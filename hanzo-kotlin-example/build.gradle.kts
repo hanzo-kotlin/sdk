@@ -8,5 +8,5 @@ dependencies {
 }
 
 application {
-    mainClass = "com.hanzo_ai.api.example.MainKt"
+    mainClass = "ai.hanzo.api.example.MainKt"
 }
