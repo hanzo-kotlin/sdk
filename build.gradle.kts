@@ -8,7 +8,7 @@ repositories {
 }
 
 allprojects {
-    group = "com.hanzo_ai.api"
+    group = "ai.hanzo.api"
     version = "0.0.1-alpha.0" // x-release-please-version
 }
 
