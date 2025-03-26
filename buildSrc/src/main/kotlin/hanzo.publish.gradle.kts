@@ -27,9 +27,9 @@ configure<PublishingExtension> {
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/stainless-sdks/Hanzo-AI-kotlin.git")
-                    developerConnection.set("scm:git:git://github.com/stainless-sdks/Hanzo-AI-kotlin.git")
-                    url.set("https://github.com/stainless-sdks/Hanzo-AI-kotlin")
+                    connection.set("scm:git:git://github.com/hanzoai/kotlin-sdk.git")
+                    developerConnection.set("scm:git:git://github.com/hanzoai/kotlin-sdk.git")
+                    url.set("https://github.com/hanzoai/kotlin-sdk")
                 }
 
                 versionMapping {
