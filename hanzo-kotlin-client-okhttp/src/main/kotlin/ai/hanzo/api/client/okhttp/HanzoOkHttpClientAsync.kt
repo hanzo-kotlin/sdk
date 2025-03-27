@@ -31,6 +31,8 @@ class HanzoOkHttpClientAsync private constructor() {
         private var timeout: Timeout = Timeout.default()
         private var proxy: Proxy? = null
 
+        fun sandbox() = apply { baseUrl(ClientOptions.SANDBOX_URL) }
+
         fun baseUrl(baseUrl: String) = apply {
             clientOptions.baseUrl(baseUrl)
             this.baseUrl = baseUrl
