@@ -30,7 +30,7 @@ configure<MavenPublishBaseExtension> {
 
     pom {
         name.set("Hanzo API")
-        description.set("Call 100+ LLMs in the OpenAI format. [**Docs**](https://docs.hanzo.ai/)\n\n👉 [`Hanzo Console`](https://cloud.hanzo.ai). Create, Edit API Keys.\n\n💸 [`LLM Models`](https://models.hanzo.ai/).")
+        description.set("API documentation for Hanzo")
         url.set("https://docs.hanzo.ai")
 
         licenses {
