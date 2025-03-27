@@ -2,8 +2,8 @@
 
 <!-- x-release-please-start-version -->
 
-[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.0.1-alpha.0)
-[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.0.1-alpha.0/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.0.1-alpha.0)
+[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1)
+[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1)
 
 <!-- x-release-please-end -->
 
@@ -13,7 +13,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 <!-- x-release-please-start-version -->
 
-The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are also available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.0.1-alpha.0).
+The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are also available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1).
 
 <!-- x-release-please-end -->
 
@@ -24,7 +24,7 @@ The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai
 ### Gradle
 
 ```kotlin
-implementation("ai.hanzo.api:hanzo-kotlin:0.0.1-alpha.0")
+implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.1")
 ```
 
 ### Maven
@@ -33,7 +33,7 @@ implementation("ai.hanzo.api:hanzo-kotlin:0.0.1-alpha.0")
 <dependency>
   <groupId>ai.hanzo.api</groupId>
   <artifactId>hanzo-kotlin</artifactId>
-  <version>0.0.1-alpha.0</version>
+  <version>0.1.0-alpha.1</version>
 </dependency>
 ```
 
