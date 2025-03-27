@@ -22,7 +22,7 @@ import java.util.Objects
 /**
  * Generate an API key based on the provided data.
  *
- * Docs: https://docs.llm.ai/docs/proxy/virtual_keys
+ * Docs: https://docs.hanzo.ai/docs/proxy/virtual_keys
  *
  * Parameters:
  * - duration: Optional[str] - Specify the length of time the token is valid for. You can set
@@ -37,10 +37,10 @@ import java.util.Objects
  * - models: Optional[list] - Model_name's a user is allowed to call. (if empty, key is allowed to
  *   call all models)
  * - aliases: Optional[dict] - Any alias mappings, on top of anything in the config.yaml model
- *   list. - https://docs.llm.ai/docs/proxy/virtual_keys#managing-auth---upgradedowngrade-models
+ *   list. - https://docs.hanzo.ai/docs/proxy/virtual_keys#managing-auth---upgradedowngrade-models
  * - config: Optional[dict] - any key-specific configs, overrides config in config.yaml
  * - spend: Optional[int] - Amount spent by key. Default is 0. Will be updated by proxy whenever key
- *   is used. https://docs.llm.ai/docs/proxy/virtual_keys#managing-auth---tracking-spend
+ *   is used. https://docs.hanzo.ai/docs/proxy/virtual_keys#managing-auth---tracking-spend
  * - send_invite_email: Optional[bool] - Whether to send an invite email to the user_id, with the
  *   generate key
  * - max_budget: Optional[float] - Specify max budget for a given key.
@@ -62,7 +62,7 @@ import java.util.Objects
  *   1000, "gpt-3.5-turbo": 1000}. IF null or {} then no model specific tpm limit.
  * - allowed_cache_controls: Optional[list] - List of allowed cache control values.
  *   Example - ["no-cache", "no-store"]. See all values -
- *   https://docs.llm.ai/docs/proxy/caching#turn-on--off-caching-per-request
+ *   https://docs.hanzo.ai/docs/proxy/caching#turn-on--off-caching-per-request
  * - blocked: Optional[bool] - Whether the key is blocked.
  * - rpm_limit: Optional[int] - Specify rpm limit for a given key (Requests per minute)
  * - tpm_limit: Optional[int] - Specify tpm limit for a given key (Tokens per minute)
@@ -72,7 +72,7 @@ import java.util.Objects
  *   [tracking spend](https://llm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
  *   and/or doing [tag-based routing](https://llm.vercel.app/docs/proxy/tag_routing).
  * - enforced_params: Optional[List[str]] - List of enforced params for the key (Enterprise only).
- *   [Docs](https://docs.llm.ai/docs/proxy/enterprise#enforce-required-params-for-llm-requests)
+ *   [Docs](https://docs.hanzo.ai/docs/proxy/enterprise#enforce-required-params-for-llm-requests)
  *
  * Examples:
  * 1. Allow users to turn on/off pii masking

@@ -8,7 +8,7 @@ import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
-/** [Docs](https://docs.llm.ai/docs/pass_through/cohere) */
+/** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
 class CohereRetrieveParams
 private constructor(
     private val endpoint: String,

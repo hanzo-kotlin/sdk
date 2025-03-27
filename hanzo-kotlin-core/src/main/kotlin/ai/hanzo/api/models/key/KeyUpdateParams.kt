@@ -34,7 +34,7 @@ import java.util.Objects
  * - models: Optional[list] - Model_name's a user is allowed to call
  * - tags: Optional[List[str]] - Tags for organizing keys (Enterprise only)
  * - enforced_params: Optional[List[str]] - List of enforced params for the key (Enterprise only).
- *   [Docs](https://docs.llm.ai/docs/proxy/enterprise#enforce-required-params-for-llm-requests)
+ *   [Docs](https://docs.hanzo.ai/docs/proxy/enterprise#enforce-required-params-for-llm-requests)
  * - spend: Optional[float] - Amount spent by key
  * - max_budget: Optional[float] - Max budget for key
  * - model_max_budget: Optional[Dict[str, BudgetConfig]] - Model-specific budgets {"gpt-4":

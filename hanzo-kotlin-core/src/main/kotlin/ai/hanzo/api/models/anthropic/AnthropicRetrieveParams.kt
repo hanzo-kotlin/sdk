@@ -8,7 +8,7 @@ import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
-/** [Docs](https://docs.llm.ai/docs/anthropic_completion) */
+/** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
 class AnthropicRetrieveParams
 private constructor(
     private val endpoint: String,

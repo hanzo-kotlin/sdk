@@ -23,31 +23,31 @@ interface BedrockServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/bedrock) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
     suspend fun create(
         params: BedrockCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockCreateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/bedrock) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
     suspend fun retrieve(
         params: BedrockRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockRetrieveResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/bedrock) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
     suspend fun update(
         params: BedrockUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockUpdateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/bedrock) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
     suspend fun delete(
         params: BedrockDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockDeleteResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/bedrock) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
     suspend fun patch(
         params: BedrockPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),

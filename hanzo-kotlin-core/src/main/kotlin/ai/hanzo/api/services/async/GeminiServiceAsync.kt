@@ -23,31 +23,31 @@ interface GeminiServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
     suspend fun create(
         params: GeminiCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiCreateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
     suspend fun retrieve(
         params: GeminiRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiRetrieveResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
     suspend fun update(
         params: GeminiUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiUpdateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
     suspend fun delete(
         params: GeminiDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiDeleteResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
     suspend fun patch(
         params: GeminiPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),

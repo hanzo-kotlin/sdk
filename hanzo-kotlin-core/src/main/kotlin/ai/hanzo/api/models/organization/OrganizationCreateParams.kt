@@ -51,7 +51,7 @@ import java.util.Objects
  * - organization_id: _Optional[str]_ - The organization id of the team. Default is None. Create via
  *   `/organization/new`.
  * - model_aliases: Optional[dict] - Model aliases for the team.
- *   [Docs](https://docs.llm.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
+ *   [Docs](https://docs.hanzo.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
  *
  * Case 1: Create new org **without** a budget_id
  *

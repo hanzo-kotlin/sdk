@@ -26,7 +26,7 @@ interface HealthServiceAsync {
     /**
      * 🚨 USE `/health/liveliness` to health check the proxy 🚨
      *
-     * See more 👉 https://docs.llm.ai/docs/proxy/health
+     * See more 👉 https://docs.hanzo.ai/docs/proxy/health
      *
      * Check the health of all the endpoints in config.yaml
      *

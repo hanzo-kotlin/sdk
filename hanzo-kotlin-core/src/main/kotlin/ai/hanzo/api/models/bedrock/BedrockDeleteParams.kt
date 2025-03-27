@@ -10,7 +10,7 @@ import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
-/** [Docs](https://docs.llm.ai/docs/pass_through/bedrock) */
+/** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
 class BedrockDeleteParams
 private constructor(
     private val endpoint: String,

@@ -23,31 +23,31 @@ interface CohereServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun create(
         params: CohereCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereCreateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun retrieve(
         params: CohereRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereRetrieveResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun update(
         params: CohereUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereUpdateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun delete(
         params: CohereDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereDeleteResponse
 
-    /** [Docs](https://docs.llm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun modify(
         params: CohereModifyParams,
         requestOptions: RequestOptions = RequestOptions.none(),
