@@ -23,31 +23,31 @@ interface AnthropicServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
-    /** [Docs](https://docs.llm.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
     suspend fun create(
         params: AnthropicCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicCreateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
     suspend fun retrieve(
         params: AnthropicRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicRetrieveResponse
 
-    /** [Docs](https://docs.llm.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
     suspend fun update(
         params: AnthropicUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicUpdateResponse
 
-    /** [Docs](https://docs.llm.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
     suspend fun delete(
         params: AnthropicDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicDeleteResponse
 
-    /** [Docs](https://docs.llm.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
     suspend fun modify(
         params: AnthropicModifyParams,
         requestOptions: RequestOptions = RequestOptions.none(),

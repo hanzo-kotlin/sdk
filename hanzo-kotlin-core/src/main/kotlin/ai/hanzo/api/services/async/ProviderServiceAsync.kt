@@ -17,7 +17,7 @@ interface ProviderServiceAsync {
 
     /**
      * Provider Budget Routing - Get Budget, Spend Details
-     * https://docs.llm.ai/docs/proxy/provider_budget_routing
+     * https://docs.hanzo.ai/docs/proxy/provider_budget_routing
      *
      * Use this endpoint to check current budget, spend and budget reset time for a provider
      *

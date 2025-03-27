@@ -26,7 +26,7 @@ interface VertexAiService {
     /**
      * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun create(
         params: VertexAiCreateParams,
@@ -36,7 +36,7 @@ interface VertexAiService {
     /**
      * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun retrieve(
         params: VertexAiRetrieveParams,
@@ -46,7 +46,7 @@ interface VertexAiService {
     /**
      * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun update(
         params: VertexAiUpdateParams,
@@ -56,7 +56,7 @@ interface VertexAiService {
     /**
      * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun delete(
         params: VertexAiDeleteParams,
@@ -66,7 +66,7 @@ interface VertexAiService {
     /**
      * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun patch(
         params: VertexAiPatchParams,

@@ -13,7 +13,7 @@ import java.util.Objects
 /**
  * Call LLM proxy via Vertex AI SDK.
  *
- * [Docs](https://docs.llm.ai/docs/pass_through/vertex_ai)
+ * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
  */
 class VertexAiDeleteParams
 private constructor(

@@ -18,7 +18,7 @@ interface GuardrailServiceAsync {
     /**
      * List the guardrails that are available on the proxy server
      *
-     * 👉 [Guardrail docs](https://docs.llm.ai/docs/proxy/guardrails/quick_start)
+     * 👉 [Guardrail docs](https://docs.hanzo.ai/docs/proxy/guardrails/quick_start)
      *
      * Example Request:
      * ```bash

@@ -26,7 +26,7 @@ interface LangfuseServiceAsync {
     /**
      * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun create(
         params: LangfuseCreateParams,
@@ -36,7 +36,7 @@ interface LangfuseServiceAsync {
     /**
      * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun retrieve(
         params: LangfuseRetrieveParams,
@@ -46,7 +46,7 @@ interface LangfuseServiceAsync {
     /**
      * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun update(
         params: LangfuseUpdateParams,
@@ -56,7 +56,7 @@ interface LangfuseServiceAsync {
     /**
      * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun delete(
         params: LangfuseDeleteParams,
@@ -66,7 +66,7 @@ interface LangfuseServiceAsync {
     /**
      * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.llm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun patch(
         params: LangfusePatchParams,
