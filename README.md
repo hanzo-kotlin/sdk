@@ -9,6 +9,8 @@
 
 The Hanzo Kotlin SDK provides convenient access to the [Hanzo REST API](https://docs.hanzo.ai) from applications written in Kotlin.
 
+The Hanzo Kotlin SDK is similar to the Hanzo Java SDK but with minor differences that make it more ergonomic for use in Kotlin, such as nullable values instead of `Optional`, `Sequence` instead of `Stream`, and suspend functions instead of `CompletableFuture`.
+
 It is generated with [Stainless](https://www.stainless.com/).
 
 <!-- x-release-please-start-version -->
@@ -345,6 +347,20 @@ val client: HanzoClient = HanzoOkHttpClient.builder()
         "https://example.com", 8080
       )
     ))
+    .build()
+```
+
+### Environments
+
+The SDK sends requests to the production by default. To send requests to a different environment, configure the client like so:
+
+```kotlin
+import ai.hanzo.api.client.HanzoClient
+import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
+
+val client: HanzoClient = HanzoOkHttpClient.builder()
+    .fromEnv()
+    .sandbox()
     .build()
 ```
 

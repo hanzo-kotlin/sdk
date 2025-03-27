@@ -38,6 +38,8 @@ private constructor(
 
         const val PRODUCTION_URL = "https://api.hanzo.ai"
 
+        const val SANDBOX_URL = "https://api.sandbox.hanzo.ai"
+
         /**
          * Returns a mutable builder for constructing an instance of [ClientOptions].
          *
