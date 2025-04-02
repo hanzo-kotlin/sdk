@@ -445,6 +445,30 @@ private constructor(
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (if (budgetId.asKnown() == null) 0 else 1) +
+            (if (createdAt.asKnown() == null) 0 else 1) +
+            (if (createdBy.asKnown() == null) 0 else 1) +
+            (models.asKnown()?.size ?: 0) +
+            (if (organizationId.asKnown() == null) 0 else 1) +
+            (if (updatedAt.asKnown() == null) 0 else 1) +
+            (if (updatedBy.asKnown() == null) 0 else 1) +
+            (if (organizationAlias.asKnown() == null) 0 else 1) +
+            (if (spend.asKnown() == null) 0 else 1)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true

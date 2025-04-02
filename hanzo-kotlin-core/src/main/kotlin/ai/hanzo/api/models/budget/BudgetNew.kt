@@ -426,6 +426,29 @@ private constructor(
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (if (budgetDuration.asKnown() == null) 0 else 1) +
+            (if (budgetId.asKnown() == null) 0 else 1) +
+            (if (maxBudget.asKnown() == null) 0 else 1) +
+            (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+            (modelMaxBudget.asKnown()?.validity() ?: 0) +
+            (if (rpmLimit.asKnown() == null) 0 else 1) +
+            (if (softBudget.asKnown() == null) 0 else 1) +
+            (if (tpmLimit.asKnown() == null) 0 else 1)
+
     /**
      * Max budget for each model (e.g. {'gpt-4o': {'max_budget': '0.0000001', 'budget_duration':
      * '1d', 'tpm_limit': 1000, 'rpm_limit': 1000}})
@@ -494,6 +517,23 @@ private constructor(
 
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {

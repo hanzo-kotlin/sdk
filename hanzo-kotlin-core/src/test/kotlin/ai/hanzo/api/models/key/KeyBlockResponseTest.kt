@@ -3,6 +3,8 @@
 package ai.hanzo.api.models.key
 
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
@@ -82,5 +84,51 @@ internal class KeyBlockResponseTest {
             .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
         assertThat(keyBlockResponse.updatedBy()).isEqualTo("updated_by")
         assertThat(keyBlockResponse.userId()).isEqualTo("user_id")
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val keyBlockResponse =
+            KeyBlockResponse.builder()
+                .token("token")
+                .aliases(JsonValue.from(mapOf<String, Any>()))
+                .addAllowedCacheControl(JsonValue.from(mapOf<String, Any>()))
+                .blocked(true)
+                .budgetDuration("budget_duration")
+                .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .config(JsonValue.from(mapOf<String, Any>()))
+                .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .createdBy("created_by")
+                .expires("string")
+                .keyAlias("key_alias")
+                .keyName("key_name")
+                .llmBudgetTable(JsonValue.from(mapOf<String, Any>()))
+                .maxBudget(0.0)
+                .maxParallelRequests(0L)
+                .metadata(JsonValue.from(mapOf<String, Any>()))
+                .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                .modelSpend(JsonValue.from(mapOf<String, Any>()))
+                .addModel(JsonValue.from(mapOf<String, Any>()))
+                .orgId("org_id")
+                .permissions(JsonValue.from(mapOf<String, Any>()))
+                .rpmLimit(0L)
+                .softBudgetCooldown(true)
+                .spend(0.0)
+                .teamId("team_id")
+                .tpmLimit(0L)
+                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .updatedBy("updated_by")
+                .userId("user_id")
+                .build()
+
+        val roundtrippedKeyBlockResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(keyBlockResponse),
+                jacksonTypeRef<KeyBlockResponse>(),
+            )
+
+        assertThat(roundtrippedKeyBlockResponse).isEqualTo(keyBlockResponse)
     }
 }

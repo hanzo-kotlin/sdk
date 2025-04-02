@@ -3,6 +3,8 @@
 package ai.hanzo.api.models.team
 
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
@@ -86,5 +88,53 @@ internal class TeamCreateResponseTest {
         assertThat(teamCreateResponse.spend()).isEqualTo(0.0)
         assertThat(teamCreateResponse.teamAlias()).isEqualTo("team_alias")
         assertThat(teamCreateResponse.tpmLimit()).isEqualTo(0L)
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val teamCreateResponse =
+            TeamCreateResponse.builder()
+                .teamId("team_id")
+                .addAdmin(JsonValue.from(mapOf<String, Any>()))
+                .blocked(true)
+                .budgetDuration("budget_duration")
+                .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .llmModelTable(
+                    TeamCreateResponse.LlmModelTable.builder()
+                        .createdBy("created_by")
+                        .updatedBy("updated_by")
+                        .modelAliases(JsonValue.from(mapOf<String, Any>()))
+                        .build()
+                )
+                .maxBudget(0.0)
+                .maxParallelRequests(0L)
+                .addMember(JsonValue.from(mapOf<String, Any>()))
+                .addMembersWithRole(
+                    Member.builder()
+                        .role(Member.Role.ADMIN)
+                        .userEmail("user_email")
+                        .userId("user_id")
+                        .build()
+                )
+                .metadata(JsonValue.from(mapOf<String, Any>()))
+                .modelId(0L)
+                .addModel(JsonValue.from(mapOf<String, Any>()))
+                .organizationId("organization_id")
+                .rpmLimit(0L)
+                .spend(0.0)
+                .teamAlias("team_alias")
+                .tpmLimit(0L)
+                .build()
+
+        val roundtrippedTeamCreateResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(teamCreateResponse),
+                jacksonTypeRef<TeamCreateResponse>(),
+            )
+
+        assertThat(roundtrippedTeamCreateResponse).isEqualTo(teamCreateResponse)
     }
 }

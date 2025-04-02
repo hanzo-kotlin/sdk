@@ -9,6 +9,7 @@ import ai.hanzo.api.core.JsonField
 import ai.hanzo.api.core.JsonMissing
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
+import ai.hanzo.api.core.allMaxBy
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.getOrThrow
 import ai.hanzo.api.core.http.Headers
@@ -520,6 +521,25 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (member.asKnown()?.validity() ?: 0) +
+                (if (teamId.asKnown() == null) 0 else 1) +
+                (if (maxBudgetInTeam.asKnown() == null) 0 else 1)
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
@@ -561,13 +581,12 @@ private constructor(
 
         fun _json(): JsonValue? = _json
 
-        fun <T> accept(visitor: Visitor<T>): T {
-            return when {
+        fun <T> accept(visitor: Visitor<T>): T =
+            when {
                 members != null -> visitor.visitMembers(members)
                 member != null -> visitor.visitMember(member)
                 else -> visitor.unknown(_json)
             }
-        }
 
         private var validated: Boolean = false
 
@@ -589,6 +608,32 @@ private constructor(
             )
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            accept(
+                object : Visitor<Int> {
+                    override fun visitMembers(members: List<Member>) =
+                        members.sumOf { it.validity().toInt() }
+
+                    override fun visitMember(member: Member) = member.validity()
+
+                    override fun unknown(json: JsonValue?) = 0
+                }
+            )
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
@@ -642,18 +687,28 @@ private constructor(
             override fun ObjectCodec.deserialize(node: JsonNode): Member {
                 val json = JsonValue.fromJsonNode(node)
 
-                tryDeserialize(node, jacksonTypeRef<List<Member>>()) {
-                        it.forEach { it.validate() }
-                    }
-                    ?.let {
-                        return Member(members = it, _json = json)
-                    }
-                tryDeserialize(node, jacksonTypeRef<Member>()) { it.validate() }
-                    ?.let {
-                        return Member(member = it, _json = json)
-                    }
-
-                return Member(_json = json)
+                val bestMatches =
+                    sequenceOf(
+                            tryDeserialize(node, jacksonTypeRef<Member>())?.let {
+                                Member(member = it, _json = json)
+                            },
+                            tryDeserialize(node, jacksonTypeRef<List<Member>>())?.let {
+                                Member(members = it, _json = json)
+                            },
+                        )
+                        .filterNotNull()
+                        .allMaxBy { it.validity() }
+                        .toList()
+                return when (bestMatches.size) {
+                    // This can happen if what we're deserializing is completely incompatible with
+                    // all the possible variants (e.g. deserializing from boolean).
+                    0 -> Member(_json = json)
+                    1 -> bestMatches.single()
+                    // If there's more than one match with the highest validity, then use the first
+                    // completely valid match, or simply the first match if none are completely
+                    // valid.
+                    else -> bestMatches.firstOrNull { it.isValid() } ?: bestMatches.first()
+                }
             }
         }
 

@@ -988,6 +988,42 @@ private constructor(
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (allowedCacheControls.asKnown()?.size ?: 0) +
+            (if (blocked.asKnown() == null) 0 else 1) +
+            (if (budgetDuration.asKnown() == null) 0 else 1) +
+            (if (budgetId.asKnown() == null) 0 else 1) +
+            (if (duration.asKnown() == null) 0 else 1) +
+            (enforcedParams.asKnown()?.size ?: 0) +
+            (guardrails.asKnown()?.size ?: 0) +
+            (if (key.asKnown() == null) 0 else 1) +
+            (if (keyAlias.asKnown() == null) 0 else 1) +
+            (if (maxBudget.asKnown() == null) 0 else 1) +
+            (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+            (models.asKnown()?.size ?: 0) +
+            (if (newMasterKey.asKnown() == null) 0 else 1) +
+            (if (rpmLimit.asKnown() == null) 0 else 1) +
+            (if (sendInviteEmail.asKnown() == null) 0 else 1) +
+            (if (softBudget.asKnown() == null) 0 else 1) +
+            (if (spend.asKnown() == null) 0 else 1) +
+            (tags.asKnown()?.size ?: 0) +
+            (if (teamId.asKnown() == null) 0 else 1) +
+            (if (tpmLimit.asKnown() == null) 0 else 1) +
+            (if (userId.asKnown() == null) 0 else 1)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true

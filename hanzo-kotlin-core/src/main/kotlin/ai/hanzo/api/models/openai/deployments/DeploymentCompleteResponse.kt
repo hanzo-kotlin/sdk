@@ -4,6 +4,7 @@ package ai.hanzo.api.models.openai.deployments
 
 import ai.hanzo.api.core.ExcludeMissing
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
@@ -81,6 +82,21 @@ private constructor(private val additionalProperties: MutableMap<String, JsonVal
 
         validated = true
     }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int = 0
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {
