@@ -116,7 +116,7 @@ internal class UserServiceTest {
                 .build()
         val userService = client.user()
 
-        val user =
+        val users =
             userService.list(
                 UserListParams.builder()
                     .page(1L)
@@ -126,7 +126,7 @@ internal class UserServiceTest {
                     .build()
             )
 
-        user.validate()
+        users.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

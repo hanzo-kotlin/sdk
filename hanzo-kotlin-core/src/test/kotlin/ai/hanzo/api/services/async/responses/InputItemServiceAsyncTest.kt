@@ -22,11 +22,11 @@ internal class InputItemServiceAsyncTest {
                 .build()
         val inputItemServiceAsync = client.responses().inputItems()
 
-        val inputItem =
+        val inputItems =
             inputItemServiceAsync.list(
                 InputItemListParams.builder().responseId("response_id").build()
             )
 
-        inputItem.validate()
+        inputItems.validate()
     }
 }

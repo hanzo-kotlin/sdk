@@ -111,12 +111,12 @@ internal class TeamServiceTest {
                 .build()
         val teamService = client.team()
 
-        val team =
+        val teams =
             teamService.list(
                 TeamListParams.builder().organizationId("organization_id").userId("user_id").build()
             )
 
-        team.validate()
+        teams.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

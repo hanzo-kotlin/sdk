@@ -61,12 +61,12 @@ internal class BatchServiceTest {
                 .build()
         val batchService = client.batches()
 
-        val batch =
+        val batches =
             batchService.list(
                 BatchListParams.builder().after("after").limit(0L).provider("provider").build()
             )
 
-        batch.validate()
+        batches.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

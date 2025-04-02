@@ -22,9 +22,9 @@ internal class InputItemServiceTest {
                 .build()
         val inputItemService = client.responses().inputItems()
 
-        val inputItem =
+        val inputItems =
             inputItemService.list(InputItemListParams.builder().responseId("response_id").build())
 
-        inputItem.validate()
+        inputItems.validate()
     }
 }

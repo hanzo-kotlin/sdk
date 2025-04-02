@@ -37,9 +37,9 @@ internal class AssistantServiceAsyncTest {
                 .build()
         val assistantServiceAsync = client.assistants()
 
-        val assistant = assistantServiceAsync.list()
+        val assistants = assistantServiceAsync.list()
 
-        assistant.validate()
+        assistants.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
