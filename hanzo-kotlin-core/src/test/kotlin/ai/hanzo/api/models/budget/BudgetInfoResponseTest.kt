@@ -2,6 +2,9 @@
 
 package ai.hanzo.api.models.budget
 
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
@@ -11,5 +14,20 @@ internal class BudgetInfoResponseTest {
     @Test
     fun create() {
         val budgetInfoResponse = BudgetInfoResponse.builder().build()
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val budgetInfoResponse = BudgetInfoResponse.builder().build()
+
+        val roundtrippedBudgetInfoResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(budgetInfoResponse),
+                jacksonTypeRef<BudgetInfoResponse>(),
+            )
+
+        assertThat(roundtrippedBudgetInfoResponse).isEqualTo(budgetInfoResponse)
     }
 }

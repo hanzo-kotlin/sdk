@@ -1806,9 +1806,45 @@ private constructor(
             userAlias()
             userEmail()
             userId()
-            userRole()
+            userRole()?.validate()
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (allowedCacheControls.asKnown()?.size ?: 0) +
+                (if (autoCreateKey.asKnown() == null) 0 else 1) +
+                (if (blocked.asKnown() == null) 0 else 1) +
+                (if (budgetDuration.asKnown() == null) 0 else 1) +
+                (if (duration.asKnown() == null) 0 else 1) +
+                (guardrails.asKnown()?.size ?: 0) +
+                (if (keyAlias.asKnown() == null) 0 else 1) +
+                (if (maxBudget.asKnown() == null) 0 else 1) +
+                (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+                (models.asKnown()?.size ?: 0) +
+                (if (rpmLimit.asKnown() == null) 0 else 1) +
+                (if (sendInviteEmail.asKnown() == null) 0 else 1) +
+                (if (spend.asKnown() == null) 0 else 1) +
+                (if (teamId.asKnown() == null) 0 else 1) +
+                (teams.asKnown()?.size ?: 0) +
+                (if (tpmLimit.asKnown() == null) 0 else 1) +
+                (if (userAlias.asKnown() == null) 0 else 1) +
+                (if (userEmail.asKnown() == null) 0 else 1) +
+                (if (userId.asKnown() == null) 0 else 1) +
+                (userRole.asKnown()?.validity() ?: 0)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
@@ -1923,6 +1959,33 @@ private constructor(
          */
         fun asString(): String =
             _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
+
+        private var validated: Boolean = false
+
+        fun validate(): UserRole = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {

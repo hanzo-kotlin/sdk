@@ -457,6 +457,14 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true

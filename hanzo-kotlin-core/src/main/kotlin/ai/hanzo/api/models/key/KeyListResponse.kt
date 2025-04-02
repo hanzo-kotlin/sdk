@@ -9,6 +9,7 @@ import ai.hanzo.api.core.ExcludeMissing
 import ai.hanzo.api.core.JsonField
 import ai.hanzo.api.core.JsonMissing
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.core.allMaxBy
 import ai.hanzo.api.core.checkKnown
 import ai.hanzo.api.core.getOrThrow
 import ai.hanzo.api.core.toImmutable
@@ -261,6 +262,25 @@ private constructor(
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (if (currentPage.asKnown() == null) 0 else 1) +
+            (keys.asKnown()?.sumOf { it.validity().toInt() } ?: 0) +
+            (if (totalCount.asKnown() == null) 0 else 1) +
+            (if (totalPages.asKnown() == null) 0 else 1)
+
     /** Return the row in the db */
     @JsonDeserialize(using = Key.Deserializer::class)
     @JsonSerialize(using = Key.Serializer::class)
@@ -287,13 +307,12 @@ private constructor(
 
         fun _json(): JsonValue? = _json
 
-        fun <T> accept(visitor: Visitor<T>): T {
-            return when {
+        fun <T> accept(visitor: Visitor<T>): T =
+            when {
                 string != null -> visitor.visitString(string)
                 userApiKeyAuth != null -> visitor.visitUserApiKeyAuth(userApiKeyAuth)
                 else -> visitor.unknown(_json)
             }
-        }
 
         private var validated: Boolean = false
 
@@ -313,6 +332,32 @@ private constructor(
             )
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            accept(
+                object : Visitor<Int> {
+                    override fun visitString(string: String) = 1
+
+                    override fun visitUserApiKeyAuth(userApiKeyAuth: UserApiKeyAuth) =
+                        userApiKeyAuth.validity()
+
+                    override fun unknown(json: JsonValue?) = 0
+                }
+            )
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
@@ -368,15 +413,28 @@ private constructor(
             override fun ObjectCodec.deserialize(node: JsonNode): Key {
                 val json = JsonValue.fromJsonNode(node)
 
-                tryDeserialize(node, jacksonTypeRef<String>())?.let {
-                    return Key(string = it, _json = json)
+                val bestMatches =
+                    sequenceOf(
+                            tryDeserialize(node, jacksonTypeRef<UserApiKeyAuth>())?.let {
+                                Key(userApiKeyAuth = it, _json = json)
+                            },
+                            tryDeserialize(node, jacksonTypeRef<String>())?.let {
+                                Key(string = it, _json = json)
+                            },
+                        )
+                        .filterNotNull()
+                        .allMaxBy { it.validity() }
+                        .toList()
+                return when (bestMatches.size) {
+                    // This can happen if what we're deserializing is completely incompatible with
+                    // all the possible variants (e.g. deserializing from array).
+                    0 -> Key(_json = json)
+                    1 -> bestMatches.single()
+                    // If there's more than one match with the highest validity, then use the first
+                    // completely valid match, or simply the first match if none are completely
+                    // valid.
+                    else -> bestMatches.firstOrNull { it.isValid() } ?: bestMatches.first()
                 }
-                tryDeserialize(node, jacksonTypeRef<UserApiKeyAuth>()) { it.validate() }
-                    ?.let {
-                        return Key(userApiKeyAuth = it, _json = json)
-                    }
-
-                return Key(_json = json)
             }
         }
 
@@ -2416,7 +2474,7 @@ private constructor(
 
                 token()
                 allowedCacheControls()
-                allowedModelRegion()
+                allowedModelRegion()?.validate()
                 apiKey()
                 blocked()
                 budgetDuration()
@@ -2456,11 +2514,72 @@ private constructor(
                 updatedBy()
                 userEmail()
                 userId()
-                userRole()
+                userRole()?.validate()
                 userRpmLimit()
                 userTpmLimit()
                 validated = true
             }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: HanzoInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            internal fun validity(): Int =
+                (if (token.asKnown() == null) 0 else 1) +
+                    (allowedCacheControls.asKnown()?.size ?: 0) +
+                    (allowedModelRegion.asKnown()?.validity() ?: 0) +
+                    (if (apiKey.asKnown() == null) 0 else 1) +
+                    (if (blocked.asKnown() == null) 0 else 1) +
+                    (if (budgetDuration.asKnown() == null) 0 else 1) +
+                    (if (budgetResetAt.asKnown() == null) 0 else 1) +
+                    (if (createdAt.asKnown() == null) 0 else 1) +
+                    (if (createdBy.asKnown() == null) 0 else 1) +
+                    (if (endUserId.asKnown() == null) 0 else 1) +
+                    (if (endUserMaxBudget.asKnown() == null) 0 else 1) +
+                    (if (endUserRpmLimit.asKnown() == null) 0 else 1) +
+                    (if (endUserTpmLimit.asKnown() == null) 0 else 1) +
+                    (expires.asKnown()?.validity() ?: 0) +
+                    (if (keyAlias.asKnown() == null) 0 else 1) +
+                    (if (keyName.asKnown() == null) 0 else 1) +
+                    (if (lastRefreshedAt.asKnown() == null) 0 else 1) +
+                    (if (maxBudget.asKnown() == null) 0 else 1) +
+                    (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+                    (models.asKnown()?.size ?: 0) +
+                    (if (orgId.asKnown() == null) 0 else 1) +
+                    (if (rpmLimit.asKnown() == null) 0 else 1) +
+                    (rpmLimitPerModel.asKnown()?.validity() ?: 0) +
+                    (if (softBudget.asKnown() == null) 0 else 1) +
+                    (if (softBudgetCooldown.asKnown() == null) 0 else 1) +
+                    (if (spend.asKnown() == null) 0 else 1) +
+                    (if (teamAlias.asKnown() == null) 0 else 1) +
+                    (if (teamBlocked.asKnown() == null) 0 else 1) +
+                    (if (teamId.asKnown() == null) 0 else 1) +
+                    (if (teamMaxBudget.asKnown() == null) 0 else 1) +
+                    (teamMember.asKnown()?.validity() ?: 0) +
+                    (if (teamMemberSpend.asKnown() == null) 0 else 1) +
+                    (teamModels.asKnown()?.size ?: 0) +
+                    (if (teamRpmLimit.asKnown() == null) 0 else 1) +
+                    (if (teamSpend.asKnown() == null) 0 else 1) +
+                    (if (teamTpmLimit.asKnown() == null) 0 else 1) +
+                    (if (tpmLimit.asKnown() == null) 0 else 1) +
+                    (tpmLimitPerModel.asKnown()?.validity() ?: 0) +
+                    (if (updatedAt.asKnown() == null) 0 else 1) +
+                    (if (updatedBy.asKnown() == null) 0 else 1) +
+                    (if (userEmail.asKnown() == null) 0 else 1) +
+                    (if (userId.asKnown() == null) 0 else 1) +
+                    (userRole.asKnown()?.validity() ?: 0) +
+                    (if (userRpmLimit.asKnown() == null) 0 else 1) +
+                    (if (userTpmLimit.asKnown() == null) 0 else 1)
 
             class AllowedModelRegion
             @JsonCreator
@@ -2555,6 +2674,33 @@ private constructor(
                 fun asString(): String =
                     _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
 
+                private var validated: Boolean = false
+
+                fun validate(): AllowedModelRegion = apply {
+                    if (validated) {
+                        return@apply
+                    }
+
+                    known()
+                    validated = true
+                }
+
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: HanzoInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
                 override fun equals(other: Any?): Boolean {
                     if (this === other) {
                         return true
@@ -2591,13 +2737,12 @@ private constructor(
 
                 fun _json(): JsonValue? = _json
 
-                fun <T> accept(visitor: Visitor<T>): T {
-                    return when {
+                fun <T> accept(visitor: Visitor<T>): T =
+                    when {
                         string != null -> visitor.visitString(string)
                         offsetDateTime != null -> visitor.visitOffsetDateTime(offsetDateTime)
                         else -> visitor.unknown(_json)
                     }
-                }
 
                 private var validated: Boolean = false
 
@@ -2615,6 +2760,31 @@ private constructor(
                     )
                     validated = true
                 }
+
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: HanzoInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                internal fun validity(): Int =
+                    accept(
+                        object : Visitor<Int> {
+                            override fun visitString(string: String) = 1
+
+                            override fun visitOffsetDateTime(offsetDateTime: OffsetDateTime) = 1
+
+                            override fun unknown(json: JsonValue?) = 0
+                        }
+                    )
 
                 override fun equals(other: Any?): Boolean {
                     if (this === other) {
@@ -2672,14 +2842,29 @@ private constructor(
                     override fun ObjectCodec.deserialize(node: JsonNode): Expires {
                         val json = JsonValue.fromJsonNode(node)
 
-                        tryDeserialize(node, jacksonTypeRef<String>())?.let {
-                            return Expires(string = it, _json = json)
+                        val bestMatches =
+                            sequenceOf(
+                                    tryDeserialize(node, jacksonTypeRef<String>())?.let {
+                                        Expires(string = it, _json = json)
+                                    },
+                                    tryDeserialize(node, jacksonTypeRef<OffsetDateTime>())?.let {
+                                        Expires(offsetDateTime = it, _json = json)
+                                    },
+                                )
+                                .filterNotNull()
+                                .allMaxBy { it.validity() }
+                                .toList()
+                        return when (bestMatches.size) {
+                            // This can happen if what we're deserializing is completely
+                            // incompatible with all the possible variants (e.g. deserializing from
+                            // object).
+                            0 -> Expires(_json = json)
+                            1 -> bestMatches.single()
+                            // If there's more than one match with the highest validity, then use
+                            // the first completely valid match, or simply the first match if none
+                            // are completely valid.
+                            else -> bestMatches.firstOrNull { it.isValid() } ?: bestMatches.first()
                         }
-                        tryDeserialize(node, jacksonTypeRef<OffsetDateTime>())?.let {
-                            return Expires(offsetDateTime = it, _json = json)
-                        }
-
-                        return Expires(_json = json)
                     }
                 }
 
@@ -2772,6 +2957,25 @@ private constructor(
                     validated = true
                 }
 
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: HanzoInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                internal fun validity(): Int =
+                    additionalProperties.count { (_, value) ->
+                        !value.isNull() && !value.isMissing()
+                    }
+
                 override fun equals(other: Any?): Boolean {
                     if (this === other) {
                         return true
@@ -2860,6 +3064,25 @@ private constructor(
 
                     validated = true
                 }
+
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: HanzoInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                internal fun validity(): Int =
+                    additionalProperties.count { (_, value) ->
+                        !value.isNull() && !value.isMissing()
+                    }
 
                 override fun equals(other: Any?): Boolean {
                     if (this === other) {
@@ -3010,6 +3233,33 @@ private constructor(
                  */
                 fun asString(): String =
                     _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
+
+                private var validated: Boolean = false
+
+                fun validate(): UserRole = apply {
+                    if (validated) {
+                        return@apply
+                    }
+
+                    known()
+                    validated = true
+                }
+
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: HanzoInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
 
                 override fun equals(other: Any?): Boolean {
                     if (this === other) {

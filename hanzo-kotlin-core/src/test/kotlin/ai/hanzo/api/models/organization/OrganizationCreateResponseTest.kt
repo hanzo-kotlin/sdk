@@ -3,6 +3,8 @@
 package ai.hanzo.api.models.organization
 
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
@@ -40,5 +42,32 @@ internal class OrganizationCreateResponseTest {
             .isEqualTo(JsonValue.from(mapOf<String, Any>()))
         assertThat(organizationCreateResponse.organizationAlias()).isEqualTo("organization_alias")
         assertThat(organizationCreateResponse.spend()).isEqualTo(0.0)
+    }
+
+    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val organizationCreateResponse =
+            OrganizationCreateResponse.builder()
+                .budgetId("budget_id")
+                .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .createdBy("created_by")
+                .addModel("string")
+                .organizationId("organization_id")
+                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .updatedBy("updated_by")
+                .metadata(JsonValue.from(mapOf<String, Any>()))
+                .organizationAlias("organization_alias")
+                .spend(0.0)
+                .build()
+
+        val roundtrippedOrganizationCreateResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(organizationCreateResponse),
+                jacksonTypeRef<OrganizationCreateResponse>(),
+            )
+
+        assertThat(roundtrippedOrganizationCreateResponse).isEqualTo(organizationCreateResponse)
     }
 }

@@ -263,6 +263,24 @@ private constructor(
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (if (organizationId.asKnown() == null) 0 else 1) +
+            (updatedOrganizationMemberships.asKnown()?.sumOf { it.validity().toInt() } ?: 0) +
+            (updatedUsers.asKnown()?.sumOf { it.validity().toInt() } ?: 0)
+
     /**
      * This is the table that track what organizations a user belongs to and users spend within the
      * organization
@@ -661,6 +679,30 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (if (createdAt.asKnown() == null) 0 else 1) +
+                (if (organizationId.asKnown() == null) 0 else 1) +
+                (if (updatedAt.asKnown() == null) 0 else 1) +
+                (if (userId.asKnown() == null) 0 else 1) +
+                (if (budgetId.asKnown() == null) 0 else 1) +
+                (llmBudgetTable.asKnown()?.validity() ?: 0) +
+                (if (spend.asKnown() == null) 0 else 1) +
+                (if (userRole.asKnown() == null) 0 else 1)
+
         /** Represents user-controllable params for a LLM_BudgetTable record */
         class LlmBudgetTable
         private constructor(
@@ -1015,6 +1057,28 @@ private constructor(
                 tpmLimit()
                 validated = true
             }
+
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: HanzoInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            internal fun validity(): Int =
+                (if (budgetDuration.asKnown() == null) 0 else 1) +
+                    (if (maxBudget.asKnown() == null) 0 else 1) +
+                    (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+                    (if (rpmLimit.asKnown() == null) 0 else 1) +
+                    (if (softBudget.asKnown() == null) 0 else 1) +
+                    (if (tpmLimit.asKnown() == null) 0 else 1)
 
             override fun equals(other: Any?): Boolean {
                 if (this === other) {
@@ -1686,6 +1750,35 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (if (userId.asKnown() == null) 0 else 1) +
+                (if (budgetDuration.asKnown() == null) 0 else 1) +
+                (if (budgetResetAt.asKnown() == null) 0 else 1) +
+                (if (maxBudget.asKnown() == null) 0 else 1) +
+                (models.asKnown()?.size ?: 0) +
+                (organizationMemberships.asKnown()?.sumOf { it.validity().toInt() } ?: 0) +
+                (if (rpmLimit.asKnown() == null) 0 else 1) +
+                (if (spend.asKnown() == null) 0 else 1) +
+                (if (ssoUserId.asKnown() == null) 0 else 1) +
+                (teams.asKnown()?.size ?: 0) +
+                (if (tpmLimit.asKnown() == null) 0 else 1) +
+                (if (userEmail.asKnown() == null) 0 else 1) +
+                (if (userRole.asKnown() == null) 0 else 1)
+
         /**
          * This is the table that track what organizations a user belongs to and users spend within
          * the organization
@@ -2096,6 +2189,30 @@ private constructor(
                 validated = true
             }
 
+            fun isValid(): Boolean =
+                try {
+                    validate()
+                    true
+                } catch (e: HanzoInvalidDataException) {
+                    false
+                }
+
+            /**
+             * Returns a score indicating how many valid values are contained in this object
+             * recursively.
+             *
+             * Used for best match union deserialization.
+             */
+            internal fun validity(): Int =
+                (if (createdAt.asKnown() == null) 0 else 1) +
+                    (if (organizationId.asKnown() == null) 0 else 1) +
+                    (if (updatedAt.asKnown() == null) 0 else 1) +
+                    (if (userId.asKnown() == null) 0 else 1) +
+                    (if (budgetId.asKnown() == null) 0 else 1) +
+                    (llmBudgetTable.asKnown()?.validity() ?: 0) +
+                    (if (spend.asKnown() == null) 0 else 1) +
+                    (if (userRole.asKnown() == null) 0 else 1)
+
             /** Represents user-controllable params for a LLM_BudgetTable record */
             class LlmBudgetTable
             private constructor(
@@ -2459,6 +2576,28 @@ private constructor(
                     tpmLimit()
                     validated = true
                 }
+
+                fun isValid(): Boolean =
+                    try {
+                        validate()
+                        true
+                    } catch (e: HanzoInvalidDataException) {
+                        false
+                    }
+
+                /**
+                 * Returns a score indicating how many valid values are contained in this object
+                 * recursively.
+                 *
+                 * Used for best match union deserialization.
+                 */
+                internal fun validity(): Int =
+                    (if (budgetDuration.asKnown() == null) 0 else 1) +
+                        (if (maxBudget.asKnown() == null) 0 else 1) +
+                        (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+                        (if (rpmLimit.asKnown() == null) 0 else 1) +
+                        (if (softBudget.asKnown() == null) 0 else 1) +
+                        (if (tpmLimit.asKnown() == null) 0 else 1)
 
                 override fun equals(other: Any?): Boolean {
                     if (this === other) {
