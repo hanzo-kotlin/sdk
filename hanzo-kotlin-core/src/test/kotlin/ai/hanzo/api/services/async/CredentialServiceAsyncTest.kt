@@ -47,9 +47,9 @@ internal class CredentialServiceAsyncTest {
                 .build()
         val credentialServiceAsync = client.credentials()
 
-        val credential = credentialServiceAsync.list()
+        val credentials = credentialServiceAsync.list()
 
-        credential.validate()
+        credentials.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

@@ -39,8 +39,9 @@ internal class MessageServiceTest {
                 .build()
         val messageService = client.threads().messages()
 
-        val message = messageService.list(MessageListParams.builder().threadId("thread_id").build())
+        val messages =
+            messageService.list(MessageListParams.builder().threadId("thread_id").build())
 
-        message.validate()
+        messages.validate()
     }
 }

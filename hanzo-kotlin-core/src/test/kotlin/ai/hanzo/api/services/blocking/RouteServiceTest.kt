@@ -21,8 +21,8 @@ internal class RouteServiceTest {
                 .build()
         val routeService = client.routes()
 
-        val route = routeService.list()
+        val routes = routeService.list()
 
-        route.validate()
+        routes.validate()
     }
 }

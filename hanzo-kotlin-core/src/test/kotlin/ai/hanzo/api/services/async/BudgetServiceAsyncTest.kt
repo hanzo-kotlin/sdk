@@ -118,9 +118,9 @@ internal class BudgetServiceAsyncTest {
                 .build()
         val budgetServiceAsync = client.budget()
 
-        val budget = budgetServiceAsync.list()
+        val budgets = budgetServiceAsync.list()
 
-        budget.validate()
+        budgets.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

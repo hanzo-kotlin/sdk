@@ -66,12 +66,12 @@ internal class FileServiceTest {
                 .build()
         val fileService = client.files()
 
-        val file =
+        val files =
             fileService.list(
                 FileListParams.builder().provider("provider").purpose("purpose").build()
             )
 
-        file.validate()
+        files.validate()
     }
 
     @Disabled("skipped: tests are disabled for the time being")

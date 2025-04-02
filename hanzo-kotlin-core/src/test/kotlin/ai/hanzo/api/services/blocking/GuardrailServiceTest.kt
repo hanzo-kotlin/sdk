@@ -21,8 +21,8 @@ internal class GuardrailServiceTest {
                 .build()
         val guardrailService = client.guardrails()
 
-        val guardrail = guardrailService.list()
+        val guardrails = guardrailService.list()
 
-        guardrail.validate()
+        guardrails.validate()
     }
 }
