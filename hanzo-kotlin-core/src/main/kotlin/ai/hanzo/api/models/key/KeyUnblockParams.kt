@@ -206,7 +206,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): BlockKeyRequest = blockKeyRequest
+    fun _body(): BlockKeyRequest = blockKeyRequest
 
     override fun _headers(): Headers =
         Headers.builder()

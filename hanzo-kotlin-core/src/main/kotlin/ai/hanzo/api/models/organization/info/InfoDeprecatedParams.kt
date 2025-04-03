@@ -75,6 +75,15 @@ private constructor(
             additionalQueryParams = infoDeprecatedParams.additionalQueryParams.toBuilder()
         }
 
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [organizations]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
         fun organizations(organizations: List<String>) = apply { body.organizations(organizations) }
 
         /**
@@ -232,7 +241,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 

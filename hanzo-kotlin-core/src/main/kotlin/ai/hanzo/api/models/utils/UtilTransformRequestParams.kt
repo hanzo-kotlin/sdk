@@ -77,6 +77,16 @@ private constructor(
             additionalQueryParams = utilTransformRequestParams.additionalQueryParams.toBuilder()
         }
 
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [callType]
+         * - [requestBody]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
         fun callType(callType: CallType) = apply { body.callType(callType) }
 
         /**
@@ -228,7 +238,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 

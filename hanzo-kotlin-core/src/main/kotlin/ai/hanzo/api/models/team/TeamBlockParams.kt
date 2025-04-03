@@ -191,7 +191,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): BlockTeamRequest = blockTeamRequest
+    fun _body(): BlockTeamRequest = blockTeamRequest
 
     override fun _headers(): Headers = additionalHeaders
 

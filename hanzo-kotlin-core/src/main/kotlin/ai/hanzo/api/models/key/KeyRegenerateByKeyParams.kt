@@ -247,7 +247,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): RegenerateKeyRequest? = regenerateKeyRequest
+    fun _body(): RegenerateKeyRequest? = regenerateKeyRequest
 
     fun _pathParam(index: Int): String =
         when (index) {
