@@ -103,6 +103,16 @@ private constructor(
             additionalQueryParams = modelAddParams.additionalQueryParams.toBuilder()
         }
 
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [models]
+         * - [teamId]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
         fun models(models: List<String>) = apply { body.models(models) }
 
         /**
@@ -265,7 +275,7 @@ private constructor(
             ModelAddParams(body.build(), additionalHeaders.build(), additionalQueryParams.build())
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 

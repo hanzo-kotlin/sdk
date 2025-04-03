@@ -94,6 +94,18 @@ private constructor(
             additionalQueryParams = credentialCreateParams.additionalQueryParams.toBuilder()
         }
 
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [credentialInfo]
+         * - [credentialName]
+         * - [credentialValues]
+         * - [modelId]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
         fun credentialInfo(credentialInfo: JsonValue) = apply {
             body.credentialInfo(credentialInfo)
         }
@@ -263,7 +275,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
