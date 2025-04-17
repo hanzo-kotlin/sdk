@@ -376,6 +376,42 @@ val client: HanzoClient = HanzoOkHttpClient.builder()
     .build()
 ```
 
+### Custom HTTP client
+
+The SDK consists of three artifacts:
+
+- `hanzo-kotlin-core`
+  - Contains core SDK logic
+  - Does not depend on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`HanzoClient`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClient.kt), [`HanzoClientAsync`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsync.kt), [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt), and [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), all of which can work with any HTTP client
+- `hanzo-kotlin-client-okhttp`
+  - Depends on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`HanzoOkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClient.kt) and [`HanzoOkHttpClientAsync`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClientAsync.kt), which provide a way to construct [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt) and [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), respectively, using OkHttp
+- `hanzo-kotlin`
+  - Depends on and exposes the APIs of both `hanzo-kotlin-core` and `hanzo-kotlin-client-okhttp`
+  - Does not have its own logic
+
+This structure allows replacing the SDK's default HTTP client without pulling in unnecessary dependencies.
+
+#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)
+
+> [!TIP]
+> Try the available [network options](#network-options) before replacing the default client.
+
+To use a customized `OkHttpClient`:
+
+1. Replace your [`hanzo-kotlin` dependency](#installation) with `hanzo-kotlin-core`
+2. Copy `hanzo-kotlin-client-okhttp`'s [`OkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/OkHttpClient.kt) class into your code and customize it
+3. Construct [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt) or [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), similarly to [`HanzoOkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClient.kt) or [`HanzoOkHttpClientAsync`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClientAsync.kt), using your customized client
+
+### Completely custom HTTP client
+
+To use a completely custom HTTP client:
+
+1. Replace your [`hanzo-kotlin` dependency](#installation) with `hanzo-kotlin-core`
+2. Write a class that implements the [`HttpClient`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/core/http/HttpClient.kt) interface
+3. Construct [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt) or [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), similarly to [`HanzoOkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClient.kt) or [`HanzoOkHttpClientAsync`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClientAsync.kt), using your new client class
+
 ## Undocumented API functionality
 
 The SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.
