@@ -15,7 +15,7 @@ internal class FileCreateParamsTest {
     fun create() {
         FileCreateParams.builder()
             .provider("provider")
-            .file("some content".toByteArray())
+            .file("some content".byteInputStream())
             .purpose("purpose")
             .customLlmProvider("custom_llm_provider")
             .build()
@@ -27,7 +27,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".toByteArray())
+                .file("some content".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -42,7 +42,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".toByteArray())
+                .file("some content".byteInputStream())
                 .purpose("purpose")
                 .customLlmProvider("custom_llm_provider")
                 .build()
@@ -59,7 +59,7 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".toByteArray()),
+                        "file" to MultipartField.of("some content".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                         "custom_llm_provider" to MultipartField.of("custom_llm_provider"),
                     )
@@ -75,7 +75,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".toByteArray())
+                .file("some content".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -91,7 +91,7 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".toByteArray()),
+                        "file" to MultipartField.of("some content".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                     )
                     .mapValues { (_, field) ->
