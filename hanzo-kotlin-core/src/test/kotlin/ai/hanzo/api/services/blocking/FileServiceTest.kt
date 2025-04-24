@@ -29,7 +29,7 @@ internal class FileServiceTest {
             fileService.create(
                 FileCreateParams.builder()
                     .provider("provider")
-                    .file("some content".toByteArray())
+                    .file("some content".byteInputStream())
                     .purpose("purpose")
                     .customLlmProvider("custom_llm_provider")
                     .build()

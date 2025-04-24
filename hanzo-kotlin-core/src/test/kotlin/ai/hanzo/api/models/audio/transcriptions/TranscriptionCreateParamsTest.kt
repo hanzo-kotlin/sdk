@@ -13,13 +13,14 @@ internal class TranscriptionCreateParamsTest {
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-        TranscriptionCreateParams.builder().file("some content".toByteArray()).build()
+        TranscriptionCreateParams.builder().file("some content".byteInputStream()).build()
     }
 
     @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
-        val params = TranscriptionCreateParams.builder().file("some content".toByteArray()).build()
+        val params =
+            TranscriptionCreateParams.builder().file("some content".byteInputStream()).build()
 
         val body = params._body()
 
@@ -32,7 +33,7 @@ internal class TranscriptionCreateParamsTest {
                 InputStream::class.java,
             )
             .isEqualTo(
-                mapOf("file" to MultipartField.of("some content".toByteArray())).mapValues {
+                mapOf("file" to MultipartField.of("some content".byteInputStream())).mapValues {
                     (_, field) ->
                     field.map { (it as? ByteArray)?.inputStream() ?: it }
                 }
