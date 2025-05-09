@@ -323,7 +323,6 @@ Requests time out after 1 minute by default.
 To set a custom timeout, configure the method call using the `timeout` method:
 
 ```kotlin
-import ai.hanzo.api.models.ClientGetHomeParams
 import ai.hanzo.api.models.ClientGetHomeResponse
 
 val response: ClientGetHomeResponse = client.getHome(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build())
@@ -565,7 +564,6 @@ val response: UtilTokenCounterResponse = client.utils().tokenCounter(params).val
 Or configure the method call to validate the response using the `responseValidation` method:
 
 ```kotlin
-import ai.hanzo.api.models.ClientGetHomeParams
 import ai.hanzo.api.models.ClientGetHomeResponse
 
 val response: ClientGetHomeResponse = client.getHome(RequestOptions.builder().responseValidation(true).build())
