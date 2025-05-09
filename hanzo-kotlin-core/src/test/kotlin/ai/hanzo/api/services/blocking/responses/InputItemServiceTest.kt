@@ -4,7 +4,6 @@ package ai.hanzo.api.services.blocking.responses
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.responses.inputitems.InputItemListParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,8 +21,7 @@ internal class InputItemServiceTest {
                 .build()
         val inputItemService = client.responses().inputItems()
 
-        val inputItems =
-            inputItemService.list(InputItemListParams.builder().responseId("response_id").build())
+        val inputItems = inputItemService.list("response_id")
 
         inputItems.validate()
     }

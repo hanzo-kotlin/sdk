@@ -4,11 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.vertexai.VertexAiCreateParams
-import ai.hanzo.api.models.vertexai.VertexAiDeleteParams
-import ai.hanzo.api.models.vertexai.VertexAiPatchParams
-import ai.hanzo.api.models.vertexai.VertexAiRetrieveParams
-import ai.hanzo.api.models.vertexai.VertexAiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,8 +21,7 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.create(VertexAiCreateParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.create("endpoint")
 
         vertexAi.validate()
     }
@@ -42,8 +36,7 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.retrieve(VertexAiRetrieveParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.retrieve("endpoint")
 
         vertexAi.validate()
     }
@@ -58,8 +51,7 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.update(VertexAiUpdateParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.update("endpoint")
 
         vertexAi.validate()
     }
@@ -74,8 +66,7 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.delete(VertexAiDeleteParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.delete("endpoint")
 
         vertexAi.validate()
     }
@@ -90,8 +81,7 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val response =
-            vertexAiService.patch(VertexAiPatchParams.builder().endpoint("endpoint").build())
+        val response = vertexAiService.patch("endpoint")
 
         response.validate()
     }

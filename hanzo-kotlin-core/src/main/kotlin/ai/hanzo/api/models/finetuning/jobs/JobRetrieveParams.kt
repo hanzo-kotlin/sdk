@@ -22,13 +22,13 @@ import java.util.Objects
  */
 class JobRetrieveParams
 private constructor(
-    private val fineTuningJobId: String,
+    private val fineTuningJobId: String?,
     private val customLlmProvider: CustomLlmProvider,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun fineTuningJobId(): String = fineTuningJobId
+    fun fineTuningJobId(): String? = fineTuningJobId
 
     fun customLlmProvider(): CustomLlmProvider = customLlmProvider
 
@@ -45,7 +45,6 @@ private constructor(
          *
          * The following fields are required:
          * ```kotlin
-         * .fineTuningJobId()
          * .customLlmProvider()
          * ```
          */
@@ -67,7 +66,7 @@ private constructor(
             additionalQueryParams = jobRetrieveParams.additionalQueryParams.toBuilder()
         }
 
-        fun fineTuningJobId(fineTuningJobId: String) = apply {
+        fun fineTuningJobId(fineTuningJobId: String?) = apply {
             this.fineTuningJobId = fineTuningJobId
         }
 
@@ -180,7 +179,6 @@ private constructor(
          *
          * The following fields are required:
          * ```kotlin
-         * .fineTuningJobId()
          * .customLlmProvider()
          * ```
          *
@@ -188,7 +186,7 @@ private constructor(
          */
         fun build(): JobRetrieveParams =
             JobRetrieveParams(
-                checkRequired("fineTuningJobId", fineTuningJobId),
+                fineTuningJobId,
                 checkRequired("customLlmProvider", customLlmProvider),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -197,7 +195,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> fineTuningJobId
+            0 -> fineTuningJobId ?: ""
             else -> ""
         }
 

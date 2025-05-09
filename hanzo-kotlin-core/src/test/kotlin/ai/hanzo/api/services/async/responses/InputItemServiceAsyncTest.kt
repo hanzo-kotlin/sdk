@@ -4,7 +4,6 @@ package ai.hanzo.api.services.async.responses
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.responses.inputitems.InputItemListParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,10 +21,7 @@ internal class InputItemServiceAsyncTest {
                 .build()
         val inputItemServiceAsync = client.responses().inputItems()
 
-        val inputItems =
-            inputItemServiceAsync.list(
-                InputItemListParams.builder().responseId("response_id").build()
-            )
+        val inputItems = inputItemServiceAsync.list("response_id")
 
         inputItems.validate()
     }

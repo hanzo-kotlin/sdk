@@ -53,9 +53,24 @@ interface ResponseServiceAsync {
      * ```
      */
     suspend fun retrieve(
+        responseId: String,
+        params: ResponseRetrieveParams = ResponseRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ResponseRetrieveResponse =
+        retrieve(params.toBuilder().responseId(responseId).build(), requestOptions)
+
+    /** @see [retrieve] */
+    suspend fun retrieve(
         params: ResponseRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ResponseRetrieveResponse
+
+    /** @see [retrieve] */
+    suspend fun retrieve(
+        responseId: String,
+        requestOptions: RequestOptions,
+    ): ResponseRetrieveResponse =
+        retrieve(responseId, ResponseRetrieveParams.none(), requestOptions)
 
     /**
      * Delete a response by ID.
@@ -68,9 +83,21 @@ interface ResponseServiceAsync {
      * ```
      */
     suspend fun delete(
+        responseId: String,
+        params: ResponseDeleteParams = ResponseDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ResponseDeleteResponse =
+        delete(params.toBuilder().responseId(responseId).build(), requestOptions)
+
+    /** @see [delete] */
+    suspend fun delete(
         params: ResponseDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ResponseDeleteResponse
+
+    /** @see [delete] */
+    suspend fun delete(responseId: String, requestOptions: RequestOptions): ResponseDeleteResponse =
+        delete(responseId, ResponseDeleteParams.none(), requestOptions)
 
     /**
      * A view of [ResponseServiceAsync] that provides access to raw HTTP responses for each method.
@@ -102,9 +129,26 @@ interface ResponseServiceAsync {
          */
         @MustBeClosed
         suspend fun retrieve(
+            responseId: String,
+            params: ResponseRetrieveParams = ResponseRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ResponseRetrieveResponse> =
+            retrieve(params.toBuilder().responseId(responseId).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        suspend fun retrieve(
             params: ResponseRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ResponseRetrieveResponse>
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        suspend fun retrieve(
+            responseId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<ResponseRetrieveResponse> =
+            retrieve(responseId, ResponseRetrieveParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `delete /v1/responses/{response_id}`, but is otherwise
@@ -112,8 +156,25 @@ interface ResponseServiceAsync {
          */
         @MustBeClosed
         suspend fun delete(
+            responseId: String,
+            params: ResponseDeleteParams = ResponseDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ResponseDeleteResponse> =
+            delete(params.toBuilder().responseId(responseId).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
             params: ResponseDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ResponseDeleteResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
+            responseId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<ResponseDeleteResponse> =
+            delete(responseId, ResponseDeleteParams.none(), requestOptions)
     }
 }

@@ -37,9 +37,20 @@ interface EngineServiceAsync {
      * ```
      */
     suspend fun complete(
+        model: String,
+        params: EngineCompleteParams = EngineCompleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): EngineCompleteResponse = complete(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see [complete] */
+    suspend fun complete(
         params: EngineCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineCompleteResponse
+
+    /** @see [complete] */
+    suspend fun complete(model: String, requestOptions: RequestOptions): EngineCompleteResponse =
+        complete(model, EngineCompleteParams.none(), requestOptions)
 
     /**
      * Follows the exact same API spec as `OpenAI's Embeddings API
@@ -56,9 +67,20 @@ interface EngineServiceAsync {
      * ```
      */
     suspend fun embed(
+        model: String,
+        params: EngineEmbedParams = EngineEmbedParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): EngineEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see [embed] */
+    suspend fun embed(
         params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineEmbedResponse
+
+    /** @see [embed] */
+    suspend fun embed(model: String, requestOptions: RequestOptions): EngineEmbedResponse =
+        embed(model, EngineEmbedParams.none(), requestOptions)
 
     /**
      * A view of [EngineServiceAsync] that provides access to raw HTTP responses for each method.
@@ -73,9 +95,26 @@ interface EngineServiceAsync {
          */
         @MustBeClosed
         suspend fun complete(
+            model: String,
+            params: EngineCompleteParams = EngineCompleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<EngineCompleteResponse> =
+            complete(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see [complete] */
+        @MustBeClosed
+        suspend fun complete(
             params: EngineCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineCompleteResponse>
+
+        /** @see [complete] */
+        @MustBeClosed
+        suspend fun complete(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<EngineCompleteResponse> =
+            complete(model, EngineCompleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `post /engines/{model}/embeddings`, but is otherwise the
@@ -83,8 +122,25 @@ interface EngineServiceAsync {
          */
         @MustBeClosed
         suspend fun embed(
+            model: String,
+            params: EngineEmbedParams = EngineEmbedParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<EngineEmbedResponse> =
+            embed(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see [embed] */
+        @MustBeClosed
+        suspend fun embed(
             params: EngineEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineEmbedResponse>
+
+        /** @see [embed] */
+        @MustBeClosed
+        suspend fun embed(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<EngineEmbedResponse> =
+            embed(model, EngineEmbedParams.none(), requestOptions)
     }
 }

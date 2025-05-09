@@ -5,6 +5,7 @@ package ai.hanzo.api.services.blocking
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -82,6 +83,9 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
             params: FileCreateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<FileCreateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("provider", params.provider())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -110,6 +114,9 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
             params: FileRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<FileRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("fileId", params.fileId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -136,6 +143,9 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
             params: FileListParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<FileListResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("provider", params.provider())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -162,6 +172,9 @@ class FileServiceImpl internal constructor(private val clientOptions: ClientOpti
             params: FileDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<FileDeleteResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("fileId", params.fileId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)

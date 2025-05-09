@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.gemini.GeminiCreateParams
-import ai.hanzo.api.models.gemini.GeminiDeleteParams
-import ai.hanzo.api.models.gemini.GeminiPatchParams
-import ai.hanzo.api.models.gemini.GeminiRetrieveParams
-import ai.hanzo.api.models.gemini.GeminiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,8 +21,7 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.create(GeminiCreateParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.create("endpoint")
 
         gemini.validate()
     }
@@ -42,8 +36,7 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.retrieve(GeminiRetrieveParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.retrieve("endpoint")
 
         gemini.validate()
     }
@@ -58,8 +51,7 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.update(GeminiUpdateParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.update("endpoint")
 
         gemini.validate()
     }
@@ -74,8 +66,7 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.delete(GeminiDeleteParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.delete("endpoint")
 
         gemini.validate()
     }
@@ -90,8 +81,7 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val response =
-            geminiServiceAsync.patch(GeminiPatchParams.builder().endpoint("endpoint").build())
+        val response = geminiServiceAsync.patch("endpoint")
 
         response.validate()
     }

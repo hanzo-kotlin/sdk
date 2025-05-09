@@ -4,7 +4,6 @@ package ai.hanzo.api.services.async.finetuning.jobs
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.finetuning.jobs.cancel.CancelCreateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,10 +21,7 @@ internal class CancelServiceAsyncTest {
                 .build()
         val cancelServiceAsync = client.fineTuning().jobs().cancel()
 
-        val cancel =
-            cancelServiceAsync.create(
-                CancelCreateParams.builder().fineTuningJobId("fine_tuning_job_id").build()
-            )
+        val cancel = cancelServiceAsync.create("fine_tuning_job_id")
 
         cancel.validate()
     }

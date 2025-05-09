@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.azure.AzureCallParams
-import ai.hanzo.api.models.azure.AzureCreateParams
-import ai.hanzo.api.models.azure.AzureDeleteParams
-import ai.hanzo.api.models.azure.AzurePatchParams
-import ai.hanzo.api.models.azure.AzureUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,8 +21,7 @@ internal class AzureServiceAsyncTest {
                 .build()
         val azureServiceAsync = client.azure()
 
-        val azure =
-            azureServiceAsync.create(AzureCreateParams.builder().endpoint("endpoint").build())
+        val azure = azureServiceAsync.create("endpoint")
 
         azure.validate()
     }
@@ -42,8 +36,7 @@ internal class AzureServiceAsyncTest {
                 .build()
         val azureServiceAsync = client.azure()
 
-        val azure =
-            azureServiceAsync.update(AzureUpdateParams.builder().endpoint("endpoint").build())
+        val azure = azureServiceAsync.update("endpoint")
 
         azure.validate()
     }
@@ -58,8 +51,7 @@ internal class AzureServiceAsyncTest {
                 .build()
         val azureServiceAsync = client.azure()
 
-        val azure =
-            azureServiceAsync.delete(AzureDeleteParams.builder().endpoint("endpoint").build())
+        val azure = azureServiceAsync.delete("endpoint")
 
         azure.validate()
     }
@@ -74,8 +66,7 @@ internal class AzureServiceAsyncTest {
                 .build()
         val azureServiceAsync = client.azure()
 
-        val response =
-            azureServiceAsync.call(AzureCallParams.builder().endpoint("endpoint").build())
+        val response = azureServiceAsync.call("endpoint")
 
         response.validate()
     }
@@ -90,8 +81,7 @@ internal class AzureServiceAsyncTest {
                 .build()
         val azureServiceAsync = client.azure()
 
-        val response =
-            azureServiceAsync.patch(AzurePatchParams.builder().endpoint("endpoint").build())
+        val response = azureServiceAsync.patch("endpoint")
 
         response.validate()
     }

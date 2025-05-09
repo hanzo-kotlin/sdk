@@ -25,33 +25,91 @@ interface BedrockServiceAsync {
 
     /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
     suspend fun create(
+        endpoint: String,
+        params: BedrockCreateParams = BedrockCreateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BedrockCreateResponse = create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [create] */
+    suspend fun create(
         params: BedrockCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockCreateResponse
 
+    /** @see [create] */
+    suspend fun create(endpoint: String, requestOptions: RequestOptions): BedrockCreateResponse =
+        create(endpoint, BedrockCreateParams.none(), requestOptions)
+
     /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
+    suspend fun retrieve(
+        endpoint: String,
+        params: BedrockRetrieveParams = BedrockRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BedrockRetrieveResponse =
+        retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [retrieve] */
     suspend fun retrieve(
         params: BedrockRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockRetrieveResponse
 
+    /** @see [retrieve] */
+    suspend fun retrieve(
+        endpoint: String,
+        requestOptions: RequestOptions,
+    ): BedrockRetrieveResponse = retrieve(endpoint, BedrockRetrieveParams.none(), requestOptions)
+
     /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
+    suspend fun update(
+        endpoint: String,
+        params: BedrockUpdateParams = BedrockUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BedrockUpdateResponse = update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [update] */
     suspend fun update(
         params: BedrockUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockUpdateResponse
 
+    /** @see [update] */
+    suspend fun update(endpoint: String, requestOptions: RequestOptions): BedrockUpdateResponse =
+        update(endpoint, BedrockUpdateParams.none(), requestOptions)
+
     /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
+    suspend fun delete(
+        endpoint: String,
+        params: BedrockDeleteParams = BedrockDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BedrockDeleteResponse = delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [delete] */
     suspend fun delete(
         params: BedrockDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockDeleteResponse
 
+    /** @see [delete] */
+    suspend fun delete(endpoint: String, requestOptions: RequestOptions): BedrockDeleteResponse =
+        delete(endpoint, BedrockDeleteParams.none(), requestOptions)
+
     /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
+    suspend fun patch(
+        endpoint: String,
+        params: BedrockPatchParams = BedrockPatchParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BedrockPatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [patch] */
     suspend fun patch(
         params: BedrockPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockPatchResponse
+
+    /** @see [patch] */
+    suspend fun patch(endpoint: String, requestOptions: RequestOptions): BedrockPatchResponse =
+        patch(endpoint, BedrockPatchParams.none(), requestOptions)
 
     /**
      * A view of [BedrockServiceAsync] that provides access to raw HTTP responses for each method.
@@ -64,9 +122,26 @@ interface BedrockServiceAsync {
          */
         @MustBeClosed
         suspend fun create(
+            endpoint: String,
+            params: BedrockCreateParams = BedrockCreateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BedrockCreateResponse> =
+            create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
             params: BedrockCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockCreateResponse>
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BedrockCreateResponse> =
+            create(endpoint, BedrockCreateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /bedrock/{endpoint}`, but is otherwise the same as
@@ -74,9 +149,26 @@ interface BedrockServiceAsync {
          */
         @MustBeClosed
         suspend fun retrieve(
+            endpoint: String,
+            params: BedrockRetrieveParams = BedrockRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BedrockRetrieveResponse> =
+            retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        suspend fun retrieve(
             params: BedrockRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockRetrieveResponse>
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        suspend fun retrieve(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BedrockRetrieveResponse> =
+            retrieve(endpoint, BedrockRetrieveParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `put /bedrock/{endpoint}`, but is otherwise the same as
@@ -84,9 +176,26 @@ interface BedrockServiceAsync {
          */
         @MustBeClosed
         suspend fun update(
+            endpoint: String,
+            params: BedrockUpdateParams = BedrockUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BedrockUpdateResponse> =
+            update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [update] */
+        @MustBeClosed
+        suspend fun update(
             params: BedrockUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockUpdateResponse>
+
+        /** @see [update] */
+        @MustBeClosed
+        suspend fun update(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BedrockUpdateResponse> =
+            update(endpoint, BedrockUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `delete /bedrock/{endpoint}`, but is otherwise the same
@@ -94,9 +203,26 @@ interface BedrockServiceAsync {
          */
         @MustBeClosed
         suspend fun delete(
+            endpoint: String,
+            params: BedrockDeleteParams = BedrockDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BedrockDeleteResponse> =
+            delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
             params: BedrockDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockDeleteResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BedrockDeleteResponse> =
+            delete(endpoint, BedrockDeleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `patch /bedrock/{endpoint}`, but is otherwise the same as
@@ -104,8 +230,25 @@ interface BedrockServiceAsync {
          */
         @MustBeClosed
         suspend fun patch(
+            endpoint: String,
+            params: BedrockPatchParams = BedrockPatchParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BedrockPatchResponse> =
+            patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [patch] */
+        @MustBeClosed
+        suspend fun patch(
             params: BedrockPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockPatchResponse>
+
+        /** @see [patch] */
+        @MustBeClosed
+        suspend fun patch(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BedrockPatchResponse> =
+            patch(endpoint, BedrockPatchParams.none(), requestOptions)
     }
 }

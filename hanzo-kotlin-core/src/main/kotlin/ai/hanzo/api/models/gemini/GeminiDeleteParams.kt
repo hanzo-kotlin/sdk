@@ -4,7 +4,6 @@ package ai.hanzo.api.models.gemini
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -13,13 +12,13 @@ import java.util.Objects
 /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
 class GeminiDeleteParams
 private constructor(
-    private val endpoint: String,
+    private val endpoint: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun endpoint(): String = endpoint
+    fun endpoint(): String? = endpoint
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -31,14 +30,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [GeminiDeleteParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .endpoint()
-         * ```
-         */
+        fun none(): GeminiDeleteParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [GeminiDeleteParams]. */
         fun builder() = Builder()
     }
 
@@ -57,7 +51,7 @@ private constructor(
             additionalBodyProperties = geminiDeleteParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun endpoint(endpoint: String) = apply { this.endpoint = endpoint }
+        fun endpoint(endpoint: String?) = apply { this.endpoint = endpoint }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -183,17 +177,10 @@ private constructor(
          * Returns an immutable instance of [GeminiDeleteParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .endpoint()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): GeminiDeleteParams =
             GeminiDeleteParams(
-                checkRequired("endpoint", endpoint),
+                endpoint,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -204,7 +191,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> endpoint
+            0 -> endpoint ?: ""
             else -> ""
         }
 

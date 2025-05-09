@@ -5,6 +5,7 @@ package ai.hanzo.api.services.blocking
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -108,6 +109,9 @@ class ThreadServiceImpl internal constructor(private val clientOptions: ClientOp
             params: ThreadRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<ThreadRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("threadId", params.threadId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)

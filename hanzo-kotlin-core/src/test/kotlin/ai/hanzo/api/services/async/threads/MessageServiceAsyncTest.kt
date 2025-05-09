@@ -4,8 +4,6 @@ package ai.hanzo.api.services.async.threads
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.threads.messages.MessageCreateParams
-import ai.hanzo.api.models.threads.messages.MessageListParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -23,8 +21,7 @@ internal class MessageServiceAsyncTest {
                 .build()
         val messageServiceAsync = client.threads().messages()
 
-        val message =
-            messageServiceAsync.create(MessageCreateParams.builder().threadId("thread_id").build())
+        val message = messageServiceAsync.create("thread_id")
 
         message.validate()
     }
@@ -39,8 +36,7 @@ internal class MessageServiceAsyncTest {
                 .build()
         val messageServiceAsync = client.threads().messages()
 
-        val messages =
-            messageServiceAsync.list(MessageListParams.builder().threadId("thread_id").build())
+        val messages = messageServiceAsync.list("thread_id")
 
         messages.validate()
     }

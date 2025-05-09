@@ -4,8 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.engines.EngineCompleteParams
-import ai.hanzo.api.models.engines.EngineEmbedParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -23,7 +21,7 @@ internal class EngineServiceTest {
                 .build()
         val engineService = client.engines()
 
-        val response = engineService.complete(EngineCompleteParams.builder().model("model").build())
+        val response = engineService.complete("model")
 
         response.validate()
     }
@@ -38,7 +36,7 @@ internal class EngineServiceTest {
                 .build()
         val engineService = client.engines()
 
-        val response = engineService.embed(EngineEmbedParams.builder().model("model").build())
+        val response = engineService.embed("model")
 
         response.validate()
     }

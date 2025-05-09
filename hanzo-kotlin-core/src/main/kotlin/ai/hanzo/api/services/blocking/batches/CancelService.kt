@@ -29,9 +29,20 @@ interface CancelService {
      * ```
      */
     fun cancel(
+        batchId: String,
+        params: CancelCancelParams = CancelCancelParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CancelCancelResponse = cancel(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+    /** @see [cancel] */
+    fun cancel(
         params: CancelCancelParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CancelCancelResponse
+
+    /** @see [cancel] */
+    fun cancel(batchId: String, requestOptions: RequestOptions): CancelCancelResponse =
+        cancel(batchId, CancelCancelParams.none(), requestOptions)
 
     /** A view of [CancelService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -42,8 +53,25 @@ interface CancelService {
          */
         @MustBeClosed
         fun cancel(
+            batchId: String,
+            params: CancelCancelParams = CancelCancelParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CancelCancelResponse> =
+            cancel(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+        /** @see [cancel] */
+        @MustBeClosed
+        fun cancel(
             params: CancelCancelParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CancelCancelResponse>
+
+        /** @see [cancel] */
+        @MustBeClosed
+        fun cancel(
+            batchId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<CancelCancelResponse> =
+            cancel(batchId, CancelCancelParams.none(), requestOptions)
     }
 }

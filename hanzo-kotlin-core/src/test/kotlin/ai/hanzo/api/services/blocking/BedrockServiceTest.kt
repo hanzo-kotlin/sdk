@@ -4,11 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.bedrock.BedrockCreateParams
-import ai.hanzo.api.models.bedrock.BedrockDeleteParams
-import ai.hanzo.api.models.bedrock.BedrockPatchParams
-import ai.hanzo.api.models.bedrock.BedrockRetrieveParams
-import ai.hanzo.api.models.bedrock.BedrockUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,8 +21,7 @@ internal class BedrockServiceTest {
                 .build()
         val bedrockService = client.bedrock()
 
-        val bedrock =
-            bedrockService.create(BedrockCreateParams.builder().endpoint("endpoint").build())
+        val bedrock = bedrockService.create("endpoint")
 
         bedrock.validate()
     }
@@ -42,8 +36,7 @@ internal class BedrockServiceTest {
                 .build()
         val bedrockService = client.bedrock()
 
-        val bedrock =
-            bedrockService.retrieve(BedrockRetrieveParams.builder().endpoint("endpoint").build())
+        val bedrock = bedrockService.retrieve("endpoint")
 
         bedrock.validate()
     }
@@ -58,8 +51,7 @@ internal class BedrockServiceTest {
                 .build()
         val bedrockService = client.bedrock()
 
-        val bedrock =
-            bedrockService.update(BedrockUpdateParams.builder().endpoint("endpoint").build())
+        val bedrock = bedrockService.update("endpoint")
 
         bedrock.validate()
     }
@@ -74,8 +66,7 @@ internal class BedrockServiceTest {
                 .build()
         val bedrockService = client.bedrock()
 
-        val bedrock =
-            bedrockService.delete(BedrockDeleteParams.builder().endpoint("endpoint").build())
+        val bedrock = bedrockService.delete("endpoint")
 
         bedrock.validate()
     }
@@ -90,8 +81,7 @@ internal class BedrockServiceTest {
                 .build()
         val bedrockService = client.bedrock()
 
-        val response =
-            bedrockService.patch(BedrockPatchParams.builder().endpoint("endpoint").build())
+        val response = bedrockService.patch("endpoint")
 
         response.validate()
     }

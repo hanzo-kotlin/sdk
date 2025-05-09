@@ -65,9 +65,20 @@ interface BatchServiceAsync {
      * ```
      */
     suspend fun retrieve(
+        batchId: String,
+        params: BatchRetrieveParams = BatchRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BatchRetrieveResponse = retrieve(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+    /** @see [retrieve] */
+    suspend fun retrieve(
         params: BatchRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchRetrieveResponse
+
+    /** @see [retrieve] */
+    suspend fun retrieve(batchId: String, requestOptions: RequestOptions): BatchRetrieveResponse =
+        retrieve(batchId, BatchRetrieveParams.none(), requestOptions)
 
     /**
      * Lists This is the equivalent of GET https://api.openai.com/v1/batches/ Supports Identical
@@ -102,6 +113,14 @@ interface BatchServiceAsync {
      * ```
      */
     suspend fun cancelWithProvider(
+        batchId: String,
+        params: BatchCancelWithProviderParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BatchCancelWithProviderResponse =
+        cancelWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+    /** @see [cancelWithProvider] */
+    suspend fun cancelWithProvider(
         params: BatchCancelWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchCancelWithProviderResponse
@@ -122,9 +141,24 @@ interface BatchServiceAsync {
      * ```
      */
     suspend fun createWithProvider(
+        provider: String,
+        params: BatchCreateWithProviderParams = BatchCreateWithProviderParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BatchCreateWithProviderResponse =
+        createWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
+
+    /** @see [createWithProvider] */
+    suspend fun createWithProvider(
         params: BatchCreateWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchCreateWithProviderResponse
+
+    /** @see [createWithProvider] */
+    suspend fun createWithProvider(
+        provider: String,
+        requestOptions: RequestOptions,
+    ): BatchCreateWithProviderResponse =
+        createWithProvider(provider, BatchCreateWithProviderParams.none(), requestOptions)
 
     /**
      * Lists This is the equivalent of GET https://api.openai.com/v1/batches/ Supports Identical
@@ -137,9 +171,24 @@ interface BatchServiceAsync {
      * ```
      */
     suspend fun listWithProvider(
+        provider: String,
+        params: BatchListWithProviderParams = BatchListWithProviderParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BatchListWithProviderResponse =
+        listWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
+
+    /** @see [listWithProvider] */
+    suspend fun listWithProvider(
         params: BatchListWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchListWithProviderResponse
+
+    /** @see [listWithProvider] */
+    suspend fun listWithProvider(
+        provider: String,
+        requestOptions: RequestOptions,
+    ): BatchListWithProviderResponse =
+        listWithProvider(provider, BatchListWithProviderParams.none(), requestOptions)
 
     /**
      * Retrieves a batch. This is the equivalent of GET https://api.openai.com/v1/batches/{batch_id}
@@ -151,6 +200,14 @@ interface BatchServiceAsync {
      * curl http://localhost:4000/v1/batches/batch_abc123     -H "Authorization: Bearer sk-1234"     -H "Content-Type: application/json"
      * ```
      */
+    suspend fun retrieveWithProvider(
+        batchId: String,
+        params: BatchRetrieveWithProviderParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BatchRetrieveWithProviderResponse =
+        retrieveWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+    /** @see [retrieveWithProvider] */
     suspend fun retrieveWithProvider(
         params: BatchRetrieveWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -182,9 +239,26 @@ interface BatchServiceAsync {
          */
         @MustBeClosed
         suspend fun retrieve(
+            batchId: String,
+            params: BatchRetrieveParams = BatchRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BatchRetrieveResponse> =
+            retrieve(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        suspend fun retrieve(
             params: BatchRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchRetrieveResponse>
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        suspend fun retrieve(
+            batchId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BatchRetrieveResponse> =
+            retrieve(batchId, BatchRetrieveParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /v1/batches`, but is otherwise the same as
@@ -207,6 +281,15 @@ interface BatchServiceAsync {
          */
         @MustBeClosed
         suspend fun cancelWithProvider(
+            batchId: String,
+            params: BatchCancelWithProviderParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BatchCancelWithProviderResponse> =
+            cancelWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+        /** @see [cancelWithProvider] */
+        @MustBeClosed
+        suspend fun cancelWithProvider(
             params: BatchCancelWithProviderParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchCancelWithProviderResponse>
@@ -217,9 +300,26 @@ interface BatchServiceAsync {
          */
         @MustBeClosed
         suspend fun createWithProvider(
+            provider: String,
+            params: BatchCreateWithProviderParams = BatchCreateWithProviderParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BatchCreateWithProviderResponse> =
+            createWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
+
+        /** @see [createWithProvider] */
+        @MustBeClosed
+        suspend fun createWithProvider(
             params: BatchCreateWithProviderParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchCreateWithProviderResponse>
+
+        /** @see [createWithProvider] */
+        @MustBeClosed
+        suspend fun createWithProvider(
+            provider: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BatchCreateWithProviderResponse> =
+            createWithProvider(provider, BatchCreateWithProviderParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /{provider}/v1/batches`, but is otherwise the same
@@ -227,14 +327,40 @@ interface BatchServiceAsync {
          */
         @MustBeClosed
         suspend fun listWithProvider(
+            provider: String,
+            params: BatchListWithProviderParams = BatchListWithProviderParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BatchListWithProviderResponse> =
+            listWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
+
+        /** @see [listWithProvider] */
+        @MustBeClosed
+        suspend fun listWithProvider(
             params: BatchListWithProviderParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchListWithProviderResponse>
+
+        /** @see [listWithProvider] */
+        @MustBeClosed
+        suspend fun listWithProvider(
+            provider: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<BatchListWithProviderResponse> =
+            listWithProvider(provider, BatchListWithProviderParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /{provider}/v1/batches/{batch_id}`, but is otherwise
          * the same as [BatchServiceAsync.retrieveWithProvider].
          */
+        @MustBeClosed
+        suspend fun retrieveWithProvider(
+            batchId: String,
+            params: BatchRetrieveWithProviderParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BatchRetrieveWithProviderResponse> =
+            retrieveWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+        /** @see [retrieveWithProvider] */
         @MustBeClosed
         suspend fun retrieveWithProvider(
             params: BatchRetrieveWithProviderParams,

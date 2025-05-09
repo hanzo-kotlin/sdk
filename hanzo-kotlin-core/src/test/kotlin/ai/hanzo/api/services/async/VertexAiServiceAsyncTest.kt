@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.vertexai.VertexAiCreateParams
-import ai.hanzo.api.models.vertexai.VertexAiDeleteParams
-import ai.hanzo.api.models.vertexai.VertexAiPatchParams
-import ai.hanzo.api.models.vertexai.VertexAiRetrieveParams
-import ai.hanzo.api.models.vertexai.VertexAiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,8 +21,7 @@ internal class VertexAiServiceAsyncTest {
                 .build()
         val vertexAiServiceAsync = client.vertexAi()
 
-        val vertexAi =
-            vertexAiServiceAsync.create(VertexAiCreateParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiServiceAsync.create("endpoint")
 
         vertexAi.validate()
     }
@@ -42,10 +36,7 @@ internal class VertexAiServiceAsyncTest {
                 .build()
         val vertexAiServiceAsync = client.vertexAi()
 
-        val vertexAi =
-            vertexAiServiceAsync.retrieve(
-                VertexAiRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val vertexAi = vertexAiServiceAsync.retrieve("endpoint")
 
         vertexAi.validate()
     }
@@ -60,8 +51,7 @@ internal class VertexAiServiceAsyncTest {
                 .build()
         val vertexAiServiceAsync = client.vertexAi()
 
-        val vertexAi =
-            vertexAiServiceAsync.update(VertexAiUpdateParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiServiceAsync.update("endpoint")
 
         vertexAi.validate()
     }
@@ -76,8 +66,7 @@ internal class VertexAiServiceAsyncTest {
                 .build()
         val vertexAiServiceAsync = client.vertexAi()
 
-        val vertexAi =
-            vertexAiServiceAsync.delete(VertexAiDeleteParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiServiceAsync.delete("endpoint")
 
         vertexAi.validate()
     }
@@ -92,8 +81,7 @@ internal class VertexAiServiceAsyncTest {
                 .build()
         val vertexAiServiceAsync = client.vertexAi()
 
-        val response =
-            vertexAiServiceAsync.patch(VertexAiPatchParams.builder().endpoint("endpoint").build())
+        val response = vertexAiServiceAsync.patch("endpoint")
 
         response.validate()
     }

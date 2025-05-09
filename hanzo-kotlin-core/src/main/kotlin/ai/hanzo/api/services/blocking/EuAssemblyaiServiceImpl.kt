@@ -5,6 +5,7 @@ package ai.hanzo.api.services.blocking
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -83,6 +84,9 @@ class EuAssemblyaiServiceImpl internal constructor(private val clientOptions: Cl
             params: EuAssemblyaiCreateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<EuAssemblyaiCreateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -111,6 +115,9 @@ class EuAssemblyaiServiceImpl internal constructor(private val clientOptions: Cl
             params: EuAssemblyaiRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<EuAssemblyaiRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -138,6 +145,9 @@ class EuAssemblyaiServiceImpl internal constructor(private val clientOptions: Cl
             params: EuAssemblyaiUpdateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<EuAssemblyaiUpdateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
@@ -166,6 +176,9 @@ class EuAssemblyaiServiceImpl internal constructor(private val clientOptions: Cl
             params: EuAssemblyaiDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<EuAssemblyaiDeleteResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
@@ -194,6 +207,9 @@ class EuAssemblyaiServiceImpl internal constructor(private val clientOptions: Cl
             params: EuAssemblyaiPatchParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<EuAssemblyaiPatchResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)

@@ -4,7 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.threads.ThreadRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -37,10 +36,7 @@ internal class ThreadServiceAsyncTest {
                 .build()
         val threadServiceAsync = client.threads()
 
-        val thread =
-            threadServiceAsync.retrieve(
-                ThreadRetrieveParams.builder().threadId("thread_id").build()
-            )
+        val thread = threadServiceAsync.retrieve("thread_id")
 
         thread.validate()
     }

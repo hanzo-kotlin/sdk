@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.assemblyai.AssemblyaiCreateParams
-import ai.hanzo.api.models.assemblyai.AssemblyaiDeleteParams
-import ai.hanzo.api.models.assemblyai.AssemblyaiPatchParams
-import ai.hanzo.api.models.assemblyai.AssemblyaiRetrieveParams
-import ai.hanzo.api.models.assemblyai.AssemblyaiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,10 +21,7 @@ internal class AssemblyaiServiceAsyncTest {
                 .build()
         val assemblyaiServiceAsync = client.assemblyai()
 
-        val assemblyai =
-            assemblyaiServiceAsync.create(
-                AssemblyaiCreateParams.builder().endpoint("endpoint").build()
-            )
+        val assemblyai = assemblyaiServiceAsync.create("endpoint")
 
         assemblyai.validate()
     }
@@ -44,10 +36,7 @@ internal class AssemblyaiServiceAsyncTest {
                 .build()
         val assemblyaiServiceAsync = client.assemblyai()
 
-        val assemblyai =
-            assemblyaiServiceAsync.retrieve(
-                AssemblyaiRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val assemblyai = assemblyaiServiceAsync.retrieve("endpoint")
 
         assemblyai.validate()
     }
@@ -62,10 +51,7 @@ internal class AssemblyaiServiceAsyncTest {
                 .build()
         val assemblyaiServiceAsync = client.assemblyai()
 
-        val assemblyai =
-            assemblyaiServiceAsync.update(
-                AssemblyaiUpdateParams.builder().endpoint("endpoint").build()
-            )
+        val assemblyai = assemblyaiServiceAsync.update("endpoint")
 
         assemblyai.validate()
     }
@@ -80,10 +66,7 @@ internal class AssemblyaiServiceAsyncTest {
                 .build()
         val assemblyaiServiceAsync = client.assemblyai()
 
-        val assemblyai =
-            assemblyaiServiceAsync.delete(
-                AssemblyaiDeleteParams.builder().endpoint("endpoint").build()
-            )
+        val assemblyai = assemblyaiServiceAsync.delete("endpoint")
 
         assemblyai.validate()
     }
@@ -98,10 +81,7 @@ internal class AssemblyaiServiceAsyncTest {
                 .build()
         val assemblyaiServiceAsync = client.assemblyai()
 
-        val response =
-            assemblyaiServiceAsync.patch(
-                AssemblyaiPatchParams.builder().endpoint("endpoint").build()
-            )
+        val response = assemblyaiServiceAsync.patch("endpoint")
 
         response.validate()
     }

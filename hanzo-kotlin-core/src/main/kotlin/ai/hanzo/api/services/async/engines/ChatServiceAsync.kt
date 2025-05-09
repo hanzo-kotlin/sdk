@@ -35,9 +35,20 @@ interface ChatServiceAsync {
      * ```
      */
     suspend fun complete(
+        model: String,
+        params: ChatCompleteParams = ChatCompleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ChatCompleteResponse = complete(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see [complete] */
+    suspend fun complete(
         params: ChatCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ChatCompleteResponse
+
+    /** @see [complete] */
+    suspend fun complete(model: String, requestOptions: RequestOptions): ChatCompleteResponse =
+        complete(model, ChatCompleteParams.none(), requestOptions)
 
     /** A view of [ChatServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -48,8 +59,25 @@ interface ChatServiceAsync {
          */
         @MustBeClosed
         suspend fun complete(
+            model: String,
+            params: ChatCompleteParams = ChatCompleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ChatCompleteResponse> =
+            complete(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see [complete] */
+        @MustBeClosed
+        suspend fun complete(
             params: ChatCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ChatCompleteResponse>
+
+        /** @see [complete] */
+        @MustBeClosed
+        suspend fun complete(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<ChatCompleteResponse> =
+            complete(model, ChatCompleteParams.none(), requestOptions)
     }
 }

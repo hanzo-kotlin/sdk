@@ -8,7 +8,6 @@ import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointCreateParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointDeleteParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointListParams
-import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointUpdateParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughGenericEndpoint
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -53,10 +52,7 @@ internal class PassThroughEndpointServiceTest {
                 .build()
         val passThroughEndpointService = client.config().passThroughEndpoint()
 
-        val passThroughEndpoint =
-            passThroughEndpointService.update(
-                PassThroughEndpointUpdateParams.builder().endpointId("endpoint_id").build()
-            )
+        val passThroughEndpoint = passThroughEndpointService.update("endpoint_id")
 
         passThroughEndpoint.validate()
     }

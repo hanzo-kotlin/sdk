@@ -4,7 +4,6 @@ package ai.hanzo.api.models.credentials
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -13,13 +12,13 @@ import java.util.Objects
 /** [BETA] endpoint. This might change unexpectedly. */
 class CredentialDeleteParams
 private constructor(
-    private val credentialName: String,
+    private val credentialName: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun credentialName(): String = credentialName
+    fun credentialName(): String? = credentialName
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -31,14 +30,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [CredentialDeleteParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .credentialName()
-         * ```
-         */
+        fun none(): CredentialDeleteParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [CredentialDeleteParams]. */
         fun builder() = Builder()
     }
 
@@ -58,7 +52,7 @@ private constructor(
                 credentialDeleteParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun credentialName(credentialName: String) = apply { this.credentialName = credentialName }
+        fun credentialName(credentialName: String?) = apply { this.credentialName = credentialName }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -184,17 +178,10 @@ private constructor(
          * Returns an immutable instance of [CredentialDeleteParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .credentialName()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): CredentialDeleteParams =
             CredentialDeleteParams(
-                checkRequired("credentialName", credentialName),
+                credentialName,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -205,7 +192,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> credentialName
+            0 -> credentialName ?: ""
             else -> ""
         }
 

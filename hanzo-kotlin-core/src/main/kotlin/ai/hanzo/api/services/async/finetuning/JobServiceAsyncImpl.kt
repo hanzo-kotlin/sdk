@@ -5,6 +5,7 @@ package ai.hanzo.api.services.async.finetuning
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -104,6 +105,9 @@ class JobServiceAsyncImpl internal constructor(private val clientOptions: Client
             params: JobRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<JobRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("fineTuningJobId", params.fineTuningJobId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)

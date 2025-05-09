@@ -4,8 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.responses.ResponseDeleteParams
-import ai.hanzo.api.models.responses.ResponseRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -38,10 +36,7 @@ internal class ResponseServiceTest {
                 .build()
         val responseService = client.responses()
 
-        val response =
-            responseService.retrieve(
-                ResponseRetrieveParams.builder().responseId("response_id").build()
-            )
+        val response = responseService.retrieve("response_id")
 
         response.validate()
     }
@@ -56,8 +51,7 @@ internal class ResponseServiceTest {
                 .build()
         val responseService = client.responses()
 
-        val response =
-            responseService.delete(ResponseDeleteParams.builder().responseId("response_id").build())
+        val response = responseService.delete("response_id")
 
         response.validate()
     }

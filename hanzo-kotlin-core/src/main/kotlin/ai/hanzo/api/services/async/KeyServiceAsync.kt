@@ -341,9 +341,24 @@ interface KeyServiceAsync {
      * Note: This is an Enterprise feature. It requires a premium license to use.
      */
     suspend fun regenerateByKey(
+        pathKey: String,
+        params: KeyRegenerateByKeyParams = KeyRegenerateByKeyParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): GenerateKeyResponse? =
+        regenerateByKey(params.toBuilder().pathKey(pathKey).build(), requestOptions)
+
+    /** @see [regenerateByKey] */
+    suspend fun regenerateByKey(
         params: KeyRegenerateByKeyParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GenerateKeyResponse?
+
+    /** @see [regenerateByKey] */
+    suspend fun regenerateByKey(
+        pathKey: String,
+        requestOptions: RequestOptions,
+    ): GenerateKeyResponse? =
+        regenerateByKey(pathKey, KeyRegenerateByKeyParams.none(), requestOptions)
 
     /**
      * Retrieve information about a key. Parameters: key: Optional[str] = Query parameter
@@ -485,9 +500,26 @@ interface KeyServiceAsync {
          */
         @MustBeClosed
         suspend fun regenerateByKey(
+            pathKey: String,
+            params: KeyRegenerateByKeyParams = KeyRegenerateByKeyParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<GenerateKeyResponse?> =
+            regenerateByKey(params.toBuilder().pathKey(pathKey).build(), requestOptions)
+
+        /** @see [regenerateByKey] */
+        @MustBeClosed
+        suspend fun regenerateByKey(
             params: KeyRegenerateByKeyParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GenerateKeyResponse?>
+
+        /** @see [regenerateByKey] */
+        @MustBeClosed
+        suspend fun regenerateByKey(
+            pathKey: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<GenerateKeyResponse?> =
+            regenerateByKey(pathKey, KeyRegenerateByKeyParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /key/info`, but is otherwise the same as

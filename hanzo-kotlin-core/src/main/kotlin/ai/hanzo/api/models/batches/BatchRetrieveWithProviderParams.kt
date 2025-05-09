@@ -21,7 +21,7 @@ import java.util.Objects
 class BatchRetrieveWithProviderParams
 private constructor(
     private val provider: String,
-    private val batchId: String,
+    private val batchId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
@@ -29,7 +29,7 @@ private constructor(
     fun provider(): String = provider
 
     /** The ID of the batch to retrieve */
-    fun batchId(): String = batchId
+    fun batchId(): String? = batchId
 
     fun _additionalHeaders(): Headers = additionalHeaders
 
@@ -46,7 +46,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .batchId()
          * ```
          */
         fun builder() = Builder()
@@ -72,7 +71,7 @@ private constructor(
         fun provider(provider: String) = apply { this.provider = provider }
 
         /** The ID of the batch to retrieve */
-        fun batchId(batchId: String) = apply { this.batchId = batchId }
+        fun batchId(batchId: String?) = apply { this.batchId = batchId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -180,7 +179,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .batchId()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -188,7 +186,7 @@ private constructor(
         fun build(): BatchRetrieveWithProviderParams =
             BatchRetrieveWithProviderParams(
                 checkRequired("provider", provider),
-                checkRequired("batchId", batchId),
+                batchId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -197,7 +195,7 @@ private constructor(
     fun _pathParam(index: Int): String =
         when (index) {
             0 -> provider
-            1 -> batchId
+            1 -> batchId ?: ""
             else -> ""
         }
 
