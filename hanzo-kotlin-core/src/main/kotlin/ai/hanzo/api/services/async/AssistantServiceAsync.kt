@@ -55,9 +55,23 @@ interface AssistantServiceAsync {
      * https://platform.openai.com/docs/api-reference/assistants/createAssistant
      */
     suspend fun delete(
+        assistantId: String,
+        params: AssistantDeleteParams = AssistantDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AssistantDeleteResponse =
+        delete(params.toBuilder().assistantId(assistantId).build(), requestOptions)
+
+    /** @see [delete] */
+    suspend fun delete(
         params: AssistantDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssistantDeleteResponse
+
+    /** @see [delete] */
+    suspend fun delete(
+        assistantId: String,
+        requestOptions: RequestOptions,
+    ): AssistantDeleteResponse = delete(assistantId, AssistantDeleteParams.none(), requestOptions)
 
     /**
      * A view of [AssistantServiceAsync] that provides access to raw HTTP responses for each method.
@@ -102,8 +116,25 @@ interface AssistantServiceAsync {
          */
         @MustBeClosed
         suspend fun delete(
+            assistantId: String,
+            params: AssistantDeleteParams = AssistantDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AssistantDeleteResponse> =
+            delete(params.toBuilder().assistantId(assistantId).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
             params: AssistantDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssistantDeleteResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
+            assistantId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AssistantDeleteResponse> =
+            delete(assistantId, AssistantDeleteParams.none(), requestOptions)
     }
 }

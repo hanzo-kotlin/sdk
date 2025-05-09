@@ -26,9 +26,21 @@ interface InputItemService {
      * ```
      */
     fun list(
+        responseId: String,
+        params: InputItemListParams = InputItemListParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): InputItemListResponse =
+        list(params.toBuilder().responseId(responseId).build(), requestOptions)
+
+    /** @see [list] */
+    fun list(
         params: InputItemListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): InputItemListResponse
+
+    /** @see [list] */
+    fun list(responseId: String, requestOptions: RequestOptions): InputItemListResponse =
+        list(responseId, InputItemListParams.none(), requestOptions)
 
     /** A view of [InputItemService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -39,8 +51,25 @@ interface InputItemService {
          */
         @MustBeClosed
         fun list(
+            responseId: String,
+            params: InputItemListParams = InputItemListParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<InputItemListResponse> =
+            list(params.toBuilder().responseId(responseId).build(), requestOptions)
+
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
             params: InputItemListParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<InputItemListResponse>
+
+        /** @see [list] */
+        @MustBeClosed
+        fun list(
+            responseId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<InputItemListResponse> =
+            list(responseId, InputItemListParams.none(), requestOptions)
     }
 }

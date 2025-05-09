@@ -4,11 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.anthropic.AnthropicCreateParams
-import ai.hanzo.api.models.anthropic.AnthropicDeleteParams
-import ai.hanzo.api.models.anthropic.AnthropicModifyParams
-import ai.hanzo.api.models.anthropic.AnthropicRetrieveParams
-import ai.hanzo.api.models.anthropic.AnthropicUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,8 +21,7 @@ internal class AnthropicServiceTest {
                 .build()
         val anthropicService = client.anthropic()
 
-        val anthropic =
-            anthropicService.create(AnthropicCreateParams.builder().endpoint("endpoint").build())
+        val anthropic = anthropicService.create("endpoint")
 
         anthropic.validate()
     }
@@ -42,10 +36,7 @@ internal class AnthropicServiceTest {
                 .build()
         val anthropicService = client.anthropic()
 
-        val anthropic =
-            anthropicService.retrieve(
-                AnthropicRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicService.retrieve("endpoint")
 
         anthropic.validate()
     }
@@ -60,8 +51,7 @@ internal class AnthropicServiceTest {
                 .build()
         val anthropicService = client.anthropic()
 
-        val anthropic =
-            anthropicService.update(AnthropicUpdateParams.builder().endpoint("endpoint").build())
+        val anthropic = anthropicService.update("endpoint")
 
         anthropic.validate()
     }
@@ -76,8 +66,7 @@ internal class AnthropicServiceTest {
                 .build()
         val anthropicService = client.anthropic()
 
-        val anthropic =
-            anthropicService.delete(AnthropicDeleteParams.builder().endpoint("endpoint").build())
+        val anthropic = anthropicService.delete("endpoint")
 
         anthropic.validate()
     }
@@ -92,8 +81,7 @@ internal class AnthropicServiceTest {
                 .build()
         val anthropicService = client.anthropic()
 
-        val response =
-            anthropicService.modify(AnthropicModifyParams.builder().endpoint("endpoint").build())
+        val response = anthropicService.modify("endpoint")
 
         response.validate()
     }

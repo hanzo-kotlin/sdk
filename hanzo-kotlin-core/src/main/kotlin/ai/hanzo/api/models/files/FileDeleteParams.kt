@@ -26,7 +26,7 @@ import java.util.Objects
 class FileDeleteParams
 private constructor(
     private val provider: String,
-    private val fileId: String,
+    private val fileId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
@@ -34,7 +34,7 @@ private constructor(
 
     fun provider(): String = provider
 
-    fun fileId(): String = fileId
+    fun fileId(): String? = fileId
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -52,7 +52,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .fileId()
          * ```
          */
         fun builder() = Builder()
@@ -77,7 +76,7 @@ private constructor(
 
         fun provider(provider: String) = apply { this.provider = provider }
 
-        fun fileId(fileId: String) = apply { this.fileId = fileId }
+        fun fileId(fileId: String?) = apply { this.fileId = fileId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -207,7 +206,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .fileId()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -215,7 +213,7 @@ private constructor(
         fun build(): FileDeleteParams =
             FileDeleteParams(
                 checkRequired("provider", provider),
-                checkRequired("fileId", fileId),
+                fileId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -227,7 +225,7 @@ private constructor(
     fun _pathParam(index: Int): String =
         when (index) {
             0 -> provider
-            1 -> fileId
+            1 -> fileId ?: ""
             else -> ""
         }
 

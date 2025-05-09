@@ -5,6 +5,7 @@ package ai.hanzo.api.services.async
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -141,6 +142,9 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
             params: BatchRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("batchId", params.batchId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -194,6 +198,9 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
             params: BatchCancelWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchCancelWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("batchId", params.batchId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -228,6 +235,9 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
             params: BatchCreateWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchCreateWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("provider", params.provider())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -256,6 +266,9 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
             params: BatchListWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchListWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("provider", params.provider())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -283,6 +296,9 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
             params: BatchRetrieveWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchRetrieveWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("batchId", params.batchId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)

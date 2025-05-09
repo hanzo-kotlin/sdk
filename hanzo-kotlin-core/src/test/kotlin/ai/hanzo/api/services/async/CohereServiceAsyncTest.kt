@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.cohere.CohereCreateParams
-import ai.hanzo.api.models.cohere.CohereDeleteParams
-import ai.hanzo.api.models.cohere.CohereModifyParams
-import ai.hanzo.api.models.cohere.CohereRetrieveParams
-import ai.hanzo.api.models.cohere.CohereUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,8 +21,7 @@ internal class CohereServiceAsyncTest {
                 .build()
         val cohereServiceAsync = client.cohere()
 
-        val cohere =
-            cohereServiceAsync.create(CohereCreateParams.builder().endpoint("endpoint").build())
+        val cohere = cohereServiceAsync.create("endpoint")
 
         cohere.validate()
     }
@@ -42,8 +36,7 @@ internal class CohereServiceAsyncTest {
                 .build()
         val cohereServiceAsync = client.cohere()
 
-        val cohere =
-            cohereServiceAsync.retrieve(CohereRetrieveParams.builder().endpoint("endpoint").build())
+        val cohere = cohereServiceAsync.retrieve("endpoint")
 
         cohere.validate()
     }
@@ -58,8 +51,7 @@ internal class CohereServiceAsyncTest {
                 .build()
         val cohereServiceAsync = client.cohere()
 
-        val cohere =
-            cohereServiceAsync.update(CohereUpdateParams.builder().endpoint("endpoint").build())
+        val cohere = cohereServiceAsync.update("endpoint")
 
         cohere.validate()
     }
@@ -74,8 +66,7 @@ internal class CohereServiceAsyncTest {
                 .build()
         val cohereServiceAsync = client.cohere()
 
-        val cohere =
-            cohereServiceAsync.delete(CohereDeleteParams.builder().endpoint("endpoint").build())
+        val cohere = cohereServiceAsync.delete("endpoint")
 
         cohere.validate()
     }
@@ -90,8 +81,7 @@ internal class CohereServiceAsyncTest {
                 .build()
         val cohereServiceAsync = client.cohere()
 
-        val response =
-            cohereServiceAsync.modify(CohereModifyParams.builder().endpoint("endpoint").build())
+        val response = cohereServiceAsync.modify("endpoint")
 
         response.validate()
     }

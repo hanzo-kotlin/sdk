@@ -6,7 +6,6 @@ import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.team.callback.CallbackAddParams
-import ai.hanzo.api.models.team.callback.CallbackRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -24,10 +23,7 @@ internal class CallbackServiceAsyncTest {
                 .build()
         val callbackServiceAsync = client.team().callback()
 
-        val callback =
-            callbackServiceAsync.retrieve(
-                CallbackRetrieveParams.builder().teamId("team_id").build()
-            )
+        val callback = callbackServiceAsync.retrieve("team_id")
 
         callback.validate()
     }

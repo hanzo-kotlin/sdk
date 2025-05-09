@@ -38,6 +38,13 @@ interface UpdateServiceAsync {
      * errors
      */
     suspend fun partial(
+        modelId: String,
+        params: UpdatePartialParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): UpdatePartialResponse = partial(params.toBuilder().modelId(modelId).build(), requestOptions)
+
+    /** @see [partial] */
+    suspend fun partial(
         params: UpdatePartialParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UpdatePartialResponse
@@ -61,6 +68,15 @@ interface UpdateServiceAsync {
          * Returns a raw HTTP response for `patch /model/{model_id}/update`, but is otherwise the
          * same as [UpdateServiceAsync.partial].
          */
+        @MustBeClosed
+        suspend fun partial(
+            modelId: String,
+            params: UpdatePartialParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<UpdatePartialResponse> =
+            partial(params.toBuilder().modelId(modelId).build(), requestOptions)
+
+        /** @see [partial] */
         @MustBeClosed
         suspend fun partial(
             params: UpdatePartialParams,

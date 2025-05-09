@@ -3,7 +3,6 @@
 package ai.hanzo.api.models.vertexai
 
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
@@ -15,12 +14,12 @@ import java.util.Objects
  */
 class VertexAiRetrieveParams
 private constructor(
-    private val endpoint: String,
+    private val endpoint: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun endpoint(): String = endpoint
+    fun endpoint(): String? = endpoint
 
     fun _additionalHeaders(): Headers = additionalHeaders
 
@@ -30,14 +29,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [VertexAiRetrieveParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .endpoint()
-         * ```
-         */
+        fun none(): VertexAiRetrieveParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [VertexAiRetrieveParams]. */
         fun builder() = Builder()
     }
 
@@ -54,7 +48,7 @@ private constructor(
             additionalQueryParams = vertexAiRetrieveParams.additionalQueryParams.toBuilder()
         }
 
-        fun endpoint(endpoint: String) = apply { this.endpoint = endpoint }
+        fun endpoint(endpoint: String?) = apply { this.endpoint = endpoint }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -158,17 +152,10 @@ private constructor(
          * Returns an immutable instance of [VertexAiRetrieveParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .endpoint()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): VertexAiRetrieveParams =
             VertexAiRetrieveParams(
-                checkRequired("endpoint", endpoint),
+                endpoint,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -176,7 +163,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> endpoint
+            0 -> endpoint ?: ""
             else -> ""
         }
 

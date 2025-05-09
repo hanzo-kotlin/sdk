@@ -5,6 +5,7 @@ package ai.hanzo.api.services.blocking
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -80,6 +81,9 @@ class AzureServiceImpl internal constructor(private val clientOptions: ClientOpt
             params: AzureCreateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<AzureCreateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -108,6 +112,9 @@ class AzureServiceImpl internal constructor(private val clientOptions: ClientOpt
             params: AzureUpdateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<AzureUpdateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
@@ -136,6 +143,9 @@ class AzureServiceImpl internal constructor(private val clientOptions: ClientOpt
             params: AzureDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<AzureDeleteResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
@@ -163,6 +173,9 @@ class AzureServiceImpl internal constructor(private val clientOptions: ClientOpt
             params: AzureCallParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<AzureCallResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -189,6 +202,9 @@ class AzureServiceImpl internal constructor(private val clientOptions: ClientOpt
             params: AzurePatchParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<AzurePatchResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)

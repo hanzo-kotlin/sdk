@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.anthropic.AnthropicCreateParams
-import ai.hanzo.api.models.anthropic.AnthropicDeleteParams
-import ai.hanzo.api.models.anthropic.AnthropicModifyParams
-import ai.hanzo.api.models.anthropic.AnthropicRetrieveParams
-import ai.hanzo.api.models.anthropic.AnthropicUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,10 +21,7 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.create(
-                AnthropicCreateParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.create("endpoint")
 
         anthropic.validate()
     }
@@ -44,10 +36,7 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.retrieve(
-                AnthropicRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.retrieve("endpoint")
 
         anthropic.validate()
     }
@@ -62,10 +51,7 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.update(
-                AnthropicUpdateParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.update("endpoint")
 
         anthropic.validate()
     }
@@ -80,10 +66,7 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.delete(
-                AnthropicDeleteParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.delete("endpoint")
 
         anthropic.validate()
     }
@@ -98,10 +81,7 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val response =
-            anthropicServiceAsync.modify(
-                AnthropicModifyParams.builder().endpoint("endpoint").build()
-            )
+        val response = anthropicServiceAsync.modify("endpoint")
 
         response.validate()
     }

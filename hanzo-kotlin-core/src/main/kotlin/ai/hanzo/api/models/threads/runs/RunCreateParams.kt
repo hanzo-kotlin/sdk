@@ -4,7 +4,6 @@ package ai.hanzo.api.models.threads.runs
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -17,13 +16,13 @@ import java.util.Objects
  */
 class RunCreateParams
 private constructor(
-    private val threadId: String,
+    private val threadId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun threadId(): String = threadId
+    fun threadId(): String? = threadId
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -35,14 +34,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [RunCreateParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .threadId()
-         * ```
-         */
+        fun none(): RunCreateParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [RunCreateParams]. */
         fun builder() = Builder()
     }
 
@@ -61,7 +55,7 @@ private constructor(
             additionalBodyProperties = runCreateParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun threadId(threadId: String) = apply { this.threadId = threadId }
+        fun threadId(threadId: String?) = apply { this.threadId = threadId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -187,17 +181,10 @@ private constructor(
          * Returns an immutable instance of [RunCreateParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .threadId()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): RunCreateParams =
             RunCreateParams(
-                checkRequired("threadId", threadId),
+                threadId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -208,7 +195,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> threadId
+            0 -> threadId ?: ""
             else -> ""
         }
 

@@ -6,7 +6,6 @@ import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.models.batches.BatchCancelWithProviderParams
 import ai.hanzo.api.models.batches.BatchCreateParams
-import ai.hanzo.api.models.batches.BatchCreateWithProviderParams
 import ai.hanzo.api.models.batches.BatchListParams
 import ai.hanzo.api.models.batches.BatchListWithProviderParams
 import ai.hanzo.api.models.batches.BatchRetrieveParams
@@ -101,10 +100,7 @@ internal class BatchServiceAsyncTest {
                 .build()
         val batchServiceAsync = client.batches()
 
-        val response =
-            batchServiceAsync.createWithProvider(
-                BatchCreateWithProviderParams.builder().provider("provider").build()
-            )
+        val response = batchServiceAsync.createWithProvider("provider")
 
         response.validate()
     }

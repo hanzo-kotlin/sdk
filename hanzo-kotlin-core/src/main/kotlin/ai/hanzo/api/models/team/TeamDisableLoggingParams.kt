@@ -4,7 +4,6 @@ package ai.hanzo.api.models.team
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -23,13 +22,13 @@ import java.util.Objects
  */
 class TeamDisableLoggingParams
 private constructor(
-    private val teamId: String,
+    private val teamId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun teamId(): String = teamId
+    fun teamId(): String? = teamId
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -41,14 +40,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [TeamDisableLoggingParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .teamId()
-         * ```
-         */
+        fun none(): TeamDisableLoggingParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [TeamDisableLoggingParams]. */
         fun builder() = Builder()
     }
 
@@ -68,7 +62,7 @@ private constructor(
                 teamDisableLoggingParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun teamId(teamId: String) = apply { this.teamId = teamId }
+        fun teamId(teamId: String?) = apply { this.teamId = teamId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -194,17 +188,10 @@ private constructor(
          * Returns an immutable instance of [TeamDisableLoggingParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .teamId()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): TeamDisableLoggingParams =
             TeamDisableLoggingParams(
-                checkRequired("teamId", teamId),
+                teamId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -215,7 +202,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> teamId
+            0 -> teamId ?: ""
             else -> ""
         }
 

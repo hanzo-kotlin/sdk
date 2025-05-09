@@ -21,9 +21,20 @@ interface RunServiceAsync {
      * API Reference: https://platform.openai.com/docs/api-reference/runs/createRun
      */
     suspend fun create(
+        threadId: String,
+        params: RunCreateParams = RunCreateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): RunCreateResponse = create(params.toBuilder().threadId(threadId).build(), requestOptions)
+
+    /** @see [create] */
+    suspend fun create(
         params: RunCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RunCreateResponse
+
+    /** @see [create] */
+    suspend fun create(threadId: String, requestOptions: RequestOptions): RunCreateResponse =
+        create(threadId, RunCreateParams.none(), requestOptions)
 
     /** A view of [RunServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -34,8 +45,25 @@ interface RunServiceAsync {
          */
         @MustBeClosed
         suspend fun create(
+            threadId: String,
+            params: RunCreateParams = RunCreateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<RunCreateResponse> =
+            create(params.toBuilder().threadId(threadId).build(), requestOptions)
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
             params: RunCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RunCreateResponse>
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
+            threadId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<RunCreateResponse> =
+            create(threadId, RunCreateParams.none(), requestOptions)
     }
 }

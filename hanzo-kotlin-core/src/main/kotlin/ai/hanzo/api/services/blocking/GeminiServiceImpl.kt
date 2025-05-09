@@ -5,6 +5,7 @@ package ai.hanzo.api.services.blocking
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -83,6 +84,9 @@ class GeminiServiceImpl internal constructor(private val clientOptions: ClientOp
             params: GeminiCreateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<GeminiCreateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -111,6 +115,9 @@ class GeminiServiceImpl internal constructor(private val clientOptions: ClientOp
             params: GeminiRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<GeminiRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -138,6 +145,9 @@ class GeminiServiceImpl internal constructor(private val clientOptions: ClientOp
             params: GeminiUpdateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<GeminiUpdateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
@@ -166,6 +176,9 @@ class GeminiServiceImpl internal constructor(private val clientOptions: ClientOp
             params: GeminiDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<GeminiDeleteResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
@@ -194,6 +207,9 @@ class GeminiServiceImpl internal constructor(private val clientOptions: ClientOp
             params: GeminiPatchParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<GeminiPatchResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)

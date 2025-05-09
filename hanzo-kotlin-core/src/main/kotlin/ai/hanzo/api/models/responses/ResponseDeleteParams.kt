@@ -4,7 +4,6 @@ package ai.hanzo.api.models.responses
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -22,13 +21,13 @@ import java.util.Objects
  */
 class ResponseDeleteParams
 private constructor(
-    private val responseId: String,
+    private val responseId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun responseId(): String = responseId
+    fun responseId(): String? = responseId
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -40,14 +39,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [ResponseDeleteParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .responseId()
-         * ```
-         */
+        fun none(): ResponseDeleteParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [ResponseDeleteParams]. */
         fun builder() = Builder()
     }
 
@@ -66,7 +60,7 @@ private constructor(
             additionalBodyProperties = responseDeleteParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun responseId(responseId: String) = apply { this.responseId = responseId }
+        fun responseId(responseId: String?) = apply { this.responseId = responseId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -192,17 +186,10 @@ private constructor(
          * Returns an immutable instance of [ResponseDeleteParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .responseId()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): ResponseDeleteParams =
             ResponseDeleteParams(
-                checkRequired("responseId", responseId),
+                responseId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -213,7 +200,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> responseId
+            0 -> responseId ?: ""
             else -> ""
         }
 

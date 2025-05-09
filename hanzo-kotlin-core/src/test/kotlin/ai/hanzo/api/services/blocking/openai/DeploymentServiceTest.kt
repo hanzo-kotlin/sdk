@@ -4,8 +4,6 @@ package ai.hanzo.api.services.blocking.openai
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.openai.deployments.DeploymentCompleteParams
-import ai.hanzo.api.models.openai.deployments.DeploymentEmbedParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -23,8 +21,7 @@ internal class DeploymentServiceTest {
                 .build()
         val deploymentService = client.openai().deployments()
 
-        val response =
-            deploymentService.complete(DeploymentCompleteParams.builder().model("model").build())
+        val response = deploymentService.complete("model")
 
         response.validate()
     }
@@ -39,8 +36,7 @@ internal class DeploymentServiceTest {
                 .build()
         val deploymentService = client.openai().deployments()
 
-        val response =
-            deploymentService.embed(DeploymentEmbedParams.builder().model("model").build())
+        val response = deploymentService.embed("model")
 
         response.validate()
     }

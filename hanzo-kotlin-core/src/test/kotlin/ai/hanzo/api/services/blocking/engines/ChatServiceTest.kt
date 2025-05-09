@@ -4,7 +4,6 @@ package ai.hanzo.api.services.blocking.engines
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.engines.chat.ChatCompleteParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,7 +21,7 @@ internal class ChatServiceTest {
                 .build()
         val chatService = client.engines().chat()
 
-        val response = chatService.complete(ChatCompleteParams.builder().model("model").build())
+        val response = chatService.complete("model")
 
         response.validate()
     }

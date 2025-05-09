@@ -4,7 +4,6 @@ package ai.hanzo.api.models.key
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.immutableEmptyMap
@@ -59,14 +58,14 @@ import java.util.Objects
  */
 class KeyRegenerateByKeyParams
 private constructor(
-    private val pathKey: String,
+    private val pathKey: String?,
     private val llmChangedBy: String?,
     private val regenerateKeyRequest: RegenerateKeyRequest?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun pathKey(): String = pathKey
+    fun pathKey(): String? = pathKey
 
     /**
      * The llm-changed-by header enables tracking of actions performed by authorized users on behalf
@@ -87,14 +86,9 @@ private constructor(
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [KeyRegenerateByKeyParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .pathKey()
-         * ```
-         */
+        fun none(): KeyRegenerateByKeyParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [KeyRegenerateByKeyParams]. */
         fun builder() = Builder()
     }
 
@@ -115,7 +109,7 @@ private constructor(
             additionalQueryParams = keyRegenerateByKeyParams.additionalQueryParams.toBuilder()
         }
 
-        fun pathKey(pathKey: String) = apply { this.pathKey = pathKey }
+        fun pathKey(pathKey: String?) = apply { this.pathKey = pathKey }
 
         /**
          * The llm-changed-by header enables tracking of actions performed by authorized users on
@@ -229,17 +223,10 @@ private constructor(
          * Returns an immutable instance of [KeyRegenerateByKeyParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .pathKey()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): KeyRegenerateByKeyParams =
             KeyRegenerateByKeyParams(
-                checkRequired("pathKey", pathKey),
+                pathKey,
                 llmChangedBy,
                 regenerateKeyRequest,
                 additionalHeaders.build(),
@@ -251,7 +238,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> pathKey
+            0 -> pathKey ?: ""
             else -> ""
         }
 

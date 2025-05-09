@@ -4,7 +4,6 @@ package ai.hanzo.api.models.batches
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -27,13 +26,13 @@ import java.util.Objects
  */
 class BatchCreateWithProviderParams
 private constructor(
-    private val provider: String,
+    private val provider: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun provider(): String = provider
+    fun provider(): String? = provider
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
@@ -45,14 +44,11 @@ private constructor(
 
     companion object {
 
+        fun none(): BatchCreateWithProviderParams = builder().build()
+
         /**
          * Returns a mutable builder for constructing an instance of
          * [BatchCreateWithProviderParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .provider()
-         * ```
          */
         fun builder() = Builder()
     }
@@ -73,7 +69,7 @@ private constructor(
                 batchCreateWithProviderParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun provider(provider: String) = apply { this.provider = provider }
+        fun provider(provider: String?) = apply { this.provider = provider }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -199,17 +195,10 @@ private constructor(
          * Returns an immutable instance of [BatchCreateWithProviderParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .provider()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): BatchCreateWithProviderParams =
             BatchCreateWithProviderParams(
-                checkRequired("provider", provider),
+                provider,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
@@ -220,7 +209,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> provider
+            0 -> provider ?: ""
             else -> ""
         }
 

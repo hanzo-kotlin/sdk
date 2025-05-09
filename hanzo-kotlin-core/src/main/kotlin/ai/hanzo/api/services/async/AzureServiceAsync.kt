@@ -29,9 +29,20 @@ interface AzureServiceAsync {
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
      */
     suspend fun create(
+        endpoint: String,
+        params: AzureCreateParams = AzureCreateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AzureCreateResponse = create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [create] */
+    suspend fun create(
         params: AzureCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AzureCreateResponse
+
+    /** @see [create] */
+    suspend fun create(endpoint: String, requestOptions: RequestOptions): AzureCreateResponse =
+        create(endpoint, AzureCreateParams.none(), requestOptions)
 
     /**
      * Call any azure endpoint using the proxy.
@@ -39,9 +50,20 @@ interface AzureServiceAsync {
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
      */
     suspend fun update(
+        endpoint: String,
+        params: AzureUpdateParams = AzureUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AzureUpdateResponse = update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [update] */
+    suspend fun update(
         params: AzureUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AzureUpdateResponse
+
+    /** @see [update] */
+    suspend fun update(endpoint: String, requestOptions: RequestOptions): AzureUpdateResponse =
+        update(endpoint, AzureUpdateParams.none(), requestOptions)
 
     /**
      * Call any azure endpoint using the proxy.
@@ -49,9 +71,20 @@ interface AzureServiceAsync {
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
      */
     suspend fun delete(
+        endpoint: String,
+        params: AzureDeleteParams = AzureDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AzureDeleteResponse = delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [delete] */
+    suspend fun delete(
         params: AzureDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AzureDeleteResponse
+
+    /** @see [delete] */
+    suspend fun delete(endpoint: String, requestOptions: RequestOptions): AzureDeleteResponse =
+        delete(endpoint, AzureDeleteParams.none(), requestOptions)
 
     /**
      * Call any azure endpoint using the proxy.
@@ -59,9 +92,20 @@ interface AzureServiceAsync {
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
      */
     suspend fun call(
+        endpoint: String,
+        params: AzureCallParams = AzureCallParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AzureCallResponse = call(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [call] */
+    suspend fun call(
         params: AzureCallParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AzureCallResponse
+
+    /** @see [call] */
+    suspend fun call(endpoint: String, requestOptions: RequestOptions): AzureCallResponse =
+        call(endpoint, AzureCallParams.none(), requestOptions)
 
     /**
      * Call any azure endpoint using the proxy.
@@ -69,9 +113,20 @@ interface AzureServiceAsync {
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
      */
     suspend fun patch(
+        endpoint: String,
+        params: AzurePatchParams = AzurePatchParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AzurePatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see [patch] */
+    suspend fun patch(
         params: AzurePatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AzurePatchResponse
+
+    /** @see [patch] */
+    suspend fun patch(endpoint: String, requestOptions: RequestOptions): AzurePatchResponse =
+        patch(endpoint, AzurePatchParams.none(), requestOptions)
 
     /** A view of [AzureServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -82,9 +137,26 @@ interface AzureServiceAsync {
          */
         @MustBeClosed
         suspend fun create(
+            endpoint: String,
+            params: AzureCreateParams = AzureCreateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AzureCreateResponse> =
+            create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
             params: AzureCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AzureCreateResponse>
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AzureCreateResponse> =
+            create(endpoint, AzureCreateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `put /azure/{endpoint}`, but is otherwise the same as
@@ -92,9 +164,26 @@ interface AzureServiceAsync {
          */
         @MustBeClosed
         suspend fun update(
+            endpoint: String,
+            params: AzureUpdateParams = AzureUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AzureUpdateResponse> =
+            update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [update] */
+        @MustBeClosed
+        suspend fun update(
             params: AzureUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AzureUpdateResponse>
+
+        /** @see [update] */
+        @MustBeClosed
+        suspend fun update(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AzureUpdateResponse> =
+            update(endpoint, AzureUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `delete /azure/{endpoint}`, but is otherwise the same as
@@ -102,9 +191,26 @@ interface AzureServiceAsync {
          */
         @MustBeClosed
         suspend fun delete(
+            endpoint: String,
+            params: AzureDeleteParams = AzureDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AzureDeleteResponse> =
+            delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
             params: AzureDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AzureDeleteResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AzureDeleteResponse> =
+            delete(endpoint, AzureDeleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /azure/{endpoint}`, but is otherwise the same as
@@ -112,9 +218,26 @@ interface AzureServiceAsync {
          */
         @MustBeClosed
         suspend fun call(
+            endpoint: String,
+            params: AzureCallParams = AzureCallParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AzureCallResponse> =
+            call(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [call] */
+        @MustBeClosed
+        suspend fun call(
             params: AzureCallParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AzureCallResponse>
+
+        /** @see [call] */
+        @MustBeClosed
+        suspend fun call(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AzureCallResponse> =
+            call(endpoint, AzureCallParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `patch /azure/{endpoint}`, but is otherwise the same as
@@ -122,8 +245,25 @@ interface AzureServiceAsync {
          */
         @MustBeClosed
         suspend fun patch(
+            endpoint: String,
+            params: AzurePatchParams = AzurePatchParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AzurePatchResponse> =
+            patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see [patch] */
+        @MustBeClosed
+        suspend fun patch(
             params: AzurePatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AzurePatchResponse>
+
+        /** @see [patch] */
+        @MustBeClosed
+        suspend fun patch(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AzurePatchResponse> =
+            patch(endpoint, AzurePatchParams.none(), requestOptions)
     }
 }

@@ -37,9 +37,20 @@ interface EngineService {
      * ```
      */
     fun complete(
+        model: String,
+        params: EngineCompleteParams = EngineCompleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): EngineCompleteResponse = complete(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see [complete] */
+    fun complete(
         params: EngineCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineCompleteResponse
+
+    /** @see [complete] */
+    fun complete(model: String, requestOptions: RequestOptions): EngineCompleteResponse =
+        complete(model, EngineCompleteParams.none(), requestOptions)
 
     /**
      * Follows the exact same API spec as `OpenAI's Embeddings API
@@ -56,9 +67,20 @@ interface EngineService {
      * ```
      */
     fun embed(
+        model: String,
+        params: EngineEmbedParams = EngineEmbedParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): EngineEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see [embed] */
+    fun embed(
         params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineEmbedResponse
+
+    /** @see [embed] */
+    fun embed(model: String, requestOptions: RequestOptions): EngineEmbedResponse =
+        embed(model, EngineEmbedParams.none(), requestOptions)
 
     /** A view of [EngineService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -71,9 +93,26 @@ interface EngineService {
          */
         @MustBeClosed
         fun complete(
+            model: String,
+            params: EngineCompleteParams = EngineCompleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<EngineCompleteResponse> =
+            complete(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see [complete] */
+        @MustBeClosed
+        fun complete(
             params: EngineCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineCompleteResponse>
+
+        /** @see [complete] */
+        @MustBeClosed
+        fun complete(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<EngineCompleteResponse> =
+            complete(model, EngineCompleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `post /engines/{model}/embeddings`, but is otherwise the
@@ -81,8 +120,25 @@ interface EngineService {
          */
         @MustBeClosed
         fun embed(
+            model: String,
+            params: EngineEmbedParams = EngineEmbedParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<EngineEmbedResponse> =
+            embed(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see [embed] */
+        @MustBeClosed
+        fun embed(
             params: EngineEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineEmbedResponse>
+
+        /** @see [embed] */
+        @MustBeClosed
+        fun embed(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<EngineEmbedResponse> =
+            embed(model, EngineEmbedParams.none(), requestOptions)
     }
 }

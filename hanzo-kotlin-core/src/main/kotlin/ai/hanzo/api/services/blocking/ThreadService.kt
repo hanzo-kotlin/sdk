@@ -43,9 +43,21 @@ interface ThreadService {
      * API Reference - https://platform.openai.com/docs/api-reference/threads/getThread
      */
     fun retrieve(
+        threadId: String,
+        params: ThreadRetrieveParams = ThreadRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ThreadRetrieveResponse =
+        retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
+
+    /** @see [retrieve] */
+    fun retrieve(
         params: ThreadRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ThreadRetrieveResponse
+
+    /** @see [retrieve] */
+    fun retrieve(threadId: String, requestOptions: RequestOptions): ThreadRetrieveResponse =
+        retrieve(threadId, ThreadRetrieveParams.none(), requestOptions)
 
     /** A view of [ThreadService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -75,8 +87,25 @@ interface ThreadService {
          */
         @MustBeClosed
         fun retrieve(
+            threadId: String,
+            params: ThreadRetrieveParams = ThreadRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ThreadRetrieveResponse> =
+            retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
             params: ThreadRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ThreadRetrieveResponse>
+
+        /** @see [retrieve] */
+        @MustBeClosed
+        fun retrieve(
+            threadId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<ThreadRetrieveResponse> =
+            retrieve(threadId, ThreadRetrieveParams.none(), requestOptions)
     }
 }

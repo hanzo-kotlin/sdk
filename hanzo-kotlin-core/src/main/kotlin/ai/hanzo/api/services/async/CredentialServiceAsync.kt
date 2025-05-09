@@ -40,9 +40,24 @@ interface CredentialServiceAsync {
 
     /** [BETA] endpoint. This might change unexpectedly. */
     suspend fun delete(
+        credentialName: String,
+        params: CredentialDeleteParams = CredentialDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CredentialDeleteResponse =
+        delete(params.toBuilder().credentialName(credentialName).build(), requestOptions)
+
+    /** @see [delete] */
+    suspend fun delete(
         params: CredentialDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CredentialDeleteResponse
+
+    /** @see [delete] */
+    suspend fun delete(
+        credentialName: String,
+        requestOptions: RequestOptions,
+    ): CredentialDeleteResponse =
+        delete(credentialName, CredentialDeleteParams.none(), requestOptions)
 
     /**
      * A view of [CredentialServiceAsync] that provides access to raw HTTP responses for each
@@ -81,8 +96,25 @@ interface CredentialServiceAsync {
          */
         @MustBeClosed
         suspend fun delete(
+            credentialName: String,
+            params: CredentialDeleteParams = CredentialDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CredentialDeleteResponse> =
+            delete(params.toBuilder().credentialName(credentialName).build(), requestOptions)
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
             params: CredentialDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CredentialDeleteResponse>
+
+        /** @see [delete] */
+        @MustBeClosed
+        suspend fun delete(
+            credentialName: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<CredentialDeleteResponse> =
+            delete(credentialName, CredentialDeleteParams.none(), requestOptions)
     }
 }

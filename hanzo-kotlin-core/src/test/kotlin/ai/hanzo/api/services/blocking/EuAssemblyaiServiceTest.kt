@@ -4,11 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiCreateParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiDeleteParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiPatchParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiRetrieveParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,10 +21,7 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.create(
-                EuAssemblyaiCreateParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.create("endpoint")
 
         euAssemblyai.validate()
     }
@@ -44,10 +36,7 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.retrieve(
-                EuAssemblyaiRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.retrieve("endpoint")
 
         euAssemblyai.validate()
     }
@@ -62,10 +51,7 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.update(
-                EuAssemblyaiUpdateParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.update("endpoint")
 
         euAssemblyai.validate()
     }
@@ -80,10 +66,7 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.delete(
-                EuAssemblyaiDeleteParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.delete("endpoint")
 
         euAssemblyai.validate()
     }
@@ -98,10 +81,7 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val response =
-            euAssemblyaiService.patch(
-                EuAssemblyaiPatchParams.builder().endpoint("endpoint").build()
-            )
+        val response = euAssemblyaiService.patch("endpoint")
 
         response.validate()
     }

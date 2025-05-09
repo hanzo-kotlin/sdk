@@ -28,9 +28,24 @@ interface PassThroughEndpointServiceAsync {
 
     /** Update a pass-through endpoint */
     suspend fun update(
+        endpointId: String,
+        params: PassThroughEndpointUpdateParams = PassThroughEndpointUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): PassThroughEndpointUpdateResponse =
+        update(params.toBuilder().endpointId(endpointId).build(), requestOptions)
+
+    /** @see [update] */
+    suspend fun update(
         params: PassThroughEndpointUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): PassThroughEndpointUpdateResponse
+
+    /** @see [update] */
+    suspend fun update(
+        endpointId: String,
+        requestOptions: RequestOptions,
+    ): PassThroughEndpointUpdateResponse =
+        update(endpointId, PassThroughEndpointUpdateParams.none(), requestOptions)
 
     /**
      * GET configured pass through endpoint.
@@ -78,9 +93,26 @@ interface PassThroughEndpointServiceAsync {
          */
         @MustBeClosed
         suspend fun update(
+            endpointId: String,
+            params: PassThroughEndpointUpdateParams = PassThroughEndpointUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<PassThroughEndpointUpdateResponse> =
+            update(params.toBuilder().endpointId(endpointId).build(), requestOptions)
+
+        /** @see [update] */
+        @MustBeClosed
+        suspend fun update(
             params: PassThroughEndpointUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<PassThroughEndpointUpdateResponse>
+
+        /** @see [update] */
+        @MustBeClosed
+        suspend fun update(
+            endpointId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<PassThroughEndpointUpdateResponse> =
+            update(endpointId, PassThroughEndpointUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /config/pass_through_endpoint`, but is otherwise the

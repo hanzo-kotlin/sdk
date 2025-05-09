@@ -54,6 +54,14 @@ interface JobServiceAsync {
      * - `fine_tuning_job_id`: The ID of the fine-tuning job to retrieve.
      */
     suspend fun retrieve(
+        fineTuningJobId: String,
+        params: JobRetrieveParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): JobRetrieveResponse =
+        retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
+
+    /** @see [retrieve] */
+    suspend fun retrieve(
         params: JobRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobRetrieveResponse
@@ -91,6 +99,15 @@ interface JobServiceAsync {
          * Returns a raw HTTP response for `get /v1/fine_tuning/jobs/{fine_tuning_job_id}`, but is
          * otherwise the same as [JobServiceAsync.retrieve].
          */
+        @MustBeClosed
+        suspend fun retrieve(
+            fineTuningJobId: String,
+            params: JobRetrieveParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<JobRetrieveResponse> =
+            retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
+
+        /** @see [retrieve] */
         @MustBeClosed
         suspend fun retrieve(
             params: JobRetrieveParams,

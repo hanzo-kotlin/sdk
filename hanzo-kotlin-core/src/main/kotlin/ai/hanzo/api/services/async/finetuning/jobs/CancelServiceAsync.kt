@@ -26,9 +26,23 @@ interface CancelServiceAsync {
      * - `fine_tuning_job_id`: The ID of the fine-tuning job to cancel.
      */
     suspend fun create(
+        fineTuningJobId: String,
+        params: CancelCreateParams = CancelCreateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CancelCreateResponse =
+        create(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
+
+    /** @see [create] */
+    suspend fun create(
         params: CancelCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CancelCreateResponse
+
+    /** @see [create] */
+    suspend fun create(
+        fineTuningJobId: String,
+        requestOptions: RequestOptions,
+    ): CancelCreateResponse = create(fineTuningJobId, CancelCreateParams.none(), requestOptions)
 
     /**
      * A view of [CancelServiceAsync] that provides access to raw HTTP responses for each method.
@@ -41,8 +55,25 @@ interface CancelServiceAsync {
          */
         @MustBeClosed
         suspend fun create(
+            fineTuningJobId: String,
+            params: CancelCreateParams = CancelCreateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CancelCreateResponse> =
+            create(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
             params: CancelCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CancelCreateResponse>
+
+        /** @see [create] */
+        @MustBeClosed
+        suspend fun create(
+            fineTuningJobId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<CancelCreateResponse> =
+            create(fineTuningJobId, CancelCreateParams.none(), requestOptions)
     }
 }

@@ -254,9 +254,24 @@ interface TeamServiceAsync {
      * ```
      */
     suspend fun disableLogging(
+        teamId: String,
+        params: TeamDisableLoggingParams = TeamDisableLoggingParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): TeamDisableLoggingResponse =
+        disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+    /** @see [disableLogging] */
+    suspend fun disableLogging(
         params: TeamDisableLoggingParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamDisableLoggingResponse
+
+    /** @see [disableLogging] */
+    suspend fun disableLogging(
+        teamId: String,
+        requestOptions: RequestOptions,
+    ): TeamDisableLoggingResponse =
+        disableLogging(teamId, TeamDisableLoggingParams.none(), requestOptions)
 
     /** List Available Teams */
     suspend fun listAvailable(
@@ -420,9 +435,26 @@ interface TeamServiceAsync {
          */
         @MustBeClosed
         suspend fun disableLogging(
+            teamId: String,
+            params: TeamDisableLoggingParams = TeamDisableLoggingParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<TeamDisableLoggingResponse> =
+            disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+        /** @see [disableLogging] */
+        @MustBeClosed
+        suspend fun disableLogging(
             params: TeamDisableLoggingParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamDisableLoggingResponse>
+
+        /** @see [disableLogging] */
+        @MustBeClosed
+        suspend fun disableLogging(
+            teamId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<TeamDisableLoggingResponse> =
+            disableLogging(teamId, TeamDisableLoggingParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /team/available`, but is otherwise the same as

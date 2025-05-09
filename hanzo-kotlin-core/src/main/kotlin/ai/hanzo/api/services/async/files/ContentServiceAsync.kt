@@ -30,6 +30,13 @@ interface ContentServiceAsync {
      * ```
      */
     suspend fun retrieve(
+        fileId: String,
+        params: ContentRetrieveParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ContentRetrieveResponse = retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
+
+    /** @see [retrieve] */
+    suspend fun retrieve(
         params: ContentRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ContentRetrieveResponse
@@ -43,6 +50,15 @@ interface ContentServiceAsync {
          * Returns a raw HTTP response for `get /{provider}/v1/files/{file_id}/content`, but is
          * otherwise the same as [ContentServiceAsync.retrieve].
          */
+        @MustBeClosed
+        suspend fun retrieve(
+            fileId: String,
+            params: ContentRetrieveParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ContentRetrieveResponse> =
+            retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
+
+        /** @see [retrieve] */
         @MustBeClosed
         suspend fun retrieve(
             params: ContentRetrieveParams,

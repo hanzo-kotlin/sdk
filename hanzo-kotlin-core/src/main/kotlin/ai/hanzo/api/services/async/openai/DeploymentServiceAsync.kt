@@ -37,9 +37,23 @@ interface DeploymentServiceAsync {
      * ```
      */
     suspend fun complete(
+        model: String,
+        params: DeploymentCompleteParams = DeploymentCompleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): DeploymentCompleteResponse =
+        complete(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see [complete] */
+    suspend fun complete(
         params: DeploymentCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentCompleteResponse
+
+    /** @see [complete] */
+    suspend fun complete(
+        model: String,
+        requestOptions: RequestOptions,
+    ): DeploymentCompleteResponse = complete(model, DeploymentCompleteParams.none(), requestOptions)
 
     /**
      * Follows the exact same API spec as `OpenAI's Embeddings API
@@ -56,9 +70,20 @@ interface DeploymentServiceAsync {
      * ```
      */
     suspend fun embed(
+        model: String,
+        params: DeploymentEmbedParams = DeploymentEmbedParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): DeploymentEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see [embed] */
+    suspend fun embed(
         params: DeploymentEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentEmbedResponse
+
+    /** @see [embed] */
+    suspend fun embed(model: String, requestOptions: RequestOptions): DeploymentEmbedResponse =
+        embed(model, DeploymentEmbedParams.none(), requestOptions)
 
     /**
      * A view of [DeploymentServiceAsync] that provides access to raw HTTP responses for each
@@ -74,9 +99,26 @@ interface DeploymentServiceAsync {
          */
         @MustBeClosed
         suspend fun complete(
+            model: String,
+            params: DeploymentCompleteParams = DeploymentCompleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<DeploymentCompleteResponse> =
+            complete(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see [complete] */
+        @MustBeClosed
+        suspend fun complete(
             params: DeploymentCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentCompleteResponse>
+
+        /** @see [complete] */
+        @MustBeClosed
+        suspend fun complete(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<DeploymentCompleteResponse> =
+            complete(model, DeploymentCompleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `post /openai/deployments/{model}/embeddings`, but is
@@ -84,8 +126,25 @@ interface DeploymentServiceAsync {
          */
         @MustBeClosed
         suspend fun embed(
+            model: String,
+            params: DeploymentEmbedParams = DeploymentEmbedParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<DeploymentEmbedResponse> =
+            embed(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see [embed] */
+        @MustBeClosed
+        suspend fun embed(
             params: DeploymentEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentEmbedResponse>
+
+        /** @see [embed] */
+        @MustBeClosed
+        suspend fun embed(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<DeploymentEmbedResponse> =
+            embed(model, DeploymentEmbedParams.none(), requestOptions)
     }
 }

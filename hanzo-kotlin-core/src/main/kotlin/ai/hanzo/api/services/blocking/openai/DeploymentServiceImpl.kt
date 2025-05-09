@@ -5,6 +5,7 @@ package ai.hanzo.api.services.blocking.openai
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
 import ai.hanzo.api.core.handlers.withErrorHandler
@@ -68,6 +69,9 @@ class DeploymentServiceImpl internal constructor(private val clientOptions: Clie
             params: DeploymentCompleteParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<DeploymentCompleteResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("model", params.model())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -96,6 +100,9 @@ class DeploymentServiceImpl internal constructor(private val clientOptions: Clie
             params: DeploymentEmbedParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<DeploymentEmbedResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("model", params.model())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)

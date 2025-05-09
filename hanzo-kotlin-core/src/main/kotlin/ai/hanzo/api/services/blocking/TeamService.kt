@@ -254,9 +254,21 @@ interface TeamService {
      * ```
      */
     fun disableLogging(
+        teamId: String,
+        params: TeamDisableLoggingParams = TeamDisableLoggingParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): TeamDisableLoggingResponse =
+        disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+    /** @see [disableLogging] */
+    fun disableLogging(
         params: TeamDisableLoggingParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamDisableLoggingResponse
+
+    /** @see [disableLogging] */
+    fun disableLogging(teamId: String, requestOptions: RequestOptions): TeamDisableLoggingResponse =
+        disableLogging(teamId, TeamDisableLoggingParams.none(), requestOptions)
 
     /** List Available Teams */
     fun listAvailable(
@@ -420,9 +432,26 @@ interface TeamService {
          */
         @MustBeClosed
         fun disableLogging(
+            teamId: String,
+            params: TeamDisableLoggingParams = TeamDisableLoggingParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<TeamDisableLoggingResponse> =
+            disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+        /** @see [disableLogging] */
+        @MustBeClosed
+        fun disableLogging(
             params: TeamDisableLoggingParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamDisableLoggingResponse>
+
+        /** @see [disableLogging] */
+        @MustBeClosed
+        fun disableLogging(
+            teamId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<TeamDisableLoggingResponse> =
+            disableLogging(teamId, TeamDisableLoggingParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /team/available`, but is otherwise the same as

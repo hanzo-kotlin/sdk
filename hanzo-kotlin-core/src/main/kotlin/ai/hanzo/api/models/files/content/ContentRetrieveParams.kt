@@ -25,14 +25,14 @@ import java.util.Objects
 class ContentRetrieveParams
 private constructor(
     private val provider: String,
-    private val fileId: String,
+    private val fileId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
     fun provider(): String = provider
 
-    fun fileId(): String = fileId
+    fun fileId(): String? = fileId
 
     fun _additionalHeaders(): Headers = additionalHeaders
 
@@ -48,7 +48,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .fileId()
          * ```
          */
         fun builder() = Builder()
@@ -71,7 +70,7 @@ private constructor(
 
         fun provider(provider: String) = apply { this.provider = provider }
 
-        fun fileId(fileId: String) = apply { this.fileId = fileId }
+        fun fileId(fileId: String?) = apply { this.fileId = fileId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -179,7 +178,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .fileId()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -187,7 +185,7 @@ private constructor(
         fun build(): ContentRetrieveParams =
             ContentRetrieveParams(
                 checkRequired("provider", provider),
-                checkRequired("fileId", fileId),
+                fileId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -196,7 +194,7 @@ private constructor(
     fun _pathParam(index: Int): String =
         when (index) {
             0 -> provider
-            1 -> fileId
+            1 -> fileId ?: ""
             else -> ""
         }
 

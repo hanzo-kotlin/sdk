@@ -4,7 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.assistants.AssistantDeleteParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -52,10 +51,7 @@ internal class AssistantServiceTest {
                 .build()
         val assistantService = client.assistants()
 
-        val assistant =
-            assistantService.delete(
-                AssistantDeleteParams.builder().assistantId("assistant_id").build()
-            )
+        val assistant = assistantService.delete("assistant_id")
 
         assistant.validate()
     }

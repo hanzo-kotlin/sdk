@@ -6,7 +6,6 @@ import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.credentials.CredentialCreateParams
-import ai.hanzo.api.models.credentials.CredentialDeleteParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -62,10 +61,7 @@ internal class CredentialServiceTest {
                 .build()
         val credentialService = client.credentials()
 
-        val credential =
-            credentialService.delete(
-                CredentialDeleteParams.builder().credentialName("credential_name").build()
-            )
+        val credential = credentialService.delete("credential_name")
 
         credential.validate()
     }
