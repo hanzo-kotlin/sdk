@@ -30,6 +30,9 @@ class CallbackServiceAsyncImpl internal constructor(private val clientOptions: C
 
     override fun withRawResponse(): CallbackServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CallbackServiceAsync =
+        CallbackServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun retrieve(
         params: CallbackRetrieveParams,
         requestOptions: RequestOptions,
@@ -49,6 +52,13 @@ class CallbackServiceAsyncImpl internal constructor(private val clientOptions: C
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CallbackServiceAsync.WithRawResponse =
+            CallbackServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveHandler: Handler<CallbackRetrieveResponse> =
             jsonHandler<CallbackRetrieveResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -63,6 +73,7 @@ class CallbackServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", params._pathParam(0), "callback")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -93,6 +104,7 @@ class CallbackServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", params._pathParam(0), "callback")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

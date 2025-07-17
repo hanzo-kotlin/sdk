@@ -26,6 +26,9 @@ class TestServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): TestServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TestServiceAsync =
+        TestServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun ping(
         params: TestPingParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class TestServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): TestServiceAsync.WithRawResponse =
+            TestServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val pingHandler: Handler<TestPingResponse> =
             jsonHandler<TestPingResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
@@ -48,6 +58,7 @@ class TestServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("test")
                     .build()
                     .prepareAsync(clientOptions, params)

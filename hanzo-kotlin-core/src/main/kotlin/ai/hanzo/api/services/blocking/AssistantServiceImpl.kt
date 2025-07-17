@@ -32,6 +32,9 @@ class AssistantServiceImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): AssistantService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AssistantService =
+        AssistantServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: AssistantCreateParams,
         requestOptions: RequestOptions,
@@ -58,6 +61,13 @@ class AssistantServiceImpl internal constructor(private val clientOptions: Clien
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): AssistantService.WithRawResponse =
+            AssistantServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<AssistantCreateResponse> =
             jsonHandler<AssistantCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -69,6 +79,7 @@ class AssistantServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "assistants")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -97,6 +108,7 @@ class AssistantServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "assistants")
                     .build()
                     .prepare(clientOptions, params)
@@ -127,6 +139,7 @@ class AssistantServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "assistants", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

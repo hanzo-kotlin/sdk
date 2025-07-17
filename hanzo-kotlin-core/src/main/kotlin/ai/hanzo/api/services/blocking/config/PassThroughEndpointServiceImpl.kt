@@ -33,6 +33,11 @@ internal constructor(private val clientOptions: ClientOptions) : PassThroughEndp
 
     override fun withRawResponse(): PassThroughEndpointService.WithRawResponse = withRawResponse
 
+    override fun withOptions(
+        modifier: (ClientOptions.Builder) -> Unit
+    ): PassThroughEndpointService =
+        PassThroughEndpointServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: PassThroughEndpointCreateParams,
         requestOptions: RequestOptions,
@@ -66,6 +71,13 @@ internal constructor(private val clientOptions: ClientOptions) : PassThroughEndp
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): PassThroughEndpointService.WithRawResponse =
+            PassThroughEndpointServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<PassThroughEndpointCreateResponse> =
             jsonHandler<PassThroughEndpointCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -77,6 +89,7 @@ internal constructor(private val clientOptions: ClientOptions) : PassThroughEndp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("config", "pass_through_endpoint")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -108,6 +121,7 @@ internal constructor(private val clientOptions: ClientOptions) : PassThroughEndp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("config", "pass_through_endpoint", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -136,6 +150,7 @@ internal constructor(private val clientOptions: ClientOptions) : PassThroughEndp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("config", "pass_through_endpoint")
                     .build()
                     .prepare(clientOptions, params)
@@ -163,6 +178,7 @@ internal constructor(private val clientOptions: ClientOptions) : PassThroughEndp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("config", "pass_through_endpoint")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

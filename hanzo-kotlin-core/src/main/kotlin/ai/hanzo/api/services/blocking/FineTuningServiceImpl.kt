@@ -17,6 +17,9 @@ class FineTuningServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): FineTuningService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): FineTuningService =
+        FineTuningServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun jobs(): JobService = jobs
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -25,6 +28,13 @@ class FineTuningServiceImpl internal constructor(private val clientOptions: Clie
         private val jobs: JobService.WithRawResponse by lazy {
             JobServiceImpl.WithRawResponseImpl(clientOptions)
         }
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): FineTuningService.WithRawResponse =
+            FineTuningServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         override fun jobs(): JobService.WithRawResponse = jobs
     }

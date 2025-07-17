@@ -34,6 +34,9 @@ class EngineServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): EngineServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): EngineServiceAsync =
+        EngineServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun chat(): ChatServiceAsync = chat
 
     override suspend fun complete(
@@ -59,6 +62,13 @@ class EngineServiceAsyncImpl internal constructor(private val clientOptions: Cli
             ChatServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): EngineServiceAsync.WithRawResponse =
+            EngineServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun chat(): ChatServiceAsync.WithRawResponse = chat
 
         private val completeHandler: Handler<EngineCompleteResponse> =
@@ -75,6 +85,7 @@ class EngineServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("engines", params._pathParam(0), "completions")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -106,6 +117,7 @@ class EngineServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("engines", params._pathParam(0), "embeddings")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

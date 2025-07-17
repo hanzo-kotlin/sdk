@@ -26,6 +26,9 @@ class ModelGroupServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): ModelGroupService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelGroupService =
+        ModelGroupServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun retrieveInfo(
         params: ModelGroupRetrieveInfoParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class ModelGroupServiceImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModelGroupService.WithRawResponse =
+            ModelGroupServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveInfoHandler: Handler<ModelGroupRetrieveInfoResponse> =
             jsonHandler<ModelGroupRetrieveInfoResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class ModelGroupServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model_group", "info")
                     .build()
                     .prepare(clientOptions, params)

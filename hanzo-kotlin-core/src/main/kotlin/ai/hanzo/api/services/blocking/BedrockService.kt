@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.bedrock.BedrockCreateParams
@@ -22,6 +23,13 @@ interface BedrockService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): BedrockService
 
     /** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
     fun create(
@@ -111,6 +119,13 @@ interface BedrockService {
 
     /** A view of [BedrockService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): BedrockService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /bedrock/{endpoint}`, but is otherwise the same as

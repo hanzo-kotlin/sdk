@@ -31,6 +31,9 @@ class SpendServiceImpl internal constructor(private val clientOptions: ClientOpt
 
     override fun withRawResponse(): SpendService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendService =
+        SpendServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun calculateSpend(
         params: SpendCalculateSpendParams,
         requestOptions: RequestOptions,
@@ -57,6 +60,11 @@ class SpendServiceImpl internal constructor(private val clientOptions: ClientOpt
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): SpendService.WithRawResponse =
+            SpendServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val calculateSpendHandler: Handler<SpendCalculateSpendResponse> =
             jsonHandler<SpendCalculateSpendResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -68,6 +76,7 @@ class SpendServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("spend", "calculate")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -96,6 +105,7 @@ class SpendServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("spend", "logs")
                     .build()
                     .prepare(clientOptions, params)
@@ -123,6 +133,7 @@ class SpendServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("spend", "tags")
                     .build()
                     .prepare(clientOptions, params)

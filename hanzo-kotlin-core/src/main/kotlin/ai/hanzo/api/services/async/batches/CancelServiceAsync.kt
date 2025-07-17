@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.batches
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.batches.cancel.CancelCancelParams
@@ -14,6 +15,13 @@ interface CancelServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CancelServiceAsync
 
     /**
      * Cancel a batch. This is the equivalent of POST
@@ -48,6 +56,15 @@ interface CancelServiceAsync {
      * A view of [CancelServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CancelServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /batches/{batch_id}/cancel`, but is otherwise the

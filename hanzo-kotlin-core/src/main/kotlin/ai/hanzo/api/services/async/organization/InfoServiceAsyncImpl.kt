@@ -29,6 +29,9 @@ class InfoServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): InfoServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): InfoServiceAsync =
+        InfoServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun retrieve(
         params: InfoRetrieveParams,
         requestOptions: RequestOptions,
@@ -48,6 +51,13 @@ class InfoServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): InfoServiceAsync.WithRawResponse =
+            InfoServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveHandler: Handler<InfoRetrieveResponse> =
             jsonHandler<InfoRetrieveResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -59,6 +69,7 @@ class InfoServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "info")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -86,6 +97,7 @@ class InfoServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "info")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

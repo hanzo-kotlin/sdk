@@ -13,6 +13,17 @@ class RegenerateServiceAsyncImpl internal constructor(private val clientOptions:
 
     override fun withRawResponse(): RegenerateServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RegenerateServiceAsync =
+        RegenerateServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        RegenerateServiceAsync.WithRawResponse
+        RegenerateServiceAsync.WithRawResponse {
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): RegenerateServiceAsync.WithRawResponse =
+            RegenerateServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+    }
 }

@@ -27,6 +27,9 @@ class EmbeddingServiceAsyncImpl internal constructor(private val clientOptions: 
 
     override fun withRawResponse(): EmbeddingServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): EmbeddingServiceAsync =
+        EmbeddingServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun create(
         params: EmbeddingCreateParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,13 @@ class EmbeddingServiceAsyncImpl internal constructor(private val clientOptions: 
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): EmbeddingServiceAsync.WithRawResponse =
+            EmbeddingServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<EmbeddingCreateResponse> =
             jsonHandler<EmbeddingCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -50,6 +60,7 @@ class EmbeddingServiceAsyncImpl internal constructor(private val clientOptions: 
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("embeddings")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

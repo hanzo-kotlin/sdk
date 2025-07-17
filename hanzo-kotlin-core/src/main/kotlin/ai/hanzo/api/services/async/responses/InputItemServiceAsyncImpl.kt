@@ -27,6 +27,9 @@ class InputItemServiceAsyncImpl internal constructor(private val clientOptions: 
 
     override fun withRawResponse(): InputItemServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): InputItemServiceAsync =
+        InputItemServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun list(
         params: InputItemListParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class InputItemServiceAsyncImpl internal constructor(private val clientOptions: 
         InputItemServiceAsync.WithRawResponse {
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): InputItemServiceAsync.WithRawResponse =
+            InputItemServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         private val listHandler: Handler<InputItemListResponse> =
             jsonHandler<InputItemListResponse>(clientOptions.jsonMapper)
@@ -53,6 +63,7 @@ class InputItemServiceAsyncImpl internal constructor(private val clientOptions: 
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "responses", params._pathParam(0), "input_items")
                     .build()
                     .prepareAsync(clientOptions, params)

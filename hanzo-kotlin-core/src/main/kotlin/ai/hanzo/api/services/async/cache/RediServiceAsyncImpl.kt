@@ -26,6 +26,9 @@ class RediServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): RediServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RediServiceAsync =
+        RediServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun retrieveInfo(
         params: RediRetrieveInfoParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class RediServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): RediServiceAsync.WithRawResponse =
+            RediServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveInfoHandler: Handler<RediRetrieveInfoResponse> =
             jsonHandler<RediRetrieveInfoResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class RediServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("cache", "redis", "info")
                     .build()
                     .prepareAsync(clientOptions, params)

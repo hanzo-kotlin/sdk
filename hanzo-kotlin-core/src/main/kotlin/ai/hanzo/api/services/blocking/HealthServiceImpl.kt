@@ -34,6 +34,9 @@ class HealthServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): HealthService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): HealthService =
+        HealthServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun checkAll(
         params: HealthCheckAllParams,
         requestOptions: RequestOptions,
@@ -74,6 +77,11 @@ class HealthServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): HealthService.WithRawResponse =
+            HealthServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val checkAllHandler: Handler<HealthCheckAllResponse> =
             jsonHandler<HealthCheckAllResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -85,6 +93,7 @@ class HealthServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health")
                     .build()
                     .prepare(clientOptions, params)
@@ -112,6 +121,7 @@ class HealthServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "liveliness")
                     .build()
                     .prepare(clientOptions, params)
@@ -139,6 +149,7 @@ class HealthServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "liveness")
                     .build()
                     .prepare(clientOptions, params)
@@ -166,6 +177,7 @@ class HealthServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "readiness")
                     .build()
                     .prepare(clientOptions, params)
@@ -193,6 +205,7 @@ class HealthServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "services")
                     .build()
                     .prepare(clientOptions, params)

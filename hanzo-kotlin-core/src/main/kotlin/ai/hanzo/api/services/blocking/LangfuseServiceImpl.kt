@@ -36,6 +36,9 @@ class LangfuseServiceImpl internal constructor(private val clientOptions: Client
 
     override fun withRawResponse(): LangfuseService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): LangfuseService =
+        LangfuseServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: LangfuseCreateParams,
         requestOptions: RequestOptions,
@@ -76,6 +79,13 @@ class LangfuseServiceImpl internal constructor(private val clientOptions: Client
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): LangfuseService.WithRawResponse =
+            LangfuseServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<LangfuseCreateResponse> =
             jsonHandler<LangfuseCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -90,6 +100,7 @@ class LangfuseServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("langfuse", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -121,6 +132,7 @@ class LangfuseServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("langfuse", params._pathParam(0))
                     .build()
                     .prepare(clientOptions, params)
@@ -151,6 +163,7 @@ class LangfuseServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("langfuse", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -182,6 +195,7 @@ class LangfuseServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("langfuse", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -213,6 +227,7 @@ class LangfuseServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("langfuse", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

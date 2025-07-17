@@ -34,6 +34,9 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
 
     override fun withRawResponse(): UserService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UserService =
+        UserServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: UserCreateParams,
         requestOptions: RequestOptions,
@@ -71,6 +74,11 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): UserService.WithRawResponse =
+            UserServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val createHandler: Handler<UserCreateResponse> =
             jsonHandler<UserCreateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
@@ -81,6 +89,7 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -108,6 +117,7 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -135,6 +145,7 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "get_users")
                     .build()
                     .prepare(clientOptions, params)
@@ -161,6 +172,7 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -189,6 +201,7 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "info")
                     .build()
                     .prepare(clientOptions, params)

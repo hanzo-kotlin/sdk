@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.cohere.CohereCreateParams
@@ -22,6 +23,13 @@ interface CohereServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CohereServiceAsync
 
     /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun create(
@@ -113,6 +121,15 @@ interface CohereServiceAsync {
      * A view of [CohereServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CohereServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /cohere/{endpoint}`, but is otherwise the same as

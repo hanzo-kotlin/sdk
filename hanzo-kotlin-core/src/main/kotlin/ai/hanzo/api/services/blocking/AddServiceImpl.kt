@@ -26,6 +26,9 @@ class AddServiceImpl internal constructor(private val clientOptions: ClientOptio
 
     override fun withRawResponse(): AddService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AddService =
+        AddServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun addAllowedIp(
         params: AddAddAllowedIpParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,11 @@ class AddServiceImpl internal constructor(private val clientOptions: ClientOptio
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): AddService.WithRawResponse =
+            AddServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val addAllowedIpHandler: Handler<AddAddAllowedIpResponse> =
             jsonHandler<AddAddAllowedIpResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +57,7 @@ class AddServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("add", "allowed_ip")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

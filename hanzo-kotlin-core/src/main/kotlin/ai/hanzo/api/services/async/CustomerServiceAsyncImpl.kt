@@ -39,6 +39,9 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
 
     override fun withRawResponse(): CustomerServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CustomerServiceAsync =
+        CustomerServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun create(
         params: CustomerCreateParams,
         requestOptions: RequestOptions,
@@ -93,6 +96,13 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CustomerServiceAsync.WithRawResponse =
+            CustomerServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<CustomerCreateResponse> =
             jsonHandler<CustomerCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -104,6 +114,7 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("customer", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -132,6 +143,7 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("customer", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -160,6 +172,7 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("customer", "list")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -187,6 +200,7 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("customer", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -215,6 +229,7 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("customer", "block")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -243,6 +258,7 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("customer", "info")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -270,6 +286,7 @@ class CustomerServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("customer", "unblock")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

@@ -35,6 +35,9 @@ class CacheServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): CacheServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CacheServiceAsync =
+        CacheServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun redis(): RediServiceAsync = redis
 
     override suspend fun delete(
@@ -67,6 +70,13 @@ class CacheServiceAsyncImpl internal constructor(private val clientOptions: Clie
             RediServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CacheServiceAsync.WithRawResponse =
+            CacheServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun redis(): RediServiceAsync.WithRawResponse = redis
 
         private val deleteHandler: Handler<CacheDeleteResponse> =
@@ -80,6 +90,7 @@ class CacheServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("cache", "delete")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -108,6 +119,7 @@ class CacheServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("cache", "flushall")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -135,6 +147,7 @@ class CacheServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("cache", "ping")
                     .build()
                     .prepareAsync(clientOptions, params)

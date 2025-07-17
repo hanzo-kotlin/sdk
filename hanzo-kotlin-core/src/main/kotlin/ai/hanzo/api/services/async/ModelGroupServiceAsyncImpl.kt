@@ -26,6 +26,9 @@ class ModelGroupServiceAsyncImpl internal constructor(private val clientOptions:
 
     override fun withRawResponse(): ModelGroupServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelGroupServiceAsync =
+        ModelGroupServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun retrieveInfo(
         params: ModelGroupRetrieveInfoParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class ModelGroupServiceAsyncImpl internal constructor(private val clientOptions:
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModelGroupServiceAsync.WithRawResponse =
+            ModelGroupServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveInfoHandler: Handler<ModelGroupRetrieveInfoResponse> =
             jsonHandler<ModelGroupRetrieveInfoResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class ModelGroupServiceAsyncImpl internal constructor(private val clientOptions:
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model_group", "info")
                     .build()
                     .prepareAsync(clientOptions, params)

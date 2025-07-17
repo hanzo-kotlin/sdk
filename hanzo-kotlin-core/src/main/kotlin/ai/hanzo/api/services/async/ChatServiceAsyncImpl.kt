@@ -19,6 +19,9 @@ class ChatServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): ChatServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ChatServiceAsync =
+        ChatServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun completions(): CompletionServiceAsync = completions
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -27,6 +30,13 @@ class ChatServiceAsyncImpl internal constructor(private val clientOptions: Clien
         private val completions: CompletionServiceAsync.WithRawResponse by lazy {
             CompletionServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ChatServiceAsync.WithRawResponse =
+            ChatServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         override fun completions(): CompletionServiceAsync.WithRawResponse = completions
     }

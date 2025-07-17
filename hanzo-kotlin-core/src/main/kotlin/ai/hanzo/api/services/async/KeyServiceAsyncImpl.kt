@@ -49,6 +49,9 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
 
     override fun withRawResponse(): KeyServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): KeyServiceAsync =
+        KeyServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun regenerate(): RegenerateServiceAsync = regenerate
 
     override suspend fun update(
@@ -123,6 +126,13 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             RegenerateServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): KeyServiceAsync.WithRawResponse =
+            KeyServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun regenerate(): RegenerateServiceAsync.WithRawResponse = regenerate
 
         private val updateHandler: Handler<KeyUpdateResponse> =
@@ -135,6 +145,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -162,6 +173,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "list")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -188,6 +200,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -215,6 +228,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "block")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -243,6 +257,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "health")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -271,6 +286,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "generate")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -302,6 +318,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", params._pathParam(0), "regenerate")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -330,6 +347,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "info")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -356,6 +374,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "unblock")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

@@ -37,6 +37,9 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
 
     override fun withRawResponse(): ModelService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelService =
+        ModelServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun info(): InfoService = info
 
     override fun update(): UpdateService = update
@@ -68,6 +71,11 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
             UpdateServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModelService.WithRawResponse =
+            ModelServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun info(): InfoService.WithRawResponse = info
 
         override fun update(): UpdateService.WithRawResponse = update
@@ -83,6 +91,7 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -111,6 +120,7 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

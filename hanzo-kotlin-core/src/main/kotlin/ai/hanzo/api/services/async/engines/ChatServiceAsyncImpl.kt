@@ -28,6 +28,9 @@ class ChatServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): ChatServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ChatServiceAsync =
+        ChatServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun complete(
         params: ChatCompleteParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,13 @@ class ChatServiceAsyncImpl internal constructor(private val clientOptions: Clien
         ChatServiceAsync.WithRawResponse {
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ChatServiceAsync.WithRawResponse =
+            ChatServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         private val completeHandler: Handler<ChatCompleteResponse> =
             jsonHandler<ChatCompleteResponse>(clientOptions.jsonMapper)
@@ -54,6 +64,7 @@ class ChatServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("engines", params._pathParam(0), "chat", "completions")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

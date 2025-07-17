@@ -29,6 +29,9 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
 
     override fun withRawResponse(): ModelService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelService =
+        ModelServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun add(params: ModelAddParams, requestOptions: RequestOptions): ModelAddResponse =
         // post /team/model/add
         withRawResponse().add(params, requestOptions).parse()
@@ -45,6 +48,11 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModelService.WithRawResponse =
+            ModelServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val addHandler: Handler<ModelAddResponse> =
             jsonHandler<ModelAddResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
@@ -55,6 +63,7 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "model", "add")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -83,6 +92,7 @@ class ModelServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "model", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

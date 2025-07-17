@@ -27,6 +27,9 @@ class DeleteServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): DeleteServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): DeleteServiceAsync =
+        DeleteServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun createAllowedIp(
         params: DeleteCreateAllowedIpParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,13 @@ class DeleteServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): DeleteServiceAsync.WithRawResponse =
+            DeleteServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createAllowedIpHandler: Handler<DeleteCreateAllowedIpResponse> =
             jsonHandler<DeleteCreateAllowedIpResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -50,6 +60,7 @@ class DeleteServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("delete", "allowed_ip")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

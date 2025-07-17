@@ -30,6 +30,9 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): UpdateService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UpdateService =
+        UpdateServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun full(
         params: UpdateFullParams,
         requestOptions: RequestOptions,
@@ -49,6 +52,11 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): UpdateService.WithRawResponse =
+            UpdateServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val fullHandler: Handler<UpdateFullResponse> =
             jsonHandler<UpdateFullResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
@@ -59,6 +67,7 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -90,6 +99,7 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", params._pathParam(0), "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

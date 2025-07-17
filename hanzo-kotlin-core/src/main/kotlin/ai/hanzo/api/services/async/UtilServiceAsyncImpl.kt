@@ -31,6 +31,9 @@ class UtilServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): UtilServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UtilServiceAsync =
+        UtilServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun getSupportedOpenAIParams(
         params: UtilGetSupportedOpenAIParamsParams,
         requestOptions: RequestOptions,
@@ -57,6 +60,13 @@ class UtilServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): UtilServiceAsync.WithRawResponse =
+            UtilServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val getSupportedOpenAIParamsHandler: Handler<UtilGetSupportedOpenAIParamsResponse> =
             jsonHandler<UtilGetSupportedOpenAIParamsResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -68,6 +78,7 @@ class UtilServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("utils", "supported_openai_params")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -95,6 +106,7 @@ class UtilServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("utils", "token_counter")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -123,6 +135,7 @@ class UtilServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("utils", "transform_request")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

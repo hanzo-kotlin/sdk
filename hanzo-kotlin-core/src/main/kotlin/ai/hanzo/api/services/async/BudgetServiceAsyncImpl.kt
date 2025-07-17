@@ -37,6 +37,9 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): BudgetServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): BudgetServiceAsync =
+        BudgetServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun create(
         params: BudgetCreateParams,
         requestOptions: RequestOptions,
@@ -84,6 +87,13 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): BudgetServiceAsync.WithRawResponse =
+            BudgetServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<BudgetCreateResponse> =
             jsonHandler<BudgetCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -95,6 +105,7 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("budget", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -123,6 +134,7 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("budget", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -150,6 +162,7 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("budget", "list")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -177,6 +190,7 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("budget", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -204,6 +218,7 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("budget", "info")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -232,6 +247,7 @@ class BudgetServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("budget", "settings")
                     .build()
                     .prepareAsync(clientOptions, params)

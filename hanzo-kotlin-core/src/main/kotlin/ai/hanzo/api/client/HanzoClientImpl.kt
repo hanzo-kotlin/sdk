@@ -263,6 +263,9 @@ class HanzoClientImpl(private val clientOptions: ClientOptions) : HanzoClient {
 
     override fun withRawResponse(): HanzoClient.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): HanzoClient =
+        HanzoClientImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun models(): ModelService = models
 
     override fun openai(): OpenAIService = openai
@@ -565,6 +568,11 @@ class HanzoClientImpl(private val clientOptions: ClientOptions) : HanzoClient {
             BudgetServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): HanzoClient.WithRawResponse =
+            HanzoClientImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun models(): ModelService.WithRawResponse = models
 
         override fun openai(): OpenAIService.WithRawResponse = openai
@@ -672,6 +680,7 @@ class HanzoClientImpl(private val clientOptions: ClientOptions) : HanzoClient {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("")
                     .build()
                     .prepare(clientOptions, params)

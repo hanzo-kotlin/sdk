@@ -29,6 +29,9 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): ModelServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelServiceAsync =
+        ModelServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun add(
         params: ModelAddParams,
         requestOptions: RequestOptions,
@@ -48,6 +51,13 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModelServiceAsync.WithRawResponse =
+            ModelServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val addHandler: Handler<ModelAddResponse> =
             jsonHandler<ModelAddResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
@@ -58,6 +68,7 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "model", "add")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -86,6 +97,7 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "model", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

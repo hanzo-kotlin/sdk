@@ -28,6 +28,9 @@ class CancelServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): CancelService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CancelService =
+        CancelServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: CancelCreateParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,11 @@ class CancelServiceImpl internal constructor(private val clientOptions: ClientOp
         CancelService.WithRawResponse {
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CancelService.WithRawResponse =
+            CancelServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
 
         private val createHandler: Handler<CancelCreateResponse> =
             jsonHandler<CancelCreateResponse>(clientOptions.jsonMapper)
@@ -54,6 +62,7 @@ class CancelServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "fine_tuning", "jobs", params._pathParam(0), "cancel")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

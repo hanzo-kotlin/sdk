@@ -27,6 +27,9 @@ class InputItemServiceImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): InputItemService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): InputItemService =
+        InputItemServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun list(
         params: InputItemListParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class InputItemServiceImpl internal constructor(private val clientOptions: Clien
         InputItemService.WithRawResponse {
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): InputItemService.WithRawResponse =
+            InputItemServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         private val listHandler: Handler<InputItemListResponse> =
             jsonHandler<InputItemListResponse>(clientOptions.jsonMapper)
@@ -53,6 +63,7 @@ class InputItemServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "responses", params._pathParam(0), "input_items")
                     .build()
                     .prepare(clientOptions, params)

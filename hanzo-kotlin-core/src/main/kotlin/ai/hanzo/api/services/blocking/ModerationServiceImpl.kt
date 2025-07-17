@@ -27,6 +27,9 @@ class ModerationServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): ModerationService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModerationService =
+        ModerationServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: ModerationCreateParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,13 @@ class ModerationServiceImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModerationService.WithRawResponse =
+            ModerationServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<ModerationCreateResponse> =
             jsonHandler<ModerationCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -50,6 +60,7 @@ class ModerationServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "moderations")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

@@ -27,6 +27,9 @@ class SpeechServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): SpeechService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpeechService =
+        SpeechServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: SpeechCreateParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,11 @@ class SpeechServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): SpeechService.WithRawResponse =
+            SpeechServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val createHandler: Handler<SpeechCreateResponse> =
             jsonHandler<SpeechCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -50,6 +58,7 @@ class SpeechServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "audio", "speech")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

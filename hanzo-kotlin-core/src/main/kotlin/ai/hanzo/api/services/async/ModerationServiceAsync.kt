@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.moderations.ModerationCreateParams
@@ -14,6 +15,13 @@ interface ModerationServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModerationServiceAsync
 
     /**
      * The moderations endpoint is a tool you can use to check whether content complies with an LLM
@@ -39,6 +47,15 @@ interface ModerationServiceAsync {
      * method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModerationServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /v1/moderations`, but is otherwise the same as

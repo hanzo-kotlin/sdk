@@ -36,6 +36,9 @@ class AnthropicServiceImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): AnthropicService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AnthropicService =
+        AnthropicServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: AnthropicCreateParams,
         requestOptions: RequestOptions,
@@ -76,6 +79,13 @@ class AnthropicServiceImpl internal constructor(private val clientOptions: Clien
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): AnthropicService.WithRawResponse =
+            AnthropicServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<AnthropicCreateResponse> =
             jsonHandler<AnthropicCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -90,6 +100,7 @@ class AnthropicServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("anthropic", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -121,6 +132,7 @@ class AnthropicServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("anthropic", params._pathParam(0))
                     .build()
                     .prepare(clientOptions, params)
@@ -151,6 +163,7 @@ class AnthropicServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("anthropic", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -182,6 +195,7 @@ class AnthropicServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("anthropic", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -213,6 +227,7 @@ class AnthropicServiceImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("anthropic", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

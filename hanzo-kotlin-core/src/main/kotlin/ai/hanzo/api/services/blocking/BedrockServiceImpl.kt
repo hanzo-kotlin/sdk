@@ -36,6 +36,9 @@ class BedrockServiceImpl internal constructor(private val clientOptions: ClientO
 
     override fun withRawResponse(): BedrockService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): BedrockService =
+        BedrockServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: BedrockCreateParams,
         requestOptions: RequestOptions,
@@ -76,6 +79,13 @@ class BedrockServiceImpl internal constructor(private val clientOptions: ClientO
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): BedrockService.WithRawResponse =
+            BedrockServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<BedrockCreateResponse> =
             jsonHandler<BedrockCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -90,6 +100,7 @@ class BedrockServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("bedrock", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -121,6 +132,7 @@ class BedrockServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("bedrock", params._pathParam(0))
                     .build()
                     .prepare(clientOptions, params)
@@ -151,6 +163,7 @@ class BedrockServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("bedrock", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -182,6 +195,7 @@ class BedrockServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("bedrock", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -213,6 +227,7 @@ class BedrockServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("bedrock", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

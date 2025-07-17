@@ -30,6 +30,9 @@ class MessageServiceImpl internal constructor(private val clientOptions: ClientO
 
     override fun withRawResponse(): MessageService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): MessageService =
+        MessageServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: MessageCreateParams,
         requestOptions: RequestOptions,
@@ -49,6 +52,13 @@ class MessageServiceImpl internal constructor(private val clientOptions: ClientO
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): MessageService.WithRawResponse =
+            MessageServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<MessageCreateResponse> =
             jsonHandler<MessageCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -63,6 +73,7 @@ class MessageServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "threads", params._pathParam(0), "messages")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -94,6 +105,7 @@ class MessageServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "threads", params._pathParam(0), "messages")
                     .build()
                     .prepare(clientOptions, params)

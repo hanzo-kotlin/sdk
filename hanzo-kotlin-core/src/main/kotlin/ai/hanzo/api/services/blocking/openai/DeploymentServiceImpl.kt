@@ -34,6 +34,9 @@ class DeploymentServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): DeploymentService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): DeploymentService =
+        DeploymentServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun chat(): ChatService = chat
 
     override fun complete(
@@ -59,6 +62,13 @@ class DeploymentServiceImpl internal constructor(private val clientOptions: Clie
             ChatServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): DeploymentService.WithRawResponse =
+            DeploymentServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun chat(): ChatService.WithRawResponse = chat
 
         private val completeHandler: Handler<DeploymentCompleteResponse> =
@@ -75,6 +85,7 @@ class DeploymentServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", "deployments", params._pathParam(0), "completions")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -106,6 +117,7 @@ class DeploymentServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", "deployments", params._pathParam(0), "embeddings")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

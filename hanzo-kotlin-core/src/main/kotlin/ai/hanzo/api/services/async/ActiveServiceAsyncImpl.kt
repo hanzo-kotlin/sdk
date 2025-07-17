@@ -26,6 +26,9 @@ class ActiveServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): ActiveServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ActiveServiceAsync =
+        ActiveServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun listCallbacks(
         params: ActiveListCallbacksParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class ActiveServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ActiveServiceAsync.WithRawResponse =
+            ActiveServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val listCallbacksHandler: Handler<ActiveListCallbacksResponse> =
             jsonHandler<ActiveListCallbacksResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class ActiveServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("active", "callbacks")
                     .build()
                     .prepareAsync(clientOptions, params)
