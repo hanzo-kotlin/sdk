@@ -42,6 +42,9 @@ class OpenAIServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): OpenAIServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): OpenAIServiceAsync =
+        OpenAIServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun deployments(): DeploymentServiceAsync = deployments
 
     override suspend fun create(
@@ -88,6 +91,13 @@ class OpenAIServiceAsyncImpl internal constructor(private val clientOptions: Cli
             DeploymentServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): OpenAIServiceAsync.WithRawResponse =
+            OpenAIServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun deployments(): DeploymentServiceAsync.WithRawResponse = deployments
 
         private val createHandler: Handler<OpenAICreateResponse> =
@@ -104,6 +114,7 @@ class OpenAIServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -135,6 +146,7 @@ class OpenAIServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -165,6 +177,7 @@ class OpenAIServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -196,6 +209,7 @@ class OpenAIServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -227,6 +241,7 @@ class OpenAIServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

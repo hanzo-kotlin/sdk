@@ -31,6 +31,9 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): SpendServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendServiceAsync =
+        SpendServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun calculateSpend(
         params: SpendCalculateSpendParams,
         requestOptions: RequestOptions,
@@ -57,6 +60,13 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): SpendServiceAsync.WithRawResponse =
+            SpendServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val calculateSpendHandler: Handler<SpendCalculateSpendResponse> =
             jsonHandler<SpendCalculateSpendResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -68,6 +78,7 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("spend", "calculate")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -96,6 +107,7 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("spend", "logs")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -123,6 +135,7 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("spend", "tags")
                     .build()
                     .prepareAsync(clientOptions, params)

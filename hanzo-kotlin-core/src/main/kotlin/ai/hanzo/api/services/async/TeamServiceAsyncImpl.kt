@@ -58,6 +58,9 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): TeamServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TeamServiceAsync =
+        TeamServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun model(): ModelServiceAsync = model
 
     override fun callback(): CallbackServiceAsync = callback
@@ -159,6 +162,13 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             CallbackServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): TeamServiceAsync.WithRawResponse =
+            TeamServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun model(): ModelServiceAsync.WithRawResponse = model
 
         override fun callback(): CallbackServiceAsync.WithRawResponse = callback
@@ -173,6 +183,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -200,6 +211,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -227,6 +239,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "list")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -253,6 +266,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -281,6 +295,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "member_add")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -308,6 +323,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "block")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -339,6 +355,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", params._pathParam(0), "disable_logging")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -367,6 +384,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "available")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -394,6 +412,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "member_delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -422,6 +441,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "info")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -449,6 +469,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "unblock")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -477,6 +498,7 @@ class TeamServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "member_update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

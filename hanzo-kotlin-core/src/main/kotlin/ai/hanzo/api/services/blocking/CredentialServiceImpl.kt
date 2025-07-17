@@ -32,6 +32,9 @@ class CredentialServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): CredentialService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CredentialService =
+        CredentialServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: CredentialCreateParams,
         requestOptions: RequestOptions,
@@ -58,6 +61,13 @@ class CredentialServiceImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CredentialService.WithRawResponse =
+            CredentialServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<CredentialCreateResponse> =
             jsonHandler<CredentialCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -69,6 +79,7 @@ class CredentialServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("credentials")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -97,6 +108,7 @@ class CredentialServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("credentials")
                     .build()
                     .prepare(clientOptions, params)
@@ -127,6 +139,7 @@ class CredentialServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("credentials", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

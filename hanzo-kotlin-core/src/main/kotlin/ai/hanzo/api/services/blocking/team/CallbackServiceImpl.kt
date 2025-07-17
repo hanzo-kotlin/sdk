@@ -30,6 +30,9 @@ class CallbackServiceImpl internal constructor(private val clientOptions: Client
 
     override fun withRawResponse(): CallbackService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CallbackService =
+        CallbackServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun retrieve(
         params: CallbackRetrieveParams,
         requestOptions: RequestOptions,
@@ -49,6 +52,13 @@ class CallbackServiceImpl internal constructor(private val clientOptions: Client
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CallbackService.WithRawResponse =
+            CallbackServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveHandler: Handler<CallbackRetrieveResponse> =
             jsonHandler<CallbackRetrieveResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -63,6 +73,7 @@ class CallbackServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", params._pathParam(0), "callback")
                     .build()
                     .prepare(clientOptions, params)
@@ -93,6 +104,7 @@ class CallbackServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", params._pathParam(0), "callback")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

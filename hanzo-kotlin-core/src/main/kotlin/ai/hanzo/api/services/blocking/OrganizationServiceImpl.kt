@@ -43,6 +43,9 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
 
     override fun withRawResponse(): OrganizationService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): OrganizationService =
+        OrganizationServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun info(): InfoService = info
 
     override fun create(
@@ -103,6 +106,13 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             InfoServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): OrganizationService.WithRawResponse =
+            OrganizationServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun info(): InfoService.WithRawResponse = info
 
         private val createHandler: Handler<OrganizationCreateResponse> =
@@ -116,6 +126,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -144,6 +155,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -172,6 +184,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "list")
                     .build()
                     .prepare(clientOptions, params)
@@ -199,6 +212,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -227,6 +241,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "member_add")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -255,6 +270,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "member_delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -283,6 +299,7 @@ class OrganizationServiceImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "member_update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

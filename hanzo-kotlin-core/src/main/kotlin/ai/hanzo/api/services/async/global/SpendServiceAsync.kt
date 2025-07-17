@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.global
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.global.spend.SpendListTagsParams
@@ -18,6 +19,13 @@ interface SpendServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendServiceAsync
 
     /**
      * LLM Enterprise - View Spend Per Request Tag. Used by LLM UI
@@ -76,6 +84,15 @@ interface SpendServiceAsync {
 
     /** A view of [SpendServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): SpendServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /global/spend/tags`, but is otherwise the same as

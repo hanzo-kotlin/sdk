@@ -35,6 +35,9 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
     override fun withRawResponse(): UserServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UserServiceAsync =
+        UserServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun create(
         params: UserCreateParams,
         requestOptions: RequestOptions,
@@ -75,6 +78,13 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): UserServiceAsync.WithRawResponse =
+            UserServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<UserCreateResponse> =
             jsonHandler<UserCreateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
@@ -85,6 +95,7 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -112,6 +123,7 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -139,6 +151,7 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "get_users")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -165,6 +178,7 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -193,6 +207,7 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "info")
                     .build()
                     .prepareAsync(clientOptions, params)

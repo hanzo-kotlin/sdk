@@ -26,6 +26,9 @@ class ActiveServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): ActiveService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ActiveService =
+        ActiveServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun listCallbacks(
         params: ActiveListCallbacksParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,11 @@ class ActiveServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ActiveService.WithRawResponse =
+            ActiveServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val listCallbacksHandler: Handler<ActiveListCallbacksResponse> =
             jsonHandler<ActiveListCallbacksResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +57,7 @@ class ActiveServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("active", "callbacks")
                     .build()
                     .prepare(clientOptions, params)

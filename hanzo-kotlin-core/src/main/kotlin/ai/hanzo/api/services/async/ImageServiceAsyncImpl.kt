@@ -19,6 +19,9 @@ class ImageServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): ImageServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ImageServiceAsync =
+        ImageServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun generations(): GenerationServiceAsync = generations
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -27,6 +30,13 @@ class ImageServiceAsyncImpl internal constructor(private val clientOptions: Clie
         private val generations: GenerationServiceAsync.WithRawResponse by lazy {
             GenerationServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ImageServiceAsync.WithRawResponse =
+            ImageServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         override fun generations(): GenerationServiceAsync.WithRawResponse = generations
     }

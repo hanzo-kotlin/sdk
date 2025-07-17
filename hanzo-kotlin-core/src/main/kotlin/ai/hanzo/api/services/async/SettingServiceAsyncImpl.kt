@@ -26,6 +26,9 @@ class SettingServiceAsyncImpl internal constructor(private val clientOptions: Cl
 
     override fun withRawResponse(): SettingServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SettingServiceAsync =
+        SettingServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun retrieve(
         params: SettingRetrieveParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class SettingServiceAsyncImpl internal constructor(private val clientOptions: Cl
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): SettingServiceAsync.WithRawResponse =
+            SettingServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveHandler: Handler<SettingRetrieveResponse> =
             jsonHandler<SettingRetrieveResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class SettingServiceAsyncImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("settings")
                     .build()
                     .prepareAsync(clientOptions, params)

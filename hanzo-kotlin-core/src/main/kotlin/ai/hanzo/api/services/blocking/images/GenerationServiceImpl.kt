@@ -27,6 +27,9 @@ class GenerationServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): GenerationService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): GenerationService =
+        GenerationServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: GenerationCreateParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,13 @@ class GenerationServiceImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): GenerationService.WithRawResponse =
+            GenerationServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<GenerationCreateResponse> =
             jsonHandler<GenerationCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -50,6 +60,7 @@ class GenerationServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "images", "generations")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

@@ -26,6 +26,9 @@ class SettingServiceImpl internal constructor(private val clientOptions: ClientO
 
     override fun withRawResponse(): SettingService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SettingService =
+        SettingServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun retrieve(
         params: SettingRetrieveParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class SettingServiceImpl internal constructor(private val clientOptions: ClientO
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): SettingService.WithRawResponse =
+            SettingServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val retrieveHandler: Handler<SettingRetrieveResponse> =
             jsonHandler<SettingRetrieveResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class SettingServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("settings")
                     .build()
                     .prepare(clientOptions, params)

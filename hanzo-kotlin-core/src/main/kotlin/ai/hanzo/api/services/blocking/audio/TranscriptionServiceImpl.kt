@@ -27,6 +27,9 @@ class TranscriptionServiceImpl internal constructor(private val clientOptions: C
 
     override fun withRawResponse(): TranscriptionService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TranscriptionService =
+        TranscriptionServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: TranscriptionCreateParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,13 @@ class TranscriptionServiceImpl internal constructor(private val clientOptions: C
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): TranscriptionService.WithRawResponse =
+            TranscriptionServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<TranscriptionCreateResponse> =
             jsonHandler<TranscriptionCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -50,6 +60,7 @@ class TranscriptionServiceImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "audio", "transcriptions")
                     .body(multipartFormData(clientOptions.jsonMapper, params._body()))
                     .build()

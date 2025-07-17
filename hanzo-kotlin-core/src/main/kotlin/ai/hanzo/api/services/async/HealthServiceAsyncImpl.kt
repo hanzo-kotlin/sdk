@@ -34,6 +34,9 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): HealthServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): HealthServiceAsync =
+        HealthServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun checkAll(
         params: HealthCheckAllParams,
         requestOptions: RequestOptions,
@@ -74,6 +77,13 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): HealthServiceAsync.WithRawResponse =
+            HealthServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val checkAllHandler: Handler<HealthCheckAllResponse> =
             jsonHandler<HealthCheckAllResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -85,6 +95,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -112,6 +123,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "liveliness")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -139,6 +151,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "liveness")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -166,6 +179,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "readiness")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -193,6 +207,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("health", "services")
                     .build()
                     .prepareAsync(clientOptions, params)

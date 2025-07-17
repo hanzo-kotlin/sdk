@@ -17,6 +17,9 @@ class GlobalServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): GlobalServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): GlobalServiceAsync =
+        GlobalServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun spend(): SpendServiceAsync = spend
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -25,6 +28,13 @@ class GlobalServiceAsyncImpl internal constructor(private val clientOptions: Cli
         private val spend: SpendServiceAsync.WithRawResponse by lazy {
             SpendServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): GlobalServiceAsync.WithRawResponse =
+            GlobalServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         override fun spend(): SpendServiceAsync.WithRawResponse = spend
     }

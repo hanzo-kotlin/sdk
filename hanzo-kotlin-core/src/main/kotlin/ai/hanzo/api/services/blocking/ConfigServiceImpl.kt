@@ -19,6 +19,9 @@ class ConfigServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): ConfigService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ConfigService =
+        ConfigServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun passThroughEndpoint(): PassThroughEndpointService = passThroughEndpoint
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -27,6 +30,11 @@ class ConfigServiceImpl internal constructor(private val clientOptions: ClientOp
         private val passThroughEndpoint: PassThroughEndpointService.WithRawResponse by lazy {
             PassThroughEndpointServiceImpl.WithRawResponseImpl(clientOptions)
         }
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ConfigService.WithRawResponse =
+            ConfigServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
 
         override fun passThroughEndpoint(): PassThroughEndpointService.WithRawResponse =
             passThroughEndpoint

@@ -26,6 +26,9 @@ class ProviderServiceImpl internal constructor(private val clientOptions: Client
 
     override fun withRawResponse(): ProviderService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ProviderService =
+        ProviderServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun listBudgets(
         params: ProviderListBudgetsParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class ProviderServiceImpl internal constructor(private val clientOptions: Client
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ProviderService.WithRawResponse =
+            ProviderServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val listBudgetsHandler: Handler<ProviderListBudgetsResponse> =
             jsonHandler<ProviderListBudgetsResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class ProviderServiceImpl internal constructor(private val clientOptions: Client
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("provider", "budgets")
                     .build()
                     .prepare(clientOptions, params)

@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking.openai.deployments
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.openai.deployments.chat.ChatCompleteParams
@@ -14,6 +15,13 @@ interface ChatService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ChatService
 
     /**
      * Follows the exact same API spec as `OpenAI's Chat API
@@ -52,6 +60,13 @@ interface ChatService {
 
     /** A view of [ChatService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ChatService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /openai/deployments/{model}/chat/completions`, but

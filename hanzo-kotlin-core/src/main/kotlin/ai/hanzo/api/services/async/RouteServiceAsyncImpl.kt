@@ -26,6 +26,9 @@ class RouteServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): RouteServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RouteServiceAsync =
+        RouteServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun list(
         params: RouteListParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class RouteServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): RouteServiceAsync.WithRawResponse =
+            RouteServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val listHandler: Handler<RouteListResponse> =
             jsonHandler<RouteListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
 
@@ -48,6 +58,7 @@ class RouteServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("routes")
                     .build()
                     .prepareAsync(clientOptions, params)

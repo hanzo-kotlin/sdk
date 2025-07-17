@@ -17,6 +17,9 @@ class ImageServiceImpl internal constructor(private val clientOptions: ClientOpt
 
     override fun withRawResponse(): ImageService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ImageService =
+        ImageServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun generations(): GenerationService = generations
 
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
@@ -25,6 +28,11 @@ class ImageServiceImpl internal constructor(private val clientOptions: ClientOpt
         private val generations: GenerationService.WithRawResponse by lazy {
             GenerationServiceImpl.WithRawResponseImpl(clientOptions)
         }
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ImageService.WithRawResponse =
+            ImageServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
 
         override fun generations(): GenerationService.WithRawResponse = generations
     }

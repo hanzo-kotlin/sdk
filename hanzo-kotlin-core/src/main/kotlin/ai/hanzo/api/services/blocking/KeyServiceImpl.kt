@@ -46,6 +46,9 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
 
     override fun withRawResponse(): KeyService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): KeyService =
+        KeyServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun regenerate(): RegenerateService = regenerate
 
     override fun update(
@@ -114,6 +117,11 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             RegenerateServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): KeyService.WithRawResponse =
+            KeyServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun regenerate(): RegenerateService.WithRawResponse = regenerate
 
         private val updateHandler: Handler<KeyUpdateResponse> =
@@ -126,6 +134,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -153,6 +162,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "list")
                     .build()
                     .prepare(clientOptions, params)
@@ -179,6 +189,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -206,6 +217,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "block")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -234,6 +246,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "health")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -262,6 +275,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "generate")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -293,6 +307,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", params._pathParam(0), "regenerate")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -321,6 +336,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "info")
                     .build()
                     .prepare(clientOptions, params)
@@ -347,6 +363,7 @@ class KeyServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("key", "unblock")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

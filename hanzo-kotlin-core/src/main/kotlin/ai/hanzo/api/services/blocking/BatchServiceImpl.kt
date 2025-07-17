@@ -44,6 +44,9 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
 
     override fun withRawResponse(): BatchService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): BatchService =
+        BatchServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun cancel(): CancelService = cancel
 
     override fun create(
@@ -101,6 +104,11 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             CancelServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): BatchService.WithRawResponse =
+            BatchServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun cancel(): CancelService.WithRawResponse = cancel
 
         private val createHandler: Handler<BatchCreateResponse> =
@@ -114,6 +122,7 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "batches")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -145,6 +154,7 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "batches", params._pathParam(0))
                     .build()
                     .prepare(clientOptions, params)
@@ -171,6 +181,7 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "batches")
                     .build()
                     .prepare(clientOptions, params)
@@ -201,6 +212,7 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(
                         params._pathParam(0),
                         "v1",
@@ -238,6 +250,7 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(params._pathParam(0), "v1", "batches")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -269,6 +282,7 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(params._pathParam(0), "v1", "batches")
                     .build()
                     .prepare(clientOptions, params)
@@ -299,6 +313,7 @@ class BatchServiceImpl internal constructor(private val clientOptions: ClientOpt
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(params._pathParam(0), "v1", "batches", params._pathParam(1))
                     .build()
                     .prepare(clientOptions, params)

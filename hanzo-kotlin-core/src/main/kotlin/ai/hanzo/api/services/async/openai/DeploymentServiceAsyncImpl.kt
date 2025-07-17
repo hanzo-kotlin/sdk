@@ -34,6 +34,9 @@ class DeploymentServiceAsyncImpl internal constructor(private val clientOptions:
 
     override fun withRawResponse(): DeploymentServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): DeploymentServiceAsync =
+        DeploymentServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun chat(): ChatServiceAsync = chat
 
     override suspend fun complete(
@@ -59,6 +62,13 @@ class DeploymentServiceAsyncImpl internal constructor(private val clientOptions:
             ChatServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): DeploymentServiceAsync.WithRawResponse =
+            DeploymentServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun chat(): ChatServiceAsync.WithRawResponse = chat
 
         private val completeHandler: Handler<DeploymentCompleteResponse> =
@@ -75,6 +85,7 @@ class DeploymentServiceAsyncImpl internal constructor(private val clientOptions:
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", "deployments", params._pathParam(0), "completions")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -106,6 +117,7 @@ class DeploymentServiceAsyncImpl internal constructor(private val clientOptions:
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", "deployments", params._pathParam(0), "embeddings")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

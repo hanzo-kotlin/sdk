@@ -31,6 +31,9 @@ class RerankServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): RerankService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RerankService =
+        RerankServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: RerankCreateParams,
         requestOptions: RequestOptions,
@@ -57,6 +60,11 @@ class RerankServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): RerankService.WithRawResponse =
+            RerankServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val createHandler: Handler<RerankCreateResponse> =
             jsonHandler<RerankCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -68,6 +76,7 @@ class RerankServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("rerank")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -96,6 +105,7 @@ class RerankServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "rerank")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -124,6 +134,7 @@ class RerankServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v2", "rerank")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

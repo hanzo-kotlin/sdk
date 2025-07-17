@@ -37,6 +37,9 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): ModelServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelServiceAsync =
+        ModelServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun info(): InfoServiceAsync = info
 
     override fun update(): UpdateServiceAsync = update
@@ -68,6 +71,13 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
             UpdateServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModelServiceAsync.WithRawResponse =
+            ModelServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun info(): InfoServiceAsync.WithRawResponse = info
 
         override fun update(): UpdateServiceAsync.WithRawResponse = update
@@ -83,6 +93,7 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -111,6 +122,7 @@ class ModelServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

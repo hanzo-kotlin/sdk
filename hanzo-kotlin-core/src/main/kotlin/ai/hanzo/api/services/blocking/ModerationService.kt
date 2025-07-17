@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.moderations.ModerationCreateParams
@@ -14,6 +15,13 @@ interface ModerationService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModerationService
 
     /**
      * The moderations endpoint is a tool you can use to check whether content complies with an LLM
@@ -36,6 +44,15 @@ interface ModerationService {
 
     /** A view of [ModerationService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModerationService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /v1/moderations`, but is otherwise the same as

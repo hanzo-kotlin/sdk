@@ -27,6 +27,9 @@ class CompletionServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): CompletionService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CompletionService =
+        CompletionServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun create(
         params: CompletionCreateParams,
         requestOptions: RequestOptions,
@@ -39,6 +42,13 @@ class CompletionServiceImpl internal constructor(private val clientOptions: Clie
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CompletionService.WithRawResponse =
+            CompletionServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<CompletionCreateResponse> =
             jsonHandler<CompletionCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -50,6 +60,7 @@ class CompletionServiceImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("completions")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

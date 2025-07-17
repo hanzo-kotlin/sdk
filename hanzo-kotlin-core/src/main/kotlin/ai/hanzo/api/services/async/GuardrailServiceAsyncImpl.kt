@@ -26,6 +26,9 @@ class GuardrailServiceAsyncImpl internal constructor(private val clientOptions: 
 
     override fun withRawResponse(): GuardrailServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): GuardrailServiceAsync =
+        GuardrailServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun list(
         params: GuardrailListParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class GuardrailServiceAsyncImpl internal constructor(private val clientOptions: 
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): GuardrailServiceAsync.WithRawResponse =
+            GuardrailServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val listHandler: Handler<GuardrailListResponse> =
             jsonHandler<GuardrailListResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -49,6 +59,7 @@ class GuardrailServiceAsyncImpl internal constructor(private val clientOptions: 
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("guardrails", "list")
                     .build()
                     .prepareAsync(clientOptions, params)

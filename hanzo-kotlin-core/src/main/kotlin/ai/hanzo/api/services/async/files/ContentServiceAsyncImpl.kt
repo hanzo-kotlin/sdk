@@ -27,6 +27,9 @@ class ContentServiceAsyncImpl internal constructor(private val clientOptions: Cl
 
     override fun withRawResponse(): ContentServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ContentServiceAsync =
+        ContentServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun retrieve(
         params: ContentRetrieveParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class ContentServiceAsyncImpl internal constructor(private val clientOptions: Cl
         ContentServiceAsync.WithRawResponse {
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ContentServiceAsync.WithRawResponse =
+            ContentServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         private val retrieveHandler: Handler<ContentRetrieveResponse> =
             jsonHandler<ContentRetrieveResponse>(clientOptions.jsonMapper)
@@ -53,6 +63,7 @@ class ContentServiceAsyncImpl internal constructor(private val clientOptions: Cl
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(
                         params._pathParam(0),
                         "v1",

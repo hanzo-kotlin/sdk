@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking.team
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.team.model.ModelAddParams
@@ -16,6 +17,13 @@ interface ModelService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelService
 
     /**
      * Add models to a team's allowed model list. Only proxy admin or team admin can add models.
@@ -60,6 +68,13 @@ interface ModelService {
 
     /** A view of [ModelService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /team/model/add`, but is otherwise the same as

@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.assemblyai.AssemblyaiCreateParams
@@ -22,6 +23,13 @@ interface AssemblyaiService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AssemblyaiService
 
     /** Assemblyai Proxy Route */
     fun create(
@@ -115,6 +123,15 @@ interface AssemblyaiService {
 
     /** A view of [AssemblyaiService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): AssemblyaiService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /assemblyai/{endpoint}`, but is otherwise the same

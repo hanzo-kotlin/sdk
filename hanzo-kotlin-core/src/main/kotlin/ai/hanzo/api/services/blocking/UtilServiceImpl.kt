@@ -30,6 +30,9 @@ class UtilServiceImpl internal constructor(private val clientOptions: ClientOpti
 
     override fun withRawResponse(): UtilService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UtilService =
+        UtilServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun getSupportedOpenAIParams(
         params: UtilGetSupportedOpenAIParamsParams,
         requestOptions: RequestOptions,
@@ -56,6 +59,11 @@ class UtilServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): UtilService.WithRawResponse =
+            UtilServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         private val getSupportedOpenAIParamsHandler: Handler<UtilGetSupportedOpenAIParamsResponse> =
             jsonHandler<UtilGetSupportedOpenAIParamsResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -67,6 +75,7 @@ class UtilServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("utils", "supported_openai_params")
                     .build()
                     .prepare(clientOptions, params)
@@ -94,6 +103,7 @@ class UtilServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("utils", "token_counter")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -122,6 +132,7 @@ class UtilServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("utils", "transform_request")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()

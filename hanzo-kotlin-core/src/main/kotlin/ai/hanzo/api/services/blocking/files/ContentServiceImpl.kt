@@ -27,6 +27,9 @@ class ContentServiceImpl internal constructor(private val clientOptions: ClientO
 
     override fun withRawResponse(): ContentService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ContentService =
+        ContentServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun retrieve(
         params: ContentRetrieveParams,
         requestOptions: RequestOptions,
@@ -38,6 +41,13 @@ class ContentServiceImpl internal constructor(private val clientOptions: ClientO
         ContentService.WithRawResponse {
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ContentService.WithRawResponse =
+            ContentServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         private val retrieveHandler: Handler<ContentRetrieveResponse> =
             jsonHandler<ContentRetrieveResponse>(clientOptions.jsonMapper)
@@ -53,6 +63,7 @@ class ContentServiceImpl internal constructor(private val clientOptions: ClientO
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(
                         params._pathParam(0),
                         "v1",

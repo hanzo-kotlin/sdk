@@ -38,6 +38,9 @@ class ResponseServiceAsyncImpl internal constructor(private val clientOptions: C
 
     override fun withRawResponse(): ResponseServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ResponseServiceAsync =
+        ResponseServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun inputItems(): InputItemServiceAsync = inputItems
 
     override suspend fun create(
@@ -70,6 +73,13 @@ class ResponseServiceAsyncImpl internal constructor(private val clientOptions: C
             InputItemServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ResponseServiceAsync.WithRawResponse =
+            ResponseServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun inputItems(): InputItemServiceAsync.WithRawResponse = inputItems
 
         private val createHandler: Handler<ResponseCreateResponse> =
@@ -83,6 +93,7 @@ class ResponseServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "responses")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -114,6 +125,7 @@ class ResponseServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "responses", params._pathParam(0))
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -144,6 +156,7 @@ class ResponseServiceAsyncImpl internal constructor(private val clientOptions: C
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "responses", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.credentials.CredentialCreateParams
@@ -18,6 +19,13 @@ interface CredentialService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CredentialService
 
     /**
      * [BETA] endpoint. This might change unexpectedly. Stores credential in DB. Reloads credentials
@@ -58,6 +66,15 @@ interface CredentialService {
 
     /** A view of [CredentialService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CredentialService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /credentials`, but is otherwise the same as

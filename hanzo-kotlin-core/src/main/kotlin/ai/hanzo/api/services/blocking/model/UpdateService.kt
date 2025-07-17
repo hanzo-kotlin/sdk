@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking.model
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.model.update.UpdateFullParams
@@ -16,6 +17,13 @@ interface UpdateService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UpdateService
 
     /** Edit existing model params */
     fun full(
@@ -51,6 +59,13 @@ interface UpdateService {
 
     /** A view of [UpdateService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UpdateService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /model/update`, but is otherwise the same as

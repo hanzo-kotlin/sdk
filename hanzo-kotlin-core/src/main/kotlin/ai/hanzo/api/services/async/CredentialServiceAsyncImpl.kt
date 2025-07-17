@@ -32,6 +32,9 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
 
     override fun withRawResponse(): CredentialServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CredentialServiceAsync =
+        CredentialServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override suspend fun create(
         params: CredentialCreateParams,
         requestOptions: RequestOptions,
@@ -58,6 +61,13 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
 
         private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CredentialServiceAsync.WithRawResponse =
+            CredentialServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         private val createHandler: Handler<CredentialCreateResponse> =
             jsonHandler<CredentialCreateResponse>(clientOptions.jsonMapper)
                 .withErrorHandler(errorHandler)
@@ -69,6 +79,7 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("credentials")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
@@ -97,6 +108,7 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("credentials")
                     .build()
                     .prepareAsync(clientOptions, params)
@@ -127,6 +139,7 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("credentials", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

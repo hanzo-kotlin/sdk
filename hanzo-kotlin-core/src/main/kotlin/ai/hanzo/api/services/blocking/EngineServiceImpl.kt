@@ -34,6 +34,9 @@ class EngineServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): EngineService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): EngineService =
+        EngineServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun chat(): ChatService = chat
 
     override fun complete(
@@ -59,6 +62,11 @@ class EngineServiceImpl internal constructor(private val clientOptions: ClientOp
             ChatServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): EngineService.WithRawResponse =
+            EngineServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun chat(): ChatService.WithRawResponse = chat
 
         private val completeHandler: Handler<EngineCompleteResponse> =
@@ -75,6 +83,7 @@ class EngineServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("engines", params._pathParam(0), "completions")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -106,6 +115,7 @@ class EngineServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("engines", params._pathParam(0), "embeddings")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()

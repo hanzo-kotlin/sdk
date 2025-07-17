@@ -38,6 +38,9 @@ class ThreadServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
     override fun withRawResponse(): ThreadServiceAsync.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ThreadServiceAsync =
+        ThreadServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun messages(): MessageServiceAsync = messages
 
     override fun runs(): RunServiceAsync = runs
@@ -69,6 +72,13 @@ class ThreadServiceAsyncImpl internal constructor(private val clientOptions: Cli
             RunServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ThreadServiceAsync.WithRawResponse =
+            ThreadServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun messages(): MessageServiceAsync.WithRawResponse = messages
 
         override fun runs(): RunServiceAsync.WithRawResponse = runs
@@ -84,6 +94,7 @@ class ThreadServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "threads")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
@@ -115,6 +126,7 @@ class ThreadServiceAsyncImpl internal constructor(private val clientOptions: Cli
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "threads", params._pathParam(0))
                     .build()
                     .prepareAsync(clientOptions, params)
