@@ -211,12 +211,23 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UtilTransformRequestResponse && error == other.error && rawRequestApiBase == other.rawRequestApiBase && rawRequestBody == other.rawRequestBody && rawRequestHeaders == other.rawRequestHeaders && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is UtilTransformRequestResponse &&
+            error == other.error &&
+            rawRequestApiBase == other.rawRequestApiBase &&
+            rawRequestBody == other.rawRequestBody &&
+            rawRequestHeaders == other.rawRequestHeaders &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(error, rawRequestApiBase, rawRequestBody, rawRequestHeaders, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            error,
+            rawRequestApiBase,
+            rawRequestBody,
+            rawRequestHeaders,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

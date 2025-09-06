@@ -78,8 +78,10 @@ private constructor(
     fun _additionalBodyProperties(): Map<String, JsonValue> =
         regenerateKeyRequest?._additionalProperties() ?: immutableEmptyMap()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -257,10 +259,22 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is KeyRegenerateByKeyParams && pathKey == other.pathKey && llmChangedBy == other.llmChangedBy && regenerateKeyRequest == other.regenerateKeyRequest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is KeyRegenerateByKeyParams &&
+            pathKey == other.pathKey &&
+            llmChangedBy == other.llmChangedBy &&
+            regenerateKeyRequest == other.regenerateKeyRequest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathKey, llmChangedBy, regenerateKeyRequest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            pathKey,
+            llmChangedBy,
+            regenerateKeyRequest,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "KeyRegenerateByKeyParams{pathKey=$pathKey, llmChangedBy=$llmChangedBy, regenerateKeyRequest=$regenerateKeyRequest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

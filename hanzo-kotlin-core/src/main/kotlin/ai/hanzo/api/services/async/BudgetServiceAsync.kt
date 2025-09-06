@@ -81,7 +81,7 @@ interface BudgetServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BudgetListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): BudgetListResponse =
         list(BudgetListParams.none(), requestOptions)
 
@@ -164,7 +164,7 @@ interface BudgetServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BudgetListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<BudgetListResponse> =
             list(BudgetListParams.none(), requestOptions)

@@ -4,18 +4,15 @@ package ai.hanzo.api.models.utils
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class UtilGetSupportedOpenAIParamsParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         UtilGetSupportedOpenAIParamsParams.builder().model("model").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params = UtilGetSupportedOpenAIParamsParams.builder().model("model").build()

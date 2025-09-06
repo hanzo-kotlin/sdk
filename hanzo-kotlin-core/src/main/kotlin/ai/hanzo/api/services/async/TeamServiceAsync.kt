@@ -115,7 +115,7 @@ interface TeamServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): TeamCreateResponse =
         create(TeamCreateParams.none(), requestOptions)
 
@@ -187,7 +187,7 @@ interface TeamServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): TeamListResponse =
         list(TeamListParams.none(), requestOptions)
 
@@ -268,13 +268,13 @@ interface TeamServiceAsync {
     ): TeamDisableLoggingResponse =
         disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-    /** @see [disableLogging] */
+    /** @see disableLogging */
     suspend fun disableLogging(
         params: TeamDisableLoggingParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamDisableLoggingResponse
 
-    /** @see [disableLogging] */
+    /** @see disableLogging */
     suspend fun disableLogging(
         teamId: String,
         requestOptions: RequestOptions,
@@ -287,7 +287,7 @@ interface TeamServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamListAvailableResponse
 
-    /** @see [listAvailable] */
+    /** @see listAvailable */
     suspend fun listAvailable(requestOptions: RequestOptions): TeamListAvailableResponse =
         listAvailable(TeamListAvailableParams.none(), requestOptions)
 
@@ -328,7 +328,7 @@ interface TeamServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     suspend fun retrieveInfo(requestOptions: RequestOptions): TeamRetrieveInfoResponse =
         retrieveInfo(TeamRetrieveInfoParams.none(), requestOptions)
 
@@ -384,7 +384,7 @@ interface TeamServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(requestOptions: RequestOptions): HttpResponseFor<TeamCreateResponse> =
             create(TeamCreateParams.none(), requestOptions)
@@ -409,7 +409,7 @@ interface TeamServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<TeamListResponse> =
             list(TeamListParams.none(), requestOptions)
@@ -456,14 +456,14 @@ interface TeamServiceAsync {
         ): HttpResponseFor<TeamDisableLoggingResponse> =
             disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-        /** @see [disableLogging] */
+        /** @see disableLogging */
         @MustBeClosed
         suspend fun disableLogging(
             params: TeamDisableLoggingParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamDisableLoggingResponse>
 
-        /** @see [disableLogging] */
+        /** @see disableLogging */
         @MustBeClosed
         suspend fun disableLogging(
             teamId: String,
@@ -481,7 +481,7 @@ interface TeamServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamListAvailableResponse>
 
-        /** @see [listAvailable] */
+        /** @see listAvailable */
         @MustBeClosed
         suspend fun listAvailable(
             requestOptions: RequestOptions
@@ -508,7 +508,7 @@ interface TeamServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         suspend fun retrieveInfo(
             requestOptions: RequestOptions

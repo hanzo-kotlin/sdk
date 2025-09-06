@@ -166,7 +166,7 @@ interface ModelGroupServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ModelGroupRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     suspend fun retrieveInfo(requestOptions: RequestOptions): ModelGroupRetrieveInfoResponse =
         retrieveInfo(ModelGroupRetrieveInfoParams.none(), requestOptions)
 
@@ -195,7 +195,7 @@ interface ModelGroupServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ModelGroupRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         suspend fun retrieveInfo(
             requestOptions: RequestOptions

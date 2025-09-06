@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.engines.chat
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class ChatCompleteParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         ChatCompleteParams.builder().model("model").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = ChatCompleteParams.builder().model("model").build()

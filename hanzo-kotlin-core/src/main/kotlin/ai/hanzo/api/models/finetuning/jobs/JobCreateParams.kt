@@ -163,8 +163,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -897,12 +899,31 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && customLlmProvider == other.customLlmProvider && model == other.model && trainingFile == other.trainingFile && hyperparameters == other.hyperparameters && integrations == other.integrations && seed == other.seed && suffix == other.suffix && validationFile == other.validationFile && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                customLlmProvider == other.customLlmProvider &&
+                model == other.model &&
+                trainingFile == other.trainingFile &&
+                hyperparameters == other.hyperparameters &&
+                integrations == other.integrations &&
+                seed == other.seed &&
+                suffix == other.suffix &&
+                validationFile == other.validationFile &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(customLlmProvider, model, trainingFile, hyperparameters, integrations, seed, suffix, validationFile, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                customLlmProvider,
+                model,
+                trainingFile,
+                hyperparameters,
+                integrations,
+                seed,
+                suffix,
+                validationFile,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1036,7 +1057,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is CustomLlmProvider && value == other.value /* spotless:on */
+            return other is CustomLlmProvider && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1346,10 +1367,10 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is BatchSize && string == other.string && long == other.long /* spotless:on */
+                return other is BatchSize && string == other.string && long == other.long
             }
 
-            override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, long) /* spotless:on */
+            override fun hashCode(): Int = Objects.hash(string, long)
 
             override fun toString(): String =
                 when {
@@ -1515,10 +1536,12 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is LearningRateMultiplier && string == other.string && double == other.double /* spotless:on */
+                return other is LearningRateMultiplier &&
+                    string == other.string &&
+                    double == other.double
             }
 
-            override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, double) /* spotless:on */
+            override fun hashCode(): Int = Objects.hash(string, double)
 
             override fun toString(): String =
                 when {
@@ -1686,10 +1709,10 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is NEpochs && string == other.string && long == other.long /* spotless:on */
+                return other is NEpochs && string == other.string && long == other.long
             }
 
-            override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, long) /* spotless:on */
+            override fun hashCode(): Int = Objects.hash(string, long)
 
             override fun toString(): String =
                 when {
@@ -1783,12 +1806,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Hyperparameters && batchSize == other.batchSize && learningRateMultiplier == other.learningRateMultiplier && nEpochs == other.nEpochs && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Hyperparameters &&
+                batchSize == other.batchSize &&
+                learningRateMultiplier == other.learningRateMultiplier &&
+                nEpochs == other.nEpochs &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(batchSize, learningRateMultiplier, nEpochs, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(batchSize, learningRateMultiplier, nEpochs, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1801,10 +1828,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is JobCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is JobCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "JobCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

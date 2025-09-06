@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.files
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class FileDeleteParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         FileDeleteParams.builder().provider("provider").fileId("file_id").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = FileDeleteParams.builder().provider("provider").fileId("file_id").build()

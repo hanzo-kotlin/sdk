@@ -43,13 +43,13 @@ interface VertexAiService {
     ): VertexAiCreateResponse =
         create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     fun create(
         params: VertexAiCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): VertexAiCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(endpoint: String, requestOptions: RequestOptions): VertexAiCreateResponse =
         create(endpoint, VertexAiCreateParams.none(), requestOptions)
 
@@ -65,13 +65,13 @@ interface VertexAiService {
     ): VertexAiRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(
         params: VertexAiRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): VertexAiRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(endpoint: String, requestOptions: RequestOptions): VertexAiRetrieveResponse =
         retrieve(endpoint, VertexAiRetrieveParams.none(), requestOptions)
 
@@ -87,13 +87,13 @@ interface VertexAiService {
     ): VertexAiUpdateResponse =
         update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     fun update(
         params: VertexAiUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): VertexAiUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     fun update(endpoint: String, requestOptions: RequestOptions): VertexAiUpdateResponse =
         update(endpoint, VertexAiUpdateParams.none(), requestOptions)
 
@@ -109,13 +109,13 @@ interface VertexAiService {
     ): VertexAiDeleteResponse =
         delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(
         params: VertexAiDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): VertexAiDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(endpoint: String, requestOptions: RequestOptions): VertexAiDeleteResponse =
         delete(endpoint, VertexAiDeleteParams.none(), requestOptions)
 
@@ -130,13 +130,13 @@ interface VertexAiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): VertexAiPatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     fun patch(
         params: VertexAiPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): VertexAiPatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     fun patch(endpoint: String, requestOptions: RequestOptions): VertexAiPatchResponse =
         patch(endpoint, VertexAiPatchParams.none(), requestOptions)
 
@@ -162,14 +162,14 @@ interface VertexAiService {
         ): HttpResponseFor<VertexAiCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             params: VertexAiCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<VertexAiCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             endpoint: String,
@@ -189,14 +189,14 @@ interface VertexAiService {
         ): HttpResponseFor<VertexAiRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             params: VertexAiRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<VertexAiRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             endpoint: String,
@@ -216,14 +216,14 @@ interface VertexAiService {
         ): HttpResponseFor<VertexAiUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             params: VertexAiUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<VertexAiUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             endpoint: String,
@@ -243,14 +243,14 @@ interface VertexAiService {
         ): HttpResponseFor<VertexAiDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             params: VertexAiDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<VertexAiDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             endpoint: String,
@@ -270,14 +270,14 @@ interface VertexAiService {
         ): HttpResponseFor<VertexAiPatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         fun patch(
             params: VertexAiPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<VertexAiPatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         fun patch(
             endpoint: String,

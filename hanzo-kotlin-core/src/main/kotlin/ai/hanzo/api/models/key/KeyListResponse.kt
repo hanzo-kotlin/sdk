@@ -364,10 +364,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Key && string == other.string && userApiKeyAuth == other.userApiKeyAuth /* spotless:on */
+            return other is Key && string == other.string && userApiKeyAuth == other.userApiKeyAuth
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, userApiKeyAuth) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(string, userApiKeyAuth)
 
         override fun toString(): String =
             when {
@@ -2706,7 +2706,7 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is AllowedModelRegion && value == other.value /* spotless:on */
+                    return other is AllowedModelRegion && value == other.value
                 }
 
                 override fun hashCode() = value.hashCode()
@@ -2791,10 +2791,12 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is Expires && string == other.string && offsetDateTime == other.offsetDateTime /* spotless:on */
+                    return other is Expires &&
+                        string == other.string &&
+                        offsetDateTime == other.offsetDateTime
                 }
 
-                override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, offsetDateTime) /* spotless:on */
+                override fun hashCode(): Int = Objects.hash(string, offsetDateTime)
 
                 override fun toString(): String =
                     when {
@@ -2981,12 +2983,11 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is RpmLimitPerModel && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is RpmLimitPerModel &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
                 private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-                /* spotless:on */
 
                 override fun hashCode(): Int = hashCode
 
@@ -3089,12 +3090,11 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is TpmLimitPerModel && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is TpmLimitPerModel &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
                 private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-                /* spotless:on */
 
                 override fun hashCode(): Int = hashCode
 
@@ -3266,7 +3266,7 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is UserRole && value == other.value /* spotless:on */
+                    return other is UserRole && value == other.value
                 }
 
                 override fun hashCode() = value.hashCode()
@@ -3279,12 +3279,125 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is UserApiKeyAuth && token == other.token && aliases == other.aliases && allowedCacheControls == other.allowedCacheControls && allowedModelRegion == other.allowedModelRegion && apiKey == other.apiKey && blocked == other.blocked && budgetDuration == other.budgetDuration && budgetResetAt == other.budgetResetAt && config == other.config && createdAt == other.createdAt && createdBy == other.createdBy && endUserId == other.endUserId && endUserMaxBudget == other.endUserMaxBudget && endUserRpmLimit == other.endUserRpmLimit && endUserTpmLimit == other.endUserTpmLimit && expires == other.expires && keyAlias == other.keyAlias && keyName == other.keyName && lastRefreshedAt == other.lastRefreshedAt && llmBudgetTable == other.llmBudgetTable && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && metadata == other.metadata && modelMaxBudget == other.modelMaxBudget && modelSpend == other.modelSpend && models == other.models && orgId == other.orgId && parentOtelSpan == other.parentOtelSpan && permissions == other.permissions && rpmLimit == other.rpmLimit && rpmLimitPerModel == other.rpmLimitPerModel && softBudget == other.softBudget && softBudgetCooldown == other.softBudgetCooldown && spend == other.spend && teamAlias == other.teamAlias && teamBlocked == other.teamBlocked && teamId == other.teamId && teamMaxBudget == other.teamMaxBudget && teamMember == other.teamMember && teamMemberSpend == other.teamMemberSpend && teamMetadata == other.teamMetadata && teamModelAliases == other.teamModelAliases && teamModels == other.teamModels && teamRpmLimit == other.teamRpmLimit && teamSpend == other.teamSpend && teamTpmLimit == other.teamTpmLimit && tpmLimit == other.tpmLimit && tpmLimitPerModel == other.tpmLimitPerModel && updatedAt == other.updatedAt && updatedBy == other.updatedBy && userEmail == other.userEmail && userId == other.userId && userRole == other.userRole && userRpmLimit == other.userRpmLimit && userTpmLimit == other.userTpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is UserApiKeyAuth &&
+                    token == other.token &&
+                    aliases == other.aliases &&
+                    allowedCacheControls == other.allowedCacheControls &&
+                    allowedModelRegion == other.allowedModelRegion &&
+                    apiKey == other.apiKey &&
+                    blocked == other.blocked &&
+                    budgetDuration == other.budgetDuration &&
+                    budgetResetAt == other.budgetResetAt &&
+                    config == other.config &&
+                    createdAt == other.createdAt &&
+                    createdBy == other.createdBy &&
+                    endUserId == other.endUserId &&
+                    endUserMaxBudget == other.endUserMaxBudget &&
+                    endUserRpmLimit == other.endUserRpmLimit &&
+                    endUserTpmLimit == other.endUserTpmLimit &&
+                    expires == other.expires &&
+                    keyAlias == other.keyAlias &&
+                    keyName == other.keyName &&
+                    lastRefreshedAt == other.lastRefreshedAt &&
+                    llmBudgetTable == other.llmBudgetTable &&
+                    maxBudget == other.maxBudget &&
+                    maxParallelRequests == other.maxParallelRequests &&
+                    metadata == other.metadata &&
+                    modelMaxBudget == other.modelMaxBudget &&
+                    modelSpend == other.modelSpend &&
+                    models == other.models &&
+                    orgId == other.orgId &&
+                    parentOtelSpan == other.parentOtelSpan &&
+                    permissions == other.permissions &&
+                    rpmLimit == other.rpmLimit &&
+                    rpmLimitPerModel == other.rpmLimitPerModel &&
+                    softBudget == other.softBudget &&
+                    softBudgetCooldown == other.softBudgetCooldown &&
+                    spend == other.spend &&
+                    teamAlias == other.teamAlias &&
+                    teamBlocked == other.teamBlocked &&
+                    teamId == other.teamId &&
+                    teamMaxBudget == other.teamMaxBudget &&
+                    teamMember == other.teamMember &&
+                    teamMemberSpend == other.teamMemberSpend &&
+                    teamMetadata == other.teamMetadata &&
+                    teamModelAliases == other.teamModelAliases &&
+                    teamModels == other.teamModels &&
+                    teamRpmLimit == other.teamRpmLimit &&
+                    teamSpend == other.teamSpend &&
+                    teamTpmLimit == other.teamTpmLimit &&
+                    tpmLimit == other.tpmLimit &&
+                    tpmLimitPerModel == other.tpmLimitPerModel &&
+                    updatedAt == other.updatedAt &&
+                    updatedBy == other.updatedBy &&
+                    userEmail == other.userEmail &&
+                    userId == other.userId &&
+                    userRole == other.userRole &&
+                    userRpmLimit == other.userRpmLimit &&
+                    userTpmLimit == other.userTpmLimit &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(token, aliases, allowedCacheControls, allowedModelRegion, apiKey, blocked, budgetDuration, budgetResetAt, config, createdAt, createdBy, endUserId, endUserMaxBudget, endUserRpmLimit, endUserTpmLimit, expires, keyAlias, keyName, lastRefreshedAt, llmBudgetTable, maxBudget, maxParallelRequests, metadata, modelMaxBudget, modelSpend, models, orgId, parentOtelSpan, permissions, rpmLimit, rpmLimitPerModel, softBudget, softBudgetCooldown, spend, teamAlias, teamBlocked, teamId, teamMaxBudget, teamMember, teamMemberSpend, teamMetadata, teamModelAliases, teamModels, teamRpmLimit, teamSpend, teamTpmLimit, tpmLimit, tpmLimitPerModel, updatedAt, updatedBy, userEmail, userId, userRole, userRpmLimit, userTpmLimit, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    token,
+                    aliases,
+                    allowedCacheControls,
+                    allowedModelRegion,
+                    apiKey,
+                    blocked,
+                    budgetDuration,
+                    budgetResetAt,
+                    config,
+                    createdAt,
+                    createdBy,
+                    endUserId,
+                    endUserMaxBudget,
+                    endUserRpmLimit,
+                    endUserTpmLimit,
+                    expires,
+                    keyAlias,
+                    keyName,
+                    lastRefreshedAt,
+                    llmBudgetTable,
+                    maxBudget,
+                    maxParallelRequests,
+                    metadata,
+                    modelMaxBudget,
+                    modelSpend,
+                    models,
+                    orgId,
+                    parentOtelSpan,
+                    permissions,
+                    rpmLimit,
+                    rpmLimitPerModel,
+                    softBudget,
+                    softBudgetCooldown,
+                    spend,
+                    teamAlias,
+                    teamBlocked,
+                    teamId,
+                    teamMaxBudget,
+                    teamMember,
+                    teamMemberSpend,
+                    teamMetadata,
+                    teamModelAliases,
+                    teamModels,
+                    teamRpmLimit,
+                    teamSpend,
+                    teamTpmLimit,
+                    tpmLimit,
+                    tpmLimitPerModel,
+                    updatedAt,
+                    updatedBy,
+                    userEmail,
+                    userId,
+                    userRole,
+                    userRpmLimit,
+                    userTpmLimit,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -3298,12 +3411,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is KeyListResponse && currentPage == other.currentPage && keys == other.keys && totalCount == other.totalCount && totalPages == other.totalPages && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is KeyListResponse &&
+            currentPage == other.currentPage &&
+            keys == other.keys &&
+            totalCount == other.totalCount &&
+            totalPages == other.totalPages &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(currentPage, keys, totalCount, totalPages, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(currentPage, keys, totalCount, totalPages, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

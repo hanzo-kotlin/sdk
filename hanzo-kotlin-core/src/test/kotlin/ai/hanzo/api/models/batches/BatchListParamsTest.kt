@@ -4,18 +4,15 @@ package ai.hanzo.api.models.batches
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class BatchListParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         BatchListParams.builder().after("after").limit(0L).provider("provider").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params = BatchListParams.builder().after("after").limit(0L).provider("provider").build()
@@ -32,7 +29,6 @@ internal class BatchListParamsTest {
             )
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params = BatchListParams.builder().build()

@@ -38,13 +38,13 @@ interface BedrockServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockCreateResponse = create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: BedrockCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(endpoint: String, requestOptions: RequestOptions): BedrockCreateResponse =
         create(endpoint, BedrockCreateParams.none(), requestOptions)
 
@@ -56,13 +56,13 @@ interface BedrockServiceAsync {
     ): BedrockRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: BedrockRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         endpoint: String,
         requestOptions: RequestOptions,
@@ -75,13 +75,13 @@ interface BedrockServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockUpdateResponse = update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(
         params: BedrockUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(endpoint: String, requestOptions: RequestOptions): BedrockUpdateResponse =
         update(endpoint, BedrockUpdateParams.none(), requestOptions)
 
@@ -92,13 +92,13 @@ interface BedrockServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockDeleteResponse = delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: BedrockDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): BedrockDeleteResponse =
         delete(endpoint, BedrockDeleteParams.none(), requestOptions)
 
@@ -109,13 +109,13 @@ interface BedrockServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockPatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(
         params: BedrockPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BedrockPatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(endpoint: String, requestOptions: RequestOptions): BedrockPatchResponse =
         patch(endpoint, BedrockPatchParams.none(), requestOptions)
 
@@ -145,14 +145,14 @@ interface BedrockServiceAsync {
         ): HttpResponseFor<BedrockCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: BedrockCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             endpoint: String,
@@ -172,14 +172,14 @@ interface BedrockServiceAsync {
         ): HttpResponseFor<BedrockRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: BedrockRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             endpoint: String,
@@ -199,14 +199,14 @@ interface BedrockServiceAsync {
         ): HttpResponseFor<BedrockUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: BedrockUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             endpoint: String,
@@ -226,14 +226,14 @@ interface BedrockServiceAsync {
         ): HttpResponseFor<BedrockDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: BedrockDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             endpoint: String,
@@ -253,14 +253,14 @@ interface BedrockServiceAsync {
         ): HttpResponseFor<BedrockPatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             params: BedrockPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BedrockPatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             endpoint: String,

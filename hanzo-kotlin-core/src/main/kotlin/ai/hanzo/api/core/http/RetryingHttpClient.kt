@@ -3,6 +3,7 @@ package ai.hanzo.api.core.http
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.errors.HanzoIoException
+import ai.hanzo.api.errors.HanzoRetryableException
 import java.io.IOException
 import java.time.Clock
 import java.time.Duration
@@ -159,9 +160,10 @@ private constructor(
     }
 
     private fun shouldRetry(throwable: Throwable): Boolean =
-        // Only retry IOException and HanzoIoException, other exceptions are not intended to be
-        // retried.
-        throwable is IOException || throwable is HanzoIoException
+        // Only retry known retryable exceptions, other exceptions are not intended to be retried.
+        throwable is IOException ||
+            throwable is HanzoIoException ||
+            throwable is HanzoRetryableException
 
     private fun getRetryBackoffDuration(retries: Int, response: HttpResponse?): Duration {
         // About the Retry-After header:

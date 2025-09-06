@@ -4,18 +4,15 @@ package ai.hanzo.api.models.modelgroup
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class ModelGroupRetrieveInfoParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         ModelGroupRetrieveInfoParams.builder().modelGroup("model_group").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params = ModelGroupRetrieveInfoParams.builder().modelGroup("model_group").build()
@@ -26,7 +23,6 @@ internal class ModelGroupRetrieveInfoParamsTest {
             .isEqualTo(QueryParams.builder().put("model_group", "model_group").build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params = ModelGroupRetrieveInfoParams.builder().build()

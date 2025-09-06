@@ -4,12 +4,10 @@ package ai.hanzo.api.models.utils
 
 import ai.hanzo.api.core.JsonValue
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class UtilTransformRequestParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         UtilTransformRequestParams.builder()
@@ -18,7 +16,6 @@ internal class UtilTransformRequestParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =

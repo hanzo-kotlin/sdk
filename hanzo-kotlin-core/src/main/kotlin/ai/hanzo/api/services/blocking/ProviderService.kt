@@ -73,7 +73,7 @@ interface ProviderService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ProviderListBudgetsResponse
 
-    /** @see [listBudgets] */
+    /** @see listBudgets */
     fun listBudgets(requestOptions: RequestOptions): ProviderListBudgetsResponse =
         listBudgets(ProviderListBudgetsParams.none(), requestOptions)
 
@@ -97,7 +97,7 @@ interface ProviderService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ProviderListBudgetsResponse>
 
-        /** @see [listBudgets] */
+        /** @see listBudgets */
         @MustBeClosed
         fun listBudgets(
             requestOptions: RequestOptions

@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.add
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class AddAddAllowedIpParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         AddAddAllowedIpParams.builder().ipAddress(IpAddress.builder().ip("ip").build()).build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =

@@ -211,12 +211,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PassThroughGenericEndpoint && headers == other.headers && path == other.path && target == other.target && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is PassThroughGenericEndpoint &&
+            headers == other.headers &&
+            path == other.path &&
+            target == other.target &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
     private val hashCode: Int by lazy { Objects.hash(headers, path, target, additionalProperties) }
-    /* spotless:on */
 
     override fun hashCode(): Int = hashCode
 

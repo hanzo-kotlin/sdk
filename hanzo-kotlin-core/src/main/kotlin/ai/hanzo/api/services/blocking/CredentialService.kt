@@ -42,7 +42,7 @@ interface CredentialService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CredentialListResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): CredentialListResponse =
         list(CredentialListParams.none(), requestOptions)
 
@@ -54,13 +54,13 @@ interface CredentialService {
     ): CredentialDeleteResponse =
         delete(params.toBuilder().credentialName(credentialName).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(
         params: CredentialDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CredentialDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(credentialName: String, requestOptions: RequestOptions): CredentialDeleteResponse =
         delete(credentialName, CredentialDeleteParams.none(), requestOptions)
 
@@ -96,7 +96,7 @@ interface CredentialService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CredentialListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<CredentialListResponse> =
             list(CredentialListParams.none(), requestOptions)
@@ -113,14 +113,14 @@ interface CredentialService {
         ): HttpResponseFor<CredentialDeleteResponse> =
             delete(params.toBuilder().credentialName(credentialName).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             params: CredentialDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CredentialDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             credentialName: String,

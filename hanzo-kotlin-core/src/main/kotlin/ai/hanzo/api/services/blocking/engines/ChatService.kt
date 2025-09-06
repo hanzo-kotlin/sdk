@@ -48,13 +48,13 @@ interface ChatService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ChatCompleteResponse = complete(params.toBuilder().model(model).build(), requestOptions)
 
-    /** @see [complete] */
+    /** @see complete */
     fun complete(
         params: ChatCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ChatCompleteResponse
 
-    /** @see [complete] */
+    /** @see complete */
     fun complete(model: String, requestOptions: RequestOptions): ChatCompleteResponse =
         complete(model, ChatCompleteParams.none(), requestOptions)
 
@@ -80,14 +80,14 @@ interface ChatService {
         ): HttpResponseFor<ChatCompleteResponse> =
             complete(params.toBuilder().model(model).build(), requestOptions)
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         fun complete(
             params: ChatCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ChatCompleteResponse>
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         fun complete(
             model: String,

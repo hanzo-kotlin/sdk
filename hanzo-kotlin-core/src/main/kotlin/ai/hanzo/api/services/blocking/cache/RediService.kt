@@ -29,7 +29,7 @@ interface RediService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RediRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     fun retrieveInfo(requestOptions: RequestOptions): RediRetrieveInfoResponse =
         retrieveInfo(RediRetrieveInfoParams.none(), requestOptions)
 
@@ -53,7 +53,7 @@ interface RediService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RediRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         fun retrieveInfo(
             requestOptions: RequestOptions

@@ -38,13 +38,13 @@ interface CohereServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereCreateResponse = create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: CohereCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(endpoint: String, requestOptions: RequestOptions): CohereCreateResponse =
         create(endpoint, CohereCreateParams.none(), requestOptions)
 
@@ -56,13 +56,13 @@ interface CohereServiceAsync {
     ): CohereRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: CohereRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(endpoint: String, requestOptions: RequestOptions): CohereRetrieveResponse =
         retrieve(endpoint, CohereRetrieveParams.none(), requestOptions)
 
@@ -73,13 +73,13 @@ interface CohereServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereUpdateResponse = update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(
         params: CohereUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(endpoint: String, requestOptions: RequestOptions): CohereUpdateResponse =
         update(endpoint, CohereUpdateParams.none(), requestOptions)
 
@@ -90,13 +90,13 @@ interface CohereServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereDeleteResponse = delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: CohereDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): CohereDeleteResponse =
         delete(endpoint, CohereDeleteParams.none(), requestOptions)
 
@@ -107,13 +107,13 @@ interface CohereServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereModifyResponse = modify(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [modify] */
+    /** @see modify */
     suspend fun modify(
         params: CohereModifyParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CohereModifyResponse
 
-    /** @see [modify] */
+    /** @see modify */
     suspend fun modify(endpoint: String, requestOptions: RequestOptions): CohereModifyResponse =
         modify(endpoint, CohereModifyParams.none(), requestOptions)
 
@@ -143,14 +143,14 @@ interface CohereServiceAsync {
         ): HttpResponseFor<CohereCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: CohereCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CohereCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             endpoint: String,
@@ -170,14 +170,14 @@ interface CohereServiceAsync {
         ): HttpResponseFor<CohereRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: CohereRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CohereRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             endpoint: String,
@@ -197,14 +197,14 @@ interface CohereServiceAsync {
         ): HttpResponseFor<CohereUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: CohereUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CohereUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             endpoint: String,
@@ -224,14 +224,14 @@ interface CohereServiceAsync {
         ): HttpResponseFor<CohereDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: CohereDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CohereDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             endpoint: String,
@@ -251,14 +251,14 @@ interface CohereServiceAsync {
         ): HttpResponseFor<CohereModifyResponse> =
             modify(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [modify] */
+        /** @see modify */
         @MustBeClosed
         suspend fun modify(
             params: CohereModifyParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CohereModifyResponse>
 
-        /** @see [modify] */
+        /** @see modify */
         @MustBeClosed
         suspend fun modify(
             endpoint: String,

@@ -194,7 +194,7 @@ interface HanzoClientAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ClientGetHomeResponse
 
-    /** @see [getHome] */
+    /** @see getHome */
     suspend fun getHome(requestOptions: RequestOptions): ClientGetHomeResponse =
         getHome(ClientGetHomeParams.none(), requestOptions)
 
@@ -327,7 +327,7 @@ interface HanzoClientAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ClientGetHomeResponse>
 
-        /** @see [getHome] */
+        /** @see getHome */
         @MustBeClosed
         suspend fun getHome(
             requestOptions: RequestOptions

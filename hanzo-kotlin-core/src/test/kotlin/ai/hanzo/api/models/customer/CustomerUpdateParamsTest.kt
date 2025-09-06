@@ -3,12 +3,10 @@
 package ai.hanzo.api.models.customer
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class CustomerUpdateParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         CustomerUpdateParams.builder()
@@ -22,7 +20,6 @@ internal class CustomerUpdateParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -47,7 +44,6 @@ internal class CustomerUpdateParamsTest {
         assertThat(body.maxBudget()).isEqualTo(0.0)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params = CustomerUpdateParams.builder().userId("user_id").build()

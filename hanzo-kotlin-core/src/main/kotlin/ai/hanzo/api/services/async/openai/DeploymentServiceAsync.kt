@@ -51,13 +51,13 @@ interface DeploymentServiceAsync {
     ): DeploymentCompleteResponse =
         complete(params.toBuilder().model(model).build(), requestOptions)
 
-    /** @see [complete] */
+    /** @see complete */
     suspend fun complete(
         params: DeploymentCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentCompleteResponse
 
-    /** @see [complete] */
+    /** @see complete */
     suspend fun complete(
         model: String,
         requestOptions: RequestOptions,
@@ -83,13 +83,13 @@ interface DeploymentServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
 
-    /** @see [embed] */
+    /** @see embed */
     suspend fun embed(
         params: DeploymentEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentEmbedResponse
 
-    /** @see [embed] */
+    /** @see embed */
     suspend fun embed(model: String, requestOptions: RequestOptions): DeploymentEmbedResponse =
         embed(model, DeploymentEmbedParams.none(), requestOptions)
 
@@ -122,14 +122,14 @@ interface DeploymentServiceAsync {
         ): HttpResponseFor<DeploymentCompleteResponse> =
             complete(params.toBuilder().model(model).build(), requestOptions)
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         suspend fun complete(
             params: DeploymentCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentCompleteResponse>
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         suspend fun complete(
             model: String,
@@ -149,14 +149,14 @@ interface DeploymentServiceAsync {
         ): HttpResponseFor<DeploymentEmbedResponse> =
             embed(params.toBuilder().model(model).build(), requestOptions)
 
-        /** @see [embed] */
+        /** @see embed */
         @MustBeClosed
         suspend fun embed(
             params: DeploymentEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentEmbedResponse>
 
-        /** @see [embed] */
+        /** @see embed */
         @MustBeClosed
         suspend fun embed(
             model: String,

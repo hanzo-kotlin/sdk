@@ -110,8 +110,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -718,12 +720,29 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && budgetId == other.budgetId && metadata == other.metadata && models == other.models && organizationAlias == other.organizationAlias && organizationId == other.organizationId && spend == other.spend && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                budgetId == other.budgetId &&
+                metadata == other.metadata &&
+                models == other.models &&
+                organizationAlias == other.organizationAlias &&
+                organizationId == other.organizationId &&
+                spend == other.spend &&
+                updatedBy == other.updatedBy &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(budgetId, metadata, models, organizationAlias, organizationId, spend, updatedBy, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                budgetId,
+                metadata,
+                models,
+                organizationAlias,
+                organizationId,
+                spend,
+                updatedBy,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -736,10 +755,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrganizationUpdateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OrganizationUpdateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OrganizationUpdateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

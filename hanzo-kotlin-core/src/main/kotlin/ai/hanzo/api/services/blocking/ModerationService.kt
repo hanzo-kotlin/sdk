@@ -38,7 +38,7 @@ interface ModerationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ModerationCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): ModerationCreateResponse =
         create(ModerationCreateParams.none(), requestOptions)
 
@@ -64,7 +64,7 @@ interface ModerationService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ModerationCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<ModerationCreateResponse> =
             create(ModerationCreateParams.none(), requestOptions)

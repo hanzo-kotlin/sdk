@@ -4,18 +4,15 @@ package ai.hanzo.api.models.customer
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class CustomerRetrieveInfoParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         CustomerRetrieveInfoParams.builder().endUserId("end_user_id").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params = CustomerRetrieveInfoParams.builder().endUserId("end_user_id").build()

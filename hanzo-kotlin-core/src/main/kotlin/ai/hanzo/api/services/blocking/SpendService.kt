@@ -80,7 +80,7 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SpendCalculateSpendResponse
 
-    /** @see [calculateSpend] */
+    /** @see calculateSpend */
     fun calculateSpend(requestOptions: RequestOptions): SpendCalculateSpendResponse =
         calculateSpend(SpendCalculateSpendParams.none(), requestOptions)
 
@@ -117,7 +117,7 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListLogsResponse>
 
-    /** @see [listLogs] */
+    /** @see listLogs */
     fun listLogs(requestOptions: RequestOptions): List<SpendListLogsResponse> =
         listLogs(SpendListLogsParams.none(), requestOptions)
 
@@ -140,7 +140,7 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListTagsResponse>
 
-    /** @see [listTags] */
+    /** @see listTags */
     fun listTags(requestOptions: RequestOptions): List<SpendListTagsResponse> =
         listTags(SpendListTagsParams.none(), requestOptions)
 
@@ -164,7 +164,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SpendCalculateSpendResponse>
 
-        /** @see [calculateSpend] */
+        /** @see calculateSpend */
         @MustBeClosed
         fun calculateSpend(
             requestOptions: RequestOptions
@@ -181,7 +181,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListLogsResponse>>
 
-        /** @see [listLogs] */
+        /** @see listLogs */
         @MustBeClosed
         fun listLogs(requestOptions: RequestOptions): HttpResponseFor<List<SpendListLogsResponse>> =
             listLogs(SpendListLogsParams.none(), requestOptions)
@@ -196,7 +196,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListTagsResponse>>
 
-        /** @see [listTags] */
+        /** @see listTags */
         @MustBeClosed
         fun listTags(requestOptions: RequestOptions): HttpResponseFor<List<SpendListTagsResponse>> =
             listTags(SpendListTagsParams.none(), requestOptions)

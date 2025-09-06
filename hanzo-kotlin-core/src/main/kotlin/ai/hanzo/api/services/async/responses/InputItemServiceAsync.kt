@@ -40,13 +40,13 @@ interface InputItemServiceAsync {
     ): InputItemListResponse =
         list(params.toBuilder().responseId(responseId).build(), requestOptions)
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(
         params: InputItemListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): InputItemListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(responseId: String, requestOptions: RequestOptions): InputItemListResponse =
         list(responseId, InputItemListParams.none(), requestOptions)
 
@@ -76,14 +76,14 @@ interface InputItemServiceAsync {
         ): HttpResponseFor<InputItemListResponse> =
             list(params.toBuilder().responseId(responseId).build(), requestOptions)
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             params: InputItemListParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<InputItemListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             responseId: String,

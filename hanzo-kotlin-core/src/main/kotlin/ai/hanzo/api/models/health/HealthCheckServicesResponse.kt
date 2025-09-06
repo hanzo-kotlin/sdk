@@ -103,12 +103,11 @@ private constructor(private val additionalProperties: MutableMap<String, JsonVal
             return true
         }
 
-        return /* spotless:off */ other is HealthCheckServicesResponse && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is HealthCheckServicesResponse &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
     private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-    /* spotless:on */
 
     override fun hashCode(): Int = hashCode
 

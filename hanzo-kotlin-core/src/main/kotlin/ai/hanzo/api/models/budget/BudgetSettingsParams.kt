@@ -25,8 +25,10 @@ private constructor(
 
     fun budgetId(): String = budgetId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -192,10 +194,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BudgetSettingsParams && budgetId == other.budgetId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BudgetSettingsParams &&
+            budgetId == other.budgetId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(budgetId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(budgetId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "BudgetSettingsParams{budgetId=$budgetId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

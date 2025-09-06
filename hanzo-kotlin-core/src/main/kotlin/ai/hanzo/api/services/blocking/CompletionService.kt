@@ -44,7 +44,7 @@ interface CompletionService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletionCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): CompletionCreateResponse =
         create(CompletionCreateParams.none(), requestOptions)
 
@@ -70,7 +70,7 @@ interface CompletionService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CompletionCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<CompletionCreateResponse> =
             create(CompletionCreateParams.none(), requestOptions)

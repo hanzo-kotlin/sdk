@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.credentials
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class CredentialDeleteParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         CredentialDeleteParams.builder().credentialName("credential_name").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = CredentialDeleteParams.builder().credentialName("credential_name").build()

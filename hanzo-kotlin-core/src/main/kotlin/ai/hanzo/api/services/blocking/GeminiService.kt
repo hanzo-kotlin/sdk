@@ -38,13 +38,13 @@ interface GeminiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiCreateResponse = create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     fun create(
         params: GeminiCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(endpoint: String, requestOptions: RequestOptions): GeminiCreateResponse =
         create(endpoint, GeminiCreateParams.none(), requestOptions)
 
@@ -56,13 +56,13 @@ interface GeminiService {
     ): GeminiRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(
         params: GeminiRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(endpoint: String, requestOptions: RequestOptions): GeminiRetrieveResponse =
         retrieve(endpoint, GeminiRetrieveParams.none(), requestOptions)
 
@@ -73,13 +73,13 @@ interface GeminiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiUpdateResponse = update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     fun update(
         params: GeminiUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     fun update(endpoint: String, requestOptions: RequestOptions): GeminiUpdateResponse =
         update(endpoint, GeminiUpdateParams.none(), requestOptions)
 
@@ -90,13 +90,13 @@ interface GeminiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiDeleteResponse = delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(
         params: GeminiDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(endpoint: String, requestOptions: RequestOptions): GeminiDeleteResponse =
         delete(endpoint, GeminiDeleteParams.none(), requestOptions)
 
@@ -107,13 +107,13 @@ interface GeminiService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiPatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     fun patch(
         params: GeminiPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiPatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     fun patch(endpoint: String, requestOptions: RequestOptions): GeminiPatchResponse =
         patch(endpoint, GeminiPatchParams.none(), requestOptions)
 
@@ -139,14 +139,14 @@ interface GeminiService {
         ): HttpResponseFor<GeminiCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             params: GeminiCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             endpoint: String,
@@ -166,14 +166,14 @@ interface GeminiService {
         ): HttpResponseFor<GeminiRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             params: GeminiRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             endpoint: String,
@@ -193,14 +193,14 @@ interface GeminiService {
         ): HttpResponseFor<GeminiUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             params: GeminiUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             endpoint: String,
@@ -220,14 +220,14 @@ interface GeminiService {
         ): HttpResponseFor<GeminiDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             params: GeminiDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             endpoint: String,
@@ -247,14 +247,14 @@ interface GeminiService {
         ): HttpResponseFor<GeminiPatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         fun patch(
             params: GeminiPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiPatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         fun patch(
             endpoint: String,

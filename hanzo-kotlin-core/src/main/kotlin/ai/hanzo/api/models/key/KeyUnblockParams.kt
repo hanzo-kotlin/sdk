@@ -43,8 +43,10 @@ private constructor(
     fun _additionalBodyProperties(): Map<String, JsonValue> =
         blockKeyRequest._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -223,10 +225,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is KeyUnblockParams && llmChangedBy == other.llmChangedBy && blockKeyRequest == other.blockKeyRequest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is KeyUnblockParams &&
+            llmChangedBy == other.llmChangedBy &&
+            blockKeyRequest == other.blockKeyRequest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(llmChangedBy, blockKeyRequest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(llmChangedBy, blockKeyRequest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "KeyUnblockParams{llmChangedBy=$llmChangedBy, blockKeyRequest=$blockKeyRequest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -51,13 +51,13 @@ interface DeploymentService {
     ): DeploymentCompleteResponse =
         complete(params.toBuilder().model(model).build(), requestOptions)
 
-    /** @see [complete] */
+    /** @see complete */
     fun complete(
         params: DeploymentCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentCompleteResponse
 
-    /** @see [complete] */
+    /** @see complete */
     fun complete(model: String, requestOptions: RequestOptions): DeploymentCompleteResponse =
         complete(model, DeploymentCompleteParams.none(), requestOptions)
 
@@ -81,13 +81,13 @@ interface DeploymentService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
 
-    /** @see [embed] */
+    /** @see embed */
     fun embed(
         params: DeploymentEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentEmbedResponse
 
-    /** @see [embed] */
+    /** @see embed */
     fun embed(model: String, requestOptions: RequestOptions): DeploymentEmbedResponse =
         embed(model, DeploymentEmbedParams.none(), requestOptions)
 
@@ -117,14 +117,14 @@ interface DeploymentService {
         ): HttpResponseFor<DeploymentCompleteResponse> =
             complete(params.toBuilder().model(model).build(), requestOptions)
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         fun complete(
             params: DeploymentCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentCompleteResponse>
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         fun complete(
             model: String,
@@ -144,14 +144,14 @@ interface DeploymentService {
         ): HttpResponseFor<DeploymentEmbedResponse> =
             embed(params.toBuilder().model(model).build(), requestOptions)
 
-        /** @see [embed] */
+        /** @see embed */
         @MustBeClosed
         fun embed(
             params: DeploymentEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentEmbedResponse>
 
-        /** @see [embed] */
+        /** @see embed */
         @MustBeClosed
         fun embed(
             model: String,

@@ -29,7 +29,7 @@ interface RouteServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RouteListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): RouteListResponse =
         list(RouteListParams.none(), requestOptions)
 
@@ -55,7 +55,7 @@ interface RouteServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RouteListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<RouteListResponse> =
             list(RouteListParams.none(), requestOptions)

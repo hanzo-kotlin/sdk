@@ -115,7 +115,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): TeamCreateResponse =
         create(TeamCreateParams.none(), requestOptions)
 
@@ -187,7 +187,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamListResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): TeamListResponse =
         list(TeamListParams.none(), requestOptions)
 
@@ -268,13 +268,13 @@ interface TeamService {
     ): TeamDisableLoggingResponse =
         disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-    /** @see [disableLogging] */
+    /** @see disableLogging */
     fun disableLogging(
         params: TeamDisableLoggingParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamDisableLoggingResponse
 
-    /** @see [disableLogging] */
+    /** @see disableLogging */
     fun disableLogging(teamId: String, requestOptions: RequestOptions): TeamDisableLoggingResponse =
         disableLogging(teamId, TeamDisableLoggingParams.none(), requestOptions)
 
@@ -284,7 +284,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamListAvailableResponse
 
-    /** @see [listAvailable] */
+    /** @see listAvailable */
     fun listAvailable(requestOptions: RequestOptions): TeamListAvailableResponse =
         listAvailable(TeamListAvailableParams.none(), requestOptions)
 
@@ -325,7 +325,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     fun retrieveInfo(requestOptions: RequestOptions): TeamRetrieveInfoResponse =
         retrieveInfo(TeamRetrieveInfoParams.none(), requestOptions)
 
@@ -381,7 +381,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<TeamCreateResponse> =
             create(TeamCreateParams.none(), requestOptions)
@@ -406,7 +406,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<TeamListResponse> =
             list(TeamListParams.none(), requestOptions)
@@ -453,14 +453,14 @@ interface TeamService {
         ): HttpResponseFor<TeamDisableLoggingResponse> =
             disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-        /** @see [disableLogging] */
+        /** @see disableLogging */
         @MustBeClosed
         fun disableLogging(
             params: TeamDisableLoggingParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamDisableLoggingResponse>
 
-        /** @see [disableLogging] */
+        /** @see disableLogging */
         @MustBeClosed
         fun disableLogging(
             teamId: String,
@@ -478,7 +478,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamListAvailableResponse>
 
-        /** @see [listAvailable] */
+        /** @see listAvailable */
         @MustBeClosed
         fun listAvailable(
             requestOptions: RequestOptions
@@ -505,7 +505,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         fun retrieveInfo(
             requestOptions: RequestOptions

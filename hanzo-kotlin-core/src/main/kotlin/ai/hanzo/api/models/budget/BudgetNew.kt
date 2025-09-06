@@ -540,12 +540,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ModelMaxBudget && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is ModelMaxBudget && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -557,12 +555,31 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BudgetNew && budgetDuration == other.budgetDuration && budgetId == other.budgetId && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && modelMaxBudget == other.modelMaxBudget && rpmLimit == other.rpmLimit && softBudget == other.softBudget && tpmLimit == other.tpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is BudgetNew &&
+            budgetDuration == other.budgetDuration &&
+            budgetId == other.budgetId &&
+            maxBudget == other.maxBudget &&
+            maxParallelRequests == other.maxParallelRequests &&
+            modelMaxBudget == other.modelMaxBudget &&
+            rpmLimit == other.rpmLimit &&
+            softBudget == other.softBudget &&
+            tpmLimit == other.tpmLimit &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(budgetDuration, budgetId, maxBudget, maxParallelRequests, modelMaxBudget, rpmLimit, softBudget, tpmLimit, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            budgetDuration,
+            budgetId,
+            maxBudget,
+            maxParallelRequests,
+            modelMaxBudget,
+            rpmLimit,
+            softBudget,
+            tpmLimit,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

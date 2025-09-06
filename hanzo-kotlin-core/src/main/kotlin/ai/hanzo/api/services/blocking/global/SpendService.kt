@@ -46,7 +46,7 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListTagsResponse>
 
-    /** @see [listTags] */
+    /** @see listTags */
     fun listTags(requestOptions: RequestOptions): List<SpendListTagsResponse> =
         listTags(SpendListTagsParams.none(), requestOptions)
 
@@ -63,7 +63,7 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SpendResetResponse
 
-    /** @see [reset] */
+    /** @see reset */
     fun reset(requestOptions: RequestOptions): SpendResetResponse =
         reset(SpendResetParams.none(), requestOptions)
 
@@ -78,7 +78,7 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendRetrieveReportResponse>
 
-    /** @see [retrieveReport] */
+    /** @see retrieveReport */
     fun retrieveReport(requestOptions: RequestOptions): List<SpendRetrieveReportResponse> =
         retrieveReport(SpendRetrieveReportParams.none(), requestOptions)
 
@@ -102,7 +102,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListTagsResponse>>
 
-        /** @see [listTags] */
+        /** @see listTags */
         @MustBeClosed
         fun listTags(requestOptions: RequestOptions): HttpResponseFor<List<SpendListTagsResponse>> =
             listTags(SpendListTagsParams.none(), requestOptions)
@@ -117,7 +117,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SpendResetResponse>
 
-        /** @see [reset] */
+        /** @see reset */
         @MustBeClosed
         fun reset(requestOptions: RequestOptions): HttpResponseFor<SpendResetResponse> =
             reset(SpendResetParams.none(), requestOptions)
@@ -132,7 +132,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendRetrieveReportResponse>>
 
-        /** @see [retrieveReport] */
+        /** @see retrieveReport */
         @MustBeClosed
         fun retrieveReport(
             requestOptions: RequestOptions

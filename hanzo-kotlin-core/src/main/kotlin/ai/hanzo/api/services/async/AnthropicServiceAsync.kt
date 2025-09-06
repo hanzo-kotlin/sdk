@@ -39,13 +39,13 @@ interface AnthropicServiceAsync {
     ): AnthropicCreateResponse =
         create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: AnthropicCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(endpoint: String, requestOptions: RequestOptions): AnthropicCreateResponse =
         create(endpoint, AnthropicCreateParams.none(), requestOptions)
 
@@ -57,13 +57,13 @@ interface AnthropicServiceAsync {
     ): AnthropicRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: AnthropicRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         endpoint: String,
         requestOptions: RequestOptions,
@@ -78,13 +78,13 @@ interface AnthropicServiceAsync {
     ): AnthropicUpdateResponse =
         update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(
         params: AnthropicUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(endpoint: String, requestOptions: RequestOptions): AnthropicUpdateResponse =
         update(endpoint, AnthropicUpdateParams.none(), requestOptions)
 
@@ -96,13 +96,13 @@ interface AnthropicServiceAsync {
     ): AnthropicDeleteResponse =
         delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: AnthropicDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): AnthropicDeleteResponse =
         delete(endpoint, AnthropicDeleteParams.none(), requestOptions)
 
@@ -114,13 +114,13 @@ interface AnthropicServiceAsync {
     ): AnthropicModifyResponse =
         modify(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [modify] */
+    /** @see modify */
     suspend fun modify(
         params: AnthropicModifyParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AnthropicModifyResponse
 
-    /** @see [modify] */
+    /** @see modify */
     suspend fun modify(endpoint: String, requestOptions: RequestOptions): AnthropicModifyResponse =
         modify(endpoint, AnthropicModifyParams.none(), requestOptions)
 
@@ -150,14 +150,14 @@ interface AnthropicServiceAsync {
         ): HttpResponseFor<AnthropicCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: AnthropicCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AnthropicCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             endpoint: String,
@@ -177,14 +177,14 @@ interface AnthropicServiceAsync {
         ): HttpResponseFor<AnthropicRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: AnthropicRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AnthropicRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             endpoint: String,
@@ -204,14 +204,14 @@ interface AnthropicServiceAsync {
         ): HttpResponseFor<AnthropicUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: AnthropicUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AnthropicUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             endpoint: String,
@@ -231,14 +231,14 @@ interface AnthropicServiceAsync {
         ): HttpResponseFor<AnthropicDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: AnthropicDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AnthropicDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             endpoint: String,
@@ -258,14 +258,14 @@ interface AnthropicServiceAsync {
         ): HttpResponseFor<AnthropicModifyResponse> =
             modify(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [modify] */
+        /** @see modify */
         @MustBeClosed
         suspend fun modify(
             params: AnthropicModifyParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AnthropicModifyResponse>
 
-        /** @see [modify] */
+        /** @see modify */
         @MustBeClosed
         suspend fun modify(
             endpoint: String,

@@ -25,10 +25,13 @@ private constructor(
 
     fun endpointId(): String = endpointId
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -225,10 +228,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PassThroughEndpointDeleteParams && endpointId == other.endpointId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is PassThroughEndpointDeleteParams &&
+            endpointId == other.endpointId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(endpointId, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(endpointId, additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "PassThroughEndpointDeleteParams{endpointId=$endpointId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

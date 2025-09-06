@@ -42,7 +42,7 @@ interface EmbeddingServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EmbeddingCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): EmbeddingCreateResponse =
         create(EmbeddingCreateParams.none(), requestOptions)
 
@@ -70,7 +70,7 @@ interface EmbeddingServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EmbeddingCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             requestOptions: RequestOptions

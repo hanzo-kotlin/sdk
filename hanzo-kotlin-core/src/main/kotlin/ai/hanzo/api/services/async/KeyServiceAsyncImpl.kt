@@ -3,14 +3,14 @@
 package ai.hanzo.api.services.async
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -120,7 +120,8 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         KeyServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         private val regenerate: RegenerateServiceAsync.WithRawResponse by lazy {
             RegenerateServiceAsyncImpl.WithRawResponseImpl(clientOptions)
@@ -136,7 +137,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
         override fun regenerate(): RegenerateServiceAsync.WithRawResponse = regenerate
 
         private val updateHandler: Handler<KeyUpdateResponse> =
-            jsonHandler<KeyUpdateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<KeyUpdateResponse>(clientOptions.jsonMapper)
 
         override suspend fun update(
             params: KeyUpdateParams,
@@ -152,7 +153,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { updateHandler.handle(it) }
                     .also {
@@ -164,7 +165,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
         }
 
         private val listHandler: Handler<KeyListResponse> =
-            jsonHandler<KeyListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<KeyListResponse>(clientOptions.jsonMapper)
 
         override suspend fun list(
             params: KeyListParams,
@@ -179,7 +180,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listHandler.handle(it) }
                     .also {
@@ -191,7 +192,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
         }
 
         private val deleteHandler: Handler<KeyDeleteResponse> =
-            jsonHandler<KeyDeleteResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<KeyDeleteResponse>(clientOptions.jsonMapper)
 
         override suspend fun delete(
             params: KeyDeleteParams,
@@ -207,7 +208,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { deleteHandler.handle(it) }
                     .also {
@@ -219,7 +220,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
         }
 
         private val blockHandler: Handler<KeyBlockResponse?> =
-            jsonHandler<KeyBlockResponse?>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<KeyBlockResponse?>(clientOptions.jsonMapper)
 
         override suspend fun block(
             params: KeyBlockParams,
@@ -235,7 +236,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { blockHandler.handle(it) }
                     .also {
@@ -248,7 +249,6 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
 
         private val checkHealthHandler: Handler<KeyCheckHealthResponse> =
             jsonHandler<KeyCheckHealthResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun checkHealth(
             params: KeyCheckHealthParams,
@@ -264,7 +264,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { checkHealthHandler.handle(it) }
                     .also {
@@ -277,7 +277,6 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
 
         private val generateHandler: Handler<GenerateKeyResponse> =
             jsonHandler<GenerateKeyResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun generate(
             params: KeyGenerateParams,
@@ -293,7 +292,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { generateHandler.handle(it) }
                     .also {
@@ -306,7 +305,6 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
 
         private val regenerateByKeyHandler: Handler<GenerateKeyResponse?> =
             jsonHandler<GenerateKeyResponse?>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun regenerateByKey(
             params: KeyRegenerateByKeyParams,
@@ -325,7 +323,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { regenerateByKeyHandler.handle(it) }
                     .also {
@@ -338,7 +336,6 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
 
         private val retrieveInfoHandler: Handler<KeyRetrieveInfoResponse> =
             jsonHandler<KeyRetrieveInfoResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun retrieveInfo(
             params: KeyRetrieveInfoParams,
@@ -353,7 +350,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveInfoHandler.handle(it) }
                     .also {
@@ -365,7 +362,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
         }
 
         private val unblockHandler: Handler<KeyUnblockResponse> =
-            jsonHandler<KeyUnblockResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<KeyUnblockResponse>(clientOptions.jsonMapper)
 
         override suspend fun unblock(
             params: KeyUnblockParams,
@@ -381,7 +378,7 @@ class KeyServiceAsyncImpl internal constructor(private val clientOptions: Client
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { unblockHandler.handle(it) }
                     .also {

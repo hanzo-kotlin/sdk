@@ -38,7 +38,7 @@ interface AssistantServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssistantCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): AssistantCreateResponse =
         create(AssistantCreateParams.none(), requestOptions)
 
@@ -52,7 +52,7 @@ interface AssistantServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssistantListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): AssistantListResponse =
         list(AssistantListParams.none(), requestOptions)
 
@@ -69,13 +69,13 @@ interface AssistantServiceAsync {
     ): AssistantDeleteResponse =
         delete(params.toBuilder().assistantId(assistantId).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: AssistantDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssistantDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         assistantId: String,
         requestOptions: RequestOptions,
@@ -105,7 +105,7 @@ interface AssistantServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssistantCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             requestOptions: RequestOptions
@@ -122,7 +122,7 @@ interface AssistantServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssistantListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<AssistantListResponse> =
             list(AssistantListParams.none(), requestOptions)
@@ -139,14 +139,14 @@ interface AssistantServiceAsync {
         ): HttpResponseFor<AssistantDeleteResponse> =
             delete(params.toBuilder().assistantId(assistantId).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: AssistantDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssistantDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             assistantId: String,

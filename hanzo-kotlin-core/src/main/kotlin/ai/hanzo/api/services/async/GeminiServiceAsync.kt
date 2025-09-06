@@ -38,13 +38,13 @@ interface GeminiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiCreateResponse = create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: GeminiCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(endpoint: String, requestOptions: RequestOptions): GeminiCreateResponse =
         create(endpoint, GeminiCreateParams.none(), requestOptions)
 
@@ -56,13 +56,13 @@ interface GeminiServiceAsync {
     ): GeminiRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: GeminiRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(endpoint: String, requestOptions: RequestOptions): GeminiRetrieveResponse =
         retrieve(endpoint, GeminiRetrieveParams.none(), requestOptions)
 
@@ -73,13 +73,13 @@ interface GeminiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiUpdateResponse = update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(
         params: GeminiUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(endpoint: String, requestOptions: RequestOptions): GeminiUpdateResponse =
         update(endpoint, GeminiUpdateParams.none(), requestOptions)
 
@@ -90,13 +90,13 @@ interface GeminiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiDeleteResponse = delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: GeminiDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): GeminiDeleteResponse =
         delete(endpoint, GeminiDeleteParams.none(), requestOptions)
 
@@ -107,13 +107,13 @@ interface GeminiServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiPatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(
         params: GeminiPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GeminiPatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(endpoint: String, requestOptions: RequestOptions): GeminiPatchResponse =
         patch(endpoint, GeminiPatchParams.none(), requestOptions)
 
@@ -143,14 +143,14 @@ interface GeminiServiceAsync {
         ): HttpResponseFor<GeminiCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: GeminiCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             endpoint: String,
@@ -170,14 +170,14 @@ interface GeminiServiceAsync {
         ): HttpResponseFor<GeminiRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: GeminiRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             endpoint: String,
@@ -197,14 +197,14 @@ interface GeminiServiceAsync {
         ): HttpResponseFor<GeminiUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: GeminiUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             endpoint: String,
@@ -224,14 +224,14 @@ interface GeminiServiceAsync {
         ): HttpResponseFor<GeminiDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: GeminiDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             endpoint: String,
@@ -251,14 +251,14 @@ interface GeminiServiceAsync {
         ): HttpResponseFor<GeminiPatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             params: GeminiPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GeminiPatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             endpoint: String,

@@ -1393,7 +1393,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is UserRole && value == other.value /* spotless:on */
+            return other is UserRole && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1406,12 +1406,87 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UserCreateResponse && expires == other.expires && key == other.key && token == other.token && aliases == other.aliases && allowedCacheControls == other.allowedCacheControls && blocked == other.blocked && budgetDuration == other.budgetDuration && budgetId == other.budgetId && config == other.config && createdBy == other.createdBy && duration == other.duration && enforcedParams == other.enforcedParams && guardrails == other.guardrails && keyAlias == other.keyAlias && keyName == other.keyName && llmBudgetTable == other.llmBudgetTable && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && metadata == other.metadata && modelMaxBudget == other.modelMaxBudget && modelRpmLimit == other.modelRpmLimit && modelTpmLimit == other.modelTpmLimit && models == other.models && permissions == other.permissions && rpmLimit == other.rpmLimit && spend == other.spend && tags == other.tags && teamId == other.teamId && teams == other.teams && tokenId == other.tokenId && tpmLimit == other.tpmLimit && updatedBy == other.updatedBy && userAlias == other.userAlias && userEmail == other.userEmail && userId == other.userId && userRole == other.userRole && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is UserCreateResponse &&
+            expires == other.expires &&
+            key == other.key &&
+            token == other.token &&
+            aliases == other.aliases &&
+            allowedCacheControls == other.allowedCacheControls &&
+            blocked == other.blocked &&
+            budgetDuration == other.budgetDuration &&
+            budgetId == other.budgetId &&
+            config == other.config &&
+            createdBy == other.createdBy &&
+            duration == other.duration &&
+            enforcedParams == other.enforcedParams &&
+            guardrails == other.guardrails &&
+            keyAlias == other.keyAlias &&
+            keyName == other.keyName &&
+            llmBudgetTable == other.llmBudgetTable &&
+            maxBudget == other.maxBudget &&
+            maxParallelRequests == other.maxParallelRequests &&
+            metadata == other.metadata &&
+            modelMaxBudget == other.modelMaxBudget &&
+            modelRpmLimit == other.modelRpmLimit &&
+            modelTpmLimit == other.modelTpmLimit &&
+            models == other.models &&
+            permissions == other.permissions &&
+            rpmLimit == other.rpmLimit &&
+            spend == other.spend &&
+            tags == other.tags &&
+            teamId == other.teamId &&
+            teams == other.teams &&
+            tokenId == other.tokenId &&
+            tpmLimit == other.tpmLimit &&
+            updatedBy == other.updatedBy &&
+            userAlias == other.userAlias &&
+            userEmail == other.userEmail &&
+            userId == other.userId &&
+            userRole == other.userRole &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(expires, key, token, aliases, allowedCacheControls, blocked, budgetDuration, budgetId, config, createdBy, duration, enforcedParams, guardrails, keyAlias, keyName, llmBudgetTable, maxBudget, maxParallelRequests, metadata, modelMaxBudget, modelRpmLimit, modelTpmLimit, models, permissions, rpmLimit, spend, tags, teamId, teams, tokenId, tpmLimit, updatedBy, userAlias, userEmail, userId, userRole, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            expires,
+            key,
+            token,
+            aliases,
+            allowedCacheControls,
+            blocked,
+            budgetDuration,
+            budgetId,
+            config,
+            createdBy,
+            duration,
+            enforcedParams,
+            guardrails,
+            keyAlias,
+            keyName,
+            llmBudgetTable,
+            maxBudget,
+            maxParallelRequests,
+            metadata,
+            modelMaxBudget,
+            modelRpmLimit,
+            modelTpmLimit,
+            models,
+            permissions,
+            rpmLimit,
+            spend,
+            tags,
+            teamId,
+            teams,
+            tokenId,
+            tpmLimit,
+            updatedBy,
+            userAlias,
+            userEmail,
+            userId,
+            userRole,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

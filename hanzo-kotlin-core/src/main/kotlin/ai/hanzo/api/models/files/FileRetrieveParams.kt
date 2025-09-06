@@ -33,8 +33,10 @@ private constructor(
 
     fun fileId(): String? = fileId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -206,10 +208,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FileRetrieveParams && provider == other.provider && fileId == other.fileId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is FileRetrieveParams &&
+            provider == other.provider &&
+            fileId == other.fileId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(provider, fileId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(provider, fileId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "FileRetrieveParams{provider=$provider, fileId=$fileId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

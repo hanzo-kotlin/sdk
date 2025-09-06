@@ -110,7 +110,7 @@ interface UserService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): UserCreateResponse =
         create(UserCreateParams.none(), requestOptions)
 
@@ -169,7 +169,7 @@ interface UserService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     fun update(requestOptions: RequestOptions): UserUpdateResponse =
         update(UserUpdateParams.none(), requestOptions)
 
@@ -195,7 +195,7 @@ interface UserService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserListResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): UserListResponse =
         list(UserListParams.none(), requestOptions)
 
@@ -235,7 +235,7 @@ interface UserService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     fun retrieveInfo(requestOptions: RequestOptions): UserRetrieveInfoResponse =
         retrieveInfo(UserRetrieveInfoParams.none(), requestOptions)
 
@@ -259,7 +259,7 @@ interface UserService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<UserCreateResponse> =
             create(UserCreateParams.none(), requestOptions)
@@ -274,7 +274,7 @@ interface UserService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(requestOptions: RequestOptions): HttpResponseFor<UserUpdateResponse> =
             update(UserUpdateParams.none(), requestOptions)
@@ -289,7 +289,7 @@ interface UserService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<UserListResponse> =
             list(UserListParams.none(), requestOptions)
@@ -314,7 +314,7 @@ interface UserService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         fun retrieveInfo(
             requestOptions: RequestOptions

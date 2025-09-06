@@ -474,12 +474,35 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrganizationCreateResponse && budgetId == other.budgetId && createdAt == other.createdAt && createdBy == other.createdBy && models == other.models && organizationId == other.organizationId && updatedAt == other.updatedAt && updatedBy == other.updatedBy && metadata == other.metadata && organizationAlias == other.organizationAlias && spend == other.spend && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OrganizationCreateResponse &&
+            budgetId == other.budgetId &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            models == other.models &&
+            organizationId == other.organizationId &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            metadata == other.metadata &&
+            organizationAlias == other.organizationAlias &&
+            spend == other.spend &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(budgetId, createdAt, createdBy, models, organizationId, updatedAt, updatedBy, metadata, organizationAlias, spend, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            budgetId,
+            createdAt,
+            createdBy,
+            models,
+            organizationId,
+            updatedAt,
+            updatedBy,
+            metadata,
+            organizationAlias,
+            spend,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

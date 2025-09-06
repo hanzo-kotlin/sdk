@@ -43,13 +43,13 @@ interface OpenAIServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAICreateResponse = create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: OpenAICreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAICreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(endpoint: String, requestOptions: RequestOptions): OpenAICreateResponse =
         create(endpoint, OpenAICreateParams.none(), requestOptions)
 
@@ -63,13 +63,13 @@ interface OpenAIServiceAsync {
     ): OpenAIRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: OpenAIRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAIRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(endpoint: String, requestOptions: RequestOptions): OpenAIRetrieveResponse =
         retrieve(endpoint, OpenAIRetrieveParams.none(), requestOptions)
 
@@ -82,13 +82,13 @@ interface OpenAIServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAIUpdateResponse = update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(
         params: OpenAIUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAIUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(endpoint: String, requestOptions: RequestOptions): OpenAIUpdateResponse =
         update(endpoint, OpenAIUpdateParams.none(), requestOptions)
 
@@ -101,13 +101,13 @@ interface OpenAIServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAIDeleteResponse = delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: OpenAIDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAIDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): OpenAIDeleteResponse =
         delete(endpoint, OpenAIDeleteParams.none(), requestOptions)
 
@@ -120,13 +120,13 @@ interface OpenAIServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAIPatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(
         params: OpenAIPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OpenAIPatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(endpoint: String, requestOptions: RequestOptions): OpenAIPatchResponse =
         patch(endpoint, OpenAIPatchParams.none(), requestOptions)
 
@@ -158,14 +158,14 @@ interface OpenAIServiceAsync {
         ): HttpResponseFor<OpenAICreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: OpenAICreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<OpenAICreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             endpoint: String,
@@ -185,14 +185,14 @@ interface OpenAIServiceAsync {
         ): HttpResponseFor<OpenAIRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: OpenAIRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<OpenAIRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             endpoint: String,
@@ -212,14 +212,14 @@ interface OpenAIServiceAsync {
         ): HttpResponseFor<OpenAIUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: OpenAIUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<OpenAIUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             endpoint: String,
@@ -239,14 +239,14 @@ interface OpenAIServiceAsync {
         ): HttpResponseFor<OpenAIDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: OpenAIDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<OpenAIDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             endpoint: String,
@@ -266,14 +266,14 @@ interface OpenAIServiceAsync {
         ): HttpResponseFor<OpenAIPatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             params: OpenAIPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<OpenAIPatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             endpoint: String,

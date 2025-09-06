@@ -681,10 +681,10 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is Mode && string == other.string && strings == other.strings /* spotless:on */
+                    return other is Mode && string == other.string && strings == other.strings
                 }
 
-                override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, strings) /* spotless:on */
+                override fun hashCode(): Int = Objects.hash(string, strings)
 
                 override fun toString(): String =
                     when {
@@ -698,7 +698,7 @@ private constructor(
 
                     fun ofString(string: String) = Mode(string = string)
 
-                    fun ofStrings(strings: List<String>) = Mode(strings = strings)
+                    fun ofStrings(strings: List<String>) = Mode(strings = strings.toImmutable())
                 }
 
                 /**
@@ -779,12 +779,16 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is LlmParams && guardrail == other.guardrail && mode == other.mode && defaultOn == other.defaultOn && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is LlmParams &&
+                    guardrail == other.guardrail &&
+                    mode == other.mode &&
+                    defaultOn == other.defaultOn &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(guardrail, mode, defaultOn, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(guardrail, mode, defaultOn, additionalProperties)
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -797,12 +801,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Guardrail && guardrailInfo == other.guardrailInfo && guardrailName == other.guardrailName && llmParams == other.llmParams && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Guardrail &&
+                guardrailInfo == other.guardrailInfo &&
+                guardrailName == other.guardrailName &&
+                llmParams == other.llmParams &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(guardrailInfo, guardrailName, llmParams, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(guardrailInfo, guardrailName, llmParams, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -815,12 +823,12 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GuardrailListResponse && guardrails == other.guardrails && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is GuardrailListResponse &&
+            guardrails == other.guardrails &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
     private val hashCode: Int by lazy { Objects.hash(guardrails, additionalProperties) }
-    /* spotless:on */
 
     override fun hashCode(): Int = hashCode
 

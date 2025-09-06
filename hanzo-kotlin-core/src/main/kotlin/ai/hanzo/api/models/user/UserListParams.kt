@@ -46,8 +46,10 @@ private constructor(
     /** Get list of users by user_ids */
     fun userIds(): String? = userIds
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -237,10 +239,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UserListParams && page == other.page && pageSize == other.pageSize && role == other.role && userIds == other.userIds && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is UserListParams &&
+            page == other.page &&
+            pageSize == other.pageSize &&
+            role == other.role &&
+            userIds == other.userIds &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(page, pageSize, role, userIds, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(page, pageSize, role, userIds, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "UserListParams{page=$page, pageSize=$pageSize, role=$role, userIds=$userIds, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

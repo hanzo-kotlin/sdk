@@ -4,18 +4,15 @@ package ai.hanzo.api.models.files
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class FileListParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         FileListParams.builder().provider("provider").purpose("purpose").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = FileListParams.builder().provider("provider").build()
@@ -25,7 +22,6 @@ internal class FileListParamsTest {
         assertThat(params._pathParam(1)).isEqualTo("")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params = FileListParams.builder().provider("provider").purpose("purpose").build()
@@ -35,7 +31,6 @@ internal class FileListParamsTest {
         assertThat(queryParams).isEqualTo(QueryParams.builder().put("purpose", "purpose").build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params = FileListParams.builder().provider("provider").build()

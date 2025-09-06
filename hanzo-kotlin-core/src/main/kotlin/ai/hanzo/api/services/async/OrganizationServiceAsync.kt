@@ -111,7 +111,7 @@ interface OrganizationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): OrganizationUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(requestOptions: RequestOptions): OrganizationUpdateResponse =
         update(OrganizationUpdateParams.none(), requestOptions)
 
@@ -125,7 +125,7 @@ interface OrganizationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<OrganizationListResponse>
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): List<OrganizationListResponse> =
         list(OrganizationListParams.none(), requestOptions)
 
@@ -229,7 +229,7 @@ interface OrganizationServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<OrganizationUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             requestOptions: RequestOptions
@@ -246,7 +246,7 @@ interface OrganizationServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<OrganizationListResponse>>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             requestOptions: RequestOptions

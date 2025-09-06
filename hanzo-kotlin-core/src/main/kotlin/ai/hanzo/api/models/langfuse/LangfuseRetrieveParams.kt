@@ -21,8 +21,10 @@ private constructor(
 
     fun endpoint(): String? = endpoint
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -176,10 +178,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is LangfuseRetrieveParams && endpoint == other.endpoint && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is LangfuseRetrieveParams &&
+            endpoint == other.endpoint &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(endpoint, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(endpoint, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "LangfuseRetrieveParams{endpoint=$endpoint, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

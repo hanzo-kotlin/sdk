@@ -369,8 +369,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -1928,12 +1930,69 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && key == other.key && aliases == other.aliases && allowedCacheControls == other.allowedCacheControls && blocked == other.blocked && budgetDuration == other.budgetDuration && budgetId == other.budgetId && config == other.config && duration == other.duration && enforcedParams == other.enforcedParams && guardrails == other.guardrails && keyAlias == other.keyAlias && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && metadata == other.metadata && modelMaxBudget == other.modelMaxBudget && modelRpmLimit == other.modelRpmLimit && modelTpmLimit == other.modelTpmLimit && models == other.models && permissions == other.permissions && rpmLimit == other.rpmLimit && spend == other.spend && tags == other.tags && teamId == other.teamId && tempBudgetExpiry == other.tempBudgetExpiry && tempBudgetIncrease == other.tempBudgetIncrease && tpmLimit == other.tpmLimit && userId == other.userId && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                key == other.key &&
+                aliases == other.aliases &&
+                allowedCacheControls == other.allowedCacheControls &&
+                blocked == other.blocked &&
+                budgetDuration == other.budgetDuration &&
+                budgetId == other.budgetId &&
+                config == other.config &&
+                duration == other.duration &&
+                enforcedParams == other.enforcedParams &&
+                guardrails == other.guardrails &&
+                keyAlias == other.keyAlias &&
+                maxBudget == other.maxBudget &&
+                maxParallelRequests == other.maxParallelRequests &&
+                metadata == other.metadata &&
+                modelMaxBudget == other.modelMaxBudget &&
+                modelRpmLimit == other.modelRpmLimit &&
+                modelTpmLimit == other.modelTpmLimit &&
+                models == other.models &&
+                permissions == other.permissions &&
+                rpmLimit == other.rpmLimit &&
+                spend == other.spend &&
+                tags == other.tags &&
+                teamId == other.teamId &&
+                tempBudgetExpiry == other.tempBudgetExpiry &&
+                tempBudgetIncrease == other.tempBudgetIncrease &&
+                tpmLimit == other.tpmLimit &&
+                userId == other.userId &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(key, aliases, allowedCacheControls, blocked, budgetDuration, budgetId, config, duration, enforcedParams, guardrails, keyAlias, maxBudget, maxParallelRequests, metadata, modelMaxBudget, modelRpmLimit, modelTpmLimit, models, permissions, rpmLimit, spend, tags, teamId, tempBudgetExpiry, tempBudgetIncrease, tpmLimit, userId, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                key,
+                aliases,
+                allowedCacheControls,
+                blocked,
+                budgetDuration,
+                budgetId,
+                config,
+                duration,
+                enforcedParams,
+                guardrails,
+                keyAlias,
+                maxBudget,
+                maxParallelRequests,
+                metadata,
+                modelMaxBudget,
+                modelRpmLimit,
+                modelTpmLimit,
+                models,
+                permissions,
+                rpmLimit,
+                spend,
+                tags,
+                teamId,
+                tempBudgetExpiry,
+                tempBudgetIncrease,
+                tpmLimit,
+                userId,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1946,10 +2005,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is KeyUpdateParams && llmChangedBy == other.llmChangedBy && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is KeyUpdateParams &&
+            llmChangedBy == other.llmChangedBy &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(llmChangedBy, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(llmChangedBy, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "KeyUpdateParams{llmChangedBy=$llmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

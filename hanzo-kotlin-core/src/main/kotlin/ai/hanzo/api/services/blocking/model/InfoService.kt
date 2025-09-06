@@ -59,7 +59,7 @@ interface InfoService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): InfoListResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): InfoListResponse =
         list(InfoListParams.none(), requestOptions)
 
@@ -83,7 +83,7 @@ interface InfoService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<InfoListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<InfoListResponse> =
             list(InfoListParams.none(), requestOptions)

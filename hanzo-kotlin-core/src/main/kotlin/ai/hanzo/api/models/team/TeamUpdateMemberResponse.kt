@@ -263,12 +263,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TeamUpdateMemberResponse && teamId == other.teamId && userId == other.userId && maxBudgetInTeam == other.maxBudgetInTeam && userEmail == other.userEmail && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is TeamUpdateMemberResponse &&
+            teamId == other.teamId &&
+            userId == other.userId &&
+            maxBudgetInTeam == other.maxBudgetInTeam &&
+            userEmail == other.userEmail &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(teamId, userId, maxBudgetInTeam, userEmail, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(teamId, userId, maxBudgetInTeam, userEmail, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

@@ -46,7 +46,7 @@ interface ResponseServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ResponseCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): ResponseCreateResponse =
         create(ResponseCreateParams.none(), requestOptions)
 
@@ -67,13 +67,13 @@ interface ResponseServiceAsync {
     ): ResponseRetrieveResponse =
         retrieve(params.toBuilder().responseId(responseId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: ResponseRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ResponseRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         responseId: String,
         requestOptions: RequestOptions,
@@ -97,13 +97,13 @@ interface ResponseServiceAsync {
     ): ResponseDeleteResponse =
         delete(params.toBuilder().responseId(responseId).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: ResponseDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ResponseDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(responseId: String, requestOptions: RequestOptions): ResponseDeleteResponse =
         delete(responseId, ResponseDeleteParams.none(), requestOptions)
 
@@ -133,7 +133,7 @@ interface ResponseServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ResponseCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             requestOptions: RequestOptions
@@ -152,14 +152,14 @@ interface ResponseServiceAsync {
         ): HttpResponseFor<ResponseRetrieveResponse> =
             retrieve(params.toBuilder().responseId(responseId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: ResponseRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ResponseRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             responseId: String,
@@ -179,14 +179,14 @@ interface ResponseServiceAsync {
         ): HttpResponseFor<ResponseDeleteResponse> =
             delete(params.toBuilder().responseId(responseId).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: ResponseDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ResponseDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             responseId: String,

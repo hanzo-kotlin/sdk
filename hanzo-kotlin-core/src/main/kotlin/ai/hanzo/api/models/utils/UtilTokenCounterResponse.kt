@@ -269,12 +269,17 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UtilTokenCounterResponse && modelUsed == other.modelUsed && requestModel == other.requestModel && tokenizerType == other.tokenizerType && totalTokens == other.totalTokens && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is UtilTokenCounterResponse &&
+            modelUsed == other.modelUsed &&
+            requestModel == other.requestModel &&
+            tokenizerType == other.tokenizerType &&
+            totalTokens == other.totalTokens &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(modelUsed, requestModel, tokenizerType, totalTokens, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(modelUsed, requestModel, tokenizerType, totalTokens, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

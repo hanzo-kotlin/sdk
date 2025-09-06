@@ -5,12 +5,10 @@ package ai.hanzo.api.models.team.callback
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.http.Headers
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class CallbackAddParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         CallbackAddParams.builder()
@@ -26,7 +24,6 @@ internal class CallbackAddParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params =
@@ -45,7 +42,6 @@ internal class CallbackAddParamsTest {
         assertThat(params._pathParam(1)).isEqualTo("")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun headers() {
         val params =
@@ -67,7 +63,6 @@ internal class CallbackAddParamsTest {
             .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun headersWithoutOptionalFields() {
         val params =
@@ -86,7 +81,6 @@ internal class CallbackAddParamsTest {
         assertThat(headers).isEqualTo(Headers.builder().build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -114,7 +108,6 @@ internal class CallbackAddParamsTest {
         assertThat(body.callbackType()).isEqualTo(CallbackAddParams.CallbackType.SUCCESS)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params =

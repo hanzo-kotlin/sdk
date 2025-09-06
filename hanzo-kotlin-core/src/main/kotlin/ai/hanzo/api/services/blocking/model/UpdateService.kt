@@ -51,7 +51,7 @@ interface UpdateService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UpdatePartialResponse = partial(params.toBuilder().modelId(modelId).build(), requestOptions)
 
-    /** @see [partial] */
+    /** @see partial */
     fun partial(
         params: UpdatePartialParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -89,7 +89,7 @@ interface UpdateService {
         ): HttpResponseFor<UpdatePartialResponse> =
             partial(params.toBuilder().modelId(modelId).build(), requestOptions)
 
-        /** @see [partial] */
+        /** @see partial */
         @MustBeClosed
         fun partial(
             params: UpdatePartialParams,

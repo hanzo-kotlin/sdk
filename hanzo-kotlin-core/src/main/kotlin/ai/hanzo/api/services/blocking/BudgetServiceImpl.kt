@@ -3,13 +3,13 @@
 package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -85,7 +85,8 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         BudgetService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         override fun withOptions(
             modifier: (ClientOptions.Builder) -> Unit
@@ -94,7 +95,6 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val createHandler: Handler<BudgetCreateResponse> =
             jsonHandler<BudgetCreateResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun create(
             params: BudgetCreateParams,
@@ -110,7 +110,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -123,7 +123,6 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val updateHandler: Handler<BudgetUpdateResponse> =
             jsonHandler<BudgetUpdateResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun update(
             params: BudgetUpdateParams,
@@ -139,7 +138,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { updateHandler.handle(it) }
                     .also {
@@ -151,7 +150,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
         }
 
         private val listHandler: Handler<BudgetListResponse> =
-            jsonHandler<BudgetListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<BudgetListResponse>(clientOptions.jsonMapper)
 
         override fun list(
             params: BudgetListParams,
@@ -166,7 +165,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listHandler.handle(it) }
                     .also {
@@ -179,7 +178,6 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val deleteHandler: Handler<BudgetDeleteResponse> =
             jsonHandler<BudgetDeleteResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun delete(
             params: BudgetDeleteParams,
@@ -195,7 +193,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { deleteHandler.handle(it) }
                     .also {
@@ -207,7 +205,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
         }
 
         private val infoHandler: Handler<BudgetInfoResponse> =
-            jsonHandler<BudgetInfoResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<BudgetInfoResponse>(clientOptions.jsonMapper)
 
         override fun info(
             params: BudgetInfoParams,
@@ -223,7 +221,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { infoHandler.handle(it) }
                     .also {
@@ -236,7 +234,6 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val settingsHandler: Handler<BudgetSettingsResponse> =
             jsonHandler<BudgetSettingsResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun settings(
             params: BudgetSettingsParams,
@@ -251,7 +248,7 @@ class BudgetServiceImpl internal constructor(private val clientOptions: ClientOp
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { settingsHandler.handle(it) }
                     .also {

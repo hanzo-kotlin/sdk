@@ -33,8 +33,10 @@ private constructor(
     /** Key in the request parameters */
     fun key(): String? = key
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -185,10 +187,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is KeyRetrieveInfoParams && key == other.key && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is KeyRetrieveInfoParams &&
+            key == other.key &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(key, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(key, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "KeyRetrieveInfoParams{key=$key, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

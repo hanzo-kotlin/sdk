@@ -2,12 +2,10 @@
 
 package ai.hanzo.api.models.threads
 
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class ThreadCreateParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         ThreadCreateParams.builder().build()

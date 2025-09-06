@@ -36,13 +36,13 @@ interface MessageServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): MessageCreateResponse = create(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: MessageCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): MessageCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(threadId: String, requestOptions: RequestOptions): MessageCreateResponse =
         create(threadId, MessageCreateParams.none(), requestOptions)
 
@@ -57,13 +57,13 @@ interface MessageServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): MessageListResponse = list(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(
         params: MessageListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): MessageListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(threadId: String, requestOptions: RequestOptions): MessageListResponse =
         list(threadId, MessageListParams.none(), requestOptions)
 
@@ -93,14 +93,14 @@ interface MessageServiceAsync {
         ): HttpResponseFor<MessageCreateResponse> =
             create(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: MessageCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<MessageCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             threadId: String,
@@ -120,14 +120,14 @@ interface MessageServiceAsync {
         ): HttpResponseFor<MessageListResponse> =
             list(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             params: MessageListParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<MessageListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             threadId: String,

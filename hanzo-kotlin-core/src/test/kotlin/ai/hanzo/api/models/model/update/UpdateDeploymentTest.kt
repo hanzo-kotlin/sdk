@@ -8,12 +8,10 @@ import ai.hanzo.api.models.model.ModelInfo
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class UpdateDeploymentTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val updateDeployment =
@@ -124,7 +122,6 @@ internal class UpdateDeploymentTest {
         assertThat(updateDeployment.modelName()).isEqualTo("model_name")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun roundtrip() {
         val jsonMapper = jsonMapper()

@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.openai.deployments
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class DeploymentEmbedParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         DeploymentEmbedParams.builder().model("model").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = DeploymentEmbedParams.builder().model("model").build()

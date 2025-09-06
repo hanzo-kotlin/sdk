@@ -3,13 +3,13 @@
 package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -61,7 +61,8 @@ class CacheServiceImpl internal constructor(private val clientOptions: ClientOpt
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         CacheService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         private val redis: RediService.WithRawResponse by lazy {
             RediServiceImpl.WithRawResponseImpl(clientOptions)
@@ -76,7 +77,6 @@ class CacheServiceImpl internal constructor(private val clientOptions: ClientOpt
 
         private val deleteHandler: Handler<CacheDeleteResponse> =
             jsonHandler<CacheDeleteResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun delete(
             params: CacheDeleteParams,
@@ -92,7 +92,7 @@ class CacheServiceImpl internal constructor(private val clientOptions: ClientOpt
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { deleteHandler.handle(it) }
                     .also {
@@ -105,7 +105,6 @@ class CacheServiceImpl internal constructor(private val clientOptions: ClientOpt
 
         private val flushAllHandler: Handler<CacheFlushAllResponse> =
             jsonHandler<CacheFlushAllResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun flushAll(
             params: CacheFlushAllParams,
@@ -121,7 +120,7 @@ class CacheServiceImpl internal constructor(private val clientOptions: ClientOpt
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { flushAllHandler.handle(it) }
                     .also {
@@ -133,7 +132,7 @@ class CacheServiceImpl internal constructor(private val clientOptions: ClientOpt
         }
 
         private val pingHandler: Handler<CachePingResponse> =
-            jsonHandler<CachePingResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<CachePingResponse>(clientOptions.jsonMapper)
 
         override fun ping(
             params: CachePingParams,
@@ -148,7 +147,7 @@ class CacheServiceImpl internal constructor(private val clientOptions: ClientOpt
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { pingHandler.handle(it) }
                     .also {

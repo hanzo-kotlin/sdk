@@ -46,7 +46,7 @@ interface SpendServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListTagsResponse>
 
-    /** @see [listTags] */
+    /** @see listTags */
     suspend fun listTags(requestOptions: RequestOptions): List<SpendListTagsResponse> =
         listTags(SpendListTagsParams.none(), requestOptions)
 
@@ -63,7 +63,7 @@ interface SpendServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SpendResetResponse
 
-    /** @see [reset] */
+    /** @see reset */
     suspend fun reset(requestOptions: RequestOptions): SpendResetResponse =
         reset(SpendResetParams.none(), requestOptions)
 
@@ -78,7 +78,7 @@ interface SpendServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendRetrieveReportResponse>
 
-    /** @see [retrieveReport] */
+    /** @see retrieveReport */
     suspend fun retrieveReport(requestOptions: RequestOptions): List<SpendRetrieveReportResponse> =
         retrieveReport(SpendRetrieveReportParams.none(), requestOptions)
 
@@ -104,7 +104,7 @@ interface SpendServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListTagsResponse>>
 
-        /** @see [listTags] */
+        /** @see listTags */
         @MustBeClosed
         suspend fun listTags(
             requestOptions: RequestOptions
@@ -121,7 +121,7 @@ interface SpendServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SpendResetResponse>
 
-        /** @see [reset] */
+        /** @see reset */
         @MustBeClosed
         suspend fun reset(requestOptions: RequestOptions): HttpResponseFor<SpendResetResponse> =
             reset(SpendResetParams.none(), requestOptions)
@@ -136,7 +136,7 @@ interface SpendServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendRetrieveReportResponse>>
 
-        /** @see [retrieveReport] */
+        /** @see retrieveReport */
         @MustBeClosed
         suspend fun retrieveReport(
             requestOptions: RequestOptions
