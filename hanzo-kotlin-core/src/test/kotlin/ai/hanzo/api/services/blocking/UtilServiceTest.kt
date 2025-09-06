@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class UtilServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun getSupportedOpenAIParams() {
         val client =
@@ -33,7 +33,7 @@ internal class UtilServiceTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun tokenCounter() {
         val client =
@@ -55,7 +55,7 @@ internal class UtilServiceTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun transformRequest() {
         val client =

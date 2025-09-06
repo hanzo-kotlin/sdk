@@ -113,7 +113,7 @@ interface KeyServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): KeyListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): KeyListResponse =
         list(KeyListParams.none(), requestOptions)
 
@@ -144,7 +144,7 @@ interface KeyServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): KeyDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(requestOptions: RequestOptions): KeyDeleteResponse =
         delete(KeyDeleteParams.none(), requestOptions)
 
@@ -212,7 +212,7 @@ interface KeyServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): KeyCheckHealthResponse
 
-    /** @see [checkHealth] */
+    /** @see checkHealth */
     suspend fun checkHealth(requestOptions: RequestOptions): KeyCheckHealthResponse =
         checkHealth(KeyCheckHealthParams.none(), requestOptions)
 
@@ -296,7 +296,7 @@ interface KeyServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GenerateKeyResponse
 
-    /** @see [generate] */
+    /** @see generate */
     suspend fun generate(requestOptions: RequestOptions): GenerateKeyResponse =
         generate(KeyGenerateParams.none(), requestOptions)
 
@@ -355,13 +355,13 @@ interface KeyServiceAsync {
     ): GenerateKeyResponse? =
         regenerateByKey(params.toBuilder().pathKey(pathKey).build(), requestOptions)
 
-    /** @see [regenerateByKey] */
+    /** @see regenerateByKey */
     suspend fun regenerateByKey(
         params: KeyRegenerateByKeyParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GenerateKeyResponse?
 
-    /** @see [regenerateByKey] */
+    /** @see regenerateByKey */
     suspend fun regenerateByKey(
         pathKey: String,
         requestOptions: RequestOptions,
@@ -390,7 +390,7 @@ interface KeyServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): KeyRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     suspend fun retrieveInfo(requestOptions: RequestOptions): KeyRetrieveInfoResponse =
         retrieveInfo(KeyRetrieveInfoParams.none(), requestOptions)
 
@@ -447,7 +447,7 @@ interface KeyServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<KeyListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<KeyListResponse> =
             list(KeyListParams.none(), requestOptions)
@@ -462,7 +462,7 @@ interface KeyServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<KeyDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(requestOptions: RequestOptions): HttpResponseFor<KeyDeleteResponse> =
             delete(KeyDeleteParams.none(), requestOptions)
@@ -487,7 +487,7 @@ interface KeyServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<KeyCheckHealthResponse>
 
-        /** @see [checkHealth] */
+        /** @see checkHealth */
         @MustBeClosed
         suspend fun checkHealth(
             requestOptions: RequestOptions
@@ -504,7 +504,7 @@ interface KeyServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GenerateKeyResponse>
 
-        /** @see [generate] */
+        /** @see generate */
         @MustBeClosed
         suspend fun generate(requestOptions: RequestOptions): HttpResponseFor<GenerateKeyResponse> =
             generate(KeyGenerateParams.none(), requestOptions)
@@ -521,14 +521,14 @@ interface KeyServiceAsync {
         ): HttpResponseFor<GenerateKeyResponse?> =
             regenerateByKey(params.toBuilder().pathKey(pathKey).build(), requestOptions)
 
-        /** @see [regenerateByKey] */
+        /** @see regenerateByKey */
         @MustBeClosed
         suspend fun regenerateByKey(
             params: KeyRegenerateByKeyParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GenerateKeyResponse?>
 
-        /** @see [regenerateByKey] */
+        /** @see regenerateByKey */
         @MustBeClosed
         suspend fun regenerateByKey(
             pathKey: String,
@@ -546,7 +546,7 @@ interface KeyServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<KeyRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         suspend fun retrieveInfo(
             requestOptions: RequestOptions

@@ -68,7 +68,7 @@ interface JobService {
     ): JobRetrieveResponse =
         retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(
         params: JobRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -122,7 +122,7 @@ interface JobService {
         ): HttpResponseFor<JobRetrieveResponse> =
             retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             params: JobRetrieveParams,

@@ -4,12 +4,10 @@ package ai.hanzo.api.models.credentials
 
 import ai.hanzo.api.core.JsonValue
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class CredentialCreateParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         CredentialCreateParams.builder()
@@ -20,7 +18,6 @@ internal class CredentialCreateParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -39,7 +36,6 @@ internal class CredentialCreateParamsTest {
         assertThat(body.modelId()).isEqualTo("model_id")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params =

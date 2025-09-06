@@ -3,13 +3,13 @@
 package ai.hanzo.api.services.async
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.parseable
@@ -75,7 +75,8 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         HealthServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         override fun withOptions(
             modifier: (ClientOptions.Builder) -> Unit
@@ -86,7 +87,6 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val checkAllHandler: Handler<HealthCheckAllResponse> =
             jsonHandler<HealthCheckAllResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun checkAll(
             params: HealthCheckAllParams,
@@ -101,7 +101,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { checkAllHandler.handle(it) }
                     .also {
@@ -114,7 +114,6 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val checkLivelinessHandler: Handler<HealthCheckLivelinessResponse> =
             jsonHandler<HealthCheckLivelinessResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun checkLiveliness(
             params: HealthCheckLivelinessParams,
@@ -129,7 +128,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { checkLivelinessHandler.handle(it) }
                     .also {
@@ -142,7 +141,6 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val checkLivenessHandler: Handler<HealthCheckLivenessResponse> =
             jsonHandler<HealthCheckLivenessResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun checkLiveness(
             params: HealthCheckLivenessParams,
@@ -157,7 +155,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { checkLivenessHandler.handle(it) }
                     .also {
@@ -170,7 +168,6 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val checkReadinessHandler: Handler<HealthCheckReadinessResponse> =
             jsonHandler<HealthCheckReadinessResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun checkReadiness(
             params: HealthCheckReadinessParams,
@@ -185,7 +182,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { checkReadinessHandler.handle(it) }
                     .also {
@@ -198,7 +195,6 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
 
         private val checkServicesHandler: Handler<HealthCheckServicesResponse> =
             jsonHandler<HealthCheckServicesResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun checkServices(
             params: HealthCheckServicesParams,
@@ -213,7 +209,7 @@ class HealthServiceAsyncImpl internal constructor(private val clientOptions: Cli
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { checkServicesHandler.handle(it) }
                     .also {

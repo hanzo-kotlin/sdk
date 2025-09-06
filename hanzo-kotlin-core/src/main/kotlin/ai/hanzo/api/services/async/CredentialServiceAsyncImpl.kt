@@ -3,14 +3,14 @@
 package ai.hanzo.api.services.async
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -59,7 +59,8 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         CredentialServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         override fun withOptions(
             modifier: (ClientOptions.Builder) -> Unit
@@ -70,7 +71,6 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
 
         private val createHandler: Handler<CredentialCreateResponse> =
             jsonHandler<CredentialCreateResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun create(
             params: CredentialCreateParams,
@@ -86,7 +86,7 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -99,7 +99,6 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
 
         private val listHandler: Handler<CredentialListResponse> =
             jsonHandler<CredentialListResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun list(
             params: CredentialListParams,
@@ -114,7 +113,7 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listHandler.handle(it) }
                     .also {
@@ -127,7 +126,6 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
 
         private val deleteHandler: Handler<CredentialDeleteResponse> =
             jsonHandler<CredentialDeleteResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun delete(
             params: CredentialDeleteParams,
@@ -146,7 +144,7 @@ class CredentialServiceAsyncImpl internal constructor(private val clientOptions:
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { deleteHandler.handle(it) }
                     .also {

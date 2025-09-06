@@ -14,6 +14,7 @@ import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.getOrThrow
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
+import ai.hanzo.api.core.toImmutable
 import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
@@ -92,8 +93,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -556,12 +559,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && member == other.member && teamId == other.teamId && maxBudgetInTeam == other.maxBudgetInTeam && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                member == other.member &&
+                teamId == other.teamId &&
+                maxBudgetInTeam == other.maxBudgetInTeam &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(member, teamId, maxBudgetInTeam, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(member, teamId, maxBudgetInTeam, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -651,10 +658,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Member && members == other.members && member == other.member /* spotless:on */
+            return other is Member && members == other.members && member == other.member
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(members, member) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(members, member)
 
         override fun toString(): String =
             when {
@@ -666,7 +673,7 @@ private constructor(
 
         companion object {
 
-            fun ofMembers(members: List<Member>) = Member(members = members)
+            fun ofMembers(members: List<Member>) = Member(members = members.toImmutable())
 
             fun ofMember(member: Member) = Member(member = member)
         }
@@ -745,10 +752,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TeamAddMemberParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TeamAddMemberParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TeamAddMemberParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -51,7 +51,7 @@ interface ActiveServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ActiveListCallbacksResponse
 
-    /** @see [listCallbacks] */
+    /** @see listCallbacks */
     suspend fun listCallbacks(requestOptions: RequestOptions): ActiveListCallbacksResponse =
         listCallbacks(ActiveListCallbacksParams.none(), requestOptions)
 
@@ -79,7 +79,7 @@ interface ActiveServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ActiveListCallbacksResponse>
 
-        /** @see [listCallbacks] */
+        /** @see listCallbacks */
         @MustBeClosed
         suspend fun listCallbacks(
             requestOptions: RequestOptions

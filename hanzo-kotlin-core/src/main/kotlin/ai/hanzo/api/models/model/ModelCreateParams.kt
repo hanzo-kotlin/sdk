@@ -82,8 +82,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -527,12 +529,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && llmParams == other.llmParams && modelInfo == other.modelInfo && modelName == other.modelName && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                llmParams == other.llmParams &&
+                modelInfo == other.modelInfo &&
+                modelName == other.modelName &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(llmParams, modelInfo, modelName, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(llmParams, modelInfo, modelName, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2029,10 +2035,12 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is ConfigurableClientsideAuthParam && string == other.string && paramsCustomAuth == other.paramsCustomAuth /* spotless:on */
+                return other is ConfigurableClientsideAuthParam &&
+                    string == other.string &&
+                    paramsCustomAuth == other.paramsCustomAuth
             }
 
-            override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, paramsCustomAuth) /* spotless:on */
+            override fun hashCode(): Int = Objects.hash(string, paramsCustomAuth)
 
             override fun toString(): String =
                 when {
@@ -2222,10 +2230,10 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is StreamTimeout && double == other.double && string == other.string /* spotless:on */
+                return other is StreamTimeout && double == other.double && string == other.string
             }
 
-            override fun hashCode(): Int = /* spotless:off */ Objects.hash(double, string) /* spotless:on */
+            override fun hashCode(): Int = Objects.hash(double, string)
 
             override fun toString(): String =
                 when {
@@ -2391,10 +2399,10 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is Timeout && double == other.double && string == other.string /* spotless:on */
+                return other is Timeout && double == other.double && string == other.string
             }
 
-            override fun hashCode(): Int = /* spotless:off */ Objects.hash(double, string) /* spotless:on */
+            override fun hashCode(): Int = Objects.hash(double, string)
 
             override fun toString(): String =
                 when {
@@ -2560,10 +2568,12 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is VertexCredentials && jsonValue == other.jsonValue && string == other.string /* spotless:on */
+                return other is VertexCredentials &&
+                    jsonValue == other.jsonValue &&
+                    string == other.string
             }
 
-            override fun hashCode(): Int = /* spotless:off */ Objects.hash(jsonValue, string) /* spotless:on */
+            override fun hashCode(): Int = Objects.hash(jsonValue, string)
 
             override fun toString(): String =
                 when {
@@ -2659,12 +2669,77 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is LlmParams && model == other.model && apiBase == other.apiBase && apiKey == other.apiKey && apiVersion == other.apiVersion && awsAccessKeyId == other.awsAccessKeyId && awsRegionName == other.awsRegionName && awsSecretAccessKey == other.awsSecretAccessKey && budgetDuration == other.budgetDuration && configurableClientsideAuthParams == other.configurableClientsideAuthParams && customLlmProvider == other.customLlmProvider && inputCostPerSecond == other.inputCostPerSecond && inputCostPerToken == other.inputCostPerToken && llmTraceId == other.llmTraceId && maxBudget == other.maxBudget && maxFileSizeMb == other.maxFileSizeMb && maxRetries == other.maxRetries && mergeReasoningContentInChoices == other.mergeReasoningContentInChoices && modelInfo == other.modelInfo && organization == other.organization && outputCostPerSecond == other.outputCostPerSecond && outputCostPerToken == other.outputCostPerToken && regionName == other.regionName && rpm == other.rpm && streamTimeout == other.streamTimeout && timeout == other.timeout && tpm == other.tpm && useInPassThrough == other.useInPassThrough && vertexCredentials == other.vertexCredentials && vertexLocation == other.vertexLocation && vertexProject == other.vertexProject && watsonxRegionName == other.watsonxRegionName && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is LlmParams &&
+                model == other.model &&
+                apiBase == other.apiBase &&
+                apiKey == other.apiKey &&
+                apiVersion == other.apiVersion &&
+                awsAccessKeyId == other.awsAccessKeyId &&
+                awsRegionName == other.awsRegionName &&
+                awsSecretAccessKey == other.awsSecretAccessKey &&
+                budgetDuration == other.budgetDuration &&
+                configurableClientsideAuthParams == other.configurableClientsideAuthParams &&
+                customLlmProvider == other.customLlmProvider &&
+                inputCostPerSecond == other.inputCostPerSecond &&
+                inputCostPerToken == other.inputCostPerToken &&
+                llmTraceId == other.llmTraceId &&
+                maxBudget == other.maxBudget &&
+                maxFileSizeMb == other.maxFileSizeMb &&
+                maxRetries == other.maxRetries &&
+                mergeReasoningContentInChoices == other.mergeReasoningContentInChoices &&
+                modelInfo == other.modelInfo &&
+                organization == other.organization &&
+                outputCostPerSecond == other.outputCostPerSecond &&
+                outputCostPerToken == other.outputCostPerToken &&
+                regionName == other.regionName &&
+                rpm == other.rpm &&
+                streamTimeout == other.streamTimeout &&
+                timeout == other.timeout &&
+                tpm == other.tpm &&
+                useInPassThrough == other.useInPassThrough &&
+                vertexCredentials == other.vertexCredentials &&
+                vertexLocation == other.vertexLocation &&
+                vertexProject == other.vertexProject &&
+                watsonxRegionName == other.watsonxRegionName &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(model, apiBase, apiKey, apiVersion, awsAccessKeyId, awsRegionName, awsSecretAccessKey, budgetDuration, configurableClientsideAuthParams, customLlmProvider, inputCostPerSecond, inputCostPerToken, llmTraceId, maxBudget, maxFileSizeMb, maxRetries, mergeReasoningContentInChoices, modelInfo, organization, outputCostPerSecond, outputCostPerToken, regionName, rpm, streamTimeout, timeout, tpm, useInPassThrough, vertexCredentials, vertexLocation, vertexProject, watsonxRegionName, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                model,
+                apiBase,
+                apiKey,
+                apiVersion,
+                awsAccessKeyId,
+                awsRegionName,
+                awsSecretAccessKey,
+                budgetDuration,
+                configurableClientsideAuthParams,
+                customLlmProvider,
+                inputCostPerSecond,
+                inputCostPerToken,
+                llmTraceId,
+                maxBudget,
+                maxFileSizeMb,
+                maxRetries,
+                mergeReasoningContentInChoices,
+                modelInfo,
+                organization,
+                outputCostPerSecond,
+                outputCostPerToken,
+                regionName,
+                rpm,
+                streamTimeout,
+                timeout,
+                tpm,
+                useInPassThrough,
+                vertexCredentials,
+                vertexLocation,
+                vertexProject,
+                watsonxRegionName,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2677,10 +2752,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ModelCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is ModelCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "ModelCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

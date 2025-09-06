@@ -34,13 +34,13 @@ interface RunService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RunCreateResponse = create(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     fun create(
         params: RunCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RunCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(threadId: String, requestOptions: RequestOptions): RunCreateResponse =
         create(threadId, RunCreateParams.none(), requestOptions)
 
@@ -66,14 +66,14 @@ interface RunService {
         ): HttpResponseFor<RunCreateResponse> =
             create(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             params: RunCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RunCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             threadId: String,

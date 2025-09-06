@@ -5,12 +5,10 @@ package ai.hanzo.api.models.model
 import ai.hanzo.api.core.JsonValue
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class ModelCreateParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         ModelCreateParams.builder()
@@ -67,7 +65,6 @@ internal class ModelCreateParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -180,7 +177,6 @@ internal class ModelCreateParamsTest {
         assertThat(body.modelName()).isEqualTo("model_name")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params =

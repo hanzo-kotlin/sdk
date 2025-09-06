@@ -280,8 +280,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -1411,12 +1413,47 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && admins == other.admins && blocked == other.blocked && budgetDuration == other.budgetDuration && guardrails == other.guardrails && maxBudget == other.maxBudget && members == other.members && membersWithRoles == other.membersWithRoles && metadata == other.metadata && modelAliases == other.modelAliases && models == other.models && organizationId == other.organizationId && rpmLimit == other.rpmLimit && tags == other.tags && teamAlias == other.teamAlias && teamId == other.teamId && tpmLimit == other.tpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                admins == other.admins &&
+                blocked == other.blocked &&
+                budgetDuration == other.budgetDuration &&
+                guardrails == other.guardrails &&
+                maxBudget == other.maxBudget &&
+                members == other.members &&
+                membersWithRoles == other.membersWithRoles &&
+                metadata == other.metadata &&
+                modelAliases == other.modelAliases &&
+                models == other.models &&
+                organizationId == other.organizationId &&
+                rpmLimit == other.rpmLimit &&
+                tags == other.tags &&
+                teamAlias == other.teamAlias &&
+                teamId == other.teamId &&
+                tpmLimit == other.tpmLimit &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(admins, blocked, budgetDuration, guardrails, maxBudget, members, membersWithRoles, metadata, modelAliases, models, organizationId, rpmLimit, tags, teamAlias, teamId, tpmLimit, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                admins,
+                blocked,
+                budgetDuration,
+                guardrails,
+                maxBudget,
+                members,
+                membersWithRoles,
+                metadata,
+                modelAliases,
+                models,
+                organizationId,
+                rpmLimit,
+                tags,
+                teamAlias,
+                teamId,
+                tpmLimit,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1429,10 +1466,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TeamCreateParams && llmChangedBy == other.llmChangedBy && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TeamCreateParams &&
+            llmChangedBy == other.llmChangedBy &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(llmChangedBy, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(llmChangedBy, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TeamCreateParams{llmChangedBy=$llmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

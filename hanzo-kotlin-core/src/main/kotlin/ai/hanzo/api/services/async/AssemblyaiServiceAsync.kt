@@ -39,13 +39,13 @@ interface AssemblyaiServiceAsync {
     ): AssemblyaiCreateResponse =
         create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: AssemblyaiCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(endpoint: String, requestOptions: RequestOptions): AssemblyaiCreateResponse =
         create(endpoint, AssemblyaiCreateParams.none(), requestOptions)
 
@@ -57,13 +57,13 @@ interface AssemblyaiServiceAsync {
     ): AssemblyaiRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: AssemblyaiRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         endpoint: String,
         requestOptions: RequestOptions,
@@ -78,13 +78,13 @@ interface AssemblyaiServiceAsync {
     ): AssemblyaiUpdateResponse =
         update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(
         params: AssemblyaiUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(endpoint: String, requestOptions: RequestOptions): AssemblyaiUpdateResponse =
         update(endpoint, AssemblyaiUpdateParams.none(), requestOptions)
 
@@ -96,13 +96,13 @@ interface AssemblyaiServiceAsync {
     ): AssemblyaiDeleteResponse =
         delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: AssemblyaiDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): AssemblyaiDeleteResponse =
         delete(endpoint, AssemblyaiDeleteParams.none(), requestOptions)
 
@@ -114,13 +114,13 @@ interface AssemblyaiServiceAsync {
     ): AssemblyaiPatchResponse =
         patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(
         params: AssemblyaiPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiPatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(endpoint: String, requestOptions: RequestOptions): AssemblyaiPatchResponse =
         patch(endpoint, AssemblyaiPatchParams.none(), requestOptions)
 
@@ -151,14 +151,14 @@ interface AssemblyaiServiceAsync {
         ): HttpResponseFor<AssemblyaiCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: AssemblyaiCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             endpoint: String,
@@ -178,14 +178,14 @@ interface AssemblyaiServiceAsync {
         ): HttpResponseFor<AssemblyaiRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: AssemblyaiRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             endpoint: String,
@@ -205,14 +205,14 @@ interface AssemblyaiServiceAsync {
         ): HttpResponseFor<AssemblyaiUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: AssemblyaiUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             endpoint: String,
@@ -232,14 +232,14 @@ interface AssemblyaiServiceAsync {
         ): HttpResponseFor<AssemblyaiDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: AssemblyaiDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             endpoint: String,
@@ -259,14 +259,14 @@ interface AssemblyaiServiceAsync {
         ): HttpResponseFor<AssemblyaiPatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             params: AssemblyaiPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiPatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             endpoint: String,

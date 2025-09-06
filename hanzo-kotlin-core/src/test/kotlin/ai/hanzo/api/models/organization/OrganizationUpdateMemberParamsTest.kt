@@ -3,12 +3,10 @@
 package ai.hanzo.api.models.organization
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class OrganizationUpdateMemberParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         OrganizationUpdateMemberParams.builder()
@@ -20,7 +18,6 @@ internal class OrganizationUpdateMemberParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -41,7 +38,6 @@ internal class OrganizationUpdateMemberParamsTest {
         assertThat(body.userId()).isEqualTo("user_id")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params =

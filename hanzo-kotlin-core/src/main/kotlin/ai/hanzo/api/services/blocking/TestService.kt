@@ -37,7 +37,7 @@ interface TestService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TestPingResponse
 
-    /** @see [ping] */
+    /** @see ping */
     fun ping(requestOptions: RequestOptions): TestPingResponse =
         ping(TestPingParams.none(), requestOptions)
 
@@ -61,7 +61,7 @@ interface TestService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TestPingResponse>
 
-        /** @see [ping] */
+        /** @see ping */
         @MustBeClosed
         fun ping(requestOptions: RequestOptions): HttpResponseFor<TestPingResponse> =
             ping(TestPingParams.none(), requestOptions)

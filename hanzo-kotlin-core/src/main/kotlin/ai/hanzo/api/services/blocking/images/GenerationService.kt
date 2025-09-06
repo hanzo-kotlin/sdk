@@ -29,7 +29,7 @@ interface GenerationService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GenerationCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): GenerationCreateResponse =
         create(GenerationCreateParams.none(), requestOptions)
 
@@ -55,7 +55,7 @@ interface GenerationService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GenerationCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<GenerationCreateResponse> =
             create(GenerationCreateParams.none(), requestOptions)

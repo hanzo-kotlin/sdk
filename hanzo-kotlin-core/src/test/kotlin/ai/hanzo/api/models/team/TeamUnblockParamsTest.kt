@@ -3,12 +3,10 @@
 package ai.hanzo.api.models.team
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class TeamUnblockParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         TeamUnblockParams.builder()
@@ -16,7 +14,6 @@ internal class TeamUnblockParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =

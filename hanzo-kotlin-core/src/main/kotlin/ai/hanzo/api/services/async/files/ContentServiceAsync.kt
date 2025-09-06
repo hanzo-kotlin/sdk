@@ -43,7 +43,7 @@ interface ContentServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ContentRetrieveResponse = retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: ContentRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -75,7 +75,7 @@ interface ContentServiceAsync {
         ): HttpResponseFor<ContentRetrieveResponse> =
             retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: ContentRetrieveParams,

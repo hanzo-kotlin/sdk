@@ -51,7 +51,7 @@ interface SettingService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SettingRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(requestOptions: RequestOptions): SettingRetrieveResponse =
         retrieve(SettingRetrieveParams.none(), requestOptions)
 
@@ -75,7 +75,7 @@ interface SettingService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SettingRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(requestOptions: RequestOptions): HttpResponseFor<SettingRetrieveResponse> =
             retrieve(SettingRetrieveParams.none(), requestOptions)

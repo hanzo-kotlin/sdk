@@ -42,13 +42,13 @@ interface PassThroughEndpointService {
     ): PassThroughEndpointUpdateResponse =
         update(params.toBuilder().endpointId(endpointId).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     fun update(
         params: PassThroughEndpointUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): PassThroughEndpointUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     fun update(
         endpointId: String,
         requestOptions: RequestOptions,
@@ -65,7 +65,7 @@ interface PassThroughEndpointService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): PassThroughEndpointResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): PassThroughEndpointResponse =
         list(PassThroughEndpointListParams.none(), requestOptions)
 
@@ -116,14 +116,14 @@ interface PassThroughEndpointService {
         ): HttpResponseFor<PassThroughEndpointUpdateResponse> =
             update(params.toBuilder().endpointId(endpointId).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             params: PassThroughEndpointUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<PassThroughEndpointUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             endpointId: String,
@@ -141,7 +141,7 @@ interface PassThroughEndpointService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<PassThroughEndpointResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<PassThroughEndpointResponse> =
             list(PassThroughEndpointListParams.none(), requestOptions)

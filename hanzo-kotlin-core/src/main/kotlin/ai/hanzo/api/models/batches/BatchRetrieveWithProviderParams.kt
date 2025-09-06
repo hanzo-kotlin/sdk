@@ -31,8 +31,10 @@ private constructor(
     /** The ID of the batch to retrieve */
     fun batchId(): String? = batchId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -208,10 +210,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BatchRetrieveWithProviderParams && provider == other.provider && batchId == other.batchId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BatchRetrieveWithProviderParams &&
+            provider == other.provider &&
+            batchId == other.batchId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(provider, batchId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(provider, batchId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "BatchRetrieveWithProviderParams{provider=$provider, batchId=$batchId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

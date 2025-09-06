@@ -6,12 +6,10 @@ import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.http.Headers
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class KeyUpdateParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         KeyUpdateParams.builder()
@@ -46,7 +44,6 @@ internal class KeyUpdateParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun headers() {
         val params =
@@ -87,7 +84,6 @@ internal class KeyUpdateParamsTest {
             .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun headersWithoutOptionalFields() {
         val params = KeyUpdateParams.builder().key("key").build()
@@ -97,7 +93,6 @@ internal class KeyUpdateParamsTest {
         assertThat(headers).isEqualTo(Headers.builder().build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -165,7 +160,6 @@ internal class KeyUpdateParamsTest {
         assertThat(body.userId()).isEqualTo("user_id")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params = KeyUpdateParams.builder().key("key").build()

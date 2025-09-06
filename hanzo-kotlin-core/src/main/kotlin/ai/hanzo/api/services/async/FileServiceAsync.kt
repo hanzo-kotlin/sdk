@@ -51,7 +51,7 @@ interface FileServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): FileCreateResponse = create(params.toBuilder().provider(provider).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: FileCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -76,7 +76,7 @@ interface FileServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): FileRetrieveResponse = retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: FileRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -101,13 +101,13 @@ interface FileServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): FileListResponse = list(params.toBuilder().provider(provider).build(), requestOptions)
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(
         params: FileListParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): FileListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(provider: String, requestOptions: RequestOptions): FileListResponse =
         list(provider, FileListParams.none(), requestOptions)
 
@@ -130,7 +130,7 @@ interface FileServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): FileDeleteResponse = delete(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: FileDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -160,7 +160,7 @@ interface FileServiceAsync {
         ): HttpResponseFor<FileCreateResponse> =
             create(params.toBuilder().provider(provider).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: FileCreateParams,
@@ -179,7 +179,7 @@ interface FileServiceAsync {
         ): HttpResponseFor<FileRetrieveResponse> =
             retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: FileRetrieveParams,
@@ -198,14 +198,14 @@ interface FileServiceAsync {
         ): HttpResponseFor<FileListResponse> =
             list(params.toBuilder().provider(provider).build(), requestOptions)
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             params: FileListParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<FileListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             provider: String,
@@ -224,7 +224,7 @@ interface FileServiceAsync {
         ): HttpResponseFor<FileDeleteResponse> =
             delete(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: FileDeleteParams,

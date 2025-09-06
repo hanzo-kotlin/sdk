@@ -62,7 +62,7 @@ interface GuardrailService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GuardrailListResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): GuardrailListResponse =
         list(GuardrailListParams.none(), requestOptions)
 
@@ -86,7 +86,7 @@ interface GuardrailService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GuardrailListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<GuardrailListResponse> =
             list(GuardrailListParams.none(), requestOptions)

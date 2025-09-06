@@ -9,7 +9,7 @@ dependencies {
 
 application {
     // Use `./gradlew :hanzo-kotlin-example:run` to run `Main`
-    // Use `./gradlew :hanzo-kotlin-example:run -Dexample=Something` to run `SomethingExample`
+    // Use `./gradlew :hanzo-kotlin-example:run -Pexample=Something` to run `SomethingExample`
     mainClass = "ai.hanzo.api.example.${
         if (project.hasProperty("example"))
             "${project.property("example")}ExampleKt"

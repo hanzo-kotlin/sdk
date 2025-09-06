@@ -110,7 +110,7 @@ interface UserServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): UserCreateResponse =
         create(UserCreateParams.none(), requestOptions)
 
@@ -169,7 +169,7 @@ interface UserServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(requestOptions: RequestOptions): UserUpdateResponse =
         update(UserUpdateParams.none(), requestOptions)
 
@@ -195,7 +195,7 @@ interface UserServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): UserListResponse =
         list(UserListParams.none(), requestOptions)
 
@@ -235,7 +235,7 @@ interface UserServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UserRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     suspend fun retrieveInfo(requestOptions: RequestOptions): UserRetrieveInfoResponse =
         retrieveInfo(UserRetrieveInfoParams.none(), requestOptions)
 
@@ -259,7 +259,7 @@ interface UserServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(requestOptions: RequestOptions): HttpResponseFor<UserCreateResponse> =
             create(UserCreateParams.none(), requestOptions)
@@ -274,7 +274,7 @@ interface UserServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(requestOptions: RequestOptions): HttpResponseFor<UserUpdateResponse> =
             update(UserUpdateParams.none(), requestOptions)
@@ -289,7 +289,7 @@ interface UserServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<UserListResponse> =
             list(UserListParams.none(), requestOptions)
@@ -314,7 +314,7 @@ interface UserServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UserRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         suspend fun retrieveInfo(
             requestOptions: RequestOptions

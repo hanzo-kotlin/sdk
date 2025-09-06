@@ -51,7 +51,7 @@ interface SettingServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SettingRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(requestOptions: RequestOptions): SettingRetrieveResponse =
         retrieve(SettingRetrieveParams.none(), requestOptions)
 
@@ -79,7 +79,7 @@ interface SettingServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SettingRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             requestOptions: RequestOptions

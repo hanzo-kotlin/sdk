@@ -195,12 +195,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CredentialItem && credentialInfo == other.credentialInfo && credentialName == other.credentialName && credentialValues == other.credentialValues && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is CredentialItem &&
+            credentialInfo == other.credentialInfo &&
+            credentialName == other.credentialName &&
+            credentialValues == other.credentialValues &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(credentialInfo, credentialName, credentialValues, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(credentialInfo, credentialName, credentialValues, additionalProperties)
+    }
 
     override fun hashCode(): Int = hashCode
 

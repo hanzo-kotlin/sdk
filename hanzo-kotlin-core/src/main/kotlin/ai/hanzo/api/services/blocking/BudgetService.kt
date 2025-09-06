@@ -81,7 +81,7 @@ interface BudgetService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BudgetListResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): BudgetListResponse =
         list(BudgetListParams.none(), requestOptions)
 
@@ -160,7 +160,7 @@ interface BudgetService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BudgetListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<BudgetListResponse> =
             list(BudgetListParams.none(), requestOptions)

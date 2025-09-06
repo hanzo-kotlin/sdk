@@ -30,8 +30,10 @@ private constructor(
     /** Specify the service being hit. */
     fun service(): Service = service
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -354,7 +356,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Service && value == other.value /* spotless:on */
+            return other is Service && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -367,10 +369,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HealthCheckServicesParams && service == other.service && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HealthCheckServicesParams &&
+            service == other.service &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "HealthCheckServicesParams{service=$service, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

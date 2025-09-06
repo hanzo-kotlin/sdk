@@ -263,8 +263,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -1291,12 +1293,41 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && userId == other.userId && alias == other.alias && allowedModelRegion == other.allowedModelRegion && blocked == other.blocked && budgetDuration == other.budgetDuration && budgetId == other.budgetId && defaultModel == other.defaultModel && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && modelMaxBudget == other.modelMaxBudget && rpmLimit == other.rpmLimit && softBudget == other.softBudget && tpmLimit == other.tpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                userId == other.userId &&
+                alias == other.alias &&
+                allowedModelRegion == other.allowedModelRegion &&
+                blocked == other.blocked &&
+                budgetDuration == other.budgetDuration &&
+                budgetId == other.budgetId &&
+                defaultModel == other.defaultModel &&
+                maxBudget == other.maxBudget &&
+                maxParallelRequests == other.maxParallelRequests &&
+                modelMaxBudget == other.modelMaxBudget &&
+                rpmLimit == other.rpmLimit &&
+                softBudget == other.softBudget &&
+                tpmLimit == other.tpmLimit &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(userId, alias, allowedModelRegion, blocked, budgetDuration, budgetId, defaultModel, maxBudget, maxParallelRequests, modelMaxBudget, rpmLimit, softBudget, tpmLimit, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                userId,
+                alias,
+                allowedModelRegion,
+                blocked,
+                budgetDuration,
+                budgetId,
+                defaultModel,
+                maxBudget,
+                maxParallelRequests,
+                modelMaxBudget,
+                rpmLimit,
+                softBudget,
+                tpmLimit,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -1425,7 +1456,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is AllowedModelRegion && value == other.value /* spotless:on */
+            return other is AllowedModelRegion && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1524,12 +1555,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is ModelMaxBudget && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is ModelMaxBudget && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -1541,10 +1570,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CustomerCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CustomerCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CustomerCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

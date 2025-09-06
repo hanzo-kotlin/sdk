@@ -41,7 +41,7 @@ interface ThreadService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ThreadCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): ThreadCreateResponse =
         create(ThreadCreateParams.none(), requestOptions)
 
@@ -57,13 +57,13 @@ interface ThreadService {
     ): ThreadRetrieveResponse =
         retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(
         params: ThreadRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ThreadRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(threadId: String, requestOptions: RequestOptions): ThreadRetrieveResponse =
         retrieve(threadId, ThreadRetrieveParams.none(), requestOptions)
 
@@ -91,7 +91,7 @@ interface ThreadService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ThreadCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<ThreadCreateResponse> =
             create(ThreadCreateParams.none(), requestOptions)
@@ -108,14 +108,14 @@ interface ThreadService {
         ): HttpResponseFor<ThreadRetrieveResponse> =
             retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             params: ThreadRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ThreadRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             threadId: String,

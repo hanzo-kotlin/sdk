@@ -33,7 +33,7 @@ interface SpeechServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SpeechCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): SpeechCreateResponse =
         create(SpeechCreateParams.none(), requestOptions)
 
@@ -61,7 +61,7 @@ interface SpeechServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SpeechCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(requestOptions: RequestOptions): HttpResponseFor<SpeechCreateResponse> =
             create(SpeechCreateParams.none(), requestOptions)

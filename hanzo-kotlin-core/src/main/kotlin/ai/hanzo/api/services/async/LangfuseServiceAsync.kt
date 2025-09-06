@@ -43,13 +43,13 @@ interface LangfuseServiceAsync {
     ): LangfuseCreateResponse =
         create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: LangfuseCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): LangfuseCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(endpoint: String, requestOptions: RequestOptions): LangfuseCreateResponse =
         create(endpoint, LangfuseCreateParams.none(), requestOptions)
 
@@ -65,13 +65,13 @@ interface LangfuseServiceAsync {
     ): LangfuseRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: LangfuseRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): LangfuseRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         endpoint: String,
         requestOptions: RequestOptions,
@@ -89,13 +89,13 @@ interface LangfuseServiceAsync {
     ): LangfuseUpdateResponse =
         update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(
         params: LangfuseUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): LangfuseUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     suspend fun update(endpoint: String, requestOptions: RequestOptions): LangfuseUpdateResponse =
         update(endpoint, LangfuseUpdateParams.none(), requestOptions)
 
@@ -111,13 +111,13 @@ interface LangfuseServiceAsync {
     ): LangfuseDeleteResponse =
         delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(
         params: LangfuseDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): LangfuseDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): LangfuseDeleteResponse =
         delete(endpoint, LangfuseDeleteParams.none(), requestOptions)
 
@@ -132,13 +132,13 @@ interface LangfuseServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): LangfusePatchResponse = patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(
         params: LangfusePatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): LangfusePatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     suspend fun patch(endpoint: String, requestOptions: RequestOptions): LangfusePatchResponse =
         patch(endpoint, LangfusePatchParams.none(), requestOptions)
 
@@ -168,14 +168,14 @@ interface LangfuseServiceAsync {
         ): HttpResponseFor<LangfuseCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: LangfuseCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<LangfuseCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             endpoint: String,
@@ -195,14 +195,14 @@ interface LangfuseServiceAsync {
         ): HttpResponseFor<LangfuseRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: LangfuseRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<LangfuseRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             endpoint: String,
@@ -222,14 +222,14 @@ interface LangfuseServiceAsync {
         ): HttpResponseFor<LangfuseUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: LangfuseUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<LangfuseUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             endpoint: String,
@@ -249,14 +249,14 @@ interface LangfuseServiceAsync {
         ): HttpResponseFor<LangfuseDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             params: LangfuseDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<LangfuseDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(
             endpoint: String,
@@ -276,14 +276,14 @@ interface LangfuseServiceAsync {
         ): HttpResponseFor<LangfusePatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             params: LangfusePatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<LangfusePatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         suspend fun patch(
             endpoint: String,

@@ -39,13 +39,13 @@ interface EuAssemblyaiService {
     ): EuAssemblyaiCreateResponse =
         create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     fun create(
         params: EuAssemblyaiCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EuAssemblyaiCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(endpoint: String, requestOptions: RequestOptions): EuAssemblyaiCreateResponse =
         create(endpoint, EuAssemblyaiCreateParams.none(), requestOptions)
 
@@ -57,13 +57,13 @@ interface EuAssemblyaiService {
     ): EuAssemblyaiRetrieveResponse =
         retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(
         params: EuAssemblyaiRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EuAssemblyaiRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(endpoint: String, requestOptions: RequestOptions): EuAssemblyaiRetrieveResponse =
         retrieve(endpoint, EuAssemblyaiRetrieveParams.none(), requestOptions)
 
@@ -75,13 +75,13 @@ interface EuAssemblyaiService {
     ): EuAssemblyaiUpdateResponse =
         update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [update] */
+    /** @see update */
     fun update(
         params: EuAssemblyaiUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EuAssemblyaiUpdateResponse
 
-    /** @see [update] */
+    /** @see update */
     fun update(endpoint: String, requestOptions: RequestOptions): EuAssemblyaiUpdateResponse =
         update(endpoint, EuAssemblyaiUpdateParams.none(), requestOptions)
 
@@ -93,13 +93,13 @@ interface EuAssemblyaiService {
     ): EuAssemblyaiDeleteResponse =
         delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(
         params: EuAssemblyaiDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EuAssemblyaiDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     fun delete(endpoint: String, requestOptions: RequestOptions): EuAssemblyaiDeleteResponse =
         delete(endpoint, EuAssemblyaiDeleteParams.none(), requestOptions)
 
@@ -111,13 +111,13 @@ interface EuAssemblyaiService {
     ): EuAssemblyaiPatchResponse =
         patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-    /** @see [patch] */
+    /** @see patch */
     fun patch(
         params: EuAssemblyaiPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EuAssemblyaiPatchResponse
 
-    /** @see [patch] */
+    /** @see patch */
     fun patch(endpoint: String, requestOptions: RequestOptions): EuAssemblyaiPatchResponse =
         patch(endpoint, EuAssemblyaiPatchParams.none(), requestOptions)
 
@@ -147,14 +147,14 @@ interface EuAssemblyaiService {
         ): HttpResponseFor<EuAssemblyaiCreateResponse> =
             create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             params: EuAssemblyaiCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EuAssemblyaiCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(
             endpoint: String,
@@ -174,14 +174,14 @@ interface EuAssemblyaiService {
         ): HttpResponseFor<EuAssemblyaiRetrieveResponse> =
             retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             params: EuAssemblyaiRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EuAssemblyaiRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             endpoint: String,
@@ -201,14 +201,14 @@ interface EuAssemblyaiService {
         ): HttpResponseFor<EuAssemblyaiUpdateResponse> =
             update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             params: EuAssemblyaiUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EuAssemblyaiUpdateResponse>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
         fun update(
             endpoint: String,
@@ -228,14 +228,14 @@ interface EuAssemblyaiService {
         ): HttpResponseFor<EuAssemblyaiDeleteResponse> =
             delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             params: EuAssemblyaiDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EuAssemblyaiDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         fun delete(
             endpoint: String,
@@ -255,14 +255,14 @@ interface EuAssemblyaiService {
         ): HttpResponseFor<EuAssemblyaiPatchResponse> =
             patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         fun patch(
             params: EuAssemblyaiPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EuAssemblyaiPatchResponse>
 
-        /** @see [patch] */
+        /** @see patch */
         @MustBeClosed
         fun patch(
             endpoint: String,

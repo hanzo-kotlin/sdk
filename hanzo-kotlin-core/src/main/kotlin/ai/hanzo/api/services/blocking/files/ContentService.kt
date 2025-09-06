@@ -43,7 +43,7 @@ interface ContentService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ContentRetrieveResponse = retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     fun retrieve(
         params: ContentRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -71,7 +71,7 @@ interface ContentService {
         ): HttpResponseFor<ContentRetrieveResponse> =
             retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             params: ContentRetrieveParams,

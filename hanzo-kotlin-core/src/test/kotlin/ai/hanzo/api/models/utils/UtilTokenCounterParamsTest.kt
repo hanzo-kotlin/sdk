@@ -4,12 +4,10 @@ package ai.hanzo.api.models.utils
 
 import ai.hanzo.api.core.JsonValue
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class UtilTokenCounterParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         UtilTokenCounterParams.builder()
@@ -19,7 +17,6 @@ internal class UtilTokenCounterParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -36,7 +33,6 @@ internal class UtilTokenCounterParamsTest {
         assertThat(body.prompt()).isEqualTo("prompt")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params = UtilTokenCounterParams.builder().model("model").build()

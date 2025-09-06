@@ -58,7 +58,7 @@ interface BatchServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): BatchCreateResponse =
         create(BatchCreateParams.none(), requestOptions)
 
@@ -78,13 +78,13 @@ interface BatchServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchRetrieveResponse = retrieve(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: BatchRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(batchId: String, requestOptions: RequestOptions): BatchRetrieveResponse =
         retrieve(batchId, BatchRetrieveParams.none(), requestOptions)
 
@@ -103,7 +103,7 @@ interface BatchServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): BatchListResponse =
         list(BatchListParams.none(), requestOptions)
 
@@ -127,7 +127,7 @@ interface BatchServiceAsync {
     ): BatchCancelWithProviderResponse =
         cancelWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-    /** @see [cancelWithProvider] */
+    /** @see cancelWithProvider */
     suspend fun cancelWithProvider(
         params: BatchCancelWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -155,13 +155,13 @@ interface BatchServiceAsync {
     ): BatchCreateWithProviderResponse =
         createWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
 
-    /** @see [createWithProvider] */
+    /** @see createWithProvider */
     suspend fun createWithProvider(
         params: BatchCreateWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchCreateWithProviderResponse
 
-    /** @see [createWithProvider] */
+    /** @see createWithProvider */
     suspend fun createWithProvider(
         provider: String,
         requestOptions: RequestOptions,
@@ -185,13 +185,13 @@ interface BatchServiceAsync {
     ): BatchListWithProviderResponse =
         listWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
 
-    /** @see [listWithProvider] */
+    /** @see listWithProvider */
     suspend fun listWithProvider(
         params: BatchListWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BatchListWithProviderResponse
 
-    /** @see [listWithProvider] */
+    /** @see listWithProvider */
     suspend fun listWithProvider(
         provider: String,
         requestOptions: RequestOptions,
@@ -215,7 +215,7 @@ interface BatchServiceAsync {
     ): BatchRetrieveWithProviderResponse =
         retrieveWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-    /** @see [retrieveWithProvider] */
+    /** @see retrieveWithProvider */
     suspend fun retrieveWithProvider(
         params: BatchRetrieveWithProviderParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -245,7 +245,7 @@ interface BatchServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(requestOptions: RequestOptions): HttpResponseFor<BatchCreateResponse> =
             create(BatchCreateParams.none(), requestOptions)
@@ -262,14 +262,14 @@ interface BatchServiceAsync {
         ): HttpResponseFor<BatchRetrieveResponse> =
             retrieve(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: BatchRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             batchId: String,
@@ -287,7 +287,7 @@ interface BatchServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<BatchListResponse> =
             list(BatchListParams.none(), requestOptions)
@@ -304,7 +304,7 @@ interface BatchServiceAsync {
         ): HttpResponseFor<BatchCancelWithProviderResponse> =
             cancelWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-        /** @see [cancelWithProvider] */
+        /** @see cancelWithProvider */
         @MustBeClosed
         suspend fun cancelWithProvider(
             params: BatchCancelWithProviderParams,
@@ -323,14 +323,14 @@ interface BatchServiceAsync {
         ): HttpResponseFor<BatchCreateWithProviderResponse> =
             createWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
 
-        /** @see [createWithProvider] */
+        /** @see createWithProvider */
         @MustBeClosed
         suspend fun createWithProvider(
             params: BatchCreateWithProviderParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchCreateWithProviderResponse>
 
-        /** @see [createWithProvider] */
+        /** @see createWithProvider */
         @MustBeClosed
         suspend fun createWithProvider(
             provider: String,
@@ -350,14 +350,14 @@ interface BatchServiceAsync {
         ): HttpResponseFor<BatchListWithProviderResponse> =
             listWithProvider(params.toBuilder().provider(provider).build(), requestOptions)
 
-        /** @see [listWithProvider] */
+        /** @see listWithProvider */
         @MustBeClosed
         suspend fun listWithProvider(
             params: BatchListWithProviderParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BatchListWithProviderResponse>
 
-        /** @see [listWithProvider] */
+        /** @see listWithProvider */
         @MustBeClosed
         suspend fun listWithProvider(
             provider: String,
@@ -377,7 +377,7 @@ interface BatchServiceAsync {
         ): HttpResponseFor<BatchRetrieveWithProviderResponse> =
             retrieveWithProvider(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-        /** @see [retrieveWithProvider] */
+        /** @see retrieveWithProvider */
         @MustBeClosed
         suspend fun retrieveWithProvider(
             params: BatchRetrieveWithProviderParams,

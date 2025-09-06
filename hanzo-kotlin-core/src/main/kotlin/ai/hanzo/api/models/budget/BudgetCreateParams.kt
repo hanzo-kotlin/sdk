@@ -35,8 +35,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = budgetNew._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -198,10 +200,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BudgetCreateParams && budgetNew == other.budgetNew && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BudgetCreateParams &&
+            budgetNew == other.budgetNew &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(budgetNew, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(budgetNew, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "BudgetCreateParams{budgetNew=$budgetNew, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

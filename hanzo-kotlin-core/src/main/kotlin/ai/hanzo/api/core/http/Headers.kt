@@ -1,5 +1,15 @@
+// File generated from our OpenAPI spec by Stainless.
+
 package ai.hanzo.api.core.http
 
+import ai.hanzo.api.core.JsonArray
+import ai.hanzo.api.core.JsonBoolean
+import ai.hanzo.api.core.JsonMissing
+import ai.hanzo.api.core.JsonNull
+import ai.hanzo.api.core.JsonNumber
+import ai.hanzo.api.core.JsonObject
+import ai.hanzo.api.core.JsonString
+import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.toImmutable
 import java.util.TreeMap
 
@@ -23,6 +33,19 @@ class Headers private constructor(private val map: Map<String, List<String>>, va
         private val map: MutableMap<String, MutableList<String>> =
             TreeMap(String.CASE_INSENSITIVE_ORDER)
         private var size: Int = 0
+
+        fun put(name: String, value: JsonValue): Builder = apply {
+            when (value) {
+                is JsonMissing,
+                is JsonNull -> {}
+                is JsonBoolean -> put(name, value.value.toString())
+                is JsonNumber -> put(name, value.value.toString())
+                is JsonString -> put(name, value.value)
+                is JsonArray -> value.values.forEach { put(name, it) }
+                is JsonObject ->
+                    value.values.forEach { (nestedName, value) -> put("$name.$nestedName", value) }
+            }
+        }
 
         fun put(name: String, value: String) = apply {
             map.getOrPut(name) { mutableListOf() }.add(value)

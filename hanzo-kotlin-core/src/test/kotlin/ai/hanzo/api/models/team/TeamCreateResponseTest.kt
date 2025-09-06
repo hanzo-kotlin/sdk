@@ -7,12 +7,10 @@ import ai.hanzo.api.core.jsonMapper
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class TeamCreateResponseTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val teamCreateResponse =
@@ -90,7 +88,6 @@ internal class TeamCreateResponseTest {
         assertThat(teamCreateResponse.tpmLimit()).isEqualTo(0L)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun roundtrip() {
         val jsonMapper = jsonMapper()

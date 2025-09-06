@@ -1029,12 +1029,71 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is RegenerateKeyRequest && aliases == other.aliases && allowedCacheControls == other.allowedCacheControls && blocked == other.blocked && budgetDuration == other.budgetDuration && budgetId == other.budgetId && config == other.config && duration == other.duration && enforcedParams == other.enforcedParams && guardrails == other.guardrails && key == other.key && keyAlias == other.keyAlias && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && metadata == other.metadata && modelMaxBudget == other.modelMaxBudget && modelRpmLimit == other.modelRpmLimit && modelTpmLimit == other.modelTpmLimit && models == other.models && newMasterKey == other.newMasterKey && permissions == other.permissions && rpmLimit == other.rpmLimit && sendInviteEmail == other.sendInviteEmail && softBudget == other.softBudget && spend == other.spend && tags == other.tags && teamId == other.teamId && tpmLimit == other.tpmLimit && userId == other.userId && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is RegenerateKeyRequest &&
+            aliases == other.aliases &&
+            allowedCacheControls == other.allowedCacheControls &&
+            blocked == other.blocked &&
+            budgetDuration == other.budgetDuration &&
+            budgetId == other.budgetId &&
+            config == other.config &&
+            duration == other.duration &&
+            enforcedParams == other.enforcedParams &&
+            guardrails == other.guardrails &&
+            key == other.key &&
+            keyAlias == other.keyAlias &&
+            maxBudget == other.maxBudget &&
+            maxParallelRequests == other.maxParallelRequests &&
+            metadata == other.metadata &&
+            modelMaxBudget == other.modelMaxBudget &&
+            modelRpmLimit == other.modelRpmLimit &&
+            modelTpmLimit == other.modelTpmLimit &&
+            models == other.models &&
+            newMasterKey == other.newMasterKey &&
+            permissions == other.permissions &&
+            rpmLimit == other.rpmLimit &&
+            sendInviteEmail == other.sendInviteEmail &&
+            softBudget == other.softBudget &&
+            spend == other.spend &&
+            tags == other.tags &&
+            teamId == other.teamId &&
+            tpmLimit == other.tpmLimit &&
+            userId == other.userId &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(aliases, allowedCacheControls, blocked, budgetDuration, budgetId, config, duration, enforcedParams, guardrails, key, keyAlias, maxBudget, maxParallelRequests, metadata, modelMaxBudget, modelRpmLimit, modelTpmLimit, models, newMasterKey, permissions, rpmLimit, sendInviteEmail, softBudget, spend, tags, teamId, tpmLimit, userId, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            aliases,
+            allowedCacheControls,
+            blocked,
+            budgetDuration,
+            budgetId,
+            config,
+            duration,
+            enforcedParams,
+            guardrails,
+            key,
+            keyAlias,
+            maxBudget,
+            maxParallelRequests,
+            metadata,
+            modelMaxBudget,
+            modelRpmLimit,
+            modelTpmLimit,
+            models,
+            newMasterKey,
+            permissions,
+            rpmLimit,
+            sendInviteEmail,
+            softBudget,
+            spend,
+            tags,
+            teamId,
+            tpmLimit,
+            userId,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

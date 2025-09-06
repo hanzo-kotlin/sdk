@@ -1085,12 +1085,29 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is LlmBudgetTable && budgetDuration == other.budgetDuration && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && modelMaxBudget == other.modelMaxBudget && rpmLimit == other.rpmLimit && softBudget == other.softBudget && tpmLimit == other.tpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is LlmBudgetTable &&
+                    budgetDuration == other.budgetDuration &&
+                    maxBudget == other.maxBudget &&
+                    maxParallelRequests == other.maxParallelRequests &&
+                    modelMaxBudget == other.modelMaxBudget &&
+                    rpmLimit == other.rpmLimit &&
+                    softBudget == other.softBudget &&
+                    tpmLimit == other.tpmLimit &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(budgetDuration, maxBudget, maxParallelRequests, modelMaxBudget, rpmLimit, softBudget, tpmLimit, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    budgetDuration,
+                    maxBudget,
+                    maxParallelRequests,
+                    modelMaxBudget,
+                    rpmLimit,
+                    softBudget,
+                    tpmLimit,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -1103,12 +1120,33 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is UpdatedOrganizationMembership && createdAt == other.createdAt && organizationId == other.organizationId && updatedAt == other.updatedAt && userId == other.userId && budgetId == other.budgetId && llmBudgetTable == other.llmBudgetTable && spend == other.spend && user == other.user && userRole == other.userRole && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is UpdatedOrganizationMembership &&
+                createdAt == other.createdAt &&
+                organizationId == other.organizationId &&
+                updatedAt == other.updatedAt &&
+                userId == other.userId &&
+                budgetId == other.budgetId &&
+                llmBudgetTable == other.llmBudgetTable &&
+                spend == other.spend &&
+                user == other.user &&
+                userRole == other.userRole &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(createdAt, organizationId, updatedAt, userId, budgetId, llmBudgetTable, spend, user, userRole, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                createdAt,
+                organizationId,
+                updatedAt,
+                userId,
+                budgetId,
+                llmBudgetTable,
+                spend,
+                user,
+                userRole,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2604,12 +2642,29 @@ private constructor(
                         return true
                     }
 
-                    return /* spotless:off */ other is LlmBudgetTable && budgetDuration == other.budgetDuration && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && modelMaxBudget == other.modelMaxBudget && rpmLimit == other.rpmLimit && softBudget == other.softBudget && tpmLimit == other.tpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+                    return other is LlmBudgetTable &&
+                        budgetDuration == other.budgetDuration &&
+                        maxBudget == other.maxBudget &&
+                        maxParallelRequests == other.maxParallelRequests &&
+                        modelMaxBudget == other.modelMaxBudget &&
+                        rpmLimit == other.rpmLimit &&
+                        softBudget == other.softBudget &&
+                        tpmLimit == other.tpmLimit &&
+                        additionalProperties == other.additionalProperties
                 }
 
-                /* spotless:off */
-                private val hashCode: Int by lazy { Objects.hash(budgetDuration, maxBudget, maxParallelRequests, modelMaxBudget, rpmLimit, softBudget, tpmLimit, additionalProperties) }
-                /* spotless:on */
+                private val hashCode: Int by lazy {
+                    Objects.hash(
+                        budgetDuration,
+                        maxBudget,
+                        maxParallelRequests,
+                        modelMaxBudget,
+                        rpmLimit,
+                        softBudget,
+                        tpmLimit,
+                        additionalProperties,
+                    )
+                }
 
                 override fun hashCode(): Int = hashCode
 
@@ -2622,12 +2677,33 @@ private constructor(
                     return true
                 }
 
-                return /* spotless:off */ other is OrganizationMembership && createdAt == other.createdAt && organizationId == other.organizationId && updatedAt == other.updatedAt && userId == other.userId && budgetId == other.budgetId && llmBudgetTable == other.llmBudgetTable && spend == other.spend && user == other.user && userRole == other.userRole && additionalProperties == other.additionalProperties /* spotless:on */
+                return other is OrganizationMembership &&
+                    createdAt == other.createdAt &&
+                    organizationId == other.organizationId &&
+                    updatedAt == other.updatedAt &&
+                    userId == other.userId &&
+                    budgetId == other.budgetId &&
+                    llmBudgetTable == other.llmBudgetTable &&
+                    spend == other.spend &&
+                    user == other.user &&
+                    userRole == other.userRole &&
+                    additionalProperties == other.additionalProperties
             }
 
-            /* spotless:off */
-            private val hashCode: Int by lazy { Objects.hash(createdAt, organizationId, updatedAt, userId, budgetId, llmBudgetTable, spend, user, userRole, additionalProperties) }
-            /* spotless:on */
+            private val hashCode: Int by lazy {
+                Objects.hash(
+                    createdAt,
+                    organizationId,
+                    updatedAt,
+                    userId,
+                    budgetId,
+                    llmBudgetTable,
+                    spend,
+                    user,
+                    userRole,
+                    additionalProperties,
+                )
+            }
 
             override fun hashCode(): Int = hashCode
 
@@ -2640,12 +2716,47 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is UpdatedUser && userId == other.userId && budgetDuration == other.budgetDuration && budgetResetAt == other.budgetResetAt && maxBudget == other.maxBudget && metadata == other.metadata && modelMaxBudget == other.modelMaxBudget && modelSpend == other.modelSpend && models == other.models && organizationMemberships == other.organizationMemberships && rpmLimit == other.rpmLimit && spend == other.spend && ssoUserId == other.ssoUserId && teams == other.teams && tpmLimit == other.tpmLimit && userEmail == other.userEmail && userRole == other.userRole && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is UpdatedUser &&
+                userId == other.userId &&
+                budgetDuration == other.budgetDuration &&
+                budgetResetAt == other.budgetResetAt &&
+                maxBudget == other.maxBudget &&
+                metadata == other.metadata &&
+                modelMaxBudget == other.modelMaxBudget &&
+                modelSpend == other.modelSpend &&
+                models == other.models &&
+                organizationMemberships == other.organizationMemberships &&
+                rpmLimit == other.rpmLimit &&
+                spend == other.spend &&
+                ssoUserId == other.ssoUserId &&
+                teams == other.teams &&
+                tpmLimit == other.tpmLimit &&
+                userEmail == other.userEmail &&
+                userRole == other.userRole &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(userId, budgetDuration, budgetResetAt, maxBudget, metadata, modelMaxBudget, modelSpend, models, organizationMemberships, rpmLimit, spend, ssoUserId, teams, tpmLimit, userEmail, userRole, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                userId,
+                budgetDuration,
+                budgetResetAt,
+                maxBudget,
+                metadata,
+                modelMaxBudget,
+                modelSpend,
+                models,
+                organizationMemberships,
+                rpmLimit,
+                spend,
+                ssoUserId,
+                teams,
+                tpmLimit,
+                userEmail,
+                userRole,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2658,12 +2769,21 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrganizationAddMemberResponse && organizationId == other.organizationId && updatedOrganizationMemberships == other.updatedOrganizationMemberships && updatedUsers == other.updatedUsers && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is OrganizationAddMemberResponse &&
+            organizationId == other.organizationId &&
+            updatedOrganizationMemberships == other.updatedOrganizationMemberships &&
+            updatedUsers == other.updatedUsers &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(organizationId, updatedOrganizationMemberships, updatedUsers, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            organizationId,
+            updatedOrganizationMemberships,
+            updatedUsers,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

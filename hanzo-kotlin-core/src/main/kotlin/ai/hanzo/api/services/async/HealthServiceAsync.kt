@@ -52,7 +52,7 @@ interface HealthServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): HealthCheckAllResponse
 
-    /** @see [checkAll] */
+    /** @see checkAll */
     suspend fun checkAll(requestOptions: RequestOptions): HealthCheckAllResponse =
         checkAll(HealthCheckAllParams.none(), requestOptions)
 
@@ -62,7 +62,7 @@ interface HealthServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): HealthCheckLivelinessResponse
 
-    /** @see [checkLiveliness] */
+    /** @see checkLiveliness */
     suspend fun checkLiveliness(requestOptions: RequestOptions): HealthCheckLivelinessResponse =
         checkLiveliness(HealthCheckLivelinessParams.none(), requestOptions)
 
@@ -72,7 +72,7 @@ interface HealthServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): HealthCheckLivenessResponse
 
-    /** @see [checkLiveness] */
+    /** @see checkLiveness */
     suspend fun checkLiveness(requestOptions: RequestOptions): HealthCheckLivenessResponse =
         checkLiveness(HealthCheckLivenessParams.none(), requestOptions)
 
@@ -82,7 +82,7 @@ interface HealthServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): HealthCheckReadinessResponse
 
-    /** @see [checkReadiness] */
+    /** @see checkReadiness */
     suspend fun checkReadiness(requestOptions: RequestOptions): HealthCheckReadinessResponse =
         checkReadiness(HealthCheckReadinessParams.none(), requestOptions)
 
@@ -123,7 +123,7 @@ interface HealthServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<HealthCheckAllResponse>
 
-        /** @see [checkAll] */
+        /** @see checkAll */
         @MustBeClosed
         suspend fun checkAll(
             requestOptions: RequestOptions
@@ -140,7 +140,7 @@ interface HealthServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<HealthCheckLivelinessResponse>
 
-        /** @see [checkLiveliness] */
+        /** @see checkLiveliness */
         @MustBeClosed
         suspend fun checkLiveliness(
             requestOptions: RequestOptions
@@ -157,7 +157,7 @@ interface HealthServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<HealthCheckLivenessResponse>
 
-        /** @see [checkLiveness] */
+        /** @see checkLiveness */
         @MustBeClosed
         suspend fun checkLiveness(
             requestOptions: RequestOptions
@@ -174,7 +174,7 @@ interface HealthServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<HealthCheckReadinessResponse>
 
-        /** @see [checkReadiness] */
+        /** @see checkReadiness */
         @MustBeClosed
         suspend fun checkReadiness(
             requestOptions: RequestOptions

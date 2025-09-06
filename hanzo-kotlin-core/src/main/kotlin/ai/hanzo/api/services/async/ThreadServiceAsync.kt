@@ -41,7 +41,7 @@ interface ThreadServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ThreadCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): ThreadCreateResponse =
         create(ThreadCreateParams.none(), requestOptions)
 
@@ -57,13 +57,13 @@ interface ThreadServiceAsync {
     ): ThreadRetrieveResponse =
         retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: ThreadRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ThreadRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(threadId: String, requestOptions: RequestOptions): ThreadRetrieveResponse =
         retrieve(threadId, ThreadRetrieveParams.none(), requestOptions)
 
@@ -95,7 +95,7 @@ interface ThreadServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ThreadCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(requestOptions: RequestOptions): HttpResponseFor<ThreadCreateResponse> =
             create(ThreadCreateParams.none(), requestOptions)
@@ -112,14 +112,14 @@ interface ThreadServiceAsync {
         ): HttpResponseFor<ThreadRetrieveResponse> =
             retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: ThreadRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ThreadRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             threadId: String,

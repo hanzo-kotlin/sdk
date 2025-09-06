@@ -4,12 +4,10 @@ package ai.hanzo.api.models.finetuning.jobs
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class JobRetrieveParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         JobRetrieveParams.builder()
@@ -18,7 +16,6 @@ internal class JobRetrieveParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params =
@@ -32,7 +29,6 @@ internal class JobRetrieveParamsTest {
         assertThat(params._pathParam(1)).isEqualTo("")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params =

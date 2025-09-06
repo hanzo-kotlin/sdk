@@ -33,7 +33,7 @@ interface RerankService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): RerankCreateResponse =
         create(RerankCreateParams.none(), requestOptions)
 
@@ -43,7 +43,7 @@ interface RerankService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateV1Response
 
-    /** @see [createV1] */
+    /** @see createV1 */
     fun createV1(requestOptions: RequestOptions): RerankCreateV1Response =
         createV1(RerankCreateV1Params.none(), requestOptions)
 
@@ -53,7 +53,7 @@ interface RerankService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateV2Response
 
-    /** @see [createV2] */
+    /** @see createV2 */
     fun createV2(requestOptions: RequestOptions): RerankCreateV2Response =
         createV2(RerankCreateV2Params.none(), requestOptions)
 
@@ -77,7 +77,7 @@ interface RerankService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<RerankCreateResponse> =
             create(RerankCreateParams.none(), requestOptions)
@@ -92,7 +92,7 @@ interface RerankService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateV1Response>
 
-        /** @see [createV1] */
+        /** @see createV1 */
         @MustBeClosed
         fun createV1(requestOptions: RequestOptions): HttpResponseFor<RerankCreateV1Response> =
             createV1(RerankCreateV1Params.none(), requestOptions)
@@ -107,7 +107,7 @@ interface RerankService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateV2Response>
 
-        /** @see [createV2] */
+        /** @see createV2 */
         @MustBeClosed
         fun createV2(requestOptions: RequestOptions): HttpResponseFor<RerankCreateV2Response> =
             createV2(RerankCreateV2Params.none(), requestOptions)

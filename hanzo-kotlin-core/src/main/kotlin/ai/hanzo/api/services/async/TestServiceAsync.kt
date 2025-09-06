@@ -37,7 +37,7 @@ interface TestServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TestPingResponse
 
-    /** @see [ping] */
+    /** @see ping */
     suspend fun ping(requestOptions: RequestOptions): TestPingResponse =
         ping(TestPingParams.none(), requestOptions)
 
@@ -61,7 +61,7 @@ interface TestServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TestPingResponse>
 
-        /** @see [ping] */
+        /** @see ping */
         @MustBeClosed
         suspend fun ping(requestOptions: RequestOptions): HttpResponseFor<TestPingResponse> =
             ping(TestPingParams.none(), requestOptions)

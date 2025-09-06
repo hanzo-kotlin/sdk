@@ -28,8 +28,10 @@ private constructor(
     /** User ID in the request parameters */
     fun userId(): String? = userId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -180,10 +182,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UserRetrieveInfoParams && userId == other.userId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is UserRetrieveInfoParams &&
+            userId == other.userId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(userId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(userId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "UserRetrieveInfoParams{userId=$userId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

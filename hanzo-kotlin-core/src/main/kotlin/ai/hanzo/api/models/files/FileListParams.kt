@@ -32,8 +32,10 @@ private constructor(
 
     fun purpose(): String? = purpose
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -198,10 +200,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FileListParams && provider == other.provider && purpose == other.purpose && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is FileListParams &&
+            provider == other.provider &&
+            purpose == other.purpose &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(provider, purpose, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(provider, purpose, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "FileListParams{provider=$provider, purpose=$purpose, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -35,8 +35,10 @@ private constructor(
     /** Time from which to start viewing key spend */
     fun startDate(): String? = startDate
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -198,10 +200,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SpendListTagsParams && endDate == other.endDate && startDate == other.startDate && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SpendListTagsParams &&
+            endDate == other.endDate &&
+            startDate == other.startDate &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(endDate, startDate, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(endDate, startDate, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SpendListTagsParams{endDate=$endDate, startDate=$startDate, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

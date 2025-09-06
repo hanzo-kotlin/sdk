@@ -40,13 +40,13 @@ interface CancelServiceAsync {
     ): CancelCreateResponse =
         create(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         params: CancelCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CancelCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(
         fineTuningJobId: String,
         requestOptions: RequestOptions,
@@ -78,14 +78,14 @@ interface CancelServiceAsync {
         ): HttpResponseFor<CancelCreateResponse> =
             create(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             params: CancelCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CancelCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             fineTuningJobId: String,

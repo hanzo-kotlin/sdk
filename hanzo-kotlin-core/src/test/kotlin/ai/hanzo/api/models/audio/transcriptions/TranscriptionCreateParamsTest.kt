@@ -5,18 +5,15 @@ package ai.hanzo.api.models.audio.transcriptions
 import ai.hanzo.api.core.MultipartField
 import java.io.InputStream
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class TranscriptionCreateParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         TranscriptionCreateParams.builder().file("some content".byteInputStream()).build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =

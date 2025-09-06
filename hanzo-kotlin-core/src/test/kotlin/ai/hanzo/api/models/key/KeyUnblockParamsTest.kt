@@ -4,12 +4,10 @@ package ai.hanzo.api.models.key
 
 import ai.hanzo.api.core.http.Headers
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class KeyUnblockParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         KeyUnblockParams.builder()
@@ -18,7 +16,6 @@ internal class KeyUnblockParamsTest {
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun headers() {
         val params =
@@ -33,7 +30,6 @@ internal class KeyUnblockParamsTest {
             .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun headersWithoutOptionalFields() {
         val params =
@@ -46,7 +42,6 @@ internal class KeyUnblockParamsTest {
         assertThat(headers).isEqualTo(Headers.builder().build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
@@ -60,7 +55,6 @@ internal class KeyUnblockParamsTest {
         assertThat(body).isEqualTo(BlockKeyRequest.builder().key("key").build())
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params =

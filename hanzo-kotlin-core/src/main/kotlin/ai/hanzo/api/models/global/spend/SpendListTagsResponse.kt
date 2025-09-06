@@ -11,6 +11,7 @@ import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.allMaxBy
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.getOrThrow
+import ai.hanzo.api.core.toImmutable
 import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
@@ -862,10 +863,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is EndTime && string == other.string && offsetDate == other.offsetDate /* spotless:on */
+            return other is EndTime && string == other.string && offsetDate == other.offsetDate
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, offsetDate) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(string, offsetDate)
 
         override fun toString(): String =
             when {
@@ -1042,10 +1043,13 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Messages && string == other.string && jsonValues == other.jsonValues && jsonValue == other.jsonValue /* spotless:on */
+            return other is Messages &&
+                string == other.string &&
+                jsonValues == other.jsonValues &&
+                jsonValue == other.jsonValue
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, jsonValues, jsonValue) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(string, jsonValues, jsonValue)
 
         override fun toString(): String =
             when {
@@ -1060,7 +1064,8 @@ private constructor(
 
             fun ofString(string: String) = Messages(string = string)
 
-            fun ofJsonValues(jsonValues: List<JsonValue>) = Messages(jsonValues = jsonValues)
+            fun ofJsonValues(jsonValues: List<JsonValue>) =
+                Messages(jsonValues = jsonValues.toImmutable())
 
             fun ofJsonValue(jsonValue: JsonValue) = Messages(jsonValue = jsonValue)
         }
@@ -1231,10 +1236,13 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Response && string == other.string && jsonValues == other.jsonValues && jsonValue == other.jsonValue /* spotless:on */
+            return other is Response &&
+                string == other.string &&
+                jsonValues == other.jsonValues &&
+                jsonValue == other.jsonValue
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, jsonValues, jsonValue) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(string, jsonValues, jsonValue)
 
         override fun toString(): String =
             when {
@@ -1249,7 +1257,8 @@ private constructor(
 
             fun ofString(string: String) = Response(string = string)
 
-            fun ofJsonValues(jsonValues: List<JsonValue>) = Response(jsonValues = jsonValues)
+            fun ofJsonValues(jsonValues: List<JsonValue>) =
+                Response(jsonValues = jsonValues.toImmutable())
 
             fun ofJsonValue(jsonValue: JsonValue) = Response(jsonValue = jsonValue)
         }
@@ -1408,10 +1417,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is StartTime && string == other.string && offsetDate == other.offsetDate /* spotless:on */
+            return other is StartTime && string == other.string && offsetDate == other.offsetDate
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, offsetDate) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(string, offsetDate)
 
         override fun toString(): String =
             when {
@@ -1504,12 +1513,53 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SpendListTagsResponse && apiKey == other.apiKey && callType == other.callType && endTime == other.endTime && messages == other.messages && requestId == other.requestId && response == other.response && startTime == other.startTime && apiBase == other.apiBase && cacheHit == other.cacheHit && cacheKey == other.cacheKey && completionTokens == other.completionTokens && metadata == other.metadata && model == other.model && promptTokens == other.promptTokens && requestTags == other.requestTags && requesterIpAddress == other.requesterIpAddress && spend == other.spend && totalTokens == other.totalTokens && user == other.user && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is SpendListTagsResponse &&
+            apiKey == other.apiKey &&
+            callType == other.callType &&
+            endTime == other.endTime &&
+            messages == other.messages &&
+            requestId == other.requestId &&
+            response == other.response &&
+            startTime == other.startTime &&
+            apiBase == other.apiBase &&
+            cacheHit == other.cacheHit &&
+            cacheKey == other.cacheKey &&
+            completionTokens == other.completionTokens &&
+            metadata == other.metadata &&
+            model == other.model &&
+            promptTokens == other.promptTokens &&
+            requestTags == other.requestTags &&
+            requesterIpAddress == other.requesterIpAddress &&
+            spend == other.spend &&
+            totalTokens == other.totalTokens &&
+            user == other.user &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(apiKey, callType, endTime, messages, requestId, response, startTime, apiBase, cacheHit, cacheKey, completionTokens, metadata, model, promptTokens, requestTags, requesterIpAddress, spend, totalTokens, user, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            apiKey,
+            callType,
+            endTime,
+            messages,
+            requestId,
+            response,
+            startTime,
+            apiBase,
+            cacheHit,
+            cacheKey,
+            completionTokens,
+            metadata,
+            model,
+            promptTokens,
+            requestTags,
+            requesterIpAddress,
+            spend,
+            totalTokens,
+            user,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

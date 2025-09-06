@@ -51,13 +51,13 @@ interface CallbackServiceAsync {
     ): CallbackRetrieveResponse =
         retrieve(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(
         params: CallbackRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CallbackRetrieveResponse
 
-    /** @see [retrieve] */
+    /** @see retrieve */
     suspend fun retrieve(teamId: String, requestOptions: RequestOptions): CallbackRetrieveResponse =
         retrieve(teamId, CallbackRetrieveParams.none(), requestOptions)
 
@@ -105,7 +105,7 @@ interface CallbackServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CallbackAddResponse = add(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-    /** @see [add] */
+    /** @see add */
     suspend fun add(
         params: CallbackAddParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -137,14 +137,14 @@ interface CallbackServiceAsync {
         ): HttpResponseFor<CallbackRetrieveResponse> =
             retrieve(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: CallbackRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CallbackRetrieveResponse>
 
-        /** @see [retrieve] */
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             teamId: String,
@@ -164,7 +164,7 @@ interface CallbackServiceAsync {
         ): HttpResponseFor<CallbackAddResponse> =
             add(params.toBuilder().teamId(teamId).build(), requestOptions)
 
-        /** @see [add] */
+        /** @see add */
         @MustBeClosed
         suspend fun add(
             params: CallbackAddParams,

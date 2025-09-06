@@ -37,8 +37,10 @@ private constructor(
     fun _additionalBodyProperties(): Map<String, JsonValue> =
         updateDeployment._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -213,10 +215,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UpdatePartialParams && modelId == other.modelId && updateDeployment == other.updateDeployment && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is UpdatePartialParams &&
+            modelId == other.modelId &&
+            updateDeployment == other.updateDeployment &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(modelId, updateDeployment, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(modelId, updateDeployment, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "UpdatePartialParams{modelId=$modelId, updateDeployment=$updateDeployment, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -572,7 +572,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Tier && value == other.value /* spotless:on */
+            return other is Tier && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -585,12 +585,35 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ModelInfo && id == other.id && baseModel == other.baseModel && createdAt == other.createdAt && createdBy == other.createdBy && dbModel == other.dbModel && teamId == other.teamId && teamPublicModelName == other.teamPublicModelName && tier == other.tier && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ModelInfo &&
+            id == other.id &&
+            baseModel == other.baseModel &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dbModel == other.dbModel &&
+            teamId == other.teamId &&
+            teamPublicModelName == other.teamPublicModelName &&
+            tier == other.tier &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, baseModel, createdAt, createdBy, dbModel, teamId, teamPublicModelName, tier, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            id,
+            baseModel,
+            createdAt,
+            createdBy,
+            dbModel,
+            teamId,
+            teamPublicModelName,
+            tier,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

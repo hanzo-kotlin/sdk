@@ -18,8 +18,10 @@ private constructor(
 
     fun organizationId(): String = organizationId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -185,10 +187,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is InfoRetrieveParams && organizationId == other.organizationId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is InfoRetrieveParams &&
+            organizationId == other.organizationId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(organizationId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(organizationId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "InfoRetrieveParams{organizationId=$organizationId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

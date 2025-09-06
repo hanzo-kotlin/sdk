@@ -130,7 +130,7 @@ interface CustomerService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<CustomerListResponse>
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): List<CustomerListResponse> =
         list(CustomerListParams.none(), requestOptions)
 
@@ -244,7 +244,7 @@ interface CustomerService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<CustomerListResponse>>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<List<CustomerListResponse>> =
             list(CustomerListParams.none(), requestOptions)

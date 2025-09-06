@@ -194,7 +194,7 @@ interface HanzoClient {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ClientGetHomeResponse
 
-    /** @see [getHome] */
+    /** @see getHome */
     fun getHome(requestOptions: RequestOptions): ClientGetHomeResponse =
         getHome(ClientGetHomeParams.none(), requestOptions)
 
@@ -327,7 +327,7 @@ interface HanzoClient {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ClientGetHomeResponse>
 
-        /** @see [getHome] */
+        /** @see getHome */
         @MustBeClosed
         fun getHome(requestOptions: RequestOptions): HttpResponseFor<ClientGetHomeResponse> =
             getHome(ClientGetHomeParams.none(), requestOptions)

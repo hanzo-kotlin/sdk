@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.assemblyai
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class AssemblyaiDeleteParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         AssemblyaiDeleteParams.builder().endpoint("endpoint").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = AssemblyaiDeleteParams.builder().endpoint("endpoint").build()

@@ -1091,10 +1091,12 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Expires && string == other.string && offsetDateTime == other.offsetDateTime /* spotless:on */
+            return other is Expires &&
+                string == other.string &&
+                offsetDateTime == other.offsetDateTime
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(string, offsetDateTime) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(string, offsetDateTime)
 
         override fun toString(): String =
             when {
@@ -1188,12 +1190,73 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is KeyBlockResponse && token == other.token && aliases == other.aliases && allowedCacheControls == other.allowedCacheControls && blocked == other.blocked && budgetDuration == other.budgetDuration && budgetResetAt == other.budgetResetAt && config == other.config && createdAt == other.createdAt && createdBy == other.createdBy && expires == other.expires && keyAlias == other.keyAlias && keyName == other.keyName && llmBudgetTable == other.llmBudgetTable && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && metadata == other.metadata && modelMaxBudget == other.modelMaxBudget && modelSpend == other.modelSpend && models == other.models && orgId == other.orgId && permissions == other.permissions && rpmLimit == other.rpmLimit && softBudgetCooldown == other.softBudgetCooldown && spend == other.spend && teamId == other.teamId && tpmLimit == other.tpmLimit && updatedAt == other.updatedAt && updatedBy == other.updatedBy && userId == other.userId && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is KeyBlockResponse &&
+            token == other.token &&
+            aliases == other.aliases &&
+            allowedCacheControls == other.allowedCacheControls &&
+            blocked == other.blocked &&
+            budgetDuration == other.budgetDuration &&
+            budgetResetAt == other.budgetResetAt &&
+            config == other.config &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            expires == other.expires &&
+            keyAlias == other.keyAlias &&
+            keyName == other.keyName &&
+            llmBudgetTable == other.llmBudgetTable &&
+            maxBudget == other.maxBudget &&
+            maxParallelRequests == other.maxParallelRequests &&
+            metadata == other.metadata &&
+            modelMaxBudget == other.modelMaxBudget &&
+            modelSpend == other.modelSpend &&
+            models == other.models &&
+            orgId == other.orgId &&
+            permissions == other.permissions &&
+            rpmLimit == other.rpmLimit &&
+            softBudgetCooldown == other.softBudgetCooldown &&
+            spend == other.spend &&
+            teamId == other.teamId &&
+            tpmLimit == other.tpmLimit &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            userId == other.userId &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(token, aliases, allowedCacheControls, blocked, budgetDuration, budgetResetAt, config, createdAt, createdBy, expires, keyAlias, keyName, llmBudgetTable, maxBudget, maxParallelRequests, metadata, modelMaxBudget, modelSpend, models, orgId, permissions, rpmLimit, softBudgetCooldown, spend, teamId, tpmLimit, updatedAt, updatedBy, userId, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            token,
+            aliases,
+            allowedCacheControls,
+            blocked,
+            budgetDuration,
+            budgetResetAt,
+            config,
+            createdAt,
+            createdBy,
+            expires,
+            keyAlias,
+            keyName,
+            llmBudgetTable,
+            maxBudget,
+            maxParallelRequests,
+            metadata,
+            modelMaxBudget,
+            modelSpend,
+            models,
+            orgId,
+            permissions,
+            rpmLimit,
+            softBudgetCooldown,
+            spend,
+            teamId,
+            tpmLimit,
+            updatedAt,
+            updatedBy,
+            userId,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

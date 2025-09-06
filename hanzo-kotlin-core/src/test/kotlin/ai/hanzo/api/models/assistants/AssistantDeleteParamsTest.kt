@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.assistants
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class AssistantDeleteParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         AssistantDeleteParams.builder().assistantId("assistant_id").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = AssistantDeleteParams.builder().assistantId("assistant_id").build()

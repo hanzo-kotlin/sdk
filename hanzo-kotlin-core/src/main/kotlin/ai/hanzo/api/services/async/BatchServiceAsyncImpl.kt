@@ -3,14 +3,14 @@
 package ai.hanzo.api.services.async
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -101,7 +101,8 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         BatchServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         private val cancel: CancelServiceAsync.WithRawResponse by lazy {
             CancelServiceAsyncImpl.WithRawResponseImpl(clientOptions)
@@ -118,7 +119,6 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val createHandler: Handler<BatchCreateResponse> =
             jsonHandler<BatchCreateResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun create(
             params: BatchCreateParams,
@@ -134,7 +134,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -147,7 +147,6 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val retrieveHandler: Handler<BatchRetrieveResponse> =
             jsonHandler<BatchRetrieveResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun retrieve(
             params: BatchRetrieveParams,
@@ -165,7 +164,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveHandler.handle(it) }
                     .also {
@@ -177,7 +176,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
         }
 
         private val listHandler: Handler<BatchListResponse> =
-            jsonHandler<BatchListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<BatchListResponse>(clientOptions.jsonMapper)
 
         override suspend fun list(
             params: BatchListParams,
@@ -192,7 +191,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listHandler.handle(it) }
                     .also {
@@ -205,7 +204,6 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val cancelWithProviderHandler: Handler<BatchCancelWithProviderResponse> =
             jsonHandler<BatchCancelWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun cancelWithProvider(
             params: BatchCancelWithProviderParams,
@@ -230,7 +228,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { cancelWithProviderHandler.handle(it) }
                     .also {
@@ -243,7 +241,6 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val createWithProviderHandler: Handler<BatchCreateWithProviderResponse> =
             jsonHandler<BatchCreateWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun createWithProvider(
             params: BatchCreateWithProviderParams,
@@ -262,7 +259,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createWithProviderHandler.handle(it) }
                     .also {
@@ -275,7 +272,6 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val listWithProviderHandler: Handler<BatchListWithProviderResponse> =
             jsonHandler<BatchListWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun listWithProvider(
             params: BatchListWithProviderParams,
@@ -293,7 +289,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listWithProviderHandler.handle(it) }
                     .also {
@@ -306,7 +302,6 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val retrieveWithProviderHandler: Handler<BatchRetrieveWithProviderResponse> =
             jsonHandler<BatchRetrieveWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun retrieveWithProvider(
             params: BatchRetrieveWithProviderParams,
@@ -324,7 +319,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveWithProviderHandler.handle(it) }
                     .also {

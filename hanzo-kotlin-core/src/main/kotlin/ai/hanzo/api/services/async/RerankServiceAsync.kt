@@ -33,7 +33,7 @@ interface RerankServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): RerankCreateResponse =
         create(RerankCreateParams.none(), requestOptions)
 
@@ -43,7 +43,7 @@ interface RerankServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateV1Response
 
-    /** @see [createV1] */
+    /** @see createV1 */
     suspend fun createV1(requestOptions: RequestOptions): RerankCreateV1Response =
         createV1(RerankCreateV1Params.none(), requestOptions)
 
@@ -53,7 +53,7 @@ interface RerankServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateV2Response
 
-    /** @see [createV2] */
+    /** @see createV2 */
     suspend fun createV2(requestOptions: RequestOptions): RerankCreateV2Response =
         createV2(RerankCreateV2Params.none(), requestOptions)
 
@@ -81,7 +81,7 @@ interface RerankServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(requestOptions: RequestOptions): HttpResponseFor<RerankCreateResponse> =
             create(RerankCreateParams.none(), requestOptions)
@@ -96,7 +96,7 @@ interface RerankServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateV1Response>
 
-        /** @see [createV1] */
+        /** @see createV1 */
         @MustBeClosed
         suspend fun createV1(
             requestOptions: RequestOptions
@@ -113,7 +113,7 @@ interface RerankServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateV2Response>
 
-        /** @see [createV2] */
+        /** @see createV2 */
         @MustBeClosed
         suspend fun createV2(
             requestOptions: RequestOptions

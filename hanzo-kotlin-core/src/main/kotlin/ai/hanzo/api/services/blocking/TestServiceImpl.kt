@@ -3,13 +3,13 @@
 package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.parseable
@@ -35,7 +35,8 @@ class TestServiceImpl internal constructor(private val clientOptions: ClientOpti
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         TestService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         override fun withOptions(
             modifier: (ClientOptions.Builder) -> Unit
@@ -43,7 +44,7 @@ class TestServiceImpl internal constructor(private val clientOptions: ClientOpti
             TestServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
 
         private val pingHandler: Handler<TestPingResponse> =
-            jsonHandler<TestPingResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<TestPingResponse>(clientOptions.jsonMapper)
 
         override fun ping(
             params: TestPingParams,
@@ -58,7 +59,7 @@ class TestServiceImpl internal constructor(private val clientOptions: ClientOpti
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { pingHandler.handle(it) }
                     .also {

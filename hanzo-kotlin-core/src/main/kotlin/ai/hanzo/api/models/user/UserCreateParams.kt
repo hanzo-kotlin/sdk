@@ -376,8 +376,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -1865,12 +1867,69 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && aliases == other.aliases && allowedCacheControls == other.allowedCacheControls && autoCreateKey == other.autoCreateKey && blocked == other.blocked && budgetDuration == other.budgetDuration && config == other.config && duration == other.duration && guardrails == other.guardrails && keyAlias == other.keyAlias && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && metadata == other.metadata && modelMaxBudget == other.modelMaxBudget && modelRpmLimit == other.modelRpmLimit && modelTpmLimit == other.modelTpmLimit && models == other.models && permissions == other.permissions && rpmLimit == other.rpmLimit && sendInviteEmail == other.sendInviteEmail && spend == other.spend && teamId == other.teamId && teams == other.teams && tpmLimit == other.tpmLimit && userAlias == other.userAlias && userEmail == other.userEmail && userId == other.userId && userRole == other.userRole && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                aliases == other.aliases &&
+                allowedCacheControls == other.allowedCacheControls &&
+                autoCreateKey == other.autoCreateKey &&
+                blocked == other.blocked &&
+                budgetDuration == other.budgetDuration &&
+                config == other.config &&
+                duration == other.duration &&
+                guardrails == other.guardrails &&
+                keyAlias == other.keyAlias &&
+                maxBudget == other.maxBudget &&
+                maxParallelRequests == other.maxParallelRequests &&
+                metadata == other.metadata &&
+                modelMaxBudget == other.modelMaxBudget &&
+                modelRpmLimit == other.modelRpmLimit &&
+                modelTpmLimit == other.modelTpmLimit &&
+                models == other.models &&
+                permissions == other.permissions &&
+                rpmLimit == other.rpmLimit &&
+                sendInviteEmail == other.sendInviteEmail &&
+                spend == other.spend &&
+                teamId == other.teamId &&
+                teams == other.teams &&
+                tpmLimit == other.tpmLimit &&
+                userAlias == other.userAlias &&
+                userEmail == other.userEmail &&
+                userId == other.userId &&
+                userRole == other.userRole &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(aliases, allowedCacheControls, autoCreateKey, blocked, budgetDuration, config, duration, guardrails, keyAlias, maxBudget, maxParallelRequests, metadata, modelMaxBudget, modelRpmLimit, modelTpmLimit, models, permissions, rpmLimit, sendInviteEmail, spend, teamId, teams, tpmLimit, userAlias, userEmail, userId, userRole, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                aliases,
+                allowedCacheControls,
+                autoCreateKey,
+                blocked,
+                budgetDuration,
+                config,
+                duration,
+                guardrails,
+                keyAlias,
+                maxBudget,
+                maxParallelRequests,
+                metadata,
+                modelMaxBudget,
+                modelRpmLimit,
+                modelTpmLimit,
+                models,
+                permissions,
+                rpmLimit,
+                sendInviteEmail,
+                spend,
+                teamId,
+                teams,
+                tpmLimit,
+                userAlias,
+                userEmail,
+                userId,
+                userRole,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -2006,7 +2065,7 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is UserRole && value == other.value /* spotless:on */
+            return other is UserRole && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -2019,10 +2078,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UserCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is UserCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "UserCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

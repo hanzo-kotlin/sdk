@@ -14,6 +14,7 @@ import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.getOrThrow
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
+import ai.hanzo.api.core.toImmutable
 import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
@@ -113,8 +114,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -593,12 +596,16 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && member == other.member && organizationId == other.organizationId && maxBudgetInOrganization == other.maxBudgetInOrganization && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                member == other.member &&
+                organizationId == other.organizationId &&
+                maxBudgetInOrganization == other.maxBudgetInOrganization &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(member, organizationId, maxBudgetInOrganization, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(member, organizationId, maxBudgetInOrganization, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -688,10 +695,10 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Member && orgMembers == other.orgMembers && org == other.org /* spotless:on */
+            return other is Member && orgMembers == other.orgMembers && org == other.org
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(orgMembers, org) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(orgMembers, org)
 
         override fun toString(): String =
             when {
@@ -703,7 +710,8 @@ private constructor(
 
         companion object {
 
-            fun ofOrgMembers(orgMembers: List<OrgMember>) = Member(orgMembers = orgMembers)
+            fun ofOrgMembers(orgMembers: List<OrgMember>) =
+                Member(orgMembers = orgMembers.toImmutable())
 
             fun ofOrg(org: OrgMember) = Member(org = org)
         }
@@ -782,10 +790,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is OrganizationAddMemberParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OrganizationAddMemberParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OrganizationAddMemberParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

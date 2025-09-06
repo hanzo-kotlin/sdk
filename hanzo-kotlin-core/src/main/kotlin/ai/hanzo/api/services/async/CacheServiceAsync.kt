@@ -47,7 +47,7 @@ interface CacheServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CacheDeleteResponse
 
-    /** @see [delete] */
+    /** @see delete */
     suspend fun delete(requestOptions: RequestOptions): CacheDeleteResponse =
         delete(CacheDeleteParams.none(), requestOptions)
 
@@ -66,7 +66,7 @@ interface CacheServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CacheFlushAllResponse
 
-    /** @see [flushAll] */
+    /** @see flushAll */
     suspend fun flushAll(requestOptions: RequestOptions): CacheFlushAllResponse =
         flushAll(CacheFlushAllParams.none(), requestOptions)
 
@@ -76,7 +76,7 @@ interface CacheServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CachePingResponse
 
-    /** @see [ping] */
+    /** @see ping */
     suspend fun ping(requestOptions: RequestOptions): CachePingResponse =
         ping(CachePingParams.none(), requestOptions)
 
@@ -104,7 +104,7 @@ interface CacheServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CacheDeleteResponse>
 
-        /** @see [delete] */
+        /** @see delete */
         @MustBeClosed
         suspend fun delete(requestOptions: RequestOptions): HttpResponseFor<CacheDeleteResponse> =
             delete(CacheDeleteParams.none(), requestOptions)
@@ -119,7 +119,7 @@ interface CacheServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CacheFlushAllResponse>
 
-        /** @see [flushAll] */
+        /** @see flushAll */
         @MustBeClosed
         suspend fun flushAll(
             requestOptions: RequestOptions
@@ -136,7 +136,7 @@ interface CacheServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CachePingResponse>
 
-        /** @see [ping] */
+        /** @see ping */
         @MustBeClosed
         suspend fun ping(requestOptions: RequestOptions): HttpResponseFor<CachePingResponse> =
             ping(CachePingParams.none(), requestOptions)

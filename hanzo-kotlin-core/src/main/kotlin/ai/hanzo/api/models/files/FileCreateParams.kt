@@ -3,6 +3,7 @@
 package ai.hanzo.api.models.files
 
 import ai.hanzo.api.core.ExcludeMissing
+import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.MultipartField
 import ai.hanzo.api.core.Params
 import ai.hanzo.api.core.checkRequired
@@ -10,9 +11,12 @@ import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
 import ai.hanzo.api.errors.HanzoInvalidDataException
+import com.fasterxml.jackson.annotation.JsonAnyGetter
+import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.InputStream
 import java.nio.file.Path
+import java.util.Collections
 import java.util.Objects
 import kotlin.io.path.inputStream
 import kotlin.io.path.name
@@ -80,8 +84,12 @@ private constructor(
      */
     fun _customLlmProvider(): MultipartField<String> = body._customLlmProvider()
 
+    fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
+
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -141,7 +149,7 @@ private constructor(
 
         fun file(file: ByteArray) = apply { body.file(file) }
 
-        fun file(file: Path) = apply { body.file(file) }
+        fun file(path: Path) = apply { body.file(path) }
 
         fun purpose(purpose: String) = apply { body.purpose(purpose) }
 
@@ -166,6 +174,25 @@ private constructor(
          */
         fun customLlmProvider(customLlmProvider: MultipartField<String>) = apply {
             body.customLlmProvider(customLlmProvider)
+        }
+
+        fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) = apply {
+            body.additionalProperties(additionalBodyProperties)
+        }
+
+        fun putAdditionalBodyProperty(key: String, value: JsonValue) = apply {
+            body.putAdditionalProperty(key, value)
+        }
+
+        fun putAllAdditionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) =
+            apply {
+                body.putAllAdditionalProperties(additionalBodyProperties)
+            }
+
+        fun removeAdditionalBodyProperty(key: String) = apply { body.removeAdditionalProperty(key) }
+
+        fun removeAllAdditionalBodyProperties(keys: Set<String>) = apply {
+            body.removeAllAdditionalProperties(keys)
         }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
@@ -289,11 +316,11 @@ private constructor(
     }
 
     fun _body(): Map<String, MultipartField<*>> =
-        mapOf(
+        (mapOf(
                 "file" to _file(),
                 "purpose" to _purpose(),
                 "custom_llm_provider" to _customLlmProvider(),
-            )
+            ) + _additionalBodyProperties().mapValues { (_, value) -> MultipartField.of(value) })
             .toImmutable()
 
     fun _pathParam(index: Int): String =
@@ -311,6 +338,7 @@ private constructor(
         private val file: MultipartField<InputStream>,
         private val purpose: MultipartField<String>,
         private val customLlmProvider: MultipartField<String>,
+        private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
 
         /**
@@ -357,6 +385,16 @@ private constructor(
         @ExcludeMissing
         fun _customLlmProvider(): MultipartField<String> = customLlmProvider
 
+        @JsonAnySetter
+        private fun putAdditionalProperty(key: String, value: JsonValue) {
+            additionalProperties.put(key, value)
+        }
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> =
+            Collections.unmodifiableMap(additionalProperties)
+
         fun toBuilder() = Builder().from(this)
 
         companion object {
@@ -379,11 +417,13 @@ private constructor(
             private var file: MultipartField<InputStream>? = null
             private var purpose: MultipartField<String>? = null
             private var customLlmProvider: MultipartField<String> = MultipartField.of(null)
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
             internal fun from(body: Body) = apply {
                 file = body.file
                 purpose = body.purpose
                 customLlmProvider = body.customLlmProvider
+                additionalProperties = body.additionalProperties.toMutableMap()
             }
 
             fun file(file: InputStream) = file(MultipartField.of(file))
@@ -399,11 +439,11 @@ private constructor(
 
             fun file(file: ByteArray) = file(file.inputStream())
 
-            fun file(file: Path) =
+            fun file(path: Path) =
                 file(
                     MultipartField.builder<InputStream>()
-                        .value(file.inputStream())
-                        .filename(file.name)
+                        .value(path.inputStream())
+                        .filename(path.name)
                         .build()
                 )
 
@@ -432,6 +472,25 @@ private constructor(
                 this.customLlmProvider = customLlmProvider
             }
 
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
             /**
              * Returns an immutable instance of [Body].
              *
@@ -450,6 +509,7 @@ private constructor(
                     checkRequired("file", file),
                     checkRequired("purpose", purpose),
                     customLlmProvider,
+                    additionalProperties.toMutableMap(),
                 )
         }
 
@@ -479,17 +539,21 @@ private constructor(
                 return true
             }
 
-            return /* spotless:off */ other is Body && file == other.file && purpose == other.purpose && customLlmProvider == other.customLlmProvider /* spotless:on */
+            return other is Body &&
+                file == other.file &&
+                purpose == other.purpose &&
+                customLlmProvider == other.customLlmProvider &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(file, purpose, customLlmProvider) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(file, purpose, customLlmProvider, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{file=$file, purpose=$purpose, customLlmProvider=$customLlmProvider}"
+            "Body{file=$file, purpose=$purpose, customLlmProvider=$customLlmProvider, additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -497,10 +561,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is FileCreateParams && provider == other.provider && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is FileCreateParams &&
+            provider == other.provider &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(provider, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(provider, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "FileCreateParams{provider=$provider, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

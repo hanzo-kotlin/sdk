@@ -50,13 +50,13 @@ interface EngineServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineCompleteResponse = complete(params.toBuilder().model(model).build(), requestOptions)
 
-    /** @see [complete] */
+    /** @see complete */
     suspend fun complete(
         params: EngineCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineCompleteResponse
 
-    /** @see [complete] */
+    /** @see complete */
     suspend fun complete(model: String, requestOptions: RequestOptions): EngineCompleteResponse =
         complete(model, EngineCompleteParams.none(), requestOptions)
 
@@ -80,13 +80,13 @@ interface EngineServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
 
-    /** @see [embed] */
+    /** @see embed */
     suspend fun embed(
         params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineEmbedResponse
 
-    /** @see [embed] */
+    /** @see embed */
     suspend fun embed(model: String, requestOptions: RequestOptions): EngineEmbedResponse =
         embed(model, EngineEmbedParams.none(), requestOptions)
 
@@ -118,14 +118,14 @@ interface EngineServiceAsync {
         ): HttpResponseFor<EngineCompleteResponse> =
             complete(params.toBuilder().model(model).build(), requestOptions)
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         suspend fun complete(
             params: EngineCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineCompleteResponse>
 
-        /** @see [complete] */
+        /** @see complete */
         @MustBeClosed
         suspend fun complete(
             model: String,
@@ -145,14 +145,14 @@ interface EngineServiceAsync {
         ): HttpResponseFor<EngineEmbedResponse> =
             embed(params.toBuilder().model(model).build(), requestOptions)
 
-        /** @see [embed] */
+        /** @see embed */
         @MustBeClosed
         suspend fun embed(
             params: EngineEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineEmbedResponse>
 
-        /** @see [embed] */
+        /** @see embed */
         @MustBeClosed
         suspend fun embed(
             model: String,

@@ -42,13 +42,13 @@ interface CancelServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CancelCancelResponse = cancel(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-    /** @see [cancel] */
+    /** @see cancel */
     suspend fun cancel(
         params: CancelCancelParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CancelCancelResponse
 
-    /** @see [cancel] */
+    /** @see cancel */
     suspend fun cancel(batchId: String, requestOptions: RequestOptions): CancelCancelResponse =
         cancel(batchId, CancelCancelParams.none(), requestOptions)
 
@@ -78,14 +78,14 @@ interface CancelServiceAsync {
         ): HttpResponseFor<CancelCancelResponse> =
             cancel(params.toBuilder().batchId(batchId).build(), requestOptions)
 
-        /** @see [cancel] */
+        /** @see cancel */
         @MustBeClosed
         suspend fun cancel(
             params: CancelCancelParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CancelCancelResponse>
 
-        /** @see [cancel] */
+        /** @see cancel */
         @MustBeClosed
         suspend fun cancel(
             batchId: String,

@@ -80,7 +80,7 @@ interface SpendServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SpendCalculateSpendResponse
 
-    /** @see [calculateSpend] */
+    /** @see calculateSpend */
     suspend fun calculateSpend(requestOptions: RequestOptions): SpendCalculateSpendResponse =
         calculateSpend(SpendCalculateSpendParams.none(), requestOptions)
 
@@ -117,7 +117,7 @@ interface SpendServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListLogsResponse>
 
-    /** @see [listLogs] */
+    /** @see listLogs */
     suspend fun listLogs(requestOptions: RequestOptions): List<SpendListLogsResponse> =
         listLogs(SpendListLogsParams.none(), requestOptions)
 
@@ -140,7 +140,7 @@ interface SpendServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListTagsResponse>
 
-    /** @see [listTags] */
+    /** @see listTags */
     suspend fun listTags(requestOptions: RequestOptions): List<SpendListTagsResponse> =
         listTags(SpendListTagsParams.none(), requestOptions)
 
@@ -166,7 +166,7 @@ interface SpendServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SpendCalculateSpendResponse>
 
-        /** @see [calculateSpend] */
+        /** @see calculateSpend */
         @MustBeClosed
         suspend fun calculateSpend(
             requestOptions: RequestOptions
@@ -183,7 +183,7 @@ interface SpendServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListLogsResponse>>
 
-        /** @see [listLogs] */
+        /** @see listLogs */
         @MustBeClosed
         suspend fun listLogs(
             requestOptions: RequestOptions
@@ -200,7 +200,7 @@ interface SpendServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListTagsResponse>>
 
-        /** @see [listTags] */
+        /** @see listTags */
         @MustBeClosed
         suspend fun listTags(
             requestOptions: RequestOptions
