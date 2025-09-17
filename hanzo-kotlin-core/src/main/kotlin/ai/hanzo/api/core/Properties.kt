@@ -2,7 +2,7 @@
 
 package ai.hanzo.api.core
 
-import java.util.Properties
+import ai.hanzo.api.client.HanzoClient
 
 fun getOsArch(): String {
     val osArch = System.getProperty("os.arch")
@@ -16,7 +16,7 @@ fun getOsArch(): String {
         "x86_64" -> "x64"
         "arm" -> "arm"
         "aarch64" -> "arm64"
-        else -> "other:${osArch}"
+        else -> "other:$osArch"
     }
 }
 
@@ -30,13 +30,13 @@ fun getOsName(): String {
         osName.startsWith("Linux") -> "Linux"
         osName.startsWith("Mac OS") -> "MacOS"
         osName.startsWith("Windows") -> "Windows"
-        else -> "Other:${osName}"
+        else -> "Other:$osName"
     }
 }
 
 fun getOsVersion(): String = System.getProperty("os.version", "unknown")
 
 fun getPackageVersion(): String =
-    Properties::class.java.`package`.implementationVersion ?: "unknown"
+    HanzoClient::class.java.`package`.implementationVersion ?: "unknown"
 
 fun getJavaVersion(): String = System.getProperty("java.version", "unknown")
