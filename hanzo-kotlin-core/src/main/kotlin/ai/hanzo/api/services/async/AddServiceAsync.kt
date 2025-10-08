@@ -7,6 +7,7 @@ import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.add.AddAddAllowedIpParams
 import ai.hanzo.api.models.add.AddAddAllowedIpResponse
+import ai.hanzo.api.models.add.IpAddress
 import com.google.errorprone.annotations.MustBeClosed
 
 interface AddServiceAsync {
@@ -29,6 +30,13 @@ interface AddServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AddAddAllowedIpResponse
 
+    /** @see addAllowedIp */
+    suspend fun addAllowedIp(
+        ipAddress: IpAddress,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AddAddAllowedIpResponse =
+        addAllowedIp(AddAddAllowedIpParams.builder().ipAddress(ipAddress).build(), requestOptions)
+
     /** A view of [AddServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -48,5 +56,16 @@ interface AddServiceAsync {
             params: AddAddAllowedIpParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AddAddAllowedIpResponse>
+
+        /** @see addAllowedIp */
+        @MustBeClosed
+        suspend fun addAllowedIp(
+            ipAddress: IpAddress,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AddAddAllowedIpResponse> =
+            addAllowedIp(
+                AddAddAllowedIpParams.builder().ipAddress(ipAddress).build(),
+                requestOptions,
+            )
     }
 }

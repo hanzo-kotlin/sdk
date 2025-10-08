@@ -20,24 +20,24 @@ import java.util.Objects
  * Example Response:
  * ```json
  * {
- *   "guardrails": [
- *     {
- *       "guardrail_name": "bedrock-pre-guard",
- *       "guardrail_info": {
- *         "params": [
- *           {
- *             "name": "toxicity_score",
- *             "type": "float",
- *             "description": "Score between 0-1 indicating content toxicity level"
- *           },
- *           {
- *             "name": "pii_detection",
- *             "type": "boolean"
- *           }
- *         ]
- *       }
- *     }
- *   ]
+ *     "guardrails": [
+ *         {
+ *         "guardrail_name": "bedrock-pre-guard",
+ *         "guardrail_info": {
+ *             "params": [
+ *             {
+ *                 "name": "toxicity_score",
+ *                 "type": "float",
+ *                 "description": "Score between 0-1 indicating content toxicity level"
+ *             },
+ *             {
+ *                 "name": "pii_detection",
+ *                 "type": "boolean"
+ *             }
+ *             ]
+ *         }
+ *         }
+ *     ]
  * }
  * ```
  */

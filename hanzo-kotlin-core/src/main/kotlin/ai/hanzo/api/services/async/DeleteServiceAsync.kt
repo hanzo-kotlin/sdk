@@ -5,6 +5,7 @@ package ai.hanzo.api.services.async
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
+import ai.hanzo.api.models.add.IpAddress
 import ai.hanzo.api.models.delete.DeleteCreateAllowedIpParams
 import ai.hanzo.api.models.delete.DeleteCreateAllowedIpResponse
 import com.google.errorprone.annotations.MustBeClosed
@@ -29,6 +30,16 @@ interface DeleteServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeleteCreateAllowedIpResponse
 
+    /** @see createAllowedIp */
+    suspend fun createAllowedIp(
+        ipAddress: IpAddress,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): DeleteCreateAllowedIpResponse =
+        createAllowedIp(
+            DeleteCreateAllowedIpParams.builder().ipAddress(ipAddress).build(),
+            requestOptions,
+        )
+
     /**
      * A view of [DeleteServiceAsync] that provides access to raw HTTP responses for each method.
      */
@@ -52,5 +63,16 @@ interface DeleteServiceAsync {
             params: DeleteCreateAllowedIpParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeleteCreateAllowedIpResponse>
+
+        /** @see createAllowedIp */
+        @MustBeClosed
+        suspend fun createAllowedIp(
+            ipAddress: IpAddress,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<DeleteCreateAllowedIpResponse> =
+            createAllowedIp(
+                DeleteCreateAllowedIpParams.builder().ipAddress(ipAddress).build(),
+                requestOptions,
+            )
     }
 }

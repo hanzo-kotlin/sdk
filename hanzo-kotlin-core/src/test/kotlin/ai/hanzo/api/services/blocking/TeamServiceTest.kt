@@ -8,14 +8,12 @@ import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.team.BlockTeamRequest
 import ai.hanzo.api.models.team.Member
 import ai.hanzo.api.models.team.TeamAddMemberParams
-import ai.hanzo.api.models.team.TeamBlockParams
 import ai.hanzo.api.models.team.TeamCreateParams
 import ai.hanzo.api.models.team.TeamDeleteParams
 import ai.hanzo.api.models.team.TeamListAvailableParams
 import ai.hanzo.api.models.team.TeamListParams
 import ai.hanzo.api.models.team.TeamRemoveMemberParams
 import ai.hanzo.api.models.team.TeamRetrieveInfoParams
-import ai.hanzo.api.models.team.TeamUnblockParams
 import ai.hanzo.api.models.team.TeamUpdateMemberParams
 import ai.hanzo.api.models.team.TeamUpdateParams
 import org.junit.jupiter.api.Disabled
@@ -179,12 +177,7 @@ internal class TeamServiceTest {
                 .build()
         val teamService = client.team()
 
-        val response =
-            teamService.block(
-                TeamBlockParams.builder()
-                    .blockTeamRequest(BlockTeamRequest.builder().teamId("team_id").build())
-                    .build()
-            )
+        val response = teamService.block(BlockTeamRequest.builder().teamId("team_id").build())
 
         response.validate()
     }
@@ -272,12 +265,7 @@ internal class TeamServiceTest {
                 .build()
         val teamService = client.team()
 
-        val response =
-            teamService.unblock(
-                TeamUnblockParams.builder()
-                    .blockTeamRequest(BlockTeamRequest.builder().teamId("team_id").build())
-                    .build()
-            )
+        val response = teamService.unblock(BlockTeamRequest.builder().teamId("team_id").build())
 
         response.validate()
     }

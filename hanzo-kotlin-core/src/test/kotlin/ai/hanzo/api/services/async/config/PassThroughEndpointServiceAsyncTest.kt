@@ -5,7 +5,6 @@ package ai.hanzo.api.services.async.config
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
-import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointCreateParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointDeleteParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointListParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughGenericEndpoint
@@ -28,14 +27,10 @@ internal class PassThroughEndpointServiceAsyncTest {
 
         val passThroughEndpoint =
             passThroughEndpointServiceAsync.create(
-                PassThroughEndpointCreateParams.builder()
-                    .passThroughGenericEndpoint(
-                        PassThroughGenericEndpoint.builder()
-                            .headers(JsonValue.from(mapOf<String, Any>()))
-                            .path("path")
-                            .target("target")
-                            .build()
-                    )
+                PassThroughGenericEndpoint.builder()
+                    .headers(JsonValue.from(mapOf<String, Any>()))
+                    .path("path")
+                    .target("target")
                     .build()
             )
 

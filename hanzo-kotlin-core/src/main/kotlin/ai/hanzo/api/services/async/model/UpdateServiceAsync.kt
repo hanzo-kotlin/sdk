@@ -5,6 +5,7 @@ package ai.hanzo.api.services.async.model
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
+import ai.hanzo.api.models.model.update.UpdateDeployment
 import ai.hanzo.api.models.model.update.UpdateFullParams
 import ai.hanzo.api.models.model.update.UpdateFullResponse
 import ai.hanzo.api.models.model.update.UpdatePartialParams
@@ -30,6 +31,13 @@ interface UpdateServiceAsync {
         params: UpdateFullParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UpdateFullResponse
+
+    /** @see full */
+    suspend fun full(
+        updateDeployment: UpdateDeployment,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): UpdateFullResponse =
+        full(UpdateFullParams.builder().updateDeployment(updateDeployment).build(), requestOptions)
 
     /**
      * PATCH Endpoint for partial model updates.
@@ -80,6 +88,17 @@ interface UpdateServiceAsync {
             params: UpdateFullParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<UpdateFullResponse>
+
+        /** @see full */
+        @MustBeClosed
+        suspend fun full(
+            updateDeployment: UpdateDeployment,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<UpdateFullResponse> =
+            full(
+                UpdateFullParams.builder().updateDeployment(updateDeployment).build(),
+                requestOptions,
+            )
 
         /**
          * Returns a raw HTTP response for `patch /model/{model_id}/update`, but is otherwise the

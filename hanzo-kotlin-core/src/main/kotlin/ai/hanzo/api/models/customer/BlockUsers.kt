@@ -18,6 +18,7 @@ import java.util.Collections
 import java.util.Objects
 
 class BlockUsers
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val userIds: JsonField<List<String>>,
     private val additionalProperties: MutableMap<String, JsonValue>,

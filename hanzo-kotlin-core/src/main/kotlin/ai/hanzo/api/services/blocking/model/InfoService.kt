@@ -38,20 +38,21 @@ interface InfoService {
      * Example Response:
      * ```json
      * {
-     *   "data": [
-     *     {
-     *       "model_name": "fake-openai-endpoint",
-     *       "llm_params": {
-     *         "api_base": "https://exampleopenaiendpoint-production.up.railway.app/",
-     *         "model": "openai/fake"
-     *       },
-     *       "model_info": {
-     *         "id": "112f74fab24a7a5245d2ced3536dd8f5f9192c57ee6e332af0f0512e08bed5af",
-     *         "db_model": false
-     *       }
-     *     }
-     *   ]
+     *     "data": [
+     *                 {
+     *                     "model_name": "fake-openai-endpoint",
+     *                     "llm_params": {
+     *                         "api_base": "https://exampleopenaiendpoint-production.up.railway.app/",
+     *                         "model": "openai/fake"
+     *                     },
+     *                     "model_info": {
+     *                         "id": "112f74fab24a7a5245d2ced3536dd8f5f9192c57ee6e332af0f0512e08bed5af",
+     *                         "db_model": false
+     *                     }
+     *                 }
+     *             ]
      * }
+     *
      * ```
      */
     fun list(

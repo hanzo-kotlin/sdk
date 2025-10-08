@@ -5,6 +5,7 @@ package ai.hanzo.api.services.blocking
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
+import ai.hanzo.api.models.key.BlockKeyRequest
 import ai.hanzo.api.models.key.GenerateKeyResponse
 import ai.hanzo.api.models.key.KeyBlockParams
 import ai.hanzo.api.models.key.KeyBlockResponse
@@ -169,6 +170,13 @@ interface KeyService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): KeyBlockResponse?
 
+    /** @see block */
+    fun block(
+        blockKeyRequest: BlockKeyRequest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): KeyBlockResponse? =
+        block(KeyBlockParams.builder().blockKeyRequest(blockKeyRequest).build(), requestOptions)
+
     /**
      * Check the health of the key
      *
@@ -188,7 +196,9 @@ interface KeyService {
      * {
      *   "key": "healthy",
      *   "logging_callbacks": {
-     *     "callbacks": ["gcs_bucket"],
+     *     "callbacks": [
+     *       "gcs_bucket"
+     *     ],
      *     "status": "healthy",
      *     "details": "No logger exceptions triggered, system is healthy. Manually check if logs were sent to ['gcs_bucket']"
      *   }
@@ -200,7 +210,9 @@ interface KeyService {
      * {
      *   "key": "unhealthy",
      *   "logging_callbacks": {
-     *     "callbacks": ["gcs_bucket"],
+     *     "callbacks": [
+     *       "gcs_bucket"
+     *     ],
      *     "status": "unhealthy",
      *     "details": "Logger exceptions triggered, system is unhealthy: Failed to load vertex credentials. Check to see if credentials containing partial/invalid information."
      *   }
@@ -412,6 +424,13 @@ interface KeyService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): KeyUnblockResponse
 
+    /** @see unblock */
+    fun unblock(
+        blockKeyRequest: BlockKeyRequest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): KeyUnblockResponse =
+        unblock(KeyUnblockParams.builder().blockKeyRequest(blockKeyRequest).build(), requestOptions)
+
     /** A view of [KeyService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
 
@@ -473,6 +492,14 @@ interface KeyService {
             params: KeyBlockParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<KeyBlockResponse?>
+
+        /** @see block */
+        @MustBeClosed
+        fun block(
+            blockKeyRequest: BlockKeyRequest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<KeyBlockResponse?> =
+            block(KeyBlockParams.builder().blockKeyRequest(blockKeyRequest).build(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `post /key/health`, but is otherwise the same as
@@ -555,5 +582,16 @@ interface KeyService {
             params: KeyUnblockParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<KeyUnblockResponse>
+
+        /** @see unblock */
+        @MustBeClosed
+        fun unblock(
+            blockKeyRequest: BlockKeyRequest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<KeyUnblockResponse> =
+            unblock(
+                KeyUnblockParams.builder().blockKeyRequest(blockKeyRequest).build(),
+                requestOptions,
+            )
     }
 }

@@ -620,6 +620,7 @@ private constructor(
      * None budget_duration: Optional[str] = None guardrails: Optional[List[str]] = None
      */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val teamId: JsonField<String>,
         private val blocked: JsonField<Boolean>,

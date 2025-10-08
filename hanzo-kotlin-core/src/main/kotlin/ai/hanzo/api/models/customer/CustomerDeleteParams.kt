@@ -263,6 +263,7 @@ private constructor(
 
     /** Delete multiple Customers */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val userIds: JsonField<List<String>>,
         private val additionalProperties: MutableMap<String, JsonValue>,

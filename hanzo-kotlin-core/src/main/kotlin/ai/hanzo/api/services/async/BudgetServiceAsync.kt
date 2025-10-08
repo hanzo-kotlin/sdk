@@ -13,6 +13,7 @@ import ai.hanzo.api.models.budget.BudgetInfoParams
 import ai.hanzo.api.models.budget.BudgetInfoResponse
 import ai.hanzo.api.models.budget.BudgetListParams
 import ai.hanzo.api.models.budget.BudgetListResponse
+import ai.hanzo.api.models.budget.BudgetNew
 import ai.hanzo.api.models.budget.BudgetSettingsParams
 import ai.hanzo.api.models.budget.BudgetSettingsResponse
 import ai.hanzo.api.models.budget.BudgetUpdateParams
@@ -54,6 +55,13 @@ interface BudgetServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BudgetCreateResponse
 
+    /** @see create */
+    suspend fun create(
+        budgetNew: BudgetNew,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BudgetCreateResponse =
+        create(BudgetCreateParams.builder().budgetNew(budgetNew).build(), requestOptions)
+
     /**
      * Update an existing budget object.
      *
@@ -74,6 +82,13 @@ interface BudgetServiceAsync {
         params: BudgetUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): BudgetUpdateResponse
+
+    /** @see update */
+    suspend fun update(
+        budgetNew: BudgetNew,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): BudgetUpdateResponse =
+        update(BudgetUpdateParams.builder().budgetNew(budgetNew).build(), requestOptions)
 
     /** List all the created budgets in proxy db. Used on Admin UI. */
     suspend fun list(
@@ -144,6 +159,14 @@ interface BudgetServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BudgetCreateResponse>
 
+        /** @see create */
+        @MustBeClosed
+        suspend fun create(
+            budgetNew: BudgetNew,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BudgetCreateResponse> =
+            create(BudgetCreateParams.builder().budgetNew(budgetNew).build(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /budget/update`, but is otherwise the same as
          * [BudgetServiceAsync.update].
@@ -153,6 +176,14 @@ interface BudgetServiceAsync {
             params: BudgetUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<BudgetUpdateResponse>
+
+        /** @see update */
+        @MustBeClosed
+        suspend fun update(
+            budgetNew: BudgetNew,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<BudgetUpdateResponse> =
+            update(BudgetUpdateParams.builder().budgetNew(budgetNew).build(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /budget/list`, but is otherwise the same as

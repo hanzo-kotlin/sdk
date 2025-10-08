@@ -16,6 +16,7 @@ import java.util.Collections
 import java.util.Objects
 
 class BudgetNew
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val budgetDuration: JsonField<String>,
     private val budgetId: JsonField<String>,

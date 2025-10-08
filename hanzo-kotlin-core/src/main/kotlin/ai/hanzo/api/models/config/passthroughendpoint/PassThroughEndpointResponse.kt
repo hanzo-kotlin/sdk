@@ -18,6 +18,7 @@ import java.util.Collections
 import java.util.Objects
 
 class PassThroughEndpointResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val endpoints: JsonField<List<PassThroughGenericEndpoint>>,
     private val additionalProperties: MutableMap<String, JsonValue>,

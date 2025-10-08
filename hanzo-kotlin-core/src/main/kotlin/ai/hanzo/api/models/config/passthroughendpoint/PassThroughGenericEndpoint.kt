@@ -16,6 +16,7 @@ import java.util.Collections
 import java.util.Objects
 
 class PassThroughGenericEndpoint
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val headers: JsonValue,
     private val path: JsonField<String>,

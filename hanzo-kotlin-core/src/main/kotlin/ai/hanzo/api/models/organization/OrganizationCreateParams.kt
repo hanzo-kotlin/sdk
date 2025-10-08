@@ -28,27 +28,27 @@ import java.util.Objects
  * Only admins can create orgs.
  *
  * # Parameters
- * - organization_alias: _str_ - The name of the organization.
- * - models: _List_ - The models the organization has access to.
- * - budget_id: _Optional[str]_ - The id for a budget (tpm/rpm/max budget) for the organization.
+ * - organization_alias: *str* - The name of the organization.
+ * - models: *List* - The models the organization has access to.
+ * - budget_id: *Optional[str]* - The id for a budget (tpm/rpm/max budget) for the organization.
  *
- * ### IF NO BUDGET ID - CREATE ONE WITH THESE PARAMS
- * - max_budget: _Optional[float]_ - Max budget for org
- * - tpm_limit: _Optional[int]_ - Max tpm limit for org
- * - rpm_limit: _Optional[int]_ - Max rpm limit for org
- * - max_parallel_requests: _Optional[int]_ - [Not Implemented Yet] Max parallel requests for org
- * - soft_budget: _Optional[float]_ - [Not Implemented Yet] Get a slack alert when this soft budget
+ * ### IF NO BUDGET ID - CREATE ONE WITH THESE PARAMS ###
+ * - max_budget: *Optional[float]* - Max budget for org
+ * - tpm_limit: *Optional[int]* - Max tpm limit for org
+ * - rpm_limit: *Optional[int]* - Max rpm limit for org
+ * - max_parallel_requests: *Optional[int]* - [Not Implemented Yet] Max parallel requests for org
+ * - soft_budget: *Optional[float]* - [Not Implemented Yet] Get a slack alert when this soft budget
  *   is reached. Don't block requests.
- * - model_max_budget: _Optional[dict]_ - Max budget for a specific model
- * - budget_duration: _Optional[str]_ - Frequency of reseting org budget
- * - metadata: _Optional[dict]_ - Metadata for organization, store information for organization.
+ * - model_max_budget: *Optional[dict]* - Max budget for a specific model
+ * - budget_duration: *Optional[str]* - Frequency of reseting org budget
+ * - metadata: *Optional[dict]* - Metadata for organization, store information for organization.
  *   Example metadata - {"extra_info": "some info"}
- * - blocked: _bool_ - Flag indicating if the org is blocked or not - will stop all calls from keys
+ * - blocked: *bool* - Flag indicating if the org is blocked or not - will stop all calls from keys
  *   with this org_id.
- * - tags: _Optional[List[str]]_ - Tags for
+ * - tags: *Optional[List[str]]* - Tags for
  *   [tracking spend](https://llm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
  *   and/or doing [tag-based routing](https://llm.vercel.app/docs/proxy/tag_routing).
- * - organization_id: _Optional[str]_ - The organization id of the team. Default is None. Create via
+ * - organization_id: *Optional[str]* - The organization id of the team. Default is None. Create via
  *   `/organization/new`.
  * - model_aliases: Optional[dict] - Model aliases for the team.
  *   [Docs](https://docs.hanzo.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
@@ -586,6 +586,7 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val organizationAlias: JsonField<String>,
         private val budgetDuration: JsonField<String>,

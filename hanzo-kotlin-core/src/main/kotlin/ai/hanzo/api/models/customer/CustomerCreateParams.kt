@@ -655,6 +655,7 @@ private constructor(
 
     /** Create a new customer, allocate a budget to them */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val userId: JsonField<String>,
         private val alias: JsonField<String>,

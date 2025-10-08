@@ -29,6 +29,7 @@ import java.util.Collections
 import java.util.Objects
 
 class KeyBlockResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val token: JsonField<String>,
     private val aliases: JsonValue,

@@ -5,6 +5,7 @@ package ai.hanzo.api.services.async
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
+import ai.hanzo.api.models.customer.BlockUsers
 import ai.hanzo.api.models.customer.CustomerBlockParams
 import ai.hanzo.api.models.customer.CustomerBlockResponse
 import ai.hanzo.api.models.customer.CustomerCreateParams
@@ -170,6 +171,13 @@ interface CustomerServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CustomerBlockResponse
 
+    /** @see block */
+    suspend fun block(
+        blockUsers: BlockUsers,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CustomerBlockResponse =
+        block(CustomerBlockParams.builder().blockUsers(blockUsers).build(), requestOptions)
+
     /**
      * Get information about an end-user. An `end_user` is a customer (external user) of the proxy.
      *
@@ -203,6 +211,13 @@ interface CustomerServiceAsync {
         params: CustomerUnblockParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CustomerUnblockResponse
+
+    /** @see unblock */
+    suspend fun unblock(
+        blockUsers: BlockUsers,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CustomerUnblockResponse =
+        unblock(CustomerUnblockParams.builder().blockUsers(blockUsers).build(), requestOptions)
 
     /**
      * A view of [CustomerServiceAsync] that provides access to raw HTTP responses for each method.
@@ -275,6 +290,14 @@ interface CustomerServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CustomerBlockResponse>
 
+        /** @see block */
+        @MustBeClosed
+        suspend fun block(
+            blockUsers: BlockUsers,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CustomerBlockResponse> =
+            block(CustomerBlockParams.builder().blockUsers(blockUsers).build(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `get /customer/info`, but is otherwise the same as
          * [CustomerServiceAsync.retrieveInfo].
@@ -294,5 +317,13 @@ interface CustomerServiceAsync {
             params: CustomerUnblockParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CustomerUnblockResponse>
+
+        /** @see unblock */
+        @MustBeClosed
+        suspend fun unblock(
+            blockUsers: BlockUsers,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CustomerUnblockResponse> =
+            unblock(CustomerUnblockParams.builder().blockUsers(blockUsers).build(), requestOptions)
     }
 }

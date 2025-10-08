@@ -14,7 +14,7 @@ import java.util.Objects
  * in the headers
  *
  * Parameters:
- * - **keys**: _Optional[List[str]]_ - A list of keys to delete from the cache. Example {"keys":
+ * - **keys**: *Optional[List[str]]* - A list of keys to delete from the cache. Example {"keys":
  *   ["key1", "key2"]}
  *
  * ```shell

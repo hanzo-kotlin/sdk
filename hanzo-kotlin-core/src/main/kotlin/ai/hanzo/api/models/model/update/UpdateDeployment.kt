@@ -30,6 +30,7 @@ import java.util.Collections
 import java.util.Objects
 
 class UpdateDeployment
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val llmParams: JsonField<LlmParams>,
     private val modelInfo: JsonField<ModelInfo>,
@@ -213,6 +214,7 @@ private constructor(
             (if (modelName.asKnown() == null) 0 else 1)
 
     class LlmParams
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val apiBase: JsonField<String>,
         private val apiKey: JsonField<String>,

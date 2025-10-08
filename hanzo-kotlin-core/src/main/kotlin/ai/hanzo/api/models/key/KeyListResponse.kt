@@ -31,6 +31,7 @@ import java.util.Collections
 import java.util.Objects
 
 class KeyListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val currentPage: JsonField<Long>,
     private val keys: JsonField<List<Key>>,
@@ -456,6 +457,7 @@ private constructor(
 
         /** Return the row in the db */
         class UserApiKeyAuth
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val token: JsonField<String>,
             private val aliases: JsonValue,

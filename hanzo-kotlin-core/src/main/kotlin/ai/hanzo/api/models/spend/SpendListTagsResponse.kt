@@ -29,6 +29,7 @@ import java.util.Collections
 import java.util.Objects
 
 class SpendListTagsResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val apiKey: JsonField<String>,
     private val callType: JsonField<String>,

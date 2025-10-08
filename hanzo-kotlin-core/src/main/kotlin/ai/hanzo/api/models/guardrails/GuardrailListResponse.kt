@@ -29,6 +29,7 @@ import java.util.Collections
 import java.util.Objects
 
 class GuardrailListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val guardrails: JsonField<List<Guardrail>>,
     private val additionalProperties: MutableMap<String, JsonValue>,
@@ -182,6 +183,7 @@ private constructor(
     internal fun validity(): Int = (guardrails.asKnown()?.sumOf { it.validity().toInt() } ?: 0)
 
     class Guardrail
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val guardrailInfo: JsonValue,
         private val guardrailName: JsonField<String>,
@@ -383,6 +385,7 @@ private constructor(
 
         /** The returned LLM Params object for /guardrails/list */
         class LlmParams
+        @JsonCreator(mode = JsonCreator.Mode.DISABLED)
         private constructor(
             private val guardrail: JsonField<String>,
             private val mode: JsonField<Mode>,
