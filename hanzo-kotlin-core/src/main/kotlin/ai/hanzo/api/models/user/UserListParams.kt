@@ -12,10 +12,13 @@ import java.util.Objects
  *
  * Used by the UI to populate the user lists.
  *
- * Parameters: role: Optional[str] Filter users by role. Can be one of: - proxy_admin -
- * proxy_admin_viewer - internal_user - internal_user_viewer user_ids: Optional[str] Get list of
- * users by user_ids. Comma separated list of user_ids. page: int The page number to return
- * page_size: int The number of items per page
+ * Parameters: role: Optional[str] Filter users by role. Can be one of:
+ * - proxy_admin
+ * - proxy_admin_viewer
+ * - internal_user
+ * - internal_user_viewer user_ids: Optional[str] Get list of users by user_ids. Comma separated
+ *   list of user_ids. page: int The page number to return page_size: int The number of items per
+ *   page
  *
  * Currently - admin-only endpoint.
  *

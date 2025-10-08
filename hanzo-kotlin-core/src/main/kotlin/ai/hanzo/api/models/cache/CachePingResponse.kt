@@ -16,6 +16,7 @@ import java.util.Collections
 import java.util.Objects
 
 class CachePingResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val cacheType: JsonField<String>,
     private val status: JsonField<String>,

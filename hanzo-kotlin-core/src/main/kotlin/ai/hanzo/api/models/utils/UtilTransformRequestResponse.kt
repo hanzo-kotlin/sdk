@@ -15,6 +15,7 @@ import java.util.Collections
 import java.util.Objects
 
 class UtilTransformRequestResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val error: JsonField<String>,
     private val rawRequestApiBase: JsonField<String>,

@@ -124,45 +124,55 @@ interface UserServiceAsync {
      * }'
      * ```
      *
-     * Parameters: - user_id: Optional[str] - Specify a user id. If not set, a unique id will be
-     * generated. - user_email: Optional[str] - Specify a user email. - password: Optional[str] -
-     * Specify a user password. - user_alias: Optional[str] - A descriptive name for you to know who
-     * this user id refers to. - teams: Optional[list] - specify a list of team id's a user belongs
-     * to. - send_invite_email: Optional[bool] - Specify if an invite email should be sent. -
-     * user_role: Optional[str] - Specify a user role - "proxy_admin", "proxy_admin_viewer",
-     * "internal_user", "internal_user_viewer", "team", "customer". Info about each role here:
-     * `https://github.com/hanzoai/llm/llm/proxy/_types.py#L20` - max_budget: Optional[float] -
-     * Specify max budget for a given user. - budget_duration: Optional[str] - Budget is reset at
-     * the end of specified duration. If not set, budget is never reset. You can set duration as
-     * seconds ("30s"), minutes ("30m"), hours ("30h"), days ("30d"), months ("1mo"). - models:
-     * Optional[list] - Model_name's a user is allowed to call. (if empty, key is allowed to call
-     * all models) - tpm_limit: Optional[int] - Specify tpm limit for a given user (Tokens per
-     * minute) - rpm_limit: Optional[int] - Specify rpm limit for a given user (Requests per
-     * minute) - auto_create_key: bool - Default=True. Flag used for returning a key as part of the
-     * /user/new response - aliases: Optional[dict] - Model aliases for the
-     * user - [Docs](https://llm.vercel.app/docs/proxy/virtual_keys#model-aliases) - config:
-     * Optional[dict] - [DEPRECATED PARAM] User-specific config. - allowed_cache_controls:
-     * Optional[list] - List of allowed cache control values. Example - ["no-cache", "no-store"].
-     * See all values - https://docs.hanzo.ai/docs/proxy/caching#turn-on--off-caching-per-request- -
-     * blocked: Optional[bool] - [Not Implemented Yet] Whether the user is blocked. - guardrails:
-     * Optional[List[str]] - [Not Implemented Yet] List of active guardrails for the user -
-     * permissions: Optional[dict] - [Not Implemented Yet] User-specific permissions, eg. turning
-     * off pii masking. - metadata: Optional[dict] - Metadata for user, store information for user.
-     * Example metadata = {"team": "core-infra", "app": "app2", "email": "z@hanzo.ai" } -
-     * max_parallel_requests: Optional[int] - Rate limit a user based on the number of parallel
-     * requests. Raises 429 error, if user's parallel requests > x. - soft_budget: Optional[float] -
-     * Get alerts when user crosses given budget, doesn't block requests. - model_max_budget:
-     * Optional[dict] - Model-specific max budget for user.
-     * [Docs](https://docs.hanzo.ai/docs/proxy/users#add-model-specific-budgets-to-keys) -
-     * model_rpm_limit: Optional[float] - Model-specific rpm limit for user.
-     * [Docs](https://docs.hanzo.ai/docs/proxy/users#add-model-specific-limits-to-keys) -
-     * model_tpm_limit: Optional[float] - Model-specific tpm limit for user.
-     * [Docs](https://docs.hanzo.ai/docs/proxy/users#add-model-specific-limits-to-keys) - spend:
-     * Optional[float] - Amount spent by user. Default is 0. Will be updated by proxy whenever user
-     * is used. You can set duration as seconds ("30s"), minutes ("30m"), hours ("30h"), days
-     * ("30d"), months ("1mo"). - team_id: Optional[str] - [DEPRECATED PARAM] The team id of the
-     * user. Default is None. - duration: Optional[str] - [NOT IMPLEMENTED]. - key_alias:
-     * Optional[str] - [NOT IMPLEMENTED].
+     * Parameters:
+     * - user_id: Optional[str] - Specify a user id. If not set, a unique id will be generated.
+     * - user_email: Optional[str] - Specify a user email.
+     * - password: Optional[str] - Specify a user password.
+     * - user_alias: Optional[str] - A descriptive name for you to know who this user id refers to.
+     * - teams: Optional[list] - specify a list of team id's a user belongs to.
+     * - send_invite_email: Optional[bool] - Specify if an invite email should be sent.
+     * - user_role: Optional[str] - Specify a user role - "proxy_admin", "proxy_admin_viewer",
+     *   "internal_user", "internal_user_viewer", "team", "customer". Info about each role here:
+     *   `https://github.com/hanzoai/llm/llm/proxy/_types.py#L20`
+     * - max_budget: Optional[float] - Specify max budget for a given user.
+     * - budget_duration: Optional[str] - Budget is reset at the end of specified duration. If not
+     *   set, budget is never reset. You can set duration as seconds ("30s"), minutes ("30m"), hours
+     *   ("30h"), days ("30d"), months ("1mo").
+     * - models: Optional[list] - Model_name's a user is allowed to call. (if empty, key is allowed
+     *   to call all models)
+     * - tpm_limit: Optional[int] - Specify tpm limit for a given user (Tokens per minute)
+     * - rpm_limit: Optional[int] - Specify rpm limit for a given user (Requests per minute)
+     * - auto_create_key: bool - Default=True. Flag used for returning a key as part of the
+     *   /user/new response
+     * - aliases: Optional[dict] - Model aliases for the
+     *   user - [Docs](https://llm.vercel.app/docs/proxy/virtual_keys#model-aliases)
+     * - config: Optional[dict] - [DEPRECATED PARAM] User-specific config.
+     * - allowed_cache_controls: Optional[list] - List of allowed cache control values.
+     *   Example - ["no-cache", "no-store"]. See all values -
+     *   https://docs.hanzo.ai/docs/proxy/caching#turn-on--off-caching-per-request-
+     * - blocked: Optional[bool] - [Not Implemented Yet] Whether the user is blocked.
+     * - guardrails: Optional[List[str]] - [Not Implemented Yet] List of active guardrails for the
+     *   user
+     * - permissions: Optional[dict] - [Not Implemented Yet] User-specific permissions, eg. turning
+     *   off pii masking.
+     * - metadata: Optional[dict] - Metadata for user, store information for user. Example metadata
+     *   = {"team": "core-infra", "app": "app2", "email": "z@hanzo.ai" }
+     * - max_parallel_requests: Optional[int] - Rate limit a user based on the number of parallel
+     *   requests. Raises 429 error, if user's parallel requests > x.
+     * - soft_budget: Optional[float] - Get alerts when user crosses given budget, doesn't block
+     *   requests.
+     * - model_max_budget: Optional[dict] - Model-specific max budget for user.
+     *   [Docs](https://docs.hanzo.ai/docs/proxy/users#add-model-specific-budgets-to-keys)
+     * - model_rpm_limit: Optional[float] - Model-specific rpm limit for user.
+     *   [Docs](https://docs.hanzo.ai/docs/proxy/users#add-model-specific-limits-to-keys)
+     * - model_tpm_limit: Optional[float] - Model-specific tpm limit for user.
+     *   [Docs](https://docs.hanzo.ai/docs/proxy/users#add-model-specific-limits-to-keys)
+     * - spend: Optional[float] - Amount spent by user. Default is 0. Will be updated by proxy
+     *   whenever user is used. You can set duration as seconds ("30s"), minutes ("30m"), hours
+     *   ("30h"), days ("30d"), months ("1mo").
+     * - team_id: Optional[str] - [DEPRECATED PARAM] The team id of the user. Default is None.
+     * - duration: Optional[str] - [NOT IMPLEMENTED].
+     * - key_alias: Optional[str] - [NOT IMPLEMENTED].
      */
     suspend fun update(
         params: UserUpdateParams = UserUpdateParams.none(),
@@ -178,10 +188,13 @@ interface UserServiceAsync {
      *
      * Used by the UI to populate the user lists.
      *
-     * Parameters: role: Optional[str] Filter users by role. Can be one of: - proxy_admin -
-     * proxy_admin_viewer - internal_user - internal_user_viewer user_ids: Optional[str] Get list of
-     * users by user_ids. Comma separated list of user_ids. page: int The page number to return
-     * page_size: int The number of items per page
+     * Parameters: role: Optional[str] Filter users by role. Can be one of:
+     * - proxy_admin
+     * - proxy_admin_viewer
+     * - internal_user
+     * - internal_user_viewer user_ids: Optional[str] Get list of users by user_ids. Comma separated
+     *   list of user_ids. page: int The page number to return page_size: int The number of items
+     *   per page
      *
      * Currently - admin-only endpoint.
      *

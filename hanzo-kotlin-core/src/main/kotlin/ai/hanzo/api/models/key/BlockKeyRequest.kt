@@ -16,6 +16,7 @@ import java.util.Collections
 import java.util.Objects
 
 class BlockKeyRequest
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val key: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,

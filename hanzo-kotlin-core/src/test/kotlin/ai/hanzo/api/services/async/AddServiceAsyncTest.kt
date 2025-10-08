@@ -4,7 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.add.AddAddAllowedIpParams
 import ai.hanzo.api.models.add.IpAddress
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -23,12 +22,7 @@ internal class AddServiceAsyncTest {
                 .build()
         val addServiceAsync = client.add()
 
-        val response =
-            addServiceAsync.addAllowedIp(
-                AddAddAllowedIpParams.builder()
-                    .ipAddress(IpAddress.builder().ip("ip").build())
-                    .build()
-            )
+        val response = addServiceAsync.addAllowedIp(IpAddress.builder().ip("ip").build())
 
         response.validate()
     }

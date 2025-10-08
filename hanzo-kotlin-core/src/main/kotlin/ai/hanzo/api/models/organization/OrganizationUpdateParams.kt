@@ -377,6 +377,7 @@ private constructor(
 
     /** Represents user-controllable params for a LLM_OrganizationTable record */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val budgetId: JsonField<String>,
         private val metadata: JsonValue,

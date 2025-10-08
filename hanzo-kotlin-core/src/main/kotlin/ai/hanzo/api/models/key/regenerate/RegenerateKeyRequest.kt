@@ -17,6 +17,7 @@ import java.util.Collections
 import java.util.Objects
 
 class RegenerateKeyRequest
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val aliases: JsonValue,
     private val allowedCacheControls: JsonField<List<JsonValue>>,

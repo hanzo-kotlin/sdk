@@ -28,7 +28,9 @@ import java.util.Objects
  * {
  *   "key": "healthy",
  *   "logging_callbacks": {
- *     "callbacks": ["gcs_bucket"],
+ *     "callbacks": [
+ *       "gcs_bucket"
+ *     ],
  *     "status": "healthy",
  *     "details": "No logger exceptions triggered, system is healthy. Manually check if logs were sent to ['gcs_bucket']"
  *   }
@@ -40,7 +42,9 @@ import java.util.Objects
  * {
  *   "key": "unhealthy",
  *   "logging_callbacks": {
- *     "callbacks": ["gcs_bucket"],
+ *     "callbacks": [
+ *       "gcs_bucket"
+ *     ],
  *     "status": "unhealthy",
  *     "details": "Logger exceptions triggered, system is unhealthy: Failed to load vertex credentials. Check to see if credentials containing partial/invalid information."
  *   }

@@ -39,32 +39,32 @@ interface ProviderServiceAsync {
      *
      * ```json
      * {
-     *   "providers": {
-     *     "openai": {
-     *       "budget_limit": 1e-12,
-     *       "time_period": "1d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
-     *     },
-     *     "azure": {
-     *       "budget_limit": 100.0,
-     *       "time_period": "1d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
-     *     },
-     *     "anthropic": {
-     *       "budget_limit": 100.0,
-     *       "time_period": "10d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
-     *     },
-     *     "vertex_ai": {
-     *       "budget_limit": 100.0,
-     *       "time_period": "12d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
+     *     "providers": {
+     *         "openai": {
+     *             "budget_limit": 1e-12,
+     *             "time_period": "1d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         },
+     *         "azure": {
+     *             "budget_limit": 100.0,
+     *             "time_period": "1d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         },
+     *         "anthropic": {
+     *             "budget_limit": 100.0,
+     *             "time_period": "10d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         },
+     *         "vertex_ai": {
+     *             "budget_limit": 100.0,
+     *             "time_period": "12d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         }
      *     }
-     *   }
      * }
      * ```
      */

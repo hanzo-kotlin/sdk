@@ -423,6 +423,7 @@ private constructor(
 
     /** Update a Customer, use this to update customer budgets etc */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val userId: JsonField<String>,
         private val alias: JsonField<String>,

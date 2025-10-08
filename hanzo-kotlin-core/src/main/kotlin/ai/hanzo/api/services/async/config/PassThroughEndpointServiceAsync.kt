@@ -12,6 +12,7 @@ import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointListPar
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointResponse
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointUpdateParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointUpdateResponse
+import ai.hanzo.api.models.config.passthroughendpoint.PassThroughGenericEndpoint
 import com.google.errorprone.annotations.MustBeClosed
 
 interface PassThroughEndpointServiceAsync {
@@ -33,6 +34,18 @@ interface PassThroughEndpointServiceAsync {
         params: PassThroughEndpointCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): PassThroughEndpointCreateResponse
+
+    /** @see create */
+    suspend fun create(
+        passThroughGenericEndpoint: PassThroughGenericEndpoint,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): PassThroughEndpointCreateResponse =
+        create(
+            PassThroughEndpointCreateParams.builder()
+                .passThroughGenericEndpoint(passThroughGenericEndpoint)
+                .build(),
+            requestOptions,
+        )
 
     /** Update a pass-through endpoint */
     suspend fun update(
@@ -103,6 +116,19 @@ interface PassThroughEndpointServiceAsync {
             params: PassThroughEndpointCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<PassThroughEndpointCreateResponse>
+
+        /** @see create */
+        @MustBeClosed
+        suspend fun create(
+            passThroughGenericEndpoint: PassThroughGenericEndpoint,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<PassThroughEndpointCreateResponse> =
+            create(
+                PassThroughEndpointCreateParams.builder()
+                    .passThroughGenericEndpoint(passThroughGenericEndpoint)
+                    .build(),
+                requestOptions,
+            )
 
         /**
          * Returns a raw HTTP response for `post /config/pass_through_endpoint/{endpoint_id}`, but

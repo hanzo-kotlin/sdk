@@ -17,6 +17,7 @@ import java.util.Collections
 import java.util.Objects
 
 class CustomerListResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val blocked: JsonField<Boolean>,
     private val userId: JsonField<String>,
@@ -501,6 +502,7 @@ private constructor(
 
     /** Represents user-controllable params for a LLM_BudgetTable record */
     class LlmBudgetTable
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val budgetDuration: JsonField<String>,
         private val maxBudget: JsonField<Double>,

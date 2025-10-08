@@ -30,6 +30,7 @@ import java.util.Collections
 import java.util.Objects
 
 class TeamCreateResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val teamId: JsonField<String>,
     private val admins: JsonField<List<JsonValue>>,
@@ -868,6 +869,7 @@ private constructor(
             (if (tpmLimit.asKnown() == null) 0 else 1)
 
     class LlmModelTable
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val createdBy: JsonField<String>,
         private val updatedBy: JsonField<String>,

@@ -6,11 +6,9 @@ import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.customer.BlockUsers
-import ai.hanzo.api.models.customer.CustomerBlockParams
 import ai.hanzo.api.models.customer.CustomerCreateParams
 import ai.hanzo.api.models.customer.CustomerDeleteParams
 import ai.hanzo.api.models.customer.CustomerRetrieveInfoParams
-import ai.hanzo.api.models.customer.CustomerUnblockParams
 import ai.hanzo.api.models.customer.CustomerUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -132,12 +130,7 @@ internal class CustomerServiceTest {
                 .build()
         val customerService = client.customer()
 
-        val response =
-            customerService.block(
-                CustomerBlockParams.builder()
-                    .blockUsers(BlockUsers.builder().addUserId("string").build())
-                    .build()
-            )
+        val response = customerService.block(BlockUsers.builder().addUserId("string").build())
 
         response.validate()
     }
@@ -170,12 +163,7 @@ internal class CustomerServiceTest {
                 .build()
         val customerService = client.customer()
 
-        val response =
-            customerService.unblock(
-                CustomerUnblockParams.builder()
-                    .blockUsers(BlockUsers.builder().addUserId("string").build())
-                    .build()
-            )
+        val response = customerService.unblock(BlockUsers.builder().addUserId("string").build())
 
         response.validate()
     }

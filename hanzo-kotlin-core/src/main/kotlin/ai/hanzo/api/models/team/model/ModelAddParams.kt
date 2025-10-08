@@ -285,6 +285,7 @@ private constructor(
 
     /** Request to add models to a team */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val models: JsonField<List<String>>,
         private val teamId: JsonField<String>,

@@ -17,6 +17,7 @@ import java.util.Collections
 import java.util.Objects
 
 class Member
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val role: JsonField<Role>,
     private val userEmail: JsonField<String>,

@@ -20,6 +20,7 @@ import java.util.Collections
 import java.util.Objects
 
 class UserCreateResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val expires: JsonField<OffsetDateTime>,
     private val key: JsonField<String>,

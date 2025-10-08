@@ -5,12 +5,10 @@ package ai.hanzo.api.services.async
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
-import ai.hanzo.api.models.budget.BudgetCreateParams
 import ai.hanzo.api.models.budget.BudgetDeleteParams
 import ai.hanzo.api.models.budget.BudgetInfoParams
 import ai.hanzo.api.models.budget.BudgetNew
 import ai.hanzo.api.models.budget.BudgetSettingsParams
-import ai.hanzo.api.models.budget.BudgetUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -30,33 +28,29 @@ internal class BudgetServiceAsyncTest {
 
         val budget =
             budgetServiceAsync.create(
-                BudgetCreateParams.builder()
-                    .budgetNew(
-                        BudgetNew.builder()
-                            .budgetDuration("budget_duration")
-                            .budgetId("budget_id")
-                            .maxBudget(0.0)
-                            .maxParallelRequests(0L)
-                            .modelMaxBudget(
-                                BudgetNew.ModelMaxBudget.builder()
-                                    .putAdditionalProperty(
-                                        "foo",
-                                        JsonValue.from(
-                                            mapOf(
-                                                "budget_duration" to "budget_duration",
-                                                "max_budget" to 0,
-                                                "rpm_limit" to 0,
-                                                "tpm_limit" to 0,
-                                            )
-                                        ),
+                BudgetNew.builder()
+                    .budgetDuration("budget_duration")
+                    .budgetId("budget_id")
+                    .maxBudget(0.0)
+                    .maxParallelRequests(0L)
+                    .modelMaxBudget(
+                        BudgetNew.ModelMaxBudget.builder()
+                            .putAdditionalProperty(
+                                "foo",
+                                JsonValue.from(
+                                    mapOf(
+                                        "budget_duration" to "budget_duration",
+                                        "max_budget" to 0,
+                                        "rpm_limit" to 0,
+                                        "tpm_limit" to 0,
                                     )
-                                    .build()
+                                ),
                             )
-                            .rpmLimit(0L)
-                            .softBudget(0.0)
-                            .tpmLimit(0L)
                             .build()
                     )
+                    .rpmLimit(0L)
+                    .softBudget(0.0)
+                    .tpmLimit(0L)
                     .build()
             )
 
@@ -75,33 +69,29 @@ internal class BudgetServiceAsyncTest {
 
         val budget =
             budgetServiceAsync.update(
-                BudgetUpdateParams.builder()
-                    .budgetNew(
-                        BudgetNew.builder()
-                            .budgetDuration("budget_duration")
-                            .budgetId("budget_id")
-                            .maxBudget(0.0)
-                            .maxParallelRequests(0L)
-                            .modelMaxBudget(
-                                BudgetNew.ModelMaxBudget.builder()
-                                    .putAdditionalProperty(
-                                        "foo",
-                                        JsonValue.from(
-                                            mapOf(
-                                                "budget_duration" to "budget_duration",
-                                                "max_budget" to 0,
-                                                "rpm_limit" to 0,
-                                                "tpm_limit" to 0,
-                                            )
-                                        ),
+                BudgetNew.builder()
+                    .budgetDuration("budget_duration")
+                    .budgetId("budget_id")
+                    .maxBudget(0.0)
+                    .maxParallelRequests(0L)
+                    .modelMaxBudget(
+                        BudgetNew.ModelMaxBudget.builder()
+                            .putAdditionalProperty(
+                                "foo",
+                                JsonValue.from(
+                                    mapOf(
+                                        "budget_duration" to "budget_duration",
+                                        "max_budget" to 0,
+                                        "rpm_limit" to 0,
+                                        "tpm_limit" to 0,
                                     )
-                                    .build()
+                                ),
                             )
-                            .rpmLimit(0L)
-                            .softBudget(0.0)
-                            .tpmLimit(0L)
                             .build()
                     )
+                    .rpmLimit(0L)
+                    .softBudget(0.0)
+                    .tpmLimit(0L)
                     .build()
             )
 

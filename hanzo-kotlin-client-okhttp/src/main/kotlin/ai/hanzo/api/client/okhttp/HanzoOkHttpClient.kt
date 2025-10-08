@@ -5,6 +5,7 @@ package ai.hanzo.api.client.okhttp
 import ai.hanzo.api.client.HanzoClient
 import ai.hanzo.api.client.HanzoClientImpl
 import ai.hanzo.api.core.ClientOptions
+import ai.hanzo.api.core.Sleeper
 import ai.hanzo.api.core.Timeout
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.HttpClient
@@ -102,6 +103,17 @@ class HanzoOkHttpClient private constructor() {
          * needs to be overridden.
          */
         fun jsonMapper(jsonMapper: JsonMapper) = apply { clientOptions.jsonMapper(jsonMapper) }
+
+        /**
+         * The interface to use for delaying execution, like during retries.
+         *
+         * This is primarily useful for using fake delays in tests.
+         *
+         * Defaults to real execution delays.
+         *
+         * This class takes ownership of the sleeper and closes it when closed.
+         */
+        fun sleeper(sleeper: Sleeper) = apply { clientOptions.sleeper(sleeper) }
 
         /**
          * The clock to use for operations that require timing, like retries.

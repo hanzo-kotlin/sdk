@@ -16,6 +16,7 @@ import java.util.Collections
 import java.util.Objects
 
 class UtilTokenCounterResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val modelUsed: JsonField<String>,
     private val requestModel: JsonField<String>,

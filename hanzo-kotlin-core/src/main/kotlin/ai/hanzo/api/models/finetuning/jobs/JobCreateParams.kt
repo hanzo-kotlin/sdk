@@ -468,6 +468,7 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val customLlmProvider: JsonField<CustomLlmProvider>,
         private val model: JsonField<String>,
@@ -1066,6 +1067,7 @@ private constructor(
     }
 
     class Hyperparameters
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val batchSize: JsonField<BatchSize>,
         private val learningRateMultiplier: JsonField<LearningRateMultiplier>,
