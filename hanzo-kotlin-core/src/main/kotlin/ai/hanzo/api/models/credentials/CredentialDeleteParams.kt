@@ -18,6 +18,7 @@ private constructor(
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
+    /** The credential name, percent-decoded; may contain slashes */
     fun credentialName(): String? = credentialName
 
     /** Additional body properties to send with the request. */
@@ -55,6 +56,7 @@ private constructor(
                 credentialDeleteParams.additionalBodyProperties.toMutableMap()
         }
 
+        /** The credential name, percent-decoded; may contain slashes */
         fun credentialName(credentialName: String?) = apply { this.credentialName = credentialName }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {

@@ -4,7 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":hanzo-kotlin"))
+    implementation(project(":hanzo-kotlin-core"))
+    implementation(project(":hanzo-kotlin-client-okhttp"))
 }
 
 application {

@@ -9,23 +9,28 @@ import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class OrganizationUpdateMemberResponseTest {
+internal class OrganizationMembershipTableTest {
 
     @Test
     fun create() {
-        val organizationUpdateMemberResponse =
-            OrganizationUpdateMemberResponse.builder()
+        val organizationMembershipTable =
+            OrganizationMembershipTable.builder()
                 .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .organizationId("organization_id")
                 .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .userId("user_id")
                 .budgetId("budget_id")
-                .llmBudgetTable(
-                    OrganizationUpdateMemberResponse.LlmBudgetTable.builder()
+                .litellmBudgetTable(
+                    BudgetTable.builder()
                         .budgetDuration("budget_duration")
+                        .budgetId("budget_id")
                         .maxBudget(0.0)
                         .maxParallelRequests(0L)
-                        .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                        .modelMaxBudget(
+                            BudgetTable.ModelMaxBudget.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
                         .rpmLimit(0L)
                         .softBudget(0.0)
                         .tpmLimit(0L)
@@ -36,47 +41,57 @@ internal class OrganizationUpdateMemberResponseTest {
                 .userRole("user_role")
                 .build()
 
-        assertThat(organizationUpdateMemberResponse.createdAt())
+        assertThat(organizationMembershipTable.createdAt())
             .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-        assertThat(organizationUpdateMemberResponse.organizationId()).isEqualTo("organization_id")
-        assertThat(organizationUpdateMemberResponse.updatedAt())
+        assertThat(organizationMembershipTable.organizationId()).isEqualTo("organization_id")
+        assertThat(organizationMembershipTable.updatedAt())
             .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-        assertThat(organizationUpdateMemberResponse.userId()).isEqualTo("user_id")
-        assertThat(organizationUpdateMemberResponse.budgetId()).isEqualTo("budget_id")
-        assertThat(organizationUpdateMemberResponse.llmBudgetTable())
+        assertThat(organizationMembershipTable.userId()).isEqualTo("user_id")
+        assertThat(organizationMembershipTable.budgetId()).isEqualTo("budget_id")
+        assertThat(organizationMembershipTable.litellmBudgetTable())
             .isEqualTo(
-                OrganizationUpdateMemberResponse.LlmBudgetTable.builder()
+                BudgetTable.builder()
                     .budgetDuration("budget_duration")
+                    .budgetId("budget_id")
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
-                    .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                    .modelMaxBudget(
+                        BudgetTable.ModelMaxBudget.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
                     .rpmLimit(0L)
                     .softBudget(0.0)
                     .tpmLimit(0L)
                     .build()
             )
-        assertThat(organizationUpdateMemberResponse.spend()).isEqualTo(0.0)
-        assertThat(organizationUpdateMemberResponse._user())
+        assertThat(organizationMembershipTable.spend()).isEqualTo(0.0)
+        assertThat(organizationMembershipTable._user())
             .isEqualTo(JsonValue.from(mapOf<String, Any>()))
-        assertThat(organizationUpdateMemberResponse.userRole()).isEqualTo("user_role")
+        assertThat(organizationMembershipTable.userRole()).isEqualTo("user_role")
     }
 
     @Test
     fun roundtrip() {
         val jsonMapper = jsonMapper()
-        val organizationUpdateMemberResponse =
-            OrganizationUpdateMemberResponse.builder()
+        val organizationMembershipTable =
+            OrganizationMembershipTable.builder()
                 .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .organizationId("organization_id")
                 .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .userId("user_id")
                 .budgetId("budget_id")
-                .llmBudgetTable(
-                    OrganizationUpdateMemberResponse.LlmBudgetTable.builder()
+                .litellmBudgetTable(
+                    BudgetTable.builder()
                         .budgetDuration("budget_duration")
+                        .budgetId("budget_id")
                         .maxBudget(0.0)
                         .maxParallelRequests(0L)
-                        .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                        .modelMaxBudget(
+                            BudgetTable.ModelMaxBudget.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
                         .rpmLimit(0L)
                         .softBudget(0.0)
                         .tpmLimit(0L)
@@ -87,13 +102,12 @@ internal class OrganizationUpdateMemberResponseTest {
                 .userRole("user_role")
                 .build()
 
-        val roundtrippedOrganizationUpdateMemberResponse =
+        val roundtrippedOrganizationMembershipTable =
             jsonMapper.readValue(
-                jsonMapper.writeValueAsString(organizationUpdateMemberResponse),
-                jacksonTypeRef<OrganizationUpdateMemberResponse>(),
+                jsonMapper.writeValueAsString(organizationMembershipTable),
+                jacksonTypeRef<OrganizationMembershipTable>(),
             )
 
-        assertThat(roundtrippedOrganizationUpdateMemberResponse)
-            .isEqualTo(organizationUpdateMemberResponse)
+        assertThat(roundtrippedOrganizationMembershipTable).isEqualTo(organizationMembershipTable)
     }
 }

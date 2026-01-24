@@ -5,10 +5,10 @@ package ai.hanzo.api.services.blocking.organization
 import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
+import ai.hanzo.api.models.organization.OrganizationTableWithMembers
 import ai.hanzo.api.models.organization.info.InfoDeprecatedParams
 import ai.hanzo.api.models.organization.info.InfoDeprecatedResponse
 import ai.hanzo.api.models.organization.info.InfoRetrieveParams
-import ai.hanzo.api.models.organization.info.InfoRetrieveResponse
 import com.google.errorprone.annotations.MustBeClosed
 
 interface InfoService {
@@ -29,7 +29,7 @@ interface InfoService {
     fun retrieve(
         params: InfoRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): InfoRetrieveResponse
+    ): OrganizationTableWithMembers
 
     /** DEPRECATED: Use GET /organization/info instead */
     fun deprecated(
@@ -55,7 +55,7 @@ interface InfoService {
         fun retrieve(
             params: InfoRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<InfoRetrieveResponse>
+        ): HttpResponseFor<OrganizationTableWithMembers>
 
         /**
          * Returns a raw HTTP response for `post /organization/info`, but is otherwise the same as

@@ -26,17 +26,17 @@ import java.util.Objects
  */
 class KeyBlockParams
 private constructor(
-    private val llmChangedBy: String?,
+    private val litellmChangedBy: String?,
     private val blockKeyRequest: BlockKeyRequest,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
     /**
-     * The llm-changed-by header enables tracking of actions performed by authorized users on behalf
-     * of other users, providing an audit trail for accountability
+     * The litellm-changed-by header enables tracking of actions performed by authorized users on
+     * behalf of other users, providing an audit trail for accountability
      */
-    fun llmChangedBy(): String? = llmChangedBy
+    fun litellmChangedBy(): String? = litellmChangedBy
 
     fun blockKeyRequest(): BlockKeyRequest = blockKeyRequest
 
@@ -67,23 +67,25 @@ private constructor(
     /** A builder for [KeyBlockParams]. */
     class Builder internal constructor() {
 
-        private var llmChangedBy: String? = null
+        private var litellmChangedBy: String? = null
         private var blockKeyRequest: BlockKeyRequest? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         internal fun from(keyBlockParams: KeyBlockParams) = apply {
-            llmChangedBy = keyBlockParams.llmChangedBy
+            litellmChangedBy = keyBlockParams.litellmChangedBy
             blockKeyRequest = keyBlockParams.blockKeyRequest
             additionalHeaders = keyBlockParams.additionalHeaders.toBuilder()
             additionalQueryParams = keyBlockParams.additionalQueryParams.toBuilder()
         }
 
         /**
-         * The llm-changed-by header enables tracking of actions performed by authorized users on
-         * behalf of other users, providing an audit trail for accountability
+         * The litellm-changed-by header enables tracking of actions performed by authorized users
+         * on behalf of other users, providing an audit trail for accountability
          */
-        fun llmChangedBy(llmChangedBy: String?) = apply { this.llmChangedBy = llmChangedBy }
+        fun litellmChangedBy(litellmChangedBy: String?) = apply {
+            this.litellmChangedBy = litellmChangedBy
+        }
 
         fun blockKeyRequest(blockKeyRequest: BlockKeyRequest) = apply {
             this.blockKeyRequest = blockKeyRequest
@@ -201,7 +203,7 @@ private constructor(
          */
         fun build(): KeyBlockParams =
             KeyBlockParams(
-                llmChangedBy,
+                litellmChangedBy,
                 checkRequired("blockKeyRequest", blockKeyRequest),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -213,7 +215,7 @@ private constructor(
     override fun _headers(): Headers =
         Headers.builder()
             .apply {
-                llmChangedBy?.let { put("llm-changed-by", it) }
+                litellmChangedBy?.let { put("litellm-changed-by", it) }
                 putAll(additionalHeaders)
             }
             .build()
@@ -226,15 +228,15 @@ private constructor(
         }
 
         return other is KeyBlockParams &&
-            llmChangedBy == other.llmChangedBy &&
+            litellmChangedBy == other.litellmChangedBy &&
             blockKeyRequest == other.blockKeyRequest &&
             additionalHeaders == other.additionalHeaders &&
             additionalQueryParams == other.additionalQueryParams
     }
 
     override fun hashCode(): Int =
-        Objects.hash(llmChangedBy, blockKeyRequest, additionalHeaders, additionalQueryParams)
+        Objects.hash(litellmChangedBy, blockKeyRequest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
-        "KeyBlockParams{llmChangedBy=$llmChangedBy, blockKeyRequest=$blockKeyRequest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "KeyBlockParams{litellmChangedBy=$litellmChangedBy, blockKeyRequest=$blockKeyRequest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

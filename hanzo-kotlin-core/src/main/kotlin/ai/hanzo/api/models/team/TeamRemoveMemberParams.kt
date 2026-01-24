@@ -31,7 +31,7 @@ import java.util.Objects
  * -H 'Content-Type: application/json'
  * -d '{
  *     "team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849",
- *     "user_id": "dev247652@hanzo.ai"
+ *     "user_id": "krrish247652@berri.ai"
  * }'
  * ```
  */

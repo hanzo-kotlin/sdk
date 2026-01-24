@@ -34,17 +34,17 @@ import java.util.Objects
  */
 class TeamDeleteParams
 private constructor(
-    private val llmChangedBy: String?,
+    private val litellmChangedBy: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
     /**
-     * The llm-changed-by header enables tracking of actions performed by authorized users on behalf
-     * of other users, providing an audit trail for accountability
+     * The litellm-changed-by header enables tracking of actions performed by authorized users on
+     * behalf of other users, providing an audit trail for accountability
      */
-    fun llmChangedBy(): String? = llmChangedBy
+    fun litellmChangedBy(): String? = litellmChangedBy
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
@@ -85,23 +85,25 @@ private constructor(
     /** A builder for [TeamDeleteParams]. */
     class Builder internal constructor() {
 
-        private var llmChangedBy: String? = null
+        private var litellmChangedBy: String? = null
         private var body: Body.Builder = Body.builder()
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         internal fun from(teamDeleteParams: TeamDeleteParams) = apply {
-            llmChangedBy = teamDeleteParams.llmChangedBy
+            litellmChangedBy = teamDeleteParams.litellmChangedBy
             body = teamDeleteParams.body.toBuilder()
             additionalHeaders = teamDeleteParams.additionalHeaders.toBuilder()
             additionalQueryParams = teamDeleteParams.additionalQueryParams.toBuilder()
         }
 
         /**
-         * The llm-changed-by header enables tracking of actions performed by authorized users on
-         * behalf of other users, providing an audit trail for accountability
+         * The litellm-changed-by header enables tracking of actions performed by authorized users
+         * on behalf of other users, providing an audit trail for accountability
          */
-        fun llmChangedBy(llmChangedBy: String?) = apply { this.llmChangedBy = llmChangedBy }
+        fun litellmChangedBy(litellmChangedBy: String?) = apply {
+            this.litellmChangedBy = litellmChangedBy
+        }
 
         /**
          * Sets the entire request body.
@@ -261,7 +263,7 @@ private constructor(
          */
         fun build(): TeamDeleteParams =
             TeamDeleteParams(
-                llmChangedBy,
+                litellmChangedBy,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -273,7 +275,7 @@ private constructor(
     override fun _headers(): Headers =
         Headers.builder()
             .apply {
-                llmChangedBy?.let { put("llm-changed-by", it) }
+                litellmChangedBy?.let { put("litellm-changed-by", it) }
                 putAll(additionalHeaders)
             }
             .build()
@@ -457,15 +459,15 @@ private constructor(
         }
 
         return other is TeamDeleteParams &&
-            llmChangedBy == other.llmChangedBy &&
+            litellmChangedBy == other.litellmChangedBy &&
             body == other.body &&
             additionalHeaders == other.additionalHeaders &&
             additionalQueryParams == other.additionalQueryParams
     }
 
     override fun hashCode(): Int =
-        Objects.hash(llmChangedBy, body, additionalHeaders, additionalQueryParams)
+        Objects.hash(litellmChangedBy, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
-        "TeamDeleteParams{llmChangedBy=$llmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "TeamDeleteParams{litellmChangedBy=$litellmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

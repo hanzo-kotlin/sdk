@@ -61,7 +61,7 @@ import java.util.Objects
 class CallbackAddParams
 private constructor(
     private val teamId: String?,
-    private val llmChangedBy: String?,
+    private val litellmChangedBy: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
@@ -70,10 +70,10 @@ private constructor(
     fun teamId(): String? = teamId
 
     /**
-     * The llm-changed-by header enables tracking of actions performed by authorized users on behalf
-     * of other users, providing an audit trail for accountability
+     * The litellm-changed-by header enables tracking of actions performed by authorized users on
+     * behalf of other users, providing an audit trail for accountability
      */
-    fun llmChangedBy(): String? = llmChangedBy
+    fun litellmChangedBy(): String? = litellmChangedBy
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
@@ -142,14 +142,14 @@ private constructor(
     class Builder internal constructor() {
 
         private var teamId: String? = null
-        private var llmChangedBy: String? = null
+        private var litellmChangedBy: String? = null
         private var body: Body.Builder = Body.builder()
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         internal fun from(callbackAddParams: CallbackAddParams) = apply {
             teamId = callbackAddParams.teamId
-            llmChangedBy = callbackAddParams.llmChangedBy
+            litellmChangedBy = callbackAddParams.litellmChangedBy
             body = callbackAddParams.body.toBuilder()
             additionalHeaders = callbackAddParams.additionalHeaders.toBuilder()
             additionalQueryParams = callbackAddParams.additionalQueryParams.toBuilder()
@@ -158,10 +158,12 @@ private constructor(
         fun teamId(teamId: String?) = apply { this.teamId = teamId }
 
         /**
-         * The llm-changed-by header enables tracking of actions performed by authorized users on
-         * behalf of other users, providing an audit trail for accountability
+         * The litellm-changed-by header enables tracking of actions performed by authorized users
+         * on behalf of other users, providing an audit trail for accountability
          */
-        fun llmChangedBy(llmChangedBy: String?) = apply { this.llmChangedBy = llmChangedBy }
+        fun litellmChangedBy(litellmChangedBy: String?) = apply {
+            this.litellmChangedBy = litellmChangedBy
+        }
 
         /**
          * Sets the entire request body.
@@ -346,7 +348,7 @@ private constructor(
         fun build(): CallbackAddParams =
             CallbackAddParams(
                 teamId,
-                llmChangedBy,
+                litellmChangedBy,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -364,7 +366,7 @@ private constructor(
     override fun _headers(): Headers =
         Headers.builder()
             .apply {
-                llmChangedBy?.let { put("llm-changed-by", it) }
+                litellmChangedBy?.let { put("litellm-changed-by", it) }
                 putAll(additionalHeaders)
             }
             .build()
@@ -854,15 +856,15 @@ private constructor(
 
         return other is CallbackAddParams &&
             teamId == other.teamId &&
-            llmChangedBy == other.llmChangedBy &&
+            litellmChangedBy == other.litellmChangedBy &&
             body == other.body &&
             additionalHeaders == other.additionalHeaders &&
             additionalQueryParams == other.additionalQueryParams
     }
 
     override fun hashCode(): Int =
-        Objects.hash(teamId, llmChangedBy, body, additionalHeaders, additionalQueryParams)
+        Objects.hash(teamId, litellmChangedBy, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
-        "CallbackAddParams{teamId=$teamId, llmChangedBy=$llmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "CallbackAddParams{teamId=$teamId, litellmChangedBy=$litellmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

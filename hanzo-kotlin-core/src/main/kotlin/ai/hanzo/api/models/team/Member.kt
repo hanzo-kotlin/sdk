@@ -33,18 +33,25 @@ private constructor(
     ) : this(role, userEmail, userId, mutableMapOf())
 
     /**
+     * The role of the user within the team. 'admin' users can manage team settings and members,
+     * 'user' is a regular team member
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
      *   missing or null (e.g. if the server responded with an unexpected value).
      */
     fun role(): Role = role.getRequired("role")
 
     /**
+     * The email address of the user to add. Either user_id or user_email must be provided
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
     fun userEmail(): String? = userEmail.getNullable("user_email")
 
     /**
+     * The unique ID of the user to add. Either user_id or user_email must be provided
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
@@ -111,6 +118,10 @@ private constructor(
             additionalProperties = member.additionalProperties.toMutableMap()
         }
 
+        /**
+         * The role of the user within the team. 'admin' users can manage team settings and members,
+         * 'user' is a regular team member
+         */
         fun role(role: Role) = role(JsonField.of(role))
 
         /**
@@ -121,6 +132,7 @@ private constructor(
          */
         fun role(role: JsonField<Role>) = apply { this.role = role }
 
+        /** The email address of the user to add. Either user_id or user_email must be provided */
         fun userEmail(userEmail: String?) = userEmail(JsonField.ofNullable(userEmail))
 
         /**
@@ -132,6 +144,7 @@ private constructor(
          */
         fun userEmail(userEmail: JsonField<String>) = apply { this.userEmail = userEmail }
 
+        /** The unique ID of the user to add. Either user_id or user_email must be provided */
         fun userId(userId: String?) = userId(JsonField.ofNullable(userId))
 
         /**
@@ -213,6 +226,10 @@ private constructor(
             (if (userEmail.asKnown() == null) 0 else 1) +
             (if (userId.asKnown() == null) 0 else 1)
 
+    /**
+     * The role of the user within the team. 'admin' users can manage team settings and members,
+     * 'user' is a regular team member
+     */
     class Role @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
         /**

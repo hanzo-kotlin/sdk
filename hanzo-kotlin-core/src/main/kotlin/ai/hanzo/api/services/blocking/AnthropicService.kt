@@ -31,7 +31,7 @@ interface AnthropicService {
      */
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AnthropicService
 
-    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/anthropic_completion) */
     fun create(
         endpoint: String,
         params: AnthropicCreateParams = AnthropicCreateParams.none(),
@@ -49,7 +49,7 @@ interface AnthropicService {
     fun create(endpoint: String, requestOptions: RequestOptions): AnthropicCreateResponse =
         create(endpoint, AnthropicCreateParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/anthropic_completion) */
     fun retrieve(
         endpoint: String,
         params: AnthropicRetrieveParams = AnthropicRetrieveParams.none(),
@@ -67,7 +67,7 @@ interface AnthropicService {
     fun retrieve(endpoint: String, requestOptions: RequestOptions): AnthropicRetrieveResponse =
         retrieve(endpoint, AnthropicRetrieveParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/anthropic_completion) */
     fun update(
         endpoint: String,
         params: AnthropicUpdateParams = AnthropicUpdateParams.none(),
@@ -85,7 +85,7 @@ interface AnthropicService {
     fun update(endpoint: String, requestOptions: RequestOptions): AnthropicUpdateResponse =
         update(endpoint, AnthropicUpdateParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/anthropic_completion) */
     fun delete(
         endpoint: String,
         params: AnthropicDeleteParams = AnthropicDeleteParams.none(),
@@ -103,7 +103,7 @@ interface AnthropicService {
     fun delete(endpoint: String, requestOptions: RequestOptions): AnthropicDeleteResponse =
         delete(endpoint, AnthropicDeleteParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/anthropic_completion) */
     fun modify(
         endpoint: String,
         params: AnthropicModifyParams = AnthropicModifyParams.none(),

@@ -24,8 +24,8 @@ interface ModelGroupService {
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModelGroupService
 
     /**
-     * Get information about all the deployments on llm proxy, including config.yaml descriptions
-     * (except api key and api base)
+     * Get information about all the deployments on litellm proxy, including config.yaml
+     * descriptions (except api key and api base)
      * - /model_group/info returns all model groups. End users of proxy should use /model_group/info
      *   since those models will be used for /chat/completions, /embeddings, etc.
      * - /model_group/info?model_group=rerank-english-v3.0 returns all model groups for a specific
@@ -49,7 +49,8 @@ interface ModelGroupService {
      * -H 'accept: application/json'     -H 'Authorization: Bearersk-1234'
      * ```
      *
-     * Learn how to use and set wildcard models [here](https://docs.hanzo.ai/docs/wildcard_routing)
+     * Learn how to use and set wildcard models
+     * [here](https://docs.litellm.ai/docs/wildcard_routing)
      *
      * Example Response:
      * ```json

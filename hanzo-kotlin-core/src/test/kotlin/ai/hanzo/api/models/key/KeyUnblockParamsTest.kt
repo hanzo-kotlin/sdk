@@ -11,7 +11,7 @@ internal class KeyUnblockParamsTest {
     @Test
     fun create() {
         KeyUnblockParams.builder()
-            .llmChangedBy("llm-changed-by")
+            .litellmChangedBy("litellm-changed-by")
             .blockKeyRequest(BlockKeyRequest.builder().key("key").build())
             .build()
     }
@@ -20,14 +20,14 @@ internal class KeyUnblockParamsTest {
     fun headers() {
         val params =
             KeyUnblockParams.builder()
-                .llmChangedBy("llm-changed-by")
+                .litellmChangedBy("litellm-changed-by")
                 .blockKeyRequest(BlockKeyRequest.builder().key("key").build())
                 .build()
 
         val headers = params._headers()
 
         assertThat(headers)
-            .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
+            .isEqualTo(Headers.builder().put("litellm-changed-by", "litellm-changed-by").build())
     }
 
     @Test
@@ -46,7 +46,7 @@ internal class KeyUnblockParamsTest {
     fun body() {
         val params =
             KeyUnblockParams.builder()
-                .llmChangedBy("llm-changed-by")
+                .litellmChangedBy("litellm-changed-by")
                 .blockKeyRequest(BlockKeyRequest.builder().key("key").build())
                 .build()
 

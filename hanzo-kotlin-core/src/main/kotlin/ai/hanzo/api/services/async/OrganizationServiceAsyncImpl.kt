@@ -22,13 +22,11 @@ import ai.hanzo.api.models.organization.OrganizationCreateResponse
 import ai.hanzo.api.models.organization.OrganizationDeleteMemberParams
 import ai.hanzo.api.models.organization.OrganizationDeleteMemberResponse
 import ai.hanzo.api.models.organization.OrganizationDeleteParams
-import ai.hanzo.api.models.organization.OrganizationDeleteResponse
 import ai.hanzo.api.models.organization.OrganizationListParams
-import ai.hanzo.api.models.organization.OrganizationListResponse
+import ai.hanzo.api.models.organization.OrganizationMembershipTable
+import ai.hanzo.api.models.organization.OrganizationTableWithMembers
 import ai.hanzo.api.models.organization.OrganizationUpdateMemberParams
-import ai.hanzo.api.models.organization.OrganizationUpdateMemberResponse
 import ai.hanzo.api.models.organization.OrganizationUpdateParams
-import ai.hanzo.api.models.organization.OrganizationUpdateResponse
 import ai.hanzo.api.services.async.organization.InfoServiceAsync
 import ai.hanzo.api.services.async.organization.InfoServiceAsyncImpl
 
@@ -58,21 +56,21 @@ class OrganizationServiceAsyncImpl internal constructor(private val clientOption
     override suspend fun update(
         params: OrganizationUpdateParams,
         requestOptions: RequestOptions,
-    ): OrganizationUpdateResponse =
+    ): OrganizationTableWithMembers =
         // patch /organization/update
         withRawResponse().update(params, requestOptions).parse()
 
     override suspend fun list(
         params: OrganizationListParams,
         requestOptions: RequestOptions,
-    ): List<OrganizationListResponse> =
+    ): List<OrganizationTableWithMembers> =
         // get /organization/list
         withRawResponse().list(params, requestOptions).parse()
 
     override suspend fun delete(
         params: OrganizationDeleteParams,
         requestOptions: RequestOptions,
-    ): List<OrganizationDeleteResponse> =
+    ): List<OrganizationTableWithMembers> =
         // delete /organization/delete
         withRawResponse().delete(params, requestOptions).parse()
 
@@ -93,7 +91,7 @@ class OrganizationServiceAsyncImpl internal constructor(private val clientOption
     override suspend fun updateMember(
         params: OrganizationUpdateMemberParams,
         requestOptions: RequestOptions,
-    ): OrganizationUpdateMemberResponse =
+    ): OrganizationMembershipTable =
         // patch /organization/member_update
         withRawResponse().updateMember(params, requestOptions).parse()
 
@@ -144,19 +142,19 @@ class OrganizationServiceAsyncImpl internal constructor(private val clientOption
             }
         }
 
-        private val updateHandler: Handler<OrganizationUpdateResponse> =
-            jsonHandler<OrganizationUpdateResponse>(clientOptions.jsonMapper)
+        private val updateHandler: Handler<OrganizationTableWithMembers> =
+            jsonHandler<OrganizationTableWithMembers>(clientOptions.jsonMapper)
 
         override suspend fun update(
             params: OrganizationUpdateParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<OrganizationUpdateResponse> {
+        ): HttpResponseFor<OrganizationTableWithMembers> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("organization", "update")
-                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
@@ -172,13 +170,13 @@ class OrganizationServiceAsyncImpl internal constructor(private val clientOption
             }
         }
 
-        private val listHandler: Handler<List<OrganizationListResponse>> =
-            jsonHandler<List<OrganizationListResponse>>(clientOptions.jsonMapper)
+        private val listHandler: Handler<List<OrganizationTableWithMembers>> =
+            jsonHandler<List<OrganizationTableWithMembers>>(clientOptions.jsonMapper)
 
         override suspend fun list(
             params: OrganizationListParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<List<OrganizationListResponse>> {
+        ): HttpResponseFor<List<OrganizationTableWithMembers>> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
@@ -199,13 +197,13 @@ class OrganizationServiceAsyncImpl internal constructor(private val clientOption
             }
         }
 
-        private val deleteHandler: Handler<List<OrganizationDeleteResponse>> =
-            jsonHandler<List<OrganizationDeleteResponse>>(clientOptions.jsonMapper)
+        private val deleteHandler: Handler<List<OrganizationTableWithMembers>> =
+            jsonHandler<List<OrganizationTableWithMembers>>(clientOptions.jsonMapper)
 
         override suspend fun delete(
             params: OrganizationDeleteParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<List<OrganizationDeleteResponse>> {
+        ): HttpResponseFor<List<OrganizationTableWithMembers>> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
@@ -283,13 +281,13 @@ class OrganizationServiceAsyncImpl internal constructor(private val clientOption
             }
         }
 
-        private val updateMemberHandler: Handler<OrganizationUpdateMemberResponse> =
-            jsonHandler<OrganizationUpdateMemberResponse>(clientOptions.jsonMapper)
+        private val updateMemberHandler: Handler<OrganizationMembershipTable> =
+            jsonHandler<OrganizationMembershipTable>(clientOptions.jsonMapper)
 
         override suspend fun updateMember(
             params: OrganizationUpdateMemberParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<OrganizationUpdateMemberResponse> {
+        ): HttpResponseFor<OrganizationMembershipTable> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)

@@ -38,13 +38,9 @@ interface EmbeddingServiceAsync {
      * ```
      */
     suspend fun create(
-        params: EmbeddingCreateParams = EmbeddingCreateParams.none(),
+        params: EmbeddingCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EmbeddingCreateResponse
-
-    /** @see create */
-    suspend fun create(requestOptions: RequestOptions): EmbeddingCreateResponse =
-        create(EmbeddingCreateParams.none(), requestOptions)
 
     /**
      * A view of [EmbeddingServiceAsync] that provides access to raw HTTP responses for each method.
@@ -66,15 +62,8 @@ interface EmbeddingServiceAsync {
          */
         @MustBeClosed
         suspend fun create(
-            params: EmbeddingCreateParams = EmbeddingCreateParams.none(),
+            params: EmbeddingCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EmbeddingCreateResponse>
-
-        /** @see create */
-        @MustBeClosed
-        suspend fun create(
-            requestOptions: RequestOptions
-        ): HttpResponseFor<EmbeddingCreateResponse> =
-            create(EmbeddingCreateParams.none(), requestOptions)
     }
 }

@@ -31,8 +31,6 @@ import java.util.Collections
 import java.util.Objects
 
 /**
- * [BETA]
- *
  * Add new members (either via user_email or user_id) to a team
  *
  * If user doesn't exist, new user row will also be added to User Table
@@ -41,7 +39,7 @@ import java.util.Objects
  *
  * ```
  *
- * curl -X POST 'http://0.0.0.0:4000/team/member_add'     -H 'Authorization: Bearer sk-1234'     -H 'Content-Type: application/json'     -d '{"team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849", "member": {"role": "user", "user_id": "dev247652@hanzo.ai"}}'
+ * curl -X POST 'http://0.0.0.0:4000/team/member_add'     -H 'Authorization: Bearer sk-1234'     -H 'Content-Type: application/json'     -d '{"team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849", "member": {"role": "user", "user_id": "krrish247652@berri.ai"}}'
  *
  * ```
  */
@@ -53,18 +51,26 @@ private constructor(
 ) : Params {
 
     /**
+     * Member object or list of member objects to add. Each member must include either user_id or
+     * user_email, and a role
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
      *   missing or null (e.g. if the server responded with an unexpected value).
      */
     fun member(): Member = body.member()
 
     /**
+     * The ID of the team to add the member to
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
      *   missing or null (e.g. if the server responded with an unexpected value).
      */
     fun teamId(): String = body.teamId()
 
     /**
+     * Maximum budget allocated to this user within the team. If not set, user has unlimited budget
+     * within team limits
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
@@ -139,6 +145,10 @@ private constructor(
          */
         fun body(body: Body) = apply { this.body = body.toBuilder() }
 
+        /**
+         * Member object or list of member objects to add. Each member must include either user_id
+         * or user_email, and a role
+         */
         fun member(member: Member) = apply { body.member(member) }
 
         /**
@@ -155,6 +165,7 @@ private constructor(
         /** Alias for calling [Builder.member] with `Member.ofMember(member)`. */
         fun member(member: Member) = apply { body.member(member) }
 
+        /** The ID of the team to add the member to */
         fun teamId(teamId: String) = apply { body.teamId(teamId) }
 
         /**
@@ -165,6 +176,10 @@ private constructor(
          */
         fun teamId(teamId: JsonField<String>) = apply { body.teamId(teamId) }
 
+        /**
+         * Maximum budget allocated to this user within the team. If not set, user has unlimited
+         * budget within team limits
+         */
         fun maxBudgetInTeam(maxBudgetInTeam: Double?) = apply {
             body.maxBudgetInTeam(maxBudgetInTeam)
         }
@@ -331,6 +346,21 @@ private constructor(
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
+    /**
+     * Request body for adding members to a team.
+     *
+     * Example:
+     * ```json
+     * {
+     *     "team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849",
+     *     "member": {
+     *         "role": "user",
+     *         "user_id": "user123"
+     *     },
+     *     "max_budget_in_team": 100.0
+     * }
+     * ```
+     */
     class Body
     @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
@@ -350,18 +380,26 @@ private constructor(
         ) : this(member, teamId, maxBudgetInTeam, mutableMapOf())
 
         /**
+         * Member object or list of member objects to add. Each member must include either user_id
+         * or user_email, and a role
+         *
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is
          *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun member(): Member = member.getRequired("member")
 
         /**
+         * The ID of the team to add the member to
+         *
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is
          *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun teamId(): String = teamId.getRequired("team_id")
 
         /**
+         * Maximum budget allocated to this user within the team. If not set, user has unlimited
+         * budget within team limits
+         *
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
          *   server responded with an unexpected value).
          */
@@ -432,6 +470,10 @@ private constructor(
                 additionalProperties = body.additionalProperties.toMutableMap()
             }
 
+            /**
+             * Member object or list of member objects to add. Each member must include either
+             * user_id or user_email, and a role
+             */
             fun member(member: Member) = member(JsonField.of(member))
 
             /**
@@ -449,6 +491,7 @@ private constructor(
             /** Alias for calling [Builder.member] with `Member.ofMember(member)`. */
             fun member(member: Member) = member(Member.ofMember(member))
 
+            /** The ID of the team to add the member to */
             fun teamId(teamId: String) = teamId(JsonField.of(teamId))
 
             /**
@@ -460,6 +503,10 @@ private constructor(
              */
             fun teamId(teamId: JsonField<String>) = apply { this.teamId = teamId }
 
+            /**
+             * Maximum budget allocated to this user within the team. If not set, user has unlimited
+             * budget within team limits
+             */
             fun maxBudgetInTeam(maxBudgetInTeam: Double?) =
                 maxBudgetInTeam(JsonField.ofNullable(maxBudgetInTeam))
 
@@ -577,6 +624,10 @@ private constructor(
             "Body{member=$member, teamId=$teamId, maxBudgetInTeam=$maxBudgetInTeam, additionalProperties=$additionalProperties}"
     }
 
+    /**
+     * Member object or list of member objects to add. Each member must include either user_id or
+     * user_email, and a role
+     */
     @JsonDeserialize(using = Member.Deserializer::class)
     @JsonSerialize(using = Member.Serializer::class)
     class Member

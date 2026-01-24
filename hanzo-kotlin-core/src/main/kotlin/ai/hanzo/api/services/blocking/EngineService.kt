@@ -75,20 +75,16 @@ interface EngineService {
      * ```
      */
     fun embed(
-        model: String,
-        params: EngineEmbedParams = EngineEmbedParams.none(),
+        pathModel: String,
+        params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): EngineEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
+    ): EngineEmbedResponse = embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
 
     /** @see embed */
     fun embed(
         params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineEmbedResponse
-
-    /** @see embed */
-    fun embed(model: String, requestOptions: RequestOptions): EngineEmbedResponse =
-        embed(model, EngineEmbedParams.none(), requestOptions)
 
     /** A view of [EngineService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -135,11 +131,11 @@ interface EngineService {
          */
         @MustBeClosed
         fun embed(
-            model: String,
-            params: EngineEmbedParams = EngineEmbedParams.none(),
+            pathModel: String,
+            params: EngineEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineEmbedResponse> =
-            embed(params.toBuilder().model(model).build(), requestOptions)
+            embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
 
         /** @see embed */
         @MustBeClosed
@@ -147,13 +143,5 @@ interface EngineService {
             params: EngineEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineEmbedResponse>
-
-        /** @see embed */
-        @MustBeClosed
-        fun embed(
-            model: String,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<EngineEmbedResponse> =
-            embed(model, EngineEmbedParams.none(), requestOptions)
     }
 }

@@ -23,7 +23,10 @@ internal class HealthServiceTest {
                 .build()
         val healthService = client.health()
 
-        val response = healthService.checkAll(HealthCheckAllParams.builder().model("model").build())
+        val response =
+            healthService.checkAll(
+                HealthCheckAllParams.builder().model("model").modelId("model_id").build()
+            )
 
         response.validate()
     }

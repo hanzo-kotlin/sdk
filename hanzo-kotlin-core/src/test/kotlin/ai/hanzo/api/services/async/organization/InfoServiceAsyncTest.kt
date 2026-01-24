@@ -23,12 +23,12 @@ internal class InfoServiceAsyncTest {
                 .build()
         val infoServiceAsync = client.organization().info()
 
-        val info =
+        val organizationTableWithMembers =
             infoServiceAsync.retrieve(
                 InfoRetrieveParams.builder().organizationId("organization_id").build()
             )
 
-        info.validate()
+        organizationTableWithMembers.validate()
     }
 
     @Disabled("Prism tests are disabled")

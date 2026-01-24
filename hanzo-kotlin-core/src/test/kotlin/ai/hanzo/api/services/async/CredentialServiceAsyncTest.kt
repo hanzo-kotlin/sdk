@@ -26,9 +26,17 @@ internal class CredentialServiceAsyncTest {
         val credential =
             credentialServiceAsync.create(
                 CredentialCreateParams.builder()
-                    .credentialInfo(JsonValue.from(mapOf<String, Any>()))
+                    .credentialInfo(
+                        CredentialCreateParams.CredentialInfo.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
                     .credentialName("credential_name")
-                    .credentialValues(JsonValue.from(mapOf<String, Any>()))
+                    .credentialValues(
+                        CredentialCreateParams.CredentialValues.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
                     .modelId("model_id")
                     .build()
             )

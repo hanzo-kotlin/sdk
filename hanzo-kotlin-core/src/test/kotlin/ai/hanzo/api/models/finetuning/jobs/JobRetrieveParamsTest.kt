@@ -18,11 +18,7 @@ internal class JobRetrieveParamsTest {
 
     @Test
     fun pathParams() {
-        val params =
-            JobRetrieveParams.builder()
-                .fineTuningJobId("fine_tuning_job_id")
-                .customLlmProvider(JobRetrieveParams.CustomLlmProvider.OPENAI)
-                .build()
+        val params = JobRetrieveParams.builder().fineTuningJobId("fine_tuning_job_id").build()
 
         assertThat(params._pathParam(0)).isEqualTo("fine_tuning_job_id")
         // out-of-bound path param
@@ -41,5 +37,14 @@ internal class JobRetrieveParamsTest {
 
         assertThat(queryParams)
             .isEqualTo(QueryParams.builder().put("custom_llm_provider", "openai").build())
+    }
+
+    @Test
+    fun queryParamsWithoutOptionalFields() {
+        val params = JobRetrieveParams.builder().fineTuningJobId("fine_tuning_job_id").build()
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

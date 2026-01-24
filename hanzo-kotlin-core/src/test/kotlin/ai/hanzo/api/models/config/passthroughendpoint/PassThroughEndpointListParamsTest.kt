@@ -10,17 +10,26 @@ internal class PassThroughEndpointListParamsTest {
 
     @Test
     fun create() {
-        PassThroughEndpointListParams.builder().endpointId("endpoint_id").build()
+        PassThroughEndpointListParams.builder().endpointId("endpoint_id").teamId("team_id").build()
     }
 
     @Test
     fun queryParams() {
-        val params = PassThroughEndpointListParams.builder().endpointId("endpoint_id").build()
+        val params =
+            PassThroughEndpointListParams.builder()
+                .endpointId("endpoint_id")
+                .teamId("team_id")
+                .build()
 
         val queryParams = params._queryParams()
 
         assertThat(queryParams)
-            .isEqualTo(QueryParams.builder().put("endpoint_id", "endpoint_id").build())
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("endpoint_id", "endpoint_id")
+                    .put("team_id", "team_id")
+                    .build()
+            )
     }
 
     @Test

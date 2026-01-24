@@ -11,7 +11,7 @@ import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
 /**
- * Delete a pass-through endpoint
+ * Delete a pass-through endpoint by ID.
  *
  * Returns - the deleted endpoint
  */

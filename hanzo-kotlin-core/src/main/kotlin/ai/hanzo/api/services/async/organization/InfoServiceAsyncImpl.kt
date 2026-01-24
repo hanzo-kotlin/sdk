@@ -15,10 +15,10 @@ import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
 import ai.hanzo.api.core.http.parseable
 import ai.hanzo.api.core.prepareAsync
+import ai.hanzo.api.models.organization.OrganizationTableWithMembers
 import ai.hanzo.api.models.organization.info.InfoDeprecatedParams
 import ai.hanzo.api.models.organization.info.InfoDeprecatedResponse
 import ai.hanzo.api.models.organization.info.InfoRetrieveParams
-import ai.hanzo.api.models.organization.info.InfoRetrieveResponse
 
 class InfoServiceAsyncImpl internal constructor(private val clientOptions: ClientOptions) :
     InfoServiceAsync {
@@ -35,7 +35,7 @@ class InfoServiceAsyncImpl internal constructor(private val clientOptions: Clien
     override suspend fun retrieve(
         params: InfoRetrieveParams,
         requestOptions: RequestOptions,
-    ): InfoRetrieveResponse =
+    ): OrganizationTableWithMembers =
         // get /organization/info
         withRawResponse().retrieve(params, requestOptions).parse()
 
@@ -59,13 +59,13 @@ class InfoServiceAsyncImpl internal constructor(private val clientOptions: Clien
                 clientOptions.toBuilder().apply(modifier).build()
             )
 
-        private val retrieveHandler: Handler<InfoRetrieveResponse> =
-            jsonHandler<InfoRetrieveResponse>(clientOptions.jsonMapper)
+        private val retrieveHandler: Handler<OrganizationTableWithMembers> =
+            jsonHandler<OrganizationTableWithMembers>(clientOptions.jsonMapper)
 
         override suspend fun retrieve(
             params: InfoRetrieveParams,
             requestOptions: RequestOptions,
-        ): HttpResponseFor<InfoRetrieveResponse> {
+        ): HttpResponseFor<OrganizationTableWithMembers> {
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
