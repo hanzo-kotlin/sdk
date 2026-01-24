@@ -10,17 +10,17 @@ internal class InfoListParamsTest {
 
     @Test
     fun create() {
-        InfoListParams.builder().llmModelId("llm_model_id").build()
+        InfoListParams.builder().litellmModelId("litellm_model_id").build()
     }
 
     @Test
     fun queryParams() {
-        val params = InfoListParams.builder().llmModelId("llm_model_id").build()
+        val params = InfoListParams.builder().litellmModelId("litellm_model_id").build()
 
         val queryParams = params._queryParams()
 
         assertThat(queryParams)
-            .isEqualTo(QueryParams.builder().put("llm_model_id", "llm_model_id").build())
+            .isEqualTo(QueryParams.builder().put("litellm_model_id", "litellm_model_id").build())
     }
 
     @Test

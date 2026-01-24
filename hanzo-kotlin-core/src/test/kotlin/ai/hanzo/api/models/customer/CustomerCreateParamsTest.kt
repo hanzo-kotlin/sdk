@@ -3,6 +3,7 @@
 package ai.hanzo.api.models.customer
 
 import ai.hanzo.api.core.JsonValue
+import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -17,6 +18,7 @@ internal class CustomerCreateParamsTest {
             .blocked(true)
             .budgetDuration("budget_duration")
             .budgetId("budget_id")
+            .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
             .defaultModel("default_model")
             .maxBudget(0.0)
             .maxParallelRequests(0L)
@@ -37,6 +39,7 @@ internal class CustomerCreateParamsTest {
             )
             .rpmLimit(0L)
             .softBudget(0.0)
+            .spend(0.0)
             .tpmLimit(0L)
             .build()
     }
@@ -51,6 +54,7 @@ internal class CustomerCreateParamsTest {
                 .blocked(true)
                 .budgetDuration("budget_duration")
                 .budgetId("budget_id")
+                .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .defaultModel("default_model")
                 .maxBudget(0.0)
                 .maxParallelRequests(0L)
@@ -71,6 +75,7 @@ internal class CustomerCreateParamsTest {
                 )
                 .rpmLimit(0L)
                 .softBudget(0.0)
+                .spend(0.0)
                 .tpmLimit(0L)
                 .build()
 
@@ -82,6 +87,7 @@ internal class CustomerCreateParamsTest {
         assertThat(body.blocked()).isEqualTo(true)
         assertThat(body.budgetDuration()).isEqualTo("budget_duration")
         assertThat(body.budgetId()).isEqualTo("budget_id")
+        assertThat(body.budgetResetAt()).isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
         assertThat(body.defaultModel()).isEqualTo("default_model")
         assertThat(body.maxBudget()).isEqualTo(0.0)
         assertThat(body.maxParallelRequests()).isEqualTo(0L)
@@ -103,6 +109,7 @@ internal class CustomerCreateParamsTest {
             )
         assertThat(body.rpmLimit()).isEqualTo(0L)
         assertThat(body.softBudget()).isEqualTo(0.0)
+        assertThat(body.spend()).isEqualTo(0.0)
         assertThat(body.tpmLimit()).isEqualTo(0L)
     }
 

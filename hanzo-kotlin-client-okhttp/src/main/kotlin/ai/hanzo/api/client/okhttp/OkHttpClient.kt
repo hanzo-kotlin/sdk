@@ -13,12 +13,14 @@ import java.io.IOException
 import java.io.InputStream
 import java.net.Proxy
 import java.time.Duration
+import java.util.concurrent.ExecutorService
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.X509TrustManager
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
 import okhttp3.Callback
+import okhttp3.Dispatcher
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -77,7 +79,7 @@ class OkHttpClient private constructor(private val okHttpClient: okhttp3.OkHttpC
         if (logLevel != null) {
             clientBuilder.addNetworkInterceptor(
                 HttpLoggingInterceptor().setLevel(logLevel).apply {
-                    redactHeader("Ocp-Apim-Subscription-Key")
+                    redactHeader("x-litellm-api-key")
                 }
             )
         }
@@ -119,19 +121,19 @@ class OkHttpClient private constructor(private val okHttpClient: okhttp3.OkHttpC
 
         val builder = Request.Builder().url(toUrl()).method(method.name, body)
         headers.names().forEach { name ->
-            headers.values(name).forEach { builder.header(name, it) }
+            headers.values(name).forEach { builder.addHeader(name, it) }
         }
 
         if (
             !headers.names().contains("X-Stainless-Read-Timeout") && client.readTimeoutMillis != 0
         ) {
-            builder.header(
+            builder.addHeader(
                 "X-Stainless-Read-Timeout",
                 Duration.ofMillis(client.readTimeoutMillis.toLong()).seconds.toString(),
             )
         }
         if (!headers.names().contains("X-Stainless-Timeout") && client.callTimeoutMillis != 0) {
-            builder.header(
+            builder.addHeader(
                 "X-Stainless-Timeout",
                 Duration.ofMillis(client.callTimeoutMillis.toLong()).seconds.toString(),
             )
@@ -202,6 +204,7 @@ class OkHttpClient private constructor(private val okHttpClient: okhttp3.OkHttpC
 
         private var timeout: Timeout = Timeout.default()
         private var proxy: Proxy? = null
+        private var dispatcherExecutorService: ExecutorService? = null
         private var sslSocketFactory: SSLSocketFactory? = null
         private var trustManager: X509TrustManager? = null
         private var hostnameVerifier: HostnameVerifier? = null
@@ -211,6 +214,10 @@ class OkHttpClient private constructor(private val okHttpClient: okhttp3.OkHttpC
         fun timeout(timeout: Duration) = timeout(Timeout.builder().request(timeout).build())
 
         fun proxy(proxy: Proxy?) = apply { this.proxy = proxy }
+
+        fun dispatcherExecutorService(dispatcherExecutorService: ExecutorService?) = apply {
+            this.dispatcherExecutorService = dispatcherExecutorService
+        }
 
         fun sslSocketFactory(sslSocketFactory: SSLSocketFactory?) = apply {
             this.sslSocketFactory = sslSocketFactory
@@ -227,12 +234,16 @@ class OkHttpClient private constructor(private val okHttpClient: okhttp3.OkHttpC
         fun build(): OkHttpClient =
             OkHttpClient(
                 okhttp3.OkHttpClient.Builder()
+                    // `RetryingHttpClient` handles retries if the user enabled them.
+                    .retryOnConnectionFailure(false)
                     .connectTimeout(timeout.connect())
                     .readTimeout(timeout.read())
                     .writeTimeout(timeout.write())
                     .callTimeout(timeout.request())
                     .proxy(proxy)
                     .apply {
+                        dispatcherExecutorService?.let { dispatcher(Dispatcher(it)) }
+
                         val sslSocketFactory = sslSocketFactory
                         val trustManager = trustManager
                         if (sslSocketFactory != null && trustManager != null) {

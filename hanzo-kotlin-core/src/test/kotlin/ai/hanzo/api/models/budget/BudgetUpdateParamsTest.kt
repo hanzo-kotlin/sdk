@@ -3,6 +3,7 @@
 package ai.hanzo.api.models.budget
 
 import ai.hanzo.api.core.JsonValue
+import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -15,6 +16,7 @@ internal class BudgetUpdateParamsTest {
                 BudgetNew.builder()
                     .budgetDuration("budget_duration")
                     .budgetId("budget_id")
+                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
                     .modelMaxBudget(
@@ -48,6 +50,7 @@ internal class BudgetUpdateParamsTest {
                     BudgetNew.builder()
                         .budgetDuration("budget_duration")
                         .budgetId("budget_id")
+                        .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                         .maxBudget(0.0)
                         .maxParallelRequests(0L)
                         .modelMaxBudget(
@@ -79,6 +82,7 @@ internal class BudgetUpdateParamsTest {
                 BudgetNew.builder()
                     .budgetDuration("budget_duration")
                     .budgetId("budget_id")
+                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
                     .modelMaxBudget(

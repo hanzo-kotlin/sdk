@@ -11,6 +11,7 @@ import ai.hanzo.api.models.finetuning.jobs.JobListParams
 import ai.hanzo.api.models.finetuning.jobs.JobListResponse
 import ai.hanzo.api.models.finetuning.jobs.JobRetrieveParams
 import ai.hanzo.api.models.finetuning.jobs.JobRetrieveResponse
+import ai.hanzo.api.models.finetuning.jobs.LiteLlmFineTuningJobCreate
 import ai.hanzo.api.services.blocking.finetuning.jobs.CancelService
 import com.google.errorprone.annotations.MustBeClosed
 
@@ -53,17 +54,29 @@ interface JobService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobCreateResponse
 
+    /** @see create */
+    fun create(
+        liteLlmFineTuningJobCreate: LiteLlmFineTuningJobCreate,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): JobCreateResponse =
+        create(
+            JobCreateParams.builder()
+                .liteLlmFineTuningJobCreate(liteLlmFineTuningJobCreate)
+                .build(),
+            requestOptions,
+        )
+
     /**
      * Retrieves a fine-tuning job. This is the equivalent of GET
      * https://api.openai.com/v1/fine_tuning/jobs/{fine_tuning_job_id}
      *
      * Supported Query Params:
-     * - `custom_llm_provider`: Name of the LLM provider
+     * - `custom_llm_provider`: Name of the LiteLLM provider
      * - `fine_tuning_job_id`: The ID of the fine-tuning job to retrieve.
      */
     fun retrieve(
         fineTuningJobId: String,
-        params: JobRetrieveParams,
+        params: JobRetrieveParams = JobRetrieveParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobRetrieveResponse =
         retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
@@ -74,19 +87,27 @@ interface JobService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobRetrieveResponse
 
+    /** @see retrieve */
+    fun retrieve(fineTuningJobId: String, requestOptions: RequestOptions): JobRetrieveResponse =
+        retrieve(fineTuningJobId, JobRetrieveParams.none(), requestOptions)
+
     /**
      * Lists fine-tuning jobs for the organization. This is the equivalent of GET
      * https://api.openai.com/v1/fine_tuning/jobs
      *
      * Supported Query Params:
-     * - `custom_llm_provider`: Name of the LLM provider
+     * - `custom_llm_provider`: Name of the LiteLLM provider
      * - `after`: Identifier for the last job from the previous pagination request.
      * - `limit`: Number of fine-tuning jobs to retrieve (default is 20).
      */
     fun list(
-        params: JobListParams,
+        params: JobListParams = JobListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobListResponse
+
+    /** @see list */
+    fun list(requestOptions: RequestOptions): JobListResponse =
+        list(JobListParams.none(), requestOptions)
 
     /** A view of [JobService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -110,6 +131,19 @@ interface JobService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<JobCreateResponse>
 
+        /** @see create */
+        @MustBeClosed
+        fun create(
+            liteLlmFineTuningJobCreate: LiteLlmFineTuningJobCreate,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<JobCreateResponse> =
+            create(
+                JobCreateParams.builder()
+                    .liteLlmFineTuningJobCreate(liteLlmFineTuningJobCreate)
+                    .build(),
+                requestOptions,
+            )
+
         /**
          * Returns a raw HTTP response for `get /v1/fine_tuning/jobs/{fine_tuning_job_id}`, but is
          * otherwise the same as [JobService.retrieve].
@@ -117,7 +151,7 @@ interface JobService {
         @MustBeClosed
         fun retrieve(
             fineTuningJobId: String,
-            params: JobRetrieveParams,
+            params: JobRetrieveParams = JobRetrieveParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<JobRetrieveResponse> =
             retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
@@ -129,14 +163,27 @@ interface JobService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<JobRetrieveResponse>
 
+        /** @see retrieve */
+        @MustBeClosed
+        fun retrieve(
+            fineTuningJobId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<JobRetrieveResponse> =
+            retrieve(fineTuningJobId, JobRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `get /v1/fine_tuning/jobs`, but is otherwise the same as
          * [JobService.list].
          */
         @MustBeClosed
         fun list(
-            params: JobListParams,
+            params: JobListParams = JobListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<JobListResponse>
+
+        /** @see list */
+        @MustBeClosed
+        fun list(requestOptions: RequestOptions): HttpResponseFor<JobListResponse> =
+            list(JobListParams.none(), requestOptions)
     }
 }

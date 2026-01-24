@@ -35,6 +35,9 @@ interface AzureServiceAsync {
      * Call any azure endpoint using the proxy.
      *
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
+     *
+     * Checks if the deployment id in the url is a litellm model name. If so, it will route using
+     * the llm_router.allm_passthrough_route.
      */
     suspend fun create(
         endpoint: String,
@@ -56,6 +59,9 @@ interface AzureServiceAsync {
      * Call any azure endpoint using the proxy.
      *
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
+     *
+     * Checks if the deployment id in the url is a litellm model name. If so, it will route using
+     * the llm_router.allm_passthrough_route.
      */
     suspend fun update(
         endpoint: String,
@@ -77,6 +83,9 @@ interface AzureServiceAsync {
      * Call any azure endpoint using the proxy.
      *
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
+     *
+     * Checks if the deployment id in the url is a litellm model name. If so, it will route using
+     * the llm_router.allm_passthrough_route.
      */
     suspend fun delete(
         endpoint: String,
@@ -98,6 +107,9 @@ interface AzureServiceAsync {
      * Call any azure endpoint using the proxy.
      *
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
+     *
+     * Checks if the deployment id in the url is a litellm model name. If so, it will route using
+     * the llm_router.allm_passthrough_route.
      */
     suspend fun call(
         endpoint: String,
@@ -119,6 +131,9 @@ interface AzureServiceAsync {
      * Call any azure endpoint using the proxy.
      *
      * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
+     *
+     * Checks if the deployment id in the url is a litellm model name. If so, it will route using
+     * the llm_router.allm_passthrough_route.
      */
     suspend fun patch(
         endpoint: String,

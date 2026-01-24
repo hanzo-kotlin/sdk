@@ -32,6 +32,9 @@ internal class FileServiceTest {
                     .file("some content".byteInputStream())
                     .purpose("purpose")
                     .customLlmProvider("custom_llm_provider")
+                    .litellmMetadata("litellm_metadata")
+                    .targetModelNames("target_model_names")
+                    .targetStorage("target_storage")
                     .build()
             )
 
@@ -68,7 +71,11 @@ internal class FileServiceTest {
 
         val files =
             fileService.list(
-                FileListParams.builder().provider("provider").purpose("purpose").build()
+                FileListParams.builder()
+                    .provider("provider")
+                    .purpose("purpose")
+                    .targetModelNames("target_model_names")
+                    .build()
             )
 
         files.validate()

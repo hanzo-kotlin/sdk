@@ -12,7 +12,11 @@ internal class UtilTransformRequestParamsTest {
     fun create() {
         UtilTransformRequestParams.builder()
             .callType(UtilTransformRequestParams.CallType.EMBEDDING)
-            .requestBody(JsonValue.from(mapOf<String, Any>()))
+            .requestBody(
+                UtilTransformRequestParams.RequestBody.builder()
+                    .putAdditionalProperty("foo", JsonValue.from("bar"))
+                    .build()
+            )
             .build()
     }
 
@@ -21,12 +25,21 @@ internal class UtilTransformRequestParamsTest {
         val params =
             UtilTransformRequestParams.builder()
                 .callType(UtilTransformRequestParams.CallType.EMBEDDING)
-                .requestBody(JsonValue.from(mapOf<String, Any>()))
+                .requestBody(
+                    UtilTransformRequestParams.RequestBody.builder()
+                        .putAdditionalProperty("foo", JsonValue.from("bar"))
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
         assertThat(body.callType()).isEqualTo(UtilTransformRequestParams.CallType.EMBEDDING)
-        assertThat(body._requestBody()).isEqualTo(JsonValue.from(mapOf<String, Any>()))
+        assertThat(body.requestBody())
+            .isEqualTo(
+                UtilTransformRequestParams.RequestBody.builder()
+                    .putAdditionalProperty("foo", JsonValue.from("bar"))
+                    .build()
+            )
     }
 }

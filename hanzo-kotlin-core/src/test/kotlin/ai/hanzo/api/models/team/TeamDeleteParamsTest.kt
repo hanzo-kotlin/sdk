@@ -10,18 +10,24 @@ internal class TeamDeleteParamsTest {
 
     @Test
     fun create() {
-        TeamDeleteParams.builder().llmChangedBy("llm-changed-by").addTeamId("string").build()
+        TeamDeleteParams.builder()
+            .litellmChangedBy("litellm-changed-by")
+            .addTeamId("string")
+            .build()
     }
 
     @Test
     fun headers() {
         val params =
-            TeamDeleteParams.builder().llmChangedBy("llm-changed-by").addTeamId("string").build()
+            TeamDeleteParams.builder()
+                .litellmChangedBy("litellm-changed-by")
+                .addTeamId("string")
+                .build()
 
         val headers = params._headers()
 
         assertThat(headers)
-            .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
+            .isEqualTo(Headers.builder().put("litellm-changed-by", "litellm-changed-by").build())
     }
 
     @Test
@@ -36,7 +42,10 @@ internal class TeamDeleteParamsTest {
     @Test
     fun body() {
         val params =
-            TeamDeleteParams.builder().llmChangedBy("llm-changed-by").addTeamId("string").build()
+            TeamDeleteParams.builder()
+                .litellmChangedBy("litellm-changed-by")
+                .addTeamId("string")
+                .build()
 
         val body = params._body()
 

@@ -12,10 +12,22 @@ import java.util.Objects
 /**
  * Follows the OpenAI Responses API spec: https://platform.openai.com/docs/api-reference/responses
  *
+ * Supports background mode with polling_via_cache for partial response retrieval. When
+ * background=true and polling_via_cache is enabled, returns a polling_id immediately and streams
+ * the response in the background, updating Redis cache.
+ *
  * ```bash
+ * # Normal request
  * curl -X POST http://localhost:4000/v1/responses     -H "Content-Type: application/json"     -H "Authorization: Bearer sk-1234"     -d '{
  *     "model": "gpt-4o",
  *     "input": "Tell me about AI"
+ * }'
+ *
+ * # Background request with polling
+ * curl -X POST http://localhost:4000/v1/responses     -H "Content-Type: application/json"     -H "Authorization: Bearer sk-1234"     -d '{
+ *     "model": "gpt-4o",
+ *     "input": "Tell me about AI",
+ *     "background": true
  * }'
  * ```
  */

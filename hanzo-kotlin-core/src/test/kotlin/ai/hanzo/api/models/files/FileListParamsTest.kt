@@ -10,7 +10,11 @@ internal class FileListParamsTest {
 
     @Test
     fun create() {
-        FileListParams.builder().provider("provider").purpose("purpose").build()
+        FileListParams.builder()
+            .provider("provider")
+            .purpose("purpose")
+            .targetModelNames("target_model_names")
+            .build()
     }
 
     @Test
@@ -24,11 +28,22 @@ internal class FileListParamsTest {
 
     @Test
     fun queryParams() {
-        val params = FileListParams.builder().provider("provider").purpose("purpose").build()
+        val params =
+            FileListParams.builder()
+                .provider("provider")
+                .purpose("purpose")
+                .targetModelNames("target_model_names")
+                .build()
 
         val queryParams = params._queryParams()
 
-        assertThat(queryParams).isEqualTo(QueryParams.builder().put("purpose", "purpose").build())
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("purpose", "purpose")
+                    .put("target_model_names", "target_model_names")
+                    .build()
+            )
     }
 
     @Test

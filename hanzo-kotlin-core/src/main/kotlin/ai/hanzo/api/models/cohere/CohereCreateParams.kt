@@ -9,7 +9,7 @@ import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
-/** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
+/** [Docs](https://docs.litellm.ai/docs/pass_through/cohere) */
 class CohereCreateParams
 private constructor(
     private val endpoint: String?,

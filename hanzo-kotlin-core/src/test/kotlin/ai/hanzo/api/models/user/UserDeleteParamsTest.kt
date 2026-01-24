@@ -10,18 +10,24 @@ internal class UserDeleteParamsTest {
 
     @Test
     fun create() {
-        UserDeleteParams.builder().llmChangedBy("llm-changed-by").addUserId("string").build()
+        UserDeleteParams.builder()
+            .litellmChangedBy("litellm-changed-by")
+            .addUserId("string")
+            .build()
     }
 
     @Test
     fun headers() {
         val params =
-            UserDeleteParams.builder().llmChangedBy("llm-changed-by").addUserId("string").build()
+            UserDeleteParams.builder()
+                .litellmChangedBy("litellm-changed-by")
+                .addUserId("string")
+                .build()
 
         val headers = params._headers()
 
         assertThat(headers)
-            .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
+            .isEqualTo(Headers.builder().put("litellm-changed-by", "litellm-changed-by").build())
     }
 
     @Test
@@ -36,7 +42,10 @@ internal class UserDeleteParamsTest {
     @Test
     fun body() {
         val params =
-            UserDeleteParams.builder().llmChangedBy("llm-changed-by").addUserId("string").build()
+            UserDeleteParams.builder()
+                .litellmChangedBy("litellm-changed-by")
+                .addUserId("string")
+                .build()
 
         val body = params._body()
 

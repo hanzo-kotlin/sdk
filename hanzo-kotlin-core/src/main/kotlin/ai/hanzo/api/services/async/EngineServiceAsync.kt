@@ -75,20 +75,16 @@ interface EngineServiceAsync {
      * ```
      */
     suspend fun embed(
-        model: String,
-        params: EngineEmbedParams = EngineEmbedParams.none(),
+        pathModel: String,
+        params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): EngineEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
+    ): EngineEmbedResponse = embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
 
     /** @see embed */
     suspend fun embed(
         params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineEmbedResponse
-
-    /** @see embed */
-    suspend fun embed(model: String, requestOptions: RequestOptions): EngineEmbedResponse =
-        embed(model, EngineEmbedParams.none(), requestOptions)
 
     /**
      * A view of [EngineServiceAsync] that provides access to raw HTTP responses for each method.
@@ -139,11 +135,11 @@ interface EngineServiceAsync {
          */
         @MustBeClosed
         suspend fun embed(
-            model: String,
-            params: EngineEmbedParams = EngineEmbedParams.none(),
+            pathModel: String,
+            params: EngineEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineEmbedResponse> =
-            embed(params.toBuilder().model(model).build(), requestOptions)
+            embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
 
         /** @see embed */
         @MustBeClosed
@@ -151,13 +147,5 @@ interface EngineServiceAsync {
             params: EngineEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineEmbedResponse>
-
-        /** @see embed */
-        @MustBeClosed
-        suspend fun embed(
-            model: String,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<EngineEmbedResponse> =
-            embed(model, EngineEmbedParams.none(), requestOptions)
     }
 }

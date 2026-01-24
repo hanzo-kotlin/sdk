@@ -110,13 +110,13 @@ class EngineServiceImpl internal constructor(private val clientOptions: ClientOp
         ): HttpResponseFor<EngineEmbedResponse> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
-            checkRequired("model", params.model())
+            checkRequired("pathModel", params.pathModel())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("engines", params._pathParam(0), "embeddings")
-                    .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
+                    .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

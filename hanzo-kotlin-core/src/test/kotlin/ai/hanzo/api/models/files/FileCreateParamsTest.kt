@@ -16,6 +16,9 @@ internal class FileCreateParamsTest {
             .file("some content".byteInputStream())
             .purpose("purpose")
             .customLlmProvider("custom_llm_provider")
+            .litellmMetadata("litellm_metadata")
+            .targetModelNames("target_model_names")
+            .targetStorage("target_storage")
             .build()
     }
 
@@ -41,6 +44,9 @@ internal class FileCreateParamsTest {
                 .file("some content".byteInputStream())
                 .purpose("purpose")
                 .customLlmProvider("custom_llm_provider")
+                .litellmMetadata("litellm_metadata")
+                .targetModelNames("target_model_names")
+                .targetStorage("target_storage")
                 .build()
 
         val body = params._body()
@@ -58,6 +64,9 @@ internal class FileCreateParamsTest {
                         "file" to MultipartField.of("some content".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                         "custom_llm_provider" to MultipartField.of("custom_llm_provider"),
+                        "litellm_metadata" to MultipartField.of("litellm_metadata"),
+                        "target_model_names" to MultipartField.of("target_model_names"),
+                        "target_storage" to MultipartField.of("target_storage"),
                     )
                     .mapValues { (_, field) ->
                         field.map { (it as? ByteArray)?.inputStream() ?: it }

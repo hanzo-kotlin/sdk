@@ -50,6 +50,22 @@ private constructor(
     fun role(): Role? = body.role()
 
     /**
+     * Requests per minute limit for this team member
+     *
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun rpmLimit(): Long? = body.rpmLimit()
+
+    /**
+     * Tokens per minute limit for this team member
+     *
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun tpmLimit(): Long? = body.tpmLimit()
+
+    /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
@@ -81,6 +97,20 @@ private constructor(
      * Unlike [role], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _role(): JsonField<Role> = body._role()
+
+    /**
+     * Returns the raw JSON value of [rpmLimit].
+     *
+     * Unlike [rpmLimit], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _rpmLimit(): JsonField<Long> = body._rpmLimit()
+
+    /**
+     * Returns the raw JSON value of [tpmLimit].
+     *
+     * Unlike [tpmLimit], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _tpmLimit(): JsonField<Long> = body._tpmLimit()
 
     /**
      * Returns the raw JSON value of [userEmail].
@@ -140,8 +170,8 @@ private constructor(
          * - [teamId]
          * - [maxBudgetInTeam]
          * - [role]
-         * - [userEmail]
-         * - [userId]
+         * - [rpmLimit]
+         * - [tpmLimit]
          * - etc.
          */
         fun body(body: Body) = apply { this.body = body.toBuilder() }
@@ -187,6 +217,42 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun role(role: JsonField<Role>) = apply { body.role(role) }
+
+        /** Requests per minute limit for this team member */
+        fun rpmLimit(rpmLimit: Long?) = apply { body.rpmLimit(rpmLimit) }
+
+        /**
+         * Alias for [Builder.rpmLimit].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
+         */
+        fun rpmLimit(rpmLimit: Long) = rpmLimit(rpmLimit as Long?)
+
+        /**
+         * Sets [Builder.rpmLimit] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.rpmLimit] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun rpmLimit(rpmLimit: JsonField<Long>) = apply { body.rpmLimit(rpmLimit) }
+
+        /** Tokens per minute limit for this team member */
+        fun tpmLimit(tpmLimit: Long?) = apply { body.tpmLimit(tpmLimit) }
+
+        /**
+         * Alias for [Builder.tpmLimit].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
+         */
+        fun tpmLimit(tpmLimit: Long) = tpmLimit(tpmLimit as Long?)
+
+        /**
+         * Sets [Builder.tpmLimit] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.tpmLimit] with a well-typed [Long] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun tpmLimit(tpmLimit: JsonField<Long>) = apply { body.tpmLimit(tpmLimit) }
 
         fun userEmail(userEmail: String?) = apply { body.userEmail(userEmail) }
 
@@ -358,6 +424,8 @@ private constructor(
         private val teamId: JsonField<String>,
         private val maxBudgetInTeam: JsonField<Double>,
         private val role: JsonField<Role>,
+        private val rpmLimit: JsonField<Long>,
+        private val tpmLimit: JsonField<Long>,
         private val userEmail: JsonField<String>,
         private val userId: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
@@ -370,11 +438,22 @@ private constructor(
             @ExcludeMissing
             maxBudgetInTeam: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("role") @ExcludeMissing role: JsonField<Role> = JsonMissing.of(),
+            @JsonProperty("rpm_limit") @ExcludeMissing rpmLimit: JsonField<Long> = JsonMissing.of(),
+            @JsonProperty("tpm_limit") @ExcludeMissing tpmLimit: JsonField<Long> = JsonMissing.of(),
             @JsonProperty("user_email")
             @ExcludeMissing
             userEmail: JsonField<String> = JsonMissing.of(),
             @JsonProperty("user_id") @ExcludeMissing userId: JsonField<String> = JsonMissing.of(),
-        ) : this(teamId, maxBudgetInTeam, role, userEmail, userId, mutableMapOf())
+        ) : this(
+            teamId,
+            maxBudgetInTeam,
+            role,
+            rpmLimit,
+            tpmLimit,
+            userEmail,
+            userId,
+            mutableMapOf(),
+        )
 
         /**
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is
@@ -393,6 +472,22 @@ private constructor(
          *   server responded with an unexpected value).
          */
         fun role(): Role? = role.getNullable("role")
+
+        /**
+         * Requests per minute limit for this team member
+         *
+         * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+         *   server responded with an unexpected value).
+         */
+        fun rpmLimit(): Long? = rpmLimit.getNullable("rpm_limit")
+
+        /**
+         * Tokens per minute limit for this team member
+         *
+         * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+         *   server responded with an unexpected value).
+         */
+        fun tpmLimit(): Long? = tpmLimit.getNullable("tpm_limit")
 
         /**
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -429,6 +524,20 @@ private constructor(
          * Unlike [role], this method doesn't throw if the JSON field has an unexpected type.
          */
         @JsonProperty("role") @ExcludeMissing fun _role(): JsonField<Role> = role
+
+        /**
+         * Returns the raw JSON value of [rpmLimit].
+         *
+         * Unlike [rpmLimit], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("rpm_limit") @ExcludeMissing fun _rpmLimit(): JsonField<Long> = rpmLimit
+
+        /**
+         * Returns the raw JSON value of [tpmLimit].
+         *
+         * Unlike [tpmLimit], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("tpm_limit") @ExcludeMissing fun _tpmLimit(): JsonField<Long> = tpmLimit
 
         /**
          * Returns the raw JSON value of [userEmail].
@@ -475,6 +584,8 @@ private constructor(
             private var teamId: JsonField<String>? = null
             private var maxBudgetInTeam: JsonField<Double> = JsonMissing.of()
             private var role: JsonField<Role> = JsonMissing.of()
+            private var rpmLimit: JsonField<Long> = JsonMissing.of()
+            private var tpmLimit: JsonField<Long> = JsonMissing.of()
             private var userEmail: JsonField<String> = JsonMissing.of()
             private var userId: JsonField<String> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
@@ -483,6 +594,8 @@ private constructor(
                 teamId = body.teamId
                 maxBudgetInTeam = body.maxBudgetInTeam
                 role = body.role
+                rpmLimit = body.rpmLimit
+                tpmLimit = body.tpmLimit
                 userEmail = body.userEmail
                 userId = body.userId
                 additionalProperties = body.additionalProperties.toMutableMap()
@@ -531,6 +644,44 @@ private constructor(
              * value.
              */
             fun role(role: JsonField<Role>) = apply { this.role = role }
+
+            /** Requests per minute limit for this team member */
+            fun rpmLimit(rpmLimit: Long?) = rpmLimit(JsonField.ofNullable(rpmLimit))
+
+            /**
+             * Alias for [Builder.rpmLimit].
+             *
+             * This unboxed primitive overload exists for backwards compatibility.
+             */
+            fun rpmLimit(rpmLimit: Long) = rpmLimit(rpmLimit as Long?)
+
+            /**
+             * Sets [Builder.rpmLimit] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.rpmLimit] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun rpmLimit(rpmLimit: JsonField<Long>) = apply { this.rpmLimit = rpmLimit }
+
+            /** Tokens per minute limit for this team member */
+            fun tpmLimit(tpmLimit: Long?) = tpmLimit(JsonField.ofNullable(tpmLimit))
+
+            /**
+             * Alias for [Builder.tpmLimit].
+             *
+             * This unboxed primitive overload exists for backwards compatibility.
+             */
+            fun tpmLimit(tpmLimit: Long) = tpmLimit(tpmLimit as Long?)
+
+            /**
+             * Sets [Builder.tpmLimit] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.tpmLimit] with a well-typed [Long] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun tpmLimit(tpmLimit: JsonField<Long>) = apply { this.tpmLimit = tpmLimit }
 
             fun userEmail(userEmail: String?) = userEmail(JsonField.ofNullable(userEmail))
 
@@ -590,6 +741,8 @@ private constructor(
                     checkRequired("teamId", teamId),
                     maxBudgetInTeam,
                     role,
+                    rpmLimit,
+                    tpmLimit,
                     userEmail,
                     userId,
                     additionalProperties.toMutableMap(),
@@ -606,6 +759,8 @@ private constructor(
             teamId()
             maxBudgetInTeam()
             role()?.validate()
+            rpmLimit()
+            tpmLimit()
             userEmail()
             userId()
             validated = true
@@ -629,6 +784,8 @@ private constructor(
             (if (teamId.asKnown() == null) 0 else 1) +
                 (if (maxBudgetInTeam.asKnown() == null) 0 else 1) +
                 (role.asKnown()?.validity() ?: 0) +
+                (if (rpmLimit.asKnown() == null) 0 else 1) +
+                (if (tpmLimit.asKnown() == null) 0 else 1) +
                 (if (userEmail.asKnown() == null) 0 else 1) +
                 (if (userId.asKnown() == null) 0 else 1)
 
@@ -641,19 +798,30 @@ private constructor(
                 teamId == other.teamId &&
                 maxBudgetInTeam == other.maxBudgetInTeam &&
                 role == other.role &&
+                rpmLimit == other.rpmLimit &&
+                tpmLimit == other.tpmLimit &&
                 userEmail == other.userEmail &&
                 userId == other.userId &&
                 additionalProperties == other.additionalProperties
         }
 
         private val hashCode: Int by lazy {
-            Objects.hash(teamId, maxBudgetInTeam, role, userEmail, userId, additionalProperties)
+            Objects.hash(
+                teamId,
+                maxBudgetInTeam,
+                role,
+                rpmLimit,
+                tpmLimit,
+                userEmail,
+                userId,
+                additionalProperties,
+            )
         }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{teamId=$teamId, maxBudgetInTeam=$maxBudgetInTeam, role=$role, userEmail=$userEmail, userId=$userId, additionalProperties=$additionalProperties}"
+            "Body{teamId=$teamId, maxBudgetInTeam=$maxBudgetInTeam, role=$role, rpmLimit=$rpmLimit, tpmLimit=$tpmLimit, userEmail=$userEmail, userId=$userId, additionalProperties=$additionalProperties}"
     }
 
     class Role @JsonCreator private constructor(private val value: JsonField<String>) : Enum {

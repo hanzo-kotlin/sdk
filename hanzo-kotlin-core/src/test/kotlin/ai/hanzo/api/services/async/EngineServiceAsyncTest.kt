@@ -4,6 +4,8 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
+import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.models.engines.EngineEmbedParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -36,7 +38,29 @@ internal class EngineServiceAsyncTest {
                 .build()
         val engineServiceAsync = client.engines()
 
-        val response = engineServiceAsync.embed("model")
+        val response =
+            engineServiceAsync.embed(
+                EngineEmbedParams.builder()
+                    .pathModel("model")
+                    .bodyModel("model")
+                    .apiBase("api_base")
+                    .apiKey("api_key")
+                    .apiType("api_type")
+                    .apiVersion("api_version")
+                    .caching(true)
+                    .customLlmProvider("string")
+                    .addInput("string")
+                    .litellmCallId("litellm_call_id")
+                    .litellmLoggingObj(
+                        EngineEmbedParams.LitellmLoggingObj.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
+                    .loggerFn("logger_fn")
+                    .timeout(0L)
+                    .user("user")
+                    .build()
+            )
 
         response.validate()
     }

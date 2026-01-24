@@ -31,7 +31,7 @@ interface GeminiService {
      */
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): GeminiService
 
-    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/google_ai_studio) */
     fun create(
         endpoint: String,
         params: GeminiCreateParams = GeminiCreateParams.none(),
@@ -48,7 +48,7 @@ interface GeminiService {
     fun create(endpoint: String, requestOptions: RequestOptions): GeminiCreateResponse =
         create(endpoint, GeminiCreateParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/google_ai_studio) */
     fun retrieve(
         endpoint: String,
         params: GeminiRetrieveParams = GeminiRetrieveParams.none(),
@@ -66,7 +66,7 @@ interface GeminiService {
     fun retrieve(endpoint: String, requestOptions: RequestOptions): GeminiRetrieveResponse =
         retrieve(endpoint, GeminiRetrieveParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/google_ai_studio) */
     fun update(
         endpoint: String,
         params: GeminiUpdateParams = GeminiUpdateParams.none(),
@@ -83,7 +83,7 @@ interface GeminiService {
     fun update(endpoint: String, requestOptions: RequestOptions): GeminiUpdateResponse =
         update(endpoint, GeminiUpdateParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/google_ai_studio) */
     fun delete(
         endpoint: String,
         params: GeminiDeleteParams = GeminiDeleteParams.none(),
@@ -100,7 +100,7 @@ interface GeminiService {
     fun delete(endpoint: String, requestOptions: RequestOptions): GeminiDeleteResponse =
         delete(endpoint, GeminiDeleteParams.none(), requestOptions)
 
-    /** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
+    /** [Docs](https://docs.litellm.ai/docs/pass_through/google_ai_studio) */
     fun patch(
         endpoint: String,
         params: GeminiPatchParams = GeminiPatchParams.none(),

@@ -8,9 +8,9 @@ import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
 /**
- * Call LLM proxy via Vertex AI SDK.
+ * Call LiteLLM proxy via Vertex AI SDK.
  *
- * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
+ * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
  */
 class VertexAiRetrieveParams
 private constructor(

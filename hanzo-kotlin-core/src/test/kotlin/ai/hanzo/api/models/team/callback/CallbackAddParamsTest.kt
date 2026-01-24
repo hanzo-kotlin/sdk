@@ -13,7 +13,7 @@ internal class CallbackAddParamsTest {
     fun create() {
         CallbackAddParams.builder()
             .teamId("team_id")
-            .llmChangedBy("llm-changed-by")
+            .litellmChangedBy("litellm-changed-by")
             .callbackName("callback_name")
             .callbackVars(
                 CallbackAddParams.CallbackVars.builder()
@@ -47,7 +47,7 @@ internal class CallbackAddParamsTest {
         val params =
             CallbackAddParams.builder()
                 .teamId("team_id")
-                .llmChangedBy("llm-changed-by")
+                .litellmChangedBy("litellm-changed-by")
                 .callbackName("callback_name")
                 .callbackVars(
                     CallbackAddParams.CallbackVars.builder()
@@ -60,7 +60,7 @@ internal class CallbackAddParamsTest {
         val headers = params._headers()
 
         assertThat(headers)
-            .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
+            .isEqualTo(Headers.builder().put("litellm-changed-by", "litellm-changed-by").build())
     }
 
     @Test
@@ -86,7 +86,7 @@ internal class CallbackAddParamsTest {
         val params =
             CallbackAddParams.builder()
                 .teamId("team_id")
-                .llmChangedBy("llm-changed-by")
+                .litellmChangedBy("litellm-changed-by")
                 .callbackName("callback_name")
                 .callbackVars(
                     CallbackAddParams.CallbackVars.builder()

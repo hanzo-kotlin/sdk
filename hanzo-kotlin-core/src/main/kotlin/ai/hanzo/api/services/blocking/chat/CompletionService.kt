@@ -43,13 +43,9 @@ interface CompletionService {
      * ```
      */
     fun create(
-        params: CompletionCreateParams = CompletionCreateParams.none(),
+        params: CompletionCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletionCreateResponse
-
-    /** @see create */
-    fun create(requestOptions: RequestOptions): CompletionCreateResponse =
-        create(CompletionCreateParams.none(), requestOptions)
 
     /** A view of [CompletionService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
@@ -69,13 +65,8 @@ interface CompletionService {
          */
         @MustBeClosed
         fun create(
-            params: CompletionCreateParams = CompletionCreateParams.none(),
+            params: CompletionCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CompletionCreateResponse>
-
-        /** @see create */
-        @MustBeClosed
-        fun create(requestOptions: RequestOptions): HttpResponseFor<CompletionCreateResponse> =
-            create(CompletionCreateParams.none(), requestOptions)
     }
 }

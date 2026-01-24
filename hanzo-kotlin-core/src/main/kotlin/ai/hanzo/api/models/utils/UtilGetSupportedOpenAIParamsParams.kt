@@ -9,7 +9,7 @@ import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
 /**
- * Returns supported openai params for a given llm model name
+ * Returns supported openai params for a given litellm model name
  *
  * e.g. `gpt-4` vs `gpt-3.5-turbo`
  *
