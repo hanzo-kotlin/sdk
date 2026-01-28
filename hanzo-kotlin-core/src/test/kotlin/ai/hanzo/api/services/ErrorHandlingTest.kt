@@ -25,11 +25,12 @@ import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.entry
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.parallel.ResourceLock
 
 @WireMockTest
+@ResourceLock("https://github.com/wiremock/wiremock/issues/169")
 internal class ErrorHandlingTest {
 
     companion object {
@@ -56,7 +57,6 @@ internal class ErrorHandlingTest {
                 .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun clientGetHome400() {
         val hanzoClient = client
@@ -74,7 +74,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome400WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(400).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<BadRequestException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(400)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHome401() {
         val hanzoClient = client
@@ -92,7 +108,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome401WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(401).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<UnauthorizedException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(401)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHome403() {
         val hanzoClient = client
@@ -110,7 +142,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome403WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(403).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<PermissionDeniedException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(403)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHome404() {
         val hanzoClient = client
@@ -128,7 +176,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome404WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(404).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<NotFoundException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(404)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHome422() {
         val hanzoClient = client
@@ -146,7 +210,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome422WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(422).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<UnprocessableEntityException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(422)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHome429() {
         val hanzoClient = client
@@ -164,7 +244,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome429WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(429).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<RateLimitException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(429)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHome500() {
         val hanzoClient = client
@@ -182,7 +278,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome500WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(500).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<InternalServerException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(500)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHome999() {
         val hanzoClient = client
@@ -200,7 +312,23 @@ internal class ErrorHandlingTest {
         assertThat(e.body()).isEqualTo(ERROR_JSON)
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Test
+    fun clientGetHome999WithRawResponse() {
+        val hanzoClient = client.withRawResponse()
+        stubFor(
+            get(anyUrl())
+                .willReturn(
+                    status(999).withHeader(HEADER_NAME, HEADER_VALUE).withBody(ERROR_JSON_BYTES)
+                )
+        )
+
+        val e = assertThrows<UnexpectedStatusCodeException> { hanzoClient.getHome() }
+
+        assertThat(e.statusCode()).isEqualTo(999)
+        assertThat(e.headers().toMap()).contains(entry(HEADER_NAME, listOf(HEADER_VALUE)))
+        assertThat(e.body()).isEqualTo(ERROR_JSON)
+    }
+
     @Test
     fun clientGetHomeInvalidJsonBody() {
         val hanzoClient = client

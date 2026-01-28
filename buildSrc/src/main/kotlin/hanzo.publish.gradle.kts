@@ -1,61 +1,72 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinJvm
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
-    `maven-publish`
-    signing
+    id("com.vanniktech.maven.publish")
 }
 
-configure<PublishingExtension> {
-    publications {
-        register<MavenPublication>("maven") {
-            from(components["java"])
+publishing {
+  repositories {
+      if (project.hasProperty("publishLocal")) {
+          maven {
+              name = "LocalFileSystem"
+              url = uri("${rootProject.layout.buildDirectory.get()}/local-maven-repo")
+          }
+      }
+  }
+}
 
-            pom {
-                name.set("Hanzo API")
-                description.set("Call 100+ LLMs in the OpenAI format. [**Docs**](https://docs.hanzo.ai/)\n\n👉 [`Hanzo Console`](https://cloud.hanzo.ai). Create, Edit API Keys.\n\n💸 [`LLM Models`](https://models.hanzo.ai/).")
-                url.set("https://docs.hanzo.ai")
+repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
 
-                licenses {
-                    license {
-                        name.set("Apache-2.0")
-                    }
-                }
+extra["signingInMemoryKey"] = System.getenv("GPG_SIGNING_KEY")
+extra["signingInMemoryKeyId"] = System.getenv("GPG_SIGNING_KEY_ID")
+extra["signingInMemoryKeyPassword"] = System.getenv("GPG_SIGNING_PASSWORD")
 
-                developers {
-                    developer {
-                        name.set("Hanzo")
-                        email.set("dev@hanzo.ai")
-                    }
-                }
+configure<MavenPublishBaseExtension> {
+    if (!project.hasProperty("publishLocal")) {
+        signAllPublications()
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    }
 
-                scm {
-                    connection.set("scm:git:git://github.com/hanzoai/kotlin-sdk.git")
-                    developerConnection.set("scm:git:git://github.com/hanzoai/kotlin-sdk.git")
-                    url.set("https://github.com/hanzoai/kotlin-sdk")
-                }
+    coordinates(project.group.toString(), project.name, project.version.toString())
+    configure(
+        KotlinJvm(
+            javadocJar = JavadocJar.Dokka("dokkaHtml"),
+            sourcesJar = true,
+        )
+    )
 
-                versionMapping {
-                    allVariants {
-                        fromResolutionResult()
-                    }
-                }
+    pom {
+        name.set("LiteLLM API")
+        description.set("Proxy Server to call 100+ LLMs in the OpenAI format.\n[**Customize Swagger Docs**](https://docs.litellm.ai/docs/proxy/enterprise#swagger-docs---custom-routes--branding)\n\n👉 [`LiteLLM Admin Panel on /ui`](/ui). Create, Edit Keys with SSO. Having\nissues? Try [`Fallback Login`](/fallback/login)\n\n💸 [`LiteLLM Model Cost Map`](https://models.litellm.ai/).\n\n🔎 [`LiteLLM Model Hub`](/ui/model_hub_table). See available models on the\nproxy. [**Docs**](https://docs.litellm.ai/docs/proxy/ai_hub)")
+        url.set("https://docs.hanzo.ai")
+
+        licenses {
+            license {
+                name.set("Apache-2.0")
             }
+        }
+
+        developers {
+            developer {
+                name.set("Hanzo")
+                email.set("dev@hanzo.ai")
+            }
+        }
+
+        scm {
+            connection.set("scm:git:git://github.com/hanzoai/kotlin-sdk.git")
+            developerConnection.set("scm:git:git://github.com/hanzoai/kotlin-sdk.git")
+            url.set("https://github.com/hanzoai/kotlin-sdk")
         }
     }
 }
 
-signing {
-    val signingKeyId = System.getenv("GPG_SIGNING_KEY_ID")?.ifBlank { null }
-    val signingKey = System.getenv("GPG_SIGNING_KEY")?.ifBlank { null }
-    val signingPassword = System.getenv("GPG_SIGNING_PASSWORD")?.ifBlank { null }
-    if (signingKey != null && signingPassword != null) {
-        useInMemoryPgpKeys(
-            signingKeyId,
-            signingKey,
-            signingPassword,
-        )
-        sign(publishing.publications["maven"])
-    }
-}
-
-tasks.named("publish") {
-    dependsOn(":closeAndReleaseSonatypeStagingRepository")
+tasks.withType<Zip>().configureEach {
+    isZip64 = true
 }

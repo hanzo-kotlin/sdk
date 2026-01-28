@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class UtilServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun getSupportedOpenAIParams() {
         val client =
@@ -33,7 +33,7 @@ internal class UtilServiceTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun tokenCounter() {
         val client =
@@ -46,8 +46,18 @@ internal class UtilServiceTest {
         val response =
             utilService.tokenCounter(
                 UtilTokenCounterParams.builder()
+                    .callEndpoint(true)
                     .model("model")
-                    .addMessage(JsonValue.from(mapOf<String, Any>()))
+                    .addContent(
+                        UtilTokenCounterParams.Content.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
+                    .addMessage(
+                        UtilTokenCounterParams.Message.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
                     .prompt("prompt")
                     .build()
             )
@@ -55,7 +65,7 @@ internal class UtilServiceTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun transformRequest() {
         val client =
@@ -69,7 +79,11 @@ internal class UtilServiceTest {
             utilService.transformRequest(
                 UtilTransformRequestParams.builder()
                     .callType(UtilTransformRequestParams.CallType.EMBEDDING)
-                    .requestBody(JsonValue.from(mapOf<String, Any>()))
+                    .requestBody(
+                        UtilTransformRequestParams.RequestBody.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
                     .build()
             )
 

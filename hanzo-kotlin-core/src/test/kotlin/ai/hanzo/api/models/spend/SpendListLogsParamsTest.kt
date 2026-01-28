@@ -4,12 +4,10 @@ package ai.hanzo.api.models.spend
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class SpendListLogsParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         SpendListLogsParams.builder()
@@ -17,11 +15,11 @@ internal class SpendListLogsParamsTest {
             .endDate("end_date")
             .requestId("request_id")
             .startDate("start_date")
+            .summarize(true)
             .userId("user_id")
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params =
@@ -30,6 +28,7 @@ internal class SpendListLogsParamsTest {
                 .endDate("end_date")
                 .requestId("request_id")
                 .startDate("start_date")
+                .summarize(true)
                 .userId("user_id")
                 .build()
 
@@ -42,12 +41,12 @@ internal class SpendListLogsParamsTest {
                     .put("end_date", "end_date")
                     .put("request_id", "request_id")
                     .put("start_date", "start_date")
+                    .put("summarize", "true")
                     .put("user_id", "user_id")
                     .build()
             )
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params = SpendListLogsParams.builder().build()

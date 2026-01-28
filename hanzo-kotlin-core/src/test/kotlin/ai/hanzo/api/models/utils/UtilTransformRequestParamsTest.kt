@@ -4,32 +4,42 @@ package ai.hanzo.api.models.utils
 
 import ai.hanzo.api.core.JsonValue
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class UtilTransformRequestParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         UtilTransformRequestParams.builder()
             .callType(UtilTransformRequestParams.CallType.EMBEDDING)
-            .requestBody(JsonValue.from(mapOf<String, Any>()))
+            .requestBody(
+                UtilTransformRequestParams.RequestBody.builder()
+                    .putAdditionalProperty("foo", JsonValue.from("bar"))
+                    .build()
+            )
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
             UtilTransformRequestParams.builder()
                 .callType(UtilTransformRequestParams.CallType.EMBEDDING)
-                .requestBody(JsonValue.from(mapOf<String, Any>()))
+                .requestBody(
+                    UtilTransformRequestParams.RequestBody.builder()
+                        .putAdditionalProperty("foo", JsonValue.from("bar"))
+                        .build()
+                )
                 .build()
 
         val body = params._body()
 
         assertThat(body.callType()).isEqualTo(UtilTransformRequestParams.CallType.EMBEDDING)
-        assertThat(body._requestBody()).isEqualTo(JsonValue.from(mapOf<String, Any>()))
+        assertThat(body.requestBody())
+            .isEqualTo(
+                UtilTransformRequestParams.RequestBody.builder()
+                    .putAdditionalProperty("foo", JsonValue.from("bar"))
+                    .build()
+            )
     }
 }

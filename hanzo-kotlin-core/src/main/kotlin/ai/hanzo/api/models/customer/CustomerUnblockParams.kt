@@ -33,8 +33,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = blockUsers._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -185,7 +187,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): BlockUsers = blockUsers
+    fun _body(): BlockUsers = blockUsers
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -196,10 +198,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CustomerUnblockParams && blockUsers == other.blockUsers && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CustomerUnblockParams &&
+            blockUsers == other.blockUsers &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(blockUsers, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(blockUsers, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CustomerUnblockParams{blockUsers=$blockUsers, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

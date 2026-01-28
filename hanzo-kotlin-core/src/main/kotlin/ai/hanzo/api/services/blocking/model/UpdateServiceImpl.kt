@@ -3,13 +3,14 @@
 package ai.hanzo.api.services.blocking.model
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -29,6 +30,9 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
 
     override fun withRawResponse(): UpdateService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UpdateService =
+        UpdateServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun full(
         params: UpdateFullParams,
         requestOptions: RequestOptions,
@@ -46,10 +50,16 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         UpdateService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): UpdateService.WithRawResponse =
+            UpdateServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
 
         private val fullHandler: Handler<UpdateFullResponse> =
-            jsonHandler<UpdateFullResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<UpdateFullResponse>(clientOptions.jsonMapper)
 
         override fun full(
             params: UpdateFullParams,
@@ -58,13 +68,14 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { fullHandler.handle(it) }
                     .also {
@@ -77,22 +88,25 @@ class UpdateServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val partialHandler: Handler<UpdatePartialResponse> =
             jsonHandler<UpdatePartialResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun partial(
             params: UpdatePartialParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<UpdatePartialResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("modelId", params.modelId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("model", params._pathParam(0), "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { partialHandler.handle(it) }
                     .also {

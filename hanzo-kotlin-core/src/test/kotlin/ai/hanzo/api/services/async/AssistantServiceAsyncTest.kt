@@ -4,7 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.assistants.AssistantDeleteParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class AssistantServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -27,7 +26,7 @@ internal class AssistantServiceAsyncTest {
         assistant.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun list() {
         val client =
@@ -37,12 +36,12 @@ internal class AssistantServiceAsyncTest {
                 .build()
         val assistantServiceAsync = client.assistants()
 
-        val assistant = assistantServiceAsync.list()
+        val assistants = assistantServiceAsync.list()
 
-        assistant.validate()
+        assistants.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =
@@ -52,10 +51,7 @@ internal class AssistantServiceAsyncTest {
                 .build()
         val assistantServiceAsync = client.assistants()
 
-        val assistant =
-            assistantServiceAsync.delete(
-                AssistantDeleteParams.builder().assistantId("assistant_id").build()
-            )
+        val assistant = assistantServiceAsync.delete("assistant_id")
 
         assistant.validate()
     }

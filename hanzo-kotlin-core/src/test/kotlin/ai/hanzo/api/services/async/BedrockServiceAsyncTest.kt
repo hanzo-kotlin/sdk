@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.bedrock.BedrockCreateParams
-import ai.hanzo.api.models.bedrock.BedrockDeleteParams
-import ai.hanzo.api.models.bedrock.BedrockPatchParams
-import ai.hanzo.api.models.bedrock.BedrockRetrieveParams
-import ai.hanzo.api.models.bedrock.BedrockUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class BedrockServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -26,13 +21,12 @@ internal class BedrockServiceAsyncTest {
                 .build()
         val bedrockServiceAsync = client.bedrock()
 
-        val bedrock =
-            bedrockServiceAsync.create(BedrockCreateParams.builder().endpoint("endpoint").build())
+        val bedrock = bedrockServiceAsync.create("endpoint")
 
         bedrock.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
         val client =
@@ -42,15 +36,12 @@ internal class BedrockServiceAsyncTest {
                 .build()
         val bedrockServiceAsync = client.bedrock()
 
-        val bedrock =
-            bedrockServiceAsync.retrieve(
-                BedrockRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val bedrock = bedrockServiceAsync.retrieve("endpoint")
 
         bedrock.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun update() {
         val client =
@@ -60,13 +51,12 @@ internal class BedrockServiceAsyncTest {
                 .build()
         val bedrockServiceAsync = client.bedrock()
 
-        val bedrock =
-            bedrockServiceAsync.update(BedrockUpdateParams.builder().endpoint("endpoint").build())
+        val bedrock = bedrockServiceAsync.update("endpoint")
 
         bedrock.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =
@@ -76,13 +66,12 @@ internal class BedrockServiceAsyncTest {
                 .build()
         val bedrockServiceAsync = client.bedrock()
 
-        val bedrock =
-            bedrockServiceAsync.delete(BedrockDeleteParams.builder().endpoint("endpoint").build())
+        val bedrock = bedrockServiceAsync.delete("endpoint")
 
         bedrock.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun patch() {
         val client =
@@ -92,8 +81,7 @@ internal class BedrockServiceAsyncTest {
                 .build()
         val bedrockServiceAsync = client.bedrock()
 
-        val response =
-            bedrockServiceAsync.patch(BedrockPatchParams.builder().endpoint("endpoint").build())
+        val response = bedrockServiceAsync.patch("endpoint")
 
         response.validate()
     }

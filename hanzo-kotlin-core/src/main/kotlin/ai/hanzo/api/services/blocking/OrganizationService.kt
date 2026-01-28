@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.organization.OrganizationAddMemberParams
@@ -11,13 +12,11 @@ import ai.hanzo.api.models.organization.OrganizationCreateResponse
 import ai.hanzo.api.models.organization.OrganizationDeleteMemberParams
 import ai.hanzo.api.models.organization.OrganizationDeleteMemberResponse
 import ai.hanzo.api.models.organization.OrganizationDeleteParams
-import ai.hanzo.api.models.organization.OrganizationDeleteResponse
 import ai.hanzo.api.models.organization.OrganizationListParams
-import ai.hanzo.api.models.organization.OrganizationListResponse
+import ai.hanzo.api.models.organization.OrganizationMembershipTable
+import ai.hanzo.api.models.organization.OrganizationTableWithMembers
 import ai.hanzo.api.models.organization.OrganizationUpdateMemberParams
-import ai.hanzo.api.models.organization.OrganizationUpdateMemberResponse
 import ai.hanzo.api.models.organization.OrganizationUpdateParams
-import ai.hanzo.api.models.organization.OrganizationUpdateResponse
 import ai.hanzo.api.services.blocking.organization.InfoService
 import com.google.errorprone.annotations.MustBeClosed
 
@@ -27,6 +26,13 @@ interface OrganizationService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): OrganizationService
 
     fun info(): InfoService
 
@@ -38,33 +44,38 @@ interface OrganizationService {
      * Only admins can create orgs.
      *
      * # Parameters
-     * - organization_alias: _str_ - The name of the organization.
-     * - models: _List_ - The models the organization has access to.
-     * - budget_id: _Optional[str]_ - The id for a budget (tpm/rpm/max budget) for the organization.
+     * - organization_alias: *str* - The name of the organization.
+     * - models: *List* - The models the organization has access to.
+     * - budget_id: *Optional[str]* - The id for a budget (tpm/rpm/max budget) for the organization.
      *
-     * ### IF NO BUDGET ID - CREATE ONE WITH THESE PARAMS
-     * - max_budget: _Optional[float]_ - Max budget for org
-     * - tpm_limit: _Optional[int]_ - Max tpm limit for org
-     * - rpm_limit: _Optional[int]_ - Max rpm limit for org
-     * - max_parallel_requests: _Optional[int]_ - [Not Implemented Yet] Max parallel requests for
+     * ### IF NO BUDGET ID - CREATE ONE WITH THESE PARAMS ###
+     * - max_budget: *Optional[float]* - Max budget for org
+     * - tpm_limit: *Optional[int]* - Max tpm limit for org
+     * - rpm_limit: *Optional[int]* - Max rpm limit for org
+     * - model_rpm_limit: *Optional[Dict[str, int]]* - The RPM (Requests Per Minute) limit per model
+     *   for this organization.
+     * - model_tpm_limit: *Optional[Dict[str, int]]* - The TPM (Tokens Per Minute) limit per model
+     *   for this organization.
+     * - max_parallel_requests: *Optional[int]* - [Not Implemented Yet] Max parallel requests for
      *   org
-     * - soft_budget: _Optional[float]_ - [Not Implemented Yet] Get a slack alert when this soft
+     * - soft_budget: *Optional[float]* - [Not Implemented Yet] Get a slack alert when this soft
      *   budget is reached. Don't block requests.
-     * - model_max_budget: _Optional[dict]_ - Max budget for a specific model
-     * - budget_duration: _Optional[str]_ - Frequency of reseting org budget
-     * - metadata: _Optional[dict]_ - Metadata for organization, store information for organization.
+     * - model_max_budget: *Optional[dict]* - Max budget for a specific model
+     * - budget_duration: *Optional[str]* - Frequency of reseting org budget
+     * - metadata: *Optional[dict]* - Metadata for organization, store information for organization.
      *   Example metadata - {"extra_info": "some info"}
-     * - blocked: _bool_ - Flag indicating if the org is blocked or not - will stop all calls from
+     * - blocked: *bool* - Flag indicating if the org is blocked or not - will stop all calls from
      *   keys with this org_id.
-     * - tags: _Optional[List[str]]_ - Tags for
-     *   [tracking spend](https://llm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
-     *   and/or doing [tag-based routing](https://llm.vercel.app/docs/proxy/tag_routing).
-     * - organization_id: _Optional[str]_ - The organization id of the team. Default is None. Create
+     * - tags: *Optional[List[str]]* - Tags for
+     *   [tracking spend](https://litellm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
+     *   and/or doing [tag-based routing](https://litellm.vercel.app/docs/proxy/tag_routing).
+     * - organization_id: *Optional[str]* - The organization id of the team. Default is None. Create
      *   via `/organization/new`.
      * - model_aliases: Optional[dict] - Model aliases for the team.
-     *   [Docs](https://docs.hanzo.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
-     *
-     * Case 1: Create new org **without** a budget_id
+     *   [Docs](https://docs.litellm.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
+     * - object_permission: Optional[LiteLLM_ObjectPermissionBase] - organization-specific object
+     *   permission. Example - {"vector_stores": ["vector_store_1", "vector_store_2"]}. IF null or
+     *   {} then no object permission. Case 1: Create new org **without** a budget_id
      *
      * ```bash
      * curl --location 'http://0.0.0.0:4000/organization/new'
@@ -101,24 +112,36 @@ interface OrganizationService {
     fun update(
         params: OrganizationUpdateParams = OrganizationUpdateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): OrganizationUpdateResponse
+    ): OrganizationTableWithMembers
 
-    /** @see [update] */
-    fun update(requestOptions: RequestOptions): OrganizationUpdateResponse =
+    /** @see update */
+    fun update(requestOptions: RequestOptions): OrganizationTableWithMembers =
         update(OrganizationUpdateParams.none(), requestOptions)
 
     /**
+     * Get a list of organizations with optional filtering.
+     *
+     * Parameters: org_id: Optional[str] Filter organizations by exact organization_id match
+     * org_alias: Optional[str] Filter organizations by partial organization_alias match
+     * (case-insensitive)
+     *
+     * Example:
      * ```
-     * curl --location --request GET 'http://0.0.0.0:4000/organization/list'         --header 'Authorization: Bearer sk-1234'
+     * curl --location --request GET 'http://0.0.0.0:4000/organization/list?org_alias=my-org'         --header 'Authorization: Bearer sk-1234'
+     * ```
+     *
+     * Example with org_id:
+     * ```
+     * curl --location --request GET 'http://0.0.0.0:4000/organization/list?org_id=123e4567-e89b-12d3-a456-426614174000'         --header 'Authorization: Bearer sk-1234'
      * ```
      */
     fun list(
         params: OrganizationListParams = OrganizationListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<OrganizationListResponse>
+    ): List<OrganizationTableWithMembers>
 
-    /** @see [list] */
-    fun list(requestOptions: RequestOptions): List<OrganizationListResponse> =
+    /** @see list */
+    fun list(requestOptions: RequestOptions): List<OrganizationTableWithMembers> =
         list(OrganizationListParams.none(), requestOptions)
 
     /**
@@ -130,7 +153,7 @@ interface OrganizationService {
     fun delete(
         params: OrganizationDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): List<OrganizationDeleteResponse>
+    ): List<OrganizationTableWithMembers>
 
     /**
      * [BETA]
@@ -144,7 +167,7 @@ interface OrganizationService {
      * # Parameters:
      * - organization_id: str (required)
      * - member: Union[List[Member], Member] (required)
-     *     - role: Literal[LLMUserRoles] (required)
+     *     - role: Literal[LitellmUserRoles] (required)
      *     - user_id: Optional[str]
      *     - user_email: Optional[str]
      *
@@ -156,7 +179,7 @@ interface OrganizationService {
      *     "organization_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849",
      *     "member": {
      *         "role": "internal_user",
-     *         "user_id": "dev247652@hanzo.ai"
+     *         "user_id": "krrish247652@berri.ai"
      *     },
      *     "max_budget_in_organization": 100.0
      * }'
@@ -164,8 +187,8 @@ interface OrganizationService {
      *
      * The following is executed in this function:
      * 1. Check if organization exists
-     * 2. Creates a new Internal User if the user_id or user_email is not found in LLM_UserTable
-     * 3. Add Internal User to the `LLM_OrganizationMembership` table
+     * 2. Creates a new Internal User if the user_id or user_email is not found in LiteLLM_UserTable
+     * 3. Add Internal User to the `LiteLLM_OrganizationMembership` table
      */
     fun addMember(
         params: OrganizationAddMemberParams,
@@ -182,12 +205,21 @@ interface OrganizationService {
     fun updateMember(
         params: OrganizationUpdateMemberParams,
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): OrganizationUpdateMemberResponse
+    ): OrganizationMembershipTable
 
     /**
      * A view of [OrganizationService] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): OrganizationService.WithRawResponse
 
         fun info(): InfoService.WithRawResponse
 
@@ -209,11 +241,11 @@ interface OrganizationService {
         fun update(
             params: OrganizationUpdateParams = OrganizationUpdateParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<OrganizationUpdateResponse>
+        ): HttpResponseFor<OrganizationTableWithMembers>
 
-        /** @see [update] */
+        /** @see update */
         @MustBeClosed
-        fun update(requestOptions: RequestOptions): HttpResponseFor<OrganizationUpdateResponse> =
+        fun update(requestOptions: RequestOptions): HttpResponseFor<OrganizationTableWithMembers> =
             update(OrganizationUpdateParams.none(), requestOptions)
 
         /**
@@ -224,11 +256,13 @@ interface OrganizationService {
         fun list(
             params: OrganizationListParams = OrganizationListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<OrganizationListResponse>>
+        ): HttpResponseFor<List<OrganizationTableWithMembers>>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
-        fun list(requestOptions: RequestOptions): HttpResponseFor<List<OrganizationListResponse>> =
+        fun list(
+            requestOptions: RequestOptions
+        ): HttpResponseFor<List<OrganizationTableWithMembers>> =
             list(OrganizationListParams.none(), requestOptions)
 
         /**
@@ -239,7 +273,7 @@ interface OrganizationService {
         fun delete(
             params: OrganizationDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<List<OrganizationDeleteResponse>>
+        ): HttpResponseFor<List<OrganizationTableWithMembers>>
 
         /**
          * Returns a raw HTTP response for `post /organization/member_add`, but is otherwise the
@@ -269,6 +303,6 @@ interface OrganizationService {
         fun updateMember(
             params: OrganizationUpdateMemberParams,
             requestOptions: RequestOptions = RequestOptions.none(),
-        ): HttpResponseFor<OrganizationUpdateMemberResponse>
+        ): HttpResponseFor<OrganizationMembershipTable>
     }
 }

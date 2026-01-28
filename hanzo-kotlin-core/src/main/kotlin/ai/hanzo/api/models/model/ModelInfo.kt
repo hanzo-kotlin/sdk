@@ -18,6 +18,7 @@ import java.util.Collections
 import java.util.Objects
 
 class ModelInfo
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val id: JsonField<String>,
     private val baseModel: JsonField<String>,
@@ -425,11 +426,36 @@ private constructor(
         dbModel()
         teamId()
         teamPublicModelName()
-        tier()
+        tier()?.validate()
         updatedAt()
         updatedBy()
         validated = true
     }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (if (id.asKnown() == null) 0 else 1) +
+            (if (baseModel.asKnown() == null) 0 else 1) +
+            (if (createdAt.asKnown() == null) 0 else 1) +
+            (if (createdBy.asKnown() == null) 0 else 1) +
+            (if (dbModel.asKnown() == null) 0 else 1) +
+            (if (teamId.asKnown() == null) 0 else 1) +
+            (if (teamPublicModelName.asKnown() == null) 0 else 1) +
+            (tier.asKnown()?.validity() ?: 0) +
+            (if (updatedAt.asKnown() == null) 0 else 1) +
+            (if (updatedBy.asKnown() == null) 0 else 1)
 
     class Tier @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
 
@@ -515,12 +541,39 @@ private constructor(
         fun asString(): String =
             _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
 
+        private var validated: Boolean = false
+
+        fun validate(): Tier = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Tier && value == other.value /* spotless:on */
+            return other is Tier && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -533,12 +586,35 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ModelInfo && id == other.id && baseModel == other.baseModel && createdAt == other.createdAt && createdBy == other.createdBy && dbModel == other.dbModel && teamId == other.teamId && teamPublicModelName == other.teamPublicModelName && tier == other.tier && updatedAt == other.updatedAt && updatedBy == other.updatedBy && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ModelInfo &&
+            id == other.id &&
+            baseModel == other.baseModel &&
+            createdAt == other.createdAt &&
+            createdBy == other.createdBy &&
+            dbModel == other.dbModel &&
+            teamId == other.teamId &&
+            teamPublicModelName == other.teamPublicModelName &&
+            tier == other.tier &&
+            updatedAt == other.updatedAt &&
+            updatedBy == other.updatedBy &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(id, baseModel, createdAt, createdBy, dbModel, teamId, teamPublicModelName, tier, updatedAt, updatedBy, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            id,
+            baseModel,
+            createdAt,
+            createdBy,
+            dbModel,
+            teamId,
+            teamPublicModelName,
+            tier,
+            updatedAt,
+            updatedBy,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 

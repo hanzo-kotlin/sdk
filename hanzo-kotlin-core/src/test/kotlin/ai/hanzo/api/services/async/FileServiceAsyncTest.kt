@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class FileServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -29,16 +29,19 @@ internal class FileServiceAsyncTest {
             fileServiceAsync.create(
                 FileCreateParams.builder()
                     .provider("provider")
-                    .file("some content".toByteArray())
+                    .file("some content".byteInputStream())
                     .purpose("purpose")
                     .customLlmProvider("custom_llm_provider")
+                    .litellmMetadata("litellm_metadata")
+                    .targetModelNames("target_model_names")
+                    .targetStorage("target_storage")
                     .build()
             )
 
         file.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
         val client =
@@ -56,7 +59,7 @@ internal class FileServiceAsyncTest {
         file.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun list() {
         val client =
@@ -66,15 +69,19 @@ internal class FileServiceAsyncTest {
                 .build()
         val fileServiceAsync = client.files()
 
-        val file =
+        val files =
             fileServiceAsync.list(
-                FileListParams.builder().provider("provider").purpose("purpose").build()
+                FileListParams.builder()
+                    .provider("provider")
+                    .purpose("purpose")
+                    .targetModelNames("target_model_names")
+                    .build()
             )
 
-        file.validate()
+        files.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =

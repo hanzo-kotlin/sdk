@@ -5,7 +5,6 @@ package ai.hanzo.api.models.finetuning.jobs
 import ai.hanzo.api.core.Enum
 import ai.hanzo.api.core.JsonField
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.errors.HanzoInvalidDataException
@@ -17,38 +16,34 @@ import java.util.Objects
  * https://api.openai.com/v1/fine_tuning/jobs/{fine_tuning_job_id}
  *
  * Supported Query Params:
- * - `custom_llm_provider`: Name of the LLM provider
+ * - `custom_llm_provider`: Name of the LiteLLM provider
  * - `fine_tuning_job_id`: The ID of the fine-tuning job to retrieve.
  */
 class JobRetrieveParams
 private constructor(
-    private val fineTuningJobId: String,
-    private val customLlmProvider: CustomLlmProvider,
+    private val fineTuningJobId: String?,
+    private val customLlmProvider: CustomLlmProvider?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun fineTuningJobId(): String = fineTuningJobId
+    fun fineTuningJobId(): String? = fineTuningJobId
 
-    fun customLlmProvider(): CustomLlmProvider = customLlmProvider
+    fun customLlmProvider(): CustomLlmProvider? = customLlmProvider
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [JobRetrieveParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .fineTuningJobId()
-         * .customLlmProvider()
-         * ```
-         */
+        fun none(): JobRetrieveParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [JobRetrieveParams]. */
         fun builder() = Builder()
     }
 
@@ -67,11 +62,11 @@ private constructor(
             additionalQueryParams = jobRetrieveParams.additionalQueryParams.toBuilder()
         }
 
-        fun fineTuningJobId(fineTuningJobId: String) = apply {
+        fun fineTuningJobId(fineTuningJobId: String?) = apply {
             this.fineTuningJobId = fineTuningJobId
         }
 
-        fun customLlmProvider(customLlmProvider: CustomLlmProvider) = apply {
+        fun customLlmProvider(customLlmProvider: CustomLlmProvider?) = apply {
             this.customLlmProvider = customLlmProvider
         }
 
@@ -177,19 +172,11 @@ private constructor(
          * Returns an immutable instance of [JobRetrieveParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .fineTuningJobId()
-         * .customLlmProvider()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): JobRetrieveParams =
             JobRetrieveParams(
-                checkRequired("fineTuningJobId", fineTuningJobId),
-                checkRequired("customLlmProvider", customLlmProvider),
+                fineTuningJobId,
+                customLlmProvider,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -197,7 +184,7 @@ private constructor(
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> fineTuningJobId
+            0 -> fineTuningJobId ?: ""
             else -> ""
         }
 
@@ -206,7 +193,7 @@ private constructor(
     override fun _queryParams(): QueryParams =
         QueryParams.builder()
             .apply {
-                put("custom_llm_provider", customLlmProvider.toString())
+                customLlmProvider?.let { put("custom_llm_provider", it.toString()) }
                 putAll(additionalQueryParams)
             }
             .build()
@@ -299,12 +286,39 @@ private constructor(
         fun asString(): String =
             _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
 
+        private var validated: Boolean = false
+
+        fun validate(): CustomLlmProvider = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is CustomLlmProvider && value == other.value /* spotless:on */
+            return other is CustomLlmProvider && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -317,10 +331,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is JobRetrieveParams && fineTuningJobId == other.fineTuningJobId && customLlmProvider == other.customLlmProvider && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is JobRetrieveParams &&
+            fineTuningJobId == other.fineTuningJobId &&
+            customLlmProvider == other.customLlmProvider &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(fineTuningJobId, customLlmProvider, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(fineTuningJobId, customLlmProvider, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "JobRetrieveParams{fineTuningJobId=$fineTuningJobId, customLlmProvider=$customLlmProvider, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

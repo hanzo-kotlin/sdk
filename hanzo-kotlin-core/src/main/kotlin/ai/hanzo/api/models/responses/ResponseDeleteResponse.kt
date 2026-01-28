@@ -4,6 +4,7 @@ package ai.hanzo.api.models.responses
 
 import ai.hanzo.api.core.ExcludeMissing
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
@@ -11,6 +12,7 @@ import java.util.Collections
 import java.util.Objects
 
 class ResponseDeleteResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(private val additionalProperties: MutableMap<String, JsonValue>) {
 
     @JsonCreator private constructor() : this(mutableMapOf())
@@ -80,17 +82,30 @@ private constructor(private val additionalProperties: MutableMap<String, JsonVal
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int = 0
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
         }
 
-        return /* spotless:off */ other is ResponseDeleteResponse && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ResponseDeleteResponse && additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
     private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-    /* spotless:on */
 
     override fun hashCode(): Int = hashCode
 

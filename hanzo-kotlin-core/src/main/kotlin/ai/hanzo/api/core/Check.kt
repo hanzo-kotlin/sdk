@@ -3,6 +3,9 @@ package ai.hanzo.api.core
 import com.fasterxml.jackson.core.Version
 import com.fasterxml.jackson.core.util.VersionUtil
 
+fun checkRequired(name: String, condition: Boolean) =
+    check(condition) { "`$name` is required, but was not set" }
+
 fun <T : Any> checkRequired(name: String, value: T?): T =
     checkNotNull(value) { "`$name` is required, but was not set" }
 
@@ -37,6 +40,7 @@ internal fun checkMaxLength(name: String, value: String, maxLength: Int): String
 internal fun checkJacksonVersionCompatibility() {
     val incompatibleJacksonVersions =
         RUNTIME_JACKSON_VERSIONS.mapNotNull {
+            val badVersionReason = BAD_JACKSON_VERSIONS[it.toString()]
             when {
                 it.majorVersion != MINIMUM_JACKSON_VERSION.majorVersion ->
                     it to "incompatible major version"
@@ -45,12 +49,13 @@ internal fun checkJacksonVersionCompatibility() {
                 it.minorVersion == MINIMUM_JACKSON_VERSION.minorVersion &&
                     it.patchLevel < MINIMUM_JACKSON_VERSION.patchLevel ->
                     it to "patch version too low"
+                badVersionReason != null -> it to badVersionReason
                 else -> null
             }
         }
     check(incompatibleJacksonVersions.isEmpty()) {
         """
-This SDK depends on Jackson version $MINIMUM_JACKSON_VERSION, but the following incompatible Jackson versions were detected at runtime:
+This SDK requires a minimum Jackson version of $MINIMUM_JACKSON_VERSION, but the following incompatible Jackson versions were detected at runtime:
 
 ${incompatibleJacksonVersions.asSequence().map { (version, incompatibilityReason) ->
     "- `${version.toFullString().replace("/", ":")}` ($incompatibilityReason)"
@@ -61,12 +66,16 @@ This can happen if you are either:
 2. Depending on some library that depends on different Jackson versions, potentially transitively
 
 Double-check that you are depending on compatible Jackson versions.
+
+See https://www.github.com/hanzoai/kotlin-sdk#jackson for more information.
         """
             .trimIndent()
     }
 }
 
 private val MINIMUM_JACKSON_VERSION: Version = VersionUtil.parseVersion("2.13.4", null, null)
+private val BAD_JACKSON_VERSIONS: Map<String, String> =
+    mapOf("2.18.1" to "due to https://github.com/FasterXML/jackson-databind/issues/4639")
 private val RUNTIME_JACKSON_VERSIONS: List<Version> =
     listOf(
         com.fasterxml.jackson.core.json.PackageVersion.VERSION,

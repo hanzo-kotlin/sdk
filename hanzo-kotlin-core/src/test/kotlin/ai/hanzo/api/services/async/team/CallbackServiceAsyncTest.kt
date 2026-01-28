@@ -6,7 +6,6 @@ import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.team.callback.CallbackAddParams
-import ai.hanzo.api.models.team.callback.CallbackRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class CallbackServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
         val client =
@@ -24,15 +23,12 @@ internal class CallbackServiceAsyncTest {
                 .build()
         val callbackServiceAsync = client.team().callback()
 
-        val callback =
-            callbackServiceAsync.retrieve(
-                CallbackRetrieveParams.builder().teamId("team_id").build()
-            )
+        val callback = callbackServiceAsync.retrieve("team_id")
 
         callback.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun add() {
         val client =
@@ -46,7 +42,7 @@ internal class CallbackServiceAsyncTest {
             callbackServiceAsync.add(
                 CallbackAddParams.builder()
                     .teamId("team_id")
-                    .llmChangedBy("llm-changed-by")
+                    .litellmChangedBy("litellm-changed-by")
                     .callbackName("callback_name")
                     .callbackVars(
                         CallbackAddParams.CallbackVars.builder()

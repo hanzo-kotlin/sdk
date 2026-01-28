@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.assemblyai.AssemblyaiCreateParams
@@ -23,35 +24,105 @@ interface AssemblyaiServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AssemblyaiServiceAsync
+
     /** Assemblyai Proxy Route */
+    suspend fun create(
+        endpoint: String,
+        params: AssemblyaiCreateParams = AssemblyaiCreateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AssemblyaiCreateResponse =
+        create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see create */
     suspend fun create(
         params: AssemblyaiCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiCreateResponse
 
+    /** @see create */
+    suspend fun create(endpoint: String, requestOptions: RequestOptions): AssemblyaiCreateResponse =
+        create(endpoint, AssemblyaiCreateParams.none(), requestOptions)
+
     /** Assemblyai Proxy Route */
+    suspend fun retrieve(
+        endpoint: String,
+        params: AssemblyaiRetrieveParams = AssemblyaiRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AssemblyaiRetrieveResponse =
+        retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see retrieve */
     suspend fun retrieve(
         params: AssemblyaiRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiRetrieveResponse
 
+    /** @see retrieve */
+    suspend fun retrieve(
+        endpoint: String,
+        requestOptions: RequestOptions,
+    ): AssemblyaiRetrieveResponse =
+        retrieve(endpoint, AssemblyaiRetrieveParams.none(), requestOptions)
+
     /** Assemblyai Proxy Route */
+    suspend fun update(
+        endpoint: String,
+        params: AssemblyaiUpdateParams = AssemblyaiUpdateParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AssemblyaiUpdateResponse =
+        update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see update */
     suspend fun update(
         params: AssemblyaiUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiUpdateResponse
 
+    /** @see update */
+    suspend fun update(endpoint: String, requestOptions: RequestOptions): AssemblyaiUpdateResponse =
+        update(endpoint, AssemblyaiUpdateParams.none(), requestOptions)
+
     /** Assemblyai Proxy Route */
+    suspend fun delete(
+        endpoint: String,
+        params: AssemblyaiDeleteParams = AssemblyaiDeleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AssemblyaiDeleteResponse =
+        delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see delete */
     suspend fun delete(
         params: AssemblyaiDeleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiDeleteResponse
 
+    /** @see delete */
+    suspend fun delete(endpoint: String, requestOptions: RequestOptions): AssemblyaiDeleteResponse =
+        delete(endpoint, AssemblyaiDeleteParams.none(), requestOptions)
+
     /** Assemblyai Proxy Route */
+    suspend fun patch(
+        endpoint: String,
+        params: AssemblyaiPatchParams = AssemblyaiPatchParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AssemblyaiPatchResponse =
+        patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+    /** @see patch */
     suspend fun patch(
         params: AssemblyaiPatchParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AssemblyaiPatchResponse
+
+    /** @see patch */
+    suspend fun patch(endpoint: String, requestOptions: RequestOptions): AssemblyaiPatchResponse =
+        patch(endpoint, AssemblyaiPatchParams.none(), requestOptions)
 
     /**
      * A view of [AssemblyaiServiceAsync] that provides access to raw HTTP responses for each
@@ -60,14 +131,40 @@ interface AssemblyaiServiceAsync {
     interface WithRawResponse {
 
         /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): AssemblyaiServiceAsync.WithRawResponse
+
+        /**
          * Returns a raw HTTP response for `post /assemblyai/{endpoint}`, but is otherwise the same
          * as [AssemblyaiServiceAsync.create].
          */
         @MustBeClosed
         suspend fun create(
+            endpoint: String,
+            params: AssemblyaiCreateParams = AssemblyaiCreateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AssemblyaiCreateResponse> =
+            create(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see create */
+        @MustBeClosed
+        suspend fun create(
             params: AssemblyaiCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiCreateResponse>
+
+        /** @see create */
+        @MustBeClosed
+        suspend fun create(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AssemblyaiCreateResponse> =
+            create(endpoint, AssemblyaiCreateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /assemblyai/{endpoint}`, but is otherwise the same
@@ -75,9 +172,26 @@ interface AssemblyaiServiceAsync {
          */
         @MustBeClosed
         suspend fun retrieve(
+            endpoint: String,
+            params: AssemblyaiRetrieveParams = AssemblyaiRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AssemblyaiRetrieveResponse> =
+            retrieve(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see retrieve */
+        @MustBeClosed
+        suspend fun retrieve(
             params: AssemblyaiRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiRetrieveResponse>
+
+        /** @see retrieve */
+        @MustBeClosed
+        suspend fun retrieve(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AssemblyaiRetrieveResponse> =
+            retrieve(endpoint, AssemblyaiRetrieveParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `put /assemblyai/{endpoint}`, but is otherwise the same
@@ -85,9 +199,26 @@ interface AssemblyaiServiceAsync {
          */
         @MustBeClosed
         suspend fun update(
+            endpoint: String,
+            params: AssemblyaiUpdateParams = AssemblyaiUpdateParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AssemblyaiUpdateResponse> =
+            update(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see update */
+        @MustBeClosed
+        suspend fun update(
             params: AssemblyaiUpdateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiUpdateResponse>
+
+        /** @see update */
+        @MustBeClosed
+        suspend fun update(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AssemblyaiUpdateResponse> =
+            update(endpoint, AssemblyaiUpdateParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `delete /assemblyai/{endpoint}`, but is otherwise the
@@ -95,9 +226,26 @@ interface AssemblyaiServiceAsync {
          */
         @MustBeClosed
         suspend fun delete(
+            endpoint: String,
+            params: AssemblyaiDeleteParams = AssemblyaiDeleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AssemblyaiDeleteResponse> =
+            delete(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see delete */
+        @MustBeClosed
+        suspend fun delete(
             params: AssemblyaiDeleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiDeleteResponse>
+
+        /** @see delete */
+        @MustBeClosed
+        suspend fun delete(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AssemblyaiDeleteResponse> =
+            delete(endpoint, AssemblyaiDeleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `patch /assemblyai/{endpoint}`, but is otherwise the same
@@ -105,8 +253,25 @@ interface AssemblyaiServiceAsync {
          */
         @MustBeClosed
         suspend fun patch(
+            endpoint: String,
+            params: AssemblyaiPatchParams = AssemblyaiPatchParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AssemblyaiPatchResponse> =
+            patch(params.toBuilder().endpoint(endpoint).build(), requestOptions)
+
+        /** @see patch */
+        @MustBeClosed
+        suspend fun patch(
             params: AssemblyaiPatchParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AssemblyaiPatchResponse>
+
+        /** @see patch */
+        @MustBeClosed
+        suspend fun patch(
+            endpoint: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<AssemblyaiPatchResponse> =
+            patch(endpoint, AssemblyaiPatchParams.none(), requestOptions)
     }
 }

@@ -4,7 +4,6 @@ package ai.hanzo.api.models.key
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.immutableEmptyMap
@@ -17,6 +16,10 @@ import java.util.Objects
  * Parameters:
  * - key: str (path parameter) - The key to regenerate
  * - data: Optional[RegenerateKeyRequest] - Request body containing optional parameters to update
+ *     - key: Optional[str] - The key to regenerate.
+ *     - new_master_key: Optional[str] - The new master key to use, if key is the master key.
+ *     - new_key: Optional[str] - The new key to use, if key is not the master key. If both set,
+ *       new_master_key will be used.
  *     - key_alias: Optional[str] - User-friendly key alias
  *     - user_id: Optional[str] - User ID associated with key
  *     - team_id: Optional[str] - Team ID associated with key
@@ -59,42 +62,39 @@ import java.util.Objects
  */
 class KeyRegenerateByKeyParams
 private constructor(
-    private val pathKey: String,
-    private val llmChangedBy: String?,
+    private val pathKey: String?,
+    private val litellmChangedBy: String?,
     private val regenerateKeyRequest: RegenerateKeyRequest?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun pathKey(): String = pathKey
+    fun pathKey(): String? = pathKey
 
     /**
-     * The llm-changed-by header enables tracking of actions performed by authorized users on behalf
-     * of other users, providing an audit trail for accountability
+     * The litellm-changed-by header enables tracking of actions performed by authorized users on
+     * behalf of other users, providing an audit trail for accountability
      */
-    fun llmChangedBy(): String? = llmChangedBy
+    fun litellmChangedBy(): String? = litellmChangedBy
 
     fun regenerateKeyRequest(): RegenerateKeyRequest? = regenerateKeyRequest
 
     fun _additionalBodyProperties(): Map<String, JsonValue> =
         regenerateKeyRequest?._additionalProperties() ?: immutableEmptyMap()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [KeyRegenerateByKeyParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .pathKey()
-         * ```
-         */
+        fun none(): KeyRegenerateByKeyParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [KeyRegenerateByKeyParams]. */
         fun builder() = Builder()
     }
 
@@ -102,26 +102,28 @@ private constructor(
     class Builder internal constructor() {
 
         private var pathKey: String? = null
-        private var llmChangedBy: String? = null
+        private var litellmChangedBy: String? = null
         private var regenerateKeyRequest: RegenerateKeyRequest? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         internal fun from(keyRegenerateByKeyParams: KeyRegenerateByKeyParams) = apply {
             pathKey = keyRegenerateByKeyParams.pathKey
-            llmChangedBy = keyRegenerateByKeyParams.llmChangedBy
+            litellmChangedBy = keyRegenerateByKeyParams.litellmChangedBy
             regenerateKeyRequest = keyRegenerateByKeyParams.regenerateKeyRequest
             additionalHeaders = keyRegenerateByKeyParams.additionalHeaders.toBuilder()
             additionalQueryParams = keyRegenerateByKeyParams.additionalQueryParams.toBuilder()
         }
 
-        fun pathKey(pathKey: String) = apply { this.pathKey = pathKey }
+        fun pathKey(pathKey: String?) = apply { this.pathKey = pathKey }
 
         /**
-         * The llm-changed-by header enables tracking of actions performed by authorized users on
-         * behalf of other users, providing an audit trail for accountability
+         * The litellm-changed-by header enables tracking of actions performed by authorized users
+         * on behalf of other users, providing an audit trail for accountability
          */
-        fun llmChangedBy(llmChangedBy: String?) = apply { this.llmChangedBy = llmChangedBy }
+        fun litellmChangedBy(litellmChangedBy: String?) = apply {
+            this.litellmChangedBy = litellmChangedBy
+        }
 
         fun regenerateKeyRequest(regenerateKeyRequest: RegenerateKeyRequest?) = apply {
             this.regenerateKeyRequest = regenerateKeyRequest
@@ -229,36 +231,29 @@ private constructor(
          * Returns an immutable instance of [KeyRegenerateByKeyParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .pathKey()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): KeyRegenerateByKeyParams =
             KeyRegenerateByKeyParams(
-                checkRequired("pathKey", pathKey),
-                llmChangedBy,
+                pathKey,
+                litellmChangedBy,
                 regenerateKeyRequest,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
     }
 
-    internal fun _body(): RegenerateKeyRequest? = regenerateKeyRequest
+    fun _body(): RegenerateKeyRequest? = regenerateKeyRequest
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> pathKey
+            0 -> pathKey ?: ""
             else -> ""
         }
 
     override fun _headers(): Headers =
         Headers.builder()
             .apply {
-                llmChangedBy?.let { put("llm-changed-by", it) }
+                litellmChangedBy?.let { put("litellm-changed-by", it) }
                 putAll(additionalHeaders)
             }
             .build()
@@ -270,11 +265,23 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is KeyRegenerateByKeyParams && pathKey == other.pathKey && llmChangedBy == other.llmChangedBy && regenerateKeyRequest == other.regenerateKeyRequest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is KeyRegenerateByKeyParams &&
+            pathKey == other.pathKey &&
+            litellmChangedBy == other.litellmChangedBy &&
+            regenerateKeyRequest == other.regenerateKeyRequest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(pathKey, llmChangedBy, regenerateKeyRequest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            pathKey,
+            litellmChangedBy,
+            regenerateKeyRequest,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
-        "KeyRegenerateByKeyParams{pathKey=$pathKey, llmChangedBy=$llmChangedBy, regenerateKeyRequest=$regenerateKeyRequest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "KeyRegenerateByKeyParams{pathKey=$pathKey, litellmChangedBy=$litellmChangedBy, regenerateKeyRequest=$regenerateKeyRequest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

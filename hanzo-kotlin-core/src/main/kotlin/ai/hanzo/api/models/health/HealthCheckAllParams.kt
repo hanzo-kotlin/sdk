@@ -10,7 +10,7 @@ import java.util.Objects
 /**
  * 🚨 USE `/health/liveliness` to health check the proxy 🚨
  *
- * See more 👉 https://docs.hanzo.ai/docs/proxy/health
+ * See more 👉 https://docs.litellm.ai/docs/proxy/health
  *
  * Check the health of all the endpoints in config.yaml
  *
@@ -26,6 +26,7 @@ import java.util.Objects
 class HealthCheckAllParams
 private constructor(
     private val model: String?,
+    private val modelId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
@@ -33,8 +34,13 @@ private constructor(
     /** Specify the model name (optional) */
     fun model(): String? = model
 
+    /** Specify the model ID (optional) */
+    fun modelId(): String? = modelId
+
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -51,17 +57,22 @@ private constructor(
     class Builder internal constructor() {
 
         private var model: String? = null
+        private var modelId: String? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         internal fun from(healthCheckAllParams: HealthCheckAllParams) = apply {
             model = healthCheckAllParams.model
+            modelId = healthCheckAllParams.modelId
             additionalHeaders = healthCheckAllParams.additionalHeaders.toBuilder()
             additionalQueryParams = healthCheckAllParams.additionalQueryParams.toBuilder()
         }
 
         /** Specify the model name (optional) */
         fun model(model: String?) = apply { this.model = model }
+
+        /** Specify the model ID (optional) */
+        fun modelId(modelId: String?) = apply { this.modelId = modelId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -167,7 +178,12 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          */
         fun build(): HealthCheckAllParams =
-            HealthCheckAllParams(model, additionalHeaders.build(), additionalQueryParams.build())
+            HealthCheckAllParams(
+                model,
+                modelId,
+                additionalHeaders.build(),
+                additionalQueryParams.build(),
+            )
     }
 
     override fun _headers(): Headers = additionalHeaders
@@ -176,6 +192,7 @@ private constructor(
         QueryParams.builder()
             .apply {
                 model?.let { put("model", it) }
+                modelId?.let { put("model_id", it) }
                 putAll(additionalQueryParams)
             }
             .build()
@@ -185,11 +202,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HealthCheckAllParams && model == other.model && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HealthCheckAllParams &&
+            model == other.model &&
+            modelId == other.modelId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(model, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(model, modelId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
-        "HealthCheckAllParams{model=$model, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "HealthCheckAllParams{model=$model, modelId=$modelId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

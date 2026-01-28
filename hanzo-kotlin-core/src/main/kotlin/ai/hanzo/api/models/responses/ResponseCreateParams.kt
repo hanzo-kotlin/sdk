@@ -12,10 +12,22 @@ import java.util.Objects
 /**
  * Follows the OpenAI Responses API spec: https://platform.openai.com/docs/api-reference/responses
  *
+ * Supports background mode with polling_via_cache for partial response retrieval. When
+ * background=true and polling_via_cache is enabled, returns a polling_id immediately and streams
+ * the response in the background, updating Redis cache.
+ *
  * ```bash
+ * # Normal request
  * curl -X POST http://localhost:4000/v1/responses     -H "Content-Type: application/json"     -H "Authorization: Bearer sk-1234"     -d '{
  *     "model": "gpt-4o",
  *     "input": "Tell me about AI"
+ * }'
+ *
+ * # Background request with polling
+ * curl -X POST http://localhost:4000/v1/responses     -H "Content-Type: application/json"     -H "Authorization: Bearer sk-1234"     -d '{
+ *     "model": "gpt-4o",
+ *     "input": "Tell me about AI",
+ *     "background": true
  * }'
  * ```
  */
@@ -26,10 +38,13 @@ private constructor(
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -188,7 +203,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -199,10 +214,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ResponseCreateParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is ResponseCreateParams &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "ResponseCreateParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

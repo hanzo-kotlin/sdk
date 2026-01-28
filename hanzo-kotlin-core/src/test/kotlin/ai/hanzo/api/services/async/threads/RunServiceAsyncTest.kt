@@ -4,7 +4,6 @@ package ai.hanzo.api.services.async.threads
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.threads.runs.RunCreateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class RunServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -22,7 +21,7 @@ internal class RunServiceAsyncTest {
                 .build()
         val runServiceAsync = client.threads().runs()
 
-        val run = runServiceAsync.create(RunCreateParams.builder().threadId("thread_id").build())
+        val run = runServiceAsync.create("thread_id")
 
         run.validate()
     }

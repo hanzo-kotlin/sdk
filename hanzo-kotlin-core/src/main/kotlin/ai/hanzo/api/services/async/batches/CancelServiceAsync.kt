@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.batches
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.batches.cancel.CancelCancelParams
@@ -14,6 +15,13 @@ interface CancelServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CancelServiceAsync
 
     /**
      * Cancel a batch. This is the equivalent of POST
@@ -29,9 +37,20 @@ interface CancelServiceAsync {
      * ```
      */
     suspend fun cancel(
+        batchId: String,
+        params: CancelCancelParams = CancelCancelParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CancelCancelResponse = cancel(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+    /** @see cancel */
+    suspend fun cancel(
         params: CancelCancelParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CancelCancelResponse
+
+    /** @see cancel */
+    suspend fun cancel(batchId: String, requestOptions: RequestOptions): CancelCancelResponse =
+        cancel(batchId, CancelCancelParams.none(), requestOptions)
 
     /**
      * A view of [CancelServiceAsync] that provides access to raw HTTP responses for each method.
@@ -39,13 +58,39 @@ interface CancelServiceAsync {
     interface WithRawResponse {
 
         /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CancelServiceAsync.WithRawResponse
+
+        /**
          * Returns a raw HTTP response for `post /batches/{batch_id}/cancel`, but is otherwise the
          * same as [CancelServiceAsync.cancel].
          */
         @MustBeClosed
         suspend fun cancel(
+            batchId: String,
+            params: CancelCancelParams = CancelCancelParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CancelCancelResponse> =
+            cancel(params.toBuilder().batchId(batchId).build(), requestOptions)
+
+        /** @see cancel */
+        @MustBeClosed
+        suspend fun cancel(
             params: CancelCancelParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CancelCancelResponse>
+
+        /** @see cancel */
+        @MustBeClosed
+        suspend fun cancel(
+            batchId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<CancelCancelResponse> =
+            cancel(batchId, CancelCancelParams.none(), requestOptions)
     }
 }

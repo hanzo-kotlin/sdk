@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.completions.CompletionCreateParams
@@ -14,6 +15,13 @@ interface CompletionServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CompletionServiceAsync
 
     /**
      * Follows the exact same API spec as `OpenAI's Completions API
@@ -36,7 +44,7 @@ interface CompletionServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletionCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): CompletionCreateResponse =
         create(CompletionCreateParams.none(), requestOptions)
 
@@ -45,6 +53,15 @@ interface CompletionServiceAsync {
      * method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CompletionServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /completions`, but is otherwise the same as
@@ -56,7 +73,7 @@ interface CompletionServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CompletionCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             requestOptions: RequestOptions

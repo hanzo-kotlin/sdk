@@ -3,13 +3,14 @@
 package ai.hanzo.api.services.blocking.finetuning
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -34,6 +35,9 @@ class JobServiceImpl internal constructor(private val clientOptions: ClientOptio
 
     override fun withRawResponse(): JobService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): JobService =
+        JobServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     override fun cancel(): CancelService = cancel
 
     override fun create(
@@ -57,16 +61,22 @@ class JobServiceImpl internal constructor(private val clientOptions: ClientOptio
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         JobService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         private val cancel: CancelService.WithRawResponse by lazy {
             CancelServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): JobService.WithRawResponse =
+            JobServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun cancel(): CancelService.WithRawResponse = cancel
 
         private val createHandler: Handler<JobCreateResponse> =
-            jsonHandler<JobCreateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<JobCreateResponse>(clientOptions.jsonMapper)
 
         override fun create(
             params: JobCreateParams,
@@ -75,13 +85,14 @@ class JobServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "fine_tuning", "jobs")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -94,21 +105,24 @@ class JobServiceImpl internal constructor(private val clientOptions: ClientOptio
 
         private val retrieveHandler: Handler<JobRetrieveResponse> =
             jsonHandler<JobRetrieveResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun retrieve(
             params: JobRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<JobRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("fineTuningJobId", params.fineTuningJobId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "fine_tuning", "jobs", params._pathParam(0))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveHandler.handle(it) }
                     .also {
@@ -120,7 +134,7 @@ class JobServiceImpl internal constructor(private val clientOptions: ClientOptio
         }
 
         private val listHandler: Handler<JobListResponse> =
-            jsonHandler<JobListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<JobListResponse>(clientOptions.jsonMapper)
 
         override fun list(
             params: JobListParams,
@@ -129,12 +143,13 @@ class JobServiceImpl internal constructor(private val clientOptions: ClientOptio
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "fine_tuning", "jobs")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listHandler.handle(it) }
                     .also {

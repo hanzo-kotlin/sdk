@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class InfoServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun list() {
         val client =
@@ -22,9 +22,11 @@ internal class InfoServiceAsyncTest {
                 .build()
         val infoServiceAsync = client.model().info()
 
-        val info =
-            infoServiceAsync.list(InfoListParams.builder().llmModelId("llm_model_id").build())
+        val infos =
+            infoServiceAsync.list(
+                InfoListParams.builder().litellmModelId("litellm_model_id").build()
+            )
 
-        info.validate()
+        infos.validate()
     }
 }

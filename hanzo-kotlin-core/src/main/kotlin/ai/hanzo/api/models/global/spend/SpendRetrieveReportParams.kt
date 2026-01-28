@@ -54,8 +54,10 @@ private constructor(
     /** View spend for a specific team_id. Example team_id='1234 */
     fun teamId(): String? = teamId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -343,12 +345,39 @@ private constructor(
         fun asString(): String =
             _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
 
+        private var validated: Boolean = false
+
+        fun validate(): GroupBy = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is GroupBy && value == other.value /* spotless:on */
+            return other is GroupBy && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -361,10 +390,30 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SpendRetrieveReportParams && apiKey == other.apiKey && customerId == other.customerId && endDate == other.endDate && groupBy == other.groupBy && internalUserId == other.internalUserId && startDate == other.startDate && teamId == other.teamId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SpendRetrieveReportParams &&
+            apiKey == other.apiKey &&
+            customerId == other.customerId &&
+            endDate == other.endDate &&
+            groupBy == other.groupBy &&
+            internalUserId == other.internalUserId &&
+            startDate == other.startDate &&
+            teamId == other.teamId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(apiKey, customerId, endDate, groupBy, internalUserId, startDate, teamId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            apiKey,
+            customerId,
+            endDate,
+            groupBy,
+            internalUserId,
+            startDate,
+            teamId,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
         "SpendRetrieveReportParams{apiKey=$apiKey, customerId=$customerId, endDate=$endDate, groupBy=$groupBy, internalUserId=$internalUserId, startDate=$startDate, teamId=$teamId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

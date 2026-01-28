@@ -4,18 +4,15 @@ package ai.hanzo.api.models.config.passthroughendpoint
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class PassThroughEndpointDeleteParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         PassThroughEndpointDeleteParams.builder().endpointId("endpoint_id").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params = PassThroughEndpointDeleteParams.builder().endpointId("endpoint_id").build()

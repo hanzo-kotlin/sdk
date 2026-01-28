@@ -23,6 +23,7 @@ import java.util.Objects
  * - model_max_budget: Optional[dict] - Specify max budget for a given model. Example:
  *   {"openai/gpt-4o-mini": {"max_budget": 100.0, "budget_duration": "1d", "tpm_limit": 100000,
  *   "rpm_limit": 100000}}
+ * - budget_reset_at: Optional[datetime] - Update the Datetime when the budget was last reset.
  */
 class BudgetUpdateParams
 private constructor(
@@ -35,8 +36,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = budgetNew._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -187,7 +190,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): BudgetNew = budgetNew
+    fun _body(): BudgetNew = budgetNew
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -198,10 +201,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BudgetUpdateParams && budgetNew == other.budgetNew && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BudgetUpdateParams &&
+            budgetNew == other.budgetNew &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(budgetNew, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(budgetNew, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "BudgetUpdateParams{budgetNew=$budgetNew, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

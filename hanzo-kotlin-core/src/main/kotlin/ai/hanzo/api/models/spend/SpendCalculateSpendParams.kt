@@ -25,7 +25,7 @@ import java.util.Objects
  * Calculate spend **before** making call:
  *
  * Note: If you see a spend of $0.0 you need to set custom_pricing for your model:
- * https://docs.hanzo.ai/docs/proxy/custom_pricing
+ * https://docs.litellm.ai/docs/proxy/custom_pricing
  *
  * ```
  * curl --location 'http://localhost:4000/spend/calculate'
@@ -74,7 +74,11 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun _completionResponse(): JsonValue = body._completionResponse()
+    /**
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun completionResponse(): CompletionResponse? = body.completionResponse()
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -87,6 +91,14 @@ private constructor(
      *   server responded with an unexpected value).
      */
     fun model(): String? = body.model()
+
+    /**
+     * Returns the raw JSON value of [completionResponse].
+     *
+     * Unlike [completionResponse], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    fun _completionResponse(): JsonField<CompletionResponse> = body._completionResponse()
 
     /**
      * Returns the raw JSON value of [messages].
@@ -104,8 +116,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -133,7 +147,29 @@ private constructor(
             additionalQueryParams = spendCalculateSpendParams.additionalQueryParams.toBuilder()
         }
 
-        fun completionResponse(completionResponse: JsonValue) = apply {
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [completionResponse]
+         * - [messages]
+         * - [model]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
+        fun completionResponse(completionResponse: CompletionResponse?) = apply {
+            body.completionResponse(completionResponse)
+        }
+
+        /**
+         * Sets [Builder.completionResponse] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.completionResponse] with a well-typed
+         * [CompletionResponse] value instead. This method is primarily for setting the field to an
+         * undocumented or not yet supported value.
+         */
+        fun completionResponse(completionResponse: JsonField<CompletionResponse>) = apply {
             body.completionResponse(completionResponse)
         }
 
@@ -295,15 +331,16 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        private val completionResponse: JsonValue,
+        private val completionResponse: JsonField<CompletionResponse>,
         private val messages: JsonField<List<JsonValue>>,
         private val model: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
@@ -313,16 +350,19 @@ private constructor(
         private constructor(
             @JsonProperty("completion_response")
             @ExcludeMissing
-            completionResponse: JsonValue = JsonMissing.of(),
+            completionResponse: JsonField<CompletionResponse> = JsonMissing.of(),
             @JsonProperty("messages")
             @ExcludeMissing
             messages: JsonField<List<JsonValue>> = JsonMissing.of(),
             @JsonProperty("model") @ExcludeMissing model: JsonField<String> = JsonMissing.of(),
         ) : this(completionResponse, messages, model, mutableMapOf())
 
-        @JsonProperty("completion_response")
-        @ExcludeMissing
-        fun _completionResponse(): JsonValue = completionResponse
+        /**
+         * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+         *   server responded with an unexpected value).
+         */
+        fun completionResponse(): CompletionResponse? =
+            completionResponse.getNullable("completion_response")
 
         /**
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -335,6 +375,16 @@ private constructor(
          *   server responded with an unexpected value).
          */
         fun model(): String? = model.getNullable("model")
+
+        /**
+         * Returns the raw JSON value of [completionResponse].
+         *
+         * Unlike [completionResponse], this method doesn't throw if the JSON field has an
+         * unexpected type.
+         */
+        @JsonProperty("completion_response")
+        @ExcludeMissing
+        fun _completionResponse(): JsonField<CompletionResponse> = completionResponse
 
         /**
          * Returns the raw JSON value of [messages].
@@ -373,7 +423,7 @@ private constructor(
         /** A builder for [Body]. */
         class Builder internal constructor() {
 
-            private var completionResponse: JsonValue = JsonMissing.of()
+            private var completionResponse: JsonField<CompletionResponse> = JsonMissing.of()
             private var messages: JsonField<MutableList<JsonValue>>? = null
             private var model: JsonField<String> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
@@ -385,7 +435,17 @@ private constructor(
                 additionalProperties = body.additionalProperties.toMutableMap()
             }
 
-            fun completionResponse(completionResponse: JsonValue) = apply {
+            fun completionResponse(completionResponse: CompletionResponse?) =
+                completionResponse(JsonField.ofNullable(completionResponse))
+
+            /**
+             * Sets [Builder.completionResponse] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.completionResponse] with a well-typed
+             * [CompletionResponse] value instead. This method is primarily for setting the field to
+             * an undocumented or not yet supported value.
+             */
+            fun completionResponse(completionResponse: JsonField<CompletionResponse>) = apply {
                 this.completionResponse = completionResponse
             }
 
@@ -465,22 +525,46 @@ private constructor(
                 return@apply
             }
 
+            completionResponse()?.validate()
             messages()
             model()
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (completionResponse.asKnown()?.validity() ?: 0) +
+                (messages.asKnown()?.size ?: 0) +
+                (if (model.asKnown() == null) 0 else 1)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && completionResponse == other.completionResponse && messages == other.messages && model == other.model && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                completionResponse == other.completionResponse &&
+                messages == other.messages &&
+                model == other.model &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(completionResponse, messages, model, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(completionResponse, messages, model, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -488,15 +572,115 @@ private constructor(
             "Body{completionResponse=$completionResponse, messages=$messages, model=$model, additionalProperties=$additionalProperties}"
     }
 
+    class CompletionResponse
+    @JsonCreator
+    private constructor(
+        @com.fasterxml.jackson.annotation.JsonValue
+        private val additionalProperties: Map<String, JsonValue>
+    ) {
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /** Returns a mutable builder for constructing an instance of [CompletionResponse]. */
+            fun builder() = Builder()
+        }
+
+        /** A builder for [CompletionResponse]. */
+        class Builder internal constructor() {
+
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            internal fun from(completionResponse: CompletionResponse) = apply {
+                additionalProperties = completionResponse.additionalProperties.toMutableMap()
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [CompletionResponse].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): CompletionResponse = CompletionResponse(additionalProperties.toImmutable())
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): CompletionResponse = apply {
+            if (validated) {
+                return@apply
+            }
+
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return other is CompletionResponse && additionalProperties == other.additionalProperties
+        }
+
+        private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() = "CompletionResponse{additionalProperties=$additionalProperties}"
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
         }
 
-        return /* spotless:off */ other is SpendCalculateSpendParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SpendCalculateSpendParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SpendCalculateSpendParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

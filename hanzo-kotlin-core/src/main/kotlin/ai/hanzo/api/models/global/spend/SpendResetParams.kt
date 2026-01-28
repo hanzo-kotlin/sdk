@@ -12,10 +12,10 @@ import java.util.Objects
 /**
  * ADMIN ONLY / MASTER KEY Only Endpoint
  *
- * Globally reset spend for All API Keys and Teams, maintain LLM_SpendLogs
- * 1. LLM_SpendLogs will maintain the logs on spend, no data gets deleted from there
- * 2. LLM_VerificationTokens spend will be set = 0
- * 3. LLM_TeamTable spend will be set = 0
+ * Globally reset spend for All API Keys and Teams, maintain LiteLLM_SpendLogs
+ * 1. LiteLLM_SpendLogs will maintain the logs on spend, no data gets deleted from there
+ * 2. LiteLLM_VerificationTokens spend will be set = 0
+ * 3. LiteLLM_TeamTable spend will be set = 0
  */
 class SpendResetParams
 private constructor(
@@ -24,10 +24,13 @@ private constructor(
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -186,7 +189,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -197,10 +200,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SpendResetParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is SpendResetParams &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "SpendResetParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

@@ -2,13 +2,13 @@
 
 package ai.hanzo.api.models.team
 
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class TeamUpdateMemberResponseTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val teamUpdateMemberResponse =
@@ -16,12 +16,38 @@ internal class TeamUpdateMemberResponseTest {
                 .teamId("team_id")
                 .userId("user_id")
                 .maxBudgetInTeam(0.0)
+                .rpmLimit(0L)
+                .tpmLimit(0L)
                 .userEmail("user_email")
                 .build()
 
         assertThat(teamUpdateMemberResponse.teamId()).isEqualTo("team_id")
         assertThat(teamUpdateMemberResponse.userId()).isEqualTo("user_id")
         assertThat(teamUpdateMemberResponse.maxBudgetInTeam()).isEqualTo(0.0)
+        assertThat(teamUpdateMemberResponse.rpmLimit()).isEqualTo(0L)
+        assertThat(teamUpdateMemberResponse.tpmLimit()).isEqualTo(0L)
         assertThat(teamUpdateMemberResponse.userEmail()).isEqualTo("user_email")
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val teamUpdateMemberResponse =
+            TeamUpdateMemberResponse.builder()
+                .teamId("team_id")
+                .userId("user_id")
+                .maxBudgetInTeam(0.0)
+                .rpmLimit(0L)
+                .tpmLimit(0L)
+                .userEmail("user_email")
+                .build()
+
+        val roundtrippedTeamUpdateMemberResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(teamUpdateMemberResponse),
+                jacksonTypeRef<TeamUpdateMemberResponse>(),
+            )
+
+        assertThat(roundtrippedTeamUpdateMemberResponse).isEqualTo(teamUpdateMemberResponse)
     }
 }

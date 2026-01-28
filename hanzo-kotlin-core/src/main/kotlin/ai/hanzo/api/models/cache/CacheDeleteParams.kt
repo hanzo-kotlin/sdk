@@ -10,11 +10,11 @@ import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
 /**
- * Endpoint for deleting a key from the cache. All responses from llm proxy have `x-llm-cache-key`
- * in the headers
+ * Endpoint for deleting a key from the cache. All responses from litellm proxy have
+ * `x-litellm-cache-key` in the headers
  *
  * Parameters:
- * - **keys**: _Optional[List[str]]_ - A list of keys to delete from the cache. Example {"keys":
+ * - **keys**: *Optional[List[str]]* - A list of keys to delete from the cache. Example {"keys":
  *   ["key1", "key2"]}
  *
  * ```shell
@@ -28,10 +28,13 @@ private constructor(
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -190,7 +193,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -201,10 +204,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CacheDeleteParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is CacheDeleteParams &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "CacheDeleteParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class SpendServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun calculateSpend() {
         val client =
@@ -28,7 +28,11 @@ internal class SpendServiceAsyncTest {
         val response =
             spendServiceAsync.calculateSpend(
                 SpendCalculateSpendParams.builder()
-                    .completionResponse(JsonValue.from(mapOf<String, Any>()))
+                    .completionResponse(
+                        SpendCalculateSpendParams.CompletionResponse.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
                     .addMessage(JsonValue.from(mapOf<String, Any>()))
                     .model("model")
                     .build()
@@ -37,7 +41,7 @@ internal class SpendServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun listLogs() {
         val client =
@@ -54,6 +58,7 @@ internal class SpendServiceAsyncTest {
                     .endDate("end_date")
                     .requestId("request_id")
                     .startDate("start_date")
+                    .summarize(true)
                     .userId("user_id")
                     .build()
             )
@@ -61,7 +66,7 @@ internal class SpendServiceAsyncTest {
         response.forEach { it.validate() }
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun listTags() {
         val client =

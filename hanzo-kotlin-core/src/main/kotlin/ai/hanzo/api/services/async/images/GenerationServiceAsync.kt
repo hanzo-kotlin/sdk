@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.images
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.images.generations.GenerationCreateParams
@@ -15,13 +16,20 @@ interface GenerationServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): GenerationServiceAsync
+
     /** Image Generation */
     suspend fun create(
         params: GenerationCreateParams = GenerationCreateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GenerationCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): GenerationCreateResponse =
         create(GenerationCreateParams.none(), requestOptions)
 
@@ -30,6 +38,15 @@ interface GenerationServiceAsync {
      * method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): GenerationServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /v1/images/generations`, but is otherwise the same
@@ -41,7 +58,7 @@ interface GenerationServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GenerationCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             requestOptions: RequestOptions

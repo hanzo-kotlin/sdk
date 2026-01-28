@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.finetuning
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.finetuning.jobs.JobCreateParams
@@ -10,6 +11,7 @@ import ai.hanzo.api.models.finetuning.jobs.JobListParams
 import ai.hanzo.api.models.finetuning.jobs.JobListResponse
 import ai.hanzo.api.models.finetuning.jobs.JobRetrieveParams
 import ai.hanzo.api.models.finetuning.jobs.JobRetrieveResponse
+import ai.hanzo.api.models.finetuning.jobs.LiteLlmFineTuningJobCreate
 import ai.hanzo.api.services.async.finetuning.jobs.CancelServiceAsync
 import com.google.errorprone.annotations.MustBeClosed
 
@@ -19,6 +21,13 @@ interface JobServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): JobServiceAsync
 
     fun cancel(): CancelServiceAsync
 
@@ -45,35 +54,72 @@ interface JobServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobCreateResponse
 
+    /** @see create */
+    suspend fun create(
+        liteLlmFineTuningJobCreate: LiteLlmFineTuningJobCreate,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): JobCreateResponse =
+        create(
+            JobCreateParams.builder()
+                .liteLlmFineTuningJobCreate(liteLlmFineTuningJobCreate)
+                .build(),
+            requestOptions,
+        )
+
     /**
      * Retrieves a fine-tuning job. This is the equivalent of GET
      * https://api.openai.com/v1/fine_tuning/jobs/{fine_tuning_job_id}
      *
      * Supported Query Params:
-     * - `custom_llm_provider`: Name of the LLM provider
+     * - `custom_llm_provider`: Name of the LiteLLM provider
      * - `fine_tuning_job_id`: The ID of the fine-tuning job to retrieve.
      */
+    suspend fun retrieve(
+        fineTuningJobId: String,
+        params: JobRetrieveParams = JobRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): JobRetrieveResponse =
+        retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
+
+    /** @see retrieve */
     suspend fun retrieve(
         params: JobRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobRetrieveResponse
+
+    /** @see retrieve */
+    suspend fun retrieve(
+        fineTuningJobId: String,
+        requestOptions: RequestOptions,
+    ): JobRetrieveResponse = retrieve(fineTuningJobId, JobRetrieveParams.none(), requestOptions)
 
     /**
      * Lists fine-tuning jobs for the organization. This is the equivalent of GET
      * https://api.openai.com/v1/fine_tuning/jobs
      *
      * Supported Query Params:
-     * - `custom_llm_provider`: Name of the LLM provider
+     * - `custom_llm_provider`: Name of the LiteLLM provider
      * - `after`: Identifier for the last job from the previous pagination request.
      * - `limit`: Number of fine-tuning jobs to retrieve (default is 20).
      */
     suspend fun list(
-        params: JobListParams,
+        params: JobListParams = JobListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): JobListResponse
 
+    /** @see list */
+    suspend fun list(requestOptions: RequestOptions): JobListResponse =
+        list(JobListParams.none(), requestOptions)
+
     /** A view of [JobServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): JobServiceAsync.WithRawResponse
 
         fun cancel(): CancelServiceAsync.WithRawResponse
 
@@ -87,15 +133,45 @@ interface JobServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<JobCreateResponse>
 
+        /** @see create */
+        @MustBeClosed
+        suspend fun create(
+            liteLlmFineTuningJobCreate: LiteLlmFineTuningJobCreate,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<JobCreateResponse> =
+            create(
+                JobCreateParams.builder()
+                    .liteLlmFineTuningJobCreate(liteLlmFineTuningJobCreate)
+                    .build(),
+                requestOptions,
+            )
+
         /**
          * Returns a raw HTTP response for `get /v1/fine_tuning/jobs/{fine_tuning_job_id}`, but is
          * otherwise the same as [JobServiceAsync.retrieve].
          */
         @MustBeClosed
         suspend fun retrieve(
+            fineTuningJobId: String,
+            params: JobRetrieveParams = JobRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<JobRetrieveResponse> =
+            retrieve(params.toBuilder().fineTuningJobId(fineTuningJobId).build(), requestOptions)
+
+        /** @see retrieve */
+        @MustBeClosed
+        suspend fun retrieve(
             params: JobRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<JobRetrieveResponse>
+
+        /** @see retrieve */
+        @MustBeClosed
+        suspend fun retrieve(
+            fineTuningJobId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<JobRetrieveResponse> =
+            retrieve(fineTuningJobId, JobRetrieveParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /v1/fine_tuning/jobs`, but is otherwise the same as
@@ -103,8 +179,13 @@ interface JobServiceAsync {
          */
         @MustBeClosed
         suspend fun list(
-            params: JobListParams,
+            params: JobListParams = JobListParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<JobListResponse>
+
+        /** @see list */
+        @MustBeClosed
+        suspend fun list(requestOptions: RequestOptions): HttpResponseFor<JobListResponse> =
+            list(JobListParams.none(), requestOptions)
     }
 }

@@ -9,20 +9,89 @@ import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.http.RetryingHttpClient
 import com.fasterxml.jackson.databind.json.JsonMapper
 import java.time.Clock
+import java.time.Duration
 
+/** A class representing the SDK client configuration. */
 class ClientOptions
 private constructor(
     private val originalHttpClient: HttpClient,
+    /**
+     * The HTTP client to use in the SDK.
+     *
+     * Use the one published in `hanzo-kotlin-client-okhttp` or implement your own.
+     *
+     * This class takes ownership of the client and closes it when closed.
+     */
     val httpClient: HttpClient,
+    /**
+     * Whether to throw an exception if any of the Jackson versions detected at runtime are
+     * incompatible with the SDK's minimum supported Jackson version (2.13.4).
+     *
+     * Defaults to true. Use extreme caution when disabling this option. There is no guarantee that
+     * the SDK will work correctly when using an incompatible Jackson version.
+     */
     val checkJacksonVersionCompatibility: Boolean,
+    /**
+     * The Jackson JSON mapper to use for serializing and deserializing JSON.
+     *
+     * Defaults to [ai.hanzo.api.core.jsonMapper]. The default is usually sufficient and rarely
+     * needs to be overridden.
+     */
     val jsonMapper: JsonMapper,
+    /**
+     * The interface to use for delaying execution, like during retries.
+     *
+     * This is primarily useful for using fake delays in tests.
+     *
+     * Defaults to real execution delays.
+     *
+     * This class takes ownership of the sleeper and closes it when closed.
+     */
+    val sleeper: Sleeper,
+    /**
+     * The clock to use for operations that require timing, like retries.
+     *
+     * This is primarily useful for using a fake clock in tests.
+     *
+     * Defaults to [Clock.systemUTC].
+     */
     val clock: Clock,
-    val baseUrl: String,
+    private val baseUrl: String?,
+    /** Headers to send with the request. */
     val headers: Headers,
+    /** Query params to send with the request. */
     val queryParams: QueryParams,
+    /**
+     * Whether to call `validate` on every response before returning it.
+     *
+     * Defaults to false, which means the shape of the response will not be validated upfront.
+     * Instead, validation will only occur for the parts of the response that are accessed.
+     */
     val responseValidation: Boolean,
+    /**
+     * Sets the maximum time allowed for various parts of an HTTP call's lifecycle, excluding
+     * retries.
+     *
+     * Defaults to [Timeout.default].
+     */
     val timeout: Timeout,
+    /**
+     * The maximum number of times to retry failed requests, with a short exponential backoff
+     * between requests.
+     *
+     * Only the following error types are retried:
+     * - Connection errors (for example, due to a network connectivity problem)
+     * - 408 Request Timeout
+     * - 409 Conflict
+     * - 429 Rate Limit
+     * - 5xx Internal
+     *
+     * The API may also explicitly instruct the SDK to retry or not retry a request.
+     *
+     * Defaults to 2.
+     */
     val maxRetries: Int,
+    /** The default name of the subscription key header of Azure */
     val apiKey: String,
 ) {
 
@@ -32,11 +101,23 @@ private constructor(
         }
     }
 
+    /**
+     * The base URL to use for every request.
+     *
+     * Defaults to the production environment: `https://api.hanzo.ai`.
+     *
+     * The following other environments, with dedicated builder methods, are available:
+     * - sandbox: `https://api.sandbox.hanzo.ai`
+     */
+    fun baseUrl(): String = baseUrl ?: PRODUCTION_URL
+
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
         const val PRODUCTION_URL = "https://api.hanzo.ai"
+
+        const val SANDBOX_URL = "https://api.sandbox.hanzo.ai"
 
         /**
          * Returns a mutable builder for constructing an instance of [ClientOptions].
@@ -49,6 +130,11 @@ private constructor(
          */
         fun builder() = Builder()
 
+        /**
+         * Returns options configured using system properties and environment variables.
+         *
+         * @see Builder.fromEnv
+         */
         fun fromEnv(): ClientOptions = builder().fromEnv().build()
     }
 
@@ -58,8 +144,9 @@ private constructor(
         private var httpClient: HttpClient? = null
         private var checkJacksonVersionCompatibility: Boolean = true
         private var jsonMapper: JsonMapper = jsonMapper()
+        private var sleeper: Sleeper? = null
         private var clock: Clock = Clock.systemUTC()
-        private var baseUrl: String = PRODUCTION_URL
+        private var baseUrl: String? = null
         private var headers: Headers.Builder = Headers.builder()
         private var queryParams: QueryParams.Builder = QueryParams.builder()
         private var responseValidation: Boolean = false
@@ -71,6 +158,7 @@ private constructor(
             httpClient = clientOptions.originalHttpClient
             checkJacksonVersionCompatibility = clientOptions.checkJacksonVersionCompatibility
             jsonMapper = clientOptions.jsonMapper
+            sleeper = clientOptions.sleeper
             clock = clientOptions.clock
             baseUrl = clientOptions.baseUrl
             headers = clientOptions.headers.toBuilder()
@@ -81,26 +169,114 @@ private constructor(
             apiKey = clientOptions.apiKey
         }
 
-        fun httpClient(httpClient: HttpClient) = apply { this.httpClient = httpClient }
+        /**
+         * The HTTP client to use in the SDK.
+         *
+         * Use the one published in `hanzo-kotlin-client-okhttp` or implement your own.
+         *
+         * This class takes ownership of the client and closes it when closed.
+         */
+        fun httpClient(httpClient: HttpClient) = apply {
+            this.httpClient = PhantomReachableClosingHttpClient(httpClient)
+        }
 
+        /**
+         * Whether to throw an exception if any of the Jackson versions detected at runtime are
+         * incompatible with the SDK's minimum supported Jackson version (2.13.4).
+         *
+         * Defaults to true. Use extreme caution when disabling this option. There is no guarantee
+         * that the SDK will work correctly when using an incompatible Jackson version.
+         */
         fun checkJacksonVersionCompatibility(checkJacksonVersionCompatibility: Boolean) = apply {
             this.checkJacksonVersionCompatibility = checkJacksonVersionCompatibility
         }
 
+        /**
+         * The Jackson JSON mapper to use for serializing and deserializing JSON.
+         *
+         * Defaults to [ai.hanzo.api.core.jsonMapper]. The default is usually sufficient and rarely
+         * needs to be overridden.
+         */
         fun jsonMapper(jsonMapper: JsonMapper) = apply { this.jsonMapper = jsonMapper }
 
+        /**
+         * The interface to use for delaying execution, like during retries.
+         *
+         * This is primarily useful for using fake delays in tests.
+         *
+         * Defaults to real execution delays.
+         *
+         * This class takes ownership of the sleeper and closes it when closed.
+         */
+        fun sleeper(sleeper: Sleeper) = apply { this.sleeper = PhantomReachableSleeper(sleeper) }
+
+        /**
+         * The clock to use for operations that require timing, like retries.
+         *
+         * This is primarily useful for using a fake clock in tests.
+         *
+         * Defaults to [Clock.systemUTC].
+         */
         fun clock(clock: Clock) = apply { this.clock = clock }
 
-        fun baseUrl(baseUrl: String) = apply { this.baseUrl = baseUrl }
+        /**
+         * The base URL to use for every request.
+         *
+         * Defaults to the production environment: `https://api.hanzo.ai`.
+         *
+         * The following other environments, with dedicated builder methods, are available:
+         * - sandbox: `https://api.sandbox.hanzo.ai`
+         */
+        fun baseUrl(baseUrl: String?) = apply { this.baseUrl = baseUrl }
 
+        /** Sets [baseUrl] to `https://api.sandbox.hanzo.ai`. */
+        fun sandbox() = baseUrl(SANDBOX_URL)
+
+        /**
+         * Whether to call `validate` on every response before returning it.
+         *
+         * Defaults to false, which means the shape of the response will not be validated upfront.
+         * Instead, validation will only occur for the parts of the response that are accessed.
+         */
         fun responseValidation(responseValidation: Boolean) = apply {
             this.responseValidation = responseValidation
         }
 
+        /**
+         * Sets the maximum time allowed for various parts of an HTTP call's lifecycle, excluding
+         * retries.
+         *
+         * Defaults to [Timeout.default].
+         */
         fun timeout(timeout: Timeout) = apply { this.timeout = timeout }
 
+        /**
+         * Sets the maximum time allowed for a complete HTTP call, not including retries.
+         *
+         * See [Timeout.request] for more details.
+         *
+         * For fine-grained control, pass a [Timeout] object.
+         */
+        fun timeout(timeout: Duration) = timeout(Timeout.builder().request(timeout).build())
+
+        /**
+         * The maximum number of times to retry failed requests, with a short exponential backoff
+         * between requests.
+         *
+         * Only the following error types are retried:
+         * - Connection errors (for example, due to a network connectivity problem)
+         * - 408 Request Timeout
+         * - 409 Conflict
+         * - 429 Rate Limit
+         * - 5xx Internal
+         *
+         * The API may also explicitly instruct the SDK to retry or not retry a request.
+         *
+         * Defaults to 2.
+         */
         fun maxRetries(maxRetries: Int) = apply { this.maxRetries = maxRetries }
 
+        /** The default name of the subscription key header of Azure */
         fun apiKey(apiKey: String) = apply { this.apiKey = apiKey }
 
         fun headers(headers: Headers) = apply {
@@ -183,7 +359,28 @@ private constructor(
 
         fun removeAllQueryParams(keys: Set<String>) = apply { queryParams.removeAll(keys) }
 
-        fun fromEnv() = apply { System.getenv("HANZO_API_KEY")?.let { apiKey(it) } }
+        fun timeout(): Timeout = timeout
+
+        /**
+         * Updates configuration using system properties and environment variables.
+         *
+         * See this table for the available options:
+         *
+         * | Setter    | System property | Environment variable | Required | Default value            |
+         * |-----------|-----------------|----------------------|----------|--------------------------|
+         * | `apiKey`  | `hanzo.apiKey`  | `HANZO_API_KEY`      | true     | -                        |
+         * | `baseUrl` | `hanzo.baseUrl` | `HANZO_BASE_URL`     | true     | `"https://api.hanzo.ai"` |
+         *
+         * System properties take precedence over environment variables.
+         */
+        fun fromEnv() = apply {
+            (System.getProperty("hanzo.baseUrl") ?: System.getenv("HANZO_BASE_URL"))?.let {
+                baseUrl(it)
+            }
+            (System.getProperty("hanzo.apiKey") ?: System.getenv("HANZO_API_KEY"))?.let {
+                apiKey(it)
+            }
+        }
 
         /**
          * Returns an immutable instance of [ClientOptions].
@@ -200,6 +397,7 @@ private constructor(
          */
         fun build(): ClientOptions {
             val httpClient = checkRequired("httpClient", httpClient)
+            val sleeper = sleeper ?: PhantomReachableSleeper(DefaultSleeper())
             val apiKey = checkRequired("apiKey", apiKey)
 
             val headers = Headers.builder()
@@ -211,9 +409,10 @@ private constructor(
             headers.put("X-Stainless-Package-Version", getPackageVersion())
             headers.put("X-Stainless-Runtime", "JRE")
             headers.put("X-Stainless-Runtime-Version", getJavaVersion())
+            headers.put("X-Stainless-Kotlin-Version", KotlinVersion.CURRENT.toString())
             apiKey.let {
                 if (!it.isEmpty()) {
-                    headers.put("Ocp-Apim-Subscription-Key", it)
+                    headers.put("x-litellm-api-key", it)
                 }
             }
             headers.replaceAll(this.headers.build())
@@ -221,15 +420,15 @@ private constructor(
 
             return ClientOptions(
                 httpClient,
-                PhantomReachableClosingHttpClient(
-                    RetryingHttpClient.builder()
-                        .httpClient(httpClient)
-                        .clock(clock)
-                        .maxRetries(maxRetries)
-                        .build()
-                ),
+                RetryingHttpClient.builder()
+                    .httpClient(httpClient)
+                    .sleeper(sleeper)
+                    .clock(clock)
+                    .maxRetries(maxRetries)
+                    .build(),
                 checkJacksonVersionCompatibility,
                 jsonMapper,
+                sleeper,
                 clock,
                 baseUrl,
                 headers.build(),
@@ -240,5 +439,20 @@ private constructor(
                 apiKey,
             )
         }
+    }
+
+    /**
+     * Closes these client options, relinquishing any underlying resources.
+     *
+     * This is purposefully not inherited from [AutoCloseable] because the client options are
+     * long-lived and usually should not be synchronously closed via try-with-resources.
+     *
+     * It's also usually not necessary to call this method at all. the default client automatically
+     * releases threads and connections if they remain idle, but if you are writing an application
+     * that needs to aggressively release unused resources, then you may call this method.
+     */
+    fun close() {
+        httpClient.close()
+        sleeper.close()
     }
 }

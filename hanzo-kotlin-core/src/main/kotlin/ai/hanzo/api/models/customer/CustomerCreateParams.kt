@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 
@@ -50,13 +51,15 @@ import java.util.Objects
  *   a given customer.
  * - soft_budget: Optional[float] - [Not Implemented Yet] Get alerts when customer crosses given
  *   budget, doesn't block requests.
+ * - spend: Optional[float] - Specify initial spend for a given customer.
+ * - budget_reset_at: Optional[str] - Specify the date and time when the budget should be reset.
  * - Allow specifying allowed regions
  * - Allow specifying default model
  *
  * Example curl:
  * ```
  * curl --location 'http://0.0.0.0:4000/customer/new'         --header 'Authorization: Bearer sk-1234'         --header 'Content-Type: application/json'         --data '{
- *         "user_id" : "z-jaff-3",
+ *         "user_id" : "ishaan-jaff-3",
  *         "allowed_region": "eu",
  *         "budget_id": "free_tier",
  *         "default_model": "azure/gpt-3.5-turbo-eu" <- all calls from this user, use this model?
@@ -114,6 +117,14 @@ private constructor(
     fun budgetId(): String? = body.budgetId()
 
     /**
+     * Datetime when the budget is reset
+     *
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun budgetResetAt(): OffsetDateTime? = body.budgetResetAt()
+
+    /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
@@ -159,6 +170,12 @@ private constructor(
      *   server responded with an unexpected value).
      */
     fun softBudget(): Double? = body.softBudget()
+
+    /**
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun spend(): Double? = body.spend()
 
     /**
      * Max tokens per minute, allowed for this budget id.
@@ -212,6 +229,13 @@ private constructor(
     fun _budgetId(): JsonField<String> = body._budgetId()
 
     /**
+     * Returns the raw JSON value of [budgetResetAt].
+     *
+     * Unlike [budgetResetAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _budgetResetAt(): JsonField<OffsetDateTime> = body._budgetResetAt()
+
+    /**
      * Returns the raw JSON value of [defaultModel].
      *
      * Unlike [defaultModel], this method doesn't throw if the JSON field has an unexpected type.
@@ -255,6 +279,13 @@ private constructor(
     fun _softBudget(): JsonField<Double> = body._softBudget()
 
     /**
+     * Returns the raw JSON value of [spend].
+     *
+     * Unlike [spend], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _spend(): JsonField<Double> = body._spend()
+
+    /**
      * Returns the raw JSON value of [tpmLimit].
      *
      * Unlike [tpmLimit], this method doesn't throw if the JSON field has an unexpected type.
@@ -263,8 +294,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -294,6 +327,20 @@ private constructor(
             additionalHeaders = customerCreateParams.additionalHeaders.toBuilder()
             additionalQueryParams = customerCreateParams.additionalQueryParams.toBuilder()
         }
+
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [userId]
+         * - [alias]
+         * - [allowedModelRegion]
+         * - [blocked]
+         * - [budgetDuration]
+         * - etc.
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
 
         fun userId(userId: String) = apply { body.userId(userId) }
 
@@ -363,6 +410,22 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun budgetId(budgetId: JsonField<String>) = apply { body.budgetId(budgetId) }
+
+        /** Datetime when the budget is reset */
+        fun budgetResetAt(budgetResetAt: OffsetDateTime?) = apply {
+            body.budgetResetAt(budgetResetAt)
+        }
+
+        /**
+         * Sets [Builder.budgetResetAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.budgetResetAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun budgetResetAt(budgetResetAt: JsonField<OffsetDateTime>) = apply {
+            body.budgetResetAt(budgetResetAt)
+        }
 
         fun defaultModel(defaultModel: String?) = apply { body.defaultModel(defaultModel) }
 
@@ -475,6 +538,23 @@ private constructor(
          * value.
          */
         fun softBudget(softBudget: JsonField<Double>) = apply { body.softBudget(softBudget) }
+
+        fun spend(spend: Double?) = apply { body.spend(spend) }
+
+        /**
+         * Alias for [Builder.spend].
+         *
+         * This unboxed primitive overload exists for backwards compatibility.
+         */
+        fun spend(spend: Double) = spend(spend as Double?)
+
+        /**
+         * Sets [Builder.spend] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.spend] with a well-typed [Double] value instead. This
+         * method is primarily for setting the field to an undocumented or not yet supported value.
+         */
+        fun spend(spend: JsonField<Double>) = apply { body.spend(spend) }
 
         /** Max tokens per minute, allowed for this budget id. */
         fun tpmLimit(tpmLimit: Long?) = apply { body.tpmLimit(tpmLimit) }
@@ -631,7 +711,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -639,6 +719,7 @@ private constructor(
 
     /** Create a new customer, allocate a budget to them */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val userId: JsonField<String>,
         private val alias: JsonField<String>,
@@ -646,12 +727,14 @@ private constructor(
         private val blocked: JsonField<Boolean>,
         private val budgetDuration: JsonField<String>,
         private val budgetId: JsonField<String>,
+        private val budgetResetAt: JsonField<OffsetDateTime>,
         private val defaultModel: JsonField<String>,
         private val maxBudget: JsonField<Double>,
         private val maxParallelRequests: JsonField<Long>,
         private val modelMaxBudget: JsonField<ModelMaxBudget>,
         private val rpmLimit: JsonField<Long>,
         private val softBudget: JsonField<Double>,
+        private val spend: JsonField<Double>,
         private val tpmLimit: JsonField<Long>,
         private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
@@ -670,6 +753,9 @@ private constructor(
             @JsonProperty("budget_id")
             @ExcludeMissing
             budgetId: JsonField<String> = JsonMissing.of(),
+            @JsonProperty("budget_reset_at")
+            @ExcludeMissing
+            budgetResetAt: JsonField<OffsetDateTime> = JsonMissing.of(),
             @JsonProperty("default_model")
             @ExcludeMissing
             defaultModel: JsonField<String> = JsonMissing.of(),
@@ -686,6 +772,7 @@ private constructor(
             @JsonProperty("soft_budget")
             @ExcludeMissing
             softBudget: JsonField<Double> = JsonMissing.of(),
+            @JsonProperty("spend") @ExcludeMissing spend: JsonField<Double> = JsonMissing.of(),
             @JsonProperty("tpm_limit") @ExcludeMissing tpmLimit: JsonField<Long> = JsonMissing.of(),
         ) : this(
             userId,
@@ -694,12 +781,14 @@ private constructor(
             blocked,
             budgetDuration,
             budgetId,
+            budgetResetAt,
             defaultModel,
             maxBudget,
             maxParallelRequests,
             modelMaxBudget,
             rpmLimit,
             softBudget,
+            spend,
             tpmLimit,
             mutableMapOf(),
         )
@@ -742,6 +831,14 @@ private constructor(
          *   server responded with an unexpected value).
          */
         fun budgetId(): String? = budgetId.getNullable("budget_id")
+
+        /**
+         * Datetime when the budget is reset
+         *
+         * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+         *   server responded with an unexpected value).
+         */
+        fun budgetResetAt(): OffsetDateTime? = budgetResetAt.getNullable("budget_reset_at")
 
         /**
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -789,6 +886,12 @@ private constructor(
          *   server responded with an unexpected value).
          */
         fun softBudget(): Double? = softBudget.getNullable("soft_budget")
+
+        /**
+         * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+         *   server responded with an unexpected value).
+         */
+        fun spend(): Double? = spend.getNullable("spend")
 
         /**
          * Max tokens per minute, allowed for this budget id.
@@ -847,6 +950,16 @@ private constructor(
         @JsonProperty("budget_id") @ExcludeMissing fun _budgetId(): JsonField<String> = budgetId
 
         /**
+         * Returns the raw JSON value of [budgetResetAt].
+         *
+         * Unlike [budgetResetAt], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("budget_reset_at")
+        @ExcludeMissing
+        fun _budgetResetAt(): JsonField<OffsetDateTime> = budgetResetAt
+
+        /**
          * Returns the raw JSON value of [defaultModel].
          *
          * Unlike [defaultModel], this method doesn't throw if the JSON field has an unexpected
@@ -900,6 +1013,13 @@ private constructor(
         fun _softBudget(): JsonField<Double> = softBudget
 
         /**
+         * Returns the raw JSON value of [spend].
+         *
+         * Unlike [spend], this method doesn't throw if the JSON field has an unexpected type.
+         */
+        @JsonProperty("spend") @ExcludeMissing fun _spend(): JsonField<Double> = spend
+
+        /**
          * Returns the raw JSON value of [tpmLimit].
          *
          * Unlike [tpmLimit], this method doesn't throw if the JSON field has an unexpected type.
@@ -940,12 +1060,14 @@ private constructor(
             private var blocked: JsonField<Boolean> = JsonMissing.of()
             private var budgetDuration: JsonField<String> = JsonMissing.of()
             private var budgetId: JsonField<String> = JsonMissing.of()
+            private var budgetResetAt: JsonField<OffsetDateTime> = JsonMissing.of()
             private var defaultModel: JsonField<String> = JsonMissing.of()
             private var maxBudget: JsonField<Double> = JsonMissing.of()
             private var maxParallelRequests: JsonField<Long> = JsonMissing.of()
             private var modelMaxBudget: JsonField<ModelMaxBudget> = JsonMissing.of()
             private var rpmLimit: JsonField<Long> = JsonMissing.of()
             private var softBudget: JsonField<Double> = JsonMissing.of()
+            private var spend: JsonField<Double> = JsonMissing.of()
             private var tpmLimit: JsonField<Long> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
@@ -956,12 +1078,14 @@ private constructor(
                 blocked = body.blocked
                 budgetDuration = body.budgetDuration
                 budgetId = body.budgetId
+                budgetResetAt = body.budgetResetAt
                 defaultModel = body.defaultModel
                 maxBudget = body.maxBudget
                 maxParallelRequests = body.maxParallelRequests
                 modelMaxBudget = body.modelMaxBudget
                 rpmLimit = body.rpmLimit
                 softBudget = body.softBudget
+                spend = body.spend
                 tpmLimit = body.tpmLimit
                 additionalProperties = body.additionalProperties.toMutableMap()
             }
@@ -1038,6 +1162,21 @@ private constructor(
              * supported value.
              */
             fun budgetId(budgetId: JsonField<String>) = apply { this.budgetId = budgetId }
+
+            /** Datetime when the budget is reset */
+            fun budgetResetAt(budgetResetAt: OffsetDateTime?) =
+                budgetResetAt(JsonField.ofNullable(budgetResetAt))
+
+            /**
+             * Sets [Builder.budgetResetAt] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.budgetResetAt] with a well-typed [OffsetDateTime]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun budgetResetAt(budgetResetAt: JsonField<OffsetDateTime>) = apply {
+                this.budgetResetAt = budgetResetAt
+            }
 
             fun defaultModel(defaultModel: String?) =
                 defaultModel(JsonField.ofNullable(defaultModel))
@@ -1151,6 +1290,24 @@ private constructor(
              */
             fun softBudget(softBudget: JsonField<Double>) = apply { this.softBudget = softBudget }
 
+            fun spend(spend: Double?) = spend(JsonField.ofNullable(spend))
+
+            /**
+             * Alias for [Builder.spend].
+             *
+             * This unboxed primitive overload exists for backwards compatibility.
+             */
+            fun spend(spend: Double) = spend(spend as Double?)
+
+            /**
+             * Sets [Builder.spend] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.spend] with a well-typed [Double] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
+             */
+            fun spend(spend: JsonField<Double>) = apply { this.spend = spend }
+
             /** Max tokens per minute, allowed for this budget id. */
             fun tpmLimit(tpmLimit: Long?) = tpmLimit(JsonField.ofNullable(tpmLimit))
 
@@ -1209,12 +1366,14 @@ private constructor(
                     blocked,
                     budgetDuration,
                     budgetId,
+                    budgetResetAt,
                     defaultModel,
                     maxBudget,
                     maxParallelRequests,
                     modelMaxBudget,
                     rpmLimit,
                     softBudget,
+                    spend,
                     tpmLimit,
                     additionalProperties.toMutableMap(),
                 )
@@ -1229,36 +1388,102 @@ private constructor(
 
             userId()
             alias()
-            allowedModelRegion()
+            allowedModelRegion()?.validate()
             blocked()
             budgetDuration()
             budgetId()
+            budgetResetAt()
             defaultModel()
             maxBudget()
             maxParallelRequests()
             modelMaxBudget()?.validate()
             rpmLimit()
             softBudget()
+            spend()
             tpmLimit()
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (if (userId.asKnown() == null) 0 else 1) +
+                (if (alias.asKnown() == null) 0 else 1) +
+                (allowedModelRegion.asKnown()?.validity() ?: 0) +
+                (if (blocked.asKnown() == null) 0 else 1) +
+                (if (budgetDuration.asKnown() == null) 0 else 1) +
+                (if (budgetId.asKnown() == null) 0 else 1) +
+                (if (budgetResetAt.asKnown() == null) 0 else 1) +
+                (if (defaultModel.asKnown() == null) 0 else 1) +
+                (if (maxBudget.asKnown() == null) 0 else 1) +
+                (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+                (modelMaxBudget.asKnown()?.validity() ?: 0) +
+                (if (rpmLimit.asKnown() == null) 0 else 1) +
+                (if (softBudget.asKnown() == null) 0 else 1) +
+                (if (spend.asKnown() == null) 0 else 1) +
+                (if (tpmLimit.asKnown() == null) 0 else 1)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && userId == other.userId && alias == other.alias && allowedModelRegion == other.allowedModelRegion && blocked == other.blocked && budgetDuration == other.budgetDuration && budgetId == other.budgetId && defaultModel == other.defaultModel && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && modelMaxBudget == other.modelMaxBudget && rpmLimit == other.rpmLimit && softBudget == other.softBudget && tpmLimit == other.tpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                userId == other.userId &&
+                alias == other.alias &&
+                allowedModelRegion == other.allowedModelRegion &&
+                blocked == other.blocked &&
+                budgetDuration == other.budgetDuration &&
+                budgetId == other.budgetId &&
+                budgetResetAt == other.budgetResetAt &&
+                defaultModel == other.defaultModel &&
+                maxBudget == other.maxBudget &&
+                maxParallelRequests == other.maxParallelRequests &&
+                modelMaxBudget == other.modelMaxBudget &&
+                rpmLimit == other.rpmLimit &&
+                softBudget == other.softBudget &&
+                spend == other.spend &&
+                tpmLimit == other.tpmLimit &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(userId, alias, allowedModelRegion, blocked, budgetDuration, budgetId, defaultModel, maxBudget, maxParallelRequests, modelMaxBudget, rpmLimit, softBudget, tpmLimit, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                userId,
+                alias,
+                allowedModelRegion,
+                blocked,
+                budgetDuration,
+                budgetId,
+                budgetResetAt,
+                defaultModel,
+                maxBudget,
+                maxParallelRequests,
+                modelMaxBudget,
+                rpmLimit,
+                softBudget,
+                spend,
+                tpmLimit,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
         override fun toString() =
-            "Body{userId=$userId, alias=$alias, allowedModelRegion=$allowedModelRegion, blocked=$blocked, budgetDuration=$budgetDuration, budgetId=$budgetId, defaultModel=$defaultModel, maxBudget=$maxBudget, maxParallelRequests=$maxParallelRequests, modelMaxBudget=$modelMaxBudget, rpmLimit=$rpmLimit, softBudget=$softBudget, tpmLimit=$tpmLimit, additionalProperties=$additionalProperties}"
+            "Body{userId=$userId, alias=$alias, allowedModelRegion=$allowedModelRegion, blocked=$blocked, budgetDuration=$budgetDuration, budgetId=$budgetId, budgetResetAt=$budgetResetAt, defaultModel=$defaultModel, maxBudget=$maxBudget, maxParallelRequests=$maxParallelRequests, modelMaxBudget=$modelMaxBudget, rpmLimit=$rpmLimit, softBudget=$softBudget, spend=$spend, tpmLimit=$tpmLimit, additionalProperties=$additionalProperties}"
     }
 
     class AllowedModelRegion
@@ -1350,12 +1575,39 @@ private constructor(
         fun asString(): String =
             _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
 
+        private var validated: Boolean = false
+
+        fun validate(): AllowedModelRegion = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is AllowedModelRegion && value == other.value /* spotless:on */
+            return other is AllowedModelRegion && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -1432,17 +1684,32 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is ModelMaxBudget && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is ModelMaxBudget && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -1454,10 +1721,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CustomerCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CustomerCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CustomerCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

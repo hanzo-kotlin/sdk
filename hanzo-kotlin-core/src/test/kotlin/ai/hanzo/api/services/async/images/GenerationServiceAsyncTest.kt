@@ -4,6 +4,7 @@ package ai.hanzo.api.services.async.images
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
+import ai.hanzo.api.models.images.generations.GenerationCreateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class GenerationServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -21,7 +22,8 @@ internal class GenerationServiceAsyncTest {
                 .build()
         val generationServiceAsync = client.images().generations()
 
-        val generation = generationServiceAsync.create()
+        val generation =
+            generationServiceAsync.create(GenerationCreateParams.builder().model("model").build())
 
         generation.validate()
     }

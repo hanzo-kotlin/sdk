@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.config
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointCreateParams
@@ -11,6 +12,7 @@ import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointListPar
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointResponse
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointUpdateParams
 import ai.hanzo.api.models.config.passthroughendpoint.PassThroughEndpointUpdateResponse
+import ai.hanzo.api.models.config.passthroughendpoint.PassThroughGenericEndpoint
 import com.google.errorprone.annotations.MustBeClosed
 
 interface PassThroughEndpointServiceAsync {
@@ -20,13 +22,40 @@ interface PassThroughEndpointServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): PassThroughEndpointServiceAsync
+
     /** Create new pass-through endpoint */
     suspend fun create(
         params: PassThroughEndpointCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): PassThroughEndpointCreateResponse
 
-    /** Update a pass-through endpoint */
+    /** @see create */
+    suspend fun create(
+        passThroughGenericEndpoint: PassThroughGenericEndpoint,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): PassThroughEndpointCreateResponse =
+        create(
+            PassThroughEndpointCreateParams.builder()
+                .passThroughGenericEndpoint(passThroughGenericEndpoint)
+                .build(),
+            requestOptions,
+        )
+
+    /** Update a pass-through endpoint by ID. */
+    suspend fun update(
+        endpointId: String,
+        params: PassThroughEndpointUpdateParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): PassThroughEndpointUpdateResponse =
+        update(params.toBuilder().endpointId(endpointId).build(), requestOptions)
+
+    /** @see update */
     suspend fun update(
         params: PassThroughEndpointUpdateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -42,12 +71,12 @@ interface PassThroughEndpointServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): PassThroughEndpointResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): PassThroughEndpointResponse =
         list(PassThroughEndpointListParams.none(), requestOptions)
 
     /**
-     * Delete a pass-through endpoint
+     * Delete a pass-through endpoint by ID.
      *
      * Returns - the deleted endpoint
      */
@@ -63,6 +92,15 @@ interface PassThroughEndpointServiceAsync {
     interface WithRawResponse {
 
         /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): PassThroughEndpointServiceAsync.WithRawResponse
+
+        /**
          * Returns a raw HTTP response for `post /config/pass_through_endpoint`, but is otherwise
          * the same as [PassThroughEndpointServiceAsync.create].
          */
@@ -72,10 +110,32 @@ interface PassThroughEndpointServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<PassThroughEndpointCreateResponse>
 
+        /** @see create */
+        @MustBeClosed
+        suspend fun create(
+            passThroughGenericEndpoint: PassThroughGenericEndpoint,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<PassThroughEndpointCreateResponse> =
+            create(
+                PassThroughEndpointCreateParams.builder()
+                    .passThroughGenericEndpoint(passThroughGenericEndpoint)
+                    .build(),
+                requestOptions,
+            )
+
         /**
          * Returns a raw HTTP response for `post /config/pass_through_endpoint/{endpoint_id}`, but
          * is otherwise the same as [PassThroughEndpointServiceAsync.update].
          */
+        @MustBeClosed
+        suspend fun update(
+            endpointId: String,
+            params: PassThroughEndpointUpdateParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<PassThroughEndpointUpdateResponse> =
+            update(params.toBuilder().endpointId(endpointId).build(), requestOptions)
+
+        /** @see update */
         @MustBeClosed
         suspend fun update(
             params: PassThroughEndpointUpdateParams,
@@ -92,7 +152,7 @@ interface PassThroughEndpointServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<PassThroughEndpointResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(
             requestOptions: RequestOptions

@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.rerank.RerankCreateParams
@@ -19,13 +20,20 @@ interface RerankService {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RerankService
+
     /** Rerank */
     fun create(
         params: RerankCreateParams = RerankCreateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): RerankCreateResponse =
         create(RerankCreateParams.none(), requestOptions)
 
@@ -35,7 +43,7 @@ interface RerankService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateV1Response
 
-    /** @see [createV1] */
+    /** @see createV1 */
     fun createV1(requestOptions: RequestOptions): RerankCreateV1Response =
         createV1(RerankCreateV1Params.none(), requestOptions)
 
@@ -45,12 +53,19 @@ interface RerankService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RerankCreateV2Response
 
-    /** @see [createV2] */
+    /** @see createV2 */
     fun createV2(requestOptions: RequestOptions): RerankCreateV2Response =
         createV2(RerankCreateV2Params.none(), requestOptions)
 
     /** A view of [RerankService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RerankService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /rerank`, but is otherwise the same as
@@ -62,7 +77,7 @@ interface RerankService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<RerankCreateResponse> =
             create(RerankCreateParams.none(), requestOptions)
@@ -77,7 +92,7 @@ interface RerankService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateV1Response>
 
-        /** @see [createV1] */
+        /** @see createV1 */
         @MustBeClosed
         fun createV1(requestOptions: RequestOptions): HttpResponseFor<RerankCreateV1Response> =
             createV1(RerankCreateV1Params.none(), requestOptions)
@@ -92,7 +107,7 @@ interface RerankService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RerankCreateV2Response>
 
-        /** @see [createV2] */
+        /** @see createV2 */
         @MustBeClosed
         fun createV2(requestOptions: RequestOptions): HttpResponseFor<RerankCreateV2Response> =
             createV2(RerankCreateV2Params.none(), requestOptions)

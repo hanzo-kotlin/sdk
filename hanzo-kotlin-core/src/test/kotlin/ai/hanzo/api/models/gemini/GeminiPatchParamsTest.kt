@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.gemini
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class GeminiPatchParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         GeminiPatchParams.builder().endpoint("endpoint").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = GeminiPatchParams.builder().endpoint("endpoint").build()

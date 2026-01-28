@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.cache
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.cache.redis.RediRetrieveInfoParams
@@ -15,18 +16,32 @@ interface RediServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RediServiceAsync
+
     /** Endpoint for getting /redis/info */
     suspend fun retrieveInfo(
         params: RediRetrieveInfoParams = RediRetrieveInfoParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RediRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     suspend fun retrieveInfo(requestOptions: RequestOptions): RediRetrieveInfoResponse =
         retrieveInfo(RediRetrieveInfoParams.none(), requestOptions)
 
     /** A view of [RediServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RediServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /cache/redis/info`, but is otherwise the same as
@@ -38,7 +53,7 @@ interface RediServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RediRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         suspend fun retrieveInfo(
             requestOptions: RequestOptions

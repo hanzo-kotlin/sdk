@@ -6,12 +6,11 @@ import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.customer.BlockUsers
-import ai.hanzo.api.models.customer.CustomerBlockParams
 import ai.hanzo.api.models.customer.CustomerCreateParams
 import ai.hanzo.api.models.customer.CustomerDeleteParams
 import ai.hanzo.api.models.customer.CustomerRetrieveInfoParams
-import ai.hanzo.api.models.customer.CustomerUnblockParams
 import ai.hanzo.api.models.customer.CustomerUpdateParams
+import java.time.OffsetDateTime
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -19,7 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class CustomerServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -38,6 +37,7 @@ internal class CustomerServiceAsyncTest {
                     .blocked(true)
                     .budgetDuration("budget_duration")
                     .budgetId("budget_id")
+                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .defaultModel("default_model")
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
@@ -58,6 +58,7 @@ internal class CustomerServiceAsyncTest {
                     )
                     .rpmLimit(0L)
                     .softBudget(0.0)
+                    .spend(0.0)
                     .tpmLimit(0L)
                     .build()
             )
@@ -65,7 +66,7 @@ internal class CustomerServiceAsyncTest {
         customer.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun update() {
         val client =
@@ -91,7 +92,7 @@ internal class CustomerServiceAsyncTest {
         customer.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun list() {
         val client =
@@ -101,12 +102,12 @@ internal class CustomerServiceAsyncTest {
                 .build()
         val customerServiceAsync = client.customer()
 
-        val customers = customerServiceAsync.list()
+        val liteLlmEndUserTables = customerServiceAsync.list()
 
-        customers.forEach { it.validate() }
+        liteLlmEndUserTables.forEach { it.validate() }
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =
@@ -122,7 +123,7 @@ internal class CustomerServiceAsyncTest {
         customer.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun block() {
         val client =
@@ -132,17 +133,12 @@ internal class CustomerServiceAsyncTest {
                 .build()
         val customerServiceAsync = client.customer()
 
-        val response =
-            customerServiceAsync.block(
-                CustomerBlockParams.builder()
-                    .blockUsers(BlockUsers.builder().addUserId("string").build())
-                    .build()
-            )
+        val response = customerServiceAsync.block(BlockUsers.builder().addUserId("string").build())
 
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieveInfo() {
         val client =
@@ -152,15 +148,15 @@ internal class CustomerServiceAsyncTest {
                 .build()
         val customerServiceAsync = client.customer()
 
-        val response =
+        val liteLlmEndUserTable =
             customerServiceAsync.retrieveInfo(
                 CustomerRetrieveInfoParams.builder().endUserId("end_user_id").build()
             )
 
-        response.validate()
+        liteLlmEndUserTable.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun unblock() {
         val client =
@@ -171,11 +167,7 @@ internal class CustomerServiceAsyncTest {
         val customerServiceAsync = client.customer()
 
         val response =
-            customerServiceAsync.unblock(
-                CustomerUnblockParams.builder()
-                    .blockUsers(BlockUsers.builder().addUserId("string").build())
-                    .build()
-            )
+            customerServiceAsync.unblock(BlockUsers.builder().addUserId("string").build())
 
         response.validate()
     }

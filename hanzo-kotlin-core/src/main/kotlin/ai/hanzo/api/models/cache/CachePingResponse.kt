@@ -7,6 +7,7 @@ import ai.hanzo.api.core.JsonField
 import ai.hanzo.api.core.JsonMissing
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.toImmutable
 import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
@@ -16,11 +17,12 @@ import java.util.Collections
 import java.util.Objects
 
 class CachePingResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val cacheType: JsonField<String>,
     private val status: JsonField<String>,
-    private val healthCheckCacheParams: JsonValue,
-    private val llmCacheParams: JsonField<String>,
+    private val healthCheckCacheParams: JsonField<HealthCheckCacheParams>,
+    private val litellmCacheParams: JsonField<String>,
     private val pingResponse: JsonField<Boolean>,
     private val setCacheResponse: JsonField<String>,
     private val additionalProperties: MutableMap<String, JsonValue>,
@@ -32,10 +34,10 @@ private constructor(
         @JsonProperty("status") @ExcludeMissing status: JsonField<String> = JsonMissing.of(),
         @JsonProperty("health_check_cache_params")
         @ExcludeMissing
-        healthCheckCacheParams: JsonValue = JsonMissing.of(),
-        @JsonProperty("llm_cache_params")
+        healthCheckCacheParams: JsonField<HealthCheckCacheParams> = JsonMissing.of(),
+        @JsonProperty("litellm_cache_params")
         @ExcludeMissing
-        llmCacheParams: JsonField<String> = JsonMissing.of(),
+        litellmCacheParams: JsonField<String> = JsonMissing.of(),
         @JsonProperty("ping_response")
         @ExcludeMissing
         pingResponse: JsonField<Boolean> = JsonMissing.of(),
@@ -46,7 +48,7 @@ private constructor(
         cacheType,
         status,
         healthCheckCacheParams,
-        llmCacheParams,
+        litellmCacheParams,
         pingResponse,
         setCacheResponse,
         mutableMapOf(),
@@ -64,15 +66,18 @@ private constructor(
      */
     fun status(): String = status.getRequired("status")
 
-    @JsonProperty("health_check_cache_params")
-    @ExcludeMissing
-    fun _healthCheckCacheParams(): JsonValue = healthCheckCacheParams
+    /**
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun healthCheckCacheParams(): HealthCheckCacheParams? =
+        healthCheckCacheParams.getNullable("health_check_cache_params")
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
-    fun llmCacheParams(): String? = llmCacheParams.getNullable("llm_cache_params")
+    fun litellmCacheParams(): String? = litellmCacheParams.getNullable("litellm_cache_params")
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -101,13 +106,24 @@ private constructor(
     @JsonProperty("status") @ExcludeMissing fun _status(): JsonField<String> = status
 
     /**
-     * Returns the raw JSON value of [llmCacheParams].
+     * Returns the raw JSON value of [healthCheckCacheParams].
      *
-     * Unlike [llmCacheParams], this method doesn't throw if the JSON field has an unexpected type.
+     * Unlike [healthCheckCacheParams], this method doesn't throw if the JSON field has an
+     * unexpected type.
      */
-    @JsonProperty("llm_cache_params")
+    @JsonProperty("health_check_cache_params")
     @ExcludeMissing
-    fun _llmCacheParams(): JsonField<String> = llmCacheParams
+    fun _healthCheckCacheParams(): JsonField<HealthCheckCacheParams> = healthCheckCacheParams
+
+    /**
+     * Returns the raw JSON value of [litellmCacheParams].
+     *
+     * Unlike [litellmCacheParams], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    @JsonProperty("litellm_cache_params")
+    @ExcludeMissing
+    fun _litellmCacheParams(): JsonField<String> = litellmCacheParams
 
     /**
      * Returns the raw JSON value of [pingResponse].
@@ -159,8 +175,8 @@ private constructor(
 
         private var cacheType: JsonField<String>? = null
         private var status: JsonField<String>? = null
-        private var healthCheckCacheParams: JsonValue = JsonMissing.of()
-        private var llmCacheParams: JsonField<String> = JsonMissing.of()
+        private var healthCheckCacheParams: JsonField<HealthCheckCacheParams> = JsonMissing.of()
+        private var litellmCacheParams: JsonField<String> = JsonMissing.of()
         private var pingResponse: JsonField<Boolean> = JsonMissing.of()
         private var setCacheResponse: JsonField<String> = JsonMissing.of()
         private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
@@ -169,7 +185,7 @@ private constructor(
             cacheType = cachePingResponse.cacheType
             status = cachePingResponse.status
             healthCheckCacheParams = cachePingResponse.healthCheckCacheParams
-            llmCacheParams = cachePingResponse.llmCacheParams
+            litellmCacheParams = cachePingResponse.litellmCacheParams
             pingResponse = cachePingResponse.pingResponse
             setCacheResponse = cachePingResponse.setCacheResponse
             additionalProperties = cachePingResponse.additionalProperties.toMutableMap()
@@ -196,22 +212,33 @@ private constructor(
          */
         fun status(status: JsonField<String>) = apply { this.status = status }
 
-        fun healthCheckCacheParams(healthCheckCacheParams: JsonValue) = apply {
-            this.healthCheckCacheParams = healthCheckCacheParams
-        }
-
-        fun llmCacheParams(llmCacheParams: String?) =
-            llmCacheParams(JsonField.ofNullable(llmCacheParams))
+        fun healthCheckCacheParams(healthCheckCacheParams: HealthCheckCacheParams?) =
+            healthCheckCacheParams(JsonField.ofNullable(healthCheckCacheParams))
 
         /**
-         * Sets [Builder.llmCacheParams] to an arbitrary JSON value.
+         * Sets [Builder.healthCheckCacheParams] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.llmCacheParams] with a well-typed [String] value
+         * You should usually call [Builder.healthCheckCacheParams] with a well-typed
+         * [HealthCheckCacheParams] value instead. This method is primarily for setting the field to
+         * an undocumented or not yet supported value.
+         */
+        fun healthCheckCacheParams(healthCheckCacheParams: JsonField<HealthCheckCacheParams>) =
+            apply {
+                this.healthCheckCacheParams = healthCheckCacheParams
+            }
+
+        fun litellmCacheParams(litellmCacheParams: String?) =
+            litellmCacheParams(JsonField.ofNullable(litellmCacheParams))
+
+        /**
+         * Sets [Builder.litellmCacheParams] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.litellmCacheParams] with a well-typed [String] value
          * instead. This method is primarily for setting the field to an undocumented or not yet
          * supported value.
          */
-        fun llmCacheParams(llmCacheParams: JsonField<String>) = apply {
-            this.llmCacheParams = llmCacheParams
+        fun litellmCacheParams(litellmCacheParams: JsonField<String>) = apply {
+            this.litellmCacheParams = litellmCacheParams
         }
 
         fun pingResponse(pingResponse: Boolean?) = pingResponse(JsonField.ofNullable(pingResponse))
@@ -285,7 +312,7 @@ private constructor(
                 checkRequired("cacheType", cacheType),
                 checkRequired("status", status),
                 healthCheckCacheParams,
-                llmCacheParams,
+                litellmCacheParams,
                 pingResponse,
                 setCacheResponse,
                 additionalProperties.toMutableMap(),
@@ -301,10 +328,134 @@ private constructor(
 
         cacheType()
         status()
-        llmCacheParams()
+        healthCheckCacheParams()?.validate()
+        litellmCacheParams()
         pingResponse()
         setCacheResponse()
         validated = true
+    }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (if (cacheType.asKnown() == null) 0 else 1) +
+            (if (status.asKnown() == null) 0 else 1) +
+            (healthCheckCacheParams.asKnown()?.validity() ?: 0) +
+            (if (litellmCacheParams.asKnown() == null) 0 else 1) +
+            (if (pingResponse.asKnown() == null) 0 else 1) +
+            (if (setCacheResponse.asKnown() == null) 0 else 1)
+
+    class HealthCheckCacheParams
+    @JsonCreator
+    private constructor(
+        @com.fasterxml.jackson.annotation.JsonValue
+        private val additionalProperties: Map<String, JsonValue>
+    ) {
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /**
+             * Returns a mutable builder for constructing an instance of [HealthCheckCacheParams].
+             */
+            fun builder() = Builder()
+        }
+
+        /** A builder for [HealthCheckCacheParams]. */
+        class Builder internal constructor() {
+
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            internal fun from(healthCheckCacheParams: HealthCheckCacheParams) = apply {
+                additionalProperties = healthCheckCacheParams.additionalProperties.toMutableMap()
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [HealthCheckCacheParams].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): HealthCheckCacheParams =
+                HealthCheckCacheParams(additionalProperties.toImmutable())
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): HealthCheckCacheParams = apply {
+            if (validated) {
+                return@apply
+            }
+
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return other is HealthCheckCacheParams &&
+                additionalProperties == other.additionalProperties
+        }
+
+        private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() =
+            "HealthCheckCacheParams{additionalProperties=$additionalProperties}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -312,15 +463,30 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CachePingResponse && cacheType == other.cacheType && status == other.status && healthCheckCacheParams == other.healthCheckCacheParams && llmCacheParams == other.llmCacheParams && pingResponse == other.pingResponse && setCacheResponse == other.setCacheResponse && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is CachePingResponse &&
+            cacheType == other.cacheType &&
+            status == other.status &&
+            healthCheckCacheParams == other.healthCheckCacheParams &&
+            litellmCacheParams == other.litellmCacheParams &&
+            pingResponse == other.pingResponse &&
+            setCacheResponse == other.setCacheResponse &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(cacheType, status, healthCheckCacheParams, llmCacheParams, pingResponse, setCacheResponse, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            cacheType,
+            status,
+            healthCheckCacheParams,
+            litellmCacheParams,
+            pingResponse,
+            setCacheResponse,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "CachePingResponse{cacheType=$cacheType, status=$status, healthCheckCacheParams=$healthCheckCacheParams, llmCacheParams=$llmCacheParams, pingResponse=$pingResponse, setCacheResponse=$setCacheResponse, additionalProperties=$additionalProperties}"
+        "CachePingResponse{cacheType=$cacheType, status=$status, healthCheckCacheParams=$healthCheckCacheParams, litellmCacheParams=$litellmCacheParams, pingResponse=$pingResponse, setCacheResponse=$setCacheResponse, additionalProperties=$additionalProperties}"
 }

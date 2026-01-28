@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.anthropic.AnthropicCreateParams
-import ai.hanzo.api.models.anthropic.AnthropicDeleteParams
-import ai.hanzo.api.models.anthropic.AnthropicModifyParams
-import ai.hanzo.api.models.anthropic.AnthropicRetrieveParams
-import ai.hanzo.api.models.anthropic.AnthropicUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class AnthropicServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -26,15 +21,12 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.create(
-                AnthropicCreateParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.create("endpoint")
 
         anthropic.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
         val client =
@@ -44,15 +36,12 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.retrieve(
-                AnthropicRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.retrieve("endpoint")
 
         anthropic.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun update() {
         val client =
@@ -62,15 +51,12 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.update(
-                AnthropicUpdateParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.update("endpoint")
 
         anthropic.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =
@@ -80,15 +66,12 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val anthropic =
-            anthropicServiceAsync.delete(
-                AnthropicDeleteParams.builder().endpoint("endpoint").build()
-            )
+        val anthropic = anthropicServiceAsync.delete("endpoint")
 
         anthropic.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun modify() {
         val client =
@@ -98,10 +81,7 @@ internal class AnthropicServiceAsyncTest {
                 .build()
         val anthropicServiceAsync = client.anthropic()
 
-        val response =
-            anthropicServiceAsync.modify(
-                AnthropicModifyParams.builder().endpoint("endpoint").build()
-            )
+        val response = anthropicServiceAsync.modify("endpoint")
 
         response.validate()
     }

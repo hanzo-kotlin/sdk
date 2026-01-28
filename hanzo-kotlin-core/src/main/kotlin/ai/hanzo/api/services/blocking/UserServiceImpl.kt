@@ -3,13 +3,13 @@
 package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -19,8 +19,6 @@ import ai.hanzo.api.models.user.UserCreateParams
 import ai.hanzo.api.models.user.UserCreateResponse
 import ai.hanzo.api.models.user.UserDeleteParams
 import ai.hanzo.api.models.user.UserDeleteResponse
-import ai.hanzo.api.models.user.UserListParams
-import ai.hanzo.api.models.user.UserListResponse
 import ai.hanzo.api.models.user.UserRetrieveInfoParams
 import ai.hanzo.api.models.user.UserRetrieveInfoResponse
 import ai.hanzo.api.models.user.UserUpdateParams
@@ -33,6 +31,9 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
     }
 
     override fun withRawResponse(): UserService.WithRawResponse = withRawResponse
+
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UserService =
+        UserServiceImpl(clientOptions.toBuilder().apply(modifier).build())
 
     override fun create(
         params: UserCreateParams,
@@ -47,10 +48,6 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
     ): UserUpdateResponse =
         // post /user/update
         withRawResponse().update(params, requestOptions).parse()
-
-    override fun list(params: UserListParams, requestOptions: RequestOptions): UserListResponse =
-        // get /user/get_users
-        withRawResponse().list(params, requestOptions).parse()
 
     override fun delete(
         params: UserDeleteParams,
@@ -69,10 +66,16 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         UserService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): UserService.WithRawResponse =
+            UserServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
 
         private val createHandler: Handler<UserCreateResponse> =
-            jsonHandler<UserCreateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<UserCreateResponse>(clientOptions.jsonMapper)
 
         override fun create(
             params: UserCreateParams,
@@ -81,13 +84,14 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -99,7 +103,7 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
         }
 
         private val updateHandler: Handler<UserUpdateResponse> =
-            jsonHandler<UserUpdateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<UserUpdateResponse>(clientOptions.jsonMapper)
 
         override fun update(
             params: UserUpdateParams,
@@ -108,13 +112,14 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { updateHandler.handle(it) }
                     .also {
@@ -125,34 +130,8 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             }
         }
 
-        private val listHandler: Handler<UserListResponse> =
-            jsonHandler<UserListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
-
-        override fun list(
-            params: UserListParams,
-            requestOptions: RequestOptions,
-        ): HttpResponseFor<UserListResponse> {
-            val request =
-                HttpRequest.builder()
-                    .method(HttpMethod.GET)
-                    .addPathSegments("user", "get_users")
-                    .build()
-                    .prepare(clientOptions, params)
-            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
-            val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
-                response
-                    .use { listHandler.handle(it) }
-                    .also {
-                        if (requestOptions.responseValidation!!) {
-                            it.validate()
-                        }
-                    }
-            }
-        }
-
         private val deleteHandler: Handler<UserDeleteResponse> =
-            jsonHandler<UserDeleteResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<UserDeleteResponse>(clientOptions.jsonMapper)
 
         override fun delete(
             params: UserDeleteParams,
@@ -161,13 +140,14 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { deleteHandler.handle(it) }
                     .also {
@@ -180,7 +160,6 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val retrieveInfoHandler: Handler<UserRetrieveInfoResponse> =
             jsonHandler<UserRetrieveInfoResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun retrieveInfo(
             params: UserRetrieveInfoParams,
@@ -189,12 +168,13 @@ class UserServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("user", "info")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveInfoHandler.handle(it) }
                     .also {

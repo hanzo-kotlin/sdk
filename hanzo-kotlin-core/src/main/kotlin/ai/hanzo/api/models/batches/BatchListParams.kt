@@ -22,6 +22,7 @@ private constructor(
     private val after: String?,
     private val limit: Long?,
     private val provider: String?,
+    private val targetModelNames: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
@@ -32,8 +33,12 @@ private constructor(
 
     fun provider(): String? = provider
 
+    fun targetModelNames(): String? = targetModelNames
+
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -52,6 +57,7 @@ private constructor(
         private var after: String? = null
         private var limit: Long? = null
         private var provider: String? = null
+        private var targetModelNames: String? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
@@ -59,6 +65,7 @@ private constructor(
             after = batchListParams.after
             limit = batchListParams.limit
             provider = batchListParams.provider
+            targetModelNames = batchListParams.targetModelNames
             additionalHeaders = batchListParams.additionalHeaders.toBuilder()
             additionalQueryParams = batchListParams.additionalQueryParams.toBuilder()
         }
@@ -75,6 +82,10 @@ private constructor(
         fun limit(limit: Long) = limit(limit as Long?)
 
         fun provider(provider: String?) = apply { this.provider = provider }
+
+        fun targetModelNames(targetModelNames: String?) = apply {
+            this.targetModelNames = targetModelNames
+        }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -184,6 +195,7 @@ private constructor(
                 after,
                 limit,
                 provider,
+                targetModelNames,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
@@ -197,6 +209,7 @@ private constructor(
                 after?.let { put("after", it) }
                 limit?.let { put("limit", it.toString()) }
                 provider?.let { put("provider", it) }
+                targetModelNames?.let { put("target_model_names", it) }
                 putAll(additionalQueryParams)
             }
             .build()
@@ -206,11 +219,25 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BatchListParams && after == other.after && limit == other.limit && provider == other.provider && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is BatchListParams &&
+            after == other.after &&
+            limit == other.limit &&
+            provider == other.provider &&
+            targetModelNames == other.targetModelNames &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(after, limit, provider, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            after,
+            limit,
+            provider,
+            targetModelNames,
+            additionalHeaders,
+            additionalQueryParams,
+        )
 
     override fun toString() =
-        "BatchListParams{after=$after, limit=$limit, provider=$provider, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "BatchListParams{after=$after, limit=$limit, provider=$provider, targetModelNames=$targetModelNames, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

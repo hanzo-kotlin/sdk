@@ -16,7 +16,7 @@ import java.util.Objects
  *
  * Example curl:
  * ```
- * curl -X GET 'http://localhost:4000/customer/info?end_user_id=test-llm-user-4'         -H 'Authorization: Bearer sk-1234'
+ * curl -X GET 'http://localhost:4000/customer/info?end_user_id=test-litellm-user-4'         -H 'Authorization: Bearer sk-1234'
  * ```
  */
 class CustomerRetrieveInfoParams
@@ -29,8 +29,10 @@ private constructor(
     /** End User ID in the request parameters */
     fun endUserId(): String = endUserId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -197,10 +199,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CustomerRetrieveInfoParams && endUserId == other.endUserId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CustomerRetrieveInfoParams &&
+            endUserId == other.endUserId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(endUserId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(endUserId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CustomerRetrieveInfoParams{endUserId=$endUserId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

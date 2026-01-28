@@ -2,13 +2,13 @@
 
 package ai.hanzo.api.models.key
 
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class KeyListResponseTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val keyListResponse =
@@ -23,5 +23,25 @@ internal class KeyListResponseTest {
         assertThat(keyListResponse.keys()).containsExactly(KeyListResponse.Key.ofString("string"))
         assertThat(keyListResponse.totalCount()).isEqualTo(0L)
         assertThat(keyListResponse.totalPages()).isEqualTo(0L)
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val keyListResponse =
+            KeyListResponse.builder()
+                .currentPage(0L)
+                .addKey("string")
+                .totalCount(0L)
+                .totalPages(0L)
+                .build()
+
+        val roundtrippedKeyListResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(keyListResponse),
+                jacksonTypeRef<KeyListResponse>(),
+            )
+
+        assertThat(roundtrippedKeyListResponse).isEqualTo(keyListResponse)
     }
 }

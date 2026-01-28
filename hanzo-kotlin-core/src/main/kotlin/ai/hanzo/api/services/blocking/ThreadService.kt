@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.threads.ThreadCreateParams
@@ -19,6 +20,13 @@ interface ThreadService {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ThreadService
+
     fun messages(): MessageService
 
     fun runs(): RunService
@@ -33,7 +41,7 @@ interface ThreadService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ThreadCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): ThreadCreateResponse =
         create(ThreadCreateParams.none(), requestOptions)
 
@@ -43,12 +51,31 @@ interface ThreadService {
      * API Reference - https://platform.openai.com/docs/api-reference/threads/getThread
      */
     fun retrieve(
+        threadId: String,
+        params: ThreadRetrieveParams = ThreadRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ThreadRetrieveResponse =
+        retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
+
+    /** @see retrieve */
+    fun retrieve(
         params: ThreadRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ThreadRetrieveResponse
 
+    /** @see retrieve */
+    fun retrieve(threadId: String, requestOptions: RequestOptions): ThreadRetrieveResponse =
+        retrieve(threadId, ThreadRetrieveParams.none(), requestOptions)
+
     /** A view of [ThreadService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ThreadService.WithRawResponse
 
         fun messages(): MessageService.WithRawResponse
 
@@ -64,7 +91,7 @@ interface ThreadService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ThreadCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<ThreadCreateResponse> =
             create(ThreadCreateParams.none(), requestOptions)
@@ -75,8 +102,25 @@ interface ThreadService {
          */
         @MustBeClosed
         fun retrieve(
+            threadId: String,
+            params: ThreadRetrieveParams = ThreadRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ThreadRetrieveResponse> =
+            retrieve(params.toBuilder().threadId(threadId).build(), requestOptions)
+
+        /** @see retrieve */
+        @MustBeClosed
+        fun retrieve(
             params: ThreadRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ThreadRetrieveResponse>
+
+        /** @see retrieve */
+        @MustBeClosed
+        fun retrieve(
+            threadId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<ThreadRetrieveResponse> =
+            retrieve(threadId, ThreadRetrieveParams.none(), requestOptions)
     }
 }

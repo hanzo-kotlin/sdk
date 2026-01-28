@@ -4,11 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.vertexai.VertexAiCreateParams
-import ai.hanzo.api.models.vertexai.VertexAiDeleteParams
-import ai.hanzo.api.models.vertexai.VertexAiPatchParams
-import ai.hanzo.api.models.vertexai.VertexAiRetrieveParams
-import ai.hanzo.api.models.vertexai.VertexAiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class VertexAiServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun create() {
         val client =
@@ -26,13 +21,12 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.create(VertexAiCreateParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.create("endpoint")
 
         vertexAi.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun retrieve() {
         val client =
@@ -42,13 +36,12 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.retrieve(VertexAiRetrieveParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.retrieve("endpoint")
 
         vertexAi.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun update() {
         val client =
@@ -58,13 +51,12 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.update(VertexAiUpdateParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.update("endpoint")
 
         vertexAi.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun delete() {
         val client =
@@ -74,13 +66,12 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val vertexAi =
-            vertexAiService.delete(VertexAiDeleteParams.builder().endpoint("endpoint").build())
+        val vertexAi = vertexAiService.delete("endpoint")
 
         vertexAi.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun patch() {
         val client =
@@ -90,8 +81,7 @@ internal class VertexAiServiceTest {
                 .build()
         val vertexAiService = client.vertexAi()
 
-        val response =
-            vertexAiService.patch(VertexAiPatchParams.builder().endpoint("endpoint").build())
+        val response = vertexAiService.patch("endpoint")
 
         response.validate()
     }

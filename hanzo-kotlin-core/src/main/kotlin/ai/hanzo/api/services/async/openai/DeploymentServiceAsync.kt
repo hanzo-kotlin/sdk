@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.openai
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.openai.deployments.DeploymentCompleteParams
@@ -17,6 +18,13 @@ interface DeploymentServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): DeploymentServiceAsync
 
     fun chat(): ChatServiceAsync
 
@@ -37,9 +45,23 @@ interface DeploymentServiceAsync {
      * ```
      */
     suspend fun complete(
+        model: String,
+        params: DeploymentCompleteParams = DeploymentCompleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): DeploymentCompleteResponse =
+        complete(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see complete */
+    suspend fun complete(
         params: DeploymentCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentCompleteResponse
+
+    /** @see complete */
+    suspend fun complete(
+        model: String,
+        requestOptions: RequestOptions,
+    ): DeploymentCompleteResponse = complete(model, DeploymentCompleteParams.none(), requestOptions)
 
     /**
      * Follows the exact same API spec as `OpenAI's Embeddings API
@@ -56,6 +78,14 @@ interface DeploymentServiceAsync {
      * ```
      */
     suspend fun embed(
+        pathModel: String,
+        params: DeploymentEmbedParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): DeploymentEmbedResponse =
+        embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+
+    /** @see embed */
+    suspend fun embed(
         params: DeploymentEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentEmbedResponse
@@ -66,6 +96,15 @@ interface DeploymentServiceAsync {
      */
     interface WithRawResponse {
 
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): DeploymentServiceAsync.WithRawResponse
+
         fun chat(): ChatServiceAsync.WithRawResponse
 
         /**
@@ -74,14 +113,40 @@ interface DeploymentServiceAsync {
          */
         @MustBeClosed
         suspend fun complete(
+            model: String,
+            params: DeploymentCompleteParams = DeploymentCompleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<DeploymentCompleteResponse> =
+            complete(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see complete */
+        @MustBeClosed
+        suspend fun complete(
             params: DeploymentCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentCompleteResponse>
+
+        /** @see complete */
+        @MustBeClosed
+        suspend fun complete(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<DeploymentCompleteResponse> =
+            complete(model, DeploymentCompleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `post /openai/deployments/{model}/embeddings`, but is
          * otherwise the same as [DeploymentServiceAsync.embed].
          */
+        @MustBeClosed
+        suspend fun embed(
+            pathModel: String,
+            params: DeploymentEmbedParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<DeploymentEmbedResponse> =
+            embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+
+        /** @see embed */
         @MustBeClosed
         suspend fun embed(
             params: DeploymentEmbedParams,

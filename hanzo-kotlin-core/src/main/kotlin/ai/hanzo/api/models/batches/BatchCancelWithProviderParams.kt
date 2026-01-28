@@ -26,7 +26,7 @@ import java.util.Objects
 class BatchCancelWithProviderParams
 private constructor(
     private val provider: String,
-    private val batchId: String,
+    private val batchId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
@@ -34,12 +34,15 @@ private constructor(
 
     fun provider(): String = provider
 
-    fun batchId(): String = batchId
+    fun batchId(): String? = batchId
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -53,7 +56,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .batchId()
          * ```
          */
         fun builder() = Builder()
@@ -79,7 +81,7 @@ private constructor(
 
         fun provider(provider: String) = apply { this.provider = provider }
 
-        fun batchId(batchId: String) = apply { this.batchId = batchId }
+        fun batchId(batchId: String?) = apply { this.batchId = batchId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -209,7 +211,6 @@ private constructor(
          * The following fields are required:
          * ```kotlin
          * .provider()
-         * .batchId()
          * ```
          *
          * @throws IllegalStateException if any required field is unset.
@@ -217,19 +218,19 @@ private constructor(
         fun build(): BatchCancelWithProviderParams =
             BatchCancelWithProviderParams(
                 checkRequired("provider", provider),
-                checkRequired("batchId", batchId),
+                batchId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
             )
     }
 
-    internal fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     fun _pathParam(index: Int): String =
         when (index) {
             0 -> provider
-            1 -> batchId
+            1 -> batchId ?: ""
             else -> ""
         }
 
@@ -242,10 +243,22 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BatchCancelWithProviderParams && provider == other.provider && batchId == other.batchId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is BatchCancelWithProviderParams &&
+            provider == other.provider &&
+            batchId == other.batchId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(provider, batchId, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            provider,
+            batchId,
+            additionalHeaders,
+            additionalQueryParams,
+            additionalBodyProperties,
+        )
 
     override fun toString() =
         "BatchCancelWithProviderParams{provider=$provider, batchId=$batchId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

@@ -2,7 +2,6 @@
 
 package ai.hanzo.api.models.organization
 
-import ai.hanzo.api.core.Enum
 import ai.hanzo.api.core.ExcludeMissing
 import ai.hanzo.api.core.JsonField
 import ai.hanzo.api.core.JsonMissing
@@ -54,7 +53,7 @@ private constructor(
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
-    fun role(): Role? = body.role()
+    fun role(): UserRoles? = body.role()
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -88,7 +87,7 @@ private constructor(
      *
      * Unlike [role], this method doesn't throw if the JSON field has an unexpected type.
      */
-    fun _role(): JsonField<Role> = body._role()
+    fun _role(): JsonField<UserRoles> = body._role()
 
     /**
      * Returns the raw JSON value of [userEmail].
@@ -106,8 +105,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -138,6 +139,20 @@ private constructor(
             additionalHeaders = organizationUpdateMemberParams.additionalHeaders.toBuilder()
             additionalQueryParams = organizationUpdateMemberParams.additionalQueryParams.toBuilder()
         }
+
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [organizationId]
+         * - [maxBudgetInOrganization]
+         * - [role]
+         * - [userEmail]
+         * - [userId]
+         * - etc.
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
 
         fun organizationId(organizationId: String) = apply { body.organizationId(organizationId) }
 
@@ -187,15 +202,15 @@ private constructor(
          *
          * Customer Roles: CUSTOMER: External users -> these are customers
          */
-        fun role(role: Role?) = apply { body.role(role) }
+        fun role(role: UserRoles?) = apply { body.role(role) }
 
         /**
          * Sets [Builder.role] to an arbitrary JSON value.
          *
-         * You should usually call [Builder.role] with a well-typed [Role] value instead. This
+         * You should usually call [Builder.role] with a well-typed [UserRoles] value instead. This
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
-        fun role(role: JsonField<Role>) = apply { body.role(role) }
+        fun role(role: JsonField<UserRoles>) = apply { body.role(role) }
 
         fun userEmail(userEmail: String?) = apply { body.userEmail(userEmail) }
 
@@ -355,17 +370,18 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val organizationId: JsonField<String>,
         private val maxBudgetInOrganization: JsonField<Double>,
-        private val role: JsonField<Role>,
+        private val role: JsonField<UserRoles>,
         private val userEmail: JsonField<String>,
         private val userId: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
@@ -379,7 +395,7 @@ private constructor(
             @JsonProperty("max_budget_in_organization")
             @ExcludeMissing
             maxBudgetInOrganization: JsonField<Double> = JsonMissing.of(),
-            @JsonProperty("role") @ExcludeMissing role: JsonField<Role> = JsonMissing.of(),
+            @JsonProperty("role") @ExcludeMissing role: JsonField<UserRoles> = JsonMissing.of(),
             @JsonProperty("user_email")
             @ExcludeMissing
             userEmail: JsonField<String> = JsonMissing.of(),
@@ -414,7 +430,7 @@ private constructor(
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
          *   server responded with an unexpected value).
          */
-        fun role(): Role? = role.getNullable("role")
+        fun role(): UserRoles? = role.getNullable("role")
 
         /**
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -453,7 +469,7 @@ private constructor(
          *
          * Unlike [role], this method doesn't throw if the JSON field has an unexpected type.
          */
-        @JsonProperty("role") @ExcludeMissing fun _role(): JsonField<Role> = role
+        @JsonProperty("role") @ExcludeMissing fun _role(): JsonField<UserRoles> = role
 
         /**
          * Returns the raw JSON value of [userEmail].
@@ -499,7 +515,7 @@ private constructor(
 
             private var organizationId: JsonField<String>? = null
             private var maxBudgetInOrganization: JsonField<Double> = JsonMissing.of()
-            private var role: JsonField<Role> = JsonMissing.of()
+            private var role: JsonField<UserRoles> = JsonMissing.of()
             private var userEmail: JsonField<String> = JsonMissing.of()
             private var userId: JsonField<String> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
@@ -562,16 +578,16 @@ private constructor(
              *
              * Customer Roles: CUSTOMER: External users -> these are customers
              */
-            fun role(role: Role?) = role(JsonField.ofNullable(role))
+            fun role(role: UserRoles?) = role(JsonField.ofNullable(role))
 
             /**
              * Sets [Builder.role] to an arbitrary JSON value.
              *
-             * You should usually call [Builder.role] with a well-typed [Role] value instead. This
-             * method is primarily for setting the field to an undocumented or not yet supported
-             * value.
+             * You should usually call [Builder.role] with a well-typed [UserRoles] value instead.
+             * This method is primarily for setting the field to an undocumented or not yet
+             * supported value.
              */
-            fun role(role: JsonField<Role>) = apply { this.role = role }
+            fun role(role: JsonField<UserRoles>) = apply { this.role = role }
 
             fun userEmail(userEmail: String?) = userEmail(JsonField.ofNullable(userEmail))
 
@@ -646,23 +662,57 @@ private constructor(
 
             organizationId()
             maxBudgetInOrganization()
-            role()
+            role()?.validate()
             userEmail()
             userId()
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (if (organizationId.asKnown() == null) 0 else 1) +
+                (if (maxBudgetInOrganization.asKnown() == null) 0 else 1) +
+                (role.asKnown()?.validity() ?: 0) +
+                (if (userEmail.asKnown() == null) 0 else 1) +
+                (if (userId.asKnown() == null) 0 else 1)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && organizationId == other.organizationId && maxBudgetInOrganization == other.maxBudgetInOrganization && role == other.role && userEmail == other.userEmail && userId == other.userId && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                organizationId == other.organizationId &&
+                maxBudgetInOrganization == other.maxBudgetInOrganization &&
+                role == other.role &&
+                userEmail == other.userEmail &&
+                userId == other.userId &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(organizationId, maxBudgetInOrganization, role, userEmail, userId, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                organizationId,
+                maxBudgetInOrganization,
+                role,
+                userEmail,
+                userId,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -670,154 +720,18 @@ private constructor(
             "Body{organizationId=$organizationId, maxBudgetInOrganization=$maxBudgetInOrganization, role=$role, userEmail=$userEmail, userId=$userId, additionalProperties=$additionalProperties}"
     }
 
-    /**
-     * Admin Roles: PROXY_ADMIN: admin over the platform PROXY_ADMIN_VIEW_ONLY: can login, view all
-     * own keys, view all spend ORG_ADMIN: admin over a specific organization, can create teams,
-     * users only within their organization
-     *
-     * Internal User Roles: INTERNAL_USER: can login, view/create/delete their own keys, view their
-     * spend INTERNAL_USER_VIEW_ONLY: can login, view their own keys, view their own spend
-     *
-     * Team Roles: TEAM: used for JWT auth
-     *
-     * Customer Roles: CUSTOMER: External users -> these are customers
-     */
-    class Role @JsonCreator private constructor(private val value: JsonField<String>) : Enum {
-
-        /**
-         * Returns this class instance's raw value.
-         *
-         * This is usually only useful if this instance was deserialized from data that doesn't
-         * match any known member, and you want to know that value. For example, if the SDK is on an
-         * older version than the API, then the API may respond with new members that the SDK is
-         * unaware of.
-         */
-        @com.fasterxml.jackson.annotation.JsonValue fun _value(): JsonField<String> = value
-
-        companion object {
-
-            val PROXY_ADMIN = of("proxy_admin")
-
-            val PROXY_ADMIN_VIEWER = of("proxy_admin_viewer")
-
-            val ORG_ADMIN = of("org_admin")
-
-            val INTERNAL_USER = of("internal_user")
-
-            val INTERNAL_USER_VIEWER = of("internal_user_viewer")
-
-            val TEAM = of("team")
-
-            val CUSTOMER = of("customer")
-
-            fun of(value: String) = Role(JsonField.of(value))
-        }
-
-        /** An enum containing [Role]'s known values. */
-        enum class Known {
-            PROXY_ADMIN,
-            PROXY_ADMIN_VIEWER,
-            ORG_ADMIN,
-            INTERNAL_USER,
-            INTERNAL_USER_VIEWER,
-            TEAM,
-            CUSTOMER,
-        }
-
-        /**
-         * An enum containing [Role]'s known values, as well as an [_UNKNOWN] member.
-         *
-         * An instance of [Role] can contain an unknown value in a couple of cases:
-         * - It was deserialized from data that doesn't match any known member. For example, if the
-         *   SDK is on an older version than the API, then the API may respond with new members that
-         *   the SDK is unaware of.
-         * - It was constructed with an arbitrary value using the [of] method.
-         */
-        enum class Value {
-            PROXY_ADMIN,
-            PROXY_ADMIN_VIEWER,
-            ORG_ADMIN,
-            INTERNAL_USER,
-            INTERNAL_USER_VIEWER,
-            TEAM,
-            CUSTOMER,
-            /** An enum member indicating that [Role] was instantiated with an unknown value. */
-            _UNKNOWN,
-        }
-
-        /**
-         * Returns an enum member corresponding to this class instance's value, or [Value._UNKNOWN]
-         * if the class was instantiated with an unknown value.
-         *
-         * Use the [known] method instead if you're certain the value is always known or if you want
-         * to throw for the unknown case.
-         */
-        fun value(): Value =
-            when (this) {
-                PROXY_ADMIN -> Value.PROXY_ADMIN
-                PROXY_ADMIN_VIEWER -> Value.PROXY_ADMIN_VIEWER
-                ORG_ADMIN -> Value.ORG_ADMIN
-                INTERNAL_USER -> Value.INTERNAL_USER
-                INTERNAL_USER_VIEWER -> Value.INTERNAL_USER_VIEWER
-                TEAM -> Value.TEAM
-                CUSTOMER -> Value.CUSTOMER
-                else -> Value._UNKNOWN
-            }
-
-        /**
-         * Returns an enum member corresponding to this class instance's value.
-         *
-         * Use the [value] method instead if you're uncertain the value is always known and don't
-         * want to throw for the unknown case.
-         *
-         * @throws HanzoInvalidDataException if this class instance's value is a not a known member.
-         */
-        fun known(): Known =
-            when (this) {
-                PROXY_ADMIN -> Known.PROXY_ADMIN
-                PROXY_ADMIN_VIEWER -> Known.PROXY_ADMIN_VIEWER
-                ORG_ADMIN -> Known.ORG_ADMIN
-                INTERNAL_USER -> Known.INTERNAL_USER
-                INTERNAL_USER_VIEWER -> Known.INTERNAL_USER_VIEWER
-                TEAM -> Known.TEAM
-                CUSTOMER -> Known.CUSTOMER
-                else -> throw HanzoInvalidDataException("Unknown Role: $value")
-            }
-
-        /**
-         * Returns this class instance's primitive wire representation.
-         *
-         * This differs from the [toString] method because that method is primarily for debugging
-         * and generally doesn't throw.
-         *
-         * @throws HanzoInvalidDataException if this class instance's value does not have the
-         *   expected primitive type.
-         */
-        fun asString(): String =
-            _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) {
-                return true
-            }
-
-            return /* spotless:off */ other is Role && value == other.value /* spotless:on */
-        }
-
-        override fun hashCode() = value.hashCode()
-
-        override fun toString() = value.toString()
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
         }
 
-        return /* spotless:off */ other is OrganizationUpdateMemberParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is OrganizationUpdateMemberParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "OrganizationUpdateMemberParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

@@ -4,7 +4,6 @@ package ai.hanzo.api.models.threads.messages
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -17,32 +16,30 @@ import java.util.Objects
  */
 class MessageCreateParams
 private constructor(
-    private val threadId: String,
+    private val threadId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun threadId(): String = threadId
+    fun threadId(): String? = threadId
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [MessageCreateParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .threadId()
-         * ```
-         */
+        fun none(): MessageCreateParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [MessageCreateParams]. */
         fun builder() = Builder()
     }
 
@@ -61,7 +58,7 @@ private constructor(
             additionalBodyProperties = messageCreateParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun threadId(threadId: String) = apply { this.threadId = threadId }
+        fun threadId(threadId: String?) = apply { this.threadId = threadId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -187,28 +184,21 @@ private constructor(
          * Returns an immutable instance of [MessageCreateParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .threadId()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): MessageCreateParams =
             MessageCreateParams(
-                checkRequired("threadId", threadId),
+                threadId,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
             )
     }
 
-    internal fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> threadId
+            0 -> threadId ?: ""
             else -> ""
         }
 
@@ -221,10 +211,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is MessageCreateParams && threadId == other.threadId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is MessageCreateParams &&
+            threadId == other.threadId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(threadId, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(threadId, additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "MessageCreateParams{threadId=$threadId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

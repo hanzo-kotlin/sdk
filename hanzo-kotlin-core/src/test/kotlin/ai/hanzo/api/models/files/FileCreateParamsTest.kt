@@ -5,29 +5,29 @@ package ai.hanzo.api.models.files
 import ai.hanzo.api.core.MultipartField
 import java.io.InputStream
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class FileCreateParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         FileCreateParams.builder()
             .provider("provider")
-            .file("some content".toByteArray())
+            .file("some content".byteInputStream())
             .purpose("purpose")
             .customLlmProvider("custom_llm_provider")
+            .litellmMetadata("litellm_metadata")
+            .targetModelNames("target_model_names")
+            .targetStorage("target_storage")
             .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".toByteArray())
+                .file("some content".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -36,15 +36,17 @@ internal class FileCreateParamsTest {
         assertThat(params._pathParam(1)).isEqualTo("")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun body() {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".toByteArray())
+                .file("some content".byteInputStream())
                 .purpose("purpose")
                 .customLlmProvider("custom_llm_provider")
+                .litellmMetadata("litellm_metadata")
+                .targetModelNames("target_model_names")
+                .targetStorage("target_storage")
                 .build()
 
         val body = params._body()
@@ -59,9 +61,12 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".toByteArray()),
+                        "file" to MultipartField.of("some content".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                         "custom_llm_provider" to MultipartField.of("custom_llm_provider"),
+                        "litellm_metadata" to MultipartField.of("litellm_metadata"),
+                        "target_model_names" to MultipartField.of("target_model_names"),
+                        "target_storage" to MultipartField.of("target_storage"),
                     )
                     .mapValues { (_, field) ->
                         field.map { (it as? ByteArray)?.inputStream() ?: it }
@@ -69,13 +74,12 @@ internal class FileCreateParamsTest {
             )
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun bodyWithoutOptionalFields() {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".toByteArray())
+                .file("some content".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -91,7 +95,7 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".toByteArray()),
+                        "file" to MultipartField.of("some content".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                     )
                     .mapValues { (_, field) ->

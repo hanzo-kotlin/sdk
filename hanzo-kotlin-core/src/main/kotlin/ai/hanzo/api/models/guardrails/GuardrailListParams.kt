@@ -10,7 +10,7 @@ import java.util.Objects
 /**
  * List the guardrails that are available on the proxy server
  *
- * 👉 [Guardrail docs](https://docs.hanzo.ai/docs/proxy/guardrails/quick_start)
+ * 👉 [Guardrail docs](https://docs.litellm.ai/docs/proxy/guardrails/quick_start)
  *
  * Example Request:
  * ```bash
@@ -20,24 +20,24 @@ import java.util.Objects
  * Example Response:
  * ```json
  * {
- *   "guardrails": [
- *     {
- *       "guardrail_name": "bedrock-pre-guard",
- *       "guardrail_info": {
- *         "params": [
- *           {
- *             "name": "toxicity_score",
- *             "type": "float",
- *             "description": "Score between 0-1 indicating content toxicity level"
- *           },
- *           {
- *             "name": "pii_detection",
- *             "type": "boolean"
- *           }
- *         ]
- *       }
- *     }
- *   ]
+ *     "guardrails": [
+ *         {
+ *         "guardrail_name": "bedrock-pre-guard",
+ *         "guardrail_info": {
+ *             "params": [
+ *             {
+ *                 "name": "toxicity_score",
+ *                 "type": "float",
+ *                 "description": "Score between 0-1 indicating content toxicity level"
+ *             },
+ *             {
+ *                 "name": "pii_detection",
+ *                 "type": "boolean"
+ *             }
+ *             ]
+ *         }
+ *         }
+ *     ]
  * }
  * ```
  */
@@ -47,8 +47,10 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -188,10 +190,12 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is GuardrailListParams && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is GuardrailListParams &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "GuardrailListParams{additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

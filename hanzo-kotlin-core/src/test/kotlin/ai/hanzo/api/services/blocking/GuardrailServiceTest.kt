@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class GuardrailServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun list() {
         val client =
@@ -21,8 +21,8 @@ internal class GuardrailServiceTest {
                 .build()
         val guardrailService = client.guardrails()
 
-        val guardrail = guardrailService.list()
+        val guardrails = guardrailService.list()
 
-        guardrail.validate()
+        guardrails.validate()
     }
 }

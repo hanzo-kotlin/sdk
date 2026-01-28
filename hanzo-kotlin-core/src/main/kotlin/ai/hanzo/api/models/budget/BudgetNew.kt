@@ -12,13 +12,16 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.OffsetDateTime
 import java.util.Collections
 import java.util.Objects
 
 class BudgetNew
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val budgetDuration: JsonField<String>,
     private val budgetId: JsonField<String>,
+    private val budgetResetAt: JsonField<OffsetDateTime>,
     private val maxBudget: JsonField<Double>,
     private val maxParallelRequests: JsonField<Long>,
     private val modelMaxBudget: JsonField<ModelMaxBudget>,
@@ -34,6 +37,9 @@ private constructor(
         @ExcludeMissing
         budgetDuration: JsonField<String> = JsonMissing.of(),
         @JsonProperty("budget_id") @ExcludeMissing budgetId: JsonField<String> = JsonMissing.of(),
+        @JsonProperty("budget_reset_at")
+        @ExcludeMissing
+        budgetResetAt: JsonField<OffsetDateTime> = JsonMissing.of(),
         @JsonProperty("max_budget") @ExcludeMissing maxBudget: JsonField<Double> = JsonMissing.of(),
         @JsonProperty("max_parallel_requests")
         @ExcludeMissing
@@ -49,6 +55,7 @@ private constructor(
     ) : this(
         budgetDuration,
         budgetId,
+        budgetResetAt,
         maxBudget,
         maxParallelRequests,
         modelMaxBudget,
@@ -73,6 +80,14 @@ private constructor(
      *   server responded with an unexpected value).
      */
     fun budgetId(): String? = budgetId.getNullable("budget_id")
+
+    /**
+     * Datetime when the budget is reset
+     *
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun budgetResetAt(): OffsetDateTime? = budgetResetAt.getNullable("budget_reset_at")
 
     /**
      * Requests will fail if this budget (in USD) is exceeded.
@@ -138,6 +153,15 @@ private constructor(
      * Unlike [budgetId], this method doesn't throw if the JSON field has an unexpected type.
      */
     @JsonProperty("budget_id") @ExcludeMissing fun _budgetId(): JsonField<String> = budgetId
+
+    /**
+     * Returns the raw JSON value of [budgetResetAt].
+     *
+     * Unlike [budgetResetAt], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    @JsonProperty("budget_reset_at")
+    @ExcludeMissing
+    fun _budgetResetAt(): JsonField<OffsetDateTime> = budgetResetAt
 
     /**
      * Returns the raw JSON value of [maxBudget].
@@ -209,6 +233,7 @@ private constructor(
 
         private var budgetDuration: JsonField<String> = JsonMissing.of()
         private var budgetId: JsonField<String> = JsonMissing.of()
+        private var budgetResetAt: JsonField<OffsetDateTime> = JsonMissing.of()
         private var maxBudget: JsonField<Double> = JsonMissing.of()
         private var maxParallelRequests: JsonField<Long> = JsonMissing.of()
         private var modelMaxBudget: JsonField<ModelMaxBudget> = JsonMissing.of()
@@ -220,6 +245,7 @@ private constructor(
         internal fun from(budgetNew: BudgetNew) = apply {
             budgetDuration = budgetNew.budgetDuration
             budgetId = budgetNew.budgetId
+            budgetResetAt = budgetNew.budgetResetAt
             maxBudget = budgetNew.maxBudget
             maxParallelRequests = budgetNew.maxParallelRequests
             modelMaxBudget = budgetNew.modelMaxBudget
@@ -254,6 +280,21 @@ private constructor(
          * method is primarily for setting the field to an undocumented or not yet supported value.
          */
         fun budgetId(budgetId: JsonField<String>) = apply { this.budgetId = budgetId }
+
+        /** Datetime when the budget is reset */
+        fun budgetResetAt(budgetResetAt: OffsetDateTime?) =
+            budgetResetAt(JsonField.ofNullable(budgetResetAt))
+
+        /**
+         * Sets [Builder.budgetResetAt] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.budgetResetAt] with a well-typed [OffsetDateTime] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun budgetResetAt(budgetResetAt: JsonField<OffsetDateTime>) = apply {
+            this.budgetResetAt = budgetResetAt
+        }
 
         /** Requests will fail if this budget (in USD) is exceeded. */
         fun maxBudget(maxBudget: Double?) = maxBudget(JsonField.ofNullable(maxBudget))
@@ -398,6 +439,7 @@ private constructor(
             BudgetNew(
                 budgetDuration,
                 budgetId,
+                budgetResetAt,
                 maxBudget,
                 maxParallelRequests,
                 modelMaxBudget,
@@ -417,6 +459,7 @@ private constructor(
 
         budgetDuration()
         budgetId()
+        budgetResetAt()
         maxBudget()
         maxParallelRequests()
         modelMaxBudget()?.validate()
@@ -425,6 +468,30 @@ private constructor(
         tpmLimit()
         validated = true
     }
+
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int =
+        (if (budgetDuration.asKnown() == null) 0 else 1) +
+            (if (budgetId.asKnown() == null) 0 else 1) +
+            (if (budgetResetAt.asKnown() == null) 0 else 1) +
+            (if (maxBudget.asKnown() == null) 0 else 1) +
+            (if (maxParallelRequests.asKnown() == null) 0 else 1) +
+            (modelMaxBudget.asKnown()?.validity() ?: 0) +
+            (if (rpmLimit.asKnown() == null) 0 else 1) +
+            (if (softBudget.asKnown() == null) 0 else 1) +
+            (if (tpmLimit.asKnown() == null) 0 else 1)
 
     /**
      * Max budget for each model (e.g. {'gpt-4o': {'max_budget': '0.0000001', 'budget_duration':
@@ -495,17 +562,32 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is ModelMaxBudget && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is ModelMaxBudget && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -517,15 +599,36 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is BudgetNew && budgetDuration == other.budgetDuration && budgetId == other.budgetId && maxBudget == other.maxBudget && maxParallelRequests == other.maxParallelRequests && modelMaxBudget == other.modelMaxBudget && rpmLimit == other.rpmLimit && softBudget == other.softBudget && tpmLimit == other.tpmLimit && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is BudgetNew &&
+            budgetDuration == other.budgetDuration &&
+            budgetId == other.budgetId &&
+            budgetResetAt == other.budgetResetAt &&
+            maxBudget == other.maxBudget &&
+            maxParallelRequests == other.maxParallelRequests &&
+            modelMaxBudget == other.modelMaxBudget &&
+            rpmLimit == other.rpmLimit &&
+            softBudget == other.softBudget &&
+            tpmLimit == other.tpmLimit &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
-    private val hashCode: Int by lazy { Objects.hash(budgetDuration, budgetId, maxBudget, maxParallelRequests, modelMaxBudget, rpmLimit, softBudget, tpmLimit, additionalProperties) }
-    /* spotless:on */
+    private val hashCode: Int by lazy {
+        Objects.hash(
+            budgetDuration,
+            budgetId,
+            budgetResetAt,
+            maxBudget,
+            maxParallelRequests,
+            modelMaxBudget,
+            rpmLimit,
+            softBudget,
+            tpmLimit,
+            additionalProperties,
+        )
+    }
 
     override fun hashCode(): Int = hashCode
 
     override fun toString() =
-        "BudgetNew{budgetDuration=$budgetDuration, budgetId=$budgetId, maxBudget=$maxBudget, maxParallelRequests=$maxParallelRequests, modelMaxBudget=$modelMaxBudget, rpmLimit=$rpmLimit, softBudget=$softBudget, tpmLimit=$tpmLimit, additionalProperties=$additionalProperties}"
+        "BudgetNew{budgetDuration=$budgetDuration, budgetId=$budgetId, budgetResetAt=$budgetResetAt, maxBudget=$maxBudget, maxParallelRequests=$maxParallelRequests, modelMaxBudget=$modelMaxBudget, rpmLimit=$rpmLimit, softBudget=$softBudget, tpmLimit=$tpmLimit, additionalProperties=$additionalProperties}"
 }

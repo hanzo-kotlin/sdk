@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.provider.ProviderListBudgetsParams
@@ -16,8 +17,15 @@ interface ProviderServiceAsync {
     fun withRawResponse(): WithRawResponse
 
     /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ProviderServiceAsync
+
+    /**
      * Provider Budget Routing - Get Budget, Spend Details
-     * https://docs.hanzo.ai/docs/proxy/provider_budget_routing
+     * https://docs.litellm.ai/docs/proxy/provider_budget_routing
      *
      * Use this endpoint to check current budget, spend and budget reset time for a provider
      *
@@ -31,32 +39,32 @@ interface ProviderServiceAsync {
      *
      * ```json
      * {
-     *   "providers": {
-     *     "openai": {
-     *       "budget_limit": 1e-12,
-     *       "time_period": "1d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
-     *     },
-     *     "azure": {
-     *       "budget_limit": 100.0,
-     *       "time_period": "1d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
-     *     },
-     *     "anthropic": {
-     *       "budget_limit": 100.0,
-     *       "time_period": "10d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
-     *     },
-     *     "vertex_ai": {
-     *       "budget_limit": 100.0,
-     *       "time_period": "12d",
-     *       "spend": 0.0,
-     *       "budget_reset_at": null
+     *     "providers": {
+     *         "openai": {
+     *             "budget_limit": 1e-12,
+     *             "time_period": "1d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         },
+     *         "azure": {
+     *             "budget_limit": 100.0,
+     *             "time_period": "1d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         },
+     *         "anthropic": {
+     *             "budget_limit": 100.0,
+     *             "time_period": "10d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         },
+     *         "vertex_ai": {
+     *             "budget_limit": 100.0,
+     *             "time_period": "12d",
+     *             "spend": 0.0,
+     *             "budget_reset_at": null
+     *         }
      *     }
-     *   }
      * }
      * ```
      */
@@ -65,7 +73,7 @@ interface ProviderServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ProviderListBudgetsResponse
 
-    /** @see [listBudgets] */
+    /** @see listBudgets */
     suspend fun listBudgets(requestOptions: RequestOptions): ProviderListBudgetsResponse =
         listBudgets(ProviderListBudgetsParams.none(), requestOptions)
 
@@ -73,6 +81,15 @@ interface ProviderServiceAsync {
      * A view of [ProviderServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ProviderServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /provider/budgets`, but is otherwise the same as
@@ -84,7 +101,7 @@ interface ProviderServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ProviderListBudgetsResponse>
 
-        /** @see [listBudgets] */
+        /** @see listBudgets */
         @MustBeClosed
         suspend fun listBudgets(
             requestOptions: RequestOptions

@@ -2,14 +2,14 @@
 
 package ai.hanzo.api.models.model
 
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class ModelInfoTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val modelInfo =
@@ -38,5 +38,31 @@ internal class ModelInfoTest {
         assertThat(modelInfo.updatedAt())
             .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
         assertThat(modelInfo.updatedBy()).isEqualTo("updated_by")
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val modelInfo =
+            ModelInfo.builder()
+                .id("id")
+                .baseModel("base_model")
+                .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .createdBy("created_by")
+                .dbModel(true)
+                .teamId("team_id")
+                .teamPublicModelName("team_public_model_name")
+                .tier(ModelInfo.Tier.FREE)
+                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .updatedBy("updated_by")
+                .build()
+
+        val roundtrippedModelInfo =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(modelInfo),
+                jacksonTypeRef<ModelInfo>(),
+            )
+
+        assertThat(roundtrippedModelInfo).isEqualTo(modelInfo)
     }
 }

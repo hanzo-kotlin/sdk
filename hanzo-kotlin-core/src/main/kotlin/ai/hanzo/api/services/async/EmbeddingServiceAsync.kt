@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.embeddings.EmbeddingCreateParams
@@ -14,6 +15,13 @@ interface EmbeddingServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): EmbeddingServiceAsync
 
     /**
      * Follows the exact same API spec as `OpenAI's Embeddings API
@@ -30,13 +38,9 @@ interface EmbeddingServiceAsync {
      * ```
      */
     suspend fun create(
-        params: EmbeddingCreateParams = EmbeddingCreateParams.none(),
+        params: EmbeddingCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EmbeddingCreateResponse
-
-    /** @see [create] */
-    suspend fun create(requestOptions: RequestOptions): EmbeddingCreateResponse =
-        create(EmbeddingCreateParams.none(), requestOptions)
 
     /**
      * A view of [EmbeddingServiceAsync] that provides access to raw HTTP responses for each method.
@@ -44,20 +48,22 @@ interface EmbeddingServiceAsync {
     interface WithRawResponse {
 
         /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): EmbeddingServiceAsync.WithRawResponse
+
+        /**
          * Returns a raw HTTP response for `post /embeddings`, but is otherwise the same as
          * [EmbeddingServiceAsync.create].
          */
         @MustBeClosed
         suspend fun create(
-            params: EmbeddingCreateParams = EmbeddingCreateParams.none(),
+            params: EmbeddingCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EmbeddingCreateResponse>
-
-        /** @see [create] */
-        @MustBeClosed
-        suspend fun create(
-            requestOptions: RequestOptions
-        ): HttpResponseFor<EmbeddingCreateResponse> =
-            create(EmbeddingCreateParams.none(), requestOptions)
     }
 }

@@ -4,8 +4,6 @@ package ai.hanzo.api.services.blocking.threads
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.threads.messages.MessageCreateParams
-import ai.hanzo.api.models.threads.messages.MessageListParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -13,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class MessageServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun create() {
         val client =
@@ -23,13 +21,12 @@ internal class MessageServiceTest {
                 .build()
         val messageService = client.threads().messages()
 
-        val message =
-            messageService.create(MessageCreateParams.builder().threadId("thread_id").build())
+        val message = messageService.create("thread_id")
 
         message.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun list() {
         val client =
@@ -39,8 +36,8 @@ internal class MessageServiceTest {
                 .build()
         val messageService = client.threads().messages()
 
-        val message = messageService.list(MessageListParams.builder().threadId("thread_id").build())
+        val messages = messageService.list("thread_id")
 
-        message.validate()
+        messages.validate()
     }
 }

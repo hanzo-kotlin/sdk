@@ -3,13 +3,14 @@
 package ai.hanzo.api.services.async
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -42,6 +43,9 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
     private val cancel: CancelServiceAsync by lazy { CancelServiceAsyncImpl(clientOptions) }
 
     override fun withRawResponse(): BatchServiceAsync.WithRawResponse = withRawResponse
+
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): BatchServiceAsync =
+        BatchServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
 
     override fun cancel(): CancelServiceAsync = cancel
 
@@ -97,17 +101,24 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         BatchServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         private val cancel: CancelServiceAsync.WithRawResponse by lazy {
             CancelServiceAsyncImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): BatchServiceAsync.WithRawResponse =
+            BatchServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+
         override fun cancel(): CancelServiceAsync.WithRawResponse = cancel
 
         private val createHandler: Handler<BatchCreateResponse> =
             jsonHandler<BatchCreateResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun create(
             params: BatchCreateParams,
@@ -116,13 +127,14 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "batches")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -135,21 +147,24 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val retrieveHandler: Handler<BatchRetrieveResponse> =
             jsonHandler<BatchRetrieveResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun retrieve(
             params: BatchRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("batchId", params.batchId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "batches", params._pathParam(0))
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveHandler.handle(it) }
                     .also {
@@ -161,7 +176,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
         }
 
         private val listHandler: Handler<BatchListResponse> =
-            jsonHandler<BatchListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<BatchListResponse>(clientOptions.jsonMapper)
 
         override suspend fun list(
             params: BatchListParams,
@@ -170,12 +185,13 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("v1", "batches")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listHandler.handle(it) }
                     .also {
@@ -188,15 +204,18 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val cancelWithProviderHandler: Handler<BatchCancelWithProviderResponse> =
             jsonHandler<BatchCancelWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun cancelWithProvider(
             params: BatchCancelWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchCancelWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("batchId", params.batchId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(
                         params._pathParam(0),
                         "v1",
@@ -209,7 +228,7 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { cancelWithProviderHandler.handle(it) }
                     .also {
@@ -222,22 +241,25 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val createWithProviderHandler: Handler<BatchCreateWithProviderResponse> =
             jsonHandler<BatchCreateWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun createWithProvider(
             params: BatchCreateWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchCreateWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("provider", params.provider())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(params._pathParam(0), "v1", "batches")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createWithProviderHandler.handle(it) }
                     .also {
@@ -250,21 +272,24 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val listWithProviderHandler: Handler<BatchListWithProviderResponse> =
             jsonHandler<BatchListWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun listWithProvider(
             params: BatchListWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchListWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("provider", params.provider())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(params._pathParam(0), "v1", "batches")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listWithProviderHandler.handle(it) }
                     .also {
@@ -277,21 +302,24 @@ class BatchServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val retrieveWithProviderHandler: Handler<BatchRetrieveWithProviderResponse> =
             jsonHandler<BatchRetrieveWithProviderResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun retrieveWithProvider(
             params: BatchRetrieveWithProviderParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<BatchRetrieveWithProviderResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("batchId", params.batchId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments(params._pathParam(0), "v1", "batches", params._pathParam(1))
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveWithProviderHandler.handle(it) }
                     .also {

@@ -19,6 +19,7 @@ import java.util.Objects
  * Complete provider budget configuration and status. Maps provider names to their budget configs.
  */
 class ProviderListBudgetsResponse
+@JsonCreator(mode = JsonCreator.Mode.DISABLED)
 private constructor(
     private val providers: JsonField<Providers>,
     private val additionalProperties: MutableMap<String, JsonValue>,
@@ -125,6 +126,21 @@ private constructor(
         validated = true
     }
 
+    fun isValid(): Boolean =
+        try {
+            validate()
+            true
+        } catch (e: HanzoInvalidDataException) {
+            false
+        }
+
+    /**
+     * Returns a score indicating how many valid values are contained in this object recursively.
+     *
+     * Used for best match union deserialization.
+     */
+    internal fun validity(): Int = (providers.asKnown()?.validity() ?: 0)
+
     class Providers
     @JsonCreator
     private constructor(
@@ -190,17 +206,32 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Providers && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Providers && additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -212,12 +243,12 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is ProviderListBudgetsResponse && providers == other.providers && additionalProperties == other.additionalProperties /* spotless:on */
+        return other is ProviderListBudgetsResponse &&
+            providers == other.providers &&
+            additionalProperties == other.additionalProperties
     }
 
-    /* spotless:off */
     private val hashCode: Int by lazy { Objects.hash(providers, additionalProperties) }
-    /* spotless:on */
 
     override fun hashCode(): Int = hashCode
 

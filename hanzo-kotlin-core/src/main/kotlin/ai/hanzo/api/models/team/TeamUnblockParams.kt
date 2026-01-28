@@ -34,8 +34,10 @@ private constructor(
     fun _additionalBodyProperties(): Map<String, JsonValue> =
         blockTeamRequest._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -188,7 +190,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): BlockTeamRequest = blockTeamRequest
+    fun _body(): BlockTeamRequest = blockTeamRequest
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -199,10 +201,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TeamUnblockParams && blockTeamRequest == other.blockTeamRequest && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TeamUnblockParams &&
+            blockTeamRequest == other.blockTeamRequest &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(blockTeamRequest, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(blockTeamRequest, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TeamUnblockParams{blockTeamRequest=$blockTeamRequest, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

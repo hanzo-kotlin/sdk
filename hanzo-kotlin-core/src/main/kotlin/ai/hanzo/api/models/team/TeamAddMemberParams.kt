@@ -9,10 +9,12 @@ import ai.hanzo.api.core.JsonField
 import ai.hanzo.api.core.JsonMissing
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
+import ai.hanzo.api.core.allMaxBy
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.getOrThrow
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
+import ai.hanzo.api.core.toImmutable
 import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
@@ -29,8 +31,6 @@ import java.util.Collections
 import java.util.Objects
 
 /**
- * [BETA]
- *
  * Add new members (either via user_email or user_id) to a team
  *
  * If user doesn't exist, new user row will also be added to User Table
@@ -39,7 +39,7 @@ import java.util.Objects
  *
  * ```
  *
- * curl -X POST 'http://0.0.0.0:4000/team/member_add'     -H 'Authorization: Bearer sk-1234'     -H 'Content-Type: application/json'     -d '{"team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849", "member": {"role": "user", "user_id": "dev247652@hanzo.ai"}}'
+ * curl -X POST 'http://0.0.0.0:4000/team/member_add'     -H 'Authorization: Bearer sk-1234'     -H 'Content-Type: application/json'     -d '{"team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849", "member": {"role": "user", "user_id": "krrish247652@berri.ai"}}'
  *
  * ```
  */
@@ -51,18 +51,26 @@ private constructor(
 ) : Params {
 
     /**
+     * Member object or list of member objects to add. Each member must include either user_id or
+     * user_email, and a role
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
      *   missing or null (e.g. if the server responded with an unexpected value).
      */
     fun member(): Member = body.member()
 
     /**
+     * The ID of the team to add the member to
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
      *   missing or null (e.g. if the server responded with an unexpected value).
      */
     fun teamId(): String = body.teamId()
 
     /**
+     * Maximum budget allocated to this user within the team. If not set, user has unlimited budget
+     * within team limits
+     *
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
      *   server responded with an unexpected value).
      */
@@ -91,8 +99,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -124,6 +134,21 @@ private constructor(
             additionalQueryParams = teamAddMemberParams.additionalQueryParams.toBuilder()
         }
 
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [member]
+         * - [teamId]
+         * - [maxBudgetInTeam]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
+        /**
+         * Member object or list of member objects to add. Each member must include either user_id
+         * or user_email, and a role
+         */
         fun member(member: Member) = apply { body.member(member) }
 
         /**
@@ -140,6 +165,7 @@ private constructor(
         /** Alias for calling [Builder.member] with `Member.ofMember(member)`. */
         fun member(member: Member) = apply { body.member(member) }
 
+        /** The ID of the team to add the member to */
         fun teamId(teamId: String) = apply { body.teamId(teamId) }
 
         /**
@@ -150,6 +176,10 @@ private constructor(
          */
         fun teamId(teamId: JsonField<String>) = apply { body.teamId(teamId) }
 
+        /**
+         * Maximum budget allocated to this user within the team. If not set, user has unlimited
+         * budget within team limits
+         */
         fun maxBudgetInTeam(maxBudgetInTeam: Double?) = apply {
             body.maxBudgetInTeam(maxBudgetInTeam)
         }
@@ -310,13 +340,29 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
+    /**
+     * Request body for adding members to a team.
+     *
+     * Example:
+     * ```json
+     * {
+     *     "team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849",
+     *     "member": {
+     *         "role": "user",
+     *         "user_id": "user123"
+     *     },
+     *     "max_budget_in_team": 100.0
+     * }
+     * ```
+     */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val member: JsonField<Member>,
         private val teamId: JsonField<String>,
@@ -334,18 +380,26 @@ private constructor(
         ) : this(member, teamId, maxBudgetInTeam, mutableMapOf())
 
         /**
+         * Member object or list of member objects to add. Each member must include either user_id
+         * or user_email, and a role
+         *
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is
          *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun member(): Member = member.getRequired("member")
 
         /**
+         * The ID of the team to add the member to
+         *
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is
          *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
          */
         fun teamId(): String = teamId.getRequired("team_id")
 
         /**
+         * Maximum budget allocated to this user within the team. If not set, user has unlimited
+         * budget within team limits
+         *
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
          *   server responded with an unexpected value).
          */
@@ -416,6 +470,10 @@ private constructor(
                 additionalProperties = body.additionalProperties.toMutableMap()
             }
 
+            /**
+             * Member object or list of member objects to add. Each member must include either
+             * user_id or user_email, and a role
+             */
             fun member(member: Member) = member(JsonField.of(member))
 
             /**
@@ -433,6 +491,7 @@ private constructor(
             /** Alias for calling [Builder.member] with `Member.ofMember(member)`. */
             fun member(member: Member) = member(Member.ofMember(member))
 
+            /** The ID of the team to add the member to */
             fun teamId(teamId: String) = teamId(JsonField.of(teamId))
 
             /**
@@ -444,6 +503,10 @@ private constructor(
              */
             fun teamId(teamId: JsonField<String>) = apply { this.teamId = teamId }
 
+            /**
+             * Maximum budget allocated to this user within the team. If not set, user has unlimited
+             * budget within team limits
+             */
             fun maxBudgetInTeam(maxBudgetInTeam: Double?) =
                 maxBudgetInTeam(JsonField.ofNullable(maxBudgetInTeam))
 
@@ -520,17 +583,40 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (member.asKnown()?.validity() ?: 0) +
+                (if (teamId.asKnown() == null) 0 else 1) +
+                (if (maxBudgetInTeam.asKnown() == null) 0 else 1)
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && member == other.member && teamId == other.teamId && maxBudgetInTeam == other.maxBudgetInTeam && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                member == other.member &&
+                teamId == other.teamId &&
+                maxBudgetInTeam == other.maxBudgetInTeam &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(member, teamId, maxBudgetInTeam, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(member, teamId, maxBudgetInTeam, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -538,6 +624,10 @@ private constructor(
             "Body{member=$member, teamId=$teamId, maxBudgetInTeam=$maxBudgetInTeam, additionalProperties=$additionalProperties}"
     }
 
+    /**
+     * Member object or list of member objects to add. Each member must include either user_id or
+     * user_email, and a role
+     */
     @JsonDeserialize(using = Member.Deserializer::class)
     @JsonSerialize(using = Member.Serializer::class)
     class Member
@@ -561,13 +651,12 @@ private constructor(
 
         fun _json(): JsonValue? = _json
 
-        fun <T> accept(visitor: Visitor<T>): T {
-            return when {
+        fun <T> accept(visitor: Visitor<T>): T =
+            when {
                 members != null -> visitor.visitMembers(members)
                 member != null -> visitor.visitMember(member)
                 else -> visitor.unknown(_json)
             }
-        }
 
         private var validated: Boolean = false
 
@@ -590,15 +679,41 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            accept(
+                object : Visitor<Int> {
+                    override fun visitMembers(members: List<Member>) =
+                        members.sumOf { it.validity().toInt() }
+
+                    override fun visitMember(member: Member) = member.validity()
+
+                    override fun unknown(json: JsonValue?) = 0
+                }
+            )
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Member && members == other.members && member == other.member /* spotless:on */
+            return other is Member && members == other.members && member == other.member
         }
 
-        override fun hashCode(): Int = /* spotless:off */ Objects.hash(members, member) /* spotless:on */
+        override fun hashCode(): Int = Objects.hash(members, member)
 
         override fun toString(): String =
             when {
@@ -610,7 +725,7 @@ private constructor(
 
         companion object {
 
-            fun ofMembers(members: List<Member>) = Member(members = members)
+            fun ofMembers(members: List<Member>) = Member(members = members.toImmutable())
 
             fun ofMember(member: Member) = Member(member = member)
         }
@@ -642,18 +757,28 @@ private constructor(
             override fun ObjectCodec.deserialize(node: JsonNode): Member {
                 val json = JsonValue.fromJsonNode(node)
 
-                tryDeserialize(node, jacksonTypeRef<List<Member>>()) {
-                        it.forEach { it.validate() }
-                    }
-                    ?.let {
-                        return Member(members = it, _json = json)
-                    }
-                tryDeserialize(node, jacksonTypeRef<Member>()) { it.validate() }
-                    ?.let {
-                        return Member(member = it, _json = json)
-                    }
-
-                return Member(_json = json)
+                val bestMatches =
+                    sequenceOf(
+                            tryDeserialize(node, jacksonTypeRef<Member>())?.let {
+                                Member(member = it, _json = json)
+                            },
+                            tryDeserialize(node, jacksonTypeRef<List<Member>>())?.let {
+                                Member(members = it, _json = json)
+                            },
+                        )
+                        .filterNotNull()
+                        .allMaxBy { it.validity() }
+                        .toList()
+                return when (bestMatches.size) {
+                    // This can happen if what we're deserializing is completely incompatible with
+                    // all the possible variants (e.g. deserializing from boolean).
+                    0 -> Member(_json = json)
+                    1 -> bestMatches.single()
+                    // If there's more than one match with the highest validity, then use the first
+                    // completely valid match, or simply the first match if none are completely
+                    // valid.
+                    else -> bestMatches.firstOrNull { it.isValid() } ?: bestMatches.first()
+                }
             }
         }
 
@@ -679,10 +804,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TeamAddMemberParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TeamAddMemberParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TeamAddMemberParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

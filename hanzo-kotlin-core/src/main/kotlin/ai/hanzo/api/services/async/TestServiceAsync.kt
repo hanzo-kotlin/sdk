@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.test.TestPingParams
@@ -14,6 +15,13 @@ interface TestServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TestServiceAsync
 
     /**
      * [DEPRECATED] use `/health/liveliness` instead.
@@ -29,12 +37,19 @@ interface TestServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TestPingResponse
 
-    /** @see [ping] */
+    /** @see ping */
     suspend fun ping(requestOptions: RequestOptions): TestPingResponse =
         ping(TestPingParams.none(), requestOptions)
 
     /** A view of [TestServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TestServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /test`, but is otherwise the same as
@@ -46,7 +61,7 @@ interface TestServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TestPingResponse>
 
-        /** @see [ping] */
+        /** @see ping */
         @MustBeClosed
         suspend fun ping(requestOptions: RequestOptions): HttpResponseFor<TestPingResponse> =
             ping(TestPingParams.none(), requestOptions)

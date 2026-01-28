@@ -3,13 +3,13 @@
 package ai.hanzo.api.services.async.global
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -30,6 +30,9 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
     }
 
     override fun withRawResponse(): SpendServiceAsync.WithRawResponse = withRawResponse
+
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendServiceAsync =
+        SpendServiceAsyncImpl(clientOptions.toBuilder().apply(modifier).build())
 
     override suspend fun listTags(
         params: SpendListTagsParams,
@@ -55,11 +58,18 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         SpendServiceAsync.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): SpendServiceAsync.WithRawResponse =
+            SpendServiceAsyncImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
 
         private val listTagsHandler: Handler<List<SpendListTagsResponse>> =
             jsonHandler<List<SpendListTagsResponse>>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun listTags(
             params: SpendListTagsParams,
@@ -68,12 +78,13 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("global", "spend", "tags")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listTagsHandler.handle(it) }
                     .also {
@@ -85,7 +96,7 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
         }
 
         private val resetHandler: Handler<SpendResetResponse> =
-            jsonHandler<SpendResetResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<SpendResetResponse>(clientOptions.jsonMapper)
 
         override suspend fun reset(
             params: SpendResetParams,
@@ -94,13 +105,14 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("global", "spend", "reset")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { resetHandler.handle(it) }
                     .also {
@@ -113,7 +125,6 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
 
         private val retrieveReportHandler: Handler<List<SpendRetrieveReportResponse>> =
             jsonHandler<List<SpendRetrieveReportResponse>>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override suspend fun retrieveReport(
             params: SpendRetrieveReportParams,
@@ -122,12 +133,13 @@ class SpendServiceAsyncImpl internal constructor(private val clientOptions: Clie
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("global", "spend", "report")
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.executeAsync(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveReportHandler.handle(it) }
                     .also {

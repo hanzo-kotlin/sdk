@@ -5,6 +5,7 @@ package ai.hanzo.api.core
 import ai.hanzo.api.errors.HanzoInvalidDataException
 import java.util.Collections
 import java.util.SortedMap
+import java.util.concurrent.locks.Lock
 
 internal fun <T : Any> T?.getOrThrow(name: String): T =
     this ?: throw HanzoInvalidDataException("`${name}` is not present")
@@ -20,6 +21,33 @@ internal fun <K, V> immutableEmptyMap(): Map<K, V> = Collections.emptyMap()
 internal fun <K : Comparable<K>, V> SortedMap<K, V>.toImmutable(): SortedMap<K, V> =
     if (isEmpty()) Collections.emptySortedMap()
     else Collections.unmodifiableSortedMap(toSortedMap(comparator()))
+
+/**
+ * Returns all elements that yield the largest value for the given function, or an empty list if
+ * there are zero elements.
+ *
+ * This is similar to [Sequence.maxByOrNull] except it returns _all_ elements that yield the largest
+ * value; not just the first one.
+ */
+internal fun <T, R : Comparable<R>> Sequence<T>.allMaxBy(selector: (T) -> R): List<T> {
+    var maxValue: R? = null
+    val maxElements = mutableListOf<T>()
+
+    val iterator = iterator()
+    while (iterator.hasNext()) {
+        val element = iterator.next()
+        val value = selector(element)
+        if (maxValue == null || value > maxValue) {
+            maxValue = value
+            maxElements.clear()
+            maxElements.add(element)
+        } else if (value == maxValue) {
+            maxElements.add(element)
+        }
+    }
+
+    return maxElements
+}
 
 /**
  * Returns whether [this] is equal to [other].
@@ -56,3 +84,19 @@ internal fun Any?.contentToString(): String {
 }
 
 internal interface Enum
+
+/**
+ * Executes a suspending block of code while holding this lock.
+ *
+ * @param T the return type of the action
+ * @param action the suspending function to execute while holding the lock
+ * @return the result of executing the action
+ */
+internal suspend fun <T> Lock.withLockAsync(action: suspend () -> T): T {
+    lock()
+    return try {
+        action()
+    } finally {
+        unlock()
+    }
+}

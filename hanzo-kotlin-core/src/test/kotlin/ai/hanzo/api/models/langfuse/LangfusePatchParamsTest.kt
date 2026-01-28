@@ -3,18 +3,15 @@
 package ai.hanzo.api.models.langfuse
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class LangfusePatchParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         LangfusePatchParams.builder().endpoint("endpoint").build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = LangfusePatchParams.builder().endpoint("endpoint").build()

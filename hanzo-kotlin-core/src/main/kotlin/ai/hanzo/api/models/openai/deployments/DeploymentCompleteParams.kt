@@ -4,7 +4,6 @@ package ai.hanzo.api.models.openai.deployments
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -28,32 +27,30 @@ import java.util.Objects
  */
 class DeploymentCompleteParams
 private constructor(
-    private val model: String,
+    private val model: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun model(): String = model
+    fun model(): String? = model
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [DeploymentCompleteParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .model()
-         * ```
-         */
+        fun none(): DeploymentCompleteParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [DeploymentCompleteParams]. */
         fun builder() = Builder()
     }
 
@@ -73,7 +70,7 @@ private constructor(
                 deploymentCompleteParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun model(model: String) = apply { this.model = model }
+        fun model(model: String?) = apply { this.model = model }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -199,28 +196,21 @@ private constructor(
          * Returns an immutable instance of [DeploymentCompleteParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .model()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): DeploymentCompleteParams =
             DeploymentCompleteParams(
-                checkRequired("model", model),
+                model,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
                 additionalBodyProperties.toImmutable(),
             )
     }
 
-    internal fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> model
+            0 -> model ?: ""
             else -> ""
         }
 
@@ -233,10 +223,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is DeploymentCompleteParams && model == other.model && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is DeploymentCompleteParams &&
+            model == other.model &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(model, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(model, additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
         "DeploymentCompleteParams{model=$model, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

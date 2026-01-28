@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class TranscriptionServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun create() {
         val client =
@@ -24,7 +24,7 @@ internal class TranscriptionServiceTest {
 
         val transcription =
             transcriptionService.create(
-                TranscriptionCreateParams.builder().file("some content".toByteArray()).build()
+                TranscriptionCreateParams.builder().file("some content".byteInputStream()).build()
             )
 
         transcription.validate()

@@ -30,8 +30,10 @@ private constructor(
     /** Specify the service being hit. */
     fun service(): Service = service
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -220,6 +222,8 @@ private constructor(
 
             val LANGFUSE = of("langfuse")
 
+            val LANGFUSE_OTEL = of("langfuse_otel")
+
             val SLACK = of("slack")
 
             val OPENMETER = of("openmeter")
@@ -232,6 +236,12 @@ private constructor(
 
             val DATADOG = of("datadog")
 
+            val GENERIC_API = of("generic_api")
+
+            val ARIZE = of("arize")
+
+            val SQS = of("sqs")
+
             fun of(value: String) = Service(JsonField.of(value))
         }
 
@@ -239,12 +249,16 @@ private constructor(
         enum class Known {
             SLACK_BUDGET_ALERTS,
             LANGFUSE,
+            LANGFUSE_OTEL,
             SLACK,
             OPENMETER,
             WEBHOOK,
             EMAIL,
             BRAINTRUST,
             DATADOG,
+            GENERIC_API,
+            ARIZE,
+            SQS,
         }
 
         /**
@@ -259,12 +273,16 @@ private constructor(
         enum class Value {
             SLACK_BUDGET_ALERTS,
             LANGFUSE,
+            LANGFUSE_OTEL,
             SLACK,
             OPENMETER,
             WEBHOOK,
             EMAIL,
             BRAINTRUST,
             DATADOG,
+            GENERIC_API,
+            ARIZE,
+            SQS,
             /** An enum member indicating that [Service] was instantiated with an unknown value. */
             _UNKNOWN,
         }
@@ -280,12 +298,16 @@ private constructor(
             when (this) {
                 SLACK_BUDGET_ALERTS -> Value.SLACK_BUDGET_ALERTS
                 LANGFUSE -> Value.LANGFUSE
+                LANGFUSE_OTEL -> Value.LANGFUSE_OTEL
                 SLACK -> Value.SLACK
                 OPENMETER -> Value.OPENMETER
                 WEBHOOK -> Value.WEBHOOK
                 EMAIL -> Value.EMAIL
                 BRAINTRUST -> Value.BRAINTRUST
                 DATADOG -> Value.DATADOG
+                GENERIC_API -> Value.GENERIC_API
+                ARIZE -> Value.ARIZE
+                SQS -> Value.SQS
                 else -> Value._UNKNOWN
             }
 
@@ -301,12 +323,16 @@ private constructor(
             when (this) {
                 SLACK_BUDGET_ALERTS -> Known.SLACK_BUDGET_ALERTS
                 LANGFUSE -> Known.LANGFUSE
+                LANGFUSE_OTEL -> Known.LANGFUSE_OTEL
                 SLACK -> Known.SLACK
                 OPENMETER -> Known.OPENMETER
                 WEBHOOK -> Known.WEBHOOK
                 EMAIL -> Known.EMAIL
                 BRAINTRUST -> Known.BRAINTRUST
                 DATADOG -> Known.DATADOG
+                GENERIC_API -> Known.GENERIC_API
+                ARIZE -> Known.ARIZE
+                SQS -> Known.SQS
                 else -> throw HanzoInvalidDataException("Unknown Service: $value")
             }
 
@@ -322,12 +348,39 @@ private constructor(
         fun asString(): String =
             _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
 
+        private var validated: Boolean = false
+
+        fun validate(): Service = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Service && value == other.value /* spotless:on */
+            return other is Service && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -340,10 +393,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is HealthCheckServicesParams && service == other.service && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is HealthCheckServicesParams &&
+            service == other.service &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(service, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(service, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "HealthCheckServicesParams{service=$service, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

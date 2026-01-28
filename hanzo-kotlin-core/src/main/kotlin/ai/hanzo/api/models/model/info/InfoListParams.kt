@@ -11,44 +11,47 @@ import java.util.Objects
  * Provides more info about each model in /models, including config.yaml descriptions (except api
  * key and api base)
  *
- * Parameters: llm_model_id: Optional[str] = None (this is the value of `x-llm-model-id` returned in
- * response headers)
+ * Parameters: litellm_model_id: Optional[str] = None (this is the value of `x-litellm-model-id`
+ * returned in response headers)
  *
- *     - When llm_model_id is passed, it will return the info for that specific model
- *     - When llm_model_id is not passed, it will return the info for all models
+ *     - When litellm_model_id is passed, it will return the info for that specific model
+ *     - When litellm_model_id is not passed, it will return the info for all models
  *
  * Returns: Returns a dictionary containing information about each model.
  *
  * Example Response:
  * ```json
  * {
- *   "data": [
- *     {
- *       "model_name": "fake-openai-endpoint",
- *       "llm_params": {
- *         "api_base": "https://exampleopenaiendpoint-production.up.railway.app/",
- *         "model": "openai/fake"
- *       },
- *       "model_info": {
- *         "id": "112f74fab24a7a5245d2ced3536dd8f5f9192c57ee6e332af0f0512e08bed5af",
- *         "db_model": false
- *       }
- *     }
- *   ]
+ *     "data": [
+ *                 {
+ *                     "model_name": "fake-openai-endpoint",
+ *                     "litellm_params": {
+ *                         "api_base": "https://exampleopenaiendpoint-production.up.railway.app/",
+ *                         "model": "openai/fake"
+ *                     },
+ *                     "model_info": {
+ *                         "id": "112f74fab24a7a5245d2ced3536dd8f5f9192c57ee6e332af0f0512e08bed5af",
+ *                         "db_model": false
+ *                     }
+ *                 }
+ *             ]
  * }
+ *
  * ```
  */
 class InfoListParams
 private constructor(
-    private val llmModelId: String?,
+    private val litellmModelId: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun llmModelId(): String? = llmModelId
+    fun litellmModelId(): String? = litellmModelId
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -64,17 +67,17 @@ private constructor(
     /** A builder for [InfoListParams]. */
     class Builder internal constructor() {
 
-        private var llmModelId: String? = null
+        private var litellmModelId: String? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         internal fun from(infoListParams: InfoListParams) = apply {
-            llmModelId = infoListParams.llmModelId
+            litellmModelId = infoListParams.litellmModelId
             additionalHeaders = infoListParams.additionalHeaders.toBuilder()
             additionalQueryParams = infoListParams.additionalQueryParams.toBuilder()
         }
 
-        fun llmModelId(llmModelId: String?) = apply { this.llmModelId = llmModelId }
+        fun litellmModelId(litellmModelId: String?) = apply { this.litellmModelId = litellmModelId }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -180,7 +183,7 @@ private constructor(
          * Further updates to this [Builder] will not mutate the returned instance.
          */
         fun build(): InfoListParams =
-            InfoListParams(llmModelId, additionalHeaders.build(), additionalQueryParams.build())
+            InfoListParams(litellmModelId, additionalHeaders.build(), additionalQueryParams.build())
     }
 
     override fun _headers(): Headers = additionalHeaders
@@ -188,7 +191,7 @@ private constructor(
     override fun _queryParams(): QueryParams =
         QueryParams.builder()
             .apply {
-                llmModelId?.let { put("llm_model_id", it) }
+                litellmModelId?.let { put("litellm_model_id", it) }
                 putAll(additionalQueryParams)
             }
             .build()
@@ -198,11 +201,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is InfoListParams && llmModelId == other.llmModelId && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is InfoListParams &&
+            litellmModelId == other.litellmModelId &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(llmModelId, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(litellmModelId, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
-        "InfoListParams{llmModelId=$llmModelId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "InfoListParams{litellmModelId=$litellmModelId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

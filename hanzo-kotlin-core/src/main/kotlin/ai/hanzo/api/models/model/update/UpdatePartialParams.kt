@@ -24,21 +24,23 @@ import java.util.Objects
  */
 class UpdatePartialParams
 private constructor(
-    private val modelId: String,
+    private val modelId: String?,
     private val updateDeployment: UpdateDeployment,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun modelId(): String = modelId
+    fun modelId(): String? = modelId
 
     fun updateDeployment(): UpdateDeployment = updateDeployment
 
     fun _additionalBodyProperties(): Map<String, JsonValue> =
         updateDeployment._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -50,7 +52,6 @@ private constructor(
          *
          * The following fields are required:
          * ```kotlin
-         * .modelId()
          * .updateDeployment()
          * ```
          */
@@ -72,7 +73,7 @@ private constructor(
             additionalQueryParams = updatePartialParams.additionalQueryParams.toBuilder()
         }
 
-        fun modelId(modelId: String) = apply { this.modelId = modelId }
+        fun modelId(modelId: String?) = apply { this.modelId = modelId }
 
         fun updateDeployment(updateDeployment: UpdateDeployment) = apply {
             this.updateDeployment = updateDeployment
@@ -183,7 +184,6 @@ private constructor(
          *
          * The following fields are required:
          * ```kotlin
-         * .modelId()
          * .updateDeployment()
          * ```
          *
@@ -191,18 +191,18 @@ private constructor(
          */
         fun build(): UpdatePartialParams =
             UpdatePartialParams(
-                checkRequired("modelId", modelId),
+                modelId,
                 checkRequired("updateDeployment", updateDeployment),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
     }
 
-    internal fun _body(): UpdateDeployment = updateDeployment
+    fun _body(): UpdateDeployment = updateDeployment
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> modelId
+            0 -> modelId ?: ""
             else -> ""
         }
 
@@ -215,10 +215,15 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UpdatePartialParams && modelId == other.modelId && updateDeployment == other.updateDeployment && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is UpdatePartialParams &&
+            modelId == other.modelId &&
+            updateDeployment == other.updateDeployment &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(modelId, updateDeployment, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(modelId, updateDeployment, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "UpdatePartialParams{modelId=$modelId, updateDeployment=$updateDeployment, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

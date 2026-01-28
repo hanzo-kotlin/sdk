@@ -36,7 +36,7 @@ import java.util.Objects
  * Example curl:
  * ```
  * curl --location 'http://0.0.0.0:4000/customer/update'     --header 'Authorization: Bearer sk-1234'     --header 'Content-Type: application/json'     --data '{
- *     "user_id": "test-llm-user-4",
+ *     "user_id": "test-litellm-user-4",
  *     "budget_id": "paid_tier"
  * }'
  *
@@ -144,8 +144,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -175,6 +177,20 @@ private constructor(
             additionalHeaders = customerUpdateParams.additionalHeaders.toBuilder()
             additionalQueryParams = customerUpdateParams.additionalQueryParams.toBuilder()
         }
+
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [userId]
+         * - [alias]
+         * - [allowedModelRegion]
+         * - [blocked]
+         * - [budgetId]
+         * - etc.
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
 
         fun userId(userId: String) = apply { body.userId(userId) }
 
@@ -399,7 +415,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -407,6 +423,7 @@ private constructor(
 
     /** Update a Customer, use this to update customer budgets etc */
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val userId: JsonField<String>,
         private val alias: JsonField<String>,
@@ -735,7 +752,7 @@ private constructor(
 
             userId()
             alias()
-            allowedModelRegion()
+            allowedModelRegion()?.validate()
             blocked()
             budgetId()
             defaultModel()
@@ -743,17 +760,57 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (if (userId.asKnown() == null) 0 else 1) +
+                (if (alias.asKnown() == null) 0 else 1) +
+                (allowedModelRegion.asKnown()?.validity() ?: 0) +
+                (if (blocked.asKnown() == null) 0 else 1) +
+                (if (budgetId.asKnown() == null) 0 else 1) +
+                (if (defaultModel.asKnown() == null) 0 else 1) +
+                (if (maxBudget.asKnown() == null) 0 else 1)
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && userId == other.userId && alias == other.alias && allowedModelRegion == other.allowedModelRegion && blocked == other.blocked && budgetId == other.budgetId && defaultModel == other.defaultModel && maxBudget == other.maxBudget && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                userId == other.userId &&
+                alias == other.alias &&
+                allowedModelRegion == other.allowedModelRegion &&
+                blocked == other.blocked &&
+                budgetId == other.budgetId &&
+                defaultModel == other.defaultModel &&
+                maxBudget == other.maxBudget &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(userId, alias, allowedModelRegion, blocked, budgetId, defaultModel, maxBudget, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                userId,
+                alias,
+                allowedModelRegion,
+                blocked,
+                budgetId,
+                defaultModel,
+                maxBudget,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -850,12 +907,39 @@ private constructor(
         fun asString(): String =
             _value().asString() ?: throw HanzoInvalidDataException("Value is not a String")
 
+        private var validated: Boolean = false
+
+        fun validate(): AllowedModelRegion = apply {
+            if (validated) {
+                return@apply
+            }
+
+            known()
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = if (value() == Value._UNKNOWN) 0 else 1
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is AllowedModelRegion && value == other.value /* spotless:on */
+            return other is AllowedModelRegion && value == other.value
         }
 
         override fun hashCode() = value.hashCode()
@@ -868,10 +952,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CustomerUpdateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CustomerUpdateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CustomerUpdateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

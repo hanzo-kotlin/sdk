@@ -4,7 +4,6 @@ package ai.hanzo.api.models.batches.cancel
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
@@ -25,35 +24,33 @@ import java.util.Objects
  */
 class CancelCancelParams
 private constructor(
-    private val batchId: String,
+    private val batchId: String?,
     private val provider: String?,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
     private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
-    fun batchId(): String = batchId
+    fun batchId(): String? = batchId
 
     fun provider(): String? = provider
 
+    /** Additional body properties to send with the request. */
     fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
 
     companion object {
 
-        /**
-         * Returns a mutable builder for constructing an instance of [CancelCancelParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .batchId()
-         * ```
-         */
+        fun none(): CancelCancelParams = builder().build()
+
+        /** Returns a mutable builder for constructing an instance of [CancelCancelParams]. */
         fun builder() = Builder()
     }
 
@@ -74,7 +71,7 @@ private constructor(
             additionalBodyProperties = cancelCancelParams.additionalBodyProperties.toMutableMap()
         }
 
-        fun batchId(batchId: String) = apply { this.batchId = batchId }
+        fun batchId(batchId: String?) = apply { this.batchId = batchId }
 
         fun provider(provider: String?) = apply { this.provider = provider }
 
@@ -202,17 +199,10 @@ private constructor(
          * Returns an immutable instance of [CancelCancelParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .batchId()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): CancelCancelParams =
             CancelCancelParams(
-                checkRequired("batchId", batchId),
+                batchId,
                 provider,
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
@@ -220,11 +210,11 @@ private constructor(
             )
     }
 
-    internal fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     fun _pathParam(index: Int): String =
         when (index) {
-            0 -> batchId
+            0 -> batchId ?: ""
             else -> ""
         }
 
@@ -243,10 +233,22 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is CancelCancelParams && batchId == other.batchId && provider == other.provider && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams && additionalBodyProperties == other.additionalBodyProperties /* spotless:on */
+        return other is CancelCancelParams &&
+            batchId == other.batchId &&
+            provider == other.provider &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(batchId, provider, additionalHeaders, additionalQueryParams, additionalBodyProperties) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(
+            batchId,
+            provider,
+            additionalHeaders,
+            additionalQueryParams,
+            additionalBodyProperties,
+        )
 
     override fun toString() =
         "CancelCancelParams{batchId=$batchId, provider=$provider, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"

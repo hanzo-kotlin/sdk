@@ -31,7 +31,7 @@ import java.util.Objects
  * -H 'Content-Type: application/json'
  * -d '{
  *     "team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849",
- *     "user_id": "dev247652@hanzo.ai"
+ *     "user_id": "krrish247652@berri.ai"
  * }'
  * ```
  */
@@ -83,8 +83,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -114,6 +116,17 @@ private constructor(
             additionalHeaders = teamRemoveMemberParams.additionalHeaders.toBuilder()
             additionalQueryParams = teamRemoveMemberParams.additionalQueryParams.toBuilder()
         }
+
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [teamId]
+         * - [userEmail]
+         * - [userId]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
 
         fun teamId(teamId: String) = apply { body.teamId(teamId) }
 
@@ -283,13 +296,14 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val teamId: JsonField<String>,
         private val userEmail: JsonField<String>,
@@ -471,17 +485,40 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (if (teamId.asKnown() == null) 0 else 1) +
+                (if (userEmail.asKnown() == null) 0 else 1) +
+                (if (userId.asKnown() == null) 0 else 1)
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && teamId == other.teamId && userEmail == other.userEmail && userId == other.userId && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                teamId == other.teamId &&
+                userEmail == other.userEmail &&
+                userId == other.userId &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(teamId, userEmail, userId, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(teamId, userEmail, userId, additionalProperties)
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -494,10 +531,13 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is TeamRemoveMemberParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is TeamRemoveMemberParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "TeamRemoveMemberParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

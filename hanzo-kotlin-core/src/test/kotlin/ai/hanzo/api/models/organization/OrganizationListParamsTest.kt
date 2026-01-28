@@ -2,14 +2,35 @@
 
 package ai.hanzo.api.models.organization
 
-import org.junit.jupiter.api.Disabled
+import ai.hanzo.api.core.http.QueryParams
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 internal class OrganizationListParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-        OrganizationListParams.builder().build()
+        OrganizationListParams.builder().orgAlias("org_alias").orgId("org_id").build()
+    }
+
+    @Test
+    fun queryParams() {
+        val params = OrganizationListParams.builder().orgAlias("org_alias").orgId("org_id").build()
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams)
+            .isEqualTo(
+                QueryParams.builder().put("org_alias", "org_alias").put("org_id", "org_id").build()
+            )
+    }
+
+    @Test
+    fun queryParamsWithoutOptionalFields() {
+        val params = OrganizationListParams.builder().build()
+
+        val queryParams = params._queryParams()
+
+        assertThat(queryParams).isEqualTo(QueryParams.builder().build())
     }
 }

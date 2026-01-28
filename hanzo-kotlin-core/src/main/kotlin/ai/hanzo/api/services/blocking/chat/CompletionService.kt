@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking.chat
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.chat.completions.CompletionCreateParams
@@ -14,6 +15,13 @@ interface CompletionService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CompletionService
 
     /**
      * Follows the exact same API spec as `OpenAI's Chat API
@@ -35,16 +43,21 @@ interface CompletionService {
      * ```
      */
     fun create(
-        params: CompletionCreateParams = CompletionCreateParams.none(),
+        params: CompletionCreateParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletionCreateResponse
 
-    /** @see [create] */
-    fun create(requestOptions: RequestOptions): CompletionCreateResponse =
-        create(CompletionCreateParams.none(), requestOptions)
-
     /** A view of [CompletionService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): CompletionService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /v1/chat/completions`, but is otherwise the same as
@@ -52,13 +65,8 @@ interface CompletionService {
          */
         @MustBeClosed
         fun create(
-            params: CompletionCreateParams = CompletionCreateParams.none(),
+            params: CompletionCreateParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CompletionCreateResponse>
-
-        /** @see [create] */
-        @MustBeClosed
-        fun create(requestOptions: RequestOptions): HttpResponseFor<CompletionCreateResponse> =
-            create(CompletionCreateParams.none(), requestOptions)
     }
 }

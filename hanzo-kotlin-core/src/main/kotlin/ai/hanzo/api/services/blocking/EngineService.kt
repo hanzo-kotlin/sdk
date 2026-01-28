@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.engines.EngineCompleteParams
@@ -17,6 +18,13 @@ interface EngineService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): EngineService
 
     fun chat(): ChatService
 
@@ -37,9 +45,20 @@ interface EngineService {
      * ```
      */
     fun complete(
+        model: String,
+        params: EngineCompleteParams = EngineCompleteParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): EngineCompleteResponse = complete(params.toBuilder().model(model).build(), requestOptions)
+
+    /** @see complete */
+    fun complete(
         params: EngineCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineCompleteResponse
+
+    /** @see complete */
+    fun complete(model: String, requestOptions: RequestOptions): EngineCompleteResponse =
+        complete(model, EngineCompleteParams.none(), requestOptions)
 
     /**
      * Follows the exact same API spec as `OpenAI's Embeddings API
@@ -56,12 +75,26 @@ interface EngineService {
      * ```
      */
     fun embed(
+        pathModel: String,
+        params: EngineEmbedParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): EngineEmbedResponse = embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+
+    /** @see embed */
+    fun embed(
         params: EngineEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): EngineEmbedResponse
 
     /** A view of [EngineService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): EngineService.WithRawResponse
 
         fun chat(): ChatService.WithRawResponse
 
@@ -71,14 +104,40 @@ interface EngineService {
          */
         @MustBeClosed
         fun complete(
+            model: String,
+            params: EngineCompleteParams = EngineCompleteParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<EngineCompleteResponse> =
+            complete(params.toBuilder().model(model).build(), requestOptions)
+
+        /** @see complete */
+        @MustBeClosed
+        fun complete(
             params: EngineCompleteParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<EngineCompleteResponse>
+
+        /** @see complete */
+        @MustBeClosed
+        fun complete(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<EngineCompleteResponse> =
+            complete(model, EngineCompleteParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `post /engines/{model}/embeddings`, but is otherwise the
          * same as [EngineService.embed].
          */
+        @MustBeClosed
+        fun embed(
+            pathModel: String,
+            params: EngineEmbedParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<EngineEmbedResponse> =
+            embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+
+        /** @see embed */
         @MustBeClosed
         fun embed(
             params: EngineEmbedParams,

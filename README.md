@@ -2,18 +2,29 @@
 
 <!-- x-release-please-start-version -->
 
-[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1)
-[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1)
+[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2)
+[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2)
 
 <!-- x-release-please-end -->
 
 The Hanzo Kotlin SDK provides convenient access to the [Hanzo REST API](https://docs.hanzo.ai) from applications written in Kotlin.
 
+The Hanzo Kotlin SDK is similar to the Hanzo Java SDK but with minor differences that make it more ergonomic for use in Kotlin, such as nullable values instead of `Optional`, `Sequence` instead of `Stream`, and suspend functions instead of `CompletableFuture`.
+
 It is generated with [Stainless](https://www.stainless.com/).
+
+## MCP Server
+
+Use the Hanzo MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=hanzoai-mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImhhbnpvYWktbWNwIl0sImVudiI6eyJIQU5aT19BUElfS0VZIjoiTXkgQVBJIEtleSJ9fQ)
+[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22hanzoai-mcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22hanzoai-mcp%22%5D%2C%22env%22%3A%7B%22HANZO_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)
+
+> Note: You may need to set environment variables in your MCP client.
 
 <!-- x-release-please-start-version -->
 
-The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are also available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.1).
+The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2).
 
 <!-- x-release-please-end -->
 
@@ -24,7 +35,7 @@ The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai
 ### Gradle
 
 ```kotlin
-implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.1")
+implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.2")
 ```
 
 ### Maven
@@ -33,7 +44,7 @@ implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.1")
 <dependency>
   <groupId>ai.hanzo.api</groupId>
   <artifactId>hanzo-kotlin</artifactId>
-  <version>0.1.0-alpha.1</version>
+  <version>0.1.0-alpha.2</version>
 </dependency>
 ```
 
@@ -51,7 +62,8 @@ import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.models.ClientGetHomeParams
 import ai.hanzo.api.models.ClientGetHomeResponse
 
-// Configures using the `HANZO_API_KEY` environment variable
+// Configures using the `hanzo.apiKey` and `hanzo.baseUrl` system properties
+// Or configures using the `HANZO_API_KEY` and `HANZO_BASE_URL` environment variables
 val client: HanzoClient = HanzoOkHttpClient.fromEnv()
 
 val response: ClientGetHomeResponse = client.getHome()
@@ -59,13 +71,14 @@ val response: ClientGetHomeResponse = client.getHome()
 
 ## Client configuration
 
-Configure the client using environment variables:
+Configure the client using system properties or environment variables:
 
 ```kotlin
 import ai.hanzo.api.client.HanzoClient
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 
-// Configures using the `HANZO_API_KEY` environment variable
+// Configures using the `hanzo.apiKey` and `hanzo.baseUrl` system properties
+// Or configures using the `HANZO_API_KEY` and `HANZO_BASE_URL` environment variables
 val client: HanzoClient = HanzoOkHttpClient.fromEnv()
 ```
 
@@ -87,7 +100,8 @@ import ai.hanzo.api.client.HanzoClient
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 
 val client: HanzoClient = HanzoOkHttpClient.builder()
-    // Configures using the `HANZO_API_KEY` environment variable
+    // Configures using the `hanzo.apiKey` and `hanzo.baseUrl` system properties
+    // Or configures using the `HANZO_API_KEY` and `HANZO_BASE_URL` environment variables
     .fromEnv()
     .apiKey("My API Key")
     .build()
@@ -95,13 +109,31 @@ val client: HanzoClient = HanzoOkHttpClient.builder()
 
 See this table for the available options:
 
-| Setter   | Environment variable | Required | Default value |
-| -------- | -------------------- | -------- | ------------- |
-| `apiKey` | `HANZO_API_KEY`      | true     | -             |
+| Setter    | System property | Environment variable | Required | Default value            |
+| --------- | --------------- | -------------------- | -------- | ------------------------ |
+| `apiKey`  | `hanzo.apiKey`  | `HANZO_API_KEY`      | true     | -                        |
+| `baseUrl` | `hanzo.baseUrl` | `HANZO_BASE_URL`     | true     | `"https://api.hanzo.ai"` |
+
+System properties take precedence over environment variables.
 
 > [!TIP]
 > Don't create more than one client in the same application. Each client has a connection pool and
 > thread pools, which are more efficient to share between requests.
+
+### Modifying configuration
+
+To temporarily use a modified client configuration, while reusing the same connection and thread pools, call `withOptions()` on any client or service:
+
+```kotlin
+import ai.hanzo.api.client.HanzoClient
+
+val clientWithOptions: HanzoClient = client.withOptions {
+    it.baseUrl("https://example.com")
+    it.maxRetries(42)
+}
+```
+
+The `withOptions()` method does not affect the original client or service.
 
 ## Requests and responses
 
@@ -127,7 +159,8 @@ import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.models.ClientGetHomeParams
 import ai.hanzo.api.models.ClientGetHomeResponse
 
-// Configures using the `HANZO_API_KEY` environment variable
+// Configures using the `hanzo.apiKey` and `hanzo.baseUrl` system properties
+// Or configures using the `HANZO_API_KEY` and `HANZO_BASE_URL` environment variables
 val client: HanzoClient = HanzoOkHttpClient.fromEnv()
 
 val response: ClientGetHomeResponse = client.async().getHome()
@@ -141,7 +174,8 @@ import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.models.ClientGetHomeParams
 import ai.hanzo.api.models.ClientGetHomeResponse
 
-// Configures using the `HANZO_API_KEY` environment variable
+// Configures using the `hanzo.apiKey` and `hanzo.baseUrl` system properties
+// Or configures using the `HANZO_API_KEY` and `HANZO_BASE_URL` environment variables
 val client: HanzoClientAsync = HanzoOkHttpClientAsync.fromEnv()
 
 val response: ClientGetHomeResponse = client.getHome()
@@ -254,6 +288,8 @@ The SDK throws custom unchecked exception types:
 
 - [`HanzoIoException`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/errors/HanzoIoException.kt): I/O networking errors.
 
+- [`HanzoRetryableException`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/errors/HanzoRetryableException.kt): Generic error indicating a failure that could be retried by the client.
+
 - [`HanzoInvalidDataException`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/errors/HanzoInvalidDataException.kt): Failure to interpret successfully parsed data. For example, when accessing a property that's supposed to be required, but the API unexpectedly omitted it from the response.
 
 - [`HanzoException`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/errors/HanzoException.kt): Base class for all exceptions. Most errors will result in one of the previously mentioned ones, but completely generic errors may be thrown using the base class.
@@ -265,20 +301,39 @@ The SDK uses the standard [OkHttp logging interceptor](https://github.com/square
 Enable logging by setting the `HANZO_LOG` environment variable to `info`:
 
 ```sh
-$ export HANZO_LOG=info
+export HANZO_LOG=info
 ```
 
 Or to `debug` for more verbose logging:
 
 ```sh
-$ export HANZO_LOG=debug
+export HANZO_LOG=debug
 ```
+
+## ProGuard and R8
+
+Although the SDK uses reflection, it is still usable with [ProGuard](https://github.com/Guardsquare/proguard) and [R8](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) because `hanzo-kotlin-core` is published with a [configuration file](hanzo-kotlin-core/src/main/resources/META-INF/proguard/hanzo-kotlin-core.pro) containing [keep rules](https://www.guardsquare.com/manual/configuration/usage).
+
+ProGuard and R8 should automatically detect and use the published rules, but you can also manually copy the keep rules if necessary.
+
+## Jackson
+
+The SDK depends on [Jackson](https://github.com/FasterXML/jackson) for JSON serialization/deserialization. It is compatible with version 2.13.4 or higher, but depends on version 2.18.2 by default.
+
+The SDK throws an exception if it detects an incompatible Jackson version at runtime (e.g. if the default version was overridden in your Maven or Gradle config).
+
+If the SDK threw an exception, but you're _certain_ the version is compatible, then disable the version check using the `checkJacksonVersionCompatibility` on [`HanzoOkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClient.kt) or [`HanzoOkHttpClientAsync`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClientAsync.kt).
+
+> [!CAUTION]
+> We make no guarantee that the SDK works correctly when the Jackson version check is disabled.
+
+Also note that there are bugs in older Jackson versions that can affect the SDK. We don't work around all Jackson bugs ([example](https://github.com/FasterXML/jackson-databind/issues/3240)) and expect users to upgrade Jackson for those instead.
 
 ## Network options
 
 ### Retries
 
-The SDK automatically retries 2 times by default, with a short exponential backoff.
+The SDK automatically retries 2 times by default, with a short exponential backoff between requests.
 
 Only the following error types are retried:
 
@@ -288,7 +343,7 @@ Only the following error types are retried:
 - 429 Rate Limit
 - 5xx Internal
 
-The API may also explicitly instruct the SDK to retry or not retry a response.
+The API may also explicitly instruct the SDK to retry or not retry a request.
 
 To set a custom number of retries, configure the client using the `maxRetries` method:
 
@@ -309,7 +364,6 @@ Requests time out after 1 minute by default.
 To set a custom timeout, configure the method call using the `timeout` method:
 
 ```kotlin
-import ai.hanzo.api.models.ClientGetHomeParams
 import ai.hanzo.api.models.ClientGetHomeResponse
 
 val response: ClientGetHomeResponse = client.getHome(RequestOptions.builder().timeout(Duration.ofSeconds(30)).build())
@@ -348,6 +402,77 @@ val client: HanzoClient = HanzoOkHttpClient.builder()
     .build()
 ```
 
+### HTTPS
+
+> [!NOTE]
+> Most applications should not call these methods, and instead use the system defaults. The defaults include
+> special optimizations that can be lost if the implementations are modified.
+
+To configure how HTTPS connections are secured, configure the client using the `sslSocketFactory`, `trustManager`, and `hostnameVerifier` methods:
+
+```kotlin
+import ai.hanzo.api.client.HanzoClient
+import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
+
+val client: HanzoClient = HanzoOkHttpClient.builder()
+    .fromEnv()
+    // If `sslSocketFactory` is set, then `trustManager` must be set, and vice versa.
+    .sslSocketFactory(yourSSLSocketFactory)
+    .trustManager(yourTrustManager)
+    .hostnameVerifier(yourHostnameVerifier)
+    .build()
+```
+
+### Environments
+
+The SDK sends requests to the production by default. To send requests to a different environment, configure the client like so:
+
+```kotlin
+import ai.hanzo.api.client.HanzoClient
+import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
+
+val client: HanzoClient = HanzoOkHttpClient.builder()
+    .fromEnv()
+    .sandbox()
+    .build()
+```
+
+### Custom HTTP client
+
+The SDK consists of three artifacts:
+
+- `hanzo-kotlin-core`
+  - Contains core SDK logic
+  - Does not depend on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`HanzoClient`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClient.kt), [`HanzoClientAsync`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsync.kt), [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt), and [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), all of which can work with any HTTP client
+- `hanzo-kotlin-client-okhttp`
+  - Depends on [OkHttp](https://square.github.io/okhttp)
+  - Exposes [`HanzoOkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClient.kt) and [`HanzoOkHttpClientAsync`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClientAsync.kt), which provide a way to construct [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt) and [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), respectively, using OkHttp
+- `hanzo-kotlin`
+  - Depends on and exposes the APIs of both `hanzo-kotlin-core` and `hanzo-kotlin-client-okhttp`
+  - Does not have its own logic
+
+This structure allows replacing the SDK's default HTTP client without pulling in unnecessary dependencies.
+
+#### Customized [`OkHttpClient`](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html)
+
+> [!TIP]
+> Try the available [network options](#network-options) before replacing the default client.
+
+To use a customized `OkHttpClient`:
+
+1. Replace your [`hanzo-kotlin` dependency](#installation) with `hanzo-kotlin-core`
+2. Copy `hanzo-kotlin-client-okhttp`'s [`OkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/OkHttpClient.kt) class into your code and customize it
+3. Construct [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt) or [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), similarly to [`HanzoOkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClient.kt) or [`HanzoOkHttpClientAsync`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClientAsync.kt), using your customized client
+
+### Completely custom HTTP client
+
+To use a completely custom HTTP client:
+
+1. Replace your [`hanzo-kotlin` dependency](#installation) with `hanzo-kotlin-core`
+2. Write a class that implements the [`HttpClient`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/core/http/HttpClient.kt) interface
+3. Construct [`HanzoClientImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientImpl.kt) or [`HanzoClientAsyncImpl`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/client/HanzoClientAsyncImpl.kt), similarly to [`HanzoOkHttpClient`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClient.kt) or [`HanzoOkHttpClientAsync`](hanzo-kotlin-client-okhttp/src/main/kotlin/ai/hanzo/api/client/okhttp/HanzoOkHttpClientAsync.kt), using your new client class
+
 ## Undocumented API functionality
 
 The SDK is typed for convenient usage of the documented API. However, it also supports working with undocumented or not yet supported parts of the API.
@@ -376,7 +501,7 @@ import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.model.ModelCreateParams
 
 val params: ModelCreateParams = ModelCreateParams.builder()
-    .llmParams(ModelCreateParams.LlmParams.builder()
+    .litellmParams(ModelCreateParams.LitellmParams.builder()
         .putAdditionalProperty("secretProperty", JsonValue.from("42"))
         .build())
     .build()
@@ -425,6 +550,20 @@ val complexValue: JsonValue = JsonValue.from(mapOf(
     3, 4
   )
 ))
+```
+
+Normally a `Builder` class's `build` method will throw [`IllegalStateException`](https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalStateException.html) if any required parameter or property is unset.
+
+To forcibly omit a required parameter or property, pass [`JsonMissing`](hanzo-kotlin-core/src/main/kotlin/ai/hanzo/api/core/Values.kt):
+
+```kotlin
+import ai.hanzo.api.core.JsonMissing
+import ai.hanzo.api.models.ClientGetHomeParams
+import ai.hanzo.api.models.openai.OpenAICreateParams
+
+val params: ClientGetHomeParams = OpenAICreateParams.builder()
+    .endpoint(JsonMissing.of())
+    .build()
 ```
 
 ### Response properties
@@ -487,7 +626,6 @@ val response: UtilTokenCounterResponse = client.utils().tokenCounter(params).val
 Or configure the method call to validate the response using the `responseValidation` method:
 
 ```kotlin
-import ai.hanzo.api.models.ClientGetHomeParams
 import ai.hanzo.api.models.ClientGetHomeResponse
 
 val response: ClientGetHomeResponse = client.getHome(RequestOptions.builder().responseValidation(true).build())

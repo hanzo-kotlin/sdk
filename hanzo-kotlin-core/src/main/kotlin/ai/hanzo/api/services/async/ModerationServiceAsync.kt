@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.moderations.ModerationCreateParams
@@ -16,10 +17,15 @@ interface ModerationServiceAsync {
     fun withRawResponse(): WithRawResponse
 
     /**
-     * The moderations endpoint is a tool you can use to check whether content complies with an LLM
-     * Providers policies.
+     * Returns a view of this service with the given option modifications applied.
      *
-     * Quick Start
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ModerationServiceAsync
+
+    /**
+     * The moderations endpoint is a tool you can use to check whether content complies with an LLM
+     * Providers policies. Quick Start
      *
      * ```
      * curl --location 'http://0.0.0.0:4000/moderations'     --header 'Content-Type: application/json'     --header 'Authorization: Bearer sk-1234'     --data '{"input": "Sample text goes here", "model": "text-moderation-stable"}'
@@ -30,7 +36,7 @@ interface ModerationServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ModerationCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     suspend fun create(requestOptions: RequestOptions): ModerationCreateResponse =
         create(ModerationCreateParams.none(), requestOptions)
 
@@ -39,6 +45,15 @@ interface ModerationServiceAsync {
      * method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ModerationServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /v1/moderations`, but is otherwise the same as
@@ -50,7 +65,7 @@ interface ModerationServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<ModerationCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         suspend fun create(
             requestOptions: RequestOptions

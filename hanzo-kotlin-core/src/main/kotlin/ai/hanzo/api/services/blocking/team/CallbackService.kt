@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking.team
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.team.callback.CallbackAddParams
@@ -16,6 +17,13 @@ interface CallbackService {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CallbackService
 
     /**
      * Get the success/failure callbacks and variables for a team
@@ -37,9 +45,21 @@ interface CallbackService {
      * team_callback_settings_obj.callback_vars, }, }
      */
     fun retrieve(
+        teamId: String,
+        params: CallbackRetrieveParams = CallbackRetrieveParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CallbackRetrieveResponse =
+        retrieve(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+    /** @see retrieve */
+    fun retrieve(
         params: CallbackRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CallbackRetrieveResponse
+
+    /** @see retrieve */
+    fun retrieve(teamId: String, requestOptions: RequestOptions): CallbackRetrieveResponse =
+        retrieve(teamId, CallbackRetrieveParams.none(), requestOptions)
 
     /**
      * Add a success/failure callback to a team
@@ -80,6 +100,13 @@ interface CallbackService {
      * will be logged to langfuse using the public key pk-lf-xxxx1 and the secret key sk-xxxxx
      */
     fun add(
+        teamId: String,
+        params: CallbackAddParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): CallbackAddResponse = add(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+    /** @see add */
+    fun add(
         params: CallbackAddParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CallbackAddResponse
@@ -88,19 +115,52 @@ interface CallbackService {
     interface WithRawResponse {
 
         /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CallbackService.WithRawResponse
+
+        /**
          * Returns a raw HTTP response for `get /team/{team_id}/callback`, but is otherwise the same
          * as [CallbackService.retrieve].
          */
+        @MustBeClosed
+        fun retrieve(
+            teamId: String,
+            params: CallbackRetrieveParams = CallbackRetrieveParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CallbackRetrieveResponse> =
+            retrieve(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+        /** @see retrieve */
         @MustBeClosed
         fun retrieve(
             params: CallbackRetrieveParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CallbackRetrieveResponse>
 
+        /** @see retrieve */
+        @MustBeClosed
+        fun retrieve(
+            teamId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<CallbackRetrieveResponse> =
+            retrieve(teamId, CallbackRetrieveParams.none(), requestOptions)
+
         /**
          * Returns a raw HTTP response for `post /team/{team_id}/callback`, but is otherwise the
          * same as [CallbackService.add].
          */
+        @MustBeClosed
+        fun add(
+            teamId: String,
+            params: CallbackAddParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<CallbackAddResponse> =
+            add(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+        /** @see add */
         @MustBeClosed
         fun add(
             params: CallbackAddParams,

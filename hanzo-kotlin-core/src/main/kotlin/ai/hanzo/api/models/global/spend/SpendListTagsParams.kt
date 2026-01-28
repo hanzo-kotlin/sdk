@@ -8,7 +8,7 @@ import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
 /**
- * LLM Enterprise - View Spend Per Request Tag. Used by LLM UI
+ * LiteLLM Enterprise - View Spend Per Request Tag. Used by LiteLLM UI
  *
  * Example Request:
  * ```
@@ -39,8 +39,10 @@ private constructor(
     /** comman separated tags to filter on */
     fun tags(): String? = tags
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -209,10 +211,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is SpendListTagsParams && endDate == other.endDate && startDate == other.startDate && tags == other.tags && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is SpendListTagsParams &&
+            endDate == other.endDate &&
+            startDate == other.startDate &&
+            tags == other.tags &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(endDate, startDate, tags, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(endDate, startDate, tags, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "SpendListTagsParams{endDate=$endDate, startDate=$startDate, tags=$tags, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

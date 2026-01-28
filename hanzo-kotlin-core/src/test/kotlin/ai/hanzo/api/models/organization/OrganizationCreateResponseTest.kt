@@ -3,14 +3,14 @@
 package ai.hanzo.api.models.organization
 
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class OrganizationCreateResponseTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val organizationCreateResponse =
@@ -22,9 +22,127 @@ internal class OrganizationCreateResponseTest {
                 .organizationId("organization_id")
                 .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .updatedBy("updated_by")
-                .metadata(JsonValue.from(mapOf<String, Any>()))
+                .litellmBudgetTable(
+                    BudgetTable.builder()
+                        .budgetDuration("budget_duration")
+                        .budgetId("budget_id")
+                        .maxBudget(0.0)
+                        .maxParallelRequests(0L)
+                        .modelMaxBudget(
+                            BudgetTable.ModelMaxBudget.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .rpmLimit(0L)
+                        .softBudget(0.0)
+                        .tpmLimit(0L)
+                        .build()
+                )
+                .metadata(
+                    OrganizationCreateResponse.Metadata.builder()
+                        .putAdditionalProperty("foo", JsonValue.from("bar"))
+                        .build()
+                )
+                .objectPermission(
+                    OrganizationCreateResponse.ObjectPermission.builder()
+                        .objectPermissionId("object_permission_id")
+                        .addAgentAccessGroup("string")
+                        .addAgent("string")
+                        .addMcpAccessGroup("string")
+                        .addMcpServer("string")
+                        .mcpToolPermissions(
+                            OrganizationCreateResponse.ObjectPermission.McpToolPermissions.builder()
+                                .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
+                                .build()
+                        )
+                        .addVectorStore("string")
+                        .build()
+                )
+                .objectPermissionId("object_permission_id")
                 .organizationAlias("organization_alias")
                 .spend(0.0)
+                .addUser(
+                    OrganizationCreateResponse.User.builder()
+                        .userId("user_id")
+                        .budgetDuration("budget_duration")
+                        .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .maxBudget(0.0)
+                        .metadata(
+                            OrganizationCreateResponse.User.Metadata.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .modelMaxBudget(
+                            OrganizationCreateResponse.User.ModelMaxBudget.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .modelSpend(
+                            OrganizationCreateResponse.User.ModelSpend.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .addModel(JsonValue.from(mapOf<String, Any>()))
+                        .objectPermission(
+                            OrganizationCreateResponse.User.ObjectPermission.builder()
+                                .objectPermissionId("object_permission_id")
+                                .addAgentAccessGroup("string")
+                                .addAgent("string")
+                                .addMcpAccessGroup("string")
+                                .addMcpServer("string")
+                                .mcpToolPermissions(
+                                    OrganizationCreateResponse.User.ObjectPermission
+                                        .McpToolPermissions
+                                        .builder()
+                                        .putAdditionalProperty(
+                                            "foo",
+                                            JsonValue.from(listOf("string")),
+                                        )
+                                        .build()
+                                )
+                                .addVectorStore("string")
+                                .build()
+                        )
+                        .addOrganizationMembership(
+                            OrganizationMembershipTable.builder()
+                                .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                                .organizationId("organization_id")
+                                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                                .userId("user_id")
+                                .budgetId("budget_id")
+                                .litellmBudgetTable(
+                                    BudgetTable.builder()
+                                        .budgetDuration("budget_duration")
+                                        .budgetId("budget_id")
+                                        .maxBudget(0.0)
+                                        .maxParallelRequests(0L)
+                                        .modelMaxBudget(
+                                            BudgetTable.ModelMaxBudget.builder()
+                                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                                .build()
+                                        )
+                                        .rpmLimit(0L)
+                                        .softBudget(0.0)
+                                        .tpmLimit(0L)
+                                        .build()
+                                )
+                                .spend(0.0)
+                                .user(JsonValue.from(mapOf<String, Any>()))
+                                .userRole("user_role")
+                                .build()
+                        )
+                        .rpmLimit(0L)
+                        .spend(0.0)
+                        .ssoUserId("sso_user_id")
+                        .addTeam("string")
+                        .tpmLimit(0L)
+                        .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .userAlias("user_alias")
+                        .userEmail("user_email")
+                        .userRole("user_role")
+                        .build()
+                )
                 .build()
 
         assertThat(organizationCreateResponse.budgetId()).isEqualTo("budget_id")
@@ -36,9 +154,271 @@ internal class OrganizationCreateResponseTest {
         assertThat(organizationCreateResponse.updatedAt())
             .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
         assertThat(organizationCreateResponse.updatedBy()).isEqualTo("updated_by")
-        assertThat(organizationCreateResponse._metadata())
-            .isEqualTo(JsonValue.from(mapOf<String, Any>()))
+        assertThat(organizationCreateResponse.litellmBudgetTable())
+            .isEqualTo(
+                BudgetTable.builder()
+                    .budgetDuration("budget_duration")
+                    .budgetId("budget_id")
+                    .maxBudget(0.0)
+                    .maxParallelRequests(0L)
+                    .modelMaxBudget(
+                        BudgetTable.ModelMaxBudget.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
+                    .rpmLimit(0L)
+                    .softBudget(0.0)
+                    .tpmLimit(0L)
+                    .build()
+            )
+        assertThat(organizationCreateResponse.metadata())
+            .isEqualTo(
+                OrganizationCreateResponse.Metadata.builder()
+                    .putAdditionalProperty("foo", JsonValue.from("bar"))
+                    .build()
+            )
+        assertThat(organizationCreateResponse.objectPermission())
+            .isEqualTo(
+                OrganizationCreateResponse.ObjectPermission.builder()
+                    .objectPermissionId("object_permission_id")
+                    .addAgentAccessGroup("string")
+                    .addAgent("string")
+                    .addMcpAccessGroup("string")
+                    .addMcpServer("string")
+                    .mcpToolPermissions(
+                        OrganizationCreateResponse.ObjectPermission.McpToolPermissions.builder()
+                            .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
+                            .build()
+                    )
+                    .addVectorStore("string")
+                    .build()
+            )
+        assertThat(organizationCreateResponse.objectPermissionId())
+            .isEqualTo("object_permission_id")
         assertThat(organizationCreateResponse.organizationAlias()).isEqualTo("organization_alias")
         assertThat(organizationCreateResponse.spend()).isEqualTo(0.0)
+        assertThat(organizationCreateResponse.users())
+            .containsExactly(
+                OrganizationCreateResponse.User.builder()
+                    .userId("user_id")
+                    .budgetDuration("budget_duration")
+                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .maxBudget(0.0)
+                    .metadata(
+                        OrganizationCreateResponse.User.Metadata.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
+                    .modelMaxBudget(
+                        OrganizationCreateResponse.User.ModelMaxBudget.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
+                    .modelSpend(
+                        OrganizationCreateResponse.User.ModelSpend.builder()
+                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                            .build()
+                    )
+                    .addModel(JsonValue.from(mapOf<String, Any>()))
+                    .objectPermission(
+                        OrganizationCreateResponse.User.ObjectPermission.builder()
+                            .objectPermissionId("object_permission_id")
+                            .addAgentAccessGroup("string")
+                            .addAgent("string")
+                            .addMcpAccessGroup("string")
+                            .addMcpServer("string")
+                            .mcpToolPermissions(
+                                OrganizationCreateResponse.User.ObjectPermission.McpToolPermissions
+                                    .builder()
+                                    .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
+                                    .build()
+                            )
+                            .addVectorStore("string")
+                            .build()
+                    )
+                    .addOrganizationMembership(
+                        OrganizationMembershipTable.builder()
+                            .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                            .organizationId("organization_id")
+                            .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                            .userId("user_id")
+                            .budgetId("budget_id")
+                            .litellmBudgetTable(
+                                BudgetTable.builder()
+                                    .budgetDuration("budget_duration")
+                                    .budgetId("budget_id")
+                                    .maxBudget(0.0)
+                                    .maxParallelRequests(0L)
+                                    .modelMaxBudget(
+                                        BudgetTable.ModelMaxBudget.builder()
+                                            .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                            .build()
+                                    )
+                                    .rpmLimit(0L)
+                                    .softBudget(0.0)
+                                    .tpmLimit(0L)
+                                    .build()
+                            )
+                            .spend(0.0)
+                            .user(JsonValue.from(mapOf<String, Any>()))
+                            .userRole("user_role")
+                            .build()
+                    )
+                    .rpmLimit(0L)
+                    .spend(0.0)
+                    .ssoUserId("sso_user_id")
+                    .addTeam("string")
+                    .tpmLimit(0L)
+                    .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .userAlias("user_alias")
+                    .userEmail("user_email")
+                    .userRole("user_role")
+                    .build()
+            )
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val organizationCreateResponse =
+            OrganizationCreateResponse.builder()
+                .budgetId("budget_id")
+                .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .createdBy("created_by")
+                .addModel("string")
+                .organizationId("organization_id")
+                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                .updatedBy("updated_by")
+                .litellmBudgetTable(
+                    BudgetTable.builder()
+                        .budgetDuration("budget_duration")
+                        .budgetId("budget_id")
+                        .maxBudget(0.0)
+                        .maxParallelRequests(0L)
+                        .modelMaxBudget(
+                            BudgetTable.ModelMaxBudget.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .rpmLimit(0L)
+                        .softBudget(0.0)
+                        .tpmLimit(0L)
+                        .build()
+                )
+                .metadata(
+                    OrganizationCreateResponse.Metadata.builder()
+                        .putAdditionalProperty("foo", JsonValue.from("bar"))
+                        .build()
+                )
+                .objectPermission(
+                    OrganizationCreateResponse.ObjectPermission.builder()
+                        .objectPermissionId("object_permission_id")
+                        .addAgentAccessGroup("string")
+                        .addAgent("string")
+                        .addMcpAccessGroup("string")
+                        .addMcpServer("string")
+                        .mcpToolPermissions(
+                            OrganizationCreateResponse.ObjectPermission.McpToolPermissions.builder()
+                                .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
+                                .build()
+                        )
+                        .addVectorStore("string")
+                        .build()
+                )
+                .objectPermissionId("object_permission_id")
+                .organizationAlias("organization_alias")
+                .spend(0.0)
+                .addUser(
+                    OrganizationCreateResponse.User.builder()
+                        .userId("user_id")
+                        .budgetDuration("budget_duration")
+                        .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .maxBudget(0.0)
+                        .metadata(
+                            OrganizationCreateResponse.User.Metadata.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .modelMaxBudget(
+                            OrganizationCreateResponse.User.ModelMaxBudget.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .modelSpend(
+                            OrganizationCreateResponse.User.ModelSpend.builder()
+                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                .build()
+                        )
+                        .addModel(JsonValue.from(mapOf<String, Any>()))
+                        .objectPermission(
+                            OrganizationCreateResponse.User.ObjectPermission.builder()
+                                .objectPermissionId("object_permission_id")
+                                .addAgentAccessGroup("string")
+                                .addAgent("string")
+                                .addMcpAccessGroup("string")
+                                .addMcpServer("string")
+                                .mcpToolPermissions(
+                                    OrganizationCreateResponse.User.ObjectPermission
+                                        .McpToolPermissions
+                                        .builder()
+                                        .putAdditionalProperty(
+                                            "foo",
+                                            JsonValue.from(listOf("string")),
+                                        )
+                                        .build()
+                                )
+                                .addVectorStore("string")
+                                .build()
+                        )
+                        .addOrganizationMembership(
+                            OrganizationMembershipTable.builder()
+                                .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                                .organizationId("organization_id")
+                                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                                .userId("user_id")
+                                .budgetId("budget_id")
+                                .litellmBudgetTable(
+                                    BudgetTable.builder()
+                                        .budgetDuration("budget_duration")
+                                        .budgetId("budget_id")
+                                        .maxBudget(0.0)
+                                        .maxParallelRequests(0L)
+                                        .modelMaxBudget(
+                                            BudgetTable.ModelMaxBudget.builder()
+                                                .putAdditionalProperty("foo", JsonValue.from("bar"))
+                                                .build()
+                                        )
+                                        .rpmLimit(0L)
+                                        .softBudget(0.0)
+                                        .tpmLimit(0L)
+                                        .build()
+                                )
+                                .spend(0.0)
+                                .user(JsonValue.from(mapOf<String, Any>()))
+                                .userRole("user_role")
+                                .build()
+                        )
+                        .rpmLimit(0L)
+                        .spend(0.0)
+                        .ssoUserId("sso_user_id")
+                        .addTeam("string")
+                        .tpmLimit(0L)
+                        .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                        .userAlias("user_alias")
+                        .userEmail("user_email")
+                        .userRole("user_role")
+                        .build()
+                )
+                .build()
+
+        val roundtrippedOrganizationCreateResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(organizationCreateResponse),
+                jacksonTypeRef<OrganizationCreateResponse>(),
+            )
+
+        assertThat(roundtrippedOrganizationCreateResponse).isEqualTo(organizationCreateResponse)
     }
 }

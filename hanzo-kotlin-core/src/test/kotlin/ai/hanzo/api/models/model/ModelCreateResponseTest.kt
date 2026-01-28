@@ -2,14 +2,29 @@
 
 package ai.hanzo.api.models.model
 
-import org.junit.jupiter.api.Disabled
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 internal class ModelCreateResponseTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val modelCreateResponse = ModelCreateResponse.builder().build()
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val modelCreateResponse = ModelCreateResponse.builder().build()
+
+        val roundtrippedModelCreateResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(modelCreateResponse),
+                jacksonTypeRef<ModelCreateResponse>(),
+            )
+
+        assertThat(roundtrippedModelCreateResponse).isEqualTo(modelCreateResponse)
     }
 }

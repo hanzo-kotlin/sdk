@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.routes.RouteListParams
@@ -15,18 +16,34 @@ interface RouteServiceAsync {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RouteServiceAsync
+
     /** Get a list of available routes in the FastAPI application. */
     suspend fun list(
         params: RouteListParams = RouteListParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): RouteListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): RouteListResponse =
         list(RouteListParams.none(), requestOptions)
 
     /** A view of [RouteServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): RouteServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /routes`, but is otherwise the same as
@@ -38,7 +55,7 @@ interface RouteServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<RouteListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<RouteListResponse> =
             list(RouteListParams.none(), requestOptions)

@@ -1,8 +1,11 @@
 package ai.hanzo.api.core.http
 
+import ai.hanzo.api.core.DefaultSleeper
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.Sleeper
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.errors.HanzoIoException
+import ai.hanzo.api.errors.HanzoRetryableException
 import java.io.IOException
 import java.time.Clock
 import java.time.Duration
@@ -15,22 +18,17 @@ import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
 import kotlin.math.min
 import kotlin.math.pow
-import kotlin.time.toKotlinDuration
-import kotlinx.coroutines.delay
 
 class RetryingHttpClient
 private constructor(
     private val httpClient: HttpClient,
+    private val sleeper: Sleeper,
     private val clock: Clock,
     private val maxRetries: Int,
     private val idempotencyHeader: String?,
 ) : HttpClient {
 
     override fun execute(request: HttpRequest, requestOptions: RequestOptions): HttpResponse {
-        if (!isRetryable(request) || maxRetries <= 0) {
-            return httpClient.execute(request, requestOptions)
-        }
-
         var modifiedRequest = maybeAddIdempotencyHeader(request)
 
         // Don't send the current retry count in the headers if the caller set their own value.
@@ -42,6 +40,10 @@ private constructor(
         while (true) {
             if (shouldSendRetryCount) {
                 modifiedRequest = setRetryCountHeader(modifiedRequest, retries)
+            }
+
+            if (!isRetryable(modifiedRequest)) {
+                return httpClient.execute(modifiedRequest, requestOptions)
             }
 
             val response =
@@ -60,10 +62,10 @@ private constructor(
                     null
                 }
 
-            val backoffMillis = getRetryBackoffMillis(retries, response)
+            val backoffDuration = getRetryBackoffDuration(retries, response)
             // All responses must be closed, so close the failed one before retrying.
             response?.close()
-            Thread.sleep(backoffMillis.toMillis())
+            sleeper.sleep(backoffDuration)
         }
     }
 
@@ -71,10 +73,6 @@ private constructor(
         request: HttpRequest,
         requestOptions: RequestOptions,
     ): HttpResponse {
-        if (!isRetryable(request) || maxRetries <= 0) {
-            return httpClient.executeAsync(request, requestOptions)
-        }
-
         var modifiedRequest = maybeAddIdempotencyHeader(request)
 
         // Don't send the current retry count in the headers if the caller set their own value.
@@ -86,6 +84,10 @@ private constructor(
         while (true) {
             if (shouldSendRetryCount) {
                 modifiedRequest = setRetryCountHeader(modifiedRequest, retries)
+            }
+
+            if (!isRetryable(modifiedRequest)) {
+                return httpClient.executeAsync(modifiedRequest, requestOptions)
             }
 
             val response =
@@ -104,14 +106,17 @@ private constructor(
                     null
                 }
 
-            val backoffMillis = getRetryBackoffMillis(retries, response)
+            val backoffDuration = getRetryBackoffDuration(retries, response)
             // All responses must be closed, so close the failed one before retrying.
             response?.close()
-            delay(backoffMillis.toKotlinDuration())
+            sleeper.sleepAsync(backoffDuration)
         }
     }
 
-    override fun close() = httpClient.close()
+    override fun close() {
+        httpClient.close()
+        sleeper.close()
+    }
 
     private fun isRetryable(request: HttpRequest): Boolean =
         // Some requests, such as when a request body is being streamed, cannot be retried because
@@ -158,11 +163,12 @@ private constructor(
     }
 
     private fun shouldRetry(throwable: Throwable): Boolean =
-        // Only retry IOException and HanzoIoException, other exceptions are not intended to be
-        // retried.
-        throwable is IOException || throwable is HanzoIoException
+        // Only retry known retryable exceptions, other exceptions are not intended to be retried.
+        throwable is IOException ||
+            throwable is HanzoIoException ||
+            throwable is HanzoRetryableException
 
-    private fun getRetryBackoffMillis(retries: Int, response: HttpResponse?): Duration {
+    private fun getRetryBackoffDuration(retries: Int, response: HttpResponse?): Duration {
         // About the Retry-After header:
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After
         response
@@ -215,11 +221,14 @@ private constructor(
     class Builder internal constructor() {
 
         private var httpClient: HttpClient? = null
+        private var sleeper: Sleeper? = null
         private var clock: Clock = Clock.systemUTC()
         private var maxRetries: Int = 2
         private var idempotencyHeader: String? = null
 
         fun httpClient(httpClient: HttpClient) = apply { this.httpClient = httpClient }
+
+        fun sleeper(sleeper: Sleeper) = apply { this.sleeper = sleeper }
 
         fun clock(clock: Clock) = apply { this.clock = clock }
 
@@ -230,6 +239,7 @@ private constructor(
         fun build(): HttpClient =
             RetryingHttpClient(
                 checkRequired("httpClient", httpClient),
+                sleeper ?: DefaultSleeper(),
                 clock,
                 maxRetries,
                 idempotencyHeader,

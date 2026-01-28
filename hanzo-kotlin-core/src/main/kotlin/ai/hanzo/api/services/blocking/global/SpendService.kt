@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking.global
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.global.spend.SpendListTagsParams
@@ -20,7 +21,14 @@ interface SpendService {
     fun withRawResponse(): WithRawResponse
 
     /**
-     * LLM Enterprise - View Spend Per Request Tag. Used by LLM UI
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendService
+
+    /**
+     * LiteLLM Enterprise - View Spend Per Request Tag. Used by LiteLLM UI
      *
      * Example Request:
      * ```
@@ -38,24 +46,24 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListTagsResponse>
 
-    /** @see [listTags] */
+    /** @see listTags */
     fun listTags(requestOptions: RequestOptions): List<SpendListTagsResponse> =
         listTags(SpendListTagsParams.none(), requestOptions)
 
     /**
      * ADMIN ONLY / MASTER KEY Only Endpoint
      *
-     * Globally reset spend for All API Keys and Teams, maintain LLM_SpendLogs
-     * 1. LLM_SpendLogs will maintain the logs on spend, no data gets deleted from there
-     * 2. LLM_VerificationTokens spend will be set = 0
-     * 3. LLM_TeamTable spend will be set = 0
+     * Globally reset spend for All API Keys and Teams, maintain LiteLLM_SpendLogs
+     * 1. LiteLLM_SpendLogs will maintain the logs on spend, no data gets deleted from there
+     * 2. LiteLLM_VerificationTokens spend will be set = 0
+     * 3. LiteLLM_TeamTable spend will be set = 0
      */
     fun reset(
         params: SpendResetParams = SpendResetParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SpendResetResponse
 
-    /** @see [reset] */
+    /** @see reset */
     fun reset(requestOptions: RequestOptions): SpendResetResponse =
         reset(SpendResetParams.none(), requestOptions)
 
@@ -70,12 +78,19 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendRetrieveReportResponse>
 
-    /** @see [retrieveReport] */
+    /** @see retrieveReport */
     fun retrieveReport(requestOptions: RequestOptions): List<SpendRetrieveReportResponse> =
         retrieveReport(SpendRetrieveReportParams.none(), requestOptions)
 
     /** A view of [SpendService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /global/spend/tags`, but is otherwise the same as
@@ -87,7 +102,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListTagsResponse>>
 
-        /** @see [listTags] */
+        /** @see listTags */
         @MustBeClosed
         fun listTags(requestOptions: RequestOptions): HttpResponseFor<List<SpendListTagsResponse>> =
             listTags(SpendListTagsParams.none(), requestOptions)
@@ -102,7 +117,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SpendResetResponse>
 
-        /** @see [reset] */
+        /** @see reset */
         @MustBeClosed
         fun reset(requestOptions: RequestOptions): HttpResponseFor<SpendResetResponse> =
             reset(SpendResetParams.none(), requestOptions)
@@ -117,7 +132,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendRetrieveReportResponse>>
 
-        /** @see [retrieveReport] */
+        /** @see retrieveReport */
         @MustBeClosed
         fun retrieveReport(
             requestOptions: RequestOptions

@@ -37,17 +37,17 @@ import java.util.Objects
  */
 class UserDeleteParams
 private constructor(
-    private val llmChangedBy: String?,
+    private val litellmChangedBy: String?,
     private val body: Body,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
     /**
-     * The llm-changed-by header enables tracking of actions performed by authorized users on behalf
-     * of other users, providing an audit trail for accountability
+     * The litellm-changed-by header enables tracking of actions performed by authorized users on
+     * behalf of other users, providing an audit trail for accountability
      */
-    fun llmChangedBy(): String? = llmChangedBy
+    fun litellmChangedBy(): String? = litellmChangedBy
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
@@ -64,8 +64,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -86,23 +88,34 @@ private constructor(
     /** A builder for [UserDeleteParams]. */
     class Builder internal constructor() {
 
-        private var llmChangedBy: String? = null
+        private var litellmChangedBy: String? = null
         private var body: Body.Builder = Body.builder()
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
 
         internal fun from(userDeleteParams: UserDeleteParams) = apply {
-            llmChangedBy = userDeleteParams.llmChangedBy
+            litellmChangedBy = userDeleteParams.litellmChangedBy
             body = userDeleteParams.body.toBuilder()
             additionalHeaders = userDeleteParams.additionalHeaders.toBuilder()
             additionalQueryParams = userDeleteParams.additionalQueryParams.toBuilder()
         }
 
         /**
-         * The llm-changed-by header enables tracking of actions performed by authorized users on
-         * behalf of other users, providing an audit trail for accountability
+         * The litellm-changed-by header enables tracking of actions performed by authorized users
+         * on behalf of other users, providing an audit trail for accountability
          */
-        fun llmChangedBy(llmChangedBy: String?) = apply { this.llmChangedBy = llmChangedBy }
+        fun litellmChangedBy(litellmChangedBy: String?) = apply {
+            this.litellmChangedBy = litellmChangedBy
+        }
+
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [userIds]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
 
         fun userIds(userIds: List<String>) = apply { body.userIds(userIds) }
 
@@ -253,19 +266,19 @@ private constructor(
          */
         fun build(): UserDeleteParams =
             UserDeleteParams(
-                llmChangedBy,
+                litellmChangedBy,
                 body.build(),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers =
         Headers.builder()
             .apply {
-                llmChangedBy?.let { put("llm-changed-by", it) }
+                litellmChangedBy?.let { put("litellm-changed-by", it) }
                 putAll(additionalHeaders)
             }
             .build()
@@ -273,6 +286,7 @@ private constructor(
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
         private val userIds: JsonField<List<String>>,
         private val additionalProperties: MutableMap<String, JsonValue>,
@@ -408,17 +422,33 @@ private constructor(
             validated = true
         }
 
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int = (userIds.asKnown()?.size ?: 0)
+
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && userIds == other.userIds && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                userIds == other.userIds &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
         private val hashCode: Int by lazy { Objects.hash(userIds, additionalProperties) }
-        /* spotless:on */
 
         override fun hashCode(): Int = hashCode
 
@@ -431,11 +461,16 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is UserDeleteParams && llmChangedBy == other.llmChangedBy && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is UserDeleteParams &&
+            litellmChangedBy == other.litellmChangedBy &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(llmChangedBy, body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(litellmChangedBy, body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
-        "UserDeleteParams{llmChangedBy=$llmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "UserDeleteParams{litellmChangedBy=$litellmChangedBy, body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
 }

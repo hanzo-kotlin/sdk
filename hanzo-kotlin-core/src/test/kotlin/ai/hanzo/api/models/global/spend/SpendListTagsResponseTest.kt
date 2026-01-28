@@ -3,13 +3,13 @@
 package ai.hanzo.api.models.global.spend
 
 import ai.hanzo.api.core.JsonValue
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class SpendListTagsResponseTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val spendListTagsResponse =
@@ -60,5 +60,40 @@ internal class SpendListTagsResponseTest {
         assertThat(spendListTagsResponse.spend()).isEqualTo(0.0)
         assertThat(spendListTagsResponse.totalTokens()).isEqualTo(0L)
         assertThat(spendListTagsResponse.user()).isEqualTo("user")
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val spendListTagsResponse =
+            SpendListTagsResponse.builder()
+                .apiKey("api_key")
+                .callType("call_type")
+                .endTime("string")
+                .messages("string")
+                .requestId("request_id")
+                .response("string")
+                .startTime("string")
+                .apiBase("api_base")
+                .cacheHit("cache_hit")
+                .cacheKey("cache_key")
+                .completionTokens(0L)
+                .metadata(JsonValue.from(mapOf<String, Any>()))
+                .model("model")
+                .promptTokens(0L)
+                .requestTags(JsonValue.from(mapOf<String, Any>()))
+                .requesterIpAddress("requester_ip_address")
+                .spend(0.0)
+                .totalTokens(0L)
+                .user("user")
+                .build()
+
+        val roundtrippedSpendListTagsResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(spendListTagsResponse),
+                jacksonTypeRef<SpendListTagsResponse>(),
+            )
+
+        assertThat(roundtrippedSpendListTagsResponse).isEqualTo(spendListTagsResponse)
     }
 }

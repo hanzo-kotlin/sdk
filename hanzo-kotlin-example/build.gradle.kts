@@ -4,9 +4,17 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":hanzo-kotlin"))
+    implementation(project(":hanzo-kotlin-core"))
+    implementation(project(":hanzo-kotlin-client-okhttp"))
 }
 
 application {
-    mainClass = "ai.hanzo.api.example.MainKt"
+    // Use `./gradlew :hanzo-kotlin-example:run` to run `Main`
+    // Use `./gradlew :hanzo-kotlin-example:run -Pexample=Something` to run `SomethingExample`
+    mainClass = "ai.hanzo.api.example.${
+        if (project.hasProperty("example"))
+            "${project.property("example")}ExampleKt"
+        else
+            "MainKt"
+    }"
 }

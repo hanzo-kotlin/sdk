@@ -2,14 +2,29 @@
 
 package ai.hanzo.api.models.user
 
-import org.junit.jupiter.api.Disabled
+import ai.hanzo.api.core.jsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 internal class UserDeleteResponseTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
         val userDeleteResponse = UserDeleteResponse.builder().build()
+    }
+
+    @Test
+    fun roundtrip() {
+        val jsonMapper = jsonMapper()
+        val userDeleteResponse = UserDeleteResponse.builder().build()
+
+        val roundtrippedUserDeleteResponse =
+            jsonMapper.readValue(
+                jsonMapper.writeValueAsString(userDeleteResponse),
+                jacksonTypeRef<UserDeleteResponse>(),
+            )
+
+        assertThat(roundtrippedUserDeleteResponse).isEqualTo(userDeleteResponse)
     }
 }

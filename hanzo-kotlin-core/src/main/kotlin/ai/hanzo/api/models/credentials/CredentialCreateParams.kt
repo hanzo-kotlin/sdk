@@ -10,6 +10,7 @@ import ai.hanzo.api.core.Params
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
+import ai.hanzo.api.core.toImmutable
 import ai.hanzo.api.errors.HanzoInvalidDataException
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
@@ -29,7 +30,11 @@ private constructor(
     private val additionalQueryParams: QueryParams,
 ) : Params {
 
-    fun _credentialInfo(): JsonValue = body._credentialInfo()
+    /**
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
+     *   missing or null (e.g. if the server responded with an unexpected value).
+     */
+    fun credentialInfo(): CredentialInfo = body.credentialInfo()
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is unexpectedly
@@ -37,7 +42,11 @@ private constructor(
      */
     fun credentialName(): String = body.credentialName()
 
-    fun _credentialValues(): JsonValue = body._credentialValues()
+    /**
+     * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+     *   server responded with an unexpected value).
+     */
+    fun credentialValues(): CredentialValues? = body.credentialValues()
 
     /**
      * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
@@ -46,11 +55,26 @@ private constructor(
     fun modelId(): String? = body.modelId()
 
     /**
+     * Returns the raw JSON value of [credentialInfo].
+     *
+     * Unlike [credentialInfo], this method doesn't throw if the JSON field has an unexpected type.
+     */
+    fun _credentialInfo(): JsonField<CredentialInfo> = body._credentialInfo()
+
+    /**
      * Returns the raw JSON value of [credentialName].
      *
      * Unlike [credentialName], this method doesn't throw if the JSON field has an unexpected type.
      */
     fun _credentialName(): JsonField<String> = body._credentialName()
+
+    /**
+     * Returns the raw JSON value of [credentialValues].
+     *
+     * Unlike [credentialValues], this method doesn't throw if the JSON field has an unexpected
+     * type.
+     */
+    fun _credentialValues(): JsonField<CredentialValues> = body._credentialValues()
 
     /**
      * Returns the raw JSON value of [modelId].
@@ -61,8 +85,10 @@ private constructor(
 
     fun _additionalBodyProperties(): Map<String, JsonValue> = body._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -94,7 +120,30 @@ private constructor(
             additionalQueryParams = credentialCreateParams.additionalQueryParams.toBuilder()
         }
 
-        fun credentialInfo(credentialInfo: JsonValue) = apply {
+        /**
+         * Sets the entire request body.
+         *
+         * This is generally only useful if you are already constructing the body separately.
+         * Otherwise, it's more convenient to use the top-level setters instead:
+         * - [credentialInfo]
+         * - [credentialName]
+         * - [credentialValues]
+         * - [modelId]
+         */
+        fun body(body: Body) = apply { this.body = body.toBuilder() }
+
+        fun credentialInfo(credentialInfo: CredentialInfo) = apply {
+            body.credentialInfo(credentialInfo)
+        }
+
+        /**
+         * Sets [Builder.credentialInfo] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.credentialInfo] with a well-typed [CredentialInfo] value
+         * instead. This method is primarily for setting the field to an undocumented or not yet
+         * supported value.
+         */
+        fun credentialInfo(credentialInfo: JsonField<CredentialInfo>) = apply {
             body.credentialInfo(credentialInfo)
         }
 
@@ -111,7 +160,18 @@ private constructor(
             body.credentialName(credentialName)
         }
 
-        fun credentialValues(credentialValues: JsonValue) = apply {
+        fun credentialValues(credentialValues: CredentialValues?) = apply {
+            body.credentialValues(credentialValues)
+        }
+
+        /**
+         * Sets [Builder.credentialValues] to an arbitrary JSON value.
+         *
+         * You should usually call [Builder.credentialValues] with a well-typed [CredentialValues]
+         * value instead. This method is primarily for setting the field to an undocumented or not
+         * yet supported value.
+         */
+        fun credentialValues(credentialValues: JsonField<CredentialValues>) = apply {
             body.credentialValues(credentialValues)
         }
 
@@ -263,17 +323,18 @@ private constructor(
             )
     }
 
-    internal fun _body(): Body = body
+    fun _body(): Body = body
 
     override fun _headers(): Headers = additionalHeaders
 
     override fun _queryParams(): QueryParams = additionalQueryParams
 
     class Body
+    @JsonCreator(mode = JsonCreator.Mode.DISABLED)
     private constructor(
-        private val credentialInfo: JsonValue,
+        private val credentialInfo: JsonField<CredentialInfo>,
         private val credentialName: JsonField<String>,
-        private val credentialValues: JsonValue,
+        private val credentialValues: JsonField<CredentialValues>,
         private val modelId: JsonField<String>,
         private val additionalProperties: MutableMap<String, JsonValue>,
     ) {
@@ -282,19 +343,21 @@ private constructor(
         private constructor(
             @JsonProperty("credential_info")
             @ExcludeMissing
-            credentialInfo: JsonValue = JsonMissing.of(),
+            credentialInfo: JsonField<CredentialInfo> = JsonMissing.of(),
             @JsonProperty("credential_name")
             @ExcludeMissing
             credentialName: JsonField<String> = JsonMissing.of(),
             @JsonProperty("credential_values")
             @ExcludeMissing
-            credentialValues: JsonValue = JsonMissing.of(),
+            credentialValues: JsonField<CredentialValues> = JsonMissing.of(),
             @JsonProperty("model_id") @ExcludeMissing modelId: JsonField<String> = JsonMissing.of(),
         ) : this(credentialInfo, credentialName, credentialValues, modelId, mutableMapOf())
 
-        @JsonProperty("credential_info")
-        @ExcludeMissing
-        fun _credentialInfo(): JsonValue = credentialInfo
+        /**
+         * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is
+         *   unexpectedly missing or null (e.g. if the server responded with an unexpected value).
+         */
+        fun credentialInfo(): CredentialInfo = credentialInfo.getRequired("credential_info")
 
         /**
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type or is
@@ -302,15 +365,28 @@ private constructor(
          */
         fun credentialName(): String = credentialName.getRequired("credential_name")
 
-        @JsonProperty("credential_values")
-        @ExcludeMissing
-        fun _credentialValues(): JsonValue = credentialValues
+        /**
+         * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
+         *   server responded with an unexpected value).
+         */
+        fun credentialValues(): CredentialValues? =
+            credentialValues.getNullable("credential_values")
 
         /**
          * @throws HanzoInvalidDataException if the JSON field has an unexpected type (e.g. if the
          *   server responded with an unexpected value).
          */
         fun modelId(): String? = modelId.getNullable("model_id")
+
+        /**
+         * Returns the raw JSON value of [credentialInfo].
+         *
+         * Unlike [credentialInfo], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("credential_info")
+        @ExcludeMissing
+        fun _credentialInfo(): JsonField<CredentialInfo> = credentialInfo
 
         /**
          * Returns the raw JSON value of [credentialName].
@@ -321,6 +397,16 @@ private constructor(
         @JsonProperty("credential_name")
         @ExcludeMissing
         fun _credentialName(): JsonField<String> = credentialName
+
+        /**
+         * Returns the raw JSON value of [credentialValues].
+         *
+         * Unlike [credentialValues], this method doesn't throw if the JSON field has an unexpected
+         * type.
+         */
+        @JsonProperty("credential_values")
+        @ExcludeMissing
+        fun _credentialValues(): JsonField<CredentialValues> = credentialValues
 
         /**
          * Returns the raw JSON value of [modelId].
@@ -358,9 +444,9 @@ private constructor(
         /** A builder for [Body]. */
         class Builder internal constructor() {
 
-            private var credentialInfo: JsonValue? = null
+            private var credentialInfo: JsonField<CredentialInfo>? = null
             private var credentialName: JsonField<String>? = null
-            private var credentialValues: JsonValue = JsonMissing.of()
+            private var credentialValues: JsonField<CredentialValues> = JsonMissing.of()
             private var modelId: JsonField<String> = JsonMissing.of()
             private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
@@ -372,7 +458,17 @@ private constructor(
                 additionalProperties = body.additionalProperties.toMutableMap()
             }
 
-            fun credentialInfo(credentialInfo: JsonValue) = apply {
+            fun credentialInfo(credentialInfo: CredentialInfo) =
+                credentialInfo(JsonField.of(credentialInfo))
+
+            /**
+             * Sets [Builder.credentialInfo] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.credentialInfo] with a well-typed [CredentialInfo]
+             * value instead. This method is primarily for setting the field to an undocumented or
+             * not yet supported value.
+             */
+            fun credentialInfo(credentialInfo: JsonField<CredentialInfo>) = apply {
                 this.credentialInfo = credentialInfo
             }
 
@@ -390,7 +486,17 @@ private constructor(
                 this.credentialName = credentialName
             }
 
-            fun credentialValues(credentialValues: JsonValue) = apply {
+            fun credentialValues(credentialValues: CredentialValues?) =
+                credentialValues(JsonField.ofNullable(credentialValues))
+
+            /**
+             * Sets [Builder.credentialValues] to an arbitrary JSON value.
+             *
+             * You should usually call [Builder.credentialValues] with a well-typed
+             * [CredentialValues] value instead. This method is primarily for setting the field to
+             * an undocumented or not yet supported value.
+             */
+            fun credentialValues(credentialValues: JsonField<CredentialValues>) = apply {
                 this.credentialValues = credentialValues
             }
 
@@ -454,22 +560,55 @@ private constructor(
                 return@apply
             }
 
+            credentialInfo().validate()
             credentialName()
+            credentialValues()?.validate()
             modelId()
             validated = true
         }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            (credentialInfo.asKnown()?.validity() ?: 0) +
+                (if (credentialName.asKnown() == null) 0 else 1) +
+                (credentialValues.asKnown()?.validity() ?: 0) +
+                (if (modelId.asKnown() == null) 0 else 1)
 
         override fun equals(other: Any?): Boolean {
             if (this === other) {
                 return true
             }
 
-            return /* spotless:off */ other is Body && credentialInfo == other.credentialInfo && credentialName == other.credentialName && credentialValues == other.credentialValues && modelId == other.modelId && additionalProperties == other.additionalProperties /* spotless:on */
+            return other is Body &&
+                credentialInfo == other.credentialInfo &&
+                credentialName == other.credentialName &&
+                credentialValues == other.credentialValues &&
+                modelId == other.modelId &&
+                additionalProperties == other.additionalProperties
         }
 
-        /* spotless:off */
-        private val hashCode: Int by lazy { Objects.hash(credentialInfo, credentialName, credentialValues, modelId, additionalProperties) }
-        /* spotless:on */
+        private val hashCode: Int by lazy {
+            Objects.hash(
+                credentialInfo,
+                credentialName,
+                credentialValues,
+                modelId,
+                additionalProperties,
+            )
+        }
 
         override fun hashCode(): Int = hashCode
 
@@ -477,15 +616,212 @@ private constructor(
             "Body{credentialInfo=$credentialInfo, credentialName=$credentialName, credentialValues=$credentialValues, modelId=$modelId, additionalProperties=$additionalProperties}"
     }
 
+    class CredentialInfo
+    @JsonCreator
+    private constructor(
+        @com.fasterxml.jackson.annotation.JsonValue
+        private val additionalProperties: Map<String, JsonValue>
+    ) {
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /** Returns a mutable builder for constructing an instance of [CredentialInfo]. */
+            fun builder() = Builder()
+        }
+
+        /** A builder for [CredentialInfo]. */
+        class Builder internal constructor() {
+
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            internal fun from(credentialInfo: CredentialInfo) = apply {
+                additionalProperties = credentialInfo.additionalProperties.toMutableMap()
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [CredentialInfo].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): CredentialInfo = CredentialInfo(additionalProperties.toImmutable())
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): CredentialInfo = apply {
+            if (validated) {
+                return@apply
+            }
+
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return other is CredentialInfo && additionalProperties == other.additionalProperties
+        }
+
+        private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() = "CredentialInfo{additionalProperties=$additionalProperties}"
+    }
+
+    class CredentialValues
+    @JsonCreator
+    private constructor(
+        @com.fasterxml.jackson.annotation.JsonValue
+        private val additionalProperties: Map<String, JsonValue>
+    ) {
+
+        @JsonAnyGetter
+        @ExcludeMissing
+        fun _additionalProperties(): Map<String, JsonValue> = additionalProperties
+
+        fun toBuilder() = Builder().from(this)
+
+        companion object {
+
+            /** Returns a mutable builder for constructing an instance of [CredentialValues]. */
+            fun builder() = Builder()
+        }
+
+        /** A builder for [CredentialValues]. */
+        class Builder internal constructor() {
+
+            private var additionalProperties: MutableMap<String, JsonValue> = mutableMapOf()
+
+            internal fun from(credentialValues: CredentialValues) = apply {
+                additionalProperties = credentialValues.additionalProperties.toMutableMap()
+            }
+
+            fun additionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.clear()
+                putAllAdditionalProperties(additionalProperties)
+            }
+
+            fun putAdditionalProperty(key: String, value: JsonValue) = apply {
+                additionalProperties.put(key, value)
+            }
+
+            fun putAllAdditionalProperties(additionalProperties: Map<String, JsonValue>) = apply {
+                this.additionalProperties.putAll(additionalProperties)
+            }
+
+            fun removeAdditionalProperty(key: String) = apply { additionalProperties.remove(key) }
+
+            fun removeAllAdditionalProperties(keys: Set<String>) = apply {
+                keys.forEach(::removeAdditionalProperty)
+            }
+
+            /**
+             * Returns an immutable instance of [CredentialValues].
+             *
+             * Further updates to this [Builder] will not mutate the returned instance.
+             */
+            fun build(): CredentialValues = CredentialValues(additionalProperties.toImmutable())
+        }
+
+        private var validated: Boolean = false
+
+        fun validate(): CredentialValues = apply {
+            if (validated) {
+                return@apply
+            }
+
+            validated = true
+        }
+
+        fun isValid(): Boolean =
+            try {
+                validate()
+                true
+            } catch (e: HanzoInvalidDataException) {
+                false
+            }
+
+        /**
+         * Returns a score indicating how many valid values are contained in this object
+         * recursively.
+         *
+         * Used for best match union deserialization.
+         */
+        internal fun validity(): Int =
+            additionalProperties.count { (_, value) -> !value.isNull() && !value.isMissing() }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) {
+                return true
+            }
+
+            return other is CredentialValues && additionalProperties == other.additionalProperties
+        }
+
+        private val hashCode: Int by lazy { Objects.hash(additionalProperties) }
+
+        override fun hashCode(): Int = hashCode
+
+        override fun toString() = "CredentialValues{additionalProperties=$additionalProperties}"
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) {
             return true
         }
 
-        return /* spotless:off */ other is CredentialCreateParams && body == other.body && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is CredentialCreateParams &&
+            body == other.body &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(body, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int = Objects.hash(body, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "CredentialCreateParams{body=$body, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

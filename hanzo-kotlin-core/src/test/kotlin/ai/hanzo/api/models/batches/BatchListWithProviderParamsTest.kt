@@ -4,18 +4,20 @@ package ai.hanzo.api.models.batches
 
 import ai.hanzo.api.core.http.QueryParams
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 internal class BatchListWithProviderParamsTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun create() {
-        BatchListWithProviderParams.builder().provider("provider").after("after").limit(0L).build()
+        BatchListWithProviderParams.builder()
+            .provider("provider")
+            .after("after")
+            .limit(0L)
+            .targetModelNames("target_model_names")
+            .build()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun pathParams() {
         val params = BatchListWithProviderParams.builder().provider("provider").build()
@@ -25,7 +27,6 @@ internal class BatchListWithProviderParamsTest {
         assertThat(params._pathParam(1)).isEqualTo("")
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParams() {
         val params =
@@ -33,15 +34,21 @@ internal class BatchListWithProviderParamsTest {
                 .provider("provider")
                 .after("after")
                 .limit(0L)
+                .targetModelNames("target_model_names")
                 .build()
 
         val queryParams = params._queryParams()
 
         assertThat(queryParams)
-            .isEqualTo(QueryParams.builder().put("after", "after").put("limit", "0").build())
+            .isEqualTo(
+                QueryParams.builder()
+                    .put("after", "after")
+                    .put("limit", "0")
+                    .put("target_model_names", "target_model_names")
+                    .build()
+            )
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
     @Test
     fun queryParamsWithoutOptionalFields() {
         val params = BatchListWithProviderParams.builder().provider("provider").build()

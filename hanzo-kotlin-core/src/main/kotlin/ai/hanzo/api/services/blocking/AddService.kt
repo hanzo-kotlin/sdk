@@ -2,10 +2,12 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.add.AddAddAllowedIpParams
 import ai.hanzo.api.models.add.AddAddAllowedIpResponse
+import ai.hanzo.api.models.add.IpAddress
 import com.google.errorprone.annotations.MustBeClosed
 
 interface AddService {
@@ -15,14 +17,35 @@ interface AddService {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AddService
+
     /** Add Allowed Ip */
     fun addAllowedIp(
         params: AddAddAllowedIpParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): AddAddAllowedIpResponse
 
+    /** @see addAllowedIp */
+    fun addAllowedIp(
+        ipAddress: IpAddress,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): AddAddAllowedIpResponse =
+        addAllowedIp(AddAddAllowedIpParams.builder().ipAddress(ipAddress).build(), requestOptions)
+
     /** A view of [AddService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): AddService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /add/allowed_ip`, but is otherwise the same as
@@ -33,5 +56,16 @@ interface AddService {
             params: AddAddAllowedIpParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<AddAddAllowedIpResponse>
+
+        /** @see addAllowedIp */
+        @MustBeClosed
+        fun addAllowedIp(
+            ipAddress: IpAddress,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<AddAddAllowedIpResponse> =
+            addAllowedIp(
+                AddAddAllowedIpParams.builder().ipAddress(ipAddress).build(),
+                requestOptions,
+            )
     }
 }

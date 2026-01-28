@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.guardrails.GuardrailListParams
@@ -16,9 +17,16 @@ interface GuardrailServiceAsync {
     fun withRawResponse(): WithRawResponse
 
     /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): GuardrailServiceAsync
+
+    /**
      * List the guardrails that are available on the proxy server
      *
-     * 👉 [Guardrail docs](https://docs.hanzo.ai/docs/proxy/guardrails/quick_start)
+     * 👉 [Guardrail docs](https://docs.litellm.ai/docs/proxy/guardrails/quick_start)
      *
      * Example Request:
      * ```bash
@@ -28,24 +36,24 @@ interface GuardrailServiceAsync {
      * Example Response:
      * ```json
      * {
-     *   "guardrails": [
-     *     {
-     *       "guardrail_name": "bedrock-pre-guard",
-     *       "guardrail_info": {
-     *         "params": [
-     *           {
-     *             "name": "toxicity_score",
-     *             "type": "float",
-     *             "description": "Score between 0-1 indicating content toxicity level"
-     *           },
-     *           {
-     *             "name": "pii_detection",
-     *             "type": "boolean"
-     *           }
-     *         ]
-     *       }
-     *     }
-     *   ]
+     *     "guardrails": [
+     *         {
+     *         "guardrail_name": "bedrock-pre-guard",
+     *         "guardrail_info": {
+     *             "params": [
+     *             {
+     *                 "name": "toxicity_score",
+     *                 "type": "float",
+     *                 "description": "Score between 0-1 indicating content toxicity level"
+     *             },
+     *             {
+     *                 "name": "pii_detection",
+     *                 "type": "boolean"
+     *             }
+     *             ]
+     *         }
+     *         }
+     *     ]
      * }
      * ```
      */
@@ -54,7 +62,7 @@ interface GuardrailServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): GuardrailListResponse
 
-    /** @see [list] */
+    /** @see list */
     suspend fun list(requestOptions: RequestOptions): GuardrailListResponse =
         list(GuardrailListParams.none(), requestOptions)
 
@@ -62,6 +70,15 @@ interface GuardrailServiceAsync {
      * A view of [GuardrailServiceAsync] that provides access to raw HTTP responses for each method.
      */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): GuardrailServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /guardrails/list`, but is otherwise the same as
@@ -73,7 +90,7 @@ interface GuardrailServiceAsync {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<GuardrailListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         suspend fun list(requestOptions: RequestOptions): HttpResponseFor<GuardrailListResponse> =
             list(GuardrailListParams.none(), requestOptions)

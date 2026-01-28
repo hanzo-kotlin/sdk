@@ -22,8 +22,10 @@ private constructor(
     fun _additionalBodyProperties(): Map<String, JsonValue> =
         passThroughGenericEndpoint._additionalProperties()
 
+    /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
 
+    /** Additional query param to send with the request. */
     fun _additionalQueryParams(): QueryParams = additionalQueryParams
 
     fun toBuilder() = Builder().from(this)
@@ -181,7 +183,7 @@ private constructor(
             )
     }
 
-    internal fun _body(): PassThroughGenericEndpoint = passThroughGenericEndpoint
+    fun _body(): PassThroughGenericEndpoint = passThroughGenericEndpoint
 
     override fun _headers(): Headers = additionalHeaders
 
@@ -192,10 +194,14 @@ private constructor(
             return true
         }
 
-        return /* spotless:off */ other is PassThroughEndpointCreateParams && passThroughGenericEndpoint == other.passThroughGenericEndpoint && additionalHeaders == other.additionalHeaders && additionalQueryParams == other.additionalQueryParams /* spotless:on */
+        return other is PassThroughEndpointCreateParams &&
+            passThroughGenericEndpoint == other.passThroughGenericEndpoint &&
+            additionalHeaders == other.additionalHeaders &&
+            additionalQueryParams == other.additionalQueryParams
     }
 
-    override fun hashCode(): Int = /* spotless:off */ Objects.hash(passThroughGenericEndpoint, additionalHeaders, additionalQueryParams) /* spotless:on */
+    override fun hashCode(): Int =
+        Objects.hash(passThroughGenericEndpoint, additionalHeaders, additionalQueryParams)
 
     override fun toString() =
         "PassThroughEndpointCreateParams{passThroughGenericEndpoint=$passThroughGenericEndpoint, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"

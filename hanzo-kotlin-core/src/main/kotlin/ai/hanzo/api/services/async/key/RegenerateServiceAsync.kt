@@ -2,6 +2,8 @@
 
 package ai.hanzo.api.services.async.key
 
+import ai.hanzo.api.core.ClientOptions
+
 interface RegenerateServiceAsync {
 
     /**
@@ -10,8 +12,25 @@ interface RegenerateServiceAsync {
     fun withRawResponse(): WithRawResponse
 
     /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RegenerateServiceAsync
+
+    /**
      * A view of [RegenerateServiceAsync] that provides access to raw HTTP responses for each
      * method.
      */
-    interface WithRawResponse
+    interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): RegenerateServiceAsync.WithRawResponse
+    }
 }

@@ -4,11 +4,6 @@ package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiCreateParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiDeleteParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiPatchParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiRetrieveParams
-import ai.hanzo.api.models.euassemblyai.EuAssemblyaiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class EuAssemblyaiServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun create() {
         val client =
@@ -26,15 +21,12 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.create(
-                EuAssemblyaiCreateParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.create("endpoint")
 
         euAssemblyai.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun retrieve() {
         val client =
@@ -44,15 +36,12 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.retrieve(
-                EuAssemblyaiRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.retrieve("endpoint")
 
         euAssemblyai.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun update() {
         val client =
@@ -62,15 +51,12 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.update(
-                EuAssemblyaiUpdateParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.update("endpoint")
 
         euAssemblyai.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun delete() {
         val client =
@@ -80,15 +66,12 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val euAssemblyai =
-            euAssemblyaiService.delete(
-                EuAssemblyaiDeleteParams.builder().endpoint("endpoint").build()
-            )
+        val euAssemblyai = euAssemblyaiService.delete("endpoint")
 
         euAssemblyai.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun patch() {
         val client =
@@ -98,10 +81,7 @@ internal class EuAssemblyaiServiceTest {
                 .build()
         val euAssemblyaiService = client.euAssemblyai()
 
-        val response =
-            euAssemblyaiService.patch(
-                EuAssemblyaiPatchParams.builder().endpoint("endpoint").build()
-            )
+        val response = euAssemblyaiService.patch("endpoint")
 
         response.validate()
     }

@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.files
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.files.content.ContentRetrieveParams
@@ -14,6 +15,13 @@ interface ContentServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ContentServiceAsync
 
     /**
      * Returns information about a specific file. that can be used across - Assistants API, Batch
@@ -30,6 +38,13 @@ interface ContentServiceAsync {
      * ```
      */
     suspend fun retrieve(
+        fileId: String,
+        params: ContentRetrieveParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ContentRetrieveResponse = retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
+
+    /** @see retrieve */
+    suspend fun retrieve(
         params: ContentRetrieveParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ContentRetrieveResponse
@@ -40,9 +55,27 @@ interface ContentServiceAsync {
     interface WithRawResponse {
 
         /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): ContentServiceAsync.WithRawResponse
+
+        /**
          * Returns a raw HTTP response for `get /{provider}/v1/files/{file_id}/content`, but is
          * otherwise the same as [ContentServiceAsync.retrieve].
          */
+        @MustBeClosed
+        suspend fun retrieve(
+            fileId: String,
+            params: ContentRetrieveParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ContentRetrieveResponse> =
+            retrieve(params.toBuilder().fileId(fileId).build(), requestOptions)
+
+        /** @see retrieve */
         @MustBeClosed
         suspend fun retrieve(
             params: ContentRetrieveParams,

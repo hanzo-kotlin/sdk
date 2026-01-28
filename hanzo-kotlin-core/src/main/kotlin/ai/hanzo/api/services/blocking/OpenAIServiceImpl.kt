@@ -3,13 +3,14 @@
 package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -38,6 +39,9 @@ class OpenAIServiceImpl internal constructor(private val clientOptions: ClientOp
     private val deployments: DeploymentService by lazy { DeploymentServiceImpl(clientOptions) }
 
     override fun withRawResponse(): OpenAIService.WithRawResponse = withRawResponse
+
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): OpenAIService =
+        OpenAIServiceImpl(clientOptions.toBuilder().apply(modifier).build())
 
     override fun deployments(): DeploymentService = deployments
 
@@ -79,32 +83,41 @@ class OpenAIServiceImpl internal constructor(private val clientOptions: ClientOp
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         OpenAIService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         private val deployments: DeploymentService.WithRawResponse by lazy {
             DeploymentServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): OpenAIService.WithRawResponse =
+            OpenAIServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun deployments(): DeploymentService.WithRawResponse = deployments
 
         private val createHandler: Handler<OpenAICreateResponse> =
             jsonHandler<OpenAICreateResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun create(
             params: OpenAICreateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<OpenAICreateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -117,21 +130,24 @@ class OpenAIServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val retrieveHandler: Handler<OpenAIRetrieveResponse> =
             jsonHandler<OpenAIRetrieveResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun retrieve(
             params: OpenAIRetrieveParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<OpenAIRetrieveResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveHandler.handle(it) }
                     .also {
@@ -144,22 +160,25 @@ class OpenAIServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val updateHandler: Handler<OpenAIUpdateResponse> =
             jsonHandler<OpenAIUpdateResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun update(
             params: OpenAIUpdateParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<OpenAIUpdateResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PUT)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { updateHandler.handle(it) }
                     .also {
@@ -172,22 +191,25 @@ class OpenAIServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val deleteHandler: Handler<OpenAIDeleteResponse> =
             jsonHandler<OpenAIDeleteResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun delete(
             params: OpenAIDeleteParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<OpenAIDeleteResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.DELETE)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { deleteHandler.handle(it) }
                     .also {
@@ -200,22 +222,25 @@ class OpenAIServiceImpl internal constructor(private val clientOptions: ClientOp
 
         private val patchHandler: Handler<OpenAIPatchResponse> =
             jsonHandler<OpenAIPatchResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun patch(
             params: OpenAIPatchParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<OpenAIPatchResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("endpoint", params.endpoint())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.PATCH)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", params._pathParam(0))
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { patchHandler.handle(it) }
                     .also {

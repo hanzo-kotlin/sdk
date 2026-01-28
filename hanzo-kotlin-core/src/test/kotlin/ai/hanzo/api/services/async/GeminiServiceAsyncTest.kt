@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.gemini.GeminiCreateParams
-import ai.hanzo.api.models.gemini.GeminiDeleteParams
-import ai.hanzo.api.models.gemini.GeminiPatchParams
-import ai.hanzo.api.models.gemini.GeminiRetrieveParams
-import ai.hanzo.api.models.gemini.GeminiUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class GeminiServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -26,13 +21,12 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.create(GeminiCreateParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.create("endpoint")
 
         gemini.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
         val client =
@@ -42,13 +36,12 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.retrieve(GeminiRetrieveParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.retrieve("endpoint")
 
         gemini.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun update() {
         val client =
@@ -58,13 +51,12 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.update(GeminiUpdateParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.update("endpoint")
 
         gemini.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =
@@ -74,13 +66,12 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val gemini =
-            geminiServiceAsync.delete(GeminiDeleteParams.builder().endpoint("endpoint").build())
+        val gemini = geminiServiceAsync.delete("endpoint")
 
         gemini.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun patch() {
         val client =
@@ -90,8 +81,7 @@ internal class GeminiServiceAsyncTest {
                 .build()
         val geminiServiceAsync = client.gemini()
 
-        val response =
-            geminiServiceAsync.patch(GeminiPatchParams.builder().endpoint("endpoint").build())
+        val response = geminiServiceAsync.patch("endpoint")
 
         response.validate()
     }

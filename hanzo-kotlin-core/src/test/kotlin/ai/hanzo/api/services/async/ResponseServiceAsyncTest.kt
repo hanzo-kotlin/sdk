@@ -4,8 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.responses.ResponseDeleteParams
-import ai.hanzo.api.models.responses.ResponseRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -13,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class ResponseServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -28,7 +26,7 @@ internal class ResponseServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
         val client =
@@ -38,15 +36,12 @@ internal class ResponseServiceAsyncTest {
                 .build()
         val responseServiceAsync = client.responses()
 
-        val response =
-            responseServiceAsync.retrieve(
-                ResponseRetrieveParams.builder().responseId("response_id").build()
-            )
+        val response = responseServiceAsync.retrieve("response_id")
 
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =
@@ -56,10 +51,7 @@ internal class ResponseServiceAsyncTest {
                 .build()
         val responseServiceAsync = client.responses()
 
-        val response =
-            responseServiceAsync.delete(
-                ResponseDeleteParams.builder().responseId("response_id").build()
-            )
+        val response = responseServiceAsync.delete("response_id")
 
         response.validate()
     }

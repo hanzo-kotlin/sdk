@@ -6,7 +6,6 @@ import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.models.batches.BatchCancelWithProviderParams
 import ai.hanzo.api.models.batches.BatchCreateParams
-import ai.hanzo.api.models.batches.BatchCreateWithProviderParams
 import ai.hanzo.api.models.batches.BatchListParams
 import ai.hanzo.api.models.batches.BatchListWithProviderParams
 import ai.hanzo.api.models.batches.BatchRetrieveParams
@@ -18,7 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class BatchServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun create() {
         val client =
@@ -33,7 +32,7 @@ internal class BatchServiceTest {
         batch.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun retrieve() {
         val client =
@@ -51,7 +50,7 @@ internal class BatchServiceTest {
         batch.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun list() {
         val client =
@@ -61,15 +60,20 @@ internal class BatchServiceTest {
                 .build()
         val batchService = client.batches()
 
-        val batch =
+        val batches =
             batchService.list(
-                BatchListParams.builder().after("after").limit(0L).provider("provider").build()
+                BatchListParams.builder()
+                    .after("after")
+                    .limit(0L)
+                    .provider("provider")
+                    .targetModelNames("target_model_names")
+                    .build()
             )
 
-        batch.validate()
+        batches.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun cancelWithProvider() {
         val client =
@@ -90,7 +94,7 @@ internal class BatchServiceTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun createWithProvider() {
         val client =
@@ -100,15 +104,12 @@ internal class BatchServiceTest {
                 .build()
         val batchService = client.batches()
 
-        val response =
-            batchService.createWithProvider(
-                BatchCreateWithProviderParams.builder().provider("provider").build()
-            )
+        val response = batchService.createWithProvider("provider")
 
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun listWithProvider() {
         val client =
@@ -124,13 +125,14 @@ internal class BatchServiceTest {
                     .provider("provider")
                     .after("after")
                     .limit(0L)
+                    .targetModelNames("target_model_names")
                     .build()
             )
 
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun retrieveWithProvider() {
         val client =

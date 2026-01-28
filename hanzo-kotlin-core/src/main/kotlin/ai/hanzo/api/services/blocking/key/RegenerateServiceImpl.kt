@@ -13,6 +13,17 @@ class RegenerateServiceImpl internal constructor(private val clientOptions: Clie
 
     override fun withRawResponse(): RegenerateService.WithRawResponse = withRawResponse
 
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): RegenerateService =
+        RegenerateServiceImpl(clientOptions.toBuilder().apply(modifier).build())
+
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
-        RegenerateService.WithRawResponse
+        RegenerateService.WithRawResponse {
+
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): RegenerateService.WithRawResponse =
+            RegenerateServiceImpl.WithRawResponseImpl(
+                clientOptions.toBuilder().apply(modifier).build()
+            )
+    }
 }

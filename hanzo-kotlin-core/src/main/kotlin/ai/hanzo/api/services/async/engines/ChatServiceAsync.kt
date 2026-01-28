@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async.engines
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.engines.chat.ChatCompleteParams
@@ -14,6 +15,13 @@ interface ChatServiceAsync {
      * Returns a view of this service that provides access to raw HTTP responses for each method.
      */
     fun withRawResponse(): WithRawResponse
+
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ChatServiceAsync
 
     /**
      * Follows the exact same API spec as `OpenAI's Chat API
@@ -35,6 +43,14 @@ interface ChatServiceAsync {
      * ```
      */
     suspend fun complete(
+        pathModel: String,
+        params: ChatCompleteParams,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): ChatCompleteResponse =
+        complete(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+
+    /** @see complete */
+    suspend fun complete(
         params: ChatCompleteParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): ChatCompleteResponse
@@ -43,9 +59,25 @@ interface ChatServiceAsync {
     interface WithRawResponse {
 
         /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): ChatServiceAsync.WithRawResponse
+
+        /**
          * Returns a raw HTTP response for `post /engines/{model}/chat/completions`, but is
          * otherwise the same as [ChatServiceAsync.complete].
          */
+        @MustBeClosed
+        suspend fun complete(
+            pathModel: String,
+            params: ChatCompleteParams,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<ChatCompleteResponse> =
+            complete(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+
+        /** @see complete */
         @MustBeClosed
         suspend fun complete(
             params: ChatCompleteParams,

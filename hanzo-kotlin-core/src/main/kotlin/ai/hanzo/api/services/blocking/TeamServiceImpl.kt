@@ -3,13 +3,14 @@
 package ai.hanzo.api.services.blocking
 
 import ai.hanzo.api.core.ClientOptions
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.RequestOptions
+import ai.hanzo.api.core.checkRequired
+import ai.hanzo.api.core.handlers.errorBodyHandler
 import ai.hanzo.api.core.handlers.errorHandler
 import ai.hanzo.api.core.handlers.jsonHandler
-import ai.hanzo.api.core.handlers.withErrorHandler
 import ai.hanzo.api.core.http.HttpMethod
 import ai.hanzo.api.core.http.HttpRequest
+import ai.hanzo.api.core.http.HttpResponse
 import ai.hanzo.api.core.http.HttpResponse.Handler
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.core.http.json
@@ -55,6 +56,9 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
     private val callback: CallbackService by lazy { CallbackServiceImpl(clientOptions) }
 
     override fun withRawResponse(): TeamService.WithRawResponse = withRawResponse
+
+    override fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TeamService =
+        TeamServiceImpl(clientOptions.toBuilder().apply(modifier).build())
 
     override fun model(): ModelService = model
 
@@ -141,7 +145,8 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
     class WithRawResponseImpl internal constructor(private val clientOptions: ClientOptions) :
         TeamService.WithRawResponse {
 
-        private val errorHandler: Handler<JsonValue> = errorHandler(clientOptions.jsonMapper)
+        private val errorHandler: Handler<HttpResponse> =
+            errorHandler(errorBodyHandler(clientOptions.jsonMapper))
 
         private val model: ModelService.WithRawResponse by lazy {
             ModelServiceImpl.WithRawResponseImpl(clientOptions)
@@ -151,12 +156,17 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             CallbackServiceImpl.WithRawResponseImpl(clientOptions)
         }
 
+        override fun withOptions(
+            modifier: (ClientOptions.Builder) -> Unit
+        ): TeamService.WithRawResponse =
+            TeamServiceImpl.WithRawResponseImpl(clientOptions.toBuilder().apply(modifier).build())
+
         override fun model(): ModelService.WithRawResponse = model
 
         override fun callback(): CallbackService.WithRawResponse = callback
 
         private val createHandler: Handler<TeamCreateResponse> =
-            jsonHandler<TeamCreateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<TeamCreateResponse>(clientOptions.jsonMapper)
 
         override fun create(
             params: TeamCreateParams,
@@ -165,13 +175,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "new")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { createHandler.handle(it) }
                     .also {
@@ -183,7 +194,7 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
         }
 
         private val updateHandler: Handler<TeamUpdateResponse> =
-            jsonHandler<TeamUpdateResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<TeamUpdateResponse>(clientOptions.jsonMapper)
 
         override fun update(
             params: TeamUpdateParams,
@@ -192,13 +203,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { updateHandler.handle(it) }
                     .also {
@@ -210,7 +222,7 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
         }
 
         private val listHandler: Handler<TeamListResponse> =
-            jsonHandler<TeamListResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<TeamListResponse>(clientOptions.jsonMapper)
 
         override fun list(
             params: TeamListParams,
@@ -219,12 +231,13 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "list")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listHandler.handle(it) }
                     .also {
@@ -236,7 +249,7 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
         }
 
         private val deleteHandler: Handler<TeamDeleteResponse> =
-            jsonHandler<TeamDeleteResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<TeamDeleteResponse>(clientOptions.jsonMapper)
 
         override fun delete(
             params: TeamDeleteParams,
@@ -245,13 +258,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { deleteHandler.handle(it) }
                     .also {
@@ -264,7 +278,6 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val addMemberHandler: Handler<TeamAddMemberResponse> =
             jsonHandler<TeamAddMemberResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun addMember(
             params: TeamAddMemberParams,
@@ -273,13 +286,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "member_add")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { addMemberHandler.handle(it) }
                     .also {
@@ -291,7 +305,7 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
         }
 
         private val blockHandler: Handler<TeamBlockResponse> =
-            jsonHandler<TeamBlockResponse>(clientOptions.jsonMapper).withErrorHandler(errorHandler)
+            jsonHandler<TeamBlockResponse>(clientOptions.jsonMapper)
 
         override fun block(
             params: TeamBlockParams,
@@ -300,13 +314,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "block")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { blockHandler.handle(it) }
                     .also {
@@ -319,22 +334,25 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val disableLoggingHandler: Handler<TeamDisableLoggingResponse> =
             jsonHandler<TeamDisableLoggingResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun disableLogging(
             params: TeamDisableLoggingParams,
             requestOptions: RequestOptions,
         ): HttpResponseFor<TeamDisableLoggingResponse> {
+            // We check here instead of in the params builder because this can be specified
+            // positionally or in the params class.
+            checkRequired("teamId", params.teamId())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", params._pathParam(0), "disable_logging")
                     .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { disableLoggingHandler.handle(it) }
                     .also {
@@ -347,7 +365,6 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val listAvailableHandler: Handler<TeamListAvailableResponse> =
             jsonHandler<TeamListAvailableResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun listAvailable(
             params: TeamListAvailableParams,
@@ -356,12 +373,13 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "available")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { listAvailableHandler.handle(it) }
                     .also {
@@ -374,7 +392,6 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val removeMemberHandler: Handler<TeamRemoveMemberResponse> =
             jsonHandler<TeamRemoveMemberResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun removeMember(
             params: TeamRemoveMemberParams,
@@ -383,13 +400,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "member_delete")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { removeMemberHandler.handle(it) }
                     .also {
@@ -402,7 +420,6 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val retrieveInfoHandler: Handler<TeamRetrieveInfoResponse> =
             jsonHandler<TeamRetrieveInfoResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun retrieveInfo(
             params: TeamRetrieveInfoParams,
@@ -411,12 +428,13 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "info")
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { retrieveInfoHandler.handle(it) }
                     .also {
@@ -429,7 +447,6 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val unblockHandler: Handler<TeamUnblockResponse> =
             jsonHandler<TeamUnblockResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun unblock(
             params: TeamUnblockParams,
@@ -438,13 +455,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "unblock")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { unblockHandler.handle(it) }
                     .also {
@@ -457,7 +475,6 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
 
         private val updateMemberHandler: Handler<TeamUpdateMemberResponse> =
             jsonHandler<TeamUpdateMemberResponse>(clientOptions.jsonMapper)
-                .withErrorHandler(errorHandler)
 
         override fun updateMember(
             params: TeamUpdateMemberParams,
@@ -466,13 +483,14 @@ class TeamServiceImpl internal constructor(private val clientOptions: ClientOpti
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
+                    .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("team", "member_update")
                     .body(json(clientOptions.jsonMapper, params._body()))
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
             val response = clientOptions.httpClient.execute(request, requestOptions)
-            return response.parseable {
+            return errorHandler.handle(response).parseable {
                 response
                     .use { updateMemberHandler.handle(it) }
                     .also {

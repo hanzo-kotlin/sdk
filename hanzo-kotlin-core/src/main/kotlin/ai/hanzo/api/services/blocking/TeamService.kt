@@ -2,8 +2,10 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
+import ai.hanzo.api.models.team.BlockTeamRequest
 import ai.hanzo.api.models.team.TeamAddMemberParams
 import ai.hanzo.api.models.team.TeamAddMemberResponse
 import ai.hanzo.api.models.team.TeamBlockParams
@@ -39,6 +41,13 @@ interface TeamService {
      */
     fun withRawResponse(): WithRawResponse
 
+    /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TeamService
+
     fun model(): ModelService
 
     fun callback(): CallbackService
@@ -46,23 +55,35 @@ interface TeamService {
     /**
      * Allow users to create a new team. Apply user permissions to their team.
      *
-     * 👉 [Detailed Doc on setting team budgets](https://docs.hanzo.ai/docs/proxy/team_budgets)
+     * 👉 [Detailed Doc on setting team budgets](https://docs.litellm.ai/docs/proxy/team_budgets)
      *
      * Parameters:
      * - team_alias: Optional[str] - User defined team alias
      * - team_id: Optional[str] - The team id of the user. If none passed, we'll generate it.
      * - members_with_roles: List[{"role": "admin" or "user", "user_id": "<user-id>"}] - A list of
      *   users and their roles in the team. Get user_id when making a new user via `/user/new`.
+     * - team_member_permissions: Optional[List[str]] - A list of routes that non-admin team members
+     *   can access. example: ["/key/generate", "/key/update", "/key/delete"]
      * - metadata: Optional[dict] - Metadata for team, store information for team. Example metadata
      *   = {"extra_info": "some info"}
+     * - model_rpm_limit: Optional[Dict[str, int]] - The RPM (Requests Per Minute) limit for this
+     *   team - applied across all keys for this team.
+     * - model_tpm_limit: Optional[Dict[str, int]] - The TPM (Tokens Per Minute) limit for this
+     *   team - applied across all keys for this team.
      * - tpm_limit: Optional[int] - The TPM (Tokens Per Minute) limit for this team - all keys with
      *   this team_id will have at max this TPM limit
      * - rpm_limit: Optional[int] - The RPM (Requests Per Minute) limit for this team - all keys
      *   associated with this team_id will have at max this RPM limit
+     * - rpm_limit_type: Optional[Literal["guaranteed_throughput", "best_effort_throughput"]] - The
+     *   type of RPM limit enforcement. Use "guaranteed_throughput" to raise an error if
+     *   overallocating RPM, or "best_effort_throughput" for best effort enforcement.
+     * - tpm_limit_type: Optional[Literal["guaranteed_throughput", "best_effort_throughput"]] - The
+     *   type of TPM limit enforcement. Use "guaranteed_throughput" to raise an error if
+     *   overallocating TPM, or "best_effort_throughput" for best effort enforcement.
      * - max_budget: Optional[float] - The maximum budget allocated to the team - all keys for this
      *   team_id will have at max this max_budget
      * - budget_duration: Optional[str] - The duration of the budget for the team. Doc
-     *   [here](https://docs.hanzo.ai/docs/proxy/team_budgets)
+     *   [here](https://docs.litellm.ai/docs/proxy/team_budgets)
      * - models: Optional[list] - A list of models associated with the team - all keys for this
      *   team_id will have at most, these models. If empty, assumes all models are allowed.
      * - blocked: bool - Flag indicating if the team is blocked or not - will stop all calls from
@@ -70,18 +91,46 @@ interface TeamService {
      * - members: Optional[List] - Control team members via `/team/member/add` and
      *   `/team/member/delete`.
      * - tags: Optional[List[str]] - Tags for
-     *   [tracking spend](https://llm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
-     *   and/or doing [tag-based routing](https://llm.vercel.app/docs/proxy/tag_routing).
+     *   [tracking spend](https://litellm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
+     *   and/or doing [tag-based routing](https://litellm.vercel.app/docs/proxy/tag_routing).
+     * - prompts: Optional[List[str]] - List of prompts that the team is allowed to use.
      * - organization_id: Optional[str] - The organization id of the team. Default is None. Create
      *   via `/organization/new`.
      * - model_aliases: Optional[dict] - Model aliases for the team.
-     *   [Docs](https://docs.hanzo.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
+     *   [Docs](https://docs.litellm.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
      * - guardrails: Optional[List[str]] - Guardrails for the team.
-     *   [Docs](https://docs.hanzo.ai/docs/proxy/guardrails) Returns:
+     *   [Docs](https://docs.litellm.ai/docs/proxy/guardrails)
+     * - disable_global_guardrails: Optional[bool] - Whether to disable global guardrails for the
+     *   key.
+     * - object_permission: Optional[LiteLLM_ObjectPermissionBase] - team-specific object
+     *   permission. Example - {"vector_stores": ["vector_store_1", "vector_store_2"], "agents":
+     *   ["agent_1", "agent_2"], "agent_access_groups": ["dev_group"]}. IF null or {} then no object
+     *   permission.
+     * - team_member_budget: Optional[float] - The maximum budget allocated to an individual team
+     *   member.
+     * - team_member_rpm_limit: Optional[int] - The RPM (Requests Per Minute) limit for individual
+     *   team members.
+     * - team_member_tpm_limit: Optional[int] - The TPM (Tokens Per Minute) limit for individual
+     *   team members.
+     * - team_member_key_duration: Optional[str] - The duration for a team member's key. e.g. "1d",
+     *   "1w", "1mo"
+     * - allowed_passthrough_routes: Optional[List[str]] - List of allowed pass through routes for
+     *   the team.
+     * - allowed_vector_store_indexes: Optional[List[dict]] - List of allowed vector store indexes
+     *   for the key.
+     *   Example - [{"index_name": "my-index", "index_permissions": ["write", "read"]}]. If
+     *   specified, the key will only be able to use these specific vector store indexes. Create
+     *   index, using `/v1/indexes` endpoint.
+     * - secret_manager_settings: Optional[dict] - Secret manager settings for the team.
+     *   [Docs](https://docs.litellm.ai/docs/secret_managers/overview)
+     * - router_settings: Optional[UpdateRouterConfig] - team-specific router settings. Example -
+     *   {"model_group_retry_policy": {"max_retries": 5}}. IF null or {} then no router settings.
+     *
+     * Returns:
      * - team_id: (str) Unique team id - used for tracking spend across multiple keys for same team
      *   id.
      *
-     * \_deprecated_params:
+     * _deprecated_params:
      * - admins: list - A list of user_id's for the admin role
      * - users: list - A list of user_id's for the user role
      *
@@ -94,12 +143,12 @@ interface TeamService {
      * }'
      *
      * ```
-     * ```
+     *  ```
      * curl --location 'http://0.0.0.0:4000/team/new'     --header 'Authorization: Bearer sk-1234'     --header 'Content-Type: application/json'     --data '{
-     *            "team_alias": "QA Prod Bot",
-     *            "max_budget": 0.000000001,
-     *            "budget_duration": "1d"
-     *        }'
+     *             "team_alias": "QA Prod Bot",
+     *             "max_budget": 0.000000001,
+     *             "budget_duration": "1d"
+     *         }'
      * ```
      */
     fun create(
@@ -107,7 +156,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamCreateResponse
 
-    /** @see [create] */
+    /** @see create */
     fun create(requestOptions: RequestOptions): TeamCreateResponse =
         create(TeamCreateParams.none(), requestOptions)
 
@@ -119,8 +168,10 @@ interface TeamService {
      * Parameters:
      * - team_id: str - The team id of the user. Required param.
      * - team_alias: Optional[str] - User defined team alias
+     * - team_member_permissions: Optional[List[str]] - A list of routes that non-admin team members
+     *   can access. example: ["/key/generate", "/key/update", "/key/delete"]
      * - metadata: Optional[dict] - Metadata for team, store information for team. Example metadata
-     *   = {"team": "core-infra", "app": "app2", "email": "z@hanzo.ai" }
+     *   = {"team": "core-infra", "app": "app2", "email": "ishaan@berri.ai" }
      * - tpm_limit: Optional[int] - The TPM (Tokens Per Minute) limit for this team - all keys with
      *   this team_id will have at max this TPM limit
      * - rpm_limit: Optional[int] - The RPM (Requests Per Minute) limit for this team - all keys
@@ -128,20 +179,53 @@ interface TeamService {
      * - max_budget: Optional[float] - The maximum budget allocated to the team - all keys for this
      *   team_id will have at max this max_budget
      * - budget_duration: Optional[str] - The duration of the budget for the team. Doc
-     *   [here](https://docs.hanzo.ai/docs/proxy/team_budgets)
+     *   [here](https://docs.litellm.ai/docs/proxy/team_budgets)
      * - models: Optional[list] - A list of models associated with the team - all keys for this
      *   team_id will have at most, these models. If empty, assumes all models are allowed.
+     * - prompts: Optional[List[str]] - List of prompts that the team is allowed to use.
      * - blocked: bool - Flag indicating if the team is blocked or not - will stop all calls from
      *   keys with this team_id.
      * - tags: Optional[List[str]] - Tags for
-     *   [tracking spend](https://llm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
-     *   and/or doing [tag-based routing](https://llm.vercel.app/docs/proxy/tag_routing).
+     *   [tracking spend](https://litellm.vercel.app/docs/proxy/enterprise#tracking-spend-for-custom-tags)
+     *   and/or doing [tag-based routing](https://litellm.vercel.app/docs/proxy/tag_routing).
      * - organization_id: Optional[str] - The organization id of the team. Default is None. Create
      *   via `/organization/new`.
      * - model_aliases: Optional[dict] - Model aliases for the team.
-     *   [Docs](https://docs.hanzo.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
+     *   [Docs](https://docs.litellm.ai/docs/proxy/team_based_routing#create-team-with-model-alias)
      * - guardrails: Optional[List[str]] - Guardrails for the team.
-     *   [Docs](https://docs.hanzo.ai/docs/proxy/guardrails) Example - update team TPM Limit
+     *   [Docs](https://docs.litellm.ai/docs/proxy/guardrails)
+     * - disable_global_guardrails: Optional[bool] - Whether to disable global guardrails for the
+     *   key.
+     * - object_permission: Optional[LiteLLM_ObjectPermissionBase] - team-specific object
+     *   permission. Example - {"vector_stores": ["vector_store_1", "vector_store_2"], "agents":
+     *   ["agent_1", "agent_2"], "agent_access_groups": ["dev_group"]}. IF null or {} then no object
+     *   permission.
+     * - team_member_budget: Optional[float] - The maximum budget allocated to an individual team
+     *   member.
+     * - team_member_budget_duration: Optional[str] - The duration of the budget for the team
+     *   member. Doc [here](https://docs.litellm.ai/docs/proxy/team_budgets)
+     * - team_member_rpm_limit: Optional[int] - The RPM (Requests Per Minute) limit for individual
+     *   team members.
+     * - team_member_tpm_limit: Optional[int] - The TPM (Tokens Per Minute) limit for individual
+     *   team members.
+     * - team_member_key_duration: Optional[str] - The duration for a team member's key. e.g. "1d",
+     *   "1w", "1mo"
+     * - allowed_passthrough_routes: Optional[List[str]] - List of allowed pass through routes for
+     *   the team.
+     * - model_rpm_limit: Optional[Dict[str, int]] - The RPM (Requests Per Minute) limit per model
+     *   for this team. Example: {"gpt-4": 100, "gpt-3.5-turbo": 200}
+     * - model_tpm_limit: Optional[Dict[str, int]] - The TPM (Tokens Per Minute) limit per model for
+     *   this team. Example: {"gpt-4": 10000, "gpt-3.5-turbo": 20000} Example - update team TPM
+     *   Limit
+     * - allowed_vector_store_indexes: Optional[List[dict]] - List of allowed vector store indexes
+     *   for the key.
+     *   Example - [{"index_name": "my-index", "index_permissions": ["write", "read"]}]. If
+     *   specified, the key will only be able to use these specific vector store indexes. Create
+     *   index, using `/v1/indexes` endpoint.
+     * - secret_manager_settings: Optional[dict] - Secret manager settings for the team.
+     *   [Docs](https://docs.litellm.ai/docs/secret_managers/overview)
+     * - router_settings: Optional[UpdateRouterConfig] - team-specific router settings. Example -
+     *   {"model_group_retry_policy": {"max_retries": 5}}. IF null or {} then no router settings.
      *
      * ```
      * curl --location 'http://0.0.0.0:4000/team/update'     --header 'Authorization: Bearer sk-1234'     --header 'Content-Type: application/json'     --data-raw '{
@@ -179,7 +263,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamListResponse
 
-    /** @see [list] */
+    /** @see list */
     fun list(requestOptions: RequestOptions): TeamListResponse =
         list(TeamListParams.none(), requestOptions)
 
@@ -202,8 +286,6 @@ interface TeamService {
     ): TeamDeleteResponse
 
     /**
-     * [BETA]
-     *
      * Add new members (either via user_email or user_id) to a team
      *
      * If user doesn't exist, new user row will also be added to User Table
@@ -212,7 +294,7 @@ interface TeamService {
      *
      * ```
      *
-     * curl -X POST 'http://0.0.0.0:4000/team/member_add'     -H 'Authorization: Bearer sk-1234'     -H 'Content-Type: application/json'     -d '{"team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849", "member": {"role": "user", "user_id": "dev247652@hanzo.ai"}}'
+     * curl -X POST 'http://0.0.0.0:4000/team/member_add'     -H 'Authorization: Bearer sk-1234'     -H 'Content-Type: application/json'     -d '{"team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849", "member": {"role": "user", "user_id": "krrish247652@berri.ai"}}'
      *
      * ```
      */
@@ -242,6 +324,13 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamBlockResponse
 
+    /** @see block */
+    fun block(
+        blockTeamRequest: BlockTeamRequest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): TeamBlockResponse =
+        block(TeamBlockParams.builder().blockTeamRequest(blockTeamRequest).build(), requestOptions)
+
     /**
      * Disable all logging callbacks for a team
      *
@@ -254,9 +343,21 @@ interface TeamService {
      * ```
      */
     fun disableLogging(
+        teamId: String,
+        params: TeamDisableLoggingParams = TeamDisableLoggingParams.none(),
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): TeamDisableLoggingResponse =
+        disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+    /** @see disableLogging */
+    fun disableLogging(
         params: TeamDisableLoggingParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamDisableLoggingResponse
+
+    /** @see disableLogging */
+    fun disableLogging(teamId: String, requestOptions: RequestOptions): TeamDisableLoggingResponse =
+        disableLogging(teamId, TeamDisableLoggingParams.none(), requestOptions)
 
     /** List Available Teams */
     fun listAvailable(
@@ -264,7 +365,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamListAvailableResponse
 
-    /** @see [listAvailable] */
+    /** @see listAvailable */
     fun listAvailable(requestOptions: RequestOptions): TeamListAvailableResponse =
         listAvailable(TeamListAvailableParams.none(), requestOptions)
 
@@ -281,7 +382,7 @@ interface TeamService {
      * -H 'Content-Type: application/json'
      * -d '{
      *     "team_id": "45e3e396-ee08-4a61-a88e-16b3ce7e0849",
-     *     "user_id": "dev247652@hanzo.ai"
+     *     "user_id": "krrish247652@berri.ai"
      * }'
      * ```
      */
@@ -305,7 +406,7 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamRetrieveInfoResponse
 
-    /** @see [retrieveInfo] */
+    /** @see retrieveInfo */
     fun retrieveInfo(requestOptions: RequestOptions): TeamRetrieveInfoResponse =
         retrieveInfo(TeamRetrieveInfoParams.none(), requestOptions)
 
@@ -327,6 +428,16 @@ interface TeamService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): TeamUnblockResponse
 
+    /** @see unblock */
+    fun unblock(
+        blockTeamRequest: BlockTeamRequest,
+        requestOptions: RequestOptions = RequestOptions.none(),
+    ): TeamUnblockResponse =
+        unblock(
+            TeamUnblockParams.builder().blockTeamRequest(blockTeamRequest).build(),
+            requestOptions,
+        )
+
     /**
      * [BETA]
      *
@@ -339,6 +450,13 @@ interface TeamService {
 
     /** A view of [TeamService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): TeamService.WithRawResponse
 
         fun model(): ModelService.WithRawResponse
 
@@ -354,7 +472,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamCreateResponse>
 
-        /** @see [create] */
+        /** @see create */
         @MustBeClosed
         fun create(requestOptions: RequestOptions): HttpResponseFor<TeamCreateResponse> =
             create(TeamCreateParams.none(), requestOptions)
@@ -379,7 +497,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamListResponse>
 
-        /** @see [list] */
+        /** @see list */
         @MustBeClosed
         fun list(requestOptions: RequestOptions): HttpResponseFor<TeamListResponse> =
             list(TeamListParams.none(), requestOptions)
@@ -414,15 +532,43 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamBlockResponse>
 
+        /** @see block */
+        @MustBeClosed
+        fun block(
+            blockTeamRequest: BlockTeamRequest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<TeamBlockResponse> =
+            block(
+                TeamBlockParams.builder().blockTeamRequest(blockTeamRequest).build(),
+                requestOptions,
+            )
+
         /**
          * Returns a raw HTTP response for `post /team/{team_id}/disable_logging`, but is otherwise
          * the same as [TeamService.disableLogging].
          */
         @MustBeClosed
         fun disableLogging(
+            teamId: String,
+            params: TeamDisableLoggingParams = TeamDisableLoggingParams.none(),
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<TeamDisableLoggingResponse> =
+            disableLogging(params.toBuilder().teamId(teamId).build(), requestOptions)
+
+        /** @see disableLogging */
+        @MustBeClosed
+        fun disableLogging(
             params: TeamDisableLoggingParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamDisableLoggingResponse>
+
+        /** @see disableLogging */
+        @MustBeClosed
+        fun disableLogging(
+            teamId: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<TeamDisableLoggingResponse> =
+            disableLogging(teamId, TeamDisableLoggingParams.none(), requestOptions)
 
         /**
          * Returns a raw HTTP response for `get /team/available`, but is otherwise the same as
@@ -434,7 +580,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamListAvailableResponse>
 
-        /** @see [listAvailable] */
+        /** @see listAvailable */
         @MustBeClosed
         fun listAvailable(
             requestOptions: RequestOptions
@@ -461,7 +607,7 @@ interface TeamService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamRetrieveInfoResponse>
 
-        /** @see [retrieveInfo] */
+        /** @see retrieveInfo */
         @MustBeClosed
         fun retrieveInfo(
             requestOptions: RequestOptions
@@ -477,6 +623,17 @@ interface TeamService {
             params: TeamUnblockParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<TeamUnblockResponse>
+
+        /** @see unblock */
+        @MustBeClosed
+        fun unblock(
+            blockTeamRequest: BlockTeamRequest,
+            requestOptions: RequestOptions = RequestOptions.none(),
+        ): HttpResponseFor<TeamUnblockResponse> =
+            unblock(
+                TeamUnblockParams.builder().blockTeamRequest(blockTeamRequest).build(),
+                requestOptions,
+            )
 
         /**
          * Returns a raw HTTP response for `post /team/member_update`, but is otherwise the same as

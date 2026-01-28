@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.async
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.utils.UtilGetSupportedOpenAIParamsParams
@@ -20,7 +21,14 @@ interface UtilServiceAsync {
     fun withRawResponse(): WithRawResponse
 
     /**
-     * Returns supported openai params for a given llm model name
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UtilServiceAsync
+
+    /**
+     * Returns supported openai params for a given litellm model name
      *
      * e.g. `gpt-4` vs `gpt-3.5-turbo`
      *
@@ -34,7 +42,12 @@ interface UtilServiceAsync {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): UtilGetSupportedOpenAIParamsResponse
 
-    /** Token Counter */
+    /**
+     * Args: request: TokenCountRequest call_endpoint: bool - When set to "True" it will call the
+     * token counting endpoint - e.g Anthropic or Google AI Studio Token Counting APIs.
+     *
+     * Returns: TokenCountResponse
+     */
     suspend fun tokenCounter(
         params: UtilTokenCounterParams,
         requestOptions: RequestOptions = RequestOptions.none(),
@@ -48,6 +61,13 @@ interface UtilServiceAsync {
 
     /** A view of [UtilServiceAsync] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): UtilServiceAsync.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `get /utils/supported_openai_params`, but is otherwise

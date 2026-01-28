@@ -4,11 +4,6 @@ package ai.hanzo.api.services.async
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.langfuse.LangfuseCreateParams
-import ai.hanzo.api.models.langfuse.LangfuseDeleteParams
-import ai.hanzo.api.models.langfuse.LangfusePatchParams
-import ai.hanzo.api.models.langfuse.LangfuseRetrieveParams
-import ai.hanzo.api.models.langfuse.LangfuseUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -16,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class LangfuseServiceAsyncTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun create() {
         val client =
@@ -26,13 +21,12 @@ internal class LangfuseServiceAsyncTest {
                 .build()
         val langfuseServiceAsync = client.langfuse()
 
-        val langfuse =
-            langfuseServiceAsync.create(LangfuseCreateParams.builder().endpoint("endpoint").build())
+        val langfuse = langfuseServiceAsync.create("endpoint")
 
         langfuse.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
         val client =
@@ -42,15 +36,12 @@ internal class LangfuseServiceAsyncTest {
                 .build()
         val langfuseServiceAsync = client.langfuse()
 
-        val langfuse =
-            langfuseServiceAsync.retrieve(
-                LangfuseRetrieveParams.builder().endpoint("endpoint").build()
-            )
+        val langfuse = langfuseServiceAsync.retrieve("endpoint")
 
         langfuse.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun update() {
         val client =
@@ -60,13 +51,12 @@ internal class LangfuseServiceAsyncTest {
                 .build()
         val langfuseServiceAsync = client.langfuse()
 
-        val langfuse =
-            langfuseServiceAsync.update(LangfuseUpdateParams.builder().endpoint("endpoint").build())
+        val langfuse = langfuseServiceAsync.update("endpoint")
 
         langfuse.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
         val client =
@@ -76,13 +66,12 @@ internal class LangfuseServiceAsyncTest {
                 .build()
         val langfuseServiceAsync = client.langfuse()
 
-        val langfuse =
-            langfuseServiceAsync.delete(LangfuseDeleteParams.builder().endpoint("endpoint").build())
+        val langfuse = langfuseServiceAsync.delete("endpoint")
 
         langfuse.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     suspend fun patch() {
         val client =
@@ -92,8 +81,7 @@ internal class LangfuseServiceAsyncTest {
                 .build()
         val langfuseServiceAsync = client.langfuse()
 
-        val response =
-            langfuseServiceAsync.patch(LangfusePatchParams.builder().endpoint("endpoint").build())
+        val response = langfuseServiceAsync.patch("endpoint")
 
         response.validate()
     }

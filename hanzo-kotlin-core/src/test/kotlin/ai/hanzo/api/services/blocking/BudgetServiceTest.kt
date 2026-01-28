@@ -5,12 +5,11 @@ package ai.hanzo.api.services.blocking
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.core.JsonValue
-import ai.hanzo.api.models.budget.BudgetCreateParams
 import ai.hanzo.api.models.budget.BudgetDeleteParams
 import ai.hanzo.api.models.budget.BudgetInfoParams
 import ai.hanzo.api.models.budget.BudgetNew
 import ai.hanzo.api.models.budget.BudgetSettingsParams
-import ai.hanzo.api.models.budget.BudgetUpdateParams
+import java.time.OffsetDateTime
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -18,7 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(TestServerExtension::class)
 internal class BudgetServiceTest {
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun create() {
         val client =
@@ -30,40 +29,37 @@ internal class BudgetServiceTest {
 
         val budget =
             budgetService.create(
-                BudgetCreateParams.builder()
-                    .budgetNew(
-                        BudgetNew.builder()
-                            .budgetDuration("budget_duration")
-                            .budgetId("budget_id")
-                            .maxBudget(0.0)
-                            .maxParallelRequests(0L)
-                            .modelMaxBudget(
-                                BudgetNew.ModelMaxBudget.builder()
-                                    .putAdditionalProperty(
-                                        "foo",
-                                        JsonValue.from(
-                                            mapOf(
-                                                "budget_duration" to "budget_duration",
-                                                "max_budget" to 0,
-                                                "rpm_limit" to 0,
-                                                "tpm_limit" to 0,
-                                            )
-                                        ),
+                BudgetNew.builder()
+                    .budgetDuration("budget_duration")
+                    .budgetId("budget_id")
+                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .maxBudget(0.0)
+                    .maxParallelRequests(0L)
+                    .modelMaxBudget(
+                        BudgetNew.ModelMaxBudget.builder()
+                            .putAdditionalProperty(
+                                "foo",
+                                JsonValue.from(
+                                    mapOf(
+                                        "budget_duration" to "budget_duration",
+                                        "max_budget" to 0,
+                                        "rpm_limit" to 0,
+                                        "tpm_limit" to 0,
                                     )
-                                    .build()
+                                ),
                             )
-                            .rpmLimit(0L)
-                            .softBudget(0.0)
-                            .tpmLimit(0L)
                             .build()
                     )
+                    .rpmLimit(0L)
+                    .softBudget(0.0)
+                    .tpmLimit(0L)
                     .build()
             )
 
         budget.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun update() {
         val client =
@@ -75,40 +71,37 @@ internal class BudgetServiceTest {
 
         val budget =
             budgetService.update(
-                BudgetUpdateParams.builder()
-                    .budgetNew(
-                        BudgetNew.builder()
-                            .budgetDuration("budget_duration")
-                            .budgetId("budget_id")
-                            .maxBudget(0.0)
-                            .maxParallelRequests(0L)
-                            .modelMaxBudget(
-                                BudgetNew.ModelMaxBudget.builder()
-                                    .putAdditionalProperty(
-                                        "foo",
-                                        JsonValue.from(
-                                            mapOf(
-                                                "budget_duration" to "budget_duration",
-                                                "max_budget" to 0,
-                                                "rpm_limit" to 0,
-                                                "tpm_limit" to 0,
-                                            )
-                                        ),
+                BudgetNew.builder()
+                    .budgetDuration("budget_duration")
+                    .budgetId("budget_id")
+                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
+                    .maxBudget(0.0)
+                    .maxParallelRequests(0L)
+                    .modelMaxBudget(
+                        BudgetNew.ModelMaxBudget.builder()
+                            .putAdditionalProperty(
+                                "foo",
+                                JsonValue.from(
+                                    mapOf(
+                                        "budget_duration" to "budget_duration",
+                                        "max_budget" to 0,
+                                        "rpm_limit" to 0,
+                                        "tpm_limit" to 0,
                                     )
-                                    .build()
+                                ),
                             )
-                            .rpmLimit(0L)
-                            .softBudget(0.0)
-                            .tpmLimit(0L)
                             .build()
                     )
+                    .rpmLimit(0L)
+                    .softBudget(0.0)
+                    .tpmLimit(0L)
                     .build()
             )
 
         budget.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun list() {
         val client =
@@ -118,12 +111,12 @@ internal class BudgetServiceTest {
                 .build()
         val budgetService = client.budget()
 
-        val budget = budgetService.list()
+        val budgets = budgetService.list()
 
-        budget.validate()
+        budgets.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun delete() {
         val client =
@@ -138,7 +131,7 @@ internal class BudgetServiceTest {
         budget.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun info() {
         val client =
@@ -153,7 +146,7 @@ internal class BudgetServiceTest {
         response.validate()
     }
 
-    @Disabled("skipped: tests are disabled for the time being")
+    @Disabled("Prism tests are disabled")
     @Test
     fun settings() {
         val client =

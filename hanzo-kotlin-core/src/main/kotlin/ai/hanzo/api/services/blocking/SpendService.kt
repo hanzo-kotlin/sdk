@@ -2,6 +2,7 @@
 
 package ai.hanzo.api.services.blocking
 
+import ai.hanzo.api.core.ClientOptions
 import ai.hanzo.api.core.RequestOptions
 import ai.hanzo.api.core.http.HttpResponseFor
 import ai.hanzo.api.models.spend.SpendCalculateSpendParams
@@ -20,12 +21,19 @@ interface SpendService {
     fun withRawResponse(): WithRawResponse
 
     /**
+     * Returns a view of this service with the given option modifications applied.
+     *
+     * The original service is not modified.
+     */
+    fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendService
+
+    /**
      * Accepts all the params of completion_cost.
      *
      * Calculate spend **before** making call:
      *
      * Note: If you see a spend of $0.0 you need to set custom_pricing for your model:
-     * https://docs.hanzo.ai/docs/proxy/custom_pricing
+     * https://docs.litellm.ai/docs/proxy/custom_pricing
      *
      * ```
      * curl --location 'http://localhost:4000/spend/calculate'
@@ -72,13 +80,21 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): SpendCalculateSpendResponse
 
-    /** @see [calculateSpend] */
+    /** @see calculateSpend */
     fun calculateSpend(requestOptions: RequestOptions): SpendCalculateSpendResponse =
         calculateSpend(SpendCalculateSpendParams.none(), requestOptions)
 
     /**
+     * [DEPRECATED] This endpoint is not paginated and can cause performance issues. Please use
+     * `/spend/logs/v2` instead for paginated access to spend logs.
+     *
      * View all spend logs, if request_id is provided, only logs for that request_id will be
      * returned
+     *
+     * When start_date and end_date are provided:
+     * - summarize=true (default): Returns aggregated spend data grouped by date (maintains backward
+     *   compatibility)
+     * - summarize=false: Returns filtered individual log entries within the date range
      *
      * Example Request for all logs
      *
@@ -95,13 +111,19 @@ interface SpendService {
      * Example Request for specific api_key
      *
      * ```
-     * curl -X GET "http://0.0.0.0:8000/spend/logs?api_key=sk-Fn8Ej39NkBQmUagFEoUWPQ" -H "Authorization: Bearer sk-1234"
+     * curl -X GET "http://0.0.0.0:8000/spend/logs?api_key=sk-test-example-key-123" -H "Authorization: Bearer sk-1234"
      * ```
      *
      * Example Request for specific user_id
      *
      * ```
-     * curl -X GET "http://0.0.0.0:8000/spend/logs?user_id=z@hanzo.ai" -H "Authorization: Bearer sk-1234"
+     * curl -X GET "http://0.0.0.0:8000/spend/logs?user_id=ishaan@berri.ai" -H "Authorization: Bearer sk-1234"
+     * ```
+     *
+     * Example Request for date range with individual logs (unsummarized)
+     *
+     * ```
+     * curl -X GET "http://0.0.0.0:8000/spend/logs?start_date=2024-01-01&end_date=2024-01-02&summarize=false" -H "Authorization: Bearer sk-1234"
      * ```
      */
     fun listLogs(
@@ -109,12 +131,12 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListLogsResponse>
 
-    /** @see [listLogs] */
+    /** @see listLogs */
     fun listLogs(requestOptions: RequestOptions): List<SpendListLogsResponse> =
         listLogs(SpendListLogsParams.none(), requestOptions)
 
     /**
-     * LLM Enterprise - View Spend Per Request Tag
+     * LiteLLM Enterprise - View Spend Per Request Tag
      *
      * Example Request:
      * ```
@@ -132,12 +154,19 @@ interface SpendService {
         requestOptions: RequestOptions = RequestOptions.none(),
     ): List<SpendListTagsResponse>
 
-    /** @see [listTags] */
+    /** @see listTags */
     fun listTags(requestOptions: RequestOptions): List<SpendListTagsResponse> =
         listTags(SpendListTagsParams.none(), requestOptions)
 
     /** A view of [SpendService] that provides access to raw HTTP responses for each method. */
     interface WithRawResponse {
+
+        /**
+         * Returns a view of this service with the given option modifications applied.
+         *
+         * The original service is not modified.
+         */
+        fun withOptions(modifier: (ClientOptions.Builder) -> Unit): SpendService.WithRawResponse
 
         /**
          * Returns a raw HTTP response for `post /spend/calculate`, but is otherwise the same as
@@ -149,7 +178,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<SpendCalculateSpendResponse>
 
-        /** @see [calculateSpend] */
+        /** @see calculateSpend */
         @MustBeClosed
         fun calculateSpend(
             requestOptions: RequestOptions
@@ -166,7 +195,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListLogsResponse>>
 
-        /** @see [listLogs] */
+        /** @see listLogs */
         @MustBeClosed
         fun listLogs(requestOptions: RequestOptions): HttpResponseFor<List<SpendListLogsResponse>> =
             listLogs(SpendListLogsParams.none(), requestOptions)
@@ -181,7 +210,7 @@ interface SpendService {
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<List<SpendListTagsResponse>>
 
-        /** @see [listTags] */
+        /** @see listTags */
         @MustBeClosed
         fun listTags(requestOptions: RequestOptions): HttpResponseFor<List<SpendListTagsResponse>> =
             listTags(SpendListTagsParams.none(), requestOptions)
