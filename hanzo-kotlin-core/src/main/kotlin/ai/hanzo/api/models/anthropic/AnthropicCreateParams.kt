@@ -9,7 +9,7 @@ import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
-/** [Docs](https://docs.litellm.ai/docs/pass_through/anthropic_completion) */
+/** [Docs](https://docs.hanzo.ai/docs/anthropic_completion) */
 class AnthropicCreateParams
 private constructor(
     private val endpoint: String?,

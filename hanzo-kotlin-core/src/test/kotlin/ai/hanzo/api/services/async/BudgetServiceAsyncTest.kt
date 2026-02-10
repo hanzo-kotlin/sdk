@@ -9,7 +9,6 @@ import ai.hanzo.api.models.budget.BudgetDeleteParams
 import ai.hanzo.api.models.budget.BudgetInfoParams
 import ai.hanzo.api.models.budget.BudgetNew
 import ai.hanzo.api.models.budget.BudgetSettingsParams
-import java.time.OffsetDateTime
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -32,7 +31,6 @@ internal class BudgetServiceAsyncTest {
                 BudgetNew.builder()
                     .budgetDuration("budget_duration")
                     .budgetId("budget_id")
-                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
                     .modelMaxBudget(
@@ -74,7 +72,6 @@ internal class BudgetServiceAsyncTest {
                 BudgetNew.builder()
                     .budgetDuration("budget_duration")
                     .budgetId("budget_id")
-                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
                     .modelMaxBudget(

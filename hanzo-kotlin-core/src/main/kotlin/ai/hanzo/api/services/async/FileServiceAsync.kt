@@ -42,7 +42,7 @@ interface FileServiceAsync {
      *
      * ```
      * curl http://localhost:4000/v1/files         -H "Authorization: Bearer sk-1234"         -F purpose="batch"         -F file="@mydata.jsonl"
-     *     -F expires_after[anchor]="created_at"         -F expires_after[seconds]=2592000
+     *
      * ```
      */
     suspend fun create(

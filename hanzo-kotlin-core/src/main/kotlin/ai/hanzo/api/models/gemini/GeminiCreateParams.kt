@@ -9,7 +9,7 @@ import ai.hanzo.api.core.http.QueryParams
 import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
-/** [Docs](https://docs.litellm.ai/docs/pass_through/google_ai_studio) */
+/** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
 class GeminiCreateParams
 private constructor(
     private val endpoint: String?,

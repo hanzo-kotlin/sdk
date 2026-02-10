@@ -11,7 +11,7 @@ internal class KeyDeleteParamsTest {
     @Test
     fun create() {
         KeyDeleteParams.builder()
-            .litellmChangedBy("litellm-changed-by")
+            .llmChangedBy("llm-changed-by")
             .addKeyAlias("string")
             .addKey("string")
             .build()
@@ -21,7 +21,7 @@ internal class KeyDeleteParamsTest {
     fun headers() {
         val params =
             KeyDeleteParams.builder()
-                .litellmChangedBy("litellm-changed-by")
+                .llmChangedBy("llm-changed-by")
                 .addKeyAlias("string")
                 .addKey("string")
                 .build()
@@ -29,7 +29,7 @@ internal class KeyDeleteParamsTest {
         val headers = params._headers()
 
         assertThat(headers)
-            .isEqualTo(Headers.builder().put("litellm-changed-by", "litellm-changed-by").build())
+            .isEqualTo(Headers.builder().put("llm-changed-by", "llm-changed-by").build())
     }
 
     @Test
@@ -45,7 +45,7 @@ internal class KeyDeleteParamsTest {
     fun body() {
         val params =
             KeyDeleteParams.builder()
-                .litellmChangedBy("litellm-changed-by")
+                .llmChangedBy("llm-changed-by")
                 .addKeyAlias("string")
                 .addKey("string")
                 .build()

@@ -15,7 +15,6 @@ internal class SpendListLogsParamsTest {
             .endDate("end_date")
             .requestId("request_id")
             .startDate("start_date")
-            .summarize(true)
             .userId("user_id")
             .build()
     }
@@ -28,7 +27,6 @@ internal class SpendListLogsParamsTest {
                 .endDate("end_date")
                 .requestId("request_id")
                 .startDate("start_date")
-                .summarize(true)
                 .userId("user_id")
                 .build()
 
@@ -41,7 +39,6 @@ internal class SpendListLogsParamsTest {
                     .put("end_date", "end_date")
                     .put("request_id", "request_id")
                     .put("start_date", "start_date")
-                    .put("summarize", "true")
                     .put("user_id", "user_id")
                     .build()
             )

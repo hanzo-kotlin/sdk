@@ -16,16 +16,12 @@ internal class TeamUpdateMemberResponseTest {
                 .teamId("team_id")
                 .userId("user_id")
                 .maxBudgetInTeam(0.0)
-                .rpmLimit(0L)
-                .tpmLimit(0L)
                 .userEmail("user_email")
                 .build()
 
         assertThat(teamUpdateMemberResponse.teamId()).isEqualTo("team_id")
         assertThat(teamUpdateMemberResponse.userId()).isEqualTo("user_id")
         assertThat(teamUpdateMemberResponse.maxBudgetInTeam()).isEqualTo(0.0)
-        assertThat(teamUpdateMemberResponse.rpmLimit()).isEqualTo(0L)
-        assertThat(teamUpdateMemberResponse.tpmLimit()).isEqualTo(0L)
         assertThat(teamUpdateMemberResponse.userEmail()).isEqualTo("user_email")
     }
 
@@ -37,8 +33,6 @@ internal class TeamUpdateMemberResponseTest {
                 .teamId("team_id")
                 .userId("user_id")
                 .maxBudgetInTeam(0.0)
-                .rpmLimit(0L)
-                .tpmLimit(0L)
                 .userEmail("user_email")
                 .build()
 

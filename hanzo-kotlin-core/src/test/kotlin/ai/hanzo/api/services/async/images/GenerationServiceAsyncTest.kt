@@ -4,7 +4,6 @@ package ai.hanzo.api.services.async.images
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.models.images.generations.GenerationCreateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,8 +21,7 @@ internal class GenerationServiceAsyncTest {
                 .build()
         val generationServiceAsync = client.images().generations()
 
-        val generation =
-            generationServiceAsync.create(GenerationCreateParams.builder().model("model").build())
+        val generation = generationServiceAsync.create()
 
         generation.validate()
     }

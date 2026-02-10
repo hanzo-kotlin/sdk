@@ -32,9 +32,9 @@ interface LangfuseServiceAsync {
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): LangfuseServiceAsync
 
     /**
-     * Call Langfuse via LiteLLM proxy. Works with Langfuse SDK.
+     * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun create(
         endpoint: String,
@@ -54,9 +54,9 @@ interface LangfuseServiceAsync {
         create(endpoint, LangfuseCreateParams.none(), requestOptions)
 
     /**
-     * Call Langfuse via LiteLLM proxy. Works with Langfuse SDK.
+     * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun retrieve(
         endpoint: String,
@@ -78,9 +78,9 @@ interface LangfuseServiceAsync {
     ): LangfuseRetrieveResponse = retrieve(endpoint, LangfuseRetrieveParams.none(), requestOptions)
 
     /**
-     * Call Langfuse via LiteLLM proxy. Works with Langfuse SDK.
+     * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun update(
         endpoint: String,
@@ -100,9 +100,9 @@ interface LangfuseServiceAsync {
         update(endpoint, LangfuseUpdateParams.none(), requestOptions)
 
     /**
-     * Call Langfuse via LiteLLM proxy. Works with Langfuse SDK.
+     * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun delete(
         endpoint: String,
@@ -122,9 +122,9 @@ interface LangfuseServiceAsync {
         delete(endpoint, LangfuseDeleteParams.none(), requestOptions)
 
     /**
-     * Call Langfuse via LiteLLM proxy. Works with Langfuse SDK.
+     * Call Langfuse via LLM proxy. Works with Langfuse SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/langfuse)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/langfuse)
      */
     suspend fun patch(
         endpoint: String,
