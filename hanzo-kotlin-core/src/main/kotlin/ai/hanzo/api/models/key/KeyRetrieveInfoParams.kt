@@ -14,13 +14,13 @@ import java.util.Objects
  *
  * Example Curl:
  * ```
- * curl -X GET "http://0.0.0.0:4000/key/info?key=sk-test-example-key-123" -H "Authorization: Bearer sk-1234"
+ * curl -X GET "http://0.0.0.0:4000/key/info?key=sk-02Wr4IAlN3NvPXvL5JVvDA" -H "Authorization: Bearer sk-1234"
  * ```
  *
  * Example Curl - if no key is passed, it will use the Key Passed in Authorization Header
  *
  * ```
- * curl -X GET "http://0.0.0.0:4000/key/info" -H "Authorization: Bearer sk-test-example-key-123"
+ * curl -X GET "http://0.0.0.0:4000/key/info" -H "Authorization: Bearer sk-02Wr4IAlN3NvPXvL5JVvDA"
  * ```
  */
 class KeyRetrieveInfoParams

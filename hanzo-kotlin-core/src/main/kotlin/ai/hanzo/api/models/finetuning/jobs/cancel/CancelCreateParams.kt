@@ -16,7 +16,7 @@ import java.util.Objects
  * https://api.openai.com/v1/fine_tuning/jobs/{fine_tuning_job_id}/cancel
  *
  * Supported Query Params:
- * - `custom_llm_provider`: Name of the LiteLLM provider
+ * - `custom_llm_provider`: Name of the LLM provider
  * - `fine_tuning_job_id`: The ID of the fine-tuning job to cancel.
  */
 class CancelCreateParams

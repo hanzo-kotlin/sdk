@@ -79,7 +79,7 @@ class OkHttpClient private constructor(private val okHttpClient: okhttp3.OkHttpC
         if (logLevel != null) {
             clientBuilder.addNetworkInterceptor(
                 HttpLoggingInterceptor().setLevel(logLevel).apply {
-                    redactHeader("x-litellm-api-key")
+                    redactHeader("Ocp-Apim-Subscription-Key")
                 }
             )
         }

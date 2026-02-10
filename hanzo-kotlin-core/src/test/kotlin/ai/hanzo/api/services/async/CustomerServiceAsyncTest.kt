@@ -10,7 +10,6 @@ import ai.hanzo.api.models.customer.CustomerCreateParams
 import ai.hanzo.api.models.customer.CustomerDeleteParams
 import ai.hanzo.api.models.customer.CustomerRetrieveInfoParams
 import ai.hanzo.api.models.customer.CustomerUpdateParams
-import java.time.OffsetDateTime
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -37,7 +36,6 @@ internal class CustomerServiceAsyncTest {
                     .blocked(true)
                     .budgetDuration("budget_duration")
                     .budgetId("budget_id")
-                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .defaultModel("default_model")
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
@@ -58,7 +56,6 @@ internal class CustomerServiceAsyncTest {
                     )
                     .rpmLimit(0L)
                     .softBudget(0.0)
-                    .spend(0.0)
                     .tpmLimit(0L)
                     .build()
             )
@@ -102,9 +99,9 @@ internal class CustomerServiceAsyncTest {
                 .build()
         val customerServiceAsync = client.customer()
 
-        val liteLlmEndUserTables = customerServiceAsync.list()
+        val customers = customerServiceAsync.list()
 
-        liteLlmEndUserTables.forEach { it.validate() }
+        customers.forEach { it.validate() }
     }
 
     @Disabled("Prism tests are disabled")
@@ -148,12 +145,12 @@ internal class CustomerServiceAsyncTest {
                 .build()
         val customerServiceAsync = client.customer()
 
-        val liteLlmEndUserTable =
+        val response =
             customerServiceAsync.retrieveInfo(
                 CustomerRetrieveInfoParams.builder().endUserId("end_user_id").build()
             )
 
-        liteLlmEndUserTable.validate()
+        response.validate()
     }
 
     @Disabled("Prism tests are disabled")

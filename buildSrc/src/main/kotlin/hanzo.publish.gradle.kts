@@ -42,8 +42,8 @@ configure<MavenPublishBaseExtension> {
     )
 
     pom {
-        name.set("LiteLLM API")
-        description.set("Proxy Server to call 100+ LLMs in the OpenAI format.\n[**Customize Swagger Docs**](https://docs.litellm.ai/docs/proxy/enterprise#swagger-docs---custom-routes--branding)\n\n👉 [`LiteLLM Admin Panel on /ui`](/ui). Create, Edit Keys with SSO. Having\nissues? Try [`Fallback Login`](/fallback/login)\n\n💸 [`LiteLLM Model Cost Map`](https://models.litellm.ai/).\n\n🔎 [`LiteLLM Model Hub`](/ui/model_hub_table). See available models on the\nproxy. [**Docs**](https://docs.litellm.ai/docs/proxy/ai_hub)")
+        name.set("Hanzo API")
+        description.set("API documentation for Hanzo")
         url.set("https://docs.hanzo.ai")
 
         licenses {

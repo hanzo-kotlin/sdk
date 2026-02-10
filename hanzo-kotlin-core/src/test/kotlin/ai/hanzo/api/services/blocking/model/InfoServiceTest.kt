@@ -22,8 +22,7 @@ internal class InfoServiceTest {
                 .build()
         val infoService = client.model().info()
 
-        val infos =
-            infoService.list(InfoListParams.builder().litellmModelId("litellm_model_id").build())
+        val infos = infoService.list(InfoListParams.builder().llmModelId("llm_model_id").build())
 
         infos.validate()
     }

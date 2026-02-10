@@ -4,8 +4,6 @@ package ai.hanzo.api.services.async.openai.deployments
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
-import ai.hanzo.api.core.JsonValue
-import ai.hanzo.api.models.openai.deployments.chat.ChatCompleteParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -23,78 +21,7 @@ internal class ChatServiceAsyncTest {
                 .build()
         val chatServiceAsync = client.openai().deployments().chat()
 
-        val response =
-            chatServiceAsync.complete(
-                ChatCompleteParams.builder()
-                    .pathModel("model")
-                    .addMessage(
-                        ChatCompleteParams.Message.ChatCompletionUserMessage.builder()
-                            .content("Hello, how are you?")
-                            .cacheControl(
-                                ChatCompleteParams.Message.ChatCompletionUserMessage.CacheControl
-                                    .builder()
-                                    .build()
-                            )
-                            .build()
-                    )
-                    .bodyModel("model")
-                    .caching(true)
-                    .contextWindowFallbackDict(
-                        ChatCompleteParams.ContextWindowFallbackDict.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("string"))
-                            .build()
-                    )
-                    .addFallback("string")
-                    .frequencyPenalty(0.0)
-                    .functionCall("string")
-                    .addFunction(
-                        ChatCompleteParams.Function.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .addGuardrail("string")
-                    .logitBias(
-                        ChatCompleteParams.LogitBias.builder()
-                            .putAdditionalProperty("foo", JsonValue.from(0))
-                            .build()
-                    )
-                    .logprobs(true)
-                    .maxTokens(0L)
-                    .metadata(
-                        ChatCompleteParams.Metadata.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .n(0L)
-                    .numRetries(0L)
-                    .parallelToolCalls(true)
-                    .presencePenalty(0.0)
-                    .responseFormat(
-                        ChatCompleteParams.ResponseFormat.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .seed(0L)
-                    .serviceTier("service_tier")
-                    .stop("string")
-                    .stream(true)
-                    .streamOptions(
-                        ChatCompleteParams.StreamOptions.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .temperature(0.0)
-                    .toolChoice("string")
-                    .addTool(
-                        ChatCompleteParams.Tool.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .topLogprobs(0L)
-                    .topP(0.0)
-                    .user("user")
-                    .build()
-            )
+        val response = chatServiceAsync.complete("model")
 
         response.validate()
     }

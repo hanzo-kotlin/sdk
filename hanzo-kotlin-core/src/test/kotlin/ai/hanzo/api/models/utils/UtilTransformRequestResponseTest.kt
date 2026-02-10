@@ -16,33 +16,17 @@ internal class UtilTransformRequestResponseTest {
             UtilTransformRequestResponse.builder()
                 .error("error")
                 .rawRequestApiBase("raw_request_api_base")
-                .rawRequestBody(
-                    UtilTransformRequestResponse.RawRequestBody.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
-                .rawRequestHeaders(
-                    UtilTransformRequestResponse.RawRequestHeaders.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .rawRequestBody(JsonValue.from(mapOf<String, Any>()))
+                .rawRequestHeaders(JsonValue.from(mapOf<String, Any>()))
                 .build()
 
         assertThat(utilTransformRequestResponse.error()).isEqualTo("error")
         assertThat(utilTransformRequestResponse.rawRequestApiBase())
             .isEqualTo("raw_request_api_base")
-        assertThat(utilTransformRequestResponse.rawRequestBody())
-            .isEqualTo(
-                UtilTransformRequestResponse.RawRequestBody.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
-        assertThat(utilTransformRequestResponse.rawRequestHeaders())
-            .isEqualTo(
-                UtilTransformRequestResponse.RawRequestHeaders.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+        assertThat(utilTransformRequestResponse._rawRequestBody())
+            .isEqualTo(JsonValue.from(mapOf<String, Any>()))
+        assertThat(utilTransformRequestResponse._rawRequestHeaders())
+            .isEqualTo(JsonValue.from(mapOf<String, Any>()))
     }
 
     @Test
@@ -52,16 +36,8 @@ internal class UtilTransformRequestResponseTest {
             UtilTransformRequestResponse.builder()
                 .error("error")
                 .rawRequestApiBase("raw_request_api_base")
-                .rawRequestBody(
-                    UtilTransformRequestResponse.RawRequestBody.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
-                .rawRequestHeaders(
-                    UtilTransformRequestResponse.RawRequestHeaders.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .rawRequestBody(JsonValue.from(mapOf<String, Any>()))
+                .rawRequestHeaders(JsonValue.from(mapOf<String, Any>()))
                 .build()
 
         val roundtrippedUtilTransformRequestResponse =

@@ -16,7 +16,7 @@ import java.util.Objects
  *
  * Example curl:
  * ```
- * curl -X GET 'http://localhost:4000/customer/info?end_user_id=test-litellm-user-4'         -H 'Authorization: Bearer sk-1234'
+ * curl -X GET 'http://localhost:4000/customer/info?end_user_id=test-llm-user-4'         -H 'Authorization: Bearer sk-1234'
  * ```
  */
 class CustomerRetrieveInfoParams
