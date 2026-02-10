@@ -42,7 +42,7 @@ internal class CallbackServiceTest {
             callbackService.add(
                 CallbackAddParams.builder()
                     .teamId("team_id")
-                    .litellmChangedBy("litellm-changed-by")
+                    .llmChangedBy("llm-changed-by")
                     .callbackName("callback_name")
                     .callbackVars(
                         CallbackAddParams.CallbackVars.builder()

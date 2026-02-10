@@ -62,12 +62,7 @@ internal class BatchServiceTest {
 
         val batches =
             batchService.list(
-                BatchListParams.builder()
-                    .after("after")
-                    .limit(0L)
-                    .provider("provider")
-                    .targetModelNames("target_model_names")
-                    .build()
+                BatchListParams.builder().after("after").limit(0L).provider("provider").build()
             )
 
         batches.validate()
@@ -125,7 +120,6 @@ internal class BatchServiceTest {
                     .provider("provider")
                     .after("after")
                     .limit(0L)
-                    .targetModelNames("target_model_names")
                     .build()
             )
 

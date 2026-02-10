@@ -3,9 +3,7 @@
 package ai.hanzo.api.proguard
 
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.jsonMapper
-import ai.hanzo.api.models.organization.UserRoles
 import ai.hanzo.api.models.utils.UtilTokenCounterResponse
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import kotlin.reflect.full.memberFunctions
@@ -108,14 +106,6 @@ internal class ProGuardCompatibilityTest {
                 .requestModel("request_model")
                 .tokenizerType("tokenizer_type")
                 .totalTokens(0L)
-                .error(true)
-                .errorMessage("error_message")
-                .originalResponse(
-                    UtilTokenCounterResponse.OriginalResponse.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
-                .statusCode(0L)
                 .build()
 
         val roundtrippedUtilTokenCounterResponse =
@@ -125,19 +115,5 @@ internal class ProGuardCompatibilityTest {
             )
 
         assertThat(roundtrippedUtilTokenCounterResponse).isEqualTo(utilTokenCounterResponse)
-    }
-
-    @Test
-    fun userRolesRoundtrip() {
-        val jsonMapper = jsonMapper()
-        val userRoles = UserRoles.PROXY_ADMIN
-
-        val roundtrippedUserRoles =
-            jsonMapper.readValue(
-                jsonMapper.writeValueAsString(userRoles),
-                jacksonTypeRef<UserRoles>(),
-            )
-
-        assertThat(roundtrippedUserRoles).isEqualTo(userRoles)
     }
 }

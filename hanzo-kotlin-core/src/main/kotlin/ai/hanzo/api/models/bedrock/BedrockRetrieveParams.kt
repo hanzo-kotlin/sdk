@@ -7,10 +7,7 @@ import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
-/**
- * This is the v1 passthrough for Bedrock. V2 is handled by the `/bedrock/v2` endpoint.
- * [Docs](https://docs.litellm.ai/docs/pass_through/bedrock)
- */
+/** [Docs](https://docs.hanzo.ai/docs/pass_through/bedrock) */
 class BedrockRetrieveParams
 private constructor(
     private val endpoint: String?,

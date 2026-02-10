@@ -60,7 +60,7 @@ class ChatServiceAsyncImpl internal constructor(private val clientOptions: Clien
         ): HttpResponseFor<ChatCompleteResponse> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
-            checkRequired("pathModel", params.pathModel())
+            checkRequired("model", params.model())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
@@ -72,7 +72,7 @@ class ChatServiceAsyncImpl internal constructor(private val clientOptions: Clien
                         "chat",
                         "completions",
                     )
-                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepareAsync(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

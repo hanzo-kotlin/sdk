@@ -412,7 +412,7 @@ private constructor(
             headers.put("X-Stainless-Kotlin-Version", KotlinVersion.CURRENT.toString())
             apiKey.let {
                 if (!it.isEmpty()) {
-                    headers.put("x-litellm-api-key", it)
+                    headers.put("Ocp-Apim-Subscription-Key", it)
                 }
             }
             headers.replaceAll(this.headers.build())

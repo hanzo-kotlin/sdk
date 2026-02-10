@@ -43,9 +43,13 @@ interface CompletionServiceAsync {
      * ```
      */
     suspend fun create(
-        params: CompletionCreateParams,
+        params: CompletionCreateParams = CompletionCreateParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
     ): CompletionCreateResponse
+
+    /** @see create */
+    suspend fun create(requestOptions: RequestOptions): CompletionCreateResponse =
+        create(CompletionCreateParams.none(), requestOptions)
 
     /**
      * A view of [CompletionServiceAsync] that provides access to raw HTTP responses for each
@@ -68,8 +72,15 @@ interface CompletionServiceAsync {
          */
         @MustBeClosed
         suspend fun create(
-            params: CompletionCreateParams,
+            params: CompletionCreateParams = CompletionCreateParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<CompletionCreateResponse>
+
+        /** @see create */
+        @MustBeClosed
+        suspend fun create(
+            requestOptions: RequestOptions
+        ): HttpResponseFor<CompletionCreateResponse> =
+            create(CompletionCreateParams.none(), requestOptions)
     }
 }

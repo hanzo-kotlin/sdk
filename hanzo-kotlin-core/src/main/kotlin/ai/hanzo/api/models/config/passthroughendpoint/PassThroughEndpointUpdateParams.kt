@@ -4,26 +4,24 @@ package ai.hanzo.api.models.config.passthroughendpoint
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.Params
-import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
+import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
-/** Update a pass-through endpoint by ID. */
+/** Update a pass-through endpoint */
 class PassThroughEndpointUpdateParams
 private constructor(
     private val endpointId: String?,
-    private val passThroughGenericEndpoint: PassThroughGenericEndpoint,
     private val additionalHeaders: Headers,
     private val additionalQueryParams: QueryParams,
+    private val additionalBodyProperties: Map<String, JsonValue>,
 ) : Params {
 
     fun endpointId(): String? = endpointId
 
-    fun passThroughGenericEndpoint(): PassThroughGenericEndpoint = passThroughGenericEndpoint
-
-    fun _additionalBodyProperties(): Map<String, JsonValue> =
-        passThroughGenericEndpoint._additionalProperties()
+    /** Additional body properties to send with the request. */
+    fun _additionalBodyProperties(): Map<String, JsonValue> = additionalBodyProperties
 
     /** Additional headers to send with the request. */
     fun _additionalHeaders(): Headers = additionalHeaders
@@ -35,14 +33,11 @@ private constructor(
 
     companion object {
 
+        fun none(): PassThroughEndpointUpdateParams = builder().build()
+
         /**
          * Returns a mutable builder for constructing an instance of
          * [PassThroughEndpointUpdateParams].
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .passThroughGenericEndpoint()
-         * ```
          */
         fun builder() = Builder()
     }
@@ -51,26 +46,21 @@ private constructor(
     class Builder internal constructor() {
 
         private var endpointId: String? = null
-        private var passThroughGenericEndpoint: PassThroughGenericEndpoint? = null
         private var additionalHeaders: Headers.Builder = Headers.builder()
         private var additionalQueryParams: QueryParams.Builder = QueryParams.builder()
+        private var additionalBodyProperties: MutableMap<String, JsonValue> = mutableMapOf()
 
         internal fun from(passThroughEndpointUpdateParams: PassThroughEndpointUpdateParams) =
             apply {
                 endpointId = passThroughEndpointUpdateParams.endpointId
-                passThroughGenericEndpoint =
-                    passThroughEndpointUpdateParams.passThroughGenericEndpoint
                 additionalHeaders = passThroughEndpointUpdateParams.additionalHeaders.toBuilder()
                 additionalQueryParams =
                     passThroughEndpointUpdateParams.additionalQueryParams.toBuilder()
+                additionalBodyProperties =
+                    passThroughEndpointUpdateParams.additionalBodyProperties.toMutableMap()
             }
 
         fun endpointId(endpointId: String?) = apply { this.endpointId = endpointId }
-
-        fun passThroughGenericEndpoint(passThroughGenericEndpoint: PassThroughGenericEndpoint) =
-            apply {
-                this.passThroughGenericEndpoint = passThroughGenericEndpoint
-            }
 
         fun additionalHeaders(additionalHeaders: Headers) = apply {
             this.additionalHeaders.clear()
@@ -170,28 +160,43 @@ private constructor(
             additionalQueryParams.removeAll(keys)
         }
 
+        fun additionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) = apply {
+            this.additionalBodyProperties.clear()
+            putAllAdditionalBodyProperties(additionalBodyProperties)
+        }
+
+        fun putAdditionalBodyProperty(key: String, value: JsonValue) = apply {
+            additionalBodyProperties.put(key, value)
+        }
+
+        fun putAllAdditionalBodyProperties(additionalBodyProperties: Map<String, JsonValue>) =
+            apply {
+                this.additionalBodyProperties.putAll(additionalBodyProperties)
+            }
+
+        fun removeAdditionalBodyProperty(key: String) = apply {
+            additionalBodyProperties.remove(key)
+        }
+
+        fun removeAllAdditionalBodyProperties(keys: Set<String>) = apply {
+            keys.forEach(::removeAdditionalBodyProperty)
+        }
+
         /**
          * Returns an immutable instance of [PassThroughEndpointUpdateParams].
          *
          * Further updates to this [Builder] will not mutate the returned instance.
-         *
-         * The following fields are required:
-         * ```kotlin
-         * .passThroughGenericEndpoint()
-         * ```
-         *
-         * @throws IllegalStateException if any required field is unset.
          */
         fun build(): PassThroughEndpointUpdateParams =
             PassThroughEndpointUpdateParams(
                 endpointId,
-                checkRequired("passThroughGenericEndpoint", passThroughGenericEndpoint),
                 additionalHeaders.build(),
                 additionalQueryParams.build(),
+                additionalBodyProperties.toImmutable(),
             )
     }
 
-    fun _body(): PassThroughGenericEndpoint = passThroughGenericEndpoint
+    fun _body(): Map<String, JsonValue>? = additionalBodyProperties.ifEmpty { null }
 
     fun _pathParam(index: Int): String =
         when (index) {
@@ -210,19 +215,14 @@ private constructor(
 
         return other is PassThroughEndpointUpdateParams &&
             endpointId == other.endpointId &&
-            passThroughGenericEndpoint == other.passThroughGenericEndpoint &&
             additionalHeaders == other.additionalHeaders &&
-            additionalQueryParams == other.additionalQueryParams
+            additionalQueryParams == other.additionalQueryParams &&
+            additionalBodyProperties == other.additionalBodyProperties
     }
 
     override fun hashCode(): Int =
-        Objects.hash(
-            endpointId,
-            passThroughGenericEndpoint,
-            additionalHeaders,
-            additionalQueryParams,
-        )
+        Objects.hash(endpointId, additionalHeaders, additionalQueryParams, additionalBodyProperties)
 
     override fun toString() =
-        "PassThroughEndpointUpdateParams{endpointId=$endpointId, passThroughGenericEndpoint=$passThroughGenericEndpoint, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams}"
+        "PassThroughEndpointUpdateParams{endpointId=$endpointId, additionalHeaders=$additionalHeaders, additionalQueryParams=$additionalQueryParams, additionalBodyProperties=$additionalBodyProperties}"
 }

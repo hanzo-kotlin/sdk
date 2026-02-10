@@ -23,7 +23,16 @@ interface InputItemService {
      */
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): InputItemService
 
-    /** List input items for a response. */
+    /**
+     * Get input items for a response.
+     *
+     * Follows the OpenAI Responses API spec:
+     * https://platform.openai.com/docs/api-reference/responses/input-items
+     *
+     * ```bash
+     * curl -X GET http://localhost:4000/v1/responses/resp_abc123/input_items     -H "Authorization: Bearer sk-1234"
+     * ```
+     */
     fun list(
         responseId: String,
         params: InputItemListParams = InputItemListParams.none(),

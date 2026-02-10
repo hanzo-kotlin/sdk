@@ -7,6 +7,7 @@ import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.user.UserCreateParams
 import ai.hanzo.api.models.user.UserDeleteParams
+import ai.hanzo.api.models.user.UserListParams
 import ai.hanzo.api.models.user.UserRetrieveInfoParams
 import ai.hanzo.api.models.user.UserUpdateParams
 import org.junit.jupiter.api.Disabled
@@ -29,73 +30,28 @@ internal class UserServiceAsyncTest {
         val user =
             userServiceAsync.create(
                 UserCreateParams.builder()
-                    .aliases(
-                        UserCreateParams.Aliases.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .aliases(JsonValue.from(mapOf<String, Any>()))
                     .addAllowedCacheControl(JsonValue.from(mapOf<String, Any>()))
                     .autoCreateKey(true)
                     .blocked(true)
                     .budgetDuration("budget_duration")
-                    .config(
-                        UserCreateParams.Config.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .config(JsonValue.from(mapOf<String, Any>()))
                     .duration("duration")
                     .addGuardrail("string")
                     .keyAlias("key_alias")
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
-                    .metadata(
-                        UserCreateParams.Metadata.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelMaxBudget(
-                        UserCreateParams.ModelMaxBudget.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelRpmLimit(
-                        UserCreateParams.ModelRpmLimit.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelTpmLimit(
-                        UserCreateParams.ModelTpmLimit.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .metadata(JsonValue.from(mapOf<String, Any>()))
+                    .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                    .modelRpmLimit(JsonValue.from(mapOf<String, Any>()))
+                    .modelTpmLimit(JsonValue.from(mapOf<String, Any>()))
                     .addModel(JsonValue.from(mapOf<String, Any>()))
-                    .objectPermission(
-                        UserCreateParams.ObjectPermission.builder()
-                            .addAgentAccessGroup("string")
-                            .addAgent("string")
-                            .addMcpAccessGroup("string")
-                            .addMcpServer("string")
-                            .mcpToolPermissions(
-                                UserCreateParams.ObjectPermission.McpToolPermissions.builder()
-                                    .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
-                                    .build()
-                            )
-                            .addVectorStore("string")
-                            .build()
-                    )
-                    .addOrganization("string")
-                    .permissions(
-                        UserCreateParams.Permissions.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .addPrompt("string")
+                    .permissions(JsonValue.from(mapOf<String, Any>()))
                     .rpmLimit(0L)
                     .sendInviteEmail(true)
                     .spend(0.0)
-                    .ssoUserId("sso_user_id")
                     .teamId("team_id")
-                    .teamsOfStrings(listOf("string"))
+                    .addTeam(JsonValue.from(mapOf<String, Any>()))
                     .tpmLimit(0L)
                     .userAlias("user_alias")
                     .userEmail("user_email")
@@ -120,71 +76,27 @@ internal class UserServiceAsyncTest {
         val user =
             userServiceAsync.update(
                 UserUpdateParams.builder()
-                    .aliases(
-                        UserUpdateParams.Aliases.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .aliases(JsonValue.from(mapOf<String, Any>()))
                     .addAllowedCacheControl(JsonValue.from(mapOf<String, Any>()))
                     .blocked(true)
                     .budgetDuration("budget_duration")
-                    .config(
-                        UserUpdateParams.Config.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .config(JsonValue.from(mapOf<String, Any>()))
                     .duration("duration")
                     .addGuardrail("string")
                     .keyAlias("key_alias")
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
-                    .metadata(
-                        UserUpdateParams.Metadata.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelMaxBudget(
-                        UserUpdateParams.ModelMaxBudget.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelRpmLimit(
-                        UserUpdateParams.ModelRpmLimit.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelTpmLimit(
-                        UserUpdateParams.ModelTpmLimit.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .metadata(JsonValue.from(mapOf<String, Any>()))
+                    .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                    .modelRpmLimit(JsonValue.from(mapOf<String, Any>()))
+                    .modelTpmLimit(JsonValue.from(mapOf<String, Any>()))
                     .addModel(JsonValue.from(mapOf<String, Any>()))
-                    .objectPermission(
-                        UserUpdateParams.ObjectPermission.builder()
-                            .addAgentAccessGroup("string")
-                            .addAgent("string")
-                            .addMcpAccessGroup("string")
-                            .addMcpServer("string")
-                            .mcpToolPermissions(
-                                UserUpdateParams.ObjectPermission.McpToolPermissions.builder()
-                                    .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
-                                    .build()
-                            )
-                            .addVectorStore("string")
-                            .build()
-                    )
                     .password("password")
-                    .permissions(
-                        UserUpdateParams.Permissions.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .addPrompt("string")
+                    .permissions(JsonValue.from(mapOf<String, Any>()))
                     .rpmLimit(0L)
                     .spend(0.0)
                     .teamId("team_id")
                     .tpmLimit(0L)
-                    .userAlias("user_alias")
                     .userEmail("user_email")
                     .userId("user_id")
                     .userRole(UserUpdateParams.UserRole.PROXY_ADMIN)
@@ -192,6 +104,29 @@ internal class UserServiceAsyncTest {
             )
 
         user.validate()
+    }
+
+    @Disabled("Prism tests are disabled")
+    @Test
+    suspend fun list() {
+        val client =
+            HanzoOkHttpClientAsync.builder()
+                .baseUrl(TestServerExtension.BASE_URL)
+                .apiKey("My API Key")
+                .build()
+        val userServiceAsync = client.user()
+
+        val users =
+            userServiceAsync.list(
+                UserListParams.builder()
+                    .page(1L)
+                    .pageSize(1L)
+                    .role("role")
+                    .userIds("user_ids")
+                    .build()
+            )
+
+        users.validate()
     }
 
     @Disabled("Prism tests are disabled")
@@ -207,7 +142,7 @@ internal class UserServiceAsyncTest {
         val user =
             userServiceAsync.delete(
                 UserDeleteParams.builder()
-                    .litellmChangedBy("litellm-changed-by")
+                    .llmChangedBy("llm-changed-by")
                     .addUserId("string")
                     .build()
             )

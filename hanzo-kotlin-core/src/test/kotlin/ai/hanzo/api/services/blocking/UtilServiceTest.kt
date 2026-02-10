@@ -46,18 +46,8 @@ internal class UtilServiceTest {
         val response =
             utilService.tokenCounter(
                 UtilTokenCounterParams.builder()
-                    .callEndpoint(true)
                     .model("model")
-                    .addContent(
-                        UtilTokenCounterParams.Content.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .addMessage(
-                        UtilTokenCounterParams.Message.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .addMessage(JsonValue.from(mapOf<String, Any>()))
                     .prompt("prompt")
                     .build()
             )
@@ -79,11 +69,7 @@ internal class UtilServiceTest {
             utilService.transformRequest(
                 UtilTransformRequestParams.builder()
                     .callType(UtilTransformRequestParams.CallType.EMBEDDING)
-                    .requestBody(
-                        UtilTransformRequestParams.RequestBody.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .requestBody(JsonValue.from(mapOf<String, Any>()))
                     .build()
             )
 

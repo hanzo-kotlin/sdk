@@ -4,7 +4,6 @@ package ai.hanzo.api.services.blocking.images
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
-import ai.hanzo.api.models.images.generations.GenerationCreateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,8 +21,7 @@ internal class GenerationServiceTest {
                 .build()
         val generationService = client.images().generations()
 
-        val generation =
-            generationService.create(GenerationCreateParams.builder().model("model").build())
+        val generation = generationService.create()
 
         generation.validate()
     }

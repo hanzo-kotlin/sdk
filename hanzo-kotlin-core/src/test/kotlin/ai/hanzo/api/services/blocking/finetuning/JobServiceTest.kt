@@ -4,9 +4,9 @@ package ai.hanzo.api.services.blocking.finetuning
 
 import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
+import ai.hanzo.api.models.finetuning.jobs.JobCreateParams
 import ai.hanzo.api.models.finetuning.jobs.JobListParams
 import ai.hanzo.api.models.finetuning.jobs.JobRetrieveParams
-import ai.hanzo.api.models.finetuning.jobs.LiteLlmFineTuningJobCreate
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,12 +26,12 @@ internal class JobServiceTest {
 
         val job =
             jobService.create(
-                LiteLlmFineTuningJobCreate.builder()
+                JobCreateParams.builder()
+                    .customLlmProvider(JobCreateParams.CustomLlmProvider.OPENAI)
                     .model("model")
                     .trainingFile("training_file")
-                    .customLlmProvider(LiteLlmFineTuningJobCreate.CustomLlmProvider.OPENAI)
                     .hyperparameters(
-                        LiteLlmFineTuningJobCreate.Hyperparameters.builder()
+                        JobCreateParams.Hyperparameters.builder()
                             .batchSize("string")
                             .learningRateMultiplier("string")
                             .nEpochs("string")
@@ -81,10 +81,9 @@ internal class JobServiceTest {
         val jobs =
             jobService.list(
                 JobListParams.builder()
-                    .after("after")
                     .customLlmProvider(JobListParams.CustomLlmProvider.OPENAI)
+                    .after("after")
                     .limit(0L)
-                    .targetModelNames("target_model_names")
                     .build()
             )
 
