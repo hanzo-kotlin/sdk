@@ -402,6 +402,25 @@ val client: HanzoClient = HanzoOkHttpClient.builder()
     .build()
 ```
 
+### Connection pooling
+
+To customize the underlying OkHttp connection pool, configure the client using the `maxIdleConnections` and `keepAliveDuration` methods:
+
+```kotlin
+import ai.hanzo.api.client.HanzoClient
+import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
+import java.time.Duration
+
+val client: HanzoClient = HanzoOkHttpClient.builder()
+    .fromEnv()
+    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.
+    .maxIdleConnections(10)
+    .keepAliveDuration(Duration.ofMinutes(2))
+    .build()
+```
+
+If both options are unset, OkHttp's default connection pool settings are used.
+
 ### HTTPS
 
 > [!NOTE]
