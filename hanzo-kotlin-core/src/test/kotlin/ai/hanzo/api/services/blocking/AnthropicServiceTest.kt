@@ -2,23 +2,16 @@
 
 package ai.hanzo.api.services.blocking
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class AnthropicServiceTest {
 
     @Disabled("Prism tests are disabled")
     @Test
     fun create() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val anthropicService = client.anthropic()
 
         val anthropic = anthropicService.create("endpoint")
@@ -29,11 +22,7 @@ internal class AnthropicServiceTest {
     @Disabled("Prism tests are disabled")
     @Test
     fun retrieve() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val anthropicService = client.anthropic()
 
         val anthropic = anthropicService.retrieve("endpoint")
@@ -44,11 +33,7 @@ internal class AnthropicServiceTest {
     @Disabled("Prism tests are disabled")
     @Test
     fun update() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val anthropicService = client.anthropic()
 
         val anthropic = anthropicService.update("endpoint")
@@ -59,11 +44,7 @@ internal class AnthropicServiceTest {
     @Disabled("Prism tests are disabled")
     @Test
     fun delete() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val anthropicService = client.anthropic()
 
         val anthropic = anthropicService.delete("endpoint")
@@ -74,11 +55,7 @@ internal class AnthropicServiceTest {
     @Disabled("Prism tests are disabled")
     @Test
     fun modify() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val anthropicService = client.anthropic()
 
         val response = anthropicService.modify("endpoint")

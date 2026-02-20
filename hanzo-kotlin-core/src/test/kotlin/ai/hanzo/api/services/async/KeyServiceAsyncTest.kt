@@ -2,7 +2,6 @@
 
 package ai.hanzo.api.services.async
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.key.BlockKeyRequest
@@ -18,19 +17,13 @@ import ai.hanzo.api.models.key.regenerate.RegenerateKeyRequest
 import java.time.OffsetDateTime
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class KeyServiceAsyncTest {
 
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun update() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val key =
@@ -73,11 +66,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun list() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val keys =
@@ -100,11 +89,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun delete() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val key =
@@ -122,11 +107,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun block() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val response =
@@ -143,11 +124,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun checkHealth() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val response = keyServiceAsync.checkHealth()
@@ -158,11 +135,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun generate() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val generateKeyResponse =
@@ -205,11 +178,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun regenerateByKey() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val generateKeyResponse =
@@ -258,11 +227,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieveInfo() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val response =
@@ -274,11 +239,7 @@ internal class KeyServiceAsyncTest {
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun unblock() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val keyServiceAsync = client.key()
 
         val response =
