@@ -2,7 +2,6 @@
 
 package ai.hanzo.api.services.blocking.model
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.model.ModelInfo
@@ -11,19 +10,13 @@ import ai.hanzo.api.models.model.update.UpdatePartialParams
 import java.time.OffsetDateTime
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class UpdateServiceTest {
 
     @Disabled("Prism tests are disabled")
     @Test
     fun full() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val updateService = client.model().update()
 
         val response =
@@ -88,11 +81,7 @@ internal class UpdateServiceTest {
     @Disabled("Prism tests are disabled")
     @Test
     fun partial() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val updateService = client.model().update()
 
         val response =
