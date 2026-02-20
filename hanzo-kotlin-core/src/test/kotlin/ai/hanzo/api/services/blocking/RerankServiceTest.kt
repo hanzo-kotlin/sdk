@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 internal class RerankServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -19,7 +19,7 @@ internal class RerankServiceTest {
         rerank.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun createV1() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -30,7 +30,7 @@ internal class RerankServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun createV2() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

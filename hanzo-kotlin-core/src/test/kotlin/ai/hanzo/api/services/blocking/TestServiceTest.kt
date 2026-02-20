@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 internal class TestServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun ping() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

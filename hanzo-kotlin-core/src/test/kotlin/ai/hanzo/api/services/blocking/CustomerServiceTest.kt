@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 
 internal class CustomerServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -56,7 +56,7 @@ internal class CustomerServiceTest {
         customer.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun update() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -78,7 +78,7 @@ internal class CustomerServiceTest {
         customer.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun list() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -89,7 +89,7 @@ internal class CustomerServiceTest {
         customers.forEach { it.validate() }
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun delete() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -101,7 +101,7 @@ internal class CustomerServiceTest {
         customer.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun block() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -112,7 +112,7 @@ internal class CustomerServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieveInfo() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -126,7 +126,7 @@ internal class CustomerServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun unblock() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
