@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 internal class DeleteServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun createAllowedIp() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
