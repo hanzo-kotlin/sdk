@@ -2,24 +2,17 @@
 
 package ai.hanzo.api.services.async.files
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.models.files.content.ContentRetrieveParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class ContentServiceAsyncTest {
 
     @Disabled("Prism tests are disabled")
     @Test
     suspend fun retrieve() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val contentServiceAsync = client.files().content()
 
         val content =
