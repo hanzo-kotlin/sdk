@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 internal class InfoServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieve() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -24,7 +24,7 @@ internal class InfoServiceTest {
         info.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun deprecated() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

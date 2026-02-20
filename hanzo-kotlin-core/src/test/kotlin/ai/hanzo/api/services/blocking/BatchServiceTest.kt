@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 
 internal class BatchServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -25,7 +25,7 @@ internal class BatchServiceTest {
         batch.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieve() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -39,7 +39,7 @@ internal class BatchServiceTest {
         batch.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun list() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -53,7 +53,7 @@ internal class BatchServiceTest {
         batches.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun cancelWithProvider() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -70,7 +70,7 @@ internal class BatchServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun createWithProvider() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -81,7 +81,7 @@ internal class BatchServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun listWithProvider() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -99,7 +99,7 @@ internal class BatchServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieveWithProvider() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

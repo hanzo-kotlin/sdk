@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 internal class HealthServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun checkAll() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -21,7 +21,7 @@ internal class HealthServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun checkLiveliness() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -32,7 +32,7 @@ internal class HealthServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun checkLiveness() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -43,7 +43,7 @@ internal class HealthServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun checkReadiness() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -54,7 +54,7 @@ internal class HealthServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun checkServices() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

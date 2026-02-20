@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test
 
 internal class KeyServiceAsyncTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun update() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -63,7 +63,7 @@ internal class KeyServiceAsyncTest {
         key.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun list() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -86,7 +86,7 @@ internal class KeyServiceAsyncTest {
         keys.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun delete() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -104,7 +104,7 @@ internal class KeyServiceAsyncTest {
         key.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun block() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -121,7 +121,7 @@ internal class KeyServiceAsyncTest {
         response?.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun checkHealth() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -132,7 +132,7 @@ internal class KeyServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun generate() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -175,7 +175,7 @@ internal class KeyServiceAsyncTest {
         generateKeyResponse.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun regenerateByKey() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -224,7 +224,7 @@ internal class KeyServiceAsyncTest {
         generateKeyResponse?.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun retrieveInfo() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
@@ -236,7 +236,7 @@ internal class KeyServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun unblock() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()

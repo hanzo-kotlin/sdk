@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 
 internal class BudgetServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -50,7 +50,7 @@ internal class BudgetServiceTest {
         budget.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun update() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -87,7 +87,7 @@ internal class BudgetServiceTest {
         budget.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun list() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -98,7 +98,7 @@ internal class BudgetServiceTest {
         budgets.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun delete() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -109,7 +109,7 @@ internal class BudgetServiceTest {
         budget.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun info() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -120,7 +120,7 @@ internal class BudgetServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun settings() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

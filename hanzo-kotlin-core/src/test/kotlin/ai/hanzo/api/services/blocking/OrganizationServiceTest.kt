@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test
 
 internal class OrganizationServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -43,7 +43,7 @@ internal class OrganizationServiceTest {
         organization.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun update() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -65,7 +65,7 @@ internal class OrganizationServiceTest {
         organization.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun list() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -76,7 +76,7 @@ internal class OrganizationServiceTest {
         organizations.forEach { it.validate() }
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun delete() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -90,7 +90,7 @@ internal class OrganizationServiceTest {
         organizations.forEach { it.validate() }
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun addMember() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -116,7 +116,7 @@ internal class OrganizationServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun deleteMember() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -134,7 +134,7 @@ internal class OrganizationServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun updateMember() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

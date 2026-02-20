@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 
 internal class SpendServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun calculateSpend() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -30,7 +30,7 @@ internal class SpendServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun listLogs() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -50,7 +50,7 @@ internal class SpendServiceTest {
         response.forEach { it.validate() }
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun listTags() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
