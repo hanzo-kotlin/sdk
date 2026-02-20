@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 internal class ModelGroupServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieveInfo() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

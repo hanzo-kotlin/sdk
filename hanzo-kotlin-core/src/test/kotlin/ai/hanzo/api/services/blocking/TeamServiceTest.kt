@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test
 
 internal class TeamServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -58,7 +58,7 @@ internal class TeamServiceTest {
         team.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun update() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -87,7 +87,7 @@ internal class TeamServiceTest {
         team.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun list() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -101,7 +101,7 @@ internal class TeamServiceTest {
         teams.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun delete() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -118,7 +118,7 @@ internal class TeamServiceTest {
         team.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun addMember() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -144,7 +144,7 @@ internal class TeamServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun block() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -155,7 +155,7 @@ internal class TeamServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun disableLogging() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -166,7 +166,7 @@ internal class TeamServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun listAvailable() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -182,7 +182,7 @@ internal class TeamServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun removeMember() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -200,7 +200,7 @@ internal class TeamServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieveInfo() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -212,7 +212,7 @@ internal class TeamServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun unblock() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
@@ -223,7 +223,7 @@ internal class TeamServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun updateMember() {
         val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()

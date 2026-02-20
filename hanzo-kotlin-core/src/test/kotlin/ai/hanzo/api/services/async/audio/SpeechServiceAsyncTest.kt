@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 internal class SpeechServiceAsyncTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun create() {
         val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
