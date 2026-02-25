@@ -1,3 +1,5 @@
+// File generated from our OpenAPI spec by Stainless.
+
 package ai.hanzo.api.core.http
 
 import ai.hanzo.api.core.DefaultSleeper
