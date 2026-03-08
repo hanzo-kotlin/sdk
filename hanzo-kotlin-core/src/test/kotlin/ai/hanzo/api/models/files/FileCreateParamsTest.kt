@@ -13,7 +13,7 @@ internal class FileCreateParamsTest {
     fun create() {
         FileCreateParams.builder()
             .provider("provider")
-            .file("some content".byteInputStream())
+            .file("Example data".byteInputStream())
             .purpose("purpose")
             .customLlmProvider("custom_llm_provider")
             .build()
@@ -24,7 +24,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -38,7 +38,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .purpose("purpose")
                 .customLlmProvider("custom_llm_provider")
                 .build()
@@ -55,7 +55,7 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".byteInputStream()),
+                        "file" to MultipartField.of("Example data".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                         "custom_llm_provider" to MultipartField.of("custom_llm_provider"),
                     )
@@ -70,7 +70,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -86,7 +86,7 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".byteInputStream()),
+                        "file" to MultipartField.of("Example data".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                     )
                     .mapValues { (_, field) ->
