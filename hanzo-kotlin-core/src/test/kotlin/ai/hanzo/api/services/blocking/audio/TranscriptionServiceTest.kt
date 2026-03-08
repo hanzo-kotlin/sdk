@@ -17,7 +17,7 @@ internal class TranscriptionServiceTest {
 
         val transcription =
             transcriptionService.create(
-                TranscriptionCreateParams.builder().file("some content".byteInputStream()).build()
+                TranscriptionCreateParams.builder().file("Example data".byteInputStream()).build()
             )
 
         transcription.validate()
