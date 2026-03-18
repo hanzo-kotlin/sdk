@@ -410,13 +410,14 @@ private constructor(
             headers.put("X-Stainless-Runtime", "JRE")
             headers.put("X-Stainless-Runtime-Version", getJavaVersion())
             headers.put("X-Stainless-Kotlin-Version", KotlinVersion.CURRENT.toString())
-            apiKey.let {
-                if (!it.isEmpty()) {
-                    headers.put("Ocp-Apim-Subscription-Key", it)
-                }
-            }
+            // We replace after all the default headers to allow end-users to overwrite them.
             headers.replaceAll(this.headers.build())
             queryParams.replaceAll(this.queryParams.build())
+            apiKey.let {
+                if (!it.isEmpty()) {
+                    headers.replace("Ocp-Apim-Subscription-Key", it)
+                }
+            }
 
             return ClientOptions(
                 httpClient,
