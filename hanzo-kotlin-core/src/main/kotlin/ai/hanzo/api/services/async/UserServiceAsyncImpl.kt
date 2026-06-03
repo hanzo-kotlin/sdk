@@ -19,6 +19,8 @@ import ai.hanzo.api.models.user.UserCreateParams
 import ai.hanzo.api.models.user.UserCreateResponse
 import ai.hanzo.api.models.user.UserDeleteParams
 import ai.hanzo.api.models.user.UserDeleteResponse
+import ai.hanzo.api.models.user.UserListParams
+import ai.hanzo.api.models.user.UserListResponse
 import ai.hanzo.api.models.user.UserRetrieveInfoParams
 import ai.hanzo.api.models.user.UserRetrieveInfoResponse
 import ai.hanzo.api.models.user.UserUpdateParams
@@ -49,6 +51,13 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
     ): UserUpdateResponse =
         // post /user/update
         withRawResponse().update(params, requestOptions).parse()
+
+    override suspend fun list(
+        params: UserListParams,
+        requestOptions: RequestOptions,
+    ): UserListResponse =
+        // get /user/get_users
+        withRawResponse().list(params, requestOptions).parse()
 
     override suspend fun delete(
         params: UserDeleteParams,
@@ -125,6 +134,33 @@ class UserServiceAsyncImpl internal constructor(private val clientOptions: Clien
             return errorHandler.handle(response).parseable {
                 response
                     .use { updateHandler.handle(it) }
+                    .also {
+                        if (requestOptions.responseValidation!!) {
+                            it.validate()
+                        }
+                    }
+            }
+        }
+
+        private val listHandler: Handler<UserListResponse> =
+            jsonHandler<UserListResponse>(clientOptions.jsonMapper)
+
+        override suspend fun list(
+            params: UserListParams,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<UserListResponse> {
+            val request =
+                HttpRequest.builder()
+                    .method(HttpMethod.GET)
+                    .baseUrl(clientOptions.baseUrl())
+                    .addPathSegments("user", "get_users")
+                    .build()
+                    .prepareAsync(clientOptions, params)
+            val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))
+            val response = clientOptions.httpClient.executeAsync(request, requestOptions)
+            return errorHandler.handle(response).parseable {
+                response
+                    .use { listHandler.handle(it) }
                     .also {
                         if (requestOptions.responseValidation!!) {
                             it.validate()

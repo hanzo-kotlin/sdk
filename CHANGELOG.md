@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2026-06-01)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/hanzoai/kotlin-sdk/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* **api:** api update ([aa5cb95](https://github.com/hanzoai/kotlin-sdk/commit/aa5cb95397f1c30bf3c46aeed966a270812a2ac9))
+* **client:** add connection pooling option ([d002826](https://github.com/hanzoai/kotlin-sdk/commit/d0028262d51ff084b95afd86a516442974cb29db))
+
+
+### Bug Fixes
+
+* **client:** allow updating header/query affecting fields in `toBuilder()` ([1cf3487](https://github.com/hanzoai/kotlin-sdk/commit/1cf34873ac141632133d8e6d3df16d701213d00e))
+* **client:** incorrect `Retry-After` parsing ([8aec562](https://github.com/hanzoai/kotlin-sdk/commit/8aec56258bcf03539820ebed821e80bdc14dfe56))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([9925142](https://github.com/hanzoai/kotlin-sdk/commit/9925142ea10c9a5718942cb2cf39b336e6c67deb))
+* drop apache dependency ([427c5f7](https://github.com/hanzoai/kotlin-sdk/commit/427c5f7cf010a54be943e4b4850f657a1874c360))
+* **internal:** allow passing args to `./scripts/test` ([071114e](https://github.com/hanzoai/kotlin-sdk/commit/071114e8105a2cc7530dd6e53c183a5f54e74a5a))
+* **internal:** bump ktfmt ([83d127e](https://github.com/hanzoai/kotlin-sdk/commit/83d127e9e049ce049de90b351b63bc0e90f99b43))
+* **internal:** bump palantir-java-format ([af0a333](https://github.com/hanzoai/kotlin-sdk/commit/af0a33324956df5d17f48f5f78aeb93ee8ea525b))
+* **internal:** codegen related update ([5b5bd0e](https://github.com/hanzoai/kotlin-sdk/commit/5b5bd0e57472f8597e5909ad6e23392659765bcd))
+* **internal:** expand imports ([604254e](https://github.com/hanzoai/kotlin-sdk/commit/604254e076d74fb604842a03a2028c4b0e1b68f4))
+* **internal:** make `OkHttp` constructor internal ([cf751a9](https://github.com/hanzoai/kotlin-sdk/commit/cf751a9443cac1557a7e31ff9e139691a690b455))
+* **internal:** remove mock server code ([109f5ec](https://github.com/hanzoai/kotlin-sdk/commit/109f5ecd32cf8cbbc400e0ddcbff444538ac9068))
+* **internal:** tweak CI branches ([53511d0](https://github.com/hanzoai/kotlin-sdk/commit/53511d033eee04a0ee8cd75677d66338dea769be))
+* **internal:** update `TestServerExtension` comment ([3606576](https://github.com/hanzoai/kotlin-sdk/commit/3606576ac8fa594d817dc7b1bf433dc07ef84f02))
+* **internal:** update gitignore ([16dcf04](https://github.com/hanzoai/kotlin-sdk/commit/16dcf048ff722b85e0ea157eeadfe485c67e2ad3))
+* **internal:** update retry delay tests ([4f6f2a5](https://github.com/hanzoai/kotlin-sdk/commit/4f6f2a53b833bd547f0c0188b19565619534222c))
+* **internal:** upgrade AssertJ ([6d3fd59](https://github.com/hanzoai/kotlin-sdk/commit/6d3fd59f93539eb11de938f7e677c347b091d639))
+* make `Properties` more resilient to `null` ([feb1d06](https://github.com/hanzoai/kotlin-sdk/commit/feb1d06dd06e10a13fa01d71d464490c56f96c01))
+* update mock server docs ([c561d5b](https://github.com/hanzoai/kotlin-sdk/commit/c561d5be71aa0dfa7b7a45c704e8497b02fdafb1))
+* update placeholder string ([e738702](https://github.com/hanzoai/kotlin-sdk/commit/e7387024129a6dd7ce533d9db5d6f8b5c0943172))
+
 ## 0.1.0-alpha.2 (2026-01-28)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/hanzoai/kotlin-sdk/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)

@@ -10,24 +10,20 @@ internal class JobCreateParamsTest {
     @Test
     fun create() {
         JobCreateParams.builder()
-            .liteLlmFineTuningJobCreate(
-                LiteLlmFineTuningJobCreate.builder()
-                    .model("model")
-                    .trainingFile("training_file")
-                    .customLlmProvider(LiteLlmFineTuningJobCreate.CustomLlmProvider.OPENAI)
-                    .hyperparameters(
-                        LiteLlmFineTuningJobCreate.Hyperparameters.builder()
-                            .batchSize("string")
-                            .learningRateMultiplier("string")
-                            .nEpochs("string")
-                            .build()
-                    )
-                    .addIntegration("string")
-                    .seed(0L)
-                    .suffix("suffix")
-                    .validationFile("validation_file")
+            .customLlmProvider(JobCreateParams.CustomLlmProvider.OPENAI)
+            .model("model")
+            .trainingFile("training_file")
+            .hyperparameters(
+                JobCreateParams.Hyperparameters.builder()
+                    .batchSize("string")
+                    .learningRateMultiplier("string")
+                    .nEpochs("string")
                     .build()
             )
+            .addIntegration("string")
+            .seed(0L)
+            .suffix("suffix")
+            .validationFile("validation_file")
             .build()
     }
 
@@ -35,69 +31,54 @@ internal class JobCreateParamsTest {
     fun body() {
         val params =
             JobCreateParams.builder()
-                .liteLlmFineTuningJobCreate(
-                    LiteLlmFineTuningJobCreate.builder()
-                        .model("model")
-                        .trainingFile("training_file")
-                        .customLlmProvider(LiteLlmFineTuningJobCreate.CustomLlmProvider.OPENAI)
-                        .hyperparameters(
-                            LiteLlmFineTuningJobCreate.Hyperparameters.builder()
-                                .batchSize("string")
-                                .learningRateMultiplier("string")
-                                .nEpochs("string")
-                                .build()
-                        )
-                        .addIntegration("string")
-                        .seed(0L)
-                        .suffix("suffix")
-                        .validationFile("validation_file")
+                .customLlmProvider(JobCreateParams.CustomLlmProvider.OPENAI)
+                .model("model")
+                .trainingFile("training_file")
+                .hyperparameters(
+                    JobCreateParams.Hyperparameters.builder()
+                        .batchSize("string")
+                        .learningRateMultiplier("string")
+                        .nEpochs("string")
                         .build()
                 )
+                .addIntegration("string")
+                .seed(0L)
+                .suffix("suffix")
+                .validationFile("validation_file")
                 .build()
 
         val body = params._body()
 
-        assertThat(body)
+        assertThat(body.customLlmProvider()).isEqualTo(JobCreateParams.CustomLlmProvider.OPENAI)
+        assertThat(body.model()).isEqualTo("model")
+        assertThat(body.trainingFile()).isEqualTo("training_file")
+        assertThat(body.hyperparameters())
             .isEqualTo(
-                LiteLlmFineTuningJobCreate.builder()
-                    .model("model")
-                    .trainingFile("training_file")
-                    .customLlmProvider(LiteLlmFineTuningJobCreate.CustomLlmProvider.OPENAI)
-                    .hyperparameters(
-                        LiteLlmFineTuningJobCreate.Hyperparameters.builder()
-                            .batchSize("string")
-                            .learningRateMultiplier("string")
-                            .nEpochs("string")
-                            .build()
-                    )
-                    .addIntegration("string")
-                    .seed(0L)
-                    .suffix("suffix")
-                    .validationFile("validation_file")
+                JobCreateParams.Hyperparameters.builder()
+                    .batchSize("string")
+                    .learningRateMultiplier("string")
+                    .nEpochs("string")
                     .build()
             )
+        assertThat(body.integrations()).containsExactly("string")
+        assertThat(body.seed()).isEqualTo(0L)
+        assertThat(body.suffix()).isEqualTo("suffix")
+        assertThat(body.validationFile()).isEqualTo("validation_file")
     }
 
     @Test
     fun bodyWithoutOptionalFields() {
         val params =
             JobCreateParams.builder()
-                .liteLlmFineTuningJobCreate(
-                    LiteLlmFineTuningJobCreate.builder()
-                        .model("model")
-                        .trainingFile("training_file")
-                        .build()
-                )
+                .customLlmProvider(JobCreateParams.CustomLlmProvider.OPENAI)
+                .model("model")
+                .trainingFile("training_file")
                 .build()
 
         val body = params._body()
 
-        assertThat(body)
-            .isEqualTo(
-                LiteLlmFineTuningJobCreate.builder()
-                    .model("model")
-                    .trainingFile("training_file")
-                    .build()
-            )
+        assertThat(body.customLlmProvider()).isEqualTo(JobCreateParams.CustomLlmProvider.OPENAI)
+        assertThat(body.model()).isEqualTo("model")
+        assertThat(body.trainingFile()).isEqualTo("training_file")
     }
 }

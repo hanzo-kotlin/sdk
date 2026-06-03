@@ -2,23 +2,16 @@
 
 package ai.hanzo.api.services.blocking
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class CohereServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val cohereService = client.cohere()
 
         val cohere = cohereService.create("endpoint")
@@ -26,14 +19,10 @@ internal class CohereServiceTest {
         cohere.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieve() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val cohereService = client.cohere()
 
         val cohere = cohereService.retrieve("endpoint")
@@ -41,14 +30,10 @@ internal class CohereServiceTest {
         cohere.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun update() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val cohereService = client.cohere()
 
         val cohere = cohereService.update("endpoint")
@@ -56,14 +41,10 @@ internal class CohereServiceTest {
         cohere.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun delete() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val cohereService = client.cohere()
 
         val cohere = cohereService.delete("endpoint")
@@ -71,14 +52,10 @@ internal class CohereServiceTest {
         cohere.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun modify() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val cohereService = client.cohere()
 
         val response = cohereService.modify("endpoint")

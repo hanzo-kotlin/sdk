@@ -14,58 +14,15 @@ internal class PassThroughGenericEndpointTest {
     fun create() {
         val passThroughGenericEndpoint =
             PassThroughGenericEndpoint.builder()
+                .headers(JsonValue.from(mapOf<String, Any>()))
                 .path("path")
                 .target("target")
-                .id("id")
-                .auth(true)
-                .costPerRequest(0.0)
-                .guardrails(
-                    PassThroughGenericEndpoint.Guardrails.builder()
-                        .putAdditionalProperty(
-                            "foo",
-                            JsonValue.from(
-                                mapOf(
-                                    "request_fields" to listOf("string"),
-                                    "response_fields" to listOf("string"),
-                                )
-                            ),
-                        )
-                        .build()
-                )
-                .headers(
-                    PassThroughGenericEndpoint.Headers.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
-                .includeSubpath(true)
                 .build()
 
+        assertThat(passThroughGenericEndpoint._headers())
+            .isEqualTo(JsonValue.from(mapOf<String, Any>()))
         assertThat(passThroughGenericEndpoint.path()).isEqualTo("path")
         assertThat(passThroughGenericEndpoint.target()).isEqualTo("target")
-        assertThat(passThroughGenericEndpoint.id()).isEqualTo("id")
-        assertThat(passThroughGenericEndpoint.auth()).isEqualTo(true)
-        assertThat(passThroughGenericEndpoint.costPerRequest()).isEqualTo(0.0)
-        assertThat(passThroughGenericEndpoint.guardrails())
-            .isEqualTo(
-                PassThroughGenericEndpoint.Guardrails.builder()
-                    .putAdditionalProperty(
-                        "foo",
-                        JsonValue.from(
-                            mapOf(
-                                "request_fields" to listOf("string"),
-                                "response_fields" to listOf("string"),
-                            )
-                        ),
-                    )
-                    .build()
-            )
-        assertThat(passThroughGenericEndpoint.headers())
-            .isEqualTo(
-                PassThroughGenericEndpoint.Headers.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
-        assertThat(passThroughGenericEndpoint.includeSubpath()).isEqualTo(true)
     }
 
     @Test
@@ -73,30 +30,9 @@ internal class PassThroughGenericEndpointTest {
         val jsonMapper = jsonMapper()
         val passThroughGenericEndpoint =
             PassThroughGenericEndpoint.builder()
+                .headers(JsonValue.from(mapOf<String, Any>()))
                 .path("path")
                 .target("target")
-                .id("id")
-                .auth(true)
-                .costPerRequest(0.0)
-                .guardrails(
-                    PassThroughGenericEndpoint.Guardrails.builder()
-                        .putAdditionalProperty(
-                            "foo",
-                            JsonValue.from(
-                                mapOf(
-                                    "request_fields" to listOf("string"),
-                                    "response_fields" to listOf("string"),
-                                )
-                            ),
-                        )
-                        .build()
-                )
-                .headers(
-                    PassThroughGenericEndpoint.Headers.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
-                .includeSubpath(true)
                 .build()
 
         val roundtrippedPassThroughGenericEndpoint =

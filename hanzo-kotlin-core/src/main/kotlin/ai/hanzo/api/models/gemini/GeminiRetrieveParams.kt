@@ -7,7 +7,7 @@ import ai.hanzo.api.core.http.Headers
 import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
-/** [Docs](https://docs.litellm.ai/docs/pass_through/google_ai_studio) */
+/** [Docs](https://docs.hanzo.ai/docs/pass_through/google_ai_studio) */
 class GeminiRetrieveParams
 private constructor(
     private val endpoint: String?,

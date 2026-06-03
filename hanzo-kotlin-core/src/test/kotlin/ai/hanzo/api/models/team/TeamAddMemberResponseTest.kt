@@ -4,8 +4,6 @@ package ai.hanzo.api.models.team
 
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.jsonMapper
-import ai.hanzo.api.models.organization.BudgetTable
-import ai.hanzo.api.models.organization.OrganizationMembershipTable
 import com.fasterxml.jackson.module.kotlin.jacksonTypeRef
 import java.time.OffsetDateTime
 import org.assertj.core.api.Assertions.assertThat
@@ -20,17 +18,13 @@ internal class TeamAddMemberResponseTest {
                 .teamId("team_id")
                 .addUpdatedTeamMembership(
                     TeamAddMemberResponse.UpdatedTeamMembership.builder()
-                        .litellmBudgetTable(
-                            BudgetTable.builder()
+                        .budgetId("budget_id")
+                        .llmBudgetTable(
+                            TeamAddMemberResponse.UpdatedTeamMembership.LlmBudgetTable.builder()
                                 .budgetDuration("budget_duration")
-                                .budgetId("budget_id")
                                 .maxBudget(0.0)
                                 .maxParallelRequests(0L)
-                                .modelMaxBudget(
-                                    BudgetTable.ModelMaxBudget.builder()
-                                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                        .build()
-                                )
+                                .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
                                 .rpmLimit(0L)
                                 .softBudget(0.0)
                                 .tpmLimit(0L)
@@ -38,8 +32,6 @@ internal class TeamAddMemberResponseTest {
                         )
                         .teamId("team_id")
                         .userId("user_id")
-                        .budgetId("budget_id")
-                        .spend(0.0)
                         .build()
                 )
                 .addUpdatedUser(
@@ -47,62 +39,26 @@ internal class TeamAddMemberResponseTest {
                         .userId("user_id")
                         .budgetDuration("budget_duration")
                         .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                        .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                         .maxBudget(0.0)
-                        .metadata(
-                            TeamAddMemberResponse.UpdatedUser.Metadata.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .modelMaxBudget(
-                            TeamAddMemberResponse.UpdatedUser.ModelMaxBudget.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .modelSpend(
-                            TeamAddMemberResponse.UpdatedUser.ModelSpend.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
+                        .metadata(JsonValue.from(mapOf<String, Any>()))
+                        .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                        .modelSpend(JsonValue.from(mapOf<String, Any>()))
                         .addModel(JsonValue.from(mapOf<String, Any>()))
-                        .objectPermission(
-                            TeamAddMemberResponse.UpdatedUser.ObjectPermission.builder()
-                                .objectPermissionId("object_permission_id")
-                                .addAgentAccessGroup("string")
-                                .addAgent("string")
-                                .addMcpAccessGroup("string")
-                                .addMcpServer("string")
-                                .mcpToolPermissions(
-                                    TeamAddMemberResponse.UpdatedUser.ObjectPermission
-                                        .McpToolPermissions
-                                        .builder()
-                                        .putAdditionalProperty(
-                                            "foo",
-                                            JsonValue.from(listOf("string")),
-                                        )
-                                        .build()
-                                )
-                                .addVectorStore("string")
-                                .build()
-                        )
                         .addOrganizationMembership(
-                            OrganizationMembershipTable.builder()
+                            TeamAddMemberResponse.UpdatedUser.OrganizationMembership.builder()
                                 .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                                 .organizationId("organization_id")
                                 .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                                 .userId("user_id")
                                 .budgetId("budget_id")
-                                .litellmBudgetTable(
-                                    BudgetTable.builder()
+                                .llmBudgetTable(
+                                    TeamAddMemberResponse.UpdatedUser.OrganizationMembership
+                                        .LlmBudgetTable
+                                        .builder()
                                         .budgetDuration("budget_duration")
-                                        .budgetId("budget_id")
                                         .maxBudget(0.0)
                                         .maxParallelRequests(0L)
-                                        .modelMaxBudget(
-                                            BudgetTable.ModelMaxBudget.builder()
-                                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                                .build()
-                                        )
+                                        .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
                                         .rpmLimit(0L)
                                         .softBudget(0.0)
                                         .tpmLimit(0L)
@@ -118,8 +74,6 @@ internal class TeamAddMemberResponseTest {
                         .ssoUserId("sso_user_id")
                         .addTeam("string")
                         .tpmLimit(0L)
-                        .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                        .userAlias("user_alias")
                         .userEmail("user_email")
                         .userRole("user_role")
                         .build()
@@ -129,18 +83,11 @@ internal class TeamAddMemberResponseTest {
                 .budgetDuration("budget_duration")
                 .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                .litellmModelTable(
-                    TeamAddMemberResponse.LitellmModelTable.builder()
+                .llmModelTable(
+                    TeamAddMemberResponse.LlmModelTable.builder()
                         .createdBy("created_by")
                         .updatedBy("updated_by")
-                        .id(0L)
-                        .modelAliases(
-                            TeamAddMemberResponse.LitellmModelTable.ModelAliases.UnionMember0
-                                .builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .team(JsonValue.from(mapOf<String, Any>()))
+                        .modelAliases(JsonValue.from(mapOf<String, Any>()))
                         .build()
                 )
                 .maxBudget(0.0)
@@ -153,58 +100,27 @@ internal class TeamAddMemberResponseTest {
                         .userId("user_id")
                         .build()
                 )
-                .metadata(
-                    TeamAddMemberResponse.Metadata.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .metadata(JsonValue.from(mapOf<String, Any>()))
                 .modelId(0L)
                 .addModel(JsonValue.from(mapOf<String, Any>()))
-                .objectPermission(
-                    TeamAddMemberResponse.ObjectPermission.builder()
-                        .objectPermissionId("object_permission_id")
-                        .addAgentAccessGroup("string")
-                        .addAgent("string")
-                        .addMcpAccessGroup("string")
-                        .addMcpServer("string")
-                        .mcpToolPermissions(
-                            TeamAddMemberResponse.ObjectPermission.McpToolPermissions.builder()
-                                .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
-                                .build()
-                        )
-                        .addVectorStore("string")
-                        .build()
-                )
-                .objectPermissionId("object_permission_id")
                 .organizationId("organization_id")
-                .routerSettings(
-                    TeamAddMemberResponse.RouterSettings.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
                 .rpmLimit(0L)
                 .spend(0.0)
                 .teamAlias("team_alias")
-                .addTeamMemberPermission("string")
                 .tpmLimit(0L)
-                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .build()
 
         assertThat(teamAddMemberResponse.teamId()).isEqualTo("team_id")
         assertThat(teamAddMemberResponse.updatedTeamMemberships())
             .containsExactly(
                 TeamAddMemberResponse.UpdatedTeamMembership.builder()
-                    .litellmBudgetTable(
-                        BudgetTable.builder()
+                    .budgetId("budget_id")
+                    .llmBudgetTable(
+                        TeamAddMemberResponse.UpdatedTeamMembership.LlmBudgetTable.builder()
                             .budgetDuration("budget_duration")
-                            .budgetId("budget_id")
                             .maxBudget(0.0)
                             .maxParallelRequests(0L)
-                            .modelMaxBudget(
-                                BudgetTable.ModelMaxBudget.builder()
-                                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                    .build()
-                            )
+                            .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
                             .rpmLimit(0L)
                             .softBudget(0.0)
                             .tpmLimit(0L)
@@ -212,8 +128,6 @@ internal class TeamAddMemberResponseTest {
                     )
                     .teamId("team_id")
                     .userId("user_id")
-                    .budgetId("budget_id")
-                    .spend(0.0)
                     .build()
             )
         assertThat(teamAddMemberResponse.updatedUsers())
@@ -222,59 +136,26 @@ internal class TeamAddMemberResponseTest {
                     .userId("user_id")
                     .budgetDuration("budget_duration")
                     .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .maxBudget(0.0)
-                    .metadata(
-                        TeamAddMemberResponse.UpdatedUser.Metadata.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelMaxBudget(
-                        TeamAddMemberResponse.UpdatedUser.ModelMaxBudget.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelSpend(
-                        TeamAddMemberResponse.UpdatedUser.ModelSpend.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .metadata(JsonValue.from(mapOf<String, Any>()))
+                    .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                    .modelSpend(JsonValue.from(mapOf<String, Any>()))
                     .addModel(JsonValue.from(mapOf<String, Any>()))
-                    .objectPermission(
-                        TeamAddMemberResponse.UpdatedUser.ObjectPermission.builder()
-                            .objectPermissionId("object_permission_id")
-                            .addAgentAccessGroup("string")
-                            .addAgent("string")
-                            .addMcpAccessGroup("string")
-                            .addMcpServer("string")
-                            .mcpToolPermissions(
-                                TeamAddMemberResponse.UpdatedUser.ObjectPermission
-                                    .McpToolPermissions
-                                    .builder()
-                                    .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
-                                    .build()
-                            )
-                            .addVectorStore("string")
-                            .build()
-                    )
                     .addOrganizationMembership(
-                        OrganizationMembershipTable.builder()
+                        TeamAddMemberResponse.UpdatedUser.OrganizationMembership.builder()
                             .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                             .organizationId("organization_id")
                             .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                             .userId("user_id")
                             .budgetId("budget_id")
-                            .litellmBudgetTable(
-                                BudgetTable.builder()
+                            .llmBudgetTable(
+                                TeamAddMemberResponse.UpdatedUser.OrganizationMembership
+                                    .LlmBudgetTable
+                                    .builder()
                                     .budgetDuration("budget_duration")
-                                    .budgetId("budget_id")
                                     .maxBudget(0.0)
                                     .maxParallelRequests(0L)
-                                    .modelMaxBudget(
-                                        BudgetTable.ModelMaxBudget.builder()
-                                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                            .build()
-                                    )
+                                    .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
                                     .rpmLimit(0L)
                                     .softBudget(0.0)
                                     .tpmLimit(0L)
@@ -290,8 +171,6 @@ internal class TeamAddMemberResponseTest {
                     .ssoUserId("sso_user_id")
                     .addTeam("string")
                     .tpmLimit(0L)
-                    .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                    .userAlias("user_alias")
                     .userEmail("user_email")
                     .userRole("user_role")
                     .build()
@@ -304,18 +183,12 @@ internal class TeamAddMemberResponseTest {
             .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
         assertThat(teamAddMemberResponse.createdAt())
             .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-        assertThat(teamAddMemberResponse.litellmModelTable())
+        assertThat(teamAddMemberResponse.llmModelTable())
             .isEqualTo(
-                TeamAddMemberResponse.LitellmModelTable.builder()
+                TeamAddMemberResponse.LlmModelTable.builder()
                     .createdBy("created_by")
                     .updatedBy("updated_by")
-                    .id(0L)
-                    .modelAliases(
-                        TeamAddMemberResponse.LitellmModelTable.ModelAliases.UnionMember0.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .team(JsonValue.from(mapOf<String, Any>()))
+                    .modelAliases(JsonValue.from(mapOf<String, Any>()))
                     .build()
             )
         assertThat(teamAddMemberResponse.maxBudget()).isEqualTo(0.0)
@@ -330,46 +203,16 @@ internal class TeamAddMemberResponseTest {
                     .userId("user_id")
                     .build()
             )
-        assertThat(teamAddMemberResponse.metadata())
-            .isEqualTo(
-                TeamAddMemberResponse.Metadata.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+        assertThat(teamAddMemberResponse._metadata())
+            .isEqualTo(JsonValue.from(mapOf<String, Any>()))
         assertThat(teamAddMemberResponse.modelId()).isEqualTo(0L)
         assertThat(teamAddMemberResponse.models())
             .containsExactly(JsonValue.from(mapOf<String, Any>()))
-        assertThat(teamAddMemberResponse.objectPermission())
-            .isEqualTo(
-                TeamAddMemberResponse.ObjectPermission.builder()
-                    .objectPermissionId("object_permission_id")
-                    .addAgentAccessGroup("string")
-                    .addAgent("string")
-                    .addMcpAccessGroup("string")
-                    .addMcpServer("string")
-                    .mcpToolPermissions(
-                        TeamAddMemberResponse.ObjectPermission.McpToolPermissions.builder()
-                            .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
-                            .build()
-                    )
-                    .addVectorStore("string")
-                    .build()
-            )
-        assertThat(teamAddMemberResponse.objectPermissionId()).isEqualTo("object_permission_id")
         assertThat(teamAddMemberResponse.organizationId()).isEqualTo("organization_id")
-        assertThat(teamAddMemberResponse.routerSettings())
-            .isEqualTo(
-                TeamAddMemberResponse.RouterSettings.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
         assertThat(teamAddMemberResponse.rpmLimit()).isEqualTo(0L)
         assertThat(teamAddMemberResponse.spend()).isEqualTo(0.0)
         assertThat(teamAddMemberResponse.teamAlias()).isEqualTo("team_alias")
-        assertThat(teamAddMemberResponse.teamMemberPermissions()).containsExactly("string")
         assertThat(teamAddMemberResponse.tpmLimit()).isEqualTo(0L)
-        assertThat(teamAddMemberResponse.updatedAt())
-            .isEqualTo(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
     }
 
     @Test
@@ -380,17 +223,13 @@ internal class TeamAddMemberResponseTest {
                 .teamId("team_id")
                 .addUpdatedTeamMembership(
                     TeamAddMemberResponse.UpdatedTeamMembership.builder()
-                        .litellmBudgetTable(
-                            BudgetTable.builder()
+                        .budgetId("budget_id")
+                        .llmBudgetTable(
+                            TeamAddMemberResponse.UpdatedTeamMembership.LlmBudgetTable.builder()
                                 .budgetDuration("budget_duration")
-                                .budgetId("budget_id")
                                 .maxBudget(0.0)
                                 .maxParallelRequests(0L)
-                                .modelMaxBudget(
-                                    BudgetTable.ModelMaxBudget.builder()
-                                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                        .build()
-                                )
+                                .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
                                 .rpmLimit(0L)
                                 .softBudget(0.0)
                                 .tpmLimit(0L)
@@ -398,8 +237,6 @@ internal class TeamAddMemberResponseTest {
                         )
                         .teamId("team_id")
                         .userId("user_id")
-                        .budgetId("budget_id")
-                        .spend(0.0)
                         .build()
                 )
                 .addUpdatedUser(
@@ -407,62 +244,26 @@ internal class TeamAddMemberResponseTest {
                         .userId("user_id")
                         .budgetDuration("budget_duration")
                         .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                        .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                         .maxBudget(0.0)
-                        .metadata(
-                            TeamAddMemberResponse.UpdatedUser.Metadata.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .modelMaxBudget(
-                            TeamAddMemberResponse.UpdatedUser.ModelMaxBudget.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .modelSpend(
-                            TeamAddMemberResponse.UpdatedUser.ModelSpend.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
+                        .metadata(JsonValue.from(mapOf<String, Any>()))
+                        .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
+                        .modelSpend(JsonValue.from(mapOf<String, Any>()))
                         .addModel(JsonValue.from(mapOf<String, Any>()))
-                        .objectPermission(
-                            TeamAddMemberResponse.UpdatedUser.ObjectPermission.builder()
-                                .objectPermissionId("object_permission_id")
-                                .addAgentAccessGroup("string")
-                                .addAgent("string")
-                                .addMcpAccessGroup("string")
-                                .addMcpServer("string")
-                                .mcpToolPermissions(
-                                    TeamAddMemberResponse.UpdatedUser.ObjectPermission
-                                        .McpToolPermissions
-                                        .builder()
-                                        .putAdditionalProperty(
-                                            "foo",
-                                            JsonValue.from(listOf("string")),
-                                        )
-                                        .build()
-                                )
-                                .addVectorStore("string")
-                                .build()
-                        )
                         .addOrganizationMembership(
-                            OrganizationMembershipTable.builder()
+                            TeamAddMemberResponse.UpdatedUser.OrganizationMembership.builder()
                                 .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                                 .organizationId("organization_id")
                                 .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                                 .userId("user_id")
                                 .budgetId("budget_id")
-                                .litellmBudgetTable(
-                                    BudgetTable.builder()
+                                .llmBudgetTable(
+                                    TeamAddMemberResponse.UpdatedUser.OrganizationMembership
+                                        .LlmBudgetTable
+                                        .builder()
                                         .budgetDuration("budget_duration")
-                                        .budgetId("budget_id")
                                         .maxBudget(0.0)
                                         .maxParallelRequests(0L)
-                                        .modelMaxBudget(
-                                            BudgetTable.ModelMaxBudget.builder()
-                                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                                .build()
-                                        )
+                                        .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
                                         .rpmLimit(0L)
                                         .softBudget(0.0)
                                         .tpmLimit(0L)
@@ -478,8 +279,6 @@ internal class TeamAddMemberResponseTest {
                         .ssoUserId("sso_user_id")
                         .addTeam("string")
                         .tpmLimit(0L)
-                        .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                        .userAlias("user_alias")
                         .userEmail("user_email")
                         .userRole("user_role")
                         .build()
@@ -489,18 +288,11 @@ internal class TeamAddMemberResponseTest {
                 .budgetDuration("budget_duration")
                 .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .createdAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
-                .litellmModelTable(
-                    TeamAddMemberResponse.LitellmModelTable.builder()
+                .llmModelTable(
+                    TeamAddMemberResponse.LlmModelTable.builder()
                         .createdBy("created_by")
                         .updatedBy("updated_by")
-                        .id(0L)
-                        .modelAliases(
-                            TeamAddMemberResponse.LitellmModelTable.ModelAliases.UnionMember0
-                                .builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .team(JsonValue.from(mapOf<String, Any>()))
+                        .modelAliases(JsonValue.from(mapOf<String, Any>()))
                         .build()
                 )
                 .maxBudget(0.0)
@@ -513,41 +305,14 @@ internal class TeamAddMemberResponseTest {
                         .userId("user_id")
                         .build()
                 )
-                .metadata(
-                    TeamAddMemberResponse.Metadata.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .metadata(JsonValue.from(mapOf<String, Any>()))
                 .modelId(0L)
                 .addModel(JsonValue.from(mapOf<String, Any>()))
-                .objectPermission(
-                    TeamAddMemberResponse.ObjectPermission.builder()
-                        .objectPermissionId("object_permission_id")
-                        .addAgentAccessGroup("string")
-                        .addAgent("string")
-                        .addMcpAccessGroup("string")
-                        .addMcpServer("string")
-                        .mcpToolPermissions(
-                            TeamAddMemberResponse.ObjectPermission.McpToolPermissions.builder()
-                                .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
-                                .build()
-                        )
-                        .addVectorStore("string")
-                        .build()
-                )
-                .objectPermissionId("object_permission_id")
                 .organizationId("organization_id")
-                .routerSettings(
-                    TeamAddMemberResponse.RouterSettings.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
                 .rpmLimit(0L)
                 .spend(0.0)
                 .teamAlias("team_alias")
-                .addTeamMemberPermission("string")
                 .tpmLimit(0L)
-                .updatedAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                 .build()
 
         val roundtrippedTeamAddMemberResponse =

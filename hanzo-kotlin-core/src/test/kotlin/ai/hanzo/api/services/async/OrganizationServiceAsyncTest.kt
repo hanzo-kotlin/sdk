@@ -2,7 +2,6 @@
 
 package ai.hanzo.api.services.async
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.organization.OrgMember
@@ -10,24 +9,17 @@ import ai.hanzo.api.models.organization.OrganizationAddMemberParams
 import ai.hanzo.api.models.organization.OrganizationCreateParams
 import ai.hanzo.api.models.organization.OrganizationDeleteMemberParams
 import ai.hanzo.api.models.organization.OrganizationDeleteParams
-import ai.hanzo.api.models.organization.OrganizationListParams
 import ai.hanzo.api.models.organization.OrganizationUpdateMemberParams
-import ai.hanzo.api.models.organization.UserRoles
+import ai.hanzo.api.models.organization.OrganizationUpdateParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class OrganizationServiceAsyncTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun create() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val organizationServiceAsync = client.organization()
 
         val organization =
@@ -38,42 +30,9 @@ internal class OrganizationServiceAsyncTest {
                     .budgetId("budget_id")
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
-                    .metadata(
-                        OrganizationCreateParams.Metadata.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelMaxBudget(
-                        OrganizationCreateParams.ModelMaxBudget.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .modelRpmLimit(
-                        OrganizationCreateParams.ModelRpmLimit.builder()
-                            .putAdditionalProperty("foo", JsonValue.from(0))
-                            .build()
-                    )
-                    .modelTpmLimit(
-                        OrganizationCreateParams.ModelTpmLimit.builder()
-                            .putAdditionalProperty("foo", JsonValue.from(0))
-                            .build()
-                    )
+                    .metadata(JsonValue.from(mapOf<String, Any>()))
+                    .modelMaxBudget(JsonValue.from(mapOf<String, Any>()))
                     .addModel(JsonValue.from(mapOf<String, Any>()))
-                    .objectPermission(
-                        OrganizationCreateParams.ObjectPermission.builder()
-                            .addAgentAccessGroup("string")
-                            .addAgent("string")
-                            .addMcpAccessGroup("string")
-                            .addMcpServer("string")
-                            .mcpToolPermissions(
-                                OrganizationCreateParams.ObjectPermission.McpToolPermissions
-                                    .builder()
-                                    .putAdditionalProperty("foo", JsonValue.from(listOf("string")))
-                                    .build()
-                            )
-                            .addVectorStore("string")
-                            .build()
-                    )
                     .organizationId("organization_id")
                     .rpmLimit(0L)
                     .softBudget(0.0)
@@ -84,65 +43,57 @@ internal class OrganizationServiceAsyncTest {
         organization.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun update() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val organizationServiceAsync = client.organization()
 
-        val organizationTableWithMembers = organizationServiceAsync.update()
-
-        organizationTableWithMembers.validate()
-    }
-
-    @Disabled("Prism tests are disabled")
-    @Test
-    suspend fun list() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
-        val organizationServiceAsync = client.organization()
-
-        val organizationTableWithMembers =
-            organizationServiceAsync.list(
-                OrganizationListParams.builder().orgAlias("org_alias").orgId("org_id").build()
+        val organization =
+            organizationServiceAsync.update(
+                OrganizationUpdateParams.builder()
+                    .budgetId("budget_id")
+                    .metadata(JsonValue.from(mapOf<String, Any>()))
+                    .addModel("string")
+                    .organizationAlias("organization_alias")
+                    .organizationId("organization_id")
+                    .spend(0.0)
+                    .updatedBy("updated_by")
+                    .build()
             )
 
-        organizationTableWithMembers.forEach { it.validate() }
+        organization.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
-    suspend fun delete() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+    suspend fun list() {
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val organizationServiceAsync = client.organization()
 
-        val organizationTableWithMembers =
+        val organizations = organizationServiceAsync.list()
+
+        organizations.forEach { it.validate() }
+    }
+
+    @Disabled("Mock server tests are disabled")
+    @Test
+    suspend fun delete() {
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
+        val organizationServiceAsync = client.organization()
+
+        val organizations =
             organizationServiceAsync.delete(
                 OrganizationDeleteParams.builder().addOrganizationId("string").build()
             )
 
-        organizationTableWithMembers.forEach { it.validate() }
+        organizations.forEach { it.validate() }
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun addMember() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val organizationServiceAsync = client.organization()
 
         val response =
@@ -165,14 +116,10 @@ internal class OrganizationServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun deleteMember() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val organizationServiceAsync = client.organization()
 
         val response =
@@ -187,27 +134,23 @@ internal class OrganizationServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun updateMember() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val organizationServiceAsync = client.organization()
 
-        val organizationMembershipTable =
+        val response =
             organizationServiceAsync.updateMember(
                 OrganizationUpdateMemberParams.builder()
                     .organizationId("organization_id")
                     .maxBudgetInOrganization(0.0)
-                    .role(UserRoles.PROXY_ADMIN)
+                    .role(OrganizationUpdateMemberParams.Role.PROXY_ADMIN)
                     .userEmail("user_email")
                     .userId("user_id")
                     .build()
             )
 
-        organizationMembershipTable.validate()
+        response.validate()
     }
 }

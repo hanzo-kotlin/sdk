@@ -112,13 +112,13 @@ class DeploymentServiceImpl internal constructor(private val clientOptions: Clie
         ): HttpResponseFor<DeploymentEmbedResponse> {
             // We check here instead of in the params builder because this can be specified
             // positionally or in the params class.
-            checkRequired("pathModel", params.pathModel())
+            checkRequired("model", params.model())
             val request =
                 HttpRequest.builder()
                     .method(HttpMethod.POST)
                     .baseUrl(clientOptions.baseUrl())
                     .addPathSegments("openai", "deployments", params._pathParam(0), "embeddings")
-                    .body(json(clientOptions.jsonMapper, params._body()))
+                    .apply { params._body()?.let { body(json(clientOptions.jsonMapper, it)) } }
                     .build()
                     .prepare(clientOptions, params)
             val requestOptions = requestOptions.applyDefaults(RequestOptions.from(clientOptions))

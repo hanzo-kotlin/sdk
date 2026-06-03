@@ -32,9 +32,9 @@ interface VertexAiService {
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): VertexAiService
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun create(
         endpoint: String,
@@ -54,9 +54,9 @@ interface VertexAiService {
         create(endpoint, VertexAiCreateParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun retrieve(
         endpoint: String,
@@ -76,9 +76,9 @@ interface VertexAiService {
         retrieve(endpoint, VertexAiRetrieveParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun update(
         endpoint: String,
@@ -98,9 +98,9 @@ interface VertexAiService {
         update(endpoint, VertexAiUpdateParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun delete(
         endpoint: String,
@@ -120,9 +120,9 @@ interface VertexAiService {
         delete(endpoint, VertexAiDeleteParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     fun patch(
         endpoint: String,

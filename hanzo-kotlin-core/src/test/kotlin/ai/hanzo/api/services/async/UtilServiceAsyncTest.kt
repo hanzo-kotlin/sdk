@@ -2,7 +2,6 @@
 
 package ai.hanzo.api.services.async
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClientAsync
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.utils.UtilGetSupportedOpenAIParamsParams
@@ -10,19 +9,13 @@ import ai.hanzo.api.models.utils.UtilTokenCounterParams
 import ai.hanzo.api.models.utils.UtilTransformRequestParams
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class UtilServiceAsyncTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun getSupportedOpenAIParams() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val utilServiceAsync = client.utils()
 
         val response =
@@ -33,31 +26,17 @@ internal class UtilServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun tokenCounter() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val utilServiceAsync = client.utils()
 
         val response =
             utilServiceAsync.tokenCounter(
                 UtilTokenCounterParams.builder()
-                    .callEndpoint(true)
                     .model("model")
-                    .addContent(
-                        UtilTokenCounterParams.Content.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .addMessage(
-                        UtilTokenCounterParams.Message.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .addMessage(JsonValue.from(mapOf<String, Any>()))
                     .prompt("prompt")
                     .build()
             )
@@ -65,25 +44,17 @@ internal class UtilServiceAsyncTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     suspend fun transformRequest() {
-        val client =
-            HanzoOkHttpClientAsync.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClientAsync.builder().apiKey("My API Key").build()
         val utilServiceAsync = client.utils()
 
         val response =
             utilServiceAsync.transformRequest(
                 UtilTransformRequestParams.builder()
                     .callType(UtilTransformRequestParams.CallType.EMBEDDING)
-                    .requestBody(
-                        UtilTransformRequestParams.RequestBody.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
+                    .requestBody(JsonValue.from(mapOf<String, Any>()))
                     .build()
             )
 

@@ -78,17 +78,20 @@ interface DeploymentServiceAsync {
      * ```
      */
     suspend fun embed(
-        pathModel: String,
-        params: DeploymentEmbedParams,
+        model: String,
+        params: DeploymentEmbedParams = DeploymentEmbedParams.none(),
         requestOptions: RequestOptions = RequestOptions.none(),
-    ): DeploymentEmbedResponse =
-        embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+    ): DeploymentEmbedResponse = embed(params.toBuilder().model(model).build(), requestOptions)
 
     /** @see embed */
     suspend fun embed(
         params: DeploymentEmbedParams,
         requestOptions: RequestOptions = RequestOptions.none(),
     ): DeploymentEmbedResponse
+
+    /** @see embed */
+    suspend fun embed(model: String, requestOptions: RequestOptions): DeploymentEmbedResponse =
+        embed(model, DeploymentEmbedParams.none(), requestOptions)
 
     /**
      * A view of [DeploymentServiceAsync] that provides access to raw HTTP responses for each
@@ -140,11 +143,11 @@ interface DeploymentServiceAsync {
          */
         @MustBeClosed
         suspend fun embed(
-            pathModel: String,
-            params: DeploymentEmbedParams,
+            model: String,
+            params: DeploymentEmbedParams = DeploymentEmbedParams.none(),
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentEmbedResponse> =
-            embed(params.toBuilder().pathModel(pathModel).build(), requestOptions)
+            embed(params.toBuilder().model(model).build(), requestOptions)
 
         /** @see embed */
         @MustBeClosed
@@ -152,5 +155,13 @@ interface DeploymentServiceAsync {
             params: DeploymentEmbedParams,
             requestOptions: RequestOptions = RequestOptions.none(),
         ): HttpResponseFor<DeploymentEmbedResponse>
+
+        /** @see embed */
+        @MustBeClosed
+        suspend fun embed(
+            model: String,
+            requestOptions: RequestOptions,
+        ): HttpResponseFor<DeploymentEmbedResponse> =
+            embed(model, DeploymentEmbedParams.none(), requestOptions)
     }
 }

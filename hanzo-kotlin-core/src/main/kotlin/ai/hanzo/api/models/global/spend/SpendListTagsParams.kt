@@ -8,7 +8,7 @@ import ai.hanzo.api.core.http.QueryParams
 import java.util.Objects
 
 /**
- * LiteLLM Enterprise - View Spend Per Request Tag. Used by LiteLLM UI
+ * LLM Enterprise - View Spend Per Request Tag. Used by LLM UI
  *
  * Example Request:
  * ```

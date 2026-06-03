@@ -10,12 +10,7 @@ internal class BatchListWithProviderParamsTest {
 
     @Test
     fun create() {
-        BatchListWithProviderParams.builder()
-            .provider("provider")
-            .after("after")
-            .limit(0L)
-            .targetModelNames("target_model_names")
-            .build()
+        BatchListWithProviderParams.builder().provider("provider").after("after").limit(0L).build()
     }
 
     @Test
@@ -34,19 +29,12 @@ internal class BatchListWithProviderParamsTest {
                 .provider("provider")
                 .after("after")
                 .limit(0L)
-                .targetModelNames("target_model_names")
                 .build()
 
         val queryParams = params._queryParams()
 
         assertThat(queryParams)
-            .isEqualTo(
-                QueryParams.builder()
-                    .put("after", "after")
-                    .put("limit", "0")
-                    .put("target_model_names", "target_model_names")
-                    .build()
-            )
+            .isEqualTo(QueryParams.builder().put("after", "after").put("limit", "0").build())
     }
 
     @Test

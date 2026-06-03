@@ -13,9 +13,6 @@ import java.util.Objects
  * Call any azure endpoint using the proxy.
  *
  * Just use `{PROXY_BASE_URL}/azure/{endpoint:path}`
- *
- * Checks if the deployment id in the url is a litellm model name. If so, it will route using the
- * llm_router.allm_passthrough_route.
  */
 class AzureUpdateParams
 private constructor(

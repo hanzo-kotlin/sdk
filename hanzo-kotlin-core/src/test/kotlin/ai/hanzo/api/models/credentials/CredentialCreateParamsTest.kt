@@ -11,17 +11,9 @@ internal class CredentialCreateParamsTest {
     @Test
     fun create() {
         CredentialCreateParams.builder()
-            .credentialInfo(
-                CredentialCreateParams.CredentialInfo.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+            .credentialInfo(JsonValue.from(mapOf<String, Any>()))
             .credentialName("credential_name")
-            .credentialValues(
-                CredentialCreateParams.CredentialValues.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+            .credentialValues(JsonValue.from(mapOf<String, Any>()))
             .modelId("model_id")
             .build()
     }
@@ -30,35 +22,17 @@ internal class CredentialCreateParamsTest {
     fun body() {
         val params =
             CredentialCreateParams.builder()
-                .credentialInfo(
-                    CredentialCreateParams.CredentialInfo.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .credentialInfo(JsonValue.from(mapOf<String, Any>()))
                 .credentialName("credential_name")
-                .credentialValues(
-                    CredentialCreateParams.CredentialValues.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .credentialValues(JsonValue.from(mapOf<String, Any>()))
                 .modelId("model_id")
                 .build()
 
         val body = params._body()
 
-        assertThat(body.credentialInfo())
-            .isEqualTo(
-                CredentialCreateParams.CredentialInfo.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+        assertThat(body._credentialInfo()).isEqualTo(JsonValue.from(mapOf<String, Any>()))
         assertThat(body.credentialName()).isEqualTo("credential_name")
-        assertThat(body.credentialValues())
-            .isEqualTo(
-                CredentialCreateParams.CredentialValues.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+        assertThat(body._credentialValues()).isEqualTo(JsonValue.from(mapOf<String, Any>()))
         assertThat(body.modelId()).isEqualTo("model_id")
     }
 
@@ -66,22 +40,13 @@ internal class CredentialCreateParamsTest {
     fun bodyWithoutOptionalFields() {
         val params =
             CredentialCreateParams.builder()
-                .credentialInfo(
-                    CredentialCreateParams.CredentialInfo.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .credentialInfo(JsonValue.from(mapOf<String, Any>()))
                 .credentialName("credential_name")
                 .build()
 
         val body = params._body()
 
-        assertThat(body.credentialInfo())
-            .isEqualTo(
-                CredentialCreateParams.CredentialInfo.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+        assertThat(body._credentialInfo()).isEqualTo(JsonValue.from(mapOf<String, Any>()))
         assertThat(body.credentialName()).isEqualTo("credential_name")
     }
 }

@@ -10,9 +10,9 @@ import ai.hanzo.api.core.toImmutable
 import java.util.Objects
 
 /**
- * Call LiteLLM proxy via Vertex AI SDK.
+ * Call LLM proxy via Vertex AI SDK.
  *
- * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+ * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
  */
 class VertexAiDeleteParams
 private constructor(
