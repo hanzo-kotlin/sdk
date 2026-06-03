@@ -10,18 +10,10 @@ import java.util.Objects
 /**
  * Get a response by ID.
  *
- * Supports both:
- * - Polling IDs (litellm_poll_*): Returns cumulative cached content from background responses
- * - Provider response IDs: Passes through to provider API
- *
  * Follows the OpenAI Responses API spec:
  * https://platform.openai.com/docs/api-reference/responses/get
  *
  * ```bash
- * # Get polling response
- * curl -X GET http://localhost:4000/v1/responses/litellm_poll_abc123     -H "Authorization: Bearer sk-1234"
- *
- * # Get provider response
  * curl -X GET http://localhost:4000/v1/responses/resp_abc123     -H "Authorization: Bearer sk-1234"
  * ```
  */

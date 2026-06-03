@@ -16,30 +16,9 @@ internal class PassThroughEndpointResponseTest {
             PassThroughEndpointResponse.builder()
                 .addEndpoint(
                     PassThroughGenericEndpoint.builder()
+                        .headers(JsonValue.from(mapOf<String, Any>()))
                         .path("path")
                         .target("target")
-                        .id("id")
-                        .auth(true)
-                        .costPerRequest(0.0)
-                        .guardrails(
-                            PassThroughGenericEndpoint.Guardrails.builder()
-                                .putAdditionalProperty(
-                                    "foo",
-                                    JsonValue.from(
-                                        mapOf(
-                                            "request_fields" to listOf("string"),
-                                            "response_fields" to listOf("string"),
-                                        )
-                                    ),
-                                )
-                                .build()
-                        )
-                        .headers(
-                            PassThroughGenericEndpoint.Headers.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .includeSubpath(true)
                         .build()
                 )
                 .build()
@@ -47,30 +26,9 @@ internal class PassThroughEndpointResponseTest {
         assertThat(passThroughEndpointResponse.endpoints())
             .containsExactly(
                 PassThroughGenericEndpoint.builder()
+                    .headers(JsonValue.from(mapOf<String, Any>()))
                     .path("path")
                     .target("target")
-                    .id("id")
-                    .auth(true)
-                    .costPerRequest(0.0)
-                    .guardrails(
-                        PassThroughGenericEndpoint.Guardrails.builder()
-                            .putAdditionalProperty(
-                                "foo",
-                                JsonValue.from(
-                                    mapOf(
-                                        "request_fields" to listOf("string"),
-                                        "response_fields" to listOf("string"),
-                                    )
-                                ),
-                            )
-                            .build()
-                    )
-                    .headers(
-                        PassThroughGenericEndpoint.Headers.builder()
-                            .putAdditionalProperty("foo", JsonValue.from("bar"))
-                            .build()
-                    )
-                    .includeSubpath(true)
                     .build()
             )
     }
@@ -82,30 +40,9 @@ internal class PassThroughEndpointResponseTest {
             PassThroughEndpointResponse.builder()
                 .addEndpoint(
                     PassThroughGenericEndpoint.builder()
+                        .headers(JsonValue.from(mapOf<String, Any>()))
                         .path("path")
                         .target("target")
-                        .id("id")
-                        .auth(true)
-                        .costPerRequest(0.0)
-                        .guardrails(
-                            PassThroughGenericEndpoint.Guardrails.builder()
-                                .putAdditionalProperty(
-                                    "foo",
-                                    JsonValue.from(
-                                        mapOf(
-                                            "request_fields" to listOf("string"),
-                                            "response_fields" to listOf("string"),
-                                        )
-                                    ),
-                                )
-                                .build()
-                        )
-                        .headers(
-                            PassThroughGenericEndpoint.Headers.builder()
-                                .putAdditionalProperty("foo", JsonValue.from("bar"))
-                                .build()
-                        )
-                        .includeSubpath(true)
                         .build()
                 )
                 .build()

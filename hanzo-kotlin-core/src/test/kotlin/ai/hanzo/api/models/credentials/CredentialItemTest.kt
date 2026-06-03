@@ -14,32 +14,15 @@ internal class CredentialItemTest {
     fun create() {
         val credentialItem =
             CredentialItem.builder()
-                .credentialInfo(
-                    CredentialItem.CredentialInfo.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .credentialInfo(JsonValue.from(mapOf<String, Any>()))
                 .credentialName("credential_name")
-                .credentialValues(
-                    CredentialItem.CredentialValues.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .credentialValues(JsonValue.from(mapOf<String, Any>()))
                 .build()
 
-        assertThat(credentialItem.credentialInfo())
-            .isEqualTo(
-                CredentialItem.CredentialInfo.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+        assertThat(credentialItem._credentialInfo()).isEqualTo(JsonValue.from(mapOf<String, Any>()))
         assertThat(credentialItem.credentialName()).isEqualTo("credential_name")
-        assertThat(credentialItem.credentialValues())
-            .isEqualTo(
-                CredentialItem.CredentialValues.builder()
-                    .putAdditionalProperty("foo", JsonValue.from("bar"))
-                    .build()
-            )
+        assertThat(credentialItem._credentialValues())
+            .isEqualTo(JsonValue.from(mapOf<String, Any>()))
     }
 
     @Test
@@ -47,17 +30,9 @@ internal class CredentialItemTest {
         val jsonMapper = jsonMapper()
         val credentialItem =
             CredentialItem.builder()
-                .credentialInfo(
-                    CredentialItem.CredentialInfo.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .credentialInfo(JsonValue.from(mapOf<String, Any>()))
                 .credentialName("credential_name")
-                .credentialValues(
-                    CredentialItem.CredentialValues.builder()
-                        .putAdditionalProperty("foo", JsonValue.from("bar"))
-                        .build()
-                )
+                .credentialValues(JsonValue.from(mapOf<String, Any>()))
                 .build()
 
         val roundtrippedCredentialItem =

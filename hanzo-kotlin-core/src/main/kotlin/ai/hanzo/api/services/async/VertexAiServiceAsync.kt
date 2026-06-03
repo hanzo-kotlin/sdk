@@ -32,9 +32,9 @@ interface VertexAiServiceAsync {
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): VertexAiServiceAsync
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     suspend fun create(
         endpoint: String,
@@ -54,9 +54,9 @@ interface VertexAiServiceAsync {
         create(endpoint, VertexAiCreateParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     suspend fun retrieve(
         endpoint: String,
@@ -78,9 +78,9 @@ interface VertexAiServiceAsync {
     ): VertexAiRetrieveResponse = retrieve(endpoint, VertexAiRetrieveParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     suspend fun update(
         endpoint: String,
@@ -100,9 +100,9 @@ interface VertexAiServiceAsync {
         update(endpoint, VertexAiUpdateParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     suspend fun delete(
         endpoint: String,
@@ -122,9 +122,9 @@ interface VertexAiServiceAsync {
         delete(endpoint, VertexAiDeleteParams.none(), requestOptions)
 
     /**
-     * Call LiteLLM proxy via Vertex AI SDK.
+     * Call LLM proxy via Vertex AI SDK.
      *
-     * [Docs](https://docs.litellm.ai/docs/pass_through/vertex_ai)
+     * [Docs](https://docs.hanzo.ai/docs/pass_through/vertex_ai)
      */
     suspend fun patch(
         endpoint: String,

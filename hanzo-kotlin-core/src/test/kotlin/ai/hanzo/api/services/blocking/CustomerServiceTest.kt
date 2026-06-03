@@ -2,7 +2,6 @@
 
 package ai.hanzo.api.services.blocking
 
-import ai.hanzo.api.TestServerExtension
 import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.customer.BlockUsers
@@ -10,22 +9,15 @@ import ai.hanzo.api.models.customer.CustomerCreateParams
 import ai.hanzo.api.models.customer.CustomerDeleteParams
 import ai.hanzo.api.models.customer.CustomerRetrieveInfoParams
 import ai.hanzo.api.models.customer.CustomerUpdateParams
-import java.time.OffsetDateTime
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 
-@ExtendWith(TestServerExtension::class)
 internal class CustomerServiceTest {
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun create() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val customerService = client.customer()
 
         val customer =
@@ -37,7 +29,6 @@ internal class CustomerServiceTest {
                     .blocked(true)
                     .budgetDuration("budget_duration")
                     .budgetId("budget_id")
-                    .budgetResetAt(OffsetDateTime.parse("2019-12-27T18:11:19.117Z"))
                     .defaultModel("default_model")
                     .maxBudget(0.0)
                     .maxParallelRequests(0L)
@@ -58,7 +49,6 @@ internal class CustomerServiceTest {
                     )
                     .rpmLimit(0L)
                     .softBudget(0.0)
-                    .spend(0.0)
                     .tpmLimit(0L)
                     .build()
             )
@@ -66,14 +56,10 @@ internal class CustomerServiceTest {
         customer.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun update() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val customerService = client.customer()
 
         val customer =
@@ -92,29 +78,21 @@ internal class CustomerServiceTest {
         customer.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun list() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val customerService = client.customer()
 
-        val liteLlmEndUserTables = customerService.list()
+        val customers = customerService.list()
 
-        liteLlmEndUserTables.forEach { it.validate() }
+        customers.forEach { it.validate() }
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun delete() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val customerService = client.customer()
 
         val customer =
@@ -123,14 +101,10 @@ internal class CustomerServiceTest {
         customer.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun block() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val customerService = client.customer()
 
         val response = customerService.block(BlockUsers.builder().addUserId("string").build())
@@ -138,32 +112,24 @@ internal class CustomerServiceTest {
         response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun retrieveInfo() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val customerService = client.customer()
 
-        val liteLlmEndUserTable =
+        val response =
             customerService.retrieveInfo(
                 CustomerRetrieveInfoParams.builder().endUserId("end_user_id").build()
             )
 
-        liteLlmEndUserTable.validate()
+        response.validate()
     }
 
-    @Disabled("Prism tests are disabled")
+    @Disabled("Mock server tests are disabled")
     @Test
     fun unblock() {
-        val client =
-            HanzoOkHttpClient.builder()
-                .baseUrl(TestServerExtension.BASE_URL)
-                .apiKey("My API Key")
-                .build()
+        val client = HanzoOkHttpClient.builder().apiKey("My API Key").build()
         val customerService = client.customer()
 
         val response = customerService.unblock(BlockUsers.builder().addUserId("string").build())

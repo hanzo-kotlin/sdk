@@ -11,7 +11,9 @@ import java.util.Objects
 
 /**
  * The moderations endpoint is a tool you can use to check whether content complies with an LLM
- * Providers policies. Quick Start
+ * Providers policies.
+ *
+ * Quick Start
  *
  * ```
  * curl --location 'http://0.0.0.0:4000/moderations'     --header 'Content-Type: application/json'     --header 'Authorization: Bearer sk-1234'     --data '{"input": "Sample text goes here", "model": "text-moderation-stable"}'

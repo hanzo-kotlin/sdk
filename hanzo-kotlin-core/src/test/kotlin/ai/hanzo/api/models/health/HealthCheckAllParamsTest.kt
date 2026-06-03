@@ -10,19 +10,16 @@ internal class HealthCheckAllParamsTest {
 
     @Test
     fun create() {
-        HealthCheckAllParams.builder().model("model").modelId("model_id").build()
+        HealthCheckAllParams.builder().model("model").build()
     }
 
     @Test
     fun queryParams() {
-        val params = HealthCheckAllParams.builder().model("model").modelId("model_id").build()
+        val params = HealthCheckAllParams.builder().model("model").build()
 
         val queryParams = params._queryParams()
 
-        assertThat(queryParams)
-            .isEqualTo(
-                QueryParams.builder().put("model", "model").put("model_id", "model_id").build()
-            )
+        assertThat(queryParams).isEqualTo(QueryParams.builder().put("model", "model").build())
     }
 
     @Test

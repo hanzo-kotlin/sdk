@@ -2,8 +2,8 @@
 
 <!-- x-release-please-start-version -->
 
-[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2)
-[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2)
+[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.3)
+[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.3/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.3)
 
 <!-- x-release-please-end -->
 
@@ -24,7 +24,7 @@ Use the Hanzo MCP Server to enable AI assistants to interact with this API, allo
 
 <!-- x-release-please-start-version -->
 
-The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.2).
+The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.3).
 
 <!-- x-release-please-end -->
 
@@ -35,7 +35,7 @@ The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai
 ### Gradle
 
 ```kotlin
-implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.2")
+implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.3")
 ```
 
 ### Maven
@@ -44,7 +44,7 @@ implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.2")
 <dependency>
   <groupId>ai.hanzo.api</groupId>
   <artifactId>hanzo-kotlin</artifactId>
-  <version>0.1.0-alpha.2</version>
+  <version>0.1.0-alpha.3</version>
 </dependency>
 ```
 
@@ -402,6 +402,25 @@ val client: HanzoClient = HanzoOkHttpClient.builder()
     .build()
 ```
 
+### Connection pooling
+
+To customize the underlying OkHttp connection pool, configure the client using the `maxIdleConnections` and `keepAliveDuration` methods:
+
+```kotlin
+import ai.hanzo.api.client.HanzoClient
+import ai.hanzo.api.client.okhttp.HanzoOkHttpClient
+import java.time.Duration
+
+val client: HanzoClient = HanzoOkHttpClient.builder()
+    .fromEnv()
+    // If `maxIdleConnections` is set, then `keepAliveDuration` must be set, and vice versa.
+    .maxIdleConnections(10)
+    .keepAliveDuration(Duration.ofMinutes(2))
+    .build()
+```
+
+If both options are unset, OkHttp's default connection pool settings are used.
+
 ### HTTPS
 
 > [!NOTE]
@@ -501,7 +520,7 @@ import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.models.model.ModelCreateParams
 
 val params: ModelCreateParams = ModelCreateParams.builder()
-    .litellmParams(ModelCreateParams.LitellmParams.builder()
+    .llmParams(ModelCreateParams.LlmParams.builder()
         .putAdditionalProperty("secretProperty", JsonValue.from("42"))
         .build())
     .build()

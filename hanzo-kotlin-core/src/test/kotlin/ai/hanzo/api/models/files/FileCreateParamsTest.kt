@@ -13,12 +13,9 @@ internal class FileCreateParamsTest {
     fun create() {
         FileCreateParams.builder()
             .provider("provider")
-            .file("some content".byteInputStream())
+            .file("Example data".byteInputStream())
             .purpose("purpose")
             .customLlmProvider("custom_llm_provider")
-            .litellmMetadata("litellm_metadata")
-            .targetModelNames("target_model_names")
-            .targetStorage("target_storage")
             .build()
     }
 
@@ -27,7 +24,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -41,12 +38,9 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .purpose("purpose")
                 .customLlmProvider("custom_llm_provider")
-                .litellmMetadata("litellm_metadata")
-                .targetModelNames("target_model_names")
-                .targetStorage("target_storage")
                 .build()
 
         val body = params._body()
@@ -61,12 +55,9 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".byteInputStream()),
+                        "file" to MultipartField.of("Example data".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                         "custom_llm_provider" to MultipartField.of("custom_llm_provider"),
-                        "litellm_metadata" to MultipartField.of("litellm_metadata"),
-                        "target_model_names" to MultipartField.of("target_model_names"),
-                        "target_storage" to MultipartField.of("target_storage"),
                     )
                     .mapValues { (_, field) ->
                         field.map { (it as? ByteArray)?.inputStream() ?: it }
@@ -79,7 +70,7 @@ internal class FileCreateParamsTest {
         val params =
             FileCreateParams.builder()
                 .provider("provider")
-                .file("some content".byteInputStream())
+                .file("Example data".byteInputStream())
                 .purpose("purpose")
                 .build()
 
@@ -95,7 +86,7 @@ internal class FileCreateParamsTest {
             )
             .isEqualTo(
                 mapOf(
-                        "file" to MultipartField.of("some content".byteInputStream()),
+                        "file" to MultipartField.of("Example data".byteInputStream()),
                         "purpose" to MultipartField.of("purpose"),
                     )
                     .mapValues { (_, field) ->

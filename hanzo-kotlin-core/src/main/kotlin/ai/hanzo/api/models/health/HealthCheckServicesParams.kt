@@ -222,8 +222,6 @@ private constructor(
 
             val LANGFUSE = of("langfuse")
 
-            val LANGFUSE_OTEL = of("langfuse_otel")
-
             val SLACK = of("slack")
 
             val OPENMETER = of("openmeter")
@@ -236,12 +234,6 @@ private constructor(
 
             val DATADOG = of("datadog")
 
-            val GENERIC_API = of("generic_api")
-
-            val ARIZE = of("arize")
-
-            val SQS = of("sqs")
-
             fun of(value: String) = Service(JsonField.of(value))
         }
 
@@ -249,16 +241,12 @@ private constructor(
         enum class Known {
             SLACK_BUDGET_ALERTS,
             LANGFUSE,
-            LANGFUSE_OTEL,
             SLACK,
             OPENMETER,
             WEBHOOK,
             EMAIL,
             BRAINTRUST,
             DATADOG,
-            GENERIC_API,
-            ARIZE,
-            SQS,
         }
 
         /**
@@ -273,16 +261,12 @@ private constructor(
         enum class Value {
             SLACK_BUDGET_ALERTS,
             LANGFUSE,
-            LANGFUSE_OTEL,
             SLACK,
             OPENMETER,
             WEBHOOK,
             EMAIL,
             BRAINTRUST,
             DATADOG,
-            GENERIC_API,
-            ARIZE,
-            SQS,
             /** An enum member indicating that [Service] was instantiated with an unknown value. */
             _UNKNOWN,
         }
@@ -298,16 +282,12 @@ private constructor(
             when (this) {
                 SLACK_BUDGET_ALERTS -> Value.SLACK_BUDGET_ALERTS
                 LANGFUSE -> Value.LANGFUSE
-                LANGFUSE_OTEL -> Value.LANGFUSE_OTEL
                 SLACK -> Value.SLACK
                 OPENMETER -> Value.OPENMETER
                 WEBHOOK -> Value.WEBHOOK
                 EMAIL -> Value.EMAIL
                 BRAINTRUST -> Value.BRAINTRUST
                 DATADOG -> Value.DATADOG
-                GENERIC_API -> Value.GENERIC_API
-                ARIZE -> Value.ARIZE
-                SQS -> Value.SQS
                 else -> Value._UNKNOWN
             }
 
@@ -323,16 +303,12 @@ private constructor(
             when (this) {
                 SLACK_BUDGET_ALERTS -> Known.SLACK_BUDGET_ALERTS
                 LANGFUSE -> Known.LANGFUSE
-                LANGFUSE_OTEL -> Known.LANGFUSE_OTEL
                 SLACK -> Known.SLACK
                 OPENMETER -> Known.OPENMETER
                 WEBHOOK -> Known.WEBHOOK
                 EMAIL -> Known.EMAIL
                 BRAINTRUST -> Known.BRAINTRUST
                 DATADOG -> Known.DATADOG
-                GENERIC_API -> Known.GENERIC_API
-                ARIZE -> Known.ARIZE
-                SQS -> Known.SQS
                 else -> throw HanzoInvalidDataException("Unknown Service: $value")
             }
 

@@ -31,7 +31,7 @@ interface CohereServiceAsync {
      */
     fun withOptions(modifier: (ClientOptions.Builder) -> Unit): CohereServiceAsync
 
-    /** [Docs](https://docs.litellm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun create(
         endpoint: String,
         params: CohereCreateParams = CohereCreateParams.none(),
@@ -48,7 +48,7 @@ interface CohereServiceAsync {
     suspend fun create(endpoint: String, requestOptions: RequestOptions): CohereCreateResponse =
         create(endpoint, CohereCreateParams.none(), requestOptions)
 
-    /** [Docs](https://docs.litellm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun retrieve(
         endpoint: String,
         params: CohereRetrieveParams = CohereRetrieveParams.none(),
@@ -66,7 +66,7 @@ interface CohereServiceAsync {
     suspend fun retrieve(endpoint: String, requestOptions: RequestOptions): CohereRetrieveResponse =
         retrieve(endpoint, CohereRetrieveParams.none(), requestOptions)
 
-    /** [Docs](https://docs.litellm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun update(
         endpoint: String,
         params: CohereUpdateParams = CohereUpdateParams.none(),
@@ -83,7 +83,7 @@ interface CohereServiceAsync {
     suspend fun update(endpoint: String, requestOptions: RequestOptions): CohereUpdateResponse =
         update(endpoint, CohereUpdateParams.none(), requestOptions)
 
-    /** [Docs](https://docs.litellm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun delete(
         endpoint: String,
         params: CohereDeleteParams = CohereDeleteParams.none(),
@@ -100,7 +100,7 @@ interface CohereServiceAsync {
     suspend fun delete(endpoint: String, requestOptions: RequestOptions): CohereDeleteResponse =
         delete(endpoint, CohereDeleteParams.none(), requestOptions)
 
-    /** [Docs](https://docs.litellm.ai/docs/pass_through/cohere) */
+    /** [Docs](https://docs.hanzo.ai/docs/pass_through/cohere) */
     suspend fun modify(
         endpoint: String,
         params: CohereModifyParams = CohereModifyParams.none(),
