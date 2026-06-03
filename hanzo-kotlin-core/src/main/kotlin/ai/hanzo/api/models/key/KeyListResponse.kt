@@ -251,6 +251,14 @@ private constructor(
 
     private var validated: Boolean = false
 
+    /**
+     * Validates that the types of all values in this object match their expected types recursively.
+     *
+     * This method is _not_ forwards compatible with new types from the API for existing fields.
+     *
+     * @throws HanzoInvalidDataException if any value type in this object doesn't match its expected
+     *   type.
+     */
     fun validate(): KeyListResponse = apply {
         if (validated) {
             return@apply
@@ -308,6 +316,30 @@ private constructor(
 
         fun _json(): JsonValue? = _json
 
+        /**
+         * Maps this instance's current variant to a value of type [T] using the given [visitor].
+         *
+         * Note that this method is _not_ forwards compatible with new variants from the API, unless
+         * [visitor] overrides [Visitor.unknown]. To handle variants not known to this version of
+         * the SDK gracefully, consider overriding [Visitor.unknown]:
+         * ```kotlin
+         * import ai.hanzo.api.core.JsonValue
+         *
+         * val result: String? = key.accept(object : Key.Visitor<String?> {
+         *     override fun visitString(string: String): String? = string.toString()
+         *
+         *     // ...
+         *
+         *     override fun unknown(json: JsonValue?): String? {
+         *         // Or inspect the `json`.
+         *         return null
+         *     }
+         * })
+         * ```
+         *
+         * @throws HanzoInvalidDataException if [Visitor.unknown] is not overridden in [visitor] and
+         *   the current variant is unknown.
+         */
         fun <T> accept(visitor: Visitor<T>): T =
             when {
                 string != null -> visitor.visitString(string)
@@ -317,6 +349,15 @@ private constructor(
 
         private var validated: Boolean = false
 
+        /**
+         * Validates that the types of all values in this object match their expected types
+         * recursively.
+         *
+         * This method is _not_ forwards compatible with new types from the API for existing fields.
+         *
+         * @throws HanzoInvalidDataException if any value type in this object doesn't match its
+         *   expected type.
+         */
         fun validate(): Key = apply {
             if (validated) {
                 return@apply
@@ -2539,6 +2580,16 @@ private constructor(
 
             private var validated: Boolean = false
 
+            /**
+             * Validates that the types of all values in this object match their expected types
+             * recursively.
+             *
+             * This method is _not_ forwards compatible with new types from the API for existing
+             * fields.
+             *
+             * @throws HanzoInvalidDataException if any value type in this object doesn't match its
+             *   expected type.
+             */
             fun validate(): UserApiKeyAuth = apply {
                 if (validated) {
                     return@apply
@@ -2748,6 +2799,16 @@ private constructor(
 
                 private var validated: Boolean = false
 
+                /**
+                 * Validates that the types of all values in this object match their expected types
+                 * recursively.
+                 *
+                 * This method is _not_ forwards compatible with new types from the API for existing
+                 * fields.
+                 *
+                 * @throws HanzoInvalidDataException if any value type in this object doesn't match
+                 *   its expected type.
+                 */
                 fun validate(): AllowedModelRegion = apply {
                     if (validated) {
                         return@apply
@@ -2809,6 +2870,31 @@ private constructor(
 
                 fun _json(): JsonValue? = _json
 
+                /**
+                 * Maps this instance's current variant to a value of type [T] using the given
+                 * [visitor].
+                 *
+                 * Note that this method is _not_ forwards compatible with new variants from the
+                 * API, unless [visitor] overrides [Visitor.unknown]. To handle variants not known
+                 * to this version of the SDK gracefully, consider overriding [Visitor.unknown]:
+                 * ```kotlin
+                 * import ai.hanzo.api.core.JsonValue
+                 *
+                 * val result: String? = expires.accept(object : Expires.Visitor<String?> {
+                 *     override fun visitString(string: String): String? = string.toString()
+                 *
+                 *     // ...
+                 *
+                 *     override fun unknown(json: JsonValue?): String? {
+                 *         // Or inspect the `json`.
+                 *         return null
+                 *     }
+                 * })
+                 * ```
+                 *
+                 * @throws HanzoInvalidDataException if [Visitor.unknown] is not overridden in
+                 *   [visitor] and the current variant is unknown.
+                 */
                 fun <T> accept(visitor: Visitor<T>): T =
                     when {
                         string != null -> visitor.visitString(string)
@@ -2818,6 +2904,16 @@ private constructor(
 
                 private var validated: Boolean = false
 
+                /**
+                 * Validates that the types of all values in this object match their expected types
+                 * recursively.
+                 *
+                 * This method is _not_ forwards compatible with new types from the API for existing
+                 * fields.
+                 *
+                 * @throws HanzoInvalidDataException if any value type in this object doesn't match
+                 *   its expected type.
+                 */
                 fun validate(): Expires = apply {
                     if (validated) {
                         return@apply
@@ -3023,6 +3119,16 @@ private constructor(
 
                 private var validated: Boolean = false
 
+                /**
+                 * Validates that the types of all values in this object match their expected types
+                 * recursively.
+                 *
+                 * This method is _not_ forwards compatible with new types from the API for existing
+                 * fields.
+                 *
+                 * @throws HanzoInvalidDataException if any value type in this object doesn't match
+                 *   its expected type.
+                 */
                 fun validate(): RpmLimitPerModel = apply {
                     if (validated) {
                         return@apply
@@ -3130,6 +3236,16 @@ private constructor(
 
                 private var validated: Boolean = false
 
+                /**
+                 * Validates that the types of all values in this object match their expected types
+                 * recursively.
+                 *
+                 * This method is _not_ forwards compatible with new types from the API for existing
+                 * fields.
+                 *
+                 * @throws HanzoInvalidDataException if any value type in this object doesn't match
+                 *   its expected type.
+                 */
                 fun validate(): TpmLimitPerModel = apply {
                     if (validated) {
                         return@apply
@@ -3308,6 +3424,16 @@ private constructor(
 
                 private var validated: Boolean = false
 
+                /**
+                 * Validates that the types of all values in this object match their expected types
+                 * recursively.
+                 *
+                 * This method is _not_ forwards compatible with new types from the API for existing
+                 * fields.
+                 *
+                 * @throws HanzoInvalidDataException if any value type in this object doesn't match
+                 *   its expected type.
+                 */
                 fun validate(): UserRole = apply {
                     if (validated) {
                         return@apply

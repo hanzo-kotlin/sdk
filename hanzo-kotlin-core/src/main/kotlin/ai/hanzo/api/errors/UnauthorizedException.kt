@@ -5,10 +5,14 @@ package ai.hanzo.api.errors
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
+import ai.hanzo.api.core.jsonMapper
 
 class UnauthorizedException
 private constructor(private val headers: Headers, private val body: JsonValue, cause: Throwable?) :
-    HanzoServiceException("401: $body", cause) {
+    HanzoServiceException(
+        "401: ${if (body.isMissing()) "Unknown" else jsonMapper().writeValueAsString(body)}",
+        cause,
+    ) {
 
     override fun statusCode(): Int = 401
 
