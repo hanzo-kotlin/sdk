@@ -5,6 +5,7 @@ package ai.hanzo.api.errors
 import ai.hanzo.api.core.JsonValue
 import ai.hanzo.api.core.checkRequired
 import ai.hanzo.api.core.http.Headers
+import ai.hanzo.api.core.jsonMapper
 
 class UnexpectedStatusCodeException
 private constructor(
@@ -12,7 +13,11 @@ private constructor(
     private val headers: Headers,
     private val body: JsonValue,
     cause: Throwable?,
-) : HanzoServiceException("$statusCode: $body", cause) {
+) :
+    HanzoServiceException(
+        "$statusCode: ${if (body.isMissing()) "Unknown" else jsonMapper().writeValueAsString(body)}",
+        cause,
+    ) {
 
     override fun statusCode(): Int = statusCode
 
