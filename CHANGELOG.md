@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2026-06-17)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/hanzoai/kotlin-sdk/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Chores
+
+* sync repo ([70d625f](https://github.com/hanzoai/kotlin-sdk/commit/70d625fc84c26a4b7396451cc1e0f6bb650f4a81))
+
+
+### Documentation
+
+* tidy LLM.md indexes; CLAUDE.md -&gt; LLM.md symlink convention ([c0ae246](https://github.com/hanzoai/kotlin-sdk/commit/c0ae246749bab0069f1c7daa598652f661f4d116))
+
 ## 0.1.0-alpha.3 (2026-06-01)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/hanzoai/kotlin-sdk/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
