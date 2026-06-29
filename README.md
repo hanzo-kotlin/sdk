@@ -1,3 +1,5 @@
+<p align="center"><img src=".github/hero.svg" alt="kotlin-sdk" width="880"></p>
+
 # Hanzo Kotlin API Library
 
 <!-- x-release-please-start-version -->
