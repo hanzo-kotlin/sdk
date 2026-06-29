@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2026-06-29)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/hanzoai/kotlin-sdk/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Chores
+
+* **brand:** dynamic hero banner ([31e8bb2](https://github.com/hanzoai/kotlin-sdk/commit/31e8bb23308304349a07bafb24ec851323b368f9))
+
+
+### Documentation
+
+* **brand:** add hero banner ([fcb8503](https://github.com/hanzoai/kotlin-sdk/commit/fcb8503a47cd72ae863bb80556b5e18659164e71))
+
 ## 0.1.0-alpha.4 (2026-06-17)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/hanzoai/kotlin-sdk/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
