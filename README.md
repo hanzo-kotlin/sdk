@@ -4,8 +4,8 @@
 
 <!-- x-release-please-start-version -->
 
-[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.4)
-[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.4/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.4)
+[![Maven Central](https://img.shields.io/maven-central/v/ai.hanzo.api/hanzo-kotlin)](https://central.sonatype.com/artifact/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.5)
+[![javadoc](https://javadoc.io/badge2/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.5/javadoc.svg)](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.5)
 
 <!-- x-release-please-end -->
 
@@ -26,7 +26,7 @@ Use the Hanzo MCP Server to enable AI assistants to interact with this API, allo
 
 <!-- x-release-please-start-version -->
 
-The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.4).
+The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai). KDocs are available on [javadoc.io](https://javadoc.io/doc/ai.hanzo.api/hanzo-kotlin/0.1.0-alpha.5).
 
 <!-- x-release-please-end -->
 
@@ -37,7 +37,7 @@ The REST API documentation can be found on [docs.hanzo.ai](https://docs.hanzo.ai
 ### Gradle
 
 ```kotlin
-implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.4")
+implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.5")
 ```
 
 ### Maven
@@ -46,7 +46,7 @@ implementation("ai.hanzo.api:hanzo-kotlin:0.1.0-alpha.4")
 <dependency>
   <groupId>ai.hanzo.api</groupId>
   <artifactId>hanzo-kotlin</artifactId>
-  <version>0.1.0-alpha.4</version>
+  <version>0.1.0-alpha.5</version>
 </dependency>
 ```
 
