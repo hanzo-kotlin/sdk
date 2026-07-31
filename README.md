@@ -15,6 +15,18 @@ The Hanzo Kotlin SDK is similar to the Hanzo Java SDK but with minor differences
 
 It is generated with [Stainless](https://www.stainless.com/).
 
+## Two clients live here
+
+`ai.hanzo.api:hanzo-kotlin` — this document — is the curated client: 188
+endpoints, hand-shaped ergonomics, generated with Stainless.
+
+[`ai.hanzo:hanzo-kotlin-cloud`](hanzo-kotlin-cloud/README.md) is the **full**
+cloud client: every `/v1` route of the Hanzo API, 2478 operations, generated from
+[hanzoai/openapi](https://github.com/hanzoai/openapi) `hanzo.yaml` by
+`./scripts/generate.sh`. Reach for it when the route you need is not in the
+curated surface. The six canonical example flows in [`examples/`](examples) run
+against it.
+
 ## MCP Server
 
 Use the Hanzo MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
