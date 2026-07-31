@@ -12,3 +12,8 @@ val projectNames = rootDir.listFiles()
     .toList()
 println("projects: $projectNames")
 projectNames.forEach { include(it) }
+
+// The six canonical example flows (hanzoai/openapi `flows.yaml`), built by the
+// same `./scripts/build` that builds the client. An example that does not
+// compile is worse than no example.
+listOf("hello", "chat", "money", "store", "agent", "tools").forEach { include("examples:$it") }

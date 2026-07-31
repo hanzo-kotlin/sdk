@@ -1,0 +1,65 @@
+# Hanzo CI — the ONE way this repo is gated, read by hanzoai/ci.
+#
+# No `images:` and no `deploy:`: this is a client library. What CI owes is a
+# gate plus the jar; a consumer resolves it from Maven Central at a tag.
+
+test:
+  - name: spec-drift-check
+    # The client is generated, so the one thing that can break on its own is the
+    # committed client disagreeing with hanzoai/openapi. `--check` regenerates
+    # into a temp tree and diffs; non-zero means a generated file was
+    # hand-edited, or the spec moved and nobody regenerated. This is the whole
+    # point of keeping the invocation in `generate.py` and only a call site here.
+    #
+    # Needs a token that can read hanzoai/openapi, which is private and in
+    # another org: the workflow's default GITHUB_TOKEN is scoped to this repo
+    # and will not do. Set SPEC_TOKEN (or GH_TOKEN) from KMS.
+    run: ./scripts/generate.sh --check
+
+  - name: sdk-build
+    # Compiles the generated cloud client (263 API classes, 2062 models) and all
+    # six example flows.
+    #
+    # NOT `./scripts/build`, which builds every module and cannot pass:
+    # hanzo-kotlin-core does not compile, at upstream HEAD, with none of this
+    # change applied. Its Stainless-generated TeamAddMemberParams.kt declares
+    # `member(member: Member)` twice in both builders — "Conflicting overloads"
+    # at lines 142, 156 and 435. That is a Stainless codegen bug in the legacy
+    # client and it is fixed by regenerating that client, not from here; gating
+    # on it would mean this repo's CI is red for a reason nobody in it can fix.
+    # Widen this back to ./scripts/build the day hanzo-kotlin-core compiles.
+    run: |
+      set -e
+      ./gradlew :hanzo-kotlin-cloud:assemble
+      ./gradlew :examples:hello:assemble :examples:chat:assemble :examples:money:assemble \
+                :examples:store:assemble :examples:agent:assemble :examples:tools:assemble
+
+  - name: sdk-lint
+    # ktfmt over the hand-written modules. It is switched off for
+    # hanzo-kotlin-cloud, whose sources must stay byte-identical to the
+    # generator's output or `spec-drift-check` above fails.
+    run: ./scripts/lint
+
+  - name: flows-test
+    # Pins the six canonical flows to the routes hanzoai/openapi `flows.yaml`
+    # names, and asserts the client actually sends the bearer token and the org
+    # header. Those two facts are the whole contract of a generated SDK.
+    run: ./gradlew :hanzo-kotlin-cloud:test
+
+binaries:
+  - name: hanzo-kotlin-cloud
+    # Built on every push, published only on a tag.
+    #
+    # Maven Central publication rides here because it is the release lane this
+    # repo has: `hanzo.publish` (buildSrc) signs with GPG_SIGNING_KEY /
+    # GPG_SIGNING_KEY_ID / GPG_SIGNING_PASSWORD and uploads with
+    # ORG_GRADLE_PROJECT_mavenCentralUsername / …Password, all KMS-sourced and
+    # injected by the reusable. Without them the jar is still produced and
+    # nothing is published — so a push builds and only a tag releases.
+    run: |
+      set -e
+      ./gradlew :hanzo-kotlin-cloud:assemble
+      if [ "${GITHUB_REF_TYPE:-}" = tag ] && [ -n "${GPG_SIGNING_KEY:-}" ]; then
+        ./gradlew :hanzo-kotlin-cloud:publishAndReleaseToMavenCentral
+      fi
+    out: hanzo-kotlin-cloud/build/libs/*.jar
