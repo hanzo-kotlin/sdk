@@ -63,3 +63,23 @@ binaries:
         ./gradlew :hanzo-kotlin-cloud:publishAndReleaseToMavenCentral
       fi
     out: hanzo-kotlin-cloud/build/libs/*.jar
+
+# THE CLIENT LANE — this repo is a PROJECTION of one API document at one version.
+#
+# hanzoai/cloud's release sends `repository_dispatch: spec-update` carrying
+# (version, sha, spec_sha256); hanzoai/ci fetches openapi.yaml AT THAT SHA,
+# REFUSES if the bytes hash to anything else, runs `generate:`, writes
+# `.spec-lock` beside the code, and — only after the `test:` block below has
+# passed over exactly those bytes — commits and cuts a patch.
+#
+# The document moved from hanzoai/openapi `hanzo.yaml` (hand-merged, 1742 paths,
+# fed by nothing, and NOTHING HAS EVER SENT the spec-update this repo listens
+# for) to hanzoai/cloud `openapi.yaml` — smaller (1058 paths), emitted from the
+# code by each app's own router, and gated on every cloud release. A smaller true
+# document beats a larger unverified one.
+client:
+  generate: ./scripts/generate.sh
+  # NO version: — this client's version is a gradle -alpha.N build, not
+  # x.y.z, so there is no patch for the lane to derive. Its projection
+  # still lands and is still gated; the cut waits for a human, instead of
+  # a tag naming bytes under a number nobody chose.
