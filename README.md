@@ -13,12 +13,12 @@ The Hanzo Kotlin SDK provides convenient access to the [Hanzo REST API](https://
 
 The Hanzo Kotlin SDK is similar to the Hanzo Java SDK but with minor differences that make it more ergonomic for use in Kotlin, such as nullable values instead of `Optional`, `Sequence` instead of `Stream`, and suspend functions instead of `CompletableFuture`.
 
-It is generated with [Stainless](https://www.stainless.com/).
-
 ## Two clients live here
 
 `ai.hanzo.api:hanzo-kotlin` — this document — is the curated client: 188
-endpoints, hand-shaped ergonomics, generated with Stainless.
+endpoints with hand-shaped ergonomics. It was produced by Stainless, which Hanzo
+retired on 2026-07-04, so nothing regenerates it now: what is committed here is
+what it is. New surface arrives in the cloud client below.
 
 [`ai.hanzo:hanzo-kotlin-cloud`](hanzo-kotlin-cloud/README.md) is the **full**
 cloud client: every `/v1` route of the Hanzo API, 2478 operations, generated from
