@@ -1,44 +1,27 @@
 #!/usr/bin/env bash
-# Regenerate the Hanzo Cloud client from the unified OpenAPI spec.
+# Regenerate the Hanzo Cloud client from the Hanzo Cloud API document.
 #
-# This is a CALL SITE, not a generator invocation. The invocation is logic and
-# lives once, in hanzoai/openapi `generate.py`; every per-language knob —
-# generator, library, serialization, packages, coordinates, and which path in
-# this repo the generator owns — is data in `sdks.yaml` beside it. Nothing here
-# repeats them, so there is nothing in this repo that can drift on its own.
+# A CALL SITE, not a generator invocation. The invocation is logic and lives
+# once, in `generate.py`; every per-language knob — generator, library,
+# serialization, packages, coordinates, and which path in this repo the
+# generator owns — is data in `sdks.yaml` beside it.
 #
 #   ./scripts/generate.sh          # rewrite hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud
 #   ./scripts/generate.sh --check  # diff only; non-zero if the committed client drifted
 #
-#   OPENAPI=~/work/hanzo/openapi ./scripts/generate.sh   # reuse a checkout you have
+# BOTH INPUTS ARRIVE AS VALUES. $SPEC is the document, already fetched at a
+# pinned ref and digest-checked; $OPENAPI is the checkout holding the driver.
+# hanzoai/ci's client lane sets both, because it holds the one credential that
+# reads the forge the driver lives on. What stood here instead was a four-deep
+# credential chain pointed at github.com, where the driver is not canonical and
+# none of those tokens are provisioned. Set OPENAPI by hand to run it by hand.
 #
-# Without OPENAPI this clones hanzoai/openapi. That repo is PRIVATE, and GitHub
-# 404s a private path rather than 403ing it, so an unauthenticated fetch looks
-# like a missing file — hence the token, and hence the explicit message below
-# rather than a confusing 404.
-#
-# Requires: git, java 17+, python3 with PyYAML.
+# Requires: java 17+, python3 with PyYAML.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-SPEC_REPO="${SPEC_REPO:-hanzoai/openapi}"
-SPEC_REF="${SPEC_REF:-main}"
-OPENAPI="${OPENAPI:-}"
+: "${OPENAPI:?the generator lives in hanzoai/openapi; hanzoai/ci's client lane sets OPENAPI, or point it at a checkout}"
 
-if [ -z "$OPENAPI" ]; then
-  TOKEN="${SPEC_TOKEN:-${GH_TOKEN:-${GITHUB_TOKEN:-}}}"
-  : "${TOKEN:?$SPEC_REPO is private: set SPEC_TOKEN (or GH_TOKEN/GITHUB_TOKEN), or point OPENAPI at a checkout}"
-  OPENAPI="$(mktemp -d)"
-  trap 'rm -rf "$OPENAPI"' EXIT
-  echo "==> cloning $SPEC_REPO@$SPEC_REF (private repo — authenticated clone)"
-  git clone --quiet --depth 1 --branch "$SPEC_REF" \
-    "https://x-access-token:${TOKEN}@github.com/${SPEC_REPO}.git" "$OPENAPI"
-fi
-
-echo "==> $(git -C "$OPENAPI" rev-parse HEAD) $SPEC_REPO"
-# THE DOCUMENT AS AN ARGUMENT. hanzoai/ci's client: lane fetches openapi.yaml at
-# the sha hanzoai/cloud just deployed and exports SPEC; the driver projects THAT
-# rather than the checkout's own hanzo.yaml. With SPEC unset nothing changes —
-# a maintainer regenerating by hand still gets the checkout's document.
 if [ -n "${SPEC:-}" ]; then set -- --spec "$SPEC" "$@"; fi
-python3 "$OPENAPI/generate.py" kotlin --repo "$PWD" "$@"
+
+exec python3 "$OPENAPI/generate.py" kotlin --repo "$PWD" "$@"
