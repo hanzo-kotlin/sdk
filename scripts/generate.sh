@@ -16,7 +16,8 @@
 # credential chain pointed at github.com, where the driver is not canonical and
 # none of those tokens are provisioned. Set OPENAPI by hand to run it by hand.
 #
-# Requires: java 17+, python3 with PyYAML.
+# Requires: uv, java 17+. uv carries the interpreter and the PyYAML the driver
+# needs; the ci client lane provisions it.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -24,4 +25,4 @@ cd "$(dirname "$0")/.."
 
 if [ -n "${SPEC:-}" ]; then set -- --spec "$SPEC" "$@"; fi
 
-exec python3 "$OPENAPI/generate.py" kotlin --repo "$PWD" "$@"
+exec uv run --with pyyaml python3 "$OPENAPI/generate.py" kotlin --repo "$PWD" "$@"
