@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCaptureResult
-import ai.hanzo.cloud.model.CloudPostV1EventRequest
+import ai.hanzo.cloud.model.CaptureResult
+import ai.hanzo.cloud.model.PostV1EventRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,10 +48,10 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/event
-     * 
-     * 
-     * @param cloudPostV1EventRequest  (optional)
-     * @return CloudCaptureResult
+     * Capture product events into your org&#39;s warehouse
+     * Stores pageviews, browser errors, identifies and custom commerce events as rows in the caller&#39;s own tenant, and answers a receipt {accepted, dropped} that always totals what was sent — a beacon is never silently discarded.  THE STATUS SAYS WHETHER ANYTHING LANDED, so a green check can never mean an empty warehouse. 200 means at least one event was stored (or that nothing was sent), and a nonzero &#x60;dropped&#x60; beside a nonzero &#x60;accepted&#x60; is a PARTIAL batch, never a failed one — a batch is not refused whole for its worst element. If NOTHING was stored the request is an error, and it names the one thing that fixes it: 401 &#x60;ingest_key_required&#x60; when every event was refused for want of a credential (the same events land with a key), and 400 &#x60;unroutable_events&#x60; when the caller HAD capability and the body still named nothing storable.  ONE door for every wire a Hanzo surface emits, dispatched by the SHAPE of the body and never by a second path: a bare event object, a bare array of them, the {batch:[…]} / {events:[…]} envelope, the team console&#39;s snake_case array, and the PostHog wire (spelled &#x60;distinct_id&#x60;/&#x60;api_key&#x60;, which the canonical wire never uses). BATCH IS A BODY, NOT A PATH — there is no /v1/event/batch, because an array already is one.  WHAT THE CALLER PRESENTS DECIDES WHAT IT MAY WRITE, and the door itself grants nothing. A validated bearer or an org API key writes the full event at full fidelity. A PUBLISHABLE key (pk-, on Authorization: Bearer, x-hanzo-ingest-key, or ?ingest_key&#x3D; for navigator.sendBeacon, which cannot set headers) does the same, and is the credential a browser bundle ships: it is deliberately NOT a secret, it resolves WHICH tenant a beacon belongs to and nothing more. A pk- never authenticates and can READ NOTHING — not this org&#39;s errors, not a lens, not any other route on this API — so a leaked one lets a stranger write into your stream, and never lets one read out of it. Reading these rows back always takes a real bearer. A Hanzo Team workspace token resolves its org at REDUCED capability: the signed account names the person, so a &#x60;distinctId&#x60; in the body cannot pin events on a colleague.  NO CREDENTIAL IS REFUSED: a write the server cannot attribute to a project is 401 &#x60;ingest_key_required&#x60;, and a credential that IS presented but resolves to no project is 403 &#x60;ingest_key_unknown&#x60;. Nothing is filed under a shared tenant — events nobody can read are worse than events nobody sent, because the caller is told it succeeded. A browser bundle therefore always ships a pk-, which is what /v1/event.js takes.  A REDUCED principal — a Hanzo Team workspace token — writes through the PROJECTION into its own org: narrowed to what the SERVER can name (pageviews and errors, plus the closed autocapture vocabulary $click, $input, $change, $submit, $view), where every one of those names is resolved through a server-owned table and stored as that table&#39;s value, so the name on the wire is never the name in the row. Stripped, too, to the fields the projection names, so revenue, personId, groupId and every property but the element annotation cannot reach a row — and an exception is carried only on an error, never on an interaction, so a click cannot ship a stack trace into a row&#39;s attributes. It does NOT name the person: the signed account is the identity, so a &#x60;distinctId&#x60; in the body cannot pin events on a colleague. Everything refused is counted in &#x60;dropped&#x60;.  The projected lane alone is bounded: 413 over 64 KiB, 400 over 50 events, 429 on the per-client-IP and per-peer caps, and a DNT:1 or Sec-GPC:1 request stores nothing and says so in the receipt. Two stored values carry their own bounds on top, because a request cap does not bound one value: an element annotation over 2 KiB (or a trail over 32 steps) and an exception class over 256 bytes are dropped from the row, which still lands. Authenticated bodies are offered to the observability plane first, which claims LLM-observability ingestion batches and declines everything else.
+     * @param postV1EventRequest  (optional)
+     * @return CaptureResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Event(cloudPostV1EventRequest: CloudPostV1EventRequest? = null) : CloudCaptureResult {
-        val localVarResponse = cloudPostV1EventWithHttpInfo(cloudPostV1EventRequest = cloudPostV1EventRequest)
+    fun postV1Event(postV1EventRequest: PostV1EventRequest? = null) : CaptureResult {
+        val localVarResponse = postV1EventWithHttpInfo(postV1EventRequest = postV1EventRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptureResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptureResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,31 +80,31 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/event
-     * 
-     * 
-     * @param cloudPostV1EventRequest  (optional)
-     * @return ApiResponse<CloudCaptureResult?>
+     * Capture product events into your org&#39;s warehouse
+     * Stores pageviews, browser errors, identifies and custom commerce events as rows in the caller&#39;s own tenant, and answers a receipt {accepted, dropped} that always totals what was sent — a beacon is never silently discarded.  THE STATUS SAYS WHETHER ANYTHING LANDED, so a green check can never mean an empty warehouse. 200 means at least one event was stored (or that nothing was sent), and a nonzero &#x60;dropped&#x60; beside a nonzero &#x60;accepted&#x60; is a PARTIAL batch, never a failed one — a batch is not refused whole for its worst element. If NOTHING was stored the request is an error, and it names the one thing that fixes it: 401 &#x60;ingest_key_required&#x60; when every event was refused for want of a credential (the same events land with a key), and 400 &#x60;unroutable_events&#x60; when the caller HAD capability and the body still named nothing storable.  ONE door for every wire a Hanzo surface emits, dispatched by the SHAPE of the body and never by a second path: a bare event object, a bare array of them, the {batch:[…]} / {events:[…]} envelope, the team console&#39;s snake_case array, and the PostHog wire (spelled &#x60;distinct_id&#x60;/&#x60;api_key&#x60;, which the canonical wire never uses). BATCH IS A BODY, NOT A PATH — there is no /v1/event/batch, because an array already is one.  WHAT THE CALLER PRESENTS DECIDES WHAT IT MAY WRITE, and the door itself grants nothing. A validated bearer or an org API key writes the full event at full fidelity. A PUBLISHABLE key (pk-, on Authorization: Bearer, x-hanzo-ingest-key, or ?ingest_key&#x3D; for navigator.sendBeacon, which cannot set headers) does the same, and is the credential a browser bundle ships: it is deliberately NOT a secret, it resolves WHICH tenant a beacon belongs to and nothing more. A pk- never authenticates and can READ NOTHING — not this org&#39;s errors, not a lens, not any other route on this API — so a leaked one lets a stranger write into your stream, and never lets one read out of it. Reading these rows back always takes a real bearer. A Hanzo Team workspace token resolves its org at REDUCED capability: the signed account names the person, so a &#x60;distinctId&#x60; in the body cannot pin events on a colleague.  NO CREDENTIAL IS REFUSED: a write the server cannot attribute to a project is 401 &#x60;ingest_key_required&#x60;, and a credential that IS presented but resolves to no project is 403 &#x60;ingest_key_unknown&#x60;. Nothing is filed under a shared tenant — events nobody can read are worse than events nobody sent, because the caller is told it succeeded. A browser bundle therefore always ships a pk-, which is what /v1/event.js takes.  A REDUCED principal — a Hanzo Team workspace token — writes through the PROJECTION into its own org: narrowed to what the SERVER can name (pageviews and errors, plus the closed autocapture vocabulary $click, $input, $change, $submit, $view), where every one of those names is resolved through a server-owned table and stored as that table&#39;s value, so the name on the wire is never the name in the row. Stripped, too, to the fields the projection names, so revenue, personId, groupId and every property but the element annotation cannot reach a row — and an exception is carried only on an error, never on an interaction, so a click cannot ship a stack trace into a row&#39;s attributes. It does NOT name the person: the signed account is the identity, so a &#x60;distinctId&#x60; in the body cannot pin events on a colleague. Everything refused is counted in &#x60;dropped&#x60;.  The projected lane alone is bounded: 413 over 64 KiB, 400 over 50 events, 429 on the per-client-IP and per-peer caps, and a DNT:1 or Sec-GPC:1 request stores nothing and says so in the receipt. Two stored values carry their own bounds on top, because a request cap does not bound one value: an element annotation over 2 KiB (or a trail over 32 steps) and an exception class over 256 bytes are dropped from the row, which still lands. Authenticated bodies are offered to the observability plane first, which claims LLM-observability ingestion batches and declines everything else.
+     * @param postV1EventRequest  (optional)
+     * @return ApiResponse<CaptureResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EventWithHttpInfo(cloudPostV1EventRequest: CloudPostV1EventRequest?) : ApiResponse<CloudCaptureResult?> {
-        val localVariableConfig = cloudPostV1EventRequestConfig(cloudPostV1EventRequest = cloudPostV1EventRequest)
+    fun postV1EventWithHttpInfo(postV1EventRequest: PostV1EventRequest?) : ApiResponse<CaptureResult?> {
+        val localVariableConfig = postV1EventRequestConfig(postV1EventRequest = postV1EventRequest)
 
-        return request<CloudPostV1EventRequest, CloudCaptureResult>(
+        return request<PostV1EventRequest, CaptureResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Event
+     * To obtain the request config of the operation postV1Event
      *
-     * @param cloudPostV1EventRequest  (optional)
+     * @param postV1EventRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1EventRequestConfig(cloudPostV1EventRequest: CloudPostV1EventRequest?) : RequestConfig<CloudPostV1EventRequest> {
-        val localVariableBody = cloudPostV1EventRequest
+    fun postV1EventRequestConfig(postV1EventRequest: PostV1EventRequest?) : RequestConfig<PostV1EventRequest> {
+        val localVariableBody = postV1EventRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -115,15 +115,15 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/event",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/event/{project}/envelope
-     * 
-     * 
+     * Sentry SDK envelope ingest — errors and traces from an unmodified Sentry client
+     * Accepts the CURRENT Sentry wire — the framed envelope a modern SDK posts, carrying its items in one request — so an application already instrumented with Sentry reports into Hanzo&#39;s error tracking by pointing its DSN here and changing nothing else.  CLOUD ROUTES IT AND READS NONE OF IT. The body is relayed byte-for-byte to the observability plane, which parses the wire, verifies the credential and answers; this door declares no response shape because it does not know one. A deployment with no observability plane mounted answers 503.  THE CREDENTIAL IS A SENTRY DSN KEY, NOT A HANZO PRINCIPAL. This is one of the few writes on the platform that carries no bearer and no org header by design — a Sentry SDK has neither — and it is exempt from the principal gate for that reason. The observability plane verifies the DSN key itself, fail-closed: a request without a valid one is refused there, never admitted here. Presenting a Hanzo bearer instead does nothing.  &#x60;project&#x60; IS THE DSN&#39;S PROJECT ID — the identifier in the DSN the SDK was configured with, and what the tenant is derived from. It is NOT a Hanzo IAM project and NOT a tracker project key. Only these two ingest paths map through: no observability READ API is reachable by any other suffix under this prefix.
      * @param project 
      * @param body  (optional)
      * @return void
@@ -134,8 +134,8 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EventByProjectEnvelope(project: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = cloudPostV1EventByProjectEnvelopeWithHttpInfo(project = project, body = body)
+    fun postV1EventByProjectEnvelope(project: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postV1EventByProjectEnvelopeWithHttpInfo(project = project, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -154,8 +154,8 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/event/{project}/envelope
-     * 
-     * 
+     * Sentry SDK envelope ingest — errors and traces from an unmodified Sentry client
+     * Accepts the CURRENT Sentry wire — the framed envelope a modern SDK posts, carrying its items in one request — so an application already instrumented with Sentry reports into Hanzo&#39;s error tracking by pointing its DSN here and changing nothing else.  CLOUD ROUTES IT AND READS NONE OF IT. The body is relayed byte-for-byte to the observability plane, which parses the wire, verifies the credential and answers; this door declares no response shape because it does not know one. A deployment with no observability plane mounted answers 503.  THE CREDENTIAL IS A SENTRY DSN KEY, NOT A HANZO PRINCIPAL. This is one of the few writes on the platform that carries no bearer and no org header by design — a Sentry SDK has neither — and it is exempt from the principal gate for that reason. The observability plane verifies the DSN key itself, fail-closed: a request without a valid one is refused there, never admitted here. Presenting a Hanzo bearer instead does nothing.  &#x60;project&#x60; IS THE DSN&#39;S PROJECT ID — the identifier in the DSN the SDK was configured with, and what the tenant is derived from. It is NOT a Hanzo IAM project and NOT a tracker project key. Only these two ingest paths map through: no observability READ API is reachable by any other suffix under this prefix.
      * @param project 
      * @param body  (optional)
      * @return ApiResponse<Unit?>
@@ -163,8 +163,8 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EventByProjectEnvelopeWithHttpInfo(project: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EventByProjectEnvelopeRequestConfig(project = project, body = body)
+    fun postV1EventByProjectEnvelopeWithHttpInfo(project: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1EventByProjectEnvelopeRequestConfig(project = project, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -172,13 +172,13 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EventByProjectEnvelope
+     * To obtain the request config of the operation postV1EventByProjectEnvelope
      *
      * @param project 
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1EventByProjectEnvelopeRequestConfig(project: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1EventByProjectEnvelopeRequestConfig(project: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -189,15 +189,15 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/event/{project}/envelope".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/event/{project}/store
-     * 
-     * 
+     * Sentry SDK store ingest — the legacy single-event wire
+     * Accepts the LEGACY Sentry wire: one event per request, what an SDK predating envelopes sends. Same door, same credential, same destination as the envelope endpoint — kept open so an old client reports without being upgraded first. New instrumentation has no reason to choose it.  CLOUD ROUTES IT AND READS NONE OF IT. The body is relayed byte-for-byte to the observability plane, which parses the wire, verifies the credential and answers; this door declares no response shape because it does not know one. A deployment with no observability plane mounted answers 503.  THE CREDENTIAL IS A SENTRY DSN KEY, NOT A HANZO PRINCIPAL. This is one of the few writes on the platform that carries no bearer and no org header by design — a Sentry SDK has neither — and it is exempt from the principal gate for that reason. The observability plane verifies the DSN key itself, fail-closed: a request without a valid one is refused there, never admitted here. Presenting a Hanzo bearer instead does nothing.  &#x60;project&#x60; IS THE DSN&#39;S PROJECT ID — the identifier in the DSN the SDK was configured with, and what the tenant is derived from. It is NOT a Hanzo IAM project and NOT a tracker project key. Only these two ingest paths map through: no observability READ API is reachable by any other suffix under this prefix.
      * @param project 
      * @param body  (optional)
      * @return void
@@ -208,8 +208,8 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EventByProjectStore(project: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = cloudPostV1EventByProjectStoreWithHttpInfo(project = project, body = body)
+    fun postV1EventByProjectStore(project: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postV1EventByProjectStoreWithHttpInfo(project = project, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -228,8 +228,8 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/event/{project}/store
-     * 
-     * 
+     * Sentry SDK store ingest — the legacy single-event wire
+     * Accepts the LEGACY Sentry wire: one event per request, what an SDK predating envelopes sends. Same door, same credential, same destination as the envelope endpoint — kept open so an old client reports without being upgraded first. New instrumentation has no reason to choose it.  CLOUD ROUTES IT AND READS NONE OF IT. The body is relayed byte-for-byte to the observability plane, which parses the wire, verifies the credential and answers; this door declares no response shape because it does not know one. A deployment with no observability plane mounted answers 503.  THE CREDENTIAL IS A SENTRY DSN KEY, NOT A HANZO PRINCIPAL. This is one of the few writes on the platform that carries no bearer and no org header by design — a Sentry SDK has neither — and it is exempt from the principal gate for that reason. The observability plane verifies the DSN key itself, fail-closed: a request without a valid one is refused there, never admitted here. Presenting a Hanzo bearer instead does nothing.  &#x60;project&#x60; IS THE DSN&#39;S PROJECT ID — the identifier in the DSN the SDK was configured with, and what the tenant is derived from. It is NOT a Hanzo IAM project and NOT a tracker project key. Only these two ingest paths map through: no observability READ API is reachable by any other suffix under this prefix.
      * @param project 
      * @param body  (optional)
      * @return ApiResponse<Unit?>
@@ -237,8 +237,8 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EventByProjectStoreWithHttpInfo(project: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EventByProjectStoreRequestConfig(project = project, body = body)
+    fun postV1EventByProjectStoreWithHttpInfo(project: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1EventByProjectStoreRequestConfig(project = project, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -246,13 +246,13 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EventByProjectStore
+     * To obtain the request config of the operation postV1EventByProjectStore
      *
      * @param project 
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1EventByProjectStoreRequestConfig(project: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1EventByProjectStoreRequestConfig(project: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -263,7 +263,7 @@ class EventApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/event/{project}/store".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

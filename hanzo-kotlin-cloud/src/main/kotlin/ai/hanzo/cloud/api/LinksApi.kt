@@ -19,6 +19,17 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.AccountsUsage
+import ai.hanzo.cloud.model.BoardResp
+import ai.hanzo.cloud.model.DeviceView
+import ai.hanzo.cloud.model.EnrollReq
+import ai.hanzo.cloud.model.IngestReq
+import ai.hanzo.cloud.model.IngestResp
+import ai.hanzo.cloud.model.LinkList
+import ai.hanzo.cloud.model.LinkView
+import ai.hanzo.cloud.model.RevokeResp
+import ai.hanzo.cloud.model.RoutePlan
+import ai.hanzo.cloud.model.SummaryResp
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,22 +57,23 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/links/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Logs out one account and stops the sessions it was running.
+     * Logs out one account and stops the sessions it was running.  It revokes a single linked account and stops the agent sessions that ran under it, answering with the revoked row and how many sessions stopped. The link is RETAINED with a revoked status rather than deleted, so its usage history and the audit trail survive the log-out — which also means a revoked account still appears in the list, and is excluded from the route plan rather than absent from it. The session stop is narrowed to the revoking user&#39;s own sessions on that device, provider and account, and a stop that fails does not fail the revoke: the revoked row is the durable truth. An id that does not exist, or belongs to another user or org, is the same 404.
+     * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
+     * @return RevokeResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1LinksById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1LinksByIdWithHttpInfo(id = id)
+    fun deleteV1LinksById(id: kotlin.String) : RevokeResp {
+        val localVarResponse = deleteV1LinksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RevokeResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -77,60 +89,63 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/links/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Logs out one account and stops the sessions it was running.
+     * Logs out one account and stops the sessions it was running.  It revokes a single linked account and stops the agent sessions that ran under it, answering with the revoked row and how many sessions stopped. The link is RETAINED with a revoked status rather than deleted, so its usage history and the audit trail survive the log-out — which also means a revoked account still appears in the list, and is excluded from the route plan rather than absent from it. The session stop is narrowed to the revoking user&#39;s own sessions on that device, provider and account, and a stop that fails does not fail the revoke: the revoked row is the durable truth. An id that does not exist, or belongs to another user or org, is the same 404.
+     * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
+     * @return ApiResponse<RevokeResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1LinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1LinksByIdRequestConfig(id = id)
+    fun deleteV1LinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<RevokeResp?> {
+        val localVariableConfig = deleteV1LinksByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, RevokeResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1LinksById
+     * To obtain the request config of the operation deleteV1LinksById
      *
-     * @param id 
+     * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
      * @return RequestConfig
      */
-    fun cloudDeleteV1LinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1LinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/links/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/links
-     * 
-     * 
-     * @return void
+     * Lists your linked accounts and the devices they sit on.
+     * Lists your linked accounts and the devices they sit on.  It answers the caller&#39;s own links plus a devices projection of the same rows folded per machine — the cross-machine \&quot;AI Providers / Accounts\&quot; view. A device is a projection, not a stored entity: its labels come from its most-recently-seen account, so there is no device to create and none to garbage-collect. Revoked links are INCLUDED rather than dropped, because a logged-out account keeps its usage history and audit trail. Scoped to the caller: a validated principal and a non-empty org, else 403.
+     * @return LinkList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Links() : Unit {
-        val localVarResponse = cloudGetV1LinksWithHttpInfo()
+    fun getV1Links() : LinkList {
+        val localVarResponse = getV1LinksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LinkList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -146,59 +161,62 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/links
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Lists your linked accounts and the devices they sit on.
+     * Lists your linked accounts and the devices they sit on.  It answers the caller&#39;s own links plus a devices projection of the same rows folded per machine — the cross-machine \&quot;AI Providers / Accounts\&quot; view. A device is a projection, not a stored entity: its labels come from its most-recently-seen account, so there is no device to create and none to garbage-collect. Revoked links are INCLUDED rather than dropped, because a logged-out account keeps its usage history and audit trail. Scoped to the caller: a validated principal and a non-empty org, else 403.
+     * @return ApiResponse<LinkList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LinksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LinksRequestConfig()
+    fun getV1LinksWithHttpInfo() : ApiResponse<LinkList?> {
+        val localVariableConfig = getV1LinksRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, LinkList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Links
+     * To obtain the request config of the operation getV1Links
      *
      * @return RequestConfig
      */
-    fun cloudGetV1LinksRequestConfig() : RequestConfig<Unit> {
+    fun getV1LinksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/links/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Reads one linked account.
+     * Reads one linked account.  It answers a single link — its device, provider, account, plan, how it bills, its status and its latest usage snapshot. An id that does not exist, or belongs to another user or org, is the same 404: the scope is a bound predicate on the read, so a wrong id and a foreign id are indistinguishable and neither confirms the other&#39;s existence. The static paths on this collection — route, usage, devices — register before this one and win first-match, so a link whose id collided with one of those words could not be addressed here.
+     * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
+     * @return LinkView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LinksById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1LinksByIdWithHttpInfo(id = id)
+    fun getV1LinksById(id: kotlin.String) : LinkView {
+        val localVarResponse = getV1LinksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LinkView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -214,61 +232,64 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/links/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Reads one linked account.
+     * Reads one linked account.  It answers a single link — its device, provider, account, plan, how it bills, its status and its latest usage snapshot. An id that does not exist, or belongs to another user or org, is the same 404: the scope is a bound predicate on the read, so a wrong id and a foreign id are indistinguishable and neither confirms the other&#39;s existence. The static paths on this collection — route, usage, devices — register before this one and win first-match, so a link whose id collided with one of those words could not be addressed here.
+     * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
+     * @return ApiResponse<LinkView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LinksByIdRequestConfig(id = id)
+    fun getV1LinksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<LinkView?> {
+        val localVariableConfig = getV1LinksByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, LinkView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LinksById
+     * To obtain the request config of the operation getV1LinksById
      *
-     * @param id 
+     * @param id ID is the link to act on, from the path. It is scoped to the caller, so another user&#39;s or org&#39;s id is a 404.
      * @return RequestConfig
      */
-    fun cloudGetV1LinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1LinksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/links/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/links/devices/{machine}
-     * 
-     * 
-     * @param machine 
-     * @return void
+     * Shows one machine: its accounts, usage and live sessions.
+     * Shows one machine: its accounts, usage and live sessions.  It answers one device — its host and OS labels, every account the caller has signed in on that machine with its latest usage, and how many agent sessions the caller currently has running on it. The device labels come from the most-recently-seen account, since a device is a projection of its links rather than a row of its own. A machine with none of the caller&#39;s accounts is 404, which is also the answer when the machine belongs to someone else — the scope makes the two indistinguishable, deliberately. The session count reports 0 where the agent plane is not mounted rather than failing the read.
+     * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
+     * @return DeviceView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LinksDevicesByMachine(machine: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1LinksDevicesByMachineWithHttpInfo(machine = machine)
+    fun getV1LinksDevicesByMachine(machine: kotlin.String) : DeviceView {
+        val localVarResponse = getV1LinksDevicesByMachineWithHttpInfo(machine = machine)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeviceView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -284,60 +305,63 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/links/devices/{machine}
-     * 
-     * 
-     * @param machine 
-     * @return ApiResponse<Unit?>
+     * Shows one machine: its accounts, usage and live sessions.
+     * Shows one machine: its accounts, usage and live sessions.  It answers one device — its host and OS labels, every account the caller has signed in on that machine with its latest usage, and how many agent sessions the caller currently has running on it. The device labels come from the most-recently-seen account, since a device is a projection of its links rather than a row of its own. A machine with none of the caller&#39;s accounts is 404, which is also the answer when the machine belongs to someone else — the scope makes the two indistinguishable, deliberately. The session count reports 0 where the agent plane is not mounted rather than failing the read.
+     * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
+     * @return ApiResponse<DeviceView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LinksDevicesByMachineWithHttpInfo(machine: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LinksDevicesByMachineRequestConfig(machine = machine)
+    fun getV1LinksDevicesByMachineWithHttpInfo(machine: kotlin.String) : ApiResponse<DeviceView?> {
+        val localVariableConfig = getV1LinksDevicesByMachineRequestConfig(machine = machine)
 
-        return request<Unit, Unit>(
+        return request<Unit, DeviceView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LinksDevicesByMachine
+     * To obtain the request config of the operation getV1LinksDevicesByMachine
      *
-     * @param machine 
+     * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
      * @return RequestConfig
      */
-    fun cloudGetV1LinksDevicesByMachineRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
+    fun getV1LinksDevicesByMachineRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/links/devices/{machine}".replace("{"+"machine"+"}", encodeURIComponent(machine.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/links/route
-     * 
-     * 
-     * @return void
+     * Gets the failover order across your linked accounts.
+     * Gets the failover order across your linked accounts.  It answers an ordered redundancy plan over the caller&#39;s LINKED (not revoked) accounts: each candidate with its remaining rate-limit headroom, whether it is routable right now, how it BILLS (plan or commerce), and a reason when it is not — plus the primary to try first. It is what lets a router fail over from one subscription to another and fall back to the metered API as the always-available backstop, knowing the cost consequence before it dials.  It is POLICY, not execution: the plan is computed purely from the usage snapshots already in the registry, never by probing a provider, so it is a total function of the links and costs nothing to ask for. Actually dialing, detecting a live 429 and advancing to the next candidate belongs to the caller. A link with no snapshot counts as full headroom.
+     * @return RoutePlan
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LinksRoute() : Unit {
-        val localVarResponse = cloudGetV1LinksRouteWithHttpInfo()
+    fun getV1LinksRoute() : RoutePlan {
+        val localVarResponse = getV1LinksRouteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RoutePlan
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -353,58 +377,65 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/links/route
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Gets the failover order across your linked accounts.
+     * Gets the failover order across your linked accounts.  It answers an ordered redundancy plan over the caller&#39;s LINKED (not revoked) accounts: each candidate with its remaining rate-limit headroom, whether it is routable right now, how it BILLS (plan or commerce), and a reason when it is not — plus the primary to try first. It is what lets a router fail over from one subscription to another and fall back to the metered API as the always-available backstop, knowing the cost consequence before it dials.  It is POLICY, not execution: the plan is computed purely from the usage snapshots already in the registry, never by probing a provider, so it is a total function of the links and costs nothing to ask for. Actually dialing, detecting a live 429 and advancing to the next candidate belongs to the caller. A link with no snapshot counts as full headroom.
+     * @return ApiResponse<RoutePlan?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LinksRouteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LinksRouteRequestConfig()
+    fun getV1LinksRouteWithHttpInfo() : ApiResponse<RoutePlan?> {
+        val localVariableConfig = getV1LinksRouteRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, RoutePlan>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LinksRoute
+     * To obtain the request config of the operation getV1LinksRoute
      *
      * @return RequestConfig
      */
-    fun cloudGetV1LinksRouteRequestConfig() : RequestConfig<Unit> {
+    fun getV1LinksRouteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/links/route",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/links/usage
-     * 
-     * 
-     * @return void
+     * Shows one provider account&#39;s own usage dashboard.
+     * Shows one provider account&#39;s own usage dashboard.  It answers the time series for a SINGLE provider account — the windows in range plus the currently-open ones — as that provider&#39;s own meter reported it: \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;. current is the newest instance of each lane (the headline); windows is the history behind it, both computed from ONE deduped read. provider is required; an unknown window class or range is 400, never a quiet fallback to a different one. When no series is available the response is a 200 with available:false and empty lists — an honest \&quot;we have no data\&quot;, which is a different claim from zero usage.
+     * @param provider Provider is the provider whose meter to read. Required. (optional)
+     * @param account Account narrows to one account when a user has several with the provider. (optional)
+     * @param window Window selects a window class: 6h, day, week or month. Empty reads all. (optional)
+     * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a quiet fallback. (optional)
+     * @return BoardResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LinksUsage() : Unit {
-        val localVarResponse = cloudGetV1LinksUsageWithHttpInfo()
+    fun getV1LinksUsage(provider: kotlin.String? = null, account: kotlin.String? = null, window: kotlin.String? = null, range: kotlin.String? = null) : BoardResp {
+        val localVarResponse = getV1LinksUsageWithHttpInfo(provider = provider, account = account, window = window, range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BoardResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -420,58 +451,83 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/links/usage
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Shows one provider account&#39;s own usage dashboard.
+     * Shows one provider account&#39;s own usage dashboard.  It answers the time series for a SINGLE provider account — the windows in range plus the currently-open ones — as that provider&#39;s own meter reported it: \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;. current is the newest instance of each lane (the headline); windows is the history behind it, both computed from ONE deduped read. provider is required; an unknown window class or range is 400, never a quiet fallback to a different one. When no series is available the response is a 200 with available:false and empty lists — an honest \&quot;we have no data\&quot;, which is a different claim from zero usage.
+     * @param provider Provider is the provider whose meter to read. Required. (optional)
+     * @param account Account narrows to one account when a user has several with the provider. (optional)
+     * @param window Window selects a window class: 6h, day, week or month. Empty reads all. (optional)
+     * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a quiet fallback. (optional)
+     * @return ApiResponse<BoardResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LinksUsageWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LinksUsageRequestConfig()
+    fun getV1LinksUsageWithHttpInfo(provider: kotlin.String?, account: kotlin.String?, window: kotlin.String?, range: kotlin.String?) : ApiResponse<BoardResp?> {
+        val localVariableConfig = getV1LinksUsageRequestConfig(provider = provider, account = account, window = window, range = range)
 
-        return request<Unit, Unit>(
+        return request<Unit, BoardResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LinksUsage
+     * To obtain the request config of the operation getV1LinksUsage
      *
+     * @param provider Provider is the provider whose meter to read. Required. (optional)
+     * @param account Account narrows to one account when a user has several with the provider. (optional)
+     * @param window Window selects a window class: 6h, day, week or month. Empty reads all. (optional)
+     * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a quiet fallback. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1LinksUsageRequestConfig() : RequestConfig<Unit> {
+    fun getV1LinksUsageRequestConfig(provider: kotlin.String?, account: kotlin.String?, window: kotlin.String?, range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (provider != null) {
+                    put("provider", listOf(provider.toString()))
+                }
+                if (account != null) {
+                    put("account", listOf(account.toString()))
+                }
+                if (window != null) {
+                    put("window", listOf(window.toString()))
+                }
+                if (range != null) {
+                    put("range", listOf(range.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/links/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/links/usage/accounts
-     * 
-     * 
-     * @return void
+     * Breaks down what the gateway routed through each of your accounts.
+     * Breaks down what the gateway routed through each of your accounts.  It answers one row per linked account the GATEWAY actually routed through, plus their total — requests, prompt and completion tokens, and cost. This is the routed ledger, the read twin of the counter the router writes, and it is distinct from both of its neighbours: not the device collector&#39;s plan snapshots, and not the org money ledger. The source and scope fields on the response say so on every payload. The same shape answers in the billing namespace, from one shaping function, so the two mounts cannot drift.
+     * @return AccountsUsage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LinksUsageAccounts() : Unit {
-        val localVarResponse = cloudGetV1LinksUsageAccountsWithHttpInfo()
+    fun getV1LinksUsageAccounts() : AccountsUsage {
+        val localVarResponse = getV1LinksUsageAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccountsUsage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -487,58 +543,62 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/links/usage/accounts
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Breaks down what the gateway routed through each of your accounts.
+     * Breaks down what the gateway routed through each of your accounts.  It answers one row per linked account the GATEWAY actually routed through, plus their total — requests, prompt and completion tokens, and cost. This is the routed ledger, the read twin of the counter the router writes, and it is distinct from both of its neighbours: not the device collector&#39;s plan snapshots, and not the org money ledger. The source and scope fields on the response say so on every payload. The same shape answers in the billing namespace, from one shaping function, so the two mounts cannot drift.
+     * @return ApiResponse<AccountsUsage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LinksUsageAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LinksUsageAccountsRequestConfig()
+    fun getV1LinksUsageAccountsWithHttpInfo() : ApiResponse<AccountsUsage?> {
+        val localVariableConfig = getV1LinksUsageAccountsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, AccountsUsage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LinksUsageAccounts
+     * To obtain the request config of the operation getV1LinksUsageAccounts
      *
      * @return RequestConfig
      */
-    fun cloudGetV1LinksUsageAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getV1LinksUsageAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/links/usage/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/links/usage/summary
-     * 
-     * 
-     * @return void
+     * Shows plan consumption and Hanzo spend side by side.
+     * Shows plan consumption and Hanzo spend side by side.  It answers the global usage board over one window: the caller&#39;s own linked accounts, metered from each provider&#39;s own login, alongside their org&#39;s Hanzo-routed inference. These come from different ledgers and mean different things, so every row is LABELLED by source, by scope and by availability, and THE TWO ARE NEVER SUMMED — a plan&#39;s percentage is not money, and a provider&#39;s own spend is not a Hanzo charge. The rows sit side by side and say what they are.  One resolver fixes the window for both halves, so the two sets always cover the same period. range is one of 1h, 24h, 7d or 30d and defaults to 24h; anything else is 400 rather than a silent substitution. A ledger that cannot answer reports available:false instead of a zero that would read as \&quot;no usage\&quot;.
+     * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a silent substitution. (optional)
+     * @return SummaryResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LinksUsageSummary() : Unit {
-        val localVarResponse = cloudGetV1LinksUsageSummaryWithHttpInfo()
+    fun getV1LinksUsageSummary(range: kotlin.String? = null) : SummaryResp {
+        val localVarResponse = getV1LinksUsageSummaryWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SummaryResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -554,58 +614,69 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/links/usage/summary
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Shows plan consumption and Hanzo spend side by side.
+     * Shows plan consumption and Hanzo spend side by side.  It answers the global usage board over one window: the caller&#39;s own linked accounts, metered from each provider&#39;s own login, alongside their org&#39;s Hanzo-routed inference. These come from different ledgers and mean different things, so every row is LABELLED by source, by scope and by availability, and THE TWO ARE NEVER SUMMED — a plan&#39;s percentage is not money, and a provider&#39;s own spend is not a Hanzo charge. The rows sit side by side and say what they are.  One resolver fixes the window for both halves, so the two sets always cover the same period. range is one of 1h, 24h, 7d or 30d and defaults to 24h; anything else is 400 rather than a silent substitution. A ledger that cannot answer reports available:false instead of a zero that would read as \&quot;no usage\&quot;.
+     * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a silent substitution. (optional)
+     * @return ApiResponse<SummaryResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LinksUsageSummaryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LinksUsageSummaryRequestConfig()
+    fun getV1LinksUsageSummaryWithHttpInfo(range: kotlin.String?) : ApiResponse<SummaryResp?> {
+        val localVariableConfig = getV1LinksUsageSummaryRequestConfig(range = range)
 
-        return request<Unit, Unit>(
+        return request<Unit, SummaryResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LinksUsageSummary
+     * To obtain the request config of the operation getV1LinksUsageSummary
      *
+     * @param range Range is the period, one of 1h, 24h, 7d or 30d; empty means 24h, and an unknown label is 400, never a silent substitution. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1LinksUsageSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1LinksUsageSummaryRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (range != null) {
+                    put("range", listOf(range.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/links/usage/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/links
-     * 
-     * 
-     * @return void
+     * Registers a signed-in AI provider account on a machine.
+     * Registers a signed-in AI provider account on a machine.  It records that a developer has signed into one provider account on one machine — a Claude Max or ChatGPT Plus subscription, a Hanzo key, a raw provider key — and answers 201 with the stored link. Re-reporting the same (machine, provider, account) UPDATES that link rather than creating a second, so a collector may call this on every heartbeat. machine and provider are required (400 otherwise), as is a valid kind, and every field is length-bounded. Scoped to the caller: a validated principal and a non-empty org, else 403, so a caller writes only their OWN accounts within their own org.
+     * @param enrollReq 
+     * @return LinkView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Links() : Unit {
-        val localVarResponse = cloudPostV1LinksWithHttpInfo()
+    fun postV1Links(enrollReq: EnrollReq) : LinkView {
+        val localVarResponse = postV1LinksWithHttpInfo(enrollReq = enrollReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LinkView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -621,59 +692,65 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/links
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Registers a signed-in AI provider account on a machine.
+     * Registers a signed-in AI provider account on a machine.  It records that a developer has signed into one provider account on one machine — a Claude Max or ChatGPT Plus subscription, a Hanzo key, a raw provider key — and answers 201 with the stored link. Re-reporting the same (machine, provider, account) UPDATES that link rather than creating a second, so a collector may call this on every heartbeat. machine and provider are required (400 otherwise), as is a valid kind, and every field is length-bounded. Scoped to the caller: a validated principal and a non-empty org, else 403, so a caller writes only their OWN accounts within their own org.
+     * @param enrollReq 
+     * @return ApiResponse<LinkView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LinksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1LinksRequestConfig()
+    fun postV1LinksWithHttpInfo(enrollReq: EnrollReq) : ApiResponse<LinkView?> {
+        val localVariableConfig = postV1LinksRequestConfig(enrollReq = enrollReq)
 
-        return request<Unit, Unit>(
+        return request<EnrollReq, LinkView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Links
+     * To obtain the request config of the operation postV1Links
      *
+     * @param enrollReq 
      * @return RequestConfig
      */
-    fun cloudPostV1LinksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1LinksRequestConfig(enrollReq: EnrollReq) : RequestConfig<EnrollReq> {
+        val localVariableBody = enrollReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/links/devices/{machine}/revoke
-     * 
-     * 
-     * @param machine 
-     * @return void
+     * Logs out every account on one machine and stops its sessions.
+     * Logs out every account on one machine and stops its sessions.  It revokes every one of the caller&#39;s accounts on one machine and stops the agent sessions they were running, answering with how many of each. This is the \&quot;I lost that laptop\&quot; button. Revoked links are RETAINED, not deleted, so usage history and the audit trail survive a log-out — the rows come back in the response with their new status. The session stop reaches only the REVOKING user&#39;s own sessions, so a shared machine name can never be used to stop a co-tenant&#39;s work, and a stop that fails does not fail the revoke: the revoked row is the durable truth and the count then honestly reports fewer. A machine with nothing left to revoke is 404.
+     * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
+     * @return RevokeResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1LinksDevicesByMachineRevoke(machine: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1LinksDevicesByMachineRevokeWithHttpInfo(machine = machine)
+    fun postV1LinksDevicesByMachineRevoke(machine: kotlin.String) : RevokeResp {
+        val localVarResponse = postV1LinksDevicesByMachineRevokeWithHttpInfo(machine = machine)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RevokeResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -689,60 +766,64 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/links/devices/{machine}/revoke
-     * 
-     * 
-     * @param machine 
-     * @return ApiResponse<Unit?>
+     * Logs out every account on one machine and stops its sessions.
+     * Logs out every account on one machine and stops its sessions.  It revokes every one of the caller&#39;s accounts on one machine and stops the agent sessions they were running, answering with how many of each. This is the \&quot;I lost that laptop\&quot; button. Revoked links are RETAINED, not deleted, so usage history and the audit trail survive a log-out — the rows come back in the response with their new status. The session stop reaches only the REVOKING user&#39;s own sessions, so a shared machine name can never be used to stop a co-tenant&#39;s work, and a stop that fails does not fail the revoke: the revoked row is the durable truth and the count then honestly reports fewer. A machine with nothing left to revoke is 404.
+     * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
+     * @return ApiResponse<RevokeResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LinksDevicesByMachineRevokeWithHttpInfo(machine: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1LinksDevicesByMachineRevokeRequestConfig(machine = machine)
+    fun postV1LinksDevicesByMachineRevokeWithHttpInfo(machine: kotlin.String) : ApiResponse<RevokeResp?> {
+        val localVariableConfig = postV1LinksDevicesByMachineRevokeRequestConfig(machine = machine)
 
-        return request<Unit, Unit>(
+        return request<Unit, RevokeResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1LinksDevicesByMachineRevoke
+     * To obtain the request config of the operation postV1LinksDevicesByMachineRevoke
      *
-     * @param machine 
+     * @param machine Machine is the machine to act on, from the path. It is scoped to the caller, so a machine with none of the caller&#39;s accounts is a 404.
      * @return RequestConfig
      */
-    fun cloudPostV1LinksDevicesByMachineRevokeRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
+    fun postV1LinksDevicesByMachineRevokeRequestConfig(machine: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/links/devices/{machine}/revoke".replace("{"+"machine"+"}", encodeURIComponent(machine.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/links/usage
-     * 
-     * 
-     * @return void
+     * Reports usage samples from the device collector.
+     * Reports usage samples from the device collector.  It ingests a batch of usage samples and answers with how many were accepted, whether history was durably stored, and the links they refreshed. A report also REFRESHES one link per distinct (machine, provider, account) it names, so a running collector keeps the accounts overview current without a separate registration call.  A caller can only ever report for THEMSELVES: org and subject come from the validated bearer, never from the body, so no sample can be attributed to another user or tenant. History is FAIL-SOFT and stored says which happened — a warehouse outage still accepts the report and refreshes the links rather than failing the device, and answers 202 either way. Send either one sample inline or up to 256 in samples; an empty batch or an over-long one is 400, as is a provider, window class or kind outside the closed vocabulary — an unrecognized window is refused rather than rewritten, because a silently reclassified sample would fill a dashboard with a class nobody reported.
+     * @param ingestReq 
+     * @return IngestResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1LinksUsage() : Unit {
-        val localVarResponse = cloudPostV1LinksUsageWithHttpInfo()
+    fun postV1LinksUsage(ingestReq: IngestReq) : IngestResp {
+        val localVarResponse = postV1LinksUsageWithHttpInfo(ingestReq = ingestReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IngestResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -758,37 +839,42 @@ class LinksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/links/usage
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Reports usage samples from the device collector.
+     * Reports usage samples from the device collector.  It ingests a batch of usage samples and answers with how many were accepted, whether history was durably stored, and the links they refreshed. A report also REFRESHES one link per distinct (machine, provider, account) it names, so a running collector keeps the accounts overview current without a separate registration call.  A caller can only ever report for THEMSELVES: org and subject come from the validated bearer, never from the body, so no sample can be attributed to another user or tenant. History is FAIL-SOFT and stored says which happened — a warehouse outage still accepts the report and refreshes the links rather than failing the device, and answers 202 either way. Send either one sample inline or up to 256 in samples; an empty batch or an over-long one is 400, as is a provider, window class or kind outside the closed vocabulary — an unrecognized window is refused rather than rewritten, because a silently reclassified sample would fill a dashboard with a class nobody reported.
+     * @param ingestReq 
+     * @return ApiResponse<IngestResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LinksUsageWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1LinksUsageRequestConfig()
+    fun postV1LinksUsageWithHttpInfo(ingestReq: IngestReq) : ApiResponse<IngestResp?> {
+        val localVariableConfig = postV1LinksUsageRequestConfig(ingestReq = ingestReq)
 
-        return request<Unit, Unit>(
+        return request<IngestReq, IngestResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1LinksUsage
+     * To obtain the request config of the operation postV1LinksUsage
      *
+     * @param ingestReq 
      * @return RequestConfig
      */
-    fun cloudPostV1LinksUsageRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1LinksUsageRequestConfig(ingestReq: IngestReq) : RequestConfig<IngestReq> {
+        val localVariableBody = ingestReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/links/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

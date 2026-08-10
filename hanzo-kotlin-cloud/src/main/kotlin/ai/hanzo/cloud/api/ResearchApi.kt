@@ -19,16 +19,16 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudArtifact
-import ai.hanzo.cloud.model.CloudArtifactOut
-import ai.hanzo.cloud.model.CloudArtifactsOut
-import ai.hanzo.cloud.model.CloudExperimentsOut
-import ai.hanzo.cloud.model.CloudGrantOut
-import ai.hanzo.cloud.model.CloudGrantRequest
-import ai.hanzo.cloud.model.CloudIngestOut
-import ai.hanzo.cloud.model.CloudIngestRequest
-import ai.hanzo.cloud.model.CloudProjectsOut
-import ai.hanzo.cloud.model.CloudResearchTotals
+import ai.hanzo.cloud.model.ArtifactOut
+import ai.hanzo.cloud.model.ArtifactsOut
+import ai.hanzo.cloud.model.ExperimentsOut
+import ai.hanzo.cloud.model.GrantOut
+import ai.hanzo.cloud.model.GrantRequest
+import ai.hanzo.cloud.model.IngestOut
+import ai.hanzo.cloud.model.IngestRequest
+import ai.hanzo.cloud.model.ProjectsOut
+import ai.hanzo.cloud.model.ResearchArtifact
+import ai.hanzo.cloud.model.ResearchTotals
 
 import com.google.gson.annotations.SerializedName
 
@@ -56,12 +56,12 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/research/artifacts
-     * ListResearchArtifacts returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash.
-     * ListResearchArtifacts returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash. ?run&#x3D; narrows to one run, ?project&#x3D; to one project (default the caller&#39;s project scope), and ?since&#x3D; to a unix second.
+     * Returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash.
+     * Returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash. ?run&#x3D; narrows to one run, ?project&#x3D; to one project (default the caller&#39;s project scope), and ?since&#x3D; to a unix second.
      * @param project Project narrows to one project. Empty takes the caller&#39;s project scope. (optional)
      * @param run Run narrows to one run&#39;s artifacts by its stable id. (optional)
      * @param since Since bounds the feed to artifacts recorded at or after this unix second. (optional)
-     * @return CloudArtifactsOut
+     * @return ArtifactsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -70,11 +70,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ResearchArtifacts(project: kotlin.String? = null, run: kotlin.String? = null, since: kotlin.Int? = null) : CloudArtifactsOut {
-        val localVarResponse = cloudGetV1ResearchArtifactsWithHttpInfo(project = project, run = run, since = since)
+    fun getV1ResearchArtifacts(project: kotlin.String? = null, run: kotlin.String? = null, since: kotlin.Int? = null) : ArtifactsOut {
+        val localVarResponse = getV1ResearchArtifactsWithHttpInfo(project = project, run = run, since = since)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArtifactsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArtifactsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -90,34 +90,34 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/research/artifacts
-     * ListResearchArtifacts returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash.
-     * ListResearchArtifacts returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash. ?run&#x3D; narrows to one run, ?project&#x3D; to one project (default the caller&#39;s project scope), and ?since&#x3D; to a unix second.
+     * Returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash.
+     * Returns the caller org&#39;s research-diary feed newest-first — the snapshots and reports tied to its runs, as metadata and content addresses; the bytes themselves are fetched by hash. ?run&#x3D; narrows to one run, ?project&#x3D; to one project (default the caller&#39;s project scope), and ?since&#x3D; to a unix second.
      * @param project Project narrows to one project. Empty takes the caller&#39;s project scope. (optional)
      * @param run Run narrows to one run&#39;s artifacts by its stable id. (optional)
      * @param since Since bounds the feed to artifacts recorded at or after this unix second. (optional)
-     * @return ApiResponse<CloudArtifactsOut?>
+     * @return ApiResponse<ArtifactsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ResearchArtifactsWithHttpInfo(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : ApiResponse<CloudArtifactsOut?> {
-        val localVariableConfig = cloudGetV1ResearchArtifactsRequestConfig(project = project, run = run, since = since)
+    fun getV1ResearchArtifactsWithHttpInfo(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : ApiResponse<ArtifactsOut?> {
+        val localVariableConfig = getV1ResearchArtifactsRequestConfig(project = project, run = run, since = since)
 
-        return request<Unit, CloudArtifactsOut>(
+        return request<Unit, ArtifactsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ResearchArtifacts
+     * To obtain the request config of the operation getV1ResearchArtifacts
      *
      * @param project Project narrows to one project. Empty takes the caller&#39;s project scope. (optional)
      * @param run Run narrows to one run&#39;s artifacts by its stable id. (optional)
      * @param since Since bounds the feed to artifacts recorded at or after this unix second. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ResearchArtifactsRequestConfig(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ResearchArtifactsRequestConfig(project: kotlin.String?, run: kotlin.String?, since: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -139,15 +139,15 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/artifacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/research/artifacts/{sha256}
-     * 
-     * 
+     * Fetch one recorded artifact&#39;s bytes by its content hash.
+     * Streams the artifact&#39;s stored bytes — the retrieval half of hash-addressing, where the diary feed hands out hashes and this hands back what they name. The Content-Type is image/png when the artifact was recorded as a snapshot and application/octet-stream otherwise; it comes from the recorded KIND, not from sniffing the bytes, so an artifact filed as a report always arrives as opaque bytes.  The hash is an address, and the read is NOT global. The store file IS the org, so the same bytes recorded by two tenants are two artifacts, and a hash that exists but belongs to somebody else is a 404 exactly like one that was never recorded — knowing a content hash is never enough to read it. A caller with no validated org is refused 403 outright.  Project narrows further INSIDE that org: the artifact&#39;s project must equal the caller&#39;s, which is &#x60;?project&#x3D;&#x60; when given and otherwise the caller&#39;s own project scope, defaulting to the default project. So an artifact filed under a named project is not found until the caller names that project — a mismatch is the same 404 an unknown hash gets, never a distinguishable refusal.  The address can be trusted because the WRITE derived it: the server hashes the bytes it stores, inside the trust boundary, and refuses a client-supplied sha256 that disagrees with them, so poisoning a first write would take a preimage. This read does not re-hash — it looks the hash up as a key.  One shape to expect: this route writes its errors IN-BAND as {\&quot;error\&quot;: …} at the real status code, not the {status, error} envelope the typed ops beside it return. It is mounted under an error-flattening filter that would otherwise rewrite its 4xx, so the body is written before that filter runs. A store that cannot be opened is a 500.
      * @param sha256 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -157,8 +157,8 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ResearchArtifactsBySha256(sha256: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1ResearchArtifactsBySha256WithHttpInfo(sha256 = sha256)
+    fun getV1ResearchArtifactsBySha256(sha256: kotlin.String) : Unit {
+        val localVarResponse = getV1ResearchArtifactsBySha256WithHttpInfo(sha256 = sha256)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -177,16 +177,16 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/research/artifacts/{sha256}
-     * 
-     * 
+     * Fetch one recorded artifact&#39;s bytes by its content hash.
+     * Streams the artifact&#39;s stored bytes — the retrieval half of hash-addressing, where the diary feed hands out hashes and this hands back what they name. The Content-Type is image/png when the artifact was recorded as a snapshot and application/octet-stream otherwise; it comes from the recorded KIND, not from sniffing the bytes, so an artifact filed as a report always arrives as opaque bytes.  The hash is an address, and the read is NOT global. The store file IS the org, so the same bytes recorded by two tenants are two artifacts, and a hash that exists but belongs to somebody else is a 404 exactly like one that was never recorded — knowing a content hash is never enough to read it. A caller with no validated org is refused 403 outright.  Project narrows further INSIDE that org: the artifact&#39;s project must equal the caller&#39;s, which is &#x60;?project&#x3D;&#x60; when given and otherwise the caller&#39;s own project scope, defaulting to the default project. So an artifact filed under a named project is not found until the caller names that project — a mismatch is the same 404 an unknown hash gets, never a distinguishable refusal.  The address can be trusted because the WRITE derived it: the server hashes the bytes it stores, inside the trust boundary, and refuses a client-supplied sha256 that disagrees with them, so poisoning a first write would take a preimage. This read does not re-hash — it looks the hash up as a key.  One shape to expect: this route writes its errors IN-BAND as {\&quot;error\&quot;: …} at the real status code, not the {status, error} envelope the typed ops beside it return. It is mounted under an error-flattening filter that would otherwise rewrite its 4xx, so the body is written before that filter runs. A store that cannot be opened is a 500.
      * @param sha256 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ResearchArtifactsBySha256WithHttpInfo(sha256: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ResearchArtifactsBySha256RequestConfig(sha256 = sha256)
+    fun getV1ResearchArtifactsBySha256WithHttpInfo(sha256: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1ResearchArtifactsBySha256RequestConfig(sha256 = sha256)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -194,12 +194,12 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ResearchArtifactsBySha256
+     * To obtain the request config of the operation getV1ResearchArtifactsBySha256
      *
      * @param sha256 
      * @return RequestConfig
      */
-    fun cloudGetV1ResearchArtifactsBySha256RequestConfig(sha256: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ResearchArtifactsBySha256RequestConfig(sha256: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -209,18 +209,18 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/artifacts/{sha256}".replace("{"+"sha256"+"}", encodeURIComponent(sha256.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/research/experiments
-     * ListExperiments returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history.
-     * ListExperiments returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history. With no ?project&#x3D; it reads the org&#39;s whole set across projects (the ops board&#39;s cross-project view, since a project is a sub-scope of the one tenant); ?project&#x3D; narrows to one and ?kind&#x3D; to one discriminator.
+     * Returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history.
+     * Returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history. With no ?project&#x3D; it reads the org&#39;s whole set across projects (the ops board&#39;s cross-project view, since a project is a sub-scope of the one tenant); ?project&#x3D; narrows to one and ?kind&#x3D; to one discriminator.
      * @param project Project narrows to one project. Empty reads the org&#39;s whole set across projects. (optional)
      * @param kind Kind narrows to one discriminator: benchmark, kernel-perf, training, ablation or policy-eval. (optional)
-     * @return CloudExperimentsOut
+     * @return ExperimentsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -229,11 +229,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ResearchExperiments(project: kotlin.String? = null, kind: kotlin.String? = null) : CloudExperimentsOut {
-        val localVarResponse = cloudGetV1ResearchExperimentsWithHttpInfo(project = project, kind = kind)
+    fun getV1ResearchExperiments(project: kotlin.String? = null, kind: kotlin.String? = null) : ExperimentsOut {
+        val localVarResponse = getV1ResearchExperimentsWithHttpInfo(project = project, kind = kind)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudExperimentsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ExperimentsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -249,32 +249,32 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/research/experiments
-     * ListExperiments returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history.
-     * ListExperiments returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history. With no ?project&#x3D; it reads the org&#39;s whole set across projects (the ops board&#39;s cross-project view, since a project is a sub-scope of the one tenant); ?project&#x3D; narrows to one and ?kind&#x3D; to one discriminator.
+     * Returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history.
+     * Returns the caller org&#39;s CANONICAL experiments — the deterministic deduped view over the versioned history. With no ?project&#x3D; it reads the org&#39;s whole set across projects (the ops board&#39;s cross-project view, since a project is a sub-scope of the one tenant); ?project&#x3D; narrows to one and ?kind&#x3D; to one discriminator.
      * @param project Project narrows to one project. Empty reads the org&#39;s whole set across projects. (optional)
      * @param kind Kind narrows to one discriminator: benchmark, kernel-perf, training, ablation or policy-eval. (optional)
-     * @return ApiResponse<CloudExperimentsOut?>
+     * @return ApiResponse<ExperimentsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ResearchExperimentsWithHttpInfo(project: kotlin.String?, kind: kotlin.String?) : ApiResponse<CloudExperimentsOut?> {
-        val localVariableConfig = cloudGetV1ResearchExperimentsRequestConfig(project = project, kind = kind)
+    fun getV1ResearchExperimentsWithHttpInfo(project: kotlin.String?, kind: kotlin.String?) : ApiResponse<ExperimentsOut?> {
+        val localVariableConfig = getV1ResearchExperimentsRequestConfig(project = project, kind = kind)
 
-        return request<Unit, CloudExperimentsOut>(
+        return request<Unit, ExperimentsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ResearchExperiments
+     * To obtain the request config of the operation getV1ResearchExperiments
      *
      * @param project Project narrows to one project. Empty reads the org&#39;s whole set across projects. (optional)
      * @param kind Kind narrows to one discriminator: benchmark, kernel-perf, training, ablation or policy-eval. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ResearchExperimentsRequestConfig(project: kotlin.String?, kind: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ResearchExperimentsRequestConfig(project: kotlin.String?, kind: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -293,16 +293,16 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/research/projects
-     * ListResearchProjects returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
-     * ListResearchProjects returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
-     * @return CloudProjectsOut
+     * Returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
+     * Returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
+     * @return ProjectsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -311,11 +311,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ResearchProjects() : CloudProjectsOut {
-        val localVarResponse = cloudGetV1ResearchProjectsWithHttpInfo()
+    fun getV1ResearchProjects() : ProjectsOut {
+        val localVarResponse = getV1ResearchProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProjectsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -331,28 +331,28 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/research/projects
-     * ListResearchProjects returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
-     * ListResearchProjects returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
-     * @return ApiResponse<CloudProjectsOut?>
+     * Returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
+     * Returns every research project in the caller&#39;s org with its real totals — canonical and retained side by side — which is the ops board&#39;s \&quot;every project + real totals\&quot; view.
+     * @return ApiResponse<ProjectsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ResearchProjectsWithHttpInfo() : ApiResponse<CloudProjectsOut?> {
-        val localVariableConfig = cloudGetV1ResearchProjectsRequestConfig()
+    fun getV1ResearchProjectsWithHttpInfo() : ApiResponse<ProjectsOut?> {
+        val localVariableConfig = getV1ResearchProjectsRequestConfig()
 
-        return request<Unit, CloudProjectsOut>(
+        return request<Unit, ProjectsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ResearchProjects
+     * To obtain the request config of the operation getV1ResearchProjects
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ResearchProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getV1ResearchProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -363,17 +363,17 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/research/totals
-     * GetResearchTotals returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target.
-     * GetResearchTotals returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target. Canonical and retained counts travel together, so a deduped view never reads as loss. ?project&#x3D; narrows to one project.
+     * Returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target.
+     * Returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target. Canonical and retained counts travel together, so a deduped view never reads as loss. ?project&#x3D; narrows to one project.
      * @param project Project narrows the aggregate to one project. Empty aggregates the whole org. (optional)
-     * @return CloudResearchTotals
+     * @return ResearchTotals
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -382,11 +382,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ResearchTotals(project: kotlin.String? = null) : CloudResearchTotals {
-        val localVarResponse = cloudGetV1ResearchTotalsWithHttpInfo(project = project)
+    fun getV1ResearchTotals(project: kotlin.String? = null) : ResearchTotals {
+        val localVarResponse = getV1ResearchTotalsWithHttpInfo(project = project)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudResearchTotals
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ResearchTotals
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -402,30 +402,30 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/research/totals
-     * GetResearchTotals returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target.
-     * GetResearchTotals returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target. Canonical and retained counts travel together, so a deduped view never reads as loss. ?project&#x3D; narrows to one project.
+     * Returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target.
+     * Returns the caller org&#39;s headline aggregate plus a per-kind breakdown — the observatory&#39;s poll target. Canonical and retained counts travel together, so a deduped view never reads as loss. ?project&#x3D; narrows to one project.
      * @param project Project narrows the aggregate to one project. Empty aggregates the whole org. (optional)
-     * @return ApiResponse<CloudResearchTotals?>
+     * @return ApiResponse<ResearchTotals?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ResearchTotalsWithHttpInfo(project: kotlin.String?) : ApiResponse<CloudResearchTotals?> {
-        val localVariableConfig = cloudGetV1ResearchTotalsRequestConfig(project = project)
+    fun getV1ResearchTotalsWithHttpInfo(project: kotlin.String?) : ApiResponse<ResearchTotals?> {
+        val localVariableConfig = getV1ResearchTotalsRequestConfig(project = project)
 
-        return request<Unit, CloudResearchTotals>(
+        return request<Unit, ResearchTotals>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ResearchTotals
+     * To obtain the request config of the operation getV1ResearchTotals
      *
      * @param project Project narrows the aggregate to one project. Empty aggregates the whole org. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ResearchTotalsRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ResearchTotalsRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -441,17 +441,17 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/totals",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/research/artifacts
-     * RecordResearchArtifact records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary.
-     * RecordResearchArtifact records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary. The caller submits the bytes as base64 &#x60;content&#x60;; the SERVER hashes them and THAT hash is the identity and the ref, so the address can never be poisoned by a client-asserted one. A client-supplied sha256, if present, must match the bytes. The project is the SERVER&#39;s value and visibility is forced private. Re-posting the same bytes is a no-op that reports created&#x3D;false.
-     * @param cloudArtifact 
-     * @return CloudArtifactOut
+     * Records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary.
+     * Records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary. The caller submits the bytes as base64 &#x60;content&#x60;; the SERVER hashes them and THAT hash is the identity and the ref, so the address can never be poisoned by a client-asserted one. A client-supplied sha256, if present, must match the bytes. The project is the SERVER&#39;s value and visibility is forced private. Re-posting the same bytes is a no-op that reports created&#x3D;false.
+     * @param researchArtifact 
+     * @return ArtifactOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -460,11 +460,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ResearchArtifacts(cloudArtifact: CloudArtifact) : CloudArtifactOut {
-        val localVarResponse = cloudPostV1ResearchArtifactsWithHttpInfo(cloudArtifact = cloudArtifact)
+    fun postV1ResearchArtifacts(researchArtifact: ResearchArtifact) : ArtifactOut {
+        val localVarResponse = postV1ResearchArtifactsWithHttpInfo(researchArtifact = researchArtifact)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArtifactOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArtifactOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -480,31 +480,31 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/research/artifacts
-     * RecordResearchArtifact records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary.
-     * RecordResearchArtifact records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary. The caller submits the bytes as base64 &#x60;content&#x60;; the SERVER hashes them and THAT hash is the identity and the ref, so the address can never be poisoned by a client-asserted one. A client-supplied sha256, if present, must match the bytes. The project is the SERVER&#39;s value and visibility is forced private. Re-posting the same bytes is a no-op that reports created&#x3D;false.
-     * @param cloudArtifact 
-     * @return ApiResponse<CloudArtifactOut?>
+     * Records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary.
+     * Records one research-diary artifact — a board snapshot or a generated report — CONTENT-ADDRESSED inside the trust boundary. The caller submits the bytes as base64 &#x60;content&#x60;; the SERVER hashes them and THAT hash is the identity and the ref, so the address can never be poisoned by a client-asserted one. A client-supplied sha256, if present, must match the bytes. The project is the SERVER&#39;s value and visibility is forced private. Re-posting the same bytes is a no-op that reports created&#x3D;false.
+     * @param researchArtifact 
+     * @return ApiResponse<ArtifactOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ResearchArtifactsWithHttpInfo(cloudArtifact: CloudArtifact) : ApiResponse<CloudArtifactOut?> {
-        val localVariableConfig = cloudPostV1ResearchArtifactsRequestConfig(cloudArtifact = cloudArtifact)
+    fun postV1ResearchArtifactsWithHttpInfo(researchArtifact: ResearchArtifact) : ApiResponse<ArtifactOut?> {
+        val localVariableConfig = postV1ResearchArtifactsRequestConfig(researchArtifact = researchArtifact)
 
-        return request<CloudArtifact, CloudArtifactOut>(
+        return request<ResearchArtifact, ArtifactOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ResearchArtifacts
+     * To obtain the request config of the operation postV1ResearchArtifacts
      *
-     * @param cloudArtifact 
+     * @param researchArtifact 
      * @return RequestConfig
      */
-    fun cloudPostV1ResearchArtifactsRequestConfig(cloudArtifact: CloudArtifact) : RequestConfig<CloudArtifact> {
-        val localVariableBody = cloudArtifact
+    fun postV1ResearchArtifactsRequestConfig(researchArtifact: ResearchArtifact) : RequestConfig<ResearchArtifact> {
+        val localVariableBody = researchArtifact
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -515,17 +515,17 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/artifacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/research/experiments
-     * IngestExperiments appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort.
-     * IngestExperiments appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort. The project is the SERVER&#39;s value and visibility is forced private — an upload grants no training or publication right, which is a separate call. A run carrying a BYO endpoint is SSRF-checked before the store is touched. The answer carries BOTH the canonical (deduped) and retained (full history) counts, so a caller sees the versioned truth rather than a dedup that reads as loss.
-     * @param cloudIngestRequest 
-     * @return CloudIngestOut
+     * Appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort.
+     * Appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort. The project is the SERVER&#39;s value and visibility is forced private — an upload grants no training or publication right, which is a separate call. A run carrying a BYO endpoint is SSRF-checked before the store is touched. The answer carries BOTH the canonical (deduped) and retained (full history) counts, so a caller sees the versioned truth rather than a dedup that reads as loss.
+     * @param ingestRequest 
+     * @return IngestOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -534,11 +534,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ResearchExperiments(cloudIngestRequest: CloudIngestRequest) : CloudIngestOut {
-        val localVarResponse = cloudPostV1ResearchExperimentsWithHttpInfo(cloudIngestRequest = cloudIngestRequest)
+    fun postV1ResearchExperiments(ingestRequest: IngestRequest) : IngestOut {
+        val localVarResponse = postV1ResearchExperimentsWithHttpInfo(ingestRequest = ingestRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIngestOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IngestOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -554,31 +554,31 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/research/experiments
-     * IngestExperiments appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort.
-     * IngestExperiments appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort. The project is the SERVER&#39;s value and visibility is forced private — an upload grants no training or publication right, which is a separate call. A run carrying a BYO endpoint is SSRF-checked before the store is touched. The answer carries BOTH the canonical (deduped) and retained (full history) counts, so a caller sees the versioned truth rather than a dedup that reads as loss.
-     * @param cloudIngestRequest 
-     * @return ApiResponse<CloudIngestOut?>
+     * Appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort.
+     * Appends one batch of experiment and attempt versions to the caller org&#39;s evidence store, idempotently by content, then rolls it up to the analytics plane best-effort. The project is the SERVER&#39;s value and visibility is forced private — an upload grants no training or publication right, which is a separate call. A run carrying a BYO endpoint is SSRF-checked before the store is touched. The answer carries BOTH the canonical (deduped) and retained (full history) counts, so a caller sees the versioned truth rather than a dedup that reads as loss.
+     * @param ingestRequest 
+     * @return ApiResponse<IngestOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ResearchExperimentsWithHttpInfo(cloudIngestRequest: CloudIngestRequest) : ApiResponse<CloudIngestOut?> {
-        val localVariableConfig = cloudPostV1ResearchExperimentsRequestConfig(cloudIngestRequest = cloudIngestRequest)
+    fun postV1ResearchExperimentsWithHttpInfo(ingestRequest: IngestRequest) : ApiResponse<IngestOut?> {
+        val localVariableConfig = postV1ResearchExperimentsRequestConfig(ingestRequest = ingestRequest)
 
-        return request<CloudIngestRequest, CloudIngestOut>(
+        return request<IngestRequest, IngestOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ResearchExperiments
+     * To obtain the request config of the operation postV1ResearchExperiments
      *
-     * @param cloudIngestRequest 
+     * @param ingestRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1ResearchExperimentsRequestConfig(cloudIngestRequest: CloudIngestRequest) : RequestConfig<CloudIngestRequest> {
-        val localVariableBody = cloudIngestRequest
+    fun postV1ResearchExperimentsRequestConfig(ingestRequest: IngestRequest) : RequestConfig<IngestRequest> {
+        val localVariableBody = ingestRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -589,17 +589,17 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/research/grants
-     * GrantResearchVisibility records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent.
-     * GrantResearchVisibility records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent. Address a run by its stable id or an artifact by its sha256; an artifact grant sets visibility only. The ORG is the tenant boundary and comes from the validated principal, so a caller can only ever grant within its own org; &#x60;project&#x60; locates WHICH record inside it and defaults to the caller&#39;s project scope.
-     * @param cloudGrantRequest 
-     * @return CloudGrantOut
+     * Records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent.
+     * Records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent. Address a run by its stable id or an artifact by its sha256; an artifact grant sets visibility only. The ORG is the tenant boundary and comes from the validated principal, so a caller can only ever grant within its own org; &#x60;project&#x60; locates WHICH record inside it and defaults to the caller&#39;s project scope.
+     * @param grantRequest 
+     * @return GrantOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -608,11 +608,11 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ResearchGrants(cloudGrantRequest: CloudGrantRequest) : CloudGrantOut {
-        val localVarResponse = cloudPostV1ResearchGrantsWithHttpInfo(cloudGrantRequest = cloudGrantRequest)
+    fun postV1ResearchGrants(grantRequest: GrantRequest) : GrantOut {
+        val localVarResponse = postV1ResearchGrantsWithHttpInfo(grantRequest = grantRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGrantOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GrantOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -628,31 +628,31 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/research/grants
-     * GrantResearchVisibility records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent.
-     * GrantResearchVisibility records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent. Address a run by its stable id or an artifact by its sha256; an artifact grant sets visibility only. The ORG is the tenant boundary and comes from the validated principal, so a caller can only ever grant within its own org; &#x60;project&#x60; locates WHICH record inside it and defaults to the caller&#39;s project scope.
-     * @param cloudGrantRequest 
-     * @return ApiResponse<CloudGrantOut?>
+     * Records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent.
+     * Records the SEPARATE authorization an upload never implies: a record&#39;s visibility (private, org or public) and, for a run, its training and commons-publication consent. Address a run by its stable id or an artifact by its sha256; an artifact grant sets visibility only. The ORG is the tenant boundary and comes from the validated principal, so a caller can only ever grant within its own org; &#x60;project&#x60; locates WHICH record inside it and defaults to the caller&#39;s project scope.
+     * @param grantRequest 
+     * @return ApiResponse<GrantOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ResearchGrantsWithHttpInfo(cloudGrantRequest: CloudGrantRequest) : ApiResponse<CloudGrantOut?> {
-        val localVariableConfig = cloudPostV1ResearchGrantsRequestConfig(cloudGrantRequest = cloudGrantRequest)
+    fun postV1ResearchGrantsWithHttpInfo(grantRequest: GrantRequest) : ApiResponse<GrantOut?> {
+        val localVariableConfig = postV1ResearchGrantsRequestConfig(grantRequest = grantRequest)
 
-        return request<CloudGrantRequest, CloudGrantOut>(
+        return request<GrantRequest, GrantOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ResearchGrants
+     * To obtain the request config of the operation postV1ResearchGrants
      *
-     * @param cloudGrantRequest 
+     * @param grantRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1ResearchGrantsRequestConfig(cloudGrantRequest: CloudGrantRequest) : RequestConfig<CloudGrantRequest> {
-        val localVariableBody = cloudGrantRequest
+    fun postV1ResearchGrantsRequestConfig(grantRequest: GrantRequest) : RequestConfig<GrantRequest> {
+        val localVariableBody = grantRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -663,7 +663,7 @@ class ResearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/research/grants",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

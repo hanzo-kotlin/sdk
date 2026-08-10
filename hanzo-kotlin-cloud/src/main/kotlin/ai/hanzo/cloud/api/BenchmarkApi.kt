@@ -19,6 +19,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.Admission
+import ai.hanzo.cloud.model.BenchmarkCatalog
+import ai.hanzo.cloud.model.Leaderboard
+import ai.hanzo.cloud.model.Pairing
+import ai.hanzo.cloud.model.Preset
+import ai.hanzo.cloud.model.PresetAccepted
+import ai.hanzo.cloud.model.PresetList
+import ai.hanzo.cloud.model.Suite
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +54,22 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/benchmark/catalog
-     * 
-     * 
-     * @return void
+     * Is the canonical public benchmarks this arena runs — the id, title, axis, item count and upstream source of each, with native marking the ones the standardized harness runs today; the rest are registered and adapter-pending.
+     * Is the canonical public benchmarks this arena runs — the id, title, axis, item count and upstream source of each, with native marking the ones the standardized harness runs today; the rest are registered and adapter-pending.  These ids are the vocabulary the rest of the surface takes: a run names them, and the leaderboard and compare read them from ?benchmark&#x3D;. The catalog is deployment-wide and identical for every caller — there is no tenant in it.
+     * @return BenchmarkCatalog
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BenchmarkCatalog() : Unit {
-        val localVarResponse = cloudGetV1BenchmarkCatalogWithHttpInfo()
+    fun getV1BenchmarkCatalog() : BenchmarkCatalog {
+        val localVarResponse = getV1BenchmarkCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BenchmarkCatalog
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,58 +85,64 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/benchmark/catalog
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the canonical public benchmarks this arena runs — the id, title, axis, item count and upstream source of each, with native marking the ones the standardized harness runs today; the rest are registered and adapter-pending.
+     * Is the canonical public benchmarks this arena runs — the id, title, axis, item count and upstream source of each, with native marking the ones the standardized harness runs today; the rest are registered and adapter-pending.  These ids are the vocabulary the rest of the surface takes: a run names them, and the leaderboard and compare read them from ?benchmark&#x3D;. The catalog is deployment-wide and identical for every caller — there is no tenant in it.
+     * @return ApiResponse<BenchmarkCatalog?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BenchmarkCatalogWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BenchmarkCatalogRequestConfig()
+    fun getV1BenchmarkCatalogWithHttpInfo() : ApiResponse<BenchmarkCatalog?> {
+        val localVariableConfig = getV1BenchmarkCatalogRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, BenchmarkCatalog>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BenchmarkCatalog
+     * To obtain the request config of the operation getV1BenchmarkCatalog
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BenchmarkCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getV1BenchmarkCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/benchmark/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/benchmark/compare
-     * 
-     * 
-     * @return void
+     * Is the ONLY valid arm-vs-arm test: it pairs the two models on the items BOTH completed, and answers rescue and damage counts with an exact-McNemar p.
+     * Is the ONLY valid arm-vs-arm test: it pairs the two models on the items BOTH completed, and answers rescue and damage counts with an exact-McNemar p.  Pairing is what prevents the subset artifact — comparing one model&#39;s easy subset against another&#39;s full run — so n_common, not either arm&#39;s own coverage, is the number to read this by.  Both a and b are required. The benchmark defaults to gpqa_diamond.
+     * @param a A is the first model id. It is required.
+     * @param b B is the second model id. It is required.
+     * @param benchmark Benchmark is the catalog id to compare on, defaulting to gpqa_diamond. (optional)
+     * @return Pairing
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BenchmarkCompare() : Unit {
-        val localVarResponse = cloudGetV1BenchmarkCompareWithHttpInfo()
+    fun getV1BenchmarkCompare(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String? = null) : Pairing {
+        val localVarResponse = getV1BenchmarkCompareWithHttpInfo(a = a, b = b, benchmark = benchmark)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Pairing
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -143,58 +158,75 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/benchmark/compare
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the ONLY valid arm-vs-arm test: it pairs the two models on the items BOTH completed, and answers rescue and damage counts with an exact-McNemar p.
+     * Is the ONLY valid arm-vs-arm test: it pairs the two models on the items BOTH completed, and answers rescue and damage counts with an exact-McNemar p.  Pairing is what prevents the subset artifact — comparing one model&#39;s easy subset against another&#39;s full run — so n_common, not either arm&#39;s own coverage, is the number to read this by.  Both a and b are required. The benchmark defaults to gpqa_diamond.
+     * @param a A is the first model id. It is required.
+     * @param b B is the second model id. It is required.
+     * @param benchmark Benchmark is the catalog id to compare on, defaulting to gpqa_diamond. (optional)
+     * @return ApiResponse<Pairing?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BenchmarkCompareWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BenchmarkCompareRequestConfig()
+    fun getV1BenchmarkCompareWithHttpInfo(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String?) : ApiResponse<Pairing?> {
+        val localVariableConfig = getV1BenchmarkCompareRequestConfig(a = a, b = b, benchmark = benchmark)
 
-        return request<Unit, Unit>(
+        return request<Unit, Pairing>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BenchmarkCompare
+     * To obtain the request config of the operation getV1BenchmarkCompare
      *
+     * @param a A is the first model id. It is required.
+     * @param b B is the second model id. It is required.
+     * @param benchmark Benchmark is the catalog id to compare on, defaulting to gpqa_diamond. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BenchmarkCompareRequestConfig() : RequestConfig<Unit> {
+    fun getV1BenchmarkCompareRequestConfig(a: kotlin.String, b: kotlin.String, benchmark: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (benchmark != null) {
+                    put("benchmark", listOf(benchmark.toString()))
+                }
+                put("a", listOf(a.toString()))
+                put("b", listOf(b.toString()))
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/benchmark/compare",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/benchmark/leaderboard
-     * 
-     * 
-     * @return void
+     * Answers one row per model for the benchmark named — what our own harness measured, beside what the vendor claims, and the gap between them.
+     * Answers one row per model for the benchmark named — what our own harness measured, beside what the vendor claims, and the gap between them.  The gap is the point of the arena; provider-reported claims have run materially hot against one standardized harness.  The two planes are NEVER blended, and that is the rule to read the rows by: a model we have measured but no vendor has claimed for shows published null, a model with only a claim shows measured null, and gap exists only where both do.  n is coverage and is not decoration: two measured numbers taken over different item counts are not comparable, so read the row&#39;s n before reading its accuracy.
+     * @param benchmark Benchmark is the catalog id to read, defaulting to gpqa_diamond. (optional)
+     * @return Leaderboard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BenchmarkLeaderboard() : Unit {
-        val localVarResponse = cloudGetV1BenchmarkLeaderboardWithHttpInfo()
+    fun getV1BenchmarkLeaderboard(benchmark: kotlin.String? = null) : Leaderboard {
+        val localVarResponse = getV1BenchmarkLeaderboardWithHttpInfo(benchmark = benchmark)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Leaderboard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -210,58 +242,68 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/benchmark/leaderboard
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers one row per model for the benchmark named — what our own harness measured, beside what the vendor claims, and the gap between them.
+     * Answers one row per model for the benchmark named — what our own harness measured, beside what the vendor claims, and the gap between them.  The gap is the point of the arena; provider-reported claims have run materially hot against one standardized harness.  The two planes are NEVER blended, and that is the rule to read the rows by: a model we have measured but no vendor has claimed for shows published null, a model with only a claim shows measured null, and gap exists only where both do.  n is coverage and is not decoration: two measured numbers taken over different item counts are not comparable, so read the row&#39;s n before reading its accuracy.
+     * @param benchmark Benchmark is the catalog id to read, defaulting to gpqa_diamond. (optional)
+     * @return ApiResponse<Leaderboard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BenchmarkLeaderboardWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BenchmarkLeaderboardRequestConfig()
+    fun getV1BenchmarkLeaderboardWithHttpInfo(benchmark: kotlin.String?) : ApiResponse<Leaderboard?> {
+        val localVariableConfig = getV1BenchmarkLeaderboardRequestConfig(benchmark = benchmark)
 
-        return request<Unit, Unit>(
+        return request<Unit, Leaderboard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BenchmarkLeaderboard
+     * To obtain the request config of the operation getV1BenchmarkLeaderboard
      *
+     * @param benchmark Benchmark is the catalog id to read, defaulting to gpqa_diamond. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BenchmarkLeaderboardRequestConfig() : RequestConfig<Unit> {
+    fun getV1BenchmarkLeaderboardRequestConfig(benchmark: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (benchmark != null) {
+                    put("benchmark", listOf(benchmark.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/benchmark/leaderboard",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/benchmark/presets
-     * 
-     * 
-     * @return void
+     * Are the router blends available to compose from — a named set of model arms, the rank they escalate through and the panel width that bounds fan-out — each served by the model layer as enso-&lt;name&gt;.
+     * Are the router blends available to compose from — a named set of model arms, the rank they escalate through and the panel width that bounds fan-out — each served by the model layer as enso-&lt;name&gt;.  Today it answers exactly one row, the reference blend: a worked example written in models we name, published as an example of the FORM. It is deliberately not the composition of a Hanzo-served tier — the tier name exists to abstract that — so fork it and swap arms by what the leaderboard measures on your own tasks rather than reading it as a disclosure.
+     * @return PresetList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BenchmarkPresets() : Unit {
-        val localVarResponse = cloudGetV1BenchmarkPresetsWithHttpInfo()
+    fun getV1BenchmarkPresets() : PresetList {
+        val localVarResponse = getV1BenchmarkPresetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PresetList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -277,58 +319,62 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/benchmark/presets
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Are the router blends available to compose from — a named set of model arms, the rank they escalate through and the panel width that bounds fan-out — each served by the model layer as enso-&lt;name&gt;.
+     * Are the router blends available to compose from — a named set of model arms, the rank they escalate through and the panel width that bounds fan-out — each served by the model layer as enso-&lt;name&gt;.  Today it answers exactly one row, the reference blend: a worked example written in models we name, published as an example of the FORM. It is deliberately not the composition of a Hanzo-served tier — the tier name exists to abstract that — so fork it and swap arms by what the leaderboard measures on your own tasks rather than reading it as a disclosure.
+     * @return ApiResponse<PresetList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BenchmarkPresetsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BenchmarkPresetsRequestConfig()
+    fun getV1BenchmarkPresetsWithHttpInfo() : ApiResponse<PresetList?> {
+        val localVariableConfig = getV1BenchmarkPresetsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, PresetList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BenchmarkPresets
+     * To obtain the request config of the operation getV1BenchmarkPresets
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BenchmarkPresetsRequestConfig() : RequestConfig<Unit> {
+    fun getV1BenchmarkPresetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/benchmark/presets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/benchmark/presets
-     * 
-     * 
-     * @return void
+     * Validates a router blend — its name, its arms, the rank they escalate through and the panel fan-out width — and answers 202 with the preset and the enso-&lt;name&gt; it would be served as.
+     * Validates a router blend — its name, its arms, the rank they escalate through and the panel fan-out width — and answers 202 with the preset and the enso-&lt;name&gt; it would be served as.  It VALIDATES AND ECHOES: the definition is not persisted yet, so a preset accepted here is not one the model layer will resolve. Treat the response as a check on the blend, not a promise to serve it.  Defaults fill the shape rather than refusing it: an omitted rank becomes the arms in declared order and a panel below 1 becomes 1. The one real invariant is that rank may only name arms the blend declares — the same rule the model catalog enforces — and a rank naming anything else is a 422 listing exactly which entries were undeclared. A blend with no name or no arms is a 400.
+     * @param preset 
+     * @return PresetAccepted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BenchmarkPresets() : Unit {
-        val localVarResponse = cloudPostV1BenchmarkPresetsWithHttpInfo()
+    fun postV1BenchmarkPresets(preset: Preset) : PresetAccepted {
+        val localVarResponse = postV1BenchmarkPresetsWithHttpInfo(preset = preset)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PresetAccepted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -344,58 +390,65 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * POST /v1/benchmark/presets
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Validates a router blend — its name, its arms, the rank they escalate through and the panel fan-out width — and answers 202 with the preset and the enso-&lt;name&gt; it would be served as.
+     * Validates a router blend — its name, its arms, the rank they escalate through and the panel fan-out width — and answers 202 with the preset and the enso-&lt;name&gt; it would be served as.  It VALIDATES AND ECHOES: the definition is not persisted yet, so a preset accepted here is not one the model layer will resolve. Treat the response as a check on the blend, not a promise to serve it.  Defaults fill the shape rather than refusing it: an omitted rank becomes the arms in declared order and a panel below 1 becomes 1. The one real invariant is that rank may only name arms the blend declares — the same rule the model catalog enforces — and a rank naming anything else is a 422 listing exactly which entries were undeclared. A blend with no name or no arms is a 400.
+     * @param preset 
+     * @return ApiResponse<PresetAccepted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BenchmarkPresetsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BenchmarkPresetsRequestConfig()
+    fun postV1BenchmarkPresetsWithHttpInfo(preset: Preset) : ApiResponse<PresetAccepted?> {
+        val localVariableConfig = postV1BenchmarkPresetsRequestConfig(preset = preset)
 
-        return request<Unit, Unit>(
+        return request<Preset, PresetAccepted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BenchmarkPresets
+     * To obtain the request config of the operation postV1BenchmarkPresets
      *
+     * @param preset 
      * @return RequestConfig
      */
-    fun cloudPostV1BenchmarkPresetsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1BenchmarkPresetsRequestConfig(preset: Preset) : RequestConfig<Preset> {
+        val localVariableBody = preset
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/benchmark/presets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/benchmark/runs
-     * 
-     * 
-     * @return void
+     * Admits and queues a benchmark run against a model or your own endpoint, and answers 202 with the receipt.
+     * Admits and queues a benchmark run against a model or your own endpoint, and answers 202 with the receipt.  It is an ADMISSION, not a result: the work is done by the harness afterwards and the numbers appear on the leaderboard as it completes them.  Cost is bounded by the store rather than by a quota: attempts are append-only and keyed by (benchmark, item, model), so an (item, model) pair already attempted is skipped instead of re-spent, and re-queuing the same run is close to free.  Validation is up front and total — a request with neither model nor endpoint is a 400, one with no benchmarks is a 400, and any benchmark id outside the catalog is a 422 naming exactly which ids were unknown, so a typo never silently queues a partial run.
+     * @param suite 
+     * @return Admission
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BenchmarkRuns() : Unit {
-        val localVarResponse = cloudPostV1BenchmarkRunsWithHttpInfo()
+    fun postV1BenchmarkRuns(suite: Suite) : Admission {
+        val localVarResponse = postV1BenchmarkRunsWithHttpInfo(suite = suite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Admission
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -411,37 +464,42 @@ class BenchmarkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * POST /v1/benchmark/runs
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Admits and queues a benchmark run against a model or your own endpoint, and answers 202 with the receipt.
+     * Admits and queues a benchmark run against a model or your own endpoint, and answers 202 with the receipt.  It is an ADMISSION, not a result: the work is done by the harness afterwards and the numbers appear on the leaderboard as it completes them.  Cost is bounded by the store rather than by a quota: attempts are append-only and keyed by (benchmark, item, model), so an (item, model) pair already attempted is skipped instead of re-spent, and re-queuing the same run is close to free.  Validation is up front and total — a request with neither model nor endpoint is a 400, one with no benchmarks is a 400, and any benchmark id outside the catalog is a 422 naming exactly which ids were unknown, so a typo never silently queues a partial run.
+     * @param suite 
+     * @return ApiResponse<Admission?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BenchmarkRunsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BenchmarkRunsRequestConfig()
+    fun postV1BenchmarkRunsWithHttpInfo(suite: Suite) : ApiResponse<Admission?> {
+        val localVariableConfig = postV1BenchmarkRunsRequestConfig(suite = suite)
 
-        return request<Unit, Unit>(
+        return request<Suite, Admission>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BenchmarkRuns
+     * To obtain the request config of the operation postV1BenchmarkRuns
      *
+     * @param suite 
      * @return RequestConfig
      */
-    fun cloudPostV1BenchmarkRunsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1BenchmarkRunsRequestConfig(suite: Suite) : RequestConfig<Suite> {
+        val localVariableBody = suite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/benchmark/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

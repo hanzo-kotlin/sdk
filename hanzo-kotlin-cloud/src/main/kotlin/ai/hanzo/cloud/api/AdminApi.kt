@@ -19,91 +19,92 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AnalyticsAdminListUsers200ResponseInner
-import ai.hanzo.cloud.model.AnalyticsWebsite
-import ai.hanzo.cloud.model.CloudAccessOut
-import ai.hanzo.cloud.model.CloudActionOut
-import ai.hanzo.cloud.model.CloudAdminBonusesEnvelope
-import ai.hanzo.cloud.model.CloudAdminBook
-import ai.hanzo.cloud.model.CloudAdminCatalogOut
-import ai.hanzo.cloud.model.CloudAdminEnablementBoard
-import ai.hanzo.cloud.model.CloudAdminEnablementItem
-import ai.hanzo.cloud.model.CloudAdminReportOut
-import ai.hanzo.cloud.model.CloudAimetricsOut
-import ai.hanzo.cloud.model.CloudAnalyticsOut
-import ai.hanzo.cloud.model.CloudAnchorOut
-import ai.hanzo.cloud.model.CloudApproveRequest
-import ai.hanzo.cloud.model.CloudAuthorResult
-import ai.hanzo.cloud.model.CloudAuthorSweepResult
-import ai.hanzo.cloud.model.CloudBackfillIn
-import ai.hanzo.cloud.model.CloudBackfillOut
-import ai.hanzo.cloud.model.CloudBasesOut
-import ai.hanzo.cloud.model.CloudBasisResult
-import ai.hanzo.cloud.model.CloudBindOut
-import ai.hanzo.cloud.model.CloudBlockStorageOut
-import ai.hanzo.cloud.model.CloudCapIn
-import ai.hanzo.cloud.model.CloudComputeOut
-import ai.hanzo.cloud.model.CloudCordonIn
-import ai.hanzo.cloud.model.CloudCustomerDetailOut
-import ai.hanzo.cloud.model.CloudCustomersOut
-import ai.hanzo.cloud.model.CloudDropletIn
-import ai.hanzo.cloud.model.CloudFinanceOut
-import ai.hanzo.cloud.model.CloudFlagsOut
-import ai.hanzo.cloud.model.CloudGrantIn
-import ai.hanzo.cloud.model.CloudGrantOut
-import ai.hanzo.cloud.model.CloudGrantsOut
-import ai.hanzo.cloud.model.CloudIamRowsOut
-import ai.hanzo.cloud.model.CloudInvoicesOut
-import ai.hanzo.cloud.model.CloudListOut
-import ai.hanzo.cloud.model.CloudMeOut
-import ai.hanzo.cloud.model.CloudMetricsOut
-import ai.hanzo.cloud.model.CloudMoneyOut
-import ai.hanzo.cloud.model.CloudMutationOut
-import ai.hanzo.cloud.model.CloudNameIn
-import ai.hanzo.cloud.model.CloudO11yOut
-import ai.hanzo.cloud.model.CloudOrgsOut
-import ai.hanzo.cloud.model.CloudOverlay
-import ai.hanzo.cloud.model.CloudOverviewOut
-import ai.hanzo.cloud.model.CloudPayoutRequest
-import ai.hanzo.cloud.model.CloudPayoutResult
-import ai.hanzo.cloud.model.CloudPolicyOut
-import ai.hanzo.cloud.model.CloudPolicyRequest
-import ai.hanzo.cloud.model.CloudProductsOut
-import ai.hanzo.cloud.model.CloudPromoIn
-import ai.hanzo.cloud.model.CloudProviderPatchIn
-import ai.hanzo.cloud.model.CloudProvidersCreditOut
-import ai.hanzo.cloud.model.CloudRawOut
-import ai.hanzo.cloud.model.CloudReadOut
-import ai.hanzo.cloud.model.CloudRecordsOut
-import ai.hanzo.cloud.model.CloudReloadIn
-import ai.hanzo.cloud.model.CloudRevenueOut
-import ai.hanzo.cloud.model.CloudScaleIn
-import ai.hanzo.cloud.model.CloudSeedOut
-import ai.hanzo.cloud.model.CloudSeedRequest
-import ai.hanzo.cloud.model.CloudServiceInput
-import ai.hanzo.cloud.model.CloudServiceModeIn
-import ai.hanzo.cloud.model.CloudServiceOut
-import ai.hanzo.cloud.model.CloudServicesOut
-import ai.hanzo.cloud.model.CloudSetEnablementBody
-import ai.hanzo.cloud.model.CloudSetFlagIn
-import ai.hanzo.cloud.model.CloudSubscriptionsOut
-import ai.hanzo.cloud.model.CloudSubsystemsOut
-import ai.hanzo.cloud.model.CloudSweepEnvelope
-import ai.hanzo.cloud.model.CloudSweepOut
-import ai.hanzo.cloud.model.CloudSweepRequest
-import ai.hanzo.cloud.model.CloudSyncOut
-import ai.hanzo.cloud.model.CloudUsageFundingOut
-import ai.hanzo.cloud.model.CloudUsageOut
-import ai.hanzo.cloud.model.CloudUsersOut
-import ai.hanzo.cloud.model.CloudVerifyOut
-import ai.hanzo.cloud.model.CloudVolumeIn
-import ai.hanzo.cloud.model.CloudVolumeSnapshotOut
-import ai.hanzo.cloud.model.CloudWaitlistBoostRequest
-import ai.hanzo.cloud.model.S3AdminInfo200Response
-import ai.hanzo.cloud.model.S3CreateServiceAccountRequest
-import ai.hanzo.cloud.model.S3ListServiceAccounts200Response
-import ai.hanzo.cloud.model.S3ServiceAccount
-import ai.hanzo.cloud.model.S3UsageInfo
+import ai.hanzo.cloud.model.AccessOut
+import ai.hanzo.cloud.model.AccrualsOut
+import ai.hanzo.cloud.model.ActionOut
+import ai.hanzo.cloud.model.AdminBonusesEnvelope
+import ai.hanzo.cloud.model.AdminBook
+import ai.hanzo.cloud.model.AdminCatalogOut
+import ai.hanzo.cloud.model.AdminEnablementBoard
+import ai.hanzo.cloud.model.AdminEnablementItem
+import ai.hanzo.cloud.model.AdminReportOut
+import ai.hanzo.cloud.model.AffiliateOut
+import ai.hanzo.cloud.model.AimetricsOut
+import ai.hanzo.cloud.model.AnalyticsOut
+import ai.hanzo.cloud.model.AnchorOut
+import ai.hanzo.cloud.model.Approval
+import ai.hanzo.cloud.model.ApproveRequest
+import ai.hanzo.cloud.model.AuthorResult
+import ai.hanzo.cloud.model.AuthorSweepResult
+import ai.hanzo.cloud.model.BackfillIn
+import ai.hanzo.cloud.model.BackfillOut
+import ai.hanzo.cloud.model.BasesOut
+import ai.hanzo.cloud.model.BasisResult
+import ai.hanzo.cloud.model.CapIn
+import ai.hanzo.cloud.model.ComputeOut
+import ai.hanzo.cloud.model.CordonIn
+import ai.hanzo.cloud.model.CustomerDetailOut
+import ai.hanzo.cloud.model.CustomersOut
+import ai.hanzo.cloud.model.DirectoryOut
+import ai.hanzo.cloud.model.Disbursal
+import ai.hanzo.cloud.model.DropletIn
+import ai.hanzo.cloud.model.FinanceOut
+import ai.hanzo.cloud.model.FlagsOut
+import ai.hanzo.cloud.model.GrantIn
+import ai.hanzo.cloud.model.GrantOut
+import ai.hanzo.cloud.model.GrantsOut
+import ai.hanzo.cloud.model.IamRowsOut
+import ai.hanzo.cloud.model.InvoicesOut
+import ai.hanzo.cloud.model.ListOut
+import ai.hanzo.cloud.model.MeOut
+import ai.hanzo.cloud.model.MetricsOut
+import ai.hanzo.cloud.model.MoneyOut
+import ai.hanzo.cloud.model.MutationOut
+import ai.hanzo.cloud.model.NameIn
+import ai.hanzo.cloud.model.O11yOut
+import ai.hanzo.cloud.model.OrgsOut
+import ai.hanzo.cloud.model.Overlay
+import ai.hanzo.cloud.model.OverviewOut
+import ai.hanzo.cloud.model.PayoutOut
+import ai.hanzo.cloud.model.PayoutRequest
+import ai.hanzo.cloud.model.PayoutResult
+import ai.hanzo.cloud.model.PolicyOut
+import ai.hanzo.cloud.model.PolicyRequest
+import ai.hanzo.cloud.model.ProductsOut
+import ai.hanzo.cloud.model.PromoIn
+import ai.hanzo.cloud.model.ProviderPatchIn
+import ai.hanzo.cloud.model.ProvidersCreditOut
+import ai.hanzo.cloud.model.RateSet
+import ai.hanzo.cloud.model.RawOut
+import ai.hanzo.cloud.model.ReadOut
+import ai.hanzo.cloud.model.RecordsOut
+import ai.hanzo.cloud.model.ReferralsOut
+import ai.hanzo.cloud.model.ReloadIn
+import ai.hanzo.cloud.model.RevenueOut
+import ai.hanzo.cloud.model.ScaleIn
+import ai.hanzo.cloud.model.SeedOut
+import ai.hanzo.cloud.model.SeedRequest
+import ai.hanzo.cloud.model.ServiceInput
+import ai.hanzo.cloud.model.ServiceModeIn
+import ai.hanzo.cloud.model.ServiceOut
+import ai.hanzo.cloud.model.ServicesOut
+import ai.hanzo.cloud.model.SetEnablementBody
+import ai.hanzo.cloud.model.SetFlagIn
+import ai.hanzo.cloud.model.SignerOut
+import ai.hanzo.cloud.model.SubscriptionsOut
+import ai.hanzo.cloud.model.SubsystemsOut
+import ai.hanzo.cloud.model.SweepEnvelope
+import ai.hanzo.cloud.model.SweepOut
+import ai.hanzo.cloud.model.SweepRequest
+import ai.hanzo.cloud.model.SyncOut
+import ai.hanzo.cloud.model.UsageFundingOut
+import ai.hanzo.cloud.model.UsageOut
+import ai.hanzo.cloud.model.UsersOut
+import ai.hanzo.cloud.model.VerifyOut
+import ai.hanzo.cloud.model.VolumeIn
+import ai.hanzo.cloud.model.VolumeSnapshotOut
+import ai.hanzo.cloud.model.VolumesOut
+import ai.hanzo.cloud.model.WaitlistBoostRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -130,219 +131,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * GET /v1/analytics/admin/users
-     * List all users (admin only)
-     * 
-     * @param page  (optional)
-     * @param pageSize  (optional)
-     * @param orderBy  (optional)
-     * @param search  (optional)
-     * @return kotlin.collections.List<AnalyticsAdminListUsers200ResponseInner>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun analyticsAdminListUsers(page: kotlin.Int? = null, pageSize: kotlin.Int? = null, orderBy: kotlin.String? = null, search: kotlin.String? = null) : kotlin.collections.List<AnalyticsAdminListUsers200ResponseInner> {
-        val localVarResponse = analyticsAdminListUsersWithHttpInfo(page = page, pageSize = pageSize, orderBy = orderBy, search = search)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<AnalyticsAdminListUsers200ResponseInner>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/analytics/admin/users
-     * List all users (admin only)
-     * 
-     * @param page  (optional)
-     * @param pageSize  (optional)
-     * @param orderBy  (optional)
-     * @param search  (optional)
-     * @return ApiResponse<kotlin.collections.List<AnalyticsAdminListUsers200ResponseInner>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun analyticsAdminListUsersWithHttpInfo(page: kotlin.Int?, pageSize: kotlin.Int?, orderBy: kotlin.String?, search: kotlin.String?) : ApiResponse<kotlin.collections.List<AnalyticsAdminListUsers200ResponseInner>?> {
-        val localVariableConfig = analyticsAdminListUsersRequestConfig(page = page, pageSize = pageSize, orderBy = orderBy, search = search)
-
-        return request<Unit, kotlin.collections.List<AnalyticsAdminListUsers200ResponseInner>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation analyticsAdminListUsers
-     *
-     * @param page  (optional)
-     * @param pageSize  (optional)
-     * @param orderBy  (optional)
-     * @param search  (optional)
-     * @return RequestConfig
-     */
-    fun analyticsAdminListUsersRequestConfig(page: kotlin.Int?, pageSize: kotlin.Int?, orderBy: kotlin.String?, search: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (page != null) {
-                    put("page", listOf(page.toString()))
-                }
-                if (pageSize != null) {
-                    put("pageSize", listOf(pageSize.toString()))
-                }
-                if (orderBy != null) {
-                    put("orderBy", listOf(orderBy.toString()))
-                }
-                if (search != null) {
-                    put("search", listOf(search.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/analytics/admin/users",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/analytics/admin/websites
-     * List all websites for a user (admin only)
-     * 
-     * @param userId 
-     * @param includeOwnedTeams  (optional)
-     * @param includeAllTeams  (optional)
-     * @param page  (optional)
-     * @param pageSize  (optional)
-     * @param orderBy  (optional)
-     * @param search  (optional)
-     * @return kotlin.collections.List<AnalyticsWebsite>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun analyticsAdminListWebsites(userId: java.util.UUID, includeOwnedTeams: kotlin.String? = null, includeAllTeams: kotlin.String? = null, page: kotlin.Int? = null, pageSize: kotlin.Int? = null, orderBy: kotlin.String? = null, search: kotlin.String? = null) : kotlin.collections.List<AnalyticsWebsite> {
-        val localVarResponse = analyticsAdminListWebsitesWithHttpInfo(userId = userId, includeOwnedTeams = includeOwnedTeams, includeAllTeams = includeAllTeams, page = page, pageSize = pageSize, orderBy = orderBy, search = search)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<AnalyticsWebsite>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/analytics/admin/websites
-     * List all websites for a user (admin only)
-     * 
-     * @param userId 
-     * @param includeOwnedTeams  (optional)
-     * @param includeAllTeams  (optional)
-     * @param page  (optional)
-     * @param pageSize  (optional)
-     * @param orderBy  (optional)
-     * @param search  (optional)
-     * @return ApiResponse<kotlin.collections.List<AnalyticsWebsite>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun analyticsAdminListWebsitesWithHttpInfo(userId: java.util.UUID, includeOwnedTeams: kotlin.String?, includeAllTeams: kotlin.String?, page: kotlin.Int?, pageSize: kotlin.Int?, orderBy: kotlin.String?, search: kotlin.String?) : ApiResponse<kotlin.collections.List<AnalyticsWebsite>?> {
-        val localVariableConfig = analyticsAdminListWebsitesRequestConfig(userId = userId, includeOwnedTeams = includeOwnedTeams, includeAllTeams = includeAllTeams, page = page, pageSize = pageSize, orderBy = orderBy, search = search)
-
-        return request<Unit, kotlin.collections.List<AnalyticsWebsite>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation analyticsAdminListWebsites
-     *
-     * @param userId 
-     * @param includeOwnedTeams  (optional)
-     * @param includeAllTeams  (optional)
-     * @param page  (optional)
-     * @param pageSize  (optional)
-     * @param orderBy  (optional)
-     * @param search  (optional)
-     * @return RequestConfig
-     */
-    fun analyticsAdminListWebsitesRequestConfig(userId: java.util.UUID, includeOwnedTeams: kotlin.String?, includeAllTeams: kotlin.String?, page: kotlin.Int?, pageSize: kotlin.Int?, orderBy: kotlin.String?, search: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("userId", listOf(userId.toString()))
-                if (includeOwnedTeams != null) {
-                    put("includeOwnedTeams", listOf(includeOwnedTeams.toString()))
-                }
-                if (includeAllTeams != null) {
-                    put("includeAllTeams", listOf(includeAllTeams.toString()))
-                }
-                if (page != null) {
-                    put("page", listOf(page.toString()))
-                }
-                if (pageSize != null) {
-                    put("pageSize", listOf(pageSize.toString()))
-                }
-                if (orderBy != null) {
-                    put("orderBy", listOf(orderBy.toString()))
-                }
-                if (search != null) {
-                    put("search", listOf(search.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/analytics/admin/websites",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/admin/aimetrics
-     * Is the fleet AI board: O11yAI generations (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).
-     * Is the fleet AI board: O11yAI generations (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).  Every signal degrades INDEPENDENTLY — a table that is absent or errors contributes its zero value and the read still succeeds. O11yAI latency is a SEPARATE query from generations and cost on purpose: a Nullable end_time or a column mismatch there must not zero the two numbers that did read.
+     * Is the fleet AI board: LLM generations over gen_ai spans (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).
+     * Is the fleet AI board: LLM generations over gen_ai spans (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).  Every signal degrades INDEPENDENTLY — a table that is absent or errors contributes its zero value and the read still succeeds. Generation latency is a SEPARATE query from generations and cost on purpose: a duration/attribute mismatch there must not zero the two numbers that did read.
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
-     * @return CloudAimetricsOut
+     * @return AimetricsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -351,11 +144,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminAIMetrics(range: kotlin.String? = null) : CloudAimetricsOut {
-        val localVarResponse = cloudAdminAIMetricsWithHttpInfo(range = range)
+    fun adminAIMetrics(range: kotlin.String? = null) : AimetricsOut {
+        val localVarResponse = adminAIMetricsWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAimetricsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AimetricsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -371,30 +164,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/aimetrics
-     * Is the fleet AI board: O11yAI generations (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).
-     * Is the fleet AI board: O11yAI generations (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).  Every signal degrades INDEPENDENTLY — a table that is absent or errors contributes its zero value and the read still succeeds. O11yAI latency is a SEPARATE query from generations and cost on purpose: a Nullable end_time or a column mismatch there must not zero the two numbers that did read.
+     * Is the fleet AI board: LLM generations over gen_ai spans (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).
+     * Is the fleet AI board: LLM generations over gen_ai spans (count, cost, avg/p95 latency, per-model), per-model usage from the live cloud_usage ledger, and the eval plane (traces, scores, score names, runs, and the average-score trend).  Every signal degrades INDEPENDENTLY — a table that is absent or errors contributes its zero value and the read still succeeds. Generation latency is a SEPARATE query from generations and cost on purpose: a duration/attribute mismatch there must not zero the two numbers that did read.
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
-     * @return ApiResponse<CloudAimetricsOut?>
+     * @return ApiResponse<AimetricsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminAIMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<CloudAimetricsOut?> {
-        val localVariableConfig = cloudAdminAIMetricsRequestConfig(range = range)
+    fun adminAIMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<AimetricsOut?> {
+        val localVariableConfig = adminAIMetricsRequestConfig(range = range)
 
-        return request<Unit, CloudAimetricsOut>(
+        return request<Unit, AimetricsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminAIMetrics
+     * To obtain the request config of the operation adminAIMetrics
      *
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminAIMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun adminAIMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -410,7 +203,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/aimetrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -420,7 +213,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the SaaS product-analytics board over the caller&#39;s tenant window: active customers, new and churned, retention, MRR, ARPU, the usage trend and the top customers by spend — every number folded from the commerce ledger, not sampled.
      * Is the SaaS product-analytics board over the caller&#39;s tenant window: active customers, new and churned, retention, MRR, ARPU, the usage trend and the top customers by spend — every number folded from the commerce ledger, not sampled.  The window is the caller&#39;s, not the fleet&#39;s: a SuperAdmin gets every org, a white-label admin only their own subtree (core.ScopedOrgs, the one scope predicate).  sources[] carries each upstream&#39;s freshness so a partial read is VISIBLE rather than silently low: a ledger that answered for only some orgs marks commerce-ledger degraded instead of publishing an undercount as healthy.
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
-     * @return CloudAnalyticsOut
+     * @return AnalyticsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -429,11 +222,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminAnalytics(range: kotlin.String? = null) : CloudAnalyticsOut {
-        val localVarResponse = cloudAdminAnalyticsWithHttpInfo(range = range)
+    fun adminAnalytics(range: kotlin.String? = null) : AnalyticsOut {
+        val localVarResponse = adminAnalyticsWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAnalyticsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AnalyticsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -452,27 +245,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the SaaS product-analytics board over the caller&#39;s tenant window: active customers, new and churned, retention, MRR, ARPU, the usage trend and the top customers by spend — every number folded from the commerce ledger, not sampled.
      * Is the SaaS product-analytics board over the caller&#39;s tenant window: active customers, new and churned, retention, MRR, ARPU, the usage trend and the top customers by spend — every number folded from the commerce ledger, not sampled.  The window is the caller&#39;s, not the fleet&#39;s: a SuperAdmin gets every org, a white-label admin only their own subtree (core.ScopedOrgs, the one scope predicate).  sources[] carries each upstream&#39;s freshness so a partial read is VISIBLE rather than silently low: a ledger that answered for only some orgs marks commerce-ledger degraded instead of publishing an undercount as healthy.
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
-     * @return ApiResponse<CloudAnalyticsOut?>
+     * @return ApiResponse<AnalyticsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminAnalyticsWithHttpInfo(range: kotlin.String?) : ApiResponse<CloudAnalyticsOut?> {
-        val localVariableConfig = cloudAdminAnalyticsRequestConfig(range = range)
+    fun adminAnalyticsWithHttpInfo(range: kotlin.String?) : ApiResponse<AnalyticsOut?> {
+        val localVariableConfig = adminAnalyticsRequestConfig(range = range)
 
-        return request<Unit, CloudAnalyticsOut>(
+        return request<Unit, AnalyticsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminAnalytics
+     * To obtain the request config of the operation adminAnalytics
      *
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminAnalyticsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun adminAnalyticsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -488,7 +281,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/analytics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -500,7 +293,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param owner Owner is the org whose rows to read. Defaults to the admin org, which owns the platform&#39;s roles and applications. (optional)
      * @param p Page is the 1-based page number. Forwarded only when set — IAM applies its own default otherwise. (optional)
      * @param pageSize PageSize is rows per page. Forwarded only when set. (optional)
-     * @return CloudIamRowsOut
+     * @return IamRowsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -509,11 +302,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminApplications(owner: kotlin.String? = null, p: kotlin.String? = null, pageSize: kotlin.String? = null) : CloudIamRowsOut {
-        val localVarResponse = cloudAdminApplicationsWithHttpInfo(owner = owner, p = p, pageSize = pageSize)
+    fun adminApplications(owner: kotlin.String? = null, p: kotlin.String? = null, pageSize: kotlin.String? = null) : IamRowsOut {
+        val localVarResponse = adminApplicationsWithHttpInfo(owner = owner, p = p, pageSize = pageSize)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIamRowsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamRowsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -534,29 +327,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param owner Owner is the org whose rows to read. Defaults to the admin org, which owns the platform&#39;s roles and applications. (optional)
      * @param p Page is the 1-based page number. Forwarded only when set — IAM applies its own default otherwise. (optional)
      * @param pageSize PageSize is rows per page. Forwarded only when set. (optional)
-     * @return ApiResponse<CloudIamRowsOut?>
+     * @return ApiResponse<IamRowsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminApplicationsWithHttpInfo(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<CloudIamRowsOut?> {
-        val localVariableConfig = cloudAdminApplicationsRequestConfig(owner = owner, p = p, pageSize = pageSize)
+    fun adminApplicationsWithHttpInfo(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<IamRowsOut?> {
+        val localVariableConfig = adminApplicationsRequestConfig(owner = owner, p = p, pageSize = pageSize)
 
-        return request<Unit, CloudIamRowsOut>(
+        return request<Unit, IamRowsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminApplications
+     * To obtain the request config of the operation adminApplications
      *
      * @param owner Owner is the org whose rows to read. Defaults to the admin org, which owns the platform&#39;s roles and applications. (optional)
      * @param p Page is the 1-based page number. Forwarded only when set — IAM applies its own default otherwise. (optional)
      * @param pageSize PageSize is rows per page. Forwarded only when set. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminApplicationsRequestConfig(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
+    fun adminApplicationsRequestConfig(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -578,7 +371,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -597,7 +390,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param until Until is the upper time bound, RFC3339, with the same tolerance. (optional)
      * @param pageSize PageSize is rows per page, default 100. (optional)
      * @param p Page is the 1-based page number, driving the offset. (optional)
-     * @return CloudRecordsOut
+     * @return RecordsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -606,11 +399,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminAudit(org: kotlin.String? = null, sub: kotlin.String? = null, action: kotlin.String? = null, resource: kotlin.String? = null, resourceId: kotlin.String? = null, result: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, pageSize: kotlin.String? = null, p: kotlin.String? = null) : CloudRecordsOut {
-        val localVarResponse = cloudAdminAuditWithHttpInfo(org = org, sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
+    fun adminAudit(org: kotlin.String? = null, sub: kotlin.String? = null, action: kotlin.String? = null, resource: kotlin.String? = null, resourceId: kotlin.String? = null, result: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, pageSize: kotlin.String? = null, p: kotlin.String? = null) : RecordsOut {
+        val localVarResponse = adminAuditWithHttpInfo(org = org, sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRecordsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RecordsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -638,22 +431,22 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param until Until is the upper time bound, RFC3339, with the same tolerance. (optional)
      * @param pageSize PageSize is rows per page, default 100. (optional)
      * @param p Page is the 1-based page number, driving the offset. (optional)
-     * @return ApiResponse<CloudRecordsOut?>
+     * @return ApiResponse<RecordsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminAuditWithHttpInfo(org: kotlin.String?, sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : ApiResponse<CloudRecordsOut?> {
-        val localVariableConfig = cloudAdminAuditRequestConfig(org = org, sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
+    fun adminAuditWithHttpInfo(org: kotlin.String?, sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : ApiResponse<RecordsOut?> {
+        val localVariableConfig = adminAuditRequestConfig(org = org, sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
 
-        return request<Unit, CloudRecordsOut>(
+        return request<Unit, RecordsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminAudit
+     * To obtain the request config of the operation adminAudit
      *
      * @param org Org restricts the trail to one tenant. (optional)
      * @param sub Sub restricts it to one actor (the validated subject that made the request). (optional)
@@ -667,7 +460,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param p Page is the 1-based page number, driving the offset. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminAuditRequestConfig(org: kotlin.String?, sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : RequestConfig<Unit> {
+    fun adminAuditRequestConfig(org: kotlin.String?, sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -710,7 +503,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/audit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -719,7 +512,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/audit/verify
      * Walks the WHOLE hash chain and reports whether it is intact: how many records were checked, the head hash to pin externally against tail-truncation, and — when the chain is broken — the seq of the first bad record and why.
      * Walks the WHOLE hash chain and reports whether it is intact: how many records were checked, the head hash to pin externally against tail-truncation, and — when the chain is broken — the seq of the first bad record and why.  brokenAt is -1 exactly when ok is true. An unconfigured store is an honest failure here rather than a fabricated pass.
-     * @return CloudVerifyOut
+     * @return VerifyOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -728,11 +521,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminAuditVerify() : CloudVerifyOut {
-        val localVarResponse = cloudAdminAuditVerifyWithHttpInfo()
+    fun adminAuditVerify() : VerifyOut {
+        val localVarResponse = adminAuditVerifyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVerifyOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VerifyOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -750,26 +543,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/audit/verify
      * Walks the WHOLE hash chain and reports whether it is intact: how many records were checked, the head hash to pin externally against tail-truncation, and — when the chain is broken — the seq of the first bad record and why.
      * Walks the WHOLE hash chain and reports whether it is intact: how many records were checked, the head hash to pin externally against tail-truncation, and — when the chain is broken — the seq of the first bad record and why.  brokenAt is -1 exactly when ok is true. An unconfigured store is an honest failure here rather than a fabricated pass.
-     * @return ApiResponse<CloudVerifyOut?>
+     * @return ApiResponse<VerifyOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminAuditVerifyWithHttpInfo() : ApiResponse<CloudVerifyOut?> {
-        val localVariableConfig = cloudAdminAuditVerifyRequestConfig()
+    fun adminAuditVerifyWithHttpInfo() : ApiResponse<VerifyOut?> {
+        val localVariableConfig = adminAuditVerifyRequestConfig()
 
-        return request<Unit, CloudVerifyOut>(
+        return request<Unit, VerifyOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminAuditVerify
+     * To obtain the request config of the operation adminAuditVerify
      *
      * @return RequestConfig
      */
-    fun cloudAdminAuditVerifyRequestConfig() : RequestConfig<Unit> {
+    fun adminAuditVerifyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -780,7 +573,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/audit/verify",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -789,7 +582,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/bases
      * Lists the tenant Base instances in the caller&#39;s window — a SuperAdmin sees every tenant&#39;s, anyone else only their own subtree&#39;s.
      * Lists the tenant Base instances in the caller&#39;s window — a SuperAdmin sees every tenant&#39;s, anyone else only their own subtree&#39;s.  The scope is enforced TWICE: the upstream is asked for the caller&#39;s org, AND every row it returns is re-checked against the resolved scope. An upstream that ignored the filter therefore degrades to empty, never to a cross-tenant leak.  The Base engine is being embedded into cloud; until it lands this proxies BASE_ADMIN_URL and, when that is unset, answers 200 with an empty list and msg saying so — the honest not-yet state, never fabricated instances.
-     * @return CloudBasesOut
+     * @return BasesOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -798,11 +591,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminBases() : CloudBasesOut {
-        val localVarResponse = cloudAdminBasesWithHttpInfo()
+    fun adminBases() : BasesOut {
+        val localVarResponse = adminBasesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBasesOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BasesOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -820,26 +613,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/bases
      * Lists the tenant Base instances in the caller&#39;s window — a SuperAdmin sees every tenant&#39;s, anyone else only their own subtree&#39;s.
      * Lists the tenant Base instances in the caller&#39;s window — a SuperAdmin sees every tenant&#39;s, anyone else only their own subtree&#39;s.  The scope is enforced TWICE: the upstream is asked for the caller&#39;s org, AND every row it returns is re-checked against the resolved scope. An upstream that ignored the filter therefore degrades to empty, never to a cross-tenant leak.  The Base engine is being embedded into cloud; until it lands this proxies BASE_ADMIN_URL and, when that is unset, answers 200 with an empty list and msg saying so — the honest not-yet state, never fabricated instances.
-     * @return ApiResponse<CloudBasesOut?>
+     * @return ApiResponse<BasesOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminBasesWithHttpInfo() : ApiResponse<CloudBasesOut?> {
-        val localVariableConfig = cloudAdminBasesRequestConfig()
+    fun adminBasesWithHttpInfo() : ApiResponse<BasesOut?> {
+        val localVariableConfig = adminBasesRequestConfig()
 
-        return request<Unit, CloudBasesOut>(
+        return request<Unit, BasesOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminBases
+     * To obtain the request config of the operation adminBases
      *
      * @return RequestConfig
      */
-    fun cloudAdminBasesRequestConfig() : RequestConfig<Unit> {
+    fun adminBasesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -850,16 +643,18 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/bases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/admin/block-storage
-     * Is the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.
-     * Is the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.  A volume&#39;s usedGiB and pct are null, always: DO exposes capacity and attachment but no fill, so the console renders \&quot;—\&quot; rather than a number nobody measured. The datastore card is the one real fill here, and it is the number to scale on.  The two sources degrade independently — a DO outage still returns the datastore fill, and a disconnected datastore still returns the DO fleet.
-     * @return CloudBlockStorageOut
+     * GET /v1/admin/caps
+     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.
+     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.  These are the SAME rows the customer edits in their own console — a platform override and a customer budget are one model, not two.
+     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
+     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops. (optional)
+     * @return RawOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -868,11 +663,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminBlockStorage() : CloudBlockStorageOut {
-        val localVarResponse = cloudAdminBlockStorageWithHttpInfo()
+    fun adminCaps(org: kotlin.String? = null, id: kotlin.String? = null) : RawOut {
+        val localVarResponse = adminCapsWithHttpInfo(org = org, id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBlockStorageOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -887,40 +682,52 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * GET /v1/admin/block-storage
-     * Is the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.
-     * Is the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.  A volume&#39;s usedGiB and pct are null, always: DO exposes capacity and attachment but no fill, so the console renders \&quot;—\&quot; rather than a number nobody measured. The datastore card is the one real fill here, and it is the number to scale on.  The two sources degrade independently — a DO outage still returns the datastore fill, and a disconnected datastore still returns the DO fleet.
-     * @return ApiResponse<CloudBlockStorageOut?>
+     * GET /v1/admin/caps
+     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.
+     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.  These are the SAME rows the customer edits in their own console — a platform override and a customer budget are one model, not two.
+     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
+     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops. (optional)
+     * @return ApiResponse<RawOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminBlockStorageWithHttpInfo() : ApiResponse<CloudBlockStorageOut?> {
-        val localVariableConfig = cloudAdminBlockStorageRequestConfig()
+    fun adminCapsWithHttpInfo(org: kotlin.String?, id: kotlin.String?) : ApiResponse<RawOut?> {
+        val localVariableConfig = adminCapsRequestConfig(org = org, id = id)
 
-        return request<Unit, CloudBlockStorageOut>(
+        return request<Unit, RawOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminBlockStorage
+     * To obtain the request config of the operation adminCaps
      *
+     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
+     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminBlockStorageRequestConfig() : RequestConfig<Unit> {
+    fun adminCapsRequestConfig(org: kotlin.String?, id: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (org != null) {
+                    put("org", listOf(org.toString()))
+                }
+                if (id != null) {
+                    put("id", listOf(id.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/admin/block-storage",
+            path = "/v1/admin/caps",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -932,7 +739,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param kind Kind narrows to one workload class (bot | machine | cluster | nodepool | container | function | …). An OPEN spectrum matched as a plain string, lowercased to the warehouse&#39;s convention; empty means every kind. (optional)
      * @param org Org narrows to one tenant. Empty means every tenant — this board is cross-tenant by nature. (optional)
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as 30d. (optional)
-     * @return CloudComputeOut
+     * @return ComputeOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -941,11 +748,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminCompute(kind: kotlin.String? = null, org: kotlin.String? = null, range: kotlin.String? = null) : CloudComputeOut {
-        val localVarResponse = cloudAdminComputeWithHttpInfo(kind = kind, org = org, range = range)
+    fun adminCompute(kind: kotlin.String? = null, org: kotlin.String? = null, range: kotlin.String? = null) : ComputeOut {
+        val localVarResponse = adminComputeWithHttpInfo(kind = kind, org = org, range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudComputeOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ComputeOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -966,29 +773,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param kind Kind narrows to one workload class (bot | machine | cluster | nodepool | container | function | …). An OPEN spectrum matched as a plain string, lowercased to the warehouse&#39;s convention; empty means every kind. (optional)
      * @param org Org narrows to one tenant. Empty means every tenant — this board is cross-tenant by nature. (optional)
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as 30d. (optional)
-     * @return ApiResponse<CloudComputeOut?>
+     * @return ApiResponse<ComputeOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminComputeWithHttpInfo(kind: kotlin.String?, org: kotlin.String?, range: kotlin.String?) : ApiResponse<CloudComputeOut?> {
-        val localVariableConfig = cloudAdminComputeRequestConfig(kind = kind, org = org, range = range)
+    fun adminComputeWithHttpInfo(kind: kotlin.String?, org: kotlin.String?, range: kotlin.String?) : ApiResponse<ComputeOut?> {
+        val localVariableConfig = adminComputeRequestConfig(kind = kind, org = org, range = range)
 
-        return request<Unit, CloudComputeOut>(
+        return request<Unit, ComputeOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminCompute
+     * To obtain the request config of the operation adminCompute
      *
      * @param kind Kind narrows to one workload class (bot | machine | cluster | nodepool | container | function | …). An OPEN spectrum matched as a plain string, lowercased to the warehouse&#39;s convention; empty means every kind. (optional)
      * @param org Org narrows to one tenant. Empty means every tenant — this board is cross-tenant by nature. (optional)
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as 30d. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminComputeRequestConfig(kind: kotlin.String?, org: kotlin.String?, range: kotlin.String?) : RequestConfig<Unit> {
+    fun adminComputeRequestConfig(kind: kotlin.String?, org: kotlin.String?, range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1010,7 +817,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/compute",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1020,8 +827,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Marks one cluster node unschedulable — or schedulable again — and can drain the pods already on it.
      * Marks one cluster node unschedulable — or schedulable again — and can drain the pods already on it.  It is the ONE infra change that does not go through the run discipline, because there is no destructive verdict to check: cordoning is reversible and evicting respects the cluster&#39;s own PodDisruptionBudgets. It reads the cached board for the same reason. The outcome is audited either way, and the result reports how many pods were evicted.
      * @param id ID is the node&#39;s droplet id, from the path.
-     * @param cloudCordonIn 
-     * @return CloudMutationOut
+     * @param cordonIn 
+     * @return MutationOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1030,11 +837,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminCordonNode(id: kotlin.String, cloudCordonIn: CloudCordonIn) : CloudMutationOut {
-        val localVarResponse = cloudAdminCordonNodeWithHttpInfo(id = id, cloudCordonIn = cloudCordonIn)
+    fun adminCordonNode(id: kotlin.String, cordonIn: CordonIn) : MutationOut {
+        val localVarResponse = adminCordonNodeWithHttpInfo(id = id, cordonIn = cordonIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMutationOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutationOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1053,30 +860,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Marks one cluster node unschedulable — or schedulable again — and can drain the pods already on it.
      * Marks one cluster node unschedulable — or schedulable again — and can drain the pods already on it.  It is the ONE infra change that does not go through the run discipline, because there is no destructive verdict to check: cordoning is reversible and evicting respects the cluster&#39;s own PodDisruptionBudgets. It reads the cached board for the same reason. The outcome is audited either way, and the result reports how many pods were evicted.
      * @param id ID is the node&#39;s droplet id, from the path.
-     * @param cloudCordonIn 
-     * @return ApiResponse<CloudMutationOut?>
+     * @param cordonIn 
+     * @return ApiResponse<MutationOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminCordonNodeWithHttpInfo(id: kotlin.String, cloudCordonIn: CloudCordonIn) : ApiResponse<CloudMutationOut?> {
-        val localVariableConfig = cloudAdminCordonNodeRequestConfig(id = id, cloudCordonIn = cloudCordonIn)
+    fun adminCordonNodeWithHttpInfo(id: kotlin.String, cordonIn: CordonIn) : ApiResponse<MutationOut?> {
+        val localVariableConfig = adminCordonNodeRequestConfig(id = id, cordonIn = cordonIn)
 
-        return request<CloudCordonIn, CloudMutationOut>(
+        return request<CordonIn, MutationOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminCordonNode
+     * To obtain the request config of the operation adminCordonNode
      *
      * @param id ID is the node&#39;s droplet id, from the path.
-     * @param cloudCordonIn 
+     * @param cordonIn 
      * @return RequestConfig
      */
-    fun cloudAdminCordonNodeRequestConfig(id: kotlin.String, cloudCordonIn: CloudCordonIn) : RequestConfig<CloudCordonIn> {
-        val localVariableBody = cloudCordonIn
+    fun adminCordonNodeRequestConfig(id: kotlin.String, cordonIn: CordonIn) : RequestConfig<CordonIn> {
+        val localVariableBody = cordonIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1087,17 +894,17 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/nodes/{id}/cordon".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/admin/credit-grants
-     * Mints credit for one org.
-     * Mints credit for one org. It is the ONE admin mint surface, and it does NOT mint in-process: it forwards the request to commerce&#39;s already-mint-gated POST /v1/billing/credit-grants, authenticated by the service token and scoped to the target org, then writes one tamper-evident compliance record. Commerce stays the sole credit ledger; this is a thin, audited relay so there is exactly one place credit is created.  The body is commerce&#39;s OWN CreateCreditGrant contract, forwarded whole — every field it carries reaches commerce. The only two this layer reads are the target org (&#x60;org&#x60;, or &#x60;user&#x60; as the org-pool alias), which selects the namespace commerce&#39;s EdgeAuth trusts, and &#x60;idempotencyKey&#x60;, which makes a double-clicked grant credit once.  A FAILED grant is audited too, with the request body attached: an attempted mint is exactly as interesting to a compliance auditor as a successful one.
-     * @param requestBody 
-     * @return CloudRawOut
+     * POST /v1/admin/caps
+     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows.
+     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows. The body is commerce&#39;s spend-alert contract, forwarded byte-for-byte.
+     * @param capIn 
+     * @return RawOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1106,11 +913,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminCreateCreditGrant(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : CloudRawOut {
-        val localVarResponse = cloudAdminCreateCreditGrantWithHttpInfo(requestBody = requestBody)
+    fun adminCreateCap(capIn: CapIn) : RawOut {
+        val localVarResponse = adminCreateCapWithHttpInfo(capIn = capIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1125,32 +932,32 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * POST /v1/admin/credit-grants
-     * Mints credit for one org.
-     * Mints credit for one org. It is the ONE admin mint surface, and it does NOT mint in-process: it forwards the request to commerce&#39;s already-mint-gated POST /v1/billing/credit-grants, authenticated by the service token and scoped to the target org, then writes one tamper-evident compliance record. Commerce stays the sole credit ledger; this is a thin, audited relay so there is exactly one place credit is created.  The body is commerce&#39;s OWN CreateCreditGrant contract, forwarded whole — every field it carries reaches commerce. The only two this layer reads are the target org (&#x60;org&#x60;, or &#x60;user&#x60; as the org-pool alias), which selects the namespace commerce&#39;s EdgeAuth trusts, and &#x60;idempotencyKey&#x60;, which makes a double-clicked grant credit once.  A FAILED grant is audited too, with the request body attached: an attempted mint is exactly as interesting to a compliance auditor as a successful one.
-     * @param requestBody 
-     * @return ApiResponse<CloudRawOut?>
+     * POST /v1/admin/caps
+     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows.
+     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows. The body is commerce&#39;s spend-alert contract, forwarded byte-for-byte.
+     * @param capIn 
+     * @return ApiResponse<RawOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminCreateCreditGrantWithHttpInfo(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminCreateCreditGrantRequestConfig(requestBody = requestBody)
+    fun adminCreateCapWithHttpInfo(capIn: CapIn) : ApiResponse<RawOut?> {
+        val localVariableConfig = adminCreateCapRequestConfig(capIn = capIn)
 
-        return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, CloudRawOut>(
+        return request<CapIn, RawOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminCreateCreditGrant
+     * To obtain the request config of the operation adminCreateCap
      *
-     * @param requestBody 
+     * @param capIn 
      * @return RequestConfig
      */
-    fun cloudAdminCreateCreditGrantRequestConfig(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
-        val localVariableBody = requestBody
+    fun adminCreateCapRequestConfig(capIn: CapIn) : RequestConfig<CapIn> {
+        val localVariableBody = capIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1158,84 +965,10 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/admin/credit-grants",
+            path = "/v1/admin/caps",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/admin/spend-caps
-     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows.
-     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows. The body is commerce&#39;s spend-alert contract, forwarded byte-for-byte.
-     * @param cloudCapIn 
-     * @return CloudRawOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminCreateSpendCap(cloudCapIn: CloudCapIn) : CloudRawOut {
-        val localVarResponse = cloudAdminCreateSpendCapWithHttpInfo(cloudCapIn = cloudCapIn)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/admin/spend-caps
-     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows.
-     * Sets a usage cap on one org — a platform override of a customer budget, written to the customer&#39;s own spend-alert rows. The body is commerce&#39;s spend-alert contract, forwarded byte-for-byte.
-     * @param cloudCapIn 
-     * @return ApiResponse<CloudRawOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminCreateSpendCapWithHttpInfo(cloudCapIn: CloudCapIn) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminCreateSpendCapRequestConfig(cloudCapIn = cloudCapIn)
-
-        return request<CloudCapIn, CloudRawOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudAdminCreateSpendCap
-     *
-     * @param cloudCapIn 
-     * @return RequestConfig
-     */
-    fun cloudAdminCreateSpendCapRequestConfig(cloudCapIn: CloudCapIn) : RequestConfig<CloudCapIn> {
-        val localVariableBody = cloudCapIn
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/admin/spend-caps",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1245,7 +978,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Answers GET /v1/admin/customers/:org.
      * Answers GET /v1/admin/customers/:org.
      * @param org Org is the tenant slug from the path.
-     * @return CloudCustomerDetailOut
+     * @return CustomerDetailOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1254,11 +987,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminCustomer(org: kotlin.String) : CloudCustomerDetailOut {
-        val localVarResponse = cloudAdminCustomerWithHttpInfo(org = org)
+    fun adminCustomer(org: kotlin.String) : CustomerDetailOut {
+        val localVarResponse = adminCustomerWithHttpInfo(org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCustomerDetailOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CustomerDetailOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1277,27 +1010,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Answers GET /v1/admin/customers/:org.
      * Answers GET /v1/admin/customers/:org.
      * @param org Org is the tenant slug from the path.
-     * @return ApiResponse<CloudCustomerDetailOut?>
+     * @return ApiResponse<CustomerDetailOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminCustomerWithHttpInfo(org: kotlin.String) : ApiResponse<CloudCustomerDetailOut?> {
-        val localVariableConfig = cloudAdminCustomerRequestConfig(org = org)
+    fun adminCustomerWithHttpInfo(org: kotlin.String) : ApiResponse<CustomerDetailOut?> {
+        val localVariableConfig = adminCustomerRequestConfig(org = org)
 
-        return request<Unit, CloudCustomerDetailOut>(
+        return request<Unit, CustomerDetailOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminCustomer
+     * To obtain the request config of the operation adminCustomer
      *
      * @param org Org is the tenant slug from the path.
      * @return RequestConfig
      */
-    fun cloudAdminCustomerRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
+    fun adminCustomerRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1308,7 +1041,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1317,7 +1050,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/customers
      * Lists every customer org at a glance, sorted by slug: owner email, plan, suspend status, member count, balance, month-to-date spend and MRR.
      * Lists every customer org at a glance, sorted by slug: owner email, plan, suspend status, member count, balance, month-to-date spend and MRR.  Each row costs one IAM read plus the org&#39;s money reads, fanned out under a fixed concurrency ceiling so a large fleet cannot stampede the upstreams. Every read is best-effort per row: an upstream miss degrades THAT field to its honest zero rather than failing the fleet.
-     * @return CloudCustomersOut
+     * @return CustomersOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1326,11 +1059,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminCustomers() : CloudCustomersOut {
-        val localVarResponse = cloudAdminCustomersWithHttpInfo()
+    fun adminCustomers() : CustomersOut {
+        val localVarResponse = adminCustomersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCustomersOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CustomersOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1348,26 +1081,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/customers
      * Lists every customer org at a glance, sorted by slug: owner email, plan, suspend status, member count, balance, month-to-date spend and MRR.
      * Lists every customer org at a glance, sorted by slug: owner email, plan, suspend status, member count, balance, month-to-date spend and MRR.  Each row costs one IAM read plus the org&#39;s money reads, fanned out under a fixed concurrency ceiling so a large fleet cannot stampede the upstreams. Every read is best-effort per row: an upstream miss degrades THAT field to its honest zero rather than failing the fleet.
-     * @return ApiResponse<CloudCustomersOut?>
+     * @return ApiResponse<CustomersOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminCustomersWithHttpInfo() : ApiResponse<CloudCustomersOut?> {
-        val localVariableConfig = cloudAdminCustomersRequestConfig()
+    fun adminCustomersWithHttpInfo() : ApiResponse<CustomersOut?> {
+        val localVariableConfig = adminCustomersRequestConfig()
 
-        return request<Unit, CloudCustomersOut>(
+        return request<Unit, CustomersOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminCustomers
+     * To obtain the request config of the operation adminCustomers
      *
      * @return RequestConfig
      */
-    fun cloudAdminCustomersRequestConfig() : RequestConfig<Unit> {
+    fun adminCustomersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1378,7 +1111,88 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/admin/caps/{id}
+     * Removes one cap by id, lifting the ceiling entirely.
+     * Removes one cap by id, lifting the ceiling entirely.
+     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
+     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
+     * @return RawOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun adminDeleteCap(id: kotlin.String, org: kotlin.String? = null) : RawOut {
+        val localVarResponse = adminDeleteCapWithHttpInfo(id = id, org = org)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/admin/caps/{id}
+     * Removes one cap by id, lifting the ceiling entirely.
+     * Removes one cap by id, lifting the ceiling entirely.
+     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
+     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
+     * @return ApiResponse<RawOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun adminDeleteCapWithHttpInfo(id: kotlin.String, org: kotlin.String?) : ApiResponse<RawOut?> {
+        val localVariableConfig = adminDeleteCapRequestConfig(id = id, org = org)
+
+        return request<Unit, RawOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation adminDeleteCap
+     *
+     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
+     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
+     * @return RequestConfig
+     */
+    fun adminDeleteCapRequestConfig(id: kotlin.String, org: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (org != null) {
+                    put("org", listOf(org.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/admin/caps/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1390,7 +1204,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param id ID is the DO droplet id, from the path. Numeric.
      * @param size Size is the target DigitalOcean size slug on resize, e.g. \&quot;s-4vcpu-8gb\&quot;. (optional)
      * @param disk Disk requests a PERMANENT resize that grows the disk. DO can never resize such a droplet down again, so it defaults false — a CPU/RAM-only change, reversible. (optional)
-     * @return CloudMutationOut
+     * @return MutationOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1399,11 +1213,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminDeleteDroplet(id: kotlin.String, size: kotlin.String? = null, disk: kotlin.Boolean? = null) : CloudMutationOut {
-        val localVarResponse = cloudAdminDeleteDropletWithHttpInfo(id = id, size = size, disk = disk)
+    fun adminDeleteDroplet(id: kotlin.String, size: kotlin.String? = null, disk: kotlin.Boolean? = null) : MutationOut {
+        val localVarResponse = adminDeleteDropletWithHttpInfo(id = id, size = size, disk = disk)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMutationOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutationOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1424,29 +1238,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param id ID is the DO droplet id, from the path. Numeric.
      * @param size Size is the target DigitalOcean size slug on resize, e.g. \&quot;s-4vcpu-8gb\&quot;. (optional)
      * @param disk Disk requests a PERMANENT resize that grows the disk. DO can never resize such a droplet down again, so it defaults false — a CPU/RAM-only change, reversible. (optional)
-     * @return ApiResponse<CloudMutationOut?>
+     * @return ApiResponse<MutationOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminDeleteDropletWithHttpInfo(id: kotlin.String, size: kotlin.String?, disk: kotlin.Boolean?) : ApiResponse<CloudMutationOut?> {
-        val localVariableConfig = cloudAdminDeleteDropletRequestConfig(id = id, size = size, disk = disk)
+    fun adminDeleteDropletWithHttpInfo(id: kotlin.String, size: kotlin.String?, disk: kotlin.Boolean?) : ApiResponse<MutationOut?> {
+        val localVariableConfig = adminDeleteDropletRequestConfig(id = id, size = size, disk = disk)
 
-        return request<Unit, CloudMutationOut>(
+        return request<Unit, MutationOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminDeleteDroplet
+     * To obtain the request config of the operation adminDeleteDroplet
      *
      * @param id ID is the DO droplet id, from the path. Numeric.
      * @param size Size is the target DigitalOcean size slug on resize, e.g. \&quot;s-4vcpu-8gb\&quot;. (optional)
      * @param disk Disk requests a PERMANENT resize that grows the disk. DO can never resize such a droplet down again, so it defaults false — a CPU/RAM-only change, reversible. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminDeleteDropletRequestConfig(id: kotlin.String, size: kotlin.String?, disk: kotlin.Boolean?) : RequestConfig<Unit> {
+    fun adminDeleteDropletRequestConfig(id: kotlin.String, size: kotlin.String?, disk: kotlin.Boolean?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1465,7 +1279,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/droplets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1475,7 +1289,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Destroys a load balancer the board has just proven no live type&#x3D;LoadBalancer Service in any cluster targets.
      * Destroys a load balancer the board has just proven no live type&#x3D;LoadBalancer Service in any cluster targets.
      * @param id ID is the DO load balancer id, from the path.
-     * @return CloudMutationOut
+     * @return MutationOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1484,11 +1298,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminDeleteLoadBalancer(id: kotlin.String) : CloudMutationOut {
-        val localVarResponse = cloudAdminDeleteLoadBalancerWithHttpInfo(id = id)
+    fun adminDeleteLoadBalancer(id: kotlin.String) : MutationOut {
+        val localVarResponse = adminDeleteLoadBalancerWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMutationOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutationOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1507,27 +1321,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Destroys a load balancer the board has just proven no live type&#x3D;LoadBalancer Service in any cluster targets.
      * Destroys a load balancer the board has just proven no live type&#x3D;LoadBalancer Service in any cluster targets.
      * @param id ID is the DO load balancer id, from the path.
-     * @return ApiResponse<CloudMutationOut?>
+     * @return ApiResponse<MutationOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminDeleteLoadBalancerWithHttpInfo(id: kotlin.String) : ApiResponse<CloudMutationOut?> {
-        val localVariableConfig = cloudAdminDeleteLoadBalancerRequestConfig(id = id)
+    fun adminDeleteLoadBalancerWithHttpInfo(id: kotlin.String) : ApiResponse<MutationOut?> {
+        val localVariableConfig = adminDeleteLoadBalancerRequestConfig(id = id)
 
-        return request<Unit, CloudMutationOut>(
+        return request<Unit, MutationOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminDeleteLoadBalancer
+     * To obtain the request config of the operation adminDeleteLoadBalancer
      *
      * @param id ID is the DO load balancer id, from the path.
      * @return RequestConfig
      */
-    fun cloudAdminDeleteLoadBalancerRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun adminDeleteLoadBalancerRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1538,88 +1352,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/loadbalancers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/admin/spend-caps/{id}
-     * Removes one cap by id, lifting the ceiling entirely.
-     * Removes one cap by id, lifting the ceiling entirely.
-     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
-     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
-     * @return CloudRawOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminDeleteSpendCap(id: kotlin.String, org: kotlin.String? = null) : CloudRawOut {
-        val localVarResponse = cloudAdminDeleteSpendCapWithHttpInfo(id = id, org = org)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/admin/spend-caps/{id}
-     * Removes one cap by id, lifting the ceiling entirely.
-     * Removes one cap by id, lifting the ceiling entirely.
-     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
-     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
-     * @return ApiResponse<CloudRawOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminDeleteSpendCapWithHttpInfo(id: kotlin.String, org: kotlin.String?) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminDeleteSpendCapRequestConfig(id = id, org = org)
-
-        return request<Unit, CloudRawOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudAdminDeleteSpendCap
-     *
-     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
-     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
-     * @return RequestConfig
-     */
-    fun cloudAdminDeleteSpendCapRequestConfig(id: kotlin.String, org: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (org != null) {
-                    put("org", listOf(org.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/admin/spend-caps/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1632,7 +1365,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param snapshot Snapshot is the snapshot-first switch on DELETE. Anything other than the literal \&quot;false\&quot; snapshots before destroying — the snapshot IS the undo, so waiving it is deliberate and explicit. (optional)
      * @param name Name is the snapshot name on the snapshot action. Blank gets a deterministic \&quot;&lt;volume&gt;-predelete-&lt;unix&gt;\&quot; so the undo is findable in the DO console. (optional)
      * @param sizeGiB SizeGiB is the target size on the resize action. A volume only ever grows — ExpandTo is the verdict that refuses a shrink, so this is not validated here. (optional)
-     * @return CloudMutationOut
+     * @return MutationOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1641,11 +1374,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminDeleteVolume(id: kotlin.String, snapshot: kotlin.String? = null, name: kotlin.String? = null, sizeGiB: kotlin.Int? = null) : CloudMutationOut {
-        val localVarResponse = cloudAdminDeleteVolumeWithHttpInfo(id = id, snapshot = snapshot, name = name, sizeGiB = sizeGiB)
+    fun adminDeleteVolume(id: kotlin.String, snapshot: kotlin.String? = null, name: kotlin.String? = null, sizeGiB: kotlin.Int? = null) : MutationOut {
+        val localVarResponse = adminDeleteVolumeWithHttpInfo(id = id, snapshot = snapshot, name = name, sizeGiB = sizeGiB)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMutationOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutationOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1667,22 +1400,22 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param snapshot Snapshot is the snapshot-first switch on DELETE. Anything other than the literal \&quot;false\&quot; snapshots before destroying — the snapshot IS the undo, so waiving it is deliberate and explicit. (optional)
      * @param name Name is the snapshot name on the snapshot action. Blank gets a deterministic \&quot;&lt;volume&gt;-predelete-&lt;unix&gt;\&quot; so the undo is findable in the DO console. (optional)
      * @param sizeGiB SizeGiB is the target size on the resize action. A volume only ever grows — ExpandTo is the verdict that refuses a shrink, so this is not validated here. (optional)
-     * @return ApiResponse<CloudMutationOut?>
+     * @return ApiResponse<MutationOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminDeleteVolumeWithHttpInfo(id: kotlin.String, snapshot: kotlin.String?, name: kotlin.String?, sizeGiB: kotlin.Int?) : ApiResponse<CloudMutationOut?> {
-        val localVariableConfig = cloudAdminDeleteVolumeRequestConfig(id = id, snapshot = snapshot, name = name, sizeGiB = sizeGiB)
+    fun adminDeleteVolumeWithHttpInfo(id: kotlin.String, snapshot: kotlin.String?, name: kotlin.String?, sizeGiB: kotlin.Int?) : ApiResponse<MutationOut?> {
+        val localVariableConfig = adminDeleteVolumeRequestConfig(id = id, snapshot = snapshot, name = name, sizeGiB = sizeGiB)
 
-        return request<Unit, CloudMutationOut>(
+        return request<Unit, MutationOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminDeleteVolume
+     * To obtain the request config of the operation adminDeleteVolume
      *
      * @param id ID is the DO volume id, from the path.
      * @param snapshot Snapshot is the snapshot-first switch on DELETE. Anything other than the literal \&quot;false\&quot; snapshots before destroying — the snapshot IS the undo, so waiving it is deliberate and explicit. (optional)
@@ -1690,7 +1423,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param sizeGiB SizeGiB is the target size on the resize action. A volume only ever grows — ExpandTo is the verdict that refuses a shrink, so this is not validated here. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminDeleteVolumeRequestConfig(id: kotlin.String, snapshot: kotlin.String?, name: kotlin.String?, sizeGiB: kotlin.Int?) : RequestConfig<Unit> {
+    fun adminDeleteVolumeRequestConfig(id: kotlin.String, snapshot: kotlin.String?, name: kotlin.String?, sizeGiB: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1712,7 +1445,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/volumes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1722,8 +1455,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Stops the plugin.
      * Stops the plugin. Its routes STAY REGISTERED and answer 503 — not 404.  That is zip&#39;s choice and this keeps it. Removing the routes would mutate the route table, and re-adding them on enable would grow it without bound across repeated cycles, which is the invariant that makes reloads flat in memory. It is also the better answer: 404 says \&quot;no such API\&quot; and a client may cache it and stop retrying, while 503 says \&quot;this API exists and is down right now\&quot;, which is true and retryable. Which of the two 503s this is — deliberate stop or crash — is what the status&#39;s disabled flag reports.
      * @param name Name is the app, from the path.
-     * @param cloudNameIn 
-     * @return CloudActionOut
+     * @param nameIn 
+     * @return ActionOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1732,11 +1465,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminDisablePlugin(name: kotlin.String, cloudNameIn: CloudNameIn) : CloudActionOut {
-        val localVarResponse = cloudAdminDisablePluginWithHttpInfo(name = name, cloudNameIn = cloudNameIn)
+    fun adminDisablePlugin(name: kotlin.String, nameIn: NameIn) : ActionOut {
+        val localVarResponse = adminDisablePluginWithHttpInfo(name = name, nameIn = nameIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActionOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActionOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1755,30 +1488,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Stops the plugin.
      * Stops the plugin. Its routes STAY REGISTERED and answer 503 — not 404.  That is zip&#39;s choice and this keeps it. Removing the routes would mutate the route table, and re-adding them on enable would grow it without bound across repeated cycles, which is the invariant that makes reloads flat in memory. It is also the better answer: 404 says \&quot;no such API\&quot; and a client may cache it and stop retrying, while 503 says \&quot;this API exists and is down right now\&quot;, which is true and retryable. Which of the two 503s this is — deliberate stop or crash — is what the status&#39;s disabled flag reports.
      * @param name Name is the app, from the path.
-     * @param cloudNameIn 
-     * @return ApiResponse<CloudActionOut?>
+     * @param nameIn 
+     * @return ApiResponse<ActionOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminDisablePluginWithHttpInfo(name: kotlin.String, cloudNameIn: CloudNameIn) : ApiResponse<CloudActionOut?> {
-        val localVariableConfig = cloudAdminDisablePluginRequestConfig(name = name, cloudNameIn = cloudNameIn)
+    fun adminDisablePluginWithHttpInfo(name: kotlin.String, nameIn: NameIn) : ApiResponse<ActionOut?> {
+        val localVariableConfig = adminDisablePluginRequestConfig(name = name, nameIn = nameIn)
 
-        return request<CloudNameIn, CloudActionOut>(
+        return request<NameIn, ActionOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminDisablePlugin
+     * To obtain the request config of the operation adminDisablePlugin
      *
      * @param name Name is the app, from the path.
-     * @param cloudNameIn 
+     * @param nameIn 
      * @return RequestConfig
      */
-    fun cloudAdminDisablePluginRequestConfig(name: kotlin.String, cloudNameIn: CloudNameIn) : RequestConfig<CloudNameIn> {
-        val localVariableBody = cloudNameIn
+    fun adminDisablePluginRequestConfig(name: kotlin.String, nameIn: NameIn) : RequestConfig<NameIn> {
+        val localVariableBody = nameIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1789,7 +1522,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins/{name}/disable".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1799,8 +1532,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Brings a stopped or disabled plugin back on the artifact it already has: the zero Plugin names no new artifact, so Reload reuses the loaded spec and clears the disabled flag.
      * Brings a stopped or disabled plugin back on the artifact it already has: the zero Plugin names no new artifact, so Reload reuses the loaded spec and clears the disabled flag. Named for what an operator means by it.
      * @param name Name is the app, from the path.
-     * @param cloudNameIn 
-     * @return CloudActionOut
+     * @param nameIn 
+     * @return ActionOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1809,11 +1542,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminEnablePlugin(name: kotlin.String, cloudNameIn: CloudNameIn) : CloudActionOut {
-        val localVarResponse = cloudAdminEnablePluginWithHttpInfo(name = name, cloudNameIn = cloudNameIn)
+    fun adminEnablePlugin(name: kotlin.String, nameIn: NameIn) : ActionOut {
+        val localVarResponse = adminEnablePluginWithHttpInfo(name = name, nameIn = nameIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActionOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActionOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1832,30 +1565,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Brings a stopped or disabled plugin back on the artifact it already has: the zero Plugin names no new artifact, so Reload reuses the loaded spec and clears the disabled flag.
      * Brings a stopped or disabled plugin back on the artifact it already has: the zero Plugin names no new artifact, so Reload reuses the loaded spec and clears the disabled flag. Named for what an operator means by it.
      * @param name Name is the app, from the path.
-     * @param cloudNameIn 
-     * @return ApiResponse<CloudActionOut?>
+     * @param nameIn 
+     * @return ApiResponse<ActionOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminEnablePluginWithHttpInfo(name: kotlin.String, cloudNameIn: CloudNameIn) : ApiResponse<CloudActionOut?> {
-        val localVariableConfig = cloudAdminEnablePluginRequestConfig(name = name, cloudNameIn = cloudNameIn)
+    fun adminEnablePluginWithHttpInfo(name: kotlin.String, nameIn: NameIn) : ApiResponse<ActionOut?> {
+        val localVariableConfig = adminEnablePluginRequestConfig(name = name, nameIn = nameIn)
 
-        return request<CloudNameIn, CloudActionOut>(
+        return request<NameIn, ActionOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminEnablePlugin
+     * To obtain the request config of the operation adminEnablePlugin
      *
      * @param name Name is the app, from the path.
-     * @param cloudNameIn 
+     * @param nameIn 
      * @return RequestConfig
      */
-    fun cloudAdminEnablePluginRequestConfig(name: kotlin.String, cloudNameIn: CloudNameIn) : RequestConfig<CloudNameIn> {
-        val localVariableBody = cloudNameIn
+    fun adminEnablePluginRequestConfig(name: kotlin.String, nameIn: NameIn) : RequestConfig<NameIn> {
+        val localVariableBody = nameIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1866,7 +1599,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins/{name}/enable".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1875,7 +1608,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/finance
      * Answers GET /v1/admin/finance.
      * Answers GET /v1/admin/finance. It reads the multi-vendor COGS from commerce /v1/costs, the DO promo-credit/burn-down treasury view, and the fleet commerce revenue, then hands them to ComputeFinance. SuperAdmin only.
-     * @return CloudFinanceOut
+     * @return FinanceOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1884,11 +1617,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminFinance() : CloudFinanceOut {
-        val localVarResponse = cloudAdminFinanceWithHttpInfo()
+    fun adminFinance() : FinanceOut {
+        val localVarResponse = adminFinanceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFinanceOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FinanceOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1906,26 +1639,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/finance
      * Answers GET /v1/admin/finance.
      * Answers GET /v1/admin/finance. It reads the multi-vendor COGS from commerce /v1/costs, the DO promo-credit/burn-down treasury view, and the fleet commerce revenue, then hands them to ComputeFinance. SuperAdmin only.
-     * @return ApiResponse<CloudFinanceOut?>
+     * @return ApiResponse<FinanceOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminFinanceWithHttpInfo() : ApiResponse<CloudFinanceOut?> {
-        val localVariableConfig = cloudAdminFinanceRequestConfig()
+    fun adminFinanceWithHttpInfo() : ApiResponse<FinanceOut?> {
+        val localVariableConfig = adminFinanceRequestConfig()
 
-        return request<Unit, CloudFinanceOut>(
+        return request<Unit, FinanceOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminFinance
+     * To obtain the request config of the operation adminFinance
      *
      * @return RequestConfig
      */
-    fun cloudAdminFinanceRequestConfig() : RequestConfig<Unit> {
+    fun adminFinanceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1936,7 +1669,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/finance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1945,8 +1678,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/finance/backfill
      * Carries ONE org&#39;s current commerce prepaid balance into the native finance wallet — the one-time cutover between the two ledgers.
      * Carries ONE org&#39;s current commerce prepaid balance into the native finance wallet — the one-time cutover between the two ledgers.  It is IDEMPOTENT: the deposit uses the fixed ref \&quot;backfill:&lt;org&gt;\&quot;, so re-running it credits the wallet at most once. Safe to retry.  The pre-migration balance is read from the CO-RESIDENT commerce ledger, not over HTTP: the admin HTTP client dials an unroutable in-process address and would read $0, and a phantom zero would silently carry nothing while reporting success. When commerce is not co-resident this fails rather than migrating nothing.
-     * @param cloudBackfillIn 
-     * @return CloudBackfillOut
+     * @param backfillIn 
+     * @return BackfillOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1955,11 +1688,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminFinanceBackfill(cloudBackfillIn: CloudBackfillIn) : CloudBackfillOut {
-        val localVarResponse = cloudAdminFinanceBackfillWithHttpInfo(cloudBackfillIn = cloudBackfillIn)
+    fun adminFinanceBackfill(backfillIn: BackfillIn) : BackfillOut {
+        val localVarResponse = adminFinanceBackfillWithHttpInfo(backfillIn = backfillIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBackfillOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BackfillOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1977,29 +1710,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/finance/backfill
      * Carries ONE org&#39;s current commerce prepaid balance into the native finance wallet — the one-time cutover between the two ledgers.
      * Carries ONE org&#39;s current commerce prepaid balance into the native finance wallet — the one-time cutover between the two ledgers.  It is IDEMPOTENT: the deposit uses the fixed ref \&quot;backfill:&lt;org&gt;\&quot;, so re-running it credits the wallet at most once. Safe to retry.  The pre-migration balance is read from the CO-RESIDENT commerce ledger, not over HTTP: the admin HTTP client dials an unroutable in-process address and would read $0, and a phantom zero would silently carry nothing while reporting success. When commerce is not co-resident this fails rather than migrating nothing.
-     * @param cloudBackfillIn 
-     * @return ApiResponse<CloudBackfillOut?>
+     * @param backfillIn 
+     * @return ApiResponse<BackfillOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminFinanceBackfillWithHttpInfo(cloudBackfillIn: CloudBackfillIn) : ApiResponse<CloudBackfillOut?> {
-        val localVariableConfig = cloudAdminFinanceBackfillRequestConfig(cloudBackfillIn = cloudBackfillIn)
+    fun adminFinanceBackfillWithHttpInfo(backfillIn: BackfillIn) : ApiResponse<BackfillOut?> {
+        val localVariableConfig = adminFinanceBackfillRequestConfig(backfillIn = backfillIn)
 
-        return request<CloudBackfillIn, CloudBackfillOut>(
+        return request<BackfillIn, BackfillOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminFinanceBackfill
+     * To obtain the request config of the operation adminFinanceBackfill
      *
-     * @param cloudBackfillIn 
+     * @param backfillIn 
      * @return RequestConfig
      */
-    fun cloudAdminFinanceBackfillRequestConfig(cloudBackfillIn: CloudBackfillIn) : RequestConfig<CloudBackfillIn> {
-        val localVariableBody = cloudBackfillIn
+    fun adminFinanceBackfillRequestConfig(backfillIn: BackfillIn) : RequestConfig<BackfillIn> {
+        val localVariableBody = backfillIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2010,7 +1743,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/finance/backfill",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2019,7 +1752,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/flags
      * Reads the platform control-plane board: every runtime launch/release switch (waitlist, public signup, subsystem activation, gateway limits, network ids) with its LIVE value and where that value came from — a stored definition or the compiled-in default.
      * Reads the platform control-plane board: every runtime launch/release switch (waitlist, public signup, subsystem activation, gateway limits, network ids) with its LIVE value and where that value came from — a stored definition or the compiled-in default.
-     * @return CloudFlagsOut
+     * @return FlagsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2028,11 +1761,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminFlags() : CloudFlagsOut {
-        val localVarResponse = cloudAdminFlagsWithHttpInfo()
+    fun adminFlags() : FlagsOut {
+        val localVarResponse = adminFlagsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlagsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlagsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2050,26 +1783,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/flags
      * Reads the platform control-plane board: every runtime launch/release switch (waitlist, public signup, subsystem activation, gateway limits, network ids) with its LIVE value and where that value came from — a stored definition or the compiled-in default.
      * Reads the platform control-plane board: every runtime launch/release switch (waitlist, public signup, subsystem activation, gateway limits, network ids) with its LIVE value and where that value came from — a stored definition or the compiled-in default.
-     * @return ApiResponse<CloudFlagsOut?>
+     * @return ApiResponse<FlagsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminFlagsWithHttpInfo() : ApiResponse<CloudFlagsOut?> {
-        val localVariableConfig = cloudAdminFlagsRequestConfig()
+    fun adminFlagsWithHttpInfo() : ApiResponse<FlagsOut?> {
+        val localVariableConfig = adminFlagsRequestConfig()
 
-        return request<Unit, CloudFlagsOut>(
+        return request<Unit, FlagsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminFlags
+     * To obtain the request config of the operation adminFlags
      *
      * @return RequestConfig
      */
-    fun cloudAdminFlagsRequestConfig() : RequestConfig<Unit> {
+    fun adminFlagsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2080,7 +1813,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/flags",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2090,8 +1823,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Issues a staff credit grant to the org named in the path — a comp, refund or promo — through the ONE credit-write path core.ApplyGrant, which validates the amount against the per-grant cap, checks the org exists, moves the money and records the tamper-evident audit row.
      * Issues a staff credit grant to the org named in the path — a comp, refund or promo — through the ONE credit-write path core.ApplyGrant, which validates the amount against the per-grant cap, checks the org exists, moves the money and records the tamper-evident audit row.  The credit lands on the account account.Payer resolves, NOT necessarily the org: name a member of a pooled org and the pool is credited. The receipt echoes the subject so the caller can see which.
      * @param org Org is the tenant to credit. Required.
-     * @param cloudGrantIn 
-     * @return CloudGrantOut
+     * @param grantIn 
+     * @return GrantOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2100,11 +1833,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminGrantCredit(org: kotlin.String, cloudGrantIn: CloudGrantIn) : CloudGrantOut {
-        val localVarResponse = cloudAdminGrantCreditWithHttpInfo(org = org, cloudGrantIn = cloudGrantIn)
+    fun adminGrantCredit(org: kotlin.String, grantIn: GrantIn) : GrantOut {
+        val localVarResponse = adminGrantCreditWithHttpInfo(org = org, grantIn = grantIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGrantOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GrantOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2123,30 +1856,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Issues a staff credit grant to the org named in the path — a comp, refund or promo — through the ONE credit-write path core.ApplyGrant, which validates the amount against the per-grant cap, checks the org exists, moves the money and records the tamper-evident audit row.
      * Issues a staff credit grant to the org named in the path — a comp, refund or promo — through the ONE credit-write path core.ApplyGrant, which validates the amount against the per-grant cap, checks the org exists, moves the money and records the tamper-evident audit row.  The credit lands on the account account.Payer resolves, NOT necessarily the org: name a member of a pooled org and the pool is credited. The receipt echoes the subject so the caller can see which.
      * @param org Org is the tenant to credit. Required.
-     * @param cloudGrantIn 
-     * @return ApiResponse<CloudGrantOut?>
+     * @param grantIn 
+     * @return ApiResponse<GrantOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminGrantCreditWithHttpInfo(org: kotlin.String, cloudGrantIn: CloudGrantIn) : ApiResponse<CloudGrantOut?> {
-        val localVariableConfig = cloudAdminGrantCreditRequestConfig(org = org, cloudGrantIn = cloudGrantIn)
+    fun adminGrantCreditWithHttpInfo(org: kotlin.String, grantIn: GrantIn) : ApiResponse<GrantOut?> {
+        val localVariableConfig = adminGrantCreditRequestConfig(org = org, grantIn = grantIn)
 
-        return request<CloudGrantIn, CloudGrantOut>(
+        return request<GrantIn, GrantOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminGrantCredit
+     * To obtain the request config of the operation adminGrantCredit
      *
      * @param org Org is the tenant to credit. Required.
-     * @param cloudGrantIn 
+     * @param grantIn 
      * @return RequestConfig
      */
-    fun cloudAdminGrantCreditRequestConfig(org: kotlin.String, cloudGrantIn: CloudGrantIn) : RequestConfig<CloudGrantIn> {
-        val localVariableBody = cloudGrantIn
+    fun adminGrantCreditRequestConfig(org: kotlin.String, grantIn: GrantIn) : RequestConfig<GrantIn> {
+        val localVariableBody = grantIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2157,7 +1890,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}/credit".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2169,7 +1902,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param org Org filters by the ACTOR&#39;s org (the staff org that issued the grant), which is rarely what a reader wants — the target org is a row field, not a filter. (optional)
      * @param result Result filters by outcome: \&quot;success\&quot; or \&quot;error\&quot;. Empty returns both, which is the point of this view — a refused grant is as interesting as a granted one. (optional)
      * @param limit Limit caps the rows returned. Default 200. (optional)
-     * @return CloudGrantsOut
+     * @return GrantsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2178,11 +1911,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminGrants(org: kotlin.String? = null, result: kotlin.String? = null, limit: kotlin.String? = null) : CloudGrantsOut {
-        val localVarResponse = cloudAdminGrantsWithHttpInfo(org = org, result = result, limit = limit)
+    fun adminGrants(org: kotlin.String? = null, result: kotlin.String? = null, limit: kotlin.String? = null) : GrantsOut {
+        val localVarResponse = adminGrantsWithHttpInfo(org = org, result = result, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGrantsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GrantsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2203,29 +1936,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param org Org filters by the ACTOR&#39;s org (the staff org that issued the grant), which is rarely what a reader wants — the target org is a row field, not a filter. (optional)
      * @param result Result filters by outcome: \&quot;success\&quot; or \&quot;error\&quot;. Empty returns both, which is the point of this view — a refused grant is as interesting as a granted one. (optional)
      * @param limit Limit caps the rows returned. Default 200. (optional)
-     * @return ApiResponse<CloudGrantsOut?>
+     * @return ApiResponse<GrantsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminGrantsWithHttpInfo(org: kotlin.String?, result: kotlin.String?, limit: kotlin.String?) : ApiResponse<CloudGrantsOut?> {
-        val localVariableConfig = cloudAdminGrantsRequestConfig(org = org, result = result, limit = limit)
+    fun adminGrantsWithHttpInfo(org: kotlin.String?, result: kotlin.String?, limit: kotlin.String?) : ApiResponse<GrantsOut?> {
+        val localVariableConfig = adminGrantsRequestConfig(org = org, result = result, limit = limit)
 
-        return request<Unit, CloudGrantsOut>(
+        return request<Unit, GrantsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminGrants
+     * To obtain the request config of the operation adminGrants
      *
      * @param org Org filters by the ACTOR&#39;s org (the staff org that issued the grant), which is rarely what a reader wants — the target org is a row field, not a filter. (optional)
      * @param result Result filters by outcome: \&quot;success\&quot; or \&quot;error\&quot;. Empty returns both, which is the point of this view — a refused grant is as interesting as a granted one. (optional)
      * @param limit Limit caps the rows returned. Default 200. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminGrantsRequestConfig(org: kotlin.String?, result: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun adminGrantsRequestConfig(org: kotlin.String?, result: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -2247,7 +1980,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/grants",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2257,7 +1990,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Serves the whole DigitalOcean infrastructure board: droplets, volumes, DOKS clusters and load balancers, each cross-referenced against every cluster&#39;s live Kubernetes state so the board can say what is safe to destroy and what is not.
      * Serves the whole DigitalOcean infrastructure board: droplets, volumes, DOKS clusters and load balancers, each cross-referenced against every cluster&#39;s live Kubernetes state so the board can say what is safe to destroy and what is not.  It is cached for up to a minute because one read is a fan-out over the DO API plus a full pod/PV listing per cluster. Staleness is never load-bearing: every MUTATION re-scans from scratch and ignores this cache.  Only an unusable DO account is a hard failure. A partial read still produces a board, with the failing source named in sources[] — except for clusters and volumes, which the safety verdict depends on; without those the analysis degrades rather than classifying anything it cannot prove.
      * @param refresh Refresh, when present, forces a full re-scan instead of serving the cached snapshot. Every MUTATION re-scans regardless — this is only for the reader. (optional)
-     * @return CloudReadOut
+     * @return ReadOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2266,11 +1999,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminInfra(refresh: kotlin.String? = null) : CloudReadOut {
-        val localVarResponse = cloudAdminInfraWithHttpInfo(refresh = refresh)
+    fun adminInfra(refresh: kotlin.String? = null) : ReadOut {
+        val localVarResponse = adminInfraWithHttpInfo(refresh = refresh)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReadOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReadOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2289,27 +2022,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Serves the whole DigitalOcean infrastructure board: droplets, volumes, DOKS clusters and load balancers, each cross-referenced against every cluster&#39;s live Kubernetes state so the board can say what is safe to destroy and what is not.
      * Serves the whole DigitalOcean infrastructure board: droplets, volumes, DOKS clusters and load balancers, each cross-referenced against every cluster&#39;s live Kubernetes state so the board can say what is safe to destroy and what is not.  It is cached for up to a minute because one read is a fan-out over the DO API plus a full pod/PV listing per cluster. Staleness is never load-bearing: every MUTATION re-scans from scratch and ignores this cache.  Only an unusable DO account is a hard failure. A partial read still produces a board, with the failing source named in sources[] — except for clusters and volumes, which the safety verdict depends on; without those the analysis degrades rather than classifying anything it cannot prove.
      * @param refresh Refresh, when present, forces a full re-scan instead of serving the cached snapshot. Every MUTATION re-scans regardless — this is only for the reader. (optional)
-     * @return ApiResponse<CloudReadOut?>
+     * @return ApiResponse<ReadOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminInfraWithHttpInfo(refresh: kotlin.String?) : ApiResponse<CloudReadOut?> {
-        val localVariableConfig = cloudAdminInfraRequestConfig(refresh = refresh)
+    fun adminInfraWithHttpInfo(refresh: kotlin.String?) : ApiResponse<ReadOut?> {
+        val localVariableConfig = adminInfraRequestConfig(refresh = refresh)
 
-        return request<Unit, CloudReadOut>(
+        return request<Unit, ReadOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminInfra
+     * To obtain the request config of the operation adminInfra
      *
      * @param refresh Refresh, when present, forces a full re-scan instead of serving the cached snapshot. Every MUTATION re-scans regardless — this is only for the reader. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminInfraRequestConfig(refresh: kotlin.String?) : RequestConfig<Unit> {
+    fun adminInfraRequestConfig(refresh: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -2325,7 +2058,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2337,7 +2070,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param status Status filters on the invoice&#39;s LATEST lifecycle status (paid, open, void, …), matched case-insensitively. (optional)
      * @param org Org filters to one tenant, matched exactly. (optional)
      * @param limit Limit caps the rows returned. total still reports the full match count. (optional)
-     * @return CloudInvoicesOut
+     * @return InvoicesOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2346,11 +2079,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminInvoices(status: kotlin.String? = null, org: kotlin.String? = null, limit: kotlin.String? = null) : CloudInvoicesOut {
-        val localVarResponse = cloudAdminInvoicesWithHttpInfo(status = status, org = org, limit = limit)
+    fun adminInvoices(status: kotlin.String? = null, org: kotlin.String? = null, limit: kotlin.String? = null) : InvoicesOut {
+        val localVarResponse = adminInvoicesWithHttpInfo(status = status, org = org, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInvoicesOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvoicesOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2371,29 +2104,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param status Status filters on the invoice&#39;s LATEST lifecycle status (paid, open, void, …), matched case-insensitively. (optional)
      * @param org Org filters to one tenant, matched exactly. (optional)
      * @param limit Limit caps the rows returned. total still reports the full match count. (optional)
-     * @return ApiResponse<CloudInvoicesOut?>
+     * @return ApiResponse<InvoicesOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminInvoicesWithHttpInfo(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : ApiResponse<CloudInvoicesOut?> {
-        val localVariableConfig = cloudAdminInvoicesRequestConfig(status = status, org = org, limit = limit)
+    fun adminInvoicesWithHttpInfo(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : ApiResponse<InvoicesOut?> {
+        val localVariableConfig = adminInvoicesRequestConfig(status = status, org = org, limit = limit)
 
-        return request<Unit, CloudInvoicesOut>(
+        return request<Unit, InvoicesOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminInvoices
+     * To obtain the request config of the operation adminInvoices
      *
      * @param status Status filters on the invoice&#39;s LATEST lifecycle status (paid, open, void, …), matched case-insensitively. (optional)
      * @param org Org filters to one tenant, matched exactly. (optional)
      * @param limit Limit caps the rows returned. total still reports the full match count. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminInvoicesRequestConfig(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun adminInvoicesRequestConfig(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -2415,7 +2148,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/invoices",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2424,8 +2157,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/grants
      * Issues a credit grant to any org from the operator Grants view, with the target named in the body.
      * Issues a credit grant to any org from the operator Grants view, with the target named in the body. It funnels through the SAME core.ApplyGrant that POST /v1/admin/customers/:org/credit uses, so there is exactly ONE credit-write path and one audit trail behind both.
-     * @param cloudGrantIn 
-     * @return CloudGrantOut
+     * @param grantIn 
+     * @return GrantOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2434,11 +2167,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminIssueGrant(cloudGrantIn: CloudGrantIn) : CloudGrantOut {
-        val localVarResponse = cloudAdminIssueGrantWithHttpInfo(cloudGrantIn = cloudGrantIn)
+    fun adminIssueGrant(grantIn: GrantIn) : GrantOut {
+        val localVarResponse = adminIssueGrantWithHttpInfo(grantIn = grantIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGrantOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GrantOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2456,29 +2189,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/grants
      * Issues a credit grant to any org from the operator Grants view, with the target named in the body.
      * Issues a credit grant to any org from the operator Grants view, with the target named in the body. It funnels through the SAME core.ApplyGrant that POST /v1/admin/customers/:org/credit uses, so there is exactly ONE credit-write path and one audit trail behind both.
-     * @param cloudGrantIn 
-     * @return ApiResponse<CloudGrantOut?>
+     * @param grantIn 
+     * @return ApiResponse<GrantOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminIssueGrantWithHttpInfo(cloudGrantIn: CloudGrantIn) : ApiResponse<CloudGrantOut?> {
-        val localVariableConfig = cloudAdminIssueGrantRequestConfig(cloudGrantIn = cloudGrantIn)
+    fun adminIssueGrantWithHttpInfo(grantIn: GrantIn) : ApiResponse<GrantOut?> {
+        val localVariableConfig = adminIssueGrantRequestConfig(grantIn = grantIn)
 
-        return request<CloudGrantIn, CloudGrantOut>(
+        return request<GrantIn, GrantOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminIssueGrant
+     * To obtain the request config of the operation adminIssueGrant
      *
-     * @param cloudGrantIn 
+     * @param grantIn 
      * @return RequestConfig
      */
-    fun cloudAdminIssueGrantRequestConfig(cloudGrantIn: CloudGrantIn) : RequestConfig<CloudGrantIn> {
-        val localVariableBody = cloudGrantIn
+    fun adminIssueGrantRequestConfig(grantIn: GrantIn) : RequestConfig<GrantIn> {
+        val localVariableBody = grantIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2489,7 +2222,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/grants",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2498,7 +2231,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/me
      * Answers with the validated operator identity — who the console is signed in as, which tier they are, and how wide their tenant window is.
      * Answers with the validated operator identity — who the console is signed in as, which tier they are, and how wide their tenant window is. The fields come from the sanitized identity headers the gate just read, so they are authoritative and never client-forgeable; nothing is looked up.
-     * @return CloudMeOut
+     * @return MeOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2507,11 +2240,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminMe() : CloudMeOut {
-        val localVarResponse = cloudAdminMeWithHttpInfo()
+    fun adminMe() : MeOut {
+        val localVarResponse = adminMeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMeOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MeOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2529,26 +2262,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/me
      * Answers with the validated operator identity — who the console is signed in as, which tier they are, and how wide their tenant window is.
      * Answers with the validated operator identity — who the console is signed in as, which tier they are, and how wide their tenant window is. The fields come from the sanitized identity headers the gate just read, so they are authoritative and never client-forgeable; nothing is looked up.
-     * @return ApiResponse<CloudMeOut?>
+     * @return ApiResponse<MeOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminMeWithHttpInfo() : ApiResponse<CloudMeOut?> {
-        val localVariableConfig = cloudAdminMeRequestConfig()
+    fun adminMeWithHttpInfo() : ApiResponse<MeOut?> {
+        val localVariableConfig = adminMeRequestConfig()
 
-        return request<Unit, CloudMeOut>(
+        return request<Unit, MeOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminMe
+     * To obtain the request config of the operation adminMe
      *
      * @return RequestConfig
      */
-    fun cloudAdminMeRequestConfig() : RequestConfig<Unit> {
+    fun adminMeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2559,7 +2292,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/me",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2570,7 +2303,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Answers GET /v1/admin/metrics by aggregating commerce.events directly (fleet-wide, no per-org fan-out). SuperAdmin only.   GET /v1/admin/metrics?window&#x3D;30d&amp;limit&#x3D;20
      * @param window Window is the movement window the new/churned MRR and the recent feed are measured over. Anything unrecognised falls back to the board default. (optional)
      * @param limit Limit caps the top-customers table. (optional)
-     * @return CloudMetricsOut
+     * @return MetricsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2579,11 +2312,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminMetrics(window: kotlin.String? = null, limit: kotlin.String? = null) : CloudMetricsOut {
-        val localVarResponse = cloudAdminMetricsWithHttpInfo(window = window, limit = limit)
+    fun adminMetrics(window: kotlin.String? = null, limit: kotlin.String? = null) : MetricsOut {
+        val localVarResponse = adminMetricsWithHttpInfo(window = window, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMetricsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MetricsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2603,28 +2336,28 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Answers GET /v1/admin/metrics by aggregating commerce.events directly (fleet-wide, no per-org fan-out). SuperAdmin only.   GET /v1/admin/metrics?window&#x3D;30d&amp;limit&#x3D;20
      * @param window Window is the movement window the new/churned MRR and the recent feed are measured over. Anything unrecognised falls back to the board default. (optional)
      * @param limit Limit caps the top-customers table. (optional)
-     * @return ApiResponse<CloudMetricsOut?>
+     * @return ApiResponse<MetricsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminMetricsWithHttpInfo(window: kotlin.String?, limit: kotlin.String?) : ApiResponse<CloudMetricsOut?> {
-        val localVariableConfig = cloudAdminMetricsRequestConfig(window = window, limit = limit)
+    fun adminMetricsWithHttpInfo(window: kotlin.String?, limit: kotlin.String?) : ApiResponse<MetricsOut?> {
+        val localVariableConfig = adminMetricsRequestConfig(window = window, limit = limit)
 
-        return request<Unit, CloudMetricsOut>(
+        return request<Unit, MetricsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminMetrics
+     * To obtain the request config of the operation adminMetrics
      *
      * @param window Window is the movement window the new/churned MRR and the recent feed are measured over. Anything unrecognised falls back to the board default. (optional)
      * @param limit Limit caps the top-customers table. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminMetricsRequestConfig(window: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun adminMetricsRequestConfig(window: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -2643,7 +2376,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2652,7 +2385,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/money
      * moneyBoardHandler answers GET /v1/admin/money.
      * moneyBoardHandler answers GET /v1/admin/money.
-     * @return CloudMoneyOut
+     * @return MoneyOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2661,11 +2394,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminMoney() : CloudMoneyOut {
-        val localVarResponse = cloudAdminMoneyWithHttpInfo()
+    fun adminMoney() : MoneyOut {
+        val localVarResponse = adminMoneyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMoneyOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MoneyOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2683,26 +2416,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/money
      * moneyBoardHandler answers GET /v1/admin/money.
      * moneyBoardHandler answers GET /v1/admin/money.
-     * @return ApiResponse<CloudMoneyOut?>
+     * @return ApiResponse<MoneyOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminMoneyWithHttpInfo() : ApiResponse<CloudMoneyOut?> {
-        val localVariableConfig = cloudAdminMoneyRequestConfig()
+    fun adminMoneyWithHttpInfo() : ApiResponse<MoneyOut?> {
+        val localVariableConfig = adminMoneyRequestConfig()
 
-        return request<Unit, CloudMoneyOut>(
+        return request<Unit, MoneyOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminMoney
+     * To obtain the request config of the operation adminMoney
      *
      * @return RequestConfig
      */
-    fun cloudAdminMoneyRequestConfig() : RequestConfig<Unit> {
+    fun adminMoneyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2713,7 +2446,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/money",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2723,7 +2456,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the fleet-wide observability board: LLM usage (requests, tokens, cost, errors, top orgs, top models), trace RED metrics (count, p50/p95/p99 latency in ms, error rate, top services), fleet log volume, and the O11yAI generation rollup — all aggregated across EVERY tenant, with no org filter applied.
      * Is the fleet-wide observability board: LLM usage (requests, tokens, cost, errors, top orgs, top models), trace RED metrics (count, p50/p95/p99 latency in ms, error rate, top services), fleet log volume, and the O11yAI generation rollup — all aggregated across EVERY tenant, with no org filter applied.  Every signal degrades INDEPENDENTLY. A table that is absent or errors contributes its zero value and the read still succeeds, so the board renders exactly what the warehouse holds rather than failing whole because one of four sources is missing. Same when the warehouse is not connected at all: the zero board, never a fabricated fleet.
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
-     * @return CloudO11yOut
+     * @return O11yOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2732,11 +2465,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminO11y(range: kotlin.String? = null) : CloudO11yOut {
-        val localVarResponse = cloudAdminO11yWithHttpInfo(range = range)
+    fun adminO11y(range: kotlin.String? = null) : O11yOut {
+        val localVarResponse = adminO11yWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudO11yOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2755,27 +2488,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Is the fleet-wide observability board: LLM usage (requests, tokens, cost, errors, top orgs, top models), trace RED metrics (count, p50/p95/p99 latency in ms, error rate, top services), fleet log volume, and the O11yAI generation rollup — all aggregated across EVERY tenant, with no org filter applied.
      * Is the fleet-wide observability board: LLM usage (requests, tokens, cost, errors, top orgs, top models), trace RED metrics (count, p50/p95/p99 latency in ms, error rate, top services), fleet log volume, and the O11yAI generation rollup — all aggregated across EVERY tenant, with no org filter applied.  Every signal degrades INDEPENDENTLY. A table that is absent or errors contributes its zero value and the read still succeeds, so the board renders exactly what the warehouse holds rather than failing whole because one of four sources is missing. Same when the warehouse is not connected at all: the zero board, never a fabricated fleet.
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
-     * @return ApiResponse<CloudO11yOut?>
+     * @return ApiResponse<O11yOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminO11yWithHttpInfo(range: kotlin.String?) : ApiResponse<CloudO11yOut?> {
-        val localVariableConfig = cloudAdminO11yRequestConfig(range = range)
+    fun adminO11yWithHttpInfo(range: kotlin.String?) : ApiResponse<O11yOut?> {
+        val localVariableConfig = adminO11yRequestConfig(range = range)
 
-        return request<Unit, CloudO11yOut>(
+        return request<Unit, O11yOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminO11y
+     * To obtain the request config of the operation adminO11y
      *
      * @param range Range is the lower time bound: 24h, 7d or 30d. Anything else reads as the board&#39;s own default. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminO11yRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun adminO11yRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -2791,7 +2524,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/o11y",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2800,7 +2533,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/orgs
      * Lists the tenant directory one row per org, sorted by slug: member count and the org&#39;s month-to-date spend and credit balance, read live from IAM and commerce.
      * Lists the tenant directory one row per org, sorted by slug: member count and the org&#39;s month-to-date spend and credit balance, read live from IAM and commerce.  The rows are the caller&#39;s tenant window, not the fleet: a SuperAdmin gets every org, a white-label admin only their own subtree. A per-org read that fails degrades THAT row to an honest zero — this panel carries no sources[] channel to report freshness on, so the alternative would be a fleet total that silently reads healthy.
-     * @return CloudOrgsOut
+     * @return OrgsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2809,11 +2542,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminOrgs() : CloudOrgsOut {
-        val localVarResponse = cloudAdminOrgsWithHttpInfo()
+    fun adminOrgs() : OrgsOut {
+        val localVarResponse = adminOrgsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOrgsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OrgsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2831,26 +2564,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/orgs
      * Lists the tenant directory one row per org, sorted by slug: member count and the org&#39;s month-to-date spend and credit balance, read live from IAM and commerce.
      * Lists the tenant directory one row per org, sorted by slug: member count and the org&#39;s month-to-date spend and credit balance, read live from IAM and commerce.  The rows are the caller&#39;s tenant window, not the fleet: a SuperAdmin gets every org, a white-label admin only their own subtree. A per-org read that fails degrades THAT row to an honest zero — this panel carries no sources[] channel to report freshness on, so the alternative would be a fleet total that silently reads healthy.
-     * @return ApiResponse<CloudOrgsOut?>
+     * @return ApiResponse<OrgsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminOrgsWithHttpInfo() : ApiResponse<CloudOrgsOut?> {
-        val localVariableConfig = cloudAdminOrgsRequestConfig()
+    fun adminOrgsWithHttpInfo() : ApiResponse<OrgsOut?> {
+        val localVariableConfig = adminOrgsRequestConfig()
 
-        return request<Unit, CloudOrgsOut>(
+        return request<Unit, OrgsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminOrgs
+     * To obtain the request config of the operation adminOrgs
      *
      * @return RequestConfig
      */
-    fun cloudAdminOrgsRequestConfig() : RequestConfig<Unit> {
+    fun adminOrgsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2861,7 +2594,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/orgs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2870,7 +2603,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/overview
      * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.
      * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.  It ALWAYS answers 200 — a tile board that fails as a whole because one upstream is down is useless. Instead every upstream reports itself in sources[]: ok, degraded, or not-configured. A commerce read that failed for ANY org marks that source degraded, because the spend/credits totals are then an undercount and must not read healthy.  tokens30d is 0 for the same reason /usage has no series: there is no fleet token counter to read yet.
-     * @return CloudOverviewOut
+     * @return OverviewOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2879,11 +2612,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminOverview() : CloudOverviewOut {
-        val localVarResponse = cloudAdminOverviewWithHttpInfo()
+    fun adminOverview() : OverviewOut {
+        val localVarResponse = adminOverviewWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOverviewOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2901,26 +2634,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/overview
      * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.
      * Is the Platform Overview tiles: how many orgs and users are in the caller&#39;s tenant window, the fleet workload counts, and month-to-date spend and credits.  It ALWAYS answers 200 — a tile board that fails as a whole because one upstream is down is useless. Instead every upstream reports itself in sources[]: ok, degraded, or not-configured. A commerce read that failed for ANY org marks that source degraded, because the spend/credits totals are then an undercount and must not read healthy.  tokens30d is 0 for the same reason /usage has no series: there is no fleet token counter to read yet.
-     * @return ApiResponse<CloudOverviewOut?>
+     * @return ApiResponse<OverviewOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminOverviewWithHttpInfo() : ApiResponse<CloudOverviewOut?> {
-        val localVariableConfig = cloudAdminOverviewRequestConfig()
+    fun adminOverviewWithHttpInfo() : ApiResponse<OverviewOut?> {
+        val localVariableConfig = adminOverviewRequestConfig()
 
-        return request<Unit, CloudOverviewOut>(
+        return request<Unit, OverviewOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminOverview
+     * To obtain the request config of the operation adminOverview
      *
      * @return RequestConfig
      */
-    fun cloudAdminOverviewRequestConfig() : RequestConfig<Unit> {
+    fun adminOverviewRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2931,7 +2664,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2941,7 +2674,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Reports what each host is actually running: every loaded plugin with its version, pid, uptime, reload and restart counts, and its measured CPU, RSS, thread and fd cost — read from the kernel, which is only answerable at all because a plugin is a process.
      * Reports what each host is actually running: every loaded plugin with its version, pid, uptime, reload and restart counts, and its measured CPU, RSS, thread and fd cost — read from the kernel, which is only answerable at all because a plugin is a process.  Reading this from deployment config would answer what was INTENDED. Only the process knows what is TRUE, and during a rolling upgrade the two disagree on purpose.
      * @param scope Scope \&quot;host\&quot; answers for THIS host only. Default \&quot;fleet\&quot; fans out to every live peer. A peer answers a host-scoped read, which is what stops the fan-out recursing. (optional)
-     * @return CloudListOut
+     * @return ListOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2950,11 +2683,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminPlugins(scope: kotlin.String? = null) : CloudListOut {
-        val localVarResponse = cloudAdminPluginsWithHttpInfo(scope = scope)
+    fun adminPlugins(scope: kotlin.String? = null) : ListOut {
+        val localVarResponse = adminPluginsWithHttpInfo(scope = scope)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudListOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2973,27 +2706,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Reports what each host is actually running: every loaded plugin with its version, pid, uptime, reload and restart counts, and its measured CPU, RSS, thread and fd cost — read from the kernel, which is only answerable at all because a plugin is a process.
      * Reports what each host is actually running: every loaded plugin with its version, pid, uptime, reload and restart counts, and its measured CPU, RSS, thread and fd cost — read from the kernel, which is only answerable at all because a plugin is a process.  Reading this from deployment config would answer what was INTENDED. Only the process knows what is TRUE, and during a rolling upgrade the two disagree on purpose.
      * @param scope Scope \&quot;host\&quot; answers for THIS host only. Default \&quot;fleet\&quot; fans out to every live peer. A peer answers a host-scoped read, which is what stops the fan-out recursing. (optional)
-     * @return ApiResponse<CloudListOut?>
+     * @return ApiResponse<ListOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminPluginsWithHttpInfo(scope: kotlin.String?) : ApiResponse<CloudListOut?> {
-        val localVariableConfig = cloudAdminPluginsRequestConfig(scope = scope)
+    fun adminPluginsWithHttpInfo(scope: kotlin.String?) : ApiResponse<ListOut?> {
+        val localVariableConfig = adminPluginsRequestConfig(scope = scope)
 
-        return request<Unit, CloudListOut>(
+        return request<Unit, ListOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminPlugins
+     * To obtain the request config of the operation adminPlugins
      *
      * @param scope Scope \&quot;host\&quot; answers for THIS host only. Default \&quot;fleet\&quot; fans out to every live peer. A peer answers a host-scoped read, which is what stops the fan-out recursing. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminPluginsRequestConfig(scope: kotlin.String?) : RequestConfig<Unit> {
+    fun adminPluginsRequestConfig(scope: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -3009,7 +2742,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3021,7 +2754,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param kind Kind matches the operator App CR&#39;s declared spec.role (sql|kv|generic|ingress). (optional)
      * @param tier Tier matches the derived infra grouping (cloud|data|edge|daemon|paas|app). (optional)
      * @param env Env matches the lifecycle namespace (main|test|dev). (optional)
-     * @return CloudProductsOut
+     * @return ProductsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3030,11 +2763,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminProducts(kind: kotlin.String? = null, tier: kotlin.String? = null, env: kotlin.String? = null) : CloudProductsOut {
-        val localVarResponse = cloudAdminProductsWithHttpInfo(kind = kind, tier = tier, env = env)
+    fun adminProducts(kind: kotlin.String? = null, tier: kotlin.String? = null, env: kotlin.String? = null) : ProductsOut {
+        val localVarResponse = adminProductsWithHttpInfo(kind = kind, tier = tier, env = env)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProductsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProductsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3055,29 +2788,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param kind Kind matches the operator App CR&#39;s declared spec.role (sql|kv|generic|ingress). (optional)
      * @param tier Tier matches the derived infra grouping (cloud|data|edge|daemon|paas|app). (optional)
      * @param env Env matches the lifecycle namespace (main|test|dev). (optional)
-     * @return ApiResponse<CloudProductsOut?>
+     * @return ApiResponse<ProductsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminProductsWithHttpInfo(kind: kotlin.String?, tier: kotlin.String?, env: kotlin.String?) : ApiResponse<CloudProductsOut?> {
-        val localVariableConfig = cloudAdminProductsRequestConfig(kind = kind, tier = tier, env = env)
+    fun adminProductsWithHttpInfo(kind: kotlin.String?, tier: kotlin.String?, env: kotlin.String?) : ApiResponse<ProductsOut?> {
+        val localVariableConfig = adminProductsRequestConfig(kind = kind, tier = tier, env = env)
 
-        return request<Unit, CloudProductsOut>(
+        return request<Unit, ProductsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminProducts
+     * To obtain the request config of the operation adminProducts
      *
      * @param kind Kind matches the operator App CR&#39;s declared spec.role (sql|kv|generic|ingress). (optional)
      * @param tier Tier matches the derived infra grouping (cloud|data|edge|daemon|paas|app). (optional)
      * @param env Env matches the lifecycle namespace (main|test|dev). (optional)
      * @return RequestConfig
      */
-    fun cloudAdminProductsRequestConfig(kind: kotlin.String?, tier: kotlin.String?, env: kotlin.String?) : RequestConfig<Unit> {
+    fun adminProductsRequestConfig(kind: kotlin.String?, tier: kotlin.String?, env: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -3099,7 +2832,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/products",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3108,7 +2841,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/promos
      * Reads the current platform plan promo — the singleton discount offer, e.g.
      * Reads the current platform plan promo — the singleton discount offer, e.g. the 50%-off launch promo. Commerce stores it in the reserved platform namespace, so the org sent with the read is the admin org and the service token is what passes commerce&#39;s own platform-admin gate.
-     * @return CloudRawOut
+     * @return RawOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3117,11 +2850,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminPromo() : CloudRawOut {
-        val localVarResponse = cloudAdminPromoWithHttpInfo()
+    fun adminPromo() : RawOut {
+        val localVarResponse = adminPromoWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3139,26 +2872,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/promos
      * Reads the current platform plan promo — the singleton discount offer, e.g.
      * Reads the current platform plan promo — the singleton discount offer, e.g. the 50%-off launch promo. Commerce stores it in the reserved platform namespace, so the org sent with the read is the admin org and the service token is what passes commerce&#39;s own platform-admin gate.
-     * @return ApiResponse<CloudRawOut?>
+     * @return ApiResponse<RawOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminPromoWithHttpInfo() : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminPromoRequestConfig()
+    fun adminPromoWithHttpInfo() : ApiResponse<RawOut?> {
+        val localVariableConfig = adminPromoRequestConfig()
 
-        return request<Unit, CloudRawOut>(
+        return request<Unit, RawOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminPromo
+     * To obtain the request config of the operation adminPromo
      *
      * @return RequestConfig
      */
-    fun cloudAdminPromoRequestConfig() : RequestConfig<Unit> {
+    fun adminPromoRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3169,7 +2902,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/promos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3178,7 +2911,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/providers/credit
      * Serves GET /v1/admin/providers/credit — the per-provider upstream credit ledger.
      * Serves GET /v1/admin/providers/credit — the per-provider upstream credit ledger. SuperAdmin-guarded (see Routes).
-     * @return CloudProvidersCreditOut
+     * @return ProvidersCreditOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3187,11 +2920,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminProvidersCredit() : CloudProvidersCreditOut {
-        val localVarResponse = cloudAdminProvidersCreditWithHttpInfo()
+    fun adminProvidersCredit() : ProvidersCreditOut {
+        val localVarResponse = adminProvidersCreditWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvidersCreditOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvidersCreditOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3209,26 +2942,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/providers/credit
      * Serves GET /v1/admin/providers/credit — the per-provider upstream credit ledger.
      * Serves GET /v1/admin/providers/credit — the per-provider upstream credit ledger. SuperAdmin-guarded (see Routes).
-     * @return ApiResponse<CloudProvidersCreditOut?>
+     * @return ApiResponse<ProvidersCreditOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminProvidersCreditWithHttpInfo() : ApiResponse<CloudProvidersCreditOut?> {
-        val localVariableConfig = cloudAdminProvidersCreditRequestConfig()
+    fun adminProvidersCreditWithHttpInfo() : ApiResponse<ProvidersCreditOut?> {
+        val localVariableConfig = adminProvidersCreditRequestConfig()
 
-        return request<Unit, CloudProvidersCreditOut>(
+        return request<Unit, ProvidersCreditOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminProvidersCredit
+     * To obtain the request config of the operation adminProvidersCredit
      *
      * @return RequestConfig
      */
-    fun cloudAdminProvidersCreditRequestConfig() : RequestConfig<Unit> {
+    fun adminProvidersCreditRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3239,7 +2972,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/providers/credit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3249,7 +2982,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Restores access for every member of the org, undoing a suspend.
      * Restores access for every member of the org, undoing a suspend. It reports the same per-user breakdown.
      * @param org Org is the tenant slug from the path.
-     * @return CloudAccessOut
+     * @return AccessOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3258,11 +2991,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminReactivateCustomer(org: kotlin.String) : CloudAccessOut {
-        val localVarResponse = cloudAdminReactivateCustomerWithHttpInfo(org = org)
+    fun adminReactivateCustomer(org: kotlin.String) : AccessOut {
+        val localVarResponse = adminReactivateCustomerWithHttpInfo(org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccessOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccessOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3281,27 +3014,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Restores access for every member of the org, undoing a suspend.
      * Restores access for every member of the org, undoing a suspend. It reports the same per-user breakdown.
      * @param org Org is the tenant slug from the path.
-     * @return ApiResponse<CloudAccessOut?>
+     * @return ApiResponse<AccessOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminReactivateCustomerWithHttpInfo(org: kotlin.String) : ApiResponse<CloudAccessOut?> {
-        val localVariableConfig = cloudAdminReactivateCustomerRequestConfig(org = org)
+    fun adminReactivateCustomerWithHttpInfo(org: kotlin.String) : ApiResponse<AccessOut?> {
+        val localVariableConfig = adminReactivateCustomerRequestConfig(org = org)
 
-        return request<Unit, CloudAccessOut>(
+        return request<Unit, AccessOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminReactivateCustomer
+     * To obtain the request config of the operation adminReactivateCustomer
      *
      * @param org Org is the tenant slug from the path.
      * @return RequestConfig
      */
-    fun cloudAdminReactivateCustomerRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
+    fun adminReactivateCustomerRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3312,7 +3045,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}/reactivate".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3322,8 +3055,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Swaps a plugin for another build without dropping a request.
      * Swaps a plugin for another build without dropping a request. The replacement is started and proven to be LISTENING before any traffic moves to it, so a bad build leaves the old one serving and returns an error rather than a hole; the old process then drains before it is killed.  With a version or url+sum it pins; naming a digest this host has run before is the rollback, and costs no network because the digest IS the cache key. With neither it restarts what is already loaded.  Fleet scope applies it to one host at a time and STOPS at the first failure, so a build that cannot come up reaches exactly one host.
      * @param name Name is the app, from the path. It must be one the manifest declares.
-     * @param cloudReloadIn 
-     * @return CloudActionOut
+     * @param reloadIn 
+     * @return ActionOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3332,11 +3065,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminReloadPlugin(name: kotlin.String, cloudReloadIn: CloudReloadIn) : CloudActionOut {
-        val localVarResponse = cloudAdminReloadPluginWithHttpInfo(name = name, cloudReloadIn = cloudReloadIn)
+    fun adminReloadPlugin(name: kotlin.String, reloadIn: ReloadIn) : ActionOut {
+        val localVarResponse = adminReloadPluginWithHttpInfo(name = name, reloadIn = reloadIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActionOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActionOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3355,30 +3088,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Swaps a plugin for another build without dropping a request.
      * Swaps a plugin for another build without dropping a request. The replacement is started and proven to be LISTENING before any traffic moves to it, so a bad build leaves the old one serving and returns an error rather than a hole; the old process then drains before it is killed.  With a version or url+sum it pins; naming a digest this host has run before is the rollback, and costs no network because the digest IS the cache key. With neither it restarts what is already loaded.  Fleet scope applies it to one host at a time and STOPS at the first failure, so a build that cannot come up reaches exactly one host.
      * @param name Name is the app, from the path. It must be one the manifest declares.
-     * @param cloudReloadIn 
-     * @return ApiResponse<CloudActionOut?>
+     * @param reloadIn 
+     * @return ApiResponse<ActionOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminReloadPluginWithHttpInfo(name: kotlin.String, cloudReloadIn: CloudReloadIn) : ApiResponse<CloudActionOut?> {
-        val localVariableConfig = cloudAdminReloadPluginRequestConfig(name = name, cloudReloadIn = cloudReloadIn)
+    fun adminReloadPluginWithHttpInfo(name: kotlin.String, reloadIn: ReloadIn) : ApiResponse<ActionOut?> {
+        val localVariableConfig = adminReloadPluginRequestConfig(name = name, reloadIn = reloadIn)
 
-        return request<CloudReloadIn, CloudActionOut>(
+        return request<ReloadIn, ActionOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminReloadPlugin
+     * To obtain the request config of the operation adminReloadPlugin
      *
      * @param name Name is the app, from the path. It must be one the manifest declares.
-     * @param cloudReloadIn 
+     * @param reloadIn 
      * @return RequestConfig
      */
-    fun cloudAdminReloadPluginRequestConfig(name: kotlin.String, cloudReloadIn: CloudReloadIn) : RequestConfig<CloudReloadIn> {
-        val localVariableBody = cloudReloadIn
+    fun adminReloadPluginRequestConfig(name: kotlin.String, reloadIn: ReloadIn) : RequestConfig<ReloadIn> {
+        val localVariableBody = reloadIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -3389,7 +3122,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/plugins/{name}/reload".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3399,8 +3132,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Changes a droplet&#39;s plan.
      * Changes a droplet&#39;s plan. Same refusal as delete and for the same reason: a DOKS node&#39;s size is the node pool&#39;s to declare.  disk&#x3D;true is a PERMANENT resize — the disk grows and DO can never resize the droplet DOWN again. disk&#x3D;false (the default) changes CPU/RAM only and is reversible. DO requires the droplet to be powered off and applies the change asynchronously, so the response carries the action to poll, not a completed change.
      * @param id ID is the DO droplet id, from the path. Numeric.
-     * @param cloudDropletIn 
-     * @return CloudMutationOut
+     * @param dropletIn 
+     * @return MutationOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3409,11 +3142,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminResizeDroplet(id: kotlin.String, cloudDropletIn: CloudDropletIn) : CloudMutationOut {
-        val localVarResponse = cloudAdminResizeDropletWithHttpInfo(id = id, cloudDropletIn = cloudDropletIn)
+    fun adminResizeDroplet(id: kotlin.String, dropletIn: DropletIn) : MutationOut {
+        val localVarResponse = adminResizeDropletWithHttpInfo(id = id, dropletIn = dropletIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMutationOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutationOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3432,30 +3165,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Changes a droplet&#39;s plan.
      * Changes a droplet&#39;s plan. Same refusal as delete and for the same reason: a DOKS node&#39;s size is the node pool&#39;s to declare.  disk&#x3D;true is a PERMANENT resize — the disk grows and DO can never resize the droplet DOWN again. disk&#x3D;false (the default) changes CPU/RAM only and is reversible. DO requires the droplet to be powered off and applies the change asynchronously, so the response carries the action to poll, not a completed change.
      * @param id ID is the DO droplet id, from the path. Numeric.
-     * @param cloudDropletIn 
-     * @return ApiResponse<CloudMutationOut?>
+     * @param dropletIn 
+     * @return ApiResponse<MutationOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminResizeDropletWithHttpInfo(id: kotlin.String, cloudDropletIn: CloudDropletIn) : ApiResponse<CloudMutationOut?> {
-        val localVariableConfig = cloudAdminResizeDropletRequestConfig(id = id, cloudDropletIn = cloudDropletIn)
+    fun adminResizeDropletWithHttpInfo(id: kotlin.String, dropletIn: DropletIn) : ApiResponse<MutationOut?> {
+        val localVariableConfig = adminResizeDropletRequestConfig(id = id, dropletIn = dropletIn)
 
-        return request<CloudDropletIn, CloudMutationOut>(
+        return request<DropletIn, MutationOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminResizeDroplet
+     * To obtain the request config of the operation adminResizeDroplet
      *
      * @param id ID is the DO droplet id, from the path. Numeric.
-     * @param cloudDropletIn 
+     * @param dropletIn 
      * @return RequestConfig
      */
-    fun cloudAdminResizeDropletRequestConfig(id: kotlin.String, cloudDropletIn: CloudDropletIn) : RequestConfig<CloudDropletIn> {
-        val localVariableBody = cloudDropletIn
+    fun adminResizeDropletRequestConfig(id: kotlin.String, dropletIn: DropletIn) : RequestConfig<DropletIn> {
+        val localVariableBody = dropletIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -3466,7 +3199,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/droplets/{id}/resize".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3476,8 +3209,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Grows a volume.
      * Grows a volume. GROW ONLY — see Volume.ExpandTo for why the other direction is a data migration this board deliberately refuses to run.  The MECHANISM follows the volume&#39;s owner, because there is exactly one way to grow each kind completely. A volume a PVC claims is grown by patching the claim: the CSI driver then resizes the DigitalOcean device AND grows the filesystem on it, leaving claim, PV, device and filesystem all agreeing. Calling DigitalOcean directly for that volume would grow the device while the PV kept declaring the old capacity and the filesystem never grew at all. One operation, one correct mechanism per owner — not two ways to do it.
      * @param id ID is the DO volume id, from the path.
-     * @param cloudVolumeIn 
-     * @return CloudMutationOut
+     * @param volumeIn 
+     * @return MutationOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3486,11 +3219,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminResizeVolume(id: kotlin.String, cloudVolumeIn: CloudVolumeIn) : CloudMutationOut {
-        val localVarResponse = cloudAdminResizeVolumeWithHttpInfo(id = id, cloudVolumeIn = cloudVolumeIn)
+    fun adminResizeVolume(id: kotlin.String, volumeIn: VolumeIn) : MutationOut {
+        val localVarResponse = adminResizeVolumeWithHttpInfo(id = id, volumeIn = volumeIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMutationOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutationOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3509,30 +3242,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Grows a volume.
      * Grows a volume. GROW ONLY — see Volume.ExpandTo for why the other direction is a data migration this board deliberately refuses to run.  The MECHANISM follows the volume&#39;s owner, because there is exactly one way to grow each kind completely. A volume a PVC claims is grown by patching the claim: the CSI driver then resizes the DigitalOcean device AND grows the filesystem on it, leaving claim, PV, device and filesystem all agreeing. Calling DigitalOcean directly for that volume would grow the device while the PV kept declaring the old capacity and the filesystem never grew at all. One operation, one correct mechanism per owner — not two ways to do it.
      * @param id ID is the DO volume id, from the path.
-     * @param cloudVolumeIn 
-     * @return ApiResponse<CloudMutationOut?>
+     * @param volumeIn 
+     * @return ApiResponse<MutationOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminResizeVolumeWithHttpInfo(id: kotlin.String, cloudVolumeIn: CloudVolumeIn) : ApiResponse<CloudMutationOut?> {
-        val localVariableConfig = cloudAdminResizeVolumeRequestConfig(id = id, cloudVolumeIn = cloudVolumeIn)
+    fun adminResizeVolumeWithHttpInfo(id: kotlin.String, volumeIn: VolumeIn) : ApiResponse<MutationOut?> {
+        val localVariableConfig = adminResizeVolumeRequestConfig(id = id, volumeIn = volumeIn)
 
-        return request<CloudVolumeIn, CloudMutationOut>(
+        return request<VolumeIn, MutationOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminResizeVolume
+     * To obtain the request config of the operation adminResizeVolume
      *
      * @param id ID is the DO volume id, from the path.
-     * @param cloudVolumeIn 
+     * @param volumeIn 
      * @return RequestConfig
      */
-    fun cloudAdminResizeVolumeRequestConfig(id: kotlin.String, cloudVolumeIn: CloudVolumeIn) : RequestConfig<CloudVolumeIn> {
-        val localVariableBody = cloudVolumeIn
+    fun adminResizeVolumeRequestConfig(id: kotlin.String, volumeIn: VolumeIn) : RequestConfig<VolumeIn> {
+        val localVariableBody = volumeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -3543,7 +3276,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/volumes/{id}/resize".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3552,7 +3285,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/revenue
      * Is the fleet money board: total prepaid balances held, total realized spend, MRR, ARPU, a per-customer table sorted highest-revenue first, and a real 30-day spend trend from the usage ledger.
      * Is the fleet money board: total prepaid balances held, total realized spend, MRR, ARPU, a per-customer table sorted highest-revenue first, and a real 30-day spend trend from the usage ledger.  ORTHOGONAL to /v1/admin/finance, which is the COGS/margin view of what WE pay vendors. This is the customer side: what each customer holds, spends and subscribes to.  arpu divides realized spend by PAYING customers, not by all of them — a fleet of free signups must not deflate the number. A customer counts as paying when it has spend or MRR.  An org whose money did not read degrades to honest zeros and marks the commerce source degraded in sources[], so a partial fleet read is visible instead of quietly low.
-     * @return CloudRevenueOut
+     * @return RevenueOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3561,11 +3294,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminRevenue() : CloudRevenueOut {
-        val localVarResponse = cloudAdminRevenueWithHttpInfo()
+    fun adminRevenue() : RevenueOut {
+        val localVarResponse = adminRevenueWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRevenueOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RevenueOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3583,26 +3316,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/revenue
      * Is the fleet money board: total prepaid balances held, total realized spend, MRR, ARPU, a per-customer table sorted highest-revenue first, and a real 30-day spend trend from the usage ledger.
      * Is the fleet money board: total prepaid balances held, total realized spend, MRR, ARPU, a per-customer table sorted highest-revenue first, and a real 30-day spend trend from the usage ledger.  ORTHOGONAL to /v1/admin/finance, which is the COGS/margin view of what WE pay vendors. This is the customer side: what each customer holds, spends and subscribes to.  arpu divides realized spend by PAYING customers, not by all of them — a fleet of free signups must not deflate the number. A customer counts as paying when it has spend or MRR.  An org whose money did not read degrades to honest zeros and marks the commerce source degraded in sources[], so a partial fleet read is visible instead of quietly low.
-     * @return ApiResponse<CloudRevenueOut?>
+     * @return ApiResponse<RevenueOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminRevenueWithHttpInfo() : ApiResponse<CloudRevenueOut?> {
-        val localVariableConfig = cloudAdminRevenueRequestConfig()
+    fun adminRevenueWithHttpInfo() : ApiResponse<RevenueOut?> {
+        val localVariableConfig = adminRevenueRequestConfig()
 
-        return request<Unit, CloudRevenueOut>(
+        return request<Unit, RevenueOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminRevenue
+     * To obtain the request config of the operation adminRevenue
      *
      * @return RequestConfig
      */
-    fun cloudAdminRevenueRequestConfig() : RequestConfig<Unit> {
+    fun adminRevenueRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3613,7 +3346,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/revenue",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3625,7 +3358,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param owner Owner is the org whose rows to read. Defaults to the admin org, which owns the platform&#39;s roles and applications. (optional)
      * @param p Page is the 1-based page number. Forwarded only when set — IAM applies its own default otherwise. (optional)
      * @param pageSize PageSize is rows per page. Forwarded only when set. (optional)
-     * @return CloudIamRowsOut
+     * @return IamRowsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3634,11 +3367,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminRoles(owner: kotlin.String? = null, p: kotlin.String? = null, pageSize: kotlin.String? = null) : CloudIamRowsOut {
-        val localVarResponse = cloudAdminRolesWithHttpInfo(owner = owner, p = p, pageSize = pageSize)
+    fun adminRoles(owner: kotlin.String? = null, p: kotlin.String? = null, pageSize: kotlin.String? = null) : IamRowsOut {
+        val localVarResponse = adminRolesWithHttpInfo(owner = owner, p = p, pageSize = pageSize)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIamRowsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IamRowsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3659,29 +3392,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param owner Owner is the org whose rows to read. Defaults to the admin org, which owns the platform&#39;s roles and applications. (optional)
      * @param p Page is the 1-based page number. Forwarded only when set — IAM applies its own default otherwise. (optional)
      * @param pageSize PageSize is rows per page. Forwarded only when set. (optional)
-     * @return ApiResponse<CloudIamRowsOut?>
+     * @return ApiResponse<IamRowsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminRolesWithHttpInfo(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<CloudIamRowsOut?> {
-        val localVariableConfig = cloudAdminRolesRequestConfig(owner = owner, p = p, pageSize = pageSize)
+    fun adminRolesWithHttpInfo(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<IamRowsOut?> {
+        val localVariableConfig = adminRolesRequestConfig(owner = owner, p = p, pageSize = pageSize)
 
-        return request<Unit, CloudIamRowsOut>(
+        return request<Unit, IamRowsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminRoles
+     * To obtain the request config of the operation adminRoles
      *
      * @param owner Owner is the org whose rows to read. Defaults to the admin org, which owns the platform&#39;s roles and applications. (optional)
      * @param p Page is the 1-based page number. Forwarded only when set — IAM applies its own default otherwise. (optional)
      * @param pageSize PageSize is rows per page. Forwarded only when set. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminRolesRequestConfig(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
+    fun adminRolesRequestConfig(owner: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -3703,7 +3436,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3714,8 +3447,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Sets a node pool&#39;s node count — the ONE correct way to change how many nodes a DOKS cluster has.  The response states what the board could NOT prove: DOKS picks which nodes a shrink removes, so no particular pod is shown to survive one. See NodePool.ScaleTo.
      * @param id ID is the DOKS cluster id, from the path.
      * @param pool Pool is the node pool, from the path. Its DO id or its name — both are unique within a cluster, and an operator reads the name off the board.
-     * @param cloudScaleIn 
-     * @return CloudMutationOut
+     * @param scaleIn 
+     * @return MutationOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3724,11 +3457,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminScaleNodePool(id: kotlin.String, pool: kotlin.String, cloudScaleIn: CloudScaleIn) : CloudMutationOut {
-        val localVarResponse = cloudAdminScaleNodePoolWithHttpInfo(id = id, pool = pool, cloudScaleIn = cloudScaleIn)
+    fun adminScaleNodePool(id: kotlin.String, pool: kotlin.String, scaleIn: ScaleIn) : MutationOut {
+        val localVarResponse = adminScaleNodePoolWithHttpInfo(id = id, pool = pool, scaleIn = scaleIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMutationOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MutationOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3748,31 +3481,31 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Sets a node pool&#39;s node count — the ONE correct way to change how many nodes a DOKS cluster has.  The response states what the board could NOT prove: DOKS picks which nodes a shrink removes, so no particular pod is shown to survive one. See NodePool.ScaleTo.
      * @param id ID is the DOKS cluster id, from the path.
      * @param pool Pool is the node pool, from the path. Its DO id or its name — both are unique within a cluster, and an operator reads the name off the board.
-     * @param cloudScaleIn 
-     * @return ApiResponse<CloudMutationOut?>
+     * @param scaleIn 
+     * @return ApiResponse<MutationOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminScaleNodePoolWithHttpInfo(id: kotlin.String, pool: kotlin.String, cloudScaleIn: CloudScaleIn) : ApiResponse<CloudMutationOut?> {
-        val localVariableConfig = cloudAdminScaleNodePoolRequestConfig(id = id, pool = pool, cloudScaleIn = cloudScaleIn)
+    fun adminScaleNodePoolWithHttpInfo(id: kotlin.String, pool: kotlin.String, scaleIn: ScaleIn) : ApiResponse<MutationOut?> {
+        val localVariableConfig = adminScaleNodePoolRequestConfig(id = id, pool = pool, scaleIn = scaleIn)
 
-        return request<CloudScaleIn, CloudMutationOut>(
+        return request<ScaleIn, MutationOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminScaleNodePool
+     * To obtain the request config of the operation adminScaleNodePool
      *
      * @param id ID is the DOKS cluster id, from the path.
      * @param pool Pool is the node pool, from the path. Its DO id or its name — both are unique within a cluster, and an operator reads the name off the board.
-     * @param cloudScaleIn 
+     * @param scaleIn 
      * @return RequestConfig
      */
-    fun cloudAdminScaleNodePoolRequestConfig(id: kotlin.String, pool: kotlin.String, cloudScaleIn: CloudScaleIn) : RequestConfig<CloudScaleIn> {
-        val localVariableBody = cloudScaleIn
+    fun adminScaleNodePoolRequestConfig(id: kotlin.String, pool: kotlin.String, scaleIn: ScaleIn) : RequestConfig<ScaleIn> {
+        val localVariableBody = scaleIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -3783,7 +3516,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/clusters/{id}/nodepools/{pool}/scale".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"pool"+"}", encodeURIComponent(pool.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3792,7 +3525,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/services
      * Reads the launch board: every hosted service in the registry with its LIVE waitlist mode, evaluated through the flag engine.
      * Reads the launch board: every hosted service in the registry with its LIVE waitlist mode, evaluated through the flag engine. This is the \&quot;remove the waitlist one service at a time\&quot; view.
-     * @return CloudServicesOut
+     * @return ServicesOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3801,11 +3534,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminServices() : CloudServicesOut {
-        val localVarResponse = cloudAdminServicesWithHttpInfo()
+    fun adminServices() : ServicesOut {
+        val localVarResponse = adminServicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudServicesOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ServicesOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3823,26 +3556,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/admin/services
      * Reads the launch board: every hosted service in the registry with its LIVE waitlist mode, evaluated through the flag engine.
      * Reads the launch board: every hosted service in the registry with its LIVE waitlist mode, evaluated through the flag engine. This is the \&quot;remove the waitlist one service at a time\&quot; view.
-     * @return ApiResponse<CloudServicesOut?>
+     * @return ApiResponse<ServicesOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminServicesWithHttpInfo() : ApiResponse<CloudServicesOut?> {
-        val localVariableConfig = cloudAdminServicesRequestConfig()
+    fun adminServicesWithHttpInfo() : ApiResponse<ServicesOut?> {
+        val localVariableConfig = adminServicesRequestConfig()
 
-        return request<Unit, CloudServicesOut>(
+        return request<Unit, ServicesOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminServices
+     * To obtain the request config of the operation adminServices
      *
      * @return RequestConfig
      */
-    fun cloudAdminServicesRequestConfig() : RequestConfig<Unit> {
+    fun adminServicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -3853,7 +3586,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3863,8 +3596,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Stores or overwrites ONE platform switch&#39;s definition and answers with the whole board as it now stands.
      * Stores or overwrites ONE platform switch&#39;s definition and answers with the whole board as it now stands. The flip is hot: this pod applies it immediately and peers converge within one evaluation TTL (15s by default), with no redeploy.  The body reaches the flag engine BYTE-FOR-BYTE — it is the engine&#39;s definition format, not this layer&#39;s, so a field the engine understands and admin does not must still arrive intact. setFlagIn names the two fields that matter for documentation; it is not a filter.  The write is recorded in the store&#39;s activity log against the caller&#39;s email.
      * @param key Key is the switch to write, taken from the path (e.g. \&quot;waitlist.chat\&quot;).
-     * @param cloudSetFlagIn 
-     * @return CloudFlagsOut
+     * @param setFlagIn 
+     * @return FlagsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3873,11 +3606,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSetFlag(key: kotlin.String, cloudSetFlagIn: CloudSetFlagIn) : CloudFlagsOut {
-        val localVarResponse = cloudAdminSetFlagWithHttpInfo(key = key, cloudSetFlagIn = cloudSetFlagIn)
+    fun adminSetFlag(key: kotlin.String, setFlagIn: SetFlagIn) : FlagsOut {
+        val localVarResponse = adminSetFlagWithHttpInfo(key = key, setFlagIn = setFlagIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlagsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlagsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3896,30 +3629,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Stores or overwrites ONE platform switch&#39;s definition and answers with the whole board as it now stands.
      * Stores or overwrites ONE platform switch&#39;s definition and answers with the whole board as it now stands. The flip is hot: this pod applies it immediately and peers converge within one evaluation TTL (15s by default), with no redeploy.  The body reaches the flag engine BYTE-FOR-BYTE — it is the engine&#39;s definition format, not this layer&#39;s, so a field the engine understands and admin does not must still arrive intact. setFlagIn names the two fields that matter for documentation; it is not a filter.  The write is recorded in the store&#39;s activity log against the caller&#39;s email.
      * @param key Key is the switch to write, taken from the path (e.g. \&quot;waitlist.chat\&quot;).
-     * @param cloudSetFlagIn 
-     * @return ApiResponse<CloudFlagsOut?>
+     * @param setFlagIn 
+     * @return ApiResponse<FlagsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSetFlagWithHttpInfo(key: kotlin.String, cloudSetFlagIn: CloudSetFlagIn) : ApiResponse<CloudFlagsOut?> {
-        val localVariableConfig = cloudAdminSetFlagRequestConfig(key = key, cloudSetFlagIn = cloudSetFlagIn)
+    fun adminSetFlagWithHttpInfo(key: kotlin.String, setFlagIn: SetFlagIn) : ApiResponse<FlagsOut?> {
+        val localVariableConfig = adminSetFlagRequestConfig(key = key, setFlagIn = setFlagIn)
 
-        return request<CloudSetFlagIn, CloudFlagsOut>(
+        return request<SetFlagIn, FlagsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSetFlag
+     * To obtain the request config of the operation adminSetFlag
      *
      * @param key Key is the switch to write, taken from the path (e.g. \&quot;waitlist.chat\&quot;).
-     * @param cloudSetFlagIn 
+     * @param setFlagIn 
      * @return RequestConfig
      */
-    fun cloudAdminSetFlagRequestConfig(key: kotlin.String, cloudSetFlagIn: CloudSetFlagIn) : RequestConfig<CloudSetFlagIn> {
-        val localVariableBody = cloudSetFlagIn
+    fun adminSetFlagRequestConfig(key: kotlin.String, setFlagIn: SetFlagIn) : RequestConfig<SetFlagIn> {
+        val localVariableBody = setFlagIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -3930,7 +3663,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/flags/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -3939,8 +3672,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * PUT /v1/admin/promos
      * Upserts the platform plan promo — the ONE place the offer is configured.
      * Upserts the platform plan promo — the ONE place the offer is configured.  The body is commerce&#39;s own promo contract and is forwarded BYTE-FOR-BYTE, so no field commerce accepts is dropped in transit. promoIn names its documented fields.
-     * @param cloudPromoIn 
-     * @return CloudRawOut
+     * @param promoIn 
+     * @return RawOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -3949,11 +3682,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSetPromo(cloudPromoIn: CloudPromoIn) : CloudRawOut {
-        val localVarResponse = cloudAdminSetPromoWithHttpInfo(cloudPromoIn = cloudPromoIn)
+    fun adminSetPromo(promoIn: PromoIn) : RawOut {
+        val localVarResponse = adminSetPromoWithHttpInfo(promoIn = promoIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -3971,29 +3704,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * PUT /v1/admin/promos
      * Upserts the platform plan promo — the ONE place the offer is configured.
      * Upserts the platform plan promo — the ONE place the offer is configured.  The body is commerce&#39;s own promo contract and is forwarded BYTE-FOR-BYTE, so no field commerce accepts is dropped in transit. promoIn names its documented fields.
-     * @param cloudPromoIn 
-     * @return ApiResponse<CloudRawOut?>
+     * @param promoIn 
+     * @return ApiResponse<RawOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSetPromoWithHttpInfo(cloudPromoIn: CloudPromoIn) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminSetPromoRequestConfig(cloudPromoIn = cloudPromoIn)
+    fun adminSetPromoWithHttpInfo(promoIn: PromoIn) : ApiResponse<RawOut?> {
+        val localVariableConfig = adminSetPromoRequestConfig(promoIn = promoIn)
 
-        return request<CloudPromoIn, CloudRawOut>(
+        return request<PromoIn, RawOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSetPromo
+     * To obtain the request config of the operation adminSetPromo
      *
-     * @param cloudPromoIn 
+     * @param promoIn 
      * @return RequestConfig
      */
-    fun cloudAdminSetPromoRequestConfig(cloudPromoIn: CloudPromoIn) : RequestConfig<CloudPromoIn> {
-        val localVariableBody = cloudPromoIn
+    fun adminSetPromoRequestConfig(promoIn: PromoIn) : RequestConfig<PromoIn> {
+        val localVariableBody = promoIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -4004,7 +3737,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/promos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4014,8 +3747,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Flips ONE service&#39;s waitlist switch — the launch lever.
      * Flips ONE service&#39;s waitlist switch — the launch lever. Hot: it takes effect on this pod immediately and on peers within one evaluation TTL, with no redeploy. An unknown service is a 404, not a silent create; onboarding goes through upsertService.
      * @param service Service is the slug to flip, taken from the path.
-     * @param cloudServiceModeIn 
-     * @return CloudServiceOut
+     * @param serviceModeIn 
+     * @return ServiceOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4024,11 +3757,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSetServiceMode(service: kotlin.String, cloudServiceModeIn: CloudServiceModeIn) : CloudServiceOut {
-        val localVarResponse = cloudAdminSetServiceModeWithHttpInfo(service = service, cloudServiceModeIn = cloudServiceModeIn)
+    fun adminSetServiceMode(service: kotlin.String, serviceModeIn: ServiceModeIn) : ServiceOut {
+        val localVarResponse = adminSetServiceModeWithHttpInfo(service = service, serviceModeIn = serviceModeIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudServiceOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ServiceOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4047,30 +3780,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Flips ONE service&#39;s waitlist switch — the launch lever.
      * Flips ONE service&#39;s waitlist switch — the launch lever. Hot: it takes effect on this pod immediately and on peers within one evaluation TTL, with no redeploy. An unknown service is a 404, not a silent create; onboarding goes through upsertService.
      * @param service Service is the slug to flip, taken from the path.
-     * @param cloudServiceModeIn 
-     * @return ApiResponse<CloudServiceOut?>
+     * @param serviceModeIn 
+     * @return ApiResponse<ServiceOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSetServiceModeWithHttpInfo(service: kotlin.String, cloudServiceModeIn: CloudServiceModeIn) : ApiResponse<CloudServiceOut?> {
-        val localVariableConfig = cloudAdminSetServiceModeRequestConfig(service = service, cloudServiceModeIn = cloudServiceModeIn)
+    fun adminSetServiceModeWithHttpInfo(service: kotlin.String, serviceModeIn: ServiceModeIn) : ApiResponse<ServiceOut?> {
+        val localVariableConfig = adminSetServiceModeRequestConfig(service = service, serviceModeIn = serviceModeIn)
 
-        return request<CloudServiceModeIn, CloudServiceOut>(
+        return request<ServiceModeIn, ServiceOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSetServiceMode
+     * To obtain the request config of the operation adminSetServiceMode
      *
      * @param service Service is the slug to flip, taken from the path.
-     * @param cloudServiceModeIn 
+     * @param serviceModeIn 
      * @return RequestConfig
      */
-    fun cloudAdminSetServiceModeRequestConfig(service: kotlin.String, cloudServiceModeIn: CloudServiceModeIn) : RequestConfig<CloudServiceModeIn> {
-        val localVariableBody = cloudServiceModeIn
+    fun adminSetServiceModeRequestConfig(service: kotlin.String, serviceModeIn: ServiceModeIn) : RequestConfig<ServiceModeIn> {
+        val localVariableBody = serviceModeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -4081,7 +3814,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/services/{service}/mode".replace("{"+"service"+"}", encodeURIComponent(service.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4091,8 +3824,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Takes a point-in-time snapshot of one volume — the undo a delete relies on, available on its own so an operator can take one before any risky change.
      * Takes a point-in-time snapshot of one volume — the undo a delete relies on, available on its own so an operator can take one before any risky change.  It re-scans the board first (never the cache) so the volume it snapshots is one that exists right now, and audits the outcome either way.
      * @param id ID is the DO volume id, from the path.
-     * @param cloudVolumeIn 
-     * @return CloudVolumeSnapshotOut
+     * @param volumeIn 
+     * @return VolumeSnapshotOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4101,11 +3834,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSnapshotVolume(id: kotlin.String, cloudVolumeIn: CloudVolumeIn) : CloudVolumeSnapshotOut {
-        val localVarResponse = cloudAdminSnapshotVolumeWithHttpInfo(id = id, cloudVolumeIn = cloudVolumeIn)
+    fun adminSnapshotVolume(id: kotlin.String, volumeIn: VolumeIn) : VolumeSnapshotOut {
+        val localVarResponse = adminSnapshotVolumeWithHttpInfo(id = id, volumeIn = volumeIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVolumeSnapshotOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VolumeSnapshotOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4124,30 +3857,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Takes a point-in-time snapshot of one volume — the undo a delete relies on, available on its own so an operator can take one before any risky change.
      * Takes a point-in-time snapshot of one volume — the undo a delete relies on, available on its own so an operator can take one before any risky change.  It re-scans the board first (never the cache) so the volume it snapshots is one that exists right now, and audits the outcome either way.
      * @param id ID is the DO volume id, from the path.
-     * @param cloudVolumeIn 
-     * @return ApiResponse<CloudVolumeSnapshotOut?>
+     * @param volumeIn 
+     * @return ApiResponse<VolumeSnapshotOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSnapshotVolumeWithHttpInfo(id: kotlin.String, cloudVolumeIn: CloudVolumeIn) : ApiResponse<CloudVolumeSnapshotOut?> {
-        val localVariableConfig = cloudAdminSnapshotVolumeRequestConfig(id = id, cloudVolumeIn = cloudVolumeIn)
+    fun adminSnapshotVolumeWithHttpInfo(id: kotlin.String, volumeIn: VolumeIn) : ApiResponse<VolumeSnapshotOut?> {
+        val localVariableConfig = adminSnapshotVolumeRequestConfig(id = id, volumeIn = volumeIn)
 
-        return request<CloudVolumeIn, CloudVolumeSnapshotOut>(
+        return request<VolumeIn, VolumeSnapshotOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSnapshotVolume
+     * To obtain the request config of the operation adminSnapshotVolume
      *
      * @param id ID is the DO volume id, from the path.
-     * @param cloudVolumeIn 
+     * @param volumeIn 
      * @return RequestConfig
      */
-    fun cloudAdminSnapshotVolumeRequestConfig(id: kotlin.String, cloudVolumeIn: CloudVolumeIn) : RequestConfig<CloudVolumeIn> {
-        val localVariableBody = cloudVolumeIn
+    fun adminSnapshotVolumeRequestConfig(id: kotlin.String, volumeIn: VolumeIn) : RequestConfig<VolumeIn> {
+        val localVariableBody = volumeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -4158,91 +3891,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/infra/volumes/{id}/snapshot".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/admin/spend-caps
-     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.
-     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.  These are the SAME rows the customer edits in their own console — a platform override and a customer budget are one model, not two.
-     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
-     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops. (optional)
-     * @return CloudRawOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSpendCaps(org: kotlin.String? = null, id: kotlin.String? = null) : CloudRawOut {
-        val localVarResponse = cloudAdminSpendCapsWithHttpInfo(org = org, id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/admin/spend-caps
-     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.
-     * Reads one org&#39;s usage caps: its spend alerts plus the derived period spend, over/warn state and reset time.  These are the SAME rows the customer edits in their own console — a platform override and a customer budget are one model, not two.
-     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
-     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops. (optional)
-     * @return ApiResponse<CloudRawOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSpendCapsWithHttpInfo(org: kotlin.String?, id: kotlin.String?) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminSpendCapsRequestConfig(org = org, id = id)
-
-        return request<Unit, CloudRawOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudAdminSpendCaps
-     *
-     * @param org Org is the tenant to act on. Required for a SuperAdmin — they must name their target; ignored for a white-label admin, who always acts on their own org. (optional)
-     * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops. (optional)
-     * @return RequestConfig
-     */
-    fun cloudAdminSpendCapsRequestConfig(org: kotlin.String?, id: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (org != null) {
-                    put("org", listOf(org.toString()))
-                }
-                if (id != null) {
-                    put("id", listOf(id.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/admin/spend-caps",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4254,7 +3903,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param status Status filters on the subscription&#39;s LATEST lifecycle status (active, trialing, canceled, …), matched case-insensitively. (optional)
      * @param org Org filters to one tenant, matched exactly. (optional)
      * @param limit Limit caps the rows returned. total still reports the full match count. (optional)
-     * @return CloudSubscriptionsOut
+     * @return SubscriptionsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4263,11 +3912,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSubscriptions(status: kotlin.String? = null, org: kotlin.String? = null, limit: kotlin.String? = null) : CloudSubscriptionsOut {
-        val localVarResponse = cloudAdminSubscriptionsWithHttpInfo(status = status, org = org, limit = limit)
+    fun adminSubscriptions(status: kotlin.String? = null, org: kotlin.String? = null, limit: kotlin.String? = null) : SubscriptionsOut {
+        val localVarResponse = adminSubscriptionsWithHttpInfo(status = status, org = org, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSubscriptionsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SubscriptionsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4288,29 +3937,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param status Status filters on the subscription&#39;s LATEST lifecycle status (active, trialing, canceled, …), matched case-insensitively. (optional)
      * @param org Org filters to one tenant, matched exactly. (optional)
      * @param limit Limit caps the rows returned. total still reports the full match count. (optional)
-     * @return ApiResponse<CloudSubscriptionsOut?>
+     * @return ApiResponse<SubscriptionsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSubscriptionsWithHttpInfo(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : ApiResponse<CloudSubscriptionsOut?> {
-        val localVariableConfig = cloudAdminSubscriptionsRequestConfig(status = status, org = org, limit = limit)
+    fun adminSubscriptionsWithHttpInfo(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : ApiResponse<SubscriptionsOut?> {
+        val localVariableConfig = adminSubscriptionsRequestConfig(status = status, org = org, limit = limit)
 
-        return request<Unit, CloudSubscriptionsOut>(
+        return request<Unit, SubscriptionsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSubscriptions
+     * To obtain the request config of the operation adminSubscriptions
      *
      * @param status Status filters on the subscription&#39;s LATEST lifecycle status (active, trialing, canceled, …), matched case-insensitively. (optional)
      * @param org Org filters to one tenant, matched exactly. (optional)
      * @param limit Limit caps the rows returned. total still reports the full match count. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminSubscriptionsRequestConfig(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun adminSubscriptionsRequestConfig(status: kotlin.String?, org: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -4332,7 +3981,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4342,7 +3991,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * subsystems answers GET /v1/admin/subsystems.
      * subsystems answers GET /v1/admin/subsystems. ?range&#x3D;24h|7d|30d bounds the telemetry window (default 30d) — the same enum, and the same helpers, as the o11y board.
      * @param range Range bounds the telemetry window: 24h, 7d or 30d. Anything else, including empty, resolves to the default through the same o11yRange the o11y board uses. (optional)
-     * @return CloudSubsystemsOut
+     * @return SubsystemsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4351,11 +4000,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSubsystems(range: kotlin.String? = null) : CloudSubsystemsOut {
-        val localVarResponse = cloudAdminSubsystemsWithHttpInfo(range = range)
+    fun adminSubsystems(range: kotlin.String? = null) : SubsystemsOut {
+        val localVarResponse = adminSubsystemsWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSubsystemsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SubsystemsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4374,27 +4023,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * subsystems answers GET /v1/admin/subsystems.
      * subsystems answers GET /v1/admin/subsystems. ?range&#x3D;24h|7d|30d bounds the telemetry window (default 30d) — the same enum, and the same helpers, as the o11y board.
      * @param range Range bounds the telemetry window: 24h, 7d or 30d. Anything else, including empty, resolves to the default through the same o11yRange the o11y board uses. (optional)
-     * @return ApiResponse<CloudSubsystemsOut?>
+     * @return ApiResponse<SubsystemsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSubsystemsWithHttpInfo(range: kotlin.String?) : ApiResponse<CloudSubsystemsOut?> {
-        val localVariableConfig = cloudAdminSubsystemsRequestConfig(range = range)
+    fun adminSubsystemsWithHttpInfo(range: kotlin.String?) : ApiResponse<SubsystemsOut?> {
+        val localVariableConfig = adminSubsystemsRequestConfig(range = range)
 
-        return request<Unit, CloudSubsystemsOut>(
+        return request<Unit, SubsystemsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSubsystems
+     * To obtain the request config of the operation adminSubsystems
      *
      * @param range Range bounds the telemetry window: 24h, 7d or 30d. Anything else, including empty, resolves to the default through the same o11yRange the o11y board uses. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminSubsystemsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+    fun adminSubsystemsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -4410,7 +4059,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/subsystems",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4420,7 +4069,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Cuts off every member of the org: IAM refuses a forbidden user at login AND at token issuance, so a suspended customer can neither sign in nor mint a fresh token.
      * Cuts off every member of the org: IAM refuses a forbidden user at login AND at token issuance, so a suspended customer can neither sign in nor mint a fresh token. Fully reversible with ReactivateCustomer.  The result names every user updated and every user that was NOT — a partial failure leaves the org in a mixed state and says so instead of reporting a clean success.
      * @param org Org is the tenant slug from the path.
-     * @return CloudAccessOut
+     * @return AccessOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4429,11 +4078,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSuspendCustomer(org: kotlin.String) : CloudAccessOut {
-        val localVarResponse = cloudAdminSuspendCustomerWithHttpInfo(org = org)
+    fun adminSuspendCustomer(org: kotlin.String) : AccessOut {
+        val localVarResponse = adminSuspendCustomerWithHttpInfo(org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccessOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccessOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4452,27 +4101,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Cuts off every member of the org: IAM refuses a forbidden user at login AND at token issuance, so a suspended customer can neither sign in nor mint a fresh token.
      * Cuts off every member of the org: IAM refuses a forbidden user at login AND at token issuance, so a suspended customer can neither sign in nor mint a fresh token. Fully reversible with ReactivateCustomer.  The result names every user updated and every user that was NOT — a partial failure leaves the org in a mixed state and says so instead of reporting a clean success.
      * @param org Org is the tenant slug from the path.
-     * @return ApiResponse<CloudAccessOut?>
+     * @return ApiResponse<AccessOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSuspendCustomerWithHttpInfo(org: kotlin.String) : ApiResponse<CloudAccessOut?> {
-        val localVariableConfig = cloudAdminSuspendCustomerRequestConfig(org = org)
+    fun adminSuspendCustomerWithHttpInfo(org: kotlin.String) : ApiResponse<AccessOut?> {
+        val localVariableConfig = adminSuspendCustomerRequestConfig(org = org)
 
-        return request<Unit, CloudAccessOut>(
+        return request<Unit, AccessOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSuspendCustomer
+     * To obtain the request config of the operation adminSuspendCustomer
      *
      * @param org Org is the tenant slug from the path.
      * @return RequestConfig
      */
-    fun cloudAdminSuspendCustomerRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
+    fun adminSuspendCustomerRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4483,7 +4132,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/customers/{org}/suspend".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4492,7 +4141,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/sync
      * Answers the operator&#39;s \&quot;Sync now\&quot; button.
      * Answers the operator&#39;s \&quot;Sync now\&quot; button. There is nothing to kick: admin aggregates LIVE on every read, so the button is just a re-read. It acknowledges honestly with started:true rather than pretending a batch job was queued.
-     * @return CloudSyncOut
+     * @return SyncOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4501,11 +4150,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminSync() : CloudSyncOut {
-        val localVarResponse = cloudAdminSyncWithHttpInfo()
+    fun adminSync() : SyncOut {
+        val localVarResponse = adminSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSyncOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SyncOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4523,26 +4172,26 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/sync
      * Answers the operator&#39;s \&quot;Sync now\&quot; button.
      * Answers the operator&#39;s \&quot;Sync now\&quot; button. There is nothing to kick: admin aggregates LIVE on every read, so the button is just a re-read. It acknowledges honestly with started:true rather than pretending a batch job was queued.
-     * @return ApiResponse<CloudSyncOut?>
+     * @return ApiResponse<SyncOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminSyncWithHttpInfo() : ApiResponse<CloudSyncOut?> {
-        val localVariableConfig = cloudAdminSyncRequestConfig()
+    fun adminSyncWithHttpInfo() : ApiResponse<SyncOut?> {
+        val localVariableConfig = adminSyncRequestConfig()
 
-        return request<Unit, CloudSyncOut>(
+        return request<Unit, SyncOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminSync
+     * To obtain the request config of the operation adminSync
      *
      * @return RequestConfig
      */
-    fun cloudAdminSyncRequestConfig() : RequestConfig<Unit> {
+    fun adminSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -4553,18 +4202,18 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * PATCH /v1/admin/spend-caps/{id}
+     * PATCH /v1/admin/caps/{id}
      * Edits one cap by id — raise or lower the ceiling, flip enforcement.
      * Edits one cap by id — raise or lower the ceiling, flip enforcement. The body is commerce&#39;s spend-alert patch contract, forwarded byte-for-byte.
      * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
-     * @param cloudCapIn 
-     * @return CloudRawOut
+     * @param capIn 
+     * @return RawOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4573,11 +4222,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminUpdateSpendCap(id: kotlin.String, cloudCapIn: CloudCapIn) : CloudRawOut {
-        val localVarResponse = cloudAdminUpdateSpendCapWithHttpInfo(id = id, cloudCapIn = cloudCapIn)
+    fun adminUpdateCap(id: kotlin.String, capIn: CapIn) : RawOut {
+        val localVarResponse = adminUpdateCapWithHttpInfo(id = id, capIn = capIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4592,34 +4241,34 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * PATCH /v1/admin/spend-caps/{id}
+     * PATCH /v1/admin/caps/{id}
      * Edits one cap by id — raise or lower the ceiling, flip enforcement.
      * Edits one cap by id — raise or lower the ceiling, flip enforcement. The body is commerce&#39;s spend-alert patch contract, forwarded byte-for-byte.
      * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
-     * @param cloudCapIn 
-     * @return ApiResponse<CloudRawOut?>
+     * @param capIn 
+     * @return ApiResponse<RawOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminUpdateSpendCapWithHttpInfo(id: kotlin.String, cloudCapIn: CloudCapIn) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminUpdateSpendCapRequestConfig(id = id, cloudCapIn = cloudCapIn)
+    fun adminUpdateCapWithHttpInfo(id: kotlin.String, capIn: CapIn) : ApiResponse<RawOut?> {
+        val localVariableConfig = adminUpdateCapRequestConfig(id = id, capIn = capIn)
 
-        return request<CloudCapIn, CloudRawOut>(
+        return request<CapIn, RawOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminUpdateSpendCap
+     * To obtain the request config of the operation adminUpdateCap
      *
      * @param id ID is the cap to edit or remove, from the path. Unused by the list and create ops.
-     * @param cloudCapIn 
+     * @param capIn 
      * @return RequestConfig
      */
-    fun cloudAdminUpdateSpendCapRequestConfig(id: kotlin.String, cloudCapIn: CloudCapIn) : RequestConfig<CloudCapIn> {
-        val localVariableBody = cloudCapIn
+    fun adminUpdateCapRequestConfig(id: kotlin.String, capIn: CapIn) : RequestConfig<CapIn> {
+        val localVariableBody = capIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -4627,10 +4276,10 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
         return RequestConfig(
             method = RequestMethod.PATCH,
-            path = "/v1/admin/spend-caps/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            path = "/v1/admin/caps/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4639,8 +4288,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/services
      * Onboards a hosted service, or edits one, so a new host comes under the launch gate WITHOUT a redeploy.
      * Onboards a hosted service, or edits one, so a new host comes under the launch gate WITHOUT a redeploy. Re-registering an existing service PRESERVES its live switch — editing the hosts of a service that is already open must not silently close it again.
-     * @param cloudServiceInput 
-     * @return CloudServiceOut
+     * @param serviceInput 
+     * @return ServiceOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4649,11 +4298,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminUpsertService(cloudServiceInput: CloudServiceInput) : CloudServiceOut {
-        val localVarResponse = cloudAdminUpsertServiceWithHttpInfo(cloudServiceInput = cloudServiceInput)
+    fun adminUpsertService(serviceInput: ServiceInput) : ServiceOut {
+        val localVarResponse = adminUpsertServiceWithHttpInfo(serviceInput = serviceInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudServiceOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ServiceOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4671,29 +4320,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/services
      * Onboards a hosted service, or edits one, so a new host comes under the launch gate WITHOUT a redeploy.
      * Onboards a hosted service, or edits one, so a new host comes under the launch gate WITHOUT a redeploy. Re-registering an existing service PRESERVES its live switch — editing the hosts of a service that is already open must not silently close it again.
-     * @param cloudServiceInput 
-     * @return ApiResponse<CloudServiceOut?>
+     * @param serviceInput 
+     * @return ApiResponse<ServiceOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminUpsertServiceWithHttpInfo(cloudServiceInput: CloudServiceInput) : ApiResponse<CloudServiceOut?> {
-        val localVariableConfig = cloudAdminUpsertServiceRequestConfig(cloudServiceInput = cloudServiceInput)
+    fun adminUpsertServiceWithHttpInfo(serviceInput: ServiceInput) : ApiResponse<ServiceOut?> {
+        val localVariableConfig = adminUpsertServiceRequestConfig(serviceInput = serviceInput)
 
-        return request<CloudServiceInput, CloudServiceOut>(
+        return request<ServiceInput, ServiceOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminUpsertService
+     * To obtain the request config of the operation adminUpsertService
      *
-     * @param cloudServiceInput 
+     * @param serviceInput 
      * @return RequestConfig
      */
-    fun cloudAdminUpsertServiceRequestConfig(cloudServiceInput: CloudServiceInput) : RequestConfig<CloudServiceInput> {
-        val localVariableBody = cloudServiceInput
+    fun adminUpsertServiceRequestConfig(serviceInput: ServiceInput) : RequestConfig<ServiceInput> {
+        val localVariableBody = serviceInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -4704,7 +4353,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4714,7 +4363,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.
      * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.  series and byProduct are ALWAYS empty. A daily trend and a per-product split are not derivable from the commerce billing API — they live in insights/datastore — so this answers with the honest empty arrays rather than fabricating a shape the console would then chart. Same reason tokens and requests are 0: there is no fleet counter to read.
      * @param org Org reads ONE tenant&#39;s month-to-date total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org. (optional)
-     * @return CloudUsageOut
+     * @return UsageOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4723,11 +4372,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminUsage(org: kotlin.String? = null) : CloudUsageOut {
-        val localVarResponse = cloudAdminUsageWithHttpInfo(org = org)
+    fun adminUsage(org: kotlin.String? = null) : UsageOut {
+        val localVarResponse = adminUsageWithHttpInfo(org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUsageOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsageOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4746,27 +4395,27 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.
      * Returns the month-to-date money totals: one org&#39;s when org names one, else the fleet sum across every org a SuperAdmin can see.  series and byProduct are ALWAYS empty. A daily trend and a per-product split are not derivable from the commerce billing API — they live in insights/datastore — so this answers with the honest empty arrays rather than fabricating a shape the console would then chart. Same reason tokens and requests are 0: there is no fleet counter to read.
      * @param org Org reads ONE tenant&#39;s month-to-date total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org. (optional)
-     * @return ApiResponse<CloudUsageOut?>
+     * @return ApiResponse<UsageOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminUsageWithHttpInfo(org: kotlin.String?) : ApiResponse<CloudUsageOut?> {
-        val localVariableConfig = cloudAdminUsageRequestConfig(org = org)
+    fun adminUsageWithHttpInfo(org: kotlin.String?) : ApiResponse<UsageOut?> {
+        val localVariableConfig = adminUsageRequestConfig(org = org)
 
-        return request<Unit, CloudUsageOut>(
+        return request<Unit, UsageOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminUsage
+     * To obtain the request config of the operation adminUsage
      *
      * @param org Org reads ONE tenant&#39;s month-to-date total instead of the fleet sum. Honoured for a SuperAdmin only — a white-label admin always reads their own org. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminUsageRequestConfig(org: kotlin.String?) : RequestConfig<Unit> {
+    fun adminUsageRequestConfig(org: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -4782,7 +4431,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4793,7 +4442,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Splits our upstream AI usage by how it was FUNDED: one row per (provider, model) over the window, tagged credit (provider grant still remaining), paid (grant exhausted) or paid_only (no grant at all).  The class is resolved at the PROVIDER level from the credit ledger, not per call — the per-call split, and the &#x60;byo&#x60; class, arrive when the metering write stamps a funding column on cloud_usage and this can GROUP BY it directly. Until then a provider with remaining grant reports all of its usage as credit, which is right in aggregate and approximate at the boundary where a grant runs out mid-window.  An unparseable window falls back to the last 30 days rather than refusing: this is a dashboard read, and a typo in a date must not blank the board.
      * @param from From is the inclusive start of the window. Unparseable or absent, together with To, falls back to the last 30 days. (optional)
      * @param to To is the exclusive end of the window. (optional)
-     * @return CloudUsageFundingOut
+     * @return UsageFundingOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4802,11 +4451,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminUsageFunding(from: kotlin.String? = null, to: kotlin.String? = null) : CloudUsageFundingOut {
-        val localVarResponse = cloudAdminUsageFundingWithHttpInfo(from = from, to = to)
+    fun adminUsageFunding(from: kotlin.String? = null, to: kotlin.String? = null) : UsageFundingOut {
+        val localVarResponse = adminUsageFundingWithHttpInfo(from = from, to = to)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUsageFundingOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsageFundingOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4826,28 +4475,28 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Splits our upstream AI usage by how it was FUNDED: one row per (provider, model) over the window, tagged credit (provider grant still remaining), paid (grant exhausted) or paid_only (no grant at all).  The class is resolved at the PROVIDER level from the credit ledger, not per call — the per-call split, and the &#x60;byo&#x60; class, arrive when the metering write stamps a funding column on cloud_usage and this can GROUP BY it directly. Until then a provider with remaining grant reports all of its usage as credit, which is right in aggregate and approximate at the boundary where a grant runs out mid-window.  An unparseable window falls back to the last 30 days rather than refusing: this is a dashboard read, and a typo in a date must not blank the board.
      * @param from From is the inclusive start of the window. Unparseable or absent, together with To, falls back to the last 30 days. (optional)
      * @param to To is the exclusive end of the window. (optional)
-     * @return ApiResponse<CloudUsageFundingOut?>
+     * @return ApiResponse<UsageFundingOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminUsageFundingWithHttpInfo(from: kotlin.String?, to: kotlin.String?) : ApiResponse<CloudUsageFundingOut?> {
-        val localVariableConfig = cloudAdminUsageFundingRequestConfig(from = from, to = to)
+    fun adminUsageFundingWithHttpInfo(from: kotlin.String?, to: kotlin.String?) : ApiResponse<UsageFundingOut?> {
+        val localVariableConfig = adminUsageFundingRequestConfig(from = from, to = to)
 
-        return request<Unit, CloudUsageFundingOut>(
+        return request<Unit, UsageFundingOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminUsageFunding
+     * To obtain the request config of the operation adminUsageFunding
      *
      * @param from From is the inclusive start of the window. Unparseable or absent, together with To, falls back to the last 30 days. (optional)
      * @param to To is the exclusive end of the window. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminUsageFundingRequestConfig(from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun adminUsageFundingRequestConfig(from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -4866,7 +4515,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/usage/funding",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4879,7 +4528,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param q Query is a free-text filter, matched by IAM as a \&quot;contains\&quot; over the user name. (optional)
      * @param p Page is the 1-based page number. Defaults to \&quot;1\&quot;; IAM returns zero rows AND a zero total when it is unset, so this layer never leaves it empty. (optional)
      * @param pageSize PageSize is rows per page. Defaults to \&quot;200\&quot;, the shared admin page size. (optional)
-     * @return CloudUsersOut
+     * @return UsersOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4888,11 +4537,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminUsers(org: kotlin.String? = null, q: kotlin.String? = null, p: kotlin.String? = null, pageSize: kotlin.String? = null) : CloudUsersOut {
-        val localVarResponse = cloudAdminUsersWithHttpInfo(org = org, q = q, p = p, pageSize = pageSize)
+    fun adminUsers(org: kotlin.String? = null, q: kotlin.String? = null, p: kotlin.String? = null, pageSize: kotlin.String? = null) : UsersOut {
+        val localVarResponse = adminUsersWithHttpInfo(org = org, q = q, p = p, pageSize = pageSize)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUsersOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsersOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -4914,22 +4563,22 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param q Query is a free-text filter, matched by IAM as a \&quot;contains\&quot; over the user name. (optional)
      * @param p Page is the 1-based page number. Defaults to \&quot;1\&quot;; IAM returns zero rows AND a zero total when it is unset, so this layer never leaves it empty. (optional)
      * @param pageSize PageSize is rows per page. Defaults to \&quot;200\&quot;, the shared admin page size. (optional)
-     * @return ApiResponse<CloudUsersOut?>
+     * @return ApiResponse<UsersOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminUsersWithHttpInfo(org: kotlin.String?, q: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<CloudUsersOut?> {
-        val localVariableConfig = cloudAdminUsersRequestConfig(org = org, q = q, p = p, pageSize = pageSize)
+    fun adminUsersWithHttpInfo(org: kotlin.String?, q: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<UsersOut?> {
+        val localVariableConfig = adminUsersRequestConfig(org = org, q = q, p = p, pageSize = pageSize)
 
-        return request<Unit, CloudUsersOut>(
+        return request<Unit, UsersOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminUsers
+     * To obtain the request config of the operation adminUsers
      *
      * @param org Org narrows the directory to ONE tenant. Honoured for a SuperAdmin only — a white-label admin is pinned to their own org and this is ignored. (optional)
      * @param q Query is a free-text filter, matched by IAM as a \&quot;contains\&quot; over the user name. (optional)
@@ -4937,7 +4586,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param pageSize PageSize is rows per page. Defaults to \&quot;200\&quot;, the shared admin page size. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminUsersRequestConfig(org: kotlin.String?, q: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
+    fun adminUsersRequestConfig(org: kotlin.String?, q: kotlin.String?, p: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -4962,7 +4611,77 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/users",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/admin/volumes
+     * Returns the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.
+     * Returns the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.  A volume&#39;s usedGiB and pct are null, always: DO exposes capacity and attachment but no fill, so the console renders \&quot;—\&quot; rather than a number nobody measured. The datastore card is the one real fill here, and it is the number to scale on.  The two sources degrade independently — a DO outage still returns the datastore fill, and a disconnected datastore still returns the DO fleet.
+     * @return VolumesOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun adminVolumes() : VolumesOut {
+        val localVarResponse = adminVolumesWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VolumesOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/admin/volumes
+     * Returns the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.
+     * Returns the realtime block-storage board: the DigitalOcean volume fleet (count, capacity, monthly list cost, per-volume region and attachment) plus the analytics datastore&#39;s OWN fill, read from its system.disks.  A volume&#39;s usedGiB and pct are null, always: DO exposes capacity and attachment but no fill, so the console renders \&quot;—\&quot; rather than a number nobody measured. The datastore card is the one real fill here, and it is the number to scale on.  The two sources degrade independently — a DO outage still returns the datastore fill, and a disconnected datastore still returns the DO fleet.
+     * @return ApiResponse<VolumesOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun adminVolumesWithHttpInfo() : ApiResponse<VolumesOut?> {
+        val localVariableConfig = adminVolumesRequestConfig()
+
+        return request<Unit, VolumesOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation adminVolumes
+     *
+     * @return RequestConfig
+     */
+    fun adminVolumesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/admin/volumes",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -4974,7 +4693,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param waitlist Waitlist is the waitlist slug to read (e.g. \&quot;chat\&quot;). The engine decides what an empty slug means. (optional)
      * @param page Page is the 1-based page number. (optional)
      * @param pageSize PageSize is entries per page. (optional)
-     * @return CloudRawOut
+     * @return RawOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -4983,11 +4702,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminWaitlist(waitlist: kotlin.String? = null, page: kotlin.String? = null, pageSize: kotlin.String? = null) : CloudRawOut {
-        val localVarResponse = cloudAdminWaitlistWithHttpInfo(waitlist = waitlist, page = page, pageSize = pageSize)
+    fun adminWaitlist(waitlist: kotlin.String? = null, page: kotlin.String? = null, pageSize: kotlin.String? = null) : RawOut {
+        val localVarResponse = adminWaitlistWithHttpInfo(waitlist = waitlist, page = page, pageSize = pageSize)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5008,29 +4727,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param waitlist Waitlist is the waitlist slug to read (e.g. \&quot;chat\&quot;). The engine decides what an empty slug means. (optional)
      * @param page Page is the 1-based page number. (optional)
      * @param pageSize PageSize is entries per page. (optional)
-     * @return ApiResponse<CloudRawOut?>
+     * @return ApiResponse<RawOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminWaitlistWithHttpInfo(waitlist: kotlin.String?, page: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminWaitlistRequestConfig(waitlist = waitlist, page = page, pageSize = pageSize)
+    fun adminWaitlistWithHttpInfo(waitlist: kotlin.String?, page: kotlin.String?, pageSize: kotlin.String?) : ApiResponse<RawOut?> {
+        val localVariableConfig = adminWaitlistRequestConfig(waitlist = waitlist, page = page, pageSize = pageSize)
 
-        return request<Unit, CloudRawOut>(
+        return request<Unit, RawOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminWaitlist
+     * To obtain the request config of the operation adminWaitlist
      *
      * @param waitlist Waitlist is the waitlist slug to read (e.g. \&quot;chat\&quot;). The engine decides what an empty slug means. (optional)
      * @param page Page is the 1-based page number. (optional)
      * @param pageSize PageSize is entries per page. (optional)
      * @return RequestConfig
      */
-    fun cloudAdminWaitlistRequestConfig(waitlist: kotlin.String?, page: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
+    fun adminWaitlistRequestConfig(waitlist: kotlin.String?, page: kotlin.String?, pageSize: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5052,7 +4771,7 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/waitlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -5061,8 +4780,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/waitlist/boost
      * Grants a user waitlist points, moving them up toward the access cutoff.
      * Grants a user waitlist points, moving them up toward the access cutoff. This is the access lever: the cutoff itself does not move, the person does.  It funnels through the engine&#39;s verified grant seam (POST /v1/waitlist/award with source&#x3D;\&quot;grant\&quot; — the ONE path that honours an explicit points amount) and writes a tamper-evident audit row either way, so a FAILED grant is recorded too. The reason field goes only to that row.
-     * @param cloudWaitlistBoostRequest 
-     * @return CloudRawOut
+     * @param waitlistBoostRequest 
+     * @return RawOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5071,11 +4790,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAdminWaitlistBoost(cloudWaitlistBoostRequest: CloudWaitlistBoostRequest) : CloudRawOut {
-        val localVarResponse = cloudAdminWaitlistBoostWithHttpInfo(cloudWaitlistBoostRequest = cloudWaitlistBoostRequest)
+    fun adminWaitlistBoost(waitlistBoostRequest: WaitlistBoostRequest) : RawOut {
+        val localVarResponse = adminWaitlistBoostWithHttpInfo(waitlistBoostRequest = waitlistBoostRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRawOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RawOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5093,29 +4812,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/admin/waitlist/boost
      * Grants a user waitlist points, moving them up toward the access cutoff.
      * Grants a user waitlist points, moving them up toward the access cutoff. This is the access lever: the cutoff itself does not move, the person does.  It funnels through the engine&#39;s verified grant seam (POST /v1/waitlist/award with source&#x3D;\&quot;grant\&quot; — the ONE path that honours an explicit points amount) and writes a tamper-evident audit row either way, so a FAILED grant is recorded too. The reason field goes only to that row.
-     * @param cloudWaitlistBoostRequest 
-     * @return ApiResponse<CloudRawOut?>
+     * @param waitlistBoostRequest 
+     * @return ApiResponse<RawOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAdminWaitlistBoostWithHttpInfo(cloudWaitlistBoostRequest: CloudWaitlistBoostRequest) : ApiResponse<CloudRawOut?> {
-        val localVariableConfig = cloudAdminWaitlistBoostRequestConfig(cloudWaitlistBoostRequest = cloudWaitlistBoostRequest)
+    fun adminWaitlistBoostWithHttpInfo(waitlistBoostRequest: WaitlistBoostRequest) : ApiResponse<RawOut?> {
+        val localVariableConfig = adminWaitlistBoostRequestConfig(waitlistBoostRequest = waitlistBoostRequest)
 
-        return request<CloudWaitlistBoostRequest, CloudRawOut>(
+        return request<WaitlistBoostRequest, RawOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAdminWaitlistBoost
+     * To obtain the request config of the operation adminWaitlistBoost
      *
-     * @param cloudWaitlistBoostRequest 
+     * @param waitlistBoostRequest 
      * @return RequestConfig
      */
-    fun cloudAdminWaitlistBoostRequestConfig(cloudWaitlistBoostRequest: CloudWaitlistBoostRequest) : RequestConfig<CloudWaitlistBoostRequest> {
-        val localVariableBody = cloudWaitlistBoostRequest
+    fun adminWaitlistBoostRequestConfig(waitlistBoostRequest: WaitlistBoostRequest) : RequestConfig<WaitlistBoostRequest> {
+        val localVariableBody = waitlistBoostRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -5126,28 +4845,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/waitlist/boost",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/affiliates
-     * 
-     * 
-     * @return void
+     * Lists every affiliate across the fleet with its ORG exposed, plus a fleet summary of lifetime accrued, still-pending and paid commission in integer cents.
+     * Lists every affiliate across the fleet with its ORG exposed, plus a fleet summary of lifetime accrued, still-pending and paid commission in integer cents.  PLATFORM SUDO ONLY, and a non-admin is refused outright. This is the cross-tenant view and it names orgs — exactly what the partner-facing leaderboard refuses to do. There is deliberately no org-scoped variant of this read; a partner sees its own standing through its own dashboard. Bounded per request.
+     * @param limit Limit caps the rows returned. Absent or non-positive means the default of 500; anything above 1000 is clamped to 1000. (optional)
+     * @return DirectoryOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminAffiliates() : Unit {
-        val localVarResponse = cloudGetV1AdminAffiliatesWithHttpInfo()
+    fun getV1AdminAffiliates(limit: kotlin.Int? = null) : DirectoryOut {
+        val localVarResponse = getV1AdminAffiliatesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DirectoryOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5163,47 +4884,56 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/affiliates
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Lists every affiliate across the fleet with its ORG exposed, plus a fleet summary of lifetime accrued, still-pending and paid commission in integer cents.
+     * Lists every affiliate across the fleet with its ORG exposed, plus a fleet summary of lifetime accrued, still-pending and paid commission in integer cents.  PLATFORM SUDO ONLY, and a non-admin is refused outright. This is the cross-tenant view and it names orgs — exactly what the partner-facing leaderboard refuses to do. There is deliberately no org-scoped variant of this read; a partner sees its own standing through its own dashboard. Bounded per request.
+     * @param limit Limit caps the rows returned. Absent or non-positive means the default of 500; anything above 1000 is clamped to 1000. (optional)
+     * @return ApiResponse<DirectoryOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminAffiliatesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AdminAffiliatesRequestConfig()
+    fun getV1AdminAffiliatesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DirectoryOut?> {
+        val localVariableConfig = getV1AdminAffiliatesRequestConfig(limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, DirectoryOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminAffiliates
+     * To obtain the request config of the operation getV1AdminAffiliates
      *
+     * @param limit Limit caps the rows returned. Absent or non-positive means the default of 500; anything above 1000 is clamped to 1000. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AdminAffiliatesRequestConfig() : RequestConfig<Unit> {
+    fun getV1AdminAffiliatesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/admin/affiliates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/authors
-     * ListAuthors returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.
-     * ListAuthors returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.  It is a Hanzo platform operation: a caller who is not a SuperAdmin gets 403. It exposes the owning org of each author, which no tenant-facing read ever does.
+     * Returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.
+     * Returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.  It is a Hanzo platform operation: a caller who is not a SuperAdmin gets 403. It exposes the owning org of each author, which no tenant-facing read ever does.
      * @param limit Limit bounds the page. 0 or less means the default of 500; anything above 1000 is clamped to 1000. (optional)
-     * @return CloudAdminBook
+     * @return AdminBook
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5212,11 +4942,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminAuthors(limit: kotlin.Int? = null) : CloudAdminBook {
-        val localVarResponse = cloudGetV1AdminAuthorsWithHttpInfo(limit = limit)
+    fun getV1AdminAuthors(limit: kotlin.Int? = null) : AdminBook {
+        val localVarResponse = getV1AdminAuthorsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdminBook
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdminBook
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5232,30 +4962,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/authors
-     * ListAuthors returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.
-     * ListAuthors returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.  It is a Hanzo platform operation: a caller who is not a SuperAdmin gets 403. It exposes the owning org of each author, which no tenant-facing read ever does.
+     * Returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.
+     * Returns the platform&#39;s whole author program — every org&#39;s author record, not the caller&#39;s — with each one&#39;s repository and deploy counts and a fleet roll-up of the money accrued, pending and paid.  It is a Hanzo platform operation: a caller who is not a SuperAdmin gets 403. It exposes the owning org of each author, which no tenant-facing read ever does.
      * @param limit Limit bounds the page. 0 or less means the default of 500; anything above 1000 is clamped to 1000. (optional)
-     * @return ApiResponse<CloudAdminBook?>
+     * @return ApiResponse<AdminBook?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminAuthorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudAdminBook?> {
-        val localVariableConfig = cloudGetV1AdminAuthorsRequestConfig(limit = limit)
+    fun getV1AdminAuthorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AdminBook?> {
+        val localVariableConfig = getV1AdminAuthorsRequestConfig(limit = limit)
 
-        return request<Unit, CloudAdminBook>(
+        return request<Unit, AdminBook>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminAuthors
+     * To obtain the request config of the operation getV1AdminAuthors
      *
      * @param limit Limit bounds the page. 0 or less means the default of 500; anything above 1000 is clamped to 1000. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AdminAuthorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AdminAuthorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5271,18 +5001,18 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/authors/{id}/basis
-     * AuthorRoyaltyBasis returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.
-     * AuthorRoyaltyBasis returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.  The data object carries: id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger (every row with its spend, the share applied then, the platform&#39;s matching half, whether it satisfies the formula and the attribution edges that explain it), reconciliation (does the ledger foot to the balance) and window (what slice was actually returned) — plus period when one was requested.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.
+     * Returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.  The data object carries: id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger (every row with its spend, the share applied then, the platform&#39;s matching half, whether it satisfies the formula and the attribution edges that explain it), reconciliation (does the ledger foot to the balance) and window (what slice was actually returned) — plus period when one was requested.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author record&#39;s handle, from the path.
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400. (optional)
-     * @return CloudBasisResult
+     * @return BasisResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5291,11 +5021,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminAuthorsIdBasis(id: kotlin.String, period: kotlin.String? = null) : CloudBasisResult {
-        val localVarResponse = cloudGetV1AdminAuthorsIdBasisWithHttpInfo(id = id, period = period)
+    fun getV1AdminAuthorsByIdBasis(id: kotlin.String, period: kotlin.String? = null) : BasisResult {
+        val localVarResponse = getV1AdminAuthorsByIdBasisWithHttpInfo(id = id, period = period)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBasisResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BasisResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5311,32 +5041,32 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/authors/{id}/basis
-     * AuthorRoyaltyBasis returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.
-     * AuthorRoyaltyBasis returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.  The data object carries: id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger (every row with its spend, the share applied then, the platform&#39;s matching half, whether it satisfies the formula and the attribution edges that explain it), reconciliation (does the ledger foot to the balance) and window (what slice was actually returned) — plus period when one was requested.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.
+     * Returns the audit trail behind ONE author&#39;s royalty — the same payload the author reads at /v1/authors/basis, from the same builder, so support sees exactly what the author sees rather than a parallel view free to drift.  The data object carries: id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger (every row with its spend, the share applied then, the platform&#39;s matching half, whether it satisfies the formula and the attribution edges that explain it), reconciliation (does the ledger foot to the balance) and window (what slice was actually returned) — plus period when one was requested.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author record&#39;s handle, from the path.
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400. (optional)
-     * @return ApiResponse<CloudBasisResult?>
+     * @return ApiResponse<BasisResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminAuthorsIdBasisWithHttpInfo(id: kotlin.String, period: kotlin.String?) : ApiResponse<CloudBasisResult?> {
-        val localVariableConfig = cloudGetV1AdminAuthorsIdBasisRequestConfig(id = id, period = period)
+    fun getV1AdminAuthorsByIdBasisWithHttpInfo(id: kotlin.String, period: kotlin.String?) : ApiResponse<BasisResult?> {
+        val localVariableConfig = getV1AdminAuthorsByIdBasisRequestConfig(id = id, period = period)
 
-        return request<Unit, CloudBasisResult>(
+        return request<Unit, BasisResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminAuthorsIdBasis
+     * To obtain the request config of the operation getV1AdminAuthorsByIdBasis
      *
      * @param id ID is the author record&#39;s handle, from the path.
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AdminAuthorsIdBasisRequestConfig(id: kotlin.String, period: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1AdminAuthorsByIdBasisRequestConfig(id: kotlin.String, period: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5352,16 +5082,16 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/basis".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/catalog
-     * GetAdminCatalog returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console.
-     * GetAdminCatalog returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console. Nothing is hidden: this is the admin&#39;s view of what exists and what is currently off, in beta or generally available. SuperAdmin only; every other caller is refused.
-     * @return CloudAdminCatalogOut
+     * Returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console.
+     * Returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console. Nothing is hidden: this is the admin&#39;s view of what exists and what is currently off, in beta or generally available. SuperAdmin only; every other caller is refused.
+     * @return AdminCatalogOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5370,11 +5100,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminCatalog() : CloudAdminCatalogOut {
-        val localVarResponse = cloudGetV1AdminCatalogWithHttpInfo()
+    fun getV1AdminCatalog() : AdminCatalogOut {
+        val localVarResponse = getV1AdminCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdminCatalogOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdminCatalogOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5390,28 +5120,28 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/catalog
-     * GetAdminCatalog returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console.
-     * GetAdminCatalog returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console. Nothing is hidden: this is the admin&#39;s view of what exists and what is currently off, in beta or generally available. SuperAdmin only; every other caller is refused.
-     * @return ApiResponse<CloudAdminCatalogOut?>
+     * Returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console.
+     * Returns the full model and provider catalog annotated with each entry&#39;s enablement state, for the operator console. Nothing is hidden: this is the admin&#39;s view of what exists and what is currently off, in beta or generally available. SuperAdmin only; every other caller is refused.
+     * @return ApiResponse<AdminCatalogOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminCatalogWithHttpInfo() : ApiResponse<CloudAdminCatalogOut?> {
-        val localVariableConfig = cloudGetV1AdminCatalogRequestConfig()
+    fun getV1AdminCatalogWithHttpInfo() : ApiResponse<AdminCatalogOut?> {
+        val localVariableConfig = getV1AdminCatalogRequestConfig()
 
-        return request<Unit, CloudAdminCatalogOut>(
+        return request<Unit, AdminCatalogOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminCatalog
+     * To obtain the request config of the operation getV1AdminCatalog
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AdminCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getV1AdminCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5422,16 +5152,16 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/enablement
-     * ListEnablement returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta.
-     * ListEnablement returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta. An item nobody has touched is absent, because an untouched item is generally available; the console composes the candidate list from the live catalog. SuperAdmin only; every other caller is refused.
-     * @return CloudAdminEnablementBoard
+     * Returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta.
+     * Returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta. An item nobody has touched is absent, because an untouched item is generally available; the console composes the candidate list from the live catalog. SuperAdmin only; every other caller is refused.
+     * @return AdminEnablementBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5440,11 +5170,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminEnablement() : CloudAdminEnablementBoard {
-        val localVarResponse = cloudGetV1AdminEnablementWithHttpInfo()
+    fun getV1AdminEnablement() : AdminEnablementBoard {
+        val localVarResponse = getV1AdminEnablementWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdminEnablementBoard
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdminEnablementBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5460,28 +5190,28 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/enablement
-     * ListEnablement returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta.
-     * ListEnablement returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta. An item nobody has touched is absent, because an untouched item is generally available; the console composes the candidate list from the live catalog. SuperAdmin only; every other caller is refused.
-     * @return ApiResponse<CloudAdminEnablementBoard?>
+     * Returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta.
+     * Returns every item an operator has set an enablement state on — its global state (off, beta or ga) and the orgs granted its beta. An item nobody has touched is absent, because an untouched item is generally available; the console composes the candidate list from the live catalog. SuperAdmin only; every other caller is refused.
+     * @return ApiResponse<AdminEnablementBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminEnablementWithHttpInfo() : ApiResponse<CloudAdminEnablementBoard?> {
-        val localVariableConfig = cloudGetV1AdminEnablementRequestConfig()
+    fun getV1AdminEnablementWithHttpInfo() : ApiResponse<AdminEnablementBoard?> {
+        val localVariableConfig = getV1AdminEnablementRequestConfig()
 
-        return request<Unit, CloudAdminEnablementBoard>(
+        return request<Unit, AdminEnablementBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminEnablement
+     * To obtain the request config of the operation getV1AdminEnablement
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AdminEnablementRequestConfig() : RequestConfig<Unit> {
+    fun getV1AdminEnablementRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5492,28 +5222,29 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/enablement",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/referrals
-     * 
-     * 
-     * @return void
+     * Answers the referral board: the top referrers by lifetime commission, the funnel conversion rate (referred orgs that have actually produced commission, over all referred orgs), and the accrual LIABILITY the platform owes, broken out by upline level.
+     * Answers the referral board: the top referrers by lifetime commission, the funnel conversion rate (referred orgs that have actually produced commission, over all referred orgs), and the accrual LIABILITY the platform owes, broken out by upline level.  Read the liability figure carefully — it is commission accrued and NOT yet paid, so it is money owed, not money spent, and the per-level split says how much of it comes from direct referrals versus the second and third levels.  PLATFORM SUDO ONLY, cross-tenant, and it names orgs. It reads the SAME single attribution spine the accrual itself walks, so the board and the ledger cannot disagree. Amounts are integer cents.
+     * @return ReferralsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminReferrals() : Unit {
-        val localVarResponse = cloudGetV1AdminReferralsWithHttpInfo()
+    fun getV1AdminReferrals() : ReferralsOut {
+        val localVarResponse = getV1AdminReferralsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReferralsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5529,47 +5260,49 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/referrals
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers the referral board: the top referrers by lifetime commission, the funnel conversion rate (referred orgs that have actually produced commission, over all referred orgs), and the accrual LIABILITY the platform owes, broken out by upline level.
+     * Answers the referral board: the top referrers by lifetime commission, the funnel conversion rate (referred orgs that have actually produced commission, over all referred orgs), and the accrual LIABILITY the platform owes, broken out by upline level.  Read the liability figure carefully — it is commission accrued and NOT yet paid, so it is money owed, not money spent, and the per-level split says how much of it comes from direct referrals versus the second and third levels.  PLATFORM SUDO ONLY, cross-tenant, and it names orgs. It reads the SAME single attribution spine the accrual itself walks, so the board and the ledger cannot disagree. Amounts are integer cents.
+     * @return ApiResponse<ReferralsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminReferralsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AdminReferralsRequestConfig()
+    fun getV1AdminReferralsWithHttpInfo() : ApiResponse<ReferralsOut?> {
+        val localVariableConfig = getV1AdminReferralsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, ReferralsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminReferrals
+     * To obtain the request config of the operation getV1AdminReferrals
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AdminReferralsRequestConfig() : RequestConfig<Unit> {
+    fun getV1AdminReferralsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/admin/referrals",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/referrals/bonuses
-     * Returns every one-time referral bonus in the ledger with a fleet summary.
-     * Returns every one-time referral bonus in the ledger with a fleet summary.  SuperAdmin only, fail-closed. This is the ONE-TIME BONUS ledger — who referred whom, what each side was granted and which ledger transactions carried it. The cross-tenant referral ANALYTICS board (top referrers, conversion, multi-level accrual liability) is a different surface, GET /v1/admin/referrals, owned by the affiliates subsystem over the shared attribution spine.
+     * Returns every referral edge in the directory with a fleet summary.
+     * Returns every referral edge in the directory with a fleet summary.  SuperAdmin only, fail-closed. This is the ATTRIBUTION directory — who referred whom and whether that referee became a customer. It carries no amounts because this package issues none. The cross-tenant referral ANALYTICS board (top referrers, conversion) is a different surface, GET /v1/admin/referrals, owned by the affiliates subsystem over the shared attribution spine.
      * @param limit Limit is how many referrals to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 500; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
-     * @return CloudAdminBonusesEnvelope
+     * @return AdminBonusesEnvelope
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5578,11 +5311,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminReferralsBonuses(limit: kotlin.String? = null) : CloudAdminBonusesEnvelope {
-        val localVarResponse = cloudGetV1AdminReferralsBonusesWithHttpInfo(limit = limit)
+    fun getV1AdminReferralsBonuses(limit: kotlin.String? = null) : AdminBonusesEnvelope {
+        val localVarResponse = getV1AdminReferralsBonusesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdminBonusesEnvelope
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdminBonusesEnvelope
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5598,30 +5331,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/referrals/bonuses
-     * Returns every one-time referral bonus in the ledger with a fleet summary.
-     * Returns every one-time referral bonus in the ledger with a fleet summary.  SuperAdmin only, fail-closed. This is the ONE-TIME BONUS ledger — who referred whom, what each side was granted and which ledger transactions carried it. The cross-tenant referral ANALYTICS board (top referrers, conversion, multi-level accrual liability) is a different surface, GET /v1/admin/referrals, owned by the affiliates subsystem over the shared attribution spine.
+     * Returns every referral edge in the directory with a fleet summary.
+     * Returns every referral edge in the directory with a fleet summary.  SuperAdmin only, fail-closed. This is the ATTRIBUTION directory — who referred whom and whether that referee became a customer. It carries no amounts because this package issues none. The cross-tenant referral ANALYTICS board (top referrers, conversion) is a different surface, GET /v1/admin/referrals, owned by the affiliates subsystem over the shared attribution spine.
      * @param limit Limit is how many referrals to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 500; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
-     * @return ApiResponse<CloudAdminBonusesEnvelope?>
+     * @return ApiResponse<AdminBonusesEnvelope?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminReferralsBonusesWithHttpInfo(limit: kotlin.String?) : ApiResponse<CloudAdminBonusesEnvelope?> {
-        val localVariableConfig = cloudGetV1AdminReferralsBonusesRequestConfig(limit = limit)
+    fun getV1AdminReferralsBonusesWithHttpInfo(limit: kotlin.String?) : ApiResponse<AdminBonusesEnvelope?> {
+        val localVariableConfig = getV1AdminReferralsBonusesRequestConfig(limit = limit)
 
-        return request<Unit, CloudAdminBonusesEnvelope>(
+        return request<Unit, AdminBonusesEnvelope>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminReferralsBonuses
+     * To obtain the request config of the operation getV1AdminReferralsBonuses
      *
      * @param limit Limit is how many referrals to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 500; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AdminReferralsBonusesRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1AdminReferralsBonusesRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5637,17 +5370,17 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/referrals/bonuses",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/admin/treasury
-     * GetAdminTreasury returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root.
-     * GetAdminTreasury returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root. ?limit&#x3D; bounds the journal page.
+     * Returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root.
+     * Returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root. ?limit&#x3D; bounds the journal page.
      * @param limit Limit caps the journal entries returned. Out of range or unparseable takes the default. (optional)
-     * @return CloudAdminReportOut
+     * @return AdminReportOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5656,11 +5389,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdminTreasury(limit: kotlin.Int? = null) : CloudAdminReportOut {
-        val localVarResponse = cloudGetV1AdminTreasuryWithHttpInfo(limit = limit)
+    fun getV1AdminTreasury(limit: kotlin.Int? = null) : AdminReportOut {
+        val localVarResponse = getV1AdminTreasuryWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdminReportOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdminReportOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5676,30 +5409,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/admin/treasury
-     * GetAdminTreasury returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root.
-     * GetAdminTreasury returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root. ?limit&#x3D; bounds the journal page.
+     * Returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root.
+     * Returns the whole treasury board for a SuperAdmin: the reserve fund report, the recent double-entry journal, and the Hanzo L1 anchor status of the ledger root. ?limit&#x3D; bounds the journal page.
      * @param limit Limit caps the journal entries returned. Out of range or unparseable takes the default. (optional)
-     * @return ApiResponse<CloudAdminReportOut?>
+     * @return ApiResponse<AdminReportOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdminTreasuryWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudAdminReportOut?> {
-        val localVariableConfig = cloudGetV1AdminTreasuryRequestConfig(limit = limit)
+    fun getV1AdminTreasuryWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AdminReportOut?> {
+        val localVariableConfig = getV1AdminTreasuryRequestConfig(limit = limit)
 
-        return request<Unit, CloudAdminReportOut>(
+        return request<Unit, AdminReportOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdminTreasury
+     * To obtain the request config of the operation getV1AdminTreasury
      *
      * @param limit Limit caps the journal entries returned. Out of range or unparseable takes the default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AdminTreasuryRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AdminTreasuryRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -5715,15 +5448,15 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/admin/catalog/models/{wildcard1}
-     * 
-     * 
+     * Turn one model off, into beta for named orgs, or generally available
+     * Sets one model&#39;s availability overlay — and the price overrides applied on top of the catalog — then answers the new effective overlay, so a console needs no second read. The model id is the whole remaining path, so a slashed id like &#x60;acme/some-model-1&#x60; addresses intact.  SuperAdmin only; every other caller is 403, decided before the body is read. The overlay is PLATFORM-WIDE — this is the catalog every org prices against, not a per-org setting — and &#x60;betaOrgs&#x60; is what narrows a beta to named orgs.  Only the fields the patch names change; an entry with no overlay yet starts from the catalog default, which is enabled. &#x60;state&#x60; is the coherent tri-state setter (&#x60;off&#x60;|&#x60;beta&#x60;|&#x60;ga&#x60;) and the low-level &#x60;enabled&#x60;/&#x60;beta&#x60; flags are applied AFTER it, so they win where both are sent; anything else in &#x60;state&#x60; is 400. A field sent as an explicit &#x60;null&#x60; arrives indistinguishable from an absent one, so null does not clear anything.  The rule worth reading twice: a disabled entry that still carries beta orgs IS a beta — &#x60;{\&quot;enabled\&quot;:false,\&quot;betaOrgs\&quot;:[\&quot;acme\&quot;]}&#x60; leaves acme seeing the model. Only an explicit &#x60;off&#x60; (or &#x60;beta:false&#x60;) with an empty list is the absolute kill switch that a user&#39;s own beta opt-in can never re-open.  &#x60;overrides&#x60; is an RFC 7386 merge patch, stored and echoed back verbatim; it must be a JSON object or null — an array or a scalar is refused — and is bounded in size and nesting depth. An uninitialised overlay store answers 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -5733,8 +5466,8 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1AdminCatalogModelsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1AdminCatalogModelsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchV1AdminCatalogModelsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchV1AdminCatalogModelsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -5753,16 +5486,16 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/admin/catalog/models/{wildcard1}
-     * 
-     * 
+     * Turn one model off, into beta for named orgs, or generally available
+     * Sets one model&#39;s availability overlay — and the price overrides applied on top of the catalog — then answers the new effective overlay, so a console needs no second read. The model id is the whole remaining path, so a slashed id like &#x60;acme/some-model-1&#x60; addresses intact.  SuperAdmin only; every other caller is 403, decided before the body is read. The overlay is PLATFORM-WIDE — this is the catalog every org prices against, not a per-org setting — and &#x60;betaOrgs&#x60; is what narrows a beta to named orgs.  Only the fields the patch names change; an entry with no overlay yet starts from the catalog default, which is enabled. &#x60;state&#x60; is the coherent tri-state setter (&#x60;off&#x60;|&#x60;beta&#x60;|&#x60;ga&#x60;) and the low-level &#x60;enabled&#x60;/&#x60;beta&#x60; flags are applied AFTER it, so they win where both are sent; anything else in &#x60;state&#x60; is 400. A field sent as an explicit &#x60;null&#x60; arrives indistinguishable from an absent one, so null does not clear anything.  The rule worth reading twice: a disabled entry that still carries beta orgs IS a beta — &#x60;{\&quot;enabled\&quot;:false,\&quot;betaOrgs\&quot;:[\&quot;acme\&quot;]}&#x60; leaves acme seeing the model. Only an explicit &#x60;off&#x60; (or &#x60;beta:false&#x60;) with an empty list is the absolute kill switch that a user&#39;s own beta opt-in can never re-open.  &#x60;overrides&#x60; is an RFC 7386 merge patch, stored and echoed back verbatim; it must be a JSON object or null — an array or a scalar is refused — and is bounded in size and nesting depth. An uninitialised overlay store answers 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1AdminCatalogModelsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1AdminCatalogModelsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchV1AdminCatalogModelsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1AdminCatalogModelsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -5770,12 +5503,12 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1AdminCatalogModelsByWildcard1
+     * To obtain the request config of the operation patchV1AdminCatalogModelsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPatchV1AdminCatalogModelsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1AdminCatalogModelsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -5785,18 +5518,18 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/catalog/models/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/admin/catalog/providers/{name}
-     * PatchProvider sets one provider&#39;s availability overlay.
-     * PatchProvider sets one provider&#39;s availability overlay.  The overlay decides whether a provider is off, in beta for named orgs, or generally available, and carries the price overrides applied on top of the catalog. Only the fields the patch names change; every other field keeps the value it had, and an absent overlay starts from the catalog default (enabled). Answers the new effective overlay, so a console needs no second read.  SuperAdmin only.
+     * Sets one provider&#39;s availability overlay.
+     * Sets one provider&#39;s availability overlay.  The overlay decides whether a provider is off, in beta for named orgs, or generally available, and carries the price overrides applied on top of the catalog. Only the fields the patch names change; every other field keeps the value it had, and an absent overlay starts from the catalog default (enabled). Answers the new effective overlay, so a console needs no second read.  SuperAdmin only.
      * @param name Name is the provider the overlay belongs to, from the URL.
-     * @param cloudProviderPatchIn 
-     * @return CloudOverlay
+     * @param providerPatchIn 
+     * @return Overlay
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -5805,11 +5538,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1AdminCatalogProvidersName(name: kotlin.String, cloudProviderPatchIn: CloudProviderPatchIn) : CloudOverlay {
-        val localVarResponse = cloudPatchV1AdminCatalogProvidersNameWithHttpInfo(name = name, cloudProviderPatchIn = cloudProviderPatchIn)
+    fun patchV1AdminCatalogProvidersByName(name: kotlin.String, providerPatchIn: ProviderPatchIn) : Overlay {
+        val localVarResponse = patchV1AdminCatalogProvidersByNameWithHttpInfo(name = name, providerPatchIn = providerPatchIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOverlay
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Overlay
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5825,33 +5558,33 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/admin/catalog/providers/{name}
-     * PatchProvider sets one provider&#39;s availability overlay.
-     * PatchProvider sets one provider&#39;s availability overlay.  The overlay decides whether a provider is off, in beta for named orgs, or generally available, and carries the price overrides applied on top of the catalog. Only the fields the patch names change; every other field keeps the value it had, and an absent overlay starts from the catalog default (enabled). Answers the new effective overlay, so a console needs no second read.  SuperAdmin only.
+     * Sets one provider&#39;s availability overlay.
+     * Sets one provider&#39;s availability overlay.  The overlay decides whether a provider is off, in beta for named orgs, or generally available, and carries the price overrides applied on top of the catalog. Only the fields the patch names change; every other field keeps the value it had, and an absent overlay starts from the catalog default (enabled). Answers the new effective overlay, so a console needs no second read.  SuperAdmin only.
      * @param name Name is the provider the overlay belongs to, from the URL.
-     * @param cloudProviderPatchIn 
-     * @return ApiResponse<CloudOverlay?>
+     * @param providerPatchIn 
+     * @return ApiResponse<Overlay?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1AdminCatalogProvidersNameWithHttpInfo(name: kotlin.String, cloudProviderPatchIn: CloudProviderPatchIn) : ApiResponse<CloudOverlay?> {
-        val localVariableConfig = cloudPatchV1AdminCatalogProvidersNameRequestConfig(name = name, cloudProviderPatchIn = cloudProviderPatchIn)
+    fun patchV1AdminCatalogProvidersByNameWithHttpInfo(name: kotlin.String, providerPatchIn: ProviderPatchIn) : ApiResponse<Overlay?> {
+        val localVariableConfig = patchV1AdminCatalogProvidersByNameRequestConfig(name = name, providerPatchIn = providerPatchIn)
 
-        return request<CloudProviderPatchIn, CloudOverlay>(
+        return request<ProviderPatchIn, Overlay>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1AdminCatalogProvidersName
+     * To obtain the request config of the operation patchV1AdminCatalogProvidersByName
      *
      * @param name Name is the provider the overlay belongs to, from the URL.
-     * @param cloudProviderPatchIn 
+     * @param providerPatchIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1AdminCatalogProvidersNameRequestConfig(name: kotlin.String, cloudProviderPatchIn: CloudProviderPatchIn) : RequestConfig<CloudProviderPatchIn> {
-        val localVariableBody = cloudProviderPatchIn
+    fun patchV1AdminCatalogProvidersByNameRequestConfig(name: kotlin.String, providerPatchIn: ProviderPatchIn) : RequestConfig<ProviderPatchIn> {
+        val localVariableBody = providerPatchIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -5862,29 +5595,31 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/catalog/providers/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/affiliates/{id}/approve
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Approves an affiliate and MINTS its referral code — the moment the partner has a working share link and starts accruing.
+     * Approves an affiliate and MINTS its referral code — the moment the partner has a working share link and starts accruing.  The code is taken from the body if one is given, else the vanity code the applicant requested, else a slug derived for them. Codes are ONE global namespace, so a taken code is a 409 and nothing is approved. The minted code is also mirrored as a link row so click tracking is uniform across every code the affiliate holds; that mirror is best-effort and its failure never fails the approval.  Approval is what makes an affiliate eligible: before it, attribution against its code does not resolve and no sweep accrues to it. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate to approve, from the path.
+     * @param approval 
+     * @return AffiliateOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAffiliatesByIdApprove(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AdminAffiliatesByIdApproveWithHttpInfo(id = id)
+    fun postV1AdminAffiliatesByIdApprove(id: kotlin.String, approval: Approval) : AffiliateOut {
+        val localVarResponse = postV1AdminAffiliatesByIdApproveWithHttpInfo(id = id, approval = approval)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5900,61 +5635,68 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/affiliates/{id}/approve
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Approves an affiliate and MINTS its referral code — the moment the partner has a working share link and starts accruing.
+     * Approves an affiliate and MINTS its referral code — the moment the partner has a working share link and starts accruing.  The code is taken from the body if one is given, else the vanity code the applicant requested, else a slug derived for them. Codes are ONE global namespace, so a taken code is a 409 and nothing is approved. The minted code is also mirrored as a link row so click tracking is uniform across every code the affiliate holds; that mirror is best-effort and its failure never fails the approval.  Approval is what makes an affiliate eligible: before it, attribution against its code does not resolve and no sweep accrues to it. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate to approve, from the path.
+     * @param approval 
+     * @return ApiResponse<AffiliateOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAffiliatesByIdApproveWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AdminAffiliatesByIdApproveRequestConfig(id = id)
+    fun postV1AdminAffiliatesByIdApproveWithHttpInfo(id: kotlin.String, approval: Approval) : ApiResponse<AffiliateOut?> {
+        val localVariableConfig = postV1AdminAffiliatesByIdApproveRequestConfig(id = id, approval = approval)
 
-        return request<Unit, Unit>(
+        return request<Approval, AffiliateOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAffiliatesByIdApprove
+     * To obtain the request config of the operation postV1AdminAffiliatesByIdApprove
      *
-     * @param id 
+     * @param id ID is the affiliate to approve, from the path.
+     * @param approval 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAffiliatesByIdApproveRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1AdminAffiliatesByIdApproveRequestConfig(id: kotlin.String, approval: Approval) : RequestConfig<Approval> {
+        val localVariableBody = approval
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/admin/affiliates/{id}/approve".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/affiliates/{id}/payout
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Pays out accrued commission and answers the payout row with the affiliate&#39;s updated balances.
+     * Pays out accrued commission and answers the payout row with the affiliate&#39;s updated balances.  The amount is reserved atomically against the affiliate&#39;s PENDING commission — accrued minus paid — so a payout can never exceed what is owed. The METHOD decides whether money actually moves: &#x60;credits&#x60; issues a commerce grant into the affiliate ORG&#39;s own wallet, tagged so the ledger can tell an affiliate payout apart from an admin or referral grant; every other method — wire, paypal and the rest — is RECORD-ONLY: the payout row and the balances move, the cash is disbursed out of band.  The amount is integer cents and must be positive. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate to pay, from the path.
+     * @param disbursal 
+     * @return PayoutOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAffiliatesByIdPayout(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AdminAffiliatesByIdPayoutWithHttpInfo(id = id)
+    fun postV1AdminAffiliatesByIdPayout(id: kotlin.String, disbursal: Disbursal) : PayoutOut {
+        val localVarResponse = postV1AdminAffiliatesByIdPayoutWithHttpInfo(id = id, disbursal = disbursal)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PayoutOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -5970,61 +5712,68 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/affiliates/{id}/payout
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Pays out accrued commission and answers the payout row with the affiliate&#39;s updated balances.
+     * Pays out accrued commission and answers the payout row with the affiliate&#39;s updated balances.  The amount is reserved atomically against the affiliate&#39;s PENDING commission — accrued minus paid — so a payout can never exceed what is owed. The METHOD decides whether money actually moves: &#x60;credits&#x60; issues a commerce grant into the affiliate ORG&#39;s own wallet, tagged so the ledger can tell an affiliate payout apart from an admin or referral grant; every other method — wire, paypal and the rest — is RECORD-ONLY: the payout row and the balances move, the cash is disbursed out of band.  The amount is integer cents and must be positive. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate to pay, from the path.
+     * @param disbursal 
+     * @return ApiResponse<PayoutOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAffiliatesByIdPayoutWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AdminAffiliatesByIdPayoutRequestConfig(id = id)
+    fun postV1AdminAffiliatesByIdPayoutWithHttpInfo(id: kotlin.String, disbursal: Disbursal) : ApiResponse<PayoutOut?> {
+        val localVariableConfig = postV1AdminAffiliatesByIdPayoutRequestConfig(id = id, disbursal = disbursal)
 
-        return request<Unit, Unit>(
+        return request<Disbursal, PayoutOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAffiliatesByIdPayout
+     * To obtain the request config of the operation postV1AdminAffiliatesByIdPayout
      *
-     * @param id 
+     * @param id ID is the affiliate to pay, from the path.
+     * @param disbursal 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAffiliatesByIdPayoutRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1AdminAffiliatesByIdPayoutRequestConfig(id: kotlin.String, disbursal: Disbursal) : RequestConfig<Disbursal> {
+        val localVariableBody = disbursal
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/admin/affiliates/{id}/payout".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/affiliates/{id}/rate
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Sets one affiliate&#39;s DIRECT commission rate, in basis points of Hanzo&#39;s margin.
+     * Sets one affiliate&#39;s DIRECT commission rate, in basis points of Hanzo&#39;s margin.  The rate is CAPPED so that the direct rate plus the platform-wide second- and third-level rates can never exceed the whole margin — the structural guarantee that everything paid on one source event stays inside the margin actually earned. The cap is resolved from the rates in force at the moment of the call and quoted in the refusal, because those switches move; a hardcoded bound would start lying the moment somebody edits the schedule.  Only the direct level is per-affiliate. The second and third levels are platform switches and are not settable here. The change applies to FUTURE accruals — commission already latched for a period is not recomputed. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate whose direct rate moves, from the path.
+     * @param rateSet 
+     * @return AffiliateOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAffiliatesByIdRate(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AdminAffiliatesByIdRateWithHttpInfo(id = id)
+    fun postV1AdminAffiliatesByIdRate(id: kotlin.String, rateSet: RateSet) : AffiliateOut {
+        val localVarResponse = postV1AdminAffiliatesByIdRateWithHttpInfo(id = id, rateSet = rateSet)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6040,61 +5789,67 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/affiliates/{id}/rate
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Sets one affiliate&#39;s DIRECT commission rate, in basis points of Hanzo&#39;s margin.
+     * Sets one affiliate&#39;s DIRECT commission rate, in basis points of Hanzo&#39;s margin.  The rate is CAPPED so that the direct rate plus the platform-wide second- and third-level rates can never exceed the whole margin — the structural guarantee that everything paid on one source event stays inside the margin actually earned. The cap is resolved from the rates in force at the moment of the call and quoted in the refusal, because those switches move; a hardcoded bound would start lying the moment somebody edits the schedule.  Only the direct level is per-affiliate. The second and third levels are platform switches and are not settable here. The change applies to FUTURE accruals — commission already latched for a period is not recomputed. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate whose direct rate moves, from the path.
+     * @param rateSet 
+     * @return ApiResponse<AffiliateOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAffiliatesByIdRateWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AdminAffiliatesByIdRateRequestConfig(id = id)
+    fun postV1AdminAffiliatesByIdRateWithHttpInfo(id: kotlin.String, rateSet: RateSet) : ApiResponse<AffiliateOut?> {
+        val localVariableConfig = postV1AdminAffiliatesByIdRateRequestConfig(id = id, rateSet = rateSet)
 
-        return request<Unit, Unit>(
+        return request<RateSet, AffiliateOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAffiliatesByIdRate
+     * To obtain the request config of the operation postV1AdminAffiliatesByIdRate
      *
-     * @param id 
+     * @param id ID is the affiliate whose direct rate moves, from the path.
+     * @param rateSet 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAffiliatesByIdRateRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1AdminAffiliatesByIdRateRequestConfig(id: kotlin.String, rateSet: RateSet) : RequestConfig<RateSet> {
+        val localVariableBody = rateSet
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/admin/affiliates/{id}/rate".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/affiliates/{id}/suspend
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Suspends an affiliate: it stops accruing on the next sweep, and its code stops resolving for new attributions.
+     * Suspends an affiliate: it stops accruing on the next sweep, and its code stops resolving for new attributions.  It CLAWS NOTHING BACK. Commission already accrued stays accrued and stays payable, and existing attribution edges are left standing — suspension ends earning, it does not unwind history. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate&#39;s server-minted handle, \&quot;aff_\&quot;-prefixed.
+     * @return AffiliateOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAffiliatesByIdSuspend(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AdminAffiliatesByIdSuspendWithHttpInfo(id = id)
+    fun postV1AdminAffiliatesByIdSuspend(id: kotlin.String) : AffiliateOut {
+        val localVarResponse = postV1AdminAffiliatesByIdSuspendWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6110,60 +5865,63 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/affiliates/{id}/suspend
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Suspends an affiliate: it stops accruing on the next sweep, and its code stops resolving for new attributions.
+     * Suspends an affiliate: it stops accruing on the next sweep, and its code stops resolving for new attributions.  It CLAWS NOTHING BACK. Commission already accrued stays accrued and stays payable, and existing attribution edges are left standing — suspension ends earning, it does not unwind history. PLATFORM SUDO ONLY. Audited.
+     * @param id ID is the affiliate&#39;s server-minted handle, \&quot;aff_\&quot;-prefixed.
+     * @return ApiResponse<AffiliateOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAffiliatesByIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AdminAffiliatesByIdSuspendRequestConfig(id = id)
+    fun postV1AdminAffiliatesByIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<AffiliateOut?> {
+        val localVariableConfig = postV1AdminAffiliatesByIdSuspendRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, AffiliateOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAffiliatesByIdSuspend
+     * To obtain the request config of the operation postV1AdminAffiliatesByIdSuspend
      *
-     * @param id 
+     * @param id ID is the affiliate&#39;s server-minted handle, \&quot;aff_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAffiliatesByIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AdminAffiliatesByIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/admin/affiliates/{id}/suspend".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/affiliates/sweep
-     * 
-     * 
-     * @return void
+     * Runs the accrual: for each referred org it reads that org&#39;s metered spend for the current period and accrues commission to every affiliate up its referral chain, then answers how many sources were swept and how many NEW accruals landed.
+     * Runs the accrual: for each referred org it reads that org&#39;s metered spend for the current period and accrues commission to every affiliate up its referral chain, then answers how many sources were swept and how many NEW accruals landed.  This is the cron path, and it is LATCHED at most once per affiliate, source org and period — so re-running it inside the same period accrues nothing further. Safe to retry, and safe to run by hand beside the schedule.  Commission is a rate of Hanzo&#39;s MARGIN on that spend, never of the customer&#39;s gross bill, so every level&#39;s share summed over one source event stays within the margin actually earned and the customer&#39;s charge is untouched. Nothing accrues past the third upline level, and only an APPROVED affiliate accrues at all.  The same spend read drives the OSS author royalty — one read, both programs — so the answer reports royalties accrued alongside. PLATFORM SUDO ONLY. Bounded per run; a source whose spend cannot be read is skipped and picked up next time, never half-accrued.
+     * @return AccrualsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAffiliatesSweep() : Unit {
-        val localVarResponse = cloudPostV1AdminAffiliatesSweepWithHttpInfo()
+    fun postV1AdminAffiliatesSweep() : AccrualsOut {
+        val localVarResponse = postV1AdminAffiliatesSweepWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccrualsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6179,48 +5937,50 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/affiliates/sweep
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Runs the accrual: for each referred org it reads that org&#39;s metered spend for the current period and accrues commission to every affiliate up its referral chain, then answers how many sources were swept and how many NEW accruals landed.
+     * Runs the accrual: for each referred org it reads that org&#39;s metered spend for the current period and accrues commission to every affiliate up its referral chain, then answers how many sources were swept and how many NEW accruals landed.  This is the cron path, and it is LATCHED at most once per affiliate, source org and period — so re-running it inside the same period accrues nothing further. Safe to retry, and safe to run by hand beside the schedule.  Commission is a rate of Hanzo&#39;s MARGIN on that spend, never of the customer&#39;s gross bill, so every level&#39;s share summed over one source event stays within the margin actually earned and the customer&#39;s charge is untouched. Nothing accrues past the third upline level, and only an APPROVED affiliate accrues at all.  The same spend read drives the OSS author royalty — one read, both programs — so the answer reports royalties accrued alongside. PLATFORM SUDO ONLY. Bounded per run; a source whose spend cannot be read is skipped and picked up next time, never half-accrued.
+     * @return ApiResponse<AccrualsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAffiliatesSweepWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AdminAffiliatesSweepRequestConfig()
+    fun postV1AdminAffiliatesSweepWithHttpInfo() : ApiResponse<AccrualsOut?> {
+        val localVariableConfig = postV1AdminAffiliatesSweepRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, AccrualsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAffiliatesSweep
+     * To obtain the request config of the operation postV1AdminAffiliatesSweep
      *
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAffiliatesSweepRequestConfig() : RequestConfig<Unit> {
+    fun postV1AdminAffiliatesSweepRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/admin/affiliates/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/authors/{id}/approve
-     * ApproveAuthor admits one author to EARNING, optionally on a negotiated royalty share.
-     * ApproveAuthor admits one author to EARNING, optionally on a negotiated royalty share. Until this runs, a connected author accrues nothing however many verified repositories they have.  A share override applies from here forward only — existing ledger rows keep the share that was applied when they were written, because a rate change must never rewrite what was already owed.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Admits one author to EARNING, optionally on a negotiated royalty share.
+     * Admits one author to EARNING, optionally on a negotiated royalty share. Until this runs, a connected author accrues nothing however many verified repositories they have.  A share override applies from here forward only — existing ledger rows keep the share that was applied when they were written, because a rate change must never rewrite what was already owed.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author to approve, from the path.
-     * @param cloudApproveRequest 
-     * @return CloudAuthorResult
+     * @param approveRequest 
+     * @return AuthorResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6229,11 +5989,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAuthorsIdApprove(id: kotlin.String, cloudApproveRequest: CloudApproveRequest) : CloudAuthorResult {
-        val localVarResponse = cloudPostV1AdminAuthorsIdApproveWithHttpInfo(id = id, cloudApproveRequest = cloudApproveRequest)
+    fun postV1AdminAuthorsByIdApprove(id: kotlin.String, approveRequest: ApproveRequest) : AuthorResult {
+        val localVarResponse = postV1AdminAuthorsByIdApproveWithHttpInfo(id = id, approveRequest = approveRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAuthorResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6249,33 +6009,33 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/authors/{id}/approve
-     * ApproveAuthor admits one author to EARNING, optionally on a negotiated royalty share.
-     * ApproveAuthor admits one author to EARNING, optionally on a negotiated royalty share. Until this runs, a connected author accrues nothing however many verified repositories they have.  A share override applies from here forward only — existing ledger rows keep the share that was applied when they were written, because a rate change must never rewrite what was already owed.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Admits one author to EARNING, optionally on a negotiated royalty share.
+     * Admits one author to EARNING, optionally on a negotiated royalty share. Until this runs, a connected author accrues nothing however many verified repositories they have.  A share override applies from here forward only — existing ledger rows keep the share that was applied when they were written, because a rate change must never rewrite what was already owed.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author to approve, from the path.
-     * @param cloudApproveRequest 
-     * @return ApiResponse<CloudAuthorResult?>
+     * @param approveRequest 
+     * @return ApiResponse<AuthorResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAuthorsIdApproveWithHttpInfo(id: kotlin.String, cloudApproveRequest: CloudApproveRequest) : ApiResponse<CloudAuthorResult?> {
-        val localVariableConfig = cloudPostV1AdminAuthorsIdApproveRequestConfig(id = id, cloudApproveRequest = cloudApproveRequest)
+    fun postV1AdminAuthorsByIdApproveWithHttpInfo(id: kotlin.String, approveRequest: ApproveRequest) : ApiResponse<AuthorResult?> {
+        val localVariableConfig = postV1AdminAuthorsByIdApproveRequestConfig(id = id, approveRequest = approveRequest)
 
-        return request<CloudApproveRequest, CloudAuthorResult>(
+        return request<ApproveRequest, AuthorResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAuthorsIdApprove
+     * To obtain the request config of the operation postV1AdminAuthorsByIdApprove
      *
      * @param id ID is the author to approve, from the path.
-     * @param cloudApproveRequest 
+     * @param approveRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAuthorsIdApproveRequestConfig(id: kotlin.String, cloudApproveRequest: CloudApproveRequest) : RequestConfig<CloudApproveRequest> {
-        val localVariableBody = cloudApproveRequest
+    fun postV1AdminAuthorsByIdApproveRequestConfig(id: kotlin.String, approveRequest: ApproveRequest) : RequestConfig<ApproveRequest> {
+        val localVariableBody = approveRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -6286,18 +6046,18 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/approve".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/authors/{id}/payout
-     * PayAuthor records a payout of accrued royalty and settles it.
-     * PayAuthor records a payout of accrued royalty and settles it.  The amount is RESERVED against the author&#39;s pending royalty atomically before anything is paid, so a payout can never exceed what is owed even under concurrent calls. An external author&#39;s payout is then BACKED against the platform reserve fund — a second, independent guard — and refused with 402 if the reserve cannot cover it, with the reservation voided. A \&quot;credits\&quot; method issues the actual wallet grant after both guards; a cash method is record-only. A first-party (treasury) author&#39;s royalty is realized into Hanzo&#39;s own reserve instead of an external wallet, and every payout row discloses which of the three it was.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Records a payout of accrued royalty and settles it.
+     * Records a payout of accrued royalty and settles it.  The amount is RESERVED against the author&#39;s pending royalty atomically before anything is paid, so a payout can never exceed what is owed even under concurrent calls. An external author&#39;s payout is then BACKED against the platform reserve fund — a second, independent guard — and refused with 402 if the reserve cannot cover it, with the reservation voided. A \&quot;credits\&quot; method issues the actual wallet grant after both guards; a cash method is record-only. A first-party (treasury) author&#39;s royalty is realized into Hanzo&#39;s own reserve instead of an external wallet, and every payout row discloses which of the three it was.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author to pay, from the path.
-     * @param cloudPayoutRequest 
-     * @return CloudPayoutResult
+     * @param payoutRequest 
+     * @return PayoutResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6306,11 +6066,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAuthorsIdPayout(id: kotlin.String, cloudPayoutRequest: CloudPayoutRequest) : CloudPayoutResult {
-        val localVarResponse = cloudPostV1AdminAuthorsIdPayoutWithHttpInfo(id = id, cloudPayoutRequest = cloudPayoutRequest)
+    fun postV1AdminAuthorsByIdPayout(id: kotlin.String, payoutRequest: PayoutRequest) : PayoutResult {
+        val localVarResponse = postV1AdminAuthorsByIdPayoutWithHttpInfo(id = id, payoutRequest = payoutRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPayoutResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PayoutResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6326,33 +6086,33 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/authors/{id}/payout
-     * PayAuthor records a payout of accrued royalty and settles it.
-     * PayAuthor records a payout of accrued royalty and settles it.  The amount is RESERVED against the author&#39;s pending royalty atomically before anything is paid, so a payout can never exceed what is owed even under concurrent calls. An external author&#39;s payout is then BACKED against the platform reserve fund — a second, independent guard — and refused with 402 if the reserve cannot cover it, with the reservation voided. A \&quot;credits\&quot; method issues the actual wallet grant after both guards; a cash method is record-only. A first-party (treasury) author&#39;s royalty is realized into Hanzo&#39;s own reserve instead of an external wallet, and every payout row discloses which of the three it was.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Records a payout of accrued royalty and settles it.
+     * Records a payout of accrued royalty and settles it.  The amount is RESERVED against the author&#39;s pending royalty atomically before anything is paid, so a payout can never exceed what is owed even under concurrent calls. An external author&#39;s payout is then BACKED against the platform reserve fund — a second, independent guard — and refused with 402 if the reserve cannot cover it, with the reservation voided. A \&quot;credits\&quot; method issues the actual wallet grant after both guards; a cash method is record-only. A first-party (treasury) author&#39;s royalty is realized into Hanzo&#39;s own reserve instead of an external wallet, and every payout row discloses which of the three it was.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author to pay, from the path.
-     * @param cloudPayoutRequest 
-     * @return ApiResponse<CloudPayoutResult?>
+     * @param payoutRequest 
+     * @return ApiResponse<PayoutResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAuthorsIdPayoutWithHttpInfo(id: kotlin.String, cloudPayoutRequest: CloudPayoutRequest) : ApiResponse<CloudPayoutResult?> {
-        val localVariableConfig = cloudPostV1AdminAuthorsIdPayoutRequestConfig(id = id, cloudPayoutRequest = cloudPayoutRequest)
+    fun postV1AdminAuthorsByIdPayoutWithHttpInfo(id: kotlin.String, payoutRequest: PayoutRequest) : ApiResponse<PayoutResult?> {
+        val localVariableConfig = postV1AdminAuthorsByIdPayoutRequestConfig(id = id, payoutRequest = payoutRequest)
 
-        return request<CloudPayoutRequest, CloudPayoutResult>(
+        return request<PayoutRequest, PayoutResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAuthorsIdPayout
+     * To obtain the request config of the operation postV1AdminAuthorsByIdPayout
      *
      * @param id ID is the author to pay, from the path.
-     * @param cloudPayoutRequest 
+     * @param payoutRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAuthorsIdPayoutRequestConfig(id: kotlin.String, cloudPayoutRequest: CloudPayoutRequest) : RequestConfig<CloudPayoutRequest> {
-        val localVariableBody = cloudPayoutRequest
+    fun postV1AdminAuthorsByIdPayoutRequestConfig(id: kotlin.String, payoutRequest: PayoutRequest) : RequestConfig<PayoutRequest> {
+        val localVariableBody = payoutRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -6363,17 +6123,17 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/payout".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/authors/{id}/suspend
-     * SuspendAuthor stops one author earning.
-     * SuspendAuthor stops one author earning. Their record, verified claims and ledger are untouched — suspension halts future accrual, it does not erase what was already owed, and it does not delete the evidence behind it.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Stops one author earning.
+     * Stops one author earning. Their record, verified claims and ledger are untouched — suspension halts future accrual, it does not erase what was already owed, and it does not delete the evidence behind it.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author record&#39;s handle, \&quot;aut_\&quot;-prefixed.
-     * @return CloudAuthorResult
+     * @return AuthorResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6382,11 +6142,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAuthorsIdSuspend(id: kotlin.String) : CloudAuthorResult {
-        val localVarResponse = cloudPostV1AdminAuthorsIdSuspendWithHttpInfo(id = id)
+    fun postV1AdminAuthorsByIdSuspend(id: kotlin.String) : AuthorResult {
+        val localVarResponse = postV1AdminAuthorsByIdSuspendWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAuthorResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6402,30 +6162,30 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/authors/{id}/suspend
-     * SuspendAuthor stops one author earning.
-     * SuspendAuthor stops one author earning. Their record, verified claims and ledger are untouched — suspension halts future accrual, it does not erase what was already owed, and it does not delete the evidence behind it.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * Stops one author earning.
+     * Stops one author earning. Their record, verified claims and ledger are untouched — suspension halts future accrual, it does not erase what was already owed, and it does not delete the evidence behind it.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
      * @param id ID is the author record&#39;s handle, \&quot;aut_\&quot;-prefixed.
-     * @return ApiResponse<CloudAuthorResult?>
+     * @return ApiResponse<AuthorResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAuthorsIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<CloudAuthorResult?> {
-        val localVariableConfig = cloudPostV1AdminAuthorsIdSuspendRequestConfig(id = id)
+    fun postV1AdminAuthorsByIdSuspendWithHttpInfo(id: kotlin.String) : ApiResponse<AuthorResult?> {
+        val localVariableConfig = postV1AdminAuthorsByIdSuspendRequestConfig(id = id)
 
-        return request<Unit, CloudAuthorResult>(
+        return request<Unit, AuthorResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAuthorsIdSuspend
+     * To obtain the request config of the operation postV1AdminAuthorsByIdSuspend
      *
      * @param id ID is the author record&#39;s handle, \&quot;aut_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAuthorsIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AdminAuthorsByIdSuspendRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6436,16 +6196,16 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/{id}/suspend".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/authors/sweep
-     * SweepAuthorRoyalty runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.
-     * SweepAuthorRoyalty runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.  It is an OVERRIDE, not the mechanism: a background scheduler runs the same sweep on its own, and every author&#39;s dashboard read sweeps their own accruals lazily. This is the manual trigger for an operator who needs the numbers now. It is idempotent — the per-period latch means running it twice accrues nothing the second time.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
-     * @return CloudAuthorSweepResult
+     * Runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.
+     * Runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.  It is an OVERRIDE, not the mechanism: a background scheduler runs the same sweep on its own, and every author&#39;s dashboard read sweeps their own accruals lazily. This is the manual trigger for an operator who needs the numbers now. It is idempotent — the per-period latch means running it twice accrues nothing the second time.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * @return AuthorSweepResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6454,11 +6214,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminAuthorsSweep() : CloudAuthorSweepResult {
-        val localVarResponse = cloudPostV1AdminAuthorsSweepWithHttpInfo()
+    fun postV1AdminAuthorsSweep() : AuthorSweepResult {
+        val localVarResponse = postV1AdminAuthorsSweepWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAuthorSweepResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorSweepResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6474,28 +6234,28 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/authors/sweep
-     * SweepAuthorRoyalty runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.
-     * SweepAuthorRoyalty runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.  It is an OVERRIDE, not the mechanism: a background scheduler runs the same sweep on its own, and every author&#39;s dashboard read sweeps their own accruals lazily. This is the manual trigger for an operator who needs the numbers now. It is idempotent — the per-period latch means running it twice accrues nothing the second time.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
-     * @return ApiResponse<CloudAuthorSweepResult?>
+     * Runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.
+     * Runs the accrual sweep across every approved author: for each of their deploying orgs it computes this period&#39;s royalty from that org&#39;s metered spend and latches it at most once per period.  It is an OVERRIDE, not the mechanism: a background scheduler runs the same sweep on its own, and every author&#39;s dashboard read sweeps their own accruals lazily. This is the manual trigger for an operator who needs the numbers now. It is idempotent — the per-period latch means running it twice accrues nothing the second time.  A Hanzo platform operation: a caller who is not a SuperAdmin gets 403.
+     * @return ApiResponse<AuthorSweepResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminAuthorsSweepWithHttpInfo() : ApiResponse<CloudAuthorSweepResult?> {
-        val localVariableConfig = cloudPostV1AdminAuthorsSweepRequestConfig()
+    fun postV1AdminAuthorsSweepWithHttpInfo() : ApiResponse<AuthorSweepResult?> {
+        val localVariableConfig = postV1AdminAuthorsSweepRequestConfig()
 
-        return request<Unit, CloudAuthorSweepResult>(
+        return request<Unit, AuthorSweepResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminAuthorsSweep
+     * To obtain the request config of the operation postV1AdminAuthorsSweep
      *
      * @return RequestConfig
      */
-    fun cloudPostV1AdminAuthorsSweepRequestConfig() : RequestConfig<Unit> {
+    fun postV1AdminAuthorsSweepRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6506,16 +6266,16 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/authors/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/referrals/sweep
-     * Qualify-checks every pending referral and grants the ones that now qualify.
-     * Qualify-checks every pending referral and grants the ones that now qualify.  SuperAdmin only, fail-closed. This is the cron path: a referee QUALIFIES once they have made metered spend — the honest signal that they actually used the product rather than merely claiming a welcome grant — and qualifying grants the referrer and the referee their bonuses in one latched step.  The grant is backed against the platform reserve fund before it is latched, so an empty fund leaves the referral honestly pending rather than minting unbacked credit, and the latch makes it at-most-once: this sweep, a concurrent sweep and the lazy check on GET /v1/referrals can never double-pay. One pass is bounded, so a large backlog drains over several runs instead of wedging one request.  It reads nothing from the caller — the counters it returns are the whole result.
-     * @return CloudSweepEnvelope
+     * Qualify-checks every pending referral and advances the ones that now qualify.
+     * Qualify-checks every pending referral and advances the ones that now qualify.  SuperAdmin only, fail-closed. This is the cron path, and the ONLY path that advances a referral: a referee QUALIFIES once they have made metered spend — the honest signal that they actually used the product rather than merely signing up.  Qualifying moves NO money. It records that an attribution became a real customer; what is owed for that is an affiliate payable in commerce, settled by wire or to a connected wallet. One pass is bounded, so a large backlog drains over several runs instead of wedging one request, and the latch makes the transition at-most-once under a concurrent sweep.  It reads nothing from the caller — the counters it returns are the whole result.
+     * @return SweepEnvelope
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6524,11 +6284,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminReferralsSweep() : CloudSweepEnvelope {
-        val localVarResponse = cloudPostV1AdminReferralsSweepWithHttpInfo()
+    fun postV1AdminReferralsSweep() : SweepEnvelope {
+        val localVarResponse = postV1AdminReferralsSweepWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSweepEnvelope
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SweepEnvelope
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6544,28 +6304,28 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/referrals/sweep
-     * Qualify-checks every pending referral and grants the ones that now qualify.
-     * Qualify-checks every pending referral and grants the ones that now qualify.  SuperAdmin only, fail-closed. This is the cron path: a referee QUALIFIES once they have made metered spend — the honest signal that they actually used the product rather than merely claiming a welcome grant — and qualifying grants the referrer and the referee their bonuses in one latched step.  The grant is backed against the platform reserve fund before it is latched, so an empty fund leaves the referral honestly pending rather than minting unbacked credit, and the latch makes it at-most-once: this sweep, a concurrent sweep and the lazy check on GET /v1/referrals can never double-pay. One pass is bounded, so a large backlog drains over several runs instead of wedging one request.  It reads nothing from the caller — the counters it returns are the whole result.
-     * @return ApiResponse<CloudSweepEnvelope?>
+     * Qualify-checks every pending referral and advances the ones that now qualify.
+     * Qualify-checks every pending referral and advances the ones that now qualify.  SuperAdmin only, fail-closed. This is the cron path, and the ONLY path that advances a referral: a referee QUALIFIES once they have made metered spend — the honest signal that they actually used the product rather than merely signing up.  Qualifying moves NO money. It records that an attribution became a real customer; what is owed for that is an affiliate payable in commerce, settled by wire or to a connected wallet. One pass is bounded, so a large backlog drains over several runs instead of wedging one request, and the latch makes the transition at-most-once under a concurrent sweep.  It reads nothing from the caller — the counters it returns are the whole result.
+     * @return ApiResponse<SweepEnvelope?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminReferralsSweepWithHttpInfo() : ApiResponse<CloudSweepEnvelope?> {
-        val localVariableConfig = cloudPostV1AdminReferralsSweepRequestConfig()
+    fun postV1AdminReferralsSweepWithHttpInfo() : ApiResponse<SweepEnvelope?> {
+        val localVariableConfig = postV1AdminReferralsSweepRequestConfig()
 
-        return request<Unit, CloudSweepEnvelope>(
+        return request<Unit, SweepEnvelope>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminReferralsSweep
+     * To obtain the request config of the operation postV1AdminReferralsSweep
      *
      * @return RequestConfig
      */
-    fun cloudPostV1AdminReferralsSweepRequestConfig() : RequestConfig<Unit> {
+    fun postV1AdminReferralsSweepRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6576,16 +6336,16 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/referrals/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/treasury/anchor
-     * AnchorTreasury commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status.
-     * AnchorTreasury commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status. When the chain path is wired it signs and submits the anchor transaction and records it; when it is not, it returns the root that WOULD be committed plus the exact remaining wiring step and records nothing false. A submit that fails still answers 200 with the anchor&#39;s own status set to \&quot;error\&quot; — the attempt is the product. SuperAdmin only.
-     * @return CloudAnchorOut
+     * Commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status.
+     * Commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status. When the chain path is wired it signs and submits the anchor transaction and records it; when it is not, it returns the root that WOULD be committed plus the exact remaining wiring step and records nothing false. A submit that fails still answers 200 with the anchor&#39;s own status set to \&quot;error\&quot; — the attempt is the product. SuperAdmin only.
+     * @return AnchorOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6594,11 +6354,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminTreasuryAnchor() : CloudAnchorOut {
-        val localVarResponse = cloudPostV1AdminTreasuryAnchorWithHttpInfo()
+    fun postV1AdminTreasuryAnchor() : AnchorOut {
+        val localVarResponse = postV1AdminTreasuryAnchorWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAnchorOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AnchorOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6614,28 +6374,28 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/treasury/anchor
-     * AnchorTreasury commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status.
-     * AnchorTreasury commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status. When the chain path is wired it signs and submits the anchor transaction and records it; when it is not, it returns the root that WOULD be committed plus the exact remaining wiring step and records nothing false. A submit that fails still answers 200 with the anchor&#39;s own status set to \&quot;error\&quot; — the attempt is the product. SuperAdmin only.
-     * @return ApiResponse<CloudAnchorOut?>
+     * Commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status.
+     * Commits the current ledger root to Hanzo L1, making the books tamper-evident on chain, and returns the anchoring status. When the chain path is wired it signs and submits the anchor transaction and records it; when it is not, it returns the root that WOULD be committed plus the exact remaining wiring step and records nothing false. A submit that fails still answers 200 with the anchor&#39;s own status set to \&quot;error\&quot; — the attempt is the product. SuperAdmin only.
+     * @return ApiResponse<AnchorOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminTreasuryAnchorWithHttpInfo() : ApiResponse<CloudAnchorOut?> {
-        val localVariableConfig = cloudPostV1AdminTreasuryAnchorRequestConfig()
+    fun postV1AdminTreasuryAnchorWithHttpInfo() : ApiResponse<AnchorOut?> {
+        val localVariableConfig = postV1AdminTreasuryAnchorRequestConfig()
 
-        return request<Unit, CloudAnchorOut>(
+        return request<Unit, AnchorOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminTreasuryAnchor
+     * To obtain the request config of the operation postV1AdminTreasuryAnchor
      *
      * @return RequestConfig
      */
-    fun cloudPostV1AdminTreasuryAnchorRequestConfig() : RequestConfig<Unit> {
+    fun postV1AdminTreasuryAnchorRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -6646,87 +6406,17 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/anchor",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/admin/treasury/bind-anchor
-     * BindTreasuryAnchorSigner makes the reserve&#39;s threshold MPC wallet the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas.
-     * BindTreasuryAnchorSigner makes the reserve&#39;s threshold MPC wallet the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas. It provisions-or-resolves the caller org&#39;s treasury wallet on the deployed MPC ring and installs it, so every later anchor commits the ledger root SIGNED BY THE QUORUM WALLET instead of a lone KMS key. Idempotent: a repeat resolves the same wallet. SuperAdmin only.
-     * @return CloudBindOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminTreasuryBindAnchor() : CloudBindOut {
-        val localVarResponse = cloudPostV1AdminTreasuryBindAnchorWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBindOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/admin/treasury/bind-anchor
-     * BindTreasuryAnchorSigner makes the reserve&#39;s threshold MPC wallet the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas.
-     * BindTreasuryAnchorSigner makes the reserve&#39;s threshold MPC wallet the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas. It provisions-or-resolves the caller org&#39;s treasury wallet on the deployed MPC ring and installs it, so every later anchor commits the ledger root SIGNED BY THE QUORUM WALLET instead of a lone KMS key. Idempotent: a repeat resolves the same wallet. SuperAdmin only.
-     * @return ApiResponse<CloudBindOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminTreasuryBindAnchorWithHttpInfo() : ApiResponse<CloudBindOut?> {
-        val localVariableConfig = cloudPostV1AdminTreasuryBindAnchorRequestConfig()
-
-        return request<Unit, CloudBindOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1AdminTreasuryBindAnchor
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1AdminTreasuryBindAnchorRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/admin/treasury/bind-anchor",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/treasury/policy
-     * SetTreasuryPolicy sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy.
-     * SetTreasuryPolicy sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy. 0–10000; the change is audited. SuperAdmin only.
-     * @param cloudPolicyRequest 
-     * @return CloudPolicyOut
+     * Sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy.
+     * Sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy. 0–10000; the change is audited. SuperAdmin only.
+     * @param policyRequest 
+     * @return PolicyOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6735,11 +6425,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminTreasuryPolicy(cloudPolicyRequest: CloudPolicyRequest) : CloudPolicyOut {
-        val localVarResponse = cloudPostV1AdminTreasuryPolicyWithHttpInfo(cloudPolicyRequest = cloudPolicyRequest)
+    fun postV1AdminTreasuryPolicy(policyRequest: PolicyRequest) : PolicyOut {
+        val localVarResponse = postV1AdminTreasuryPolicyWithHttpInfo(policyRequest = policyRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPolicyOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PolicyOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6755,31 +6445,31 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/treasury/policy
-     * SetTreasuryPolicy sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy.
-     * SetTreasuryPolicy sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy. 0–10000; the change is audited. SuperAdmin only.
-     * @param cloudPolicyRequest 
-     * @return ApiResponse<CloudPolicyOut?>
+     * Sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy.
+     * Sets the revenue-share basis points a sweep accrues into the reserve fund and returns the stored policy. 0–10000; the change is audited. SuperAdmin only.
+     * @param policyRequest 
+     * @return ApiResponse<PolicyOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminTreasuryPolicyWithHttpInfo(cloudPolicyRequest: CloudPolicyRequest) : ApiResponse<CloudPolicyOut?> {
-        val localVariableConfig = cloudPostV1AdminTreasuryPolicyRequestConfig(cloudPolicyRequest = cloudPolicyRequest)
+    fun postV1AdminTreasuryPolicyWithHttpInfo(policyRequest: PolicyRequest) : ApiResponse<PolicyOut?> {
+        val localVariableConfig = postV1AdminTreasuryPolicyRequestConfig(policyRequest = policyRequest)
 
-        return request<CloudPolicyRequest, CloudPolicyOut>(
+        return request<PolicyRequest, PolicyOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminTreasuryPolicy
+     * To obtain the request config of the operation postV1AdminTreasuryPolicy
      *
-     * @param cloudPolicyRequest 
+     * @param policyRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminTreasuryPolicyRequestConfig(cloudPolicyRequest: CloudPolicyRequest) : RequestConfig<CloudPolicyRequest> {
-        val localVariableBody = cloudPolicyRequest
+    fun postV1AdminTreasuryPolicyRequestConfig(policyRequest: PolicyRequest) : RequestConfig<PolicyRequest> {
+        val localVariableBody = policyRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -6790,17 +6480,17 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/treasury/seed
-     * SeedTreasury injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote.
-     * SeedTreasury injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote. A repeat of the same ref is at-most-once and reports created&#x3D;false. SuperAdmin only.
-     * @param cloudSeedRequest 
-     * @return CloudSeedOut
+     * Injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote.
+     * Injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote. A repeat of the same ref is at-most-once and reports created&#x3D;false. SuperAdmin only.
+     * @param seedRequest 
+     * @return SeedOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6809,11 +6499,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminTreasurySeed(cloudSeedRequest: CloudSeedRequest) : CloudSeedOut {
-        val localVarResponse = cloudPostV1AdminTreasurySeedWithHttpInfo(cloudSeedRequest = cloudSeedRequest)
+    fun postV1AdminTreasurySeed(seedRequest: SeedRequest) : SeedOut {
+        val localVarResponse = postV1AdminTreasurySeedWithHttpInfo(seedRequest = seedRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSeedOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SeedOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6829,31 +6519,31 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/treasury/seed
-     * SeedTreasury injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote.
-     * SeedTreasury injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote. A repeat of the same ref is at-most-once and reports created&#x3D;false. SuperAdmin only.
-     * @param cloudSeedRequest 
-     * @return ApiResponse<CloudSeedOut?>
+     * Injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote.
+     * Injects bootstrap capital into the reserve fund so backed payouts can begin before the first revenue-share sweep, and returns the journal entry it wrote. A repeat of the same ref is at-most-once and reports created&#x3D;false. SuperAdmin only.
+     * @param seedRequest 
+     * @return ApiResponse<SeedOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminTreasurySeedWithHttpInfo(cloudSeedRequest: CloudSeedRequest) : ApiResponse<CloudSeedOut?> {
-        val localVariableConfig = cloudPostV1AdminTreasurySeedRequestConfig(cloudSeedRequest = cloudSeedRequest)
+    fun postV1AdminTreasurySeedWithHttpInfo(seedRequest: SeedRequest) : ApiResponse<SeedOut?> {
+        val localVariableConfig = postV1AdminTreasurySeedRequestConfig(seedRequest = seedRequest)
 
-        return request<CloudSeedRequest, CloudSeedOut>(
+        return request<SeedRequest, SeedOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminTreasurySeed
+     * To obtain the request config of the operation postV1AdminTreasurySeed
      *
-     * @param cloudSeedRequest 
+     * @param seedRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminTreasurySeedRequestConfig(cloudSeedRequest: CloudSeedRequest) : RequestConfig<CloudSeedRequest> {
-        val localVariableBody = cloudSeedRequest
+    fun postV1AdminTreasurySeedRequestConfig(seedRequest: SeedRequest) : RequestConfig<SeedRequest> {
+        val localVariableBody = seedRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -6864,17 +6554,17 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/seed",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/admin/treasury/sweep
-     * SweepTreasury posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved.
-     * SweepTreasury posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved. It is idempotent per period: a re-run of a period already swept accrues nothing and reports created&#x3D;false. SuperAdmin only.
-     * @param cloudSweepRequest 
-     * @return CloudSweepOut
+     * Posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved.
+     * Posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved. It is idempotent per period: a re-run of a period already swept accrues nothing and reports created&#x3D;false. SuperAdmin only.
+     * @param sweepRequest 
+     * @return SweepOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6883,11 +6573,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdminTreasurySweep(cloudSweepRequest: CloudSweepRequest) : CloudSweepOut {
-        val localVarResponse = cloudPostV1AdminTreasurySweepWithHttpInfo(cloudSweepRequest = cloudSweepRequest)
+    fun postV1AdminTreasurySweep(sweepRequest: SweepRequest) : SweepOut {
+        val localVarResponse = postV1AdminTreasurySweepWithHttpInfo(sweepRequest = sweepRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSweepOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SweepOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6903,31 +6593,31 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/admin/treasury/sweep
-     * SweepTreasury posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved.
-     * SweepTreasury posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved. It is idempotent per period: a re-run of a period already swept accrues nothing and reports created&#x3D;false. SuperAdmin only.
-     * @param cloudSweepRequest 
-     * @return ApiResponse<CloudSweepOut?>
+     * Posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved.
+     * Posts the revenue-share accrual for one period — revenue into the reserve fund, at the current policy&#39;s basis points — and returns what it moved. It is idempotent per period: a re-run of a period already swept accrues nothing and reports created&#x3D;false. SuperAdmin only.
+     * @param sweepRequest 
+     * @return ApiResponse<SweepOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdminTreasurySweepWithHttpInfo(cloudSweepRequest: CloudSweepRequest) : ApiResponse<CloudSweepOut?> {
-        val localVariableConfig = cloudPostV1AdminTreasurySweepRequestConfig(cloudSweepRequest = cloudSweepRequest)
+    fun postV1AdminTreasurySweepWithHttpInfo(sweepRequest: SweepRequest) : ApiResponse<SweepOut?> {
+        val localVariableConfig = postV1AdminTreasurySweepRequestConfig(sweepRequest = sweepRequest)
 
-        return request<CloudSweepRequest, CloudSweepOut>(
+        return request<SweepRequest, SweepOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdminTreasurySweep
+     * To obtain the request config of the operation postV1AdminTreasurySweep
      *
-     * @param cloudSweepRequest 
+     * @param sweepRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AdminTreasurySweepRequestConfig(cloudSweepRequest: CloudSweepRequest) : RequestConfig<CloudSweepRequest> {
-        val localVariableBody = cloudSweepRequest
+    fun postV1AdminTreasurySweepRequestConfig(sweepRequest: SweepRequest) : RequestConfig<SweepRequest> {
+        val localVariableBody = sweepRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -6938,17 +6628,17 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/treasury/sweep",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/admin/enablement
-     * SetEnablement sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta.
-     * SetEnablement sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta. It is generic over kind, so the same call manages models, providers and product features through the one registry. &#x60;off&#x60; is an absolute kill switch: a self-service opt-in can never re-open it. SuperAdmin only; every other caller is refused.
-     * @param cloudSetEnablementBody 
-     * @return CloudAdminEnablementItem
+     * Sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta.
+     * Sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta. It is generic over kind, so the same call manages models, providers and product features through the one registry. &#x60;off&#x60; is an absolute kill switch: a self-service opt-in can never re-open it. SuperAdmin only; every other caller is refused.
+     * @param setEnablementBody 
+     * @return AdminEnablementItem
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -6957,11 +6647,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1AdminEnablement(cloudSetEnablementBody: CloudSetEnablementBody) : CloudAdminEnablementItem {
-        val localVarResponse = cloudPutV1AdminEnablementWithHttpInfo(cloudSetEnablementBody = cloudSetEnablementBody)
+    fun putV1AdminEnablement(setEnablementBody: SetEnablementBody) : AdminEnablementItem {
+        val localVarResponse = putV1AdminEnablementWithHttpInfo(setEnablementBody = setEnablementBody)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdminEnablementItem
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdminEnablementItem
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -6977,31 +6667,31 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/admin/enablement
-     * SetEnablement sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta.
-     * SetEnablement sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta. It is generic over kind, so the same call manages models, providers and product features through the one registry. &#x60;off&#x60; is an absolute kill switch: a self-service opt-in can never re-open it. SuperAdmin only; every other caller is refused.
-     * @param cloudSetEnablementBody 
-     * @return ApiResponse<CloudAdminEnablementItem?>
+     * Sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta.
+     * Sets one item&#39;s global enablement state — off, beta or ga — and optionally replaces the list of orgs granted its beta. It is generic over kind, so the same call manages models, providers and product features through the one registry. &#x60;off&#x60; is an absolute kill switch: a self-service opt-in can never re-open it. SuperAdmin only; every other caller is refused.
+     * @param setEnablementBody 
+     * @return ApiResponse<AdminEnablementItem?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1AdminEnablementWithHttpInfo(cloudSetEnablementBody: CloudSetEnablementBody) : ApiResponse<CloudAdminEnablementItem?> {
-        val localVariableConfig = cloudPutV1AdminEnablementRequestConfig(cloudSetEnablementBody = cloudSetEnablementBody)
+    fun putV1AdminEnablementWithHttpInfo(setEnablementBody: SetEnablementBody) : ApiResponse<AdminEnablementItem?> {
+        val localVariableConfig = putV1AdminEnablementRequestConfig(setEnablementBody = setEnablementBody)
 
-        return request<CloudSetEnablementBody, CloudAdminEnablementItem>(
+        return request<SetEnablementBody, AdminEnablementItem>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1AdminEnablement
+     * To obtain the request config of the operation putV1AdminEnablement
      *
-     * @param cloudSetEnablementBody 
+     * @param setEnablementBody 
      * @return RequestConfig
      */
-    fun cloudPutV1AdminEnablementRequestConfig(cloudSetEnablementBody: CloudSetEnablementBody) : RequestConfig<CloudSetEnablementBody> {
-        val localVariableBody = cloudSetEnablementBody
+    fun putV1AdminEnablementRequestConfig(setEnablementBody: SetEnablementBody) : RequestConfig<SetEnablementBody> {
+        val localVariableBody = setEnablementBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -7012,16 +6702,16 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/admin/enablement",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/s3/admin/info
-     * Server information
-     * Returns server version, storage capacity, and cluster status.
-     * @return S3AdminInfo200Response
+     * PUT /v1/admin/treasury/anchor/signer
+     * Installs the reserve&#39;s threshold MPC wallet as the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas.
+     * Installs the reserve&#39;s threshold MPC wallet as the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas. It provisions-or-resolves the caller org&#39;s treasury wallet on the deployed MPC ring and installs it, so every later anchor commits the ledger root SIGNED BY THE QUORUM WALLET instead of a lone KMS key. Idempotent — a repeat resolves the same wallet, which is why the address is a PUT. SuperAdmin only.
+     * @return SignerOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -7030,11 +6720,11 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun s3AdminInfo() : S3AdminInfo200Response {
-        val localVarResponse = s3AdminInfoWithHttpInfo()
+    fun putV1AdminTreasuryAnchorSigner() : SignerOut {
+        val localVarResponse = putV1AdminTreasuryAnchorSignerWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as S3AdminInfo200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SignerOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -7049,254 +6739,40 @@ class AdminApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * GET /v1/s3/admin/info
-     * Server information
-     * Returns server version, storage capacity, and cluster status.
-     * @return ApiResponse<S3AdminInfo200Response?>
+     * PUT /v1/admin/treasury/anchor/signer
+     * Installs the reserve&#39;s threshold MPC wallet as the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas.
+     * Installs the reserve&#39;s threshold MPC wallet as the signer for on-chain anchors, and returns its EVM address so an operator can fund it for gas. It provisions-or-resolves the caller org&#39;s treasury wallet on the deployed MPC ring and installs it, so every later anchor commits the ledger root SIGNED BY THE QUORUM WALLET instead of a lone KMS key. Idempotent — a repeat resolves the same wallet, which is why the address is a PUT. SuperAdmin only.
+     * @return ApiResponse<SignerOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun s3AdminInfoWithHttpInfo() : ApiResponse<S3AdminInfo200Response?> {
-        val localVariableConfig = s3AdminInfoRequestConfig()
+    fun putV1AdminTreasuryAnchorSignerWithHttpInfo() : ApiResponse<SignerOut?> {
+        val localVariableConfig = putV1AdminTreasuryAnchorSignerRequestConfig()
 
-        return request<Unit, S3AdminInfo200Response>(
+        return request<Unit, SignerOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation s3AdminInfo
+     * To obtain the request config of the operation putV1AdminTreasuryAnchorSigner
      *
      * @return RequestConfig
      */
-    fun s3AdminInfoRequestConfig() : RequestConfig<Unit> {
+    fun putV1AdminTreasuryAnchorSignerRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/s3/admin/info",
+            method = RequestMethod.PUT,
+            path = "/v1/admin/treasury/anchor/signer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/s3/admin/usage
-     * Storage usage
-     * Returns aggregate storage usage across all buckets.
-     * @return S3UsageInfo
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun s3AdminUsage() : S3UsageInfo {
-        val localVarResponse = s3AdminUsageWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as S3UsageInfo
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/s3/admin/usage
-     * Storage usage
-     * Returns aggregate storage usage across all buckets.
-     * @return ApiResponse<S3UsageInfo?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun s3AdminUsageWithHttpInfo() : ApiResponse<S3UsageInfo?> {
-        val localVariableConfig = s3AdminUsageRequestConfig()
-
-        return request<Unit, S3UsageInfo>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation s3AdminUsage
-     *
-     * @return RequestConfig
-     */
-    fun s3AdminUsageRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/s3/admin/usage",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/s3/admin/service-accounts
-     * Create a service account
-     * Create a service account with specific bucket access policies.
-     * @param s3CreateServiceAccountRequest 
-     * @return S3ServiceAccount
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun s3CreateServiceAccount(s3CreateServiceAccountRequest: S3CreateServiceAccountRequest) : S3ServiceAccount {
-        val localVarResponse = s3CreateServiceAccountWithHttpInfo(s3CreateServiceAccountRequest = s3CreateServiceAccountRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as S3ServiceAccount
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/s3/admin/service-accounts
-     * Create a service account
-     * Create a service account with specific bucket access policies.
-     * @param s3CreateServiceAccountRequest 
-     * @return ApiResponse<S3ServiceAccount?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun s3CreateServiceAccountWithHttpInfo(s3CreateServiceAccountRequest: S3CreateServiceAccountRequest) : ApiResponse<S3ServiceAccount?> {
-        val localVariableConfig = s3CreateServiceAccountRequestConfig(s3CreateServiceAccountRequest = s3CreateServiceAccountRequest)
-
-        return request<S3CreateServiceAccountRequest, S3ServiceAccount>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation s3CreateServiceAccount
-     *
-     * @param s3CreateServiceAccountRequest 
-     * @return RequestConfig
-     */
-    fun s3CreateServiceAccountRequestConfig(s3CreateServiceAccountRequest: S3CreateServiceAccountRequest) : RequestConfig<S3CreateServiceAccountRequest> {
-        val localVariableBody = s3CreateServiceAccountRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/s3/admin/service-accounts",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/s3/admin/service-accounts
-     * List service accounts
-     * 
-     * @return S3ListServiceAccounts200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun s3ListServiceAccounts() : S3ListServiceAccounts200Response {
-        val localVarResponse = s3ListServiceAccountsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as S3ListServiceAccounts200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/s3/admin/service-accounts
-     * List service accounts
-     * 
-     * @return ApiResponse<S3ListServiceAccounts200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun s3ListServiceAccountsWithHttpInfo() : ApiResponse<S3ListServiceAccounts200Response?> {
-        val localVariableConfig = s3ListServiceAccountsRequestConfig()
-
-        return request<Unit, S3ListServiceAccounts200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation s3ListServiceAccounts
-     *
-     * @return RequestConfig
-     */
-    fun s3ListServiceAccountsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/s3/admin/service-accounts",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

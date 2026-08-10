@@ -19,17 +19,17 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudArgoApp
-import ai.hanzo.cloud.model.CloudArgoAppList
-import ai.hanzo.cloud.model.CloudArgoClusterList
-import ai.hanzo.cloud.model.CloudArgoProjectList
-import ai.hanzo.cloud.model.CloudArgoRevisionMetadata
-import ai.hanzo.cloud.model.CloudArgoSyncWindows
-import ai.hanzo.cloud.model.CloudArgoTree
-import ai.hanzo.cloud.model.CloudConsoleSettings
-import ai.hanzo.cloud.model.CloudGitOpsPlane
-import ai.hanzo.cloud.model.CloudSessionUser
-import ai.hanzo.cloud.model.CloudVersionMessage
+import ai.hanzo.cloud.model.ArgoApp
+import ai.hanzo.cloud.model.ArgoAppList
+import ai.hanzo.cloud.model.ArgoClusterList
+import ai.hanzo.cloud.model.ArgoProjectList
+import ai.hanzo.cloud.model.ArgoRevisionMetadata
+import ai.hanzo.cloud.model.ArgoSyncWindows
+import ai.hanzo.cloud.model.ArgoTree
+import ai.hanzo.cloud.model.ConsoleSettings
+import ai.hanzo.cloud.model.GitOpsPlane
+import ai.hanzo.cloud.model.SessionUser
+import ai.hanzo.cloud.model.VersionMessage
 
 import com.google.gson.annotations.SerializedName
 
@@ -57,8 +57,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/account/can-i/{wildcard1}
-     * 
-     * 
+     * Compatibility answer the console UI asks before enabling its buttons
+     * Always answers &#x60;yes&#x60;, whatever resource, action or subresource the path names. It exists for the ArgoCD-compatible console, which asks this before enabling a control, and it is NOT the authorization decision: nothing downstream consults it, and every route that returns fleet data or mutates a CR carries its own gate. Reaching it at all already requires SuperAdmin, so a caller who can read the &#x60;yes&#x60; is one for whom it is true.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -68,8 +68,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployAccountCanIByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DeployAccountCanIByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1DeployAccountCanIByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1DeployAccountCanIByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -88,16 +88,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/account/can-i/{wildcard1}
-     * 
-     * 
+     * Compatibility answer the console UI asks before enabling its buttons
+     * Always answers &#x60;yes&#x60;, whatever resource, action or subresource the path names. It exists for the ArgoCD-compatible console, which asks this before enabling a control, and it is NOT the authorization decision: nothing downstream consults it, and every route that returns fleet data or mutates a CR carries its own gate. Reaching it at all already requires SuperAdmin, so a caller who can read the &#x60;yes&#x60; is one for whom it is true.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployAccountCanIByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DeployAccountCanIByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1DeployAccountCanIByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DeployAccountCanIByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -105,12 +105,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployAccountCanIByWildcard1
+     * To obtain the request config of the operation getV1DeployAccountCanIByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1DeployAccountCanIByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DeployAccountCanIByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -120,16 +120,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/account/can-i/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/applications
-     * ListDeployApplications returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).
-     * ListDeployApplications returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).  It is TENANT-SCOPED: a platform SuperAdmin reads every platform namespace, a validated org member reads only its own org&#39;s tenant namespace and only the App CRs labelled with its org, and anyone else is refused. A cross-tenant CR is never projected into an answer.
-     * @return CloudArgoAppList
+     * Returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).
+     * Returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).  It is TENANT-SCOPED: a platform SuperAdmin reads every platform namespace, a validated org member reads only its own org&#39;s tenant namespace and only the App CRs labelled with its org, and anyone else is refused. A cross-tenant CR is never projected into an answer.
+     * @return ArgoAppList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -138,11 +138,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployApplications() : CloudArgoAppList {
-        val localVarResponse = cloudGetV1DeployApplicationsWithHttpInfo()
+    fun getV1DeployApplications() : ArgoAppList {
+        val localVarResponse = getV1DeployApplicationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArgoAppList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoAppList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -158,28 +158,28 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/applications
-     * ListDeployApplications returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).
-     * ListDeployApplications returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).  It is TENANT-SCOPED: a platform SuperAdmin reads every platform namespace, a validated org member reads only its own org&#39;s tenant namespace and only the App CRs labelled with its org, and anyone else is refused. A cross-tenant CR is never projected into an answer.
-     * @return ApiResponse<CloudArgoAppList?>
+     * Returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).
+     * Returns the fleet as an argocd ApplicationList: one projected Application per operator App CR, carrying the image tag the CR DECLARES, the tag actually RUNNING in the cluster&#39;s Deployment, the reconciled health, and the sync verdict those two produce (declared &#x3D;&#x3D; running ⇒ Synced, both known and different ⇒ OutOfSync, either unknown ⇒ Unknown).  It is TENANT-SCOPED: a platform SuperAdmin reads every platform namespace, a validated org member reads only its own org&#39;s tenant namespace and only the App CRs labelled with its org, and anyone else is refused. A cross-tenant CR is never projected into an answer.
+     * @return ApiResponse<ArgoAppList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployApplicationsWithHttpInfo() : ApiResponse<CloudArgoAppList?> {
-        val localVariableConfig = cloudGetV1DeployApplicationsRequestConfig()
+    fun getV1DeployApplicationsWithHttpInfo() : ApiResponse<ArgoAppList?> {
+        val localVariableConfig = getV1DeployApplicationsRequestConfig()
 
-        return request<Unit, CloudArgoAppList>(
+        return request<Unit, ArgoAppList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployApplications
+     * To obtain the request config of the operation getV1DeployApplications
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployApplicationsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployApplicationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,17 +190,17 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/applications/{name}
-     * GetDeployApplication returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.
-     * GetDeployApplication returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.  It is TENANT-SCOPED, and a name that belongs to another org is reported NOT FOUND rather than refused: a 403 would confirm the application exists, so the route would become a cross-tenant existence oracle. A name that is not a DNS-1123 label is a 400 before any cluster read.
+     * Returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.
+     * Returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.  It is TENANT-SCOPED, and a name that belongs to another org is reported NOT FOUND rather than refused: a 403 would confirm the application exists, so the route would become a cross-tenant existence oracle. A name that is not a DNS-1123 label is a 400 before any cluster read.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
-     * @return CloudArgoApp
+     * @return ArgoApp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -209,11 +209,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployApplicationsName(name: kotlin.String) : CloudArgoApp {
-        val localVarResponse = cloudGetV1DeployApplicationsNameWithHttpInfo(name = name)
+    fun getV1DeployApplicationsByName(name: kotlin.String) : ArgoApp {
+        val localVarResponse = getV1DeployApplicationsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArgoApp
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoApp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -229,30 +229,30 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/applications/{name}
-     * GetDeployApplication returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.
-     * GetDeployApplication returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.  It is TENANT-SCOPED, and a name that belongs to another org is reported NOT FOUND rather than refused: a 403 would confirm the application exists, so the route would become a cross-tenant existence oracle. A name that is not a DNS-1123 label is a 400 before any cluster read.
+     * Returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.
+     * Returns ONE projected argocd Application by name, with status.resources filled in from its reconciled resource tree — which is what makes it the detail view rather than a row of the list.  It is TENANT-SCOPED, and a name that belongs to another org is reported NOT FOUND rather than refused: a 403 would confirm the application exists, so the route would become a cross-tenant existence oracle. A name that is not a DNS-1123 label is a 400 before any cluster read.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
-     * @return ApiResponse<CloudArgoApp?>
+     * @return ApiResponse<ArgoApp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployApplicationsNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudArgoApp?> {
-        val localVariableConfig = cloudGetV1DeployApplicationsNameRequestConfig(name = name)
+    fun getV1DeployApplicationsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoApp?> {
+        val localVariableConfig = getV1DeployApplicationsByNameRequestConfig(name = name)
 
-        return request<Unit, CloudArgoApp>(
+        return request<Unit, ArgoApp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployApplicationsName
+     * To obtain the request config of the operation getV1DeployApplicationsByName
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
-    fun cloudGetV1DeployApplicationsNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DeployApplicationsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -263,17 +263,17 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/applications/{name}/resource-tree
-     * GetDeployResourceTree returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.
-     * GetDeployResourceTree returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.  Secrets are DELIBERATELY not walked, so no materialized environment can ever appear in the tree. Tenant-scoped exactly like the application read: another org&#39;s name is not found, a malformed name is a 400.
+     * Returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.
+     * Returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.  Secrets are DELIBERATELY not walked, so no materialized environment can ever appear in the tree. Tenant-scoped exactly like the application read: another org&#39;s name is not found, a malformed name is a 400.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
-     * @return CloudArgoTree
+     * @return ArgoTree
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -282,11 +282,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployApplicationsNameResourceTree(name: kotlin.String) : CloudArgoTree {
-        val localVarResponse = cloudGetV1DeployApplicationsNameResourceTreeWithHttpInfo(name = name)
+    fun getV1DeployApplicationsByNameResourceTree(name: kotlin.String) : ArgoTree {
+        val localVarResponse = getV1DeployApplicationsByNameResourceTreeWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArgoTree
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoTree
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -302,30 +302,30 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/applications/{name}/resource-tree
-     * GetDeployResourceTree returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.
-     * GetDeployResourceTree returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.  Secrets are DELIBERATELY not walked, so no materialized environment can ever appear in the tree. Tenant-scoped exactly like the application read: another org&#39;s name is not found, a malformed name is a 400.
+     * Returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.
+     * Returns one application&#39;s argocd ApplicationTree: the objects the operator reconciled from its App CR, reached by ownerRef — the Deployment and, under it, the ReplicaSet and Pods, plus the Service, Ingress, HorizontalPodAutoscaler, PodDisruptionBudget and ConfigMaps it owns — each node carrying its parent edges and its health.  Secrets are DELIBERATELY not walked, so no materialized environment can ever appear in the tree. Tenant-scoped exactly like the application read: another org&#39;s name is not found, a malformed name is a 400.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
-     * @return ApiResponse<CloudArgoTree?>
+     * @return ApiResponse<ArgoTree?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployApplicationsNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<CloudArgoTree?> {
-        val localVariableConfig = cloudGetV1DeployApplicationsNameResourceTreeRequestConfig(name = name)
+    fun getV1DeployApplicationsByNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoTree?> {
+        val localVariableConfig = getV1DeployApplicationsByNameResourceTreeRequestConfig(name = name)
 
-        return request<Unit, CloudArgoTree>(
+        return request<Unit, ArgoTree>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployApplicationsNameResourceTree
+     * To obtain the request config of the operation getV1DeployApplicationsByNameResourceTree
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
-    fun cloudGetV1DeployApplicationsNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DeployApplicationsByNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -336,18 +336,18 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/resource-tree".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/applications/{name}/revisions/{revision}/metadata
-     * GetDeployRevisionMetadata returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.
-     * GetDeployRevisionMetadata returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.  An App CR is IMAGE-pinned rather than commit-pinned: the deploy names an image tag, and the git source this projection reports is the display-only manifest repo, not the application&#39;s own source. Nothing in this process can read a commit&#39;s author or message for an arbitrary revision. So rather than 404 (which the SPA turns into an error toast) or invent a git author, it answers the HONEST minimum: date is when the App CR was created, message is the revision asked for — with the empty revision and \&quot;HEAD\&quot; resolving to the image tag the CR declares — and author is empty. An over-long revision is truncated before it is echoed back.  Tenant-scoped exactly like the application read.
+     * Returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.
+     * Returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.  An App CR is IMAGE-pinned rather than commit-pinned: the deploy names an image tag, and the git source this projection reports is the display-only manifest repo, not the application&#39;s own source. Nothing in this process can read a commit&#39;s author or message for an arbitrary revision. So rather than 404 (which the SPA turns into an error toast) or invent a git author, it answers the HONEST minimum: date is when the App CR was created, message is the revision asked for — with the empty revision and \&quot;HEAD\&quot; resolving to the image tag the CR declares — and author is empty. An over-long revision is truncated before it is echoed back.  Tenant-scoped exactly like the application read.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label.
      * @param revision Revision is the revision to describe, from the path. The empty revision and \&quot;HEAD\&quot; both mean \&quot;whatever this application currently declares\&quot;.
-     * @return CloudArgoRevisionMetadata
+     * @return ArgoRevisionMetadata
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -356,11 +356,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployApplicationsNameRevisionsRevisionMetadata(name: kotlin.String, revision: kotlin.String) : CloudArgoRevisionMetadata {
-        val localVarResponse = cloudGetV1DeployApplicationsNameRevisionsRevisionMetadataWithHttpInfo(name = name, revision = revision)
+    fun getV1DeployApplicationsByNameRevisionsByRevisionMetadata(name: kotlin.String, revision: kotlin.String) : ArgoRevisionMetadata {
+        val localVarResponse = getV1DeployApplicationsByNameRevisionsByRevisionMetadataWithHttpInfo(name = name, revision = revision)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArgoRevisionMetadata
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoRevisionMetadata
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -376,32 +376,32 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/applications/{name}/revisions/{revision}/metadata
-     * GetDeployRevisionMetadata returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.
-     * GetDeployRevisionMetadata returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.  An App CR is IMAGE-pinned rather than commit-pinned: the deploy names an image tag, and the git source this projection reports is the display-only manifest repo, not the application&#39;s own source. Nothing in this process can read a commit&#39;s author or message for an arbitrary revision. So rather than 404 (which the SPA turns into an error toast) or invent a git author, it answers the HONEST minimum: date is when the App CR was created, message is the revision asked for — with the empty revision and \&quot;HEAD\&quot; resolving to the image tag the CR declares — and author is empty. An over-long revision is truncated before it is echoed back.  Tenant-scoped exactly like the application read.
+     * Returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.
+     * Returns the argocd RevisionMetadata for one revision of one application — what the detail view shows beside a revision.  An App CR is IMAGE-pinned rather than commit-pinned: the deploy names an image tag, and the git source this projection reports is the display-only manifest repo, not the application&#39;s own source. Nothing in this process can read a commit&#39;s author or message for an arbitrary revision. So rather than 404 (which the SPA turns into an error toast) or invent a git author, it answers the HONEST minimum: date is when the App CR was created, message is the revision asked for — with the empty revision and \&quot;HEAD\&quot; resolving to the image tag the CR declares — and author is empty. An over-long revision is truncated before it is echoed back.  Tenant-scoped exactly like the application read.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label.
      * @param revision Revision is the revision to describe, from the path. The empty revision and \&quot;HEAD\&quot; both mean \&quot;whatever this application currently declares\&quot;.
-     * @return ApiResponse<CloudArgoRevisionMetadata?>
+     * @return ApiResponse<ArgoRevisionMetadata?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployApplicationsNameRevisionsRevisionMetadataWithHttpInfo(name: kotlin.String, revision: kotlin.String) : ApiResponse<CloudArgoRevisionMetadata?> {
-        val localVariableConfig = cloudGetV1DeployApplicationsNameRevisionsRevisionMetadataRequestConfig(name = name, revision = revision)
+    fun getV1DeployApplicationsByNameRevisionsByRevisionMetadataWithHttpInfo(name: kotlin.String, revision: kotlin.String) : ApiResponse<ArgoRevisionMetadata?> {
+        val localVariableConfig = getV1DeployApplicationsByNameRevisionsByRevisionMetadataRequestConfig(name = name, revision = revision)
 
-        return request<Unit, CloudArgoRevisionMetadata>(
+        return request<Unit, ArgoRevisionMetadata>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployApplicationsNameRevisionsRevisionMetadata
+     * To obtain the request config of the operation getV1DeployApplicationsByNameRevisionsByRevisionMetadata
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label.
      * @param revision Revision is the revision to describe, from the path. The empty revision and \&quot;HEAD\&quot; both mean \&quot;whatever this application currently declares\&quot;.
      * @return RequestConfig
      */
-    fun cloudGetV1DeployApplicationsNameRevisionsRevisionMetadataRequestConfig(name: kotlin.String, revision: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DeployApplicationsByNameRevisionsByRevisionMetadataRequestConfig(name: kotlin.String, revision: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -412,17 +412,17 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/revisions/{revision}/metadata".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"revision"+"}", encodeURIComponent(revision.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/applications/{name}/syncwindows
-     * GetDeploySyncWindows returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.
-     * GetDeploySyncWindows returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.  This platform runs NO sync windows, so the answer is always the permissive empty one: canSync true, with no active and no assigned windows. The application is still resolved first, so a name that is not the caller&#39;s is not found rather than handed the static body — the endpoint discloses nothing about another tenant&#39;s fleet.
+     * Returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.
+     * Returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.  This platform runs NO sync windows, so the answer is always the permissive empty one: canSync true, with no active and no assigned windows. The application is still resolved first, so a name that is not the caller&#39;s is not found rather than handed the static body — the endpoint discloses nothing about another tenant&#39;s fleet.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
-     * @return CloudArgoSyncWindows
+     * @return ArgoSyncWindows
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -431,11 +431,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployApplicationsNameSyncwindows(name: kotlin.String) : CloudArgoSyncWindows {
-        val localVarResponse = cloudGetV1DeployApplicationsNameSyncwindowsWithHttpInfo(name = name)
+    fun getV1DeployApplicationsByNameSyncwindows(name: kotlin.String) : ArgoSyncWindows {
+        val localVarResponse = getV1DeployApplicationsByNameSyncwindowsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArgoSyncWindows
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoSyncWindows
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -451,30 +451,30 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/applications/{name}/syncwindows
-     * GetDeploySyncWindows returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.
-     * GetDeploySyncWindows returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.  This platform runs NO sync windows, so the answer is always the permissive empty one: canSync true, with no active and no assigned windows. The application is still resolved first, so a name that is not the caller&#39;s is not found rather than handed the static body — the endpoint discloses nothing about another tenant&#39;s fleet.
+     * Returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.
+     * Returns one application&#39;s argocd ApplicationSyncWindowState — the answer to \&quot;is anything blocking a sync of this application right now?\&quot;.  This platform runs NO sync windows, so the answer is always the permissive empty one: canSync true, with no active and no assigned windows. The application is still resolved first, so a name that is not the caller&#39;s is not found rather than handed the static body — the endpoint discloses nothing about another tenant&#39;s fleet.
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
-     * @return ApiResponse<CloudArgoSyncWindows?>
+     * @return ApiResponse<ArgoSyncWindows?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployApplicationsNameSyncwindowsWithHttpInfo(name: kotlin.String) : ApiResponse<CloudArgoSyncWindows?> {
-        val localVariableConfig = cloudGetV1DeployApplicationsNameSyncwindowsRequestConfig(name = name)
+    fun getV1DeployApplicationsByNameSyncwindowsWithHttpInfo(name: kotlin.String) : ApiResponse<ArgoSyncWindows?> {
+        val localVariableConfig = getV1DeployApplicationsByNameSyncwindowsRequestConfig(name = name)
 
-        return request<Unit, CloudArgoSyncWindows>(
+        return request<Unit, ArgoSyncWindows>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployApplicationsNameSyncwindows
+     * To obtain the request config of the operation getV1DeployApplicationsByNameSyncwindows
      *
      * @param name Name is the application to read, from the path. It must be a DNS-1123 label (lowercase alphanumerics and hyphens, starting and ending alphanumeric) — every operator App CR&#39;s metadata.name satisfies that, and anything else is a 400 rather than a lookup.
      * @return RequestConfig
      */
-    fun cloudGetV1DeployApplicationsNameSyncwindowsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DeployApplicationsByNameSyncwindowsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -485,15 +485,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/syncwindows".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/callback
-     * 
-     * 
+     * Finish the sign-in round trip and mint the console session
+     * Completes the redirect from IAM: it validates &#x60;state&#x60; against the single-use flow cookie in constant time, redeems the authorization code with the PKCE verifier, and then VERIFIES the resulting token exactly as this deployment&#39;s identity boundary will on every later request — so a token that would be refused next request fails here with the real reason instead of producing a sign-in loop. On success it sets the session cookie, bounded by the token&#39;s own expiry, and redirects to the validated return path.  It fails closed, and closes on the ADMIN ORG: a principal whose verified owner claim is not the reserved admin org is told plainly that it lacks the role (403) and no cookie is minted for it. That check is not the authorization decision — every gated route re-derives SuperAdmin from the verified JWT — it exists so nobody is handed a session that silently 403s everything. No flow in progress, or a mismatched &#x60;state&#x60;, is a 400; a refused or unexchangeable code is a 401.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -502,8 +502,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployCallback() : Unit {
-        val localVarResponse = cloudGetV1DeployCallbackWithHttpInfo()
+    fun getV1DeployCallback() : Unit {
+        val localVarResponse = getV1DeployCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -522,15 +522,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/callback
-     * 
-     * 
+     * Finish the sign-in round trip and mint the console session
+     * Completes the redirect from IAM: it validates &#x60;state&#x60; against the single-use flow cookie in constant time, redeems the authorization code with the PKCE verifier, and then VERIFIES the resulting token exactly as this deployment&#39;s identity boundary will on every later request — so a token that would be refused next request fails here with the real reason instead of producing a sign-in loop. On success it sets the session cookie, bounded by the token&#39;s own expiry, and redirects to the validated return path.  It fails closed, and closes on the ADMIN ORG: a principal whose verified owner claim is not the reserved admin org is told plainly that it lacks the role (403) and no cookie is minted for it. That check is not the authorization decision — every gated route re-derives SuperAdmin from the verified JWT — it exists so nobody is handed a session that silently 403s everything. No flow in progress, or a mismatched &#x60;state&#x60;, is a 400; a refused or unexchangeable code is a 401.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DeployCallbackRequestConfig()
+    fun getV1DeployCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DeployCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -538,11 +538,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployCallback
+     * To obtain the request config of the operation getV1DeployCallback
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -552,16 +552,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/clusters
-     * ListDeployClusters returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it.
-     * ListDeployClusters returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it. The in-cluster destination is always present, so an empty fleet still answers one cluster, and no cluster credential can appear — the projected type physically has no config field.  It is TENANT-SCOPED and reads the SAME App CRs the applications list reads: a platform SuperAdmin counts the whole fleet, a validated org member counts only its own org&#39;s applications, anyone else is refused.
-     * @return CloudArgoClusterList
+     * Returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it.
+     * Returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it. The in-cluster destination is always present, so an empty fleet still answers one cluster, and no cluster credential can appear — the projected type physically has no config field.  It is TENANT-SCOPED and reads the SAME App CRs the applications list reads: a platform SuperAdmin counts the whole fleet, a validated org member counts only its own org&#39;s applications, anyone else is refused.
+     * @return ArgoClusterList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -570,11 +570,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployClusters() : CloudArgoClusterList {
-        val localVarResponse = cloudGetV1DeployClustersWithHttpInfo()
+    fun getV1DeployClusters() : ArgoClusterList {
+        val localVarResponse = getV1DeployClustersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArgoClusterList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoClusterList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -590,28 +590,28 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/clusters
-     * ListDeployClusters returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it.
-     * ListDeployClusters returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it. The in-cluster destination is always present, so an empty fleet still answers one cluster, and no cluster credential can appear — the projected type physically has no config field.  It is TENANT-SCOPED and reads the SAME App CRs the applications list reads: a platform SuperAdmin counts the whole fleet, a validated org member counts only its own org&#39;s applications, anyone else is refused.
-     * @return ApiResponse<CloudArgoClusterList?>
+     * Returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it.
+     * Returns the argocd ClusterList of the destinations the caller&#39;s applications reconcile into: one entry per distinct destination server, carrying the count of applications reconciling into it. The in-cluster destination is always present, so an empty fleet still answers one cluster, and no cluster credential can appear — the projected type physically has no config field.  It is TENANT-SCOPED and reads the SAME App CRs the applications list reads: a platform SuperAdmin counts the whole fleet, a validated org member counts only its own org&#39;s applications, anyone else is refused.
+     * @return ApiResponse<ArgoClusterList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployClustersWithHttpInfo() : ApiResponse<CloudArgoClusterList?> {
-        val localVariableConfig = cloudGetV1DeployClustersRequestConfig()
+    fun getV1DeployClustersWithHttpInfo() : ApiResponse<ArgoClusterList?> {
+        val localVariableConfig = getV1DeployClustersRequestConfig()
 
-        return request<Unit, CloudArgoClusterList>(
+        return request<Unit, ArgoClusterList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployClusters
+     * To obtain the request config of the operation getV1DeployClusters
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployClustersRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployClustersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -622,16 +622,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/gitops
-     * GetDeployGitOps lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.
-     * GetDeployGitOps lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.  This is the layer ABOVE the application board, and the two disagree in exactly the case an operator most needs to see: main carries a new image pin, CD has not applied that commit yet, so every App CR still declares the old tag and the application board is legitimately \&quot;Synced\&quot; while the deploy has not landed. Only the applied revision here can show that.  installed is false — with a reason and an empty list — when the CD CRD is not served in this cluster. That is a FACT about the cluster rather than a failure of the request, so the caller can say \&quot;no CD plane here\&quot; instead of rendering an error it cannot act on; a genuine transport or RBAC failure still errors.  Read-only, and platform SuperAdmin only: the CD plane is fleet infrastructure with no tenant dimension. This view observes CD and never drives it — the sync policy is automated with self-heal, and the actionable verb an operator has is the per-application reconcile at POST /v1/deploy/applications/{name}/sync.
-     * @return CloudGitOpsPlane
+     * Lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.
+     * Lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.  This is the layer ABOVE the application board, and the two disagree in exactly the case an operator most needs to see: main carries a new image pin, CD has not applied that commit yet, so every App CR still declares the old tag and the application board is legitimately \&quot;Synced\&quot; while the deploy has not landed. Only the applied revision here can show that.  installed is false — with a reason and an empty list — when the CD CRD is not served in this cluster. That is a FACT about the cluster rather than a failure of the request, so the caller can say \&quot;no CD plane here\&quot; instead of rendering an error it cannot act on; a genuine transport or RBAC failure still errors.  Read-only, and platform SuperAdmin only: the CD plane is fleet infrastructure with no tenant dimension. This view observes CD and never drives it — the sync policy is automated with self-heal, and the actionable verb an operator has is the per-application reconcile at POST /v1/deploy/applications/{name}/sync.
+     * @return GitOpsPlane
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -640,11 +640,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployGitops() : CloudGitOpsPlane {
-        val localVarResponse = cloudGetV1DeployGitopsWithHttpInfo()
+    fun getV1DeployGitops() : GitOpsPlane {
+        val localVarResponse = getV1DeployGitopsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGitOpsPlane
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GitOpsPlane
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -660,28 +660,28 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/gitops
-     * GetDeployGitOps lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.
-     * GetDeployGitOps lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.  This is the layer ABOVE the application board, and the two disagree in exactly the case an operator most needs to see: main carries a new image pin, CD has not applied that commit yet, so every App CR still declares the old tag and the application board is legitimately \&quot;Synced\&quot; while the deploy has not landed. Only the applied revision here can show that.  installed is false — with a reason and an empty list — when the CD CRD is not served in this cluster. That is a FACT about the cluster rather than a failure of the request, so the caller can say \&quot;no CD plane here\&quot; instead of rendering an error it cannot act on; a genuine transport or RBAC failure still errors.  Read-only, and platform SuperAdmin only: the CD plane is fleet infrastructure with no tenant dimension. This view observes CD and never drives it — the sync policy is automated with self-heal, and the actionable verb an operator has is the per-application reconcile at POST /v1/deploy/applications/{name}/sync.
-     * @return ApiResponse<CloudGitOpsPlane?>
+     * Lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.
+     * Lists every Hanzo CD Application in the cluster: the git source each one polls, the commit it last APPLIED, how its last sync operation ended, and its recent deploy history — newest deploy first, ordered by namespace then name.  This is the layer ABOVE the application board, and the two disagree in exactly the case an operator most needs to see: main carries a new image pin, CD has not applied that commit yet, so every App CR still declares the old tag and the application board is legitimately \&quot;Synced\&quot; while the deploy has not landed. Only the applied revision here can show that.  installed is false — with a reason and an empty list — when the CD CRD is not served in this cluster. That is a FACT about the cluster rather than a failure of the request, so the caller can say \&quot;no CD plane here\&quot; instead of rendering an error it cannot act on; a genuine transport or RBAC failure still errors.  Read-only, and platform SuperAdmin only: the CD plane is fleet infrastructure with no tenant dimension. This view observes CD and never drives it — the sync policy is automated with self-heal, and the actionable verb an operator has is the per-application reconcile at POST /v1/deploy/applications/{name}/sync.
+     * @return ApiResponse<GitOpsPlane?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployGitopsWithHttpInfo() : ApiResponse<CloudGitOpsPlane?> {
-        val localVariableConfig = cloudGetV1DeployGitopsRequestConfig()
+    fun getV1DeployGitopsWithHttpInfo() : ApiResponse<GitOpsPlane?> {
+        val localVariableConfig = getV1DeployGitopsRequestConfig()
 
-        return request<Unit, CloudGitOpsPlane>(
+        return request<Unit, GitOpsPlane>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployGitops
+     * To obtain the request config of the operation getV1DeployGitops
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployGitopsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployGitopsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -692,15 +692,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/gitops",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/health
-     * 
-     * 
+     * Whether this control plane can actually reach the cluster it deploys to
+     * Reports the plane&#39;s real reachability: 200 only when the Kubernetes API server answers AND the App CRD is served, 503 with the same body shape otherwise, so a caller reads the same &#x60;k8s&#x60; and &#x60;crd&#x60; booleans either way rather than parsing an error envelope. It is a genuine dependency probe, not a process liveness ping — a running plane with no cluster behind it reports degraded.  This is the ONE unauthenticated route that reports state, because liveness must be probe-able without a JWT. It therefore discloses booleans only: the underlying failure — the API server address, an RBAC refusal — is logged server-side and never put on the wire.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -709,8 +709,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployHealth() : Unit {
-        val localVarResponse = cloudGetV1DeployHealthWithHttpInfo()
+    fun getV1DeployHealth() : Unit {
+        val localVarResponse = getV1DeployHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -729,15 +729,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/health
-     * 
-     * 
+     * Whether this control plane can actually reach the cluster it deploys to
+     * Reports the plane&#39;s real reachability: 200 only when the Kubernetes API server answers AND the App CRD is served, 503 with the same body shape otherwise, so a caller reads the same &#x60;k8s&#x60; and &#x60;crd&#x60; booleans either way rather than parsing an error envelope. It is a genuine dependency probe, not a process liveness ping — a running plane with no cluster behind it reports degraded.  This is the ONE unauthenticated route that reports state, because liveness must be probe-able without a JWT. It therefore discloses booleans only: the underlying failure — the API server address, an RBAC refusal — is logged server-side and never put on the wire.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DeployHealthRequestConfig()
+    fun getV1DeployHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DeployHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -745,11 +745,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployHealth
+     * To obtain the request config of the operation getV1DeployHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -759,15 +759,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/login
-     * 
-     * 
+     * Start the sign-in round trip for this console
+     * Redirects the browser to IAM&#39;s authorize endpoint, having minted a nonce and a PKCE verifier into a short-lived, single-use flow cookie. The nonce comes back as &#x60;state&#x60; and is what proves the code belongs to the round trip THIS browser started; the verifier never appears in the address bar.  Necessarily public — this is how a browser gets a principal for this host in the first place — and it grants nothing by itself. An optional &#x60;returnTo&#x60; names where to land afterwards and is run through the open-redirect guard, so only a same-host path survives. A deployment with no sign-in configured answers 503 rather than redirecting nowhere.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -776,8 +776,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployLogin() : Unit {
-        val localVarResponse = cloudGetV1DeployLoginWithHttpInfo()
+    fun getV1DeployLogin() : Unit {
+        val localVarResponse = getV1DeployLoginWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -796,15 +796,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/login
-     * 
-     * 
+     * Start the sign-in round trip for this console
+     * Redirects the browser to IAM&#39;s authorize endpoint, having minted a nonce and a PKCE verifier into a short-lived, single-use flow cookie. The nonce comes back as &#x60;state&#x60; and is what proves the code belongs to the round trip THIS browser started; the verifier never appears in the address bar.  Necessarily public — this is how a browser gets a principal for this host in the first place — and it grants nothing by itself. An optional &#x60;returnTo&#x60; names where to land afterwards and is run through the open-redirect guard, so only a same-host path survives. A deployment with no sign-in configured answers 503 rather than redirecting nowhere.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployLoginWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DeployLoginRequestConfig()
+    fun getV1DeployLoginWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DeployLoginRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -812,11 +812,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployLogin
+     * To obtain the request config of the operation getV1DeployLogin
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployLoginRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployLoginRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -826,16 +826,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/login",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/projects
-     * ListDeployProjects returns the argocd AppProjectList this console groups and filters applications by.
-     * ListDeployProjects returns the argocd AppProjectList this console groups and filters applications by. Projects are owned by Hanzo IAM rather than by argocd, so they are REFLECTED read-only from the IAM project store and nothing is persisted here: a validated org member gets its own organization&#39;s projects and a platform SuperAdmin gets every organization&#39;s.  A SuperAdmin whose IAM store is not reachable falls back to the real argoproj.io AppProject CRs when that CRD is served, and otherwise to one permissive synthesized project per distinct project name the App CRs declare. A project named \&quot;default\&quot; is always present, because that is what an App CR carrying no project label projects to.
-     * @return CloudArgoProjectList
+     * Returns the argocd AppProjectList this console groups and filters applications by.
+     * Returns the argocd AppProjectList this console groups and filters applications by. Projects are owned by Hanzo IAM rather than by argocd, so they are REFLECTED read-only from the IAM project store and nothing is persisted here: a validated org member gets its own organization&#39;s projects and a platform SuperAdmin gets every organization&#39;s.  A SuperAdmin whose IAM store is not reachable falls back to the real argoproj.io AppProject CRs when that CRD is served, and otherwise to one permissive synthesized project per distinct project name the App CRs declare. A project named \&quot;default\&quot; is always present, because that is what an App CR carrying no project label projects to.
+     * @return ArgoProjectList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -844,11 +844,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployProjects() : CloudArgoProjectList {
-        val localVarResponse = cloudGetV1DeployProjectsWithHttpInfo()
+    fun getV1DeployProjects() : ArgoProjectList {
+        val localVarResponse = getV1DeployProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudArgoProjectList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ArgoProjectList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -864,28 +864,28 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/projects
-     * ListDeployProjects returns the argocd AppProjectList this console groups and filters applications by.
-     * ListDeployProjects returns the argocd AppProjectList this console groups and filters applications by. Projects are owned by Hanzo IAM rather than by argocd, so they are REFLECTED read-only from the IAM project store and nothing is persisted here: a validated org member gets its own organization&#39;s projects and a platform SuperAdmin gets every organization&#39;s.  A SuperAdmin whose IAM store is not reachable falls back to the real argoproj.io AppProject CRs when that CRD is served, and otherwise to one permissive synthesized project per distinct project name the App CRs declare. A project named \&quot;default\&quot; is always present, because that is what an App CR carrying no project label projects to.
-     * @return ApiResponse<CloudArgoProjectList?>
+     * Returns the argocd AppProjectList this console groups and filters applications by.
+     * Returns the argocd AppProjectList this console groups and filters applications by. Projects are owned by Hanzo IAM rather than by argocd, so they are REFLECTED read-only from the IAM project store and nothing is persisted here: a validated org member gets its own organization&#39;s projects and a platform SuperAdmin gets every organization&#39;s.  A SuperAdmin whose IAM store is not reachable falls back to the real argoproj.io AppProject CRs when that CRD is served, and otherwise to one permissive synthesized project per distinct project name the App CRs declare. A project named \&quot;default\&quot; is always present, because that is what an App CR carrying no project label projects to.
+     * @return ApiResponse<ArgoProjectList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployProjectsWithHttpInfo() : ApiResponse<CloudArgoProjectList?> {
-        val localVariableConfig = cloudGetV1DeployProjectsRequestConfig()
+    fun getV1DeployProjectsWithHttpInfo() : ApiResponse<ArgoProjectList?> {
+        val localVariableConfig = getV1DeployProjectsRequestConfig()
 
-        return request<Unit, CloudArgoProjectList>(
+        return request<Unit, ArgoProjectList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployProjects
+     * To obtain the request config of the operation getV1DeployProjects
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -896,16 +896,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/session/userinfo
-     * GetDeploySession answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.
-     * GetDeploySession answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.  The anonymous answer carries loggedIn:false and a URL and NOTHING else: no username, no org, no groups, no issuer, no hint about who the caller might be or what exists in the cluster. Answering it costs nothing (the caller already knows whether it holds a cookie) and withholding it costs the whole sign-in journey.  The predicate is the platform SuperAdmin fact — the SAME one every other route here gates on, minted from a validated principal whose org is the reserved admin org — so a validated-but-not-SuperAdmin caller is reported as NOT signed in, which is the truth as this console defines it: they cannot use it.
-     * @return CloudSessionUser
+     * Answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.
+     * Answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.  The anonymous answer carries loggedIn:false and a URL and NOTHING else: no username, no org, no groups, no issuer, no hint about who the caller might be or what exists in the cluster. Answering it costs nothing (the caller already knows whether it holds a cookie) and withholding it costs the whole sign-in journey.  The predicate is the platform SuperAdmin fact — the SAME one every other route here gates on, minted from a validated principal whose org is the reserved admin org — so a validated-but-not-SuperAdmin caller is reported as NOT signed in, which is the truth as this console defines it: they cannot use it.
+     * @return SessionUser
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -914,11 +914,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeploySessionUserinfo() : CloudSessionUser {
-        val localVarResponse = cloudGetV1DeploySessionUserinfoWithHttpInfo()
+    fun getV1DeploySessionUserinfo() : SessionUser {
+        val localVarResponse = getV1DeploySessionUserinfoWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSessionUser
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SessionUser
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -934,28 +934,28 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/session/userinfo
-     * GetDeploySession answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.
-     * GetDeploySession answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.  The anonymous answer carries loggedIn:false and a URL and NOTHING else: no username, no org, no groups, no issuer, no hint about who the caller might be or what exists in the cluster. Answering it costs nothing (the caller already knows whether it holds a cookie) and withholding it costs the whole sign-in journey.  The predicate is the platform SuperAdmin fact — the SAME one every other route here gates on, minted from a validated principal whose org is the reserved admin org — so a validated-but-not-SuperAdmin caller is reported as NOT signed in, which is the truth as this console defines it: they cannot use it.
-     * @return ApiResponse<CloudSessionUser?>
+     * Answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.
+     * Answers \&quot;is this browser signed in, and if not where does it sign in?\&quot; — the dashboard SPA&#39;s bootstrap question, and the only route on this plane that answers for an anonymous caller.  The anonymous answer carries loggedIn:false and a URL and NOTHING else: no username, no org, no groups, no issuer, no hint about who the caller might be or what exists in the cluster. Answering it costs nothing (the caller already knows whether it holds a cookie) and withholding it costs the whole sign-in journey.  The predicate is the platform SuperAdmin fact — the SAME one every other route here gates on, minted from a validated principal whose org is the reserved admin org — so a validated-but-not-SuperAdmin caller is reported as NOT signed in, which is the truth as this console defines it: they cannot use it.
+     * @return ApiResponse<SessionUser?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeploySessionUserinfoWithHttpInfo() : ApiResponse<CloudSessionUser?> {
-        val localVariableConfig = cloudGetV1DeploySessionUserinfoRequestConfig()
+    fun getV1DeploySessionUserinfoWithHttpInfo() : ApiResponse<SessionUser?> {
+        val localVariableConfig = getV1DeploySessionUserinfoRequestConfig()
 
-        return request<Unit, CloudSessionUser>(
+        return request<Unit, SessionUser>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeploySessionUserinfo
+     * To obtain the request config of the operation getV1DeploySessionUserinfo
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeploySessionUserinfoRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeploySessionUserinfoRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -966,16 +966,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/session/userinfo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/settings
-     * GetDeploySettings returns the argocd AuthSettings object the dashboard SPA awaits before its first render.
-     * GetDeploySettings returns the argocd AuthSettings object the dashboard SPA awaits before its first render.  Every value is a CONSTANT of this projection rather than configuration read from anywhere: the SPA&#39;s own login form is reported disabled and its OIDC config null because Hanzo IAM owns identity at the edge and this console&#39;s sign-in is GET /v1/deploy/login, and every argocd feature the projection does not implement — status badges, Dex connectors, config-management plugins, kustomize versions, the exec terminal, apps-in-any-namespace, the hydrator, sync-with-replace — is reported off. Platform SuperAdmin only.
-     * @return CloudConsoleSettings
+     * Returns the argocd AuthSettings object the dashboard SPA awaits before its first render.
+     * Returns the argocd AuthSettings object the dashboard SPA awaits before its first render.  Every value is a CONSTANT of this projection rather than configuration read from anywhere: the SPA&#39;s own login form is reported disabled and its OIDC config null because Hanzo IAM owns identity at the edge and this console&#39;s sign-in is GET /v1/deploy/login, and every argocd feature the projection does not implement — status badges, Dex connectors, config-management plugins, kustomize versions, the exec terminal, apps-in-any-namespace, the hydrator, sync-with-replace — is reported off. Platform SuperAdmin only.
+     * @return ConsoleSettings
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -984,11 +984,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeploySettings() : CloudConsoleSettings {
-        val localVarResponse = cloudGetV1DeploySettingsWithHttpInfo()
+    fun getV1DeploySettings() : ConsoleSettings {
+        val localVarResponse = getV1DeploySettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConsoleSettings
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConsoleSettings
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1004,28 +1004,28 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/settings
-     * GetDeploySettings returns the argocd AuthSettings object the dashboard SPA awaits before its first render.
-     * GetDeploySettings returns the argocd AuthSettings object the dashboard SPA awaits before its first render.  Every value is a CONSTANT of this projection rather than configuration read from anywhere: the SPA&#39;s own login form is reported disabled and its OIDC config null because Hanzo IAM owns identity at the edge and this console&#39;s sign-in is GET /v1/deploy/login, and every argocd feature the projection does not implement — status badges, Dex connectors, config-management plugins, kustomize versions, the exec terminal, apps-in-any-namespace, the hydrator, sync-with-replace — is reported off. Platform SuperAdmin only.
-     * @return ApiResponse<CloudConsoleSettings?>
+     * Returns the argocd AuthSettings object the dashboard SPA awaits before its first render.
+     * Returns the argocd AuthSettings object the dashboard SPA awaits before its first render.  Every value is a CONSTANT of this projection rather than configuration read from anywhere: the SPA&#39;s own login form is reported disabled and its OIDC config null because Hanzo IAM owns identity at the edge and this console&#39;s sign-in is GET /v1/deploy/login, and every argocd feature the projection does not implement — status badges, Dex connectors, config-management plugins, kustomize versions, the exec terminal, apps-in-any-namespace, the hydrator, sync-with-replace — is reported off. Platform SuperAdmin only.
+     * @return ApiResponse<ConsoleSettings?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeploySettingsWithHttpInfo() : ApiResponse<CloudConsoleSettings?> {
-        val localVariableConfig = cloudGetV1DeploySettingsRequestConfig()
+    fun getV1DeploySettingsWithHttpInfo() : ApiResponse<ConsoleSettings?> {
+        val localVariableConfig = getV1DeploySettingsRequestConfig()
 
-        return request<Unit, CloudConsoleSettings>(
+        return request<Unit, ConsoleSettings>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeploySettings
+     * To obtain the request config of the operation getV1DeploySettings
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeploySettingsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeploySettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1036,15 +1036,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/stream/applications
-     * 
-     * 
+     * Live application fleet updates as Server-Sent Events
+     * Holds the connection open as text/event-stream and pushes one watch event per application change. It opens with an &#x60;ADDED&#x60; frame for every application currently present — the same projection the applications list serves, so a client renders a complete fleet from the stream alone — and then forwards &#x60;ADDED&#x60;, &#x60;MODIFIED&#x60; and &#x60;DELETED&#x60; as they happen, with a keep-alive every 25 seconds that is also how a vanished client is noticed and its watch torn down.  Read-only and TENANT-SCOPED, fail-closed: a platform SuperAdmin streams the whole fleet, a validated org member streams only its own org&#39;s applications, anyone else gets 403 and no stream. No cluster client configured is 503. If the deployment is not granted the watch verb the stream degrades to keep-alives only — the initial state still renders, it simply stops updating — rather than failing the connection.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1053,8 +1053,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployStreamApplications() : Unit {
-        val localVarResponse = cloudGetV1DeployStreamApplicationsWithHttpInfo()
+    fun getV1DeployStreamApplications() : Unit {
+        val localVarResponse = getV1DeployStreamApplicationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1073,15 +1073,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/stream/applications
-     * 
-     * 
+     * Live application fleet updates as Server-Sent Events
+     * Holds the connection open as text/event-stream and pushes one watch event per application change. It opens with an &#x60;ADDED&#x60; frame for every application currently present — the same projection the applications list serves, so a client renders a complete fleet from the stream alone — and then forwards &#x60;ADDED&#x60;, &#x60;MODIFIED&#x60; and &#x60;DELETED&#x60; as they happen, with a keep-alive every 25 seconds that is also how a vanished client is noticed and its watch torn down.  Read-only and TENANT-SCOPED, fail-closed: a platform SuperAdmin streams the whole fleet, a validated org member streams only its own org&#39;s applications, anyone else gets 403 and no stream. No cluster client configured is 503. If the deployment is not granted the watch verb the stream degrades to keep-alives only — the initial state still renders, it simply stops updating — rather than failing the connection.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployStreamApplicationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DeployStreamApplicationsRequestConfig()
+    fun getV1DeployStreamApplicationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DeployStreamApplicationsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1089,11 +1089,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployStreamApplications
+     * To obtain the request config of the operation getV1DeployStreamApplications
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployStreamApplicationsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployStreamApplicationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1103,15 +1103,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/stream/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/stream/applications/{name}/resource-tree
-     * 
-     * 
+     * Live resource tree for one application, as Server-Sent Events
+     * Holds the connection open as text/event-stream and pushes the application&#39;s whole resource tree — its live child objects and each one&#39;s derived health — once immediately and again on every keep-alive tick, so a client always has a current picture without polling. The refresh IS the keep-alive: it is a cheap rebuild rather than a watch, so there is no multi-resource watch to leak.  TENANT-SCOPED and fail-closed BEFORE the stream opens, which is the rule that matters: the caller&#39;s scope and the application&#39;s namespace are resolved first, so an unvalidated caller gets a plain 403 and an application belonging to another tenant gets a plain 404 — never an opened stream that emits nothing. A SuperAdmin reaches the whole fleet, an org member only its own org&#39;s applications. No cluster client configured is 503.
      * @param name 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1121,8 +1121,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployStreamApplicationsByNameResourceTree(name: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DeployStreamApplicationsByNameResourceTreeWithHttpInfo(name = name)
+    fun getV1DeployStreamApplicationsByNameResourceTree(name: kotlin.String) : Unit {
+        val localVarResponse = getV1DeployStreamApplicationsByNameResourceTreeWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1141,16 +1141,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/stream/applications/{name}/resource-tree
-     * 
-     * 
+     * Live resource tree for one application, as Server-Sent Events
+     * Holds the connection open as text/event-stream and pushes the application&#39;s whole resource tree — its live child objects and each one&#39;s derived health — once immediately and again on every keep-alive tick, so a client always has a current picture without polling. The refresh IS the keep-alive: it is a cheap rebuild rather than a watch, so there is no multi-resource watch to leak.  TENANT-SCOPED and fail-closed BEFORE the stream opens, which is the rule that matters: the caller&#39;s scope and the application&#39;s namespace are resolved first, so an unvalidated caller gets a plain 403 and an application belonging to another tenant gets a plain 404 — never an opened stream that emits nothing. A SuperAdmin reaches the whole fleet, an org member only its own org&#39;s applications. No cluster client configured is 503.
      * @param name 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployStreamApplicationsByNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DeployStreamApplicationsByNameResourceTreeRequestConfig(name = name)
+    fun getV1DeployStreamApplicationsByNameResourceTreeWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DeployStreamApplicationsByNameResourceTreeRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1158,12 +1158,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployStreamApplicationsByNameResourceTree
+     * To obtain the request config of the operation getV1DeployStreamApplicationsByNameResourceTree
      *
      * @param name 
      * @return RequestConfig
      */
-    fun cloudGetV1DeployStreamApplicationsByNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DeployStreamApplicationsByNameResourceTreeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1173,16 +1173,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/stream/applications/{name}/resource-tree".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/deploy/version
-     * GetDeployVersion returns the argocd VersionMessage the dashboard SPA reads at bootstrap.
-     * GetDeployVersion returns the argocd VersionMessage the dashboard SPA reads at bootstrap. There is no argocd binary behind this plane — it is a projection over operator App CRs — so the fields say so rather than describing a build: Version names the projection, BuildDate is the moment this response was generated, and Compiler/Platform/GoVersion are the constants the SPA tolerates rather than facts about this process. Platform SuperAdmin only.
-     * @return CloudVersionMessage
+     * Returns the argocd VersionMessage the dashboard SPA reads at bootstrap.
+     * Returns the argocd VersionMessage the dashboard SPA reads at bootstrap. There is no argocd binary behind this plane — it is a projection over operator App CRs — so the fields say so rather than describing a build: Version names the projection, BuildDate is the moment this response was generated, and Compiler/Platform/GoVersion are the constants the SPA tolerates rather than facts about this process. Platform SuperAdmin only.
+     * @return VersionMessage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1191,11 +1191,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DeployVersion() : CloudVersionMessage {
-        val localVarResponse = cloudGetV1DeployVersionWithHttpInfo()
+    fun getV1DeployVersion() : VersionMessage {
+        val localVarResponse = getV1DeployVersionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVersionMessage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VersionMessage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1211,28 +1211,28 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/deploy/version
-     * GetDeployVersion returns the argocd VersionMessage the dashboard SPA reads at bootstrap.
-     * GetDeployVersion returns the argocd VersionMessage the dashboard SPA reads at bootstrap. There is no argocd binary behind this plane — it is a projection over operator App CRs — so the fields say so rather than describing a build: Version names the projection, BuildDate is the moment this response was generated, and Compiler/Platform/GoVersion are the constants the SPA tolerates rather than facts about this process. Platform SuperAdmin only.
-     * @return ApiResponse<CloudVersionMessage?>
+     * Returns the argocd VersionMessage the dashboard SPA reads at bootstrap.
+     * Returns the argocd VersionMessage the dashboard SPA reads at bootstrap. There is no argocd binary behind this plane — it is a projection over operator App CRs — so the fields say so rather than describing a build: Version names the projection, BuildDate is the moment this response was generated, and Compiler/Platform/GoVersion are the constants the SPA tolerates rather than facts about this process. Platform SuperAdmin only.
+     * @return ApiResponse<VersionMessage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DeployVersionWithHttpInfo() : ApiResponse<CloudVersionMessage?> {
-        val localVariableConfig = cloudGetV1DeployVersionRequestConfig()
+    fun getV1DeployVersionWithHttpInfo() : ApiResponse<VersionMessage?> {
+        val localVariableConfig = getV1DeployVersionRequestConfig()
 
-        return request<Unit, CloudVersionMessage>(
+        return request<Unit, VersionMessage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DeployVersion
+     * To obtain the request config of the operation getV1DeployVersion
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DeployVersionRequestConfig() : RequestConfig<Unit> {
+    fun getV1DeployVersionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1243,15 +1243,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/version",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/deploy/applications/{name}/rollback
-     * 
-     * 
+     * The console&#39;s rollback control — today it requests a reconcile, nothing more
+     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release seam, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
      * @param name 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1261,8 +1261,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DeployApplicationsByNameRollback(name: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1DeployApplicationsByNameRollbackWithHttpInfo(name = name)
+    fun postV1DeployApplicationsByNameRollback(name: kotlin.String) : Unit {
+        val localVarResponse = postV1DeployApplicationsByNameRollbackWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1281,16 +1281,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/applications/{name}/rollback
-     * 
-     * 
+     * The console&#39;s rollback control — today it requests a reconcile, nothing more
+     * Performs exactly what the sync action performs: it stamps the sync-requested timestamp onto the application&#39;s App CR and answers the application re-projected. It does NOT select, pin or revert to a prior image tag, and that is the one thing to know before wiring anything to it — the name is the console&#39;s, the behaviour is the sync. Pinning a previous release rides the release seam, which this address does not call yet.  SuperAdmin-only and fail-closed, reading no request body, with an unknown application name a 404 and no cluster client a 503 — the same gate and the same failures as the sync it shares a handler with.
      * @param name 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DeployApplicationsByNameRollbackWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DeployApplicationsByNameRollbackRequestConfig(name = name)
+    fun postV1DeployApplicationsByNameRollbackWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DeployApplicationsByNameRollbackRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1298,12 +1298,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DeployApplicationsByNameRollback
+     * To obtain the request config of the operation postV1DeployApplicationsByNameRollback
      *
      * @param name 
      * @return RequestConfig
      */
-    fun cloudPostV1DeployApplicationsByNameRollbackRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postV1DeployApplicationsByNameRollbackRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1313,15 +1313,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/rollback".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/deploy/applications/{name}/sync
-     * 
-     * 
+     * Ask the operator to reconcile one application now
+     * Requests an immediate reconcile of one application by stamping a sync-requested timestamp onto its App CR, which the operator&#39;s watch observes, and answers the application re-projected. It ASKS, it does not apply: the operator performs the reconcile on its own clock, so a 200 means the request landed, not that the rollout finished — the returned row&#39;s running version still lags until it does. The CR is the desired source today, so this is a nudge; when git becomes the source the same address becomes apply-from-git.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or patched, and the write surface stays admin-only while the tenant surface is read-only reflection. It reads no request body. An unknown application name is a 404; no cluster client configured is a 503.
      * @param name 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1331,8 +1331,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DeployApplicationsByNameSync(name: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1DeployApplicationsByNameSyncWithHttpInfo(name = name)
+    fun postV1DeployApplicationsByNameSync(name: kotlin.String) : Unit {
+        val localVarResponse = postV1DeployApplicationsByNameSyncWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1351,16 +1351,16 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/applications/{name}/sync
-     * 
-     * 
+     * Ask the operator to reconcile one application now
+     * Requests an immediate reconcile of one application by stamping a sync-requested timestamp onto its App CR, which the operator&#39;s watch observes, and answers the application re-projected. It ASKS, it does not apply: the operator performs the reconcile on its own clock, so a 200 means the request landed, not that the rollout finished — the returned row&#39;s running version still lags until it does. The CR is the desired source today, so this is a nudge; when git becomes the source the same address becomes apply-from-git.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or patched, and the write surface stays admin-only while the tenant surface is read-only reflection. It reads no request body. An unknown application name is a 404; no cluster client configured is a 503.
      * @param name 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DeployApplicationsByNameSyncWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DeployApplicationsByNameSyncRequestConfig(name = name)
+    fun postV1DeployApplicationsByNameSyncWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DeployApplicationsByNameSyncRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1368,12 +1368,12 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DeployApplicationsByNameSync
+     * To obtain the request config of the operation postV1DeployApplicationsByNameSync
      *
      * @param name 
      * @return RequestConfig
      */
-    fun cloudPostV1DeployApplicationsByNameSyncRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postV1DeployApplicationsByNameSyncRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1383,15 +1383,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/applications/{name}/sync".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/deploy/logout
-     * 
-     * 
+     * End the console session on this host
+     * Clears this console&#39;s session cookie and answers the signed-out state with the sign-in URL to start again. IAM&#39;s own session is untouched — this ends the console session only, so signing back in may not prompt for credentials.  It is a POST because it changes state. As a GET it was reachable by a cross-site top-level navigation, which a SameSite&#x3D;Lax cookie still rides, so any page could sign a SuperAdmin out; a POST is not carried cross-site by that cookie.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1400,8 +1400,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DeployLogout() : Unit {
-        val localVarResponse = cloudPostV1DeployLogoutWithHttpInfo()
+    fun postV1DeployLogout() : Unit {
+        val localVarResponse = postV1DeployLogoutWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1420,15 +1420,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/logout
-     * 
-     * 
+     * End the console session on this host
+     * Clears this console&#39;s session cookie and answers the signed-out state with the sign-in URL to start again. IAM&#39;s own session is untouched — this ends the console session only, so signing back in may not prompt for credentials.  It is a POST because it changes state. As a GET it was reachable by a cross-site top-level navigation, which a SameSite&#x3D;Lax cookie still rides, so any page could sign a SuperAdmin out; a POST is not carried cross-site by that cookie.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DeployLogoutWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DeployLogoutRequestConfig()
+    fun postV1DeployLogoutWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DeployLogoutRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1436,11 +1436,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DeployLogout
+     * To obtain the request config of the operation postV1DeployLogout
      *
      * @return RequestConfig
      */
-    fun cloudPostV1DeployLogoutRequestConfig() : RequestConfig<Unit> {
+    fun postV1DeployLogoutRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1450,15 +1450,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/logout",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/deploy/reconcile
-     * 
-     * 
+     * Render the configured git source and apply it to the cluster, once
+     * Runs one full GitOps sync through the embedded engine — render the configured repo, ref and path, then three-way server-side apply with scoped prune — and answers the revision it applied, the source it came from, the declared/synced/pruned/failed counts and a per-resource result. This is the WRITE half of the plane: it mutates live cluster objects and, with prune enabled, deletes objects the source no longer declares.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or touched. The git source is read AS THE CALLER, so the source plane scopes the answer itself rather than trusting this one to have scoped it. It reads no request body; the source is configuration, not a parameter. A deployment with the engine switched off, or with no usable cluster config, answers 503; a failure to start, render or sync is a 502.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1467,8 +1467,8 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DeployReconcile() : Unit {
-        val localVarResponse = cloudPostV1DeployReconcileWithHttpInfo()
+    fun postV1DeployReconcile() : Unit {
+        val localVarResponse = postV1DeployReconcileWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1487,15 +1487,15 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/deploy/reconcile
-     * 
-     * 
+     * Render the configured git source and apply it to the cluster, once
+     * Runs one full GitOps sync through the embedded engine — render the configured repo, ref and path, then three-way server-side apply with scoped prune — and answers the revision it applied, the source it came from, the declared/synced/pruned/failed counts and a per-resource result. This is the WRITE half of the plane: it mutates live cluster objects and, with prune enabled, deletes objects the source no longer declares.  SuperAdmin-only and fail-closed — a non-SuperAdmin is refused before any cluster object is read or touched. The git source is read AS THE CALLER, so the source plane scopes the answer itself rather than trusting this one to have scoped it. It reads no request body; the source is configuration, not a parameter. A deployment with the engine switched off, or with no usable cluster config, answers 503; a failure to start, render or sync is a 502.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DeployReconcileWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DeployReconcileRequestConfig()
+    fun postV1DeployReconcileWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DeployReconcileRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1503,11 +1503,11 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DeployReconcile
+     * To obtain the request config of the operation postV1DeployReconcile
      *
      * @return RequestConfig
      */
-    fun cloudPostV1DeployReconcileRequestConfig() : RequestConfig<Unit> {
+    fun postV1DeployReconcileRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1517,7 +1517,7 @@ class DeployApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/deploy/reconcile",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

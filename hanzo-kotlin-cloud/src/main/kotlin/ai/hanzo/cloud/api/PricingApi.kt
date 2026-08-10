@@ -19,15 +19,15 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudPricingHealth
-import ai.hanzo.cloud.model.CloudPricingModelList
-import ai.hanzo.cloud.model.CloudPricingPlanList
-import ai.hanzo.cloud.model.CloudPricingPresetList
-import ai.hanzo.cloud.model.CloudPricingProviderList
-import ai.hanzo.cloud.model.CloudPricingRegionList
-import ai.hanzo.cloud.model.CloudPricingSyncOut
-import ai.hanzo.cloud.model.CloudPricingTierList
-import ai.hanzo.cloud.model.CloudPricingToolList
+import ai.hanzo.cloud.model.PricingHealth
+import ai.hanzo.cloud.model.PricingModelList
+import ai.hanzo.cloud.model.PricingPlanList
+import ai.hanzo.cloud.model.PricingPresetList
+import ai.hanzo.cloud.model.PricingProviderList
+import ai.hanzo.cloud.model.PricingRegionList
+import ai.hanzo.cloud.model.PricingSyncOut
+import ai.hanzo.cloud.model.PricingTierList
+import ai.hanzo.cloud.model.PricingToolList
 
 import com.google.gson.annotations.SerializedName
 
@@ -55,8 +55,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing
-     * GetPricing returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing.
-     * GetPricing returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing. Every model and provider it names is filtered to what the caller&#39;s org may see — the same gate the leaf routes apply, so this can never be an un-gated second source for what they hide.
+     * Returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing.
+     * Returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing. Every model and provider it names is filtered to what the caller&#39;s org may see — the same gate the leaf routes apply, so this can never be an un-gated second source for what they hide.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -66,8 +66,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Pricing() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PricingWithHttpInfo()
+    fun getV1Pricing() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -86,16 +86,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing
-     * GetPricing returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing.
-     * GetPricing returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing. Every model and provider it names is filtered to what the caller&#39;s org may see — the same gate the leaf routes apply, so this can never be an un-gated second source for what they hide.
+     * Returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing.
+     * Returns the whole pricing catalog in one document: Zen and third-party models, providers, model families, the free-model list, plan and infrastructure pricing. Every model and provider it names is filtered to what the caller&#39;s org may see — the same gate the leaf routes apply, so this can never be an un-gated second source for what they hide.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PricingRequestConfig()
+    fun getV1PricingWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -103,11 +103,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Pricing
+     * To obtain the request config of the operation getV1Pricing
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -118,16 +118,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/base
-     * ListBasePlans returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
-     * ListBasePlans returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
-     * @return CloudPricingPlanList
+     * Returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
+     * Returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
+     * @return PricingPlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -136,11 +136,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingBase() : CloudPricingPlanList {
-        val localVarResponse = cloudGetV1PricingBaseWithHttpInfo()
+    fun getV1PricingBase() : PricingPlanList {
+        val localVarResponse = getV1PricingBaseWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -156,28 +156,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/base
-     * ListBasePlans returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
-     * ListBasePlans returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
-     * @return ApiResponse<CloudPricingPlanList?>
+     * Returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
+     * Returns the Hanzo Base plans — the managed-instance tiers, each with its monthly and annual price, storage and request allowances and feature list.
+     * @return ApiResponse<PricingPlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingBaseWithHttpInfo() : ApiResponse<CloudPricingPlanList?> {
-        val localVariableConfig = cloudGetV1PricingBaseRequestConfig()
+    fun getV1PricingBaseWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getV1PricingBaseRequestConfig()
 
-        return request<Unit, CloudPricingPlanList>(
+        return request<Unit, PricingPlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingBase
+     * To obtain the request config of the operation getV1PricingBase
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingBaseRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingBaseRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -188,16 +188,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/base",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/blockchain
-     * ListBlockchainPlans returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
-     * ListBlockchainPlans returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
-     * @return CloudPricingPlanList
+     * Returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
+     * Returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
+     * @return PricingPlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -206,11 +206,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingBlockchain() : CloudPricingPlanList {
-        val localVarResponse = cloudGetV1PricingBlockchainWithHttpInfo()
+    fun getV1PricingBlockchain() : PricingPlanList {
+        val localVarResponse = getV1PricingBlockchainWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -226,28 +226,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/blockchain
-     * ListBlockchainPlans returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
-     * ListBlockchainPlans returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
-     * @return ApiResponse<CloudPricingPlanList?>
+     * Returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
+     * Returns the blockchain access plans — the RPC and node tiers, each with its monthly price, compute-unit allowance and feature list.
+     * @return ApiResponse<PricingPlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingBlockchainWithHttpInfo() : ApiResponse<CloudPricingPlanList?> {
-        val localVariableConfig = cloudGetV1PricingBlockchainRequestConfig()
+    fun getV1PricingBlockchainWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getV1PricingBlockchainRequestConfig()
 
-        return request<Unit, CloudPricingPlanList>(
+        return request<Unit, PricingPlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingBlockchain
+     * To obtain the request config of the operation getV1PricingBlockchain
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingBlockchainRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingBlockchainRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -258,15 +258,15 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/blockchain",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/cloud
-     * GetCloudPricing returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices.
-     * GetCloudPricing returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices. The section&#39;s internal half — the provider costs Hanzo pays and the plan-to- provider routing table — is stripped before it is served, so this is what a customer may see and nothing more.
+     * Returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices.
+     * Returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices. The section&#39;s internal half — the provider costs Hanzo pays and the plan-to- provider routing table — is stripped before it is served, so this is what a customer may see and nothing more.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -276,8 +276,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingCloud() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PricingCloudWithHttpInfo()
+    fun getV1PricingCloud() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingCloudWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -296,16 +296,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/cloud
-     * GetCloudPricing returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices.
-     * GetCloudPricing returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices. The section&#39;s internal half — the provider costs Hanzo pays and the plan-to- provider routing table — is stripped before it is served, so this is what a customer may see and nothing more.
+     * Returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices.
+     * Returns the public cloud section of the catalog in one document: its instance plans, its regions and its block-storage prices. The section&#39;s internal half — the provider costs Hanzo pays and the plan-to- provider routing table — is stripped before it is served, so this is what a customer may see and nothing more.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingCloudWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PricingCloudRequestConfig()
+    fun getV1PricingCloudWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingCloudRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -313,11 +313,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingCloud
+     * To obtain the request config of the operation getV1PricingCloud
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingCloudRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingCloudRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,16 +328,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/cloud/plans
-     * GetCloudPlans returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price.
-     * GetCloudPlans returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price. It is the plans of the cloud section on their own.
-     * @return CloudPricingPlanList
+     * Returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price.
+     * Returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price. It is the plans of the cloud section on their own.
+     * @return PricingPlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -346,11 +346,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingCloudPlans() : CloudPricingPlanList {
-        val localVarResponse = cloudGetV1PricingCloudPlansWithHttpInfo()
+    fun getV1PricingCloudPlans() : PricingPlanList {
+        val localVarResponse = getV1PricingCloudPlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -366,28 +366,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/cloud/plans
-     * GetCloudPlans returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price.
-     * GetCloudPlans returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price. It is the plans of the cloud section on their own.
-     * @return ApiResponse<CloudPricingPlanList?>
+     * Returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price.
+     * Returns just the cloud instance plans — each with its vCPU, memory, disk, CPU type, VM allowance, feature list and monthly and hourly price. It is the plans of the cloud section on their own.
+     * @return ApiResponse<PricingPlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingCloudPlansWithHttpInfo() : ApiResponse<CloudPricingPlanList?> {
-        val localVariableConfig = cloudGetV1PricingCloudPlansRequestConfig()
+    fun getV1PricingCloudPlansWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getV1PricingCloudPlansRequestConfig()
 
-        return request<Unit, CloudPricingPlanList>(
+        return request<Unit, PricingPlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingCloudPlans
+     * To obtain the request config of the operation getV1PricingCloudPlans
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingCloudPlansRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingCloudPlansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -398,16 +398,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/cloud/regions
-     * GetCloudRegions returns the regions a cloud instance can be placed in, each with its id, display name and physical location.
-     * GetCloudRegions returns the regions a cloud instance can be placed in, each with its id, display name and physical location. It is the regions of the cloud section on their own.
-     * @return CloudPricingRegionList
+     * Returns the regions a cloud instance can be placed in, each with its id, display name and physical location.
+     * Returns the regions a cloud instance can be placed in, each with its id, display name and physical location. It is the regions of the cloud section on their own.
+     * @return PricingRegionList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -416,11 +416,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingCloudRegions() : CloudPricingRegionList {
-        val localVarResponse = cloudGetV1PricingCloudRegionsWithHttpInfo()
+    fun getV1PricingCloudRegions() : PricingRegionList {
+        val localVarResponse = getV1PricingCloudRegionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingRegionList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingRegionList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -436,28 +436,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/cloud/regions
-     * GetCloudRegions returns the regions a cloud instance can be placed in, each with its id, display name and physical location.
-     * GetCloudRegions returns the regions a cloud instance can be placed in, each with its id, display name and physical location. It is the regions of the cloud section on their own.
-     * @return ApiResponse<CloudPricingRegionList?>
+     * Returns the regions a cloud instance can be placed in, each with its id, display name and physical location.
+     * Returns the regions a cloud instance can be placed in, each with its id, display name and physical location. It is the regions of the cloud section on their own.
+     * @return ApiResponse<PricingRegionList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingCloudRegionsWithHttpInfo() : ApiResponse<CloudPricingRegionList?> {
-        val localVariableConfig = cloudGetV1PricingCloudRegionsRequestConfig()
+    fun getV1PricingCloudRegionsWithHttpInfo() : ApiResponse<PricingRegionList?> {
+        val localVariableConfig = getV1PricingCloudRegionsRequestConfig()
 
-        return request<Unit, CloudPricingRegionList>(
+        return request<Unit, PricingRegionList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingCloudRegions
+     * To obtain the request config of the operation getV1PricingCloudRegions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingCloudRegionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingCloudRegionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -468,15 +468,15 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud/regions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/cloud/storage
-     * GetCloudStoragePricing returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
-     * GetCloudStoragePricing returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
+     * Returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
+     * Returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -486,8 +486,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingCloudStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PricingCloudStorageWithHttpInfo()
+    fun getV1PricingCloudStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingCloudStorageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -506,16 +506,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/cloud/storage
-     * GetCloudStoragePricing returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
-     * GetCloudStoragePricing returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
+     * Returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
+     * Returns the block-storage prices of the cloud section: the per-GB monthly rate and the volume size bounds a caller may ask for.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingCloudStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PricingCloudStorageRequestConfig()
+    fun getV1PricingCloudStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingCloudStorageRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -523,11 +523,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingCloudStorage
+     * To obtain the request config of the operation getV1PricingCloudStorage
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingCloudStorageRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingCloudStorageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -538,15 +538,15 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/cloud/storage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/compute
-     * GetComputePricing returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets.
-     * GetComputePricing returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets. It is the whole section as the pricing source records it, un-gated — no model or provider identity appears in it.
+     * Returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets.
+     * Returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets. It is the whole section as the pricing source records it, un-gated — no model or provider identity appears in it.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -556,8 +556,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingCompute() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PricingComputeWithHttpInfo()
+    fun getV1PricingCompute() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingComputeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -576,16 +576,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/compute
-     * GetComputePricing returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets.
-     * GetComputePricing returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets. It is the whole section as the pricing source records it, un-gated — no model or provider identity appears in it.
+     * Returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets.
+     * Returns the compute section of the catalog: the cloud provider and region the prices are quoted for, the monthly markup applied to them, the full instance-size tier list and the named presets. It is the whole section as the pricing source records it, un-gated — no model or provider identity appears in it.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingComputeWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PricingComputeRequestConfig()
+    fun getV1PricingComputeWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingComputeRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -593,11 +593,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingCompute
+     * To obtain the request config of the operation getV1PricingCompute
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingComputeRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingComputeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -608,16 +608,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/compute",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/compute/presets
-     * GetComputePresets returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price.
-     * GetComputePresets returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price. It is the presets of the compute section on their own, for a caller that does not need the full tier table.
-     * @return CloudPricingPresetList
+     * Returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price.
+     * Returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price. It is the presets of the compute section on their own, for a caller that does not need the full tier table.
+     * @return PricingPresetList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -626,11 +626,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingComputePresets() : CloudPricingPresetList {
-        val localVarResponse = cloudGetV1PricingComputePresetsWithHttpInfo()
+    fun getV1PricingComputePresets() : PricingPresetList {
+        val localVarResponse = getV1PricingComputePresetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingPresetList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPresetList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -646,28 +646,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/compute/presets
-     * GetComputePresets returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price.
-     * GetComputePresets returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price. It is the presets of the compute section on their own, for a caller that does not need the full tier table.
-     * @return ApiResponse<CloudPricingPresetList?>
+     * Returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price.
+     * Returns just the named compute sizes — the short, human-labelled list (\&quot;Starter\&quot;, \&quot;Pro\&quot;) a size picker renders, each carrying its provider slug, vCPU, memory, disk and price. It is the presets of the compute section on their own, for a caller that does not need the full tier table.
+     * @return ApiResponse<PricingPresetList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingComputePresetsWithHttpInfo() : ApiResponse<CloudPricingPresetList?> {
-        val localVariableConfig = cloudGetV1PricingComputePresetsRequestConfig()
+    fun getV1PricingComputePresetsWithHttpInfo() : ApiResponse<PricingPresetList?> {
+        val localVariableConfig = getV1PricingComputePresetsRequestConfig()
 
-        return request<Unit, CloudPricingPresetList>(
+        return request<Unit, PricingPresetList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingComputePresets
+     * To obtain the request config of the operation getV1PricingComputePresets
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingComputePresetsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingComputePresetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -678,16 +678,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/compute/presets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/pricing/featured
-     * ListFeaturedModels returns the models the catalog highlights, filtered to what the caller&#39;s org may see.
-     * ListFeaturedModels returns the models the catalog highlights, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks featured.
-     * @return CloudPricingModelList
+     * GET /v1/pricing/datastore
+     * Returns the Hanzo Datastore rate card: the tier list, the per-GB storage and egress usage rates, the annual discount and the trial.
+     * Returns the Hanzo Datastore rate card: the tier list, the per-GB storage and egress usage rates, the annual discount and the trial. It is the section as authored, un-gated — no provider identity appears in it.  The route was missing while the data existed, so this 404d and every visitor to hanzo.ai&#39;s Infrastructure tab was told pricing was \&quot;temporarily unavailable\&quot;.
+     * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -696,11 +696,81 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingFeatured() : CloudPricingModelList {
-        val localVarResponse = cloudGetV1PricingFeaturedWithHttpInfo()
+    fun getV1PricingDatastore() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingDatastoreWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingModelList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/pricing/datastore
+     * Returns the Hanzo Datastore rate card: the tier list, the per-GB storage and egress usage rates, the annual discount and the trial.
+     * Returns the Hanzo Datastore rate card: the tier list, the per-GB storage and egress usage rates, the annual discount and the trial. It is the section as authored, un-gated — no provider identity appears in it.  The route was missing while the data existed, so this 404d and every visitor to hanzo.ai&#39;s Infrastructure tab was told pricing was \&quot;temporarily unavailable\&quot;.
+     * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1PricingDatastoreWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingDatastoreRequestConfig()
+
+        return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1PricingDatastore
+     *
+     * @return RequestConfig
+     */
+    fun getV1PricingDatastoreRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/pricing/datastore",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/pricing/featured
+     * Returns the models the catalog highlights, filtered to what the caller&#39;s org may see.
+     * Returns the models the catalog highlights, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks featured.
+     * @return PricingModelList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1PricingFeatured() : PricingModelList {
+        val localVarResponse = getV1PricingFeaturedWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingModelList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -716,28 +786,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/featured
-     * ListFeaturedModels returns the models the catalog highlights, filtered to what the caller&#39;s org may see.
-     * ListFeaturedModels returns the models the catalog highlights, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks featured.
-     * @return ApiResponse<CloudPricingModelList?>
+     * Returns the models the catalog highlights, filtered to what the caller&#39;s org may see.
+     * Returns the models the catalog highlights, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks featured.
+     * @return ApiResponse<PricingModelList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingFeaturedWithHttpInfo() : ApiResponse<CloudPricingModelList?> {
-        val localVariableConfig = cloudGetV1PricingFeaturedRequestConfig()
+    fun getV1PricingFeaturedWithHttpInfo() : ApiResponse<PricingModelList?> {
+        val localVariableConfig = getV1PricingFeaturedRequestConfig()
 
-        return request<Unit, CloudPricingModelList>(
+        return request<Unit, PricingModelList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingFeatured
+     * To obtain the request config of the operation getV1PricingFeatured
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingFeaturedRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingFeaturedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -748,16 +818,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/featured",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/free
-     * ListFreeModels returns the models that cost nothing to call, filtered to what the caller&#39;s org may see.
-     * ListFreeModels returns the models that cost nothing to call, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks free.
-     * @return CloudPricingModelList
+     * Returns the models that cost nothing to call, filtered to what the caller&#39;s org may see.
+     * Returns the models that cost nothing to call, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks free.
+     * @return PricingModelList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -766,11 +836,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingFree() : CloudPricingModelList {
-        val localVarResponse = cloudGetV1PricingFreeWithHttpInfo()
+    fun getV1PricingFree() : PricingModelList {
+        val localVarResponse = getV1PricingFreeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingModelList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingModelList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -786,28 +856,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/free
-     * ListFreeModels returns the models that cost nothing to call, filtered to what the caller&#39;s org may see.
-     * ListFreeModels returns the models that cost nothing to call, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks free.
-     * @return ApiResponse<CloudPricingModelList?>
+     * Returns the models that cost nothing to call, filtered to what the caller&#39;s org may see.
+     * Returns the models that cost nothing to call, filtered to what the caller&#39;s org may see. It is the same catalog as ListModels narrowed to entries the pricing source marks free.
+     * @return ApiResponse<PricingModelList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingFreeWithHttpInfo() : ApiResponse<CloudPricingModelList?> {
-        val localVariableConfig = cloudGetV1PricingFreeRequestConfig()
+    fun getV1PricingFreeWithHttpInfo() : ApiResponse<PricingModelList?> {
+        val localVariableConfig = getV1PricingFreeRequestConfig()
 
-        return request<Unit, CloudPricingModelList>(
+        return request<Unit, PricingModelList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingFree
+     * To obtain the request config of the operation getV1PricingFree
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingFreeRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingFreeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -818,7 +888,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/free",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -827,7 +897,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/gpu
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPU, host memory and hourly price.
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPU, host memory and hourly price.
-     * @return CloudPricingTierList
+     * @return PricingTierList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -836,11 +906,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingGpu() : CloudPricingTierList {
-        val localVarResponse = cloudGetV1PricingGpuWithHttpInfo()
+    fun getV1PricingGpu() : PricingTierList {
+        val localVarResponse = getV1PricingGpuWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingTierList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingTierList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -858,26 +928,26 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/gpu
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPU, host memory and hourly price.
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPU, host memory and hourly price.
-     * @return ApiResponse<CloudPricingTierList?>
+     * @return ApiResponse<PricingTierList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingGpuWithHttpInfo() : ApiResponse<CloudPricingTierList?> {
-        val localVariableConfig = cloudGetV1PricingGpuRequestConfig()
+    fun getV1PricingGpuWithHttpInfo() : ApiResponse<PricingTierList?> {
+        val localVariableConfig = getV1PricingGpuRequestConfig()
 
-        return request<Unit, CloudPricingTierList>(
+        return request<Unit, PricingTierList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingGpu
+     * To obtain the request config of the operation getV1PricingGpu
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingGpuRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingGpuRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -888,7 +958,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/gpu",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -897,7 +967,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/health
      * Health reports that the pricing subsystem is mounted and serving.
      * Health reports that the pricing subsystem is mounted and serving. It answers from the process itself and consults neither the catalog bundle nor the enablement store, so it stays \&quot;ok\&quot; while either is degraded.
-     * @return CloudPricingHealth
+     * @return PricingHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -906,11 +976,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingHealth() : CloudPricingHealth {
-        val localVarResponse = cloudGetV1PricingHealthWithHttpInfo()
+    fun getV1PricingHealth() : PricingHealth {
+        val localVarResponse = getV1PricingHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -928,26 +998,26 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/health
      * Health reports that the pricing subsystem is mounted and serving.
      * Health reports that the pricing subsystem is mounted and serving. It answers from the process itself and consults neither the catalog bundle nor the enablement store, so it stays \&quot;ok\&quot; while either is degraded.
-     * @return ApiResponse<CloudPricingHealth?>
+     * @return ApiResponse<PricingHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingHealthWithHttpInfo() : ApiResponse<CloudPricingHealth?> {
-        val localVariableConfig = cloudGetV1PricingHealthRequestConfig()
+    fun getV1PricingHealthWithHttpInfo() : ApiResponse<PricingHealth?> {
+        val localVariableConfig = getV1PricingHealthRequestConfig()
 
-        return request<Unit, CloudPricingHealth>(
+        return request<Unit, PricingHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingHealth
+     * To obtain the request config of the operation getV1PricingHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -958,7 +1028,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -967,7 +1037,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/iam
      * ListIAMPlans returns the identity plans — the Hanzo IAM tiers, each with its monthly and annual price, monthly-active-user allowance and feature list.
      * ListIAMPlans returns the identity plans — the Hanzo IAM tiers, each with its monthly and annual price, monthly-active-user allowance and feature list.
-     * @return CloudPricingPlanList
+     * @return PricingPlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -976,11 +1046,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingIam() : CloudPricingPlanList {
-        val localVarResponse = cloudGetV1PricingIamWithHttpInfo()
+    fun getV1PricingIam() : PricingPlanList {
+        val localVarResponse = getV1PricingIamWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -998,26 +1068,26 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/iam
      * ListIAMPlans returns the identity plans — the Hanzo IAM tiers, each with its monthly and annual price, monthly-active-user allowance and feature list.
      * ListIAMPlans returns the identity plans — the Hanzo IAM tiers, each with its monthly and annual price, monthly-active-user allowance and feature list.
-     * @return ApiResponse<CloudPricingPlanList?>
+     * @return ApiResponse<PricingPlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingIamWithHttpInfo() : ApiResponse<CloudPricingPlanList?> {
-        val localVariableConfig = cloudGetV1PricingIamRequestConfig()
+    fun getV1PricingIamWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getV1PricingIamRequestConfig()
 
-        return request<Unit, CloudPricingPlanList>(
+        return request<Unit, PricingPlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingIam
+     * To obtain the request config of the operation getV1PricingIam
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingIamRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingIamRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1028,16 +1098,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/iam",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/model/{name}
-     * GetModel returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them.
-     * GetModel returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them. A model hidden for the caller&#39;s org answers the same 404 an unknown name does, so a disabled model gets no existence oracle.
-     * @param name Name is the model&#39;s name or its slugged id (\&quot;zen4\&quot;, \&quot;anthropic/claude-opus-4.6\&quot;), matched case-insensitively. It comes from the path: the URL is the addressing authority.
+     * Returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them.
+     * Returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them. A model hidden for the caller&#39;s org answers the same 404 an unknown name does, so a disabled model gets no existence oracle.
+     * @param name Name is the model&#39;s name or its slugged id (\&quot;zen4\&quot;, \&quot;acme/some-model-1\&quot;), matched case-insensitively. It comes from the path: the URL is the addressing authority.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1047,8 +1117,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingModelName(name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PricingModelNameWithHttpInfo(name = name)
+    fun getV1PricingModelByName(name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingModelByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1067,17 +1137,17 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/model/{name}
-     * GetModel returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them.
-     * GetModel returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them. A model hidden for the caller&#39;s org answers the same 404 an unknown name does, so a disabled model gets no existence oracle.
-     * @param name Name is the model&#39;s name or its slugged id (\&quot;zen4\&quot;, \&quot;anthropic/claude-opus-4.6\&quot;), matched case-insensitively. It comes from the path: the URL is the addressing authority.
+     * Returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them.
+     * Returns one model&#39;s catalog entry — its pricing, context window and capabilities as the pricing source records them. A model hidden for the caller&#39;s org answers the same 404 an unknown name does, so a disabled model gets no existence oracle.
+     * @param name Name is the model&#39;s name or its slugged id (\&quot;zen4\&quot;, \&quot;acme/some-model-1\&quot;), matched case-insensitively. It comes from the path: the URL is the addressing authority.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingModelNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PricingModelNameRequestConfig(name = name)
+    fun getV1PricingModelByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingModelByNameRequestConfig(name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1085,12 +1155,12 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingModelName
+     * To obtain the request config of the operation getV1PricingModelByName
      *
-     * @param name Name is the model&#39;s name or its slugged id (\&quot;zen4\&quot;, \&quot;anthropic/claude-opus-4.6\&quot;), matched case-insensitively. It comes from the path: the URL is the addressing authority.
+     * @param name Name is the model&#39;s name or its slugged id (\&quot;zen4\&quot;, \&quot;acme/some-model-1\&quot;), matched case-insensitively. It comes from the path: the URL is the addressing authority.
      * @return RequestConfig
      */
-    fun cloudGetV1PricingModelNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PricingModelByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1101,16 +1171,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/model/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/models
-     * ListModels returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see.
-     * ListModels returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
-     * @return CloudPricingModelList
+     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see.
+     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
+     * @return PricingModelList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1119,11 +1189,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingModels() : CloudPricingModelList {
-        val localVarResponse = cloudGetV1PricingModelsWithHttpInfo()
+    fun getV1PricingModels() : PricingModelList {
+        val localVarResponse = getV1PricingModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingModelList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingModelList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1139,28 +1209,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/models
-     * ListModels returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see.
-     * ListModels returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
-     * @return ApiResponse<CloudPricingModelList?>
+     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see.
+     * Returns the whole model catalog — Hanzo&#39;s own Zen models and every third-party model — filtered to what the caller&#39;s org may see. A model an admin has disabled is absent; one in beta appears only for an org granted it. A SuperAdmin sees every model, each annotated with its enablement state.
+     * @return ApiResponse<PricingModelList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingModelsWithHttpInfo() : ApiResponse<CloudPricingModelList?> {
-        val localVariableConfig = cloudGetV1PricingModelsRequestConfig()
+    fun getV1PricingModelsWithHttpInfo() : ApiResponse<PricingModelList?> {
+        val localVariableConfig = getV1PricingModelsRequestConfig()
 
-        return request<Unit, CloudPricingModelList>(
+        return request<Unit, PricingModelList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingModels
+     * To obtain the request config of the operation getV1PricingModels
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingModelsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1171,7 +1241,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1180,7 +1250,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/paas
      * ListPaaSPlans returns the application-hosting plans — the deploy-and-host tiers, each with its monthly and annual price, app and memory allowances and feature list.
      * ListPaaSPlans returns the application-hosting plans — the deploy-and-host tiers, each with its monthly and annual price, app and memory allowances and feature list.
-     * @return CloudPricingPlanList
+     * @return PricingPlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1189,11 +1259,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingPaas() : CloudPricingPlanList {
-        val localVarResponse = cloudGetV1PricingPaasWithHttpInfo()
+    fun getV1PricingPaas() : PricingPlanList {
+        val localVarResponse = getV1PricingPaasWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1211,26 +1281,26 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/pricing/paas
      * ListPaaSPlans returns the application-hosting plans — the deploy-and-host tiers, each with its monthly and annual price, app and memory allowances and feature list.
      * ListPaaSPlans returns the application-hosting plans — the deploy-and-host tiers, each with its monthly and annual price, app and memory allowances and feature list.
-     * @return ApiResponse<CloudPricingPlanList?>
+     * @return ApiResponse<PricingPlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingPaasWithHttpInfo() : ApiResponse<CloudPricingPlanList?> {
-        val localVariableConfig = cloudGetV1PricingPaasRequestConfig()
+    fun getV1PricingPaasWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getV1PricingPaasRequestConfig()
 
-        return request<Unit, CloudPricingPlanList>(
+        return request<Unit, PricingPlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingPaas
+     * To obtain the request config of the operation getV1PricingPaas
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingPaasRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingPaasRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1241,15 +1311,15 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/paas",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/policy
-     * GetPricingPolicy returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
-     * GetPricingPolicy returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
+     * Returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
+     * Returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1259,8 +1329,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingPolicy2() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PricingPolicy2WithHttpInfo()
+    fun getV1PricingPolicy() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1279,16 +1349,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/policy
-     * GetPricingPolicy returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
-     * GetPricingPolicy returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
+     * Returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
+     * Returns the pricing policy document: the revenue-sharing terms (the idle-resale share and the open-source share, each with its percentage and who is eligible) and the commitments Hanzo makes about how it bills — no hidden fees, no egress charges, no surprise bills.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingPolicy2WithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PricingPolicy2RequestConfig()
+    fun getV1PricingPolicyWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingPolicyRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1296,11 +1366,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingPolicy2
+     * To obtain the request config of the operation getV1PricingPolicy
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingPolicy2RequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1311,16 +1381,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/providers
-     * ListProviders returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see.
-     * ListProviders returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see. A provider an admin has disabled is absent — and so are its models everywhere else on this surface, because a provider&#39;s state cascades to what it serves.
-     * @return CloudPricingProviderList
+     * Returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see.
+     * Returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see. A provider an admin has disabled is absent — and so are its models everywhere else on this surface, because a provider&#39;s state cascades to what it serves.
+     * @return PricingProviderList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1329,11 +1399,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingProviders() : CloudPricingProviderList {
-        val localVarResponse = cloudGetV1PricingProvidersWithHttpInfo()
+    fun getV1PricingProviders() : PricingProviderList {
+        val localVarResponse = getV1PricingProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingProviderList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingProviderList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1349,28 +1419,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/providers
-     * ListProviders returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see.
-     * ListProviders returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see. A provider an admin has disabled is absent — and so are its models everywhere else on this surface, because a provider&#39;s state cascades to what it serves.
-     * @return ApiResponse<CloudPricingProviderList?>
+     * Returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see.
+     * Returns the model providers the catalog knows, each with its info object, filtered to what the caller&#39;s org may see. A provider an admin has disabled is absent — and so are its models everywhere else on this surface, because a provider&#39;s state cascades to what it serves.
+     * @return ApiResponse<PricingProviderList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingProvidersWithHttpInfo() : ApiResponse<CloudPricingProviderList?> {
-        val localVariableConfig = cloudGetV1PricingProvidersRequestConfig()
+    fun getV1PricingProvidersWithHttpInfo() : ApiResponse<PricingProviderList?> {
+        val localVariableConfig = getV1PricingProvidersRequestConfig()
 
-        return request<Unit, CloudPricingProviderList>(
+        return request<Unit, PricingProviderList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingProviders
+     * To obtain the request config of the operation getV1PricingProviders
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1381,16 +1451,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/pricing/subscriptions
-     * ListSubscriptionPlans returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
-     * ListSubscriptionPlans returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
-     * @return CloudPricingPlanList
+     * GET /v1/pricing/services
+     * Returns the managed-service rate cards — Search, Crawl, Vector, Console and Managed Services — each with its own tiers, and some with usage rates or a comparison table.
+     * Returns the managed-service rate cards — Search, Crawl, Vector, Console and Managed Services — each with its own tiers, and some with usage rates or a comparison table. It is the section as authored, un-gated.  These are DISPLAY rate cards: what a product costs, not what a plan grants. No entitlement or limit fields ride here, so nothing can bill off them.
+     * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1399,11 +1469,81 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingSubscriptions() : CloudPricingPlanList {
-        val localVarResponse = cloudGetV1PricingSubscriptionsWithHttpInfo()
+    fun getV1PricingServices() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingServicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/pricing/services
+     * Returns the managed-service rate cards — Search, Crawl, Vector, Console and Managed Services — each with its own tiers, and some with usage rates or a comparison table.
+     * Returns the managed-service rate cards — Search, Crawl, Vector, Console and Managed Services — each with its own tiers, and some with usage rates or a comparison table. It is the section as authored, un-gated.  These are DISPLAY rate cards: what a product costs, not what a plan grants. No entitlement or limit fields ride here, so nothing can bill off them.
+     * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1PricingServicesWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingServicesRequestConfig()
+
+        return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1PricingServices
+     *
+     * @return RequestConfig
+     */
+    fun getV1PricingServicesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/pricing/services",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/pricing/subscriptions
+     * Returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
+     * Returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
+     * @return PricingPlanList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1PricingSubscriptions() : PricingPlanList {
+        val localVarResponse = getV1PricingSubscriptionsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingPlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1419,28 +1559,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/subscriptions
-     * ListSubscriptionPlans returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
-     * ListSubscriptionPlans returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
-     * @return ApiResponse<CloudPricingPlanList?>
+     * Returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
+     * Returns the API subscription plans — the account-level tiers a customer subscribes to, each with its monthly and annual price, included credit, rate limits and feature list.
+     * @return ApiResponse<PricingPlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingSubscriptionsWithHttpInfo() : ApiResponse<CloudPricingPlanList?> {
-        val localVariableConfig = cloudGetV1PricingSubscriptionsRequestConfig()
+    fun getV1PricingSubscriptionsWithHttpInfo() : ApiResponse<PricingPlanList?> {
+        val localVariableConfig = getV1PricingSubscriptionsRequestConfig()
 
-        return request<Unit, CloudPricingPlanList>(
+        return request<Unit, PricingPlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingSubscriptions
+     * To obtain the request config of the operation getV1PricingSubscriptions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingSubscriptionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingSubscriptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1451,15 +1591,15 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/summary
-     * GetPricingSummary returns the catalog&#39;s headline statistics — model counts by family and the provider directory.
-     * GetPricingSummary returns the catalog&#39;s headline statistics — model counts by family and the provider directory. The provider sub-object is filtered to what the caller&#39;s org may see, so a disabled provider&#39;s name never leaks; the aggregate counts are the catalog&#39;s own, over everything it holds.
+     * Returns the catalog&#39;s headline statistics — model counts by family and the provider directory.
+     * Returns the catalog&#39;s headline statistics — model counts by family and the provider directory. The provider sub-object is filtered to what the caller&#39;s org may see, so a disabled provider&#39;s name never leaks; the aggregate counts are the catalog&#39;s own, over everything it holds.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1469,8 +1609,8 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingSummary() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PricingSummaryWithHttpInfo()
+    fun getV1PricingSummary() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PricingSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1489,16 +1629,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/summary
-     * GetPricingSummary returns the catalog&#39;s headline statistics — model counts by family and the provider directory.
-     * GetPricingSummary returns the catalog&#39;s headline statistics — model counts by family and the provider directory. The provider sub-object is filtered to what the caller&#39;s org may see, so a disabled provider&#39;s name never leaks; the aggregate counts are the catalog&#39;s own, over everything it holds.
+     * Returns the catalog&#39;s headline statistics — model counts by family and the provider directory.
+     * Returns the catalog&#39;s headline statistics — model counts by family and the provider directory. The provider sub-object is filtered to what the caller&#39;s org may see, so a disabled provider&#39;s name never leaks; the aggregate counts are the catalog&#39;s own, over everything it holds.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingSummaryWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PricingSummaryRequestConfig()
+    fun getV1PricingSummaryWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PricingSummaryRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1506,11 +1646,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingSummary
+     * To obtain the request config of the operation getV1PricingSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1521,16 +1661,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pricing/tools
-     * ListToolPrices returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
-     * ListToolPrices returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
-     * @return CloudPricingToolList
+     * Returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
+     * Returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
+     * @return PricingToolList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1539,11 +1679,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PricingTools() : CloudPricingToolList {
-        val localVarResponse = cloudGetV1PricingToolsWithHttpInfo()
+    fun getV1PricingTools() : PricingToolList {
+        val localVarResponse = getV1PricingToolsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingToolList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingToolList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1559,28 +1699,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/pricing/tools
-     * ListToolPrices returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
-     * ListToolPrices returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
-     * @return ApiResponse<CloudPricingToolList?>
+     * Returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
+     * Returns the per-use tool prices — web search, code interpreter, file storage, image generation, speech-to-text and text-to-speech — each with the unit it is billed by and its price in that unit.
+     * @return ApiResponse<PricingToolList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PricingToolsWithHttpInfo() : ApiResponse<CloudPricingToolList?> {
-        val localVariableConfig = cloudGetV1PricingToolsRequestConfig()
+    fun getV1PricingToolsWithHttpInfo() : ApiResponse<PricingToolList?> {
+        val localVariableConfig = getV1PricingToolsRequestConfig()
 
-        return request<Unit, CloudPricingToolList>(
+        return request<Unit, PricingToolList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PricingTools
+     * To obtain the request config of the operation getV1PricingTools
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PricingToolsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PricingToolsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1591,16 +1731,16 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/pricing/sync
-     * SyncPricing refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with.
-     * SyncPricing refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with. The fetch runs in Go and the markup transform in the pricing bundle. SuperAdmin only; every other caller is refused.
-     * @return CloudPricingSyncOut
+     * Refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with.
+     * Refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with. The fetch runs in Go and the markup transform in the pricing bundle. SuperAdmin only; every other caller is refused.
+     * @return PricingSyncOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1609,11 +1749,11 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PricingSync() : CloudPricingSyncOut {
-        val localVarResponse = cloudPostV1PricingSyncWithHttpInfo()
+    fun postV1PricingSync() : PricingSyncOut {
+        val localVarResponse = postV1PricingSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPricingSyncOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PricingSyncOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1629,28 +1769,28 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/pricing/sync
-     * SyncPricing refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with.
-     * SyncPricing refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with. The fetch runs in Go and the markup transform in the pricing bundle. SuperAdmin only; every other caller is refused.
-     * @return ApiResponse<CloudPricingSyncOut?>
+     * Refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with.
+     * Refreshes the third-party section of the catalog from its upstream listings and returns the time the refreshed catalog was stamped with. The fetch runs in Go and the markup transform in the pricing bundle. SuperAdmin only; every other caller is refused.
+     * @return ApiResponse<PricingSyncOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PricingSyncWithHttpInfo() : ApiResponse<CloudPricingSyncOut?> {
-        val localVariableConfig = cloudPostV1PricingSyncRequestConfig()
+    fun postV1PricingSyncWithHttpInfo() : ApiResponse<PricingSyncOut?> {
+        val localVariableConfig = postV1PricingSyncRequestConfig()
 
-        return request<Unit, CloudPricingSyncOut>(
+        return request<Unit, PricingSyncOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PricingSync
+     * To obtain the request config of the operation postV1PricingSync
      *
      * @return RequestConfig
      */
-    fun cloudPostV1PricingSyncRequestConfig() : RequestConfig<Unit> {
+    fun postV1PricingSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1661,7 +1801,7 @@ class PricingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/pricing/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

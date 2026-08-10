@@ -19,9 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudEnablementBoard
-import ai.hanzo.cloud.model.CloudEnablementOptRef
-import ai.hanzo.cloud.model.CloudUserEnablementItem
+import ai.hanzo.cloud.model.EnablementBoard
+import ai.hanzo.cloud.model.EnablementOptRef
+import ai.hanzo.cloud.model.UserEnablementItem
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,9 +49,9 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/enablement
-     * GetEnablement returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in.
-     * GetEnablement returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in. Read-only and safe for any caller — one without a validated principal simply sees the generally-available items and no opt-in affordance, never another org&#39;s state.
-     * @return CloudEnablementBoard
+     * Returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in.
+     * Returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in. Read-only and safe for any caller — one without a validated principal simply sees the generally-available items and no opt-in affordance, never another org&#39;s state.
+     * @return EnablementBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Enablement() : CloudEnablementBoard {
-        val localVarResponse = cloudGetV1EnablementWithHttpInfo()
+    fun getV1Enablement() : EnablementBoard {
+        val localVarResponse = getV1EnablementWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEnablementBoard
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EnablementBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,28 +80,28 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/enablement
-     * GetEnablement returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in.
-     * GetEnablement returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in. Read-only and safe for any caller — one without a validated principal simply sees the generally-available items and no opt-in affordance, never another org&#39;s state.
-     * @return ApiResponse<CloudEnablementBoard?>
+     * Returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in.
+     * Returns what the caller&#39;s org can actually use: every managed item with its global state, whether it is effective here, whether this org is already opted into its beta, and whether it may still opt in. Read-only and safe for any caller — one without a validated principal simply sees the generally-available items and no opt-in affordance, never another org&#39;s state.
+     * @return ApiResponse<EnablementBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EnablementWithHttpInfo() : ApiResponse<CloudEnablementBoard?> {
-        val localVariableConfig = cloudGetV1EnablementRequestConfig()
+    fun getV1EnablementWithHttpInfo() : ApiResponse<EnablementBoard?> {
+        val localVariableConfig = getV1EnablementRequestConfig()
 
-        return request<Unit, CloudEnablementBoard>(
+        return request<Unit, EnablementBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Enablement
+     * To obtain the request config of the operation getV1Enablement
      *
      * @return RequestConfig
      */
-    fun cloudGetV1EnablementRequestConfig() : RequestConfig<Unit> {
+    fun getV1EnablementRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -112,17 +112,17 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/enablement",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/enablement/optin
-     * OptIntoBeta opts the caller&#39;s OWN org into a beta item.
-     * OptIntoBeta opts the caller&#39;s OWN org into a beta item. The org is the caller&#39;s validated one, so this can never target another org, and the registry refuses anything not in beta — so it can neither re-open an item an operator turned off nor touch one that is already generally available. Requires a signed-in caller with an org.
-     * @param cloudEnablementOptRef 
-     * @return CloudUserEnablementItem
+     * Opts the caller&#39;s OWN org into a beta item.
+     * Opts the caller&#39;s OWN org into a beta item. The org is the caller&#39;s validated one, so this can never target another org, and the registry refuses anything not in beta — so it can neither re-open an item an operator turned off nor touch one that is already generally available. Requires a signed-in caller with an org.
+     * @param enablementOptRef 
+     * @return UserEnablementItem
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -131,11 +131,11 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EnablementOptin(cloudEnablementOptRef: CloudEnablementOptRef) : CloudUserEnablementItem {
-        val localVarResponse = cloudPostV1EnablementOptinWithHttpInfo(cloudEnablementOptRef = cloudEnablementOptRef)
+    fun postV1EnablementOptin(enablementOptRef: EnablementOptRef) : UserEnablementItem {
+        val localVarResponse = postV1EnablementOptinWithHttpInfo(enablementOptRef = enablementOptRef)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUserEnablementItem
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UserEnablementItem
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -151,31 +151,31 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/enablement/optin
-     * OptIntoBeta opts the caller&#39;s OWN org into a beta item.
-     * OptIntoBeta opts the caller&#39;s OWN org into a beta item. The org is the caller&#39;s validated one, so this can never target another org, and the registry refuses anything not in beta — so it can neither re-open an item an operator turned off nor touch one that is already generally available. Requires a signed-in caller with an org.
-     * @param cloudEnablementOptRef 
-     * @return ApiResponse<CloudUserEnablementItem?>
+     * Opts the caller&#39;s OWN org into a beta item.
+     * Opts the caller&#39;s OWN org into a beta item. The org is the caller&#39;s validated one, so this can never target another org, and the registry refuses anything not in beta — so it can neither re-open an item an operator turned off nor touch one that is already generally available. Requires a signed-in caller with an org.
+     * @param enablementOptRef 
+     * @return ApiResponse<UserEnablementItem?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EnablementOptinWithHttpInfo(cloudEnablementOptRef: CloudEnablementOptRef) : ApiResponse<CloudUserEnablementItem?> {
-        val localVariableConfig = cloudPostV1EnablementOptinRequestConfig(cloudEnablementOptRef = cloudEnablementOptRef)
+    fun postV1EnablementOptinWithHttpInfo(enablementOptRef: EnablementOptRef) : ApiResponse<UserEnablementItem?> {
+        val localVariableConfig = postV1EnablementOptinRequestConfig(enablementOptRef = enablementOptRef)
 
-        return request<CloudEnablementOptRef, CloudUserEnablementItem>(
+        return request<EnablementOptRef, UserEnablementItem>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EnablementOptin
+     * To obtain the request config of the operation postV1EnablementOptin
      *
-     * @param cloudEnablementOptRef 
+     * @param enablementOptRef 
      * @return RequestConfig
      */
-    fun cloudPostV1EnablementOptinRequestConfig(cloudEnablementOptRef: CloudEnablementOptRef) : RequestConfig<CloudEnablementOptRef> {
-        val localVariableBody = cloudEnablementOptRef
+    fun postV1EnablementOptinRequestConfig(enablementOptRef: EnablementOptRef) : RequestConfig<EnablementOptRef> {
+        val localVariableBody = enablementOptRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -186,17 +186,17 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/enablement/optin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/enablement/optout
-     * OptOutOfBeta removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent.
-     * OptOutOfBeta removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent. The org is the caller&#39;s validated one, so this can never revoke another org&#39;s grant. Requires a signed-in caller with an org.
-     * @param cloudEnablementOptRef 
-     * @return CloudUserEnablementItem
+     * Removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent.
+     * Removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent. The org is the caller&#39;s validated one, so this can never revoke another org&#39;s grant. Requires a signed-in caller with an org.
+     * @param enablementOptRef 
+     * @return UserEnablementItem
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -205,11 +205,11 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EnablementOptout(cloudEnablementOptRef: CloudEnablementOptRef) : CloudUserEnablementItem {
-        val localVarResponse = cloudPostV1EnablementOptoutWithHttpInfo(cloudEnablementOptRef = cloudEnablementOptRef)
+    fun postV1EnablementOptout(enablementOptRef: EnablementOptRef) : UserEnablementItem {
+        val localVarResponse = postV1EnablementOptoutWithHttpInfo(enablementOptRef = enablementOptRef)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUserEnablementItem
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UserEnablementItem
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -225,31 +225,31 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/enablement/optout
-     * OptOutOfBeta removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent.
-     * OptOutOfBeta removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent. The org is the caller&#39;s validated one, so this can never revoke another org&#39;s grant. Requires a signed-in caller with an org.
-     * @param cloudEnablementOptRef 
-     * @return ApiResponse<CloudUserEnablementItem?>
+     * Removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent.
+     * Removes the caller&#39;s OWN org from a beta item&#39;s grant list, the reverse of OptIntoBeta and idempotent. The org is the caller&#39;s validated one, so this can never revoke another org&#39;s grant. Requires a signed-in caller with an org.
+     * @param enablementOptRef 
+     * @return ApiResponse<UserEnablementItem?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EnablementOptoutWithHttpInfo(cloudEnablementOptRef: CloudEnablementOptRef) : ApiResponse<CloudUserEnablementItem?> {
-        val localVariableConfig = cloudPostV1EnablementOptoutRequestConfig(cloudEnablementOptRef = cloudEnablementOptRef)
+    fun postV1EnablementOptoutWithHttpInfo(enablementOptRef: EnablementOptRef) : ApiResponse<UserEnablementItem?> {
+        val localVariableConfig = postV1EnablementOptoutRequestConfig(enablementOptRef = enablementOptRef)
 
-        return request<CloudEnablementOptRef, CloudUserEnablementItem>(
+        return request<EnablementOptRef, UserEnablementItem>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EnablementOptout
+     * To obtain the request config of the operation postV1EnablementOptout
      *
-     * @param cloudEnablementOptRef 
+     * @param enablementOptRef 
      * @return RequestConfig
      */
-    fun cloudPostV1EnablementOptoutRequestConfig(cloudEnablementOptRef: CloudEnablementOptRef) : RequestConfig<CloudEnablementOptRef> {
-        val localVariableBody = cloudEnablementOptRef
+    fun postV1EnablementOptoutRequestConfig(enablementOptRef: EnablementOptRef) : RequestConfig<EnablementOptRef> {
+        val localVariableBody = enablementOptRef
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -260,7 +260,7 @@ class EnablementApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/enablement/optout",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

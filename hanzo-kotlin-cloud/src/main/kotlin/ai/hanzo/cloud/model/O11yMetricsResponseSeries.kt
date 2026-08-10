@@ -15,33 +15,33 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.O11yMetricPoint
+import ai.hanzo.cloud.model.O11ypoint
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param requests 
  * @param errors 
  * @param latencyP50Ms 
  * @param latencyP95Ms 
+ * @param requests 
  */
 
 
 data class O11yMetricsResponseSeries (
 
-    @SerializedName("requests")
-    val requests: kotlin.collections.List<O11yMetricPoint>? = null,
-
     @SerializedName("errors")
-    val errors: kotlin.collections.List<O11yMetricPoint>? = null,
+    val errors: kotlin.collections.List<O11ypoint>? = null,
 
     @SerializedName("latencyP50Ms")
-    val latencyP50Ms: kotlin.collections.List<O11yMetricPoint>? = null,
+    val latencyP50Ms: kotlin.collections.List<O11ypoint>? = null,
 
     @SerializedName("latencyP95Ms")
-    val latencyP95Ms: kotlin.collections.List<O11yMetricPoint>? = null
+    val latencyP95Ms: kotlin.collections.List<O11ypoint>? = null,
+
+    @SerializedName("requests")
+    val requests: kotlin.collections.List<O11ypoint>? = null
 
 ) {
 

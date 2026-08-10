@@ -19,14 +19,14 @@ package ai.hanzo.cloud.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * One live replica of a product service from the VictoriaMetrics up inventory.
+ * 
  *
  * @param instance 
  * @param up 
  */
 
 
-data class O11yDeployment (
+data class O11ydeployment (
 
     @SerializedName("instance")
     val instance: kotlin.String? = null,

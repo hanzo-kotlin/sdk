@@ -19,11 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.EdgeError
-import ai.hanzo.cloud.model.EdgeLogEntry
-import ai.hanzo.cloud.model.SearchGetStderrLogs200Response
-import ai.hanzo.cloud.model.SearchStreamLogsRequest
-import ai.hanzo.cloud.model.SearchUpdateStderrLogsRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -51,8 +46,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/logs/health
-     * 
-     * 
+     * How many log records this deployment holds for your org
+     * Reports the native log store&#39;s live state for the calling tenant: the subsystem version and &#x60;records&#x60;, the count actually held right now rather than a constant. Not a dependency probe — the store is in-process, so this answers 200 whenever the process is up.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -61,8 +56,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LogsHealth() : Unit {
-        val localVarResponse = cloudGetV1LogsHealthWithHttpInfo()
+    fun getV1LogsHealth() : Unit {
+        val localVarResponse = getV1LogsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -81,15 +76,15 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/logs/health
-     * 
-     * 
+     * How many log records this deployment holds for your org
+     * Reports the native log store&#39;s live state for the calling tenant: the subsystem version and &#x60;records&#x60;, the count actually held right now rather than a constant. Not a dependency probe — the store is in-process, so this answers 200 whenever the process is up.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LogsHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LogsHealthRequestConfig()
+    fun getV1LogsHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1LogsHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -97,11 +92,11 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LogsHealth
+     * To obtain the request config of the operation getV1LogsHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1LogsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1LogsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -111,15 +106,15 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/logs/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/logs/query
-     * 
-     * 
+     * Search your org&#39;s logs by label, time and substring
+     * Answers &#x60;{count, records}&#x60;, newest first. &#x60;match&#x60; is the same &#x60;k&#x3D;v,k2&#x3D;v2&#x60; superset label matcher the metrics query uses; &#x60;contains&#x60; is a case-insensitive substring test against the record body; &#x60;start&#x60; and &#x60;end&#x60; are nanosecond bounds.  A bound that is absent, empty or unparseable becomes 0, which means UNBOUNDED — a malformed &#x60;start&#x60; widens the search rather than failing it. &#x60;limit&#x60; caps the page and defaults to 100 when absent or non-positive, so an unfiltered read is never the whole ring.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;, so a search can only reach the org the edge asserted.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -128,8 +123,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LogsQuery() : Unit {
-        val localVarResponse = cloudGetV1LogsQueryWithHttpInfo()
+    fun getV1LogsQuery() : Unit {
+        val localVarResponse = getV1LogsQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -148,15 +143,15 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/logs/query
-     * 
-     * 
+     * Search your org&#39;s logs by label, time and substring
+     * Answers &#x60;{count, records}&#x60;, newest first. &#x60;match&#x60; is the same &#x60;k&#x3D;v,k2&#x3D;v2&#x60; superset label matcher the metrics query uses; &#x60;contains&#x60; is a case-insensitive substring test against the record body; &#x60;start&#x60; and &#x60;end&#x60; are nanosecond bounds.  A bound that is absent, empty or unparseable becomes 0, which means UNBOUNDED — a malformed &#x60;start&#x60; widens the search rather than failing it. &#x60;limit&#x60; caps the page and defaults to 100 when absent or non-positive, so an unfiltered read is never the whole ring.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;, so a search can only reach the org the edge asserted.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LogsQueryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1LogsQueryRequestConfig()
+    fun getV1LogsQueryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1LogsQueryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,11 +159,11 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LogsQuery
+     * To obtain the request config of the operation getV1LogsQuery
      *
      * @return RequestConfig
      */
-    fun cloudGetV1LogsQueryRequestConfig() : RequestConfig<Unit> {
+    fun getV1LogsQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -178,15 +173,15 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/logs/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/logs/write
-     * 
-     * 
+     * Append structured log records for your org
+     * Takes &#x60;{records:[{t, level, body, labels}]}&#x60;, appends each one, and answers &#x60;{written}&#x60;. Bodies are stored verbatim; &#x60;labels&#x60; are the indexed dimensions a query filters on, so what you do not label you can only find by substring.  &#x60;t&#x60; is NANOSECONDS since the Unix epoch. A record sent without one is stored at 0 and then falls outside any query carrying a lower bound — the usual reason a successful write does not read back. Retention is a bounded ring, 1048576 records per org, oldest evicted first. No record is validated or rejected, so &#x60;written&#x60; is the number of records SENT; only a body that does not decode at all is 400.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;; each org&#39;s records live in its own WAL-durable store.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -195,8 +190,8 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1LogsWrite() : Unit {
-        val localVarResponse = cloudPostV1LogsWriteWithHttpInfo()
+    fun postV1LogsWrite() : Unit {
+        val localVarResponse = postV1LogsWriteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -215,15 +210,15 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/logs/write
-     * 
-     * 
+     * Append structured log records for your org
+     * Takes &#x60;{records:[{t, level, body, labels}]}&#x60;, appends each one, and answers &#x60;{written}&#x60;. Bodies are stored verbatim; &#x60;labels&#x60; are the indexed dimensions a query filters on, so what you do not label you can only find by substring.  &#x60;t&#x60; is NANOSECONDS since the Unix epoch. A record sent without one is stored at 0 and then falls outside any query carrying a lower bound — the usual reason a successful write does not read back. Retention is a bounded ring, 1048576 records per org, oldest evicted first. No record is validated or rejected, so &#x60;written&#x60; is the number of records SENT; only a body that does not decode at all is 400.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;; each org&#39;s records live in its own WAL-durable store.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LogsWriteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1LogsWriteRequestConfig()
+    fun postV1LogsWriteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1LogsWriteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -231,11 +226,11 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1LogsWrite
+     * To obtain the request config of the operation postV1LogsWrite
      *
      * @return RequestConfig
      */
-    fun cloudPostV1LogsWriteRequestConfig() : RequestConfig<Unit> {
+    fun postV1LogsWriteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -245,413 +240,7 @@ class LogsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/logs/write",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter level
-     */
-     enum class LevelEdgeGetFunctionLogs(val value: kotlin.String) {
-         @SerializedName(value = "info") info("info"),
-         @SerializedName(value = "warn") warn("warn"),
-         @SerializedName(value = "error") error("error"),
-         @SerializedName(value = "debug") debug("debug");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/edge/functions/{slug}/logs
-     * Get function logs
-     * Returns function execution logs. Supports SSE streaming via Accept: text/event-stream header for live tailing. 
-     * @param slug 
-     * @param since Return logs after this timestamp (optional)
-     * @param until  (optional)
-     * @param level  (optional)
-     * @param limit  (optional, default to 100)
-     * @return kotlin.collections.List<EdgeLogEntry>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeGetFunctionLogs(slug: kotlin.String, since: java.time.OffsetDateTime? = null, until: java.time.OffsetDateTime? = null, level: LevelEdgeGetFunctionLogs? = null, limit: kotlin.Int? = 100) : kotlin.collections.List<EdgeLogEntry> {
-        val localVarResponse = edgeGetFunctionLogsWithHttpInfo(slug = slug, since = since, until = until, level = level, limit = limit)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<EdgeLogEntry>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/edge/functions/{slug}/logs
-     * Get function logs
-     * Returns function execution logs. Supports SSE streaming via Accept: text/event-stream header for live tailing. 
-     * @param slug 
-     * @param since Return logs after this timestamp (optional)
-     * @param until  (optional)
-     * @param level  (optional)
-     * @param limit  (optional, default to 100)
-     * @return ApiResponse<kotlin.collections.List<EdgeLogEntry>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun edgeGetFunctionLogsWithHttpInfo(slug: kotlin.String, since: java.time.OffsetDateTime?, until: java.time.OffsetDateTime?, level: LevelEdgeGetFunctionLogs?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<EdgeLogEntry>?> {
-        val localVariableConfig = edgeGetFunctionLogsRequestConfig(slug = slug, since = since, until = until, level = level, limit = limit)
-
-        return request<Unit, kotlin.collections.List<EdgeLogEntry>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation edgeGetFunctionLogs
-     *
-     * @param slug 
-     * @param since Return logs after this timestamp (optional)
-     * @param until  (optional)
-     * @param level  (optional)
-     * @param limit  (optional, default to 100)
-     * @return RequestConfig
-     */
-    fun edgeGetFunctionLogsRequestConfig(slug: kotlin.String, since: java.time.OffsetDateTime?, until: java.time.OffsetDateTime?, level: LevelEdgeGetFunctionLogs?, limit: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (since != null) {
-                    put("since", listOf(parseDateToQueryString(since)))
-                }
-                if (until != null) {
-                    put("until", listOf(parseDateToQueryString(until)))
-                }
-                if (level != null) {
-                    put("level", listOf(level.value))
-                }
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/edge/functions/{slug}/logs".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/search/logs/stderr
-     * Get stderr log configuration
-     * 
-     * @return SearchGetStderrLogs200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchGetStderrLogs() : SearchGetStderrLogs200Response {
-        val localVarResponse = searchGetStderrLogsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchGetStderrLogs200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/logs/stderr
-     * Get stderr log configuration
-     * 
-     * @return ApiResponse<SearchGetStderrLogs200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchGetStderrLogsWithHttpInfo() : ApiResponse<SearchGetStderrLogs200Response?> {
-        val localVariableConfig = searchGetStderrLogsRequestConfig()
-
-        return request<Unit, SearchGetStderrLogs200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchGetStderrLogs
-     *
-     * @return RequestConfig
-     */
-    fun searchGetStderrLogsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/search/logs/stderr",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/search/logs/stderr
-     * Reset stderr log level to default
-     * 
-     * @return SearchGetStderrLogs200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchResetStderrLogs() : SearchGetStderrLogs200Response {
-        val localVarResponse = searchResetStderrLogsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchGetStderrLogs200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/search/logs/stderr
-     * Reset stderr log level to default
-     * 
-     * @return ApiResponse<SearchGetStderrLogs200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchResetStderrLogsWithHttpInfo() : ApiResponse<SearchGetStderrLogs200Response?> {
-        val localVariableConfig = searchResetStderrLogsRequestConfig()
-
-        return request<Unit, SearchGetStderrLogs200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchResetStderrLogs
-     *
-     * @return RequestConfig
-     */
-    fun searchResetStderrLogsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/search/logs/stderr",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/search/logs/stream
-     * Stream logs
-     * 
-     * @param searchStreamLogsRequest 
-     * @return kotlin.String
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchStreamLogs(searchStreamLogsRequest: SearchStreamLogsRequest) : kotlin.String {
-        val localVarResponse = searchStreamLogsWithHttpInfo(searchStreamLogsRequest = searchStreamLogsRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.String
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/search/logs/stream
-     * Stream logs
-     * 
-     * @param searchStreamLogsRequest 
-     * @return ApiResponse<kotlin.String?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchStreamLogsWithHttpInfo(searchStreamLogsRequest: SearchStreamLogsRequest) : ApiResponse<kotlin.String?> {
-        val localVariableConfig = searchStreamLogsRequestConfig(searchStreamLogsRequest = searchStreamLogsRequest)
-
-        return request<SearchStreamLogsRequest, kotlin.String>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchStreamLogs
-     *
-     * @param searchStreamLogsRequest 
-     * @return RequestConfig
-     */
-    fun searchStreamLogsRequestConfig(searchStreamLogsRequest: SearchStreamLogsRequest) : RequestConfig<SearchStreamLogsRequest> {
-        val localVariableBody = searchStreamLogsRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "text/plain"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/search/logs/stream",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/search/logs/stderr
-     * Update stderr log level
-     * 
-     * @param searchUpdateStderrLogsRequest 
-     * @return SearchGetStderrLogs200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchUpdateStderrLogs(searchUpdateStderrLogsRequest: SearchUpdateStderrLogsRequest) : SearchGetStderrLogs200Response {
-        val localVarResponse = searchUpdateStderrLogsWithHttpInfo(searchUpdateStderrLogsRequest = searchUpdateStderrLogsRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchGetStderrLogs200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/search/logs/stderr
-     * Update stderr log level
-     * 
-     * @param searchUpdateStderrLogsRequest 
-     * @return ApiResponse<SearchGetStderrLogs200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchUpdateStderrLogsWithHttpInfo(searchUpdateStderrLogsRequest: SearchUpdateStderrLogsRequest) : ApiResponse<SearchGetStderrLogs200Response?> {
-        val localVariableConfig = searchUpdateStderrLogsRequestConfig(searchUpdateStderrLogsRequest = searchUpdateStderrLogsRequest)
-
-        return request<SearchUpdateStderrLogsRequest, SearchGetStderrLogs200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchUpdateStderrLogs
-     *
-     * @param searchUpdateStderrLogsRequest 
-     * @return RequestConfig
-     */
-    fun searchUpdateStderrLogsRequestConfig(searchUpdateStderrLogsRequest: SearchUpdateStderrLogsRequest) : RequestConfig<SearchUpdateStderrLogsRequest> {
-        val localVariableBody = searchUpdateStderrLogsRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/search/logs/stderr",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

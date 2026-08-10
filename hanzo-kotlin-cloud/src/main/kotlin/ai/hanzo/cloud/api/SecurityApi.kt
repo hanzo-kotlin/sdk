@@ -19,6 +19,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.FindingList
+import ai.hanzo.cloud.model.FindingView
+import ai.hanzo.cloud.model.RuleList
+import ai.hanzo.cloud.model.Ruleset
+import ai.hanzo.cloud.model.ScanDetail
+import ai.hanzo.cloud.model.ScanList
+import ai.hanzo.cloud.model.ScanView
+import ai.hanzo.cloud.model.SubmitReq
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +54,25 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/security/findings
-     * 
-     * 
-     * @return void
+     * Is the org&#39;s findings — rule, severity, path, line, masked preview and fingerprint — newest first, across scans or within one.
+     * Is the org&#39;s findings — rule, severity, path, line, masked preview and fingerprint — newest first, across scans or within one.  A minSeverity outside critical|high|medium|low is refused rather than quietly ignored, so a filter typo cannot read as \&quot;no findings\&quot;. Strictly org-scoped, and a caller with no validated org is refused.
+     * @param scanId ScanID narrows to a single scan. (optional)
+     * @param minSeverity MinSeverity drops everything below that rank: critical, high, medium or low. A value outside that set is refused rather than quietly ignored, so a filter typo cannot read as \&quot;no findings\&quot;. (optional)
+     * @param limit Limit caps the page. (optional)
+     * @return FindingList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SecurityFindings() : Unit {
-        val localVarResponse = cloudGetV1SecurityFindingsWithHttpInfo()
+    fun getV1SecurityFindings(scanId: kotlin.String? = null, minSeverity: kotlin.String? = null, limit: kotlin.Int? = null) : FindingList {
+        val localVarResponse = getV1SecurityFindingsWithHttpInfo(scanId = scanId, minSeverity = minSeverity, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FindingList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,59 +88,79 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/security/findings
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the org&#39;s findings — rule, severity, path, line, masked preview and fingerprint — newest first, across scans or within one.
+     * Is the org&#39;s findings — rule, severity, path, line, masked preview and fingerprint — newest first, across scans or within one.  A minSeverity outside critical|high|medium|low is refused rather than quietly ignored, so a filter typo cannot read as \&quot;no findings\&quot;. Strictly org-scoped, and a caller with no validated org is refused.
+     * @param scanId ScanID narrows to a single scan. (optional)
+     * @param minSeverity MinSeverity drops everything below that rank: critical, high, medium or low. A value outside that set is refused rather than quietly ignored, so a filter typo cannot read as \&quot;no findings\&quot;. (optional)
+     * @param limit Limit caps the page. (optional)
+     * @return ApiResponse<FindingList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SecurityFindingsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SecurityFindingsRequestConfig()
+    fun getV1SecurityFindingsWithHttpInfo(scanId: kotlin.String?, minSeverity: kotlin.String?, limit: kotlin.Int?) : ApiResponse<FindingList?> {
+        val localVariableConfig = getV1SecurityFindingsRequestConfig(scanId = scanId, minSeverity = minSeverity, limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, FindingList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SecurityFindings
+     * To obtain the request config of the operation getV1SecurityFindings
      *
+     * @param scanId ScanID narrows to a single scan. (optional)
+     * @param minSeverity MinSeverity drops everything below that rank: critical, high, medium or low. A value outside that set is refused rather than quietly ignored, so a filter typo cannot read as \&quot;no findings\&quot;. (optional)
+     * @param limit Limit caps the page. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1SecurityFindingsRequestConfig() : RequestConfig<Unit> {
+    fun getV1SecurityFindingsRequestConfig(scanId: kotlin.String?, minSeverity: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (scanId != null) {
+                    put("scanId", listOf(scanId.toString()))
+                }
+                if (minSeverity != null) {
+                    put("minSeverity", listOf(minSeverity.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/security/findings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/security/findings/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Returns a single finding: which rule fired, where (path and line), the masked preview and the SHA-256 fingerprint of the secret — the raw secret is not stored and cannot be read back.
+     * Returns a single finding: which rule fired, where (path and line), the masked preview and the SHA-256 fingerprint of the secret — the raw secret is not stored and cannot be read back.  Scoped to the caller&#39;s org, and a finding belonging to another org is the same 404 as one that never existed.
+     * @param id ID is the finding the URL names.
+     * @return FindingView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SecurityFindingsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1SecurityFindingsByIdWithHttpInfo(id = id)
+    fun getV1SecurityFindingsById(id: kotlin.String) : FindingView {
+        val localVarResponse = getV1SecurityFindingsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FindingView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -144,60 +176,63 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/security/findings/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns a single finding: which rule fired, where (path and line), the masked preview and the SHA-256 fingerprint of the secret — the raw secret is not stored and cannot be read back.
+     * Returns a single finding: which rule fired, where (path and line), the masked preview and the SHA-256 fingerprint of the secret — the raw secret is not stored and cannot be read back.  Scoped to the caller&#39;s org, and a finding belonging to another org is the same 404 as one that never existed.
+     * @param id ID is the finding the URL names.
+     * @return ApiResponse<FindingView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SecurityFindingsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SecurityFindingsByIdRequestConfig(id = id)
+    fun getV1SecurityFindingsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<FindingView?> {
+        val localVariableConfig = getV1SecurityFindingsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, FindingView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SecurityFindingsById
+     * To obtain the request config of the operation getV1SecurityFindingsById
      *
-     * @param id 
+     * @param id ID is the finding the URL names.
      * @return RequestConfig
      */
-    fun cloudGetV1SecurityFindingsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SecurityFindingsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/security/findings/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/security/health
-     * 
-     * 
-     * @return void
+     * Reports that the scanning subsystem is serving and how many secret-detection rules the engine holds.
+     * Reports that the scanning subsystem is serving and how many secret-detection rules the engine holds.  It has no external dependency — the answer is ok whenever the findings store opened — so it measures this process rather than anything downstream. It reads no tenant: a prober that sends no principal is answered, not refused.
+     * @return Ruleset
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SecurityHealth() : Unit {
-        val localVarResponse = cloudGetV1SecurityHealthWithHttpInfo()
+    fun getV1SecurityHealth() : Ruleset {
+        val localVarResponse = getV1SecurityHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Ruleset
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -213,58 +248,61 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/security/health
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Reports that the scanning subsystem is serving and how many secret-detection rules the engine holds.
+     * Reports that the scanning subsystem is serving and how many secret-detection rules the engine holds.  It has no external dependency — the answer is ok whenever the findings store opened — so it measures this process rather than anything downstream. It reads no tenant: a prober that sends no principal is answered, not refused.
+     * @return ApiResponse<Ruleset?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SecurityHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SecurityHealthRequestConfig()
+    fun getV1SecurityHealthWithHttpInfo() : ApiResponse<Ruleset?> {
+        val localVariableConfig = getV1SecurityHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, Ruleset>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SecurityHealth
+     * To obtain the request config of the operation getV1SecurityHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SecurityHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1SecurityHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/security/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/security/rules
-     * 
-     * 
-     * @return void
+     * Is the secret-detection catalog the engine scans with.
+     * Is the secret-detection catalog the engine scans with.  It returns every rule a scan can fire — the id, name and severity a finding cites — so a caller can render or triage results without hard-coding the catalog. It is the same for everyone and discloses nothing tenant-specific, so it carries no org scope.
+     * @return RuleList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SecurityRules() : Unit {
-        val localVarResponse = cloudGetV1SecurityRulesWithHttpInfo()
+    fun getV1SecurityRules() : RuleList {
+        val localVarResponse = getV1SecurityRulesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RuleList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -280,58 +318,62 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/security/rules
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the secret-detection catalog the engine scans with.
+     * Is the secret-detection catalog the engine scans with.  It returns every rule a scan can fire — the id, name and severity a finding cites — so a caller can render or triage results without hard-coding the catalog. It is the same for everyone and discloses nothing tenant-specific, so it carries no org scope.
+     * @return ApiResponse<RuleList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SecurityRulesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SecurityRulesRequestConfig()
+    fun getV1SecurityRulesWithHttpInfo() : ApiResponse<RuleList?> {
+        val localVariableConfig = getV1SecurityRulesRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, RuleList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SecurityRules
+     * To obtain the request config of the operation getV1SecurityRules
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SecurityRulesRequestConfig() : RequestConfig<Unit> {
+    fun getV1SecurityRulesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/security/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/security/scans
-     * 
-     * 
-     * @return void
+     * Is the org&#39;s scan history, newest first, each as the same summary the submission answered — files read, findings fired, tally by severity.
+     * Is the org&#39;s scan history, newest first, each as the same summary the submission answered — files read, findings fired, tally by severity.  Strictly org-scoped: a caller only ever sees its own scans, and one with no validated org is refused.
+     * @param limit Limit caps the page. (optional)
+     * @return ScanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SecurityScans() : Unit {
-        val localVarResponse = cloudGetV1SecurityScansWithHttpInfo()
+    fun getV1SecurityScans(limit: kotlin.Int? = null) : ScanList {
+        val localVarResponse = getV1SecurityScansWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -347,59 +389,69 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/security/scans
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the org&#39;s scan history, newest first, each as the same summary the submission answered — files read, findings fired, tally by severity.
+     * Is the org&#39;s scan history, newest first, each as the same summary the submission answered — files read, findings fired, tally by severity.  Strictly org-scoped: a caller only ever sees its own scans, and one with no validated org is refused.
+     * @param limit Limit caps the page. (optional)
+     * @return ApiResponse<ScanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SecurityScansWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SecurityScansRequestConfig()
+    fun getV1SecurityScansWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ScanList?> {
+        val localVariableConfig = getV1SecurityScansRequestConfig(limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, ScanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SecurityScans
+     * To obtain the request config of the operation getV1SecurityScans
      *
+     * @param limit Limit caps the page. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1SecurityScansRequestConfig() : RequestConfig<Unit> {
+    fun getV1SecurityScansRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/security/scans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/security/scans/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Returns one scan together with every finding on it, so the detail view is one round-trip rather than a list call per scan.
+     * Returns one scan together with every finding on it, so the detail view is one round-trip rather than a list call per scan. The findings carry masked previews and fingerprints, never secrets.  Scoped to the caller&#39;s org: a scan id belonging to another org is the same 404 as an id that never existed, so a ruleset learns nothing about what exists elsewhere. No validated org is refused.
+     * @param id ID is the scan the URL names.
+     * @return ScanDetail
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SecurityScansById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1SecurityScansByIdWithHttpInfo(id = id)
+    fun getV1SecurityScansById(id: kotlin.String) : ScanDetail {
+        val localVarResponse = getV1SecurityScansByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScanDetail
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -415,60 +467,64 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/security/scans/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns one scan together with every finding on it, so the detail view is one round-trip rather than a list call per scan.
+     * Returns one scan together with every finding on it, so the detail view is one round-trip rather than a list call per scan. The findings carry masked previews and fingerprints, never secrets.  Scoped to the caller&#39;s org: a scan id belonging to another org is the same 404 as an id that never existed, so a ruleset learns nothing about what exists elsewhere. No validated org is refused.
+     * @param id ID is the scan the URL names.
+     * @return ApiResponse<ScanDetail?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SecurityScansByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SecurityScansByIdRequestConfig(id = id)
+    fun getV1SecurityScansByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ScanDetail?> {
+        val localVariableConfig = getV1SecurityScansByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, ScanDetail>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SecurityScansById
+     * To obtain the request config of the operation getV1SecurityScansById
      *
-     * @param id 
+     * @param id ID is the scan the URL names.
      * @return RequestConfig
      */
-    fun cloudGetV1SecurityScansByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SecurityScansByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/security/scans/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/security/scans
-     * 
-     * 
-     * @return void
+     * Runs the detection engine over a batch of files and answers 201 with the scan summary: how many files were read, how many findings fired, and the tally by severity.
+     * Runs the detection engine over a batch of files and answers 201 with the scan summary: how many files were read, how many findings fired, and the tally by severity.  THE SUBMITTED CONTENT IS NEVER STORED. It is scanned in memory; what persists is the finding — its rule, its path and line, a MASKED preview (first and last characters kept, the middle starred) and the SHA-256 fingerprint of the raw secret. The fingerprint is what makes the same secret recognisable across scans and after rotation without the secret ever being written down.  It requires a validated org, which scopes the stored scan and every finding on it; a caller with no org is refused. Bounded at 500 files and 8 MiB of total content per submission — split a larger tree across scans. One scan is one metered unit, and the scan is recorded in the audit log with its tally, never with its findings.
+     * @param submitReq 
+     * @return ScanView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1SecurityScans() : Unit {
-        val localVarResponse = cloudPostV1SecurityScansWithHttpInfo()
+    fun postV1SecurityScans(submitReq: SubmitReq) : ScanView {
+        val localVarResponse = postV1SecurityScansWithHttpInfo(submitReq = submitReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScanView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -484,37 +540,42 @@ class SecurityApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/security/scans
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Runs the detection engine over a batch of files and answers 201 with the scan summary: how many files were read, how many findings fired, and the tally by severity.
+     * Runs the detection engine over a batch of files and answers 201 with the scan summary: how many files were read, how many findings fired, and the tally by severity.  THE SUBMITTED CONTENT IS NEVER STORED. It is scanned in memory; what persists is the finding — its rule, its path and line, a MASKED preview (first and last characters kept, the middle starred) and the SHA-256 fingerprint of the raw secret. The fingerprint is what makes the same secret recognisable across scans and after rotation without the secret ever being written down.  It requires a validated org, which scopes the stored scan and every finding on it; a caller with no org is refused. Bounded at 500 files and 8 MiB of total content per submission — split a larger tree across scans. One scan is one metered unit, and the scan is recorded in the audit log with its tally, never with its findings.
+     * @param submitReq 
+     * @return ApiResponse<ScanView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SecurityScansWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1SecurityScansRequestConfig()
+    fun postV1SecurityScansWithHttpInfo(submitReq: SubmitReq) : ApiResponse<ScanView?> {
+        val localVariableConfig = postV1SecurityScansRequestConfig(submitReq = submitReq)
 
-        return request<Unit, Unit>(
+        return request<SubmitReq, ScanView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1SecurityScans
+     * To obtain the request config of the operation postV1SecurityScans
      *
+     * @param submitReq 
      * @return RequestConfig
      */
-    fun cloudPostV1SecurityScansRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1SecurityScansRequestConfig(submitReq: SubmitReq) : RequestConfig<SubmitReq> {
+        val localVariableBody = submitReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/security/scans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

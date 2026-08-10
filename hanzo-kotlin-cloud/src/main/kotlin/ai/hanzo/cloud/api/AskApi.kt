@@ -19,7 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAskRequest
+import ai.hanzo.cloud.model.AskRequest
+import ai.hanzo.cloud.model.Report
+import ai.hanzo.cloud.model.WebQuestion
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,9 +49,9 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/ask
-     * 
-     * 
-     * @param cloudAskRequest  (optional)
+     * Ask a grounded question about your own org
+     * Answers a natural-language question about the CALLER&#39;S OWN org, from real figures rather than from the model&#39;s memory.  The question is classified to a grounded domain, that domain&#39;s read runs IN-PROCESS under the caller&#39;s own credentials, and only then is the result narrated. So the figures and their sources are the domain&#39;s, resolved before any model call and never altered by one — a wrong answer is a wrong query, never an invention.  Domains: books (the org&#39;s ledger), projects (what is built and what of it is deployed), git (the org&#39;s repositories and what changed in them), and web (search, news, research, deep). A validated principal is required; the answer is scoped to that principal&#39;s org and nothing else.
+     * @param askRequest  (optional)
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -58,8 +60,8 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Ask(cloudAskRequest: CloudAskRequest? = null) : Unit {
-        val localVarResponse = cloudPostV1AskWithHttpInfo(cloudAskRequest = cloudAskRequest)
+    fun postV1Ask(askRequest: AskRequest? = null) : Unit {
+        val localVarResponse = postV1AskWithHttpInfo(askRequest = askRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -78,30 +80,30 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/ask
-     * 
-     * 
-     * @param cloudAskRequest  (optional)
+     * Ask a grounded question about your own org
+     * Answers a natural-language question about the CALLER&#39;S OWN org, from real figures rather than from the model&#39;s memory.  The question is classified to a grounded domain, that domain&#39;s read runs IN-PROCESS under the caller&#39;s own credentials, and only then is the result narrated. So the figures and their sources are the domain&#39;s, resolved before any model call and never altered by one — a wrong answer is a wrong query, never an invention.  Domains: books (the org&#39;s ledger), projects (what is built and what of it is deployed), git (the org&#39;s repositories and what changed in them), and web (search, news, research, deep). A validated principal is required; the answer is scoped to that principal&#39;s org and nothing else.
+     * @param askRequest  (optional)
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AskWithHttpInfo(cloudAskRequest: CloudAskRequest?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AskRequestConfig(cloudAskRequest = cloudAskRequest)
+    fun postV1AskWithHttpInfo(askRequest: AskRequest?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AskRequestConfig(askRequest = askRequest)
 
-        return request<CloudAskRequest, Unit>(
+        return request<AskRequest, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Ask
+     * To obtain the request config of the operation postV1Ask
      *
-     * @param cloudAskRequest  (optional)
+     * @param askRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1AskRequestConfig(cloudAskRequest: CloudAskRequest?) : RequestConfig<CloudAskRequest> {
-        val localVariableBody = cloudAskRequest
+    fun postV1AskRequestConfig(askRequest: AskRequest?) : RequestConfig<AskRequest> {
+        val localVariableBody = askRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -111,7 +113,81 @@ class AskApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/ask/web
+     * Research a question on the live web and answer it with sources cited
+     * Researches a question on the live web and answers it with its sources cited.  This is the DEEP one. It plans the question into topics, runs several web searches, FETCHES AND READS the pages it finds, ranks them, and writes a grounded answer with inline markdown citations. Use it for anything that needs evidence, comparison or current fact — \&quot;what changed in X\&quot;, \&quot;compare A and B\&quot;, \&quot;is this claim true\&quot;. For a plain list of links, use search_web instead; for one page you already have the URL of, use read_page.  &#x60;mode&#x60; buys depth: &#x60;search&#x60; is a single fast pass, &#x60;news&#x60; biases to recency, &#x60;research&#x60; plans and iterates, &#x60;deep&#x60; surveys widest. &#x60;sources&#x60; narrows the evidence to &#x60;web&#x60;, &#x60;news&#x60;, &#x60;academic&#x60;, &#x60;github&#x60;, &#x60;reddit&#x60; or &#x60;x&#x60; — each becomes a site-scoped search, which is how this reaches X/Twitter posts.  EVERY CITATION IS A PAGE THIS CALL FETCHED. That is a property of the text and not an instruction to the model: each source is fenced with a per-request nonce so a crawled page cannot print itself a source number, and every markdown link in the answer is checked against the gathered set before it is returned. So a link in &#x60;answer&#x60; always appears in &#x60;sources&#x60;, and a page that was not read cannot be cited.  It is BOUNDED and it degrades rather than failing: a mode&#39;s rounds, wall clock and token ceiling all cap it, and a search that finds little or a page that will not load yields a thinner answer, never an error. A validated principal is required, and the answer is billed once to that principal&#39;s org.
+     * @param webQuestion 
+     * @return Report
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun researchWeb(webQuestion: WebQuestion) : Report {
+        val localVarResponse = researchWebWithHttpInfo(webQuestion = webQuestion)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Report
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/ask/web
+     * Research a question on the live web and answer it with sources cited
+     * Researches a question on the live web and answers it with its sources cited.  This is the DEEP one. It plans the question into topics, runs several web searches, FETCHES AND READS the pages it finds, ranks them, and writes a grounded answer with inline markdown citations. Use it for anything that needs evidence, comparison or current fact — \&quot;what changed in X\&quot;, \&quot;compare A and B\&quot;, \&quot;is this claim true\&quot;. For a plain list of links, use search_web instead; for one page you already have the URL of, use read_page.  &#x60;mode&#x60; buys depth: &#x60;search&#x60; is a single fast pass, &#x60;news&#x60; biases to recency, &#x60;research&#x60; plans and iterates, &#x60;deep&#x60; surveys widest. &#x60;sources&#x60; narrows the evidence to &#x60;web&#x60;, &#x60;news&#x60;, &#x60;academic&#x60;, &#x60;github&#x60;, &#x60;reddit&#x60; or &#x60;x&#x60; — each becomes a site-scoped search, which is how this reaches X/Twitter posts.  EVERY CITATION IS A PAGE THIS CALL FETCHED. That is a property of the text and not an instruction to the model: each source is fenced with a per-request nonce so a crawled page cannot print itself a source number, and every markdown link in the answer is checked against the gathered set before it is returned. So a link in &#x60;answer&#x60; always appears in &#x60;sources&#x60;, and a page that was not read cannot be cited.  It is BOUNDED and it degrades rather than failing: a mode&#39;s rounds, wall clock and token ceiling all cap it, and a search that finds little or a page that will not load yields a thinner answer, never an error. A validated principal is required, and the answer is billed once to that principal&#39;s org.
+     * @param webQuestion 
+     * @return ApiResponse<Report?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun researchWebWithHttpInfo(webQuestion: WebQuestion) : ApiResponse<Report?> {
+        val localVariableConfig = researchWebRequestConfig(webQuestion = webQuestion)
+
+        return request<WebQuestion, Report>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation researchWeb
+     *
+     * @param webQuestion 
+     * @return RequestConfig
+     */
+    fun researchWebRequestConfig(webQuestion: WebQuestion) : RequestConfig<WebQuestion> {
+        val localVariableBody = webQuestion
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/ask/web",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

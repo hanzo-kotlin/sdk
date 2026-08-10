@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudNodesView
+import ai.hanzo.cloud.model.NodesView
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,8 +47,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -58,8 +58,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -78,16 +78,16 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,12 +95,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1BotByWildcard1
+     * To obtain the request config of the operation deleteV1BotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudDeleteV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,15 +110,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -128,8 +128,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -148,16 +148,16 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -165,12 +165,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BotByWildcard1
+     * To obtain the request config of the operation getV1BotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -180,15 +180,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/bot/connect
-     * 
-     * 
+     * The socket a bot node dials and holds open to become invokable.
+     * Upgrades to a WebSocket and keeps it for the life of the node. cloud writes a challenge frame immediately; the node answers with a connect frame naming the protocol range it speaks, the role &#x60;node&#x60;, its own node id, and the display name, platform, agent version, capabilities and commands it reports for itself. On acceptance the session is registered, the node appears in this org&#39;s node list, and invocations begin arriving as frames on the same connection.  The upgrade needs a validated principal and answers 403 without one. The org is the gateway&#39;s verdict — injected after IAM validation and after any client copy is stripped — and is never read from the request itself, because a caller that could name an org could attach a machine into someone else&#39;s tenant.  A request carrying an Origin header is refused outright. A node is a daemon and a browser has no business here; since no same-origin policy applies to WebSockets, a page could otherwise ride a signed-in viewer&#39;s session into registering a node. Removing the whole category is the gate, not an allowlist of brand domains. The handshake deadline is one fixed instant rather than a per-read timer, so a peer cannot hold a pre-handshake socket open indefinitely by sending frames this endpoint ignores.  Two things to get right. Everything the node declares about itself — capabilities, commands, platform — is a SELF-REPORT: it is useful to show and never load-bearing, because what the node may actually be asked to run is decided at this socket against the deployment&#39;s allowlist. And a node can only ever answer calls placed on its own connection: correlation ids are minted under the connection id and checked against it, so naming another node&#39;s in-flight call resolves nothing.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -197,8 +197,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BotConnect() : Unit {
-        val localVarResponse = cloudGetV1BotConnectWithHttpInfo()
+    fun getV1BotConnect() : Unit {
+        val localVarResponse = getV1BotConnectWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -217,15 +217,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/bot/connect
-     * 
-     * 
+     * The socket a bot node dials and holds open to become invokable.
+     * Upgrades to a WebSocket and keeps it for the life of the node. cloud writes a challenge frame immediately; the node answers with a connect frame naming the protocol range it speaks, the role &#x60;node&#x60;, its own node id, and the display name, platform, agent version, capabilities and commands it reports for itself. On acceptance the session is registered, the node appears in this org&#39;s node list, and invocations begin arriving as frames on the same connection.  The upgrade needs a validated principal and answers 403 without one. The org is the gateway&#39;s verdict — injected after IAM validation and after any client copy is stripped — and is never read from the request itself, because a caller that could name an org could attach a machine into someone else&#39;s tenant.  A request carrying an Origin header is refused outright. A node is a daemon and a browser has no business here; since no same-origin policy applies to WebSockets, a page could otherwise ride a signed-in viewer&#39;s session into registering a node. Removing the whole category is the gate, not an allowlist of brand domains. The handshake deadline is one fixed instant rather than a per-read timer, so a peer cannot hold a pre-handshake socket open indefinitely by sending frames this endpoint ignores.  Two things to get right. Everything the node declares about itself — capabilities, commands, platform — is a SELF-REPORT: it is useful to show and never load-bearing, because what the node may actually be asked to run is decided at this socket against the deployment&#39;s allowlist. And a node can only ever answer calls placed on its own connection: correlation ids are minted under the connection id and checked against it, so naming another node&#39;s in-flight call resolves nothing.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BotConnectWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BotConnectRequestConfig()
+    fun getV1BotConnectWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BotConnectRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -233,11 +233,11 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BotConnect
+     * To obtain the request config of the operation getV1BotConnect
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BotConnectRequestConfig() : RequestConfig<Unit> {
+    fun getV1BotConnectRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -247,7 +247,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/connect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/bot/nodes
      * Returns the caller org&#39;s currently connected bot nodes: what each one calls itself, the platform it runs on, its agent version, when its socket was established, and the capabilities and commands it reported.
      * Returns the caller org&#39;s currently connected bot nodes: what each one calls itself, the platform it runs on, its agent version, when its socket was established, and the capabilities and commands it reported.  Only this org&#39;s nodes are listed — the org is half of every key in the table it reads — and only nodes attached to THIS replica, because the list is of live sockets rather than of registrations. The capability and command lists are the node&#39;s own self-report: useful to show, never load-bearing, because what a node may actually be asked to do is decided at the socket against the deployment&#39;s allowlist.
-     * @return CloudNodesView
+     * @return NodesView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -265,11 +265,11 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BotNodes() : CloudNodesView {
-        val localVarResponse = cloudGetV1BotNodesWithHttpInfo()
+    fun getV1BotNodes() : NodesView {
+        val localVarResponse = getV1BotNodesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNodesView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NodesView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -287,26 +287,26 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/bot/nodes
      * Returns the caller org&#39;s currently connected bot nodes: what each one calls itself, the platform it runs on, its agent version, when its socket was established, and the capabilities and commands it reported.
      * Returns the caller org&#39;s currently connected bot nodes: what each one calls itself, the platform it runs on, its agent version, when its socket was established, and the capabilities and commands it reported.  Only this org&#39;s nodes are listed — the org is half of every key in the table it reads — and only nodes attached to THIS replica, because the list is of live sockets rather than of registrations. The capability and command lists are the node&#39;s own self-report: useful to show, never load-bearing, because what a node may actually be asked to do is decided at the socket against the deployment&#39;s allowlist.
-     * @return ApiResponse<CloudNodesView?>
+     * @return ApiResponse<NodesView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BotNodesWithHttpInfo() : ApiResponse<CloudNodesView?> {
-        val localVariableConfig = cloudGetV1BotNodesRequestConfig()
+    fun getV1BotNodesWithHttpInfo() : ApiResponse<NodesView?> {
+        val localVariableConfig = getV1BotNodesRequestConfig()
 
-        return request<Unit, CloudNodesView>(
+        return request<Unit, NodesView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BotNodes
+     * To obtain the request config of the operation getV1BotNodes
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BotNodesRequestConfig() : RequestConfig<Unit> {
+    fun getV1BotNodesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -317,85 +317,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/nodes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * OPTIONS /v1/bot/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudOptionsV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * OPTIONS /v1/bot/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudOptionsV1BotByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun cloudOptionsV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -405,8 +335,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -425,16 +355,16 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PATCH /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -442,12 +372,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1BotByWildcard1
+     * To obtain the request config of the operation patchV1BotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPatchV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -457,15 +387,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -475,8 +405,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -495,16 +425,16 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -512,12 +442,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BotByWildcard1
+     * To obtain the request config of the operation postV1BotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPostV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -527,15 +457,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/bot/nodes/{id}/invoke
-     * 
-     * 
+     * Ask one of your connected machines to run a command, and get its answer back.
+     * Sends {command, params, timeoutMs, idempotencyKey} to the named node and answers with what the node returned: {ok, payload, code, message}, where payload is the node&#39;s own JSON passed through — cloud routes the call, it does not interpret the result. A reply that is not valid JSON becomes an empty payload rather than corrupting the response, which ok and code already qualify.  Neither the node nor the org is a body field: the node is the path and the org is the caller&#39;s validated identity, and a field for either would be a field somebody could set to a stranger&#39;s. A validated principal is required (403 without one), and a node id that belongs to another org answers exactly like one that does not exist — not found — so this cannot be used to probe another tenant&#39;s fleet.  Authorization happened ONCE, at the socket, on the replica holding that node — the only place that knows what the node declared it can do. A node attached to a different replica is reached through the peer forward and is authorized by the same code with the same session in hand, so a local node and a forwarded one cannot get different answers. The timeout defaults to 30s and is clamped to 5 minutes, so one request can never pin a node&#39;s socket open indefinitely.  system.run is rewritten before dispatch: its approval control fields are re-derived from the approval record and whatever the caller claimed is discarded, because a caller that could pre-approve itself is the whole thing approvals exist to prevent. No approval registry is wired today, so an invocation CLAIMING an approval is refused while an ordinary one is unaffected.  The one thing to get right: a refusal is a 403 carrying a DOMAIN body — {error, code, reason} — not the flat error envelope the rest of cloud returns, and the same body comes back whether the pre-flight sanitize refused it or the node&#39;s own gate did. Switch on &#x60;code&#x60;. The remaining failures are ordinary statuses: the node not answering in time is 504, and a node that disconnected or could not be reached is 502.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -545,8 +475,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BotNodesByIdInvoke(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1BotNodesByIdInvokeWithHttpInfo(id = id)
+    fun postV1BotNodesByIdInvoke(id: kotlin.String) : Unit {
+        val localVarResponse = postV1BotNodesByIdInvokeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -565,16 +495,16 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/bot/nodes/{id}/invoke
-     * 
-     * 
+     * Ask one of your connected machines to run a command, and get its answer back.
+     * Sends {command, params, timeoutMs, idempotencyKey} to the named node and answers with what the node returned: {ok, payload, code, message}, where payload is the node&#39;s own JSON passed through — cloud routes the call, it does not interpret the result. A reply that is not valid JSON becomes an empty payload rather than corrupting the response, which ok and code already qualify.  Neither the node nor the org is a body field: the node is the path and the org is the caller&#39;s validated identity, and a field for either would be a field somebody could set to a stranger&#39;s. A validated principal is required (403 without one), and a node id that belongs to another org answers exactly like one that does not exist — not found — so this cannot be used to probe another tenant&#39;s fleet.  Authorization happened ONCE, at the socket, on the replica holding that node — the only place that knows what the node declared it can do. A node attached to a different replica is reached through the peer forward and is authorized by the same code with the same session in hand, so a local node and a forwarded one cannot get different answers. The timeout defaults to 30s and is clamped to 5 minutes, so one request can never pin a node&#39;s socket open indefinitely.  system.run is rewritten before dispatch: its approval control fields are re-derived from the approval record and whatever the caller claimed is discarded, because a caller that could pre-approve itself is the whole thing approvals exist to prevent. No approval registry is wired today, so an invocation CLAIMING an approval is refused while an ordinary one is unaffected.  The one thing to get right: a refusal is a 403 carrying a DOMAIN body — {error, code, reason} — not the flat error envelope the rest of cloud returns, and the same body comes back whether the pre-flight sanitize refused it or the node&#39;s own gate did. Switch on &#x60;code&#x60;. The remaining failures are ordinary statuses: the node not answering in time is 504, and a node that disconnected or could not be reached is 502.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BotNodesByIdInvokeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BotNodesByIdInvokeRequestConfig(id = id)
+    fun postV1BotNodesByIdInvokeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BotNodesByIdInvokeRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -582,12 +512,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BotNodesByIdInvoke
+     * To obtain the request config of the operation postV1BotNodesByIdInvoke
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1BotNodesByIdInvokeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1BotNodesByIdInvokeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -597,15 +527,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/nodes/{id}/invoke".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/bot/peer/invoke
-     * 
-     * 
+     * Replica-to-replica forward of one invocation to the pod holding the node&#39;s socket.
+     * A machine hop, not a caller-facing route. A node&#39;s socket lands on one replica while invocations land on any, so the replica that took the request forwards it here to the one that actually holds the node, and returns that answer as its own.  It authenticates with the shared peer token, compared in constant time, and carries no user identity at all. That is why the org arrives IN THE BODY here: the forwarding replica already derived it from a gateway-validated header, so the value is a fact being relayed rather than a claim being made. On any caller-facing route the same field would be a cross-tenant invoke primitive.  It fails closed on its own configuration: with no peer token set, or a half-wired cluster that has presence but no way to forward, it serves 503 and forwards nothing — an unauthenticated endpoint that takes an org from a body is precisely the hole. A missing or wrong token is 403, and the forwarded body is bounded on read.  Two things to get right. Its refusals are text/plain rather than the JSON every zip error uses, so a client decoding them as JSON will fail on the error path only. And an invocation that RAN but was denied still answers 200 here, carrying a stable error token in the JSON body — no such node, timeout, node gone, denied, failed — which the calling replica maps back onto the status codes a caller sees. Authorization already ran on this replica at the socket and is deliberately not repeated.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -614,8 +544,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BotPeerInvoke() : Unit {
-        val localVarResponse = cloudPostV1BotPeerInvokeWithHttpInfo()
+    fun postV1BotPeerInvoke() : Unit {
+        val localVarResponse = postV1BotPeerInvokeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -634,15 +564,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/bot/peer/invoke
-     * 
-     * 
+     * Replica-to-replica forward of one invocation to the pod holding the node&#39;s socket.
+     * A machine hop, not a caller-facing route. A node&#39;s socket lands on one replica while invocations land on any, so the replica that took the request forwards it here to the one that actually holds the node, and returns that answer as its own.  It authenticates with the shared peer token, compared in constant time, and carries no user identity at all. That is why the org arrives IN THE BODY here: the forwarding replica already derived it from a gateway-validated header, so the value is a fact being relayed rather than a claim being made. On any caller-facing route the same field would be a cross-tenant invoke primitive.  It fails closed on its own configuration: with no peer token set, or a half-wired cluster that has presence but no way to forward, it serves 503 and forwards nothing — an unauthenticated endpoint that takes an org from a body is precisely the hole. A missing or wrong token is 403, and the forwarded body is bounded on read.  Two things to get right. Its refusals are text/plain rather than the JSON every zip error uses, so a client decoding them as JSON will fail on the error path only. And an invocation that RAN but was denied still answers 200 here, carrying a stable error token in the JSON body — no such node, timeout, node gone, denied, failed — which the calling replica maps back onto the status codes a caller sees. Authorization already ran on this replica at the socket and is deliberately not repeated.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BotPeerInvokeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BotPeerInvokeRequestConfig()
+    fun postV1BotPeerInvokeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BotPeerInvokeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -650,11 +580,11 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BotPeerInvoke
+     * To obtain the request config of the operation postV1BotPeerInvoke
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BotPeerInvokeRequestConfig() : RequestConfig<Unit> {
+    fun postV1BotPeerInvokeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -664,15 +594,15 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/peer/invoke",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -682,8 +612,8 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putV1BotByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putV1BotByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -702,16 +632,16 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PUT /v1/bot/{wildcard1}
-     * 
-     * 
+     * Relay one of the bot runtime&#39;s own operational paths
+     * Forwards a request to the bot runtime — the service that executes channels and skills — and hands back its answer unchanged. &#x60;/v1/bot&#x60; is stripped before forwarding, because the runtime serves bare paths: /v1/bot/health reaches it as /health.  This is the runtime&#39;s OPS face, not a control plane. A liveness probe is not a tenant-scoped resource, so it stays a relay rather than being reimplemented in Go; everything a tenant can ACT on is native and typed at /v1/bots.  A validated principal is required and the request is refused with 403 before anything is forwarded — the runtime trusts the identity headers it receives as gateway-minted, so an unauthenticated call must never be allowed to hand it a victim tenant. The caller&#39;s Authorization, org, user, email, project and environment headers ride along; nothing is minted here. The runtime&#39;s own status code and Content-Type come back verbatim (frequently not JSON), the body is bounded at 16 MiB, and a runtime that cannot be reached is 502.  One registration owns this address for every method, so which methods actually answer is the runtime&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putV1BotByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1BotByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -719,12 +649,12 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1BotByWildcard1
+     * To obtain the request config of the operation putV1BotByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPutV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putV1BotByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -734,7 +664,7 @@ class BotApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/bot/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

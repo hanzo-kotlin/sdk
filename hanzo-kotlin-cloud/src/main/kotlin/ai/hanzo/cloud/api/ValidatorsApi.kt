@@ -19,10 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudChallengeView
-import ai.hanzo.cloud.model.CloudSlotView
-import ai.hanzo.cloud.model.CloudValidatorClaim
-import ai.hanzo.cloud.model.CloudValidatorList
+import ai.hanzo.cloud.model.ChallengeView
+import ai.hanzo.cloud.model.SlotView
+import ai.hanzo.cloud.model.ValidatorClaim
+import ai.hanzo.cloud.model.ValidatorList
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,7 +53,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Returns the validator slots the caller&#39;s org has claimed.
      * Returns the validator slots the caller&#39;s org has claimed.  One entry per claimed slot with its node identity, its live-ish node status and the owner-gated registration queued for it, if any. Slots are org-scoped by the validated identity, so a caller can only ever see their own — a slot claimed by another org is not merely hidden from this list, it is unreachable through the whole surface.
      * @param limit Limit is how many slots to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 200; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
-     * @return CloudValidatorList
+     * @return ValidatorList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -62,11 +62,11 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Validators(limit: kotlin.String? = null) : CloudValidatorList {
-        val localVarResponse = cloudGetV1ValidatorsWithHttpInfo(limit = limit)
+    fun getV1Validators(limit: kotlin.String? = null) : ValidatorList {
+        val localVarResponse = getV1ValidatorsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudValidatorList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ValidatorList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -85,27 +85,27 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Returns the validator slots the caller&#39;s org has claimed.
      * Returns the validator slots the caller&#39;s org has claimed.  One entry per claimed slot with its node identity, its live-ish node status and the owner-gated registration queued for it, if any. Slots are org-scoped by the validated identity, so a caller can only ever see their own — a slot claimed by another org is not merely hidden from this list, it is unreachable through the whole surface.
      * @param limit Limit is how many slots to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 200; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
-     * @return ApiResponse<CloudValidatorList?>
+     * @return ApiResponse<ValidatorList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ValidatorsWithHttpInfo(limit: kotlin.String?) : ApiResponse<CloudValidatorList?> {
-        val localVariableConfig = cloudGetV1ValidatorsRequestConfig(limit = limit)
+    fun getV1ValidatorsWithHttpInfo(limit: kotlin.String?) : ApiResponse<ValidatorList?> {
+        val localVariableConfig = getV1ValidatorsRequestConfig(limit = limit)
 
-        return request<Unit, CloudValidatorList>(
+        return request<Unit, ValidatorList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Validators
+     * To obtain the request config of the operation getV1Validators
      *
      * @param limit Limit is how many slots to return, as a decimal string in the &#x60;?limit&#x3D;&#x60; query. Absent, unparseable or non-positive means 200; over 1000 is clamped to 1000. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ValidatorsRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ValidatorsRequestConfig(limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -121,7 +121,80 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/validators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/validators/{tokenId}
+     * Returns one claimed validator slot, scoped to the caller&#39;s org.
+     * Returns one claimed validator slot, scoped to the caller&#39;s org.  A slot another org holds, and a slot nobody holds, are both 404 — never a different status, so this route cannot be used to probe which slots are taken.
+     * @param tokenId TokenID is the slot&#39;s GenesisNFT token id, from the path, as a decimal string. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two.
+     * @return SlotView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1ValidatorsByTokenid(tokenId: kotlin.String) : SlotView {
+        val localVarResponse = getV1ValidatorsByTokenidWithHttpInfo(tokenId = tokenId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SlotView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/validators/{tokenId}
+     * Returns one claimed validator slot, scoped to the caller&#39;s org.
+     * Returns one claimed validator slot, scoped to the caller&#39;s org.  A slot another org holds, and a slot nobody holds, are both 404 — never a different status, so this route cannot be used to probe which slots are taken.
+     * @param tokenId TokenID is the slot&#39;s GenesisNFT token id, from the path, as a decimal string. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two.
+     * @return ApiResponse<SlotView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1ValidatorsByTokenidWithHttpInfo(tokenId: kotlin.String) : ApiResponse<SlotView?> {
+        val localVariableConfig = getV1ValidatorsByTokenidRequestConfig(tokenId = tokenId)
+
+        return request<Unit, SlotView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1ValidatorsByTokenid
+     *
+     * @param tokenId TokenID is the slot&#39;s GenesisNFT token id, from the path, as a decimal string. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two.
+     * @return RequestConfig
+     */
+    fun getV1ValidatorsByTokenidRequestConfig(tokenId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/validators/{tokenId}".replace("{"+"tokenId"+"}", encodeURIComponent(tokenId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -131,7 +204,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Issues the single-use nonce and the exact message a wallet must sign to claim a validator slot.
      * Issues the single-use nonce and the exact message a wallet must sign to claim a validator slot.  The nonce is bound to (validated org, slot) and stored server-side, so a signature obtained for one org or one slot can never be replayed for another, and the message POST /v1/validators verifies is rebuilt from those same server facts rather than trusted from the caller. Redeem it with POST /v1/validators before it expires; it can be redeemed once.  A tokenId outside the Validator tier is refused here rather than after signing.
      * @param tokenId TokenID is the Validator-tier GenesisNFT token id, as a decimal string in the &#x60;?tokenId&#x3D;&#x60; query. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
-     * @return CloudChallengeView
+     * @return ChallengeView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -140,11 +213,11 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ValidatorsChallenge(tokenId: kotlin.String? = null) : CloudChallengeView {
-        val localVarResponse = cloudGetV1ValidatorsChallengeWithHttpInfo(tokenId = tokenId)
+    fun getV1ValidatorsChallenge(tokenId: kotlin.String? = null) : ChallengeView {
+        val localVarResponse = getV1ValidatorsChallengeWithHttpInfo(tokenId = tokenId)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudChallengeView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ChallengeView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -163,27 +236,27 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Issues the single-use nonce and the exact message a wallet must sign to claim a validator slot.
      * Issues the single-use nonce and the exact message a wallet must sign to claim a validator slot.  The nonce is bound to (validated org, slot) and stored server-side, so a signature obtained for one org or one slot can never be replayed for another, and the message POST /v1/validators verifies is rebuilt from those same server facts rather than trusted from the caller. Redeem it with POST /v1/validators before it expires; it can be redeemed once.  A tokenId outside the Validator tier is refused here rather than after signing.
      * @param tokenId TokenID is the Validator-tier GenesisNFT token id, as a decimal string in the &#x60;?tokenId&#x3D;&#x60; query. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
-     * @return ApiResponse<CloudChallengeView?>
+     * @return ApiResponse<ChallengeView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ValidatorsChallengeWithHttpInfo(tokenId: kotlin.String?) : ApiResponse<CloudChallengeView?> {
-        val localVariableConfig = cloudGetV1ValidatorsChallengeRequestConfig(tokenId = tokenId)
+    fun getV1ValidatorsChallengeWithHttpInfo(tokenId: kotlin.String?) : ApiResponse<ChallengeView?> {
+        val localVariableConfig = getV1ValidatorsChallengeRequestConfig(tokenId = tokenId)
 
-        return request<Unit, CloudChallengeView>(
+        return request<Unit, ChallengeView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ValidatorsChallenge
+     * To obtain the request config of the operation getV1ValidatorsChallenge
      *
      * @param tokenId TokenID is the Validator-tier GenesisNFT token id, as a decimal string in the &#x60;?tokenId&#x3D;&#x60; query. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ValidatorsChallengeRequestConfig(tokenId: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ValidatorsChallengeRequestConfig(tokenId: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -199,80 +272,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/validators/challenge",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/validators/{tokenId}
-     * Returns one claimed validator slot, scoped to the caller&#39;s org.
-     * Returns one claimed validator slot, scoped to the caller&#39;s org.  A slot another org holds, and a slot nobody holds, are both 404 — never a different status, so this route cannot be used to probe which slots are taken.
-     * @param tokenId TokenID is the slot&#39;s GenesisNFT token id, from the path, as a decimal string. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two.
-     * @return CloudSlotView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ValidatorsTokenId(tokenId: kotlin.String) : CloudSlotView {
-        val localVarResponse = cloudGetV1ValidatorsTokenIdWithHttpInfo(tokenId = tokenId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSlotView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/validators/{tokenId}
-     * Returns one claimed validator slot, scoped to the caller&#39;s org.
-     * Returns one claimed validator slot, scoped to the caller&#39;s org.  A slot another org holds, and a slot nobody holds, are both 404 — never a different status, so this route cannot be used to probe which slots are taken.
-     * @param tokenId TokenID is the slot&#39;s GenesisNFT token id, from the path, as a decimal string. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two.
-     * @return ApiResponse<CloudSlotView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ValidatorsTokenIdWithHttpInfo(tokenId: kotlin.String) : ApiResponse<CloudSlotView?> {
-        val localVariableConfig = cloudGetV1ValidatorsTokenIdRequestConfig(tokenId = tokenId)
-
-        return request<Unit, CloudSlotView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1ValidatorsTokenId
-     *
-     * @param tokenId TokenID is the slot&#39;s GenesisNFT token id, from the path, as a decimal string. A value that is not a positive integer is 400. It is a string rather than a number because the parse that has always served this route trims surrounding whitespace, and one parse rule is better than two.
-     * @return RequestConfig
-     */
-    fun cloudGetV1ValidatorsTokenIdRequestConfig(tokenId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/validators/{tokenId}".replace("{"+"tokenId"+"}", encodeURIComponent(tokenId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -281,8 +281,8 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * POST /v1/validators
      * Claims a validator slot and provisions its node, after proving the caller&#39;s wallet owns the slot&#39;s NFT.
      * Claims a validator slot and provisions its node, after proving the caller&#39;s wallet owns the slot&#39;s NFT.  The pipeline, all server-enforced: burn the single-use challenge (so a replayed or forged nonce dies before any chain read), recover the signer from the message this server rebuilds, require that wallet to hold Validator-tier GenesisNFT #tokenId on Ethereum mainnet, generate a fresh luxd staking identity and seal it into KMS, write a LuxNetwork CR for a NEW node, and ENQUEUE an owner-gated registration. The registration is never auto-submitted to any P-Chain — the owner co-signs it out of band — and the stake weight is set at co-sign time, never derived from the NFT.  It fails CLOSED at every gate: a bad signature, a non-owner, a non-tier slot or an unavailable KMS all leave no claim persisted and no key material exposed. Re-claiming a slot this org already holds re-applies the node CR and returns 200 with the existing identity (keys and NodeID are stable); a slot held by another org is 409. A cluster-less deployment still claims the slot, seals the keys and queues the registration, reporting the node as \&quot;node_pending\&quot;.
-     * @param cloudValidatorClaim 
-     * @return CloudSlotView
+     * @param validatorClaim 
+     * @return SlotView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -291,11 +291,11 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Validators(cloudValidatorClaim: CloudValidatorClaim) : CloudSlotView {
-        val localVarResponse = cloudPostV1ValidatorsWithHttpInfo(cloudValidatorClaim = cloudValidatorClaim)
+    fun postV1Validators(validatorClaim: ValidatorClaim) : SlotView {
+        val localVarResponse = postV1ValidatorsWithHttpInfo(validatorClaim = validatorClaim)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSlotView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SlotView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -313,29 +313,29 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * POST /v1/validators
      * Claims a validator slot and provisions its node, after proving the caller&#39;s wallet owns the slot&#39;s NFT.
      * Claims a validator slot and provisions its node, after proving the caller&#39;s wallet owns the slot&#39;s NFT.  The pipeline, all server-enforced: burn the single-use challenge (so a replayed or forged nonce dies before any chain read), recover the signer from the message this server rebuilds, require that wallet to hold Validator-tier GenesisNFT #tokenId on Ethereum mainnet, generate a fresh luxd staking identity and seal it into KMS, write a LuxNetwork CR for a NEW node, and ENQUEUE an owner-gated registration. The registration is never auto-submitted to any P-Chain — the owner co-signs it out of band — and the stake weight is set at co-sign time, never derived from the NFT.  It fails CLOSED at every gate: a bad signature, a non-owner, a non-tier slot or an unavailable KMS all leave no claim persisted and no key material exposed. Re-claiming a slot this org already holds re-applies the node CR and returns 200 with the existing identity (keys and NodeID are stable); a slot held by another org is 409. A cluster-less deployment still claims the slot, seals the keys and queues the registration, reporting the node as \&quot;node_pending\&quot;.
-     * @param cloudValidatorClaim 
-     * @return ApiResponse<CloudSlotView?>
+     * @param validatorClaim 
+     * @return ApiResponse<SlotView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ValidatorsWithHttpInfo(cloudValidatorClaim: CloudValidatorClaim) : ApiResponse<CloudSlotView?> {
-        val localVariableConfig = cloudPostV1ValidatorsRequestConfig(cloudValidatorClaim = cloudValidatorClaim)
+    fun postV1ValidatorsWithHttpInfo(validatorClaim: ValidatorClaim) : ApiResponse<SlotView?> {
+        val localVariableConfig = postV1ValidatorsRequestConfig(validatorClaim = validatorClaim)
 
-        return request<CloudValidatorClaim, CloudSlotView>(
+        return request<ValidatorClaim, SlotView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Validators
+     * To obtain the request config of the operation postV1Validators
      *
-     * @param cloudValidatorClaim 
+     * @param validatorClaim 
      * @return RequestConfig
      */
-    fun cloudPostV1ValidatorsRequestConfig(cloudValidatorClaim: CloudValidatorClaim) : RequestConfig<CloudValidatorClaim> {
-        val localVariableBody = cloudValidatorClaim
+    fun postV1ValidatorsRequestConfig(validatorClaim: ValidatorClaim) : RequestConfig<ValidatorClaim> {
+        val localVariableBody = validatorClaim
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -346,7 +346,7 @@ class ValidatorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/validators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

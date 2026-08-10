@@ -15,55 +15,44 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.O11yDeployment
+import ai.hanzo.cloud.model.O11ydeployment
 
 import com.google.gson.annotations.SerializedName
 
 /**
- * Live health of a product service — an in-cluster health probe fused with the VictoriaMetrics up inventory.
+ * 
  *
- * @param product 
- * @param up 
- * @param latencyMs 
- * @param source 
- * @param deployments 
  * @param checkedAt 
+ * @param deployments 
+ * @param latencyMs 
+ * @param product 
+ * @param source 
+ * @param up 
  */
 
 
-data class O11yStatusResult (
+data class O11ystatusResult (
+
+    @SerializedName("checkedAt")
+    val checkedAt: kotlin.String? = null,
+
+    @SerializedName("deployments")
+    val deployments: kotlin.collections.List<O11ydeployment>? = null,
+
+    @SerializedName("latencyMs")
+    val latencyMs: kotlin.Int? = null,
 
     @SerializedName("product")
     val product: kotlin.String? = null,
 
-    @SerializedName("up")
-    val up: kotlin.Boolean? = null,
-
-    @SerializedName("latencyMs")
-    val latencyMs: kotlin.Long? = null,
-
     @SerializedName("source")
-    val source: O11yStatusResult.Source? = null,
+    val source: kotlin.String? = null,
 
-    @SerializedName("deployments")
-    val deployments: kotlin.collections.List<O11yDeployment>? = null,
-
-    @SerializedName("checkedAt")
-    val checkedAt: java.time.OffsetDateTime? = null
+    @SerializedName("up")
+    val up: kotlin.Boolean? = null
 
 ) {
 
-    /**
-     * 
-     *
-     * Values: probe,victoriaMinusMetrics,unreachable,unknownMinusService
-     */
-    enum class Source(val value: kotlin.String) {
-        @SerializedName(value = "probe") probe("probe"),
-        @SerializedName(value = "victoria-metrics") victoriaMinusMetrics("victoria-metrics"),
-        @SerializedName(value = "unreachable") unreachable("unreachable"),
-        @SerializedName(value = "unknown-service") unknownMinusService("unknown-service");
-    }
 
 }
 

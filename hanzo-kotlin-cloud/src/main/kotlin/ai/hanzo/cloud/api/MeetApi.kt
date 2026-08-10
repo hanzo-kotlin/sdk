@@ -19,6 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.MeetHealth
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +47,22 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/meet/health
-     * 
-     * 
-     * @return void
+     * Health reports whether the office can mint join tokens.
+     * Health reports whether the office can mint join tokens.  It reports whether this deployment holds the LiveKit key pair it needs: ready:true with 200 when tokens can be minted, the SAME body with ready:false, status \&quot;degraded\&quot; and 503 when they cannot — so a probe and a dashboard both read the degraded state instead of someone grepping a boot log.  It takes no credential and is reachable on every public host, so it withholds both the reason and the signing key&#39;s name on purpose: ready is the whole dashboard fact, and the reason — which names the key file and the Secret — is written to the boot log where an operator already is.
+     * @return MeetHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MeetHealth() : Unit {
-        val localVarResponse = cloudGetV1MeetHealthWithHttpInfo()
+    fun getV1MeetHealth() : MeetHealth {
+        val localVarResponse = getV1MeetHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MeetHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,45 +78,47 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/meet/health
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Health reports whether the office can mint join tokens.
+     * Health reports whether the office can mint join tokens.  It reports whether this deployment holds the LiveKit key pair it needs: ready:true with 200 when tokens can be minted, the SAME body with ready:false, status \&quot;degraded\&quot; and 503 when they cannot — so a probe and a dashboard both read the degraded state instead of someone grepping a boot log.  It takes no credential and is reachable on every public host, so it withholds both the reason and the signing key&#39;s name on purpose: ready is the whole dashboard fact, and the reason — which names the key file and the Secret — is written to the boot log where an operator already is.
+     * @return ApiResponse<MeetHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MeetHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1MeetHealthRequestConfig()
+    fun getV1MeetHealthWithHttpInfo() : ApiResponse<MeetHealth?> {
+        val localVariableConfig = getV1MeetHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, MeetHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MeetHealth
+     * To obtain the request config of the operation getV1MeetHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MeetHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1MeetHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/meet/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/meet/getToken
-     * 
-     * 
+     * GET /v1/meet/session
+     * What this caller may open a room in
+     * Answers the three facts the native lobby cannot know on its own: the identity a seat would be taken under, the LiveKit address the browser dials, and the workspaces this caller may open a room in.  It is the SAME decision getToken makes, asked before the room exists rather than after it is named. A room is bound to its tenant by its name&#39;s leading workspace segment, and only a workspace this answer lists will be admitted — so the lobby offers exactly what the mint would grant, and a person is never shown a room they would then be refused. Workspaces the caller holds only a guest role in are omitted for that reason.  An empty list is a real answer, not a fault: an IAM identity with no workspace has no room to open, and the lobby says so instead of failing.  &#x60;ws&#x60; is empty when this deployment has not been told where its media plane is (LIVEKIT_WS). Token minting is unaffected — the published office client supplies its own address — so this is a degraded native UI, not a degraded service, and the lobby refuses to dial rather than guessing a host.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -123,8 +127,75 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MeetGettoken() : Unit {
-        val localVarResponse = cloudPostV1MeetGettokenWithHttpInfo()
+    fun getV1MeetSession() : Unit {
+        val localVarResponse = getV1MeetSessionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/meet/session
+     * What this caller may open a room in
+     * Answers the three facts the native lobby cannot know on its own: the identity a seat would be taken under, the LiveKit address the browser dials, and the workspaces this caller may open a room in.  It is the SAME decision getToken makes, asked before the room exists rather than after it is named. A room is bound to its tenant by its name&#39;s leading workspace segment, and only a workspace this answer lists will be admitted — so the lobby offers exactly what the mint would grant, and a person is never shown a room they would then be refused. Workspaces the caller holds only a guest role in are omitted for that reason.  An empty list is a real answer, not a fault: an IAM identity with no workspace has no room to open, and the lobby says so instead of failing.  &#x60;ws&#x60; is empty when this deployment has not been told where its media plane is (LIVEKIT_WS). Token minting is unaffected — the published office client supplies its own address — so this is a degraded native UI, not a degraded service, and the lobby refuses to dial rather than guessing a host.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1MeetSessionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1MeetSessionRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1MeetSession
+     *
+     * @return RequestConfig
+     */
+    fun getV1MeetSessionRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/meet/session",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/meet/getToken
+     * Mint a join token for one video room
+     * Answers with a LiveKit join token for exactly the room named in the body. The body is the RAW token as text/plain — one opaque string, not JSON and not wrapped in an envelope, which is what the office client reads.  The caller presents its workspace session as a Bearer. Every clause is a refusal: the session must verify, its SIGNED workspace claim must equal the room&#39;s leading name segment — rooms are named &#x60;&lt;workspace&gt;_&lt;room&gt;_&lt;id&gt;&#x60;, and that prefix is the only thing binding a room to a tenant — and the session must carry a privileged workspace role, so a guest is refused rather than seated.  The participant identity is the SESSION&#39;S, never the body&#39;s. &#x60;_id&#x60; is accepted for compatibility with the published client bundle and deliberately ignored: LiveKit treats the identity as unique and ejects a duplicate, so honouring a caller-chosen one would let anyone in a workspace kick out a colleague and impersonate them. &#x60;participantName&#x60; is a display name only.  An unconfigured deployment answers 503 under its own name rather than 404, and the refusal states only that the office is unconfigured — the reason names key material and stays in the boot log.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1MeetGettoken() : Unit {
+        val localVarResponse = postV1MeetGettokenWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -143,15 +214,15 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/meet/getToken
-     * 
-     * 
+     * Mint a join token for one video room
+     * Answers with a LiveKit join token for exactly the room named in the body. The body is the RAW token as text/plain — one opaque string, not JSON and not wrapped in an envelope, which is what the office client reads.  The caller presents its workspace session as a Bearer. Every clause is a refusal: the session must verify, its SIGNED workspace claim must equal the room&#39;s leading name segment — rooms are named &#x60;&lt;workspace&gt;_&lt;room&gt;_&lt;id&gt;&#x60;, and that prefix is the only thing binding a room to a tenant — and the session must carry a privileged workspace role, so a guest is refused rather than seated.  The participant identity is the SESSION&#39;S, never the body&#39;s. &#x60;_id&#x60; is accepted for compatibility with the published client bundle and deliberately ignored: LiveKit treats the identity as unique and ejects a duplicate, so honouring a caller-chosen one would let anyone in a workspace kick out a colleague and impersonate them. &#x60;participantName&#x60; is a display name only.  An unconfigured deployment answers 503 under its own name rather than 404, and the refusal states only that the office is unconfigured — the reason names key material and stays in the boot log.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MeetGettokenWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1MeetGettokenRequestConfig()
+    fun postV1MeetGettokenWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MeetGettokenRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +230,11 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MeetGettoken
+     * To obtain the request config of the operation postV1MeetGettoken
      *
      * @return RequestConfig
      */
-    fun cloudPostV1MeetGettokenRequestConfig() : RequestConfig<Unit> {
+    fun postV1MeetGettokenRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -173,7 +244,7 @@ class MeetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/meet/getToken",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

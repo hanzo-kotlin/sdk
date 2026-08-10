@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudPrefsView
+import ai.hanzo.cloud.model.PrefsView
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,9 +47,9 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/prefs
-     * GetPrefs returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface.
-     * GetPrefs returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface. There is no path to another user&#39;s preferences: not for an org admin, not for a platform SuperAdmin, because the subject is built from the validated credential and is the mandatory predicate on the read. A caller who has never saved anything gets an empty document at 200, never a 404, so the user menu always renders.
-     * @return CloudPrefsView
+     * Returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface.
+     * Returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface. There is no path to another user&#39;s preferences: not for an org admin, not for a platform SuperAdmin, because the subject is built from the validated credential and is the mandatory predicate on the read. A caller who has never saved anything gets an empty document at 200, never a 404, so the user menu always renders.
+     * @return PrefsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +58,11 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Prefs() : CloudPrefsView {
-        val localVarResponse = cloudGetV1PrefsWithHttpInfo()
+    fun getV1Prefs() : PrefsView {
+        val localVarResponse = getV1PrefsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPrefsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PrefsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -78,28 +78,28 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/prefs
-     * GetPrefs returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface.
-     * GetPrefs returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface. There is no path to another user&#39;s preferences: not for an org admin, not for a platform SuperAdmin, because the subject is built from the validated credential and is the mandatory predicate on the read. A caller who has never saved anything gets an empty document at 200, never a 404, so the user menu always renders.
-     * @return ApiResponse<CloudPrefsView?>
+     * Returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface.
+     * Returns the signed-in caller&#39;s OWN preference document — the theme, density and pinned nav that follow them across every Hanzo surface. There is no path to another user&#39;s preferences: not for an org admin, not for a platform SuperAdmin, because the subject is built from the validated credential and is the mandatory predicate on the read. A caller who has never saved anything gets an empty document at 200, never a 404, so the user menu always renders.
+     * @return ApiResponse<PrefsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PrefsWithHttpInfo() : ApiResponse<CloudPrefsView?> {
-        val localVariableConfig = cloudGetV1PrefsRequestConfig()
+    fun getV1PrefsWithHttpInfo() : ApiResponse<PrefsView?> {
+        val localVariableConfig = getV1PrefsRequestConfig()
 
-        return request<Unit, CloudPrefsView>(
+        return request<Unit, PrefsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Prefs
+     * To obtain the request config of the operation getV1Prefs
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PrefsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PrefsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,15 +110,15 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/prefs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/prefs
-     * 
-     * 
+     * Save the preference keys your surface owns, leaving every other key alone
+     * Merges a JSON object key-wise into the signed-in caller&#39;s OWN preference document and answers with the whole document after the merge, so a surface saves &#x60;theme&#x60; without having to send back the &#x60;density&#x60; another surface owns. The merge is SHALLOW and the key space is open: an unnamed key is left untouched, a named key is replaced whole, and a key sent with a &#x60;null&#x60; value is DELETED. The subject is the &#x60;&lt;owner&gt;/&lt;name&gt;&#x60; identity built from the validated credential and is the mandatory predicate on the write, so there is no path to another user&#39;s preferences — not for an org admin, not for a platform SuperAdmin. Fails closed: no validated principal is 403; an empty body or a literal &#x60;null&#x60; is 400; and a patch or a resulting document over 16 KiB or 128 keys is 413.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -127,8 +127,8 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1Prefs() : Unit {
-        val localVarResponse = cloudPatchV1PrefsWithHttpInfo()
+    fun patchV1Prefs() : Unit {
+        val localVarResponse = patchV1PrefsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -147,15 +147,15 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/prefs
-     * 
-     * 
+     * Save the preference keys your surface owns, leaving every other key alone
+     * Merges a JSON object key-wise into the signed-in caller&#39;s OWN preference document and answers with the whole document after the merge, so a surface saves &#x60;theme&#x60; without having to send back the &#x60;density&#x60; another surface owns. The merge is SHALLOW and the key space is open: an unnamed key is left untouched, a named key is replaced whole, and a key sent with a &#x60;null&#x60; value is DELETED. The subject is the &#x60;&lt;owner&gt;/&lt;name&gt;&#x60; identity built from the validated credential and is the mandatory predicate on the write, so there is no path to another user&#39;s preferences — not for an org admin, not for a platform SuperAdmin. Fails closed: no validated principal is 403; an empty body or a literal &#x60;null&#x60; is 400; and a patch or a resulting document over 16 KiB or 128 keys is 413.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1PrefsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1PrefsRequestConfig()
+    fun patchV1PrefsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1PrefsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -163,11 +163,11 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1Prefs
+     * To obtain the request config of the operation patchV1Prefs
      *
      * @return RequestConfig
      */
-    fun cloudPatchV1PrefsRequestConfig() : RequestConfig<Unit> {
+    fun patchV1PrefsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -177,7 +177,7 @@ class PrefsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/prefs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

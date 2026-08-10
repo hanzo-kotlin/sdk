@@ -19,15 +19,15 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudIngressMiddlewares
-import ai.hanzo.cloud.model.CloudIngressRoutes
-import ai.hanzo.cloud.model.CloudIngressServices
-import ai.hanzo.cloud.model.CloudIngressStatus
-import ai.hanzo.cloud.model.CloudIngressTLS
-import ai.hanzo.cloud.model.CloudMiddleware
-import ai.hanzo.cloud.model.CloudRoute
-import ai.hanzo.cloud.model.CloudService
-import ai.hanzo.cloud.model.CloudTLSConfig
+import ai.hanzo.cloud.model.IngressMiddlewares
+import ai.hanzo.cloud.model.IngressRoutes
+import ai.hanzo.cloud.model.IngressServices
+import ai.hanzo.cloud.model.IngressStatus
+import ai.hanzo.cloud.model.IngressTLS
+import ai.hanzo.cloud.model.Middleware
+import ai.hanzo.cloud.model.Route
+import ai.hanzo.cloud.model.TLSConfig
+import ai.hanzo.cloud.model.Upstream
 
 import com.google.gson.annotations.SerializedName
 
@@ -55,8 +55,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/ingress/middlewares/{id}
-     * DeleteMiddleware removes one of the caller org&#39;s edge transforms and hot-applies the change.
-     * DeleteMiddleware removes one of the caller org&#39;s edge transforms and hot-applies the change. Routes still naming it stop being served (they compile as skipped) until they name a transform that exists. Answers 204; an id this org does not hold is 404.
+     * Removes one of the caller org&#39;s edge transforms and hot-applies the change.
+     * Removes one of the caller org&#39;s edge transforms and hot-applies the change. Routes still naming it stop being served (they compile as skipped) until they name a transform that exists. Answers 204; an id this org does not hold is 404.
      * @param id ID is the object to act on, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -66,8 +66,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1IngressMiddlewaresId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1IngressMiddlewaresIdWithHttpInfo(id = id)
+    fun deleteV1IngressMiddlewaresById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1IngressMiddlewaresByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -86,16 +86,16 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/ingress/middlewares/{id}
-     * DeleteMiddleware removes one of the caller org&#39;s edge transforms and hot-applies the change.
-     * DeleteMiddleware removes one of the caller org&#39;s edge transforms and hot-applies the change. Routes still naming it stop being served (they compile as skipped) until they name a transform that exists. Answers 204; an id this org does not hold is 404.
+     * Removes one of the caller org&#39;s edge transforms and hot-applies the change.
+     * Removes one of the caller org&#39;s edge transforms and hot-applies the change. Routes still naming it stop being served (they compile as skipped) until they name a transform that exists. Answers 204; an id this org does not hold is 404.
      * @param id ID is the object to act on, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1IngressMiddlewaresIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1IngressMiddlewaresIdRequestConfig(id = id)
+    fun deleteV1IngressMiddlewaresByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1IngressMiddlewaresByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -103,12 +103,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1IngressMiddlewaresId
+     * To obtain the request config of the operation deleteV1IngressMiddlewaresById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1IngressMiddlewaresIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1IngressMiddlewaresByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -118,15 +118,15 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/ingress/routes/{id}
-     * DeleteRoute removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim.
-     * DeleteRoute removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim. Answers 204; an id this org does not hold is 404.
+     * Removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim.
+     * Removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim. Answers 204; an id this org does not hold is 404.
      * @param id ID is the object to act on, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -136,8 +136,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1IngressRoutesId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1IngressRoutesIdWithHttpInfo(id = id)
+    fun deleteV1IngressRoutesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1IngressRoutesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -156,16 +156,16 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/ingress/routes/{id}
-     * DeleteRoute removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim.
-     * DeleteRoute removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim. Answers 204; an id this org does not hold is 404.
+     * Removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim.
+     * Removes one of the caller org&#39;s routing rules and hot-applies the shrunken table, freeing its host for another claim. Answers 204; an id this org does not hold is 404.
      * @param id ID is the object to act on, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1IngressRoutesIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1IngressRoutesIdRequestConfig(id = id)
+    fun deleteV1IngressRoutesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1IngressRoutesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -173,12 +173,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1IngressRoutesId
+     * To obtain the request config of the operation deleteV1IngressRoutesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1IngressRoutesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1IngressRoutesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -188,15 +188,15 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/ingress/services/{id}
-     * DeleteService removes one of the caller org&#39;s backend pools and hot-applies the change.
-     * DeleteService removes one of the caller org&#39;s backend pools and hot-applies the change. Routes still pointing at it stop being served (they compile as skipped) until they name a pool that exists. Answers 204; an id this org does not hold is 404.
+     * Removes one of the caller org&#39;s backend pools and hot-applies the change.
+     * Removes one of the caller org&#39;s backend pools and hot-applies the change. Routes still pointing at it stop being served (they compile as skipped) until they name a pool that exists. Answers 204; an id this org does not hold is 404.
      * @param id ID is the object to act on, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -206,8 +206,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1IngressServicesId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1IngressServicesIdWithHttpInfo(id = id)
+    fun deleteV1IngressServicesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1IngressServicesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -226,16 +226,16 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/ingress/services/{id}
-     * DeleteService removes one of the caller org&#39;s backend pools and hot-applies the change.
-     * DeleteService removes one of the caller org&#39;s backend pools and hot-applies the change. Routes still pointing at it stop being served (they compile as skipped) until they name a pool that exists. Answers 204; an id this org does not hold is 404.
+     * Removes one of the caller org&#39;s backend pools and hot-applies the change.
+     * Removes one of the caller org&#39;s backend pools and hot-applies the change. Routes still pointing at it stop being served (they compile as skipped) until they name a pool that exists. Answers 204; an id this org does not hold is 404.
      * @param id ID is the object to act on, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1IngressServicesIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1IngressServicesIdRequestConfig(id = id)
+    fun deleteV1IngressServicesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1IngressServicesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -243,12 +243,12 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1IngressServicesId
+     * To obtain the request config of the operation deleteV1IngressServicesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1IngressServicesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1IngressServicesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -258,16 +258,16 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ingress/middlewares
-     * ListMiddlewares returns every edge transform the caller&#39;s org has configured, ordered by id.
-     * ListMiddlewares returns every edge transform the caller&#39;s org has configured, ordered by id. A route names the ones it wants, in order.
-     * @return CloudIngressMiddlewares
+     * Returns every edge transform the caller&#39;s org has configured, ordered by id.
+     * Returns every edge transform the caller&#39;s org has configured, ordered by id. A route names the ones it wants, in order.
+     * @return IngressMiddlewares
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -276,11 +276,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressMiddlewares() : CloudIngressMiddlewares {
-        val localVarResponse = cloudGetV1IngressMiddlewaresWithHttpInfo()
+    fun getV1IngressMiddlewares() : IngressMiddlewares {
+        val localVarResponse = getV1IngressMiddlewaresWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIngressMiddlewares
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IngressMiddlewares
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -296,28 +296,28 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/ingress/middlewares
-     * ListMiddlewares returns every edge transform the caller&#39;s org has configured, ordered by id.
-     * ListMiddlewares returns every edge transform the caller&#39;s org has configured, ordered by id. A route names the ones it wants, in order.
-     * @return ApiResponse<CloudIngressMiddlewares?>
+     * Returns every edge transform the caller&#39;s org has configured, ordered by id.
+     * Returns every edge transform the caller&#39;s org has configured, ordered by id. A route names the ones it wants, in order.
+     * @return ApiResponse<IngressMiddlewares?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressMiddlewaresWithHttpInfo() : ApiResponse<CloudIngressMiddlewares?> {
-        val localVariableConfig = cloudGetV1IngressMiddlewaresRequestConfig()
+    fun getV1IngressMiddlewaresWithHttpInfo() : ApiResponse<IngressMiddlewares?> {
+        val localVariableConfig = getV1IngressMiddlewaresRequestConfig()
 
-        return request<Unit, CloudIngressMiddlewares>(
+        return request<Unit, IngressMiddlewares>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressMiddlewares
+     * To obtain the request config of the operation getV1IngressMiddlewares
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IngressMiddlewaresRequestConfig() : RequestConfig<Unit> {
+    fun getV1IngressMiddlewaresRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,17 +328,17 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ingress/middlewares/{id}
-     * GetMiddleware returns one of the caller org&#39;s edge transforms by id.
-     * GetMiddleware returns one of the caller org&#39;s edge transforms by id.
+     * Returns one of the caller org&#39;s edge transforms by id.
+     * Returns one of the caller org&#39;s edge transforms by id.
      * @param id ID is the object to act on, from the path.
-     * @return CloudMiddleware
+     * @return Middleware
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -347,11 +347,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressMiddlewaresId(id: kotlin.String) : CloudMiddleware {
-        val localVarResponse = cloudGetV1IngressMiddlewaresIdWithHttpInfo(id = id)
+    fun getV1IngressMiddlewaresById(id: kotlin.String) : Middleware {
+        val localVarResponse = getV1IngressMiddlewaresByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMiddleware
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Middleware
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -367,30 +367,30 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/ingress/middlewares/{id}
-     * GetMiddleware returns one of the caller org&#39;s edge transforms by id.
-     * GetMiddleware returns one of the caller org&#39;s edge transforms by id.
+     * Returns one of the caller org&#39;s edge transforms by id.
+     * Returns one of the caller org&#39;s edge transforms by id.
      * @param id ID is the object to act on, from the path.
-     * @return ApiResponse<CloudMiddleware?>
+     * @return ApiResponse<Middleware?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressMiddlewaresIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudMiddleware?> {
-        val localVariableConfig = cloudGetV1IngressMiddlewaresIdRequestConfig(id = id)
+    fun getV1IngressMiddlewaresByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Middleware?> {
+        val localVariableConfig = getV1IngressMiddlewaresByIdRequestConfig(id = id)
 
-        return request<Unit, CloudMiddleware>(
+        return request<Unit, Middleware>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressMiddlewaresId
+     * To obtain the request config of the operation getV1IngressMiddlewaresById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1IngressMiddlewaresIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IngressMiddlewaresByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -401,16 +401,16 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ingress/routes
-     * ListRoutes returns every routing rule the caller&#39;s org has configured, ordered by id.
-     * ListRoutes returns every routing rule the caller&#39;s org has configured, ordered by id. A route maps an exact Host (and optional path prefix) to a service.
-     * @return CloudIngressRoutes
+     * Returns every routing rule the caller&#39;s org has configured, ordered by id.
+     * Returns every routing rule the caller&#39;s org has configured, ordered by id. A route maps an exact Host (and optional path prefix) to a service.
+     * @return IngressRoutes
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -419,11 +419,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressRoutes() : CloudIngressRoutes {
-        val localVarResponse = cloudGetV1IngressRoutesWithHttpInfo()
+    fun getV1IngressRoutes() : IngressRoutes {
+        val localVarResponse = getV1IngressRoutesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIngressRoutes
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IngressRoutes
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -439,28 +439,28 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/ingress/routes
-     * ListRoutes returns every routing rule the caller&#39;s org has configured, ordered by id.
-     * ListRoutes returns every routing rule the caller&#39;s org has configured, ordered by id. A route maps an exact Host (and optional path prefix) to a service.
-     * @return ApiResponse<CloudIngressRoutes?>
+     * Returns every routing rule the caller&#39;s org has configured, ordered by id.
+     * Returns every routing rule the caller&#39;s org has configured, ordered by id. A route maps an exact Host (and optional path prefix) to a service.
+     * @return ApiResponse<IngressRoutes?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressRoutesWithHttpInfo() : ApiResponse<CloudIngressRoutes?> {
-        val localVariableConfig = cloudGetV1IngressRoutesRequestConfig()
+    fun getV1IngressRoutesWithHttpInfo() : ApiResponse<IngressRoutes?> {
+        val localVariableConfig = getV1IngressRoutesRequestConfig()
 
-        return request<Unit, CloudIngressRoutes>(
+        return request<Unit, IngressRoutes>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressRoutes
+     * To obtain the request config of the operation getV1IngressRoutes
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IngressRoutesRequestConfig() : RequestConfig<Unit> {
+    fun getV1IngressRoutesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -471,17 +471,17 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ingress/routes/{id}
-     * GetRoute returns one of the caller org&#39;s routing rules by id.
-     * GetRoute returns one of the caller org&#39;s routing rules by id.
+     * Returns one of the caller org&#39;s routing rules by id.
+     * Returns one of the caller org&#39;s routing rules by id.
      * @param id ID is the object to act on, from the path.
-     * @return CloudRoute
+     * @return Route
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -490,11 +490,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressRoutesId(id: kotlin.String) : CloudRoute {
-        val localVarResponse = cloudGetV1IngressRoutesIdWithHttpInfo(id = id)
+    fun getV1IngressRoutesById(id: kotlin.String) : Route {
+        val localVarResponse = getV1IngressRoutesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRoute
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Route
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -510,30 +510,30 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/ingress/routes/{id}
-     * GetRoute returns one of the caller org&#39;s routing rules by id.
-     * GetRoute returns one of the caller org&#39;s routing rules by id.
+     * Returns one of the caller org&#39;s routing rules by id.
+     * Returns one of the caller org&#39;s routing rules by id.
      * @param id ID is the object to act on, from the path.
-     * @return ApiResponse<CloudRoute?>
+     * @return ApiResponse<Route?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressRoutesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudRoute?> {
-        val localVariableConfig = cloudGetV1IngressRoutesIdRequestConfig(id = id)
+    fun getV1IngressRoutesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Route?> {
+        val localVariableConfig = getV1IngressRoutesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudRoute>(
+        return request<Unit, Route>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressRoutesId
+     * To obtain the request config of the operation getV1IngressRoutesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1IngressRoutesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IngressRoutesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -544,16 +544,16 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ingress/services
-     * ListServices returns every backend pool the caller&#39;s org has configured, ordered by id.
-     * ListServices returns every backend pool the caller&#39;s org has configured, ordered by id. A service is the weighted round-robin target a route dispatches to.
-     * @return CloudIngressServices
+     * Returns every backend pool the caller&#39;s org has configured, ordered by id.
+     * Returns every backend pool the caller&#39;s org has configured, ordered by id. A service is the weighted round-robin target a route dispatches to.
+     * @return IngressServices
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -562,11 +562,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressServices() : CloudIngressServices {
-        val localVarResponse = cloudGetV1IngressServicesWithHttpInfo()
+    fun getV1IngressServices() : IngressServices {
+        val localVarResponse = getV1IngressServicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIngressServices
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IngressServices
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -582,28 +582,28 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/ingress/services
-     * ListServices returns every backend pool the caller&#39;s org has configured, ordered by id.
-     * ListServices returns every backend pool the caller&#39;s org has configured, ordered by id. A service is the weighted round-robin target a route dispatches to.
-     * @return ApiResponse<CloudIngressServices?>
+     * Returns every backend pool the caller&#39;s org has configured, ordered by id.
+     * Returns every backend pool the caller&#39;s org has configured, ordered by id. A service is the weighted round-robin target a route dispatches to.
+     * @return ApiResponse<IngressServices?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressServicesWithHttpInfo() : ApiResponse<CloudIngressServices?> {
-        val localVariableConfig = cloudGetV1IngressServicesRequestConfig()
+    fun getV1IngressServicesWithHttpInfo() : ApiResponse<IngressServices?> {
+        val localVariableConfig = getV1IngressServicesRequestConfig()
 
-        return request<Unit, CloudIngressServices>(
+        return request<Unit, IngressServices>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressServices
+     * To obtain the request config of the operation getV1IngressServices
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IngressServicesRequestConfig() : RequestConfig<Unit> {
+    fun getV1IngressServicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -614,17 +614,17 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ingress/services/{id}
-     * GetService returns one of the caller org&#39;s backend pools by id.
-     * GetService returns one of the caller org&#39;s backend pools by id.
+     * Returns one of the caller org&#39;s backend pools by id.
+     * Returns one of the caller org&#39;s backend pools by id.
      * @param id ID is the object to act on, from the path.
-     * @return CloudService
+     * @return Upstream
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -633,11 +633,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressServicesId(id: kotlin.String) : CloudService {
-        val localVarResponse = cloudGetV1IngressServicesIdWithHttpInfo(id = id)
+    fun getV1IngressServicesById(id: kotlin.String) : Upstream {
+        val localVarResponse = getV1IngressServicesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudService
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Upstream
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -653,30 +653,30 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/ingress/services/{id}
-     * GetService returns one of the caller org&#39;s backend pools by id.
-     * GetService returns one of the caller org&#39;s backend pools by id.
+     * Returns one of the caller org&#39;s backend pools by id.
+     * Returns one of the caller org&#39;s backend pools by id.
      * @param id ID is the object to act on, from the path.
-     * @return ApiResponse<CloudService?>
+     * @return ApiResponse<Upstream?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressServicesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudService?> {
-        val localVariableConfig = cloudGetV1IngressServicesIdRequestConfig(id = id)
+    fun getV1IngressServicesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Upstream?> {
+        val localVariableConfig = getV1IngressServicesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudService>(
+        return request<Unit, Upstream>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressServicesId
+     * To obtain the request config of the operation getV1IngressServicesById
      *
      * @param id ID is the object to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1IngressServicesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IngressServicesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -687,7 +687,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -696,7 +696,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/ingress/status
      * Status reports the ingress edge&#39;s live posture: the role this instance runs in (app or edge), whether its listeners are bound and on which addresses, the ACME posture (staging flag and certificate cache directory), how many hosts the compiled route table currently serves, and how many the ACME HostPolicy will issue a certificate for.
      * Status reports the ingress edge&#39;s live posture: the role this instance runs in (app or edge), whether its listeners are bound and on which addresses, the ACME posture (staging flag and certificate cache directory), how many hosts the compiled route table currently serves, and how many the ACME HostPolicy will issue a certificate for.
-     * @return CloudIngressStatus
+     * @return IngressStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -705,11 +705,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressStatus() : CloudIngressStatus {
-        val localVarResponse = cloudGetV1IngressStatusWithHttpInfo()
+    fun getV1IngressStatus() : IngressStatus {
+        val localVarResponse = getV1IngressStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIngressStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IngressStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -727,26 +727,26 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/ingress/status
      * Status reports the ingress edge&#39;s live posture: the role this instance runs in (app or edge), whether its listeners are bound and on which addresses, the ACME posture (staging flag and certificate cache directory), how many hosts the compiled route table currently serves, and how many the ACME HostPolicy will issue a certificate for.
      * Status reports the ingress edge&#39;s live posture: the role this instance runs in (app or edge), whether its listeners are bound and on which addresses, the ACME posture (staging flag and certificate cache directory), how many hosts the compiled route table currently serves, and how many the ACME HostPolicy will issue a certificate for.
-     * @return ApiResponse<CloudIngressStatus?>
+     * @return ApiResponse<IngressStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressStatusWithHttpInfo() : ApiResponse<CloudIngressStatus?> {
-        val localVariableConfig = cloudGetV1IngressStatusRequestConfig()
+    fun getV1IngressStatusWithHttpInfo() : ApiResponse<IngressStatus?> {
+        val localVariableConfig = getV1IngressStatusRequestConfig()
 
-        return request<Unit, CloudIngressStatus>(
+        return request<Unit, IngressStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressStatus
+     * To obtain the request config of the operation getV1IngressStatus
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IngressStatusRequestConfig() : RequestConfig<Unit> {
+    fun getV1IngressStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -757,7 +757,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -766,7 +766,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/ingress/tls
      * GetTLS returns the caller org&#39;s ACME intent together with the edge-wide TLS facts it lands in: which role this instance runs in, whether its listeners are bound, every host the ACME HostPolicy will issue a certificate for (the union across ALL orgs of TLS-marked routes and configured extraHosts, because one process holds one certificate cache), and the ACME directory and account email the process was started with.
      * GetTLS returns the caller org&#39;s ACME intent together with the edge-wide TLS facts it lands in: which role this instance runs in, whether its listeners are bound, every host the ACME HostPolicy will issue a certificate for (the union across ALL orgs of TLS-marked routes and configured extraHosts, because one process holds one certificate cache), and the ACME directory and account email the process was started with.
-     * @return CloudIngressTLS
+     * @return IngressTLS
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -775,11 +775,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IngressTls() : CloudIngressTLS {
-        val localVarResponse = cloudGetV1IngressTlsWithHttpInfo()
+    fun getV1IngressTls() : IngressTLS {
+        val localVarResponse = getV1IngressTlsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIngressTLS
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IngressTLS
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -797,26 +797,26 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/ingress/tls
      * GetTLS returns the caller org&#39;s ACME intent together with the edge-wide TLS facts it lands in: which role this instance runs in, whether its listeners are bound, every host the ACME HostPolicy will issue a certificate for (the union across ALL orgs of TLS-marked routes and configured extraHosts, because one process holds one certificate cache), and the ACME directory and account email the process was started with.
      * GetTLS returns the caller org&#39;s ACME intent together with the edge-wide TLS facts it lands in: which role this instance runs in, whether its listeners are bound, every host the ACME HostPolicy will issue a certificate for (the union across ALL orgs of TLS-marked routes and configured extraHosts, because one process holds one certificate cache), and the ACME directory and account email the process was started with.
-     * @return ApiResponse<CloudIngressTLS?>
+     * @return ApiResponse<IngressTLS?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IngressTlsWithHttpInfo() : ApiResponse<CloudIngressTLS?> {
-        val localVariableConfig = cloudGetV1IngressTlsRequestConfig()
+    fun getV1IngressTlsWithHttpInfo() : ApiResponse<IngressTLS?> {
+        val localVariableConfig = getV1IngressTlsRequestConfig()
 
-        return request<Unit, CloudIngressTLS>(
+        return request<Unit, IngressTLS>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IngressTls
+     * To obtain the request config of the operation getV1IngressTls
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IngressTlsRequestConfig() : RequestConfig<Unit> {
+    fun getV1IngressTlsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -827,17 +827,17 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/tls",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/ingress/middlewares
-     * PutMiddleware creates or replaces one edge transform and hot-applies it.
-     * PutMiddleware creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
-     * @param cloudMiddleware 
-     * @return CloudMiddleware
+     * Creates or replaces one edge transform and hot-applies it.
+     * Creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
+     * @param middleware 
+     * @return Middleware
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -846,11 +846,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IngressMiddlewares(cloudMiddleware: CloudMiddleware) : CloudMiddleware {
-        val localVarResponse = cloudPostV1IngressMiddlewaresWithHttpInfo(cloudMiddleware = cloudMiddleware)
+    fun postV1IngressMiddlewares(middleware: Middleware) : Middleware {
+        val localVarResponse = postV1IngressMiddlewaresWithHttpInfo(middleware = middleware)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMiddleware
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Middleware
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -866,31 +866,31 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/ingress/middlewares
-     * PutMiddleware creates or replaces one edge transform and hot-applies it.
-     * PutMiddleware creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
-     * @param cloudMiddleware 
-     * @return ApiResponse<CloudMiddleware?>
+     * Creates or replaces one edge transform and hot-applies it.
+     * Creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
+     * @param middleware 
+     * @return ApiResponse<Middleware?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IngressMiddlewaresWithHttpInfo(cloudMiddleware: CloudMiddleware) : ApiResponse<CloudMiddleware?> {
-        val localVariableConfig = cloudPostV1IngressMiddlewaresRequestConfig(cloudMiddleware = cloudMiddleware)
+    fun postV1IngressMiddlewaresWithHttpInfo(middleware: Middleware) : ApiResponse<Middleware?> {
+        val localVariableConfig = postV1IngressMiddlewaresRequestConfig(middleware = middleware)
 
-        return request<CloudMiddleware, CloudMiddleware>(
+        return request<Middleware, Middleware>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IngressMiddlewares
+     * To obtain the request config of the operation postV1IngressMiddlewares
      *
-     * @param cloudMiddleware 
+     * @param middleware 
      * @return RequestConfig
      */
-    fun cloudPostV1IngressMiddlewaresRequestConfig(cloudMiddleware: CloudMiddleware) : RequestConfig<CloudMiddleware> {
-        val localVariableBody = cloudMiddleware
+    fun postV1IngressMiddlewaresRequestConfig(middleware: Middleware) : RequestConfig<Middleware> {
+        val localVariableBody = middleware
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -901,17 +901,17 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/ingress/routes
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
-     * @param cloudRoute 
-     * @return CloudRoute
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
+     * @param route 
+     * @return Route
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -920,11 +920,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IngressRoutes(cloudRoute: CloudRoute) : CloudRoute {
-        val localVarResponse = cloudPostV1IngressRoutesWithHttpInfo(cloudRoute = cloudRoute)
+    fun postV1IngressRoutes(route: Route) : Route {
+        val localVarResponse = postV1IngressRoutesWithHttpInfo(route = route)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRoute
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Route
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -940,31 +940,31 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/ingress/routes
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
-     * @param cloudRoute 
-     * @return ApiResponse<CloudRoute?>
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
+     * @param route 
+     * @return ApiResponse<Route?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IngressRoutesWithHttpInfo(cloudRoute: CloudRoute) : ApiResponse<CloudRoute?> {
-        val localVariableConfig = cloudPostV1IngressRoutesRequestConfig(cloudRoute = cloudRoute)
+    fun postV1IngressRoutesWithHttpInfo(route: Route) : ApiResponse<Route?> {
+        val localVariableConfig = postV1IngressRoutesRequestConfig(route = route)
 
-        return request<CloudRoute, CloudRoute>(
+        return request<Route, Route>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IngressRoutes
+     * To obtain the request config of the operation postV1IngressRoutes
      *
-     * @param cloudRoute 
+     * @param route 
      * @return RequestConfig
      */
-    fun cloudPostV1IngressRoutesRequestConfig(cloudRoute: CloudRoute) : RequestConfig<CloudRoute> {
-        val localVariableBody = cloudRoute
+    fun postV1IngressRoutesRequestConfig(route: Route) : RequestConfig<Route> {
+        val localVariableBody = route
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -975,17 +975,17 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/ingress/services
-     * PutService creates or replaces one backend pool and hot-applies it.
-     * PutService creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
-     * @param cloudService 
-     * @return CloudService
+     * Creates or replaces one backend pool and hot-applies it.
+     * Creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
+     * @param upstream 
+     * @return Upstream
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -994,11 +994,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IngressServices(cloudService: CloudService) : CloudService {
-        val localVarResponse = cloudPostV1IngressServicesWithHttpInfo(cloudService = cloudService)
+    fun postV1IngressServices(upstream: Upstream) : Upstream {
+        val localVarResponse = postV1IngressServicesWithHttpInfo(upstream = upstream)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudService
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Upstream
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1014,31 +1014,31 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/ingress/services
-     * PutService creates or replaces one backend pool and hot-applies it.
-     * PutService creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
-     * @param cloudService 
-     * @return ApiResponse<CloudService?>
+     * Creates or replaces one backend pool and hot-applies it.
+     * Creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
+     * @param upstream 
+     * @return ApiResponse<Upstream?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IngressServicesWithHttpInfo(cloudService: CloudService) : ApiResponse<CloudService?> {
-        val localVariableConfig = cloudPostV1IngressServicesRequestConfig(cloudService = cloudService)
+    fun postV1IngressServicesWithHttpInfo(upstream: Upstream) : ApiResponse<Upstream?> {
+        val localVariableConfig = postV1IngressServicesRequestConfig(upstream = upstream)
 
-        return request<CloudService, CloudService>(
+        return request<Upstream, Upstream>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IngressServices
+     * To obtain the request config of the operation postV1IngressServices
      *
-     * @param cloudService 
+     * @param upstream 
      * @return RequestConfig
      */
-    fun cloudPostV1IngressServicesRequestConfig(cloudService: CloudService) : RequestConfig<CloudService> {
-        val localVariableBody = cloudService
+    fun postV1IngressServicesRequestConfig(upstream: Upstream) : RequestConfig<Upstream> {
+        val localVariableBody = upstream
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1049,18 +1049,18 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/ingress/middlewares/{id}
-     * PutMiddleware creates or replaces one edge transform and hot-applies it.
-     * PutMiddleware creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
+     * Creates or replaces one edge transform and hot-applies it.
+     * Creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
      * @param id ID identifies the transform within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
-     * @param cloudMiddleware 
-     * @return CloudMiddleware
+     * @param middleware 
+     * @return Middleware
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1069,11 +1069,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1IngressMiddlewaresId(id: kotlin.String, cloudMiddleware: CloudMiddleware) : CloudMiddleware {
-        val localVarResponse = cloudPutV1IngressMiddlewaresIdWithHttpInfo(id = id, cloudMiddleware = cloudMiddleware)
+    fun putV1IngressMiddlewaresById(id: kotlin.String, middleware: Middleware) : Middleware {
+        val localVarResponse = putV1IngressMiddlewaresByIdWithHttpInfo(id = id, middleware = middleware)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMiddleware
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Middleware
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1089,33 +1089,33 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * PUT /v1/ingress/middlewares/{id}
-     * PutMiddleware creates or replaces one edge transform and hot-applies it.
-     * PutMiddleware creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
+     * Creates or replaces one edge transform and hot-applies it.
+     * Creates or replaces one edge transform and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. type must be one of redirectScheme, stripPrefix, addPrefix or headers, and stripPrefix/addPrefix each require their config key.
      * @param id ID identifies the transform within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
-     * @param cloudMiddleware 
-     * @return ApiResponse<CloudMiddleware?>
+     * @param middleware 
+     * @return ApiResponse<Middleware?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1IngressMiddlewaresIdWithHttpInfo(id: kotlin.String, cloudMiddleware: CloudMiddleware) : ApiResponse<CloudMiddleware?> {
-        val localVariableConfig = cloudPutV1IngressMiddlewaresIdRequestConfig(id = id, cloudMiddleware = cloudMiddleware)
+    fun putV1IngressMiddlewaresByIdWithHttpInfo(id: kotlin.String, middleware: Middleware) : ApiResponse<Middleware?> {
+        val localVariableConfig = putV1IngressMiddlewaresByIdRequestConfig(id = id, middleware = middleware)
 
-        return request<CloudMiddleware, CloudMiddleware>(
+        return request<Middleware, Middleware>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1IngressMiddlewaresId
+     * To obtain the request config of the operation putV1IngressMiddlewaresById
      *
      * @param id ID identifies the transform within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
-     * @param cloudMiddleware 
+     * @param middleware 
      * @return RequestConfig
      */
-    fun cloudPutV1IngressMiddlewaresIdRequestConfig(id: kotlin.String, cloudMiddleware: CloudMiddleware) : RequestConfig<CloudMiddleware> {
-        val localVariableBody = cloudMiddleware
+    fun putV1IngressMiddlewaresByIdRequestConfig(id: kotlin.String, middleware: Middleware) : RequestConfig<Middleware> {
+        val localVariableBody = middleware
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1126,18 +1126,18 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/middlewares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/ingress/routes/{id}
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
      * @param id ID identifies the route within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one.
-     * @param cloudRoute 
-     * @return CloudRoute
+     * @param route 
+     * @return Route
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1146,11 +1146,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1IngressRoutesId(id: kotlin.String, cloudRoute: CloudRoute) : CloudRoute {
-        val localVarResponse = cloudPutV1IngressRoutesIdWithHttpInfo(id = id, cloudRoute = cloudRoute)
+    fun putV1IngressRoutesById(id: kotlin.String, route: Route) : Route {
+        val localVarResponse = putV1IngressRoutesByIdWithHttpInfo(id = id, route = route)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRoute
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Route
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1166,33 +1166,33 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * PUT /v1/ingress/routes/{id}
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
-     * PutRoute creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart.
+     * Creates or replaces one routing rule and hot-applies the new table — there is no config file and no restart. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A route&#39;s host is a GLOBALLY unique DNS claim: a host another org&#39;s route already holds is refused 409, so no tenant can hijack another&#39;s hostname.
      * @param id ID identifies the route within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one.
-     * @param cloudRoute 
-     * @return ApiResponse<CloudRoute?>
+     * @param route 
+     * @return ApiResponse<Route?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1IngressRoutesIdWithHttpInfo(id: kotlin.String, cloudRoute: CloudRoute) : ApiResponse<CloudRoute?> {
-        val localVariableConfig = cloudPutV1IngressRoutesIdRequestConfig(id = id, cloudRoute = cloudRoute)
+    fun putV1IngressRoutesByIdWithHttpInfo(id: kotlin.String, route: Route) : ApiResponse<Route?> {
+        val localVariableConfig = putV1IngressRoutesByIdRequestConfig(id = id, route = route)
 
-        return request<CloudRoute, CloudRoute>(
+        return request<Route, Route>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1IngressRoutesId
+     * To obtain the request config of the operation putV1IngressRoutesById
      *
      * @param id ID identifies the route within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one.
-     * @param cloudRoute 
+     * @param route 
      * @return RequestConfig
      */
-    fun cloudPutV1IngressRoutesIdRequestConfig(id: kotlin.String, cloudRoute: CloudRoute) : RequestConfig<CloudRoute> {
-        val localVariableBody = cloudRoute
+    fun putV1IngressRoutesByIdRequestConfig(id: kotlin.String, route: Route) : RequestConfig<Route> {
+        val localVariableBody = route
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1203,18 +1203,18 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/routes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/ingress/services/{id}
-     * PutService creates or replaces one backend pool and hot-applies it.
-     * PutService creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
+     * Creates or replaces one backend pool and hot-applies it.
+     * Creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
      * @param id ID identifies the pool within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
-     * @param cloudService 
-     * @return CloudService
+     * @param upstream 
+     * @return Upstream
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1223,11 +1223,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1IngressServicesId(id: kotlin.String, cloudService: CloudService) : CloudService {
-        val localVarResponse = cloudPutV1IngressServicesIdWithHttpInfo(id = id, cloudService = cloudService)
+    fun putV1IngressServicesById(id: kotlin.String, upstream: Upstream) : Upstream {
+        val localVarResponse = putV1IngressServicesByIdWithHttpInfo(id = id, upstream = upstream)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudService
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Upstream
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1243,33 +1243,33 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * PUT /v1/ingress/services/{id}
-     * PutService creates or replaces one backend pool and hot-applies it.
-     * PutService creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
+     * Creates or replaces one backend pool and hot-applies it.
+     * Creates or replaces one backend pool and hot-applies it. POST mints an id when the body omits one; PUT takes the id from the URL, which wins over any id in the body. A pool needs at least one backend and every backend URL must be http(s)://host[:port].
      * @param id ID identifies the pool within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
-     * @param cloudService 
-     * @return ApiResponse<CloudService?>
+     * @param upstream 
+     * @return ApiResponse<Upstream?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1IngressServicesIdWithHttpInfo(id: kotlin.String, cloudService: CloudService) : ApiResponse<CloudService?> {
-        val localVariableConfig = cloudPutV1IngressServicesIdRequestConfig(id = id, cloudService = cloudService)
+    fun putV1IngressServicesByIdWithHttpInfo(id: kotlin.String, upstream: Upstream) : ApiResponse<Upstream?> {
+        val localVariableConfig = putV1IngressServicesByIdRequestConfig(id = id, upstream = upstream)
 
-        return request<CloudService, CloudService>(
+        return request<Upstream, Upstream>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1IngressServicesId
+     * To obtain the request config of the operation putV1IngressServicesById
      *
      * @param id ID identifies the pool within the org: [A-Za-z0-9-_.], at most 128 chars. A create that omits it gets a generated one. Routes reference it by this id.
-     * @param cloudService 
+     * @param upstream 
      * @return RequestConfig
      */
-    fun cloudPutV1IngressServicesIdRequestConfig(id: kotlin.String, cloudService: CloudService) : RequestConfig<CloudService> {
-        val localVariableBody = cloudService
+    fun putV1IngressServicesByIdRequestConfig(id: kotlin.String, upstream: Upstream) : RequestConfig<Upstream> {
+        val localVariableBody = upstream
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1280,7 +1280,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/services/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1289,8 +1289,8 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * PUT /v1/ingress/tls
      * PutTLS replaces the caller org&#39;s ACME intent and hot-applies what can be hot-applied.
      * PutTLS replaces the caller org&#39;s ACME intent and hot-applies what can be hot-applied. extraHosts are normalized and validated, then feed the ACME HostPolicy on the reload this op performs, alongside the per-route tls flags. acmeEmail and staging bind an ACME account for the lifetime of an edge process, so they only take effect when the edge (re)starts — the returned note says so.
-     * @param cloudTLSConfig 
-     * @return CloudTLSConfig
+     * @param tlSConfig 
+     * @return TLSConfig
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1299,11 +1299,11 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1IngressTls(cloudTLSConfig: CloudTLSConfig) : CloudTLSConfig {
-        val localVarResponse = cloudPutV1IngressTlsWithHttpInfo(cloudTLSConfig = cloudTLSConfig)
+    fun putV1IngressTls(tlSConfig: TLSConfig) : TLSConfig {
+        val localVarResponse = putV1IngressTlsWithHttpInfo(tlSConfig = tlSConfig)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTLSConfig
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TLSConfig
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1321,29 +1321,29 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * PUT /v1/ingress/tls
      * PutTLS replaces the caller org&#39;s ACME intent and hot-applies what can be hot-applied.
      * PutTLS replaces the caller org&#39;s ACME intent and hot-applies what can be hot-applied. extraHosts are normalized and validated, then feed the ACME HostPolicy on the reload this op performs, alongside the per-route tls flags. acmeEmail and staging bind an ACME account for the lifetime of an edge process, so they only take effect when the edge (re)starts — the returned note says so.
-     * @param cloudTLSConfig 
-     * @return ApiResponse<CloudTLSConfig?>
+     * @param tlSConfig 
+     * @return ApiResponse<TLSConfig?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1IngressTlsWithHttpInfo(cloudTLSConfig: CloudTLSConfig) : ApiResponse<CloudTLSConfig?> {
-        val localVariableConfig = cloudPutV1IngressTlsRequestConfig(cloudTLSConfig = cloudTLSConfig)
+    fun putV1IngressTlsWithHttpInfo(tlSConfig: TLSConfig) : ApiResponse<TLSConfig?> {
+        val localVariableConfig = putV1IngressTlsRequestConfig(tlSConfig = tlSConfig)
 
-        return request<CloudTLSConfig, CloudTLSConfig>(
+        return request<TLSConfig, TLSConfig>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1IngressTls
+     * To obtain the request config of the operation putV1IngressTls
      *
-     * @param cloudTLSConfig 
+     * @param tlSConfig 
      * @return RequestConfig
      */
-    fun cloudPutV1IngressTlsRequestConfig(cloudTLSConfig: CloudTLSConfig) : RequestConfig<CloudTLSConfig> {
-        val localVariableBody = cloudTLSConfig
+    fun putV1IngressTlsRequestConfig(tlSConfig: TLSConfig) : RequestConfig<TLSConfig> {
+        val localVariableBody = tlSConfig
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1354,7 +1354,7 @@ class IngressApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/ingress/tls",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

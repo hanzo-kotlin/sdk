@@ -15,38 +15,123 @@
 
 package ai.hanzo.cloud.model
 
+import ai.hanzo.cloud.model.O11yAttributeKey
+import ai.hanzo.cloud.model.O11yFilterSet
+import ai.hanzo.cloud.model.O11yFunction
+import ai.hanzo.cloud.model.O11yHaving
+import ai.hanzo.cloud.model.O11yOrderBy
 
 import com.google.gson.annotations.SerializedName
 
 /**
- * Composite builder-query payload. The console-shaped composite (start, end, step, compositeQuery with queryType and builderQueries) is passed through to the internal query engine unchanged; the org is pinned server-side and the client never supplies a raw PromQL/SQL fragment.
+ * 
  *
- * @param start Range start (Unix ms).
- * @param end Range end (Unix ms).
- * @param step Step resolution in seconds.
- * @param compositeQuery Composite query definition (queryType, panelType, builderQueries).
+ * @param isAnomaly 
+ * @param queriesUsedInFormula 
+ * @param shiftBy 
+ * @param aggregateAttribute 
+ * @param aggregateOperator 
+ * @param dataSource 
+ * @param disabled 
+ * @param expression 
+ * @param filters 
+ * @param functions 
+ * @param groupBy 
+ * @param having 
+ * @param legend 
+ * @param limit 
+ * @param offset 
+ * @param orderBy 
+ * @param pageSize 
+ * @param queryName 
+ * @param reduceTo 
+ * @param selectColumns 
+ * @param seriesAggregation 
+ * @param spaceAggregation 
+ * @param stepInterval 
+ * @param temporality 
+ * @param timeAggregation 
  */
 
 
 data class O11yBuilderQuery (
 
-    /* Range start (Unix ms). */
-    @SerializedName("start")
-    val start: kotlin.Long? = null,
+    @SerializedName("IsAnomaly")
+    val isAnomaly: kotlin.Boolean? = null,
 
-    /* Range end (Unix ms). */
-    @SerializedName("end")
-    val end: kotlin.Long? = null,
+    @SerializedName("QueriesUsedInFormula")
+    val queriesUsedInFormula: kotlin.collections.List<kotlin.String>? = null,
 
-    /* Step resolution in seconds. */
-    @SerializedName("step")
-    val step: kotlin.Int? = null,
+    @SerializedName("ShiftBy")
+    val shiftBy: kotlin.Int? = null,
 
-    /* Composite query definition (queryType, panelType, builderQueries). */
-    @SerializedName("compositeQuery")
-    val compositeQuery: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null
+    @SerializedName("aggregateAttribute")
+    val aggregateAttribute: O11yAttributeKey? = null,
 
-) : kotlin.collections.HashMap<String, kotlin.Any>() {
+    @SerializedName("aggregateOperator")
+    val aggregateOperator: kotlin.String? = null,
+
+    @SerializedName("dataSource")
+    val dataSource: kotlin.String? = null,
+
+    @SerializedName("disabled")
+    val disabled: kotlin.Boolean? = null,
+
+    @SerializedName("expression")
+    val expression: kotlin.String? = null,
+
+    @SerializedName("filters")
+    val filters: O11yFilterSet? = null,
+
+    @SerializedName("functions")
+    val functions: kotlin.collections.List<O11yFunction>? = null,
+
+    @SerializedName("groupBy")
+    val groupBy: kotlin.collections.List<O11yAttributeKey>? = null,
+
+    @SerializedName("having")
+    val having: kotlin.collections.List<O11yHaving>? = null,
+
+    @SerializedName("legend")
+    val legend: kotlin.String? = null,
+
+    @SerializedName("limit")
+    val limit: kotlin.Int? = null,
+
+    @SerializedName("offset")
+    val offset: kotlin.Int? = null,
+
+    @SerializedName("orderBy")
+    val orderBy: kotlin.collections.List<O11yOrderBy>? = null,
+
+    @SerializedName("pageSize")
+    val pageSize: kotlin.Int? = null,
+
+    @SerializedName("queryName")
+    val queryName: kotlin.String? = null,
+
+    @SerializedName("reduceTo")
+    val reduceTo: kotlin.String? = null,
+
+    @SerializedName("selectColumns")
+    val selectColumns: kotlin.collections.List<O11yAttributeKey>? = null,
+
+    @SerializedName("seriesAggregation")
+    val seriesAggregation: kotlin.String? = null,
+
+    @SerializedName("spaceAggregation")
+    val spaceAggregation: kotlin.String? = null,
+
+    @SerializedName("stepInterval")
+    val stepInterval: kotlin.Int? = null,
+
+    @SerializedName("temporality")
+    val temporality: kotlin.String? = null,
+
+    @SerializedName("timeAggregation")
+    val timeAggregation: kotlin.String? = null
+
+) {
 
 
 }

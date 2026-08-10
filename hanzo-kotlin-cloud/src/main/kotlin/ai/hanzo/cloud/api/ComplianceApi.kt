@@ -19,21 +19,21 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAccList
-import ai.hanzo.cloud.model.CloudAccView
-import ai.hanzo.cloud.model.CloudAccreditationDecision
-import ai.hanzo.cloud.model.CloudAccreditationReq
-import ai.hanzo.cloud.model.CloudAuditList
-import ai.hanzo.cloud.model.CloudCheckList
-import ai.hanzo.cloud.model.CloudCheckView
-import ai.hanzo.cloud.model.CloudHealthView
-import ai.hanzo.cloud.model.CloudRecordList
-import ai.hanzo.cloud.model.CloudStatusView
-import ai.hanzo.cloud.model.CloudSubject
-import ai.hanzo.cloud.model.CloudSubjectList
-import ai.hanzo.cloud.model.CloudSubjectReq
-import ai.hanzo.cloud.model.CloudVerificationDecision
-import ai.hanzo.cloud.model.CloudVerificationReq
+import ai.hanzo.cloud.model.AccList
+import ai.hanzo.cloud.model.AccView
+import ai.hanzo.cloud.model.AccreditationDecision
+import ai.hanzo.cloud.model.AccreditationReq
+import ai.hanzo.cloud.model.AuditList
+import ai.hanzo.cloud.model.CheckList
+import ai.hanzo.cloud.model.CheckView
+import ai.hanzo.cloud.model.HealthView
+import ai.hanzo.cloud.model.RecordList
+import ai.hanzo.cloud.model.StatusView
+import ai.hanzo.cloud.model.Subject
+import ai.hanzo.cloud.model.SubjectList
+import ai.hanzo.cloud.model.SubjectReq
+import ai.hanzo.cloud.model.VerificationDecision
+import ai.hanzo.cloud.model.VerificationReq
 
 import com.google.gson.annotations.SerializedName
 
@@ -61,10 +61,10 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/accreditation
-     * ListAccreditation returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
-     * ListAccreditation returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
+     * Returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
+     * Returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return CloudAccList
+     * @return AccList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -73,11 +73,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceAccreditation(limit: kotlin.Int? = null) : CloudAccList {
-        val localVarResponse = cloudGetV1ComplianceAccreditationWithHttpInfo(limit = limit)
+    fun getV1ComplianceAccreditation(limit: kotlin.Int? = null) : AccList {
+        val localVarResponse = getV1ComplianceAccreditationWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -93,30 +93,30 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/accreditation
-     * ListAccreditation returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
-     * ListAccreditation returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
+     * Returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
+     * Returns the org&#39;s tracked accreditation-state records, newest first — evidence entries the org keeps, never a platform certification.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return ApiResponse<CloudAccList?>
+     * @return ApiResponse<AccList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceAccreditationWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudAccList?> {
-        val localVariableConfig = cloudGetV1ComplianceAccreditationRequestConfig(limit = limit)
+    fun getV1ComplianceAccreditationWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AccList?> {
+        val localVariableConfig = getV1ComplianceAccreditationRequestConfig(limit = limit)
 
-        return request<Unit, CloudAccList>(
+        return request<Unit, AccList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceAccreditation
+     * To obtain the request config of the operation getV1ComplianceAccreditation
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceAccreditationRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ComplianceAccreditationRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -132,17 +132,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/compliance/accreditation/{id}
-     * GetAccreditation returns one tracked accreditation record.
-     * GetAccreditation returns one tracked accreditation record.
+     * Returns one tracked accreditation record.
+     * Returns one tracked accreditation record.
      * @param id ID is the accreditation record to read, from the path.
-     * @return CloudAccView
+     * @return AccView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -151,11 +151,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceAccreditationId(id: kotlin.String) : CloudAccView {
-        val localVarResponse = cloudGetV1ComplianceAccreditationIdWithHttpInfo(id = id)
+    fun getV1ComplianceAccreditationById(id: kotlin.String) : AccView {
+        val localVarResponse = getV1ComplianceAccreditationByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -171,30 +171,30 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/accreditation/{id}
-     * GetAccreditation returns one tracked accreditation record.
-     * GetAccreditation returns one tracked accreditation record.
+     * Returns one tracked accreditation record.
+     * Returns one tracked accreditation record.
      * @param id ID is the accreditation record to read, from the path.
-     * @return ApiResponse<CloudAccView?>
+     * @return ApiResponse<AccView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceAccreditationIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudAccView?> {
-        val localVariableConfig = cloudGetV1ComplianceAccreditationIdRequestConfig(id = id)
+    fun getV1ComplianceAccreditationByIdWithHttpInfo(id: kotlin.String) : ApiResponse<AccView?> {
+        val localVariableConfig = getV1ComplianceAccreditationByIdRequestConfig(id = id)
 
-        return request<Unit, CloudAccView>(
+        return request<Unit, AccView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceAccreditationId
+     * To obtain the request config of the operation getV1ComplianceAccreditationById
      *
      * @param id ID is the accreditation record to read, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceAccreditationIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ComplianceAccreditationByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -205,7 +205,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -215,7 +215,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when).
      * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when). The org is PINNED to the caller&#39;s validated org and the rows are narrowed to compliance.* actions. Fail-closed: no principal is a 403, no configured audit store a 501.
      * @param result Result filters rows by outcome result: success, deny, or error; empty means all. (optional)
-     * @return CloudAuditList
+     * @return AuditList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -224,11 +224,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceAudit(result: kotlin.String? = null) : CloudAuditList {
-        val localVarResponse = cloudGetV1ComplianceAuditWithHttpInfo(result = result)
+    fun getV1ComplianceAudit(result: kotlin.String? = null) : AuditList {
+        val localVarResponse = getV1ComplianceAuditWithHttpInfo(result = result)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAuditList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuditList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -247,27 +247,27 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when).
      * AuditRead is the compliance-scoped read of the SHARED tamper-evident audit plane — the SOC 2 posture surface (privileged actions: who started/decided what, when). The org is PINNED to the caller&#39;s validated org and the rows are narrowed to compliance.* actions. Fail-closed: no principal is a 403, no configured audit store a 501.
      * @param result Result filters rows by outcome result: success, deny, or error; empty means all. (optional)
-     * @return ApiResponse<CloudAuditList?>
+     * @return ApiResponse<AuditList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceAuditWithHttpInfo(result: kotlin.String?) : ApiResponse<CloudAuditList?> {
-        val localVariableConfig = cloudGetV1ComplianceAuditRequestConfig(result = result)
+    fun getV1ComplianceAuditWithHttpInfo(result: kotlin.String?) : ApiResponse<AuditList?> {
+        val localVariableConfig = getV1ComplianceAuditRequestConfig(result = result)
 
-        return request<Unit, CloudAuditList>(
+        return request<Unit, AuditList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceAudit
+     * To obtain the request config of the operation getV1ComplianceAudit
      *
      * @param result Result filters rows by outcome result: success, deny, or error; empty means all. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceAuditRequestConfig(result: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ComplianceAuditRequestConfig(result: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -283,7 +283,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/audit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -292,7 +292,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/compliance/health
      * Health reports subsystem liveness and the wired verification provider.
      * Health reports subsystem liveness and the wired verification provider. Fail-open on purpose: it never probes the external provider, so a provider outage cannot fail liveness.
-     * @return CloudHealthView
+     * @return HealthView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -301,11 +301,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceHealth() : CloudHealthView {
-        val localVarResponse = cloudGetV1ComplianceHealthWithHttpInfo()
+    fun getV1ComplianceHealth() : HealthView {
+        val localVarResponse = getV1ComplianceHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHealthView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HealthView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -323,26 +323,26 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/compliance/health
      * Health reports subsystem liveness and the wired verification provider.
      * Health reports subsystem liveness and the wired verification provider. Fail-open on purpose: it never probes the external provider, so a provider outage cannot fail liveness.
-     * @return ApiResponse<CloudHealthView?>
+     * @return ApiResponse<HealthView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceHealthWithHttpInfo() : ApiResponse<CloudHealthView?> {
-        val localVariableConfig = cloudGetV1ComplianceHealthRequestConfig()
+    fun getV1ComplianceHealthWithHttpInfo() : ApiResponse<HealthView?> {
+        val localVariableConfig = getV1ComplianceHealthRequestConfig()
 
-        return request<Unit, CloudHealthView>(
+        return request<Unit, HealthView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceHealth
+     * To obtain the request config of the operation getV1ComplianceHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1ComplianceHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -353,7 +353,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -363,7 +363,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * ListRecords is the unified compliance-record view for the org: its verifications and accreditation records together, each provider-reported or tracked, never platform-asserted.
      * ListRecords is the unified compliance-record view for the org: its verifications and accreditation records together, each provider-reported or tracked, never platform-asserted. PII stays in the subject store; records carry only opaque ids and statuses.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return CloudRecordList
+     * @return RecordList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -372,11 +372,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceRecords(limit: kotlin.Int? = null) : CloudRecordList {
-        val localVarResponse = cloudGetV1ComplianceRecordsWithHttpInfo(limit = limit)
+    fun getV1ComplianceRecords(limit: kotlin.Int? = null) : RecordList {
+        val localVarResponse = getV1ComplianceRecordsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRecordList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RecordList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -395,27 +395,27 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * ListRecords is the unified compliance-record view for the org: its verifications and accreditation records together, each provider-reported or tracked, never platform-asserted.
      * ListRecords is the unified compliance-record view for the org: its verifications and accreditation records together, each provider-reported or tracked, never platform-asserted. PII stays in the subject store; records carry only opaque ids and statuses.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return ApiResponse<CloudRecordList?>
+     * @return ApiResponse<RecordList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceRecordsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudRecordList?> {
-        val localVariableConfig = cloudGetV1ComplianceRecordsRequestConfig(limit = limit)
+    fun getV1ComplianceRecordsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<RecordList?> {
+        val localVariableConfig = getV1ComplianceRecordsRequestConfig(limit = limit)
 
-        return request<Unit, CloudRecordList>(
+        return request<Unit, RecordList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceRecords
+     * To obtain the request config of the operation getV1ComplianceRecords
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceRecordsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ComplianceRecordsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -431,7 +431,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/records",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -440,7 +440,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/compliance/status
      * Status is the org&#39;s honest posture read: the wired provider and the per-status tally of its verifications.
      * Status is the org&#39;s honest posture read: the wired provider and the per-status tally of its verifications. It is deliberately NOT a boolean \&quot;compliant\&quot; — it reports counts of provider-reported states and carries the boundary disclaimer.
-     * @return CloudStatusView
+     * @return StatusView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -449,11 +449,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceStatus() : CloudStatusView {
-        val localVarResponse = cloudGetV1ComplianceStatusWithHttpInfo()
+    fun getV1ComplianceStatus() : StatusView {
+        val localVarResponse = getV1ComplianceStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStatusView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StatusView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -471,26 +471,26 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/compliance/status
      * Status is the org&#39;s honest posture read: the wired provider and the per-status tally of its verifications.
      * Status is the org&#39;s honest posture read: the wired provider and the per-status tally of its verifications. It is deliberately NOT a boolean \&quot;compliant\&quot; — it reports counts of provider-reported states and carries the boundary disclaimer.
-     * @return ApiResponse<CloudStatusView?>
+     * @return ApiResponse<StatusView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceStatusWithHttpInfo() : ApiResponse<CloudStatusView?> {
-        val localVariableConfig = cloudGetV1ComplianceStatusRequestConfig()
+    fun getV1ComplianceStatusWithHttpInfo() : ApiResponse<StatusView?> {
+        val localVariableConfig = getV1ComplianceStatusRequestConfig()
 
-        return request<Unit, CloudStatusView>(
+        return request<Unit, StatusView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceStatus
+     * To obtain the request config of the operation getV1ComplianceStatus
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceStatusRequestConfig() : RequestConfig<Unit> {
+    fun getV1ComplianceStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -501,17 +501,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/compliance/subjects
-     * ListSubjects returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file.
-     * ListSubjects returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file. The full record is returned only by the explicit single-subject read.
+     * Returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file.
+     * Returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file. The full record is returned only by the explicit single-subject read.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return CloudSubjectList
+     * @return SubjectList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -520,11 +520,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceSubjects(limit: kotlin.Int? = null) : CloudSubjectList {
-        val localVarResponse = cloudGetV1ComplianceSubjectsWithHttpInfo(limit = limit)
+    fun getV1ComplianceSubjects(limit: kotlin.Int? = null) : SubjectList {
+        val localVarResponse = getV1ComplianceSubjectsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSubjectList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SubjectList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -540,30 +540,30 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/subjects
-     * ListSubjects returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file.
-     * ListSubjects returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file. The full record is returned only by the explicit single-subject read.
+     * Returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file.
+     * Returns the org&#39;s subjects as PII-MINIMIZED summaries — no name or email, only whether an email is on file. The full record is returned only by the explicit single-subject read.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return ApiResponse<CloudSubjectList?>
+     * @return ApiResponse<SubjectList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceSubjectsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudSubjectList?> {
-        val localVariableConfig = cloudGetV1ComplianceSubjectsRequestConfig(limit = limit)
+    fun getV1ComplianceSubjectsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SubjectList?> {
+        val localVariableConfig = getV1ComplianceSubjectsRequestConfig(limit = limit)
 
-        return request<Unit, CloudSubjectList>(
+        return request<Unit, SubjectList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceSubjects
+     * To obtain the request config of the operation getV1ComplianceSubjects
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceSubjectsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ComplianceSubjectsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -579,17 +579,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/subjects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/compliance/subjects/{id}
-     * GetSubject returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org.
-     * GetSubject returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org. The response is never cached by any intermediary.
+     * Returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org.
+     * Returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org. The response is never cached by any intermediary.
      * @param id ID is the subject to read, from the path.
-     * @return CloudSubject
+     * @return Subject
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -598,11 +598,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceSubjectsId(id: kotlin.String) : CloudSubject {
-        val localVarResponse = cloudGetV1ComplianceSubjectsIdWithHttpInfo(id = id)
+    fun getV1ComplianceSubjectsById(id: kotlin.String) : Subject {
+        val localVarResponse = getV1ComplianceSubjectsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSubject
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Subject
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -618,30 +618,30 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/subjects/{id}
-     * GetSubject returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org.
-     * GetSubject returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org. The response is never cached by any intermediary.
+     * Returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org.
+     * Returns one subject WITH its contact PII — the only surface that returns it, and only to the owning org. The response is never cached by any intermediary.
      * @param id ID is the subject to read, from the path.
-     * @return ApiResponse<CloudSubject?>
+     * @return ApiResponse<Subject?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceSubjectsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudSubject?> {
-        val localVariableConfig = cloudGetV1ComplianceSubjectsIdRequestConfig(id = id)
+    fun getV1ComplianceSubjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Subject?> {
+        val localVariableConfig = getV1ComplianceSubjectsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudSubject>(
+        return request<Unit, Subject>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceSubjectsId
+     * To obtain the request config of the operation getV1ComplianceSubjectsById
      *
      * @param id ID is the subject to read, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceSubjectsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ComplianceSubjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -652,17 +652,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/subjects/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/compliance/verifications
-     * ListVerifications returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
-     * ListVerifications returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
+     * Returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
+     * Returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return CloudCheckList
+     * @return CheckList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -671,11 +671,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceVerifications(limit: kotlin.Int? = null) : CloudCheckList {
-        val localVarResponse = cloudGetV1ComplianceVerificationsWithHttpInfo(limit = limit)
+    fun getV1ComplianceVerifications(limit: kotlin.Int? = null) : CheckList {
+        val localVarResponse = getV1ComplianceVerificationsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCheckList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CheckList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -691,30 +691,30 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/verifications
-     * ListVerifications returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
-     * ListVerifications returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
+     * Returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
+     * Returns the org&#39;s KYC/KYB verifications, newest first — opaque subject references and provider-reported statuses only, no subject PII.
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
-     * @return ApiResponse<CloudCheckList?>
+     * @return ApiResponse<CheckList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceVerificationsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudCheckList?> {
-        val localVariableConfig = cloudGetV1ComplianceVerificationsRequestConfig(limit = limit)
+    fun getV1ComplianceVerificationsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CheckList?> {
+        val localVariableConfig = getV1ComplianceVerificationsRequestConfig(limit = limit)
 
-        return request<Unit, CloudCheckList>(
+        return request<Unit, CheckList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceVerifications
+     * To obtain the request config of the operation getV1ComplianceVerifications
      *
      * @param limit Limit caps the rows returned; non-positive means the server default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceVerificationsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ComplianceVerificationsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -730,17 +730,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/compliance/verifications/{id}
-     * GetVerification returns one verification — its opaque subject reference and provider-reported status, no subject PII.
-     * GetVerification returns one verification — its opaque subject reference and provider-reported status, no subject PII.
+     * Returns one verification — its opaque subject reference and provider-reported status, no subject PII.
+     * Returns one verification — its opaque subject reference and provider-reported status, no subject PII.
      * @param id ID is the verification to act on, from the path.
-     * @return CloudCheckView
+     * @return CheckView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -749,11 +749,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComplianceVerificationsId(id: kotlin.String) : CloudCheckView {
-        val localVarResponse = cloudGetV1ComplianceVerificationsIdWithHttpInfo(id = id)
+    fun getV1ComplianceVerificationsById(id: kotlin.String) : CheckView {
+        val localVarResponse = getV1ComplianceVerificationsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCheckView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -769,30 +769,30 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/compliance/verifications/{id}
-     * GetVerification returns one verification — its opaque subject reference and provider-reported status, no subject PII.
-     * GetVerification returns one verification — its opaque subject reference and provider-reported status, no subject PII.
+     * Returns one verification — its opaque subject reference and provider-reported status, no subject PII.
+     * Returns one verification — its opaque subject reference and provider-reported status, no subject PII.
      * @param id ID is the verification to act on, from the path.
-     * @return ApiResponse<CloudCheckView?>
+     * @return ApiResponse<CheckView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComplianceVerificationsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCheckView?> {
-        val localVariableConfig = cloudGetV1ComplianceVerificationsIdRequestConfig(id = id)
+    fun getV1ComplianceVerificationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CheckView?> {
+        val localVariableConfig = getV1ComplianceVerificationsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCheckView>(
+        return request<Unit, CheckView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComplianceVerificationsId
+     * To obtain the request config of the operation getV1ComplianceVerificationsById
      *
      * @param id ID is the verification to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1ComplianceVerificationsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ComplianceVerificationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -803,17 +803,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compliance/accreditation
-     * CreateAccreditation records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier.
-     * CreateAccreditation records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier. Every CONFIRMED state (provider_verified, reviewer_confirmed) and every rejected/expired state is a DECISION recorded via the decision endpoint, attributed to the reviewer — a create can never stamp a confirmation. The underlying figures (income, net worth) are never stored; only the method, category, and state.
-     * @param cloudAccreditationReq 
-     * @return CloudAccView
+     * Records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier.
+     * Records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier. Every CONFIRMED state (provider_verified, reviewer_confirmed) and every rejected/expired state is a DECISION recorded via the decision endpoint, attributed to the reviewer — a create can never stamp a confirmation. The underlying figures (income, net worth) are never stored; only the method, category, and state.
+     * @param accreditationReq 
+     * @return AccView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -822,11 +822,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComplianceAccreditation(cloudAccreditationReq: CloudAccreditationReq) : CloudAccView {
-        val localVarResponse = cloudPostV1ComplianceAccreditationWithHttpInfo(cloudAccreditationReq = cloudAccreditationReq)
+    fun postV1ComplianceAccreditation(accreditationReq: AccreditationReq) : AccView {
+        val localVarResponse = postV1ComplianceAccreditationWithHttpInfo(accreditationReq = accreditationReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -842,31 +842,31 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/compliance/accreditation
-     * CreateAccreditation records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier.
-     * CreateAccreditation records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier. Every CONFIRMED state (provider_verified, reviewer_confirmed) and every rejected/expired state is a DECISION recorded via the decision endpoint, attributed to the reviewer — a create can never stamp a confirmation. The underlying figures (income, net worth) are never stored; only the method, category, and state.
-     * @param cloudAccreditationReq 
-     * @return ApiResponse<CloudAccView?>
+     * Records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier.
+     * Records an ASSERTED accreditation state for a subject — the subject&#39;s own assertion, with no verifier. Every CONFIRMED state (provider_verified, reviewer_confirmed) and every rejected/expired state is a DECISION recorded via the decision endpoint, attributed to the reviewer — a create can never stamp a confirmation. The underlying figures (income, net worth) are never stored; only the method, category, and state.
+     * @param accreditationReq 
+     * @return ApiResponse<AccView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComplianceAccreditationWithHttpInfo(cloudAccreditationReq: CloudAccreditationReq) : ApiResponse<CloudAccView?> {
-        val localVariableConfig = cloudPostV1ComplianceAccreditationRequestConfig(cloudAccreditationReq = cloudAccreditationReq)
+    fun postV1ComplianceAccreditationWithHttpInfo(accreditationReq: AccreditationReq) : ApiResponse<AccView?> {
+        val localVariableConfig = postV1ComplianceAccreditationRequestConfig(accreditationReq = accreditationReq)
 
-        return request<CloudAccreditationReq, CloudAccView>(
+        return request<AccreditationReq, AccView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComplianceAccreditation
+     * To obtain the request config of the operation postV1ComplianceAccreditation
      *
-     * @param cloudAccreditationReq 
+     * @param accreditationReq 
      * @return RequestConfig
      */
-    fun cloudPostV1ComplianceAccreditationRequestConfig(cloudAccreditationReq: CloudAccreditationReq) : RequestConfig<CloudAccreditationReq> {
-        val localVariableBody = cloudAccreditationReq
+    fun postV1ComplianceAccreditationRequestConfig(accreditationReq: AccreditationReq) : RequestConfig<AccreditationReq> {
+        val localVariableBody = accreditationReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -877,18 +877,18 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compliance/accreditation/{id}/decision
-     * DecideAccreditation records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry.
-     * DecideAccreditation records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry. ROLE-GATED (an org admin or platform reviewer) and ATTRIBUTED: the reviewer&#39;s identity is recorded as ReviewerSub and audited. Human-in-the-loop: the platform never confirms on its own, and even a provider_verified state carries the reviewer who recorded it.
+     * Records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry.
+     * Records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry. ROLE-GATED (an org admin or platform reviewer) and ATTRIBUTED: the reviewer&#39;s identity is recorded as ReviewerSub and audited. Human-in-the-loop: the platform never confirms on its own, and even a provider_verified state carries the reviewer who recorded it.
      * @param id ID is the accreditation record to decide, from the path.
-     * @param cloudAccreditationDecision 
-     * @return CloudAccView
+     * @param accreditationDecision 
+     * @return AccView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -897,11 +897,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComplianceAccreditationIdDecision(id: kotlin.String, cloudAccreditationDecision: CloudAccreditationDecision) : CloudAccView {
-        val localVarResponse = cloudPostV1ComplianceAccreditationIdDecisionWithHttpInfo(id = id, cloudAccreditationDecision = cloudAccreditationDecision)
+    fun postV1ComplianceAccreditationByIdDecision(id: kotlin.String, accreditationDecision: AccreditationDecision) : AccView {
+        val localVarResponse = postV1ComplianceAccreditationByIdDecisionWithHttpInfo(id = id, accreditationDecision = accreditationDecision)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -917,33 +917,33 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/compliance/accreditation/{id}/decision
-     * DecideAccreditation records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry.
-     * DecideAccreditation records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry. ROLE-GATED (an org admin or platform reviewer) and ATTRIBUTED: the reviewer&#39;s identity is recorded as ReviewerSub and audited. Human-in-the-loop: the platform never confirms on its own, and even a provider_verified state carries the reviewer who recorded it.
+     * Records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry.
+     * Records an org reviewer&#39;s decision on an accreditation record — a reviewer confirmation, a provider verification the reviewer has evidence of (a CPA/attorney letter, a verifier report), a rejection, or an expiry. ROLE-GATED (an org admin or platform reviewer) and ATTRIBUTED: the reviewer&#39;s identity is recorded as ReviewerSub and audited. Human-in-the-loop: the platform never confirms on its own, and even a provider_verified state carries the reviewer who recorded it.
      * @param id ID is the accreditation record to decide, from the path.
-     * @param cloudAccreditationDecision 
-     * @return ApiResponse<CloudAccView?>
+     * @param accreditationDecision 
+     * @return ApiResponse<AccView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComplianceAccreditationIdDecisionWithHttpInfo(id: kotlin.String, cloudAccreditationDecision: CloudAccreditationDecision) : ApiResponse<CloudAccView?> {
-        val localVariableConfig = cloudPostV1ComplianceAccreditationIdDecisionRequestConfig(id = id, cloudAccreditationDecision = cloudAccreditationDecision)
+    fun postV1ComplianceAccreditationByIdDecisionWithHttpInfo(id: kotlin.String, accreditationDecision: AccreditationDecision) : ApiResponse<AccView?> {
+        val localVariableConfig = postV1ComplianceAccreditationByIdDecisionRequestConfig(id = id, accreditationDecision = accreditationDecision)
 
-        return request<CloudAccreditationDecision, CloudAccView>(
+        return request<AccreditationDecision, AccView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComplianceAccreditationIdDecision
+     * To obtain the request config of the operation postV1ComplianceAccreditationByIdDecision
      *
      * @param id ID is the accreditation record to decide, from the path.
-     * @param cloudAccreditationDecision 
+     * @param accreditationDecision 
      * @return RequestConfig
      */
-    fun cloudPostV1ComplianceAccreditationIdDecisionRequestConfig(id: kotlin.String, cloudAccreditationDecision: CloudAccreditationDecision) : RequestConfig<CloudAccreditationDecision> {
-        val localVariableBody = cloudAccreditationDecision
+    fun postV1ComplianceAccreditationByIdDecisionRequestConfig(id: kotlin.String, accreditationDecision: AccreditationDecision) : RequestConfig<AccreditationDecision> {
+        val localVariableBody = accreditationDecision
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -954,17 +954,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/accreditation/{id}/decision".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compliance/subjects
-     * CreateSubject records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty.
-     * CreateSubject records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty. The subject&#39;s contact PII (name/email) is sealed at rest and returned only to the owning org; downstream records reference the subject by opaque id.
-     * @param cloudSubjectReq 
-     * @return CloudSubject
+     * Records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty.
+     * Records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty. The subject&#39;s contact PII (name/email) is sealed at rest and returned only to the owning org; downstream records reference the subject by opaque id.
+     * @param subjectReq 
+     * @return Subject
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -973,11 +973,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComplianceSubjects(cloudSubjectReq: CloudSubjectReq) : CloudSubject {
-        val localVarResponse = cloudPostV1ComplianceSubjectsWithHttpInfo(cloudSubjectReq = cloudSubjectReq)
+    fun postV1ComplianceSubjects(subjectReq: SubjectReq) : Subject {
+        val localVarResponse = postV1ComplianceSubjectsWithHttpInfo(subjectReq = subjectReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSubject
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Subject
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -993,31 +993,31 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/compliance/subjects
-     * CreateSubject records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty.
-     * CreateSubject records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty. The subject&#39;s contact PII (name/email) is sealed at rest and returned only to the owning org; downstream records reference the subject by opaque id.
-     * @param cloudSubjectReq 
-     * @return ApiResponse<CloudSubject?>
+     * Records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty.
+     * Records a party the org is verifying as part of its own onboarding/compliance — a team member, vendor, customer, or counterparty. The subject&#39;s contact PII (name/email) is sealed at rest and returned only to the owning org; downstream records reference the subject by opaque id.
+     * @param subjectReq 
+     * @return ApiResponse<Subject?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComplianceSubjectsWithHttpInfo(cloudSubjectReq: CloudSubjectReq) : ApiResponse<CloudSubject?> {
-        val localVariableConfig = cloudPostV1ComplianceSubjectsRequestConfig(cloudSubjectReq = cloudSubjectReq)
+    fun postV1ComplianceSubjectsWithHttpInfo(subjectReq: SubjectReq) : ApiResponse<Subject?> {
+        val localVariableConfig = postV1ComplianceSubjectsRequestConfig(subjectReq = subjectReq)
 
-        return request<CloudSubjectReq, CloudSubject>(
+        return request<SubjectReq, Subject>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComplianceSubjects
+     * To obtain the request config of the operation postV1ComplianceSubjects
      *
-     * @param cloudSubjectReq 
+     * @param subjectReq 
      * @return RequestConfig
      */
-    fun cloudPostV1ComplianceSubjectsRequestConfig(cloudSubjectReq: CloudSubjectReq) : RequestConfig<CloudSubjectReq> {
-        val localVariableBody = cloudSubjectReq
+    fun postV1ComplianceSubjectsRequestConfig(subjectReq: SubjectReq) : RequestConfig<SubjectReq> {
+        val localVariableBody = subjectReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1028,17 +1028,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/subjects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compliance/verifications
-     * StartVerification begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request.
-     * StartVerification begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request. The returned status is provider-reported and never terminal on a fresh start: starting a verification can never yield a verified record, and a provider error is a 502, never a verification.
-     * @param cloudVerificationReq 
-     * @return CloudCheckView
+     * Begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request.
+     * Begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request. The returned status is provider-reported and never terminal on a fresh start: starting a verification can never yield a verified record, and a provider error is a 502, never a verification.
+     * @param verificationReq 
+     * @return CheckView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1047,11 +1047,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComplianceVerifications(cloudVerificationReq: CloudVerificationReq) : CloudCheckView {
-        val localVarResponse = cloudPostV1ComplianceVerificationsWithHttpInfo(cloudVerificationReq = cloudVerificationReq)
+    fun postV1ComplianceVerifications(verificationReq: VerificationReq) : CheckView {
+        val localVarResponse = postV1ComplianceVerificationsWithHttpInfo(verificationReq = verificationReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCheckView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1067,31 +1067,31 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/compliance/verifications
-     * StartVerification begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request.
-     * StartVerification begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request. The returned status is provider-reported and never terminal on a fresh start: starting a verification can never yield a verified record, and a provider error is a 502, never a verification.
-     * @param cloudVerificationReq 
-     * @return ApiResponse<CloudCheckView?>
+     * Begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request.
+     * Begins a KYC/KYB verification of a subject through the wired provider — an existing subject by id, or one created inline from the request. The returned status is provider-reported and never terminal on a fresh start: starting a verification can never yield a verified record, and a provider error is a 502, never a verification.
+     * @param verificationReq 
+     * @return ApiResponse<CheckView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComplianceVerificationsWithHttpInfo(cloudVerificationReq: CloudVerificationReq) : ApiResponse<CloudCheckView?> {
-        val localVariableConfig = cloudPostV1ComplianceVerificationsRequestConfig(cloudVerificationReq = cloudVerificationReq)
+    fun postV1ComplianceVerificationsWithHttpInfo(verificationReq: VerificationReq) : ApiResponse<CheckView?> {
+        val localVariableConfig = postV1ComplianceVerificationsRequestConfig(verificationReq = verificationReq)
 
-        return request<CloudVerificationReq, CloudCheckView>(
+        return request<VerificationReq, CheckView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComplianceVerifications
+     * To obtain the request config of the operation postV1ComplianceVerifications
      *
-     * @param cloudVerificationReq 
+     * @param verificationReq 
      * @return RequestConfig
      */
-    fun cloudPostV1ComplianceVerificationsRequestConfig(cloudVerificationReq: CloudVerificationReq) : RequestConfig<CloudVerificationReq> {
-        val localVariableBody = cloudVerificationReq
+    fun postV1ComplianceVerificationsRequestConfig(verificationReq: VerificationReq) : RequestConfig<VerificationReq> {
+        val localVariableBody = verificationReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1102,18 +1102,18 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compliance/verifications/{id}/decision
-     * DecideVerification records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired.
-     * DecideVerification records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired. It produces a DISTINCT reviewer_confirmed, never a provider_verified (a provider decision is the provider&#39;s to report, via the webhook or a reconcile), and it is ROLE-GATED (an org admin or platform reviewer) AND ATTRIBUTED (the reviewer&#39;s user id is DecidedBy), so a manual pass is always accountable.
+     * Records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired.
+     * Records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired. It produces a DISTINCT reviewer_confirmed, never a provider_verified (a provider decision is the provider&#39;s to report, via the webhook or a reconcile), and it is ROLE-GATED (an org admin or platform reviewer) AND ATTRIBUTED (the reviewer&#39;s user id is DecidedBy), so a manual pass is always accountable.
      * @param id ID is the verification to decide, from the path.
-     * @param cloudVerificationDecision 
-     * @return CloudCheckView
+     * @param verificationDecision 
+     * @return CheckView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1122,11 +1122,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComplianceVerificationsIdDecision(id: kotlin.String, cloudVerificationDecision: CloudVerificationDecision) : CloudCheckView {
-        val localVarResponse = cloudPostV1ComplianceVerificationsIdDecisionWithHttpInfo(id = id, cloudVerificationDecision = cloudVerificationDecision)
+    fun postV1ComplianceVerificationsByIdDecision(id: kotlin.String, verificationDecision: VerificationDecision) : CheckView {
+        val localVarResponse = postV1ComplianceVerificationsByIdDecisionWithHttpInfo(id = id, verificationDecision = verificationDecision)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCheckView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1142,33 +1142,33 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/compliance/verifications/{id}/decision
-     * DecideVerification records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired.
-     * DecideVerification records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired. It produces a DISTINCT reviewer_confirmed, never a provider_verified (a provider decision is the provider&#39;s to report, via the webhook or a reconcile), and it is ROLE-GATED (an org admin or platform reviewer) AND ATTRIBUTED (the reviewer&#39;s user id is DecidedBy), so a manual pass is always accountable.
+     * Records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired.
+     * Records a privileged reviewer&#39;s MANUAL decision on a verification — the human-in-the-loop path, and the ONLY route to a passing status when no real provider is wired. It produces a DISTINCT reviewer_confirmed, never a provider_verified (a provider decision is the provider&#39;s to report, via the webhook or a reconcile), and it is ROLE-GATED (an org admin or platform reviewer) AND ATTRIBUTED (the reviewer&#39;s user id is DecidedBy), so a manual pass is always accountable.
      * @param id ID is the verification to decide, from the path.
-     * @param cloudVerificationDecision 
-     * @return ApiResponse<CloudCheckView?>
+     * @param verificationDecision 
+     * @return ApiResponse<CheckView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComplianceVerificationsIdDecisionWithHttpInfo(id: kotlin.String, cloudVerificationDecision: CloudVerificationDecision) : ApiResponse<CloudCheckView?> {
-        val localVariableConfig = cloudPostV1ComplianceVerificationsIdDecisionRequestConfig(id = id, cloudVerificationDecision = cloudVerificationDecision)
+    fun postV1ComplianceVerificationsByIdDecisionWithHttpInfo(id: kotlin.String, verificationDecision: VerificationDecision) : ApiResponse<CheckView?> {
+        val localVariableConfig = postV1ComplianceVerificationsByIdDecisionRequestConfig(id = id, verificationDecision = verificationDecision)
 
-        return request<CloudVerificationDecision, CloudCheckView>(
+        return request<VerificationDecision, CheckView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComplianceVerificationsIdDecision
+     * To obtain the request config of the operation postV1ComplianceVerificationsByIdDecision
      *
      * @param id ID is the verification to decide, from the path.
-     * @param cloudVerificationDecision 
+     * @param verificationDecision 
      * @return RequestConfig
      */
-    fun cloudPostV1ComplianceVerificationsIdDecisionRequestConfig(id: kotlin.String, cloudVerificationDecision: CloudVerificationDecision) : RequestConfig<CloudVerificationDecision> {
-        val localVariableBody = cloudVerificationDecision
+    fun postV1ComplianceVerificationsByIdDecisionRequestConfig(id: kotlin.String, verificationDecision: VerificationDecision) : RequestConfig<VerificationDecision> {
+        val localVariableBody = verificationDecision
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1179,17 +1179,17 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/{id}/decision".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compliance/verifications/{id}/refresh
-     * RefreshVerification polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile.
-     * RefreshVerification polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile. For the Manual provider the check stays pending; for a hosted provider it reflects the provider&#39;s settled status. A poll error is a 502, never a verification.
+     * Polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile.
+     * Polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile. For the Manual provider the check stays pending; for a hosted provider it reflects the provider&#39;s settled status. A poll error is a 502, never a verification.
      * @param id ID is the verification to act on, from the path.
-     * @return CloudCheckView
+     * @return CheckView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1198,11 +1198,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComplianceVerificationsIdRefresh(id: kotlin.String) : CloudCheckView {
-        val localVarResponse = cloudPostV1ComplianceVerificationsIdRefreshWithHttpInfo(id = id)
+    fun postV1ComplianceVerificationsByIdRefresh(id: kotlin.String) : CheckView {
+        val localVarResponse = postV1ComplianceVerificationsByIdRefreshWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCheckView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CheckView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1218,30 +1218,30 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/compliance/verifications/{id}/refresh
-     * RefreshVerification polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile.
-     * RefreshVerification polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile. For the Manual provider the check stays pending; for a hosted provider it reflects the provider&#39;s settled status. A poll error is a 502, never a verification.
+     * Polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile.
+     * Polls the wired provider for its current decision and records it, ATTRIBUTED to the provider — the internal PULL reconcile. For the Manual provider the check stays pending; for a hosted provider it reflects the provider&#39;s settled status. A poll error is a 502, never a verification.
      * @param id ID is the verification to act on, from the path.
-     * @return ApiResponse<CloudCheckView?>
+     * @return ApiResponse<CheckView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComplianceVerificationsIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCheckView?> {
-        val localVariableConfig = cloudPostV1ComplianceVerificationsIdRefreshRequestConfig(id = id)
+    fun postV1ComplianceVerificationsByIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<CheckView?> {
+        val localVariableConfig = postV1ComplianceVerificationsByIdRefreshRequestConfig(id = id)
 
-        return request<Unit, CloudCheckView>(
+        return request<Unit, CheckView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComplianceVerificationsIdRefresh
+     * To obtain the request config of the operation postV1ComplianceVerificationsByIdRefresh
      *
      * @param id ID is the verification to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1ComplianceVerificationsIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1ComplianceVerificationsByIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1252,15 +1252,15 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/{id}/refresh".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compliance/verifications/webhook
-     * 
-     * 
+     * Provider push that settles a verification, authenticated by HMAC signature
+     * The external PUSH reconcile: a verification provider (or a Hanzo relay) signals that a check settled, and the reconciled check comes back. It authenticates by an HMAC SIGNATURE over the RAW body bytes rather than by a principal — an external caller has no validated org — and the org is then resolved FROM the record the signed provider reference matches, so a call can only ever touch the one tenant that owns that reference.  The body carries NO trusted decision. A valid signature cannot force a status: the reference only says WHICH check to re-read, and the status is then pulled from the wired provider, which stays the source of truth. With no real provider configured a check stays pending, and the only route to a passing status is the role-gated, attributed reviewer decision.  An unknown reference is a benign 200 &#x60;{\&quot;ignored\&quot;: ...}&#x60; no-op, not an error, so a provider replaying stale events neither retry-storms nor learns whether a reference exists in some other tenant. Fails closed otherwise: 501 unless a webhook secret is configured, 401 on a signature that does not verify, 400 with no provider reference, 413 over 1 MiB, and 502 if the secret or the provider is unreachable.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1269,8 +1269,8 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComplianceVerificationsWebhook() : Unit {
-        val localVarResponse = cloudPostV1ComplianceVerificationsWebhookWithHttpInfo()
+    fun postV1ComplianceVerificationsWebhook() : Unit {
+        val localVarResponse = postV1ComplianceVerificationsWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1289,15 +1289,15 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * POST /v1/compliance/verifications/webhook
-     * 
-     * 
+     * Provider push that settles a verification, authenticated by HMAC signature
+     * The external PUSH reconcile: a verification provider (or a Hanzo relay) signals that a check settled, and the reconciled check comes back. It authenticates by an HMAC SIGNATURE over the RAW body bytes rather than by a principal — an external caller has no validated org — and the org is then resolved FROM the record the signed provider reference matches, so a call can only ever touch the one tenant that owns that reference.  The body carries NO trusted decision. A valid signature cannot force a status: the reference only says WHICH check to re-read, and the status is then pulled from the wired provider, which stays the source of truth. With no real provider configured a check stays pending, and the only route to a passing status is the role-gated, attributed reviewer decision.  An unknown reference is a benign 200 &#x60;{\&quot;ignored\&quot;: ...}&#x60; no-op, not an error, so a provider replaying stale events neither retry-storms nor learns whether a reference exists in some other tenant. Fails closed otherwise: 501 unless a webhook secret is configured, 401 on a signature that does not verify, 400 with no provider reference, 413 over 1 MiB, and 502 if the secret or the provider is unreachable.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComplianceVerificationsWebhookWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ComplianceVerificationsWebhookRequestConfig()
+    fun postV1ComplianceVerificationsWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ComplianceVerificationsWebhookRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1305,11 +1305,11 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComplianceVerificationsWebhook
+     * To obtain the request config of the operation postV1ComplianceVerificationsWebhook
      *
      * @return RequestConfig
      */
-    fun cloudPostV1ComplianceVerificationsWebhookRequestConfig() : RequestConfig<Unit> {
+    fun postV1ComplianceVerificationsWebhookRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1319,7 +1319,7 @@ class ComplianceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/compliance/verifications/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

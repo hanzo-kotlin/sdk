@@ -19,12 +19,12 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudProvisionRequest
-import ai.hanzo.cloud.model.CloudProvisionResult
-import ai.hanzo.cloud.model.CloudProvisionedResource
-import ai.hanzo.cloud.model.CloudProvisionedSummary
-import ai.hanzo.cloud.model.CloudVectorCollectionList
-import ai.hanzo.cloud.model.CloudVectorStats
+import ai.hanzo.cloud.model.ProvisionRequest
+import ai.hanzo.cloud.model.ProvisionResult
+import ai.hanzo.cloud.model.ProvisionedResource
+import ai.hanzo.cloud.model.ProvisionedSummary
+import ai.hanzo.cloud.model.VectorCollectionList
+import ai.hanzo.cloud.model.VectorStats
 
 import com.google.gson.annotations.SerializedName
 
@@ -52,8 +52,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/vector/{name}
-     * DropVector deletes one vector collection from the shared backend and removes its metadata row.
-     * DropVector deletes one vector collection from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
+     * Deletes one vector collection from the shared backend and removes its metadata row.
+     * Deletes one vector collection from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -63,8 +63,8 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1VectorName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1VectorNameWithHttpInfo(name = name)
+    fun deleteV1VectorByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1VectorByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -83,16 +83,16 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/vector/{name}
-     * DropVector deletes one vector collection from the shared backend and removes its metadata row.
-     * DropVector deletes one vector collection from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
+     * Deletes one vector collection from the shared backend and removes its metadata row.
+     * Deletes one vector collection from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1VectorNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1VectorNameRequestConfig(name = name)
+    fun deleteV1VectorByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1VectorByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -100,12 +100,12 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1VectorName
+     * To obtain the request config of the operation deleteV1VectorByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1VectorNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1VectorByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -115,16 +115,16 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/vector
-     * ListVector lists the caller org&#39;s vector collections.
-     * ListVector lists the caller org&#39;s vector collections. A collection is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
-     * @return kotlin.collections.List<CloudProvisionedSummary>
+     * Lists the caller org&#39;s vector collections.
+     * Lists the caller org&#39;s vector collections. A collection is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
+     * @return kotlin.collections.List<ProvisionedSummary>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -133,11 +133,11 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Vector() : kotlin.collections.List<CloudProvisionedSummary> {
-        val localVarResponse = cloudGetV1VectorWithHttpInfo()
+    fun getV1Vector() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getV1VectorWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudProvisionedSummary>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -153,28 +153,28 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/vector
-     * ListVector lists the caller org&#39;s vector collections.
-     * ListVector lists the caller org&#39;s vector collections. A collection is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
-     * @return ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?>
+     * Lists the caller org&#39;s vector collections.
+     * Lists the caller org&#39;s vector collections. A collection is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
+     * @return ApiResponse<kotlin.collections.List<ProvisionedSummary>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1VectorWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?> {
-        val localVariableConfig = cloudGetV1VectorRequestConfig()
+    fun getV1VectorWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getV1VectorRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudProvisionedSummary>>(
+        return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Vector
+     * To obtain the request config of the operation getV1Vector
      *
      * @return RequestConfig
      */
-    fun cloudGetV1VectorRequestConfig() : RequestConfig<Unit> {
+    fun getV1VectorRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -185,87 +185,17 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/vector/collections
-     * Lists the vector collections with their size and geometry.
-     * Lists the vector collections with their size and geometry.  It reads the in-cluster Qdrant service: the collection list, then each collection&#39;s detail for its point count, vector dimension and distance metric. Per-collection detail is best-effort — one collection that fails to describe itself keeps its name and defaults (dimension 0, cosine) rather than blanking the whole panel — and an unreachable Qdrant answers 200 with an EMPTY list.
-     * @return CloudVectorCollectionList
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1VectorCollections() : CloudVectorCollectionList {
-        val localVarResponse = cloudGetV1VectorCollectionsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVectorCollectionList
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/vector/collections
-     * Lists the vector collections with their size and geometry.
-     * Lists the vector collections with their size and geometry.  It reads the in-cluster Qdrant service: the collection list, then each collection&#39;s detail for its point count, vector dimension and distance metric. Per-collection detail is best-effort — one collection that fails to describe itself keeps its name and defaults (dimension 0, cosine) rather than blanking the whole panel — and an unreachable Qdrant answers 200 with an EMPTY list.
-     * @return ApiResponse<CloudVectorCollectionList?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1VectorCollectionsWithHttpInfo() : ApiResponse<CloudVectorCollectionList?> {
-        val localVariableConfig = cloudGetV1VectorCollectionsRequestConfig()
-
-        return request<Unit, CloudVectorCollectionList>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1VectorCollections
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1VectorCollectionsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/vector/collections",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/vector/{name}
-     * GetVector returns one vector collection&#39;s metadata.
-     * GetVector returns one vector collection&#39;s metadata. It carries the collection&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-collection credential, so there is no per-resource user to report.
+     * Returns one vector collection&#39;s metadata.
+     * Returns one vector collection&#39;s metadata. It carries the collection&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-collection credential, so there is no per-resource user to report.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return CloudProvisionedResource
+     * @return ProvisionedResource
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -274,11 +204,11 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1VectorName(name: kotlin.String) : CloudProvisionedResource {
-        val localVarResponse = cloudGetV1VectorNameWithHttpInfo(name = name)
+    fun getV1VectorByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getV1VectorByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionedResource
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -294,30 +224,30 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/vector/{name}
-     * GetVector returns one vector collection&#39;s metadata.
-     * GetVector returns one vector collection&#39;s metadata. It carries the collection&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-collection credential, so there is no per-resource user to report.
+     * Returns one vector collection&#39;s metadata.
+     * Returns one vector collection&#39;s metadata. It carries the collection&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-collection credential, so there is no per-resource user to report.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<CloudProvisionedResource?>
+     * @return ApiResponse<ProvisionedResource?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1VectorNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudProvisionedResource?> {
-        val localVariableConfig = cloudGetV1VectorNameRequestConfig(name = name)
+    fun getV1VectorByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getV1VectorByNameRequestConfig(name = name)
 
-        return request<Unit, CloudProvisionedResource>(
+        return request<Unit, ProvisionedResource>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1VectorName
+     * To obtain the request config of the operation getV1VectorByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudGetV1VectorNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1VectorByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,16 +258,17 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/vector/stats
-     * Totals the collections, vectors and storage across the vector store.
-     * Totals the collections, vectors and storage across the vector store.  Every figure is summed from the same per-collection detail GET /v1/vector/collections returns, so the two panels can never disagree. An unreachable Qdrant answers 200 with all zeros rather than an error.
-     * @return CloudVectorStats
+     * GET /v1/vector/collections
+     * Lists the vector collections with their size and geometry.
+     * Lists the vector collections with their size and geometry.  It reads the in-cluster Qdrant service: the collection list, then each collection&#39;s detail for its point count, vector dimension and distance metric. Per-collection detail is best-effort — one collection that fails to describe itself keeps its name and defaults (dimension 0, cosine) rather than blanking the whole panel — and an unreachable Qdrant answers 200 with an EMPTY list.
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return VectorCollectionList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -346,11 +277,85 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1VectorStats() : CloudVectorStats {
-        val localVarResponse = cloudGetV1VectorStatsWithHttpInfo()
+    fun getV1VectorCollections(authorization: kotlin.String? = null) : VectorCollectionList {
+        val localVarResponse = getV1VectorCollectionsWithHttpInfo(authorization = authorization)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVectorStats
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorCollectionList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/vector/collections
+     * Lists the vector collections with their size and geometry.
+     * Lists the vector collections with their size and geometry.  It reads the in-cluster Qdrant service: the collection list, then each collection&#39;s detail for its point count, vector dimension and distance metric. Per-collection detail is best-effort — one collection that fails to describe itself keeps its name and defaults (dimension 0, cosine) rather than blanking the whole panel — and an unreachable Qdrant answers 200 with an EMPTY list.
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return ApiResponse<VectorCollectionList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1VectorCollectionsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<VectorCollectionList?> {
+        val localVariableConfig = getV1VectorCollectionsRequestConfig(authorization = authorization)
+
+        return request<Unit, VectorCollectionList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1VectorCollections
+     *
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return RequestConfig
+     */
+    fun getV1VectorCollectionsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/vector/collections",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/vector/stats
+     * Totals the collections, vectors and storage across the vector store.
+     * Totals the collections, vectors and storage across the vector store.  Every figure is summed from the same per-collection detail GET /v1/vector/collections returns, so the two panels can never disagree. An unreachable Qdrant answers 200 with all zeros rather than an error.
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return VectorStats
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1VectorStats(authorization: kotlin.String? = null) : VectorStats {
+        val localVarResponse = getV1VectorStatsWithHttpInfo(authorization = authorization)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorStats
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -368,29 +373,32 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * GET /v1/vector/stats
      * Totals the collections, vectors and storage across the vector store.
      * Totals the collections, vectors and storage across the vector store.  Every figure is summed from the same per-collection detail GET /v1/vector/collections returns, so the two panels can never disagree. An unreachable Qdrant answers 200 with all zeros rather than an error.
-     * @return ApiResponse<CloudVectorStats?>
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return ApiResponse<VectorStats?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1VectorStatsWithHttpInfo() : ApiResponse<CloudVectorStats?> {
-        val localVariableConfig = cloudGetV1VectorStatsRequestConfig()
+    fun getV1VectorStatsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<VectorStats?> {
+        val localVariableConfig = getV1VectorStatsRequestConfig(authorization = authorization)
 
-        return request<Unit, CloudVectorStats>(
+        return request<Unit, VectorStats>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1VectorStats
+     * To obtain the request config of the operation getV1VectorStats
      *
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1VectorStatsRequestConfig() : RequestConfig<Unit> {
+    fun getV1VectorStatsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
@@ -398,17 +406,17 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/vector
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return CloudProvisionResult
+     * Provision a vector collection for your org
+     * Creates a vector collection inside the already-running shared vector backend and answers with the endpoint that reaches it.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ProvisionResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -417,11 +425,11 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Vector(cloudProvisionRequest: CloudProvisionRequest? = null) : CloudProvisionResult {
-        val localVarResponse = cloudPostV1VectorWithHttpInfo(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1Vector(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postV1VectorWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -437,31 +445,31 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/vector
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return ApiResponse<CloudProvisionResult?>
+     * Provision a vector collection for your org
+     * Creates a vector collection inside the already-running shared vector backend and answers with the endpoint that reaches it.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ApiResponse<ProvisionResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1VectorWithHttpInfo(cloudProvisionRequest: CloudProvisionRequest?) : ApiResponse<CloudProvisionResult?> {
-        val localVariableConfig = cloudPostV1VectorRequestConfig(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1VectorWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postV1VectorRequestConfig(provisionRequest = provisionRequest)
 
-        return request<CloudProvisionRequest, CloudProvisionResult>(
+        return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Vector
+     * To obtain the request config of the operation postV1Vector
      *
-     * @param cloudProvisionRequest  (optional)
+     * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1VectorRequestConfig(cloudProvisionRequest: CloudProvisionRequest?) : RequestConfig<CloudProvisionRequest> {
-        val localVariableBody = cloudProvisionRequest
+    fun postV1VectorRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+        val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -472,7 +480,7 @@ class VectorApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/vector",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,6 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.EnvironmentBoard
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +47,22 @@ class EnvironmentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/environments
-     * 
-     * 
-     * @return void
+     * Returns your deploy targets, and what is running on each.
+     * Returns your deploy targets, and what is running on each.  It returns the org&#39;s environments — the distinct deploy targets its applications name, &#x60;production&#x60; for anything that names none — each aggregating the apps that target it, a rolled-up status and when it last changed.  An environment is DERIVED, not stored: there is nothing to create or delete here, and an environment exists exactly as long as an app points at it. Requires a validated principal; 403 without one.
+     * @return EnvironmentBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Environments() : Unit {
-        val localVarResponse = cloudGetV1EnvironmentsWithHttpInfo()
+    fun getV1Environments() : EnvironmentBoard {
+        val localVarResponse = getV1EnvironmentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EnvironmentBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,37 +78,39 @@ class EnvironmentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/environments
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Returns your deploy targets, and what is running on each.
+     * Returns your deploy targets, and what is running on each.  It returns the org&#39;s environments — the distinct deploy targets its applications name, &#x60;production&#x60; for anything that names none — each aggregating the apps that target it, a rolled-up status and when it last changed.  An environment is DERIVED, not stored: there is nothing to create or delete here, and an environment exists exactly as long as an app points at it. Requires a validated principal; 403 without one.
+     * @return ApiResponse<EnvironmentBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EnvironmentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EnvironmentsRequestConfig()
+    fun getV1EnvironmentsWithHttpInfo() : ApiResponse<EnvironmentBoard?> {
+        val localVariableConfig = getV1EnvironmentsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, EnvironmentBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Environments
+     * To obtain the request config of the operation getV1Environments
      *
      * @return RequestConfig
      */
-    fun cloudGetV1EnvironmentsRequestConfig() : RequestConfig<Unit> {
+    fun getV1EnvironmentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/environments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

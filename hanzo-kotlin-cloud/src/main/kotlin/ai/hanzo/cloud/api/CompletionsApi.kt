@@ -19,7 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.GatewayCreateCompletionRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,24 +45,22 @@ class CompletionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * POST /v1/gateway/completions
-     * Create completion
-     * 
-     * @param gatewayCreateCompletionRequest 
-     * @return kotlin.Any
+     * POST /v1/completions
+     * Implements the OpenAI-compatible chat completions API
+     * Implements the OpenAI-compatible chat completions API
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayCreateCompletion(gatewayCreateCompletionRequest: GatewayCreateCompletionRequest) : kotlin.Any {
-        val localVarResponse = gatewayCreateCompletionWithHttpInfo(gatewayCreateCompletionRequest = gatewayCreateCompletionRequest)
+    fun postV1Completions() : Unit {
+        val localVarResponse = postV1CompletionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -78,43 +75,38 @@ class CompletionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * POST /v1/gateway/completions
-     * Create completion
-     * 
-     * @param gatewayCreateCompletionRequest 
-     * @return ApiResponse<kotlin.Any?>
+     * POST /v1/completions
+     * Implements the OpenAI-compatible chat completions API
+     * Implements the OpenAI-compatible chat completions API
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayCreateCompletionWithHttpInfo(gatewayCreateCompletionRequest: GatewayCreateCompletionRequest) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = gatewayCreateCompletionRequestConfig(gatewayCreateCompletionRequest = gatewayCreateCompletionRequest)
+    fun postV1CompletionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CompletionsRequestConfig()
 
-        return request<GatewayCreateCompletionRequest, kotlin.Any>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation gatewayCreateCompletion
+     * To obtain the request config of the operation postV1Completions
      *
-     * @param gatewayCreateCompletionRequest 
      * @return RequestConfig
      */
-    fun gatewayCreateCompletionRequestConfig(gatewayCreateCompletionRequest: GatewayCreateCompletionRequest) : RequestConfig<GatewayCreateCompletionRequest> {
-        val localVariableBody = gatewayCreateCompletionRequest
+    fun postV1CompletionsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/gateway/completions",
+            path = "/v1/completions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

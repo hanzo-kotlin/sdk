@@ -19,19 +19,19 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudApplication
-import ai.hanzo.cloud.model.CloudApplicationList
-import ai.hanzo.cloud.model.CloudCompany
-import ai.hanzo.cloud.model.CloudCompanyList
-import ai.hanzo.cloud.model.CloudCompanyReq
-import ai.hanzo.cloud.model.CloudContact
-import ai.hanzo.cloud.model.CloudContactList
-import ai.hanzo.cloud.model.CloudContactReq
-import ai.hanzo.cloud.model.CloudCrmSummary
-import ai.hanzo.cloud.model.CloudOppList
-import ai.hanzo.cloud.model.CloudOppReq
-import ai.hanzo.cloud.model.CloudOpportunity
-import ai.hanzo.cloud.model.CloudPatchApplicationIn
+import ai.hanzo.cloud.model.ApplicationList
+import ai.hanzo.cloud.model.Company
+import ai.hanzo.cloud.model.CompanyList
+import ai.hanzo.cloud.model.CompanyReq
+import ai.hanzo.cloud.model.Contact
+import ai.hanzo.cloud.model.ContactList
+import ai.hanzo.cloud.model.ContactReq
+import ai.hanzo.cloud.model.CrmSummary
+import ai.hanzo.cloud.model.OppList
+import ai.hanzo.cloud.model.OppReq
+import ai.hanzo.cloud.model.Opportunity
+import ai.hanzo.cloud.model.PatchApplicationIn
+import ai.hanzo.cloud.model.ProgramApplication
 
 import com.google.gson.annotations.SerializedName
 
@@ -59,8 +59,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/crm/companies/{id}
-     * DeleteCompany removes one of the caller org&#39;s companies and answers 204.
-     * DeleteCompany removes one of the caller org&#39;s companies and answers 204. Any contact or opportunity in the org that referenced it keeps existing with the reference cleared, so nothing is left pointing at a company that is gone.
+     * Removes one of the caller org&#39;s companies and answers 204.
+     * Removes one of the caller org&#39;s companies and answers 204. Any contact or opportunity in the org that referenced it keeps existing with the reference cleared, so nothing is left pointing at a company that is gone.
      * @param id ID is the record to act on, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -70,8 +70,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CrmCompaniesId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1CrmCompaniesIdWithHttpInfo(id = id)
+    fun deleteV1CrmCompaniesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CrmCompaniesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,16 +90,16 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/crm/companies/{id}
-     * DeleteCompany removes one of the caller org&#39;s companies and answers 204.
-     * DeleteCompany removes one of the caller org&#39;s companies and answers 204. Any contact or opportunity in the org that referenced it keeps existing with the reference cleared, so nothing is left pointing at a company that is gone.
+     * Removes one of the caller org&#39;s companies and answers 204.
+     * Removes one of the caller org&#39;s companies and answers 204. Any contact or opportunity in the org that referenced it keeps existing with the reference cleared, so nothing is left pointing at a company that is gone.
      * @param id ID is the record to act on, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CrmCompaniesIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1CrmCompaniesIdRequestConfig(id = id)
+    fun deleteV1CrmCompaniesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CrmCompaniesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -107,12 +107,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CrmCompaniesId
+     * To obtain the request config of the operation deleteV1CrmCompaniesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CrmCompaniesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CrmCompaniesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -122,15 +122,15 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/crm/contacts/{id}
-     * DeleteContact removes one of the caller org&#39;s contacts and answers 204.
-     * DeleteContact removes one of the caller org&#39;s contacts and answers 204. Any opportunity in the org that named it point of contact keeps existing with that reference cleared.
+     * Removes one of the caller org&#39;s contacts and answers 204.
+     * Removes one of the caller org&#39;s contacts and answers 204. Any opportunity in the org that named it point of contact keeps existing with that reference cleared.
      * @param id ID is the record to act on, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -140,8 +140,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CrmContactsId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1CrmContactsIdWithHttpInfo(id = id)
+    fun deleteV1CrmContactsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CrmContactsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -160,16 +160,16 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/crm/contacts/{id}
-     * DeleteContact removes one of the caller org&#39;s contacts and answers 204.
-     * DeleteContact removes one of the caller org&#39;s contacts and answers 204. Any opportunity in the org that named it point of contact keeps existing with that reference cleared.
+     * Removes one of the caller org&#39;s contacts and answers 204.
+     * Removes one of the caller org&#39;s contacts and answers 204. Any opportunity in the org that named it point of contact keeps existing with that reference cleared.
      * @param id ID is the record to act on, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CrmContactsIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1CrmContactsIdRequestConfig(id = id)
+    fun deleteV1CrmContactsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CrmContactsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -177,12 +177,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CrmContactsId
+     * To obtain the request config of the operation deleteV1CrmContactsById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CrmContactsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CrmContactsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -192,15 +192,15 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/crm/opportunities/{id}
-     * DeleteOpportunity removes one of the caller org&#39;s deals and answers 204.
-     * DeleteOpportunity removes one of the caller org&#39;s deals and answers 204.
+     * Removes one of the caller org&#39;s deals and answers 204.
+     * Removes one of the caller org&#39;s deals and answers 204.
      * @param id ID is the record to act on, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -210,8 +210,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CrmOpportunitiesId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1CrmOpportunitiesIdWithHttpInfo(id = id)
+    fun deleteV1CrmOpportunitiesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CrmOpportunitiesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -230,16 +230,16 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/crm/opportunities/{id}
-     * DeleteOpportunity removes one of the caller org&#39;s deals and answers 204.
-     * DeleteOpportunity removes one of the caller org&#39;s deals and answers 204.
+     * Removes one of the caller org&#39;s deals and answers 204.
+     * Removes one of the caller org&#39;s deals and answers 204.
      * @param id ID is the record to act on, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CrmOpportunitiesIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1CrmOpportunitiesIdRequestConfig(id = id)
+    fun deleteV1CrmOpportunitiesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CrmOpportunitiesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -247,12 +247,12 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CrmOpportunitiesId
+     * To obtain the request config of the operation deleteV1CrmOpportunitiesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CrmOpportunitiesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CrmOpportunitiesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -262,18 +262,18 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/applications
-     * ListApplications returns the org&#39;s Startup Program applications, newest first.
-     * ListApplications returns the org&#39;s Startup Program applications, newest first. Each carries its AI screen and its stage history; a stage narrows the page to one pipeline stage.
+     * Returns the org&#39;s Startup Program applications, newest first.
+     * Returns the org&#39;s Startup Program applications, newest first. Each carries its AI screen and its stage history; a stage narrows the page to one pipeline stage.
      * @param stage Stage returns only the applications at that pipeline stage when set: applied, screened, qualified, credits-offered, onboarded or rejected. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return CloudApplicationList
+     * @return ApplicationList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -282,11 +282,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmApplications(stage: kotlin.String? = null, limit: kotlin.Int? = null) : CloudApplicationList {
-        val localVarResponse = cloudGetV1CrmApplicationsWithHttpInfo(stage = stage, limit = limit)
+    fun getV1CrmApplications(stage: kotlin.String? = null, limit: kotlin.Int? = null) : ApplicationList {
+        val localVarResponse = getV1CrmApplicationsWithHttpInfo(stage = stage, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudApplicationList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ApplicationList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -302,32 +302,32 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/applications
-     * ListApplications returns the org&#39;s Startup Program applications, newest first.
-     * ListApplications returns the org&#39;s Startup Program applications, newest first. Each carries its AI screen and its stage history; a stage narrows the page to one pipeline stage.
+     * Returns the org&#39;s Startup Program applications, newest first.
+     * Returns the org&#39;s Startup Program applications, newest first. Each carries its AI screen and its stage history; a stage narrows the page to one pipeline stage.
      * @param stage Stage returns only the applications at that pipeline stage when set: applied, screened, qualified, credits-offered, onboarded or rejected. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return ApiResponse<CloudApplicationList?>
+     * @return ApiResponse<ApplicationList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmApplicationsWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudApplicationList?> {
-        val localVariableConfig = cloudGetV1CrmApplicationsRequestConfig(stage = stage, limit = limit)
+    fun getV1CrmApplicationsWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ApplicationList?> {
+        val localVariableConfig = getV1CrmApplicationsRequestConfig(stage = stage, limit = limit)
 
-        return request<Unit, CloudApplicationList>(
+        return request<Unit, ApplicationList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmApplications
+     * To obtain the request config of the operation getV1CrmApplications
      *
      * @param stage Stage returns only the applications at that pipeline stage when set: applied, screened, qualified, credits-offered, onboarded or rejected. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CrmApplicationsRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CrmApplicationsRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -346,17 +346,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/applications/{id}
-     * GetApplication returns one Startup Program application with its AI screen and stage history.
-     * GetApplication returns one Startup Program application with its AI screen and stage history. An id belonging to another org reads as not found.
+     * Returns one Startup Program application with its AI screen and stage history.
+     * Returns one Startup Program application with its AI screen and stage history. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return CloudApplication
+     * @return ProgramApplication
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -365,11 +365,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmApplicationsId(id: kotlin.String) : CloudApplication {
-        val localVarResponse = cloudGetV1CrmApplicationsIdWithHttpInfo(id = id)
+    fun getV1CrmApplicationsById(id: kotlin.String) : ProgramApplication {
+        val localVarResponse = getV1CrmApplicationsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudApplication
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProgramApplication
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -385,30 +385,30 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/applications/{id}
-     * GetApplication returns one Startup Program application with its AI screen and stage history.
-     * GetApplication returns one Startup Program application with its AI screen and stage history. An id belonging to another org reads as not found.
+     * Returns one Startup Program application with its AI screen and stage history.
+     * Returns one Startup Program application with its AI screen and stage history. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return ApiResponse<CloudApplication?>
+     * @return ApiResponse<ProgramApplication?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmApplicationsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudApplication?> {
-        val localVariableConfig = cloudGetV1CrmApplicationsIdRequestConfig(id = id)
+    fun getV1CrmApplicationsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ProgramApplication?> {
+        val localVariableConfig = getV1CrmApplicationsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudApplication>(
+        return request<Unit, ProgramApplication>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmApplicationsId
+     * To obtain the request config of the operation getV1CrmApplicationsById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1CrmApplicationsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CrmApplicationsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -419,17 +419,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/companies
-     * ListCompanies returns the caller org&#39;s companies, most recently updated first.
-     * ListCompanies returns the caller org&#39;s companies, most recently updated first.
+     * Returns the caller org&#39;s companies, most recently updated first.
+     * Returns the caller org&#39;s companies, most recently updated first.
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return CloudCompanyList
+     * @return CompanyList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -438,11 +438,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmCompanies(limit: kotlin.Int? = null) : CloudCompanyList {
-        val localVarResponse = cloudGetV1CrmCompaniesWithHttpInfo(limit = limit)
+    fun getV1CrmCompanies(limit: kotlin.Int? = null) : CompanyList {
+        val localVarResponse = getV1CrmCompaniesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCompanyList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CompanyList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -458,30 +458,30 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/companies
-     * ListCompanies returns the caller org&#39;s companies, most recently updated first.
-     * ListCompanies returns the caller org&#39;s companies, most recently updated first.
+     * Returns the caller org&#39;s companies, most recently updated first.
+     * Returns the caller org&#39;s companies, most recently updated first.
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return ApiResponse<CloudCompanyList?>
+     * @return ApiResponse<CompanyList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmCompaniesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudCompanyList?> {
-        val localVariableConfig = cloudGetV1CrmCompaniesRequestConfig(limit = limit)
+    fun getV1CrmCompaniesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CompanyList?> {
+        val localVariableConfig = getV1CrmCompaniesRequestConfig(limit = limit)
 
-        return request<Unit, CloudCompanyList>(
+        return request<Unit, CompanyList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmCompanies
+     * To obtain the request config of the operation getV1CrmCompanies
      *
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CrmCompaniesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CrmCompaniesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -497,17 +497,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/companies/{id}
-     * GetCompany returns one of the caller org&#39;s companies.
-     * GetCompany returns one of the caller org&#39;s companies. An id belonging to another org reads as not found.
+     * Returns one of the caller org&#39;s companies.
+     * Returns one of the caller org&#39;s companies. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return CloudCompany
+     * @return Company
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -516,11 +516,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmCompaniesId(id: kotlin.String) : CloudCompany {
-        val localVarResponse = cloudGetV1CrmCompaniesIdWithHttpInfo(id = id)
+    fun getV1CrmCompaniesById(id: kotlin.String) : Company {
+        val localVarResponse = getV1CrmCompaniesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCompany
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Company
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -536,30 +536,30 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/companies/{id}
-     * GetCompany returns one of the caller org&#39;s companies.
-     * GetCompany returns one of the caller org&#39;s companies. An id belonging to another org reads as not found.
+     * Returns one of the caller org&#39;s companies.
+     * Returns one of the caller org&#39;s companies. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return ApiResponse<CloudCompany?>
+     * @return ApiResponse<Company?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmCompaniesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCompany?> {
-        val localVariableConfig = cloudGetV1CrmCompaniesIdRequestConfig(id = id)
+    fun getV1CrmCompaniesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Company?> {
+        val localVariableConfig = getV1CrmCompaniesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCompany>(
+        return request<Unit, Company>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmCompaniesId
+     * To obtain the request config of the operation getV1CrmCompaniesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1CrmCompaniesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CrmCompaniesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -570,18 +570,18 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/contacts
-     * ListContacts returns the caller org&#39;s contacts, most recently updated first.
-     * ListContacts returns the caller org&#39;s contacts, most recently updated first. A companyId narrows the page to the people at that company.
+     * Returns the caller org&#39;s contacts, most recently updated first.
+     * Returns the caller org&#39;s contacts, most recently updated first. A companyId narrows the page to the people at that company.
      * @param companyId CompanyID returns only the contacts at that company when set. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return CloudContactList
+     * @return ContactList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -590,11 +590,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmContacts(companyId: kotlin.String? = null, limit: kotlin.Int? = null) : CloudContactList {
-        val localVarResponse = cloudGetV1CrmContactsWithHttpInfo(companyId = companyId, limit = limit)
+    fun getV1CrmContacts(companyId: kotlin.String? = null, limit: kotlin.Int? = null) : ContactList {
+        val localVarResponse = getV1CrmContactsWithHttpInfo(companyId = companyId, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudContactList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ContactList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -610,32 +610,32 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/contacts
-     * ListContacts returns the caller org&#39;s contacts, most recently updated first.
-     * ListContacts returns the caller org&#39;s contacts, most recently updated first. A companyId narrows the page to the people at that company.
+     * Returns the caller org&#39;s contacts, most recently updated first.
+     * Returns the caller org&#39;s contacts, most recently updated first. A companyId narrows the page to the people at that company.
      * @param companyId CompanyID returns only the contacts at that company when set. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return ApiResponse<CloudContactList?>
+     * @return ApiResponse<ContactList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmContactsWithHttpInfo(companyId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudContactList?> {
-        val localVariableConfig = cloudGetV1CrmContactsRequestConfig(companyId = companyId, limit = limit)
+    fun getV1CrmContactsWithHttpInfo(companyId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ContactList?> {
+        val localVariableConfig = getV1CrmContactsRequestConfig(companyId = companyId, limit = limit)
 
-        return request<Unit, CloudContactList>(
+        return request<Unit, ContactList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmContacts
+     * To obtain the request config of the operation getV1CrmContacts
      *
      * @param companyId CompanyID returns only the contacts at that company when set. (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CrmContactsRequestConfig(companyId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CrmContactsRequestConfig(companyId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -654,17 +654,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/contacts/{id}
-     * GetContact returns one of the caller org&#39;s contacts.
-     * GetContact returns one of the caller org&#39;s contacts. An id belonging to another org reads as not found.
+     * Returns one of the caller org&#39;s contacts.
+     * Returns one of the caller org&#39;s contacts. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return CloudContact
+     * @return Contact
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -673,11 +673,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmContactsId(id: kotlin.String) : CloudContact {
-        val localVarResponse = cloudGetV1CrmContactsIdWithHttpInfo(id = id)
+    fun getV1CrmContactsById(id: kotlin.String) : Contact {
+        val localVarResponse = getV1CrmContactsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudContact
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Contact
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -693,30 +693,30 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/contacts/{id}
-     * GetContact returns one of the caller org&#39;s contacts.
-     * GetContact returns one of the caller org&#39;s contacts. An id belonging to another org reads as not found.
+     * Returns one of the caller org&#39;s contacts.
+     * Returns one of the caller org&#39;s contacts. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return ApiResponse<CloudContact?>
+     * @return ApiResponse<Contact?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmContactsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudContact?> {
-        val localVariableConfig = cloudGetV1CrmContactsIdRequestConfig(id = id)
+    fun getV1CrmContactsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Contact?> {
+        val localVariableConfig = getV1CrmContactsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudContact>(
+        return request<Unit, Contact>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmContactsId
+     * To obtain the request config of the operation getV1CrmContactsById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1CrmContactsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CrmContactsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -727,18 +727,18 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/opportunities
-     * ListOpportunities returns the caller org&#39;s deals, most recently updated first.
-     * ListOpportunities returns the caller org&#39;s deals, most recently updated first. A stage narrows the page to one pipeline stage.
+     * Returns the caller org&#39;s deals, most recently updated first.
+     * Returns the caller org&#39;s deals, most recently updated first. A stage narrows the page to one pipeline stage.
      * @param stage Stage returns only the opportunities at that pipeline stage when set (NEW, SCREENING, MEETING, PROPOSAL or CUSTOMER; case-insensitive). (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return CloudOppList
+     * @return OppList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -747,11 +747,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmOpportunities(stage: kotlin.String? = null, limit: kotlin.Int? = null) : CloudOppList {
-        val localVarResponse = cloudGetV1CrmOpportunitiesWithHttpInfo(stage = stage, limit = limit)
+    fun getV1CrmOpportunities(stage: kotlin.String? = null, limit: kotlin.Int? = null) : OppList {
+        val localVarResponse = getV1CrmOpportunitiesWithHttpInfo(stage = stage, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOppList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OppList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -767,32 +767,32 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/opportunities
-     * ListOpportunities returns the caller org&#39;s deals, most recently updated first.
-     * ListOpportunities returns the caller org&#39;s deals, most recently updated first. A stage narrows the page to one pipeline stage.
+     * Returns the caller org&#39;s deals, most recently updated first.
+     * Returns the caller org&#39;s deals, most recently updated first. A stage narrows the page to one pipeline stage.
      * @param stage Stage returns only the opportunities at that pipeline stage when set (NEW, SCREENING, MEETING, PROPOSAL or CUSTOMER; case-insensitive). (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
-     * @return ApiResponse<CloudOppList?>
+     * @return ApiResponse<OppList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmOpportunitiesWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudOppList?> {
-        val localVariableConfig = cloudGetV1CrmOpportunitiesRequestConfig(stage = stage, limit = limit)
+    fun getV1CrmOpportunitiesWithHttpInfo(stage: kotlin.String?, limit: kotlin.Int?) : ApiResponse<OppList?> {
+        val localVariableConfig = getV1CrmOpportunitiesRequestConfig(stage = stage, limit = limit)
 
-        return request<Unit, CloudOppList>(
+        return request<Unit, OppList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmOpportunities
+     * To obtain the request config of the operation getV1CrmOpportunities
      *
      * @param stage Stage returns only the opportunities at that pipeline stage when set (NEW, SCREENING, MEETING, PROPOSAL or CUSTOMER; case-insensitive). (optional)
      * @param limit Limit caps the rows returned: 200 by default, 1000 at most. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CrmOpportunitiesRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CrmOpportunitiesRequestConfig(stage: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -811,17 +811,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/crm/opportunities/{id}
-     * GetOpportunity returns one of the caller org&#39;s deals.
-     * GetOpportunity returns one of the caller org&#39;s deals. An id belonging to another org reads as not found.
+     * Returns one of the caller org&#39;s deals.
+     * Returns one of the caller org&#39;s deals. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return CloudOpportunity
+     * @return Opportunity
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -830,11 +830,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmOpportunitiesId(id: kotlin.String) : CloudOpportunity {
-        val localVarResponse = cloudGetV1CrmOpportunitiesIdWithHttpInfo(id = id)
+    fun getV1CrmOpportunitiesById(id: kotlin.String) : Opportunity {
+        val localVarResponse = getV1CrmOpportunitiesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOpportunity
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Opportunity
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -850,30 +850,30 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/crm/opportunities/{id}
-     * GetOpportunity returns one of the caller org&#39;s deals.
-     * GetOpportunity returns one of the caller org&#39;s deals. An id belonging to another org reads as not found.
+     * Returns one of the caller org&#39;s deals.
+     * Returns one of the caller org&#39;s deals. An id belonging to another org reads as not found.
      * @param id ID is the record to act on, from the path.
-     * @return ApiResponse<CloudOpportunity?>
+     * @return ApiResponse<Opportunity?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmOpportunitiesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudOpportunity?> {
-        val localVariableConfig = cloudGetV1CrmOpportunitiesIdRequestConfig(id = id)
+    fun getV1CrmOpportunitiesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Opportunity?> {
+        val localVariableConfig = getV1CrmOpportunitiesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudOpportunity>(
+        return request<Unit, Opportunity>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmOpportunitiesId
+     * To obtain the request config of the operation getV1CrmOpportunitiesById
      *
      * @param id ID is the record to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1CrmOpportunitiesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CrmOpportunitiesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -884,7 +884,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -893,7 +893,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/crm/summary
      * Summary counts the caller org&#39;s CRM records: companies, contacts, opportunities.
      * Summary counts the caller org&#39;s CRM records: companies, contacts, opportunities.
-     * @return CloudCrmSummary
+     * @return CrmSummary
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -902,11 +902,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CrmSummary() : CloudCrmSummary {
-        val localVarResponse = cloudGetV1CrmSummaryWithHttpInfo()
+    fun getV1CrmSummary() : CrmSummary {
+        val localVarResponse = getV1CrmSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCrmSummary
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CrmSummary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -924,26 +924,26 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/crm/summary
      * Summary counts the caller org&#39;s CRM records: companies, contacts, opportunities.
      * Summary counts the caller org&#39;s CRM records: companies, contacts, opportunities.
-     * @return ApiResponse<CloudCrmSummary?>
+     * @return ApiResponse<CrmSummary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CrmSummaryWithHttpInfo() : ApiResponse<CloudCrmSummary?> {
-        val localVariableConfig = cloudGetV1CrmSummaryRequestConfig()
+    fun getV1CrmSummaryWithHttpInfo() : ApiResponse<CrmSummary?> {
+        val localVariableConfig = getV1CrmSummaryRequestConfig()
 
-        return request<Unit, CloudCrmSummary>(
+        return request<Unit, CrmSummary>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CrmSummary
+     * To obtain the request config of the operation getV1CrmSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CrmSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1CrmSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -954,18 +954,18 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/crm/applications/{id}
-     * PatchApplication moves one Startup Program application through the pipeline.
-     * PatchApplication moves one Startup Program application through the pipeline. The move is recorded on the application&#39;s timeline, attributed to the calling staff user: it may advance exactly one stage, go back to any earlier stage, reject from any non-rejected stage, or reopen a rejected application to &#x60;applied&#x60;; anything else is refused. Rejecting requires a reason. A note with no stage change is still recorded.
+     * Moves one Startup Program application through the pipeline.
+     * Moves one Startup Program application through the pipeline. The move is recorded on the application&#39;s timeline, attributed to the calling staff user: it may advance exactly one stage, go back to any earlier stage, reject from any non-rejected stage, or reopen a rejected application to &#x60;applied&#x60;; anything else is refused. Rejecting requires a reason. A note with no stage change is still recorded.
      * @param id ID is the application to move, from the path.
-     * @param cloudPatchApplicationIn 
-     * @return CloudApplication
+     * @param patchApplicationIn 
+     * @return ProgramApplication
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -974,11 +974,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1CrmApplicationsId(id: kotlin.String, cloudPatchApplicationIn: CloudPatchApplicationIn) : CloudApplication {
-        val localVarResponse = cloudPatchV1CrmApplicationsIdWithHttpInfo(id = id, cloudPatchApplicationIn = cloudPatchApplicationIn)
+    fun patchV1CrmApplicationsById(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : ProgramApplication {
+        val localVarResponse = patchV1CrmApplicationsByIdWithHttpInfo(id = id, patchApplicationIn = patchApplicationIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudApplication
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProgramApplication
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -994,33 +994,33 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PATCH /v1/crm/applications/{id}
-     * PatchApplication moves one Startup Program application through the pipeline.
-     * PatchApplication moves one Startup Program application through the pipeline. The move is recorded on the application&#39;s timeline, attributed to the calling staff user: it may advance exactly one stage, go back to any earlier stage, reject from any non-rejected stage, or reopen a rejected application to &#x60;applied&#x60;; anything else is refused. Rejecting requires a reason. A note with no stage change is still recorded.
+     * Moves one Startup Program application through the pipeline.
+     * Moves one Startup Program application through the pipeline. The move is recorded on the application&#39;s timeline, attributed to the calling staff user: it may advance exactly one stage, go back to any earlier stage, reject from any non-rejected stage, or reopen a rejected application to &#x60;applied&#x60;; anything else is refused. Rejecting requires a reason. A note with no stage change is still recorded.
      * @param id ID is the application to move, from the path.
-     * @param cloudPatchApplicationIn 
-     * @return ApiResponse<CloudApplication?>
+     * @param patchApplicationIn 
+     * @return ApiResponse<ProgramApplication?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1CrmApplicationsIdWithHttpInfo(id: kotlin.String, cloudPatchApplicationIn: CloudPatchApplicationIn) : ApiResponse<CloudApplication?> {
-        val localVariableConfig = cloudPatchV1CrmApplicationsIdRequestConfig(id = id, cloudPatchApplicationIn = cloudPatchApplicationIn)
+    fun patchV1CrmApplicationsByIdWithHttpInfo(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : ApiResponse<ProgramApplication?> {
+        val localVariableConfig = patchV1CrmApplicationsByIdRequestConfig(id = id, patchApplicationIn = patchApplicationIn)
 
-        return request<CloudPatchApplicationIn, CloudApplication>(
+        return request<PatchApplicationIn, ProgramApplication>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1CrmApplicationsId
+     * To obtain the request config of the operation patchV1CrmApplicationsById
      *
      * @param id ID is the application to move, from the path.
-     * @param cloudPatchApplicationIn 
+     * @param patchApplicationIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1CrmApplicationsIdRequestConfig(id: kotlin.String, cloudPatchApplicationIn: CloudPatchApplicationIn) : RequestConfig<CloudPatchApplicationIn> {
-        val localVariableBody = cloudPatchApplicationIn
+    fun patchV1CrmApplicationsByIdRequestConfig(id: kotlin.String, patchApplicationIn: PatchApplicationIn) : RequestConfig<PatchApplicationIn> {
+        val localVariableBody = patchApplicationIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1031,15 +1031,15 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/crm/applications
-     * 
-     * 
+     * Apply to the Startup Program from the public form
+     * Files an application to the Startup Program and answers the id and pipeline stage it landed at.  This is the ONE unauthenticated route in crm. It takes no principal and never reads a caller org: the application is filed against the DEPLOYMENT&#39;s own program org — the brand, hanzo unless white-labelled — so there is no tenant to name and none to leak. Reading the application back is staff-only and lives elsewhere.  company, contactName and a parseable email are required; everything else is optional context. Re-submitting the same (email, company) REFRESHES the existing application instead of filing a second one, so an impatient applicant cannot duplicate their own lead — that is a 200 where a first submission is a 201. A filled &#x60;hp&#x60; honeypot field is answered exactly like a success and stored nowhere, so a bot cannot tell a drop from an accept.  Filing is not screening: the application lands at stage &#x60;applied&#x60; with its AI screen still pending, and the screen runs afterwards on its own clock. A company and contact are also projected into the program org&#39;s ordinary CRM lists, best-effort — that projection failing does not fail the application. Bodies over 64 KiB are refused, and submissions are rate-limited.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1048,8 +1048,8 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CrmApplications() : Unit {
-        val localVarResponse = cloudPostV1CrmApplicationsWithHttpInfo()
+    fun postV1CrmApplications() : Unit {
+        val localVarResponse = postV1CrmApplicationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1068,15 +1068,15 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/crm/applications
-     * 
-     * 
+     * Apply to the Startup Program from the public form
+     * Files an application to the Startup Program and answers the id and pipeline stage it landed at.  This is the ONE unauthenticated route in crm. It takes no principal and never reads a caller org: the application is filed against the DEPLOYMENT&#39;s own program org — the brand, hanzo unless white-labelled — so there is no tenant to name and none to leak. Reading the application back is staff-only and lives elsewhere.  company, contactName and a parseable email are required; everything else is optional context. Re-submitting the same (email, company) REFRESHES the existing application instead of filing a second one, so an impatient applicant cannot duplicate their own lead — that is a 200 where a first submission is a 201. A filled &#x60;hp&#x60; honeypot field is answered exactly like a success and stored nowhere, so a bot cannot tell a drop from an accept.  Filing is not screening: the application lands at stage &#x60;applied&#x60; with its AI screen still pending, and the screen runs afterwards on its own clock. A company and contact are also projected into the program org&#39;s ordinary CRM lists, best-effort — that projection failing does not fail the application. Bodies over 64 KiB are refused, and submissions are rate-limited.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CrmApplicationsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CrmApplicationsRequestConfig()
+    fun postV1CrmApplicationsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CrmApplicationsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1084,11 +1084,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CrmApplications
+     * To obtain the request config of the operation postV1CrmApplications
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CrmApplicationsRequestConfig() : RequestConfig<Unit> {
+    fun postV1CrmApplicationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1098,17 +1098,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/applications",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/crm/companies
-     * CreateCompany adds a company to the caller&#39;s org and answers 201 with the stored record.
-     * CreateCompany adds a company to the caller&#39;s org and answers 201 with the stored record. A name is required; an empty currency defaults to USD.
-     * @param cloudCompanyReq 
-     * @return CloudCompany
+     * Adds a company to the caller&#39;s org and answers 201 with the stored record.
+     * Adds a company to the caller&#39;s org and answers 201 with the stored record. A name is required; an empty currency defaults to USD.
+     * @param companyReq 
+     * @return Company
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1117,11 +1117,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CrmCompanies(cloudCompanyReq: CloudCompanyReq) : CloudCompany {
-        val localVarResponse = cloudPostV1CrmCompaniesWithHttpInfo(cloudCompanyReq = cloudCompanyReq)
+    fun postV1CrmCompanies(companyReq: CompanyReq) : Company {
+        val localVarResponse = postV1CrmCompaniesWithHttpInfo(companyReq = companyReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCompany
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Company
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1137,31 +1137,31 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/crm/companies
-     * CreateCompany adds a company to the caller&#39;s org and answers 201 with the stored record.
-     * CreateCompany adds a company to the caller&#39;s org and answers 201 with the stored record. A name is required; an empty currency defaults to USD.
-     * @param cloudCompanyReq 
-     * @return ApiResponse<CloudCompany?>
+     * Adds a company to the caller&#39;s org and answers 201 with the stored record.
+     * Adds a company to the caller&#39;s org and answers 201 with the stored record. A name is required; an empty currency defaults to USD.
+     * @param companyReq 
+     * @return ApiResponse<Company?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CrmCompaniesWithHttpInfo(cloudCompanyReq: CloudCompanyReq) : ApiResponse<CloudCompany?> {
-        val localVariableConfig = cloudPostV1CrmCompaniesRequestConfig(cloudCompanyReq = cloudCompanyReq)
+    fun postV1CrmCompaniesWithHttpInfo(companyReq: CompanyReq) : ApiResponse<Company?> {
+        val localVariableConfig = postV1CrmCompaniesRequestConfig(companyReq = companyReq)
 
-        return request<CloudCompanyReq, CloudCompany>(
+        return request<CompanyReq, Company>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CrmCompanies
+     * To obtain the request config of the operation postV1CrmCompanies
      *
-     * @param cloudCompanyReq 
+     * @param companyReq 
      * @return RequestConfig
      */
-    fun cloudPostV1CrmCompaniesRequestConfig(cloudCompanyReq: CloudCompanyReq) : RequestConfig<CloudCompanyReq> {
-        val localVariableBody = cloudCompanyReq
+    fun postV1CrmCompaniesRequestConfig(companyReq: CompanyReq) : RequestConfig<CompanyReq> {
+        val localVariableBody = companyReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1172,17 +1172,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/crm/contacts
-     * CreateContact adds a person to the caller&#39;s org and answers 201 with the stored record.
-     * CreateContact adds a person to the caller&#39;s org and answers 201 with the stored record. One of firstName, lastName or email is required, and a companyId must name a company in the same org.
-     * @param cloudContactReq 
-     * @return CloudContact
+     * Adds a person to the caller&#39;s org and answers 201 with the stored record.
+     * Adds a person to the caller&#39;s org and answers 201 with the stored record. One of firstName, lastName or email is required, and a companyId must name a company in the same org.
+     * @param contactReq 
+     * @return Contact
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1191,11 +1191,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CrmContacts(cloudContactReq: CloudContactReq) : CloudContact {
-        val localVarResponse = cloudPostV1CrmContactsWithHttpInfo(cloudContactReq = cloudContactReq)
+    fun postV1CrmContacts(contactReq: ContactReq) : Contact {
+        val localVarResponse = postV1CrmContactsWithHttpInfo(contactReq = contactReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudContact
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Contact
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1211,31 +1211,31 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/crm/contacts
-     * CreateContact adds a person to the caller&#39;s org and answers 201 with the stored record.
-     * CreateContact adds a person to the caller&#39;s org and answers 201 with the stored record. One of firstName, lastName or email is required, and a companyId must name a company in the same org.
-     * @param cloudContactReq 
-     * @return ApiResponse<CloudContact?>
+     * Adds a person to the caller&#39;s org and answers 201 with the stored record.
+     * Adds a person to the caller&#39;s org and answers 201 with the stored record. One of firstName, lastName or email is required, and a companyId must name a company in the same org.
+     * @param contactReq 
+     * @return ApiResponse<Contact?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CrmContactsWithHttpInfo(cloudContactReq: CloudContactReq) : ApiResponse<CloudContact?> {
-        val localVariableConfig = cloudPostV1CrmContactsRequestConfig(cloudContactReq = cloudContactReq)
+    fun postV1CrmContactsWithHttpInfo(contactReq: ContactReq) : ApiResponse<Contact?> {
+        val localVariableConfig = postV1CrmContactsRequestConfig(contactReq = contactReq)
 
-        return request<CloudContactReq, CloudContact>(
+        return request<ContactReq, Contact>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CrmContacts
+     * To obtain the request config of the operation postV1CrmContacts
      *
-     * @param cloudContactReq 
+     * @param contactReq 
      * @return RequestConfig
      */
-    fun cloudPostV1CrmContactsRequestConfig(cloudContactReq: CloudContactReq) : RequestConfig<CloudContactReq> {
-        val localVariableBody = cloudContactReq
+    fun postV1CrmContactsRequestConfig(contactReq: ContactReq) : RequestConfig<ContactReq> {
+        val localVariableBody = contactReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1246,17 +1246,17 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/crm/opportunities
-     * CreateOpportunity adds a deal to the caller&#39;s org and answers 201 with the stored record.
-     * CreateOpportunity adds a deal to the caller&#39;s org and answers 201 with the stored record. A name is required; the stage defaults to NEW; companyId and pointOfContactId must name records in the same org.
-     * @param cloudOppReq 
-     * @return CloudOpportunity
+     * Adds a deal to the caller&#39;s org and answers 201 with the stored record.
+     * Adds a deal to the caller&#39;s org and answers 201 with the stored record. A name is required; the stage defaults to NEW; companyId and pointOfContactId must name records in the same org.
+     * @param oppReq 
+     * @return Opportunity
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1265,11 +1265,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CrmOpportunities(cloudOppReq: CloudOppReq) : CloudOpportunity {
-        val localVarResponse = cloudPostV1CrmOpportunitiesWithHttpInfo(cloudOppReq = cloudOppReq)
+    fun postV1CrmOpportunities(oppReq: OppReq) : Opportunity {
+        val localVarResponse = postV1CrmOpportunitiesWithHttpInfo(oppReq = oppReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOpportunity
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Opportunity
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1285,31 +1285,31 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/crm/opportunities
-     * CreateOpportunity adds a deal to the caller&#39;s org and answers 201 with the stored record.
-     * CreateOpportunity adds a deal to the caller&#39;s org and answers 201 with the stored record. A name is required; the stage defaults to NEW; companyId and pointOfContactId must name records in the same org.
-     * @param cloudOppReq 
-     * @return ApiResponse<CloudOpportunity?>
+     * Adds a deal to the caller&#39;s org and answers 201 with the stored record.
+     * Adds a deal to the caller&#39;s org and answers 201 with the stored record. A name is required; the stage defaults to NEW; companyId and pointOfContactId must name records in the same org.
+     * @param oppReq 
+     * @return ApiResponse<Opportunity?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CrmOpportunitiesWithHttpInfo(cloudOppReq: CloudOppReq) : ApiResponse<CloudOpportunity?> {
-        val localVariableConfig = cloudPostV1CrmOpportunitiesRequestConfig(cloudOppReq = cloudOppReq)
+    fun postV1CrmOpportunitiesWithHttpInfo(oppReq: OppReq) : ApiResponse<Opportunity?> {
+        val localVariableConfig = postV1CrmOpportunitiesRequestConfig(oppReq = oppReq)
 
-        return request<CloudOppReq, CloudOpportunity>(
+        return request<OppReq, Opportunity>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CrmOpportunities
+     * To obtain the request config of the operation postV1CrmOpportunities
      *
-     * @param cloudOppReq 
+     * @param oppReq 
      * @return RequestConfig
      */
-    fun cloudPostV1CrmOpportunitiesRequestConfig(cloudOppReq: CloudOppReq) : RequestConfig<CloudOppReq> {
-        val localVariableBody = cloudOppReq
+    fun postV1CrmOpportunitiesRequestConfig(oppReq: OppReq) : RequestConfig<OppReq> {
+        val localVariableBody = oppReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1320,18 +1320,18 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/crm/companies/{id}
-     * UpdateCompany replaces one of the caller org&#39;s companies.
-     * UpdateCompany replaces one of the caller org&#39;s companies. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required.
+     * Replaces one of the caller org&#39;s companies.
+     * Replaces one of the caller org&#39;s companies. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required.
      * @param id ID names the company to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudCompanyReq 
-     * @return CloudCompany
+     * @param companyReq 
+     * @return Company
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1340,11 +1340,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CrmCompaniesId(id: kotlin.String, cloudCompanyReq: CloudCompanyReq) : CloudCompany {
-        val localVarResponse = cloudPutV1CrmCompaniesIdWithHttpInfo(id = id, cloudCompanyReq = cloudCompanyReq)
+    fun putV1CrmCompaniesById(id: kotlin.String, companyReq: CompanyReq) : Company {
+        val localVarResponse = putV1CrmCompaniesByIdWithHttpInfo(id = id, companyReq = companyReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCompany
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Company
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1360,33 +1360,33 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PUT /v1/crm/companies/{id}
-     * UpdateCompany replaces one of the caller org&#39;s companies.
-     * UpdateCompany replaces one of the caller org&#39;s companies. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required.
+     * Replaces one of the caller org&#39;s companies.
+     * Replaces one of the caller org&#39;s companies. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required.
      * @param id ID names the company to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudCompanyReq 
-     * @return ApiResponse<CloudCompany?>
+     * @param companyReq 
+     * @return ApiResponse<Company?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CrmCompaniesIdWithHttpInfo(id: kotlin.String, cloudCompanyReq: CloudCompanyReq) : ApiResponse<CloudCompany?> {
-        val localVariableConfig = cloudPutV1CrmCompaniesIdRequestConfig(id = id, cloudCompanyReq = cloudCompanyReq)
+    fun putV1CrmCompaniesByIdWithHttpInfo(id: kotlin.String, companyReq: CompanyReq) : ApiResponse<Company?> {
+        val localVariableConfig = putV1CrmCompaniesByIdRequestConfig(id = id, companyReq = companyReq)
 
-        return request<CloudCompanyReq, CloudCompany>(
+        return request<CompanyReq, Company>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CrmCompaniesId
+     * To obtain the request config of the operation putV1CrmCompaniesById
      *
      * @param id ID names the company to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudCompanyReq 
+     * @param companyReq 
      * @return RequestConfig
      */
-    fun cloudPutV1CrmCompaniesIdRequestConfig(id: kotlin.String, cloudCompanyReq: CloudCompanyReq) : RequestConfig<CloudCompanyReq> {
-        val localVariableBody = cloudCompanyReq
+    fun putV1CrmCompaniesByIdRequestConfig(id: kotlin.String, companyReq: CompanyReq) : RequestConfig<CompanyReq> {
+        val localVariableBody = companyReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1397,18 +1397,18 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/companies/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/crm/contacts/{id}
-     * UpdateContact replaces one of the caller org&#39;s contacts.
-     * UpdateContact replaces one of the caller org&#39;s contacts. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. One of firstName, lastName or email is required.
+     * Replaces one of the caller org&#39;s contacts.
+     * Replaces one of the caller org&#39;s contacts. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. One of firstName, lastName or email is required.
      * @param id ID names the contact to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudContactReq 
-     * @return CloudContact
+     * @param contactReq 
+     * @return Contact
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1417,11 +1417,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CrmContactsId(id: kotlin.String, cloudContactReq: CloudContactReq) : CloudContact {
-        val localVarResponse = cloudPutV1CrmContactsIdWithHttpInfo(id = id, cloudContactReq = cloudContactReq)
+    fun putV1CrmContactsById(id: kotlin.String, contactReq: ContactReq) : Contact {
+        val localVarResponse = putV1CrmContactsByIdWithHttpInfo(id = id, contactReq = contactReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudContact
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Contact
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1437,33 +1437,33 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PUT /v1/crm/contacts/{id}
-     * UpdateContact replaces one of the caller org&#39;s contacts.
-     * UpdateContact replaces one of the caller org&#39;s contacts. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. One of firstName, lastName or email is required.
+     * Replaces one of the caller org&#39;s contacts.
+     * Replaces one of the caller org&#39;s contacts. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. One of firstName, lastName or email is required.
      * @param id ID names the contact to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudContactReq 
-     * @return ApiResponse<CloudContact?>
+     * @param contactReq 
+     * @return ApiResponse<Contact?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CrmContactsIdWithHttpInfo(id: kotlin.String, cloudContactReq: CloudContactReq) : ApiResponse<CloudContact?> {
-        val localVariableConfig = cloudPutV1CrmContactsIdRequestConfig(id = id, cloudContactReq = cloudContactReq)
+    fun putV1CrmContactsByIdWithHttpInfo(id: kotlin.String, contactReq: ContactReq) : ApiResponse<Contact?> {
+        val localVariableConfig = putV1CrmContactsByIdRequestConfig(id = id, contactReq = contactReq)
 
-        return request<CloudContactReq, CloudContact>(
+        return request<ContactReq, Contact>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CrmContactsId
+     * To obtain the request config of the operation putV1CrmContactsById
      *
      * @param id ID names the contact to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudContactReq 
+     * @param contactReq 
      * @return RequestConfig
      */
-    fun cloudPutV1CrmContactsIdRequestConfig(id: kotlin.String, cloudContactReq: CloudContactReq) : RequestConfig<CloudContactReq> {
-        val localVariableBody = cloudContactReq
+    fun putV1CrmContactsByIdRequestConfig(id: kotlin.String, contactReq: ContactReq) : RequestConfig<ContactReq> {
+        val localVariableBody = contactReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1474,18 +1474,18 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/contacts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/crm/opportunities/{id}
-     * UpdateOpportunity replaces one of the caller org&#39;s deals.
-     * UpdateOpportunity replaces one of the caller org&#39;s deals. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required and the stage must be a pipeline stage.
+     * Replaces one of the caller org&#39;s deals.
+     * Replaces one of the caller org&#39;s deals. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required and the stage must be a pipeline stage.
      * @param id ID names the opportunity to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudOppReq 
-     * @return CloudOpportunity
+     * @param oppReq 
+     * @return Opportunity
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1494,11 +1494,11 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CrmOpportunitiesId(id: kotlin.String, cloudOppReq: CloudOppReq) : CloudOpportunity {
-        val localVarResponse = cloudPutV1CrmOpportunitiesIdWithHttpInfo(id = id, cloudOppReq = cloudOppReq)
+    fun putV1CrmOpportunitiesById(id: kotlin.String, oppReq: OppReq) : Opportunity {
+        val localVarResponse = putV1CrmOpportunitiesByIdWithHttpInfo(id = id, oppReq = oppReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOpportunity
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Opportunity
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1514,33 +1514,33 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PUT /v1/crm/opportunities/{id}
-     * UpdateOpportunity replaces one of the caller org&#39;s deals.
-     * UpdateOpportunity replaces one of the caller org&#39;s deals. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required and the stage must be a pipeline stage.
+     * Replaces one of the caller org&#39;s deals.
+     * Replaces one of the caller org&#39;s deals. Every writable field is taken from the request, so a field the request omits is CLEARED — send the whole record. A name is required and the stage must be a pipeline stage.
      * @param id ID names the opportunity to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudOppReq 
-     * @return ApiResponse<CloudOpportunity?>
+     * @param oppReq 
+     * @return ApiResponse<Opportunity?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CrmOpportunitiesIdWithHttpInfo(id: kotlin.String, cloudOppReq: CloudOppReq) : ApiResponse<CloudOpportunity?> {
-        val localVariableConfig = cloudPutV1CrmOpportunitiesIdRequestConfig(id = id, cloudOppReq = cloudOppReq)
+    fun putV1CrmOpportunitiesByIdWithHttpInfo(id: kotlin.String, oppReq: OppReq) : ApiResponse<Opportunity?> {
+        val localVariableConfig = putV1CrmOpportunitiesByIdRequestConfig(id = id, oppReq = oppReq)
 
-        return request<CloudOppReq, CloudOpportunity>(
+        return request<OppReq, Opportunity>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CrmOpportunitiesId
+     * To obtain the request config of the operation putV1CrmOpportunitiesById
      *
      * @param id ID names the opportunity to update and comes from the path. A create ignores it: the server mints the id.
-     * @param cloudOppReq 
+     * @param oppReq 
      * @return RequestConfig
      */
-    fun cloudPutV1CrmOpportunitiesIdRequestConfig(id: kotlin.String, cloudOppReq: CloudOppReq) : RequestConfig<CloudOppReq> {
-        val localVariableBody = cloudOppReq
+    fun putV1CrmOpportunitiesByIdRequestConfig(id: kotlin.String, oppReq: OppReq) : RequestConfig<OppReq> {
+        val localVariableBody = oppReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1551,7 +1551,7 @@ class CrmApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/crm/opportunities/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

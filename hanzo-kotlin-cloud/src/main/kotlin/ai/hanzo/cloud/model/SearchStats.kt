@@ -15,33 +15,37 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.SearchIndexStats
+import ai.hanzo.cloud.model.DayCount
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param databaseSize 
- * @param usedDatabaseSize 
- * @param lastUpdate 
- * @param indexes 
+ * @param searchesPerDay SearchesPerDay is always empty, for the same reason as totalSearches.
+ * @param totalDocuments TotalDocuments is the sum of every index's document count.
+ * @param totalSearches TotalSearches is always 0: Meilisearch keeps no query-history counter, so this surface reports the honest zero rather than an estimate.
+ * @param totalSessions TotalSessions is always 0, for the same reason as totalSearches.
  */
 
 
 data class SearchStats (
 
-    @SerializedName("databaseSize")
-    val databaseSize: kotlin.Long? = null,
+    /* SearchesPerDay is always empty, for the same reason as totalSearches. */
+    @SerializedName("searchesPerDay")
+    val searchesPerDay: kotlin.collections.List<DayCount>? = null,
 
-    @SerializedName("usedDatabaseSize")
-    val usedDatabaseSize: kotlin.Long? = null,
+    /* TotalDocuments is the sum of every index's document count. */
+    @SerializedName("totalDocuments")
+    val totalDocuments: kotlin.Int? = null,
 
-    @SerializedName("lastUpdate")
-    val lastUpdate: java.time.OffsetDateTime? = null,
+    /* TotalSearches is always 0: Meilisearch keeps no query-history counter, so this surface reports the honest zero rather than an estimate. */
+    @SerializedName("totalSearches")
+    val totalSearches: kotlin.Int? = null,
 
-    @SerializedName("indexes")
-    val indexes: kotlin.collections.Map<kotlin.String, SearchIndexStats>? = null
+    /* TotalSessions is always 0, for the same reason as totalSearches. */
+    @SerializedName("totalSessions")
+    val totalSessions: kotlin.Int? = null
 
 ) {
 

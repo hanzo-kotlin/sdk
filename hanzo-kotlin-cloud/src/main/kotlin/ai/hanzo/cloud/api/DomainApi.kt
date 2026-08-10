@@ -19,6 +19,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.Holdings
+import ai.hanzo.cloud.model.Order
+import ai.hanzo.cloud.model.QuoteList
+import ai.hanzo.cloud.model.Reachability
+import ai.hanzo.cloud.model.RegisterResult
+import ai.hanzo.cloud.model.RenewReq
+import ai.hanzo.cloud.model.RenewResult
+import ai.hanzo.cloud.model.TransferReq
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +54,23 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/domain/availability
-     * 
-     * 
-     * @return void
+     * Checks exact names rather than searching for them, and answers the same quote shape search does — purchasable, premium, first-term and renewal price in cents.
+     * Checks exact names rather than searching for them, and answers the same quote shape search does — purchasable, premium, first-term and renewal price in cents.  It requires a validated principal; 403 without one. Nothing is charged and nothing is held. A deployment with no registrar credentials answers 503.
+     * @param domain Domain is one name, or several comma-separated, to check in one call. Names are lowercased. It is required.
+     * @return QuoteList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DomainAvailability() : Unit {
-        val localVarResponse = cloudGetV1DomainAvailabilityWithHttpInfo()
+    fun getV1DomainAvailability(domain: kotlin.String) : QuoteList {
+        val localVarResponse = getV1DomainAvailabilityWithHttpInfo(domain = domain)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as QuoteList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,58 +86,66 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/domain/availability
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Checks exact names rather than searching for them, and answers the same quote shape search does — purchasable, premium, first-term and renewal price in cents.
+     * Checks exact names rather than searching for them, and answers the same quote shape search does — purchasable, premium, first-term and renewal price in cents.  It requires a validated principal; 403 without one. Nothing is charged and nothing is held. A deployment with no registrar credentials answers 503.
+     * @param domain Domain is one name, or several comma-separated, to check in one call. Names are lowercased. It is required.
+     * @return ApiResponse<QuoteList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DomainAvailabilityWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DomainAvailabilityRequestConfig()
+    fun getV1DomainAvailabilityWithHttpInfo(domain: kotlin.String) : ApiResponse<QuoteList?> {
+        val localVariableConfig = getV1DomainAvailabilityRequestConfig(domain = domain)
 
-        return request<Unit, Unit>(
+        return request<Unit, QuoteList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DomainAvailability
+     * To obtain the request config of the operation getV1DomainAvailability
      *
+     * @param domain Domain is one name, or several comma-separated, to check in one call. Names are lowercased. It is required.
      * @return RequestConfig
      */
-    fun cloudGetV1DomainAvailabilityRequestConfig() : RequestConfig<Unit> {
+    fun getV1DomainAvailabilityRequestConfig(domain: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("domain", listOf(domain.toString()))
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/domain/availability",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/domain/domains
-     * 
-     * 
-     * @return void
+     * Is the domains your org has bought here, newest registration first, each carrying the name, when it was registered, when it expires, what the org paid, the registrar order id and the nameservers it points at.
+     * Is the domains your org has bought here, newest registration first, each carrying the name, when it was registered, when it expires, what the org paid, the registrar order id and the nameservers it points at.  Scoped to the validated principal&#39;s org — 403 without one, and there is no parameter that reaches another org&#39;s holdings.  This is the deployment&#39;s OWN ownership record, not a query to the registrar: it lists what was bought THROUGH this surface, so a domain the org holds elsewhere is not here. The default store is in-process, so a deployment that has not swapped in a durable store answers from what this process registered.
+     * @return Holdings
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DomainDomains() : Unit {
-        val localVarResponse = cloudGetV1DomainDomainsWithHttpInfo()
+    fun getV1DomainDomains() : Holdings {
+        val localVarResponse = getV1DomainDomainsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Holdings
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -143,58 +161,61 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/domain/domains
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the domains your org has bought here, newest registration first, each carrying the name, when it was registered, when it expires, what the org paid, the registrar order id and the nameservers it points at.
+     * Is the domains your org has bought here, newest registration first, each carrying the name, when it was registered, when it expires, what the org paid, the registrar order id and the nameservers it points at.  Scoped to the validated principal&#39;s org — 403 without one, and there is no parameter that reaches another org&#39;s holdings.  This is the deployment&#39;s OWN ownership record, not a query to the registrar: it lists what was bought THROUGH this surface, so a domain the org holds elsewhere is not here. The default store is in-process, so a deployment that has not swapped in a durable store answers from what this process registered.
+     * @return ApiResponse<Holdings?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DomainDomainsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DomainDomainsRequestConfig()
+    fun getV1DomainDomainsWithHttpInfo() : ApiResponse<Holdings?> {
+        val localVariableConfig = getV1DomainDomainsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, Holdings>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DomainDomains
+     * To obtain the request config of the operation getV1DomainDomains
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DomainDomainsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DomainDomainsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/domain/domains",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/domain/health
-     * 
-     * 
-     * @return void
+     * Reports registrar reachability honestly: ok only when the wholesale credentials are present AND name.com accepted them on a live call made while you waited.
+     * Reports registrar reachability honestly: ok only when the wholesale credentials are present AND name.com accepted them on a live call made while you waited.  Missing credentials or an unreachable registrar is 503 carrying configured, reachable and the reason, so an operator reads the blocker instead of guessing at it. It takes no principal, like every subsystem health probe.
+     * @return Reachability
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DomainHealth() : Unit {
-        val localVarResponse = cloudGetV1DomainHealthWithHttpInfo()
+    fun getV1DomainHealth() : Reachability {
+        val localVarResponse = getV1DomainHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Reachability
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -210,58 +231,63 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/domain/health
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Reports registrar reachability honestly: ok only when the wholesale credentials are present AND name.com accepted them on a live call made while you waited.
+     * Reports registrar reachability honestly: ok only when the wholesale credentials are present AND name.com accepted them on a live call made while you waited.  Missing credentials or an unreachable registrar is 503 carrying configured, reachable and the reason, so an operator reads the blocker instead of guessing at it. It takes no principal, like every subsystem health probe.
+     * @return ApiResponse<Reachability?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DomainHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DomainHealthRequestConfig()
+    fun getV1DomainHealthWithHttpInfo() : ApiResponse<Reachability?> {
+        val localVariableConfig = getV1DomainHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, Reachability>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DomainHealth
+     * To obtain the request config of the operation getV1DomainHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DomainHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1DomainHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/domain/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/domain/search
-     * 
-     * 
-     * @return void
+     * Finds names built from the keyword q, plus the registrar&#39;s alternate-TLD suggestions, and answers a quote for each: the name, whether it is purchasable, whether it is premium, the first-term and renewal price in cents, and the TLD.
+     * Finds names built from the keyword q, plus the registrar&#39;s alternate-TLD suggestions, and answers a quote for each: the name, whether it is purchasable, whether it is premium, the first-term and renewal price in cents, and the TLD.  Prices are RETAIL — this deployment&#39;s markup is already applied and the wholesale cost is never on the wire.  It requires a validated principal; 403 without one. Nothing is charged and nothing is held — a quote is not a reservation, and the price is re-quoted at purchase, so a name quoted here can be gone or dearer by the time you buy it. A deployment with no registrar credentials answers 503.
+     * @param q Q is the keyword to build names from. It is required.
+     * @param tld TLD narrows the search to a comma-separated set of top-level domains. (optional)
+     * @return QuoteList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DomainSearch() : Unit {
-        val localVarResponse = cloudGetV1DomainSearchWithHttpInfo()
+    fun getV1DomainSearch(q: kotlin.String, tld: kotlin.String? = null) : QuoteList {
+        val localVarResponse = getV1DomainSearchWithHttpInfo(q = q, tld = tld)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as QuoteList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -277,58 +303,72 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/domain/search
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Finds names built from the keyword q, plus the registrar&#39;s alternate-TLD suggestions, and answers a quote for each: the name, whether it is purchasable, whether it is premium, the first-term and renewal price in cents, and the TLD.
+     * Finds names built from the keyword q, plus the registrar&#39;s alternate-TLD suggestions, and answers a quote for each: the name, whether it is purchasable, whether it is premium, the first-term and renewal price in cents, and the TLD.  Prices are RETAIL — this deployment&#39;s markup is already applied and the wholesale cost is never on the wire.  It requires a validated principal; 403 without one. Nothing is charged and nothing is held — a quote is not a reservation, and the price is re-quoted at purchase, so a name quoted here can be gone or dearer by the time you buy it. A deployment with no registrar credentials answers 503.
+     * @param q Q is the keyword to build names from. It is required.
+     * @param tld TLD narrows the search to a comma-separated set of top-level domains. (optional)
+     * @return ApiResponse<QuoteList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DomainSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DomainSearchRequestConfig()
+    fun getV1DomainSearchWithHttpInfo(q: kotlin.String, tld: kotlin.String?) : ApiResponse<QuoteList?> {
+        val localVariableConfig = getV1DomainSearchRequestConfig(q = q, tld = tld)
 
-        return request<Unit, Unit>(
+        return request<Unit, QuoteList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DomainSearch
+     * To obtain the request config of the operation getV1DomainSearch
      *
+     * @param q Q is the keyword to build names from. It is required.
+     * @param tld TLD narrows the search to a comma-separated set of top-level domains. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1DomainSearchRequestConfig() : RequestConfig<Unit> {
+    fun getV1DomainSearchRequestConfig(q: kotlin.String, tld: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("q", listOf(q.toString()))
+                if (tld != null) {
+                    put("tld", listOf(tld.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/domain/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/domain/register
-     * 
-     * 
-     * @return void
+     * Buys a domain for your org and answers the ownership record together with the quote it was bought at.
+     * Buys a domain for your org and answers the ownership record together with the quote it was bought at.  The order of operations is the product guarantee: quote, refuse anything unpurchasable or unpriced, AUTHORIZE the org&#39;s prepaid balance, provision the authoritative zone in Hanzo DNS, register at the registrar already pointing at Hanzo&#39;s nameservers, and only then CAPTURE the charge and record ownership. A registrar failure therefore leaves the balance untouched — the org is never billed for a domain it did not get.  It requires a validated principal; that principal&#39;s org owns the domain and is the ledger the charge lands on. Re-buying a name the org already holds is 409, not a second purchase.  Refusals are distinct on purpose: 402 when the prepaid balance cannot cover the quoted price, 409 when the name is not available, 503 when the deployment has no registrar credentials, and the registrar&#39;s own message with its own 4xx — or 502 for its 5xx — when it rejects the purchase. Zone provisioning is best-effort: if the zone service is down the domain is still registered against Hanzo&#39;s nameservers and the zone reconciles afterwards, rather than the purchase failing.
+     * @param order 
+     * @return RegisterResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DomainRegister() : Unit {
-        val localVarResponse = cloudPostV1DomainRegisterWithHttpInfo()
+    fun postV1DomainRegister(order: Order) : RegisterResult {
+        val localVarResponse = postV1DomainRegisterWithHttpInfo(order = order)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -344,58 +384,65 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/domain/register
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Buys a domain for your org and answers the ownership record together with the quote it was bought at.
+     * Buys a domain for your org and answers the ownership record together with the quote it was bought at.  The order of operations is the product guarantee: quote, refuse anything unpurchasable or unpriced, AUTHORIZE the org&#39;s prepaid balance, provision the authoritative zone in Hanzo DNS, register at the registrar already pointing at Hanzo&#39;s nameservers, and only then CAPTURE the charge and record ownership. A registrar failure therefore leaves the balance untouched — the org is never billed for a domain it did not get.  It requires a validated principal; that principal&#39;s org owns the domain and is the ledger the charge lands on. Re-buying a name the org already holds is 409, not a second purchase.  Refusals are distinct on purpose: 402 when the prepaid balance cannot cover the quoted price, 409 when the name is not available, 503 when the deployment has no registrar credentials, and the registrar&#39;s own message with its own 4xx — or 502 for its 5xx — when it rejects the purchase. Zone provisioning is best-effort: if the zone service is down the domain is still registered against Hanzo&#39;s nameservers and the zone reconciles afterwards, rather than the purchase failing.
+     * @param order 
+     * @return ApiResponse<RegisterResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DomainRegisterWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DomainRegisterRequestConfig()
+    fun postV1DomainRegisterWithHttpInfo(order: Order) : ApiResponse<RegisterResult?> {
+        val localVariableConfig = postV1DomainRegisterRequestConfig(order = order)
 
-        return request<Unit, Unit>(
+        return request<Order, RegisterResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DomainRegister
+     * To obtain the request config of the operation postV1DomainRegister
      *
+     * @param order 
      * @return RequestConfig
      */
-    fun cloudPostV1DomainRegisterRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1DomainRegisterRequestConfig(order: Order) : RequestConfig<Order> {
+        val localVariableBody = order
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/domain/register",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/domain/renew
-     * 
-     * 
-     * @return void
+     * Extends a domain your org already owns and answers the updated record with its new expiry alongside what was paid.
+     * Extends a domain your org already owns and answers the updated record with its new expiry alongside what was paid.  Ownership is the gate: a name the caller&#39;s org does not hold is 404, so a renewal can never reach another tenant&#39;s domain.  The price is re-quoted at the CURRENT renewal rate rather than the one paid at purchase. If the registrar returns no renewal price the org&#39;s original price is charged instead, so a renewal is never accidentally free. The balance is authorized before the registrar is called and captured after it confirms — 402 when the prepaid balance cannot cover it, 503 when the deployment has no registrar credentials. Requires a validated principal.
+     * @param renewReq 
+     * @return RenewResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DomainRenew() : Unit {
-        val localVarResponse = cloudPostV1DomainRenewWithHttpInfo()
+    fun postV1DomainRenew(renewReq: RenewReq) : RenewResult {
+        val localVarResponse = postV1DomainRenewWithHttpInfo(renewReq = renewReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RenewResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -411,58 +458,65 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/domain/renew
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Extends a domain your org already owns and answers the updated record with its new expiry alongside what was paid.
+     * Extends a domain your org already owns and answers the updated record with its new expiry alongside what was paid.  Ownership is the gate: a name the caller&#39;s org does not hold is 404, so a renewal can never reach another tenant&#39;s domain.  The price is re-quoted at the CURRENT renewal rate rather than the one paid at purchase. If the registrar returns no renewal price the org&#39;s original price is charged instead, so a renewal is never accidentally free. The balance is authorized before the registrar is called and captured after it confirms — 402 when the prepaid balance cannot cover it, 503 when the deployment has no registrar credentials. Requires a validated principal.
+     * @param renewReq 
+     * @return ApiResponse<RenewResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DomainRenewWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DomainRenewRequestConfig()
+    fun postV1DomainRenewWithHttpInfo(renewReq: RenewReq) : ApiResponse<RenewResult?> {
+        val localVariableConfig = postV1DomainRenewRequestConfig(renewReq = renewReq)
 
-        return request<Unit, Unit>(
+        return request<RenewReq, RenewResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DomainRenew
+     * To obtain the request config of the operation postV1DomainRenew
      *
+     * @param renewReq 
      * @return RequestConfig
      */
-    fun cloudPostV1DomainRenewRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1DomainRenewRequestConfig(renewReq: RenewReq) : RequestConfig<RenewReq> {
+        val localVariableBody = renewReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/domain/renew",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/domain/transfer
-     * 
-     * 
-     * @return void
+     * Moves a domain you own at another registrar onto your org here, using its authCode, and answers the same record-plus-quote a purchase does.
+     * Moves a domain you own at another registrar onto your org here, using its authCode, and answers the same record-plus-quote a purchase does.  It is priced and charged exactly like a registration: authorize the org&#39;s prepaid balance, ask the registrar for the transfer, capture only after the registrar accepts. A name the registrar will not price is 409, an insufficient balance is 402, and a deployment with no registrar credentials is 503.  It requires a validated principal; the ownership record is written under that org as soon as the registrar ACCEPTS the request, which is not the same instant the transfer completes at the losing registrar. Unlike a registration this does not provision a zone, so the record carries this deployment&#39;s configured nameservers.
+     * @param transferReq 
+     * @return RegisterResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DomainTransfer() : Unit {
-        val localVarResponse = cloudPostV1DomainTransferWithHttpInfo()
+    fun postV1DomainTransfer(transferReq: TransferReq) : RegisterResult {
+        val localVarResponse = postV1DomainTransferWithHttpInfo(transferReq = transferReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -478,37 +532,42 @@ class DomainApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/domain/transfer
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Moves a domain you own at another registrar onto your org here, using its authCode, and answers the same record-plus-quote a purchase does.
+     * Moves a domain you own at another registrar onto your org here, using its authCode, and answers the same record-plus-quote a purchase does.  It is priced and charged exactly like a registration: authorize the org&#39;s prepaid balance, ask the registrar for the transfer, capture only after the registrar accepts. A name the registrar will not price is 409, an insufficient balance is 402, and a deployment with no registrar credentials is 503.  It requires a validated principal; the ownership record is written under that org as soon as the registrar ACCEPTS the request, which is not the same instant the transfer completes at the losing registrar. Unlike a registration this does not provision a zone, so the record carries this deployment&#39;s configured nameservers.
+     * @param transferReq 
+     * @return ApiResponse<RegisterResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DomainTransferWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DomainTransferRequestConfig()
+    fun postV1DomainTransferWithHttpInfo(transferReq: TransferReq) : ApiResponse<RegisterResult?> {
+        val localVariableConfig = postV1DomainTransferRequestConfig(transferReq = transferReq)
 
-        return request<Unit, Unit>(
+        return request<TransferReq, RegisterResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DomainTransfer
+     * To obtain the request config of the operation postV1DomainTransfer
      *
+     * @param transferReq 
      * @return RequestConfig
      */
-    fun cloudPostV1DomainTransferRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1DomainTransferRequestConfig(transferReq: TransferReq) : RequestConfig<TransferReq> {
+        val localVariableBody = transferReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/domain/transfer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

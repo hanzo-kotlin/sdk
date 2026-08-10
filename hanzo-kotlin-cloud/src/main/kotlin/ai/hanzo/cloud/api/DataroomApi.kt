@@ -19,6 +19,19 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.DataroomAddDocument
+import ai.hanzo.cloud.model.DataroomCreate
+import ai.hanzo.cloud.model.DataroomDocumentOne
+import ai.hanzo.cloud.model.DataroomDocuments
+import ai.hanzo.cloud.model.DataroomLinkCreate
+import ai.hanzo.cloud.model.DataroomLinkOne
+import ai.hanzo.cloud.model.DataroomLinkStats
+import ai.hanzo.cloud.model.DataroomLinks
+import ai.hanzo.cloud.model.DataroomMembership
+import ai.hanzo.cloud.model.DataroomRoomDetailOne
+import ai.hanzo.cloud.model.DataroomRoomOne
+import ai.hanzo.cloud.model.DataroomRooms
+import ai.hanzo.cloud.model.DataroomStats
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,22 +59,23 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/analytics/dataroom/{dataroomId}
-     * 
-     * 
-     * @param dataroomId 
-     * @return void
+     * Rolls up every share link pointing at one data room: session and page-view totals for the room, plus the per-page breakdown for each link beneath it.
+     * Rolls up every share link pointing at one data room: session and page-view totals for the room, plus the per-page breakdown for each link beneath it.  A room id outside the caller&#39;s own tenant store is not found. Only links that NAME the room are counted — a link created over a single document contributes nothing here, even when that document also sits in the room.
+     * @param dataroomId DataroomID is the room to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
+     * @return DataroomStats
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomAnalyticsDataroomByDataroomid(dataroomId: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId = dataroomId)
+    fun getV1DataroomAnalyticsDataroomByDataroomid(dataroomId: kotlin.String) : DataroomStats {
+        val localVarResponse = getV1DataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId = dataroomId)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomStats
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -77,61 +91,64 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/analytics/dataroom/{dataroomId}
-     * 
-     * 
-     * @param dataroomId 
-     * @return ApiResponse<Unit?>
+     * Rolls up every share link pointing at one data room: session and page-view totals for the room, plus the per-page breakdown for each link beneath it.
+     * Rolls up every share link pointing at one data room: session and page-view totals for the room, plus the per-page breakdown for each link beneath it.  A room id outside the caller&#39;s own tenant store is not found. Only links that NAME the room are counted — a link created over a single document contributes nothing here, even when that document also sits in the room.
+     * @param dataroomId DataroomID is the room to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
+     * @return ApiResponse<DataroomStats?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId = dataroomId)
+    fun getV1DataroomAnalyticsDataroomByDataroomidWithHttpInfo(dataroomId: kotlin.String) : ApiResponse<DataroomStats?> {
+        val localVariableConfig = getV1DataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId = dataroomId)
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomStats>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomAnalyticsDataroomByDataroomid
+     * To obtain the request config of the operation getV1DataroomAnalyticsDataroomByDataroomid
      *
-     * @param dataroomId 
+     * @param dataroomId DataroomID is the room to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DataroomAnalyticsDataroomByDataroomidRequestConfig(dataroomId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/analytics/dataroom/{dataroomId}".replace("{"+"dataroomId"+"}", encodeURIComponent(dataroomId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/analytics/link/{linkId}
-     * 
-     * 
-     * @param linkId 
-     * @return void
+     * Reports how one share link was actually read: total viewing sessions, total page views, and per page the view count, the summed dwell measure and its average.
+     * Reports how one share link was actually read: total viewing sessions, total page views, and per page the view count, the summed dwell measure and its average.  The link is resolved in the caller&#39;s OWN tenant store, so another org&#39;s link id is not found — knowing a link id is enough to OPEN the room it shares, and never enough to read who has been reading it.
+     * @param linkId LinkID is the link to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
+     * @return DataroomLinkStats
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomAnalyticsLinkByLinkid(linkId: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DataroomAnalyticsLinkByLinkidWithHttpInfo(linkId = linkId)
+    fun getV1DataroomAnalyticsLinkByLinkid(linkId: kotlin.String) : DataroomLinkStats {
+        val localVarResponse = getV1DataroomAnalyticsLinkByLinkidWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomLinkStats
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -147,60 +164,63 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/analytics/link/{linkId}
-     * 
-     * 
-     * @param linkId 
-     * @return ApiResponse<Unit?>
+     * Reports how one share link was actually read: total viewing sessions, total page views, and per page the view count, the summed dwell measure and its average.
+     * Reports how one share link was actually read: total viewing sessions, total page views, and per page the view count, the summed dwell measure and its average.  The link is resolved in the caller&#39;s OWN tenant store, so another org&#39;s link id is not found — knowing a link id is enough to OPEN the room it shares, and never enough to read who has been reading it.
+     * @param linkId LinkID is the link to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
+     * @return ApiResponse<DataroomLinkStats?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomAnalyticsLinkByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomAnalyticsLinkByLinkidRequestConfig(linkId = linkId)
+    fun getV1DataroomAnalyticsLinkByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<DataroomLinkStats?> {
+        val localVariableConfig = getV1DataroomAnalyticsLinkByLinkidRequestConfig(linkId = linkId)
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomLinkStats>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomAnalyticsLinkByLinkid
+     * To obtain the request config of the operation getV1DataroomAnalyticsLinkByLinkid
      *
-     * @param linkId 
+     * @param linkId LinkID is the link to report on. It is the path segment, resolved in the caller&#39;s own tenant store.
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomAnalyticsLinkByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DataroomAnalyticsLinkByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/analytics/link/{linkId}".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/datarooms
-     * 
-     * 
-     * @return void
+     * Returns every data room in the caller org&#39;s own store, newest first, with its short public id, name, description and timestamps.
+     * Returns every data room in the caller org&#39;s own store, newest first, with its short public id, name, description and timestamps.  Documents are not included — a room&#39;s contents come from reading the single room.
+     * @return DataroomRooms
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomDatarooms() : Unit {
-        val localVarResponse = cloudGetV1DataroomDataroomsWithHttpInfo()
+    fun getV1DataroomDatarooms() : DataroomRooms {
+        val localVarResponse = getV1DataroomDataroomsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomRooms
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -216,59 +236,62 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/datarooms
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Returns every data room in the caller org&#39;s own store, newest first, with its short public id, name, description and timestamps.
+     * Returns every data room in the caller org&#39;s own store, newest first, with its short public id, name, description and timestamps.  Documents are not included — a room&#39;s contents come from reading the single room.
+     * @return ApiResponse<DataroomRooms?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomDataroomsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomDataroomsRequestConfig()
+    fun getV1DataroomDataroomsWithHttpInfo() : ApiResponse<DataroomRooms?> {
+        val localVariableConfig = getV1DataroomDataroomsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomRooms>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomDatarooms
+     * To obtain the request config of the operation getV1DataroomDatarooms
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomDataroomsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DataroomDataroomsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/datarooms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/datarooms/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Reads one of the caller org&#39;s data rooms together with every document in it, each carrying its membership id and order index.
+     * Reads one of the caller org&#39;s data rooms together with every document in it, each carrying its membership id and order index.  The documents are sorted by that index with unordered ones last and creation time breaking ties — the SAME order a link&#39;s visitor sees, so this is what the room looks like from the outside. A room id outside the caller&#39;s own tenant store is not found.
+     * @param id ID is the room to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
+     * @return DataroomRoomDetailOne
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomDataroomsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DataroomDataroomsByIdWithHttpInfo(id = id)
+    fun getV1DataroomDataroomsById(id: kotlin.String) : DataroomRoomDetailOne {
+        val localVarResponse = getV1DataroomDataroomsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomRoomDetailOne
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -284,60 +307,63 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/datarooms/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Reads one of the caller org&#39;s data rooms together with every document in it, each carrying its membership id and order index.
+     * Reads one of the caller org&#39;s data rooms together with every document in it, each carrying its membership id and order index.  The documents are sorted by that index with unordered ones last and creation time breaking ties — the SAME order a link&#39;s visitor sees, so this is what the room looks like from the outside. A room id outside the caller&#39;s own tenant store is not found.
+     * @param id ID is the room to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
+     * @return ApiResponse<DataroomRoomDetailOne?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomDataroomsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomDataroomsByIdRequestConfig(id = id)
+    fun getV1DataroomDataroomsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DataroomRoomDetailOne?> {
+        val localVariableConfig = getV1DataroomDataroomsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomRoomDetailOne>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomDataroomsById
+     * To obtain the request config of the operation getV1DataroomDataroomsById
      *
-     * @param id 
+     * @param id ID is the room to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomDataroomsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DataroomDataroomsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/datarooms/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/documents
-     * 
-     * 
-     * @return void
+     * Returns every document in the caller org&#39;s own store, newest first — name, opaque storage key, content type, page count, size and timestamps.
+     * Returns every document in the caller org&#39;s own store, newest first — name, opaque storage key, content type, page count, size and timestamps.  Tenant isolation is the per-org store itself: there is one SQLite file per org and the org is never a parameter, so no input the caller controls can address another tenant&#39;s documents. Metadata only — the bytes come from the file route.
+     * @return DataroomDocuments
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomDocuments() : Unit {
-        val localVarResponse = cloudGetV1DataroomDocumentsWithHttpInfo()
+    fun getV1DataroomDocuments() : DataroomDocuments {
+        val localVarResponse = getV1DataroomDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomDocuments
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -353,59 +379,62 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/documents
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Returns every document in the caller org&#39;s own store, newest first — name, opaque storage key, content type, page count, size and timestamps.
+     * Returns every document in the caller org&#39;s own store, newest first — name, opaque storage key, content type, page count, size and timestamps.  Tenant isolation is the per-org store itself: there is one SQLite file per org and the org is never a parameter, so no input the caller controls can address another tenant&#39;s documents. Metadata only — the bytes come from the file route.
+     * @return ApiResponse<DataroomDocuments?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomDocumentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomDocumentsRequestConfig()
+    fun getV1DataroomDocumentsWithHttpInfo() : ApiResponse<DataroomDocuments?> {
+        val localVariableConfig = getV1DataroomDocumentsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomDocuments>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomDocuments
+     * To obtain the request config of the operation getV1DataroomDocuments
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DataroomDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/documents/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Reads one of the caller org&#39;s documents — its name, opaque storage key, content type, page count, size and timestamps.
+     * Reads one of the caller org&#39;s documents — its name, opaque storage key, content type, page count, size and timestamps.  The lookup runs in the caller&#39;s own tenant store, so an id belonging to another org is not found exactly like one that never existed. Metadata only: the bytes are a separate read.
+     * @param id ID is the document to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
+     * @return DataroomDocumentOne
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomDocumentsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DataroomDocumentsByIdWithHttpInfo(id = id)
+    fun getV1DataroomDocumentsById(id: kotlin.String) : DataroomDocumentOne {
+        val localVarResponse = getV1DataroomDocumentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomDocumentOne
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -421,47 +450,49 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/documents/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Reads one of the caller org&#39;s documents — its name, opaque storage key, content type, page count, size and timestamps.
+     * Reads one of the caller org&#39;s documents — its name, opaque storage key, content type, page count, size and timestamps.  The lookup runs in the caller&#39;s own tenant store, so an id belonging to another org is not found exactly like one that never existed. Metadata only: the bytes are a separate read.
+     * @param id ID is the document to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
+     * @return ApiResponse<DataroomDocumentOne?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomDocumentsByIdRequestConfig(id = id)
+    fun getV1DataroomDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DataroomDocumentOne?> {
+        val localVariableConfig = getV1DataroomDocumentsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomDocumentOne>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomDocumentsById
+     * To obtain the request config of the operation getV1DataroomDocumentsById
      *
-     * @param id 
+     * @param id ID is the document to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DataroomDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/documents/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/documents/{id}/file
-     * 
-     * 
+     * Download a document&#39;s bytes as its owner
+     * Streams the stored file back under its recorded content type, falling back to application/octet-stream when none was recorded.  Requires a validated principal; 403 without one, and the document is resolved in the caller&#39;s own tenant store, so another org&#39;s id is a 404. This is the OWNER&#39;s path and applies no link gate at all — the per-link password, email and download controls live on the viewer surface, not here. Bytes that cannot be fetched from object storage are 502, never a truncated or empty file.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -471,8 +502,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomDocumentsByIdFile(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DataroomDocumentsByIdFileWithHttpInfo(id = id)
+    fun getV1DataroomDocumentsByIdFile(id: kotlin.String) : Unit {
+        val localVarResponse = getV1DataroomDocumentsByIdFileWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -491,16 +522,16 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/documents/{id}/file
-     * 
-     * 
+     * Download a document&#39;s bytes as its owner
+     * Streams the stored file back under its recorded content type, falling back to application/octet-stream when none was recorded.  Requires a validated principal; 403 without one, and the document is resolved in the caller&#39;s own tenant store, so another org&#39;s id is a 404. This is the OWNER&#39;s path and applies no link gate at all — the per-link password, email and download controls live on the viewer surface, not here. Bytes that cannot be fetched from object storage are 502, never a truncated or empty file.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomDocumentsByIdFileWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomDocumentsByIdFileRequestConfig(id = id)
+    fun getV1DataroomDocumentsByIdFileWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DataroomDocumentsByIdFileRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -508,12 +539,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomDocumentsByIdFile
+     * To obtain the request config of the operation getV1DataroomDocumentsByIdFile
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomDocumentsByIdFileRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DataroomDocumentsByIdFileRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -523,15 +554,15 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/documents/{id}/file".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/health
-     * 
-     * 
+     * Liveness of the dataroom subsystem
+     * Answers {service, status} unconditionally — no principal, no tenant. It is registered BEFORE the bundle, the link index and the object-storage seam are wired, so it keeps answering when any of those fail and the subsystem degrades to health-only. That is the point, and the limit: a 200 here says the process is alive, never that a data room can be read or written.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -540,8 +571,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomHealth() : Unit {
-        val localVarResponse = cloudGetV1DataroomHealthWithHttpInfo()
+    fun getV1DataroomHealth() : Unit {
+        val localVarResponse = getV1DataroomHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -560,15 +591,15 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/health
-     * 
-     * 
+     * Liveness of the dataroom subsystem
+     * Answers {service, status} unconditionally — no principal, no tenant. It is registered BEFORE the bundle, the link index and the object-storage seam are wired, so it keeps answering when any of those fail and the subsystem degrades to health-only. That is the point, and the limit: a 200 here says the process is alive, never that a data room can be read or written.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomHealthRequestConfig()
+    fun getV1DataroomHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DataroomHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -576,11 +607,11 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomHealth
+     * To obtain the request config of the operation getV1DataroomHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1DataroomHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -590,28 +621,29 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/links
-     * 
-     * 
-     * @return void
+     * Returns every live share link in the caller org&#39;s own store, newest first, with the controls a visitor will meet: whether an address is required, whether a password is set, the allow and deny lists, whether download is permitted, and when the link expires.
+     * Returns every live share link in the caller org&#39;s own store, newest first, with the controls a visitor will meet: whether an address is required, whether a password is set, the allow and deny lists, whether download is permitted, and when the link expires.  Archived links are omitted entirely. A link reports only THAT a password is set — the stored form is a bcrypt hash and no route returns it.
+     * @return DataroomLinks
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomLinks() : Unit {
-        val localVarResponse = cloudGetV1DataroomLinksWithHttpInfo()
+    fun getV1DataroomLinks() : DataroomLinks {
+        val localVarResponse = getV1DataroomLinksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomLinks
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -627,45 +659,47 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/links
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Returns every live share link in the caller org&#39;s own store, newest first, with the controls a visitor will meet: whether an address is required, whether a password is set, the allow and deny lists, whether download is permitted, and when the link expires.
+     * Returns every live share link in the caller org&#39;s own store, newest first, with the controls a visitor will meet: whether an address is required, whether a password is set, the allow and deny lists, whether download is permitted, and when the link expires.  Archived links are omitted entirely. A link reports only THAT a password is set — the stored form is a bcrypt hash and no route returns it.
+     * @return ApiResponse<DataroomLinks?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomLinksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomLinksRequestConfig()
+    fun getV1DataroomLinksWithHttpInfo() : ApiResponse<DataroomLinks?> {
+        val localVariableConfig = getV1DataroomLinksRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, DataroomLinks>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomLinks
+     * To obtain the request config of the operation getV1DataroomLinks
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomLinksRequestConfig() : RequestConfig<Unit> {
+    fun getV1DataroomLinksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/dataroom/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/view/{linkId}
-     * 
-     * 
+     * What a share link&#39;s visitor sees before authenticating
+     * Answers the pre-auth face of a link to anyone holding its id: name and type, which gates apply (whether an address is required, whether a password is set), whether download is permitted, whether it has expired, and the name and description of the room behind it — or, for a single-document link, that document&#39;s name and page count.  No principal is involved: the owning org is resolved from the link id through dataroom&#39;s one cross-tenant routing table, and an unknown or archived link is a 404.  It is metadata only — a room&#39;s document list and every file stay behind the authenticate step. An expired link is REPORTED as expired here rather than refused, so a visitor learns why the next step will fail; nothing about the password beyond its existence is disclosed.
      * @param linkId 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -675,8 +709,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomViewByLinkid(linkId: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DataroomViewByLinkidWithHttpInfo(linkId = linkId)
+    fun getV1DataroomViewByLinkid(linkId: kotlin.String) : Unit {
+        val localVarResponse = getV1DataroomViewByLinkidWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -695,16 +729,16 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/view/{linkId}
-     * 
-     * 
+     * What a share link&#39;s visitor sees before authenticating
+     * Answers the pre-auth face of a link to anyone holding its id: name and type, which gates apply (whether an address is required, whether a password is set), whether download is permitted, whether it has expired, and the name and description of the room behind it — or, for a single-document link, that document&#39;s name and page count.  No principal is involved: the owning org is resolved from the link id through dataroom&#39;s one cross-tenant routing table, and an unknown or archived link is a 404.  It is metadata only — a room&#39;s document list and every file stay behind the authenticate step. An expired link is REPORTED as expired here rather than refused, so a visitor learns why the next step will fail; nothing about the password beyond its existence is disclosed.
      * @param linkId 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomViewByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomViewByLinkidRequestConfig(linkId = linkId)
+    fun getV1DataroomViewByLinkidWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DataroomViewByLinkidRequestConfig(linkId = linkId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -712,12 +746,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomViewByLinkid
+     * To obtain the request config of the operation getV1DataroomViewByLinkid
      *
      * @param linkId 
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomViewByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DataroomViewByLinkidRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -727,15 +761,15 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dataroom/view/{linkId}/document/{documentId}/file
-     * 
-     * 
+     * Read a document&#39;s bytes as an authorised link visitor
+     * Streams a document&#39;s bytes under its recorded content type to a visitor holding an open viewing session.  No principal: &#x60;?viewId&#x3D;&#x60; from the authenticate step is the authorisation and must belong to this link, or the call is 403 — holding the link id alone gets no bytes. The document must be reachable THROUGH this link (a member of the room the link opens, or the single document the link names), so a visitor cannot walk to an unrelated document by guessing an id; anything else is a 404, as is an unknown or archived link. Bytes that cannot be fetched from object storage are 502.  &#x60;?download&#x3D;1&#x60; additionally requires the link&#39;s &#x60;allowDownload&#x60; and is 403 when the owner did not permit it. Read that flag precisely: it gates the DOWNLOAD intent, not access to the bytes — without the parameter an authorised visitor is served the file for in-place viewing whether or not downloads are allowed.
      * @param linkId 
      * @param documentId 
      * @return void
@@ -746,8 +780,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DataroomViewByLinkidDocumentByDocumentidFile(linkId: kotlin.String, documentId: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId = linkId, documentId = documentId)
+    fun getV1DataroomViewByLinkidDocumentByDocumentidFile(linkId: kotlin.String, documentId: kotlin.String) : Unit {
+        val localVarResponse = getV1DataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId = linkId, documentId = documentId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -766,8 +800,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/dataroom/view/{linkId}/document/{documentId}/file
-     * 
-     * 
+     * Read a document&#39;s bytes as an authorised link visitor
+     * Streams a document&#39;s bytes under its recorded content type to a visitor holding an open viewing session.  No principal: &#x60;?viewId&#x3D;&#x60; from the authenticate step is the authorisation and must belong to this link, or the call is 403 — holding the link id alone gets no bytes. The document must be reachable THROUGH this link (a member of the room the link opens, or the single document the link names), so a visitor cannot walk to an unrelated document by guessing an id; anything else is a 404, as is an unknown or archived link. Bytes that cannot be fetched from object storage are 502.  &#x60;?download&#x3D;1&#x60; additionally requires the link&#39;s &#x60;allowDownload&#x60; and is 403 when the owner did not permit it. Read that flag precisely: it gates the DOWNLOAD intent, not access to the bytes — without the parameter an authorised visitor is served the file for in-place viewing whether or not downloads are allowed.
      * @param linkId 
      * @param documentId 
      * @return ApiResponse<Unit?>
@@ -775,8 +809,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId: kotlin.String, documentId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId = linkId, documentId = documentId)
+    fun getV1DataroomViewByLinkidDocumentByDocumentidFileWithHttpInfo(linkId: kotlin.String, documentId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId = linkId, documentId = documentId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -784,13 +818,13 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DataroomViewByLinkidDocumentByDocumentidFile
+     * To obtain the request config of the operation getV1DataroomViewByLinkidDocumentByDocumentidFile
      *
      * @param linkId 
      * @param documentId 
      * @return RequestConfig
      */
-    fun cloudGetV1DataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId: kotlin.String, documentId: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DataroomViewByLinkidDocumentByDocumentidFileRequestConfig(linkId: kotlin.String, documentId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -800,28 +834,30 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}/document/{documentId}/file".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())).replace("{"+"documentId"+"}", encodeURIComponent(documentId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/dataroom/datarooms
-     * 
-     * 
-     * @return void
+     * Opens a new data room for the caller org and answers with it, including the short public id it is addressed by.
+     * Opens a new data room for the caller org and answers with it, including the short public id it is addressed by.  &#x60;name&#x60; is required; without it the call is refused and the tenant store is untouched, because a dispatch answering 4xx rolls its transaction back. A new room holds no documents and is reachable by NOBODY until a share link is created over it — opening a room and granting access are two separate acts, so a room cannot leak by existing.
+     * @param dataroomCreate 
+     * @return DataroomRoomOne
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DataroomDatarooms() : Unit {
-        val localVarResponse = cloudPostV1DataroomDataroomsWithHttpInfo()
+    fun postV1DataroomDatarooms(dataroomCreate: DataroomCreate) : DataroomRoomOne {
+        val localVarResponse = postV1DataroomDataroomsWithHttpInfo(dataroomCreate = dataroomCreate)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomRoomOne
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -837,59 +873,66 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/dataroom/datarooms
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Opens a new data room for the caller org and answers with it, including the short public id it is addressed by.
+     * Opens a new data room for the caller org and answers with it, including the short public id it is addressed by.  &#x60;name&#x60; is required; without it the call is refused and the tenant store is untouched, because a dispatch answering 4xx rolls its transaction back. A new room holds no documents and is reachable by NOBODY until a share link is created over it — opening a room and granting access are two separate acts, so a room cannot leak by existing.
+     * @param dataroomCreate 
+     * @return ApiResponse<DataroomRoomOne?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DataroomDataroomsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DataroomDataroomsRequestConfig()
+    fun postV1DataroomDataroomsWithHttpInfo(dataroomCreate: DataroomCreate) : ApiResponse<DataroomRoomOne?> {
+        val localVariableConfig = postV1DataroomDataroomsRequestConfig(dataroomCreate = dataroomCreate)
 
-        return request<Unit, Unit>(
+        return request<DataroomCreate, DataroomRoomOne>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DataroomDatarooms
+     * To obtain the request config of the operation postV1DataroomDatarooms
      *
+     * @param dataroomCreate 
      * @return RequestConfig
      */
-    fun cloudPostV1DataroomDataroomsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1DataroomDataroomsRequestConfig(dataroomCreate: DataroomCreate) : RequestConfig<DataroomCreate> {
+        val localVariableBody = dataroomCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/dataroom/datarooms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/dataroom/datarooms/{id}/documents
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Puts an already-uploaded document into one of the caller org&#39;s data rooms and answers with the new membership id.
+     * Puts an already-uploaded document into one of the caller org&#39;s data rooms and answers with the new membership id.  It ATTACHES, it never uploads: the bytes must already be stored, so the usual order is upload the document, then add it to the room. Both the room and the document must exist in the caller&#39;s own store — either missing is not found — and a document already in the room is refused as a conflict rather than duplicated.
+     * @param id ID is the room to add to. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
+     * @param dataroomAddDocument 
+     * @return DataroomMembership
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DataroomDataroomsByIdDocuments(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1DataroomDataroomsByIdDocumentsWithHttpInfo(id = id)
+    fun postV1DataroomDataroomsByIdDocuments(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : DataroomMembership {
+        val localVarResponse = postV1DataroomDataroomsByIdDocumentsWithHttpInfo(id = id, dataroomAddDocument = dataroomAddDocument)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomMembership
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -905,47 +948,52 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/dataroom/datarooms/{id}/documents
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Puts an already-uploaded document into one of the caller org&#39;s data rooms and answers with the new membership id.
+     * Puts an already-uploaded document into one of the caller org&#39;s data rooms and answers with the new membership id.  It ATTACHES, it never uploads: the bytes must already be stored, so the usual order is upload the document, then add it to the room. Both the room and the document must exist in the caller&#39;s own store — either missing is not found — and a document already in the room is refused as a conflict rather than duplicated.
+     * @param id ID is the room to add to. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
+     * @param dataroomAddDocument 
+     * @return ApiResponse<DataroomMembership?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DataroomDataroomsByIdDocumentsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DataroomDataroomsByIdDocumentsRequestConfig(id = id)
+    fun postV1DataroomDataroomsByIdDocumentsWithHttpInfo(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : ApiResponse<DataroomMembership?> {
+        val localVariableConfig = postV1DataroomDataroomsByIdDocumentsRequestConfig(id = id, dataroomAddDocument = dataroomAddDocument)
 
-        return request<Unit, Unit>(
+        return request<DataroomAddDocument, DataroomMembership>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DataroomDataroomsByIdDocuments
+     * To obtain the request config of the operation postV1DataroomDataroomsByIdDocuments
      *
-     * @param id 
+     * @param id ID is the room to add to. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
+     * @param dataroomAddDocument 
      * @return RequestConfig
      */
-    fun cloudPostV1DataroomDataroomsByIdDocumentsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1DataroomDataroomsByIdDocumentsRequestConfig(id: kotlin.String, dataroomAddDocument: DataroomAddDocument) : RequestConfig<DataroomAddDocument> {
+        val localVariableBody = dataroomAddDocument
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/dataroom/datarooms/{id}/documents".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/dataroom/documents
-     * 
-     * 
+     * Upload a document&#39;s bytes and record it
+     * Takes the file ITSELF as the raw request body — not a JSON envelope, not multipart — stores it on the object-storage seam, and records the metadata row, answering with the new document. &#x60;?name&#x3D;&#x60; names it (default \&quot;document\&quot;), the request&#39;s Content-Type becomes the recorded mime type, and &#x60;?numPages&#x3D;&#x60; is optional.  Requires a validated principal; 403 without one. An empty body is 400 and anything over 64 MiB is 413 — a data room holds decks and PDFs, not a media library.  The storage key is 128 random bits under the tenant&#39;s own key prefix, minted before the bytes are written: if the system&#39;s randomness is unavailable the upload fails 500 rather than fall back to a predictable key that could overwrite another document&#39;s bytes. A storage write that fails is 502 and no metadata row is recorded, so a document never exists without its file.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -954,8 +1002,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DataroomDocuments() : Unit {
-        val localVarResponse = cloudPostV1DataroomDocumentsWithHttpInfo()
+    fun postV1DataroomDocuments() : Unit {
+        val localVarResponse = postV1DataroomDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -974,15 +1022,15 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/dataroom/documents
-     * 
-     * 
+     * Upload a document&#39;s bytes and record it
+     * Takes the file ITSELF as the raw request body — not a JSON envelope, not multipart — stores it on the object-storage seam, and records the metadata row, answering with the new document. &#x60;?name&#x3D;&#x60; names it (default \&quot;document\&quot;), the request&#39;s Content-Type becomes the recorded mime type, and &#x60;?numPages&#x3D;&#x60; is optional.  Requires a validated principal; 403 without one. An empty body is 400 and anything over 64 MiB is 413 — a data room holds decks and PDFs, not a media library.  The storage key is 128 random bits under the tenant&#39;s own key prefix, minted before the bytes are written: if the system&#39;s randomness is unavailable the upload fails 500 rather than fall back to a predictable key that could overwrite another document&#39;s bytes. A storage write that fails is 502 and no metadata row is recorded, so a document never exists without its file.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DataroomDocumentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DataroomDocumentsRequestConfig()
+    fun postV1DataroomDocumentsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DataroomDocumentsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -990,11 +1038,11 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DataroomDocuments
+     * To obtain the request config of the operation postV1DataroomDocuments
      *
      * @return RequestConfig
      */
-    fun cloudPostV1DataroomDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun postV1DataroomDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1004,28 +1052,30 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/dataroom/links
-     * 
-     * 
-     * @return void
+     * Grants access: it mints a public share link over one data room (&#x60;dataroomId&#x60;) or one document (&#x60;documentId&#x60;) — one of the two is required — and answers with the link, whose &#x60;id&#x60; is the token a visitor opens it with.
+     * Grants access: it mints a public share link over one data room (&#x60;dataroomId&#x60;) or one document (&#x60;documentId&#x60;) — one of the two is required — and answers with the link, whose &#x60;id&#x60; is the token a visitor opens it with.  This is how a party is let in. The controls are declared HERE and enforced on the viewer surface: &#x60;password&#x60; is hashed with bcrypt before storage and is never readable back, &#x60;emailProtected&#x60; (on by default) makes a visitor state an address, &#x60;allowList&#x60;/&#x60;denyList&#x60; narrow which addresses pass, &#x60;allowDownload&#x60; (off by default) governs downloads, and &#x60;expiresAt&#x60; closes the link. The target room or document must exist in the caller&#39;s own store or it is not found.  Creating a link also writes dataroom&#39;s ONE cross-tenant row: the link id to owning org mapping an anonymous visitor is routed through. That write is part of the operation — if it fails the call is 500 — so a link that no visitor could open is never handed back as usable.  The address a visitor later states is recorded UNVERIFIED, so a link gated only by email is openable by anyone the link reaches. Use a password for a link that must not travel.
+     * @param dataroomLinkCreate 
+     * @return DataroomLinkOne
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DataroomLinks() : Unit {
-        val localVarResponse = cloudPostV1DataroomLinksWithHttpInfo()
+    fun postV1DataroomLinks(dataroomLinkCreate: DataroomLinkCreate) : DataroomLinkOne {
+        val localVarResponse = postV1DataroomLinksWithHttpInfo(dataroomLinkCreate = dataroomLinkCreate)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DataroomLinkOne
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1041,45 +1091,50 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/dataroom/links
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Grants access: it mints a public share link over one data room (&#x60;dataroomId&#x60;) or one document (&#x60;documentId&#x60;) — one of the two is required — and answers with the link, whose &#x60;id&#x60; is the token a visitor opens it with.
+     * Grants access: it mints a public share link over one data room (&#x60;dataroomId&#x60;) or one document (&#x60;documentId&#x60;) — one of the two is required — and answers with the link, whose &#x60;id&#x60; is the token a visitor opens it with.  This is how a party is let in. The controls are declared HERE and enforced on the viewer surface: &#x60;password&#x60; is hashed with bcrypt before storage and is never readable back, &#x60;emailProtected&#x60; (on by default) makes a visitor state an address, &#x60;allowList&#x60;/&#x60;denyList&#x60; narrow which addresses pass, &#x60;allowDownload&#x60; (off by default) governs downloads, and &#x60;expiresAt&#x60; closes the link. The target room or document must exist in the caller&#39;s own store or it is not found.  Creating a link also writes dataroom&#39;s ONE cross-tenant row: the link id to owning org mapping an anonymous visitor is routed through. That write is part of the operation — if it fails the call is 500 — so a link that no visitor could open is never handed back as usable.  The address a visitor later states is recorded UNVERIFIED, so a link gated only by email is openable by anyone the link reaches. Use a password for a link that must not travel.
+     * @param dataroomLinkCreate 
+     * @return ApiResponse<DataroomLinkOne?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DataroomLinksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DataroomLinksRequestConfig()
+    fun postV1DataroomLinksWithHttpInfo(dataroomLinkCreate: DataroomLinkCreate) : ApiResponse<DataroomLinkOne?> {
+        val localVariableConfig = postV1DataroomLinksRequestConfig(dataroomLinkCreate = dataroomLinkCreate)
 
-        return request<Unit, Unit>(
+        return request<DataroomLinkCreate, DataroomLinkOne>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DataroomLinks
+     * To obtain the request config of the operation postV1DataroomLinks
      *
+     * @param dataroomLinkCreate 
      * @return RequestConfig
      */
-    fun cloudPostV1DataroomLinksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1DataroomLinksRequestConfig(dataroomLinkCreate: DataroomLinkCreate) : RequestConfig<DataroomLinkCreate> {
+        val localVariableBody = dataroomLinkCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/dataroom/links",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/dataroom/view/{linkId}/authenticate
-     * 
-     * 
+     * Pass a share link&#39;s gates and open a viewing session
+     * Clears the link&#39;s access controls and answers with the viewing session — a &#x60;viewId&#x60;, whether download is permitted, and the documents behind the link — which every later viewer call is authorised by.  No principal: the visitor is whoever holds the link id, and the org is resolved from it. The gates run in a fixed order and each is a flat refusal, never a hint. An archived or unknown link is 404 and an expired one 403. A missing address on an email-protected link is 401. An address on the deny list is 403, checked BEFORE the allow list so deny always wins. An address the allow list does not admit is 403 — an EMPTY allow list admits everyone, so a link with no list enforces the email gate alone. A wrong or absent password is 401, decided against the stored bcrypt hash.  The address is taken as stated and recorded UNVERIFIED: it names a viewer for analytics and repeat visits from it reuse one viewer record, but it proves nothing about who is on the other end. A link gated only by email is openable by anyone the link reaches.
      * @param linkId 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1089,8 +1144,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DataroomViewByLinkidAuthenticate(linkId: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1DataroomViewByLinkidAuthenticateWithHttpInfo(linkId = linkId)
+    fun postV1DataroomViewByLinkidAuthenticate(linkId: kotlin.String) : Unit {
+        val localVarResponse = postV1DataroomViewByLinkidAuthenticateWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1109,16 +1164,16 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/dataroom/view/{linkId}/authenticate
-     * 
-     * 
+     * Pass a share link&#39;s gates and open a viewing session
+     * Clears the link&#39;s access controls and answers with the viewing session — a &#x60;viewId&#x60;, whether download is permitted, and the documents behind the link — which every later viewer call is authorised by.  No principal: the visitor is whoever holds the link id, and the org is resolved from it. The gates run in a fixed order and each is a flat refusal, never a hint. An archived or unknown link is 404 and an expired one 403. A missing address on an email-protected link is 401. An address on the deny list is 403, checked BEFORE the allow list so deny always wins. An address the allow list does not admit is 403 — an EMPTY allow list admits everyone, so a link with no list enforces the email gate alone. A wrong or absent password is 401, decided against the stored bcrypt hash.  The address is taken as stated and recorded UNVERIFIED: it names a viewer for analytics and repeat visits from it reuse one viewer record, but it proves nothing about who is on the other end. A link gated only by email is openable by anyone the link reaches.
      * @param linkId 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DataroomViewByLinkidAuthenticateWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DataroomViewByLinkidAuthenticateRequestConfig(linkId = linkId)
+    fun postV1DataroomViewByLinkidAuthenticateWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DataroomViewByLinkidAuthenticateRequestConfig(linkId = linkId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1126,12 +1181,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DataroomViewByLinkidAuthenticate
+     * To obtain the request config of the operation postV1DataroomViewByLinkidAuthenticate
      *
      * @param linkId 
      * @return RequestConfig
      */
-    fun cloudPostV1DataroomViewByLinkidAuthenticateRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun postV1DataroomViewByLinkidAuthenticateRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1141,15 +1196,15 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}/authenticate".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/dataroom/view/{linkId}/pageview
-     * 
-     * 
+     * Record one page-view against an open viewing session
+     * Appends a single per-page analytics event — {viewId, pageNumber, documentId, versionNumber, duration} — and answers with its id. These events are what the owner&#39;s analytics count.  No principal: the &#x60;viewId&#x60; from the authenticate step IS the authorisation, and it must belong to THIS link or the call is 404, so a session opened on one link cannot write events onto another. &#x60;pageNumber&#x60; is required (400 without it); &#x60;documentId&#x60; falls back to the document the session was opened on, and &#x60;duration&#x60; is the caller&#39;s own dwell measure, summed per page by analytics.  Events are additive: the same page reported twice is two views, which is the metric&#39;s whole point.
      * @param linkId 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1159,8 +1214,8 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DataroomViewByLinkidPageview(linkId: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1DataroomViewByLinkidPageviewWithHttpInfo(linkId = linkId)
+    fun postV1DataroomViewByLinkidPageview(linkId: kotlin.String) : Unit {
+        val localVarResponse = postV1DataroomViewByLinkidPageviewWithHttpInfo(linkId = linkId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1179,16 +1234,16 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/dataroom/view/{linkId}/pageview
-     * 
-     * 
+     * Record one page-view against an open viewing session
+     * Appends a single per-page analytics event — {viewId, pageNumber, documentId, versionNumber, duration} — and answers with its id. These events are what the owner&#39;s analytics count.  No principal: the &#x60;viewId&#x60; from the authenticate step IS the authorisation, and it must belong to THIS link or the call is 404, so a session opened on one link cannot write events onto another. &#x60;pageNumber&#x60; is required (400 without it); &#x60;documentId&#x60; falls back to the document the session was opened on, and &#x60;duration&#x60; is the caller&#39;s own dwell measure, summed per page by analytics.  Events are additive: the same page reported twice is two views, which is the metric&#39;s whole point.
      * @param linkId 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DataroomViewByLinkidPageviewWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DataroomViewByLinkidPageviewRequestConfig(linkId = linkId)
+    fun postV1DataroomViewByLinkidPageviewWithHttpInfo(linkId: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DataroomViewByLinkidPageviewRequestConfig(linkId = linkId)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1196,12 +1251,12 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DataroomViewByLinkidPageview
+     * To obtain the request config of the operation postV1DataroomViewByLinkidPageview
      *
      * @param linkId 
      * @return RequestConfig
      */
-    fun cloudPostV1DataroomViewByLinkidPageviewRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
+    fun postV1DataroomViewByLinkidPageviewRequestConfig(linkId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1211,7 +1266,7 @@ class DataroomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/dataroom/view/{linkId}/pageview".replace("{"+"linkId"+"}", encodeURIComponent(linkId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

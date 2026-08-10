@@ -19,32 +19,34 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudBlobJSON
-import ai.hanzo.cloud.model.CloudCommitsJSON
-import ai.hanzo.cloud.model.CloudCreateReq
-import ai.hanzo.cloud.model.CloudFilesJSON
-import ai.hanzo.cloud.model.CloudGcOut
-import ai.hanzo.cloud.model.CloudKeyList
-import ai.hanzo.cloud.model.CloudKeyView
-import ai.hanzo.cloud.model.CloudMirrorList
-import ai.hanzo.cloud.model.CloudMirrorReq
-import ai.hanzo.cloud.model.CloudMirrorTargetReq
-import ai.hanzo.cloud.model.CloudMirrorTargetView
-import ai.hanzo.cloud.model.CloudPatchIn
-import ai.hanzo.cloud.model.CloudPushEvent
-import ai.hanzo.cloud.model.CloudPushReq
-import ai.hanzo.cloud.model.CloudPushResp
-import ai.hanzo.cloud.model.CloudReadmeJSON
-import ai.hanzo.cloud.model.CloudRefsJSON
-import ai.hanzo.cloud.model.CloudRegisterKeyReq
-import ai.hanzo.cloud.model.CloudRepoList
-import ai.hanzo.cloud.model.CloudRepoView
-import ai.hanzo.cloud.model.CloudSubscribeReq
-import ai.hanzo.cloud.model.CloudSubscriptionList
-import ai.hanzo.cloud.model.CloudSubscriptionView
-import ai.hanzo.cloud.model.CloudTreeJSON
-import ai.hanzo.cloud.model.CloudUsageView
-import ai.hanzo.cloud.model.CloudZapProcReq
+import ai.hanzo.cloud.model.BlobJSON
+import ai.hanzo.cloud.model.CommitsJSON
+import ai.hanzo.cloud.model.CreateReq
+import ai.hanzo.cloud.model.FilesJSON
+import ai.hanzo.cloud.model.GcOut
+import ai.hanzo.cloud.model.KeyList
+import ai.hanzo.cloud.model.KeyView
+import ai.hanzo.cloud.model.MirrorList
+import ai.hanzo.cloud.model.MirrorReq
+import ai.hanzo.cloud.model.MirrorTargetReq
+import ai.hanzo.cloud.model.MirrorTargetView
+import ai.hanzo.cloud.model.OpenReq
+import ai.hanzo.cloud.model.PatchIn
+import ai.hanzo.cloud.model.PullList
+import ai.hanzo.cloud.model.PullView
+import ai.hanzo.cloud.model.PushReq
+import ai.hanzo.cloud.model.PushResp
+import ai.hanzo.cloud.model.ReadmeJSON
+import ai.hanzo.cloud.model.RefsJSON
+import ai.hanzo.cloud.model.RegisterKeyReq
+import ai.hanzo.cloud.model.RepoList
+import ai.hanzo.cloud.model.RepoView
+import ai.hanzo.cloud.model.SubscribeReq
+import ai.hanzo.cloud.model.SubscriptionList
+import ai.hanzo.cloud.model.SubscriptionView
+import ai.hanzo.cloud.model.TreeJSON
+import ai.hanzo.cloud.model.UsageView
+import ai.hanzo.cloud.model.ZapProcReq
 
 import com.google.gson.annotations.SerializedName
 
@@ -75,20 +77,19 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes a registered SSH key, scoped to the caller&#39;s org: an org can only delete its own, and a key id it does not own is not found.
      * Removes a registered SSH key, scoped to the caller&#39;s org: an org can only delete its own, and a key id it does not own is not found. Answers 204 with no body. Once removed the key no longer authenticates any SSH git access.
      * @param id ID is the key&#39;s identifier (\&quot;gitkey_…\&quot;), from the :id path segment.
-     * @return kotlin.Any
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1GitKeysId(id: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudDeleteV1GitKeysIdWithHttpInfo(id = id)
+    fun deleteV1GitKeysById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1GitKeysByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -107,38 +108,36 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes a registered SSH key, scoped to the caller&#39;s org: an org can only delete its own, and a key id it does not own is not found.
      * Removes a registered SSH key, scoped to the caller&#39;s org: an org can only delete its own, and a key id it does not own is not found. Answers 204 with no body. Once removed the key no longer authenticates any SSH git access.
      * @param id ID is the key&#39;s identifier (\&quot;gitkey_…\&quot;), from the :id path segment.
-     * @return ApiResponse<kotlin.Any?>
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1GitKeysIdWithHttpInfo(id: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudDeleteV1GitKeysIdRequestConfig(id = id)
+    fun deleteV1GitKeysByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1GitKeysByIdRequestConfig(id = id)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1GitKeysId
+     * To obtain the request config of the operation deleteV1GitKeysById
      *
      * @param id ID is the key&#39;s identifier (\&quot;gitkey_…\&quot;), from the :id path segment.
      * @return RequestConfig
      */
-    fun cloudDeleteV1GitKeysIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1GitKeysByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/git/keys/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -148,20 +147,19 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes a repo&#39;s metadata and purges its storage.
      * Removes a repo&#39;s metadata and purges its storage. Answers 204 with no body. The metadata row is the source of truth for existence, so a storage purge that fails is logged and the delete still succeeds — and a second call is a 404, not a second delete.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return kotlin.Any
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1GitReposName(name: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudDeleteV1GitReposNameWithHttpInfo(name = name)
+    fun deleteV1GitReposByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1GitReposByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -180,38 +178,36 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes a repo&#39;s metadata and purges its storage.
      * Removes a repo&#39;s metadata and purges its storage. Answers 204 with no body. The metadata row is the source of truth for existence, so a storage purge that fails is logged and the delete still succeeds — and a second call is a 404, not a second delete.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<kotlin.Any?>
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1GitReposNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudDeleteV1GitReposNameRequestConfig(name = name)
+    fun deleteV1GitReposByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1GitReposByNameRequestConfig(name = name)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1GitReposName
+     * To obtain the request config of the operation deleteV1GitReposByName
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun cloudDeleteV1GitReposNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1GitReposByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/git/repos/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -222,20 +218,19 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes one outbound mirror target; later pushes stop being forwarded to it. Answers 204 with no body. Nothing is done to the downstream remote itself — only this repo&#39;s intent to push there is dropped.
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
-     * @return kotlin.Any
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1GitReposNameMirrorsId(name: kotlin.String, id: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudDeleteV1GitReposNameMirrorsIdWithHttpInfo(name = name, id = id)
+    fun deleteV1GitReposByNameMirrorsById(name: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1GitReposByNameMirrorsByIdWithHttpInfo(name = name, id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -255,39 +250,37 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes one outbound mirror target; later pushes stop being forwarded to it. Answers 204 with no body. Nothing is done to the downstream remote itself — only this repo&#39;s intent to push there is dropped.
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
-     * @return ApiResponse<kotlin.Any?>
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1GitReposNameMirrorsIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudDeleteV1GitReposNameMirrorsIdRequestConfig(name = name, id = id)
+    fun deleteV1GitReposByNameMirrorsByIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1GitReposByNameMirrorsByIdRequestConfig(name = name, id = id)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1GitReposNameMirrorsId
+     * To obtain the request config of the operation deleteV1GitReposByNameMirrorsById
      *
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
      * @return RequestConfig
      */
-    fun cloudDeleteV1GitReposNameMirrorsIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1GitReposByNameMirrorsByIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/git/repos/{name}/mirrors/{id}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -298,20 +291,19 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes one Slack subscription from a repo; the notifier stops posting that repo&#39;s events to that channel. Answers 204 with no body. An id that is not this repo&#39;s subscription is not found.
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
-     * @return kotlin.Any
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1GitReposNameSubscriptionsId(name: kotlin.String, id: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudDeleteV1GitReposNameSubscriptionsIdWithHttpInfo(name = name, id = id)
+    fun deleteV1GitReposByNameSubscriptionsById(name: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1GitReposByNameSubscriptionsByIdWithHttpInfo(name = name, id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -331,47 +323,45 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Removes one Slack subscription from a repo; the notifier stops posting that repo&#39;s events to that channel. Answers 204 with no body. An id that is not this repo&#39;s subscription is not found.
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
-     * @return ApiResponse<kotlin.Any?>
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1GitReposNameSubscriptionsIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudDeleteV1GitReposNameSubscriptionsIdRequestConfig(name = name, id = id)
+    fun deleteV1GitReposByNameSubscriptionsByIdWithHttpInfo(name: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1GitReposByNameSubscriptionsByIdRequestConfig(name = name, id = id)
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1GitReposNameSubscriptionsId
+     * To obtain the request config of the operation deleteV1GitReposByNameSubscriptionsById
      *
      * @param name Name is the repo, from the :name path segment.
      * @param id ID is the row to remove, from the :id path segment.
      * @return RequestConfig
      */
-    fun cloudDeleteV1GitReposNameSubscriptionsIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1GitReposByNameSubscriptionsByIdRequestConfig(name: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/git/repos/{name}/subscriptions/{id}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/git/{org}/{project}/{repo}/info/refs
-     * 
-     * 
+     * Advertise a repository&#39;s refs to a git client
+     * The ref-advertisement phase of git&#39;s smart-HTTP protocol — the first request a clone, a fetch and a push all make. &#x60;?service&#x3D;&#x60; selects which: &#x60;git-upload-pack&#x60; advertises for a fetch, &#x60;git-receive-pack&#x60; for a push, and any other value is 400.  ANONYMOUS ONLY FOR FETCH, AND ONLY ON A PUBLIC REPOSITORY. The push advertisement always requires an authenticated org, and where a path org is present it must equal the authenticated one. A private repository reached without its org is 404, indistinguishable from one that does not exist. Addressed under the API prefix, with the PROJECT as a middle path segment: project scope otherwise rides a header a git client cannot send, so this path is the only usable remote for a project-scoped repository. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param project 
      * @param repo 
@@ -383,8 +373,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitByOrgByProjectByRepoInfoRefs(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1GitByOrgByProjectByRepoInfoRefsWithHttpInfo(org = org, project = project, repo = repo)
+    fun getV1GitByOrgByProjectByRepoInfoRefs(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : Unit {
+        val localVarResponse = getV1GitByOrgByProjectByRepoInfoRefsWithHttpInfo(org = org, project = project, repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -403,8 +393,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/git/{org}/{project}/{repo}/info/refs
-     * 
-     * 
+     * Advertise a repository&#39;s refs to a git client
+     * The ref-advertisement phase of git&#39;s smart-HTTP protocol — the first request a clone, a fetch and a push all make. &#x60;?service&#x3D;&#x60; selects which: &#x60;git-upload-pack&#x60; advertises for a fetch, &#x60;git-receive-pack&#x60; for a push, and any other value is 400.  ANONYMOUS ONLY FOR FETCH, AND ONLY ON A PUBLIC REPOSITORY. The push advertisement always requires an authenticated org, and where a path org is present it must equal the authenticated one. A private repository reached without its org is 404, indistinguishable from one that does not exist. Addressed under the API prefix, with the PROJECT as a middle path segment: project scope otherwise rides a header a git client cannot send, so this path is the only usable remote for a project-scoped repository. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param project 
      * @param repo 
@@ -413,8 +403,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitByOrgByProjectByRepoInfoRefsWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1GitByOrgByProjectByRepoInfoRefsRequestConfig(org = org, project = project, repo = repo)
+    fun getV1GitByOrgByProjectByRepoInfoRefsWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1GitByOrgByProjectByRepoInfoRefsRequestConfig(org = org, project = project, repo = repo)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -422,14 +412,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitByOrgByProjectByRepoInfoRefs
+     * To obtain the request config of the operation getV1GitByOrgByProjectByRepoInfoRefs
      *
      * @param org 
      * @param project 
      * @param repo 
      * @return RequestConfig
      */
-    fun cloudGetV1GitByOrgByProjectByRepoInfoRefsRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
+    fun getV1GitByOrgByProjectByRepoInfoRefsRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -439,15 +429,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{project}/{repo}/info/refs".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/git/{org}/{repo}/info/refs
-     * 
-     * 
+     * Advertise a repository&#39;s refs to a git client
+     * The ref-advertisement phase of git&#39;s smart-HTTP protocol — the first request a clone, a fetch and a push all make. &#x60;?service&#x3D;&#x60; selects which: &#x60;git-upload-pack&#x60; advertises for a fetch, &#x60;git-receive-pack&#x60; for a push, and any other value is 400.  ANONYMOUS ONLY FOR FETCH, AND ONLY ON A PUBLIC REPOSITORY. The push advertisement always requires an authenticated org, and where a path org is present it must equal the authenticated one. A private repository reached without its org is 404, indistinguishable from one that does not exist. Addressed under the API prefix, so &#x60;git clone https://&lt;host&gt;/v1/git/&lt;org&gt;/&lt;repo&gt;.git&#x60; works on any host the binary serves. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param repo 
      * @return void
@@ -458,8 +448,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitByOrgByRepoInfoRefs(org: kotlin.String, repo: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1GitByOrgByRepoInfoRefsWithHttpInfo(org = org, repo = repo)
+    fun getV1GitByOrgByRepoInfoRefs(org: kotlin.String, repo: kotlin.String) : Unit {
+        val localVarResponse = getV1GitByOrgByRepoInfoRefsWithHttpInfo(org = org, repo = repo)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -478,8 +468,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/git/{org}/{repo}/info/refs
-     * 
-     * 
+     * Advertise a repository&#39;s refs to a git client
+     * The ref-advertisement phase of git&#39;s smart-HTTP protocol — the first request a clone, a fetch and a push all make. &#x60;?service&#x3D;&#x60; selects which: &#x60;git-upload-pack&#x60; advertises for a fetch, &#x60;git-receive-pack&#x60; for a push, and any other value is 400.  ANONYMOUS ONLY FOR FETCH, AND ONLY ON A PUBLIC REPOSITORY. The push advertisement always requires an authenticated org, and where a path org is present it must equal the authenticated one. A private repository reached without its org is 404, indistinguishable from one that does not exist. Addressed under the API prefix, so &#x60;git clone https://&lt;host&gt;/v1/git/&lt;org&gt;/&lt;repo&gt;.git&#x60; works on any host the binary serves. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param repo 
      * @return ApiResponse<Unit?>
@@ -487,8 +477,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitByOrgByRepoInfoRefsWithHttpInfo(org: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1GitByOrgByRepoInfoRefsRequestConfig(org = org, repo = repo)
+    fun getV1GitByOrgByRepoInfoRefsWithHttpInfo(org: kotlin.String, repo: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1GitByOrgByRepoInfoRefsRequestConfig(org = org, repo = repo)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -496,13 +486,13 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitByOrgByRepoInfoRefs
+     * To obtain the request config of the operation getV1GitByOrgByRepoInfoRefs
      *
      * @param org 
      * @param repo 
      * @return RequestConfig
      */
-    fun cloudGetV1GitByOrgByRepoInfoRefsRequestConfig(org: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
+    fun getV1GitByOrgByRepoInfoRefsRequestConfig(org: kotlin.String, repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -512,7 +502,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{repo}/info/refs".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -521,7 +511,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/git/keys
      * Returns the SSH public keys registered to the caller&#39;s org — the keys that authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60;.
      * Returns the SSH public keys registered to the caller&#39;s org — the keys that authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60;. Keys are org-scoped on read even though the fingerprint index is global, so one org never sees another&#39;s.
-     * @return CloudKeyList
+     * @return KeyList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -530,11 +520,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitKeys() : CloudKeyList {
-        val localVarResponse = cloudGetV1GitKeysWithHttpInfo()
+    fun getV1GitKeys() : KeyList {
+        val localVarResponse = getV1GitKeysWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKeyList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KeyList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -552,26 +542,26 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/git/keys
      * Returns the SSH public keys registered to the caller&#39;s org — the keys that authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60;.
      * Returns the SSH public keys registered to the caller&#39;s org — the keys that authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60;. Keys are org-scoped on read even though the fingerprint index is global, so one org never sees another&#39;s.
-     * @return ApiResponse<CloudKeyList?>
+     * @return ApiResponse<KeyList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitKeysWithHttpInfo() : ApiResponse<CloudKeyList?> {
-        val localVariableConfig = cloudGetV1GitKeysRequestConfig()
+    fun getV1GitKeysWithHttpInfo() : ApiResponse<KeyList?> {
+        val localVariableConfig = getV1GitKeysRequestConfig()
 
-        return request<Unit, CloudKeyList>(
+        return request<Unit, KeyList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitKeys
+     * To obtain the request config of the operation getV1GitKeys
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GitKeysRequestConfig() : RequestConfig<Unit> {
+    fun getV1GitKeysRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -582,7 +572,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -591,7 +581,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/git/repos
      * Returns the repos in the caller&#39;s scope, most recently updated first.
      * Returns the repos in the caller&#39;s scope, most recently updated first. The scope is the request principal&#39;s — the gateway-minted org and its optional project — never anything off the wire, so a caller only ever sees its own. Rows carry no branches or HEAD; read one repo for those.
-     * @return CloudRepoList
+     * @return RepoList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -600,11 +590,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitRepos() : CloudRepoList {
-        val localVarResponse = cloudGetV1GitReposWithHttpInfo()
+    fun getV1GitRepos() : RepoList {
+        val localVarResponse = getV1GitReposWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRepoList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RepoList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -622,26 +612,26 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/git/repos
      * Returns the repos in the caller&#39;s scope, most recently updated first.
      * Returns the repos in the caller&#39;s scope, most recently updated first. The scope is the request principal&#39;s — the gateway-minted org and its optional project — never anything off the wire, so a caller only ever sees its own. Rows carry no branches or HEAD; read one repo for those.
-     * @return ApiResponse<CloudRepoList?>
+     * @return ApiResponse<RepoList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposWithHttpInfo() : ApiResponse<CloudRepoList?> {
-        val localVariableConfig = cloudGetV1GitReposRequestConfig()
+    fun getV1GitReposWithHttpInfo() : ApiResponse<RepoList?> {
+        val localVariableConfig = getV1GitReposRequestConfig()
 
-        return request<Unit, CloudRepoList>(
+        return request<Unit, RepoList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitRepos
+     * To obtain the request config of the operation getV1GitRepos
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposRequestConfig() : RequestConfig<Unit> {
+    fun getV1GitReposRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -652,7 +642,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -662,7 +652,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns one repo with its live ref state: every branch name and the resolved HEAD commit.
      * Returns one repo with its live ref state: every branch name and the resolved HEAD commit. Both are read from the object store on each call, so an empty repo reports no branches and an empty head rather than failing. A repo outside the caller&#39;s scope is not found.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudRepoView
+     * @return RepoView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -671,11 +661,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposName(name: kotlin.String) : CloudRepoView {
-        val localVarResponse = cloudGetV1GitReposNameWithHttpInfo(name = name)
+    fun getV1GitReposByName(name: kotlin.String) : RepoView {
+        val localVarResponse = getV1GitReposByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRepoView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -694,27 +684,27 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns one repo with its live ref state: every branch name and the resolved HEAD commit.
      * Returns one repo with its live ref state: every branch name and the resolved HEAD commit. Both are read from the object store on each call, so an empty repo reports no branches and an empty head rather than failing. A repo outside the caller&#39;s scope is not found.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudRepoView?>
+     * @return ApiResponse<RepoView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudRepoView?> {
-        val localVariableConfig = cloudGetV1GitReposNameRequestConfig(name = name)
+    fun getV1GitReposByNameWithHttpInfo(name: kotlin.String) : ApiResponse<RepoView?> {
+        val localVariableConfig = getV1GitReposByNameRequestConfig(name = name)
 
-        return request<Unit, CloudRepoView>(
+        return request<Unit, RepoView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposName
+     * To obtain the request config of the operation getV1GitReposByName
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1GitReposByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -725,7 +715,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -737,7 +727,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
-     * @return CloudBlobJSON
+     * @return BlobJSON
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -746,11 +736,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameBlob(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : CloudBlobJSON {
-        val localVarResponse = cloudGetV1GitReposNameBlobWithHttpInfo(name = name, ref = ref, path = path)
+    fun getV1GitReposByNameBlob(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : BlobJSON {
+        val localVarResponse = getV1GitReposByNameBlobWithHttpInfo(name = name, ref = ref, path = path)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBlobJSON
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BlobJSON
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -771,29 +761,29 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
-     * @return ApiResponse<CloudBlobJSON?>
+     * @return ApiResponse<BlobJSON?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameBlobWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<CloudBlobJSON?> {
-        val localVariableConfig = cloudGetV1GitReposNameBlobRequestConfig(name = name, ref = ref, path = path)
+    fun getV1GitReposByNameBlobWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<BlobJSON?> {
+        val localVariableConfig = getV1GitReposByNameBlobRequestConfig(name = name, ref = ref, path = path)
 
-        return request<Unit, CloudBlobJSON>(
+        return request<Unit, BlobJSON>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameBlob
+     * To obtain the request config of the operation getV1GitReposByNameBlob
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameBlobRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1GitReposByNameBlobRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -812,7 +802,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/blob".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -825,7 +815,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param ref Ref is the branch, tag or commit to walk back from; empty means HEAD. (optional)
      * @param path Path narrows the history to commits touching it; empty walks the whole ref. (optional)
      * @param limit Limit caps the page. Anything not positive means 50; the cap is 100. (optional)
-     * @return CloudCommitsJSON
+     * @return CommitsJSON
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -834,11 +824,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameCommits(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null, limit: kotlin.Int? = null) : CloudCommitsJSON {
-        val localVarResponse = cloudGetV1GitReposNameCommitsWithHttpInfo(name = name, ref = ref, path = path, limit = limit)
+    fun getV1GitReposByNameCommits(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null, limit: kotlin.Int? = null) : CommitsJSON {
+        val localVarResponse = getV1GitReposByNameCommitsWithHttpInfo(name = name, ref = ref, path = path, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCommitsJSON
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CommitsJSON
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -860,22 +850,22 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param ref Ref is the branch, tag or commit to walk back from; empty means HEAD. (optional)
      * @param path Path narrows the history to commits touching it; empty walks the whole ref. (optional)
      * @param limit Limit caps the page. Anything not positive means 50; the cap is 100. (optional)
-     * @return ApiResponse<CloudCommitsJSON?>
+     * @return ApiResponse<CommitsJSON?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameCommitsWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudCommitsJSON?> {
-        val localVariableConfig = cloudGetV1GitReposNameCommitsRequestConfig(name = name, ref = ref, path = path, limit = limit)
+    fun getV1GitReposByNameCommitsWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CommitsJSON?> {
+        val localVariableConfig = getV1GitReposByNameCommitsRequestConfig(name = name, ref = ref, path = path, limit = limit)
 
-        return request<Unit, CloudCommitsJSON>(
+        return request<Unit, CommitsJSON>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameCommits
+     * To obtain the request config of the operation getV1GitReposByNameCommits
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is the branch, tag or commit to walk back from; empty means HEAD. (optional)
@@ -883,7 +873,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param limit Limit caps the page. Anything not positive means 50; the cap is 100. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameCommitsRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1GitReposByNameCommitsRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -905,7 +895,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/commits".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -917,7 +907,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param glob Glob selects files, matched segment by segment so &#x60;*&#x60; never crosses a &#x60;/&#x60;. &#x60;**&#x60; matches zero or more whole segments. (optional)
-     * @return CloudFilesJSON
+     * @return FilesJSON
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -926,11 +916,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameFiles(name: kotlin.String, ref: kotlin.String? = null, glob: kotlin.String? = null) : CloudFilesJSON {
-        val localVarResponse = cloudGetV1GitReposNameFilesWithHttpInfo(name = name, ref = ref, glob = glob)
+    fun getV1GitReposByNameFiles(name: kotlin.String, ref: kotlin.String? = null, glob: kotlin.String? = null) : FilesJSON {
+        val localVarResponse = getV1GitReposByNameFilesWithHttpInfo(name = name, ref = ref, glob = glob)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFilesJSON
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FilesJSON
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -951,29 +941,29 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param glob Glob selects files, matched segment by segment so &#x60;*&#x60; never crosses a &#x60;/&#x60;. &#x60;**&#x60; matches zero or more whole segments. (optional)
-     * @return ApiResponse<CloudFilesJSON?>
+     * @return ApiResponse<FilesJSON?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameFilesWithHttpInfo(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : ApiResponse<CloudFilesJSON?> {
-        val localVariableConfig = cloudGetV1GitReposNameFilesRequestConfig(name = name, ref = ref, glob = glob)
+    fun getV1GitReposByNameFilesWithHttpInfo(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : ApiResponse<FilesJSON?> {
+        val localVariableConfig = getV1GitReposByNameFilesRequestConfig(name = name, ref = ref, glob = glob)
 
-        return request<Unit, CloudFilesJSON>(
+        return request<Unit, FilesJSON>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameFiles
+     * To obtain the request config of the operation getV1GitReposByNameFiles
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param glob Glob selects files, matched segment by segment so &#x60;*&#x60; never crosses a &#x60;/&#x60;. &#x60;**&#x60; matches zero or more whole segments. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameFilesRequestConfig(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1GitReposByNameFilesRequestConfig(name: kotlin.String, ref: kotlin.String?, glob: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -992,7 +982,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/files".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1002,7 +992,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns a repo&#39;s outbound mirror targets — the downstream remotes the mirror reactor pushes to whenever a push lands here.
      * Returns a repo&#39;s outbound mirror targets — the downstream remotes the mirror reactor pushes to whenever a push lands here.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudMirrorList
+     * @return MirrorList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1011,11 +1001,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameMirrors(name: kotlin.String) : CloudMirrorList {
-        val localVarResponse = cloudGetV1GitReposNameMirrorsWithHttpInfo(name = name)
+    fun getV1GitReposByNameMirrors(name: kotlin.String) : MirrorList {
+        val localVarResponse = getV1GitReposByNameMirrorsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMirrorList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MirrorList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1034,27 +1024,27 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns a repo&#39;s outbound mirror targets — the downstream remotes the mirror reactor pushes to whenever a push lands here.
      * Returns a repo&#39;s outbound mirror targets — the downstream remotes the mirror reactor pushes to whenever a push lands here.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudMirrorList?>
+     * @return ApiResponse<MirrorList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameMirrorsWithHttpInfo(name: kotlin.String) : ApiResponse<CloudMirrorList?> {
-        val localVariableConfig = cloudGetV1GitReposNameMirrorsRequestConfig(name = name)
+    fun getV1GitReposByNameMirrorsWithHttpInfo(name: kotlin.String) : ApiResponse<MirrorList?> {
+        val localVariableConfig = getV1GitReposByNameMirrorsRequestConfig(name = name)
 
-        return request<Unit, CloudMirrorList>(
+        return request<Unit, MirrorList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameMirrors
+     * To obtain the request config of the operation getV1GitReposByNameMirrors
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameMirrorsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1GitReposByNameMirrorsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1065,7 +1055,164 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/mirrors".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/git/repos/{name}/pulls
+     * Returns a repo&#39;s pull requests, newest number first — what is waiting to be reviewed, and what has already landed.
+     * Returns a repo&#39;s pull requests, newest number first — what is waiting to be reviewed, and what has already landed. Narrow it with ?state&#x3D;open or ?state&#x3D;merged; omit state for every proposal.
+     * @param name Name is the repo, from the :name path segment.
+     * @param state State narrows the list to \&quot;open\&quot; or \&quot;merged\&quot;. Omit it for every proposal. (optional)
+     * @return PullList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1GitReposByNamePulls(name: kotlin.String, state: kotlin.String? = null) : PullList {
+        val localVarResponse = getV1GitReposByNamePullsWithHttpInfo(name = name, state = state)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PullList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/git/repos/{name}/pulls
+     * Returns a repo&#39;s pull requests, newest number first — what is waiting to be reviewed, and what has already landed.
+     * Returns a repo&#39;s pull requests, newest number first — what is waiting to be reviewed, and what has already landed. Narrow it with ?state&#x3D;open or ?state&#x3D;merged; omit state for every proposal.
+     * @param name Name is the repo, from the :name path segment.
+     * @param state State narrows the list to \&quot;open\&quot; or \&quot;merged\&quot;. Omit it for every proposal. (optional)
+     * @return ApiResponse<PullList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1GitReposByNamePullsWithHttpInfo(name: kotlin.String, state: kotlin.String?) : ApiResponse<PullList?> {
+        val localVariableConfig = getV1GitReposByNamePullsRequestConfig(name = name, state = state)
+
+        return request<Unit, PullList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1GitReposByNamePulls
+     *
+     * @param name Name is the repo, from the :name path segment.
+     * @param state State narrows the list to \&quot;open\&quot; or \&quot;merged\&quot;. Omit it for every proposal. (optional)
+     * @return RequestConfig
+     */
+    fun getV1GitReposByNamePullsRequestConfig(name: kotlin.String, state: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (state != null) {
+                    put("state", listOf(state.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/git/repos/{name}/pulls".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/git/repos/{name}/pulls/{number}
+     * Returns one pull request by its per-repo number.
+     * Returns one pull request by its per-repo number. A number belonging to another tenant&#39;s repo is not found, exactly as the repo itself is not.
+     * @param name Name is the repo, from the :name path segment.
+     * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
+     * @return PullView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1GitReposByNamePullsByNumber(name: kotlin.String, number: kotlin.Int) : PullView {
+        val localVarResponse = getV1GitReposByNamePullsByNumberWithHttpInfo(name = name, number = number)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PullView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/git/repos/{name}/pulls/{number}
+     * Returns one pull request by its per-repo number.
+     * Returns one pull request by its per-repo number. A number belonging to another tenant&#39;s repo is not found, exactly as the repo itself is not.
+     * @param name Name is the repo, from the :name path segment.
+     * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
+     * @return ApiResponse<PullView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1GitReposByNamePullsByNumberWithHttpInfo(name: kotlin.String, number: kotlin.Int) : ApiResponse<PullView?> {
+        val localVariableConfig = getV1GitReposByNamePullsByNumberRequestConfig(name = name, number = number)
+
+        return request<Unit, PullView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1GitReposByNamePullsByNumber
+     *
+     * @param name Name is the repo, from the :name path segment.
+     * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
+     * @return RequestConfig
+     */
+    fun getV1GitReposByNamePullsByNumberRequestConfig(name: kotlin.String, number: kotlin.Int) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/git/repos/{name}/pulls/{number}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"number"+"}", encodeURIComponent(number.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1076,7 +1223,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns the README at the tree root as plain text — unrendered, so the caller decides how to present it. A repo with no README is not found.
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
-     * @return CloudReadmeJSON
+     * @return ReadmeJSON
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1085,11 +1232,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameReadme(name: kotlin.String, ref: kotlin.String? = null) : CloudReadmeJSON {
-        val localVarResponse = cloudGetV1GitReposNameReadmeWithHttpInfo(name = name, ref = ref)
+    fun getV1GitReposByNameReadme(name: kotlin.String, ref: kotlin.String? = null) : ReadmeJSON {
+        val localVarResponse = getV1GitReposByNameReadmeWithHttpInfo(name = name, ref = ref)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReadmeJSON
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReadmeJSON
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1109,28 +1256,28 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns the README at the tree root as plain text — unrendered, so the caller decides how to present it. A repo with no README is not found.
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
-     * @return ApiResponse<CloudReadmeJSON?>
+     * @return ApiResponse<ReadmeJSON?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameReadmeWithHttpInfo(name: kotlin.String, ref: kotlin.String?) : ApiResponse<CloudReadmeJSON?> {
-        val localVariableConfig = cloudGetV1GitReposNameReadmeRequestConfig(name = name, ref = ref)
+    fun getV1GitReposByNameReadmeWithHttpInfo(name: kotlin.String, ref: kotlin.String?) : ApiResponse<ReadmeJSON?> {
+        val localVariableConfig = getV1GitReposByNameReadmeRequestConfig(name = name, ref = ref)
 
-        return request<Unit, CloudReadmeJSON>(
+        return request<Unit, ReadmeJSON>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameReadme
+     * To obtain the request config of the operation getV1GitReposByNameReadme
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameReadmeRequestConfig(name: kotlin.String, ref: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1GitReposByNameReadmeRequestConfig(name: kotlin.String, ref: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1146,7 +1293,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/readme".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1156,7 +1303,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Lists a repo&#39;s branches, tags and default branch — what a branch picker needs in one call.
      * Lists a repo&#39;s branches, tags and default branch — what a branch picker needs in one call. Unlike the other read ops it tolerates a repo with no commits: the ref sets come back empty and the default branch is still named.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudRefsJSON
+     * @return RefsJSON
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1165,11 +1312,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameRefs(name: kotlin.String) : CloudRefsJSON {
-        val localVarResponse = cloudGetV1GitReposNameRefsWithHttpInfo(name = name)
+    fun getV1GitReposByNameRefs(name: kotlin.String) : RefsJSON {
+        val localVarResponse = getV1GitReposByNameRefsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRefsJSON
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RefsJSON
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1188,27 +1335,27 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Lists a repo&#39;s branches, tags and default branch — what a branch picker needs in one call.
      * Lists a repo&#39;s branches, tags and default branch — what a branch picker needs in one call. Unlike the other read ops it tolerates a repo with no commits: the ref sets come back empty and the default branch is still named.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudRefsJSON?>
+     * @return ApiResponse<RefsJSON?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameRefsWithHttpInfo(name: kotlin.String) : ApiResponse<CloudRefsJSON?> {
-        val localVariableConfig = cloudGetV1GitReposNameRefsRequestConfig(name = name)
+    fun getV1GitReposByNameRefsWithHttpInfo(name: kotlin.String) : ApiResponse<RefsJSON?> {
+        val localVariableConfig = getV1GitReposByNameRefsRequestConfig(name = name)
 
-        return request<Unit, CloudRefsJSON>(
+        return request<Unit, RefsJSON>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameRefs
+     * To obtain the request config of the operation getV1GitReposByNameRefs
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameRefsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1GitReposByNameRefsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1219,7 +1366,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/refs".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1229,7 +1376,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns a repo&#39;s Slack subscriptions — which channels the lifecycle notifier posts this repo&#39;s push and deploy events to.
      * Returns a repo&#39;s Slack subscriptions — which channels the lifecycle notifier posts this repo&#39;s push and deploy events to.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudSubscriptionList
+     * @return SubscriptionList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1238,11 +1385,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameSubscriptions(name: kotlin.String) : CloudSubscriptionList {
-        val localVarResponse = cloudGetV1GitReposNameSubscriptionsWithHttpInfo(name = name)
+    fun getV1GitReposByNameSubscriptions(name: kotlin.String) : SubscriptionList {
+        val localVarResponse = getV1GitReposByNameSubscriptionsWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSubscriptionList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SubscriptionList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1261,27 +1408,27 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns a repo&#39;s Slack subscriptions — which channels the lifecycle notifier posts this repo&#39;s push and deploy events to.
      * Returns a repo&#39;s Slack subscriptions — which channels the lifecycle notifier posts this repo&#39;s push and deploy events to.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudSubscriptionList?>
+     * @return ApiResponse<SubscriptionList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameSubscriptionsWithHttpInfo(name: kotlin.String) : ApiResponse<CloudSubscriptionList?> {
-        val localVariableConfig = cloudGetV1GitReposNameSubscriptionsRequestConfig(name = name)
+    fun getV1GitReposByNameSubscriptionsWithHttpInfo(name: kotlin.String) : ApiResponse<SubscriptionList?> {
+        val localVariableConfig = getV1GitReposByNameSubscriptionsRequestConfig(name = name)
 
-        return request<Unit, CloudSubscriptionList>(
+        return request<Unit, SubscriptionList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameSubscriptions
+     * To obtain the request config of the operation getV1GitReposByNameSubscriptions
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameSubscriptionsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1GitReposByNameSubscriptionsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1292,7 +1439,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/subscriptions".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1304,7 +1451,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
-     * @return CloudTreeJSON
+     * @return TreeJSON
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1313,11 +1460,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitReposNameTree(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : CloudTreeJSON {
-        val localVarResponse = cloudGetV1GitReposNameTreeWithHttpInfo(name = name, ref = ref, path = path)
+    fun getV1GitReposByNameTree(name: kotlin.String, ref: kotlin.String? = null, path: kotlin.String? = null) : TreeJSON {
+        val localVarResponse = getV1GitReposByNameTreeWithHttpInfo(name = name, ref = ref, path = path)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTreeJSON
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TreeJSON
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1338,29 +1485,29 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
-     * @return ApiResponse<CloudTreeJSON?>
+     * @return ApiResponse<TreeJSON?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitReposNameTreeWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<CloudTreeJSON?> {
-        val localVariableConfig = cloudGetV1GitReposNameTreeRequestConfig(name = name, ref = ref, path = path)
+    fun getV1GitReposByNameTreeWithHttpInfo(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : ApiResponse<TreeJSON?> {
+        val localVariableConfig = getV1GitReposByNameTreeRequestConfig(name = name, ref = ref, path = path)
 
-        return request<Unit, CloudTreeJSON>(
+        return request<Unit, TreeJSON>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitReposNameTree
+     * To obtain the request config of the operation getV1GitReposByNameTree
      *
      * @param name Name is the repo to read, from the :name path segment.
      * @param ref Ref is a branch, tag or commit; empty means the repo&#39;s HEAD. (optional)
      * @param path Path is repo-relative; empty is the tree root. Traversal is stripped. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1GitReposNameTreeRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1GitReposByNameTreeRequestConfig(name: kotlin.String, ref: kotlin.String?, path: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1379,7 +1526,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/tree".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1388,7 +1535,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/git/usage
      * Returns per-repo and total storage bytes for the caller&#39;s org — the queryable, per-tenant number commerce and o11y meter on.
      * Returns per-repo and total storage bytes for the caller&#39;s org — the queryable, per-tenant number commerce and o11y meter on. It spans EVERY project sub-scope, unlike the repo list, so a billing consumer sees the whole tenant footprint in one call. Sizes are last-measured values (create, push, mirror and gc each re-measure), not a live walk of the disk.
-     * @return CloudUsageView
+     * @return UsageView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1397,11 +1544,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GitUsage() : CloudUsageView {
-        val localVarResponse = cloudGetV1GitUsageWithHttpInfo()
+    fun getV1GitUsage() : UsageView {
+        val localVarResponse = getV1GitUsageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUsageView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsageView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1419,26 +1566,26 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/git/usage
      * Returns per-repo and total storage bytes for the caller&#39;s org — the queryable, per-tenant number commerce and o11y meter on.
      * Returns per-repo and total storage bytes for the caller&#39;s org — the queryable, per-tenant number commerce and o11y meter on. It spans EVERY project sub-scope, unlike the repo list, so a billing consumer sees the whole tenant footprint in one call. Sizes are last-measured values (create, push, mirror and gc each re-measure), not a live walk of the disk.
-     * @return ApiResponse<CloudUsageView?>
+     * @return ApiResponse<UsageView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GitUsageWithHttpInfo() : ApiResponse<CloudUsageView?> {
-        val localVariableConfig = cloudGetV1GitUsageRequestConfig()
+    fun getV1GitUsageWithHttpInfo() : ApiResponse<UsageView?> {
+        val localVariableConfig = getV1GitUsageRequestConfig()
 
-        return request<Unit, CloudUsageView>(
+        return request<Unit, UsageView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GitUsage
+     * To obtain the request config of the operation getV1GitUsage
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GitUsageRequestConfig() : RequestConfig<Unit> {
+    fun getV1GitUsageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1449,7 +1596,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1459,8 +1606,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Flips a repo&#39;s public bit, the one mutable repo setting today.
      * Flips a repo&#39;s public bit, the one mutable repo setting today. Public grants ANONYMOUS fetch only; push and the whole control plane stay org-authed. Returns the updated repo.
      * @param name Name is the repo to update, from the :name path segment.
-     * @param cloudPatchIn 
-     * @return CloudRepoView
+     * @param patchIn 
+     * @return RepoView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1469,11 +1616,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1GitReposName(name: kotlin.String, cloudPatchIn: CloudPatchIn) : CloudRepoView {
-        val localVarResponse = cloudPatchV1GitReposNameWithHttpInfo(name = name, cloudPatchIn = cloudPatchIn)
+    fun patchV1GitReposByName(name: kotlin.String, patchIn: PatchIn) : RepoView {
+        val localVarResponse = patchV1GitReposByNameWithHttpInfo(name = name, patchIn = patchIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRepoView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1492,30 +1639,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Flips a repo&#39;s public bit, the one mutable repo setting today.
      * Flips a repo&#39;s public bit, the one mutable repo setting today. Public grants ANONYMOUS fetch only; push and the whole control plane stay org-authed. Returns the updated repo.
      * @param name Name is the repo to update, from the :name path segment.
-     * @param cloudPatchIn 
-     * @return ApiResponse<CloudRepoView?>
+     * @param patchIn 
+     * @return ApiResponse<RepoView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1GitReposNameWithHttpInfo(name: kotlin.String, cloudPatchIn: CloudPatchIn) : ApiResponse<CloudRepoView?> {
-        val localVariableConfig = cloudPatchV1GitReposNameRequestConfig(name = name, cloudPatchIn = cloudPatchIn)
+    fun patchV1GitReposByNameWithHttpInfo(name: kotlin.String, patchIn: PatchIn) : ApiResponse<RepoView?> {
+        val localVariableConfig = patchV1GitReposByNameRequestConfig(name = name, patchIn = patchIn)
 
-        return request<CloudPatchIn, CloudRepoView>(
+        return request<PatchIn, RepoView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1GitReposName
+     * To obtain the request config of the operation patchV1GitReposByName
      *
      * @param name Name is the repo to update, from the :name path segment.
-     * @param cloudPatchIn 
+     * @param patchIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1GitReposNameRequestConfig(name: kotlin.String, cloudPatchIn: CloudPatchIn) : RequestConfig<CloudPatchIn> {
-        val localVariableBody = cloudPatchIn
+    fun patchV1GitReposByNameRequestConfig(name: kotlin.String, patchIn: PatchIn) : RequestConfig<PatchIn> {
+        val localVariableBody = patchIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1526,15 +1673,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/{org}/{project}/{repo}/git-receive-pack
-     * 
-     * 
+     * Accept a push, and turn it into a build
+     * The pack-transfer phase of a push, and the point at which a push becomes an EVENT. NEVER ANONYMOUS: a push always requires an authenticated org, and the org in the path must equal it.  Once the pack is on disk the repository&#39;s storage usage is metered and a build is fired for every branch whose tip actually moved, computed from the before/after branch diff rather than from what the client claimed. That runs on a cancel-immune context, so a client that hangs up the moment its push lands still gets its build, and it runs even when git itself exited non-zero — the refs on disk are the ground truth. Repacking housekeeping is detached and never blocks the response.  A Content-Type other than &#x60;application/x-git-receive-pack-request&#x60; is 400. Addressed under the API prefix, with the PROJECT as a middle path segment: project scope otherwise rides a header a git client cannot send, so this path is the only usable remote for a project-scoped repository. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param project 
      * @param repo 
@@ -1547,8 +1694,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitByOrgByProjectByRepoGitReceivePack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = cloudPostV1GitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org = org, project = project, repo = repo, body = body)
+    fun postV1GitByOrgByProjectByRepoGitReceivePack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postV1GitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org = org, project = project, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1567,8 +1714,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/{org}/{project}/{repo}/git-receive-pack
-     * 
-     * 
+     * Accept a push, and turn it into a build
+     * The pack-transfer phase of a push, and the point at which a push becomes an EVENT. NEVER ANONYMOUS: a push always requires an authenticated org, and the org in the path must equal it.  Once the pack is on disk the repository&#39;s storage usage is metered and a build is fired for every branch whose tip actually moved, computed from the before/after branch diff rather than from what the client claimed. That runs on a cancel-immune context, so a client that hangs up the moment its push lands still gets its build, and it runs even when git itself exited non-zero — the refs on disk are the ground truth. Repacking housekeeping is detached and never blocks the response.  A Content-Type other than &#x60;application/x-git-receive-pack-request&#x60; is 400. Addressed under the API prefix, with the PROJECT as a middle path segment: project scope otherwise rides a header a git client cannot send, so this path is the only usable remote for a project-scoped repository. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param project 
      * @param repo 
@@ -1578,8 +1725,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitByOrgByProjectByRepoGitReceivePackRequestConfig(org = org, project = project, repo = repo, body = body)
+    fun postV1GitByOrgByProjectByRepoGitReceivePackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitByOrgByProjectByRepoGitReceivePackRequestConfig(org = org, project = project, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1587,7 +1734,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitByOrgByProjectByRepoGitReceivePack
+     * To obtain the request config of the operation postV1GitByOrgByProjectByRepoGitReceivePack
      *
      * @param org 
      * @param project 
@@ -1595,7 +1742,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitByOrgByProjectByRepoGitReceivePackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1GitByOrgByProjectByRepoGitReceivePackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1606,15 +1753,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{project}/{repo}/git-receive-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/{org}/{project}/{repo}/git-upload-pack
-     * 
-     * 
+     * Serve a clone or fetch
+     * The pack-transfer phase of a clone or fetch: the request and the response are git&#39;s binary pack protocol, streamed straight through git itself — request body to git&#39;s stdin, git&#39;s stdout to the response — so a multi-gigabyte clone never lands in this process&#39;s memory.  A PUBLIC repository is fetched anonymously; a private one requires its own org, and a wrong or absent org is 404 rather than a hint that the repository exists. A Content-Type other than &#x60;application/x-git-upload-pack-request&#x60; is 400. Addressed under the API prefix, with the PROJECT as a middle path segment: project scope otherwise rides a header a git client cannot send, so this path is the only usable remote for a project-scoped repository. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param project 
      * @param repo 
@@ -1627,8 +1774,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitByOrgByProjectByRepoGitUploadPack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = cloudPostV1GitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org = org, project = project, repo = repo, body = body)
+    fun postV1GitByOrgByProjectByRepoGitUploadPack(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postV1GitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org = org, project = project, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1647,8 +1794,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/{org}/{project}/{repo}/git-upload-pack
-     * 
-     * 
+     * Serve a clone or fetch
+     * The pack-transfer phase of a clone or fetch: the request and the response are git&#39;s binary pack protocol, streamed straight through git itself — request body to git&#39;s stdin, git&#39;s stdout to the response — so a multi-gigabyte clone never lands in this process&#39;s memory.  A PUBLIC repository is fetched anonymously; a private one requires its own org, and a wrong or absent org is 404 rather than a hint that the repository exists. A Content-Type other than &#x60;application/x-git-upload-pack-request&#x60; is 400. Addressed under the API prefix, with the PROJECT as a middle path segment: project scope otherwise rides a header a git client cannot send, so this path is the only usable remote for a project-scoped repository. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param project 
      * @param repo 
@@ -1658,8 +1805,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitByOrgByProjectByRepoGitUploadPackRequestConfig(org = org, project = project, repo = repo, body = body)
+    fun postV1GitByOrgByProjectByRepoGitUploadPackWithHttpInfo(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitByOrgByProjectByRepoGitUploadPackRequestConfig(org = org, project = project, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1667,7 +1814,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitByOrgByProjectByRepoGitUploadPack
+     * To obtain the request config of the operation postV1GitByOrgByProjectByRepoGitUploadPack
      *
      * @param org 
      * @param project 
@@ -1675,7 +1822,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitByOrgByProjectByRepoGitUploadPackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1GitByOrgByProjectByRepoGitUploadPackRequestConfig(org: kotlin.String, project: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1686,15 +1833,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{project}/{repo}/git-upload-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/{org}/{repo}/git-receive-pack
-     * 
-     * 
+     * Accept a push, and turn it into a build
+     * The pack-transfer phase of a push, and the point at which a push becomes an EVENT. NEVER ANONYMOUS: a push always requires an authenticated org, and the org in the path must equal it.  Once the pack is on disk the repository&#39;s storage usage is metered and a build is fired for every branch whose tip actually moved, computed from the before/after branch diff rather than from what the client claimed. That runs on a cancel-immune context, so a client that hangs up the moment its push lands still gets its build, and it runs even when git itself exited non-zero — the refs on disk are the ground truth. Repacking housekeeping is detached and never blocks the response.  A Content-Type other than &#x60;application/x-git-receive-pack-request&#x60; is 400. Addressed under the API prefix, so &#x60;git clone https://&lt;host&gt;/v1/git/&lt;org&gt;/&lt;repo&gt;.git&#x60; works on any host the binary serves. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param repo 
      * @param body  (optional)
@@ -1706,8 +1853,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitByOrgByRepoGitReceivePack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = cloudPostV1GitByOrgByRepoGitReceivePackWithHttpInfo(org = org, repo = repo, body = body)
+    fun postV1GitByOrgByRepoGitReceivePack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postV1GitByOrgByRepoGitReceivePackWithHttpInfo(org = org, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1726,8 +1873,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/{org}/{repo}/git-receive-pack
-     * 
-     * 
+     * Accept a push, and turn it into a build
+     * The pack-transfer phase of a push, and the point at which a push becomes an EVENT. NEVER ANONYMOUS: a push always requires an authenticated org, and the org in the path must equal it.  Once the pack is on disk the repository&#39;s storage usage is metered and a build is fired for every branch whose tip actually moved, computed from the before/after branch diff rather than from what the client claimed. That runs on a cancel-immune context, so a client that hangs up the moment its push lands still gets its build, and it runs even when git itself exited non-zero — the refs on disk are the ground truth. Repacking housekeeping is detached and never blocks the response.  A Content-Type other than &#x60;application/x-git-receive-pack-request&#x60; is 400. Addressed under the API prefix, so &#x60;git clone https://&lt;host&gt;/v1/git/&lt;org&gt;/&lt;repo&gt;.git&#x60; works on any host the binary serves. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param repo 
      * @param body  (optional)
@@ -1736,8 +1883,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitByOrgByRepoGitReceivePackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitByOrgByRepoGitReceivePackRequestConfig(org = org, repo = repo, body = body)
+    fun postV1GitByOrgByRepoGitReceivePackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitByOrgByRepoGitReceivePackRequestConfig(org = org, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1745,14 +1892,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitByOrgByRepoGitReceivePack
+     * To obtain the request config of the operation postV1GitByOrgByRepoGitReceivePack
      *
      * @param org 
      * @param repo 
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitByOrgByRepoGitReceivePackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1GitByOrgByRepoGitReceivePackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1763,15 +1910,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{repo}/git-receive-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/{org}/{repo}/git-upload-pack
-     * 
-     * 
+     * Serve a clone or fetch
+     * The pack-transfer phase of a clone or fetch: the request and the response are git&#39;s binary pack protocol, streamed straight through git itself — request body to git&#39;s stdin, git&#39;s stdout to the response — so a multi-gigabyte clone never lands in this process&#39;s memory.  A PUBLIC repository is fetched anonymously; a private one requires its own org, and a wrong or absent org is 404 rather than a hint that the repository exists. A Content-Type other than &#x60;application/x-git-upload-pack-request&#x60; is 400. Addressed under the API prefix, so &#x60;git clone https://&lt;host&gt;/v1/git/&lt;org&gt;/&lt;repo&gt;.git&#x60; works on any host the binary serves. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param repo 
      * @param body  (optional)
@@ -1783,8 +1930,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitByOrgByRepoGitUploadPack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
-        val localVarResponse = cloudPostV1GitByOrgByRepoGitUploadPackWithHttpInfo(org = org, repo = repo, body = body)
+    fun postV1GitByOrgByRepoGitUploadPack(org: kotlin.String, repo: kotlin.String, body: java.io.File? = null) : Unit {
+        val localVarResponse = postV1GitByOrgByRepoGitUploadPackWithHttpInfo(org = org, repo = repo, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1803,8 +1950,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/{org}/{repo}/git-upload-pack
-     * 
-     * 
+     * Serve a clone or fetch
+     * The pack-transfer phase of a clone or fetch: the request and the response are git&#39;s binary pack protocol, streamed straight through git itself — request body to git&#39;s stdin, git&#39;s stdout to the response — so a multi-gigabyte clone never lands in this process&#39;s memory.  A PUBLIC repository is fetched anonymously; a private one requires its own org, and a wrong or absent org is 404 rather than a hint that the repository exists. A Content-Type other than &#x60;application/x-git-upload-pack-request&#x60; is 400. Addressed under the API prefix, so &#x60;git clone https://&lt;host&gt;/v1/git/&lt;org&gt;/&lt;repo&gt;.git&#x60; works on any host the binary serves. This is git&#39;s own wire protocol, not an API call to make by hand: point a git client at the clone URL and it makes this request itself.
      * @param org 
      * @param repo 
      * @param body  (optional)
@@ -1813,8 +1960,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitByOrgByRepoGitUploadPackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitByOrgByRepoGitUploadPackRequestConfig(org = org, repo = repo, body = body)
+    fun postV1GitByOrgByRepoGitUploadPackWithHttpInfo(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitByOrgByRepoGitUploadPackRequestConfig(org = org, repo = repo, body = body)
 
         return request<java.io.File, Unit>(
             localVariableConfig
@@ -1822,14 +1969,14 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitByOrgByRepoGitUploadPack
+     * To obtain the request config of the operation postV1GitByOrgByRepoGitUploadPack
      *
      * @param org 
      * @param repo 
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitByOrgByRepoGitUploadPackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1GitByOrgByRepoGitUploadPackRequestConfig(org: kotlin.String, repo: kotlin.String, body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1840,7 +1987,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/{org}/{repo}/git-upload-pack".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1849,8 +1996,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/git/keys
      * Registers an SSH public key so it can authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60; for the caller&#39;s org.
      * Registers an SSH public key so it can authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60; for the caller&#39;s org. The key line is parsed and canonicalized before storage, its SHA256 fingerprint becomes the auth lookup handle, and the full public key round-trips (it is public). Answers 201. Fingerprints are globally unique, so a key already registered — to this org or any other — is a 409: one key belongs to exactly one org.
-     * @param cloudRegisterKeyReq 
-     * @return CloudKeyView
+     * @param registerKeyReq 
+     * @return KeyView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1859,11 +2006,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitKeys(cloudRegisterKeyReq: CloudRegisterKeyReq) : CloudKeyView {
-        val localVarResponse = cloudPostV1GitKeysWithHttpInfo(cloudRegisterKeyReq = cloudRegisterKeyReq)
+    fun postV1GitKeys(registerKeyReq: RegisterKeyReq) : KeyView {
+        val localVarResponse = postV1GitKeysWithHttpInfo(registerKeyReq = registerKeyReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKeyView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KeyView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1881,29 +2028,29 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/git/keys
      * Registers an SSH public key so it can authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60; for the caller&#39;s org.
      * Registers an SSH public key so it can authenticate &#x60;git clone git@&lt;host&gt;:&lt;org&gt;/&lt;repo&gt;.git&#x60; for the caller&#39;s org. The key line is parsed and canonicalized before storage, its SHA256 fingerprint becomes the auth lookup handle, and the full public key round-trips (it is public). Answers 201. Fingerprints are globally unique, so a key already registered — to this org or any other — is a 409: one key belongs to exactly one org.
-     * @param cloudRegisterKeyReq 
-     * @return ApiResponse<CloudKeyView?>
+     * @param registerKeyReq 
+     * @return ApiResponse<KeyView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitKeysWithHttpInfo(cloudRegisterKeyReq: CloudRegisterKeyReq) : ApiResponse<CloudKeyView?> {
-        val localVariableConfig = cloudPostV1GitKeysRequestConfig(cloudRegisterKeyReq = cloudRegisterKeyReq)
+    fun postV1GitKeysWithHttpInfo(registerKeyReq: RegisterKeyReq) : ApiResponse<KeyView?> {
+        val localVariableConfig = postV1GitKeysRequestConfig(registerKeyReq = registerKeyReq)
 
-        return request<CloudRegisterKeyReq, CloudKeyView>(
+        return request<RegisterKeyReq, KeyView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitKeys
+     * To obtain the request config of the operation postV1GitKeys
      *
-     * @param cloudRegisterKeyReq 
+     * @param registerKeyReq 
      * @return RequestConfig
      */
-    fun cloudPostV1GitKeysRequestConfig(cloudRegisterKeyReq: CloudRegisterKeyReq) : RequestConfig<CloudRegisterKeyReq> {
-        val localVariableBody = cloudRegisterKeyReq
+    fun postV1GitKeysRequestConfig(registerKeyReq: RegisterKeyReq) : RequestConfig<RegisterKeyReq> {
+        val localVariableBody = registerKeyReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1914,7 +2061,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/keys",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1923,8 +2070,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/git/repos
      * Provisions an empty bare repository in the caller&#39;s scope and returns it with its clone URLs.
      * Provisions an empty bare repository in the caller&#39;s scope and returns it with its clone URLs. Answers 201. The name must be unique within the scope — a repeat is a 409, never a silent overwrite of an existing repo. The org comes from the validated principal, so a repo is always born owned by the caller&#39;s own tenant.
-     * @param cloudCreateReq 
-     * @return CloudRepoView
+     * @param createReq 
+     * @return RepoView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1933,11 +2080,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitRepos(cloudCreateReq: CloudCreateReq) : CloudRepoView {
-        val localVarResponse = cloudPostV1GitReposWithHttpInfo(cloudCreateReq = cloudCreateReq)
+    fun postV1GitRepos(createReq: CreateReq) : RepoView {
+        val localVarResponse = postV1GitReposWithHttpInfo(createReq = createReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRepoView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1955,29 +2102,29 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/git/repos
      * Provisions an empty bare repository in the caller&#39;s scope and returns it with its clone URLs.
      * Provisions an empty bare repository in the caller&#39;s scope and returns it with its clone URLs. Answers 201. The name must be unique within the scope — a repeat is a 409, never a silent overwrite of an existing repo. The org comes from the validated principal, so a repo is always born owned by the caller&#39;s own tenant.
-     * @param cloudCreateReq 
-     * @return ApiResponse<CloudRepoView?>
+     * @param createReq 
+     * @return ApiResponse<RepoView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitReposWithHttpInfo(cloudCreateReq: CloudCreateReq) : ApiResponse<CloudRepoView?> {
-        val localVariableConfig = cloudPostV1GitReposRequestConfig(cloudCreateReq = cloudCreateReq)
+    fun postV1GitReposWithHttpInfo(createReq: CreateReq) : ApiResponse<RepoView?> {
+        val localVariableConfig = postV1GitReposRequestConfig(createReq = createReq)
 
-        return request<CloudCreateReq, CloudRepoView>(
+        return request<CreateReq, RepoView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitRepos
+     * To obtain the request config of the operation postV1GitRepos
      *
-     * @param cloudCreateReq 
+     * @param createReq 
      * @return RequestConfig
      */
-    fun cloudPostV1GitReposRequestConfig(cloudCreateReq: CloudCreateReq) : RequestConfig<CloudCreateReq> {
-        val localVariableBody = cloudCreateReq
+    fun postV1GitReposRequestConfig(createReq: CreateReq) : RequestConfig<CreateReq> {
+        val localVariableBody = createReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1988,7 +2135,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1998,7 +2145,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Repacks a repo into one bitmapped pack and rewrites its commit-graph, so the next clone reuses the bitmap instead of walking the whole object graph.
      * Repacks a repo into one bitmapped pack and rewrites its commit-graph, so the next clone reuses the bitmap instead of walking the whole object graph. Idempotent, and safe to interrupt — git swaps both artifacts atomically. It runs under one pack slot with the same memory bounds as a clone, so it can block behind heavy pack traffic rather than compete with it. Storage usage is re-measured afterwards, since a repack reclaims space.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudGcOut
+     * @return GcOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2007,11 +2154,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitReposNameGc(name: kotlin.String) : CloudGcOut {
-        val localVarResponse = cloudPostV1GitReposNameGcWithHttpInfo(name = name)
+    fun postV1GitReposByNameGc(name: kotlin.String) : GcOut {
+        val localVarResponse = postV1GitReposByNameGcWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGcOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GcOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2030,27 +2177,27 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Repacks a repo into one bitmapped pack and rewrites its commit-graph, so the next clone reuses the bitmap instead of walking the whole object graph.
      * Repacks a repo into one bitmapped pack and rewrites its commit-graph, so the next clone reuses the bitmap instead of walking the whole object graph. Idempotent, and safe to interrupt — git swaps both artifacts atomically. It runs under one pack slot with the same memory bounds as a clone, so it can block behind heavy pack traffic rather than compete with it. Storage usage is re-measured afterwards, since a repack reclaims space.
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudGcOut?>
+     * @return ApiResponse<GcOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitReposNameGcWithHttpInfo(name: kotlin.String) : ApiResponse<CloudGcOut?> {
-        val localVariableConfig = cloudPostV1GitReposNameGcRequestConfig(name = name)
+    fun postV1GitReposByNameGcWithHttpInfo(name: kotlin.String) : ApiResponse<GcOut?> {
+        val localVariableConfig = postV1GitReposByNameGcRequestConfig(name = name)
 
-        return request<Unit, CloudGcOut>(
+        return request<Unit, GcOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitReposNameGc
+     * To obtain the request config of the operation postV1GitReposByNameGc
      *
      * @param name Name is the repo&#39;s org-unique handle, from the :name path segment. A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun cloudPostV1GitReposNameGcRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postV1GitReposByNameGcRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2061,7 +2208,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/gc".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2071,8 +2218,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Imports an external git repository into the caller&#39;s repo, provisioning it on first use.
      * Imports an external git repository into the caller&#39;s repo, provisioning it on first use. Fetch is FORCED and covers every ref, so a first call clones the source and a repeat call re-syncs it — the endpoint is idempotent by mirror semantics. Mirrored bytes are metered exactly like a push, and a push.landed event is emitted for the default branch so the code index picks the repo up.
      * @param name Name is the local repo to mirror into, from the :name path segment. It is CREATED on first use.
-     * @param cloudMirrorReq 
-     * @return CloudRepoView
+     * @param mirrorReq 
+     * @return RepoView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2081,11 +2228,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitReposNameMirror(name: kotlin.String, cloudMirrorReq: CloudMirrorReq) : CloudRepoView {
-        val localVarResponse = cloudPostV1GitReposNameMirrorWithHttpInfo(name = name, cloudMirrorReq = cloudMirrorReq)
+    fun postV1GitReposByNameMirror(name: kotlin.String, mirrorReq: MirrorReq) : RepoView {
+        val localVarResponse = postV1GitReposByNameMirrorWithHttpInfo(name = name, mirrorReq = mirrorReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRepoView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RepoView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2104,30 +2251,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Imports an external git repository into the caller&#39;s repo, provisioning it on first use.
      * Imports an external git repository into the caller&#39;s repo, provisioning it on first use. Fetch is FORCED and covers every ref, so a first call clones the source and a repeat call re-syncs it — the endpoint is idempotent by mirror semantics. Mirrored bytes are metered exactly like a push, and a push.landed event is emitted for the default branch so the code index picks the repo up.
      * @param name Name is the local repo to mirror into, from the :name path segment. It is CREATED on first use.
-     * @param cloudMirrorReq 
-     * @return ApiResponse<CloudRepoView?>
+     * @param mirrorReq 
+     * @return ApiResponse<RepoView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitReposNameMirrorWithHttpInfo(name: kotlin.String, cloudMirrorReq: CloudMirrorReq) : ApiResponse<CloudRepoView?> {
-        val localVariableConfig = cloudPostV1GitReposNameMirrorRequestConfig(name = name, cloudMirrorReq = cloudMirrorReq)
+    fun postV1GitReposByNameMirrorWithHttpInfo(name: kotlin.String, mirrorReq: MirrorReq) : ApiResponse<RepoView?> {
+        val localVariableConfig = postV1GitReposByNameMirrorRequestConfig(name = name, mirrorReq = mirrorReq)
 
-        return request<CloudMirrorReq, CloudRepoView>(
+        return request<MirrorReq, RepoView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitReposNameMirror
+     * To obtain the request config of the operation postV1GitReposByNameMirror
      *
      * @param name Name is the local repo to mirror into, from the :name path segment. It is CREATED on first use.
-     * @param cloudMirrorReq 
+     * @param mirrorReq 
      * @return RequestConfig
      */
-    fun cloudPostV1GitReposNameMirrorRequestConfig(name: kotlin.String, cloudMirrorReq: CloudMirrorReq) : RequestConfig<CloudMirrorReq> {
-        val localVariableBody = cloudMirrorReq
+    fun postV1GitReposByNameMirrorRequestConfig(name: kotlin.String, mirrorReq: MirrorReq) : RequestConfig<MirrorReq> {
+        val localVariableBody = mirrorReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2138,7 +2285,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/mirror".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2148,8 +2295,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Registers a downstream remote the repo&#39;s advanced refs are pushed to whenever a push lands here.
      * Registers a downstream remote the repo&#39;s advanced refs are pushed to whenever a push lands here. Answers 201. The URL must be https to a host on the mirror allowlist (github.com / gitlab.com): the same set the mirror credential may be sent to, so a target can never capture the shared token or point the push at an internal service. Any embedded userinfo is stripped — credentials ride env-only at push time and never enter the stored URL. One mirror per host per repo; a second is a 409.
      * @param name Name is the repo whose advanced refs are pushed downstream, from the :name path segment.
-     * @param cloudMirrorTargetReq 
-     * @return CloudMirrorTargetView
+     * @param mirrorTargetReq 
+     * @return MirrorTargetView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2158,11 +2305,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitReposNameMirrors(name: kotlin.String, cloudMirrorTargetReq: CloudMirrorTargetReq) : CloudMirrorTargetView {
-        val localVarResponse = cloudPostV1GitReposNameMirrorsWithHttpInfo(name = name, cloudMirrorTargetReq = cloudMirrorTargetReq)
+    fun postV1GitReposByNameMirrors(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : MirrorTargetView {
+        val localVarResponse = postV1GitReposByNameMirrorsWithHttpInfo(name = name, mirrorTargetReq = mirrorTargetReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMirrorTargetView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MirrorTargetView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2181,30 +2328,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Registers a downstream remote the repo&#39;s advanced refs are pushed to whenever a push lands here.
      * Registers a downstream remote the repo&#39;s advanced refs are pushed to whenever a push lands here. Answers 201. The URL must be https to a host on the mirror allowlist (github.com / gitlab.com): the same set the mirror credential may be sent to, so a target can never capture the shared token or point the push at an internal service. Any embedded userinfo is stripped — credentials ride env-only at push time and never enter the stored URL. One mirror per host per repo; a second is a 409.
      * @param name Name is the repo whose advanced refs are pushed downstream, from the :name path segment.
-     * @param cloudMirrorTargetReq 
-     * @return ApiResponse<CloudMirrorTargetView?>
+     * @param mirrorTargetReq 
+     * @return ApiResponse<MirrorTargetView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitReposNameMirrorsWithHttpInfo(name: kotlin.String, cloudMirrorTargetReq: CloudMirrorTargetReq) : ApiResponse<CloudMirrorTargetView?> {
-        val localVariableConfig = cloudPostV1GitReposNameMirrorsRequestConfig(name = name, cloudMirrorTargetReq = cloudMirrorTargetReq)
+    fun postV1GitReposByNameMirrorsWithHttpInfo(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : ApiResponse<MirrorTargetView?> {
+        val localVariableConfig = postV1GitReposByNameMirrorsRequestConfig(name = name, mirrorTargetReq = mirrorTargetReq)
 
-        return request<CloudMirrorTargetReq, CloudMirrorTargetView>(
+        return request<MirrorTargetReq, MirrorTargetView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitReposNameMirrors
+     * To obtain the request config of the operation postV1GitReposByNameMirrors
      *
      * @param name Name is the repo whose advanced refs are pushed downstream, from the :name path segment.
-     * @param cloudMirrorTargetReq 
+     * @param mirrorTargetReq 
      * @return RequestConfig
      */
-    fun cloudPostV1GitReposNameMirrorsRequestConfig(name: kotlin.String, cloudMirrorTargetReq: CloudMirrorTargetReq) : RequestConfig<CloudMirrorTargetReq> {
-        val localVariableBody = cloudMirrorTargetReq
+    fun postV1GitReposByNameMirrorsRequestConfig(name: kotlin.String, mirrorTargetReq: MirrorTargetReq) : RequestConfig<MirrorTargetReq> {
+        val localVariableBody = mirrorTargetReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2215,7 +2362,160 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/mirrors".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/git/repos/{name}/pulls
+     * Proposes a branch for merging and returns it with its number.
+     * Proposes a branch for merging and returns it with its number. Answers 201. Both branches must already exist — a proposal naming a branch nobody pushed is a typo, not a plan — and base defaults to the repo&#39;s default branch.  Proposing the same head into the same base twice is a 409 while the first proposal is still open, so a retried agent run leaves ONE thing to review rather than a pile of identical ones. A repo outside the caller&#39;s scope is a 404, exactly as reading it is.
+     * @param name Name is the repo the proposal belongs to, from the :name path segment.
+     * @param openReq 
+     * @return PullView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1GitReposByNamePulls(name: kotlin.String, openReq: OpenReq) : PullView {
+        val localVarResponse = postV1GitReposByNamePullsWithHttpInfo(name = name, openReq = openReq)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PullView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/git/repos/{name}/pulls
+     * Proposes a branch for merging and returns it with its number.
+     * Proposes a branch for merging and returns it with its number. Answers 201. Both branches must already exist — a proposal naming a branch nobody pushed is a typo, not a plan — and base defaults to the repo&#39;s default branch.  Proposing the same head into the same base twice is a 409 while the first proposal is still open, so a retried agent run leaves ONE thing to review rather than a pile of identical ones. A repo outside the caller&#39;s scope is a 404, exactly as reading it is.
+     * @param name Name is the repo the proposal belongs to, from the :name path segment.
+     * @param openReq 
+     * @return ApiResponse<PullView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1GitReposByNamePullsWithHttpInfo(name: kotlin.String, openReq: OpenReq) : ApiResponse<PullView?> {
+        val localVariableConfig = postV1GitReposByNamePullsRequestConfig(name = name, openReq = openReq)
+
+        return request<OpenReq, PullView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1GitReposByNamePulls
+     *
+     * @param name Name is the repo the proposal belongs to, from the :name path segment.
+     * @param openReq 
+     * @return RequestConfig
+     */
+    fun postV1GitReposByNamePullsRequestConfig(name: kotlin.String, openReq: OpenReq) : RequestConfig<OpenReq> {
+        val localVariableBody = openReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/git/repos/{name}/pulls".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/git/repos/{name}/pulls/{number}/merge
+     * Merges an open pull request by FAST-FORWARDING base to head, and answers the proposal in its merged state with the revision base now points at.
+     * Merges an open pull request by FAST-FORWARDING base to head, and answers the proposal in its merged state with the revision base now points at.  It merges only when base is already an ancestor of head — the case where head contains every commit base has, so moving the branch loses nothing and invents nothing. When base has moved on independently, this REFUSES with 409 and says so: a real three-way merge is not implemented here, and reporting one would claim a result these bytes do not produce. Rebase head onto base and merge again.  The move is judged by the same ref policy a &#x60;git push&#x60; of it would face, and fires the same build and notify reactions, so merging is not a way around either. Merging an already-merged proposal is a 409.
+     * @param name Name is the repo, from the :name path segment.
+     * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
+     * @return PullView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1GitReposByNamePullsByNumberMerge(name: kotlin.String, number: kotlin.Int) : PullView {
+        val localVarResponse = postV1GitReposByNamePullsByNumberMergeWithHttpInfo(name = name, number = number)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PullView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/git/repos/{name}/pulls/{number}/merge
+     * Merges an open pull request by FAST-FORWARDING base to head, and answers the proposal in its merged state with the revision base now points at.
+     * Merges an open pull request by FAST-FORWARDING base to head, and answers the proposal in its merged state with the revision base now points at.  It merges only when base is already an ancestor of head — the case where head contains every commit base has, so moving the branch loses nothing and invents nothing. When base has moved on independently, this REFUSES with 409 and says so: a real three-way merge is not implemented here, and reporting one would claim a result these bytes do not produce. Rebase head onto base and merge again.  The move is judged by the same ref policy a &#x60;git push&#x60; of it would face, and fires the same build and notify reactions, so merging is not a way around either. Merging an already-merged proposal is a 409.
+     * @param name Name is the repo, from the :name path segment.
+     * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
+     * @return ApiResponse<PullView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1GitReposByNamePullsByNumberMergeWithHttpInfo(name: kotlin.String, number: kotlin.Int) : ApiResponse<PullView?> {
+        val localVariableConfig = postV1GitReposByNamePullsByNumberMergeRequestConfig(name = name, number = number)
+
+        return request<Unit, PullView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1GitReposByNamePullsByNumberMerge
+     *
+     * @param name Name is the repo, from the :name path segment.
+     * @param number Number is the proposal&#39;s per-repo number, from the :number path segment.
+     * @return RequestConfig
+     */
+    fun postV1GitReposByNamePullsByNumberMergeRequestConfig(name: kotlin.String, number: kotlin.Int) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/git/repos/{name}/pulls/{number}/merge".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"number"+"}", encodeURIComponent(number.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2225,8 +2525,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Lands a set of files as one commit without a git client — the hanzo.app builder&#39;s push.
      * Lands a set of files as one commit without a git client — the hanzo.app builder&#39;s push. The repo is CREATED on first push, the files are merged onto the branch tip (unlisted files survive), and the same push-to-deploy hook a real receive-pack fires is fired, so downstream this is indistinguishable from a &#x60;git push&#x60;.
      * @param name Name is the repo to push into, from the :name path segment. It is CREATED on first push if it does not exist.
-     * @param cloudPushReq 
-     * @return CloudPushResp
+     * @param pushReq 
+     * @return PushResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2235,11 +2535,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitReposNamePush(name: kotlin.String, cloudPushReq: CloudPushReq) : CloudPushResp {
-        val localVarResponse = cloudPostV1GitReposNamePushWithHttpInfo(name = name, cloudPushReq = cloudPushReq)
+    fun postV1GitReposByNamePush(name: kotlin.String, pushReq: PushReq) : PushResp {
+        val localVarResponse = postV1GitReposByNamePushWithHttpInfo(name = name, pushReq = pushReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPushResp
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PushResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2258,30 +2558,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Lands a set of files as one commit without a git client — the hanzo.app builder&#39;s push.
      * Lands a set of files as one commit without a git client — the hanzo.app builder&#39;s push. The repo is CREATED on first push, the files are merged onto the branch tip (unlisted files survive), and the same push-to-deploy hook a real receive-pack fires is fired, so downstream this is indistinguishable from a &#x60;git push&#x60;.
      * @param name Name is the repo to push into, from the :name path segment. It is CREATED on first push if it does not exist.
-     * @param cloudPushReq 
-     * @return ApiResponse<CloudPushResp?>
+     * @param pushReq 
+     * @return ApiResponse<PushResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitReposNamePushWithHttpInfo(name: kotlin.String, cloudPushReq: CloudPushReq) : ApiResponse<CloudPushResp?> {
-        val localVariableConfig = cloudPostV1GitReposNamePushRequestConfig(name = name, cloudPushReq = cloudPushReq)
+    fun postV1GitReposByNamePushWithHttpInfo(name: kotlin.String, pushReq: PushReq) : ApiResponse<PushResp?> {
+        val localVariableConfig = postV1GitReposByNamePushRequestConfig(name = name, pushReq = pushReq)
 
-        return request<CloudPushReq, CloudPushResp>(
+        return request<PushReq, PushResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitReposNamePush
+     * To obtain the request config of the operation postV1GitReposByNamePush
      *
      * @param name Name is the repo to push into, from the :name path segment. It is CREATED on first push if it does not exist.
-     * @param cloudPushReq 
+     * @param pushReq 
      * @return RequestConfig
      */
-    fun cloudPostV1GitReposNamePushRequestConfig(name: kotlin.String, cloudPushReq: CloudPushReq) : RequestConfig<CloudPushReq> {
-        val localVariableBody = cloudPushReq
+    fun postV1GitReposByNamePushRequestConfig(name: kotlin.String, pushReq: PushReq) : RequestConfig<PushReq> {
+        val localVariableBody = pushReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2292,7 +2592,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/push".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2302,8 +2602,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Binds a Slack channel to a repo, so the lifecycle notifier posts that repo&#39;s push and deploy events there.
      * Binds a Slack channel to a repo, so the lifecycle notifier posts that repo&#39;s push and deploy events there. Answers 201. The same channel twice on one repo is a 409; a repo outside the caller&#39;s scope is a 404, exactly as reading it is.
      * @param name Name is the repo to subscribe, from the :name path segment.
-     * @param cloudSubscribeReq 
-     * @return CloudSubscriptionView
+     * @param subscribeReq 
+     * @return SubscriptionView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2312,11 +2612,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitReposNameSubscriptions(name: kotlin.String, cloudSubscribeReq: CloudSubscribeReq) : CloudSubscriptionView {
-        val localVarResponse = cloudPostV1GitReposNameSubscriptionsWithHttpInfo(name = name, cloudSubscribeReq = cloudSubscribeReq)
+    fun postV1GitReposByNameSubscriptions(name: kotlin.String, subscribeReq: SubscribeReq) : SubscriptionView {
+        val localVarResponse = postV1GitReposByNameSubscriptionsWithHttpInfo(name = name, subscribeReq = subscribeReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSubscriptionView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SubscriptionView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2335,30 +2635,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Binds a Slack channel to a repo, so the lifecycle notifier posts that repo&#39;s push and deploy events there.
      * Binds a Slack channel to a repo, so the lifecycle notifier posts that repo&#39;s push and deploy events there. Answers 201. The same channel twice on one repo is a 409; a repo outside the caller&#39;s scope is a 404, exactly as reading it is.
      * @param name Name is the repo to subscribe, from the :name path segment.
-     * @param cloudSubscribeReq 
-     * @return ApiResponse<CloudSubscriptionView?>
+     * @param subscribeReq 
+     * @return ApiResponse<SubscriptionView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitReposNameSubscriptionsWithHttpInfo(name: kotlin.String, cloudSubscribeReq: CloudSubscribeReq) : ApiResponse<CloudSubscriptionView?> {
-        val localVariableConfig = cloudPostV1GitReposNameSubscriptionsRequestConfig(name = name, cloudSubscribeReq = cloudSubscribeReq)
+    fun postV1GitReposByNameSubscriptionsWithHttpInfo(name: kotlin.String, subscribeReq: SubscribeReq) : ApiResponse<SubscriptionView?> {
+        val localVariableConfig = postV1GitReposByNameSubscriptionsRequestConfig(name = name, subscribeReq = subscribeReq)
 
-        return request<CloudSubscribeReq, CloudSubscriptionView>(
+        return request<SubscribeReq, SubscriptionView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitReposNameSubscriptions
+     * To obtain the request config of the operation postV1GitReposByNameSubscriptions
      *
      * @param name Name is the repo to subscribe, from the :name path segment.
-     * @param cloudSubscribeReq 
+     * @param subscribeReq 
      * @return RequestConfig
      */
-    fun cloudPostV1GitReposNameSubscriptionsRequestConfig(name: kotlin.String, cloudSubscribeReq: CloudSubscribeReq) : RequestConfig<CloudSubscribeReq> {
-        val localVariableBody = cloudSubscribeReq
+    fun postV1GitReposByNameSubscriptionsRequestConfig(name: kotlin.String, subscribeReq: SubscribeReq) : RequestConfig<SubscribeReq> {
+        val localVariableBody = subscribeReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2369,16 +2669,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/repos/{name}/subscriptions".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/webhook
-     * 
-     * 
-     * @param cloudPushEvent  (optional)
+     * Retired — forge pushes build via platform.hanzo.ai
+     * GONE (410). This was the canonical forge&#39;s push-to-deploy door, and it never dispatched a build in its life.  It handed each verified push to cloud.OnGitPush, a single-registrant seam whose only registrant lives in apps/platform. cloud runs each app as its own OS process, so in the git process that builder is nil forever — and this handler answered 204 either way. Delivered, signature valid, green on the forge&#39;s hook page, and nothing built.  Push-to-deploy now belongs to POST https://platform.hanzo.ai/v1/git-webhook, which owns the build system-of-record and dispatches BuildKit Jobs. git.hanzo.ai delivers there through ONE forge-wide system webhook covering every repository; a repo opts in by committing hanzo.yml, not by owning a hook of its own.  The route is kept, and answers 410 naming that address, precisely so a misdirected delivery says what is wrong. Deleting it would 404, and a 404 here reads as &#39;the API is switched off&#39; — the wrong conclusion this estate has already drawn twice.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2387,8 +2686,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitWebhook(cloudPushEvent: CloudPushEvent? = null) : Unit {
-        val localVarResponse = cloudPostV1GitWebhookWithHttpInfo(cloudPushEvent = cloudPushEvent)
+    fun postV1GitWebhook() : Unit {
+        val localVarResponse = postV1GitWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2407,49 +2706,46 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/webhook
-     * 
-     * 
-     * @param cloudPushEvent  (optional)
+     * Retired — forge pushes build via platform.hanzo.ai
+     * GONE (410). This was the canonical forge&#39;s push-to-deploy door, and it never dispatched a build in its life.  It handed each verified push to cloud.OnGitPush, a single-registrant seam whose only registrant lives in apps/platform. cloud runs each app as its own OS process, so in the git process that builder is nil forever — and this handler answered 204 either way. Delivered, signature valid, green on the forge&#39;s hook page, and nothing built.  Push-to-deploy now belongs to POST https://platform.hanzo.ai/v1/git-webhook, which owns the build system-of-record and dispatches BuildKit Jobs. git.hanzo.ai delivers there through ONE forge-wide system webhook covering every repository; a repo opts in by committing hanzo.yml, not by owning a hook of its own.  The route is kept, and answers 410 naming that address, precisely so a misdirected delivery says what is wrong. Deleting it would 404, and a 404 here reads as &#39;the API is switched off&#39; — the wrong conclusion this estate has already drawn twice.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitWebhookWithHttpInfo(cloudPushEvent: CloudPushEvent?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitWebhookRequestConfig(cloudPushEvent = cloudPushEvent)
+    fun postV1GitWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitWebhookRequestConfig()
 
-        return request<CloudPushEvent, Unit>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitWebhook
+     * To obtain the request config of the operation postV1GitWebhook
      *
-     * @param cloudPushEvent  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitWebhookRequestConfig(cloudPushEvent: CloudPushEvent?) : RequestConfig<CloudPushEvent> {
-        val localVariableBody = cloudPushEvent
+    fun postV1GitWebhookRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
         
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/git/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/zap/createRepo
-     * 
-     * 
-     * @param cloudZapProcReq  (optional)
+     * Create a repository over the ZAP transport
+     * Creates a repository in the caller&#39;s org and project scope and answers with its record. &#x60;name&#x60; is required and &#x60;description&#x60; is optional; &#x60;project&#x60; narrows the scope within the org. A name already taken in that scope is a 409 envelope and an invalid name a 400.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
+     * @param zapProcReq  (optional)
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2458,8 +2754,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitZapCreaterepo(cloudZapProcReq: CloudZapProcReq? = null) : Unit {
-        val localVarResponse = cloudPostV1GitZapCreaterepoWithHttpInfo(cloudZapProcReq = cloudZapProcReq)
+    fun postV1GitZapCreaterepo(zapProcReq: ZapProcReq? = null) : Unit {
+        val localVarResponse = postV1GitZapCreaterepoWithHttpInfo(zapProcReq = zapProcReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2478,30 +2774,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/zap/createRepo
-     * 
-     * 
-     * @param cloudZapProcReq  (optional)
+     * Create a repository over the ZAP transport
+     * Creates a repository in the caller&#39;s org and project scope and answers with its record. &#x60;name&#x60; is required and &#x60;description&#x60; is optional; &#x60;project&#x60; narrows the scope within the org. A name already taken in that scope is a 409 envelope and an invalid name a 400.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
+     * @param zapProcReq  (optional)
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitZapCreaterepoWithHttpInfo(cloudZapProcReq: CloudZapProcReq?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitZapCreaterepoRequestConfig(cloudZapProcReq = cloudZapProcReq)
+    fun postV1GitZapCreaterepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitZapCreaterepoRequestConfig(zapProcReq = zapProcReq)
 
-        return request<CloudZapProcReq, Unit>(
+        return request<ZapProcReq, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitZapCreaterepo
+     * To obtain the request config of the operation postV1GitZapCreaterepo
      *
-     * @param cloudZapProcReq  (optional)
+     * @param zapProcReq  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitZapCreaterepoRequestConfig(cloudZapProcReq: CloudZapProcReq?) : RequestConfig<CloudZapProcReq> {
-        val localVariableBody = cloudZapProcReq
+    fun postV1GitZapCreaterepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
+        val localVariableBody = zapProcReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2511,16 +2807,16 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/createRepo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/zap/deleteRepo
-     * 
-     * 
-     * @param cloudZapProcReq  (optional)
+     * Delete a repository over the ZAP transport
+     * Deletes the repository named by &#x60;name&#x60; and answers with the deleted name. A repository outside the caller&#39;s org and project scope is a 404 envelope, so a delete can never reach another tenant&#39;s repository.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
+     * @param zapProcReq  (optional)
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2529,8 +2825,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitZapDeleterepo(cloudZapProcReq: CloudZapProcReq? = null) : Unit {
-        val localVarResponse = cloudPostV1GitZapDeleterepoWithHttpInfo(cloudZapProcReq = cloudZapProcReq)
+    fun postV1GitZapDeleterepo(zapProcReq: ZapProcReq? = null) : Unit {
+        val localVarResponse = postV1GitZapDeleterepoWithHttpInfo(zapProcReq = zapProcReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2549,30 +2845,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/zap/deleteRepo
-     * 
-     * 
-     * @param cloudZapProcReq  (optional)
+     * Delete a repository over the ZAP transport
+     * Deletes the repository named by &#x60;name&#x60; and answers with the deleted name. A repository outside the caller&#39;s org and project scope is a 404 envelope, so a delete can never reach another tenant&#39;s repository.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
+     * @param zapProcReq  (optional)
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitZapDeleterepoWithHttpInfo(cloudZapProcReq: CloudZapProcReq?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitZapDeleterepoRequestConfig(cloudZapProcReq = cloudZapProcReq)
+    fun postV1GitZapDeleterepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitZapDeleterepoRequestConfig(zapProcReq = zapProcReq)
 
-        return request<CloudZapProcReq, Unit>(
+        return request<ZapProcReq, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitZapDeleterepo
+     * To obtain the request config of the operation postV1GitZapDeleterepo
      *
-     * @param cloudZapProcReq  (optional)
+     * @param zapProcReq  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitZapDeleterepoRequestConfig(cloudZapProcReq: CloudZapProcReq?) : RequestConfig<CloudZapProcReq> {
-        val localVariableBody = cloudZapProcReq
+    fun postV1GitZapDeleterepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
+        val localVariableBody = zapProcReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2582,16 +2878,16 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/deleteRepo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/zap/getRepo
-     * 
-     * 
-     * @param cloudZapProcReq  (optional)
+     * Read one repository over the ZAP transport
+     * Answers a single repository&#39;s record, named by &#x60;name&#x60;. A repository outside the caller&#39;s org and project scope is a 404 envelope, the same answer one that does not exist gets.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
+     * @param zapProcReq  (optional)
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2600,8 +2896,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitZapGetrepo(cloudZapProcReq: CloudZapProcReq? = null) : Unit {
-        val localVarResponse = cloudPostV1GitZapGetrepoWithHttpInfo(cloudZapProcReq = cloudZapProcReq)
+    fun postV1GitZapGetrepo(zapProcReq: ZapProcReq? = null) : Unit {
+        val localVarResponse = postV1GitZapGetrepoWithHttpInfo(zapProcReq = zapProcReq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2620,30 +2916,30 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/zap/getRepo
-     * 
-     * 
-     * @param cloudZapProcReq  (optional)
+     * Read one repository over the ZAP transport
+     * Answers a single repository&#39;s record, named by &#x60;name&#x60;. A repository outside the caller&#39;s org and project scope is a 404 envelope, the same answer one that does not exist gets.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
+     * @param zapProcReq  (optional)
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitZapGetrepoWithHttpInfo(cloudZapProcReq: CloudZapProcReq?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitZapGetrepoRequestConfig(cloudZapProcReq = cloudZapProcReq)
+    fun postV1GitZapGetrepoWithHttpInfo(zapProcReq: ZapProcReq?) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitZapGetrepoRequestConfig(zapProcReq = zapProcReq)
 
-        return request<CloudZapProcReq, Unit>(
+        return request<ZapProcReq, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitZapGetrepo
+     * To obtain the request config of the operation postV1GitZapGetrepo
      *
-     * @param cloudZapProcReq  (optional)
+     * @param zapProcReq  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1GitZapGetrepoRequestConfig(cloudZapProcReq: CloudZapProcReq?) : RequestConfig<CloudZapProcReq> {
-        val localVariableBody = cloudZapProcReq
+    fun postV1GitZapGetrepoRequestConfig(zapProcReq: ZapProcReq?) : RequestConfig<ZapProcReq> {
+        val localVariableBody = zapProcReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2653,15 +2949,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/getRepo",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/zap/listRepos
-     * 
-     * 
+     * List your repositories over the ZAP transport
+     * Answers every repository in the caller&#39;s org and project scope. It reads NO body — the scope is entirely the caller&#39;s identity — so a request with an empty object is correct.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2670,8 +2966,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitZapListrepos() : Unit {
-        val localVarResponse = cloudPostV1GitZapListreposWithHttpInfo()
+    fun postV1GitZapListrepos() : Unit {
+        val localVarResponse = postV1GitZapListreposWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2690,15 +2986,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/zap/listRepos
-     * 
-     * 
+     * List your repositories over the ZAP transport
+     * Answers every repository in the caller&#39;s org and project scope. It reads NO body — the scope is entirely the caller&#39;s identity — so a request with an empty object is correct.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitZapListreposWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitZapListreposRequestConfig()
+    fun postV1GitZapListreposWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitZapListreposRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2706,11 +3002,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitZapListrepos
+     * To obtain the request config of the operation postV1GitZapListrepos
      *
      * @return RequestConfig
      */
-    fun cloudPostV1GitZapListreposRequestConfig() : RequestConfig<Unit> {
+    fun postV1GitZapListreposRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2720,15 +3016,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/listRepos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/git/zap/usage
-     * 
-     * 
+     * Report your org&#39;s git storage footprint over the ZAP transport
+     * Answers every repository in the caller&#39;s org with its size in bytes, plus the org&#39;s total — what git storage is actually being used, and by which repository. It reads NO body, and it is scoped to the caller&#39;s own org, so it is that org&#39;s footprint and never the fleet&#39;s.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2737,8 +3033,8 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GitZapUsage() : Unit {
-        val localVarResponse = cloudPostV1GitZapUsageWithHttpInfo()
+    fun postV1GitZapUsage() : Unit {
+        val localVarResponse = postV1GitZapUsageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2757,15 +3053,15 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/git/zap/usage
-     * 
-     * 
+     * Report your org&#39;s git storage footprint over the ZAP transport
+     * Answers every repository in the caller&#39;s org with its size in bytes, plus the org&#39;s total — what git storage is actually being used, and by which repository. It reads NO body, and it is scoped to the caller&#39;s own org, so it is that org&#39;s footprint and never the fleet&#39;s.  A ZAP PROCEDURE, not a REST resource. It answers the bridge&#39;s {status, msg, data} envelope rather than the raw view the /v1 route returns — which is a wire shape a typed op cannot produce, and the reason this stays a raw handler — and it calls the SAME core function the REST route calls, so the two transports cannot diverge in behaviour. Org and project scope come from the request identity and NEVER from the body: the body cannot widen the caller&#39;s scope. Without a validated org the answer is a 403 envelope.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GitZapUsageWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GitZapUsageRequestConfig()
+    fun postV1GitZapUsageWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GitZapUsageRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2773,11 +3069,11 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GitZapUsage
+     * To obtain the request config of the operation postV1GitZapUsage
      *
      * @return RequestConfig
      */
-    fun cloudPostV1GitZapUsageRequestConfig() : RequestConfig<Unit> {
+    fun postV1GitZapUsageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2787,7 +3083,7 @@ class GitApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/git/zap/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

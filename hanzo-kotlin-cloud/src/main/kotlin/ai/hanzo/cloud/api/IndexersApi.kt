@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudIndexersOut
+import ai.hanzo.cloud.model.IndexersOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,9 +47,9 @@ class IndexersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/indexers
-     * ListIndexers reports the deployment&#39;s chain indexer(s) and how far each has indexed.
-     * ListIndexers reports the deployment&#39;s chain indexer(s) and how far each has indexed. Identity and health come from the indexer&#39;s /health; the latest indexed block (height + time) from its /v1/explorer/blocks. The row EXISTS if EITHER call reaches the indexer; when the indexer is entirely unreachable the answer degrades to an honest-EMPTY list at 200, not a 502. No chain HEAD is exposed by the indexer REST, so &#x60;lag&#x60; is honestly omitted rather than fabricated.
-     * @return CloudIndexersOut
+     * Reports the deployment&#39;s chain indexer(s) and how far each has indexed.
+     * Reports the deployment&#39;s chain indexer(s) and how far each has indexed. Identity and health come from the indexer&#39;s /health; the latest indexed block (height + time) from its /v1/explorer/blocks. The row EXISTS if EITHER call reaches the indexer; when the indexer is entirely unreachable the answer degrades to an honest-EMPTY list at 200, not a 502. No chain HEAD is exposed by the indexer REST, so &#x60;lag&#x60; is honestly omitted rather than fabricated.
+     * @return IndexersOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +58,11 @@ class IndexersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Indexers() : CloudIndexersOut {
-        val localVarResponse = cloudGetV1IndexersWithHttpInfo()
+    fun getV1Indexers() : IndexersOut {
+        val localVarResponse = getV1IndexersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIndexersOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IndexersOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -78,28 +78,28 @@ class IndexersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/indexers
-     * ListIndexers reports the deployment&#39;s chain indexer(s) and how far each has indexed.
-     * ListIndexers reports the deployment&#39;s chain indexer(s) and how far each has indexed. Identity and health come from the indexer&#39;s /health; the latest indexed block (height + time) from its /v1/explorer/blocks. The row EXISTS if EITHER call reaches the indexer; when the indexer is entirely unreachable the answer degrades to an honest-EMPTY list at 200, not a 502. No chain HEAD is exposed by the indexer REST, so &#x60;lag&#x60; is honestly omitted rather than fabricated.
-     * @return ApiResponse<CloudIndexersOut?>
+     * Reports the deployment&#39;s chain indexer(s) and how far each has indexed.
+     * Reports the deployment&#39;s chain indexer(s) and how far each has indexed. Identity and health come from the indexer&#39;s /health; the latest indexed block (height + time) from its /v1/explorer/blocks. The row EXISTS if EITHER call reaches the indexer; when the indexer is entirely unreachable the answer degrades to an honest-EMPTY list at 200, not a 502. No chain HEAD is exposed by the indexer REST, so &#x60;lag&#x60; is honestly omitted rather than fabricated.
+     * @return ApiResponse<IndexersOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexersWithHttpInfo() : ApiResponse<CloudIndexersOut?> {
-        val localVariableConfig = cloudGetV1IndexersRequestConfig()
+    fun getV1IndexersWithHttpInfo() : ApiResponse<IndexersOut?> {
+        val localVariableConfig = getV1IndexersRequestConfig()
 
-        return request<Unit, CloudIndexersOut>(
+        return request<Unit, IndexersOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Indexers
+     * To obtain the request config of the operation getV1Indexers
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IndexersRequestConfig() : RequestConfig<Unit> {
+    fun getV1IndexersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +110,7 @@ class IndexersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/indexers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

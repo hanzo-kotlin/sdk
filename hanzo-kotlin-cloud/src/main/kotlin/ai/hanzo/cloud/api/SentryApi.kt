@@ -19,6 +19,21 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.O11yO11yDiscoverIn
+import ai.hanzo.cloud.model.O11yO11yDiscoverOut
+import ai.hanzo.cloud.model.O11yO11yErrorGettableIssueOut
+import ai.hanzo.cloud.model.O11yO11yErrorIssueOut
+import ai.hanzo.cloud.model.O11yO11yErrorIssuesOut
+import ai.hanzo.cloud.model.O11yO11yLogsOut
+import ai.hanzo.cloud.model.O11yO11ySentryEventOut
+import ai.hanzo.cloud.model.O11yO11ySentryIssueEventsOut
+import ai.hanzo.cloud.model.O11yO11ySentryPostableProject
+import ai.hanzo.cloud.model.O11yO11ySentryProjectOut
+import ai.hanzo.cloud.model.O11yO11ySentryProjectsOut
+import ai.hanzo.cloud.model.O11yO11ySentryUpdateIssueIn
+import ai.hanzo.cloud.model.O11yO11yStatsOut
+import ai.hanzo.cloud.model.O11yO11yTraceOut
+import ai.hanzo.cloud.model.O11yO11yTracesOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,8 +61,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Delete a Sentry project
+     * The one delete on the Sentry surface: removing a PROJECT, answering 204. Error issues, events and traces are not individually deletable — they are append-only telemetry, and their lifetime is retention&#39;s business, not an API call&#39;s.  Requires a validated, org-scoped principal with edit rights; a viewer is refused. The delete is confined to the org minted from that principal&#39;s claim, so a project id belonging to another tenant is not found rather than removed. Deleting a project retires the DSN that fed it, so any SDK still pointed at that key stops being accepted. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -57,8 +72,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -77,16 +92,16 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Delete a Sentry project
+     * The one delete on the Sentry surface: removing a PROJECT, answering 204. Error issues, events and traces are not individually deletable — they are append-only telemetry, and their lifetime is retention&#39;s business, not an API call&#39;s.  Requires a validated, org-scoped principal with edit rights; a viewer is refused. The delete is confined to the org minted from that principal&#39;s claim, so a project id belonging to another tenant is not found rather than removed. Deleting a project retires the DSN that fed it, so any SDK still pointed at that key stops being accepted. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +109,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1SentryByWildcard1
+     * To obtain the request config of the operation deleteV1SentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudDeleteV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -109,15 +124,85 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/sentry/projects/{id}
+     * Deletes one Sentry project of the caller&#39;s org.
+     * Deletes one Sentry project of the caller&#39;s org. Its DSN stops resolving immediately, so ingest for that id fails closed exactly as an unknown project does; retained events are not touched. Answers 204.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the project id.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1SentryProjectsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1SentryProjectsByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/sentry/projects/{id}
+     * Deletes one Sentry project of the caller&#39;s org.
+     * Deletes one Sentry project of the caller&#39;s org. Its DSN stops resolving immediately, so ingest for that id fails closed exactly as an unknown project does; retained events are not touched. Answers 204.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the project id.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1SentryProjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1SentryProjectsByIdRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1SentryProjectsById
+     *
+     * @param id ID is the project id.
+     * @return RequestConfig
+     */
+    fun deleteV1SentryProjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/sentry/projects/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Read the caller org&#39;s errors on the Sentry surface
+     * Serves the Sentry-compatible read surface — projects, error issues and one issue&#39;s occurrences, a single event, error logs, error-correlated traces and one trace&#39;s waterfall, and the event-rate stats — so a Sentry client or the error console reads its errors at the paths it already speaks.  It is the SAME runtime the observability surface serves, reached under a second path family, and there is NO rewrite: the runtime carries these routes literally. That is what makes this a product face rather than a translation layer. One runtime, two path families.  A validated principal is required and the read is scoped to that principal&#39;s own org. Errors are a tenant&#39;s OWN data, so org membership is the whole admission test and there is deliberately no admin term on it — gating the product on platform sudo would make the only way to see your own errors a scope that shows you everyone&#39;s. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -127,8 +212,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -147,16 +232,16 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Read the caller org&#39;s errors on the Sentry surface
+     * Serves the Sentry-compatible read surface — projects, error issues and one issue&#39;s occurrences, a single event, error logs, error-correlated traces and one trace&#39;s waterfall, and the event-rate stats — so a Sentry client or the error console reads its errors at the paths it already speaks.  It is the SAME runtime the observability surface serves, reached under a second path family, and there is NO rewrite: the runtime carries these routes literally. That is what makes this a product face rather than a translation layer. One runtime, two path families.  A validated principal is required and the read is scoped to that principal&#39;s own org. Errors are a tenant&#39;s OWN data, so org membership is the whole admission test and there is deliberately no admin term on it — gating the product on platform sudo would make the only way to see your own errors a scope that shows you everyone&#39;s. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +249,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SentryByWildcard1
+     * To obtain the request config of the operation getV1SentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -179,29 +264,31 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * OPTIONS /v1/sentry/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return void
+     * GET /v1/sentry/events/{id}
+     * Returns one captured error event of a project, by its id.
+     * Returns one captured error event of a project, by its id.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the event id.
+     * @param project Project is the project the event belongs to, by its id. Required.
+     * @return O11yO11ySentryEventOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudOptionsV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1SentryEventsById(id: kotlin.String, project: kotlin.String) : O11yO11ySentryEventOut {
+        val localVarResponse = getV1SentryEventsByIdWithHttpInfo(id = id, project = project)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryEventOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -216,48 +303,837 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * OPTIONS /v1/sentry/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
+     * GET /v1/sentry/events/{id}
+     * Returns one captured error event of a project, by its id.
+     * Returns one captured error event of a project, by its id.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the event id.
+     * @param project Project is the project the event belongs to, by its id. Required.
+     * @return ApiResponse<O11yO11ySentryEventOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1SentryEventsByIdWithHttpInfo(id: kotlin.String, project: kotlin.String) : ApiResponse<O11yO11ySentryEventOut?> {
+        val localVariableConfig = getV1SentryEventsByIdRequestConfig(id = id, project = project)
 
-        return request<Unit, Unit>(
+        return request<Unit, O11yO11ySentryEventOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudOptionsV1SentryByWildcard1
+     * To obtain the request config of the operation getV1SentryEventsById
      *
-     * @param wildcard1 
+     * @param id ID is the event id.
+     * @param project Project is the project the event belongs to, by its id. Required.
      * @return RequestConfig
      */
-    fun cloudOptionsV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SentryEventsByIdRequestConfig(id: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("project", listOf(project.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/events/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/issues
+     * Lists the caller&#39;s org&#39;s grouped error issues, optionally narrowed to one project and one time window, and filtered by status, level, environment, service, a free-text query and a sort.
+     * Lists the caller&#39;s org&#39;s grouped error issues, optionally narrowed to one project and one time window, and filtered by status, level, environment, service, a free-text query and a sort.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param status Status narrows to one lifecycle state: unresolved, resolved or ignored. (optional)
+     * @param level Level narrows to one severity, e.g. error, warning, info. (optional)
+     * @param environment Environment narrows to one deployment environment. (optional)
+     * @param serviceName ServiceName narrows to one reporting service. (optional)
+     * @param query Query narrows to issues whose text contains it. (optional)
+     * @param sort Sort orders the page, e.g. lastSeen, firstSeen, count. (optional)
+     * @param offset Offset is how many issues to skip. Zero starts at the first. (optional)
+     * @param limit Limit caps how many issues come back. Zero means the default. (optional)
+     * @param project Project narrows the org&#39;s issues to one project, by its id. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @return O11yO11yErrorIssuesOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryIssues(status: kotlin.String? = null, level: kotlin.String? = null, environment: kotlin.String? = null, serviceName: kotlin.String? = null, query: kotlin.String? = null, sort: kotlin.String? = null, offset: kotlin.Int? = null, limit: kotlin.Int? = null, project: kotlin.String? = null, period: kotlin.String? = null) : O11yO11yErrorIssuesOut {
+        val localVarResponse = getV1SentryIssuesWithHttpInfo(status = status, level = level, environment = environment, serviceName = serviceName, query = query, sort = sort, offset = offset, limit = limit, project = project, period = period)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yErrorIssuesOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/issues
+     * Lists the caller&#39;s org&#39;s grouped error issues, optionally narrowed to one project and one time window, and filtered by status, level, environment, service, a free-text query and a sort.
+     * Lists the caller&#39;s org&#39;s grouped error issues, optionally narrowed to one project and one time window, and filtered by status, level, environment, service, a free-text query and a sort.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param status Status narrows to one lifecycle state: unresolved, resolved or ignored. (optional)
+     * @param level Level narrows to one severity, e.g. error, warning, info. (optional)
+     * @param environment Environment narrows to one deployment environment. (optional)
+     * @param serviceName ServiceName narrows to one reporting service. (optional)
+     * @param query Query narrows to issues whose text contains it. (optional)
+     * @param sort Sort orders the page, e.g. lastSeen, firstSeen, count. (optional)
+     * @param offset Offset is how many issues to skip. Zero starts at the first. (optional)
+     * @param limit Limit caps how many issues come back. Zero means the default. (optional)
+     * @param project Project narrows the org&#39;s issues to one project, by its id. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @return ApiResponse<O11yO11yErrorIssuesOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryIssuesWithHttpInfo(status: kotlin.String?, level: kotlin.String?, environment: kotlin.String?, serviceName: kotlin.String?, query: kotlin.String?, sort: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, project: kotlin.String?, period: kotlin.String?) : ApiResponse<O11yO11yErrorIssuesOut?> {
+        val localVariableConfig = getV1SentryIssuesRequestConfig(status = status, level = level, environment = environment, serviceName = serviceName, query = query, sort = sort, offset = offset, limit = limit, project = project, period = period)
+
+        return request<Unit, O11yO11yErrorIssuesOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryIssues
+     *
+     * @param status Status narrows to one lifecycle state: unresolved, resolved or ignored. (optional)
+     * @param level Level narrows to one severity, e.g. error, warning, info. (optional)
+     * @param environment Environment narrows to one deployment environment. (optional)
+     * @param serviceName ServiceName narrows to one reporting service. (optional)
+     * @param query Query narrows to issues whose text contains it. (optional)
+     * @param sort Sort orders the page, e.g. lastSeen, firstSeen, count. (optional)
+     * @param offset Offset is how many issues to skip. Zero starts at the first. (optional)
+     * @param limit Limit caps how many issues come back. Zero means the default. (optional)
+     * @param project Project narrows the org&#39;s issues to one project, by its id. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @return RequestConfig
+     */
+    fun getV1SentryIssuesRequestConfig(status: kotlin.String?, level: kotlin.String?, environment: kotlin.String?, serviceName: kotlin.String?, query: kotlin.String?, sort: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, project: kotlin.String?, period: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (status != null) {
+                    put("status", listOf(status.toString()))
+                }
+                if (level != null) {
+                    put("level", listOf(level.toString()))
+                }
+                if (environment != null) {
+                    put("environment", listOf(environment.toString()))
+                }
+                if (serviceName != null) {
+                    put("serviceName", listOf(serviceName.toString()))
+                }
+                if (query != null) {
+                    put("query", listOf(query.toString()))
+                }
+                if (sort != null) {
+                    put("sort", listOf(sort.toString()))
+                }
+                if (offset != null) {
+                    put("offset", listOf(offset.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+                if (project != null) {
+                    put("project", listOf(project.toString()))
+                }
+                if (period != null) {
+                    put("period", listOf(period.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/issues",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/issues/{id}
+     * Returns one grouped issue of the caller&#39;s org with its latest occurrence sample.
+     * Returns one grouped issue of the caller&#39;s org with its latest occurrence sample.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the issue id.
+     * @return O11yO11yErrorGettableIssueOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryIssuesById(id: kotlin.String) : O11yO11yErrorGettableIssueOut {
+        val localVarResponse = getV1SentryIssuesByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yErrorGettableIssueOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/issues/{id}
+     * Returns one grouped issue of the caller&#39;s org with its latest occurrence sample.
+     * Returns one grouped issue of the caller&#39;s org with its latest occurrence sample.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the issue id.
+     * @return ApiResponse<O11yO11yErrorGettableIssueOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryIssuesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11yErrorGettableIssueOut?> {
+        val localVariableConfig = getV1SentryIssuesByIdRequestConfig(id = id)
+
+        return request<Unit, O11yO11yErrorGettableIssueOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryIssuesById
+     *
+     * @param id ID is the issue id.
+     * @return RequestConfig
+     */
+    fun getV1SentryIssuesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
+            method = RequestMethod.GET,
+            path = "/v1/sentry/issues/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/issues/{id}/events
+     * Lists one issue&#39;s captured occurrences, scoped to a project — a project is an isolation unit, so the caller declares which project&#39;s occurrences to read.
+     * Lists one issue&#39;s captured occurrences, scoped to a project — a project is an isolation unit, so the caller declares which project&#39;s occurrences to read.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the issue id.
+     * @param project Project is the project whose occurrences to read, by its id. Required.
+     * @param limit Limit caps how many occurrences come back. Zero means the default. (optional)
+     * @return O11yO11ySentryIssueEventsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryIssuesByIdEvents(id: kotlin.String, project: kotlin.String, limit: kotlin.Int? = null) : O11yO11ySentryIssueEventsOut {
+        val localVarResponse = getV1SentryIssuesByIdEventsWithHttpInfo(id = id, project = project, limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryIssueEventsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/issues/{id}/events
+     * Lists one issue&#39;s captured occurrences, scoped to a project — a project is an isolation unit, so the caller declares which project&#39;s occurrences to read.
+     * Lists one issue&#39;s captured occurrences, scoped to a project — a project is an isolation unit, so the caller declares which project&#39;s occurrences to read.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the issue id.
+     * @param project Project is the project whose occurrences to read, by its id. Required.
+     * @param limit Limit caps how many occurrences come back. Zero means the default. (optional)
+     * @return ApiResponse<O11yO11ySentryIssueEventsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryIssuesByIdEventsWithHttpInfo(id: kotlin.String, project: kotlin.String, limit: kotlin.Int?) : ApiResponse<O11yO11ySentryIssueEventsOut?> {
+        val localVariableConfig = getV1SentryIssuesByIdEventsRequestConfig(id = id, project = project, limit = limit)
+
+        return request<Unit, O11yO11ySentryIssueEventsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryIssuesByIdEvents
+     *
+     * @param id ID is the issue id.
+     * @param project Project is the project whose occurrences to read, by its id. Required.
+     * @param limit Limit caps how many occurrences come back. Zero means the default. (optional)
+     * @return RequestConfig
+     */
+    fun getV1SentryIssuesByIdEventsRequestConfig(id: kotlin.String, project: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("project", listOf(project.toString()))
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/issues/{id}/events".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/logs
+     * Lists a project&#39;s captured error events, newest first, optionally narrowed to those whose message or exception text contains a search string.
+     * Lists a project&#39;s captured error events, newest first, optionally narrowed to those whose message or exception text contains a search string.
+     * @param project Project is the project to read, as its id. Required.
+     * @param query Query narrows the page to events whose text contains it. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @param limit Limit caps how many events come back. (optional)
+     * @return O11yO11yLogsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryLogs(project: kotlin.String, query: kotlin.String? = null, period: kotlin.String? = null, limit: kotlin.Int? = null) : O11yO11yLogsOut {
+        val localVarResponse = getV1SentryLogsWithHttpInfo(project = project, query = query, period = period, limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yLogsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/logs
+     * Lists a project&#39;s captured error events, newest first, optionally narrowed to those whose message or exception text contains a search string.
+     * Lists a project&#39;s captured error events, newest first, optionally narrowed to those whose message or exception text contains a search string.
+     * @param project Project is the project to read, as its id. Required.
+     * @param query Query narrows the page to events whose text contains it. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @param limit Limit caps how many events come back. (optional)
+     * @return ApiResponse<O11yO11yLogsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryLogsWithHttpInfo(project: kotlin.String, query: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<O11yO11yLogsOut?> {
+        val localVariableConfig = getV1SentryLogsRequestConfig(project = project, query = query, period = period, limit = limit)
+
+        return request<Unit, O11yO11yLogsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryLogs
+     *
+     * @param project Project is the project to read, as its id. Required.
+     * @param query Query narrows the page to events whose text contains it. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @param limit Limit caps how many events come back. (optional)
+     * @return RequestConfig
+     */
+    fun getV1SentryLogsRequestConfig(project: kotlin.String, query: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("project", listOf(project.toString()))
+                if (query != null) {
+                    put("query", listOf(query.toString()))
+                }
+                if (period != null) {
+                    put("period", listOf(period.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/logs",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/projects
+     * Lists the caller&#39;s org&#39;s Sentry projects, each with its freshly-derived DSN.
+     * Lists the caller&#39;s org&#39;s Sentry projects, each with its freshly-derived DSN.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @return O11yO11ySentryProjectsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryProjects() : O11yO11ySentryProjectsOut {
+        val localVarResponse = getV1SentryProjectsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/projects
+     * Lists the caller&#39;s org&#39;s Sentry projects, each with its freshly-derived DSN.
+     * Lists the caller&#39;s org&#39;s Sentry projects, each with its freshly-derived DSN.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @return ApiResponse<O11yO11ySentryProjectsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryProjectsWithHttpInfo() : ApiResponse<O11yO11ySentryProjectsOut?> {
+        val localVariableConfig = getV1SentryProjectsRequestConfig()
+
+        return request<Unit, O11yO11ySentryProjectsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryProjects
+     *
+     * @return RequestConfig
+     */
+    fun getV1SentryProjectsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/projects",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/projects/{id}
+     * Returns one Sentry project of the caller&#39;s org, DSN included.
+     * Returns one Sentry project of the caller&#39;s org, DSN included.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the project id.
+     * @return O11yO11ySentryProjectOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryProjectsById(id: kotlin.String) : O11yO11ySentryProjectOut {
+        val localVarResponse = getV1SentryProjectsByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/projects/{id}
+     * Returns one Sentry project of the caller&#39;s org, DSN included.
+     * Returns one Sentry project of the caller&#39;s org, DSN included.  Callers need the viewer role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the project id.
+     * @return ApiResponse<O11yO11ySentryProjectOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryProjectsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11ySentryProjectOut?> {
+        val localVariableConfig = getV1SentryProjectsByIdRequestConfig(id = id)
+
+        return request<Unit, O11yO11ySentryProjectOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryProjectsById
+     *
+     * @param id ID is the project id.
+     * @return RequestConfig
+     */
+    fun getV1SentryProjectsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/projects/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/stats
+     * Returns a project&#39;s event-rate timeseries: one bucket per interval over the requested period, counting the events in it.
+     * Returns a project&#39;s event-rate timeseries: one bucket per interval over the requested period, counting the events in it.
+     * @param project Project is the project to read, as its id. Required.
+     * @param `field` Field is the dimension to count over. Empty counts all events. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @return O11yO11yStatsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryStats(project: kotlin.String, `field`: kotlin.String? = null, period: kotlin.String? = null) : O11yO11yStatsOut {
+        val localVarResponse = getV1SentryStatsWithHttpInfo(project = project, `field` = `field`, period = period)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yStatsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/stats
+     * Returns a project&#39;s event-rate timeseries: one bucket per interval over the requested period, counting the events in it.
+     * Returns a project&#39;s event-rate timeseries: one bucket per interval over the requested period, counting the events in it.
+     * @param project Project is the project to read, as its id. Required.
+     * @param `field` Field is the dimension to count over. Empty counts all events. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @return ApiResponse<O11yO11yStatsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryStatsWithHttpInfo(project: kotlin.String, `field`: kotlin.String?, period: kotlin.String?) : ApiResponse<O11yO11yStatsOut?> {
+        val localVariableConfig = getV1SentryStatsRequestConfig(project = project, `field` = `field`, period = period)
+
+        return request<Unit, O11yO11yStatsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryStats
+     *
+     * @param project Project is the project to read, as its id. Required.
+     * @param `field` Field is the dimension to count over. Empty counts all events. (optional)
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @return RequestConfig
+     */
+    fun getV1SentryStatsRequestConfig(project: kotlin.String, `field`: kotlin.String?, period: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("project", listOf(project.toString()))
+                if (`field` != null) {
+                    put("field", listOf(`field`.toString()))
+                }
+                if (period != null) {
+                    put("period", listOf(period.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/stats",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/traces
+     * Lists the traces a project&#39;s captured errors reference, each with how many errors landed on it, when they started and stopped, and the latest message seen — the entry point for \&quot;which requests are failing\&quot;.
+     * Lists the traces a project&#39;s captured errors reference, each with how many errors landed on it, when they started and stopped, and the latest message seen — the entry point for \&quot;which requests are failing\&quot;.
+     * @param project Project is the project to read, as its id. Required.
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @param limit Limit caps how many traces come back. (optional)
+     * @return O11yO11yTracesOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryTraces(project: kotlin.String, period: kotlin.String? = null, limit: kotlin.Int? = null) : O11yO11yTracesOut {
+        val localVarResponse = getV1SentryTracesWithHttpInfo(project = project, period = period, limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yTracesOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/traces
+     * Lists the traces a project&#39;s captured errors reference, each with how many errors landed on it, when they started and stopped, and the latest message seen — the entry point for \&quot;which requests are failing\&quot;.
+     * Lists the traces a project&#39;s captured errors reference, each with how many errors landed on it, when they started and stopped, and the latest message seen — the entry point for \&quot;which requests are failing\&quot;.
+     * @param project Project is the project to read, as its id. Required.
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @param limit Limit caps how many traces come back. (optional)
+     * @return ApiResponse<O11yO11yTracesOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryTracesWithHttpInfo(project: kotlin.String, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<O11yO11yTracesOut?> {
+        val localVariableConfig = getV1SentryTracesRequestConfig(project = project, period = period, limit = limit)
+
+        return request<Unit, O11yO11yTracesOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryTraces
+     *
+     * @param project Project is the project to read, as its id. Required.
+     * @param period Period is the window to read, relative to now — 1h, 24h, 7d, 14d, 30d. (optional)
+     * @param limit Limit caps how many traces come back. (optional)
+     * @return RequestConfig
+     */
+    fun getV1SentryTracesRequestConfig(project: kotlin.String, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("project", listOf(project.toString()))
+                if (period != null) {
+                    put("period", listOf(period.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/traces",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/sentry/traces/{id}
+     * Returns one trace&#39;s captured errors for a project — every error event that carried the trace id, in the order the events plane holds them.
+     * Returns one trace&#39;s captured errors for a project — every error event that carried the trace id, in the order the events plane holds them.
+     * @param id ID is the trace id.
+     * @param project Project is the project the trace&#39;s errors belong to. Required.
+     * @return O11yO11yTraceOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SentryTracesById(id: kotlin.String, project: kotlin.String) : O11yO11yTraceOut {
+        val localVarResponse = getV1SentryTracesByIdWithHttpInfo(id = id, project = project)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yTraceOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/sentry/traces/{id}
+     * Returns one trace&#39;s captured errors for a project — every error event that carried the trace id, in the order the events plane holds them.
+     * Returns one trace&#39;s captured errors for a project — every error event that carried the trace id, in the order the events plane holds them.
+     * @param id ID is the trace id.
+     * @param project Project is the project the trace&#39;s errors belong to. Required.
+     * @return ApiResponse<O11yO11yTraceOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SentryTracesByIdWithHttpInfo(id: kotlin.String, project: kotlin.String) : ApiResponse<O11yO11yTraceOut?> {
+        val localVariableConfig = getV1SentryTracesByIdRequestConfig(id = id, project = project)
+
+        return request<Unit, O11yO11yTraceOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SentryTracesById
+     *
+     * @param id ID is the trace id.
+     * @param project Project is the project the trace&#39;s errors belong to. Required.
+     * @return RequestConfig
+     */
+    fun getV1SentryTracesByIdRequestConfig(id: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("project", listOf(project.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/sentry/traces/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Not served — the Sentry surface has no partial update
+     * The Sentry face carries NO route for a partial update. The wildcard admits every method, so this operation exists as an address, but nothing behind it answers and a request lands on the runtime as an unrouted path.  It is documented rather than silently omitted because the useful thing to say is where to go instead: an issue&#39;s lifecycle — resolve, ignore, assign — is a REPLACE on that issue, not a patch, and it is the only mutable state on this surface. A client that reaches for a partial update here is looking for that call.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -267,8 +1143,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -287,16 +1163,16 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PATCH /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Not served — the Sentry surface has no partial update
+     * The Sentry face carries NO route for a partial update. The wildcard admits every method, so this operation exists as an address, but nothing behind it answers and a request lands on the runtime as an unrouted path.  It is documented rather than silently omitted because the useful thing to say is where to go instead: an issue&#39;s lifecycle — resolve, ignore, assign — is a REPLACE on that issue, not a patch, and it is the only mutable state on this surface. A client that reaches for a partial update here is looking for that call.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -304,12 +1180,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1SentryByWildcard1
+     * To obtain the request config of the operation patchV1SentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPatchV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -319,15 +1195,155 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/sentry/{project}/envelope/
+     * Receive a Sentry envelope on the clean root
+     * The same envelope ingest as the DSN path, spelled the way this platform names things: one /v1/, the product, the project. Point an SDK&#39;s DSN here and the wire is identical.  AUTHENTICATED BY THE DSN PUBLIC KEY and exempt from the principal gate for the same reason — a Sentry SDK has no Hanzo session to present. The project segment is a UUID enforced by the route, and the exemption matches method plus prefix plus suffix, so every Sentry READ (issues, discover, events, logs, traces, stats) stays gated.
+     * @param project 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1SentryByProjectEnvelope(project: kotlin.String) : Unit {
+        val localVarResponse = postV1SentryByProjectEnvelopeWithHttpInfo(project = project)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/sentry/{project}/envelope/
+     * Receive a Sentry envelope on the clean root
+     * The same envelope ingest as the DSN path, spelled the way this platform names things: one /v1/, the product, the project. Point an SDK&#39;s DSN here and the wire is identical.  AUTHENTICATED BY THE DSN PUBLIC KEY and exempt from the principal gate for the same reason — a Sentry SDK has no Hanzo session to present. The project segment is a UUID enforced by the route, and the exemption matches method plus prefix plus suffix, so every Sentry READ (issues, discover, events, logs, traces, stats) stays gated.
+     * @param project 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1SentryByProjectEnvelopeWithHttpInfo(project: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1SentryByProjectEnvelopeRequestConfig(project = project)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1SentryByProjectEnvelope
+     *
+     * @param project 
+     * @return RequestConfig
+     */
+    fun postV1SentryByProjectEnvelopeRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/sentry/{project}/envelope/".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/sentry/{project}/store/
+     * Receive a single Sentry event on the clean root
+     * The legacy single-event ingest on the clean /v1/sentry root — one JSON event rather than a framed batch. Same DSN-key authentication, same gate exemption, same UUID-enforced project segment as the envelope route beside it.
+     * @param project 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1SentryByProjectStore(project: kotlin.String) : Unit {
+        val localVarResponse = postV1SentryByProjectStoreWithHttpInfo(project = project)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/sentry/{project}/store/
+     * Receive a single Sentry event on the clean root
+     * The legacy single-event ingest on the clean /v1/sentry root — one JSON event rather than a framed batch. Same DSN-key authentication, same gate exemption, same UUID-enforced project segment as the envelope route beside it.
+     * @param project 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1SentryByProjectStoreWithHttpInfo(project: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1SentryByProjectStoreRequestConfig(project = project)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1SentryByProjectStore
+     *
+     * @param project 
+     * @return RequestConfig
+     */
+    fun postV1SentryByProjectStoreRequestConfig(project: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/sentry/{project}/store/".replace("{"+"project"+"}", encodeURIComponent(project.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Send events to the Sentry surface, or write on it
+     * Carries every write on the Sentry-compatible surface: the SDK&#39;s error ingest, and the authenticated writes the console makes — creating a project, rotating a project&#39;s DSN key, and running a discover query over the events plane.  THE TWO ARE AUTHENTICATED DIFFERENTLY, and that is the rule to get right. An envelope or store submission presents a DSN public key, never a Hanzo session, so it is exempt from the principal gate and verified by the ingest key check instead — which derives the org from the DSN and fails closed. A keyless submission is a 401 from that verifier, not a 403 from the gate, and telling those two apart is how you tell the hops apart. Every other write here needs a validated, org-scoped principal, and creating or rotating requires an editor rather than a viewer.  The ingest exemption is matched by method plus prefix plus suffix, never a bare prefix, and the project segment must be a UUID — so no read is reachable through it. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -337,8 +1353,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -357,16 +1373,16 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Send events to the Sentry surface, or write on it
+     * Carries every write on the Sentry-compatible surface: the SDK&#39;s error ingest, and the authenticated writes the console makes — creating a project, rotating a project&#39;s DSN key, and running a discover query over the events plane.  THE TWO ARE AUTHENTICATED DIFFERENTLY, and that is the rule to get right. An envelope or store submission presents a DSN public key, never a Hanzo session, so it is exempt from the principal gate and verified by the ingest key check instead — which derives the org from the DSN and fails closed. A keyless submission is a 401 from that verifier, not a 403 from the gate, and telling those two apart is how you tell the hops apart. Every other write here needs a validated, org-scoped principal, and creating or rotating requires an editor rather than a viewer.  The ingest exemption is matched by method plus prefix plus suffix, never a bare prefix, and the project segment must be a UUID — so no read is reachable through it. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -374,12 +1390,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1SentryByWildcard1
+     * To obtain the request config of the operation postV1SentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPostV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -389,15 +1405,236 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/sentry/discover
+     * Aggregates a project&#39;s captured errors into a table — the caller names the filters, the groupings and the aggregations, and gets back the columns and rows they asked for.
+     * Aggregates a project&#39;s captured errors into a table — the caller names the filters, the groupings and the aggregations, and gets back the columns and rows they asked for.  The project is mandatory and is checked against the caller&#39;s own org before it scopes anything, so a project id belonging to someone else reads as absent rather than as data.
+     * @param o11yO11yDiscoverIn 
+     * @return O11yO11yDiscoverOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1SentryDiscover(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : O11yO11yDiscoverOut {
+        val localVarResponse = postV1SentryDiscoverWithHttpInfo(o11yO11yDiscoverIn = o11yO11yDiscoverIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yDiscoverOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/sentry/discover
+     * Aggregates a project&#39;s captured errors into a table — the caller names the filters, the groupings and the aggregations, and gets back the columns and rows they asked for.
+     * Aggregates a project&#39;s captured errors into a table — the caller names the filters, the groupings and the aggregations, and gets back the columns and rows they asked for.  The project is mandatory and is checked against the caller&#39;s own org before it scopes anything, so a project id belonging to someone else reads as absent rather than as data.
+     * @param o11yO11yDiscoverIn 
+     * @return ApiResponse<O11yO11yDiscoverOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1SentryDiscoverWithHttpInfo(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : ApiResponse<O11yO11yDiscoverOut?> {
+        val localVariableConfig = postV1SentryDiscoverRequestConfig(o11yO11yDiscoverIn = o11yO11yDiscoverIn)
+
+        return request<O11yO11yDiscoverIn, O11yO11yDiscoverOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1SentryDiscover
+     *
+     * @param o11yO11yDiscoverIn 
+     * @return RequestConfig
+     */
+    fun postV1SentryDiscoverRequestConfig(o11yO11yDiscoverIn: O11yO11yDiscoverIn) : RequestConfig<O11yO11yDiscoverIn> {
+        val localVariableBody = o11yO11yDiscoverIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/sentry/discover",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/sentry/projects
+     * Creates a Sentry project under the caller&#39;s org and returns it, DSN included.
+     * Creates a Sentry project under the caller&#39;s org and returns it, DSN included. Only the name, and optionally a slug and platform, are the caller&#39;s to set; the org, id and key are server-assigned.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param o11yO11ySentryPostableProject 
+     * @return O11yO11ySentryProjectOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1SentryProjects(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : O11yO11ySentryProjectOut {
+        val localVarResponse = postV1SentryProjectsWithHttpInfo(o11yO11ySentryPostableProject = o11yO11ySentryPostableProject)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/sentry/projects
+     * Creates a Sentry project under the caller&#39;s org and returns it, DSN included.
+     * Creates a Sentry project under the caller&#39;s org and returns it, DSN included. Only the name, and optionally a slug and platform, are the caller&#39;s to set; the org, id and key are server-assigned.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param o11yO11ySentryPostableProject 
+     * @return ApiResponse<O11yO11ySentryProjectOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1SentryProjectsWithHttpInfo(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : ApiResponse<O11yO11ySentryProjectOut?> {
+        val localVariableConfig = postV1SentryProjectsRequestConfig(o11yO11ySentryPostableProject = o11yO11ySentryPostableProject)
+
+        return request<O11yO11ySentryPostableProject, O11yO11ySentryProjectOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1SentryProjects
+     *
+     * @param o11yO11ySentryPostableProject 
+     * @return RequestConfig
+     */
+    fun postV1SentryProjectsRequestConfig(o11yO11ySentryPostableProject: O11yO11ySentryPostableProject) : RequestConfig<O11yO11ySentryPostableProject> {
+        val localVariableBody = o11yO11ySentryPostableProject
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/sentry/projects",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/sentry/projects/{id}/keys/rotate
+     * Rotates a project&#39;s DSN key — bumping its rotation watermark so keys below it stop verifying — and returns the project with its new DSN.
+     * Rotates a project&#39;s DSN key — bumping its rotation watermark so keys below it stop verifying — and returns the project with its new DSN.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the project id.
+     * @return O11yO11ySentryProjectOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1SentryProjectsByIdKeysRotate(id: kotlin.String) : O11yO11ySentryProjectOut {
+        val localVarResponse = postV1SentryProjectsByIdKeysRotateWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11ySentryProjectOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/sentry/projects/{id}/keys/rotate
+     * Rotates a project&#39;s DSN key — bumping its rotation watermark so keys below it stop verifying — and returns the project with its new DSN.
+     * Rotates a project&#39;s DSN key — bumping its rotation watermark so keys below it stop verifying — and returns the project with its new DSN.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the project id.
+     * @return ApiResponse<O11yO11ySentryProjectOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1SentryProjectsByIdKeysRotateWithHttpInfo(id: kotlin.String) : ApiResponse<O11yO11ySentryProjectOut?> {
+        val localVariableConfig = postV1SentryProjectsByIdKeysRotateRequestConfig(id = id)
+
+        return request<Unit, O11yO11ySentryProjectOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1SentryProjectsByIdKeysRotate
+     *
+     * @param id ID is the project id.
+     * @return RequestConfig
+     */
+    fun postV1SentryProjectsByIdKeysRotateRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/sentry/projects/{id}/keys/rotate".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Move an error issue through its lifecycle
+     * The one replace on the Sentry surface: updating an error ISSUE — resolving it, ignoring it, or assigning it — and answering the updated issue.  Nothing else here takes a replace. A project is created and deleted but never replaced, and the event and trace planes are append-only telemetry, so an issue&#39;s lifecycle is the only mutable state this face exposes.  Requires a validated, org-scoped principal with edit rights; a viewer is refused. The write is confined to the org minted from that principal&#39;s claim, so an issue id belonging to another tenant is simply not found. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -407,8 +1644,8 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putV1SentryByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putV1SentryByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -427,16 +1664,16 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/sentry/{wildcard1}
-     * 
-     * 
+     * Move an error issue through its lifecycle
+     * The one replace on the Sentry surface: updating an error ISSUE — resolving it, ignoring it, or assigning it — and answering the updated issue.  Nothing else here takes a replace. A project is created and deleted but never replaced, and the event and trace planes are append-only telemetry, so an issue&#39;s lifecycle is the only mutable state this face exposes.  Requires a validated, org-scoped principal with edit rights; a viewer is refused. The write is confined to the org minted from that principal&#39;s claim, so an issue id belonging to another tenant is simply not found. Before the runtime is initialized, 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putV1SentryByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1SentryByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -444,12 +1681,12 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1SentryByWildcard1
+     * To obtain the request config of the operation putV1SentryByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPutV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putV1SentryByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -459,7 +1696,84 @@ class SentryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/sentry/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/sentry/issues/{id}
+     * Changes an issue&#39;s lifecycle — resolve, ignore, reopen or assign — and returns the updated issue.
+     * Changes an issue&#39;s lifecycle — resolve, ignore, reopen or assign — and returns the updated issue. Fields left unset are left unchanged.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the issue id.
+     * @param o11yO11ySentryUpdateIssueIn 
+     * @return O11yO11yErrorIssueOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1SentryIssuesById(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : O11yO11yErrorIssueOut {
+        val localVarResponse = putV1SentryIssuesByIdWithHttpInfo(id = id, o11yO11ySentryUpdateIssueIn = o11yO11ySentryUpdateIssueIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as O11yO11yErrorIssueOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/sentry/issues/{id}
+     * Changes an issue&#39;s lifecycle — resolve, ignore, reopen or assign — and returns the updated issue.
+     * Changes an issue&#39;s lifecycle — resolve, ignore, reopen or assign — and returns the updated issue. Fields left unset are left unchanged.  Callers need the editor role; the runtime&#39;s own gate enforces it.
+     * @param id ID is the issue id.
+     * @param o11yO11ySentryUpdateIssueIn 
+     * @return ApiResponse<O11yO11yErrorIssueOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1SentryIssuesByIdWithHttpInfo(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : ApiResponse<O11yO11yErrorIssueOut?> {
+        val localVariableConfig = putV1SentryIssuesByIdRequestConfig(id = id, o11yO11ySentryUpdateIssueIn = o11yO11ySentryUpdateIssueIn)
+
+        return request<O11yO11ySentryUpdateIssueIn, O11yO11yErrorIssueOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1SentryIssuesById
+     *
+     * @param id ID is the issue id.
+     * @param o11yO11ySentryUpdateIssueIn 
+     * @return RequestConfig
+     */
+    fun putV1SentryIssuesByIdRequestConfig(id: kotlin.String, o11yO11ySentryUpdateIssueIn: O11yO11ySentryUpdateIssueIn) : RequestConfig<O11yO11ySentryUpdateIssueIn> {
+        val localVariableBody = o11yO11ySentryUpdateIssueIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/sentry/issues/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

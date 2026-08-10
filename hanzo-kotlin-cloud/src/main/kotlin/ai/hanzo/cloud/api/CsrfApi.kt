@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCsrfResp
+import ai.hanzo.cloud.model.CsrfResp
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,7 +49,7 @@ class CsrfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/csrf
      * IssueCSRFToken mints the anti-CSRF token a browser echoes as X-CSRF-Token on every money write (mint/revoke a key, top up, onboard, and the billing/commerce write verbs).
      * IssueCSRFToken mints the anti-CSRF token a browser echoes as X-CSRF-Token on every money write (mint/revoke a key, top up, onboard, and the billing/commerce write verbs). The token is bound to the caller&#39;s validated identity and expires, so one minted for one identity cannot authorize a write as another.  It is answered no-store, so it is never cached by a shared proxy. This is the same-origin endpoint the embedded console reads — the Same-Origin Policy is what stops a cross-site page from reading the response and forging a write.
-     * @return CloudCsrfResp
+     * @return CsrfResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +58,11 @@ class CsrfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Csrf() : CloudCsrfResp {
-        val localVarResponse = cloudGetV1CsrfWithHttpInfo()
+    fun getV1Csrf() : CsrfResp {
+        val localVarResponse = getV1CsrfWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCsrfResp
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CsrfResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,26 +80,26 @@ class CsrfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/csrf
      * IssueCSRFToken mints the anti-CSRF token a browser echoes as X-CSRF-Token on every money write (mint/revoke a key, top up, onboard, and the billing/commerce write verbs).
      * IssueCSRFToken mints the anti-CSRF token a browser echoes as X-CSRF-Token on every money write (mint/revoke a key, top up, onboard, and the billing/commerce write verbs). The token is bound to the caller&#39;s validated identity and expires, so one minted for one identity cannot authorize a write as another.  It is answered no-store, so it is never cached by a shared proxy. This is the same-origin endpoint the embedded console reads — the Same-Origin Policy is what stops a cross-site page from reading the response and forging a write.
-     * @return ApiResponse<CloudCsrfResp?>
+     * @return ApiResponse<CsrfResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CsrfWithHttpInfo() : ApiResponse<CloudCsrfResp?> {
-        val localVariableConfig = cloudGetV1CsrfRequestConfig()
+    fun getV1CsrfWithHttpInfo() : ApiResponse<CsrfResp?> {
+        val localVariableConfig = getV1CsrfRequestConfig()
 
-        return request<Unit, CloudCsrfResp>(
+        return request<Unit, CsrfResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Csrf
+     * To obtain the request config of the operation getV1Csrf
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CsrfRequestConfig() : RequestConfig<Unit> {
+    fun getV1CsrfRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +110,7 @@ class CsrfApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/csrf",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

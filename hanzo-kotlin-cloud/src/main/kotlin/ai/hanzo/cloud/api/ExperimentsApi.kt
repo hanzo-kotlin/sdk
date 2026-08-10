@@ -19,13 +19,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.MlCreateExperimentRequest
-import ai.hanzo.cloud.model.MlExperiment
-import ai.hanzo.cloud.model.MlExperimentRun
-import ai.hanzo.cloud.model.MlGetRunMetrics200Response
-import ai.hanzo.cloud.model.MlListExperimentRuns200Response
-import ai.hanzo.cloud.model.MlListExperiments200Response
-import ai.hanzo.cloud.model.MlStartExperimentRunRequest
+import ai.hanzo.cloud.model.Analysis
+import ai.hanzo.cloud.model.AnalyzeQuery
+import ai.hanzo.cloud.model.Assignment
+import ai.hanzo.cloud.model.CreateBody
+import ai.hanzo.cloud.model.DecideBody
+import ai.hanzo.cloud.model.ExperimentList
+import ai.hanzo.cloud.model.Health
+import ai.hanzo.cloud.model.Trial
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,21 +54,22 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/experiments
-     * 
-     * 
-     * @return void
+     * Is every experiment in the caller&#39;s org, with its variants, status and decision, ordered by project then id.
+     * Is every experiment in the caller&#39;s org, with its variants, status and decision, ordered by project then id.  Scoped to the org resolved from the validated principal — a distinct org is a distinct physical store, so no query here can reach another tenant&#39;s rows — and further narrowed to the caller&#39;s project scope when the credential carries one. A principal with NO project scope sees the org&#39;s experiments across all of its projects, which is the answer a reader most often expects to be filtered and is not.  Requires a validated principal; refuses without one rather than answering an empty list.
+     * @return ExperimentList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Experiments() : Unit {
-        val localVarResponse = cloudGetV1ExperimentsWithHttpInfo()
+    fun getV1Experiments() : ExperimentList {
+        val localVarResponse = getV1ExperimentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ExperimentList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -83,59 +85,62 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/experiments
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is every experiment in the caller&#39;s org, with its variants, status and decision, ordered by project then id.
+     * Is every experiment in the caller&#39;s org, with its variants, status and decision, ordered by project then id.  Scoped to the org resolved from the validated principal — a distinct org is a distinct physical store, so no query here can reach another tenant&#39;s rows — and further narrowed to the caller&#39;s project scope when the credential carries one. A principal with NO project scope sees the org&#39;s experiments across all of its projects, which is the answer a reader most often expects to be filtered and is not.  Requires a validated principal; refuses without one rather than answering an empty list.
+     * @return ApiResponse<ExperimentList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ExperimentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ExperimentsRequestConfig()
+    fun getV1ExperimentsWithHttpInfo() : ApiResponse<ExperimentList?> {
+        val localVariableConfig = getV1ExperimentsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, ExperimentList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Experiments
+     * To obtain the request config of the operation getV1Experiments
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ExperimentsRequestConfig() : RequestConfig<Unit> {
+    fun getV1ExperimentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/experiments/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Is one experiment&#39;s definition and lifecycle: variants, weights, control arm, status and winner.
+     * Is one experiment&#39;s definition and lifecycle: variants, weights, control arm, status and winner.  It reads the registry row only — the definition and the decision, never live measurements. Assignment lives in the flags plane and outcomes in analytics; this is the value that names both.  Scoped to the caller&#39;s org and project from the validated principal, so another tenant&#39;s experiment of the same id is simply not found. An id that is not a legal slug is answered the same way, without a store read — the shape check and the existence check are one answer, so neither leaks the other.
+     * @param id ID is the experiment the URL names.
+     * @return Trial
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ExperimentsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1ExperimentsByIdWithHttpInfo(id = id)
+    fun getV1ExperimentsById(id: kotlin.String) : Trial {
+        val localVarResponse = getV1ExperimentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Trial
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -151,61 +156,66 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/experiments/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Is one experiment&#39;s definition and lifecycle: variants, weights, control arm, status and winner.
+     * Is one experiment&#39;s definition and lifecycle: variants, weights, control arm, status and winner.  It reads the registry row only — the definition and the decision, never live measurements. Assignment lives in the flags plane and outcomes in analytics; this is the value that names both.  Scoped to the caller&#39;s org and project from the validated principal, so another tenant&#39;s experiment of the same id is simply not found. An id that is not a legal slug is answered the same way, without a store read — the shape check and the existence check are one answer, so neither leaks the other.
+     * @param id ID is the experiment the URL names.
+     * @return ApiResponse<Trial?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ExperimentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ExperimentsByIdRequestConfig(id = id)
+    fun getV1ExperimentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Trial?> {
+        val localVariableConfig = getV1ExperimentsByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, Trial>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ExperimentsById
+     * To obtain the request config of the operation getV1ExperimentsById
      *
-     * @param id 
+     * @param id ID is the experiment the URL names.
      * @return RequestConfig
      */
-    fun cloudGetV1ExperimentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ExperimentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/experiments/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/experiments/{id}/assign
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Is the variant one subject is bucketed into, and the payload that variant carries.
+     * Is the variant one subject is bucketed into, and the payload that variant carries.  The bucketing is a deterministic hash of the subject, so the same subject gets the same arm on every call for as long as the flag definition is unchanged — and this is a pure READ: it records nothing. In particular it does NOT record an exposure. The caller&#39;s SDK must emit the experiment&#39;s exposure event itself, or the analysis has an empty denominator and every arm measures zero.  An empty variant with on false is not an error — it means the flag returned nothing for this subject, so the subject is not enrolled. A flags engine that is unavailable refuses rather than defaulting to an arm. Requires a validated principal, and the experiment must exist in the caller&#39;s org and project.
+     * @param id ID is the experiment the URL names.
+     * @param subject Subject is the unit to bucket — a user, org, session or audience key, matching the experiment&#39;s subjectKind.
+     * @param props Props is a JSON object of person properties for targeting. A value that is not valid JSON is dropped rather than refused, so a malformed one changes the bucketing without saying so. (optional)
+     * @return Assignment
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ExperimentsByIdAssign(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1ExperimentsByIdAssignWithHttpInfo(id = id)
+    fun getV1ExperimentsByIdAssign(id: kotlin.String, subject: kotlin.String, props: kotlin.String? = null) : Assignment {
+        val localVarResponse = getV1ExperimentsByIdAssignWithHttpInfo(id = id, subject = subject, props = props)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Assignment
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -221,60 +231,73 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/experiments/{id}/assign
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Is the variant one subject is bucketed into, and the payload that variant carries.
+     * Is the variant one subject is bucketed into, and the payload that variant carries.  The bucketing is a deterministic hash of the subject, so the same subject gets the same arm on every call for as long as the flag definition is unchanged — and this is a pure READ: it records nothing. In particular it does NOT record an exposure. The caller&#39;s SDK must emit the experiment&#39;s exposure event itself, or the analysis has an empty denominator and every arm measures zero.  An empty variant with on false is not an error — it means the flag returned nothing for this subject, so the subject is not enrolled. A flags engine that is unavailable refuses rather than defaulting to an arm. Requires a validated principal, and the experiment must exist in the caller&#39;s org and project.
+     * @param id ID is the experiment the URL names.
+     * @param subject Subject is the unit to bucket — a user, org, session or audience key, matching the experiment&#39;s subjectKind.
+     * @param props Props is a JSON object of person properties for targeting. A value that is not valid JSON is dropped rather than refused, so a malformed one changes the bucketing without saying so. (optional)
+     * @return ApiResponse<Assignment?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ExperimentsByIdAssignWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ExperimentsByIdAssignRequestConfig(id = id)
+    fun getV1ExperimentsByIdAssignWithHttpInfo(id: kotlin.String, subject: kotlin.String, props: kotlin.String?) : ApiResponse<Assignment?> {
+        val localVariableConfig = getV1ExperimentsByIdAssignRequestConfig(id = id, subject = subject, props = props)
 
-        return request<Unit, Unit>(
+        return request<Unit, Assignment>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ExperimentsByIdAssign
+     * To obtain the request config of the operation getV1ExperimentsByIdAssign
      *
-     * @param id 
+     * @param id ID is the experiment the URL names.
+     * @param subject Subject is the unit to bucket — a user, org, session or audience key, matching the experiment&#39;s subjectKind.
+     * @param props Props is a JSON object of person properties for targeting. A value that is not valid JSON is dropped rather than refused, so a malformed one changes the bucketing without saying so. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ExperimentsByIdAssignRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ExperimentsByIdAssignRequestConfig(id: kotlin.String, subject: kotlin.String, props: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("subject", listOf(subject.toString()))
+                if (props != null) {
+                    put("props", listOf(props.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/experiments/{id}/assign".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/experiments/health
-     * 
-     * 
-     * @return void
+     * Is whether the experiments subsystem is mounted and serving in this process.
+     * Is whether the experiments subsystem is mounted and serving in this process.  It answers unconditionally. It proves exactly one thing — that this binary registered the experiments routes and is dispatching them — and deliberately no more: it reads no principal, opens no per-org registry, and touches neither the flags engine nor the analytics plane, so a 200 here says nothing about whether a given tenant&#39;s store will open or whether an analysis can run. It is the only route on this surface that needs no org.  The static path is registered ahead of the /:id read, so it always wins the first-match scan. \&quot;health\&quot; is a legal experiment id, which means an experiment created under that id can never be fetched by id — pick another.
+     * @return Health
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ExperimentsHealth() : Unit {
-        val localVarResponse = cloudGetV1ExperimentsHealthWithHttpInfo()
+    fun getV1ExperimentsHealth() : Health {
+        val localVarResponse = getV1ExperimentsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Health
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -290,58 +313,62 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/experiments/health
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is whether the experiments subsystem is mounted and serving in this process.
+     * Is whether the experiments subsystem is mounted and serving in this process.  It answers unconditionally. It proves exactly one thing — that this binary registered the experiments routes and is dispatching them — and deliberately no more: it reads no principal, opens no per-org registry, and touches neither the flags engine nor the analytics plane, so a 200 here says nothing about whether a given tenant&#39;s store will open or whether an analysis can run. It is the only route on this surface that needs no org.  The static path is registered ahead of the /:id read, so it always wins the first-match scan. \&quot;health\&quot; is a legal experiment id, which means an experiment created under that id can never be fetched by id — pick another.
+     * @return ApiResponse<Health?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ExperimentsHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ExperimentsHealthRequestConfig()
+    fun getV1ExperimentsHealthWithHttpInfo() : ApiResponse<Health?> {
+        val localVariableConfig = getV1ExperimentsHealthRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, Health>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ExperimentsHealth
+     * To obtain the request config of the operation getV1ExperimentsHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ExperimentsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1ExperimentsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/experiments/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/experiments
-     * 
-     * 
-     * @return void
+     * Registers a controlled experiment AND puts its assignment flag live, in that order, so the arms start bucketing subjects the moment this returns 201 — the flag is created active at 100% rollout, with each variant weighted as declared.
+     * Registers a controlled experiment AND puts its assignment flag live, in that order, so the arms start bucketing subjects the moment this returns 201 — the flag is created active at 100% rollout, with each variant weighted as declared. There is no separate start call; creating IS starting.  A variant carries an opaque payload this primitive never interprets: a feature config, an ad-creative id, a subject line, a model id.  Requires a validated principal, and refuses without one. The org and project are taken from that principal and the creator is stamped from the credential — none of the three is a body field, so an experiment cannot be filed against another tenant. An id already used in this project is a conflict, never a silent overwrite: re-creating would stomp the assignment flag of a run in progress.  It fails closed on the flag write. An experiment whose assignment flag does not exist would assign nobody, so if that write fails nothing is registered.
+     * @param createBody 
+     * @return Trial
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Experiments() : Unit {
-        val localVarResponse = cloudPostV1ExperimentsWithHttpInfo()
+    fun postV1Experiments(createBody: CreateBody) : Trial {
+        val localVarResponse = postV1ExperimentsWithHttpInfo(createBody = createBody)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Trial
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -357,59 +384,66 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/experiments
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Registers a controlled experiment AND puts its assignment flag live, in that order, so the arms start bucketing subjects the moment this returns 201 — the flag is created active at 100% rollout, with each variant weighted as declared.
+     * Registers a controlled experiment AND puts its assignment flag live, in that order, so the arms start bucketing subjects the moment this returns 201 — the flag is created active at 100% rollout, with each variant weighted as declared. There is no separate start call; creating IS starting.  A variant carries an opaque payload this primitive never interprets: a feature config, an ad-creative id, a subject line, a model id.  Requires a validated principal, and refuses without one. The org and project are taken from that principal and the creator is stamped from the credential — none of the three is a body field, so an experiment cannot be filed against another tenant. An id already used in this project is a conflict, never a silent overwrite: re-creating would stomp the assignment flag of a run in progress.  It fails closed on the flag write. An experiment whose assignment flag does not exist would assign nobody, so if that write fails nothing is registered.
+     * @param createBody 
+     * @return ApiResponse<Trial?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ExperimentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ExperimentsRequestConfig()
+    fun postV1ExperimentsWithHttpInfo(createBody: CreateBody) : ApiResponse<Trial?> {
+        val localVariableConfig = postV1ExperimentsRequestConfig(createBody = createBody)
 
-        return request<Unit, Unit>(
+        return request<CreateBody, Trial>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Experiments
+     * To obtain the request config of the operation postV1Experiments
      *
+     * @param createBody 
      * @return RequestConfig
      */
-    fun cloudPostV1ExperimentsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1ExperimentsRequestConfig(createBody: CreateBody) : RequestConfig<CreateBody> {
+        val localVariableBody = createBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/experiments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/experiments/{id}/analyze
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Is per-variant conversion, lift and statistical significance against the control arm.
+     * Is per-variant conversion, lift and statistical significance against the control arm.  It reads per-subject outcomes from the analytics plane over a window, folds them into per-variant samples, and returns each arm&#39;s exposed count, conversions, rate, lift versus control, two-proportion z, two-tailed p-value and whether it clears alpha. Arms with no data still appear with zero exposed, so the read is complete over the experiment&#39;s declared arms; the control arm sorts first. The pooled-variance estimator is used and the p-value is exact; a degenerate comparison (an empty arm, no variance) answers z 0 and p 1 — not significant, never an error.  Only EXPOSED subjects are counted, and each is joined to its arm by re-evaluating the assignment flag AT ANALYSIS TIME — not from what was in force during the window. That is the one rule to get right: analyzing an experiment after its winner has been promoted re-buckets every subject into the promoted arm, collapsing the control to zero exposed and making the result meaningless. Read the analysis before deciding. A subject the flag cannot place is dropped rather than allowed to poison the fold.  The winner in the response is ADVISORY — the significant, control-beating arm with the highest rate, or empty when inconclusive. It promotes nothing; the decision is a separate, explicit act.  Every plane read is scoped to the caller&#39;s org. Per-variant samples are also written to the research evidence plane as immutable ab rows, best-effort: the analysis is still returned if that write fails, because the samples are recomputable, and the failure is logged rather than swallowed.
+     * @param id ID is the experiment the URL names.
+     * @param analyzeQuery 
+     * @return Analysis
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ExperimentsByIdAnalyze(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1ExperimentsByIdAnalyzeWithHttpInfo(id = id)
+    fun postV1ExperimentsByIdAnalyze(id: kotlin.String, analyzeQuery: AnalyzeQuery) : Analysis {
+        val localVarResponse = postV1ExperimentsByIdAnalyzeWithHttpInfo(id = id, analyzeQuery = analyzeQuery)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Analysis
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -425,61 +459,68 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/experiments/{id}/analyze
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Is per-variant conversion, lift and statistical significance against the control arm.
+     * Is per-variant conversion, lift and statistical significance against the control arm.  It reads per-subject outcomes from the analytics plane over a window, folds them into per-variant samples, and returns each arm&#39;s exposed count, conversions, rate, lift versus control, two-proportion z, two-tailed p-value and whether it clears alpha. Arms with no data still appear with zero exposed, so the read is complete over the experiment&#39;s declared arms; the control arm sorts first. The pooled-variance estimator is used and the p-value is exact; a degenerate comparison (an empty arm, no variance) answers z 0 and p 1 — not significant, never an error.  Only EXPOSED subjects are counted, and each is joined to its arm by re-evaluating the assignment flag AT ANALYSIS TIME — not from what was in force during the window. That is the one rule to get right: analyzing an experiment after its winner has been promoted re-buckets every subject into the promoted arm, collapsing the control to zero exposed and making the result meaningless. Read the analysis before deciding. A subject the flag cannot place is dropped rather than allowed to poison the fold.  The winner in the response is ADVISORY — the significant, control-beating arm with the highest rate, or empty when inconclusive. It promotes nothing; the decision is a separate, explicit act.  Every plane read is scoped to the caller&#39;s org. Per-variant samples are also written to the research evidence plane as immutable ab rows, best-effort: the analysis is still returned if that write fails, because the samples are recomputable, and the failure is logged rather than swallowed.
+     * @param id ID is the experiment the URL names.
+     * @param analyzeQuery 
+     * @return ApiResponse<Analysis?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ExperimentsByIdAnalyzeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ExperimentsByIdAnalyzeRequestConfig(id = id)
+    fun postV1ExperimentsByIdAnalyzeWithHttpInfo(id: kotlin.String, analyzeQuery: AnalyzeQuery) : ApiResponse<Analysis?> {
+        val localVariableConfig = postV1ExperimentsByIdAnalyzeRequestConfig(id = id, analyzeQuery = analyzeQuery)
 
-        return request<Unit, Unit>(
+        return request<AnalyzeQuery, Analysis>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ExperimentsByIdAnalyze
+     * To obtain the request config of the operation postV1ExperimentsByIdAnalyze
      *
-     * @param id 
+     * @param id ID is the experiment the URL names.
+     * @param analyzeQuery 
      * @return RequestConfig
      */
-    fun cloudPostV1ExperimentsByIdAnalyzeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1ExperimentsByIdAnalyzeRequestConfig(id: kotlin.String, analyzeQuery: AnalyzeQuery) : RequestConfig<AnalyzeQuery> {
+        val localVariableBody = analyzeQuery
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/experiments/{id}/analyze".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/experiments/{id}/decide
-     * 
-     * 
+     * Promotes one variant to the whole rollout and records who decided.
+     * Promotes one variant to the whole rollout and records who decided.  It rewrites the assignment flag so the named winner serves 100% of the rollout and every other arm 0%, preserving the flag&#39;s targeting groups and payloads, then stamps the experiment decided with the winner, the deciding credential and the time. This is a production behaviour change that takes effect immediately for every subject the flag evaluates.  It requires an ORG ADMIN of the caller&#39;s own org — a stricter gate than the rest of this surface, matching the flags write plane, because promoting is a flag write. The admin check runs AFTER the experiment is found, so a caller from another tenant is answered not-found rather than forbidden and learns nothing about what exists.  An experiment whose assignment flag has gone missing is a conflict rather than a silent no-op — there is nothing to promote.  Deciding is NOT terminal. A second call re-promotes a different variant and re-stamps the row; the status stays decided and the previous winner is overwritten with no record that it was ever chosen. Nothing here reverts the flag to its original weights either, so an experiment cannot be un-decided through this route — restoring a split means writing the flag definition back through the flags plane.
      * @param id 
-     * @return void
+     * @param decideBody 
+     * @return Trial
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ExperimentsByIdDecide(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1ExperimentsByIdDecideWithHttpInfo(id = id)
+    fun postV1ExperimentsByIdDecide(id: kotlin.String, decideBody: DecideBody) : Trial {
+        val localVarResponse = postV1ExperimentsByIdDecideWithHttpInfo(id = id, decideBody = decideBody)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Trial
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -495,486 +536,44 @@ class ExperimentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/experiments/{id}/decide
-     * 
-     * 
+     * Promotes one variant to the whole rollout and records who decided.
+     * Promotes one variant to the whole rollout and records who decided.  It rewrites the assignment flag so the named winner serves 100% of the rollout and every other arm 0%, preserving the flag&#39;s targeting groups and payloads, then stamps the experiment decided with the winner, the deciding credential and the time. This is a production behaviour change that takes effect immediately for every subject the flag evaluates.  It requires an ORG ADMIN of the caller&#39;s own org — a stricter gate than the rest of this surface, matching the flags write plane, because promoting is a flag write. The admin check runs AFTER the experiment is found, so a caller from another tenant is answered not-found rather than forbidden and learns nothing about what exists.  An experiment whose assignment flag has gone missing is a conflict rather than a silent no-op — there is nothing to promote.  Deciding is NOT terminal. A second call re-promotes a different variant and re-stamps the row; the status stays decided and the previous winner is overwritten with no record that it was ever chosen. Nothing here reverts the flag to its original weights either, so an experiment cannot be un-decided through this route — restoring a split means writing the flag definition back through the flags plane.
      * @param id 
-     * @return ApiResponse<Unit?>
+     * @param decideBody 
+     * @return ApiResponse<Trial?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ExperimentsByIdDecideWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ExperimentsByIdDecideRequestConfig(id = id)
+    fun postV1ExperimentsByIdDecideWithHttpInfo(id: kotlin.String, decideBody: DecideBody) : ApiResponse<Trial?> {
+        val localVariableConfig = postV1ExperimentsByIdDecideRequestConfig(id = id, decideBody = decideBody)
 
-        return request<Unit, Unit>(
+        return request<DecideBody, Trial>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ExperimentsByIdDecide
+     * To obtain the request config of the operation postV1ExperimentsByIdDecide
      *
      * @param id 
+     * @param decideBody 
      * @return RequestConfig
      */
-    fun cloudPostV1ExperimentsByIdDecideRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1ExperimentsByIdDecideRequestConfig(id: kotlin.String, decideBody: DecideBody) : RequestConfig<DecideBody> {
+        val localVariableBody = decideBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/experiments/{id}/decide".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ml/experiments
-     * Create an experiment
-     * 
-     * @param mlCreateExperimentRequest 
-     * @return MlExperiment
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlCreateExperiment(mlCreateExperimentRequest: MlCreateExperimentRequest) : MlExperiment {
-        val localVarResponse = mlCreateExperimentWithHttpInfo(mlCreateExperimentRequest = mlCreateExperimentRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlExperiment
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ml/experiments
-     * Create an experiment
-     * 
-     * @param mlCreateExperimentRequest 
-     * @return ApiResponse<MlExperiment?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlCreateExperimentWithHttpInfo(mlCreateExperimentRequest: MlCreateExperimentRequest) : ApiResponse<MlExperiment?> {
-        val localVariableConfig = mlCreateExperimentRequestConfig(mlCreateExperimentRequest = mlCreateExperimentRequest)
-
-        return request<MlCreateExperimentRequest, MlExperiment>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlCreateExperiment
-     *
-     * @param mlCreateExperimentRequest 
-     * @return RequestConfig
-     */
-    fun mlCreateExperimentRequestConfig(mlCreateExperimentRequest: MlCreateExperimentRequest) : RequestConfig<MlCreateExperimentRequest> {
-        val localVariableBody = mlCreateExperimentRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ml/experiments",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ml/experiments/{experiment_id}/runs/{run_id}/metrics
-     * Get run metrics
-     * 
-     * @param experimentId 
-     * @param runId 
-     * @return MlGetRunMetrics200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlGetRunMetrics(experimentId: kotlin.String, runId: kotlin.String) : MlGetRunMetrics200Response {
-        val localVarResponse = mlGetRunMetricsWithHttpInfo(experimentId = experimentId, runId = runId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlGetRunMetrics200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ml/experiments/{experiment_id}/runs/{run_id}/metrics
-     * Get run metrics
-     * 
-     * @param experimentId 
-     * @param runId 
-     * @return ApiResponse<MlGetRunMetrics200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlGetRunMetricsWithHttpInfo(experimentId: kotlin.String, runId: kotlin.String) : ApiResponse<MlGetRunMetrics200Response?> {
-        val localVariableConfig = mlGetRunMetricsRequestConfig(experimentId = experimentId, runId = runId)
-
-        return request<Unit, MlGetRunMetrics200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlGetRunMetrics
-     *
-     * @param experimentId 
-     * @param runId 
-     * @return RequestConfig
-     */
-    fun mlGetRunMetricsRequestConfig(experimentId: kotlin.String, runId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ml/experiments/{experiment_id}/runs/{run_id}/metrics".replace("{"+"experiment_id"+"}", encodeURIComponent(experimentId.toString())).replace("{"+"run_id"+"}", encodeURIComponent(runId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ml/experiments/{experiment_id}/runs
-     * List experiment runs
-     * 
-     * @param experimentId 
-     * @return MlListExperimentRuns200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlListExperimentRuns(experimentId: kotlin.String) : MlListExperimentRuns200Response {
-        val localVarResponse = mlListExperimentRunsWithHttpInfo(experimentId = experimentId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlListExperimentRuns200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ml/experiments/{experiment_id}/runs
-     * List experiment runs
-     * 
-     * @param experimentId 
-     * @return ApiResponse<MlListExperimentRuns200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlListExperimentRunsWithHttpInfo(experimentId: kotlin.String) : ApiResponse<MlListExperimentRuns200Response?> {
-        val localVariableConfig = mlListExperimentRunsRequestConfig(experimentId = experimentId)
-
-        return request<Unit, MlListExperimentRuns200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlListExperimentRuns
-     *
-     * @param experimentId 
-     * @return RequestConfig
-     */
-    fun mlListExperimentRunsRequestConfig(experimentId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ml/experiments/{experiment_id}/runs".replace("{"+"experiment_id"+"}", encodeURIComponent(experimentId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ml/experiments
-     * List experiments
-     * 
-     * @return MlListExperiments200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlListExperiments() : MlListExperiments200Response {
-        val localVarResponse = mlListExperimentsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlListExperiments200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ml/experiments
-     * List experiments
-     * 
-     * @return ApiResponse<MlListExperiments200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlListExperimentsWithHttpInfo() : ApiResponse<MlListExperiments200Response?> {
-        val localVariableConfig = mlListExperimentsRequestConfig()
-
-        return request<Unit, MlListExperiments200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlListExperiments
-     *
-     * @return RequestConfig
-     */
-    fun mlListExperimentsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ml/experiments",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ml/experiments/{experiment_id}/runs/{run_id}/metrics
-     * Log metrics
-     * Log metrics for a running experiment.
-     * @param experimentId 
-     * @param runId 
-     * @param requestBody 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlLogMetrics(experimentId: kotlin.String, runId: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, java.math.BigDecimal>) : Unit {
-        val localVarResponse = mlLogMetricsWithHttpInfo(experimentId = experimentId, runId = runId, requestBody = requestBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ml/experiments/{experiment_id}/runs/{run_id}/metrics
-     * Log metrics
-     * Log metrics for a running experiment.
-     * @param experimentId 
-     * @param runId 
-     * @param requestBody 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlLogMetricsWithHttpInfo(experimentId: kotlin.String, runId: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, java.math.BigDecimal>) : ApiResponse<Unit?> {
-        val localVariableConfig = mlLogMetricsRequestConfig(experimentId = experimentId, runId = runId, requestBody = requestBody)
-
-        return request<kotlin.collections.Map<kotlin.String, java.math.BigDecimal>, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlLogMetrics
-     *
-     * @param experimentId 
-     * @param runId 
-     * @param requestBody 
-     * @return RequestConfig
-     */
-    fun mlLogMetricsRequestConfig(experimentId: kotlin.String, runId: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, java.math.BigDecimal>) : RequestConfig<kotlin.collections.Map<kotlin.String, java.math.BigDecimal>> {
-        val localVariableBody = requestBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ml/experiments/{experiment_id}/runs/{run_id}/metrics".replace("{"+"experiment_id"+"}", encodeURIComponent(experimentId.toString())).replace("{"+"run_id"+"}", encodeURIComponent(runId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ml/experiments/{experiment_id}/runs
-     * Start an experiment run
-     * 
-     * @param experimentId 
-     * @param mlStartExperimentRunRequest 
-     * @return MlExperimentRun
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlStartExperimentRun(experimentId: kotlin.String, mlStartExperimentRunRequest: MlStartExperimentRunRequest) : MlExperimentRun {
-        val localVarResponse = mlStartExperimentRunWithHttpInfo(experimentId = experimentId, mlStartExperimentRunRequest = mlStartExperimentRunRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlExperimentRun
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ml/experiments/{experiment_id}/runs
-     * Start an experiment run
-     * 
-     * @param experimentId 
-     * @param mlStartExperimentRunRequest 
-     * @return ApiResponse<MlExperimentRun?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlStartExperimentRunWithHttpInfo(experimentId: kotlin.String, mlStartExperimentRunRequest: MlStartExperimentRunRequest) : ApiResponse<MlExperimentRun?> {
-        val localVariableConfig = mlStartExperimentRunRequestConfig(experimentId = experimentId, mlStartExperimentRunRequest = mlStartExperimentRunRequest)
-
-        return request<MlStartExperimentRunRequest, MlExperimentRun>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlStartExperimentRun
-     *
-     * @param experimentId 
-     * @param mlStartExperimentRunRequest 
-     * @return RequestConfig
-     */
-    fun mlStartExperimentRunRequestConfig(experimentId: kotlin.String, mlStartExperimentRunRequest: MlStartExperimentRunRequest) : RequestConfig<MlStartExperimentRunRequest> {
-        val localVariableBody = mlStartExperimentRunRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ml/experiments/{experiment_id}/runs".replace("{"+"experiment_id"+"}", encodeURIComponent(experimentId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

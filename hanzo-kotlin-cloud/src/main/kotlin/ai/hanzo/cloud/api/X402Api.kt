@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudReceipt
+import ai.hanzo.cloud.model.Receipt
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,8 +49,8 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/x402/settlements/{id}
      * Settlement reads one x402 payment receipt by id.
      * Settlement reads one x402 payment receipt by id.  It is scoped to the caller&#39;s PAYER org — the ledger that was debited — so one tenant can never read another&#39;s settlement, and an id that exists but belongs to somebody else is a 404 exactly like one that does not exist. A caller with no billable identity is refused outright.
-     * @param id ID is the settlement id from the URL — the deterministic keccak(from|nonce) key an x402 receipt is issued under (the &#x60;id&#x60; field of a Receipt, and the value of the X-Payment-Response header a paid request answers with).
-     * @return CloudReceipt
+     * @param id ID is the settlement id from the URL — the deterministic keccak(from|nonce) key an x402 receipt is issued under (the &#x60;id&#x60; field of a Receipt, and the &#x60;transaction&#x60; of the SettlementResponse on the PAYMENT-RESPONSE header a paid request answers with).
+     * @return Receipt
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -59,11 +59,11 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1X402SettlementsId(id: kotlin.String) : CloudReceipt {
-        val localVarResponse = cloudGetV1X402SettlementsIdWithHttpInfo(id = id)
+    fun getV1X402SettlementsById(id: kotlin.String) : Receipt {
+        val localVarResponse = getV1X402SettlementsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReceipt
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Receipt
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,28 +81,28 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/x402/settlements/{id}
      * Settlement reads one x402 payment receipt by id.
      * Settlement reads one x402 payment receipt by id.  It is scoped to the caller&#39;s PAYER org — the ledger that was debited — so one tenant can never read another&#39;s settlement, and an id that exists but belongs to somebody else is a 404 exactly like one that does not exist. A caller with no billable identity is refused outright.
-     * @param id ID is the settlement id from the URL — the deterministic keccak(from|nonce) key an x402 receipt is issued under (the &#x60;id&#x60; field of a Receipt, and the value of the X-Payment-Response header a paid request answers with).
-     * @return ApiResponse<CloudReceipt?>
+     * @param id ID is the settlement id from the URL — the deterministic keccak(from|nonce) key an x402 receipt is issued under (the &#x60;id&#x60; field of a Receipt, and the &#x60;transaction&#x60; of the SettlementResponse on the PAYMENT-RESPONSE header a paid request answers with).
+     * @return ApiResponse<Receipt?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1X402SettlementsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudReceipt?> {
-        val localVariableConfig = cloudGetV1X402SettlementsIdRequestConfig(id = id)
+    fun getV1X402SettlementsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Receipt?> {
+        val localVariableConfig = getV1X402SettlementsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudReceipt>(
+        return request<Unit, Receipt>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1X402SettlementsId
+     * To obtain the request config of the operation getV1X402SettlementsById
      *
-     * @param id ID is the settlement id from the URL — the deterministic keccak(from|nonce) key an x402 receipt is issued under (the &#x60;id&#x60; field of a Receipt, and the value of the X-Payment-Response header a paid request answers with).
+     * @param id ID is the settlement id from the URL — the deterministic keccak(from|nonce) key an x402 receipt is issued under (the &#x60;id&#x60; field of a Receipt, and the &#x60;transaction&#x60; of the SettlementResponse on the PAYMENT-RESPONSE header a paid request answers with).
      * @return RequestConfig
      */
-    fun cloudGetV1X402SettlementsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1X402SettlementsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -113,7 +113,7 @@ class X402Api(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/x402/settlements/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

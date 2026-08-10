@@ -19,14 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AiEnvelope
-import ai.hanzo.cloud.model.AiError
-import ai.hanzo.cloud.model.InlineObject1
-import ai.hanzo.cloud.model.InlineObject2
-import ai.hanzo.cloud.model.SearchListTasks200Response
-import ai.hanzo.cloud.model.SearchResponseError
-import ai.hanzo.cloud.model.SearchSummarizedTaskView
-import ai.hanzo.cloud.model.SearchTaskView
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,695 +45,9 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * POST /v1/ai/tasks
-     * Create a task
-     * Create one task.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiAddTask(body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiAddTaskWithHttpInfo(body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ai/tasks
-     * Create a task
-     * Create one task.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiAddTaskWithHttpInfo(body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiAddTaskRequestConfig(body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiAddTask
-     *
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiAddTaskRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ai/tasks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ai/tasks/{owner}/{name}/analyze
-     * Analyze (task)
-     * 
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiAnalyzeTask(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiAnalyzeTaskWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ai/tasks/{owner}/{name}/analyze
-     * Analyze (task)
-     * 
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiAnalyzeTaskWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiAnalyzeTaskRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiAnalyzeTask
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiAnalyzeTaskRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ai/tasks/{owner}/{name}/analyze".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/ai/tasks/{owner}/{name}
-     * Delete a task
-     * Delete one task.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiDeleteTask(owner: kotlin.String, name: kotlin.String) : AiEnvelope {
-        val localVarResponse = aiDeleteTaskWithHttpInfo(owner = owner, name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/ai/tasks/{owner}/{name}
-     * Delete a task
-     * Delete one task.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiDeleteTaskWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiDeleteTaskRequestConfig(owner = owner, name = name)
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiDeleteTask
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return RequestConfig
-     */
-    fun aiDeleteTaskRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/tasks/global
-     * List tasks across tenants
-     * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetGlobalTasks() : AiEnvelope {
-        val localVarResponse = aiGetGlobalTasksWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/tasks/global
-     * List tasks across tenants
-     * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetGlobalTasksWithHttpInfo() : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetGlobalTasksRequestConfig()
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetGlobalTasks
-     *
-     * @return RequestConfig
-     */
-    fun aiGetGlobalTasksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/tasks/global",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/tasks/{owner}/{name}
-     * Retrieve a task
-     * Read one task by its (owner, name) key.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetTask(owner: kotlin.String, name: kotlin.String) : AiEnvelope {
-        val localVarResponse = aiGetTaskWithHttpInfo(owner = owner, name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/tasks/{owner}/{name}
-     * Retrieve a task
-     * Read one task by its (owner, name) key.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetTaskWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetTaskRequestConfig(owner = owner, name = name)
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetTask
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return RequestConfig
-     */
-    fun aiGetTaskRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/tasks
-     * List tasks
-     * List the caller&#39;s tasks.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetTasks() : AiEnvelope {
-        val localVarResponse = aiGetTasksWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/tasks
-     * List tasks
-     * List the caller&#39;s tasks.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetTasksWithHttpInfo() : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetTasksRequestConfig()
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetTasks
-     *
-     * @return RequestConfig
-     */
-    fun aiGetTasksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/tasks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/ai/tasks/{owner}/{name}
-     * Replace a task
-     * Identical to PATCH — the handler takes a whole object either way.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiReplaceTask(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiReplaceTaskWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/ai/tasks/{owner}/{name}
-     * Replace a task
-     * Identical to PATCH — the handler takes a whole object either way.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiReplaceTaskWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiReplaceTaskRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiReplaceTask
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiReplaceTaskRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/ai/tasks/{owner}/{name}
-     * Update a task
-     * Update one task. PATCH and PUT reach the same handler, which has always taken a whole object.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiUpdateTask(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiUpdateTaskWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/ai/tasks/{owner}/{name}
-     * Update a task
-     * Update one task. PATCH and PUT reach the same handler, which has always taken a whole object.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiUpdateTaskWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiUpdateTaskRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiUpdateTask
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiUpdateTaskRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/ai/tasks/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ai/tasks/{owner}/{name}/document
-     * Document (task)
-     * 
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiUploadTaskDocument(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiUploadTaskDocumentWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ai/tasks/{owner}/{name}/document
-     * Document (task)
-     * 
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiUploadTaskDocumentWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiUploadTaskDocumentRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiUploadTaskDocument
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiUploadTaskDocumentRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ai/tasks/{owner}/{name}/document".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * DELETE /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -750,8 +56,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1Tasks() : Unit {
-        val localVarResponse = cloudDeleteV1TasksWithHttpInfo()
+    fun deleteV1Tasks() : Unit {
+        val localVarResponse = deleteV1TasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -770,15 +76,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1TasksRequestConfig()
+    fun deleteV1TasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1TasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -786,11 +92,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1Tasks
+     * To obtain the request config of the operation deleteV1Tasks
      *
      * @return RequestConfig
      */
-    fun cloudDeleteV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun deleteV1TasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -800,15 +106,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Delete an engine resource
+     * Removes a resource the engine owns — a namespace and the like — inside the caller&#39;s own tenant shard.  It is the narrowest of the three working methods: most of the engine&#39;s surface is read on GET and acted on with POST, so a delete that finds no route for its path answers the same plain-text 404 any unrouted path does.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -818,8 +124,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -838,16 +144,16 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Delete an engine resource
+     * Removes a resource the engine owns — a namespace and the like — inside the caller&#39;s own tenant shard.  It is the narrowest of the three working methods: most of the engine&#39;s surface is read on GET and acted on with POST, so a delete that finds no route for its path answers the same plain-text 404 any unrouted path does.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -855,12 +161,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1TasksByWildcard1
+     * To obtain the request config of the operation deleteV1TasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudDeleteV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -870,15 +176,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -887,8 +193,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Tasks() : Unit {
-        val localVarResponse = cloudGetV1TasksWithHttpInfo()
+    fun getV1Tasks() : Unit {
+        val localVarResponse = getV1TasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -907,15 +213,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TasksRequestConfig()
+    fun getV1TasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -923,11 +229,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Tasks
+     * To obtain the request config of the operation getV1Tasks
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun getV1TasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -937,15 +243,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Read workflow state from the durable engine
+     * Reads from the durable engine: list namespaces, workflows, schedules, batches, deployments, task queues, workers and search attributes, fetch one workflow with its history, or subscribe to the realtime event stream. The cluster and settings probes are on this method too.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -955,8 +261,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -975,16 +281,16 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Read workflow state from the durable engine
+     * Reads from the durable engine: list namespaces, workflows, schedules, batches, deployments, task queues, workers and search attributes, fetch one workflow with its history, or subscribe to the realtime event stream. The cluster and settings probes are on this method too.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -992,12 +298,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TasksByWildcard1
+     * To obtain the request config of the operation getV1TasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1007,152 +313,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * OPTIONS /v1/tasks
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1Tasks() : Unit {
-        val localVarResponse = cloudOptionsV1TasksWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * OPTIONS /v1/tasks
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1TasksRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudOptionsV1Tasks
-     *
-     * @return RequestConfig
-     */
-    fun cloudOptionsV1TasksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/tasks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * OPTIONS /v1/tasks/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudOptionsV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * OPTIONS /v1/tasks/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudOptionsV1TasksByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun cloudOptionsV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1161,8 +330,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1Tasks() : Unit {
-        val localVarResponse = cloudPatchV1TasksWithHttpInfo()
+    fun patchV1Tasks() : Unit {
+        val localVarResponse = patchV1TasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1181,15 +350,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1TasksRequestConfig()
+    fun patchV1TasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1TasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1197,11 +366,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1Tasks
+     * To obtain the request config of the operation patchV1Tasks
      *
      * @return RequestConfig
      */
-    fun cloudPatchV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun patchV1TasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1211,15 +380,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Not served by the engine
+     * Published because this address accepts every method, but the engine routes no PATCH: the answer is a plain-text 404, not a 405, and no state changes.  There is no partial update on this surface. State advances by appending events, so the operations that change a running workflow — signal, cancel, terminate, reset — are all POST.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1229,8 +398,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1249,16 +418,16 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Not served by the engine
+     * Published because this address accepts every method, but the engine routes no PATCH: the answer is a plain-text 404, not a 405, and no state changes.  There is no partial update on this surface. State advances by appending events, so the operations that change a running workflow — signal, cancel, terminate, reset — are all POST.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1266,12 +435,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1TasksByWildcard1
+     * To obtain the request config of the operation patchV1TasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPatchV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1281,15 +450,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1298,8 +467,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Tasks() : Unit {
-        val localVarResponse = cloudPostV1TasksWithHttpInfo()
+    fun postV1Tasks() : Unit {
+        val localVarResponse = postV1TasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1318,15 +487,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TasksRequestConfig()
+    fun postV1TasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1TasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1334,11 +503,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Tasks
+     * To obtain the request config of the operation postV1Tasks
      *
      * @return RequestConfig
      */
-    fun cloudPostV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun postV1TasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1348,15 +517,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Start workflows and act on running ones
+     * Everything that changes the engine&#39;s state: register a namespace, start a workflow or signal-with-start one, and signal, query, cancel, terminate or reset a workflow that is already running. The MCP tool surface is on this method as well, and is the one part of it that refuses a non-POST with a plain-text 405.  The engine is event-sourced and exactly-once, so an action is durable once it is accepted and survives a process crash — a started workflow resumes rather than restarts.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1366,8 +535,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1386,16 +555,16 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Start workflows and act on running ones
+     * Everything that changes the engine&#39;s state: register a namespace, start a workflow or signal-with-start one, and signal, query, cancel, terminate or reset a workflow that is already running. The MCP tool surface is on this method as well, and is the one part of it that refuses a non-POST with a plain-text 405.  The engine is event-sourced and exactly-once, so an action is durable once it is accepted and survives a process crash — a started workflow resumes rather than restarts.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1403,12 +572,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1TasksByWildcard1
+     * To obtain the request config of the operation postV1TasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPostV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1418,15 +587,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1435,8 +604,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1Tasks() : Unit {
-        val localVarResponse = cloudPutV1TasksWithHttpInfo()
+    fun putV1Tasks() : Unit {
+        val localVarResponse = putV1TasksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1455,15 +624,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/tasks
-     * 
-     * 
+     * Redirect to the tasks API root
+     * Answers 307 with Location /v1/tasks/ — this address serves nothing itself. The redirect is a routing fact derived from the engine&#39;s subtree, decided before any handler runs, so it is the same on every method.  A 307 preserves both the method and the body, so a client that follows redirects re-sends the request unchanged to /v1/tasks/ and nothing is lost. A client that does NOT follow redirects sees only the 307 and performs no work — address /v1/tasks/ directly and the hop disappears.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1TasksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1TasksRequestConfig()
+    fun putV1TasksWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putV1TasksRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1471,11 +640,11 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1Tasks
+     * To obtain the request config of the operation putV1Tasks
      *
      * @return RequestConfig
      */
-    fun cloudPutV1TasksRequestConfig() : RequestConfig<Unit> {
+    fun putV1TasksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1485,15 +654,15 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Not served by the engine
+     * Published because this address accepts every method, but the engine routes no PUT: the answer is a plain-text 404, not a 405, and no state changes.  Nothing here is updated by replacement. The engine is event-sourced — a workflow is changed by signalling, cancelling, terminating or resetting it, all of which are POST — so a client reaching for PUT wants POST.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1503,8 +672,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putV1TasksByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putV1TasksByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1523,16 +692,16 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/tasks/{wildcard1}
-     * 
-     * 
+     * Not served by the engine
+     * Published because this address accepts every method, but the engine routes no PUT: the answer is a plain-text 404, not a 405, and no state changes.  Nothing here is updated by replacement. The engine is event-sourced — a workflow is changed by signalling, cancelling, terminating or resetting it, all of which are POST — so a client reaching for PUT wants POST.  This single address fronts the whole durable-workflow engine — namespaces, workflows, schedules, batches, deployments, nexus, task queues, workers, activities and the rest — matched by path segment inside the engine&#39;s own router, which is why the document publishes one wildcard rather than sixty-four operations.  Most of it requires a validated principal and is refused 403 otherwise; the settings and cluster probes are open, because capability flags and cluster health carry no tenant data. A principal that is validated but carries NO org is refused too — that request would otherwise read the shared unscoped store instead of anyone&#39;s shard, so it fails closed. Admitted, the org, project and user are threaded into the engine, and every read and write lands in that tenant&#39;s own shard.  Two things about the answers differ from the rest of this API and will bite a generic client: errors here carry &#x60;code&#x60; as a NUMBER rather than the usual &#x60;status&#x60;, and the address serves several content types — JSON, plain-text refusals, and an event stream at the events path. Until the engine is wired the whole surface answers 503.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putV1TasksByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1TasksByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1540,12 +709,12 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1TasksByWildcard1
+     * To obtain the request config of the operation putV1TasksByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPutV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putV1TasksByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1555,674 +724,7 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tasks/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/search/tasks/cancel
-     * Cancel enqueued or processing tasks
-     * 
-     * @param uids  (optional)
-     * @param statuses  (optional)
-     * @param types  (optional)
-     * @param indexUids  (optional)
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchCancelTasks(uids: kotlin.String? = null, statuses: kotlin.String? = null, types: kotlin.String? = null, indexUids: kotlin.String? = null) : SearchSummarizedTaskView {
-        val localVarResponse = searchCancelTasksWithHttpInfo(uids = uids, statuses = statuses, types = types, indexUids = indexUids)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/search/tasks/cancel
-     * Cancel enqueued or processing tasks
-     * 
-     * @param uids  (optional)
-     * @param statuses  (optional)
-     * @param types  (optional)
-     * @param indexUids  (optional)
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchCancelTasksWithHttpInfo(uids: kotlin.String?, statuses: kotlin.String?, types: kotlin.String?, indexUids: kotlin.String?) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchCancelTasksRequestConfig(uids = uids, statuses = statuses, types = types, indexUids = indexUids)
-
-        return request<Unit, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchCancelTasks
-     *
-     * @param uids  (optional)
-     * @param statuses  (optional)
-     * @param types  (optional)
-     * @param indexUids  (optional)
-     * @return RequestConfig
-     */
-    fun searchCancelTasksRequestConfig(uids: kotlin.String?, statuses: kotlin.String?, types: kotlin.String?, indexUids: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (uids != null) {
-                    put("uids", listOf(uids.toString()))
-                }
-                if (statuses != null) {
-                    put("statuses", listOf(statuses.toString()))
-                }
-                if (types != null) {
-                    put("types", listOf(types.toString()))
-                }
-                if (indexUids != null) {
-                    put("indexUids", listOf(indexUids.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/search/tasks/cancel",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/search/tasks
-     * Delete completed tasks
-     * 
-     * @param uids  (optional)
-     * @param statuses  (optional)
-     * @param types  (optional)
-     * @param indexUids  (optional)
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchDeleteTasks(uids: kotlin.String? = null, statuses: kotlin.String? = null, types: kotlin.String? = null, indexUids: kotlin.String? = null) : SearchSummarizedTaskView {
-        val localVarResponse = searchDeleteTasksWithHttpInfo(uids = uids, statuses = statuses, types = types, indexUids = indexUids)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/search/tasks
-     * Delete completed tasks
-     * 
-     * @param uids  (optional)
-     * @param statuses  (optional)
-     * @param types  (optional)
-     * @param indexUids  (optional)
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchDeleteTasksWithHttpInfo(uids: kotlin.String?, statuses: kotlin.String?, types: kotlin.String?, indexUids: kotlin.String?) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchDeleteTasksRequestConfig(uids = uids, statuses = statuses, types = types, indexUids = indexUids)
-
-        return request<Unit, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchDeleteTasks
-     *
-     * @param uids  (optional)
-     * @param statuses  (optional)
-     * @param types  (optional)
-     * @param indexUids  (optional)
-     * @return RequestConfig
-     */
-    fun searchDeleteTasksRequestConfig(uids: kotlin.String?, statuses: kotlin.String?, types: kotlin.String?, indexUids: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (uids != null) {
-                    put("uids", listOf(uids.toString()))
-                }
-                if (statuses != null) {
-                    put("statuses", listOf(statuses.toString()))
-                }
-                if (types != null) {
-                    put("types", listOf(types.toString()))
-                }
-                if (indexUids != null) {
-                    put("indexUids", listOf(indexUids.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/search/tasks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/search/tasks/{taskUid}
-     * Get task details
-     * 
-     * @param taskUid 
-     * @return SearchTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchGetTask(taskUid: kotlin.Int) : SearchTaskView {
-        val localVarResponse = searchGetTaskWithHttpInfo(taskUid = taskUid)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/tasks/{taskUid}
-     * Get task details
-     * 
-     * @param taskUid 
-     * @return ApiResponse<SearchTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchGetTaskWithHttpInfo(taskUid: kotlin.Int) : ApiResponse<SearchTaskView?> {
-        val localVariableConfig = searchGetTaskRequestConfig(taskUid = taskUid)
-
-        return request<Unit, SearchTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchGetTask
-     *
-     * @param taskUid 
-     * @return RequestConfig
-     */
-    fun searchGetTaskRequestConfig(taskUid: kotlin.Int) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/search/tasks/{taskUid}".replace("{"+"taskUid"+"}", encodeURIComponent(taskUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/search/tasks
-     * List all tasks
-     * 
-     * @param limit  (optional, default to 20)
-     * @param from Task UID to start from (optional)
-     * @param uids Comma-separated task UIDs (optional)
-     * @param statuses Comma-separated statuses (enqueued, processing, succeeded, failed, canceled) (optional)
-     * @param types Comma-separated task types (optional)
-     * @param indexUids Comma-separated index UIDs (optional)
-     * @return SearchListTasks200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchListTasks(limit: kotlin.Int? = 20, from: kotlin.Int? = null, uids: kotlin.String? = null, statuses: kotlin.String? = null, types: kotlin.String? = null, indexUids: kotlin.String? = null) : SearchListTasks200Response {
-        val localVarResponse = searchListTasksWithHttpInfo(limit = limit, from = from, uids = uids, statuses = statuses, types = types, indexUids = indexUids)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchListTasks200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/tasks
-     * List all tasks
-     * 
-     * @param limit  (optional, default to 20)
-     * @param from Task UID to start from (optional)
-     * @param uids Comma-separated task UIDs (optional)
-     * @param statuses Comma-separated statuses (enqueued, processing, succeeded, failed, canceled) (optional)
-     * @param types Comma-separated task types (optional)
-     * @param indexUids Comma-separated index UIDs (optional)
-     * @return ApiResponse<SearchListTasks200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchListTasksWithHttpInfo(limit: kotlin.Int?, from: kotlin.Int?, uids: kotlin.String?, statuses: kotlin.String?, types: kotlin.String?, indexUids: kotlin.String?) : ApiResponse<SearchListTasks200Response?> {
-        val localVariableConfig = searchListTasksRequestConfig(limit = limit, from = from, uids = uids, statuses = statuses, types = types, indexUids = indexUids)
-
-        return request<Unit, SearchListTasks200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchListTasks
-     *
-     * @param limit  (optional, default to 20)
-     * @param from Task UID to start from (optional)
-     * @param uids Comma-separated task UIDs (optional)
-     * @param statuses Comma-separated statuses (enqueued, processing, succeeded, failed, canceled) (optional)
-     * @param types Comma-separated task types (optional)
-     * @param indexUids Comma-separated index UIDs (optional)
-     * @return RequestConfig
-     */
-    fun searchListTasksRequestConfig(limit: kotlin.Int?, from: kotlin.Int?, uids: kotlin.String?, statuses: kotlin.String?, types: kotlin.String?, indexUids: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-                if (from != null) {
-                    put("from", listOf(from.toString()))
-                }
-                if (uids != null) {
-                    put("uids", listOf(uids.toString()))
-                }
-                if (statuses != null) {
-                    put("statuses", listOf(statuses.toString()))
-                }
-                if (types != null) {
-                    put("types", listOf(types.toString()))
-                }
-                if (indexUids != null) {
-                    put("indexUids", listOf(indexUids.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/search/tasks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/tasks/events
-     * Realtime event stream (SSE, identity-gated)
-     * 
-     * @return kotlin.String
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun tasksTasksEvents() : kotlin.String {
-        val localVarResponse = tasksTasksEventsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.String
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/tasks/events
-     * Realtime event stream (SSE, identity-gated)
-     * 
-     * @return ApiResponse<kotlin.String?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun tasksTasksEventsWithHttpInfo() : ApiResponse<kotlin.String?> {
-        val localVariableConfig = tasksTasksEventsRequestConfig()
-
-        return request<Unit, kotlin.String>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation tasksTasksEvents
-     *
-     * @return RequestConfig
-     */
-    fun tasksTasksEventsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/tasks/events",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/tasks/{resource}
-     * Engine JSON API (namespaces, workflows, activities, …), identity-gated
-     * 
-     * @param resource &#39;Engine resource path (e.g. namespaces, nexus)&#39;
-     * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun tasksTasksGet(resource: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = tasksTasksGetWithHttpInfo(resource = resource)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/tasks/{resource}
-     * Engine JSON API (namespaces, workflows, activities, …), identity-gated
-     * 
-     * @param resource &#39;Engine resource path (e.g. namespaces, nexus)&#39;
-     * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun tasksTasksGetWithHttpInfo(resource: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = tasksTasksGetRequestConfig(resource = resource)
-
-        return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation tasksTasksGet
-     *
-     * @param resource &#39;Engine resource path (e.g. namespaces, nexus)&#39;
-     * @return RequestConfig
-     */
-    fun tasksTasksGetRequestConfig(resource: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/tasks/{resource}".replace("{"+"resource"+"}", encodeURIComponent(resource.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/tasks/mcp
-     * Tasks MCP tool surface (JSON-RPC, identity-gated)
-     * 
-     * @param requestBody 
-     * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun tasksTasksMcp(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = tasksTasksMcpWithHttpInfo(requestBody = requestBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/tasks/mcp
-     * Tasks MCP tool surface (JSON-RPC, identity-gated)
-     * 
-     * @param requestBody 
-     * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun tasksTasksMcpWithHttpInfo(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = tasksTasksMcpRequestConfig(requestBody = requestBody)
-
-        return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation tasksTasksMcp
-     *
-     * @param requestBody 
-     * @return RequestConfig
-     */
-    fun tasksTasksMcpRequestConfig(requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
-        val localVariableBody = requestBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/tasks/mcp",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/tasks/{resource}
-     * Engine JSON API write (identity-gated)
-     * 
-     * @param resource 
-     * @param requestBody 
-     * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun tasksTasksPost(resource: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = tasksTasksPostWithHttpInfo(resource = resource, requestBody = requestBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/tasks/{resource}
-     * Engine JSON API write (identity-gated)
-     * 
-     * @param resource 
-     * @param requestBody 
-     * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun tasksTasksPostWithHttpInfo(resource: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = tasksTasksPostRequestConfig(resource = resource, requestBody = requestBody)
-
-        return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation tasksTasksPost
-     *
-     * @param resource 
-     * @param requestBody 
-     * @return RequestConfig
-     */
-    fun tasksTasksPostRequestConfig(resource: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
-        val localVariableBody = requestBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/tasks/{resource}".replace("{"+"resource"+"}", encodeURIComponent(resource.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,8 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.GatewayEmbeddingRequest
-import ai.hanzo.cloud.model.GatewayEmbeddingResponse
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,24 +45,22 @@ class EmbeddingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * POST /v1/gateway/embeddings
-     * Create embeddings
-     * 
-     * @param gatewayEmbeddingRequest 
-     * @return GatewayEmbeddingResponse
+     * POST /v1/embeddings
+     * Implements POST /v1/embeddings (OpenAI-compatible).
+     * Implements POST /v1/embeddings (OpenAI-compatible).  Body: {\&quot;model\&quot;: \&quot;...\&quot;, \&quot;input\&quot;: \&quot;...\&quot;|[\&quot;...\&quot;, ...], \&quot;encoding_format\&quot;?, \&quot;dimensions\&quot;?} It authenticates the caller, resolves the model to its upstream provider via the shared routing table, rewrites the user-facing model name to the upstream id, and proxies the request to the provider&#39;s /embeddings endpoint verbatim.
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayCreateEmbedding(gatewayEmbeddingRequest: GatewayEmbeddingRequest) : GatewayEmbeddingResponse {
-        val localVarResponse = gatewayCreateEmbeddingWithHttpInfo(gatewayEmbeddingRequest = gatewayEmbeddingRequest)
+    fun postV1Embeddings() : Unit {
+        val localVarResponse = postV1EmbeddingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GatewayEmbeddingResponse
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -79,43 +75,38 @@ class EmbeddingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * POST /v1/gateway/embeddings
-     * Create embeddings
-     * 
-     * @param gatewayEmbeddingRequest 
-     * @return ApiResponse<GatewayEmbeddingResponse?>
+     * POST /v1/embeddings
+     * Implements POST /v1/embeddings (OpenAI-compatible).
+     * Implements POST /v1/embeddings (OpenAI-compatible).  Body: {\&quot;model\&quot;: \&quot;...\&quot;, \&quot;input\&quot;: \&quot;...\&quot;|[\&quot;...\&quot;, ...], \&quot;encoding_format\&quot;?, \&quot;dimensions\&quot;?} It authenticates the caller, resolves the model to its upstream provider via the shared routing table, rewrites the user-facing model name to the upstream id, and proxies the request to the provider&#39;s /embeddings endpoint verbatim.
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayCreateEmbeddingWithHttpInfo(gatewayEmbeddingRequest: GatewayEmbeddingRequest) : ApiResponse<GatewayEmbeddingResponse?> {
-        val localVariableConfig = gatewayCreateEmbeddingRequestConfig(gatewayEmbeddingRequest = gatewayEmbeddingRequest)
+    fun postV1EmbeddingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1EmbeddingsRequestConfig()
 
-        return request<GatewayEmbeddingRequest, GatewayEmbeddingResponse>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation gatewayCreateEmbedding
+     * To obtain the request config of the operation postV1Embeddings
      *
-     * @param gatewayEmbeddingRequest 
      * @return RequestConfig
      */
-    fun gatewayCreateEmbeddingRequestConfig(gatewayEmbeddingRequest: GatewayEmbeddingRequest) : RequestConfig<GatewayEmbeddingRequest> {
-        val localVariableBody = gatewayEmbeddingRequest
+    fun postV1EmbeddingsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/gateway/embeddings",
+            path = "/v1/embeddings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

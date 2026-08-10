@@ -19,11 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudClusterDetailView
-import ai.hanzo.cloud.model.CloudClusterList
-import ai.hanzo.cloud.model.CloudClusterView
-import ai.hanzo.cloud.model.CloudCreateClusterReq
-import ai.hanzo.cloud.model.CloudNodeList
+import ai.hanzo.cloud.model.ClusterDetailView
+import ai.hanzo.cloud.model.ClusterList
+import ai.hanzo.cloud.model.ClusterView
+import ai.hanzo.cloud.model.CreateClusterReq
+import ai.hanzo.cloud.model.NodeList
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,8 +53,8 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/k8s/clusters
      * Provisions a DOKS cluster for the caller&#39;s org and answers 201.
      * Provisions a DOKS cluster for the caller&#39;s org and answers 201. ADMIN-GATED — a SuperAdmin, or an OrgAdmin of the caller&#39;s own org — because provisioning spends real infrastructure on the house account. The request is validated at this boundary, then Visor owns provisioning and the hanzo-org ownership tag.
-     * @param cloudCreateClusterReq 
-     * @return CloudClusterView
+     * @param createClusterReq 
+     * @return ClusterView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -63,11 +63,11 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudCreateKubernetesCluster(cloudCreateClusterReq: CloudCreateClusterReq) : CloudClusterView {
-        val localVarResponse = cloudCreateKubernetesClusterWithHttpInfo(cloudCreateClusterReq = cloudCreateClusterReq)
+    fun createKubernetesCluster(createClusterReq: CreateClusterReq) : ClusterView {
+        val localVarResponse = createKubernetesClusterWithHttpInfo(createClusterReq = createClusterReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClusterView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClusterView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -85,29 +85,29 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/k8s/clusters
      * Provisions a DOKS cluster for the caller&#39;s org and answers 201.
      * Provisions a DOKS cluster for the caller&#39;s org and answers 201. ADMIN-GATED — a SuperAdmin, or an OrgAdmin of the caller&#39;s own org — because provisioning spends real infrastructure on the house account. The request is validated at this boundary, then Visor owns provisioning and the hanzo-org ownership tag.
-     * @param cloudCreateClusterReq 
-     * @return ApiResponse<CloudClusterView?>
+     * @param createClusterReq 
+     * @return ApiResponse<ClusterView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudCreateKubernetesClusterWithHttpInfo(cloudCreateClusterReq: CloudCreateClusterReq) : ApiResponse<CloudClusterView?> {
-        val localVariableConfig = cloudCreateKubernetesClusterRequestConfig(cloudCreateClusterReq = cloudCreateClusterReq)
+    fun createKubernetesClusterWithHttpInfo(createClusterReq: CreateClusterReq) : ApiResponse<ClusterView?> {
+        val localVariableConfig = createKubernetesClusterRequestConfig(createClusterReq = createClusterReq)
 
-        return request<CloudCreateClusterReq, CloudClusterView>(
+        return request<CreateClusterReq, ClusterView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudCreateKubernetesCluster
+     * To obtain the request config of the operation createKubernetesCluster
      *
-     * @param cloudCreateClusterReq 
+     * @param createClusterReq 
      * @return RequestConfig
      */
-    fun cloudCreateKubernetesClusterRequestConfig(cloudCreateClusterReq: CloudCreateClusterReq) : RequestConfig<CloudCreateClusterReq> {
-        val localVariableBody = cloudCreateClusterReq
+    fun createKubernetesClusterRequestConfig(createClusterReq: CreateClusterReq) : RequestConfig<CreateClusterReq> {
+        val localVariableBody = createClusterReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -118,7 +118,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -136,8 +136,8 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteKubernetesCluster(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteKubernetesClusterWithHttpInfo(id = id)
+    fun deleteKubernetesCluster(id: kotlin.String) : Unit {
+        val localVarResponse = deleteKubernetesClusterWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -164,8 +164,8 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteKubernetesClusterWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteKubernetesClusterRequestConfig(id = id)
+    fun deleteKubernetesClusterWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteKubernetesClusterRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -173,12 +173,12 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteKubernetesCluster
+     * To obtain the request config of the operation deleteKubernetesCluster
      *
      * @param id ID is the provider&#39;s DOKS cluster id. Visor scopes the lookup to the caller&#39;s org, so another tenant&#39;s id resolves to not-found rather than their cluster.
      * @return RequestConfig
      */
-    fun cloudDeleteKubernetesClusterRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteKubernetesClusterRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -188,7 +188,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -198,7 +198,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns one cluster&#39;s detail: node pools + worker nodes.
      * Returns one cluster&#39;s detail: node pools + worker nodes. Visor scopes the lookup to the org (a foreign or missing id resolves to not-found), so a tenant can never read another tenant&#39;s cluster by guessing an id.
      * @param id ID is the provider&#39;s DOKS cluster id. Visor scopes the lookup to the caller&#39;s org, so another tenant&#39;s id resolves to not-found rather than their cluster.
-     * @return CloudClusterDetailView
+     * @return ClusterDetailView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -207,11 +207,11 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetKubernetesCluster(id: kotlin.String) : CloudClusterDetailView {
-        val localVarResponse = cloudGetKubernetesClusterWithHttpInfo(id = id)
+    fun getKubernetesCluster(id: kotlin.String) : ClusterDetailView {
+        val localVarResponse = getKubernetesClusterWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClusterDetailView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClusterDetailView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -230,27 +230,27 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns one cluster&#39;s detail: node pools + worker nodes.
      * Returns one cluster&#39;s detail: node pools + worker nodes. Visor scopes the lookup to the org (a foreign or missing id resolves to not-found), so a tenant can never read another tenant&#39;s cluster by guessing an id.
      * @param id ID is the provider&#39;s DOKS cluster id. Visor scopes the lookup to the caller&#39;s org, so another tenant&#39;s id resolves to not-found rather than their cluster.
-     * @return ApiResponse<CloudClusterDetailView?>
+     * @return ApiResponse<ClusterDetailView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetKubernetesClusterWithHttpInfo(id: kotlin.String) : ApiResponse<CloudClusterDetailView?> {
-        val localVariableConfig = cloudGetKubernetesClusterRequestConfig(id = id)
+    fun getKubernetesClusterWithHttpInfo(id: kotlin.String) : ApiResponse<ClusterDetailView?> {
+        val localVariableConfig = getKubernetesClusterRequestConfig(id = id)
 
-        return request<Unit, CloudClusterDetailView>(
+        return request<Unit, ClusterDetailView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetKubernetesCluster
+     * To obtain the request config of the operation getKubernetesCluster
      *
      * @param id ID is the provider&#39;s DOKS cluster id. Visor scopes the lookup to the caller&#39;s org, so another tenant&#39;s id resolves to not-found rather than their cluster.
      * @return RequestConfig
      */
-    fun cloudGetKubernetesClusterRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getKubernetesClusterRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -261,7 +261,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -270,7 +270,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/k8s/clusters
      * Lists the org&#39;s DOKS clusters (Visor, house account) folded with the org&#39;s BYO clusters — ONE fleet cluster view under the unified k8s noun.
      * Lists the org&#39;s DOKS clusters (Visor, house account) folded with the org&#39;s BYO clusters — ONE fleet cluster view under the unified k8s noun. A Visor outage is logged and skipped so a down optional provider never hides the BYO list.
-     * @return CloudClusterList
+     * @return ClusterList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -279,11 +279,11 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListKubernetesClusters() : CloudClusterList {
-        val localVarResponse = cloudListKubernetesClustersWithHttpInfo()
+    fun listKubernetesClusters() : ClusterList {
+        val localVarResponse = listKubernetesClustersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClusterList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClusterList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -301,26 +301,26 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/k8s/clusters
      * Lists the org&#39;s DOKS clusters (Visor, house account) folded with the org&#39;s BYO clusters — ONE fleet cluster view under the unified k8s noun.
      * Lists the org&#39;s DOKS clusters (Visor, house account) folded with the org&#39;s BYO clusters — ONE fleet cluster view under the unified k8s noun. A Visor outage is logged and skipped so a down optional provider never hides the BYO list.
-     * @return ApiResponse<CloudClusterList?>
+     * @return ApiResponse<ClusterList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListKubernetesClustersWithHttpInfo() : ApiResponse<CloudClusterList?> {
-        val localVariableConfig = cloudListKubernetesClustersRequestConfig()
+    fun listKubernetesClustersWithHttpInfo() : ApiResponse<ClusterList?> {
+        val localVariableConfig = listKubernetesClustersRequestConfig()
 
-        return request<Unit, CloudClusterList>(
+        return request<Unit, ClusterList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListKubernetesClusters
+     * To obtain the request config of the operation listKubernetesClusters
      *
      * @return RequestConfig
      */
-    fun cloudListKubernetesClustersRequestConfig() : RequestConfig<Unit> {
+    fun listKubernetesClustersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -331,7 +331,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -340,7 +340,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/k8s/nodes
      * Returns every DOKS worker node in the org&#39;s clusters as a machine — the SAME set the fleet folds in (managedMachines), exposed directly under the k8s noun.
      * Returns every DOKS worker node in the org&#39;s clusters as a machine — the SAME set the fleet folds in (managedMachines), exposed directly under the k8s noun. House account (hanzo-org cluster tag) + BYOC, deduped by Visor.
-     * @return CloudNodeList
+     * @return NodeList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -349,11 +349,11 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListKubernetesNodes() : CloudNodeList {
-        val localVarResponse = cloudListKubernetesNodesWithHttpInfo()
+    fun listKubernetesNodes() : NodeList {
+        val localVarResponse = listKubernetesNodesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNodeList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NodeList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -371,26 +371,26 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/k8s/nodes
      * Returns every DOKS worker node in the org&#39;s clusters as a machine — the SAME set the fleet folds in (managedMachines), exposed directly under the k8s noun.
      * Returns every DOKS worker node in the org&#39;s clusters as a machine — the SAME set the fleet folds in (managedMachines), exposed directly under the k8s noun. House account (hanzo-org cluster tag) + BYOC, deduped by Visor.
-     * @return ApiResponse<CloudNodeList?>
+     * @return ApiResponse<NodeList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListKubernetesNodesWithHttpInfo() : ApiResponse<CloudNodeList?> {
-        val localVariableConfig = cloudListKubernetesNodesRequestConfig()
+    fun listKubernetesNodesWithHttpInfo() : ApiResponse<NodeList?> {
+        val localVariableConfig = listKubernetesNodesRequestConfig()
 
-        return request<Unit, CloudNodeList>(
+        return request<Unit, NodeList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListKubernetesNodes
+     * To obtain the request config of the operation listKubernetesNodes
      *
      * @return RequestConfig
      */
-    fun cloudListKubernetesNodesRequestConfig() : RequestConfig<Unit> {
+    fun listKubernetesNodesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -401,7 +401,7 @@ class K8sApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/k8s/nodes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

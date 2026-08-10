@@ -19,57 +19,29 @@ package ai.hanzo.cloud.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * A research-diary record — a raw-artifact-class record tied to a run. CONTENT- ADDRESSED inside the trust boundary: submit the bytes (base64 content) and the SERVER hashes them; that sha256 is the identity + ref (sha256:<hash>). A client sha256, if sent, must MATCH the bytes. Bytes are retrievable by hash at GET /v1/research/artifacts/{sha256}. 
+ * 
  *
- * @param content base64 bytes on WRITE — the server hashes + stores them (never returned on read)
- * @param kind 
- * @param sha256 SERVER-derived identity (read); on write it is optional and must match the content bytes
- * @param ref server-derived content address (sha256:<hash>); a client ref is ignored
- * @param runId the run/snapshot id it belongs to
- * @param project 
- * @param visibility Read-only on ingest; set via a grant.
- * @param retentionClass 
- * @param gitSha 
+ * @param content base64 bytes on write; the server hashes + stores them (never returned)
  * @param gitBranch 
  * @param gitDirty 
+ * @param gitSha 
+ * @param kind 
  * @param libVersions 
+ * @param project 
+ * @param ref server-derived content address (sha256:<hash>)
+ * @param retentionClass 
+ * @param runId 
+ * @param sha256 SERVER-derived on write; the identity
  * @param ts 
+ * @param visibility 
  */
 
 
 data class ResearchArtifact (
 
-    /* base64 bytes on WRITE — the server hashes + stores them (never returned on read) */
+    /* base64 bytes on write; the server hashes + stores them (never returned) */
     @SerializedName("content")
-    val content: kotlin.ByteArray,
-
-    @SerializedName("kind")
-    val kind: ResearchArtifact.Kind,
-
-    /* SERVER-derived identity (read); on write it is optional and must match the content bytes */
-    @SerializedName("sha256")
-    val sha256: kotlin.String? = null,
-
-    /* server-derived content address (sha256:<hash>); a client ref is ignored */
-    @SerializedName("ref")
-    val ref: kotlin.String? = null,
-
-    /* the run/snapshot id it belongs to */
-    @SerializedName("run_id")
-    val runId: kotlin.String? = null,
-
-    @SerializedName("project")
-    val project: kotlin.String? = null,
-
-    /* Read-only on ingest; set via a grant. */
-    @SerializedName("visibility")
-    val visibility: ResearchArtifact.Visibility? = Visibility.`private`,
-
-    @SerializedName("retention_class")
-    val retentionClass: kotlin.String? = "raw-artifact",
-
-    @SerializedName("git_sha")
-    val gitSha: kotlin.String? = null,
+    val content: kotlin.String? = null,
 
     @SerializedName("git_branch")
     val gitBranch: kotlin.String? = null,
@@ -77,33 +49,40 @@ data class ResearchArtifact (
     @SerializedName("git_dirty")
     val gitDirty: kotlin.Boolean? = null,
 
+    @SerializedName("git_sha")
+    val gitSha: kotlin.String? = null,
+
+    @SerializedName("kind")
+    val kind: kotlin.String? = null,
+
     @SerializedName("lib_versions")
-    val libVersions: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
+    val libVersions: kotlin.Any? = null,
+
+    @SerializedName("project")
+    val project: kotlin.String? = null,
+
+    /* server-derived content address (sha256:<hash>) */
+    @SerializedName("ref")
+    val ref: kotlin.String? = null,
+
+    @SerializedName("retention_class")
+    val retentionClass: kotlin.String? = null,
+
+    @SerializedName("run_id")
+    val runId: kotlin.String? = null,
+
+    /* SERVER-derived on write; the identity */
+    @SerializedName("sha256")
+    val sha256: kotlin.String? = null,
 
     @SerializedName("ts")
-    val ts: kotlin.Long? = null
+    val ts: kotlin.Int? = null,
+
+    @SerializedName("visibility")
+    val visibility: kotlin.String? = null
 
 ) {
 
-    /**
-     * 
-     *
-     * Values: snapshot,report
-     */
-    enum class Kind(val value: kotlin.String) {
-        @SerializedName(value = "snapshot") snapshot("snapshot"),
-        @SerializedName(value = "report") report("report");
-    }
-    /**
-     * Read-only on ingest; set via a grant.
-     *
-     * Values: `private`,org,`public`
-     */
-    enum class Visibility(val value: kotlin.String) {
-        @SerializedName(value = "private") `private`("private"),
-        @SerializedName(value = "org") org("org"),
-        @SerializedName(value = "public") `public`("public");
-    }
 
 }
 

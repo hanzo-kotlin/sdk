@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudErrorList
+import ai.hanzo.cloud.model.ErrorList
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,9 +48,9 @@ class ErrorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * GET /v1/errors
      * Errors returns the caller org&#39;s most recently captured errors, newest first.
-     * Errors returns the caller org&#39;s most recently captured errors, newest first. The error-tracking read view over the same table the capture doors write: only rows stored as type &#39;error&#39;, each with its captured exception lifted out of the property bag as a first-class field.  The org is the validated principal&#39;s — never a parameter — and this read requires a real bearer, NEVER the write-only publishable key: pk- can attribute a write and can read nothing. 403 without a validated bearer, 503 when the warehouse is unreachable.
+     * Errors returns the caller org&#39;s most recently captured errors, newest first. The error-tracking read view over event.error — the plane table the write core&#39;s error facts land in (errors are DELIBERATELY not on event.event) — each with its captured exception surfaced from the attributes map as a first-class field.  The org is the validated principal&#39;s — never a parameter — and this read requires a real bearer, NEVER the write-only publishable key: pk- can attribute a write and can read nothing. 403 without a validated bearer, 503 when the warehouse is unreachable.
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
-     * @return CloudErrorList
+     * @return ErrorList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -59,11 +59,11 @@ class ErrorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Errors(limit: kotlin.Int? = null) : CloudErrorList {
-        val localVarResponse = cloudGetV1ErrorsWithHttpInfo(limit = limit)
+    fun getV1Errors(limit: kotlin.Int? = null) : ErrorList {
+        val localVarResponse = getV1ErrorsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudErrorList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ErrorList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,29 +80,29 @@ class ErrorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     /**
      * GET /v1/errors
      * Errors returns the caller org&#39;s most recently captured errors, newest first.
-     * Errors returns the caller org&#39;s most recently captured errors, newest first. The error-tracking read view over the same table the capture doors write: only rows stored as type &#39;error&#39;, each with its captured exception lifted out of the property bag as a first-class field.  The org is the validated principal&#39;s — never a parameter — and this read requires a real bearer, NEVER the write-only publishable key: pk- can attribute a write and can read nothing. 403 without a validated bearer, 503 when the warehouse is unreachable.
+     * Errors returns the caller org&#39;s most recently captured errors, newest first. The error-tracking read view over event.error — the plane table the write core&#39;s error facts land in (errors are DELIBERATELY not on event.event) — each with its captured exception surfaced from the attributes map as a first-class field.  The org is the validated principal&#39;s — never a parameter — and this read requires a real bearer, NEVER the write-only publishable key: pk- can attribute a write and can read nothing. 403 without a validated bearer, 503 when the warehouse is unreachable.
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
-     * @return ApiResponse<CloudErrorList?>
+     * @return ApiResponse<ErrorList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ErrorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudErrorList?> {
-        val localVariableConfig = cloudGetV1ErrorsRequestConfig(limit = limit)
+    fun getV1ErrorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ErrorList?> {
+        val localVariableConfig = getV1ErrorsRequestConfig(limit = limit)
 
-        return request<Unit, CloudErrorList>(
+        return request<Unit, ErrorList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Errors
+     * To obtain the request config of the operation getV1Errors
      *
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ErrorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ErrorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -118,7 +118,7 @@ class ErrorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/errors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

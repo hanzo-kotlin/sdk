@@ -19,16 +19,16 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudConnectorProvidersOut
-import ai.hanzo.cloud.model.CloudConnectorTokenOut
-import ai.hanzo.cloud.model.CloudConnectorsOut
-import ai.hanzo.cloud.model.CloudCredentialIn
-import ai.hanzo.cloud.model.CloudCredentialOut
-import ai.hanzo.cloud.model.CloudDevicePollOut
-import ai.hanzo.cloud.model.CloudDeviceStartIn
-import ai.hanzo.cloud.model.CloudDeviceStartOut
-import ai.hanzo.cloud.model.CloudDisconnectOut
-import ai.hanzo.cloud.model.CloudRefreshOut
+import ai.hanzo.cloud.model.ConnectorProvidersOut
+import ai.hanzo.cloud.model.ConnectorTokenOut
+import ai.hanzo.cloud.model.ConnectorsOut
+import ai.hanzo.cloud.model.CredentialIn
+import ai.hanzo.cloud.model.CredentialOut
+import ai.hanzo.cloud.model.DevicePollOut
+import ai.hanzo.cloud.model.DeviceStartIn
+import ai.hanzo.cloud.model.DeviceStartOut
+import ai.hanzo.cloud.model.DisconnectOut
+import ai.hanzo.cloud.model.RefreshOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -59,7 +59,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Forgets a connector: every custodied secret, then the row.
      * Forgets a connector: every custodied secret, then the row. Idempotent — dropping a never-connected id still answers {disconnected:true} (disconnect() parity). No provider Revoke: none of the user-plane providers exposes a revoke endpoint.
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
-     * @return CloudDisconnectOut
+     * @return DisconnectOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -68,11 +68,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1ConnectorsId(id: kotlin.String) : CloudDisconnectOut {
-        val localVarResponse = cloudDeleteV1ConnectorsIdWithHttpInfo(id = id)
+    fun deleteV1ConnectorsById(id: kotlin.String) : DisconnectOut {
+        val localVarResponse = deleteV1ConnectorsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDisconnectOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DisconnectOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -91,27 +91,27 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Forgets a connector: every custodied secret, then the row.
      * Forgets a connector: every custodied secret, then the row. Idempotent — dropping a never-connected id still answers {disconnected:true} (disconnect() parity). No provider Revoke: none of the user-plane providers exposes a revoke endpoint.
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
-     * @return ApiResponse<CloudDisconnectOut?>
+     * @return ApiResponse<DisconnectOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1ConnectorsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudDisconnectOut?> {
-        val localVariableConfig = cloudDeleteV1ConnectorsIdRequestConfig(id = id)
+    fun deleteV1ConnectorsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DisconnectOut?> {
+        val localVariableConfig = deleteV1ConnectorsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudDisconnectOut>(
+        return request<Unit, DisconnectOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1ConnectorsId
+     * To obtain the request config of the operation deleteV1ConnectorsById
      *
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
      * @return RequestConfig
      */
-    fun cloudDeleteV1ConnectorsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1ConnectorsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -122,7 +122,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -131,7 +131,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/connectors
      * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints.
      * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints. Rows are keyed (org,user), so this can never surface another user&#39;s connector, and no secret is in the view.
-     * @return CloudConnectorsOut
+     * @return ConnectorsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -140,11 +140,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Connectors() : CloudConnectorsOut {
-        val localVarResponse = cloudGetV1ConnectorsWithHttpInfo()
+    fun getV1Connectors() : ConnectorsOut {
+        val localVarResponse = getV1ConnectorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConnectorsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -162,26 +162,26 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/connectors
      * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints.
      * Lists the caller&#39;s OWN connectors across every provider — the set &#x60;hanzo connector ls&#x60; prints. Rows are keyed (org,user), so this can never surface another user&#39;s connector, and no secret is in the view.
-     * @return ApiResponse<CloudConnectorsOut?>
+     * @return ApiResponse<ConnectorsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ConnectorsWithHttpInfo() : ApiResponse<CloudConnectorsOut?> {
-        val localVariableConfig = cloudGetV1ConnectorsRequestConfig()
+    fun getV1ConnectorsWithHttpInfo() : ApiResponse<ConnectorsOut?> {
+        val localVariableConfig = getV1ConnectorsRequestConfig()
 
-        return request<Unit, CloudConnectorsOut>(
+        return request<Unit, ConnectorsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Connectors
+     * To obtain the request config of the operation getV1Connectors
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ConnectorsRequestConfig() : RequestConfig<Unit> {
+    fun getV1ConnectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -192,7 +192,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -202,7 +202,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Hands the custodied access token to its owner — the ONE place custody exits.
      * Hands the custodied access token to its owner — the ONE place custody exits. The (org,user)-keyed row IS the same-user gate: another user&#39;s id is simply \&quot;no row\&quot; → 404. fresh() auto-rotates within the refreshSkew window; static providers degenerate to a plain kmsGet of Secrets[0]. Refresh tokens are NEVER returned — custody keeps the sink. The token is never logged.
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
-     * @return CloudConnectorTokenOut
+     * @return ConnectorTokenOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -211,11 +211,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ConnectorsIdToken(id: kotlin.String) : CloudConnectorTokenOut {
-        val localVarResponse = cloudGetV1ConnectorsIdTokenWithHttpInfo(id = id)
+    fun getV1ConnectorsByIdToken(id: kotlin.String) : ConnectorTokenOut {
+        val localVarResponse = getV1ConnectorsByIdTokenWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConnectorTokenOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorTokenOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -234,27 +234,27 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Hands the custodied access token to its owner — the ONE place custody exits.
      * Hands the custodied access token to its owner — the ONE place custody exits. The (org,user)-keyed row IS the same-user gate: another user&#39;s id is simply \&quot;no row\&quot; → 404. fresh() auto-rotates within the refreshSkew window; static providers degenerate to a plain kmsGet of Secrets[0]. Refresh tokens are NEVER returned — custody keeps the sink. The token is never logged.
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
-     * @return ApiResponse<CloudConnectorTokenOut?>
+     * @return ApiResponse<ConnectorTokenOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ConnectorsIdTokenWithHttpInfo(id: kotlin.String) : ApiResponse<CloudConnectorTokenOut?> {
-        val localVariableConfig = cloudGetV1ConnectorsIdTokenRequestConfig(id = id)
+    fun getV1ConnectorsByIdTokenWithHttpInfo(id: kotlin.String) : ApiResponse<ConnectorTokenOut?> {
+        val localVariableConfig = getV1ConnectorsByIdTokenRequestConfig(id = id)
 
-        return request<Unit, CloudConnectorTokenOut>(
+        return request<Unit, ConnectorTokenOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ConnectorsIdToken
+     * To obtain the request config of the operation getV1ConnectorsByIdToken
      *
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
      * @return RequestConfig
      */
-    fun cloudGetV1ConnectorsIdTokenRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ConnectorsByIdTokenRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -265,7 +265,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{id}/token".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -274,7 +274,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/connectors/providers
      * Lists the user-scoped provider cards — the catalog of what a user can connect, and how.
      * Lists the user-scoped provider cards — the catalog of what a user can connect, and how. Methods derive from capabilities (Device/Adopt/Verify — Mount asserts at least one), never from a parallel kind enum.
-     * @return CloudConnectorProvidersOut
+     * @return ConnectorProvidersOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -283,11 +283,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ConnectorsProviders() : CloudConnectorProvidersOut {
-        val localVarResponse = cloudGetV1ConnectorsProvidersWithHttpInfo()
+    fun getV1ConnectorsProviders() : ConnectorProvidersOut {
+        val localVarResponse = getV1ConnectorsProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConnectorProvidersOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectorProvidersOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -305,26 +305,26 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * GET /v1/connectors/providers
      * Lists the user-scoped provider cards — the catalog of what a user can connect, and how.
      * Lists the user-scoped provider cards — the catalog of what a user can connect, and how. Methods derive from capabilities (Device/Adopt/Verify — Mount asserts at least one), never from a parallel kind enum.
-     * @return ApiResponse<CloudConnectorProvidersOut?>
+     * @return ApiResponse<ConnectorProvidersOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ConnectorsProvidersWithHttpInfo() : ApiResponse<CloudConnectorProvidersOut?> {
-        val localVariableConfig = cloudGetV1ConnectorsProvidersRequestConfig()
+    fun getV1ConnectorsProvidersWithHttpInfo() : ApiResponse<ConnectorProvidersOut?> {
+        val localVariableConfig = getV1ConnectorsProvidersRequestConfig()
 
-        return request<Unit, CloudConnectorProvidersOut>(
+        return request<Unit, ConnectorProvidersOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ConnectorsProviders
+     * To obtain the request config of the operation getV1ConnectorsProviders
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ConnectorsProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getV1ConnectorsProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -335,7 +335,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -345,7 +345,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window.
      * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window. Only providers that declare a Refresh support it.
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
-     * @return CloudRefreshOut
+     * @return RefreshOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -354,11 +354,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ConnectorsIdRefresh(id: kotlin.String) : CloudRefreshOut {
-        val localVarResponse = cloudPostV1ConnectorsIdRefreshWithHttpInfo(id = id)
+    fun postV1ConnectorsByIdRefresh(id: kotlin.String) : RefreshOut {
+        val localVarResponse = postV1ConnectorsByIdRefreshWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRefreshOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RefreshOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -377,27 +377,27 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window.
      * Forces a token rotation for a connected connector, ahead of the automatic rotation a token read would do inside the expiry window. Only providers that declare a Refresh support it.
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
-     * @return ApiResponse<CloudRefreshOut?>
+     * @return ApiResponse<RefreshOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ConnectorsIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<CloudRefreshOut?> {
-        val localVariableConfig = cloudPostV1ConnectorsIdRefreshRequestConfig(id = id)
+    fun postV1ConnectorsByIdRefreshWithHttpInfo(id: kotlin.String) : ApiResponse<RefreshOut?> {
+        val localVariableConfig = postV1ConnectorsByIdRefreshRequestConfig(id = id)
 
-        return request<Unit, CloudRefreshOut>(
+        return request<Unit, RefreshOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ConnectorsIdRefresh
+     * To obtain the request config of the operation postV1ConnectorsByIdRefresh
      *
      * @param id ID is the connector id, provider + \&quot;:\&quot; + label (\&quot;openai:default\&quot;) — the auth-profile-id shape. Another user&#39;s id is simply no row, so 404.
      * @return RequestConfig
      */
-    fun cloudPostV1ConnectorsIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1ConnectorsByIdRefreshRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -408,7 +408,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{id}/refresh".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -418,8 +418,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt).
      * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt). ALWAYS verify-before-store: a bad credential is refused and NOTHING is persisted (connectByCredential&#39;s fail-closed order).
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
-     * @param cloudCredentialIn 
-     * @return CloudCredentialOut
+     * @param credentialIn 
+     * @return CredentialOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -428,11 +428,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ConnectorsProviderCredential(provider: kotlin.String, cloudCredentialIn: CloudCredentialIn) : CloudCredentialOut {
-        val localVarResponse = cloudPostV1ConnectorsProviderCredentialWithHttpInfo(provider = provider, cloudCredentialIn = cloudCredentialIn)
+    fun postV1ConnectorsByProviderCredential(provider: kotlin.String, credentialIn: CredentialIn) : CredentialOut {
+        val localVarResponse = postV1ConnectorsByProviderCredentialWithHttpInfo(provider = provider, credentialIn = credentialIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCredentialOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CredentialOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -451,30 +451,30 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt).
      * Is the direct intake path: a customer-held token/setup-token (Verify) or an externally obtained OAuth bundle from the CLI&#39;s local PKCE (Adopt). ALWAYS verify-before-store: a bad credential is refused and NOTHING is persisted (connectByCredential&#39;s fail-closed order).
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
-     * @param cloudCredentialIn 
-     * @return ApiResponse<CloudCredentialOut?>
+     * @param credentialIn 
+     * @return ApiResponse<CredentialOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ConnectorsProviderCredentialWithHttpInfo(provider: kotlin.String, cloudCredentialIn: CloudCredentialIn) : ApiResponse<CloudCredentialOut?> {
-        val localVariableConfig = cloudPostV1ConnectorsProviderCredentialRequestConfig(provider = provider, cloudCredentialIn = cloudCredentialIn)
+    fun postV1ConnectorsByProviderCredentialWithHttpInfo(provider: kotlin.String, credentialIn: CredentialIn) : ApiResponse<CredentialOut?> {
+        val localVariableConfig = postV1ConnectorsByProviderCredentialRequestConfig(provider = provider, credentialIn = credentialIn)
 
-        return request<CloudCredentialIn, CloudCredentialOut>(
+        return request<CredentialIn, CredentialOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ConnectorsProviderCredential
+     * To obtain the request config of the operation postV1ConnectorsByProviderCredential
      *
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
-     * @param cloudCredentialIn 
+     * @param credentialIn 
      * @return RequestConfig
      */
-    fun cloudPostV1ConnectorsProviderCredentialRequestConfig(provider: kotlin.String, cloudCredentialIn: CloudCredentialIn) : RequestConfig<CloudCredentialIn> {
-        val localVariableBody = cloudCredentialIn
+    fun postV1ConnectorsByProviderCredentialRequestConfig(provider: kotlin.String, credentialIn: CredentialIn) : RequestConfig<CredentialIn> {
+        val localVariableBody = credentialIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -485,7 +485,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{provider}/credential".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -495,8 +495,8 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Begins a device sign-in and returns the code to show the user plus how to poll for completion.
      * Begins a device sign-in and returns the code to show the user plus how to poll for completion. KMS readiness is checked NOW rather than dead-ending the user at poll-done (connect() parity), and the per-provider connector cap is checked before the provider is called. The provider&#39;s device code is persisted only in the encrypted grants table and is NEVER returned.
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
-     * @param cloudDeviceStartIn 
-     * @return CloudDeviceStartOut
+     * @param deviceStartIn 
+     * @return DeviceStartOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -505,11 +505,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ConnectorsProviderDevice(provider: kotlin.String, cloudDeviceStartIn: CloudDeviceStartIn) : CloudDeviceStartOut {
-        val localVarResponse = cloudPostV1ConnectorsProviderDeviceWithHttpInfo(provider = provider, cloudDeviceStartIn = cloudDeviceStartIn)
+    fun postV1ConnectorsByProviderDevice(provider: kotlin.String, deviceStartIn: DeviceStartIn) : DeviceStartOut {
+        val localVarResponse = postV1ConnectorsByProviderDeviceWithHttpInfo(provider = provider, deviceStartIn = deviceStartIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDeviceStartOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeviceStartOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -528,30 +528,30 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Begins a device sign-in and returns the code to show the user plus how to poll for completion.
      * Begins a device sign-in and returns the code to show the user plus how to poll for completion. KMS readiness is checked NOW rather than dead-ending the user at poll-done (connect() parity), and the per-provider connector cap is checked before the provider is called. The provider&#39;s device code is persisted only in the encrypted grants table and is NEVER returned.
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
-     * @param cloudDeviceStartIn 
-     * @return ApiResponse<CloudDeviceStartOut?>
+     * @param deviceStartIn 
+     * @return ApiResponse<DeviceStartOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ConnectorsProviderDeviceWithHttpInfo(provider: kotlin.String, cloudDeviceStartIn: CloudDeviceStartIn) : ApiResponse<CloudDeviceStartOut?> {
-        val localVariableConfig = cloudPostV1ConnectorsProviderDeviceRequestConfig(provider = provider, cloudDeviceStartIn = cloudDeviceStartIn)
+    fun postV1ConnectorsByProviderDeviceWithHttpInfo(provider: kotlin.String, deviceStartIn: DeviceStartIn) : ApiResponse<DeviceStartOut?> {
+        val localVariableConfig = postV1ConnectorsByProviderDeviceRequestConfig(provider = provider, deviceStartIn = deviceStartIn)
 
-        return request<CloudDeviceStartIn, CloudDeviceStartOut>(
+        return request<DeviceStartIn, DeviceStartOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ConnectorsProviderDevice
+     * To obtain the request config of the operation postV1ConnectorsByProviderDevice
      *
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
-     * @param cloudDeviceStartIn 
+     * @param deviceStartIn 
      * @return RequestConfig
      */
-    fun cloudPostV1ConnectorsProviderDeviceRequestConfig(provider: kotlin.String, cloudDeviceStartIn: CloudDeviceStartIn) : RequestConfig<CloudDeviceStartIn> {
-        val localVariableBody = cloudDeviceStartIn
+    fun postV1ConnectorsByProviderDeviceRequestConfig(provider: kotlin.String, deviceStartIn: DeviceStartIn) : RequestConfig<DeviceStartIn> {
+        val localVariableBody = deviceStartIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -562,7 +562,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{provider}/device".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -573,7 +573,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Advances a device sign-in. Terminal outcomes are DATA, not errors (verifyConn {active:false} discipline) — the status set is closed: pending|connected|denied|expired. pollSlow collapses to \&quot;pending\&quot; on the wire; the raised cadence rides interval.
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
      * @param flow Flow is the id deviceStartOut returned. Expired or another user&#39;s flow is indistinguishable from an unknown one: 404.
-     * @return CloudDevicePollOut
+     * @return DevicePollOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -582,11 +582,11 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ConnectorsProviderDeviceFlowPoll(provider: kotlin.String, flow: kotlin.String) : CloudDevicePollOut {
-        val localVarResponse = cloudPostV1ConnectorsProviderDeviceFlowPollWithHttpInfo(provider = provider, flow = flow)
+    fun postV1ConnectorsByProviderDeviceByFlowPoll(provider: kotlin.String, flow: kotlin.String) : DevicePollOut {
+        val localVarResponse = postV1ConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider = provider, flow = flow)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDevicePollOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DevicePollOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -606,28 +606,28 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * Advances a device sign-in. Terminal outcomes are DATA, not errors (verifyConn {active:false} discipline) — the status set is closed: pending|connected|denied|expired. pollSlow collapses to \&quot;pending\&quot; on the wire; the raised cadence rides interval.
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
      * @param flow Flow is the id deviceStartOut returned. Expired or another user&#39;s flow is indistinguishable from an unknown one: 404.
-     * @return ApiResponse<CloudDevicePollOut?>
+     * @return ApiResponse<DevicePollOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ConnectorsProviderDeviceFlowPollWithHttpInfo(provider: kotlin.String, flow: kotlin.String) : ApiResponse<CloudDevicePollOut?> {
-        val localVariableConfig = cloudPostV1ConnectorsProviderDeviceFlowPollRequestConfig(provider = provider, flow = flow)
+    fun postV1ConnectorsByProviderDeviceByFlowPollWithHttpInfo(provider: kotlin.String, flow: kotlin.String) : ApiResponse<DevicePollOut?> {
+        val localVariableConfig = postV1ConnectorsByProviderDeviceByFlowPollRequestConfig(provider = provider, flow = flow)
 
-        return request<Unit, CloudDevicePollOut>(
+        return request<Unit, DevicePollOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ConnectorsProviderDeviceFlowPoll
+     * To obtain the request config of the operation postV1ConnectorsByProviderDeviceByFlowPoll
      *
      * @param provider Provider is the user-scoped provider&#39;s registry id, from the path.
      * @param flow Flow is the id deviceStartOut returned. Expired or another user&#39;s flow is indistinguishable from an unknown one: 404.
      * @return RequestConfig
      */
-    fun cloudPostV1ConnectorsProviderDeviceFlowPollRequestConfig(provider: kotlin.String, flow: kotlin.String) : RequestConfig<Unit> {
+    fun postV1ConnectorsByProviderDeviceByFlowPollRequestConfig(provider: kotlin.String, flow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -638,7 +638,7 @@ class ConnectorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
             path = "/v1/connectors/{provider}/device/{flow}/poll".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())).replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

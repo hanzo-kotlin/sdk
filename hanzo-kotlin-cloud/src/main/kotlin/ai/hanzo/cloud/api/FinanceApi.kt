@@ -19,8 +19,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAccountsOut
-import ai.hanzo.cloud.model.CloudTreasuryReport
+import ai.hanzo.cloud.model.AccountsOut
+import ai.hanzo.cloud.model.FinanceBalanceView
+import ai.hanzo.cloud.model.FinanceCredit
+import ai.hanzo.cloud.model.FinanceInvoice
+import ai.hanzo.cloud.model.FinanceLedgerEntry
+import ai.hanzo.cloud.model.FinancePaymentMethod
+import ai.hanzo.cloud.model.FinanceUsageView
+import ai.hanzo.cloud.model.TreasuryReport
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,11 +54,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/accounts
-     * ListFinanceAccounts returns the ledger accounts the caller may see, with their balances.
-     * ListFinanceAccounts returns the ledger accounts the caller may see, with their balances. It is tenant-isolated SERVER-SIDE: an ordinary caller sees ONLY accounts under its own \&quot;org:&lt;tenant&gt;:\&quot; prefix, never house accounts and never another tenant&#39;s. A SuperAdmin may widen with ?scope&#x3D;house (the reserve, revenue and payout house accounts) or ?org&#x3D;&lt;tenant&gt; — the only way to cross the tenant boundary, and only for platform sudo. The answer is honestly empty until a tenant has ledger postings.
+     * Returns the ledger accounts the caller may see, with their balances.
+     * Returns the ledger accounts the caller may see, with their balances. It is tenant-isolated SERVER-SIDE: an ordinary caller sees ONLY accounts under its own \&quot;org:&lt;tenant&gt;:\&quot; prefix, never house accounts and never another tenant&#39;s. A SuperAdmin may widen with ?scope&#x3D;house (the reserve, revenue and payout house accounts) or ?org&#x3D;&lt;tenant&gt; — the only way to cross the tenant boundary, and only for platform sudo. The answer is honestly empty until a tenant has ledger postings.
      * @param scope Scope is \&quot;house\&quot; to read the reserve/revenue/payout house accounts. SuperAdmin only. (optional)
      * @param org Org names another tenant to read. SuperAdmin only; ignored when scope&#x3D;house. (optional)
-     * @return CloudAccountsOut
+     * @return AccountsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -61,11 +67,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinanceAccounts(scope: kotlin.String? = null, org: kotlin.String? = null) : CloudAccountsOut {
-        val localVarResponse = cloudGetV1FinanceAccountsWithHttpInfo(scope = scope, org = org)
+    fun getV1FinanceAccounts(scope: kotlin.String? = null, org: kotlin.String? = null) : AccountsOut {
+        val localVarResponse = getV1FinanceAccountsWithHttpInfo(scope = scope, org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccountsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccountsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,32 +87,32 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/accounts
-     * ListFinanceAccounts returns the ledger accounts the caller may see, with their balances.
-     * ListFinanceAccounts returns the ledger accounts the caller may see, with their balances. It is tenant-isolated SERVER-SIDE: an ordinary caller sees ONLY accounts under its own \&quot;org:&lt;tenant&gt;:\&quot; prefix, never house accounts and never another tenant&#39;s. A SuperAdmin may widen with ?scope&#x3D;house (the reserve, revenue and payout house accounts) or ?org&#x3D;&lt;tenant&gt; — the only way to cross the tenant boundary, and only for platform sudo. The answer is honestly empty until a tenant has ledger postings.
+     * Returns the ledger accounts the caller may see, with their balances.
+     * Returns the ledger accounts the caller may see, with their balances. It is tenant-isolated SERVER-SIDE: an ordinary caller sees ONLY accounts under its own \&quot;org:&lt;tenant&gt;:\&quot; prefix, never house accounts and never another tenant&#39;s. A SuperAdmin may widen with ?scope&#x3D;house (the reserve, revenue and payout house accounts) or ?org&#x3D;&lt;tenant&gt; — the only way to cross the tenant boundary, and only for platform sudo. The answer is honestly empty until a tenant has ledger postings.
      * @param scope Scope is \&quot;house\&quot; to read the reserve/revenue/payout house accounts. SuperAdmin only. (optional)
      * @param org Org names another tenant to read. SuperAdmin only; ignored when scope&#x3D;house. (optional)
-     * @return ApiResponse<CloudAccountsOut?>
+     * @return ApiResponse<AccountsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinanceAccountsWithHttpInfo(scope: kotlin.String?, org: kotlin.String?) : ApiResponse<CloudAccountsOut?> {
-        val localVariableConfig = cloudGetV1FinanceAccountsRequestConfig(scope = scope, org = org)
+    fun getV1FinanceAccountsWithHttpInfo(scope: kotlin.String?, org: kotlin.String?) : ApiResponse<AccountsOut?> {
+        val localVariableConfig = getV1FinanceAccountsRequestConfig(scope = scope, org = org)
 
-        return request<Unit, CloudAccountsOut>(
+        return request<Unit, AccountsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinanceAccounts
+     * To obtain the request config of the operation getV1FinanceAccounts
      *
      * @param scope Scope is \&quot;house\&quot; to read the reserve/revenue/payout house accounts. SuperAdmin only. (optional)
      * @param org Org names another tenant to read. SuperAdmin only; ignored when scope&#x3D;house. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FinanceAccountsRequestConfig(scope: kotlin.String?, org: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1FinanceAccountsRequestConfig(scope: kotlin.String?, org: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -125,28 +131,29 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/finance/balance
-     * 
-     * 
-     * @return void
+     * Answers the org&#39;s spendable prepaid balance typed for the finance surfaces: &#x60;availableCents&#x60;, &#x60;pendingCents&#x60;, &#x60;dueCents&#x60; and the &#x60;asOf&#x60; instant it was read.
+     * Answers the org&#39;s spendable prepaid balance typed for the finance surfaces: &#x60;availableCents&#x60;, &#x60;pendingCents&#x60;, &#x60;dueCents&#x60; and the &#x60;asOf&#x60; instant it was read.  It is the SAME wallet read /v1/billing/balance answers — one function, called by both, so the two surfaces cannot drift into disagreeing about a customer&#39;s money. Reshaped, never re-metered. Co-resident the number comes straight out of the org&#39;s own double-entry ledger file.  &#x60;dueCents&#x60; is a structural 0: this is a PREPAID wallet with no open-invoice debt, so nothing is ever owed and a non-zero value here would be an invention. &#x60;pendingCents&#x60; is 0 on the co-resident ledger, where authorization holds are never posted; only a split-deploy upstream reports holds, and there spendable is the balance NET of them, floored at 0 — a fully-held wallet reports 0 rather than money the gate would refuse.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD. Scoped to the caller&#39;s own org from the validated IAM owner claim; 401 without a validated principal, and a balance that cannot be read is 502 — never 0, because unknown is not broke.
+     * @return FinanceBalanceView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinanceBalance() : Unit {
-        val localVarResponse = cloudGetV1FinanceBalanceWithHttpInfo()
+    fun getV1FinanceBalance() : FinanceBalanceView {
+        val localVarResponse = getV1FinanceBalanceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FinanceBalanceView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -162,58 +169,61 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/balance
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers the org&#39;s spendable prepaid balance typed for the finance surfaces: &#x60;availableCents&#x60;, &#x60;pendingCents&#x60;, &#x60;dueCents&#x60; and the &#x60;asOf&#x60; instant it was read.
+     * Answers the org&#39;s spendable prepaid balance typed for the finance surfaces: &#x60;availableCents&#x60;, &#x60;pendingCents&#x60;, &#x60;dueCents&#x60; and the &#x60;asOf&#x60; instant it was read.  It is the SAME wallet read /v1/billing/balance answers — one function, called by both, so the two surfaces cannot drift into disagreeing about a customer&#39;s money. Reshaped, never re-metered. Co-resident the number comes straight out of the org&#39;s own double-entry ledger file.  &#x60;dueCents&#x60; is a structural 0: this is a PREPAID wallet with no open-invoice debt, so nothing is ever owed and a non-zero value here would be an invention. &#x60;pendingCents&#x60; is 0 on the co-resident ledger, where authorization holds are never posted; only a split-deploy upstream reports holds, and there spendable is the balance NET of them, floored at 0 — a fully-held wallet reports 0 rather than money the gate would refuse.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD. Scoped to the caller&#39;s own org from the validated IAM owner claim; 401 without a validated principal, and a balance that cannot be read is 502 — never 0, because unknown is not broke.
+     * @return ApiResponse<FinanceBalanceView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinanceBalanceWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FinanceBalanceRequestConfig()
+    fun getV1FinanceBalanceWithHttpInfo() : ApiResponse<FinanceBalanceView?> {
+        val localVariableConfig = getV1FinanceBalanceRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, FinanceBalanceView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinanceBalance
+     * To obtain the request config of the operation getV1FinanceBalance
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FinanceBalanceRequestConfig() : RequestConfig<Unit> {
+    fun getV1FinanceBalanceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/finance/balance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/finance/credits
-     * 
-     * 
-     * @return void
+     * Answers the money PUT IN to the org&#39;s wallet — each staff grant, promo and settled top-up as a positive row with its id, label, cents and grant time.
+     * Answers the money PUT IN to the org&#39;s wallet — each staff grant, promo and settled top-up as a positive row with its id, label, cents and grant time.  Spend is not a credit. A posting counts here only when it moved money IN; debits belong to /v1/finance/usage (aggregated) and /v1/finance/ledger (signed). All three project ONE read of the same ledger through ONE vocabulary for what a posting means, so they cannot disagree about a row — nor silently drop one, which is what an empty credits page against a funded wallet was.  &#x60;label&#x60; falls back through the posting&#39;s notes, then its tags, then a bare Credit — it is a description, never an identifier. &#x60;remainingCents&#x60; is OMITTED: the wallet is one running balance, not per-grant buckets, so no grant has a remainder to report and spend cannot be attributed to the credit that funded it.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD. Scoped to the caller&#39;s own org; 401 without a validated principal. An org with no grants gets an empty array — honest, never a fabricated figure.
+     * @return kotlin.collections.List<FinanceCredit>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinanceCredits() : Unit {
-        val localVarResponse = cloudGetV1FinanceCreditsWithHttpInfo()
+    fun getV1FinanceCredits() : kotlin.collections.List<FinanceCredit> {
+        val localVarResponse = getV1FinanceCreditsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinanceCredit>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -229,58 +239,61 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/credits
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers the money PUT IN to the org&#39;s wallet — each staff grant, promo and settled top-up as a positive row with its id, label, cents and grant time.
+     * Answers the money PUT IN to the org&#39;s wallet — each staff grant, promo and settled top-up as a positive row with its id, label, cents and grant time.  Spend is not a credit. A posting counts here only when it moved money IN; debits belong to /v1/finance/usage (aggregated) and /v1/finance/ledger (signed). All three project ONE read of the same ledger through ONE vocabulary for what a posting means, so they cannot disagree about a row — nor silently drop one, which is what an empty credits page against a funded wallet was.  &#x60;label&#x60; falls back through the posting&#39;s notes, then its tags, then a bare Credit — it is a description, never an identifier. &#x60;remainingCents&#x60; is OMITTED: the wallet is one running balance, not per-grant buckets, so no grant has a remainder to report and spend cannot be attributed to the credit that funded it.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD. Scoped to the caller&#39;s own org; 401 without a validated principal. An org with no grants gets an empty array — honest, never a fabricated figure.
+     * @return ApiResponse<kotlin.collections.List<FinanceCredit>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinanceCreditsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FinanceCreditsRequestConfig()
+    fun getV1FinanceCreditsWithHttpInfo() : ApiResponse<kotlin.collections.List<FinanceCredit>?> {
+        val localVariableConfig = getV1FinanceCreditsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.collections.List<FinanceCredit>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinanceCredits
+     * To obtain the request config of the operation getV1FinanceCredits
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FinanceCreditsRequestConfig() : RequestConfig<Unit> {
+    fun getV1FinanceCreditsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/finance/credits",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/finance/invoices
-     * 
-     * 
-     * @return void
+     * Answers an empty typed array, always.
+     * Answers an empty typed array, always. The fleet bills a PREPAID wallet — money in, metered debits out — and issues no customer invoices, so there is no invoice ledger to project. Nothing here is a fabricated figure and nothing is hidden behind a filter.  The shape is fixed, so the finance UI renders this lane today and the day an invoice ledger exists it fills with ZERO client change. Spend that actually happened is /v1/finance/usage; money in and out is /v1/finance/ledger; what is left to spend is /v1/finance/balance.  The gate is real even though the body is empty: 401 without a validated principal. It is the only finance read that touches no store, so it is also the only one that cannot 502.
+     * @return kotlin.collections.List<FinanceInvoice>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinanceInvoices() : Unit {
-        val localVarResponse = cloudGetV1FinanceInvoicesWithHttpInfo()
+    fun getV1FinanceInvoices() : kotlin.collections.List<FinanceInvoice> {
+        val localVarResponse = getV1FinanceInvoicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinanceInvoice>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -296,58 +309,62 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/invoices
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers an empty typed array, always.
+     * Answers an empty typed array, always. The fleet bills a PREPAID wallet — money in, metered debits out — and issues no customer invoices, so there is no invoice ledger to project. Nothing here is a fabricated figure and nothing is hidden behind a filter.  The shape is fixed, so the finance UI renders this lane today and the day an invoice ledger exists it fills with ZERO client change. Spend that actually happened is /v1/finance/usage; money in and out is /v1/finance/ledger; what is left to spend is /v1/finance/balance.  The gate is real even though the body is empty: 401 without a validated principal. It is the only finance read that touches no store, so it is also the only one that cannot 502.
+     * @return ApiResponse<kotlin.collections.List<FinanceInvoice>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinanceInvoicesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FinanceInvoicesRequestConfig()
+    fun getV1FinanceInvoicesWithHttpInfo() : ApiResponse<kotlin.collections.List<FinanceInvoice>?> {
+        val localVariableConfig = getV1FinanceInvoicesRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.collections.List<FinanceInvoice>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinanceInvoices
+     * To obtain the request config of the operation getV1FinanceInvoices
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FinanceInvoicesRequestConfig() : RequestConfig<Unit> {
+    fun getV1FinanceInvoicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/finance/invoices",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/finance/ledger
-     * 
-     * 
-     * @return void
+     * Answers the org&#39;s own postings inside &#x60;range&#x3D;&#x60;, each as a signed entry: a DEPOSIT CREDITS the wallet (positive, account &#x60;credits:&lt;org&gt;&#x60;) and every other posting DEBITS it (negative, account &#x60;usage:&lt;org&gt;&#x60;), described by its notes or its tags.
+     * Answers the org&#39;s own postings inside &#x60;range&#x3D;&#x60;, each as a signed entry: a DEPOSIT CREDITS the wallet (positive, account &#x60;credits:&lt;org&gt;&#x60;) and every other posting DEBITS it (negative, account &#x60;usage:&lt;org&gt;&#x60;), described by its notes or its tags. The sign is the posting&#39;s own meaning, read through ONE vocabulary shared with the ledger that wrote it — a reader with its own spelling for &#x60;deposit&#x60; rendered a customer&#39;s grant as a charge.  This is the closest projection of the truth. The org&#39;s double-entry postings are the source of record — balanced, only ever appended, one file per org — and this lane is that list, widest of the three: /v1/finance/credits is its deposit half and /v1/finance/usage is its withdrawal half rolled up. All three come from ONE read, which is why they cannot contradict each other, and all three answer 501 where no commerce link is configured rather than reporting an empty wallet.  A row whose timestamp will not parse is KEPT rather than dropped — a malformed date must show up in a money list, not vanish from it. &#x60;balanceCents&#x60; is omitted: these are MOVEMENTS, and the standing balance is /v1/finance/balance.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD. Scoped to the caller&#39;s own org, where the org&#39;s ledger file is the tenant boundary; 401 without a validated principal.
+     * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
+     * @return kotlin.collections.List<FinanceLedgerEntry>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinanceLedger() : Unit {
-        val localVarResponse = cloudGetV1FinanceLedgerWithHttpInfo()
+    fun getV1FinanceLedger(range: kotlin.String? = null) : kotlin.collections.List<FinanceLedgerEntry> {
+        val localVarResponse = getV1FinanceLedgerWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinanceLedgerEntry>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -363,58 +380,68 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/ledger
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers the org&#39;s own postings inside &#x60;range&#x3D;&#x60;, each as a signed entry: a DEPOSIT CREDITS the wallet (positive, account &#x60;credits:&lt;org&gt;&#x60;) and every other posting DEBITS it (negative, account &#x60;usage:&lt;org&gt;&#x60;), described by its notes or its tags.
+     * Answers the org&#39;s own postings inside &#x60;range&#x3D;&#x60;, each as a signed entry: a DEPOSIT CREDITS the wallet (positive, account &#x60;credits:&lt;org&gt;&#x60;) and every other posting DEBITS it (negative, account &#x60;usage:&lt;org&gt;&#x60;), described by its notes or its tags. The sign is the posting&#39;s own meaning, read through ONE vocabulary shared with the ledger that wrote it — a reader with its own spelling for &#x60;deposit&#x60; rendered a customer&#39;s grant as a charge.  This is the closest projection of the truth. The org&#39;s double-entry postings are the source of record — balanced, only ever appended, one file per org — and this lane is that list, widest of the three: /v1/finance/credits is its deposit half and /v1/finance/usage is its withdrawal half rolled up. All three come from ONE read, which is why they cannot contradict each other, and all three answer 501 where no commerce link is configured rather than reporting an empty wallet.  A row whose timestamp will not parse is KEPT rather than dropped — a malformed date must show up in a money list, not vanish from it. &#x60;balanceCents&#x60; is omitted: these are MOVEMENTS, and the standing balance is /v1/finance/balance.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD. Scoped to the caller&#39;s own org, where the org&#39;s ledger file is the tenant boundary; 401 without a validated principal.
+     * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
+     * @return ApiResponse<kotlin.collections.List<FinanceLedgerEntry>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinanceLedgerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FinanceLedgerRequestConfig()
+    fun getV1FinanceLedgerWithHttpInfo(range: kotlin.String?) : ApiResponse<kotlin.collections.List<FinanceLedgerEntry>?> {
+        val localVariableConfig = getV1FinanceLedgerRequestConfig(range = range)
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.collections.List<FinanceLedgerEntry>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinanceLedger
+     * To obtain the request config of the operation getV1FinanceLedger
      *
+     * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FinanceLedgerRequestConfig() : RequestConfig<Unit> {
+    fun getV1FinanceLedgerRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (range != null) {
+                    put("range", listOf(range.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/finance/ledger",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/finance/payment-methods
-     * 
-     * 
-     * @return void
+     * Answers the masked card descriptors for the caller&#39;s resolved WALLET — id, brand, last four, expiry, default flag — reshaped into the finance contract.
+     * Answers the masked card descriptors for the caller&#39;s resolved WALLET — id, brand, last four, expiry, default flag — reshaped into the finance contract.  It re-masks defensively: whatever the upstream sends, at most the trailing four DIGITS survive into &#x60;last4&#x60;. No card number, no security code and no processor token exists in this shape at all, so an over-returning upstream still cannot leak one through this lane.  Read the sibling difference before trusting a mismatch. This keys the store on the resolved wallet; /v1/billing/methods keys it on the org SLUG, which is also the key a card is SAVED under — identical for an org paying from its shared pool, different wherever the payer is a person. When the two lists disagree, the billing one is what was saved.  401 without a validated principal. An upstream that answers non-2xx or cannot be reached is 502 — never an empty list, because no cards and could not ask must not look alike.
+     * @return kotlin.collections.List<FinancePaymentMethod>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinancePaymentMethods() : Unit {
-        val localVarResponse = cloudGetV1FinancePaymentMethodsWithHttpInfo()
+    fun getV1FinancePaymentMethods() : kotlin.collections.List<FinancePaymentMethod> {
+        val localVarResponse = getV1FinancePaymentMethodsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<FinancePaymentMethod>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -430,46 +457,48 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/payment-methods
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers the masked card descriptors for the caller&#39;s resolved WALLET — id, brand, last four, expiry, default flag — reshaped into the finance contract.
+     * Answers the masked card descriptors for the caller&#39;s resolved WALLET — id, brand, last four, expiry, default flag — reshaped into the finance contract.  It re-masks defensively: whatever the upstream sends, at most the trailing four DIGITS survive into &#x60;last4&#x60;. No card number, no security code and no processor token exists in this shape at all, so an over-returning upstream still cannot leak one through this lane.  Read the sibling difference before trusting a mismatch. This keys the store on the resolved wallet; /v1/billing/methods keys it on the org SLUG, which is also the key a card is SAVED under — identical for an org paying from its shared pool, different wherever the payer is a person. When the two lists disagree, the billing one is what was saved.  401 without a validated principal. An upstream that answers non-2xx or cannot be reached is 502 — never an empty list, because no cards and could not ask must not look alike.
+     * @return ApiResponse<kotlin.collections.List<FinancePaymentMethod>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinancePaymentMethodsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FinancePaymentMethodsRequestConfig()
+    fun getV1FinancePaymentMethodsWithHttpInfo() : ApiResponse<kotlin.collections.List<FinancePaymentMethod>?> {
+        val localVariableConfig = getV1FinancePaymentMethodsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.collections.List<FinancePaymentMethod>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinancePaymentMethods
+     * To obtain the request config of the operation getV1FinancePaymentMethods
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FinancePaymentMethodsRequestConfig() : RequestConfig<Unit> {
+    fun getV1FinancePaymentMethodsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/finance/payment-methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/finance/treasury
-     * GetTreasury returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller.
-     * GetTreasury returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller. It is a TRANSPARENCY view — a partner or author can see that the pool backing their payouts is solvent — and NOT per-org money, which is the customer&#39;s own commerce balance at /v1/billing/balance. The policy is read-only here; only a SuperAdmin sets it.
-     * @return CloudTreasuryReport
+     * Returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller.
+     * Returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller. It is a TRANSPARENCY view — a partner or author can see that the pool backing their payouts is solvent — and NOT per-org money, which is the customer&#39;s own commerce balance at /v1/billing/balance. The policy is read-only here; only a SuperAdmin sets it.
+     * @return TreasuryReport
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -478,11 +507,11 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinanceTreasury() : CloudTreasuryReport {
-        val localVarResponse = cloudGetV1FinanceTreasuryWithHttpInfo()
+    fun getV1FinanceTreasury() : TreasuryReport {
+        val localVarResponse = getV1FinanceTreasuryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTreasuryReport
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TreasuryReport
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -498,28 +527,28 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/treasury
-     * GetTreasury returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller.
-     * GetTreasury returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller. It is a TRANSPARENCY view — a partner or author can see that the pool backing their payouts is solvent — and NOT per-org money, which is the customer&#39;s own commerce balance at /v1/billing/balance. The policy is read-only here; only a SuperAdmin sets it.
-     * @return ApiResponse<CloudTreasuryReport?>
+     * Returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller.
+     * Returns the reserve fund&#39;s health and the current revenue-share policy for any validated caller. It is a TRANSPARENCY view — a partner or author can see that the pool backing their payouts is solvent — and NOT per-org money, which is the customer&#39;s own commerce balance at /v1/billing/balance. The policy is read-only here; only a SuperAdmin sets it.
+     * @return ApiResponse<TreasuryReport?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinanceTreasuryWithHttpInfo() : ApiResponse<CloudTreasuryReport?> {
-        val localVariableConfig = cloudGetV1FinanceTreasuryRequestConfig()
+    fun getV1FinanceTreasuryWithHttpInfo() : ApiResponse<TreasuryReport?> {
+        val localVariableConfig = getV1FinanceTreasuryRequestConfig()
 
-        return request<Unit, CloudTreasuryReport>(
+        return request<Unit, TreasuryReport>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinanceTreasury
+     * To obtain the request config of the operation getV1FinanceTreasury
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FinanceTreasuryRequestConfig() : RequestConfig<Unit> {
+    fun getV1FinanceTreasuryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -530,28 +559,30 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/finance/treasury",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/finance/usage
-     * 
-     * 
-     * @return void
+     * Answers metered spend inside &#x60;range&#x3D;&#x60;: the window total, a time series to plot, and one line per usage TAG.
+     * Answers metered spend inside &#x60;range&#x3D;&#x60;: the window total, a time series to plot, and one line per usage TAG. Aggregated from the same charged ledger the balance comes off — projected, never re-metered.  Only DEBIT postings count; deposits are credits and are excluded. Buckets are hourly at 24h and daily otherwise, in UTC; a posting whose timestamp will not parse is dropped rather than mis-bucketed.  Lines group by the posting&#39;s tag (&#x60;Usage&#x60; where it carries none) and &#x60;units&#x60; counts POSTINGS, not tokens. The dimensions here are time and tag. For per-request rows and a per-PRODUCT breakdown, read /v1/billing/usage instead — the same money, cut a different way.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD, so a window made of sub-cent token calls totals LOW here. Scoped to the caller&#39;s own org; 401 without a validated principal.
+     * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
+     * @return FinanceUsageView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FinanceUsage() : Unit {
-        val localVarResponse = cloudGetV1FinanceUsageWithHttpInfo()
+    fun getV1FinanceUsage(range: kotlin.String? = null) : FinanceUsageView {
+        val localVarResponse = getV1FinanceUsageWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FinanceUsageView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -567,37 +598,46 @@ class FinanceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/finance/usage
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Answers metered spend inside &#x60;range&#x3D;&#x60;: the window total, a time series to plot, and one line per usage TAG.
+     * Answers metered spend inside &#x60;range&#x3D;&#x60;: the window total, a time series to plot, and one line per usage TAG. Aggregated from the same charged ledger the balance comes off — projected, never re-metered.  Only DEBIT postings count; deposits are credits and are excluded. Buckets are hourly at 24h and daily otherwise, in UTC; a posting whose timestamp will not parse is dropped rather than mis-bucketed.  Lines group by the posting&#39;s tag (&#x60;Usage&#x60; where it carries none) and &#x60;units&#x60; counts POSTINGS, not tokens. The dimensions here are time and tag. For per-request rows and a per-PRODUCT breakdown, read /v1/billing/usage instead — the same money, cut a different way.  Cents are ROUNDED from the ledger&#39;s exact 18-decimal USD, so a window made of sub-cent token calls totals LOW here. Scoped to the caller&#39;s own org; 401 without a validated principal.
+     * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
+     * @return ApiResponse<FinanceUsageView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FinanceUsageWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FinanceUsageRequestConfig()
+    fun getV1FinanceUsageWithHttpInfo(range: kotlin.String?) : ApiResponse<FinanceUsageView?> {
+        val localVariableConfig = getV1FinanceUsageRequestConfig(range = range)
 
-        return request<Unit, Unit>(
+        return request<Unit, FinanceUsageView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FinanceUsage
+     * To obtain the request config of the operation getV1FinanceUsage
      *
+     * @param range Range is the window: 24h, 7d, 30d or 90d. Anything else — including absent — is 30d, so a typo silently widens the window to a month rather than failing. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FinanceUsageRequestConfig() : RequestConfig<Unit> {
+    fun getV1FinanceUsageRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (range != null) {
+                    put("range", listOf(range.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/finance/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

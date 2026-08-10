@@ -19,9 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.GatewayHealthCheck200Response
-import ai.hanzo.cloud.model.GatewayReadinessCheck200Response
-import ai.hanzo.cloud.model.KmsGetV1KmsHealthz200Response
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,289 +45,9 @@ class HealthApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * GET /healthz
-     * Health check
-     * 
-     * @return GatewayHealthCheck200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayHealthCheck() : GatewayHealthCheck200Response {
-        val localVarResponse = gatewayHealthCheckWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GatewayHealthCheck200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /healthz
-     * Health check
-     * 
-     * @return ApiResponse<GatewayHealthCheck200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayHealthCheckWithHttpInfo() : ApiResponse<GatewayHealthCheck200Response?> {
-        val localVariableConfig = gatewayHealthCheckRequestConfig()
-
-        return request<Unit, GatewayHealthCheck200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation gatewayHealthCheck
-     *
-     * @return RequestConfig
-     */
-    fun gatewayHealthCheckRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/healthz",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/gateway/health/liveliness
-     * Liveliness check
-     * 
-     * @return kotlin.String
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayLivelinessCheck() : kotlin.String {
-        val localVarResponse = gatewayLivelinessCheckWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.String
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/gateway/health/liveliness
-     * Liveliness check
-     * 
-     * @return ApiResponse<kotlin.String?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayLivelinessCheckWithHttpInfo() : ApiResponse<kotlin.String?> {
-        val localVariableConfig = gatewayLivelinessCheckRequestConfig()
-
-        return request<Unit, kotlin.String>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation gatewayLivelinessCheck
-     *
-     * @return RequestConfig
-     */
-    fun gatewayLivelinessCheckRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "text/plain"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/gateway/health/liveliness",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/gateway/health/readiness
-     * Readiness check
-     * 
-     * @return GatewayReadinessCheck200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayReadinessCheck() : GatewayReadinessCheck200Response {
-        val localVarResponse = gatewayReadinessCheckWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GatewayReadinessCheck200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/gateway/health/readiness
-     * Readiness check
-     * 
-     * @return ApiResponse<GatewayReadinessCheck200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayReadinessCheckWithHttpInfo() : ApiResponse<GatewayReadinessCheck200Response?> {
-        val localVariableConfig = gatewayReadinessCheckRequestConfig()
-
-        return request<Unit, GatewayReadinessCheck200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation gatewayReadinessCheck
-     *
-     * @return RequestConfig
-     */
-    fun gatewayReadinessCheckRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/gateway/health/readiness",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/kms/healthz
-     * Liveness
-     * status is &#x60;degraded&#x60; when MPC is configured but unreachable -- still 200, so a working secrets surface is not flapped out of rotation.
-     * @return KmsGetV1KmsHealthz200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kmsGetV1KmsHealthz() : KmsGetV1KmsHealthz200Response {
-        val localVarResponse = kmsGetV1KmsHealthzWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KmsGetV1KmsHealthz200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kms/healthz
-     * Liveness
-     * status is &#x60;degraded&#x60; when MPC is configured but unreachable -- still 200, so a working secrets surface is not flapped out of rotation.
-     * @return ApiResponse<KmsGetV1KmsHealthz200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kmsGetV1KmsHealthzWithHttpInfo() : ApiResponse<KmsGetV1KmsHealthz200Response?> {
-        val localVariableConfig = kmsGetV1KmsHealthzRequestConfig()
-
-        return request<Unit, KmsGetV1KmsHealthz200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kmsGetV1KmsHealthz
-     *
-     * @return RequestConfig
-     */
-    fun kmsGetV1KmsHealthzRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kms/healthz",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/referrals/health
-     * Liveness probe
-     * Auto-registered liveness probe (serve.go registers &#x60;GET /v1/referrals/health&#x60; for every mounted subsystem). Response body is not defined by this package. 
+     * GET /v1/health
+     * Check if the system is live
+     * Check if the system is live
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -339,8 +56,8 @@ class HealthApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun referralsReferralsHealth() : Unit {
-        val localVarResponse = referralsReferralsHealthWithHttpInfo()
+    fun getV1Health() : Unit {
+        val localVarResponse = getV1HealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -358,16 +75,16 @@ class HealthApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * GET /v1/referrals/health
-     * Liveness probe
-     * Auto-registered liveness probe (serve.go registers &#x60;GET /v1/referrals/health&#x60; for every mounted subsystem). Response body is not defined by this package. 
+     * GET /v1/health
+     * Check if the system is live
+     * Check if the system is live
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun referralsReferralsHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = referralsReferralsHealthRequestConfig()
+    fun getV1HealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1HealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -375,18 +92,18 @@ class HealthApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation referralsReferralsHealth
+     * To obtain the request config of the operation getV1Health
      *
      * @return RequestConfig
      */
-    fun referralsReferralsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1HealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/referrals/health",
+            path = "/v1/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

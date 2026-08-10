@@ -19,13 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAllowlistPutIn
-import ai.hanzo.cloud.model.CloudAllowlistView
-import ai.hanzo.cloud.model.CloudApprovePairingIn
-import ai.hanzo.cloud.model.CloudChatChannels
-import ai.hanzo.cloud.model.CloudInboxPage
-import ai.hanzo.cloud.model.CloudPairingApproved
-import ai.hanzo.cloud.model.CloudPairingQueue
+import ai.hanzo.cloud.model.AllowlistPutIn
+import ai.hanzo.cloud.model.AllowlistView
+import ai.hanzo.cloud.model.ApprovePairingIn
+import ai.hanzo.cloud.model.ChatChannels
+import ai.hanzo.cloud.model.InboxPage
+import ai.hanzo.cloud.model.PairingApproved
+import ai.hanzo.cloud.model.PairingQueue
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,9 +53,9 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/channels
-     * Returns every chat transport channels can talk to — Discord, Slack, Teams and Telegram — with the caller org&#39;s own facts on each: whether it is connected and to which account, what the transport supports, the org&#39;s DM and group access policies, and how many pairing requests are pending approval.
-     * Returns every chat transport channels can talk to — Discord, Slack, Teams and Telegram — with the caller org&#39;s own facts on each: whether it is connected and to which account, what the transport supports, the org&#39;s DM and group access policies, and how many pairing requests are pending approval. The order is fixed, so a console can render the same rows every time. A policy that cannot be read leaves that channel&#39;s policy fields empty rather than failing the whole listing.
-     * @return CloudChatChannels
+     * Reports every chat channel this org can send through, and whether it can send through it right now.
+     * Reports every chat channel this org can send through, and whether it can send through it right now.  A channel appears here whether or not it is connected — an empty list would leave a caller unable to tell \&quot;this org has no Slack\&quot; from \&quot;Slack is down\&quot;, which are different problems with different fixes. Each entry carries the connection behind it, so the answer to \&quot;why can I not post?\&quot; is in the same response as the channel that cannot post.
+     * @return ChatChannels
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -64,11 +64,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Channels() : CloudChatChannels {
-        val localVarResponse = cloudGetV1ChannelsWithHttpInfo()
+    fun getV1Channels() : ChatChannels {
+        val localVarResponse = getV1ChannelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudChatChannels
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ChatChannels
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -84,28 +84,28 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/channels
-     * Returns every chat transport channels can talk to — Discord, Slack, Teams and Telegram — with the caller org&#39;s own facts on each: whether it is connected and to which account, what the transport supports, the org&#39;s DM and group access policies, and how many pairing requests are pending approval.
-     * Returns every chat transport channels can talk to — Discord, Slack, Teams and Telegram — with the caller org&#39;s own facts on each: whether it is connected and to which account, what the transport supports, the org&#39;s DM and group access policies, and how many pairing requests are pending approval. The order is fixed, so a console can render the same rows every time. A policy that cannot be read leaves that channel&#39;s policy fields empty rather than failing the whole listing.
-     * @return ApiResponse<CloudChatChannels?>
+     * Reports every chat channel this org can send through, and whether it can send through it right now.
+     * Reports every chat channel this org can send through, and whether it can send through it right now.  A channel appears here whether or not it is connected — an empty list would leave a caller unable to tell \&quot;this org has no Slack\&quot; from \&quot;Slack is down\&quot;, which are different problems with different fixes. Each entry carries the connection behind it, so the answer to \&quot;why can I not post?\&quot; is in the same response as the channel that cannot post.
+     * @return ApiResponse<ChatChannels?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ChannelsWithHttpInfo() : ApiResponse<CloudChatChannels?> {
-        val localVariableConfig = cloudGetV1ChannelsRequestConfig()
+    fun getV1ChannelsWithHttpInfo() : ApiResponse<ChatChannels?> {
+        val localVariableConfig = getV1ChannelsRequestConfig()
 
-        return request<Unit, CloudChatChannels>(
+        return request<Unit, ChatChannels>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Channels
+     * To obtain the request config of the operation getV1Channels
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ChannelsRequestConfig() : RequestConfig<Unit> {
+    fun getV1ChannelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -116,7 +116,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -126,7 +126,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups.
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups. An unknown channel is a 404.
      * @param channel Channel is the transport to read: discord, slack, teams or telegram. Required; an unknown value is a 404. (optional)
-     * @return CloudAllowlistView
+     * @return AllowlistView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -135,11 +135,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ChannelsAllowlist(channel: kotlin.String? = null) : CloudAllowlistView {
-        val localVarResponse = cloudGetV1ChannelsAllowlistWithHttpInfo(channel = channel)
+    fun getV1ChannelsAllowlist(channel: kotlin.String? = null) : AllowlistView {
+        val localVarResponse = getV1ChannelsAllowlistWithHttpInfo(channel = channel)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAllowlistView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AllowlistView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -158,27 +158,27 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups.
      * Returns the caller org&#39;s access policy for one channel: whether DMs are pairing-gated, allowlisted or open, whether group rooms are open, allowlisted or disabled, the config-managed DM and group allow entries, the senders approved through PAIRING (read-only here), and the org&#39;s named access groups. An unknown channel is a 404.
      * @param channel Channel is the transport to read: discord, slack, teams or telegram. Required; an unknown value is a 404. (optional)
-     * @return ApiResponse<CloudAllowlistView?>
+     * @return ApiResponse<AllowlistView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ChannelsAllowlistWithHttpInfo(channel: kotlin.String?) : ApiResponse<CloudAllowlistView?> {
-        val localVariableConfig = cloudGetV1ChannelsAllowlistRequestConfig(channel = channel)
+    fun getV1ChannelsAllowlistWithHttpInfo(channel: kotlin.String?) : ApiResponse<AllowlistView?> {
+        val localVariableConfig = getV1ChannelsAllowlistRequestConfig(channel = channel)
 
-        return request<Unit, CloudAllowlistView>(
+        return request<Unit, AllowlistView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ChannelsAllowlist
+     * To obtain the request config of the operation getV1ChannelsAllowlist
      *
      * @param channel Channel is the transport to read: discord, slack, teams or telegram. Required; an unknown value is a 404. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ChannelsAllowlistRequestConfig(channel: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ChannelsAllowlistRequestConfig(channel: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -194,7 +194,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/allowlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -205,7 +205,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns the messages people have sent to the caller org&#39;s connected chat bots, oldest first, in the portable envelope shape every transport normalises into. It is a CURSOR feed, not a search: pass the returned cursor back as &#x60;since&#x60; to get only what has arrived since. Only this org&#39;s messages are stored under this org, so the feed can never carry another tenant&#39;s chat.
      * @param since Since is the exclusive cursor: only messages with a higher row id come back. Empty starts at the beginning. Must parse as an integer. (optional)
      * @param limit Limit caps how many messages come back. Empty or 0 uses the store&#39;s default page size. Must parse as an integer. (optional)
-     * @return CloudInboxPage
+     * @return InboxPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -214,11 +214,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ChannelsInbox(since: kotlin.String? = null, limit: kotlin.String? = null) : CloudInboxPage {
-        val localVarResponse = cloudGetV1ChannelsInboxWithHttpInfo(since = since, limit = limit)
+    fun getV1ChannelsInbox(since: kotlin.String? = null, limit: kotlin.String? = null) : InboxPage {
+        val localVarResponse = getV1ChannelsInboxWithHttpInfo(since = since, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInboxPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InboxPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -238,28 +238,28 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns the messages people have sent to the caller org&#39;s connected chat bots, oldest first, in the portable envelope shape every transport normalises into. It is a CURSOR feed, not a search: pass the returned cursor back as &#x60;since&#x60; to get only what has arrived since. Only this org&#39;s messages are stored under this org, so the feed can never carry another tenant&#39;s chat.
      * @param since Since is the exclusive cursor: only messages with a higher row id come back. Empty starts at the beginning. Must parse as an integer. (optional)
      * @param limit Limit caps how many messages come back. Empty or 0 uses the store&#39;s default page size. Must parse as an integer. (optional)
-     * @return ApiResponse<CloudInboxPage?>
+     * @return ApiResponse<InboxPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ChannelsInboxWithHttpInfo(since: kotlin.String?, limit: kotlin.String?) : ApiResponse<CloudInboxPage?> {
-        val localVariableConfig = cloudGetV1ChannelsInboxRequestConfig(since = since, limit = limit)
+    fun getV1ChannelsInboxWithHttpInfo(since: kotlin.String?, limit: kotlin.String?) : ApiResponse<InboxPage?> {
+        val localVariableConfig = getV1ChannelsInboxRequestConfig(since = since, limit = limit)
 
-        return request<Unit, CloudInboxPage>(
+        return request<Unit, InboxPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ChannelsInbox
+     * To obtain the request config of the operation getV1ChannelsInbox
      *
      * @param since Since is the exclusive cursor: only messages with a higher row id come back. Empty starts at the beginning. Must parse as an integer. (optional)
      * @param limit Limit caps how many messages come back. Empty or 0 uses the store&#39;s default page size. Must parse as an integer. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ChannelsInboxRequestConfig(since: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ChannelsInboxRequestConfig(since: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -278,7 +278,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/inbox",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -287,7 +287,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/channels/pairing
      * Returns the pairing requests waiting for the caller org to approve — one per person who messaged a connected bot on a channel whose DM policy is \&quot;pairing\&quot; and who is not allowed yet.
      * Returns the pairing requests waiting for the caller org to approve — one per person who messaged a connected bot on a channel whose DM policy is \&quot;pairing\&quot; and who is not allowed yet. Each row carries the CODE an org admin passes to POST /v1/channels/pairing/approve. Expired requests are not returned. Codes are capability strings: they are shown here, and never logged.
-     * @return CloudPairingQueue
+     * @return PairingQueue
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -296,11 +296,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ChannelsPairing() : CloudPairingQueue {
-        val localVarResponse = cloudGetV1ChannelsPairingWithHttpInfo()
+    fun getV1ChannelsPairing() : PairingQueue {
+        val localVarResponse = getV1ChannelsPairingWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPairingQueue
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PairingQueue
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -318,26 +318,26 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/channels/pairing
      * Returns the pairing requests waiting for the caller org to approve — one per person who messaged a connected bot on a channel whose DM policy is \&quot;pairing\&quot; and who is not allowed yet.
      * Returns the pairing requests waiting for the caller org to approve — one per person who messaged a connected bot on a channel whose DM policy is \&quot;pairing\&quot; and who is not allowed yet. Each row carries the CODE an org admin passes to POST /v1/channels/pairing/approve. Expired requests are not returned. Codes are capability strings: they are shown here, and never logged.
-     * @return ApiResponse<CloudPairingQueue?>
+     * @return ApiResponse<PairingQueue?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ChannelsPairingWithHttpInfo() : ApiResponse<CloudPairingQueue?> {
-        val localVariableConfig = cloudGetV1ChannelsPairingRequestConfig()
+    fun getV1ChannelsPairingWithHttpInfo() : ApiResponse<PairingQueue?> {
+        val localVariableConfig = getV1ChannelsPairingRequestConfig()
 
-        return request<Unit, CloudPairingQueue>(
+        return request<Unit, PairingQueue>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ChannelsPairing
+     * To obtain the request config of the operation getV1ChannelsPairing
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ChannelsPairingRequestConfig() : RequestConfig<Unit> {
+    fun getV1ChannelsPairingRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -348,15 +348,15 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/pairing",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/channels/{channel}/send
-     * 
-     * 
+     * Send a message from your org&#39;s bot to one chat room
+     * Delivers text, attachments and actions to one room on a connected chat transport — discord, slack, teams or telegram — and answers that transport&#39;s own receipt, the &#x60;messageId&#x60; it assigned and the Unix second it landed. An unknown channel is a 404.  The body is the envelope&#39;s NARROW outbound projection: &#x60;room&#x60;, &#x60;text&#x60;, &#x60;attachments&#x60;, &#x60;actions&#x60;, &#x60;replyTo&#x60; and &#x60;idempotency&#x60;, and nothing else. Identity is not a field — the channel is the path segment and the sender is the caller&#39;s validated org — so a body carrying &#x60;sender&#x60;, &#x60;account&#x60; or &#x60;channel&#x60; is refused with 400 rather than having it silently dropped. &#x60;room.id&#x60; is required, and so is something to say: text, or at least one attachment.  Requires a validated principal; 403 without one. The room must already belong to the caller&#39;s org — each transport verifies the binding itself, so a room this org has not bound is 403 and a room whose route the bot has never learned is 409, meaning someone has to message the bot there first. A transport that fails answers 502 carrying status and shape only, never a token.  Sending is at-most-once only if you ask for it: pass an &#x60;idempotency&#x60; string and a replay answers 200 with the PRIOR receipt instead of sending twice, while a send that fails releases the key so the caller can re-attempt. Bodies over 1 MiB are refused. All four transports currently render text only, so attachments and actions are flattened deterministically to one line each after the text rather than dropped.
      * @param channel 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -366,8 +366,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ChannelsByChannelSend(channel: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1ChannelsByChannelSendWithHttpInfo(channel = channel)
+    fun postV1ChannelsByChannelSend(channel: kotlin.String) : Unit {
+        val localVarResponse = postV1ChannelsByChannelSendWithHttpInfo(channel = channel)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -386,16 +386,16 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/channels/{channel}/send
-     * 
-     * 
+     * Send a message from your org&#39;s bot to one chat room
+     * Delivers text, attachments and actions to one room on a connected chat transport — discord, slack, teams or telegram — and answers that transport&#39;s own receipt, the &#x60;messageId&#x60; it assigned and the Unix second it landed. An unknown channel is a 404.  The body is the envelope&#39;s NARROW outbound projection: &#x60;room&#x60;, &#x60;text&#x60;, &#x60;attachments&#x60;, &#x60;actions&#x60;, &#x60;replyTo&#x60; and &#x60;idempotency&#x60;, and nothing else. Identity is not a field — the channel is the path segment and the sender is the caller&#39;s validated org — so a body carrying &#x60;sender&#x60;, &#x60;account&#x60; or &#x60;channel&#x60; is refused with 400 rather than having it silently dropped. &#x60;room.id&#x60; is required, and so is something to say: text, or at least one attachment.  Requires a validated principal; 403 without one. The room must already belong to the caller&#39;s org — each transport verifies the binding itself, so a room this org has not bound is 403 and a room whose route the bot has never learned is 409, meaning someone has to message the bot there first. A transport that fails answers 502 carrying status and shape only, never a token.  Sending is at-most-once only if you ask for it: pass an &#x60;idempotency&#x60; string and a replay answers 200 with the PRIOR receipt instead of sending twice, while a send that fails releases the key so the caller can re-attempt. Bodies over 1 MiB are refused. All four transports currently render text only, so attachments and actions are flattened deterministically to one line each after the text rather than dropped.
      * @param channel 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ChannelsByChannelSendWithHttpInfo(channel: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ChannelsByChannelSendRequestConfig(channel = channel)
+    fun postV1ChannelsByChannelSendWithHttpInfo(channel: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ChannelsByChannelSendRequestConfig(channel = channel)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -403,12 +403,12 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ChannelsByChannelSend
+     * To obtain the request config of the operation postV1ChannelsByChannelSend
      *
      * @param channel 
      * @return RequestConfig
      */
-    fun cloudPostV1ChannelsByChannelSendRequestConfig(channel: kotlin.String) : RequestConfig<Unit> {
+    fun postV1ChannelsByChannelSendRequestConfig(channel: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -418,7 +418,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/{channel}/send".replace("{"+"channel"+"}", encodeURIComponent(channel.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -427,8 +427,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/channels/pairing/approve
      * Turns one pending pairing code into a standing allow entry, so that person can DM the org&#39;s bot on that channel from now on.
      * Turns one pending pairing code into a standing allow entry, so that person can DM the org&#39;s bot on that channel from now on. It requires ORG ADMIN, not merely membership. The first approval an org makes on a channel also bootstraps that sender as the channel&#39;s owner, which the answer reports. An unknown or expired code is a 404, and a code always belongs to exactly one org, so it can never approve someone into another tenant.
-     * @param cloudApprovePairingIn 
-     * @return CloudPairingApproved
+     * @param approvePairingIn 
+     * @return PairingApproved
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -437,11 +437,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ChannelsPairingApprove(cloudApprovePairingIn: CloudApprovePairingIn) : CloudPairingApproved {
-        val localVarResponse = cloudPostV1ChannelsPairingApproveWithHttpInfo(cloudApprovePairingIn = cloudApprovePairingIn)
+    fun postV1ChannelsPairingApprove(approvePairingIn: ApprovePairingIn) : PairingApproved {
+        val localVarResponse = postV1ChannelsPairingApproveWithHttpInfo(approvePairingIn = approvePairingIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPairingApproved
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PairingApproved
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -459,29 +459,29 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/channels/pairing/approve
      * Turns one pending pairing code into a standing allow entry, so that person can DM the org&#39;s bot on that channel from now on.
      * Turns one pending pairing code into a standing allow entry, so that person can DM the org&#39;s bot on that channel from now on. It requires ORG ADMIN, not merely membership. The first approval an org makes on a channel also bootstraps that sender as the channel&#39;s owner, which the answer reports. An unknown or expired code is a 404, and a code always belongs to exactly one org, so it can never approve someone into another tenant.
-     * @param cloudApprovePairingIn 
-     * @return ApiResponse<CloudPairingApproved?>
+     * @param approvePairingIn 
+     * @return ApiResponse<PairingApproved?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ChannelsPairingApproveWithHttpInfo(cloudApprovePairingIn: CloudApprovePairingIn) : ApiResponse<CloudPairingApproved?> {
-        val localVariableConfig = cloudPostV1ChannelsPairingApproveRequestConfig(cloudApprovePairingIn = cloudApprovePairingIn)
+    fun postV1ChannelsPairingApproveWithHttpInfo(approvePairingIn: ApprovePairingIn) : ApiResponse<PairingApproved?> {
+        val localVariableConfig = postV1ChannelsPairingApproveRequestConfig(approvePairingIn = approvePairingIn)
 
-        return request<CloudApprovePairingIn, CloudPairingApproved>(
+        return request<ApprovePairingIn, PairingApproved>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ChannelsPairingApprove
+     * To obtain the request config of the operation postV1ChannelsPairingApprove
      *
-     * @param cloudApprovePairingIn 
+     * @param approvePairingIn 
      * @return RequestConfig
      */
-    fun cloudPostV1ChannelsPairingApproveRequestConfig(cloudApprovePairingIn: CloudApprovePairingIn) : RequestConfig<CloudApprovePairingIn> {
-        val localVariableBody = cloudApprovePairingIn
+    fun postV1ChannelsPairingApproveRequestConfig(approvePairingIn: ApprovePairingIn) : RequestConfig<ApprovePairingIn> {
+        val localVariableBody = approvePairingIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -492,7 +492,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/pairing/approve",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -501,8 +501,8 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * PUT /v1/channels/allowlist
      * Edits the caller org&#39;s access policy for one channel and answers the policy as GET would, so both verbs return ONE shape.
      * Edits the caller org&#39;s access policy for one channel and answers the policy as GET would, so both verbs return ONE shape. It requires ORG ADMIN. Every field but &#x60;channel&#x60; is optional and applied only when provided: an empty policy string leaves that policy alone, an absent or null list leaves that list alone, and an EMPTY list clears it. It writes only CONFIG-sourced allow entries — senders approved through pairing belong to the approval flow, so a policy edit can never revoke one. An unknown channel is a 404.
-     * @param cloudAllowlistPutIn 
-     * @return CloudAllowlistView
+     * @param allowlistPutIn 
+     * @return AllowlistView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -511,11 +511,11 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1ChannelsAllowlist(cloudAllowlistPutIn: CloudAllowlistPutIn) : CloudAllowlistView {
-        val localVarResponse = cloudPutV1ChannelsAllowlistWithHttpInfo(cloudAllowlistPutIn = cloudAllowlistPutIn)
+    fun putV1ChannelsAllowlist(allowlistPutIn: AllowlistPutIn) : AllowlistView {
+        val localVarResponse = putV1ChannelsAllowlistWithHttpInfo(allowlistPutIn = allowlistPutIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAllowlistView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AllowlistView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -533,29 +533,29 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * PUT /v1/channels/allowlist
      * Edits the caller org&#39;s access policy for one channel and answers the policy as GET would, so both verbs return ONE shape.
      * Edits the caller org&#39;s access policy for one channel and answers the policy as GET would, so both verbs return ONE shape. It requires ORG ADMIN. Every field but &#x60;channel&#x60; is optional and applied only when provided: an empty policy string leaves that policy alone, an absent or null list leaves that list alone, and an EMPTY list clears it. It writes only CONFIG-sourced allow entries — senders approved through pairing belong to the approval flow, so a policy edit can never revoke one. An unknown channel is a 404.
-     * @param cloudAllowlistPutIn 
-     * @return ApiResponse<CloudAllowlistView?>
+     * @param allowlistPutIn 
+     * @return ApiResponse<AllowlistView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1ChannelsAllowlistWithHttpInfo(cloudAllowlistPutIn: CloudAllowlistPutIn) : ApiResponse<CloudAllowlistView?> {
-        val localVariableConfig = cloudPutV1ChannelsAllowlistRequestConfig(cloudAllowlistPutIn = cloudAllowlistPutIn)
+    fun putV1ChannelsAllowlistWithHttpInfo(allowlistPutIn: AllowlistPutIn) : ApiResponse<AllowlistView?> {
+        val localVariableConfig = putV1ChannelsAllowlistRequestConfig(allowlistPutIn = allowlistPutIn)
 
-        return request<CloudAllowlistPutIn, CloudAllowlistView>(
+        return request<AllowlistPutIn, AllowlistView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1ChannelsAllowlist
+     * To obtain the request config of the operation putV1ChannelsAllowlist
      *
-     * @param cloudAllowlistPutIn 
+     * @param allowlistPutIn 
      * @return RequestConfig
      */
-    fun cloudPutV1ChannelsAllowlistRequestConfig(cloudAllowlistPutIn: CloudAllowlistPutIn) : RequestConfig<CloudAllowlistPutIn> {
-        val localVariableBody = cloudAllowlistPutIn
+    fun putV1ChannelsAllowlistRequestConfig(allowlistPutIn: AllowlistPutIn) : RequestConfig<AllowlistPutIn> {
+        val localVariableBody = allowlistPutIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -566,7 +566,7 @@ class ChannelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/channels/allowlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,9 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCreateVPCReq
-import ai.hanzo.cloud.model.CloudVpcList
-import ai.hanzo.cloud.model.CloudVpcView
+import ai.hanzo.cloud.model.CreateVPCReq
+import ai.hanzo.cloud.model.VpcList
+import ai.hanzo.cloud.model.VpcView
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,8 +49,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/vpcs/{id}
-     * DeleteVpc removes one of the caller org&#39;s VPCs and answers 204.
-     * DeleteVpc removes one of the caller org&#39;s VPCs and answers 204. Ownership is confirmed by re-fetching the resource and checking its physical name carries the caller&#39;s org prefix BEFORE anything is deleted, so a cross-tenant id is a 404 rather than a delete of another org&#39;s VPC.
+     * Removes one of the caller org&#39;s VPCs and answers 204.
+     * Removes one of the caller org&#39;s VPCs and answers 204. Ownership is confirmed by re-fetching the resource and checking its physical name carries the caller&#39;s org prefix BEFORE anything is deleted, so a cross-tenant id is a 404 rather than a delete of another org&#39;s VPC.
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -60,8 +60,8 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1VpcsId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1VpcsIdWithHttpInfo(id = id)
+    fun deleteV1VpcsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1VpcsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -80,16 +80,16 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/vpcs/{id}
-     * DeleteVpc removes one of the caller org&#39;s VPCs and answers 204.
-     * DeleteVpc removes one of the caller org&#39;s VPCs and answers 204. Ownership is confirmed by re-fetching the resource and checking its physical name carries the caller&#39;s org prefix BEFORE anything is deleted, so a cross-tenant id is a 404 rather than a delete of another org&#39;s VPC.
+     * Removes one of the caller org&#39;s VPCs and answers 204.
+     * Removes one of the caller org&#39;s VPCs and answers 204. Ownership is confirmed by re-fetching the resource and checking its physical name carries the caller&#39;s org prefix BEFORE anything is deleted, so a cross-tenant id is a 404 rather than a delete of another org&#39;s VPC.
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1VpcsIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1VpcsIdRequestConfig(id = id)
+    fun deleteV1VpcsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1VpcsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -97,12 +97,12 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1VpcsId
+     * To obtain the request config of the operation deleteV1VpcsById
      *
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1VpcsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1VpcsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -112,16 +112,16 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/vpcs/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/vpcs
-     * ListVpcs returns every VPC the caller&#39;s org owns, under the friendly names the org created them with.
-     * ListVpcs returns every VPC the caller&#39;s org owns, under the friendly names the org created them with. DigitalOcean is one account for the whole deployment, so the account-wide inventory is filtered to the caller&#39;s own \&quot;o\&quot;&lt;orgHash&gt;- name prefix and the prefix is stripped — another org&#39;s VPC is not merely hidden, it is never in the answer.
-     * @return CloudVpcList
+     * Returns every VPC the caller&#39;s org owns, under the friendly names the org created them with.
+     * Returns every VPC the caller&#39;s org owns, under the friendly names the org created them with. DigitalOcean is one account for the whole deployment, so the account-wide inventory is filtered to the caller&#39;s own \&quot;o\&quot;&lt;orgHash&gt;- name prefix and the prefix is stripped — another org&#39;s VPC is not merely hidden, it is never in the answer.
+     * @return VpcList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -130,11 +130,11 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Vpcs() : CloudVpcList {
-        val localVarResponse = cloudGetV1VpcsWithHttpInfo()
+    fun getV1Vpcs() : VpcList {
+        val localVarResponse = getV1VpcsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVpcList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VpcList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -150,28 +150,28 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/vpcs
-     * ListVpcs returns every VPC the caller&#39;s org owns, under the friendly names the org created them with.
-     * ListVpcs returns every VPC the caller&#39;s org owns, under the friendly names the org created them with. DigitalOcean is one account for the whole deployment, so the account-wide inventory is filtered to the caller&#39;s own \&quot;o\&quot;&lt;orgHash&gt;- name prefix and the prefix is stripped — another org&#39;s VPC is not merely hidden, it is never in the answer.
-     * @return ApiResponse<CloudVpcList?>
+     * Returns every VPC the caller&#39;s org owns, under the friendly names the org created them with.
+     * Returns every VPC the caller&#39;s org owns, under the friendly names the org created them with. DigitalOcean is one account for the whole deployment, so the account-wide inventory is filtered to the caller&#39;s own \&quot;o\&quot;&lt;orgHash&gt;- name prefix and the prefix is stripped — another org&#39;s VPC is not merely hidden, it is never in the answer.
+     * @return ApiResponse<VpcList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1VpcsWithHttpInfo() : ApiResponse<CloudVpcList?> {
-        val localVariableConfig = cloudGetV1VpcsRequestConfig()
+    fun getV1VpcsWithHttpInfo() : ApiResponse<VpcList?> {
+        val localVariableConfig = getV1VpcsRequestConfig()
 
-        return request<Unit, CloudVpcList>(
+        return request<Unit, VpcList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Vpcs
+     * To obtain the request config of the operation getV1Vpcs
      *
      * @return RequestConfig
      */
-    fun cloudGetV1VpcsRequestConfig() : RequestConfig<Unit> {
+    fun getV1VpcsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -182,17 +182,17 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/vpcs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/vpcs/{id}
-     * GetVpc returns one of the caller org&#39;s VPCs by id.
-     * GetVpc returns one of the caller org&#39;s VPCs by id. A VPC that exists but sits in another org&#39;s namespace is reported 404, never 403 — the answer must not tell one tenant that another tenant&#39;s resource exists.
+     * Returns one of the caller org&#39;s VPCs by id.
+     * Returns one of the caller org&#39;s VPCs by id. A VPC that exists but sits in another org&#39;s namespace is reported 404, never 403 — the answer must not tell one tenant that another tenant&#39;s resource exists.
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
-     * @return CloudVpcView
+     * @return VpcView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -201,11 +201,11 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1VpcsId(id: kotlin.String) : CloudVpcView {
-        val localVarResponse = cloudGetV1VpcsIdWithHttpInfo(id = id)
+    fun getV1VpcsById(id: kotlin.String) : VpcView {
+        val localVarResponse = getV1VpcsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVpcView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VpcView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -221,30 +221,30 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/vpcs/{id}
-     * GetVpc returns one of the caller org&#39;s VPCs by id.
-     * GetVpc returns one of the caller org&#39;s VPCs by id. A VPC that exists but sits in another org&#39;s namespace is reported 404, never 403 — the answer must not tell one tenant that another tenant&#39;s resource exists.
+     * Returns one of the caller org&#39;s VPCs by id.
+     * Returns one of the caller org&#39;s VPCs by id. A VPC that exists but sits in another org&#39;s namespace is reported 404, never 403 — the answer must not tell one tenant that another tenant&#39;s resource exists.
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
-     * @return ApiResponse<CloudVpcView?>
+     * @return ApiResponse<VpcView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1VpcsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudVpcView?> {
-        val localVariableConfig = cloudGetV1VpcsIdRequestConfig(id = id)
+    fun getV1VpcsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<VpcView?> {
+        val localVariableConfig = getV1VpcsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudVpcView>(
+        return request<Unit, VpcView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1VpcsId
+     * To obtain the request config of the operation getV1VpcsById
      *
      * @param id ID is the DigitalOcean resource id (a UUID), from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1VpcsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1VpcsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -255,17 +255,17 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/vpcs/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/vpcs
-     * CreateVpc creates a VPC in the caller&#39;s org namespace and answers 201 with it.
-     * CreateVpc creates a VPC in the caller&#39;s org namespace and answers 201 with it. The physical DigitalOcean name is derived server-side from the validated org, so a tenant can only ever create inside its own namespace; a name that already exists there is a 409.
-     * @param cloudCreateVPCReq 
-     * @return CloudVpcView
+     * Creates a VPC in the caller&#39;s org namespace and answers 201 with it.
+     * Creates a VPC in the caller&#39;s org namespace and answers 201 with it. The physical DigitalOcean name is derived server-side from the validated org, so a tenant can only ever create inside its own namespace; a name that already exists there is a 409.
+     * @param createVPCReq 
+     * @return VpcView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -274,11 +274,11 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Vpcs(cloudCreateVPCReq: CloudCreateVPCReq) : CloudVpcView {
-        val localVarResponse = cloudPostV1VpcsWithHttpInfo(cloudCreateVPCReq = cloudCreateVPCReq)
+    fun postV1Vpcs(createVPCReq: CreateVPCReq) : VpcView {
+        val localVarResponse = postV1VpcsWithHttpInfo(createVPCReq = createVPCReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVpcView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VpcView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -294,31 +294,31 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/vpcs
-     * CreateVpc creates a VPC in the caller&#39;s org namespace and answers 201 with it.
-     * CreateVpc creates a VPC in the caller&#39;s org namespace and answers 201 with it. The physical DigitalOcean name is derived server-side from the validated org, so a tenant can only ever create inside its own namespace; a name that already exists there is a 409.
-     * @param cloudCreateVPCReq 
-     * @return ApiResponse<CloudVpcView?>
+     * Creates a VPC in the caller&#39;s org namespace and answers 201 with it.
+     * Creates a VPC in the caller&#39;s org namespace and answers 201 with it. The physical DigitalOcean name is derived server-side from the validated org, so a tenant can only ever create inside its own namespace; a name that already exists there is a 409.
+     * @param createVPCReq 
+     * @return ApiResponse<VpcView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1VpcsWithHttpInfo(cloudCreateVPCReq: CloudCreateVPCReq) : ApiResponse<CloudVpcView?> {
-        val localVariableConfig = cloudPostV1VpcsRequestConfig(cloudCreateVPCReq = cloudCreateVPCReq)
+    fun postV1VpcsWithHttpInfo(createVPCReq: CreateVPCReq) : ApiResponse<VpcView?> {
+        val localVariableConfig = postV1VpcsRequestConfig(createVPCReq = createVPCReq)
 
-        return request<CloudCreateVPCReq, CloudVpcView>(
+        return request<CreateVPCReq, VpcView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Vpcs
+     * To obtain the request config of the operation postV1Vpcs
      *
-     * @param cloudCreateVPCReq 
+     * @param createVPCReq 
      * @return RequestConfig
      */
-    fun cloudPostV1VpcsRequestConfig(cloudCreateVPCReq: CloudCreateVPCReq) : RequestConfig<CloudCreateVPCReq> {
-        val localVariableBody = cloudCreateVPCReq
+    fun postV1VpcsRequestConfig(createVPCReq: CreateVPCReq) : RequestConfig<CreateVPCReq> {
+        val localVariableBody = createVPCReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -329,7 +329,7 @@ class VpcsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/vpcs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

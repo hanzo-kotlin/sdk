@@ -19,14 +19,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudFleetBoard
-import ai.hanzo.cloud.model.CloudJobCancel
-import ai.hanzo.cloud.model.CloudJobCanceled
-import ai.hanzo.cloud.model.CloudJobList
-import ai.hanzo.cloud.model.CloudSampleAccepted
-import ai.hanzo.cloud.model.CloudSampleIngest
-import ai.hanzo.cloud.model.CloudSampleList
-import ai.hanzo.cloud.model.CloudWorkerList
+import ai.hanzo.cloud.model.FleetBoard
+import ai.hanzo.cloud.model.JobCancel
+import ai.hanzo.cloud.model.JobCanceled
+import ai.hanzo.cloud.model.JobList
+import ai.hanzo.cloud.model.SampleAccepted
+import ai.hanzo.cloud.model.SampleIngest
+import ai.hanzo.cloud.model.SampleList
+import ai.hanzo.cloud.model.WorkerList
 
 import com.google.gson.annotations.SerializedName
 
@@ -57,8 +57,8 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Cancels a queued or running render in the caller&#39;s org.
      * Cancels a queued or running render in the caller&#39;s org. The engine cancel is org-scoped, so a tenant can only ever cancel its OWN job: a job in another tenant&#39;s shard is 404, exactly like one that never existed. An already-finished job is 409.
      * @param id ID is the job (activity) id, from the URL path.
-     * @param cloudJobCancel 
-     * @return CloudJobCanceled
+     * @param jobCancel 
+     * @return JobCanceled
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -67,11 +67,11 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudCancelFleetJob(id: kotlin.String, cloudJobCancel: CloudJobCancel) : CloudJobCanceled {
-        val localVarResponse = cloudCancelFleetJobWithHttpInfo(id = id, cloudJobCancel = cloudJobCancel)
+    fun cancelFleetJob(id: kotlin.String, jobCancel: JobCancel) : JobCanceled {
+        val localVarResponse = cancelFleetJobWithHttpInfo(id = id, jobCancel = jobCancel)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudJobCanceled
+            ResponseType.Success -> (localVarResponse as Success<*>).data as JobCanceled
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -90,30 +90,30 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Cancels a queued or running render in the caller&#39;s org.
      * Cancels a queued or running render in the caller&#39;s org. The engine cancel is org-scoped, so a tenant can only ever cancel its OWN job: a job in another tenant&#39;s shard is 404, exactly like one that never existed. An already-finished job is 409.
      * @param id ID is the job (activity) id, from the URL path.
-     * @param cloudJobCancel 
-     * @return ApiResponse<CloudJobCanceled?>
+     * @param jobCancel 
+     * @return ApiResponse<JobCanceled?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudCancelFleetJobWithHttpInfo(id: kotlin.String, cloudJobCancel: CloudJobCancel) : ApiResponse<CloudJobCanceled?> {
-        val localVariableConfig = cloudCancelFleetJobRequestConfig(id = id, cloudJobCancel = cloudJobCancel)
+    fun cancelFleetJobWithHttpInfo(id: kotlin.String, jobCancel: JobCancel) : ApiResponse<JobCanceled?> {
+        val localVariableConfig = cancelFleetJobRequestConfig(id = id, jobCancel = jobCancel)
 
-        return request<CloudJobCancel, CloudJobCanceled>(
+        return request<JobCancel, JobCanceled>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudCancelFleetJob
+     * To obtain the request config of the operation cancelFleetJob
      *
      * @param id ID is the job (activity) id, from the URL path.
-     * @param cloudJobCancel 
+     * @param jobCancel 
      * @return RequestConfig
      */
-    fun cloudCancelFleetJobRequestConfig(id: kotlin.String, cloudJobCancel: CloudJobCancel) : RequestConfig<CloudJobCancel> {
-        val localVariableBody = cloudJobCancel
+    fun cancelFleetJobRequestConfig(id: kotlin.String, jobCancel: JobCancel) : RequestConfig<JobCancel> {
+        val localVariableBody = jobCancel
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -124,7 +124,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/jobs/{id}/cancel".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -133,7 +133,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/fleet
      * Returns every compute unit the caller&#39;s org has, from every source, each carrying its latest utilization: agent run-targets, the BYO machines that dialed in, attached BYO clusters and Visor-provisioned machines.
      * Returns every compute unit the caller&#39;s org has, from every source, each carrying its latest utilization: agent run-targets, the BYO machines that dialed in, attached BYO clusters and Visor-provisioned machines.  A unit with a live snapshot of its own keeps it; the rest are overlaid from the utilization series, and only when the sample agrees about the SOURCE — two planes could mint the same unit id, and a board must never show one machine&#39;s load on another&#39;s row. BYO GPU units also carry their gpu-jobs queue depth. Every source is folded in independently: a broken one costs its own rows and nothing else.
-     * @return CloudFleetBoard
+     * @return FleetBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -142,11 +142,11 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListFleet() : CloudFleetBoard {
-        val localVarResponse = cloudListFleetWithHttpInfo()
+    fun listFleet() : FleetBoard {
+        val localVarResponse = listFleetWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFleetBoard
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FleetBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -164,26 +164,26 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/fleet
      * Returns every compute unit the caller&#39;s org has, from every source, each carrying its latest utilization: agent run-targets, the BYO machines that dialed in, attached BYO clusters and Visor-provisioned machines.
      * Returns every compute unit the caller&#39;s org has, from every source, each carrying its latest utilization: agent run-targets, the BYO machines that dialed in, attached BYO clusters and Visor-provisioned machines.  A unit with a live snapshot of its own keeps it; the rest are overlaid from the utilization series, and only when the sample agrees about the SOURCE — two planes could mint the same unit id, and a board must never show one machine&#39;s load on another&#39;s row. BYO GPU units also carry their gpu-jobs queue depth. Every source is folded in independently: a broken one costs its own rows and nothing else.
-     * @return ApiResponse<CloudFleetBoard?>
+     * @return ApiResponse<FleetBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListFleetWithHttpInfo() : ApiResponse<CloudFleetBoard?> {
-        val localVariableConfig = cloudListFleetRequestConfig()
+    fun listFleetWithHttpInfo() : ApiResponse<FleetBoard?> {
+        val localVariableConfig = listFleetRequestConfig()
 
-        return request<Unit, CloudFleetBoard>(
+        return request<Unit, FleetBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListFleet
+     * To obtain the request config of the operation listFleet
      *
      * @return RequestConfig
      */
-    fun cloudListFleetRequestConfig() : RequestConfig<Unit> {
+    fun listFleetRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -194,7 +194,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -205,7 +205,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Returns the caller org&#39;s gpu-jobs render queue, each row tagged with the GPU it targets (empty &#x3D; the shared any-GPU lane) and the node claiming it, optionally narrowed to one GPU&#39;s queue and/or one status.  A job whose worker died — STARTED with an elapsed lease and not yet reclaimed — reads \&quot;stalled\&quot;, not \&quot;running\&quot;. Fail-soft: an unavailable tasks engine yields an empty queue rather than an error.
      * @param gpu GPU selects one node&#39;s lane: jobs TARGETED at it (gpu:&lt;node&gt;) or CLAIMED by it. The literal \&quot;shared\&quot; selects the any-GPU lane — no target, no claimant. Matched case-insensitively. (optional)
      * @param status Status selects one lifecycle state: queued, running, stalled, completed, failed or canceled. (optional)
-     * @return CloudJobList
+     * @return JobList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -214,11 +214,11 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListFleetJobs(gpu: kotlin.String? = null, status: kotlin.String? = null) : CloudJobList {
-        val localVarResponse = cloudListFleetJobsWithHttpInfo(gpu = gpu, status = status)
+    fun listFleetJobs(gpu: kotlin.String? = null, status: kotlin.String? = null) : JobList {
+        val localVarResponse = listFleetJobsWithHttpInfo(gpu = gpu, status = status)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudJobList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as JobList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -238,28 +238,28 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Returns the caller org&#39;s gpu-jobs render queue, each row tagged with the GPU it targets (empty &#x3D; the shared any-GPU lane) and the node claiming it, optionally narrowed to one GPU&#39;s queue and/or one status.  A job whose worker died — STARTED with an elapsed lease and not yet reclaimed — reads \&quot;stalled\&quot;, not \&quot;running\&quot;. Fail-soft: an unavailable tasks engine yields an empty queue rather than an error.
      * @param gpu GPU selects one node&#39;s lane: jobs TARGETED at it (gpu:&lt;node&gt;) or CLAIMED by it. The literal \&quot;shared\&quot; selects the any-GPU lane — no target, no claimant. Matched case-insensitively. (optional)
      * @param status Status selects one lifecycle state: queued, running, stalled, completed, failed or canceled. (optional)
-     * @return ApiResponse<CloudJobList?>
+     * @return ApiResponse<JobList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListFleetJobsWithHttpInfo(gpu: kotlin.String?, status: kotlin.String?) : ApiResponse<CloudJobList?> {
-        val localVariableConfig = cloudListFleetJobsRequestConfig(gpu = gpu, status = status)
+    fun listFleetJobsWithHttpInfo(gpu: kotlin.String?, status: kotlin.String?) : ApiResponse<JobList?> {
+        val localVariableConfig = listFleetJobsRequestConfig(gpu = gpu, status = status)
 
-        return request<Unit, CloudJobList>(
+        return request<Unit, JobList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListFleetJobs
+     * To obtain the request config of the operation listFleetJobs
      *
      * @param gpu GPU selects one node&#39;s lane: jobs TARGETED at it (gpu:&lt;node&gt;) or CLAIMED by it. The literal \&quot;shared\&quot; selects the any-GPU lane — no target, no claimant. Matched case-insensitively. (optional)
      * @param status Status selects one lifecycle state: queued, running, stalled, completed, failed or canceled. (optional)
      * @return RequestConfig
      */
-    fun cloudListFleetJobsRequestConfig(gpu: kotlin.String?, status: kotlin.String?) : RequestConfig<Unit> {
+    fun listFleetJobsRequestConfig(gpu: kotlin.String?, status: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -278,7 +278,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/jobs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -290,7 +290,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param unit Unit selects one compute unit&#39;s series by its source-local id. (optional)
      * @param source Source selects one plane: \&quot;agent\&quot;, \&quot;byo\&quot; or \&quot;visor\&quot;. (optional)
      * @param range Range is the lookback window (e.g. \&quot;1h\&quot;, \&quot;24h\&quot;, \&quot;7d\&quot;); empty takes the warehouse default. (optional)
-     * @return CloudSampleList
+     * @return SampleList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -299,11 +299,11 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListFleetSamples(unit: kotlin.String? = null, source: kotlin.String? = null, range: kotlin.String? = null) : CloudSampleList {
-        val localVarResponse = cloudListFleetSamplesWithHttpInfo(unit = unit, source = source, range = range)
+    fun listFleetSamples(unit: kotlin.String? = null, source: kotlin.String? = null, range: kotlin.String? = null) : SampleList {
+        val localVarResponse = listFleetSamplesWithHttpInfo(unit = unit, source = source, range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSampleList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SampleList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -324,29 +324,29 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param unit Unit selects one compute unit&#39;s series by its source-local id. (optional)
      * @param source Source selects one plane: \&quot;agent\&quot;, \&quot;byo\&quot; or \&quot;visor\&quot;. (optional)
      * @param range Range is the lookback window (e.g. \&quot;1h\&quot;, \&quot;24h\&quot;, \&quot;7d\&quot;); empty takes the warehouse default. (optional)
-     * @return ApiResponse<CloudSampleList?>
+     * @return ApiResponse<SampleList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListFleetSamplesWithHttpInfo(unit: kotlin.String?, source: kotlin.String?, range: kotlin.String?) : ApiResponse<CloudSampleList?> {
-        val localVariableConfig = cloudListFleetSamplesRequestConfig(unit = unit, source = source, range = range)
+    fun listFleetSamplesWithHttpInfo(unit: kotlin.String?, source: kotlin.String?, range: kotlin.String?) : ApiResponse<SampleList?> {
+        val localVariableConfig = listFleetSamplesRequestConfig(unit = unit, source = source, range = range)
 
-        return request<Unit, CloudSampleList>(
+        return request<Unit, SampleList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListFleetSamples
+     * To obtain the request config of the operation listFleetSamples
      *
      * @param unit Unit selects one compute unit&#39;s series by its source-local id. (optional)
      * @param source Source selects one plane: \&quot;agent\&quot;, \&quot;byo\&quot; or \&quot;visor\&quot;. (optional)
      * @param range Range is the lookback window (e.g. \&quot;1h\&quot;, \&quot;24h\&quot;, \&quot;7d\&quot;); empty takes the warehouse default. (optional)
      * @return RequestConfig
      */
-    fun cloudListFleetSamplesRequestConfig(unit: kotlin.String?, source: kotlin.String?, range: kotlin.String?) : RequestConfig<Unit> {
+    fun listFleetSamplesRequestConfig(unit: kotlin.String?, source: kotlin.String?, range: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -368,7 +368,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/samples",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -377,7 +377,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/fleet/workers
      * Returns the caller org&#39;s BYO machines — the ones that dialed in via &#x60;hanzo link&#x60; — with everything each host reported about itself.
      * Returns the caller org&#39;s BYO machines — the ones that dialed in via &#x60;hanzo link&#x60; — with everything each host reported about itself. The Machines and GPUs pages fold the same data into their normalized shapes; this is the canonical raw list a fleet view (or the CLI&#39;s &#x60;status&#x60;) reads.
-     * @return CloudWorkerList
+     * @return WorkerList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -386,11 +386,11 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListFleetWorkers() : CloudWorkerList {
-        val localVarResponse = cloudListFleetWorkersWithHttpInfo()
+    fun listFleetWorkers() : WorkerList {
+        val localVarResponse = listFleetWorkersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWorkerList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as WorkerList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -408,26 +408,26 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/fleet/workers
      * Returns the caller org&#39;s BYO machines — the ones that dialed in via &#x60;hanzo link&#x60; — with everything each host reported about itself.
      * Returns the caller org&#39;s BYO machines — the ones that dialed in via &#x60;hanzo link&#x60; — with everything each host reported about itself. The Machines and GPUs pages fold the same data into their normalized shapes; this is the canonical raw list a fleet view (or the CLI&#39;s &#x60;status&#x60;) reads.
-     * @return ApiResponse<CloudWorkerList?>
+     * @return ApiResponse<WorkerList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListFleetWorkersWithHttpInfo() : ApiResponse<CloudWorkerList?> {
-        val localVariableConfig = cloudListFleetWorkersRequestConfig()
+    fun listFleetWorkersWithHttpInfo() : ApiResponse<WorkerList?> {
+        val localVariableConfig = listFleetWorkersRequestConfig()
 
-        return request<Unit, CloudWorkerList>(
+        return request<Unit, WorkerList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListFleetWorkers
+     * To obtain the request config of the operation listFleetWorkers
      *
      * @return RequestConfig
      */
-    fun cloudListFleetWorkersRequestConfig() : RequestConfig<Unit> {
+    fun listFleetWorkersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -438,7 +438,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/workers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -447,8 +447,8 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/fleet/samples
      * Records a BYO worker&#39;s live GPU utilization into the SAME series the fleet board overlays.
      * Records a BYO worker&#39;s live GPU utilization into the SAME series the fleet board overlays. The org is the validated principal and source/kind are fixed server-side, so a worker names only its own metrics — never another tenant or another source. Answers 202: the warehouse write is DETACHED (its own bounded context, never in the response path), so a slow or absent warehouse cannot stall a heartbeat.
-     * @param cloudSampleIngest 
-     * @return CloudSampleAccepted
+     * @param sampleIngest 
+     * @return SampleAccepted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -457,11 +457,11 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudRecordFleetSample(cloudSampleIngest: CloudSampleIngest) : CloudSampleAccepted {
-        val localVarResponse = cloudRecordFleetSampleWithHttpInfo(cloudSampleIngest = cloudSampleIngest)
+    fun recordFleetSample(sampleIngest: SampleIngest) : SampleAccepted {
+        val localVarResponse = recordFleetSampleWithHttpInfo(sampleIngest = sampleIngest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSampleAccepted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SampleAccepted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -479,29 +479,29 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/fleet/samples
      * Records a BYO worker&#39;s live GPU utilization into the SAME series the fleet board overlays.
      * Records a BYO worker&#39;s live GPU utilization into the SAME series the fleet board overlays. The org is the validated principal and source/kind are fixed server-side, so a worker names only its own metrics — never another tenant or another source. Answers 202: the warehouse write is DETACHED (its own bounded context, never in the response path), so a slow or absent warehouse cannot stall a heartbeat.
-     * @param cloudSampleIngest 
-     * @return ApiResponse<CloudSampleAccepted?>
+     * @param sampleIngest 
+     * @return ApiResponse<SampleAccepted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudRecordFleetSampleWithHttpInfo(cloudSampleIngest: CloudSampleIngest) : ApiResponse<CloudSampleAccepted?> {
-        val localVariableConfig = cloudRecordFleetSampleRequestConfig(cloudSampleIngest = cloudSampleIngest)
+    fun recordFleetSampleWithHttpInfo(sampleIngest: SampleIngest) : ApiResponse<SampleAccepted?> {
+        val localVariableConfig = recordFleetSampleRequestConfig(sampleIngest = sampleIngest)
 
-        return request<CloudSampleIngest, CloudSampleAccepted>(
+        return request<SampleIngest, SampleAccepted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudRecordFleetSample
+     * To obtain the request config of the operation recordFleetSample
      *
-     * @param cloudSampleIngest 
+     * @param sampleIngest 
      * @return RequestConfig
      */
-    fun cloudRecordFleetSampleRequestConfig(cloudSampleIngest: CloudSampleIngest) : RequestConfig<CloudSampleIngest> {
-        val localVariableBody = cloudSampleIngest
+    fun recordFleetSampleRequestConfig(sampleIngest: SampleIngest) : RequestConfig<SampleIngest> {
+        val localVariableBody = sampleIngest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -512,7 +512,7 @@ class FleetApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/fleet/samples",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

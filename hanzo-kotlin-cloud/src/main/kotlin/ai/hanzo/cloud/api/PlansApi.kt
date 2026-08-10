@@ -19,15 +19,15 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudPlanEntitlements
-import ai.hanzo.cloud.model.CloudPlanHealth
-import ai.hanzo.cloud.model.CloudPlanList
-import ai.hanzo.cloud.model.CloudPlanRegionList
-import ai.hanzo.cloud.model.CloudPlanResolution
-import ai.hanzo.cloud.model.CloudPlanSchemas
-import ai.hanzo.cloud.model.CloudPlanTierList
-import ai.hanzo.cloud.model.CloudPlanToolList
-import ai.hanzo.cloud.model.CloudPlanVocab
+import ai.hanzo.cloud.model.PlanEntitlements
+import ai.hanzo.cloud.model.PlanHealth
+import ai.hanzo.cloud.model.PlanList
+import ai.hanzo.cloud.model.PlanRegionList
+import ai.hanzo.cloud.model.PlanResolution
+import ai.hanzo.cloud.model.PlanSchemas
+import ai.hanzo.cloud.model.PlanTierList
+import ai.hanzo.cloud.model.PlanToolList
+import ai.hanzo.cloud.model.PlanVocab
 
 import com.google.gson.annotations.SerializedName
 
@@ -55,8 +55,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/plans/entries/{slug}
-     * 
-     * 
+     * Remove a plan from the authority
+     * Deletes the addressed plan and answers 204. It removes the plan from the catalog buyers choose from; it does not touch subscriptions already sold against it, which keep their stored plan id. PLATFORM admin only — an org-level admin is refused 403 — and an unknown slug is 404.
      * @param slug 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -66,8 +66,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1PlansEntriesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1PlansEntriesBySlugWithHttpInfo(slug = slug)
+    fun deleteV1PlansEntriesBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = deleteV1PlansEntriesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -86,16 +86,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/plans/entries/{slug}
-     * 
-     * 
+     * Remove a plan from the authority
+     * Deletes the addressed plan and answers 204. It removes the plan from the catalog buyers choose from; it does not touch subscriptions already sold against it, which keep their stored plan id. PLATFORM admin only — an org-level admin is refused 403 — and an unknown slug is 404.
      * @param slug 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1PlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1PlansEntriesBySlugRequestConfig(slug = slug)
+    fun deleteV1PlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1PlansEntriesBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -103,12 +103,12 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1PlansEntriesBySlug
+     * To obtain the request config of the operation deleteV1PlansEntriesBySlug
      *
      * @param slug 
      * @return RequestConfig
      */
-    fun cloudDeleteV1PlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1PlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -118,16 +118,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans
-     * ListCloudPlans returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog.
-     * ListCloudPlans returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog. A reseller org sees its own overrides in place of the canonical records it has replaced, and the canonical record for every tier it has not.
-     * @return CloudPlanList
+     * Returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog.
+     * Returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog. A reseller org sees its own overrides in place of the canonical records it has replaced, and the canonical record for every tier it has not.
+     * @return PlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -136,11 +136,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Plans() : CloudPlanList {
-        val localVarResponse = cloudGetV1PlansWithHttpInfo()
+    fun getV1Plans() : PlanList {
+        val localVarResponse = getV1PlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -156,28 +156,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans
-     * ListCloudPlans returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog.
-     * ListCloudPlans returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog. A reseller org sees its own overrides in place of the canonical records it has replaced, and the canonical record for every tier it has not.
-     * @return ApiResponse<CloudPlanList?>
+     * Returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog.
+     * Returns the Hanzo cloud plan catalog: every cloud tier with its price, included capacity, limits and feature list, scoped to the caller&#39;s catalog. A reseller org sees its own overrides in place of the canonical records it has replaced, and the canonical record for every tier it has not.
+     * @return ApiResponse<PlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansWithHttpInfo() : ApiResponse<CloudPlanList?> {
-        val localVariableConfig = cloudGetV1PlansRequestConfig()
+    fun getV1PlansWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getV1PlansRequestConfig()
 
-        return request<Unit, CloudPlanList>(
+        return request<Unit, PlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Plans
+     * To obtain the request config of the operation getV1Plans
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -188,16 +188,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/blockchain
-     * ListBlockchainPlans returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms.
-     * ListBlockchainPlans returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms. It is the canonical catalog for every caller — these plans carry no reseller overrides.
-     * @return CloudPlanList
+     * Returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms.
+     * Returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms. It is the canonical catalog for every caller — these plans carry no reseller overrides.
+     * @return PlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -206,11 +206,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansBlockchain() : CloudPlanList {
-        val localVarResponse = cloudGetV1PlansBlockchainWithHttpInfo()
+    fun getV1PlansBlockchain() : PlanList {
+        val localVarResponse = getV1PlansBlockchainWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -226,28 +226,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/blockchain
-     * ListBlockchainPlans returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms.
-     * ListBlockchainPlans returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms. It is the canonical catalog for every caller — these plans carry no reseller overrides.
-     * @return ApiResponse<CloudPlanList?>
+     * Returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms.
+     * Returns the blockchain RPC plan catalog: the tiers metered in monthly compute units, with their prices, limits and overage terms. It is the canonical catalog for every caller — these plans carry no reseller overrides.
+     * @return ApiResponse<PlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansBlockchainWithHttpInfo() : ApiResponse<CloudPlanList?> {
-        val localVariableConfig = cloudGetV1PlansBlockchainRequestConfig()
+    fun getV1PlansBlockchainWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getV1PlansBlockchainRequestConfig()
 
-        return request<Unit, CloudPlanList>(
+        return request<Unit, PlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansBlockchain
+     * To obtain the request config of the operation getV1PlansBlockchain
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansBlockchainRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansBlockchainRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -258,16 +258,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/blockchain",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/cloud
-     * ListCloudCapacityPlans returns the cloud plan catalog.
-     * ListCloudCapacityPlans returns the cloud plan catalog. It is the same section ListCloudPlans answers and a separate operation because it is a separate address, and an address is what every projection keys on.
-     * @return CloudPlanList
+     * Returns the cloud plan catalog.
+     * Returns the cloud plan catalog. It is the same section ListCloudPlans answers and a separate operation because it is a separate address, and an address is what every projection keys on.
+     * @return PlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -276,11 +276,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansCloud() : CloudPlanList {
-        val localVarResponse = cloudGetV1PlansCloudWithHttpInfo()
+    fun getV1PlansCloud() : PlanList {
+        val localVarResponse = getV1PlansCloudWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -296,28 +296,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/cloud
-     * ListCloudCapacityPlans returns the cloud plan catalog.
-     * ListCloudCapacityPlans returns the cloud plan catalog. It is the same section ListCloudPlans answers and a separate operation because it is a separate address, and an address is what every projection keys on.
-     * @return ApiResponse<CloudPlanList?>
+     * Returns the cloud plan catalog.
+     * Returns the cloud plan catalog. It is the same section ListCloudPlans answers and a separate operation because it is a separate address, and an address is what every projection keys on.
+     * @return ApiResponse<PlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansCloudWithHttpInfo() : ApiResponse<CloudPlanList?> {
-        val localVariableConfig = cloudGetV1PlansCloudRequestConfig()
+    fun getV1PlansCloudWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getV1PlansCloudRequestConfig()
 
-        return request<Unit, CloudPlanList>(
+        return request<Unit, PlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansCloud
+     * To obtain the request config of the operation getV1PlansCloud
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansCloudRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansCloudRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,7 +328,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/cloud",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -337,7 +337,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/plans/dns
      * ListDNSPlans returns the DNS plan catalog: the tiers priced on zones, records per zone and queries per day.
      * ListDNSPlans returns the DNS plan catalog: the tiers priced on zones, records per zone and queries per day. It is the canonical catalog for every caller — these plans carry no reseller overrides.
-     * @return CloudPlanList
+     * @return PlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -346,11 +346,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansDns() : CloudPlanList {
-        val localVarResponse = cloudGetV1PlansDnsWithHttpInfo()
+    fun getV1PlansDns() : PlanList {
+        val localVarResponse = getV1PlansDnsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -368,26 +368,26 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/plans/dns
      * ListDNSPlans returns the DNS plan catalog: the tiers priced on zones, records per zone and queries per day.
      * ListDNSPlans returns the DNS plan catalog: the tiers priced on zones, records per zone and queries per day. It is the canonical catalog for every caller — these plans carry no reseller overrides.
-     * @return ApiResponse<CloudPlanList?>
+     * @return ApiResponse<PlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansDnsWithHttpInfo() : ApiResponse<CloudPlanList?> {
-        val localVariableConfig = cloudGetV1PlansDnsRequestConfig()
+    fun getV1PlansDnsWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getV1PlansDnsRequestConfig()
 
-        return request<Unit, CloudPlanList>(
+        return request<Unit, PlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansDns
+     * To obtain the request config of the operation getV1PlansDns
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansDnsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansDnsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -398,17 +398,17 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/dns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/entitlements/{id}
-     * GetPlanEntitlements returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it.
-     * GetPlanEntitlements returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it. It is the entitlement half of ResolvePlan, over the same catalog and the same 404 for an id no catalog holds — the read a licensing or quota gate makes.
+     * Returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it.
+     * Returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it. It is the entitlement half of ResolvePlan, over the same catalog and the same 404 for an id no catalog holds — the read a licensing or quota gate makes.
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
-     * @return CloudPlanEntitlements
+     * @return PlanEntitlements
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -417,11 +417,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansEntitlementsId(id: kotlin.String) : CloudPlanEntitlements {
-        val localVarResponse = cloudGetV1PlansEntitlementsIdWithHttpInfo(id = id)
+    fun getV1PlansEntitlementsById(id: kotlin.String) : PlanEntitlements {
+        val localVarResponse = getV1PlansEntitlementsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanEntitlements
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanEntitlements
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -437,30 +437,30 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/entitlements/{id}
-     * GetPlanEntitlements returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it.
-     * GetPlanEntitlements returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it. It is the entitlement half of ResolvePlan, over the same catalog and the same 404 for an id no catalog holds — the read a licensing or quota gate makes.
+     * Returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it.
+     * Returns what one plan GRANTS and not what it costs: the canonical namespaced entitlement block and the flat license-feature list derived from it. It is the entitlement half of ResolvePlan, over the same catalog and the same 404 for an id no catalog holds — the read a licensing or quota gate makes.
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
-     * @return ApiResponse<CloudPlanEntitlements?>
+     * @return ApiResponse<PlanEntitlements?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansEntitlementsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudPlanEntitlements?> {
-        val localVariableConfig = cloudGetV1PlansEntitlementsIdRequestConfig(id = id)
+    fun getV1PlansEntitlementsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PlanEntitlements?> {
+        val localVariableConfig = getV1PlansEntitlementsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudPlanEntitlements>(
+        return request<Unit, PlanEntitlements>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansEntitlementsId
+     * To obtain the request config of the operation getV1PlansEntitlementsById
      *
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
      * @return RequestConfig
      */
-    fun cloudGetV1PlansEntitlementsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PlansEntitlementsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -471,15 +471,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entitlements/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/entries
-     * 
-     * 
+     * The raw plan authority rows
+     * Returns every plan row as stored — the administrative view behind the public plan catalog. The plan authority is cross-tenant pricing data, so the gate is a PLATFORM admin enforced by the handler itself: an org-level admin is refused 403 no matter what they may do inside their own org.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -488,8 +488,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansEntries() : Unit {
-        val localVarResponse = cloudGetV1PlansEntriesWithHttpInfo()
+    fun getV1PlansEntries() : Unit {
+        val localVarResponse = getV1PlansEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -508,15 +508,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/entries
-     * 
-     * 
+     * The raw plan authority rows
+     * Returns every plan row as stored — the administrative view behind the public plan catalog. The plan authority is cross-tenant pricing data, so the gate is a PLATFORM admin enforced by the handler itself: an org-level admin is refused 403 no matter what they may do inside their own org.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1PlansEntriesRequestConfig()
+    fun getV1PlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1PlansEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -524,11 +524,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansEntries
+     * To obtain the request config of the operation getV1PlansEntries
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansEntriesRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -538,7 +538,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -547,7 +547,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/plans/gpu
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPUs, host memory and hourly price.
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPUs, host memory and hourly price.
-     * @return CloudPlanTierList
+     * @return PlanTierList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -556,11 +556,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansGpu() : CloudPlanTierList {
-        val localVarResponse = cloudGetV1PlansGpuWithHttpInfo()
+    fun getV1PlansGpu() : PlanTierList {
+        val localVarResponse = getV1PlansGpuWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanTierList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanTierList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -578,26 +578,26 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/plans/gpu
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPUs, host memory and hourly price.
      * ListGPUTiers returns the rentable GPU configurations, each with its accelerator count and model, VRAM, vCPUs, host memory and hourly price.
-     * @return ApiResponse<CloudPlanTierList?>
+     * @return ApiResponse<PlanTierList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansGpuWithHttpInfo() : ApiResponse<CloudPlanTierList?> {
-        val localVariableConfig = cloudGetV1PlansGpuRequestConfig()
+    fun getV1PlansGpuWithHttpInfo() : ApiResponse<PlanTierList?> {
+        val localVariableConfig = getV1PlansGpuRequestConfig()
 
-        return request<Unit, CloudPlanTierList>(
+        return request<Unit, PlanTierList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansGpu
+     * To obtain the request config of the operation getV1PlansGpu
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansGpuRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansGpuRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -608,7 +608,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/gpu",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -617,7 +617,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/plans/health
      * Health reports that the plans subsystem is mounted and serving.
      * Health reports that the plans subsystem is mounted and serving. It answers from the process itself and consults neither the catalog bundle nor the goja host, so it stays \&quot;ok\&quot; while either is degraded.
-     * @return CloudPlanHealth
+     * @return PlanHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -626,11 +626,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansHealth() : CloudPlanHealth {
-        val localVarResponse = cloudGetV1PlansHealthWithHttpInfo()
+    fun getV1PlansHealth() : PlanHealth {
+        val localVarResponse = getV1PlansHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -648,26 +648,26 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/plans/health
      * Health reports that the plans subsystem is mounted and serving.
      * Health reports that the plans subsystem is mounted and serving. It answers from the process itself and consults neither the catalog bundle nor the goja host, so it stays \&quot;ok\&quot; while either is degraded.
-     * @return ApiResponse<CloudPlanHealth?>
+     * @return ApiResponse<PlanHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansHealthWithHttpInfo() : ApiResponse<CloudPlanHealth?> {
-        val localVariableConfig = cloudGetV1PlansHealthRequestConfig()
+    fun getV1PlansHealthWithHttpInfo() : ApiResponse<PlanHealth?> {
+        val localVariableConfig = getV1PlansHealthRequestConfig()
 
-        return request<Unit, CloudPlanHealth>(
+        return request<Unit, PlanHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansHealth
+     * To obtain the request config of the operation getV1PlansHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -678,15 +678,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/policy
-     * GetPricingPolicy returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
-     * GetPricingPolicy returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
+     * Returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
+     * Returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -696,8 +696,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansPolicy() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PlansPolicyWithHttpInfo()
+    fun getV1PlansPolicy() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PlansPolicyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -716,16 +716,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/policy
-     * GetPricingPolicy returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
-     * GetPricingPolicy returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
+     * Returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
+     * Returns the published pricing policy: whether pricing is transparent, the revenue-sharing terms (idle compute resale and the open-source share) and the principles the catalog is priced by.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansPolicyWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PlansPolicyRequestConfig()
+    fun getV1PlansPolicyWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PlansPolicyRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -733,11 +733,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansPolicy
+     * To obtain the request config of the operation getV1PlansPolicy
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansPolicyRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansPolicyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -748,16 +748,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/policy",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/regions
-     * ListRegions returns the regions cloud capacity is offered in, each with its display name and physical location.
-     * ListRegions returns the regions cloud capacity is offered in, each with its display name and physical location.
-     * @return CloudPlanRegionList
+     * Returns the regions cloud capacity is offered in, each with its display name and physical location.
+     * Returns the regions cloud capacity is offered in, each with its display name and physical location.
+     * @return PlanRegionList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -766,11 +766,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansRegions() : CloudPlanRegionList {
-        val localVarResponse = cloudGetV1PlansRegionsWithHttpInfo()
+    fun getV1PlansRegions() : PlanRegionList {
+        val localVarResponse = getV1PlansRegionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanRegionList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanRegionList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -786,28 +786,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/regions
-     * ListRegions returns the regions cloud capacity is offered in, each with its display name and physical location.
-     * ListRegions returns the regions cloud capacity is offered in, each with its display name and physical location.
-     * @return ApiResponse<CloudPlanRegionList?>
+     * Returns the regions cloud capacity is offered in, each with its display name and physical location.
+     * Returns the regions cloud capacity is offered in, each with its display name and physical location.
+     * @return ApiResponse<PlanRegionList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansRegionsWithHttpInfo() : ApiResponse<CloudPlanRegionList?> {
-        val localVariableConfig = cloudGetV1PlansRegionsRequestConfig()
+    fun getV1PlansRegionsWithHttpInfo() : ApiResponse<PlanRegionList?> {
+        val localVariableConfig = getV1PlansRegionsRequestConfig()
 
-        return request<Unit, CloudPlanRegionList>(
+        return request<Unit, PlanRegionList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansRegions
+     * To obtain the request config of the operation getV1PlansRegions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansRegionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansRegionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -818,17 +818,17 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/regions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/resolve/{id}
-     * ResolvePlan resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from.
-     * ResolvePlan resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from. The id may be the plan&#39;s id or its slug, and it is resolved against the caller&#39;s catalog, so a reseller&#39;s override wins over the canonical record. An id no catalog holds answers 404.
+     * Resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from.
+     * Resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from. The id may be the plan&#39;s id or its slug, and it is resolved against the caller&#39;s catalog, so a reseller&#39;s override wins over the canonical record. An id no catalog holds answers 404.
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
-     * @return CloudPlanResolution
+     * @return PlanResolution
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -837,11 +837,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansResolveId(id: kotlin.String) : CloudPlanResolution {
-        val localVarResponse = cloudGetV1PlansResolveIdWithHttpInfo(id = id)
+    fun getV1PlansResolveById(id: kotlin.String) : PlanResolution {
+        val localVarResponse = getV1PlansResolveByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanResolution
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanResolution
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -857,30 +857,30 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/resolve/{id}
-     * ResolvePlan resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from.
-     * ResolvePlan resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from. The id may be the plan&#39;s id or its slug, and it is resolved against the caller&#39;s catalog, so a reseller&#39;s override wins over the canonical record. An id no catalog holds answers 404.
+     * Resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from.
+     * Resolves one plan to everything a consumer of the catalog needs at once: its canonical entitlement block, the flat license-feature list a signed license carries, its billing reference, and the catalog it came from. The id may be the plan&#39;s id or its slug, and it is resolved against the caller&#39;s catalog, so a reseller&#39;s override wins over the canonical record. An id no catalog holds answers 404.
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
-     * @return ApiResponse<CloudPlanResolution?>
+     * @return ApiResponse<PlanResolution?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansResolveIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudPlanResolution?> {
-        val localVariableConfig = cloudGetV1PlansResolveIdRequestConfig(id = id)
+    fun getV1PlansResolveByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PlanResolution?> {
+        val localVariableConfig = getV1PlansResolveByIdRequestConfig(id = id)
 
-        return request<Unit, CloudPlanResolution>(
+        return request<Unit, PlanResolution>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansResolveId
+     * To obtain the request config of the operation getV1PlansResolveById
      *
      * @param id ID is the plan&#39;s catalog id or slug — \&quot;pro\&quot;, \&quot;team\&quot;, \&quot;world-enterprise\&quot;, \&quot;rpc-growth\&quot;. Both are matched, so a slug resolves the plan it names.
      * @return RequestConfig
      */
-    fun cloudGetV1PlansResolveIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PlansResolveByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -891,16 +891,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/resolve/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/schema
-     * GetPlanSchemas returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
-     * GetPlanSchemas returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
-     * @return CloudPlanSchemas
+     * Returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
+     * Returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
+     * @return PlanSchemas
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -909,11 +909,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansSchema() : CloudPlanSchemas {
-        val localVarResponse = cloudGetV1PlansSchemaWithHttpInfo()
+    fun getV1PlansSchema() : PlanSchemas {
+        val localVarResponse = getV1PlansSchemaWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanSchemas
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanSchemas
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -929,28 +929,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/schema
-     * GetPlanSchemas returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
-     * GetPlanSchemas returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
-     * @return ApiResponse<CloudPlanSchemas?>
+     * Returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
+     * Returns the two JSON Schema documents this surface speaks: entitlements.schema.json, which declares every entitlement key with its type, unit and enum, and plan.schema.json, which a catalog plan record conforms to.
+     * @return ApiResponse<PlanSchemas?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansSchemaWithHttpInfo() : ApiResponse<CloudPlanSchemas?> {
-        val localVariableConfig = cloudGetV1PlansSchemaRequestConfig()
+    fun getV1PlansSchemaWithHttpInfo() : ApiResponse<PlanSchemas?> {
+        val localVariableConfig = getV1PlansSchemaRequestConfig()
 
-        return request<Unit, CloudPlanSchemas>(
+        return request<Unit, PlanSchemas>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansSchema
+     * To obtain the request config of the operation getV1PlansSchema
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansSchemaRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansSchemaRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -961,15 +961,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/schema",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/storage
-     * GetStoragePricing returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
-     * GetStoragePricing returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
+     * Returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
+     * Returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -979,8 +979,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1PlansStorageWithHttpInfo()
+    fun getV1PlansStorage() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1PlansStorageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -999,16 +999,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/storage
-     * GetStoragePricing returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
-     * GetStoragePricing returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
+     * Returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
+     * Returns the block-storage price block: the price per GB per month and the volume size bounds a cloud plan may attach.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1PlansStorageRequestConfig()
+    fun getV1PlansStorageWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1PlansStorageRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1016,11 +1016,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansStorage
+     * To obtain the request config of the operation getV1PlansStorage
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansStorageRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansStorageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1031,16 +1031,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/storage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/subscriptions
-     * ListSubscriptionPlans returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference.
-     * ListSubscriptionPlans returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference. Scoped to the caller&#39;s catalog.
-     * @return CloudPlanList
+     * Returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference.
+     * Returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference. Scoped to the caller&#39;s catalog.
+     * @return PlanList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1049,11 +1049,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansSubscriptions() : CloudPlanList {
-        val localVarResponse = cloudGetV1PlansSubscriptionsWithHttpInfo()
+    fun getV1PlansSubscriptions() : PlanList {
+        val localVarResponse = getV1PlansSubscriptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1069,28 +1069,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/subscriptions
-     * ListSubscriptionPlans returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference.
-     * ListSubscriptionPlans returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference. Scoped to the caller&#39;s catalog.
-     * @return ApiResponse<CloudPlanList?>
+     * Returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference.
+     * Returns the subscription ladder — the personal and team tiers a customer buys to use the cloud, each with its monthly and annual price, seat rules, limits and billing reference. Scoped to the caller&#39;s catalog.
+     * @return ApiResponse<PlanList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansSubscriptionsWithHttpInfo() : ApiResponse<CloudPlanList?> {
-        val localVariableConfig = cloudGetV1PlansSubscriptionsRequestConfig()
+    fun getV1PlansSubscriptionsWithHttpInfo() : ApiResponse<PlanList?> {
+        val localVariableConfig = getV1PlansSubscriptionsRequestConfig()
 
-        return request<Unit, CloudPlanList>(
+        return request<Unit, PlanList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansSubscriptions
+     * To obtain the request config of the operation getV1PlansSubscriptions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansSubscriptionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansSubscriptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1101,16 +1101,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/tools
-     * ListToolPrices returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
-     * ListToolPrices returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
-     * @return CloudPlanToolList
+     * Returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
+     * Returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
+     * @return PlanToolList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1119,11 +1119,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansTools() : CloudPlanToolList {
-        val localVarResponse = cloudGetV1PlansToolsWithHttpInfo()
+    fun getV1PlansTools() : PlanToolList {
+        val localVarResponse = getV1PlansToolsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanToolList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanToolList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1139,28 +1139,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/tools
-     * ListToolPrices returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
-     * ListToolPrices returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
-     * @return ApiResponse<CloudPlanToolList?>
+     * Returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
+     * Returns the per-use price of every metered tool — web search, code interpreter, image generation, speech — each with the unit it is billed in.
+     * @return ApiResponse<PlanToolList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansToolsWithHttpInfo() : ApiResponse<CloudPlanToolList?> {
-        val localVariableConfig = cloudGetV1PlansToolsRequestConfig()
+    fun getV1PlansToolsWithHttpInfo() : ApiResponse<PlanToolList?> {
+        val localVariableConfig = getV1PlansToolsRequestConfig()
 
-        return request<Unit, CloudPlanToolList>(
+        return request<Unit, PlanToolList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansTools
+     * To obtain the request config of the operation getV1PlansTools
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansToolsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansToolsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1171,16 +1171,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plans/vocab
-     * GetEntitlementVocabulary returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant.
-     * GetEntitlementVocabulary returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant. It is derived from entitlements.schema.json on every call, so it cannot fall behind the schema.
-     * @return CloudPlanVocab
+     * Returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant.
+     * Returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant. It is derived from entitlements.schema.json on every call, so it cannot fall behind the schema.
+     * @return PlanVocab
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1189,11 +1189,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PlansVocab() : CloudPlanVocab {
-        val localVarResponse = cloudGetV1PlansVocabWithHttpInfo()
+    fun getV1PlansVocab() : PlanVocab {
+        val localVarResponse = getV1PlansVocabWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanVocab
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanVocab
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1209,28 +1209,28 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/plans/vocab
-     * GetEntitlementVocabulary returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant.
-     * GetEntitlementVocabulary returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant. It is derived from entitlements.schema.json on every call, so it cannot fall behind the schema.
-     * @return ApiResponse<CloudPlanVocab?>
+     * Returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant.
+     * Returns the entitlement key vocabulary: every key with its namespace, JSON type, nullability, unit, enum and title, the list of namespaces, and the engine features a license can grant. It is derived from entitlements.schema.json on every call, so it cannot fall behind the schema.
+     * @return ApiResponse<PlanVocab?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PlansVocabWithHttpInfo() : ApiResponse<CloudPlanVocab?> {
-        val localVariableConfig = cloudGetV1PlansVocabRequestConfig()
+    fun getV1PlansVocabWithHttpInfo() : ApiResponse<PlanVocab?> {
+        val localVariableConfig = getV1PlansVocabRequestConfig()
 
-        return request<Unit, CloudPlanVocab>(
+        return request<Unit, PlanVocab>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PlansVocab
+     * To obtain the request config of the operation getV1PlansVocab
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PlansVocabRequestConfig() : RequestConfig<Unit> {
+    fun getV1PlansVocabRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1241,15 +1241,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/vocab",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/plans/entries
-     * 
-     * 
+     * Add a subscription plan
+     * Creates a plan from the body and answers it at 201. The slug is required and globally unique — a duplicate is 409 — and the row is marked authoritative on creation, so the corrective seed will leave it alone. Price, annual price and the contact-sales flag are stored exactly as sent, never coerced, so the difference between a free plan and a quote-only plan survives. PLATFORM admin only.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1258,8 +1258,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PlansEntries() : Unit {
-        val localVarResponse = cloudPostV1PlansEntriesWithHttpInfo()
+    fun postV1PlansEntries() : Unit {
+        val localVarResponse = postV1PlansEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1278,15 +1278,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/plans/entries
-     * 
-     * 
+     * Add a subscription plan
+     * Creates a plan from the body and answers it at 201. The slug is required and globally unique — a duplicate is 409 — and the row is marked authoritative on creation, so the corrective seed will leave it alone. Price, annual price and the contact-sales flag are stored exactly as sent, never coerced, so the difference between a free plan and a quote-only plan survives. PLATFORM admin only.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1PlansEntriesRequestConfig()
+    fun postV1PlansEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1PlansEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1294,11 +1294,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PlansEntries
+     * To obtain the request config of the operation postV1PlansEntries
      *
      * @return RequestConfig
      */
-    fun cloudPostV1PlansEntriesRequestConfig() : RequestConfig<Unit> {
+    fun postV1PlansEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1308,15 +1308,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/plans/seed
-     * 
-     * 
+     * Seed the embedded plan catalog, without overwriting administrative edits
+     * Upserts the shipped plan rows and answers how many were created and how many corrected. It is idempotent and non-destructive — a row an administrator authored or edited is left as it stands — so it is safe against a live authority and fills only what is missing or has drifted. PLATFORM admin only, and a deployment with no seed source wired answers 500 rather than quietly seeding nothing.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1325,8 +1325,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PlansSeed() : Unit {
-        val localVarResponse = cloudPostV1PlansSeedWithHttpInfo()
+    fun postV1PlansSeed() : Unit {
+        val localVarResponse = postV1PlansSeedWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1345,15 +1345,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/plans/seed
-     * 
-     * 
+     * Seed the embedded plan catalog, without overwriting administrative edits
+     * Upserts the shipped plan rows and answers how many were created and how many corrected. It is idempotent and non-destructive — a row an administrator authored or edited is left as it stands — so it is safe against a live authority and fills only what is missing or has drifted. PLATFORM admin only, and a deployment with no seed source wired answers 500 rather than quietly seeding nothing.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PlansSeedWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1PlansSeedRequestConfig()
+    fun postV1PlansSeedWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1PlansSeedRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1361,11 +1361,11 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PlansSeed
+     * To obtain the request config of the operation postV1PlansSeed
      *
      * @return RequestConfig
      */
-    fun cloudPostV1PlansSeedRequestConfig() : RequestConfig<Unit> {
+    fun postV1PlansSeedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1375,15 +1375,15 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/seed",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/plans/entries/{slug}
-     * 
-     * 
+     * Edit a plan, leaving the fields you omit alone
+     * Loads the addressed plan, applies the body over it and answers the stored result, so a partial edit never silently zeroes a price or the contact-sales flag. The slug is IMMUTABLE: a body naming a different slug is rejected outright before anything is written, because a rename would orphan every subscription that stored the old id — deprecate and create instead. An admin edit marks the row authoritative so the seed stops correcting it. PLATFORM admin only; an unknown slug is 404.
      * @param slug 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1393,8 +1393,8 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1PlansEntriesBySlug(slug: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1PlansEntriesBySlugWithHttpInfo(slug = slug)
+    fun putV1PlansEntriesBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = putV1PlansEntriesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1413,16 +1413,16 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/plans/entries/{slug}
-     * 
-     * 
+     * Edit a plan, leaving the fields you omit alone
+     * Loads the addressed plan, applies the body over it and answers the stored result, so a partial edit never silently zeroes a price or the contact-sales flag. The slug is IMMUTABLE: a body naming a different slug is rejected outright before anything is written, because a rename would orphan every subscription that stored the old id — deprecate and create instead. An admin edit marks the row authoritative so the seed stops correcting it. PLATFORM admin only; an unknown slug is 404.
      * @param slug 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1PlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1PlansEntriesBySlugRequestConfig(slug = slug)
+    fun putV1PlansEntriesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1PlansEntriesBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1430,12 +1430,12 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1PlansEntriesBySlug
+     * To obtain the request config of the operation putV1PlansEntriesBySlug
      *
      * @param slug 
      * @return RequestConfig
      */
-    fun cloudPutV1PlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun putV1PlansEntriesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1445,7 +1445,7 @@ class PlansApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/plans/entries/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

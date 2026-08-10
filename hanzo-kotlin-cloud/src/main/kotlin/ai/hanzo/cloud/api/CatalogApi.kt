@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCatalogPage
+import ai.hanzo.cloud.model.CatalogPage
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,8 +47,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/catalog/entries/{wildcard1}
-     * 
-     * 
+     * Remove a catalog entry
+     * Deletes the entry with the addressed slug and answers 204. The slug is matched as a trailing wildcard, not a single segment, because a model slug contains a slash. PLATFORM admin only — an org-level admin is refused 403 — and an unknown slug is 404, so the call is safe to repeat but not silently idempotent.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -58,8 +58,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteV1CatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -78,16 +78,16 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/catalog/entries/{wildcard1}
-     * 
-     * 
+     * Remove a catalog entry
+     * Deletes the entry with the addressed slug and answers 204. The slug is matched as a trailing wildcard, not a single segment, because a model slug contains a slash. PLATFORM admin only — an org-level admin is refused 403 — and an unknown slug is 404, so the call is safe to repeat but not silently idempotent.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1CatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,12 +95,12 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CatalogEntriesByWildcard1
+     * To obtain the request config of the operation deleteV1CatalogEntriesByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudDeleteV1CatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +110,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -129,7 +129,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param forkable Forkable is tri-state: \&quot;true\&quot; selects the forkable rows, \&quot;false\&quot; selects the rest, and anything else — including absent — applies no filter at all. (optional)
      * @param limit Limit caps the page at 200, default 50. A value that is not a non-negative integer falls back to the default. (optional)
      * @param offset Offset is where the page starts, default 0, with the same tolerance. (optional)
-     * @return CloudCatalogPage
+     * @return CatalogPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -138,11 +138,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Catalog(q: kotlin.String? = null, org: kotlin.String? = null, kind: kotlin.String? = null, origin: kotlin.String? = null, archetype: kotlin.String? = null, language: kotlin.String? = null, template: kotlin.String? = null, forkable: kotlin.String? = null, limit: kotlin.String? = null, offset: kotlin.String? = null) : CloudCatalogPage {
-        val localVarResponse = cloudGetV1CatalogWithHttpInfo(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
+    fun getV1Catalog(q: kotlin.String? = null, org: kotlin.String? = null, kind: kotlin.String? = null, origin: kotlin.String? = null, archetype: kotlin.String? = null, language: kotlin.String? = null, template: kotlin.String? = null, forkable: kotlin.String? = null, limit: kotlin.String? = null, offset: kotlin.String? = null) : CatalogPage {
+        val localVarResponse = getV1CatalogWithHttpInfo(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCatalogPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CatalogPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -170,22 +170,22 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param forkable Forkable is tri-state: \&quot;true\&quot; selects the forkable rows, \&quot;false\&quot; selects the rest, and anything else — including absent — applies no filter at all. (optional)
      * @param limit Limit caps the page at 200, default 50. A value that is not a non-negative integer falls back to the default. (optional)
      * @param offset Offset is where the page starts, default 0, with the same tolerance. (optional)
-     * @return ApiResponse<CloudCatalogPage?>
+     * @return ApiResponse<CatalogPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CatalogWithHttpInfo(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : ApiResponse<CloudCatalogPage?> {
-        val localVariableConfig = cloudGetV1CatalogRequestConfig(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
+    fun getV1CatalogWithHttpInfo(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : ApiResponse<CatalogPage?> {
+        val localVariableConfig = getV1CatalogRequestConfig(q = q, org = org, kind = kind, origin = origin, archetype = archetype, language = language, template = template, forkable = forkable, limit = limit, offset = offset)
 
-        return request<Unit, CloudCatalogPage>(
+        return request<Unit, CatalogPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Catalog
+     * To obtain the request config of the operation getV1Catalog
      *
      * @param q Q is the free-text query the lexical index scores relevance on. Empty is a browse rather than a search — the same request either way. (optional)
      * @param org Org narrows to one builder org: hanzo | lux | zoo. Case-insensitive. (optional)
@@ -199,7 +199,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param offset Offset is where the page starts, default 0, with the same tolerance. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CatalogRequestConfig(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1CatalogRequestConfig(q: kotlin.String?, org: kotlin.String?, kind: kotlin.String?, origin: kotlin.String?, archetype: kotlin.String?, language: kotlin.String?, template: kotlin.String?, forkable: kotlin.String?, limit: kotlin.String?, offset: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -242,15 +242,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/catalog/entries
-     * 
-     * 
+     * The raw catalog entries, including the unpublished ones
+     * Returns every catalog row as stored — the admin view, which unlike the public projection includes entries that are not published. It is cross-tenant platform data, so the gate is a PLATFORM admin: an org-level admin is refused 403 no matter how privileged they are inside their own org, enforced by the handler itself and not only by the route&#39;s token middleware.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -259,8 +259,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CatalogEntries() : Unit {
-        val localVarResponse = cloudGetV1CatalogEntriesWithHttpInfo()
+    fun getV1CatalogEntries() : Unit {
+        val localVarResponse = getV1CatalogEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -279,15 +279,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/catalog/entries
-     * 
-     * 
+     * The raw catalog entries, including the unpublished ones
+     * Returns every catalog row as stored — the admin view, which unlike the public projection includes entries that are not published. It is cross-tenant platform data, so the gate is a PLATFORM admin: an org-level admin is refused 403 no matter how privileged they are inside their own org, enforced by the handler itself and not only by the route&#39;s token middleware.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CatalogEntriesRequestConfig()
+    fun getV1CatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CatalogEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -295,11 +295,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CatalogEntries
+     * To obtain the request config of the operation getV1CatalogEntries
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CatalogEntriesRequestConfig() : RequestConfig<Unit> {
+    fun getV1CatalogEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -309,15 +309,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/catalog/entries
-     * 
-     * 
+     * Add a catalog entry
+     * Creates a catalog row from the body and answers it at 201. The slug is required and is the globally-unique catalog key, so a second entry claiming a slug already in use is refused 409 rather than shadowing the first. PLATFORM admin only — this is cross-tenant pricing and packaging data, and an org-level admin is refused 403.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -326,8 +326,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CatalogEntries() : Unit {
-        val localVarResponse = cloudPostV1CatalogEntriesWithHttpInfo()
+    fun postV1CatalogEntries() : Unit {
+        val localVarResponse = postV1CatalogEntriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -346,15 +346,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/catalog/entries
-     * 
-     * 
+     * Add a catalog entry
+     * Creates a catalog row from the body and answers it at 201. The slug is required and is the globally-unique catalog key, so a second entry claiming a slug already in use is refused 409 rather than shadowing the first. PLATFORM admin only — this is cross-tenant pricing and packaging data, and an org-level admin is refused 403.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CatalogEntriesRequestConfig()
+    fun postV1CatalogEntriesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CatalogEntriesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -362,11 +362,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CatalogEntries
+     * To obtain the request config of the operation postV1CatalogEntries
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CatalogEntriesRequestConfig() : RequestConfig<Unit> {
+    fun postV1CatalogEntriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -376,15 +376,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/catalog/models
-     * 
-     * 
+     * Land a syncer&#39;s view of the model catalog: upstream costs and machine facts
+     * Takes a batch of model rows and upserts each one&#39;s upstream COST and machine-observable facts, answering what was created and changed. It deliberately touches nothing a human owns — not the retail price, not the markup, not the entitlement tier — so a sync can never overwrite an administrator&#39;s pricing decision. The gate is a PLATFORM principal rather than a platform ADMIN, because the caller is normally a scheduled job holding the internal service token, which carries platform scope but no admin claim.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -393,8 +393,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CatalogModels() : Unit {
-        val localVarResponse = cloudPostV1CatalogModelsWithHttpInfo()
+    fun postV1CatalogModels() : Unit {
+        val localVarResponse = postV1CatalogModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -413,15 +413,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/catalog/models
-     * 
-     * 
+     * Land a syncer&#39;s view of the model catalog: upstream costs and machine facts
+     * Takes a batch of model rows and upserts each one&#39;s upstream COST and machine-observable facts, answering what was created and changed. It deliberately touches nothing a human owns — not the retail price, not the markup, not the entitlement tier — so a sync can never overwrite an administrator&#39;s pricing decision. The gate is a PLATFORM principal rather than a platform ADMIN, because the caller is normally a scheduled job holding the internal service token, which carries platform scope but no admin claim.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CatalogModelsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CatalogModelsRequestConfig()
+    fun postV1CatalogModelsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CatalogModelsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -429,11 +429,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CatalogModels
+     * To obtain the request config of the operation postV1CatalogModels
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CatalogModelsRequestConfig() : RequestConfig<Unit> {
+    fun postV1CatalogModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -443,15 +443,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/catalog/models/refresh
-     * 
-     * 
+     * Refresh the model catalog by reading the upstream provider
+     * Pulls the upstream model list and lands it through the same upsert the push door uses, so the rule that a sync owns cost and an administrator owns price holds no matter which door a row came through. It takes no body — the upstream is READ rather than told. If that upstream cannot be read the call answers 502 and writes NOTHING: a sync that cannot see its source must never conclude the source is empty, because that conclusion would withdraw every model on sale. The gate is a PLATFORM principal so the scheduled job&#39;s service token qualifies.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -460,8 +460,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CatalogModelsRefresh() : Unit {
-        val localVarResponse = cloudPostV1CatalogModelsRefreshWithHttpInfo()
+    fun postV1CatalogModelsRefresh() : Unit {
+        val localVarResponse = postV1CatalogModelsRefreshWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -480,15 +480,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/catalog/models/refresh
-     * 
-     * 
+     * Refresh the model catalog by reading the upstream provider
+     * Pulls the upstream model list and lands it through the same upsert the push door uses, so the rule that a sync owns cost and an administrator owns price holds no matter which door a row came through. It takes no body — the upstream is READ rather than told. If that upstream cannot be read the call answers 502 and writes NOTHING: a sync that cannot see its source must never conclude the source is empty, because that conclusion would withdraw every model on sale. The gate is a PLATFORM principal so the scheduled job&#39;s service token qualifies.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CatalogModelsRefreshWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CatalogModelsRefreshRequestConfig()
+    fun postV1CatalogModelsRefreshWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CatalogModelsRefreshRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -496,11 +496,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CatalogModelsRefresh
+     * To obtain the request config of the operation postV1CatalogModelsRefresh
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CatalogModelsRefreshRequestConfig() : RequestConfig<Unit> {
+    fun postV1CatalogModelsRefreshRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -510,15 +510,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/models/refresh",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/catalog/seed
-     * 
-     * 
+     * Seed the embedded catalog, without disturbing edits already made
+     * Upserts the shipped catalog seed and answers how many entries it created. It is idempotent and non-destructive — an entry an administrator has since edited is left alone — so it is safe to run against a live catalog to fill in what is missing. PLATFORM admin only; an org-level admin is refused 403.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -527,8 +527,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CatalogSeed() : Unit {
-        val localVarResponse = cloudPostV1CatalogSeedWithHttpInfo()
+    fun postV1CatalogSeed() : Unit {
+        val localVarResponse = postV1CatalogSeedWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -547,15 +547,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/catalog/seed
-     * 
-     * 
+     * Seed the embedded catalog, without disturbing edits already made
+     * Upserts the shipped catalog seed and answers how many entries it created. It is idempotent and non-destructive — an entry an administrator has since edited is left alone — so it is safe to run against a live catalog to fill in what is missing. PLATFORM admin only; an org-level admin is refused 403.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CatalogSeedWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CatalogSeedRequestConfig()
+    fun postV1CatalogSeedWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CatalogSeedRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -563,11 +563,11 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CatalogSeed
+     * To obtain the request config of the operation postV1CatalogSeed
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CatalogSeedRequestConfig() : RequestConfig<Unit> {
+    fun postV1CatalogSeedRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -577,15 +577,15 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/seed",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/catalog/entries/{wildcard1}
-     * 
-     * 
+     * Replace a catalog entry, keeping its slug
+     * Loads the addressed entry, applies the body over it and answers the stored result. The slug is the entry&#39;s IDENTITY and is re-stamped from the path after decoding, so a slug in the body is ignored and a rename is impossible through this address. The slug is matched as a trailing wildcard rather than one path segment because a model&#39;s slug IS its callable id and those contain a slash — a segment parameter would stop at it and leave most catalog rows unaddressable. PLATFORM admin only; an unknown slug is 404.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -595,8 +595,8 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putV1CatalogEntriesByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -615,16 +615,16 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * PUT /v1/catalog/entries/{wildcard1}
-     * 
-     * 
+     * Replace a catalog entry, keeping its slug
+     * Loads the addressed entry, applies the body over it and answers the stored result. The slug is the entry&#39;s IDENTITY and is re-stamped from the path after decoding, so a slug in the body is ignored and a rename is impossible through this address. The slug is matched as a trailing wildcard rather than one path segment because a model&#39;s slug IS its callable id and those contain a slash — a segment parameter would stop at it and leave most catalog rows unaddressable. PLATFORM admin only; an unknown slug is 404.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1CatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putV1CatalogEntriesByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CatalogEntriesByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -632,12 +632,12 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CatalogEntriesByWildcard1
+     * To obtain the request config of the operation putV1CatalogEntriesByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPutV1CatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putV1CatalogEntriesByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -647,7 +647,7 @@ class CatalogApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/catalog/entries/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

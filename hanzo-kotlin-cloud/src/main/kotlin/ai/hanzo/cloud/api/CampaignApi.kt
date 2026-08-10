@@ -19,13 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCampaignPage
-import ai.hanzo.cloud.model.CloudCampaignRecord
-import ai.hanzo.cloud.model.CloudCampaignResults
-import ai.hanzo.cloud.model.CloudCampaignSummary
-import ai.hanzo.cloud.model.CloudCampaignUpdate
-import ai.hanzo.cloud.model.CloudCampaignWrite
-import ai.hanzo.cloud.model.CloudChannelAdd
+import ai.hanzo.cloud.model.CampaignPage
+import ai.hanzo.cloud.model.CampaignRecord
+import ai.hanzo.cloud.model.CampaignResults
+import ai.hanzo.cloud.model.CampaignSummary
+import ai.hanzo.cloud.model.CampaignUpdate
+import ai.hanzo.cloud.model.CampaignWrite
+import ai.hanzo.cloud.model.ChannelAdd
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,8 +53,8 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/campaign/{id}
-     * DeleteCampaign removes one campaign of the caller&#39;s org and answers 204 with no body.
-     * DeleteCampaign removes one campaign of the caller&#39;s org and answers 204 with no body. 404 when the org has no campaign with that id.  It deletes the RECORD, not the executions: a campaign whose channels are live on a provider should be paused first, or those executions keep running with nothing here to report them.
+     * Removes one campaign of the caller&#39;s org and answers 204 with no body.
+     * Removes one campaign of the caller&#39;s org and answers 204 with no body. 404 when the org has no campaign with that id.  It deletes the RECORD, not the executions: a campaign whose channels are live on a provider should be paused first, or those executions keep running with nothing here to report them.
      * @param id ID is the campaign&#39;s server-minted handle, \&quot;cmp_\&quot;-prefixed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -64,8 +64,8 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CampaignId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1CampaignIdWithHttpInfo(id = id)
+    fun deleteV1CampaignById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CampaignByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -84,16 +84,16 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/campaign/{id}
-     * DeleteCampaign removes one campaign of the caller&#39;s org and answers 204 with no body.
-     * DeleteCampaign removes one campaign of the caller&#39;s org and answers 204 with no body. 404 when the org has no campaign with that id.  It deletes the RECORD, not the executions: a campaign whose channels are live on a provider should be paused first, or those executions keep running with nothing here to report them.
+     * Removes one campaign of the caller&#39;s org and answers 204 with no body.
+     * Removes one campaign of the caller&#39;s org and answers 204 with no body. 404 when the org has no campaign with that id.  It deletes the RECORD, not the executions: a campaign whose channels are live on a provider should be paused first, or those executions keep running with nothing here to report them.
      * @param id ID is the campaign&#39;s server-minted handle, \&quot;cmp_\&quot;-prefixed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CampaignIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1CampaignIdRequestConfig(id = id)
+    fun deleteV1CampaignByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CampaignByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -101,12 +101,12 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CampaignId
+     * To obtain the request config of the operation deleteV1CampaignById
      *
      * @param id ID is the campaign&#39;s server-minted handle, \&quot;cmp_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CampaignIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CampaignByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -116,18 +116,18 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/campaign/{id}/channels/{kind}
-     * RemoveCampaignChannel drops one channel from a campaign and returns the updated campaign.
-     * RemoveCampaignChannel drops one channel from a campaign and returns the updated campaign. 404 when the campaign carries no channel of that kind.  It removes the channel from the PLAN. A channel that is live at its provider should be paused first — dropping the row here leaves nothing to pause it with afterwards.
+     * Drops one channel from a campaign and returns the updated campaign.
+     * Drops one channel from a campaign and returns the updated campaign. 404 when the campaign carries no channel of that kind.  It removes the channel from the PLAN. A channel that is live at its provider should be paused first — dropping the row here leaves nothing to pause it with afterwards.
      * @param id ID is the campaign, from the path.
      * @param kind Kind is the channel to remove: paid, organic or email.
-     * @return CloudCampaignRecord
+     * @return CampaignRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -136,11 +136,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CampaignIdChannelsKind(id: kotlin.String, kind: kotlin.String) : CloudCampaignRecord {
-        val localVarResponse = cloudDeleteV1CampaignIdChannelsKindWithHttpInfo(id = id, kind = kind)
+    fun deleteV1CampaignByIdChannelsByKind(id: kotlin.String, kind: kotlin.String) : CampaignRecord {
+        val localVarResponse = deleteV1CampaignByIdChannelsByKindWithHttpInfo(id = id, kind = kind)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -156,32 +156,32 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/campaign/{id}/channels/{kind}
-     * RemoveCampaignChannel drops one channel from a campaign and returns the updated campaign.
-     * RemoveCampaignChannel drops one channel from a campaign and returns the updated campaign. 404 when the campaign carries no channel of that kind.  It removes the channel from the PLAN. A channel that is live at its provider should be paused first — dropping the row here leaves nothing to pause it with afterwards.
+     * Drops one channel from a campaign and returns the updated campaign.
+     * Drops one channel from a campaign and returns the updated campaign. 404 when the campaign carries no channel of that kind.  It removes the channel from the PLAN. A channel that is live at its provider should be paused first — dropping the row here leaves nothing to pause it with afterwards.
      * @param id ID is the campaign, from the path.
      * @param kind Kind is the channel to remove: paid, organic or email.
-     * @return ApiResponse<CloudCampaignRecord?>
+     * @return ApiResponse<CampaignRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CampaignIdChannelsKindWithHttpInfo(id: kotlin.String, kind: kotlin.String) : ApiResponse<CloudCampaignRecord?> {
-        val localVariableConfig = cloudDeleteV1CampaignIdChannelsKindRequestConfig(id = id, kind = kind)
+    fun deleteV1CampaignByIdChannelsByKindWithHttpInfo(id: kotlin.String, kind: kotlin.String) : ApiResponse<CampaignRecord?> {
+        val localVariableConfig = deleteV1CampaignByIdChannelsByKindRequestConfig(id = id, kind = kind)
 
-        return request<Unit, CloudCampaignRecord>(
+        return request<Unit, CampaignRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CampaignIdChannelsKind
+     * To obtain the request config of the operation deleteV1CampaignByIdChannelsByKind
      *
      * @param id ID is the campaign, from the path.
      * @param kind Kind is the channel to remove: paid, organic or email.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CampaignIdChannelsKindRequestConfig(id: kotlin.String, kind: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CampaignByIdChannelsByKindRequestConfig(id: kotlin.String, kind: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -192,18 +192,18 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/channels/{kind}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"kind"+"}", encodeURIComponent(kind.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/campaign
-     * ListCampaigns returns the org&#39;s campaigns, newest first, optionally narrowed to one status.
-     * ListCampaigns returns the org&#39;s campaigns, newest first, optionally narrowed to one status.  A campaign is the top-level go-to-market object: a value that SPANS channels (paid, organic, email) and fans out to the executor for each. The listing is org-scoped server-side, so one org can never see another&#39;s campaigns.
+     * Returns the org&#39;s campaigns, newest first, optionally narrowed to one status.
+     * Returns the org&#39;s campaigns, newest first, optionally narrowed to one status.  A campaign is the top-level go-to-market object: a value that SPANS channels (paid, organic, email) and fans out to the executor for each. The listing is org-scoped server-side, so one org can never see another&#39;s campaigns.
      * @param status Status keeps only campaigns in that state: draft, live, paused or failed. Empty means any. (optional)
      * @param limit Limit bounds the page. 0 or less means the default of 200; anything above 1000 is clamped to 1000. (optional)
-     * @return CloudCampaignPage
+     * @return CampaignPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -212,11 +212,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Campaign(status: kotlin.String? = null, limit: kotlin.Int? = null) : CloudCampaignPage {
-        val localVarResponse = cloudGetV1CampaignWithHttpInfo(status = status, limit = limit)
+    fun getV1Campaign(status: kotlin.String? = null, limit: kotlin.Int? = null) : CampaignPage {
+        val localVarResponse = getV1CampaignWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -232,32 +232,32 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/campaign
-     * ListCampaigns returns the org&#39;s campaigns, newest first, optionally narrowed to one status.
-     * ListCampaigns returns the org&#39;s campaigns, newest first, optionally narrowed to one status.  A campaign is the top-level go-to-market object: a value that SPANS channels (paid, organic, email) and fans out to the executor for each. The listing is org-scoped server-side, so one org can never see another&#39;s campaigns.
+     * Returns the org&#39;s campaigns, newest first, optionally narrowed to one status.
+     * Returns the org&#39;s campaigns, newest first, optionally narrowed to one status.  A campaign is the top-level go-to-market object: a value that SPANS channels (paid, organic, email) and fans out to the executor for each. The listing is org-scoped server-side, so one org can never see another&#39;s campaigns.
      * @param status Status keeps only campaigns in that state: draft, live, paused or failed. Empty means any. (optional)
      * @param limit Limit bounds the page. 0 or less means the default of 200; anything above 1000 is clamped to 1000. (optional)
-     * @return ApiResponse<CloudCampaignPage?>
+     * @return ApiResponse<CampaignPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CampaignWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudCampaignPage?> {
-        val localVariableConfig = cloudGetV1CampaignRequestConfig(status = status, limit = limit)
+    fun getV1CampaignWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CampaignPage?> {
+        val localVariableConfig = getV1CampaignRequestConfig(status = status, limit = limit)
 
-        return request<Unit, CloudCampaignPage>(
+        return request<Unit, CampaignPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Campaign
+     * To obtain the request config of the operation getV1Campaign
      *
      * @param status Status keeps only campaigns in that state: draft, live, paused or failed. Empty means any. (optional)
      * @param limit Limit bounds the page. 0 or less means the default of 200; anything above 1000 is clamped to 1000. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CampaignRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CampaignRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -276,17 +276,17 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/campaign/{id}
-     * GetCampaign returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status.
-     * GetCampaign returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status. 404 when the org has no campaign with that id.
+     * Returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status.
+     * Returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status. 404 when the org has no campaign with that id.
      * @param id ID is the campaign&#39;s server-minted handle, \&quot;cmp_\&quot;-prefixed.
-     * @return CloudCampaignRecord
+     * @return CampaignRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -295,11 +295,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CampaignId(id: kotlin.String) : CloudCampaignRecord {
-        val localVarResponse = cloudGetV1CampaignIdWithHttpInfo(id = id)
+    fun getV1CampaignById(id: kotlin.String) : CampaignRecord {
+        val localVarResponse = getV1CampaignByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -315,30 +315,30 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/campaign/{id}
-     * GetCampaign returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status.
-     * GetCampaign returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status. 404 when the org has no campaign with that id.
+     * Returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status.
+     * Returns one campaign of the caller&#39;s org — its name, audience, creatives, channels with their per-channel launch state, schedule, budget and status. 404 when the org has no campaign with that id.
      * @param id ID is the campaign&#39;s server-minted handle, \&quot;cmp_\&quot;-prefixed.
-     * @return ApiResponse<CloudCampaignRecord?>
+     * @return ApiResponse<CampaignRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CampaignIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCampaignRecord?> {
-        val localVariableConfig = cloudGetV1CampaignIdRequestConfig(id = id)
+    fun getV1CampaignByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CampaignRecord?> {
+        val localVariableConfig = getV1CampaignByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCampaignRecord>(
+        return request<Unit, CampaignRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CampaignId
+     * To obtain the request config of the operation getV1CampaignById
      *
      * @param id ID is the campaign&#39;s server-minted handle, \&quot;cmp_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun cloudGetV1CampaignIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CampaignByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -349,20 +349,20 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/campaign/{id}/metrics
-     * CampaignMetrics returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.
-     * CampaignMetrics returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.  There is exactly ONE metrics plane and nothing is stored here: the funnel is an analytics query over the campaign&#39;s utm_campaign-tagged events, and the spend is each provider&#39;s own number read through the org&#39;s connector. A warehouse that is not emitting yet degrades to available:false with zeroes — honest-empty, never a 500 and never a fabricated number. When the campaign runs more than one creative and an experiment is wired, abTest carries the A/B analysis.
+     * Returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.
+     * Returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.  There is exactly ONE metrics plane and nothing is stored here: the funnel is an analytics query over the campaign&#39;s utm_campaign-tagged events, and the spend is each provider&#39;s own number read through the org&#39;s connector. A warehouse that is not emitting yet degrades to available:false with zeroes — honest-empty, never a 500 and never a fabricated number. When the campaign runs more than one creative and an experiment is wired, abTest carries the A/B analysis.
      * @param id ID is the campaign to report on, from the path.
      * @param range Range is the lookback window: 24h, 7d, 30d or 90d. Anything else, including empty, reads as 30d. (optional)
      * @param start Start is an explicit RFC3339 window start. Honored only together with End, and only when End is after it. (optional)
      * @param end End is an explicit RFC3339 window end. (optional)
-     * @return CloudCampaignResults
+     * @return CampaignResults
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -371,11 +371,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CampaignIdMetrics(id: kotlin.String, range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : CloudCampaignResults {
-        val localVarResponse = cloudGetV1CampaignIdMetricsWithHttpInfo(id = id, range = range, start = start, end = end)
+    fun getV1CampaignByIdMetrics(id: kotlin.String, range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : CampaignResults {
+        val localVarResponse = getV1CampaignByIdMetricsWithHttpInfo(id = id, range = range, start = start, end = end)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignResults
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignResults
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -391,28 +391,28 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/campaign/{id}/metrics
-     * CampaignMetrics returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.
-     * CampaignMetrics returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.  There is exactly ONE metrics plane and nothing is stored here: the funnel is an analytics query over the campaign&#39;s utm_campaign-tagged events, and the spend is each provider&#39;s own number read through the org&#39;s connector. A warehouse that is not emitting yet degrades to available:false with zeroes — honest-empty, never a 500 and never a fabricated number. When the campaign runs more than one creative and an experiment is wired, abTest carries the A/B analysis.
+     * Returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.
+     * Returns a campaign&#39;s results over a window: the analytics funnel (impressions, clicks, conversions, revenue, visitors), the spend each channel&#39;s connector reports, and the derived growth KPIs — CTR, CVR, CAC and ROAS.  There is exactly ONE metrics plane and nothing is stored here: the funnel is an analytics query over the campaign&#39;s utm_campaign-tagged events, and the spend is each provider&#39;s own number read through the org&#39;s connector. A warehouse that is not emitting yet degrades to available:false with zeroes — honest-empty, never a 500 and never a fabricated number. When the campaign runs more than one creative and an experiment is wired, abTest carries the A/B analysis.
      * @param id ID is the campaign to report on, from the path.
      * @param range Range is the lookback window: 24h, 7d, 30d or 90d. Anything else, including empty, reads as 30d. (optional)
      * @param start Start is an explicit RFC3339 window start. Honored only together with End, and only when End is after it. (optional)
      * @param end End is an explicit RFC3339 window end. (optional)
-     * @return ApiResponse<CloudCampaignResults?>
+     * @return ApiResponse<CampaignResults?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CampaignIdMetricsWithHttpInfo(id: kotlin.String, range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<CloudCampaignResults?> {
-        val localVariableConfig = cloudGetV1CampaignIdMetricsRequestConfig(id = id, range = range, start = start, end = end)
+    fun getV1CampaignByIdMetricsWithHttpInfo(id: kotlin.String, range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<CampaignResults?> {
+        val localVariableConfig = getV1CampaignByIdMetricsRequestConfig(id = id, range = range, start = start, end = end)
 
-        return request<Unit, CloudCampaignResults>(
+        return request<Unit, CampaignResults>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CampaignIdMetrics
+     * To obtain the request config of the operation getV1CampaignByIdMetrics
      *
      * @param id ID is the campaign to report on, from the path.
      * @param range Range is the lookback window: 24h, 7d, 30d or 90d. Anything else, including empty, reads as 30d. (optional)
@@ -420,7 +420,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param end End is an explicit RFC3339 window end. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CampaignIdMetricsRequestConfig(id: kotlin.String, range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1CampaignByIdMetricsRequestConfig(id: kotlin.String, range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -442,16 +442,16 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/metrics".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/campaign/summary
-     * SummarizeCampaigns returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.
-     * SummarizeCampaigns returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.  The channel list is the deployment&#39;s honest capability, not a wish: a kind missing from it is one a launch will record as \&quot;unavailable\&quot; rather than fail on.
-     * @return CloudCampaignSummary
+     * Returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.
+     * Returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.  The channel list is the deployment&#39;s honest capability, not a wish: a kind missing from it is one a launch will record as \&quot;unavailable\&quot; rather than fail on.
+     * @return CampaignSummary
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -460,11 +460,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CampaignSummary() : CloudCampaignSummary {
-        val localVarResponse = cloudGetV1CampaignSummaryWithHttpInfo()
+    fun getV1CampaignSummary() : CampaignSummary {
+        val localVarResponse = getV1CampaignSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignSummary
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignSummary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -480,28 +480,28 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/campaign/summary
-     * SummarizeCampaigns returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.
-     * SummarizeCampaigns returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.  The channel list is the deployment&#39;s honest capability, not a wish: a kind missing from it is one a launch will record as \&quot;unavailable\&quot; rather than fail on.
-     * @return ApiResponse<CloudCampaignSummary?>
+     * Returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.
+     * Returns the org&#39;s go-to-market roll-up: how many campaigns exist, how many are live, their total budget in cents, and which channel executors this deployment can actually reach.  The channel list is the deployment&#39;s honest capability, not a wish: a kind missing from it is one a launch will record as \&quot;unavailable\&quot; rather than fail on.
+     * @return ApiResponse<CampaignSummary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CampaignSummaryWithHttpInfo() : ApiResponse<CloudCampaignSummary?> {
-        val localVariableConfig = cloudGetV1CampaignSummaryRequestConfig()
+    fun getV1CampaignSummaryWithHttpInfo() : ApiResponse<CampaignSummary?> {
+        val localVariableConfig = getV1CampaignSummaryRequestConfig()
 
-        return request<Unit, CloudCampaignSummary>(
+        return request<Unit, CampaignSummary>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CampaignSummary
+     * To obtain the request config of the operation getV1CampaignSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CampaignSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1CampaignSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -512,17 +512,17 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/campaign
-     * CreateCampaign creates a campaign as a DRAFT and returns it.
-     * CreateCampaign creates a campaign as a DRAFT and returns it.  A draft is inert: nothing is sent, no connector is touched and no budget is committed until the campaign is launched. The channels named here are validated and de-duplicated by kind (one executor per kind), and every channel starts \&quot;pending\&quot; whatever the caller claims — a client can never assert a launched state.
-     * @param cloudCampaignWrite 
-     * @return CloudCampaignRecord
+     * Creates a campaign as a DRAFT and returns it.
+     * Creates a campaign as a DRAFT and returns it.  A draft is inert: nothing is sent, no connector is touched and no budget is committed until the campaign is launched. The channels named here are validated and de-duplicated by kind (one executor per kind), and every channel starts \&quot;pending\&quot; whatever the caller claims — a client can never assert a launched state.
+     * @param campaignWrite 
+     * @return CampaignRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -531,11 +531,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Campaign(cloudCampaignWrite: CloudCampaignWrite) : CloudCampaignRecord {
-        val localVarResponse = cloudPostV1CampaignWithHttpInfo(cloudCampaignWrite = cloudCampaignWrite)
+    fun postV1Campaign(campaignWrite: CampaignWrite) : CampaignRecord {
+        val localVarResponse = postV1CampaignWithHttpInfo(campaignWrite = campaignWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -551,31 +551,31 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/campaign
-     * CreateCampaign creates a campaign as a DRAFT and returns it.
-     * CreateCampaign creates a campaign as a DRAFT and returns it.  A draft is inert: nothing is sent, no connector is touched and no budget is committed until the campaign is launched. The channels named here are validated and de-duplicated by kind (one executor per kind), and every channel starts \&quot;pending\&quot; whatever the caller claims — a client can never assert a launched state.
-     * @param cloudCampaignWrite 
-     * @return ApiResponse<CloudCampaignRecord?>
+     * Creates a campaign as a DRAFT and returns it.
+     * Creates a campaign as a DRAFT and returns it.  A draft is inert: nothing is sent, no connector is touched and no budget is committed until the campaign is launched. The channels named here are validated and de-duplicated by kind (one executor per kind), and every channel starts \&quot;pending\&quot; whatever the caller claims — a client can never assert a launched state.
+     * @param campaignWrite 
+     * @return ApiResponse<CampaignRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CampaignWithHttpInfo(cloudCampaignWrite: CloudCampaignWrite) : ApiResponse<CloudCampaignRecord?> {
-        val localVariableConfig = cloudPostV1CampaignRequestConfig(cloudCampaignWrite = cloudCampaignWrite)
+    fun postV1CampaignWithHttpInfo(campaignWrite: CampaignWrite) : ApiResponse<CampaignRecord?> {
+        val localVariableConfig = postV1CampaignRequestConfig(campaignWrite = campaignWrite)
 
-        return request<CloudCampaignWrite, CloudCampaignRecord>(
+        return request<CampaignWrite, CampaignRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Campaign
+     * To obtain the request config of the operation postV1Campaign
      *
-     * @param cloudCampaignWrite 
+     * @param campaignWrite 
      * @return RequestConfig
      */
-    fun cloudPostV1CampaignRequestConfig(cloudCampaignWrite: CloudCampaignWrite) : RequestConfig<CloudCampaignWrite> {
-        val localVariableBody = cloudCampaignWrite
+    fun postV1CampaignRequestConfig(campaignWrite: CampaignWrite) : RequestConfig<CampaignWrite> {
+        val localVariableBody = campaignWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -586,158 +586,18 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/campaign/{id}/launch
-     * 
-     * 
-     * @param id 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CampaignByIdLaunch(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1CampaignByIdLaunchWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/campaign/{id}/launch
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CampaignByIdLaunchWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CampaignByIdLaunchRequestConfig(id = id)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1CampaignByIdLaunch
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun cloudPostV1CampaignByIdLaunchRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/campaign/{id}/launch".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/campaign/{id}/pause
-     * 
-     * 
-     * @param id 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CampaignByIdPause(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1CampaignByIdPauseWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/campaign/{id}/pause
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CampaignByIdPauseWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CampaignByIdPauseRequestConfig(id = id)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1CampaignByIdPause
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun cloudPostV1CampaignByIdPauseRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/campaign/{id}/pause".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/campaign/{id}/channels
-     * AddCampaignChannel adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.
-     * AddCampaignChannel adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.  A campaign carries at most one channel per kind, because the kind IS the executor: adding a second \&quot;paid\&quot; channel would mean two ad accounts running one campaign with no way to tell their results apart. The new channel starts \&quot;pending\&quot; — adding it does not launch it.
+     * Adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.
+     * Adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.  A campaign carries at most one channel per kind, because the kind IS the executor: adding a second \&quot;paid\&quot; channel would mean two ad accounts running one campaign with no way to tell their results apart. The new channel starts \&quot;pending\&quot; — adding it does not launch it.
      * @param id ID is the campaign to add the channel to, from the path.
-     * @param cloudChannelAdd 
-     * @return CloudCampaignRecord
+     * @param channelAdd 
+     * @return CampaignRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -746,11 +606,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CampaignIdChannels(id: kotlin.String, cloudChannelAdd: CloudChannelAdd) : CloudCampaignRecord {
-        val localVarResponse = cloudPostV1CampaignIdChannelsWithHttpInfo(id = id, cloudChannelAdd = cloudChannelAdd)
+    fun postV1CampaignByIdChannels(id: kotlin.String, channelAdd: ChannelAdd) : CampaignRecord {
+        val localVarResponse = postV1CampaignByIdChannelsWithHttpInfo(id = id, channelAdd = channelAdd)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -766,33 +626,33 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/campaign/{id}/channels
-     * AddCampaignChannel adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.
-     * AddCampaignChannel adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.  A campaign carries at most one channel per kind, because the kind IS the executor: adding a second \&quot;paid\&quot; channel would mean two ad accounts running one campaign with no way to tell their results apart. The new channel starts \&quot;pending\&quot; — adding it does not launch it.
+     * Adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.
+     * Adds a channel to a campaign, or REPLACES the one it already has of that kind, and returns the updated campaign.  A campaign carries at most one channel per kind, because the kind IS the executor: adding a second \&quot;paid\&quot; channel would mean two ad accounts running one campaign with no way to tell their results apart. The new channel starts \&quot;pending\&quot; — adding it does not launch it.
      * @param id ID is the campaign to add the channel to, from the path.
-     * @param cloudChannelAdd 
-     * @return ApiResponse<CloudCampaignRecord?>
+     * @param channelAdd 
+     * @return ApiResponse<CampaignRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CampaignIdChannelsWithHttpInfo(id: kotlin.String, cloudChannelAdd: CloudChannelAdd) : ApiResponse<CloudCampaignRecord?> {
-        val localVariableConfig = cloudPostV1CampaignIdChannelsRequestConfig(id = id, cloudChannelAdd = cloudChannelAdd)
+    fun postV1CampaignByIdChannelsWithHttpInfo(id: kotlin.String, channelAdd: ChannelAdd) : ApiResponse<CampaignRecord?> {
+        val localVariableConfig = postV1CampaignByIdChannelsRequestConfig(id = id, channelAdd = channelAdd)
 
-        return request<CloudChannelAdd, CloudCampaignRecord>(
+        return request<ChannelAdd, CampaignRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CampaignIdChannels
+     * To obtain the request config of the operation postV1CampaignByIdChannels
      *
      * @param id ID is the campaign to add the channel to, from the path.
-     * @param cloudChannelAdd 
+     * @param channelAdd 
      * @return RequestConfig
      */
-    fun cloudPostV1CampaignIdChannelsRequestConfig(id: kotlin.String, cloudChannelAdd: CloudChannelAdd) : RequestConfig<CloudChannelAdd> {
-        val localVariableBody = cloudChannelAdd
+    fun postV1CampaignByIdChannelsRequestConfig(id: kotlin.String, channelAdd: ChannelAdd) : RequestConfig<ChannelAdd> {
+        val localVariableBody = channelAdd
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -803,18 +663,158 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}/channels".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/campaign/{id}/launch
+     * Launch a campaign across every channel it declares
+     * Pushes the campaign live on each of its channels through that channel&#39;s executor and answers the whole campaign with the per-channel outcome written back onto it.  The fan-out is BEST-EFFORT PER CHANNEL, and the honest reading of the result is the rule most callers get wrong: one channel failing never aborts the others, so each channel row carries its own &#x60;live&#x60;, &#x60;failed&#x60; or &#x60;unavailable&#x60; status and detail, and a paid launch can be live while an email launch failed. The campaign itself is &#x60;live&#x60; when AT LEAST ONE channel launched and &#x60;failed&#x60; only when none did — &#x60;live&#x60; is not a claim that every channel launched. Repeating the call is safe: a channel already live is skipped, never re-launched. A campaign carrying more than one creative has its variant assigned here by the experiment seam and tagged as &#x60;utm_content&#x60;.  Org-scoped and fails closed: a valid bearer is required (403 without one), the campaign is read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, and a campaign with no channels is a 400 — there is nothing to launch. Each executor resolves its own org&#39;s connector token from the org passed to it, so a launch can never spend through another tenant&#39;s connector.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CampaignByIdLaunch(id: kotlin.String) : Unit {
+        val localVarResponse = postV1CampaignByIdLaunchWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/campaign/{id}/launch
+     * Launch a campaign across every channel it declares
+     * Pushes the campaign live on each of its channels through that channel&#39;s executor and answers the whole campaign with the per-channel outcome written back onto it.  The fan-out is BEST-EFFORT PER CHANNEL, and the honest reading of the result is the rule most callers get wrong: one channel failing never aborts the others, so each channel row carries its own &#x60;live&#x60;, &#x60;failed&#x60; or &#x60;unavailable&#x60; status and detail, and a paid launch can be live while an email launch failed. The campaign itself is &#x60;live&#x60; when AT LEAST ONE channel launched and &#x60;failed&#x60; only when none did — &#x60;live&#x60; is not a claim that every channel launched. Repeating the call is safe: a channel already live is skipped, never re-launched. A campaign carrying more than one creative has its variant assigned here by the experiment seam and tagged as &#x60;utm_content&#x60;.  Org-scoped and fails closed: a valid bearer is required (403 without one), the campaign is read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, and a campaign with no channels is a 400 — there is nothing to launch. Each executor resolves its own org&#39;s connector token from the org passed to it, so a launch can never spend through another tenant&#39;s connector.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CampaignByIdLaunchWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CampaignByIdLaunchRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CampaignByIdLaunch
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postV1CampaignByIdLaunchRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/campaign/{id}/launch".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/campaign/{id}/pause
+     * Pause every live channel on a campaign at its provider
+     * Pauses each live channel on its provider and answers the whole campaign, moved to &#x60;paused&#x60;, with the per-channel outcome written back onto it.  Only channels that are live and carry a provider reference are touched; a channel whose executor is no longer wired is marked &#x60;unavailable&#x60; and one whose pause errored is marked &#x60;failed&#x60;, with the reason on the row. The campaign still reports &#x60;paused&#x60; in both cases, and that is deliberate rather than sloppy: no live channel remains that this process will meter, and the rows say exactly which provider was not reached so it can be settled by hand.  Org-scoped and fails closed: a valid bearer is required (403 without one) and the campaign is read under the caller&#39;s OWN org, so another tenant&#39;s id is a 404.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CampaignByIdPause(id: kotlin.String) : Unit {
+        val localVarResponse = postV1CampaignByIdPauseWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/campaign/{id}/pause
+     * Pause every live channel on a campaign at its provider
+     * Pauses each live channel on its provider and answers the whole campaign, moved to &#x60;paused&#x60;, with the per-channel outcome written back onto it.  Only channels that are live and carry a provider reference are touched; a channel whose executor is no longer wired is marked &#x60;unavailable&#x60; and one whose pause errored is marked &#x60;failed&#x60;, with the reason on the row. The campaign still reports &#x60;paused&#x60; in both cases, and that is deliberate rather than sloppy: no live channel remains that this process will meter, and the rows say exactly which provider was not reached so it can be settled by hand.  Org-scoped and fails closed: a valid bearer is required (403 without one) and the campaign is read under the caller&#39;s OWN org, so another tenant&#39;s id is a 404.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CampaignByIdPauseWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CampaignByIdPauseRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CampaignByIdPause
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postV1CampaignByIdPauseRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/campaign/{id}/pause".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/campaign/{id}
-     * UpdateCampaign rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.
-     * UpdateCampaign rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.  Channels are replaced ONLY while the campaign is still a draft. Once it is launched its channels carry provider state (an external id, a live status), so they are added and removed explicitly through the channels sub-resource instead; a whole-object write would silently orphan a running execution.
+     * Rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.
+     * Rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.  Channels are replaced ONLY while the campaign is still a draft. Once it is launched its channels carry provider state (an external id, a live status), so they are added and removed explicitly through the channels sub-resource instead; a whole-object write would silently orphan a running execution.
      * @param id ID is the campaign to update, from the path.
-     * @param cloudCampaignUpdate 
-     * @return CloudCampaignRecord
+     * @param campaignUpdate 
+     * @return CampaignRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -823,11 +823,11 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CampaignId(id: kotlin.String, cloudCampaignUpdate: CloudCampaignUpdate) : CloudCampaignRecord {
-        val localVarResponse = cloudPutV1CampaignIdWithHttpInfo(id = id, cloudCampaignUpdate = cloudCampaignUpdate)
+    fun putV1CampaignById(id: kotlin.String, campaignUpdate: CampaignUpdate) : CampaignRecord {
+        val localVarResponse = putV1CampaignByIdWithHttpInfo(id = id, campaignUpdate = campaignUpdate)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -843,33 +843,33 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * PUT /v1/campaign/{id}
-     * UpdateCampaign rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.
-     * UpdateCampaign rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.  Channels are replaced ONLY while the campaign is still a draft. Once it is launched its channels carry provider state (an external id, a live status), so they are added and removed explicitly through the channels sub-resource instead; a whole-object write would silently orphan a running execution.
+     * Rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.
+     * Rewrites a campaign&#39;s core fields — name, audience, creatives, schedule and budget — and returns the updated campaign.  Channels are replaced ONLY while the campaign is still a draft. Once it is launched its channels carry provider state (an external id, a live status), so they are added and removed explicitly through the channels sub-resource instead; a whole-object write would silently orphan a running execution.
      * @param id ID is the campaign to update, from the path.
-     * @param cloudCampaignUpdate 
-     * @return ApiResponse<CloudCampaignRecord?>
+     * @param campaignUpdate 
+     * @return ApiResponse<CampaignRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CampaignIdWithHttpInfo(id: kotlin.String, cloudCampaignUpdate: CloudCampaignUpdate) : ApiResponse<CloudCampaignRecord?> {
-        val localVariableConfig = cloudPutV1CampaignIdRequestConfig(id = id, cloudCampaignUpdate = cloudCampaignUpdate)
+    fun putV1CampaignByIdWithHttpInfo(id: kotlin.String, campaignUpdate: CampaignUpdate) : ApiResponse<CampaignRecord?> {
+        val localVariableConfig = putV1CampaignByIdRequestConfig(id = id, campaignUpdate = campaignUpdate)
 
-        return request<CloudCampaignUpdate, CloudCampaignRecord>(
+        return request<CampaignUpdate, CampaignRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CampaignId
+     * To obtain the request config of the operation putV1CampaignById
      *
      * @param id ID is the campaign to update, from the path.
-     * @param cloudCampaignUpdate 
+     * @param campaignUpdate 
      * @return RequestConfig
      */
-    fun cloudPutV1CampaignIdRequestConfig(id: kotlin.String, cloudCampaignUpdate: CloudCampaignUpdate) : RequestConfig<CloudCampaignUpdate> {
-        val localVariableBody = cloudCampaignUpdate
+    fun putV1CampaignByIdRequestConfig(id: kotlin.String, campaignUpdate: CampaignUpdate) : RequestConfig<CampaignUpdate> {
+        val localVariableBody = campaignUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -880,7 +880,7 @@ class CampaignApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/campaign/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,6 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.Accounts
+import ai.hanzo.cloud.model.CollectOut
+import ai.hanzo.cloud.model.InvoiceOut
+import ai.hanzo.cloud.model.RaiseInvoiceIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -45,9 +49,82 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * DELETE /v1/billing/spend-alerts/{id}
-     * 
-     * 
+     * POST /v1/billing/invoices/{id}/collect
+     * Collect an issued invoice from credits, balance, then card
+     * Collects an issued invoice: credit grants first, then prepaid balance, then the card on file — the same waterfall the dunning workflow runs.  A DECLINE IS NOT AN ERROR. It answers with paid&#x3D;false, a reason, and the invoice still open, because a declined collection is a normal business outcome that must remain retryable — and because sealing it as a failure would wedge dunning behind a replayed decline. Only a successful collection is sealed, so a retry of a paid invoice replays the receipt instead of charging again.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return CollectOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun collectInvoice(id: kotlin.String) : CollectOut {
+        val localVarResponse = collectInvoiceWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CollectOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/billing/invoices/{id}/collect
+     * Collect an issued invoice from credits, balance, then card
+     * Collects an issued invoice: credit grants first, then prepaid balance, then the card on file — the same waterfall the dunning workflow runs.  A DECLINE IS NOT AN ERROR. It answers with paid&#x3D;false, a reason, and the invoice still open, because a declined collection is a normal business outcome that must remain retryable — and because sealing it as a failure would wedge dunning behind a replayed decline. Only a successful collection is sealed, so a retry of a paid invoice replays the receipt instead of charging again.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return ApiResponse<CollectOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun collectInvoiceWithHttpInfo(id: kotlin.String) : ApiResponse<CollectOut?> {
+        val localVariableConfig = collectInvoiceRequestConfig(id = id)
+
+        return request<Unit, CollectOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation collectInvoice
+     *
+     * @param id ID is the invoice id.
+     * @return RequestConfig
+     */
+    fun collectInvoiceRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/billing/invoices/{id}/collect".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/billing/alerts/{id}
+     * Remove one of your org&#39;s spend caps
+     * Deletes the addressed cap and answers 204. Requires an ORG ADMIN, a platform admin, or the internal service token — deleting a cap uncaps the org&#39;s spend, so a plain member is refused 403. Ownership is checked per row and a cap the caller does not own is refused as 404 rather than 403, so the response cannot confirm that another org&#39;s id exists.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -57,8 +134,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1BillingSpendAlertsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1BillingSpendAlertsByIdWithHttpInfo(id = id)
+    fun deleteV1BillingAlertsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1BillingAlertsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -76,17 +153,17 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * DELETE /v1/billing/spend-alerts/{id}
-     * 
-     * 
+     * DELETE /v1/billing/alerts/{id}
+     * Remove one of your org&#39;s spend caps
+     * Deletes the addressed cap and answers 204. Requires an ORG ADMIN, a platform admin, or the internal service token — deleting a cap uncaps the org&#39;s spend, so a plain member is refused 403. Ownership is checked per row and a cap the caller does not own is refused as 404 rather than 403, so the response cannot confirm that another org&#39;s id exists.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1BillingSpendAlertsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1BillingSpendAlertsByIdRequestConfig(id = id)
+    fun deleteV1BillingAlertsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1BillingAlertsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,30 +171,31 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1BillingSpendAlertsById
+     * To obtain the request config of the operation deleteV1BillingAlertsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudDeleteV1BillingSpendAlertsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1BillingAlertsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/billing/spend-alerts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            path = "/v1/billing/alerts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/billing/balance
-     * 
-     * 
+     * DELETE /v1/billing/methods/{id}
+     * Remove one of your saved cards
+     * Detaches the addressed card: the stored reference is removed here AND withdrawn from the processor&#39;s vault, so nothing is left that a later charge could bill.  The customer twin of DELETE /v1/billing/portal/methods/{id}. The id is resolved INSIDE your own org namespace, so a card that is not yours is simply not found there and answers 404 — never 403, which would confirm the id exists.  Removing the card an auto-recharge or a running lease bills leaves that arrangement with nothing to charge; that is yours to decide.
+     * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -126,8 +204,491 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingBalance() : Unit {
-        val localVarResponse = cloudGetV1BillingBalanceWithHttpInfo()
+    fun deleteV1BillingMethodsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1BillingMethodsByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/billing/methods/{id}
+     * Remove one of your saved cards
+     * Detaches the addressed card: the stored reference is removed here AND withdrawn from the processor&#39;s vault, so nothing is left that a later charge could bill.  The customer twin of DELETE /v1/billing/portal/methods/{id}. The id is resolved INSIDE your own org namespace, so a card that is not yours is simply not found there and answers 404 — never 403, which would confirm the id exists.  Removing the card an auto-recharge or a running lease bills leaves that arrangement with nothing to charge; that is yours to decide.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1BillingMethodsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1BillingMethodsByIdRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1BillingMethodsById
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun deleteV1BillingMethodsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/billing/methods/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/billing/portal/methods/{id}
+     * Remove a saved card — the portal detach
+     * Detaches the addressed card: the stored reference is removed here AND withdrawn from the processor&#39;s vault, so nothing is left that a later charge could bill.  The service-token twin of the customer&#39;s DELETE /v1/billing/methods/{id}, at its own address for the same reason the portal list is — a different principal, on the same rows, in this same process.  The id is resolved INSIDE the caller&#39;s org namespace, so another tenant&#39;s card is not found there and answers 404 — never 403, which would confirm the id exists. That bound holds for the service token too: it may act for any subject within the org the gateway pinned, and for no subject outside it.  Removing the card an auto-recharge or a running lease bills leaves that arrangement with nothing to charge; that is the customer&#39;s call to make.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1BillingPortalMethodsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1BillingPortalMethodsByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/billing/portal/methods/{id}
+     * Remove a saved card — the portal detach
+     * Detaches the addressed card: the stored reference is removed here AND withdrawn from the processor&#39;s vault, so nothing is left that a later charge could bill.  The service-token twin of the customer&#39;s DELETE /v1/billing/methods/{id}, at its own address for the same reason the portal list is — a different principal, on the same rows, in this same process.  The id is resolved INSIDE the caller&#39;s org namespace, so another tenant&#39;s card is not found there and answers 404 — never 403, which would confirm the id exists. That bound holds for the service token too: it may act for any subject within the org the gateway pinned, and for no subject outside it.  Removing the card an auto-recharge or a running lease bills leaves that arrangement with nothing to charge; that is the customer&#39;s call to make.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1BillingPortalMethodsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1BillingPortalMethodsByIdRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1BillingPortalMethodsById
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun deleteV1BillingPortalMethodsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/billing/portal/methods/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/invoices/{id}
+     * Read one invoice
+     * Reads one invoice out of the caller&#39;s org.  The org scopes the read by construction — the store is namespaced to it — so an id belonging to another tenant is not found rather than found and then filtered.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return InvoiceOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getInvoice(id: kotlin.String) : InvoiceOut {
+        val localVarResponse = getInvoiceWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvoiceOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/invoices/{id}
+     * Read one invoice
+     * Reads one invoice out of the caller&#39;s org.  The org scopes the read by construction — the store is namespaced to it — so an id belonging to another tenant is not found rather than found and then filtered.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return ApiResponse<InvoiceOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getInvoiceWithHttpInfo(id: kotlin.String) : ApiResponse<InvoiceOut?> {
+        val localVariableConfig = getInvoiceRequestConfig(id = id)
+
+        return request<Unit, InvoiceOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getInvoice
+     *
+     * @param id ID is the invoice id.
+     * @return RequestConfig
+     */
+    fun getInvoiceRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/invoices/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/accounts
+     * The billing account you are signed in to
+     * Returns the billing accounts visible to the caller. One organisation is exactly one billing account here, so an authenticated caller sees precisely one: their own. The list shape is the honest one — it is what a caller with access to several would receive — rather than a promise that more will ever appear for a token scoped to a single org.  The account is derived from the validated org claim and from nothing the caller sends, so there is no account parameter and a cross-tenant read is not expressible. An unauthenticated call is 401.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingAccounts() : Unit {
+        val localVarResponse = getV1BillingAccountsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/accounts
+     * The billing account you are signed in to
+     * Returns the billing accounts visible to the caller. One organisation is exactly one billing account here, so an authenticated caller sees precisely one: their own. The list shape is the honest one — it is what a caller with access to several would receive — rather than a promise that more will ever appear for a token scoped to a single org.  The account is derived from the validated org claim and from nothing the caller sends, so there is no account parameter and a cross-tenant read is not expressible. An unauthenticated call is 401.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingAccountsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingAccountsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingAccounts
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingAccountsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/accounts",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/accounts/{id}/members
+     * Who is on a billing account
+     * Returns the members of one billing account. The id must be the caller&#39;s OWN account — the handler compares it against the org resolved from the token and answers 403 when they differ, which is what guards this route: unlike its siblings it carries no subject key for the pin to overwrite, so it checks the path segment itself.  The roster it can answer is currently the requesting user alone. Membership lives in IAM, not in the ledger, and this operation reports what commerce actually holds rather than inventing a roster from a source it does not read. An unauthenticated call is 401.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingAccountsByIdMembers(id: kotlin.String) : Unit {
+        val localVarResponse = getV1BillingAccountsByIdMembersWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/accounts/{id}/members
+     * Who is on a billing account
+     * Returns the members of one billing account. The id must be the caller&#39;s OWN account — the handler compares it against the org resolved from the token and answers 403 when they differ, which is what guards this route: unlike its siblings it carries no subject key for the pin to overwrite, so it checks the path segment itself.  The roster it can answer is currently the requesting user alone. Membership lives in IAM, not in the ledger, and this operation reports what commerce actually holds rather than inventing a roster from a source it does not read. An unauthenticated call is 401.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingAccountsByIdMembersWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingAccountsByIdMembersRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingAccountsByIdMembers
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun getV1BillingAccountsByIdMembersRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/accounts/{id}/members".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/alerts
+     * List your org&#39;s spend caps and rate limits
+     * Returns the caps and alerts keyed to the caller&#39;s own billing subject, each with its threshold, enforcement flag, soft-warning percentage and current period spend. Any authenticated member of the org may read them — only the writes require an admin. The rows are keyed on the org subject the enforcement gate itself reads, which is why a cap created here is the one that actually binds. A caller with no resolvable org or subject gets an empty list, never another tenant&#39;s caps.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingAlerts() : Unit {
+        val localVarResponse = getV1BillingAlertsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/alerts
+     * List your org&#39;s spend caps and rate limits
+     * Returns the caps and alerts keyed to the caller&#39;s own billing subject, each with its threshold, enforcement flag, soft-warning percentage and current period spend. Any authenticated member of the org may read them — only the writes require an admin. The rows are keyed on the org subject the enforcement gate itself reads, which is why a cap created here is the one that actually binds. A caller with no resolvable org or subject gets an empty list, never another tenant&#39;s caps.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingAlertsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingAlertsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingAlerts
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingAlertsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/alerts",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/alerts/authorize
+     * The per-request spend-cap verdict the metering gate consumes
+     * Answers allow, reason, capCents, spentCents and warnPct for a proposed amount against a (project, service) scope — the verdict the request-edge metering gate reads before admitting a call. It evaluates EVERY covering cap and the most restrictive enforcing one wins; soft caps and an enforcing project cap whose project axis is not validated never block, they only raise the warning utilization. It is a service-to-service read authenticated by the internal service token with the org pinned by the gateway, not a browser call. Two rules matter: the spend it scores comes from the finance ledger&#39;s current-month total, and it FAILS OPEN on unknown spend — a transient read failure allows rather than denies, so a backend blip never bills-blocks an under-cap customer, while a known overage still denies.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingAlertsAuthorize() : Unit {
+        val localVarResponse = getV1BillingAlertsAuthorizeWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/alerts/authorize
+     * The per-request spend-cap verdict the metering gate consumes
+     * Answers allow, reason, capCents, spentCents and warnPct for a proposed amount against a (project, service) scope — the verdict the request-edge metering gate reads before admitting a call. It evaluates EVERY covering cap and the most restrictive enforcing one wins; soft caps and an enforcing project cap whose project axis is not validated never block, they only raise the warning utilization. It is a service-to-service read authenticated by the internal service token with the org pinned by the gateway, not a browser call. Two rules matter: the spend it scores comes from the finance ledger&#39;s current-month total, and it FAILS OPEN on unknown spend — a transient read failure allows rather than denies, so a backend blip never bills-blocks an under-cap customer, while a known overage still denies.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingAlertsAuthorizeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingAlertsAuthorizeRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingAlertsAuthorize
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingAlertsAuthorizeRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/alerts/authorize",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/balance
+     * Prepaid credit the caller&#39;s org can still spend
+     * Answers the spendable prepaid balance of the wallet this caller bills from — the same wallet the AI prepaid gate reads before admitting a paid request, the edge meter debits, and a top-up credits.  The wallet is an ADDRESS, not an org: &#x60;account&#x60; echoes the key resolved within the ledger — the org&#39;s shared pool for a tenant org, a personal account for a member of the shared signup org. The echo is the point. A browser could only GUESS its own payer by decoding its own token, and a guess that disagrees with the server is how money lands in an account the gate never reads.  &#x60;balance&#x60;, &#x60;holds&#x60; and &#x60;available&#x60; are whole USD cents, ROUNDED from the ledger&#39;s exact 18-decimal value. On the co-resident ledger &#x60;holds&#x60; is 0 and &#x60;available&#x60; equals &#x60;balance&#x60;: the gate&#39;s reservations live in its own pod and are never posted, so the settled balance IS the spendable one.  The ledger is the caller&#39;s own org, taken from the VALIDATED IAM owner claim and never from a client header. No validated principal is 401 — with one exception, the trusted in-process service token the AI gate itself presents, which reads the gateway-pinned org and nothing it could name. A balance that cannot be READ is 502, never 0: unknown is not broke.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingBalance() : Unit {
+        val localVarResponse = getV1BillingBalanceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -146,15 +707,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/billing/balance
-     * 
-     * 
+     * Prepaid credit the caller&#39;s org can still spend
+     * Answers the spendable prepaid balance of the wallet this caller bills from — the same wallet the AI prepaid gate reads before admitting a paid request, the edge meter debits, and a top-up credits.  The wallet is an ADDRESS, not an org: &#x60;account&#x60; echoes the key resolved within the ledger — the org&#39;s shared pool for a tenant org, a personal account for a member of the shared signup org. The echo is the point. A browser could only GUESS its own payer by decoding its own token, and a guess that disagrees with the server is how money lands in an account the gate never reads.  &#x60;balance&#x60;, &#x60;holds&#x60; and &#x60;available&#x60; are whole USD cents, ROUNDED from the ledger&#39;s exact 18-decimal value. On the co-resident ledger &#x60;holds&#x60; is 0 and &#x60;available&#x60; equals &#x60;balance&#x60;: the gate&#39;s reservations live in its own pod and are never posted, so the settled balance IS the spendable one.  The ledger is the caller&#39;s own org, taken from the VALIDATED IAM owner claim and never from a client header. No validated principal is 401 — with one exception, the trusted in-process service token the AI gate itself presents, which reads the gateway-pinned org and nothing it could name. A balance that cannot be READ is 502, never 0: unknown is not broke.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingBalanceWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingBalanceRequestConfig()
+    fun getV1BillingBalanceWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingBalanceRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -162,11 +723,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingBalance
+     * To obtain the request config of the operation getV1BillingBalance
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingBalanceRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingBalanceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -176,15 +737,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/balance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/billing/gpu-eligibility
-     * 
-     * 
+     * GET /v1/billing/credit-balance
+     * What is left of your credit, as one number
+     * Returns the total credit still available to the caller&#39;s own subject — the sum of what the grants have left, which is the figure the console shows above the usage meter. It is the balance a metered act draws down, so it answers the one question a customer asks before spending: how much is there.  Like every read in this family the subject is pinned to the caller before the handler runs, so the userId parameter the handler reads can never name another tenant. For the grants BEHIND this number — each with its original amount and its expiry — read /v1/billing/credits. A subject with no credit is zero, which is an answer and not an error.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -193,8 +754,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingGpuEligibility() : Unit {
-        val localVarResponse = cloudGetV1BillingGpuEligibilityWithHttpInfo()
+    fun getV1BillingCreditBalance() : Unit {
+        val localVarResponse = getV1BillingCreditBalanceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -212,16 +773,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * GET /v1/billing/gpu-eligibility
-     * 
-     * 
+     * GET /v1/billing/credit-balance
+     * What is left of your credit, as one number
+     * Returns the total credit still available to the caller&#39;s own subject — the sum of what the grants have left, which is the figure the console shows above the usage meter. It is the balance a metered act draws down, so it answers the one question a customer asks before spending: how much is there.  Like every read in this family the subject is pinned to the caller before the handler runs, so the userId parameter the handler reads can never name another tenant. For the grants BEHIND this number — each with its original amount and its expiry — read /v1/billing/credits. A subject with no credit is zero, which is an answer and not an error.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingGpuEligibilityWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingGpuEligibilityRequestConfig()
+    fun getV1BillingCreditBalanceWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingCreditBalanceRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -229,29 +790,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingGpuEligibility
+     * To obtain the request config of the operation getV1BillingCreditBalance
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingGpuEligibilityRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingCreditBalanceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/billing/gpu-eligibility",
+            path = "/v1/billing/credit-balance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/billing/invoices
-     * 
-     * 
+     * GET /v1/billing/credits
+     * List the credit grants on your org&#39;s balance
+     * Returns the caller org&#39;s credit grants — each with its original amount, what remains and when it expires — so a customer can see what was given and what is left before metered spend draws it down. It is a READ of the caller&#39;s own subject, pinned before the handler runs, so a grant belonging to another tenant is simply absent. Granting credit is not this route and never has been: minting lands on the mint-gated POST /v1/billing/credit, which no browser can reach. Reading an empty balance is an empty array, not an error.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -260,8 +821,212 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingInvoices() : Unit {
-        val localVarResponse = cloudGetV1BillingInvoicesWithHttpInfo()
+    fun getV1BillingCredits() : Unit {
+        val localVarResponse = getV1BillingCreditsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/credits
+     * List the credit grants on your org&#39;s balance
+     * Returns the caller org&#39;s credit grants — each with its original amount, what remains and when it expires — so a customer can see what was given and what is left before metered spend draws it down. It is a READ of the caller&#39;s own subject, pinned before the handler runs, so a grant belonging to another tenant is simply absent. Granting credit is not this route and never has been: minting lands on the mint-gated POST /v1/billing/credit, which no browser can reach. Reading an empty balance is an empty array, not an error.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingCreditsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingCreditsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingCredits
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingCreditsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/credits",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/crypto/deposit/{id}
+     * Follow one crypto deposit to settlement
+     * Answers the addressed deposit intent&#39;s current state — pending until a transfer is seen, confirming while the chain buries it, succeeded once it is credited — so a payment page can poll one deposit rather than the whole balance.  Scoped to the caller: an intent belonging to another payer is not found and answers 404, never another account&#39;s state. The credit itself is the chain watcher&#39;s to make; this read reports it and never performs it.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingCryptoDepositById(id: kotlin.String) : Unit {
+        val localVarResponse = getV1BillingCryptoDepositByIdWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/crypto/deposit/{id}
+     * Follow one crypto deposit to settlement
+     * Answers the addressed deposit intent&#39;s current state — pending until a transfer is seen, confirming while the chain buries it, succeeded once it is credited — so a payment page can poll one deposit rather than the whole balance.  Scoped to the caller: an intent belonging to another payer is not found and answers 404, never another account&#39;s state. The credit itself is the chain watcher&#39;s to make; this read reports it and never performs it.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingCryptoDepositByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingCryptoDepositByIdRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingCryptoDepositById
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun getV1BillingCryptoDepositByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/crypto/deposit/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/crypto/options
+     * Which chains and tokens a crypto top-up can use
+     * Answers the custody processor&#39;s LIVE capability list — the chains and the tokens on each that this deployment can actually take a deposit on. A payment page renders its asset picker straight from it rather than from a list of its own, so a chain the processor stops supporting disappears from the picker instead of minting an address nothing watches.  It is a capability read, not an account read: it says what may be paid with, never anything about this caller&#39;s balance or deposits.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingCryptoOptions() : Unit {
+        val localVarResponse = getV1BillingCryptoOptionsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/crypto/options
+     * Which chains and tokens a crypto top-up can use
+     * Answers the custody processor&#39;s LIVE capability list — the chains and the tokens on each that this deployment can actually take a deposit on. A payment page renders its asset picker straight from it rather than from a list of its own, so a chain the processor stops supporting disappears from the picker instead of minting an address nothing watches.  It is a capability read, not an account read: it says what may be paid with, never anything about this caller&#39;s balance or deposits.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingCryptoOptionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingCryptoOptionsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingCryptoOptions
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingCryptoOptionsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/crypto/options",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/invoices
+     * List your org&#39;s billing invoices
+     * Returns the caller org&#39;s invoices with a count, read from that org&#39;s own namespaced store, narrowable by userId, status or subscriptionId. The org is the one the gateway validated and the caller&#39;s billing subject is pinned into the query before the handler runs, so a read can never widen past the caller. A request that carries no resolvable org gets an honest empty list rather than an error or another tenant&#39;s rows.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingInvoices() : Unit {
+        val localVarResponse = getV1BillingInvoicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -280,15 +1045,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/billing/invoices
-     * 
-     * 
+     * List your org&#39;s billing invoices
+     * Returns the caller org&#39;s invoices with a count, read from that org&#39;s own namespaced store, narrowable by userId, status or subscriptionId. The org is the one the gateway validated and the caller&#39;s billing subject is pinned into the query before the handler runs, so a read can never widen past the caller. A request that carries no resolvable org gets an honest empty list rather than an error or another tenant&#39;s rows.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingInvoicesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingInvoicesRequestConfig()
+    fun getV1BillingInvoicesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingInvoicesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -296,11 +1061,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingInvoices
+     * To obtain the request config of the operation getV1BillingInvoices
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingInvoicesRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingInvoicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -310,15 +1075,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/billing/invoices/{id}/pdf
-     * 
-     * 
+     * Download one invoice as a PDF attachment
+     * Renders the addressed invoice as a single-page PDF and answers it as an attachment named after the invoice number. The render is a pure function of the invoice — no timestamps, no random ids — so the same invoice always produces identical bytes and a re-download is stable. The invoice is resolved inside the caller org&#39;s own namespace, so an id belonging to another tenant is simply absent and reads as 404; a caller with no validated org gets 401 rather than a document.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -328,8 +1093,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingInvoicesByIdPdf(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1BillingInvoicesByIdPdfWithHttpInfo(id = id)
+    fun getV1BillingInvoicesByIdPdf(id: kotlin.String) : Unit {
+        val localVarResponse = getV1BillingInvoicesByIdPdfWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -348,16 +1113,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/billing/invoices/{id}/pdf
-     * 
-     * 
+     * Download one invoice as a PDF attachment
+     * Renders the addressed invoice as a single-page PDF and answers it as an attachment named after the invoice number. The render is a pure function of the invoice — no timestamps, no random ids — so the same invoice always produces identical bytes and a re-download is stable. The invoice is resolved inside the caller org&#39;s own namespace, so an id belonging to another tenant is simply absent and reads as 404; a caller with no validated org gets 401 rather than a document.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingInvoicesByIdPdfWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingInvoicesByIdPdfRequestConfig(id = id)
+    fun getV1BillingInvoicesByIdPdfWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingInvoicesByIdPdfRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -365,12 +1130,12 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingInvoicesByIdPdf
+     * To obtain the request config of the operation getV1BillingInvoicesByIdPdf
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1BillingInvoicesByIdPdfRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1BillingInvoicesByIdPdfRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -380,15 +1145,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/invoices/{id}/pdf".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/billing/payment-config
-     * 
-     * 
+     * GET /v1/billing/methods
+     * Your saved cards, masked — the customer read
+     * Answers the cards saved against your own account as masked descriptors: brand, last four, expiry and the processor&#39;s reusable reference. No card number and no security code exist here to return; both live at the processor and never enter this system. It is what a checkout prefills its payment step from.  The customer face of the list a service token reads at /v1/billing/portal/methods — same rows, different principal, no hop between them.  The subject filter is pinned to the VALIDATED caller before the handler runs, so the answer is your own account&#39;s cards whatever customerId the request carries, and another org&#39;s rows are outside the namespace entirely. A caller who is not signed in is refused before the read.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -397,8 +1162,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingPaymentConfig() : Unit {
-        val localVarResponse = cloudGetV1BillingPaymentConfigWithHttpInfo()
+    fun getV1BillingMethods() : Unit {
+        val localVarResponse = getV1BillingMethodsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -416,16 +1181,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * GET /v1/billing/payment-config
-     * 
-     * 
+     * GET /v1/billing/methods
+     * Your saved cards, masked — the customer read
+     * Answers the cards saved against your own account as masked descriptors: brand, last four, expiry and the processor&#39;s reusable reference. No card number and no security code exist here to return; both live at the processor and never enter this system. It is what a checkout prefills its payment step from.  The customer face of the list a service token reads at /v1/billing/portal/methods — same rows, different principal, no hop between them.  The subject filter is pinned to the VALIDATED caller before the handler runs, so the answer is your own account&#39;s cards whatever customerId the request carries, and another org&#39;s rows are outside the namespace entirely. A caller who is not signed in is refused before the read.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingPaymentConfigWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingPaymentConfigRequestConfig()
+    fun getV1BillingMethodsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingMethodsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -433,96 +1198,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingPaymentConfig
+     * To obtain the request config of the operation getV1BillingMethods
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingPaymentConfigRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingMethodsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/billing/payment-config",
+            path = "/v1/billing/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/billing/payment-methods
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingPaymentMethods() : Unit {
-        val localVarResponse = cloudGetV1BillingPaymentMethodsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/billing/payment-methods
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingPaymentMethodsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingPaymentMethodsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1BillingPaymentMethods
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1BillingPaymentMethodsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/billing/payment-methods",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/billing/payouts
-     * 
-     * 
+     * List your org&#39;s payouts, newest first
+     * Returns the caller org&#39;s payout records ordered by creation time descending, read from that org&#39;s own namespaced store. The org is the gateway-validated one and the caller&#39;s billing subject is pinned before the handler runs, so the list is the caller&#39;s own and cannot be widened. A request with no resolvable org gets an empty array rather than an error.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -531,8 +1229,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingPayouts() : Unit {
-        val localVarResponse = cloudGetV1BillingPayoutsWithHttpInfo()
+    fun getV1BillingPayouts() : Unit {
+        val localVarResponse = getV1BillingPayoutsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -551,15 +1249,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/billing/payouts
-     * 
-     * 
+     * List your org&#39;s payouts, newest first
+     * Returns the caller org&#39;s payout records ordered by creation time descending, read from that org&#39;s own namespaced store. The org is the gateway-validated one and the caller&#39;s billing subject is pinned before the handler runs, so the list is the caller&#39;s own and cannot be widened. A request with no resolvable org gets an empty array rather than an error.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingPayoutsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingPayoutsRequestConfig()
+    fun getV1BillingPayoutsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingPayoutsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -567,11 +1265,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingPayouts
+     * To obtain the request config of the operation getV1BillingPayouts
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingPayoutsRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingPayoutsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -581,15 +1279,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/payouts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/billing/plans
-     * 
-     * 
+     * The public plan catalog, annotated with the active platform promotion
+     * Returns every subscription tier a buyer can choose, each carrying the platform promo currently in effect, optionally narrowed with the category query. Prices come from the admin-editable plan authority in the database; the embedded catalog is only a loud-failing fallback, so a failed seed or a query error serves the known plans rather than a silently blank list. It is a catalog read, not an entitlement read — it says what may be bought, never what this caller has.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -598,8 +1296,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingPlans() : Unit {
-        val localVarResponse = cloudGetV1BillingPlansWithHttpInfo()
+    fun getV1BillingPlans() : Unit {
+        val localVarResponse = getV1BillingPlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -618,15 +1316,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/billing/plans
-     * 
-     * 
+     * The public plan catalog, annotated with the active platform promotion
+     * Returns every subscription tier a buyer can choose, each carrying the platform promo currently in effect, optionally narrowed with the category query. Prices come from the admin-editable plan authority in the database; the embedded catalog is only a loud-failing fallback, so a failed seed or a query error serves the known plans rather than a silently blank list. It is a catalog read, not an entitlement read — it says what may be bought, never what this caller has.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingPlansWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingPlansRequestConfig()
+    fun getV1BillingPlansWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingPlansRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -634,11 +1332,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingPlans
+     * To obtain the request config of the operation getV1BillingPlans
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingPlansRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingPlansRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -648,15 +1346,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/plans",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/billing/spend-alerts
-     * 
-     * 
+     * GET /v1/billing/portal/methods
+     * Cards saved against the caller&#39;s org, masked — the portal read
+     * Answers the org&#39;s saved payment methods as masked descriptors: brand, last four, expiry and the processor&#39;s reusable reference. No card number and no security code exist here to return; both live at the processor and never enter this system.  This is the SERVICE-TOKEN face of the same list a customer reads at /v1/billing/methods. Both are served here, in this process, and answer the same rows; they are two addresses because they admit two different principals, not because either forwards to the other.  The customer filter is pinned to the VALIDATED caller before the handler runs, so a browser sees only its own subject&#39;s cards whatever customerId it sends; only a caller holding the internal service token may name the subject, and the org it may name it within is fixed by the gateway. Cross-tenant is closed by the org namespace for both, so an id or a subject from another org resolves to nothing. A caller who is neither is refused before the read.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -665,8 +1363,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingSpendAlerts() : Unit {
-        val localVarResponse = cloudGetV1BillingSpendAlertsWithHttpInfo()
+    fun getV1BillingPortalMethods() : Unit {
+        val localVarResponse = getV1BillingPortalMethodsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -684,16 +1382,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * GET /v1/billing/spend-alerts
-     * 
-     * 
+     * GET /v1/billing/portal/methods
+     * Cards saved against the caller&#39;s org, masked — the portal read
+     * Answers the org&#39;s saved payment methods as masked descriptors: brand, last four, expiry and the processor&#39;s reusable reference. No card number and no security code exist here to return; both live at the processor and never enter this system.  This is the SERVICE-TOKEN face of the same list a customer reads at /v1/billing/methods. Both are served here, in this process, and answer the same rows; they are two addresses because they admit two different principals, not because either forwards to the other.  The customer filter is pinned to the VALIDATED caller before the handler runs, so a browser sees only its own subject&#39;s cards whatever customerId it sends; only a caller holding the internal service token may name the subject, and the org it may name it within is fixed by the gateway. Cross-tenant is closed by the org namespace for both, so an id or a subject from another org resolves to nothing. A caller who is neither is refused before the read.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingSpendAlertsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingSpendAlertsRequestConfig()
+    fun getV1BillingPortalMethodsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingPortalMethodsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -701,29 +1399,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingSpendAlerts
+     * To obtain the request config of the operation getV1BillingPortalMethods
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingSpendAlertsRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingPortalMethodsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/billing/spend-alerts",
+            path = "/v1/billing/portal/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/billing/spend-alerts/authorize
-     * 
-     * 
+     * GET /v1/billing/settings
+     * The public payment-provider config your card form needs to initialize
+     * Answers the Square application id, location id, environment and live flag the browser&#39;s card iframe boots against — public values only, never a secret. Resolution lives in one place shared with the public tenant projection, so the card form can never initialize against a different Square application than the one commerce will actually charge. It deliberately does NOT hydrate credentials from KMS: the dialog blocks on this call, so it answers from the org and the deployment environment without a round trip, and an org with no per-org credentials gets the deployment&#39;s own public app id.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -732,8 +1430,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingSpendAlertsAuthorize() : Unit {
-        val localVarResponse = cloudGetV1BillingSpendAlertsAuthorizeWithHttpInfo()
+    fun getV1BillingSettings() : Unit {
+        val localVarResponse = getV1BillingSettingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -751,16 +1449,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * GET /v1/billing/spend-alerts/authorize
-     * 
-     * 
+     * GET /v1/billing/settings
+     * The public payment-provider config your card form needs to initialize
+     * Answers the Square application id, location id, environment and live flag the browser&#39;s card iframe boots against — public values only, never a secret. Resolution lives in one place shared with the public tenant projection, so the card form can never initialize against a different Square application than the one commerce will actually charge. It deliberately does NOT hydrate credentials from KMS: the dialog blocks on this call, so it answers from the org and the deployment environment without a round trip, and an org with no per-org credentials gets the deployment&#39;s own public app id.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingSpendAlertsAuthorizeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingSpendAlertsAuthorizeRequestConfig()
+    fun getV1BillingSettingsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingSettingsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -768,29 +1466,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingSpendAlertsAuthorize
+     * To obtain the request config of the operation getV1BillingSettings
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingSpendAlertsAuthorizeRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingSettingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/billing/spend-alerts/authorize",
+            path = "/v1/billing/settings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/billing/subscriptions
-     * 
-     * 
+     * List your org&#39;s subscriptions
+     * Returns the caller org&#39;s subscriptions with a count, narrowable by userId or status, read from that org&#39;s own namespaced store. The org is the gateway-validated one and the caller&#39;s billing subject is pinned before the handler runs. A request with no resolvable org gets an empty list and a zero count rather than an error.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -799,8 +1497,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingSubscriptions() : Unit {
-        val localVarResponse = cloudGetV1BillingSubscriptionsWithHttpInfo()
+    fun getV1BillingSubscriptions() : Unit {
+        val localVarResponse = getV1BillingSubscriptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -819,15 +1517,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/billing/subscriptions
-     * 
-     * 
+     * List your org&#39;s subscriptions
+     * Returns the caller org&#39;s subscriptions with a count, narrowable by userId or status, read from that org&#39;s own namespaced store. The org is the gateway-validated one and the caller&#39;s billing subject is pinned before the handler runs. A request with no resolvable org gets an empty list and a zero count rather than an error.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingSubscriptionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingSubscriptionsRequestConfig()
+    fun getV1BillingSubscriptionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingSubscriptionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -835,11 +1533,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingSubscriptions
+     * To obtain the request config of the operation getV1BillingSubscriptions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingSubscriptionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingSubscriptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -849,15 +1547,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscriptions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/billing/usage
-     * 
-     * 
+     * GET /v1/billing/tier
+     * The subject&#39;s plan tier and the balance a metered call is admitted on
+     * Answers one subject&#39;s resolved tier — name, display name, agent ceiling and allowed models — with the balance that admits their next metered call: prepaidAvailable, creditsRemaining, dailyRemaining and the effectiveAvailable those fold into. The ai router reads it per request to pick that caller&#39;s rate-limit tier. It sits on the org-resolving chain because a tier is org state, and the subject keys are pinned to the validated caller before the handler runs, so a browser read is always the caller&#39;s own; user is required, which only a service-to-service caller can omit and be refused 400 for. The tier is an upstream tier claim, or an explicit tier override, when either is present — that is the service-to-service contract — and is otherwise DERIVED from the org&#39;s active and trialing subscriptions, the highest one winning, its paid-ness read from the plan catalog by slug rather than from the subscription&#39;s own stored copy. The rule to get right is effectiveAvailable and not prepaidAvailable: granted credits spend too, credits first, so an account funded only by a grant reads zero prepaid while holding real spendable credit — and with the daily term zero on every tier there is no free allowance behind it, so a zero-balance account is gated. A subscription-store error answers 500 rather than downgrading to free, so a transient failure never reports a paid subscriber as unsubscribed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -866,8 +1564,142 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingUsage() : Unit {
-        val localVarResponse = cloudGetV1BillingUsageWithHttpInfo()
+    fun getV1BillingTier() : Unit {
+        val localVarResponse = getV1BillingTierWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/tier
+     * The subject&#39;s plan tier and the balance a metered call is admitted on
+     * Answers one subject&#39;s resolved tier — name, display name, agent ceiling and allowed models — with the balance that admits their next metered call: prepaidAvailable, creditsRemaining, dailyRemaining and the effectiveAvailable those fold into. The ai router reads it per request to pick that caller&#39;s rate-limit tier. It sits on the org-resolving chain because a tier is org state, and the subject keys are pinned to the validated caller before the handler runs, so a browser read is always the caller&#39;s own; user is required, which only a service-to-service caller can omit and be refused 400 for. The tier is an upstream tier claim, or an explicit tier override, when either is present — that is the service-to-service contract — and is otherwise DERIVED from the org&#39;s active and trialing subscriptions, the highest one winning, its paid-ness read from the plan catalog by slug rather than from the subscription&#39;s own stored copy. The rule to get right is effectiveAvailable and not prepaidAvailable: granted credits spend too, credits first, so an account funded only by a grant reads zero prepaid while holding real spendable credit — and with the daily term zero on every tier there is no free allowance behind it, so a zero-balance account is gated. A subscription-store error answers 500 rather than downgrading to free, so a transient failure never reports a paid subscriber as unsubscribed.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingTierWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingTierRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingTier
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingTierRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/tier",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/transactions
+     * List the movements on your own balance, newest first
+     * Returns the caller&#39;s own ledger movements — every credit and debit against the subject the usage gate charges — newest first, with a count and the subject they belong to, so a customer can reconcile a bill against the acts that produced it. Paging is limit and offset, and the currency can be narrowed.  The subject is NOT the caller&#39;s to choose. The handler filters on a user parameter, and that parameter is overwritten with the caller&#39;s own billing subject before the handler runs — so naming another subject returns your own rows rather than theirs, and the read can never disagree with the wallet it describes. An unauthenticated call is 401 rather than 403, because a browser re-authenticates on the first and only reports the second. No movements is an empty list, not an error.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingTransactions() : Unit {
+        val localVarResponse = getV1BillingTransactionsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/transactions
+     * List the movements on your own balance, newest first
+     * Returns the caller&#39;s own ledger movements — every credit and debit against the subject the usage gate charges — newest first, with a count and the subject they belong to, so a customer can reconcile a bill against the acts that produced it. Paging is limit and offset, and the currency can be narrowed.  The subject is NOT the caller&#39;s to choose. The handler filters on a user parameter, and that parameter is overwritten with the caller&#39;s own billing subject before the handler runs — so naming another subject returns your own rows rather than theirs, and the read can never disagree with the wallet it describes. An unauthenticated call is 401 rather than 403, because a browser re-authenticates on the first and only reports the second. No movements is an empty list, not an error.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingTransactionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingTransactionsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingTransactions
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingTransactionsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/transactions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/usage
+     * Every billed call the caller&#39;s org made, attributed to a product
+     * Answers one row per BILLED call against the caller&#39;s org — transaction id, amount, timestamp and the metered unit. This is the raw charged ledger, not a rollup.  Each row is stamped with a canonical &#x60;metadata.product&#x60; derived from what the meter persisted: &#x60;agent&#x60; becomes agents, &#x60;provisioning&#x60; becomes the provisioned kind, a token-metered row becomes inference, anything else keeps its metering surface. The ledger has no product field of its own, so this read is where that dimension is made real — from the SAME charged rows, never a second meter. A row that already carries its own product WINS, so the derivation stops the day the meter records one.  &#x60;product&#x3D;&lt;id&gt;&#x60; filters to one product server-side. &#x60;groupBy&#x3D;product&#x60; reduces to &#x60;{product,requests,amountCents}&#x60; rollups instead of rows.  &#x60;amount&#x60; is whole USD cents, ROUNDED; &#x60;decimal&#x60; beside it is the SAME debit exact, as an 18-decimal USD string. Sum &#x60;decimal&#x60;. A page of sub-cent token calls totals correctly there and totals ZERO in &#x60;amount&#x60; — that difference is real money.  Scoped to the caller&#39;s own org&#39;s books, where the org&#39;s ledger file IS the tenant boundary; no client-supplied subject is ever forwarded. 401 without a validated principal. The co-resident read returns the 2000 most recent debits, newest first; &#x60;start&#x60; and &#x60;end&#x60; narrow the window only on the split-deploy upstream.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingUsage() : Unit {
+        val localVarResponse = getV1BillingUsageWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -886,15 +1718,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/billing/usage
-     * 
-     * 
+     * Every billed call the caller&#39;s org made, attributed to a product
+     * Answers one row per BILLED call against the caller&#39;s org — transaction id, amount, timestamp and the metered unit. This is the raw charged ledger, not a rollup.  Each row is stamped with a canonical &#x60;metadata.product&#x60; derived from what the meter persisted: &#x60;agent&#x60; becomes agents, &#x60;provisioning&#x60; becomes the provisioned kind, a token-metered row becomes inference, anything else keeps its metering surface. The ledger has no product field of its own, so this read is where that dimension is made real — from the SAME charged rows, never a second meter. A row that already carries its own product WINS, so the derivation stops the day the meter records one.  &#x60;product&#x3D;&lt;id&gt;&#x60; filters to one product server-side. &#x60;groupBy&#x3D;product&#x60; reduces to &#x60;{product,requests,amountCents}&#x60; rollups instead of rows.  &#x60;amount&#x60; is whole USD cents, ROUNDED; &#x60;decimal&#x60; beside it is the SAME debit exact, as an 18-decimal USD string. Sum &#x60;decimal&#x60;. A page of sub-cent token calls totals correctly there and totals ZERO in &#x60;amount&#x60; — that difference is real money.  Scoped to the caller&#39;s own org&#39;s books, where the org&#39;s ledger file IS the tenant boundary; no client-supplied subject is ever forwarded. 401 without a validated principal. The co-resident read returns the 2000 most recent debits, newest first; &#x60;start&#x60; and &#x60;end&#x60; narrow the window only on the split-deploy upstream.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingUsageWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingUsageRequestConfig()
+    fun getV1BillingUsageWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingUsageRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -902,11 +1734,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingUsage
+     * To obtain the request config of the operation getV1BillingUsage
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingUsageRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingUsageRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -916,15 +1748,85 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/billing/usage/accounts
-     * 
-     * 
+     * Answers per-account totals for the linked provider accounts the gateway ROUTED this caller&#39;s traffic through — requests, prompt and completion tokens, recorded cost — plus their honest sum.
+     * Answers per-account totals for the linked provider accounts the gateway ROUTED this caller&#39;s traffic through — requests, prompt and completion tokens, recorded cost — plus their honest sum.  This is the one read in the billing namespace scoped to the PERSON, not the org. Rows are keyed on (validated org, validated user), so a caller sees the accounts THEY linked and never a colleague&#39;s, even inside one org — everything else under /v1/billing is org-wide. Neither key is ever read from the request body or the query.  It is a ROUTING counter, not the money ledger. &#x60;costCents&#x60; is 0 for an account billed by its own subscription, where the plan pays the provider directly, so these totals do not reconcile against what the org was charged. /v1/billing/usage is the charged ledger.  401 without a validated principal. Where the linked-account plane is not resident the answer is an honest 501 — never an empty breakdown, which would read as no usage.
+     * @return Accounts
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BillingUsageAccounts() : Accounts {
+        val localVarResponse = getV1BillingUsageAccountsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Accounts
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/billing/usage/accounts
+     * Answers per-account totals for the linked provider accounts the gateway ROUTED this caller&#39;s traffic through — requests, prompt and completion tokens, recorded cost — plus their honest sum.
+     * Answers per-account totals for the linked provider accounts the gateway ROUTED this caller&#39;s traffic through — requests, prompt and completion tokens, recorded cost — plus their honest sum.  This is the one read in the billing namespace scoped to the PERSON, not the org. Rows are keyed on (validated org, validated user), so a caller sees the accounts THEY linked and never a colleague&#39;s, even inside one org — everything else under /v1/billing is org-wide. Neither key is ever read from the request body or the query.  It is a ROUTING counter, not the money ledger. &#x60;costCents&#x60; is 0 for an account billed by its own subscription, where the plan pays the provider directly, so these totals do not reconcile against what the org was charged. /v1/billing/usage is the charged ledger.  401 without a validated principal. Where the linked-account plane is not resident the answer is an honest 501 — never an empty breakdown, which would read as no usage.
+     * @return ApiResponse<Accounts?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BillingUsageAccountsWithHttpInfo() : ApiResponse<Accounts?> {
+        val localVariableConfig = getV1BillingUsageAccountsRequestConfig()
+
+        return request<Unit, Accounts>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BillingUsageAccounts
+     *
+     * @return RequestConfig
+     */
+    fun getV1BillingUsageAccountsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/billing/usage/accounts",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/billing/wire
+     * Where to wire funds, and the reference that credits them to you
+     * Answers the receiving bank details for the brand this deployment serves — the account the funds actually land in, hydrated per brand rather than hard-coded — together with the payment reference to put on the transfer.  THE REFERENCE IS THE POINT. It carries your own billing key, and it is how an arriving wire is attributed to your account; a transfer sent without it arrives as an unidentified receipt. That is why this read is gated at all: an unpinned caller would be handed an unattributable reference.  Reading it credits nothing and reserves nothing. A wire is settled by an operator when the bank shows the funds, so the balance moves on receipt, not on this call.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -933,8 +1835,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BillingUsageAccounts() : Unit {
-        val localVarResponse = cloudGetV1BillingUsageAccountsWithHttpInfo()
+    fun getV1BillingWire() : Unit {
+        val localVarResponse = getV1BillingWireWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -952,16 +1854,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * GET /v1/billing/usage/accounts
-     * 
-     * 
+     * GET /v1/billing/wire
+     * Where to wire funds, and the reference that credits them to you
+     * Answers the receiving bank details for the brand this deployment serves — the account the funds actually land in, hydrated per brand rather than hard-coded — together with the payment reference to put on the transfer.  THE REFERENCE IS THE POINT. It carries your own billing key, and it is how an arriving wire is attributed to your account; a transfer sent without it arrives as an unidentified receipt. That is why this read is gated at all: an unpinned caller would be handed an unattributable reference.  Reading it credits nothing and reserves nothing. A wire is settled by an operator when the bank shows the funds, so the balance moves on receipt, not on this call.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BillingUsageAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BillingUsageAccountsRequestConfig()
+    fun getV1BillingWireWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BillingWireRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -969,29 +1871,102 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BillingUsageAccounts
+     * To obtain the request config of the operation getV1BillingWire
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BillingUsageAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getV1BillingWireRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/billing/usage/accounts",
+            path = "/v1/billing/wire",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * PATCH /v1/billing/spend-alerts/{id}
-     * 
-     * 
+     * POST /v1/billing/invoices/{id}/issue
+     * Issue a draft invoice, making it collectible
+     * Issues a draft invoice: moves it to OPEN, assigns its number, and makes it collectible.  Only a draft can be issued. An invoice already open, paid or void is refused with the state machine&#39;s own reason rather than being silently re-issued, which would mint a second number for one debt.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return InvoiceOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun issueInvoice(id: kotlin.String) : InvoiceOut {
+        val localVarResponse = issueInvoiceWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvoiceOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/billing/invoices/{id}/issue
+     * Issue a draft invoice, making it collectible
+     * Issues a draft invoice: moves it to OPEN, assigns its number, and makes it collectible.  Only a draft can be issued. An invoice already open, paid or void is refused with the state machine&#39;s own reason rather than being silently re-issued, which would mint a second number for one debt.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return ApiResponse<InvoiceOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun issueInvoiceWithHttpInfo(id: kotlin.String) : ApiResponse<InvoiceOut?> {
+        val localVariableConfig = issueInvoiceRequestConfig(id = id)
+
+        return request<Unit, InvoiceOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation issueInvoice
+     *
+     * @param id ID is the invoice id.
+     * @return RequestConfig
+     */
+    fun issueInvoiceRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/billing/invoices/{id}/issue".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/billing/alerts/{id}
+     * Change one of your org&#39;s spend caps
+     * Applies only the fields the body actually carries — title, threshold, project, service, enforce, softPct, rateLimitRpm — and leaves the rest as stored, answering the merged row with its current period spend. Requires an ORG ADMIN, a platform admin, or the internal service token, for the same reason creation does: a member who could edit the cap could raise it to nothing or drop it to a punitive floor. Ownership is checked per row and a cap the caller does not own is refused as 404, never 403, so the id space cannot be probed.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1001,8 +1976,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1BillingSpendAlertsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1BillingSpendAlertsByIdWithHttpInfo(id = id)
+    fun patchV1BillingAlertsById(id: kotlin.String) : Unit {
+        val localVarResponse = patchV1BillingAlertsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1020,17 +1995,17 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * PATCH /v1/billing/spend-alerts/{id}
-     * 
-     * 
+     * PATCH /v1/billing/alerts/{id}
+     * Change one of your org&#39;s spend caps
+     * Applies only the fields the body actually carries — title, threshold, project, service, enforce, softPct, rateLimitRpm — and leaves the rest as stored, answering the merged row with its current period spend. Requires an ORG ADMIN, a platform admin, or the internal service token, for the same reason creation does: a member who could edit the cap could raise it to nothing or drop it to a punitive floor. Ownership is checked per row and a cap the caller does not own is refused as 404, never 403, so the id space cannot be probed.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1BillingSpendAlertsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1BillingSpendAlertsByIdRequestConfig(id = id)
+    fun patchV1BillingAlertsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1BillingAlertsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1038,30 +2013,30 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1BillingSpendAlertsById
+     * To obtain the request config of the operation patchV1BillingAlertsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPatchV1BillingSpendAlertsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1BillingAlertsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.PATCH,
-            path = "/v1/billing/spend-alerts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            path = "/v1/billing/alerts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/billing/auto-recharge/run-all
-     * 
-     * 
+     * POST /v1/billing/alerts
+     * Set a spend cap or rate limit on your org
+     * Creates a cap for the caller&#39;s own org and answers the stored row with its current period spend. A spend cap is a FINANCIAL SAFETY control, so writing one requires an ORG ADMIN, a platform admin, or the internal service token — a plain authenticated member is refused 403, because a member who could delete the cap could uncap the org&#39;s spend and a member who could set a one-cent enforcing cap could deny the whole org. The cap is always keyed to the caller&#39;s own billing subject: a userId in the body is overwritten, never honored, so a cap cannot be planted on another subject. At least one of a positive threshold or a positive rateLimitRpm is required, softPct must be within 0 to 100, and an org that has reached its row limit is refused 400.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1070,8 +2045,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingAutoRechargeRunAll() : Unit {
-        val localVarResponse = cloudPostV1BillingAutoRechargeRunAllWithHttpInfo()
+    fun postV1BillingAlerts() : Unit {
+        val localVarResponse = postV1BillingAlertsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1089,16 +2064,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * POST /v1/billing/auto-recharge/run-all
-     * 
-     * 
+     * POST /v1/billing/alerts
+     * Set a spend cap or rate limit on your org
+     * Creates a cap for the caller&#39;s own org and answers the stored row with its current period spend. A spend cap is a FINANCIAL SAFETY control, so writing one requires an ORG ADMIN, a platform admin, or the internal service token — a plain authenticated member is refused 403, because a member who could delete the cap could uncap the org&#39;s spend and a member who could set a one-cent enforcing cap could deny the whole org. The cap is always keyed to the caller&#39;s own billing subject: a userId in the body is overwritten, never honored, so a cap cannot be planted on another subject. At least one of a positive threshold or a positive rateLimitRpm is required, softPct must be within 0 to 100, and an org that has reached its row limit is refused 400.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingAutoRechargeRunAllWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingAutoRechargeRunAllRequestConfig()
+    fun postV1BillingAlertsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingAlertsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1106,29 +2081,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingAutoRechargeRunAll
+     * To obtain the request config of the operation postV1BillingAlerts
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BillingAutoRechargeRunAllRequestConfig() : RequestConfig<Unit> {
+    fun postV1BillingAlertsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/billing/auto-recharge/run-all",
+            path = "/v1/billing/alerts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/billing/gpu-charge
-     * 
-     * 
+     * POST /v1/billing/crypto/deposit
+     * Get a deposit address for a crypto top-up
+     * Mints a deposit address held by the MPC signer fleet — no single party holds the key — on the chain and token you name, and returns it with the intent that tracks it.  The account credited is the PINNED caller&#39;s, never a value in the body, so a deposit cannot be aimed at someone else&#39;s balance. A caller who already has an open intent gets that same address back rather than a new one, so reloading the page cannot spray keygens across the signer fleet.  NO BALANCE MOVES HERE. This hands out an address; the chain watcher credits the account when a real transfer confirms, which is also why an address handed out and never funded costs nothing and expires nothing.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1137,8 +2112,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingGpuCharge() : Unit {
-        val localVarResponse = cloudPostV1BillingGpuChargeWithHttpInfo()
+    fun postV1BillingCryptoDeposit() : Unit {
+        val localVarResponse = postV1BillingCryptoDepositWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1156,16 +2131,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * POST /v1/billing/gpu-charge
-     * 
-     * 
+     * POST /v1/billing/crypto/deposit
+     * Get a deposit address for a crypto top-up
+     * Mints a deposit address held by the MPC signer fleet — no single party holds the key — on the chain and token you name, and returns it with the intent that tracks it.  The account credited is the PINNED caller&#39;s, never a value in the body, so a deposit cannot be aimed at someone else&#39;s balance. A caller who already has an open intent gets that same address back rather than a new one, so reloading the page cannot spray keygens across the signer fleet.  NO BALANCE MOVES HERE. This hands out an address; the chain watcher credits the account when a real transfer confirms, which is also why an address handed out and never funded costs nothing and expires nothing.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingGpuChargeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingGpuChargeRequestConfig()
+    fun postV1BillingCryptoDepositWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingCryptoDepositRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1173,29 +2148,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingGpuCharge
+     * To obtain the request config of the operation postV1BillingCryptoDeposit
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BillingGpuChargeRequestConfig() : RequestConfig<Unit> {
+    fun postV1BillingCryptoDepositRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/billing/gpu-charge",
+            path = "/v1/billing/crypto/deposit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/billing/payment-methods
-     * 
-     * 
+     * POST /v1/billing/methods
+     * Save a card for later charges
+     * Vaults the card the processor already holds — you send its one-time reference, never a card number — as a reusable card on file, and stores the billing address with it. That vaulted card is what a subscription renewal or an auto-recharge charges later, which is why saving one is the step that makes a monthly plan billable at all.  It charges nothing. Saving a card moves no money; the first charge is whatever arrangement you then attach it to.  The subject is pinned from the validated caller and OVERWRITES the customerId in the body while leaving the card fields untouched, so a card can only ever be attached to the caller&#39;s OWN account whatever the body claims. That pin is the whole control on this write, not decoration: this is the one handler in the family that reads its subject from the body.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1204,8 +2179,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingPaymentMethods() : Unit {
-        val localVarResponse = cloudPostV1BillingPaymentMethodsWithHttpInfo()
+    fun postV1BillingMethods() : Unit {
+        val localVarResponse = postV1BillingMethodsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1223,16 +2198,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * POST /v1/billing/payment-methods
-     * 
-     * 
+     * POST /v1/billing/methods
+     * Save a card for later charges
+     * Vaults the card the processor already holds — you send its one-time reference, never a card number — as a reusable card on file, and stores the billing address with it. That vaulted card is what a subscription renewal or an auto-recharge charges later, which is why saving one is the step that makes a monthly plan billable at all.  It charges nothing. Saving a card moves no money; the first charge is whatever arrangement you then attach it to.  The subject is pinned from the validated caller and OVERWRITES the customerId in the body while leaving the card fields untouched, so a card can only ever be attached to the caller&#39;s OWN account whatever the body claims. That pin is the whole control on this write, not decoration: this is the one handler in the family that reads its subject from the body.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingPaymentMethodsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingPaymentMethodsRequestConfig()
+    fun postV1BillingMethodsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingMethodsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1240,29 +2215,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingPaymentMethods
+     * To obtain the request config of the operation postV1BillingMethods
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BillingPaymentMethodsRequestConfig() : RequestConfig<Unit> {
+    fun postV1BillingMethodsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/billing/payment-methods",
+            path = "/v1/billing/methods",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/billing/spend-alerts
-     * 
-     * 
+     * POST /v1/billing/mode
+     * Move an org between sandbox and live billing
+     * Flips the org&#39;s live flag, which is the single authority for both the payment environment and the ledger bucket its transactions land in. This is a money-MINT control, not a customer action: it is gated on the internal service token AND platform scope, so an ORG ADMIN CANNOT move their own org — otherwise a tenant could drop itself into sandbox and stop paying. The rule most callers get wrong is the default: an org that has never been flipped transacts in SANDBOX, which is why a production-credentialled deployment can still hand a buyer a sandbox card form. When the deployment pins the payment environment explicitly, that pin governs and this flag only marks the transactions.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1271,8 +2246,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingSpendAlerts() : Unit {
-        val localVarResponse = cloudPostV1BillingSpendAlertsWithHttpInfo()
+    fun postV1BillingMode() : Unit {
+        val localVarResponse = postV1BillingModeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1290,16 +2265,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * POST /v1/billing/spend-alerts
-     * 
-     * 
+     * POST /v1/billing/mode
+     * Move an org between sandbox and live billing
+     * Flips the org&#39;s live flag, which is the single authority for both the payment environment and the ledger bucket its transactions land in. This is a money-MINT control, not a customer action: it is gated on the internal service token AND platform scope, so an ORG ADMIN CANNOT move their own org — otherwise a tenant could drop itself into sandbox and stop paying. The rule most callers get wrong is the default: an org that has never been flipped transacts in SANDBOX, which is why a production-credentialled deployment can still hand a buyer a sandbox card form. When the deployment pins the payment environment explicitly, that pin governs and this flag only marks the transactions.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingSpendAlertsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingSpendAlertsRequestConfig()
+    fun postV1BillingModeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingModeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1307,29 +2282,163 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingSpendAlerts
+     * To obtain the request config of the operation postV1BillingMode
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BillingSpendAlertsRequestConfig() : RequestConfig<Unit> {
+    fun postV1BillingModeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/billing/spend-alerts",
+            path = "/v1/billing/mode",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/billing/portal/methods
+     * Save a card on a subject&#39;s behalf — the portal attach
+     * The service-token twin of POST /v1/billing/methods: it vaults the processor&#39;s one-time reference as a reusable card on file for the named subject, with its billing address, and moves no money doing it.  It exists so an internal caller can complete the family it can already read and detach. The subject it may name is pinned to the org the gateway fixed, so the service token acts WITHIN one tenant and never across tenants; a caller holding no service token is refused before the write.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1BillingPortalMethods() : Unit {
+        val localVarResponse = postV1BillingPortalMethodsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/billing/portal/methods
+     * Save a card on a subject&#39;s behalf — the portal attach
+     * The service-token twin of POST /v1/billing/methods: it vaults the processor&#39;s one-time reference as a reusable card on file for the named subject, with its billing address, and moves no money doing it.  It exists so an internal caller can complete the family it can already read and detach. The subject it may name is pinned to the org the gateway fixed, so the service token acts WITHIN one tenant and never across tenants; a caller holding no service token is refused before the write.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1BillingPortalMethodsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingPortalMethodsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1BillingPortalMethods
+     *
+     * @return RequestConfig
+     */
+    fun postV1BillingPortalMethodsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/billing/portal/methods",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/billing/recharge/run-all
+     * Platform sweep: top up every org whose balance has fallen below its own threshold
+     * Walks every organization and, for those that enabled auto-recharge and whose available balance (balance minus holds) has fallen under their configured threshold, charges their default payment method off-session and credits the balance, answering a per-org result row for each one it touched. This is the platform cron&#39;s door, not a customer&#39;s: it is gated on the internal service token AND platform scope, so an org admin cannot run the fleet-wide sweep. An org above its threshold is skipped silently; an org with no default payment method is reported as an uncharged row with the reason rather than failing the whole run.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1BillingRechargeRunAll() : Unit {
+        val localVarResponse = postV1BillingRechargeRunAllWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/billing/recharge/run-all
+     * Platform sweep: top up every org whose balance has fallen below its own threshold
+     * Walks every organization and, for those that enabled auto-recharge and whose available balance (balance minus holds) has fallen under their configured threshold, charges their default payment method off-session and credits the balance, answering a per-org result row for each one it touched. This is the platform cron&#39;s door, not a customer&#39;s: it is gated on the internal service token AND platform scope, so an org admin cannot run the fleet-wide sweep. An org above its threshold is skipped silently; an org with no default payment method is reported as an uncharged row with the reason rather than failing the whole run.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1BillingRechargeRunAllWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingRechargeRunAllRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1BillingRechargeRunAll
+     *
+     * @return RequestConfig
+     */
+    fun postV1BillingRechargeRunAllRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/billing/recharge/run-all",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/billing/subscribe/card
-     * 
-     * 
+     * Subscribe to a paid plan with a card, charged for the first period immediately
+     * Vaults the tokenized card as a reusable card-on-file, charges the first period, and creates the subscription — answering the subscription and invoice ids with the amount charged. The price is SERVER-AUTHORITATIVE: it is the plan&#39;s catalog price times billable seats and a client-supplied amount is never consulted, so a scripted request cannot underpay; a per-seat plan below its minimum seats is refused, and a free plan is refused outright because this address is the paid path. The card PAN never reaches this service — the browser tokenizes it and only the single-use nonce arrives here. The subject is the caller&#39;s own org, with an in-org user honored only inside that bound, and an idempotency key (or, absent one, the nonce itself) makes a retry replay the first result instead of charging twice.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1338,8 +2447,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingSubscribeCard() : Unit {
-        val localVarResponse = cloudPostV1BillingSubscribeCardWithHttpInfo()
+    fun postV1BillingSubscribeCard() : Unit {
+        val localVarResponse = postV1BillingSubscribeCardWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1358,15 +2467,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/subscribe/card
-     * 
-     * 
+     * Subscribe to a paid plan with a card, charged for the first period immediately
+     * Vaults the tokenized card as a reusable card-on-file, charges the first period, and creates the subscription — answering the subscription and invoice ids with the amount charged. The price is SERVER-AUTHORITATIVE: it is the plan&#39;s catalog price times billable seats and a client-supplied amount is never consulted, so a scripted request cannot underpay; a per-seat plan below its minimum seats is refused, and a free plan is refused outright because this address is the paid path. The card PAN never reaches this service — the browser tokenizes it and only the single-use nonce arrives here. The subject is the caller&#39;s own org, with an in-org user honored only inside that bound, and an idempotency key (or, absent one, the nonce itself) makes a retry replay the first result instead of charging twice.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingSubscribeCardWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingSubscribeCardRequestConfig()
+    fun postV1BillingSubscribeCardWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingSubscribeCardRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1374,11 +2483,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingSubscribeCard
+     * To obtain the request config of the operation postV1BillingSubscribeCard
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BillingSubscribeCardRequestConfig() : RequestConfig<Unit> {
+    fun postV1BillingSubscribeCardRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1388,15 +2497,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscribe/card",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/billing/subscriptions/{id}/cancel
-     * 
-     * 
+     * Cancel a subscription, at period end by default
+     * Cancels the addressed subscription and answers its updated state, emitting the cancellation event the rest of the platform keys on. The default is to cancel AT PERIOD END — a body that fails to parse falls back to it — so the customer keeps what they paid for unless atPeriodEnd is explicitly false. The subscription is resolved inside the caller&#39;s own org namespace, so another tenant&#39;s id is a 404, and the write carries the browser anti-CSRF gate because it is reachable with an ambient cookie.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1406,8 +2515,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingSubscriptionsByIdCancel(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1BillingSubscriptionsByIdCancelWithHttpInfo(id = id)
+    fun postV1BillingSubscriptionsByIdCancel(id: kotlin.String) : Unit {
+        val localVarResponse = postV1BillingSubscriptionsByIdCancelWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1426,16 +2535,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/subscriptions/{id}/cancel
-     * 
-     * 
+     * Cancel a subscription, at period end by default
+     * Cancels the addressed subscription and answers its updated state, emitting the cancellation event the rest of the platform keys on. The default is to cancel AT PERIOD END — a body that fails to parse falls back to it — so the customer keeps what they paid for unless atPeriodEnd is explicitly false. The subscription is resolved inside the caller&#39;s own org namespace, so another tenant&#39;s id is a 404, and the write carries the browser anti-CSRF gate because it is reachable with an ambient cookie.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingSubscriptionsByIdCancelWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingSubscriptionsByIdCancelRequestConfig(id = id)
+    fun postV1BillingSubscriptionsByIdCancelWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingSubscriptionsByIdCancelRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1443,12 +2552,12 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingSubscriptionsByIdCancel
+     * To obtain the request config of the operation postV1BillingSubscriptionsByIdCancel
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1BillingSubscriptionsByIdCancelRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1BillingSubscriptionsByIdCancelRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1458,15 +2567,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscriptions/{id}/cancel".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/billing/subscriptions/{id}/reactivate
-     * 
-     * 
+     * Undo a pending cancellation and keep the subscription running
+     * Clears the scheduled cancellation on the addressed subscription and answers its updated state. It is the inverse of cancel and applies to a subscription that is still within its period; one the engine will not reactivate is refused 400 with the reason. The subscription is resolved inside the caller&#39;s own org namespace, so another tenant&#39;s id reads as 404, and the write carries the browser anti-CSRF gate.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1476,8 +2585,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingSubscriptionsByIdReactivate(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1BillingSubscriptionsByIdReactivateWithHttpInfo(id = id)
+    fun postV1BillingSubscriptionsByIdReactivate(id: kotlin.String) : Unit {
+        val localVarResponse = postV1BillingSubscriptionsByIdReactivateWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1496,16 +2605,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/subscriptions/{id}/reactivate
-     * 
-     * 
+     * Undo a pending cancellation and keep the subscription running
+     * Clears the scheduled cancellation on the addressed subscription and answers its updated state. It is the inverse of cancel and applies to a subscription that is still within its period; one the engine will not reactivate is refused 400 with the reason. The subscription is resolved inside the caller&#39;s own org namespace, so another tenant&#39;s id reads as 404, and the write carries the browser anti-CSRF gate.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingSubscriptionsByIdReactivateWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingSubscriptionsByIdReactivateRequestConfig(id = id)
+    fun postV1BillingSubscriptionsByIdReactivateWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingSubscriptionsByIdReactivateRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1513,12 +2622,12 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingSubscriptionsByIdReactivate
+     * To obtain the request config of the operation postV1BillingSubscriptionsByIdReactivate
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1BillingSubscriptionsByIdReactivateRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1BillingSubscriptionsByIdReactivateRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1528,15 +2637,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/subscriptions/{id}/reactivate".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/billing/test-mode
-     * 
-     * 
+     * POST /v1/billing/topup
+     * Add credit to your balance by charging one of your saved cards
+     * Charges a card the caller already has on file, named by paymentMethodId, and credits the caller&#39;s own balance — the SAVED-card twin of topup/token, sharing the one charge-and-credit core the auto-recharge cron runs on. The credit lands on the caller&#39;s OWN billing subject: the request body&#39;s subject field is pinned to the caller before the handler sees it, so a top-up can never be redirected to another subject or outside the caller&#39;s org. It is screened for risk before any money moves, exactly as the token path is, because both credit the SPENDABLE wallet. The rule most callers get wrong is that paymentMethodId is NOT covered by that subject pin — it is a card id, not a subject key — so it is checked separately, and a card belonging to any other subject answers 404 rather than 403: a permission error would confirm the id exists, which is an ownership oracle over other people&#39;s cards.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1545,8 +2654,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingTestMode() : Unit {
-        val localVarResponse = cloudPostV1BillingTestModeWithHttpInfo()
+    fun postV1BillingTopup() : Unit {
+        val localVarResponse = postV1BillingTopupWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1564,16 +2673,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * POST /v1/billing/test-mode
-     * 
-     * 
+     * POST /v1/billing/topup
+     * Add credit to your balance by charging one of your saved cards
+     * Charges a card the caller already has on file, named by paymentMethodId, and credits the caller&#39;s own balance — the SAVED-card twin of topup/token, sharing the one charge-and-credit core the auto-recharge cron runs on. The credit lands on the caller&#39;s OWN billing subject: the request body&#39;s subject field is pinned to the caller before the handler sees it, so a top-up can never be redirected to another subject or outside the caller&#39;s org. It is screened for risk before any money moves, exactly as the token path is, because both credit the SPENDABLE wallet. The rule most callers get wrong is that paymentMethodId is NOT covered by that subject pin — it is a card id, not a subject key — so it is checked separately, and a card belonging to any other subject answers 404 rather than 403: a permission error would confirm the id exists, which is an ownership oracle over other people&#39;s cards.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingTestModeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingTestModeRequestConfig()
+    fun postV1BillingTopupWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingTopupRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1581,29 +2690,29 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingTestMode
+     * To obtain the request config of the operation postV1BillingTopup
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BillingTestModeRequestConfig() : RequestConfig<Unit> {
+    fun postV1BillingTopupRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/billing/test-mode",
+            path = "/v1/billing/topup",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/billing/topup/token
-     * 
-     * 
+     * Add credit to your balance by charging a tokenized card once
+     * Charges the single-use card token for the given amount and credits the caller&#39;s own balance, answering the transaction id and the new balance — the one-time top-up path, with no payment method saved. The amount is bounded SERVER-SIDE (roughly a one dollar floor and a five thousand dollar ceiling by deployment policy) and the check runs before any money moves, because the browser cap is not a control against a scripted request. The credit lands on the caller&#39;s OWN billing subject — the same key the usage gate debits — and can never be redirected outside the caller&#39;s org. Retries are safe: an idempotency key, or absent one the amount within a short window, replays the first result, and if that guard store is unreachable the call is refused with 503 rather than risking a second real charge.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1612,8 +2721,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingTopupToken() : Unit {
-        val localVarResponse = cloudPostV1BillingTopupTokenWithHttpInfo()
+    fun postV1BillingTopupToken() : Unit {
+        val localVarResponse = postV1BillingTopupTokenWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1632,15 +2741,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/topup/token
-     * 
-     * 
+     * Add credit to your balance by charging a tokenized card once
+     * Charges the single-use card token for the given amount and credits the caller&#39;s own balance, answering the transaction id and the new balance — the one-time top-up path, with no payment method saved. The amount is bounded SERVER-SIDE (roughly a one dollar floor and a five thousand dollar ceiling by deployment policy) and the check runs before any money moves, because the browser cap is not a control against a scripted request. The credit lands on the caller&#39;s OWN billing subject — the same key the usage gate debits — and can never be redirected outside the caller&#39;s org. Retries are safe: an idempotency key, or absent one the amount within a short window, replays the first result, and if that guard store is unreachable the call is refused with 503 rather than risking a second real charge.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingTopupTokenWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingTopupTokenRequestConfig()
+    fun postV1BillingTopupTokenWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingTopupTokenRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1648,11 +2757,11 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingTopupToken
+     * To obtain the request config of the operation postV1BillingTopupToken
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BillingTopupTokenRequestConfig() : RequestConfig<Unit> {
+    fun postV1BillingTopupTokenRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1662,15 +2771,15 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/topup/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/billing/webhooks/{provider}
-     * 
-     * 
+     * Payment-provider webhook intake for settlement and subscription lifecycle events
+     * Accepts a payment provider&#39;s event, verifies it, records it for audit, and applies subscription lifecycle changes to the matching local row. There is no bearer here and there cannot be: the provider&#39;s SIGNATURE over the body IS the authentication, so a request with no recognized signature header is 400 and one whose signature does not verify is 401. The provider path segment is only a hint for dashboard configuration — verification picks the processor regardless of what the URL says. Redelivery is safe: an event id already recorded is acknowledged as a duplicate without re-applying any side effect, which matters because providers retry for days until they see a 2xx.
      * @param provider 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1680,8 +2789,8 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BillingWebhooksByProvider(provider: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1BillingWebhooksByProviderWithHttpInfo(provider = provider)
+    fun postV1BillingWebhooksByProvider(provider: kotlin.String) : Unit {
+        val localVarResponse = postV1BillingWebhooksByProviderWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1700,16 +2809,16 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/billing/webhooks/{provider}
-     * 
-     * 
+     * Payment-provider webhook intake for settlement and subscription lifecycle events
+     * Accepts a payment provider&#39;s event, verifies it, records it for audit, and applies subscription lifecycle changes to the matching local row. There is no bearer here and there cannot be: the provider&#39;s SIGNATURE over the body IS the authentication, so a request with no recognized signature header is 400 and one whose signature does not verify is 401. The provider path segment is only a hint for dashboard configuration — verification picks the processor regardless of what the URL says. Redelivery is safe: an event id already recorded is acknowledged as a duplicate without re-applying any side effect, which matters because providers retry for days until they see a 2xx.
      * @param provider 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BillingWebhooksByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BillingWebhooksByProviderRequestConfig(provider = provider)
+    fun postV1BillingWebhooksByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BillingWebhooksByProviderRequestConfig(provider = provider)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1717,12 +2826,12 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BillingWebhooksByProvider
+     * To obtain the request config of the operation postV1BillingWebhooksByProvider
      *
      * @param provider 
      * @return RequestConfig
      */
-    fun cloudPostV1BillingWebhooksByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun postV1BillingWebhooksByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1732,7 +2841,154 @@ class BillingApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/billing/webhooks/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/billing/invoices
+     * Raise a draft invoice against a customer
+     * Raises a DRAFT invoice against a customer in the caller&#39;s own org.  The invoice is not collectible yet: a draft exists so it can be read and corrected, and issueInvoice is the separate act that turns it into a demand for payment. The subtotal and amount due are computed from the lines, so there is no total to send and none to get wrong.  The billing org is the caller&#39;s, taken from the validated principal, so an invoice can only ever be raised on the caller&#39;s own books.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param raiseInvoiceIn 
+     * @return InvoiceOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun raiseInvoice(raiseInvoiceIn: RaiseInvoiceIn) : InvoiceOut {
+        val localVarResponse = raiseInvoiceWithHttpInfo(raiseInvoiceIn = raiseInvoiceIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvoiceOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/billing/invoices
+     * Raise a draft invoice against a customer
+     * Raises a DRAFT invoice against a customer in the caller&#39;s own org.  The invoice is not collectible yet: a draft exists so it can be read and corrected, and issueInvoice is the separate act that turns it into a demand for payment. The subtotal and amount due are computed from the lines, so there is no total to send and none to get wrong.  The billing org is the caller&#39;s, taken from the validated principal, so an invoice can only ever be raised on the caller&#39;s own books.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param raiseInvoiceIn 
+     * @return ApiResponse<InvoiceOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun raiseInvoiceWithHttpInfo(raiseInvoiceIn: RaiseInvoiceIn) : ApiResponse<InvoiceOut?> {
+        val localVariableConfig = raiseInvoiceRequestConfig(raiseInvoiceIn = raiseInvoiceIn)
+
+        return request<RaiseInvoiceIn, InvoiceOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation raiseInvoice
+     *
+     * @param raiseInvoiceIn 
+     * @return RequestConfig
+     */
+    fun raiseInvoiceRequestConfig(raiseInvoiceIn: RaiseInvoiceIn) : RequestConfig<RaiseInvoiceIn> {
+        val localVariableBody = raiseInvoiceIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/billing/invoices",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/billing/invoices/{id}/void
+     * Void a draft or issued invoice
+     * Voids a draft or issued invoice — the cancel.  A paid invoice cannot be voided: money has moved, and the correction for that is a refund, not an erasure. The state machine refuses it and that refusal is the answer.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return InvoiceOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun voidInvoice(id: kotlin.String) : InvoiceOut {
+        val localVarResponse = voidInvoiceWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvoiceOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/billing/invoices/{id}/void
+     * Void a draft or issued invoice
+     * Voids a draft or issued invoice — the cancel.  A paid invoice cannot be voided: money has moved, and the correction for that is a refund, not an erasure. The state machine refuses it and that refusal is the answer.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the invoice id.
+     * @return ApiResponse<InvoiceOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun voidInvoiceWithHttpInfo(id: kotlin.String) : ApiResponse<InvoiceOut?> {
+        val localVariableConfig = voidInvoiceRequestConfig(id = id)
+
+        return request<Unit, InvoiceOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation voidInvoice
+     *
+     * @param id ID is the invoice id.
+     * @return RequestConfig
+     */
+    fun voidInvoiceRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/billing/invoices/{id}/void".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

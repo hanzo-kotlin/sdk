@@ -19,10 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudProvisionRequest
-import ai.hanzo.cloud.model.CloudProvisionResult
-import ai.hanzo.cloud.model.CloudProvisionedResource
-import ai.hanzo.cloud.model.CloudProvisionedSummary
+import ai.hanzo.cloud.model.ProvisionRequest
+import ai.hanzo.cloud.model.ProvisionResult
+import ai.hanzo.cloud.model.ProvisionedResource
+import ai.hanzo.cloud.model.ProvisionedSummary
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,8 +50,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * DELETE /v1/datastore/{name}
-     * DropDatastore deprovisions one Hanzo Datastore warehouse.
-     * DropDatastore deprovisions one Hanzo Datastore warehouse. It reverts any app instance bound to it back to Base BEFORE tearing down the org&#39;s dedicated instance, then deletes the sealed credential and removes the metadata row. Answers 204 with no body; a second call is a 404.
+     * Deprovisions one Hanzo Datastore warehouse.
+     * Deprovisions one Hanzo Datastore warehouse. It reverts any app instance bound to it back to Base BEFORE tearing down the org&#39;s dedicated instance, then deletes the sealed credential and removes the metadata row. Answers 204 with no body; a second call is a 404.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -61,8 +61,8 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1DatastoreName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1DatastoreNameWithHttpInfo(name = name)
+    fun deleteV1DatastoreByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1DatastoreByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -81,16 +81,16 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * DELETE /v1/datastore/{name}
-     * DropDatastore deprovisions one Hanzo Datastore warehouse.
-     * DropDatastore deprovisions one Hanzo Datastore warehouse. It reverts any app instance bound to it back to Base BEFORE tearing down the org&#39;s dedicated instance, then deletes the sealed credential and removes the metadata row. Answers 204 with no body; a second call is a 404.
+     * Deprovisions one Hanzo Datastore warehouse.
+     * Deprovisions one Hanzo Datastore warehouse. It reverts any app instance bound to it back to Base BEFORE tearing down the org&#39;s dedicated instance, then deletes the sealed credential and removes the metadata row. Answers 204 with no body; a second call is a 404.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1DatastoreNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1DatastoreNameRequestConfig(name = name)
+    fun deleteV1DatastoreByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1DatastoreByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1DatastoreName
+     * To obtain the request config of the operation deleteV1DatastoreByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1DatastoreNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1DatastoreByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -113,16 +113,16 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/datastore
-     * ListDatastore lists the caller org&#39;s Hanzo Datastore warehouses.
-     * ListDatastore lists the caller org&#39;s Hanzo Datastore warehouses. Each one is a DEDICATED analytical instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is its HTTP port, 8123.
-     * @return kotlin.collections.List<CloudProvisionedSummary>
+     * Lists the caller org&#39;s Hanzo Datastore warehouses.
+     * Lists the caller org&#39;s Hanzo Datastore warehouses. Each one is a DEDICATED analytical instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is its HTTP port, 8123.
+     * @return kotlin.collections.List<ProvisionedSummary>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -131,11 +131,11 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Datastore() : kotlin.collections.List<CloudProvisionedSummary> {
-        val localVarResponse = cloudGetV1DatastoreWithHttpInfo()
+    fun getV1Datastore() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getV1DatastoreWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudProvisionedSummary>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -151,28 +151,28 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/datastore
-     * ListDatastore lists the caller org&#39;s Hanzo Datastore warehouses.
-     * ListDatastore lists the caller org&#39;s Hanzo Datastore warehouses. Each one is a DEDICATED analytical instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is its HTTP port, 8123.
-     * @return ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?>
+     * Lists the caller org&#39;s Hanzo Datastore warehouses.
+     * Lists the caller org&#39;s Hanzo Datastore warehouses. Each one is a DEDICATED analytical instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is its HTTP port, 8123.
+     * @return ApiResponse<kotlin.collections.List<ProvisionedSummary>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DatastoreWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?> {
-        val localVariableConfig = cloudGetV1DatastoreRequestConfig()
+    fun getV1DatastoreWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getV1DatastoreRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudProvisionedSummary>>(
+        return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Datastore
+     * To obtain the request config of the operation getV1Datastore
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DatastoreRequestConfig() : RequestConfig<Unit> {
+    fun getV1DatastoreRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -183,17 +183,17 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/datastore/{name}
-     * GetDatastore returns one Hanzo Datastore warehouse&#39;s metadata.
-     * GetDatastore returns one Hanzo Datastore warehouse&#39;s metadata. It carries the warehouse&#39;s status, its instance address and the admin user the instance booted with — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view rather than the row.
+     * Returns one Hanzo Datastore warehouse&#39;s metadata.
+     * Returns one Hanzo Datastore warehouse&#39;s metadata. It carries the warehouse&#39;s status, its instance address and the admin user the instance booted with — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view rather than the row.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return CloudProvisionedResource
+     * @return ProvisionedResource
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -202,11 +202,11 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DatastoreName(name: kotlin.String) : CloudProvisionedResource {
-        val localVarResponse = cloudGetV1DatastoreNameWithHttpInfo(name = name)
+    fun getV1DatastoreByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getV1DatastoreByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionedResource
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -222,30 +222,30 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/datastore/{name}
-     * GetDatastore returns one Hanzo Datastore warehouse&#39;s metadata.
-     * GetDatastore returns one Hanzo Datastore warehouse&#39;s metadata. It carries the warehouse&#39;s status, its instance address and the admin user the instance booted with — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view rather than the row.
+     * Returns one Hanzo Datastore warehouse&#39;s metadata.
+     * Returns one Hanzo Datastore warehouse&#39;s metadata. It carries the warehouse&#39;s status, its instance address and the admin user the instance booted with — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view rather than the row.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<CloudProvisionedResource?>
+     * @return ApiResponse<ProvisionedResource?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DatastoreNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudProvisionedResource?> {
-        val localVariableConfig = cloudGetV1DatastoreNameRequestConfig(name = name)
+    fun getV1DatastoreByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getV1DatastoreByNameRequestConfig(name = name)
 
-        return request<Unit, CloudProvisionedResource>(
+        return request<Unit, ProvisionedResource>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DatastoreName
+     * To obtain the request config of the operation getV1DatastoreByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudGetV1DatastoreNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DatastoreByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -256,17 +256,17 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/datastore
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return CloudProvisionResult
+     * Provision a Hanzo Datastore instance for your org
+     * Launches your org&#39;s OWN Hanzo Datastore instance and answers with its &#x60;datastore://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ProvisionResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -275,11 +275,11 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Datastore(cloudProvisionRequest: CloudProvisionRequest? = null) : CloudProvisionResult {
-        val localVarResponse = cloudPostV1DatastoreWithHttpInfo(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1Datastore(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postV1DatastoreWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -295,31 +295,31 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * POST /v1/datastore
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return ApiResponse<CloudProvisionResult?>
+     * Provision a Hanzo Datastore instance for your org
+     * Launches your org&#39;s OWN Hanzo Datastore instance and answers with its &#x60;datastore://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ApiResponse<ProvisionResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DatastoreWithHttpInfo(cloudProvisionRequest: CloudProvisionRequest?) : ApiResponse<CloudProvisionResult?> {
-        val localVariableConfig = cloudPostV1DatastoreRequestConfig(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1DatastoreWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postV1DatastoreRequestConfig(provisionRequest = provisionRequest)
 
-        return request<CloudProvisionRequest, CloudProvisionResult>(
+        return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Datastore
+     * To obtain the request config of the operation postV1Datastore
      *
-     * @param cloudProvisionRequest  (optional)
+     * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1DatastoreRequestConfig(cloudProvisionRequest: CloudProvisionRequest?) : RequestConfig<CloudProvisionRequest> {
-        val localVariableBody = cloudProvisionRequest
+    fun postV1DatastoreRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+        val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -330,7 +330,7 @@ class DatastoreApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/datastore",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

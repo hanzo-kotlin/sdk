@@ -15,21 +15,37 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.McpTool
+import ai.hanzo.cloud.model.MCPListing
 
 import com.google.gson.annotations.SerializedName
 
 /**
- * The `tools/list` result.
+ * 
  *
- * @param tools 
+ * @param catalog Catalog is this page of listings, featured first, then by name.
+ * @param limit Limit is the page size that was actually applied — the default or the clamp, when the request asked for neither or for too much.
+ * @param offset Offset is where this page started, so a caller pages from what the server did rather than from what it asked for.
+ * @param total Total is how many listings the filter matched, which is more than this page holds whenever there is a next one.
  */
 
 
 data class McpCatalog (
 
-    @SerializedName("tools")
-    val tools: kotlin.collections.List<McpTool>? = null
+    /* Catalog is this page of listings, featured first, then by name. */
+    @SerializedName("catalog")
+    val catalog: kotlin.collections.List<MCPListing>? = null,
+
+    /* Limit is the page size that was actually applied — the default or the clamp, when the request asked for neither or for too much. */
+    @SerializedName("limit")
+    val limit: kotlin.Int? = null,
+
+    /* Offset is where this page started, so a caller pages from what the server did rather than from what it asked for. */
+    @SerializedName("offset")
+    val offset: kotlin.Int? = null,
+
+    /* Total is how many listings the filter matched, which is more than this page holds whenever there is a next one. */
+    @SerializedName("total")
+    val total: kotlin.Int? = null
 
 ) {
 

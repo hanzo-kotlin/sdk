@@ -10,14 +10,14 @@
 // Org-scoped: /v1/agents replies 403 {"error":"X-Org-Id required"} without one,
 // which `Hanzo` sends from HANZO_ORG_ID.
 //
-// Operations: cloud_post_v1_agents            (POST /v1/agents),
-//             cloud_post_v1_agents_by_ref_run (POST /v1/agents/{ref}/run),
-//             cloud_get_v1_agents_ref_runs    (GET  /v1/agents/{ref}/runs)
+// Operations: post_v1_agents            (POST /v1/agents),
+//             post_v1_agents_by_ref_run (POST /v1/agents/{ref}/run),
+//             get_v1_agents_by_ref_runs (GET  /v1/agents/{ref}/runs)
 //
 //   HANZO_API_KEY=hk-... HANZO_ORG_ID=my-org ./gradlew :examples:agent:run
 import ai.hanzo.Hanzo
 import ai.hanzo.cloud.api.AgentsApi
-import ai.hanzo.cloud.model.CloudCreateAgentIn
+import ai.hanzo.cloud.model.CreateAgentIn
 
 private val TERMINAL = setOf("succeeded", "failed", "cancelled", "canceled", "error", "timeout")
 
@@ -31,24 +31,24 @@ fun main() {
 
     val name = "sdk-example-${System.nanoTime().toString(36)}"
     val agent =
-        agents.cloudPostV1Agents(
-            CloudCreateAgentIn(
+        agents.postV1Agents(
+            CreateAgentIn(
                 name = name,
                 model = model,
-                instructions = "You answer in exactly one sentence.",
+                instructions = "Answer in exactly one sentence: what is the capital of Japan?",
             )
         )
     println("created  ${agent.name} (${agent.id}) model=${agent.model}")
 
-    // The run endpoint returns no body, so the new run is the one that was not
-    // in the list beforehand.
-    val before = agents.cloudGetV1AgentsRefRuns(name).runs.orEmpty().map { it.id }.toSet()
-    agents.cloudPostV1AgentsByRefRun(name)
+    // The run endpoint takes no body and returns none, so the input is the
+    // agent's own instructions and the new run is the one that was not in the
+    // list beforehand.
+    val before = agents.getV1AgentsByRefRuns(name).runs.orEmpty().map { it.id }.toSet()
+    agents.postV1AgentsByRefRun(name)
     println("started  a run of $name")
 
     repeat(60) {
-        val run =
-            agents.cloudGetV1AgentsRefRuns(name).runs.orEmpty().firstOrNull { it.id !in before }
+        val run = agents.getV1AgentsByRefRuns(name).runs.orEmpty().firstOrNull { it.id !in before }
         val status = run?.status?.lowercase().orEmpty()
         if (run != null && status in TERMINAL) {
             println("run      ${run.id} $status in ${run.durationMs}ms")

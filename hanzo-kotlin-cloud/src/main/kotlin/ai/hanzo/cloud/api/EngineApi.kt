@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudEngineStatus
+import ai.hanzo.cloud.model.EngineStatus
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,7 +47,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/engine/model
-     * Model reads one model&#39;s load state — loaded, unloading, or not_found, as the engine itself reports it.
+     * Read one model&#39;s load state on the serving runtime
      * Model reads one model&#39;s load state — loaded, unloading, or not_found, as the engine itself reports it.
      * @param model Model is the model id to inspect, exactly as the model list reports it. (optional)
      * @return kotlin.Any
@@ -59,8 +59,8 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EngineModel(model: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = cloudGetV1EngineModelWithHttpInfo(model = model)
+    fun engineModel(model: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = engineModelWithHttpInfo(model = model)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -79,7 +79,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/engine/model
-     * Model reads one model&#39;s load state — loaded, unloading, or not_found, as the engine itself reports it.
+     * Read one model&#39;s load state on the serving runtime
      * Model reads one model&#39;s load state — loaded, unloading, or not_found, as the engine itself reports it.
      * @param model Model is the model id to inspect, exactly as the model list reports it. (optional)
      * @return ApiResponse<kotlin.Any?>
@@ -88,8 +88,8 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EngineModelWithHttpInfo(model: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1EngineModelRequestConfig(model = model)
+    fun engineModelWithHttpInfo(model: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = engineModelRequestConfig(model = model)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -97,12 +97,12 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EngineModel
+     * To obtain the request config of the operation engineModel
      *
      * @param model Model is the model id to inspect, exactly as the model list reports it. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1EngineModelRequestConfig(model: kotlin.String?) : RequestConfig<Unit> {
+    fun engineModelRequestConfig(model: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -118,15 +118,15 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/model",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/engine/models
-     * Models lists the models the engine serves, each with its load state — the server&#39;s own model table (its OpenAI-style list envelope, load status included), relayed verbatim.
-     * Models lists the models the engine serves, each with its load state — the server&#39;s own model table (its OpenAI-style list envelope, load status included), relayed verbatim.
+     * List the models the serving runtime holds, with each one&#39;s load state
+     * Models lists the models the engine serves, each with its load state — the server&#39;s own model table (its standard list envelope, load status included), relayed verbatim.
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -136,8 +136,8 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EngineModels() : kotlin.Any {
-        val localVarResponse = cloudGetV1EngineModelsWithHttpInfo()
+    fun engineModels() : kotlin.Any {
+        val localVarResponse = engineModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -156,16 +156,16 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/engine/models
-     * Models lists the models the engine serves, each with its load state — the server&#39;s own model table (its OpenAI-style list envelope, load status included), relayed verbatim.
-     * Models lists the models the engine serves, each with its load state — the server&#39;s own model table (its OpenAI-style list envelope, load status included), relayed verbatim.
+     * List the models the serving runtime holds, with each one&#39;s load state
+     * Models lists the models the engine serves, each with its load state — the server&#39;s own model table (its standard list envelope, load status included), relayed verbatim.
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EngineModelsWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1EngineModelsRequestConfig()
+    fun engineModelsWithHttpInfo() : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = engineModelsRequestConfig()
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -173,11 +173,11 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EngineModels
+     * To obtain the request config of the operation engineModels
      *
      * @return RequestConfig
      */
-    fun cloudGetV1EngineModelsRequestConfig() : RequestConfig<Unit> {
+    fun engineModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -188,16 +188,16 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/engine/status
+     * Whether the serving runtime is reachable, and which build it runs
      * Status reports whether the engine deployment is reachable and which build revision it runs — an honest lens for \&quot;is the serving runtime up\&quot;, never a fabricated ok.
-     * Status reports whether the engine deployment is reachable and which build revision it runs — an honest lens for \&quot;is the serving runtime up\&quot;, never a fabricated ok.
-     * @return CloudEngineStatus
+     * @return EngineStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -206,11 +206,11 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EngineStatus() : CloudEngineStatus {
-        val localVarResponse = cloudGetV1EngineStatusWithHttpInfo()
+    fun engineStatus() : EngineStatus {
+        val localVarResponse = engineStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEngineStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EngineStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -226,28 +226,28 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/engine/status
+     * Whether the serving runtime is reachable, and which build it runs
      * Status reports whether the engine deployment is reachable and which build revision it runs — an honest lens for \&quot;is the serving runtime up\&quot;, never a fabricated ok.
-     * Status reports whether the engine deployment is reachable and which build revision it runs — an honest lens for \&quot;is the serving runtime up\&quot;, never a fabricated ok.
-     * @return ApiResponse<CloudEngineStatus?>
+     * @return ApiResponse<EngineStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EngineStatusWithHttpInfo() : ApiResponse<CloudEngineStatus?> {
-        val localVariableConfig = cloudGetV1EngineStatusRequestConfig()
+    fun engineStatusWithHttpInfo() : ApiResponse<EngineStatus?> {
+        val localVariableConfig = engineStatusRequestConfig()
 
-        return request<Unit, CloudEngineStatus>(
+        return request<Unit, EngineStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EngineStatus
+     * To obtain the request config of the operation engineStatus
      *
      * @return RequestConfig
      */
-    fun cloudGetV1EngineStatusRequestConfig() : RequestConfig<Unit> {
+    fun engineStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -258,14 +258,14 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/engine/system
-     * System reads the engine host&#39;s inventory: OS, CPU, memory, every accelerator device with its VRAM and compute capability, and the build&#39;s capabilities (CUDA/Metal/flash-attention) — the real hardware under the serving runtime, relayed verbatim.
+     * The serving host&#39;s own inventory: devices, memory and build capabilities
      * System reads the engine host&#39;s inventory: OS, CPU, memory, every accelerator device with its VRAM and compute capability, and the build&#39;s capabilities (CUDA/Metal/flash-attention) — the real hardware under the serving runtime, relayed verbatim.
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
@@ -276,8 +276,8 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EngineSystem() : kotlin.Any {
-        val localVarResponse = cloudGetV1EngineSystemWithHttpInfo()
+    fun engineSystem() : kotlin.Any {
+        val localVarResponse = engineSystemWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -296,7 +296,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/engine/system
-     * System reads the engine host&#39;s inventory: OS, CPU, memory, every accelerator device with its VRAM and compute capability, and the build&#39;s capabilities (CUDA/Metal/flash-attention) — the real hardware under the serving runtime, relayed verbatim.
+     * The serving host&#39;s own inventory: devices, memory and build capabilities
      * System reads the engine host&#39;s inventory: OS, CPU, memory, every accelerator device with its VRAM and compute capability, and the build&#39;s capabilities (CUDA/Metal/flash-attention) — the real hardware under the serving runtime, relayed verbatim.
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -304,8 +304,8 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EngineSystemWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1EngineSystemRequestConfig()
+    fun engineSystemWithHttpInfo() : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = engineSystemRequestConfig()
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -313,11 +313,11 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EngineSystem
+     * To obtain the request config of the operation engineSystem
      *
      * @return RequestConfig
      */
-    fun cloudGetV1EngineSystemRequestConfig() : RequestConfig<Unit> {
+    fun engineSystemRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,7 +328,7 @@ class EngineApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/engine/system",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

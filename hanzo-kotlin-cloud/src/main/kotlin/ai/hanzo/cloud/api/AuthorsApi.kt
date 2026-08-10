@@ -19,12 +19,12 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudClaim
-import ai.hanzo.cloud.model.CloudConnectRequest
-import ai.hanzo.cloud.model.CloudDeployRecord
-import ai.hanzo.cloud.model.CloudDeployRequest
-import ai.hanzo.cloud.model.CloudEnrolment
-import ai.hanzo.cloud.model.CloudVerifyRequest
+import ai.hanzo.cloud.model.Claim
+import ai.hanzo.cloud.model.ConnectRequest
+import ai.hanzo.cloud.model.DeployRecord
+import ai.hanzo.cloud.model.DeployRequest
+import ai.hanzo.cloud.model.Enrolment
+import ai.hanzo.cloud.model.VerifyRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -52,8 +52,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/authors
-     * MyAuthorProgram returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.
-     * MyAuthorProgram returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.  It answers ONE OF TWO SHAPES from this address. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;, \&quot;badgeBase\&quot;} — an honest \&quot;not enrolled\&quot; rather than a 404, so the console can render the connect form. An enrolled org gets the dashboard: isAuthor, id, status, githubLogin, verified, verifyCode, verifyFile, verifySnippet, shareBps, badgeBase, repos, orgs, deploys, accruedCents, pendingCents, paidCents, payouts and ledger.  For an APPROVED author this read ALSO runs the accrual sweep opportunistically, so the dashboard is self-updating. That is why the royalty AUDIT lives at its own address: an audit must not move the money it is auditing.
+     * Returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.
+     * Returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.  It answers ONE OF TWO SHAPES from this address. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;, \&quot;badgeBase\&quot;} — an honest \&quot;not enrolled\&quot; rather than a 404, so the console can render the connect form. An enrolled org gets the dashboard: isAuthor, id, status, githubLogin, verified, verifyCode, verifyFile, verifySnippet, shareBps, badgeBase, repos, orgs, deploys, accruedCents, pendingCents, paidCents, payouts and ledger.  For an APPROVED author this read ALSO runs the accrual sweep opportunistically, so the dashboard is self-updating. That is why the royalty AUDIT lives at its own address: an audit must not move the money it is auditing.
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -63,8 +63,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Authors() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1AuthorsWithHttpInfo()
+    fun getV1Authors() : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1AuthorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -83,16 +83,16 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/authors
-     * MyAuthorProgram returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.
-     * MyAuthorProgram returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.  It answers ONE OF TWO SHAPES from this address. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;, \&quot;badgeBase\&quot;} — an honest \&quot;not enrolled\&quot; rather than a 404, so the console can render the connect form. An enrolled org gets the dashboard: isAuthor, id, status, githubLogin, verified, verifyCode, verifyFile, verifySnippet, shareBps, badgeBase, repos, orgs, deploys, accruedCents, pendingCents, paidCents, payouts and ledger.  For an APPROVED author this read ALSO runs the accrual sweep opportunistically, so the dashboard is self-updating. That is why the royalty AUDIT lives at its own address: an audit must not move the money it is auditing.
+     * Returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.
+     * Returns the caller&#39;s author-program dashboard: enrolment status, linked forge login, verified repositories and owner-wide claims, recorded deploys, accrued / pending / paid royalty, and the payout history.  It answers ONE OF TWO SHAPES from this address. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;, \&quot;badgeBase\&quot;} — an honest \&quot;not enrolled\&quot; rather than a 404, so the console can render the connect form. An enrolled org gets the dashboard: isAuthor, id, status, githubLogin, verified, verifyCode, verifyFile, verifySnippet, shareBps, badgeBase, repos, orgs, deploys, accruedCents, pendingCents, paidCents, payouts and ledger.  For an APPROVED author this read ALSO runs the accrual sweep opportunistically, so the dashboard is self-updating. That is why the royalty AUDIT lives at its own address: an audit must not move the money it is auditing.
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AuthorsWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1AuthorsRequestConfig()
+    fun getV1AuthorsWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1AuthorsRequestConfig()
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -100,11 +100,11 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Authors
+     * To obtain the request config of the operation getV1Authors
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AuthorsRequestConfig() : RequestConfig<Unit> {
+    fun getV1AuthorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -115,15 +115,15 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/authors/basis
-     * MyRoyaltyBasis returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.
-     * MyRoyaltyBasis returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.  It answers ONE OF TWO SHAPES. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;} — never a 404, which would answer \&quot;is this org an author?\&quot; for anyone who asked. An enrolled org gets the basis: isAuthor, id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger, reconciliation, window, and period when one was requested.  This read NEVER sweeps, and that is the point of it being a separate address from the dashboard: an audit must not move the money it is auditing, so calling it N times leaves the balances and the ledger byte-identical.
+     * Returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.
+     * Returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.  It answers ONE OF TWO SHAPES. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;} — never a 404, which would answer \&quot;is this org an author?\&quot; for anyone who asked. An enrolled org gets the basis: isAuthor, id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger, reconciliation, window, and period when one was requested.  This read NEVER sweeps, and that is the point of it being a separate address from the dashboard: an audit must not move the money it is auditing, so calling it N times leaves the balances and the ledger byte-identical.
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400, because the period is echoed back and used as a SQL filter and is only ever accepted in the one form the accrual latch mints. (optional)
      * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
      * @throws IllegalStateException If the request is not correctly configured
@@ -134,8 +134,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AuthorsBasis(period: kotlin.String? = null) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1AuthorsBasisWithHttpInfo(period = period)
+    fun getV1AuthorsBasis(period: kotlin.String? = null) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1AuthorsBasisWithHttpInfo(period = period)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -154,8 +154,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/authors/basis
-     * MyRoyaltyBasis returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.
-     * MyRoyaltyBasis returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.  It answers ONE OF TWO SHAPES. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;} — never a 404, which would answer \&quot;is this org an author?\&quot; for anyone who asked. An enrolled org gets the basis: isAuthor, id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger, reconciliation, window, and period when one was requested.  This read NEVER sweeps, and that is the point of it being a separate address from the dashboard: an audit must not move the money it is auditing, so calling it N times leaves the balances and the ledger byte-identical.
+     * Returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.
+     * Returns the AUDIT TRAIL behind the caller&#39;s own royalty: every ledger row with the spend it was computed from, the share applied at the time, the platform&#39;s matching half, whether each row satisfies the formula, and the attribution edges that already existed when the row was written.  It answers ONE OF TWO SHAPES. An org that has never connected gets {\&quot;isAuthor\&quot;: false, \&quot;defaultShareBps\&quot;} — never a 404, which would answer \&quot;is this org an author?\&quot; for anyone who asked. An enrolled org gets the basis: isAuthor, id, status, asOf, shareBps, platformShareBps, defaultShareBps, shareSource, settlesTo, method (the formula, the rate card and the sizing), ledger, reconciliation, window, and period when one was requested.  This read NEVER sweeps, and that is the point of it being a separate address from the dashboard: an audit must not move the money it is auditing, so calling it N times leaves the balances and the ledger byte-identical.
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400, because the period is echoed back and used as a SQL filter and is only ever accepted in the one form the accrual latch mints. (optional)
      * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -163,8 +163,8 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AuthorsBasisWithHttpInfo(period: kotlin.String?) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1AuthorsBasisRequestConfig(period = period)
+    fun getV1AuthorsBasisWithHttpInfo(period: kotlin.String?) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1AuthorsBasisRequestConfig(period = period)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -172,12 +172,12 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AuthorsBasis
+     * To obtain the request config of the operation getV1AuthorsBasis
      *
      * @param period Period is the UTC accrual month, YYYY-MM. Empty means every period; any other shape is refused with 400, because the period is echoed back and used as a SQL filter and is only ever accepted in the one form the accrual latch mints. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AuthorsBasisRequestConfig(period: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1AuthorsBasisRequestConfig(period: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -193,17 +193,17 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/basis",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/authors/connect
-     * ConnectAuthor enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs.
-     * ConnectAuthor enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs. It is IDEMPOTENT: a second call returns the same enrolment rather than a conflict.  The forge login is taken from IAM&#39;s LINKED account for the provider when there is one — that is identity proof, not a claim — and only otherwise from the login in the body, which then has to be proven per repository. Connecting does not admit an org to earning: a platform reviewer approves that separately.  Answers 201 when it enrolled the org and 200 when it found an existing enrolment.
-     * @param cloudConnectRequest 
-     * @return CloudEnrolment
+     * Enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs.
+     * Enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs. It is IDEMPOTENT: a second call returns the same enrolment rather than a conflict.  The forge login is taken from IAM&#39;s LINKED account for the provider when there is one — that is identity proof, not a claim — and only otherwise from the login in the body, which then has to be proven per repository. Connecting does not admit an org to earning: a platform reviewer approves that separately.  Answers 201 when it enrolled the org and 200 when it found an existing enrolment.
+     * @param connectRequest 
+     * @return Enrolment
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -212,11 +212,11 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AuthorsConnect(cloudConnectRequest: CloudConnectRequest) : CloudEnrolment {
-        val localVarResponse = cloudPostV1AuthorsConnectWithHttpInfo(cloudConnectRequest = cloudConnectRequest)
+    fun postV1AuthorsConnect(connectRequest: ConnectRequest) : Enrolment {
+        val localVarResponse = postV1AuthorsConnectWithHttpInfo(connectRequest = connectRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEnrolment
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Enrolment
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -232,31 +232,31 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/authors/connect
-     * ConnectAuthor enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs.
-     * ConnectAuthor enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs. It is IDEMPOTENT: a second call returns the same enrolment rather than a conflict.  The forge login is taken from IAM&#39;s LINKED account for the provider when there is one — that is identity proof, not a claim — and only otherwise from the login in the body, which then has to be proven per repository. Connecting does not admit an org to earning: a platform reviewer approves that separately.  Answers 201 when it enrolled the org and 200 when it found an existing enrolment.
-     * @param cloudConnectRequest 
-     * @return ApiResponse<CloudEnrolment?>
+     * Enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs.
+     * Enrols the caller&#39;s org in the author program at status \&quot;connected\&quot; and returns its enrolment, including the verify code the file method needs. It is IDEMPOTENT: a second call returns the same enrolment rather than a conflict.  The forge login is taken from IAM&#39;s LINKED account for the provider when there is one — that is identity proof, not a claim — and only otherwise from the login in the body, which then has to be proven per repository. Connecting does not admit an org to earning: a platform reviewer approves that separately.  Answers 201 when it enrolled the org and 200 when it found an existing enrolment.
+     * @param connectRequest 
+     * @return ApiResponse<Enrolment?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AuthorsConnectWithHttpInfo(cloudConnectRequest: CloudConnectRequest) : ApiResponse<CloudEnrolment?> {
-        val localVariableConfig = cloudPostV1AuthorsConnectRequestConfig(cloudConnectRequest = cloudConnectRequest)
+    fun postV1AuthorsConnectWithHttpInfo(connectRequest: ConnectRequest) : ApiResponse<Enrolment?> {
+        val localVariableConfig = postV1AuthorsConnectRequestConfig(connectRequest = connectRequest)
 
-        return request<CloudConnectRequest, CloudEnrolment>(
+        return request<ConnectRequest, Enrolment>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AuthorsConnect
+     * To obtain the request config of the operation postV1AuthorsConnect
      *
-     * @param cloudConnectRequest 
+     * @param connectRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AuthorsConnectRequestConfig(cloudConnectRequest: CloudConnectRequest) : RequestConfig<CloudConnectRequest> {
-        val localVariableBody = cloudConnectRequest
+    fun postV1AuthorsConnectRequestConfig(connectRequest: ConnectRequest) : RequestConfig<ConnectRequest> {
+        val localVariableBody = connectRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -267,17 +267,17 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/connect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/authors/deploys/record
-     * RecordAuthorDeploy records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.
-     * RecordAuthorDeploy records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.  It is deliberately NOT an error for a deploy to attribute to nobody: a project built from no repository, or from one no author has verified, answers {\&quot;recorded\&quot;: false, \&quot;reason\&quot;} so a deploy pipeline can fire this on every deploy without branching. Attribution resolves per-repository first, then owner-wide, so a repository with its own claim always earns for its own author.  A deploy of a Hanzo-maintained template attributes to the platform treasury, and a self-deploy (the author&#39;s own org deploying its own repository) is recorded for provenance but excluded from accrual. The edge is idempotent per repository+project+org.  Answers 201 when it recorded a new edge and 200 otherwise.
-     * @param cloudDeployRequest 
-     * @return CloudDeployRecord
+     * Records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.
+     * Records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.  It is deliberately NOT an error for a deploy to attribute to nobody: a project built from no repository, or from one no author has verified, answers {\&quot;recorded\&quot;: false, \&quot;reason\&quot;} so a deploy pipeline can fire this on every deploy without branching. Attribution resolves per-repository first, then owner-wide, so a repository with its own claim always earns for its own author.  A deploy of a Hanzo-maintained template attributes to the platform treasury, and a self-deploy (the author&#39;s own org deploying its own repository) is recorded for provenance but excluded from accrual. The edge is idempotent per repository+project+org.  Answers 201 when it recorded a new edge and 200 otherwise.
+     * @param deployRequest 
+     * @return DeployRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -286,11 +286,11 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AuthorsDeploysRecord(cloudDeployRequest: CloudDeployRequest) : CloudDeployRecord {
-        val localVarResponse = cloudPostV1AuthorsDeploysRecordWithHttpInfo(cloudDeployRequest = cloudDeployRequest)
+    fun postV1AuthorsDeploysRecord(deployRequest: DeployRequest) : DeployRecord {
+        val localVarResponse = postV1AuthorsDeploysRecordWithHttpInfo(deployRequest = deployRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDeployRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeployRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -306,31 +306,31 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/authors/deploys/record
-     * RecordAuthorDeploy records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.
-     * RecordAuthorDeploy records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.  It is deliberately NOT an error for a deploy to attribute to nobody: a project built from no repository, or from one no author has verified, answers {\&quot;recorded\&quot;: false, \&quot;reason\&quot;} so a deploy pipeline can fire this on every deploy without branching. Attribution resolves per-repository first, then owner-wide, so a repository with its own claim always earns for its own author.  A deploy of a Hanzo-maintained template attributes to the platform treasury, and a self-deploy (the author&#39;s own org deploying its own repository) is recorded for provenance but excluded from accrual. The edge is idempotent per repository+project+org.  Answers 201 when it recorded a new edge and 200 otherwise.
-     * @param cloudDeployRequest 
-     * @return ApiResponse<CloudDeployRecord?>
+     * Records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.
+     * Records that the caller&#39;s org deployed a project built from a source repository, which is the edge that makes an author&#39;s work earn royalty.  It is deliberately NOT an error for a deploy to attribute to nobody: a project built from no repository, or from one no author has verified, answers {\&quot;recorded\&quot;: false, \&quot;reason\&quot;} so a deploy pipeline can fire this on every deploy without branching. Attribution resolves per-repository first, then owner-wide, so a repository with its own claim always earns for its own author.  A deploy of a Hanzo-maintained template attributes to the platform treasury, and a self-deploy (the author&#39;s own org deploying its own repository) is recorded for provenance but excluded from accrual. The edge is idempotent per repository+project+org.  Answers 201 when it recorded a new edge and 200 otherwise.
+     * @param deployRequest 
+     * @return ApiResponse<DeployRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AuthorsDeploysRecordWithHttpInfo(cloudDeployRequest: CloudDeployRequest) : ApiResponse<CloudDeployRecord?> {
-        val localVariableConfig = cloudPostV1AuthorsDeploysRecordRequestConfig(cloudDeployRequest = cloudDeployRequest)
+    fun postV1AuthorsDeploysRecordWithHttpInfo(deployRequest: DeployRequest) : ApiResponse<DeployRecord?> {
+        val localVariableConfig = postV1AuthorsDeploysRecordRequestConfig(deployRequest = deployRequest)
 
-        return request<CloudDeployRequest, CloudDeployRecord>(
+        return request<DeployRequest, DeployRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AuthorsDeploysRecord
+     * To obtain the request config of the operation postV1AuthorsDeploysRecord
      *
-     * @param cloudDeployRequest 
+     * @param deployRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AuthorsDeploysRecordRequestConfig(cloudDeployRequest: CloudDeployRequest) : RequestConfig<CloudDeployRequest> {
-        val localVariableBody = cloudDeployRequest
+    fun postV1AuthorsDeploysRecordRequestConfig(deployRequest: DeployRequest) : RequestConfig<DeployRequest> {
+        val localVariableBody = deployRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -341,17 +341,17 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/deploys/record",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/authors/repos/verify
-     * VerifyAuthorRepo proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.
-     * VerifyAuthorRepo proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.  Ownership is proven the SAME two ways in both cases, tried in order: an IAM-linked forge token with admin or push permission, or a hanzo.json on the default branch carrying the author&#39;s verify code. Claiming an OWNER proves it against that owner&#39;s \&quot;.github\&quot; control repository, and is exactly as strong as a per-repository claim — an owner the caller cannot prove is refused with 422, never assumed.  A per-repository claim wins over an owner-wide one, so a specifically-claimed repository always earns for its own author. A repository another author has already verified is a 409. The org must have connected first.  Answers 201 when it recorded a new claim and 200 when the claim already existed.
-     * @param cloudVerifyRequest 
-     * @return CloudClaim
+     * Proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.
+     * Proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.  Ownership is proven the SAME two ways in both cases, tried in order: an IAM-linked forge token with admin or push permission, or a hanzo.json on the default branch carrying the author&#39;s verify code. Claiming an OWNER proves it against that owner&#39;s \&quot;.github\&quot; control repository, and is exactly as strong as a per-repository claim — an owner the caller cannot prove is refused with 422, never assumed.  A per-repository claim wins over an owner-wide one, so a specifically-claimed repository always earns for its own author. A repository another author has already verified is a 409. The org must have connected first.  Answers 201 when it recorded a new claim and 200 when the claim already existed.
+     * @param verifyRequest 
+     * @return Claim
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -360,11 +360,11 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AuthorsReposVerify(cloudVerifyRequest: CloudVerifyRequest) : CloudClaim {
-        val localVarResponse = cloudPostV1AuthorsReposVerifyWithHttpInfo(cloudVerifyRequest = cloudVerifyRequest)
+    fun postV1AuthorsReposVerify(verifyRequest: VerifyRequest) : Claim {
+        val localVarResponse = postV1AuthorsReposVerifyWithHttpInfo(verifyRequest = verifyRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClaim
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Claim
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -380,31 +380,31 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/authors/repos/verify
-     * VerifyAuthorRepo proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.
-     * VerifyAuthorRepo proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.  Ownership is proven the SAME two ways in both cases, tried in order: an IAM-linked forge token with admin or push permission, or a hanzo.json on the default branch carrying the author&#39;s verify code. Claiming an OWNER proves it against that owner&#39;s \&quot;.github\&quot; control repository, and is exactly as strong as a per-repository claim — an owner the caller cannot prove is refused with 422, never assumed.  A per-repository claim wins over an owner-wide one, so a specifically-claimed repository always earns for its own author. A repository another author has already verified is a 409. The org must have connected first.  Answers 201 when it recorded a new claim and 200 when the claim already existed.
-     * @param cloudVerifyRequest 
-     * @return ApiResponse<CloudClaim?>
+     * Proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.
+     * Proves that the caller owns a repository — or a whole OWNER — and records the claim, which is what makes deploys of that code earn royalty.  Ownership is proven the SAME two ways in both cases, tried in order: an IAM-linked forge token with admin or push permission, or a hanzo.json on the default branch carrying the author&#39;s verify code. Claiming an OWNER proves it against that owner&#39;s \&quot;.github\&quot; control repository, and is exactly as strong as a per-repository claim — an owner the caller cannot prove is refused with 422, never assumed.  A per-repository claim wins over an owner-wide one, so a specifically-claimed repository always earns for its own author. A repository another author has already verified is a 409. The org must have connected first.  Answers 201 when it recorded a new claim and 200 when the claim already existed.
+     * @param verifyRequest 
+     * @return ApiResponse<Claim?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AuthorsReposVerifyWithHttpInfo(cloudVerifyRequest: CloudVerifyRequest) : ApiResponse<CloudClaim?> {
-        val localVariableConfig = cloudPostV1AuthorsReposVerifyRequestConfig(cloudVerifyRequest = cloudVerifyRequest)
+    fun postV1AuthorsReposVerifyWithHttpInfo(verifyRequest: VerifyRequest) : ApiResponse<Claim?> {
+        val localVariableConfig = postV1AuthorsReposVerifyRequestConfig(verifyRequest = verifyRequest)
 
-        return request<CloudVerifyRequest, CloudClaim>(
+        return request<VerifyRequest, Claim>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AuthorsReposVerify
+     * To obtain the request config of the operation postV1AuthorsReposVerify
      *
-     * @param cloudVerifyRequest 
+     * @param verifyRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1AuthorsReposVerifyRequestConfig(cloudVerifyRequest: CloudVerifyRequest) : RequestConfig<CloudVerifyRequest> {
-        val localVariableBody = cloudVerifyRequest
+    fun postV1AuthorsReposVerifyRequestConfig(verifyRequest: VerifyRequest) : RequestConfig<VerifyRequest> {
+        val localVariableBody = verifyRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -415,7 +415,7 @@ class AuthorsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/authors/repos/verify",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

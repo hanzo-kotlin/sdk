@@ -19,9 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AnalyticsGetSharedWebsite200Response
-import ai.hanzo.cloud.model.CloudEnableResp
-import ai.hanzo.cloud.model.CloudSharesOut
+import ai.hanzo.cloud.model.EnableResp
+import ai.hanzo.cloud.model.SharesOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,83 +47,10 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * GET /v1/analytics/share/{shareId}
-     * Get a shared website by share ID (no auth required)
-     * 
-     * @param shareId 
-     * @return AnalyticsGetSharedWebsite200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun analyticsGetSharedWebsite(shareId: kotlin.String) : AnalyticsGetSharedWebsite200Response {
-        val localVarResponse = analyticsGetSharedWebsiteWithHttpInfo(shareId = shareId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AnalyticsGetSharedWebsite200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/analytics/share/{shareId}
-     * Get a shared website by share ID (no auth required)
-     * 
-     * @param shareId 
-     * @return ApiResponse<AnalyticsGetSharedWebsite200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun analyticsGetSharedWebsiteWithHttpInfo(shareId: kotlin.String) : ApiResponse<AnalyticsGetSharedWebsite200Response?> {
-        val localVariableConfig = analyticsGetSharedWebsiteRequestConfig(shareId = shareId)
-
-        return request<Unit, AnalyticsGetSharedWebsite200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation analyticsGetSharedWebsite
-     *
-     * @param shareId 
-     * @return RequestConfig
-     */
-    fun analyticsGetSharedWebsiteRequestConfig(shareId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/analytics/share/{shareId}".replace("{"+"shareId"+"}", encodeURIComponent(shareId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * GET /v1/share
-     * ListShares returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled.
-     * ListShares returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled. It is a READ and it degrades honestly: an unconfigured deployment, an org that has not provisioned yet, and an unreachable controller all answer an EMPTY list at 200 rather than an error, so the console never error-toasts on load.
-     * @return CloudSharesOut
+     * Returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled.
+     * Returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled. It is a READ and it degrades honestly: an unconfigured deployment, an org that has not provisioned yet, and an unreachable controller all answer an EMPTY list at 200 rather than an error, so the console never error-toasts on load.
+     * @return SharesOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -133,11 +59,11 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Share() : CloudSharesOut {
-        val localVarResponse = cloudGetV1ShareWithHttpInfo()
+    fun getV1Share() : SharesOut {
+        val localVarResponse = getV1ShareWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSharesOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SharesOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -153,28 +79,28 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/share
-     * ListShares returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled.
-     * ListShares returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled. It is a READ and it degrades honestly: an unconfigured deployment, an org that has not provisioned yet, and an unreachable controller all answer an EMPTY list at 200 rather than an error, so the console never error-toasts on load.
-     * @return ApiResponse<CloudSharesOut?>
+     * Returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled.
+     * Returns the tunnel shares the caller&#39;s org currently has open, across every environment that org has enabled. It is a READ and it degrades honestly: an unconfigured deployment, an org that has not provisioned yet, and an unreachable controller all answer an EMPTY list at 200 rather than an error, so the console never error-toasts on load.
+     * @return ApiResponse<SharesOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ShareWithHttpInfo() : ApiResponse<CloudSharesOut?> {
-        val localVariableConfig = cloudGetV1ShareRequestConfig()
+    fun getV1ShareWithHttpInfo() : ApiResponse<SharesOut?> {
+        val localVariableConfig = getV1ShareRequestConfig()
 
-        return request<Unit, CloudSharesOut>(
+        return request<Unit, SharesOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Share
+     * To obtain the request config of the operation getV1Share
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ShareRequestConfig() : RequestConfig<Unit> {
+    fun getV1ShareRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -185,7 +111,7 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/share",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -194,7 +120,7 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/share/enable
      * Enable provisions the caller org&#39;s tunnel account and returns the credential the &#x60;hanzo share&#x60; CLI needs to run a tunnel.
      * Enable provisions the caller org&#39;s tunnel account and returns the credential the &#x60;hanzo share&#x60; CLI needs to run a tunnel. It is idempotent: the account is keyed deterministically off the VALIDATED org, so a repeat call hands back the same account rather than creating a second one, and a caller can only ever provision their OWN org&#39;s account. 503 when the deployment has no share controller configured; 502 when that controller is unreachable.
-     * @return CloudEnableResp
+     * @return EnableResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -203,11 +129,11 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ShareEnable() : CloudEnableResp {
-        val localVarResponse = cloudPostV1ShareEnableWithHttpInfo()
+    fun postV1ShareEnable() : EnableResp {
+        val localVarResponse = postV1ShareEnableWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEnableResp
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EnableResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -225,26 +151,26 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/share/enable
      * Enable provisions the caller org&#39;s tunnel account and returns the credential the &#x60;hanzo share&#x60; CLI needs to run a tunnel.
      * Enable provisions the caller org&#39;s tunnel account and returns the credential the &#x60;hanzo share&#x60; CLI needs to run a tunnel. It is idempotent: the account is keyed deterministically off the VALIDATED org, so a repeat call hands back the same account rather than creating a second one, and a caller can only ever provision their OWN org&#39;s account. 503 when the deployment has no share controller configured; 502 when that controller is unreachable.
-     * @return ApiResponse<CloudEnableResp?>
+     * @return ApiResponse<EnableResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ShareEnableWithHttpInfo() : ApiResponse<CloudEnableResp?> {
-        val localVariableConfig = cloudPostV1ShareEnableRequestConfig()
+    fun postV1ShareEnableWithHttpInfo() : ApiResponse<EnableResp?> {
+        val localVariableConfig = postV1ShareEnableRequestConfig()
 
-        return request<Unit, CloudEnableResp>(
+        return request<Unit, EnableResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ShareEnable
+     * To obtain the request config of the operation postV1ShareEnable
      *
      * @return RequestConfig
      */
-    fun cloudPostV1ShareEnableRequestConfig() : RequestConfig<Unit> {
+    fun postV1ShareEnableRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -255,7 +181,7 @@ class ShareApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/share/enable",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

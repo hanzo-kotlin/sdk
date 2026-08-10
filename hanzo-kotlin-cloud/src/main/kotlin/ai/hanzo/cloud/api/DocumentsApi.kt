@@ -19,11 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.SearchDeleteDocumentsByFilterRequest
-import ai.hanzo.cloud.model.SearchEditDocumentsByFunctionRequest
-import ai.hanzo.cloud.model.SearchPaginatedDocuments
-import ai.hanzo.cloud.model.SearchResponseError
-import ai.hanzo.cloud.model.SearchSummarizedTaskView
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,26 +45,22 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * POST /v1/search/indexes/{indexUid}/documents
-     * Add or replace documents
-     * 
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @param primaryKey Primary key field name (optional)
-     * @return SearchSummarizedTaskView
+     * DELETE /v1/documents
+     * Handles DELETE /v1/documents — a JSON array of file_ids.
+     * Handles DELETE /v1/documents — a JSON array of file_ids.
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchAddOrReplaceDocuments(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>, primaryKey: kotlin.String? = null) : SearchSummarizedTaskView {
-        val localVarResponse = searchAddOrReplaceDocumentsWithHttpInfo(indexUid = indexUid, requestBody = requestBody, primaryKey = primaryKey)
+    fun deleteV1Documents() : Unit {
+        val localVarResponse = deleteV1DocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -84,234 +75,59 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * POST /v1/search/indexes/{indexUid}/documents
-     * Add or replace documents
-     * 
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @param primaryKey Primary key field name (optional)
-     * @return ApiResponse<SearchSummarizedTaskView?>
+     * DELETE /v1/documents
+     * Handles DELETE /v1/documents — a JSON array of file_ids.
+     * Handles DELETE /v1/documents — a JSON array of file_ids.
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchAddOrReplaceDocumentsWithHttpInfo(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>, primaryKey: kotlin.String?) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchAddOrReplaceDocumentsRequestConfig(indexUid = indexUid, requestBody = requestBody, primaryKey = primaryKey)
+    fun deleteV1DocumentsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1DocumentsRequestConfig()
 
-        return request<kotlin.collections.List<kotlin.Any>, SearchSummarizedTaskView>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation searchAddOrReplaceDocuments
+     * To obtain the request config of the operation deleteV1Documents
      *
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @param primaryKey Primary key field name (optional)
      * @return RequestConfig
      */
-    fun searchAddOrReplaceDocumentsRequestConfig(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>, primaryKey: kotlin.String?) : RequestConfig<kotlin.collections.List<kotlin.Any>> {
-        val localVariableBody = requestBody
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (primaryKey != null) {
-                    put("primaryKey", listOf(primaryKey.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/search/indexes/{indexUid}/documents".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/search/indexes/{indexUid}/documents
-     * Add or update documents (partial)
-     * 
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @param primaryKey  (optional)
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchAddOrUpdateDocuments(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>, primaryKey: kotlin.String? = null) : SearchSummarizedTaskView {
-        val localVarResponse = searchAddOrUpdateDocumentsWithHttpInfo(indexUid = indexUid, requestBody = requestBody, primaryKey = primaryKey)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/search/indexes/{indexUid}/documents
-     * Add or update documents (partial)
-     * 
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @param primaryKey  (optional)
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchAddOrUpdateDocumentsWithHttpInfo(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>, primaryKey: kotlin.String?) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchAddOrUpdateDocumentsRequestConfig(indexUid = indexUid, requestBody = requestBody, primaryKey = primaryKey)
-
-        return request<kotlin.collections.List<kotlin.Any>, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchAddOrUpdateDocuments
-     *
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @param primaryKey  (optional)
-     * @return RequestConfig
-     */
-    fun searchAddOrUpdateDocumentsRequestConfig(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.Any>, primaryKey: kotlin.String?) : RequestConfig<kotlin.collections.List<kotlin.Any>> {
-        val localVariableBody = requestBody
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (primaryKey != null) {
-                    put("primaryKey", listOf(primaryKey.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/search/indexes/{indexUid}/documents".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/search/indexes/{indexUid}/documents
-     * Delete all documents in the index
-     * 
-     * @param indexUid Unique index identifier
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchDeleteAllDocuments(indexUid: kotlin.String) : SearchSummarizedTaskView {
-        val localVarResponse = searchDeleteAllDocumentsWithHttpInfo(indexUid = indexUid)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/search/indexes/{indexUid}/documents
-     * Delete all documents in the index
-     * 
-     * @param indexUid Unique index identifier
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchDeleteAllDocumentsWithHttpInfo(indexUid: kotlin.String) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchDeleteAllDocumentsRequestConfig(indexUid = indexUid)
-
-        return request<Unit, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchDeleteAllDocuments
-     *
-     * @param indexUid Unique index identifier
-     * @return RequestConfig
-     */
-    fun searchDeleteAllDocumentsRequestConfig(indexUid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1DocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/search/indexes/{indexUid}/documents".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
+            path = "/v1/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * DELETE /v1/search/indexes/{indexUid}/documents/{documentId}
-     * Delete a single document
-     * 
-     * @param indexUid Unique index identifier
-     * @param documentId 
-     * @return SearchSummarizedTaskView
+     * GET /v1/documents/{file_id}/context
+     * Handles GET /v1/documents/:file_id/context — every chunk of a file, as LangChain Documents (used when RAG_USE_FULL_CONTEXT is on).
+     * Handles GET /v1/documents/:file_id/context — every chunk of a file, as LangChain Documents (used when RAG_USE_FULL_CONTEXT is on).
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchDeleteDocument(indexUid: kotlin.String, documentId: kotlin.String) : SearchSummarizedTaskView {
-        val localVarResponse = searchDeleteDocumentWithHttpInfo(indexUid = indexUid, documentId = documentId)
+    fun getV1DocumentsByFileIdContext() : Unit {
+        val localVarResponse = getV1DocumentsByFileIdContextWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -326,458 +142,38 @@ class DocumentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * DELETE /v1/search/indexes/{indexUid}/documents/{documentId}
-     * Delete a single document
-     * 
-     * @param indexUid Unique index identifier
-     * @param documentId 
-     * @return ApiResponse<SearchSummarizedTaskView?>
+     * GET /v1/documents/{file_id}/context
+     * Handles GET /v1/documents/:file_id/context — every chunk of a file, as LangChain Documents (used when RAG_USE_FULL_CONTEXT is on).
+     * Handles GET /v1/documents/:file_id/context — every chunk of a file, as LangChain Documents (used when RAG_USE_FULL_CONTEXT is on).
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchDeleteDocumentWithHttpInfo(indexUid: kotlin.String, documentId: kotlin.String) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchDeleteDocumentRequestConfig(indexUid = indexUid, documentId = documentId)
+    fun getV1DocumentsByFileIdContextWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DocumentsByFileIdContextRequestConfig()
 
-        return request<Unit, SearchSummarizedTaskView>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation searchDeleteDocument
+     * To obtain the request config of the operation getV1DocumentsByFileIdContext
      *
-     * @param indexUid Unique index identifier
-     * @param documentId 
      * @return RequestConfig
      */
-    fun searchDeleteDocumentRequestConfig(indexUid: kotlin.String, documentId: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DocumentsByFileIdContextRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/search/indexes/{indexUid}/documents/{documentId}".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())).replace("{"+"documentId"+"}", encodeURIComponent(documentId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/documents/delete-batch
-     * Delete documents by IDs
-     * 
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchDeleteDocumentsBatch(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.String>) : SearchSummarizedTaskView {
-        val localVarResponse = searchDeleteDocumentsBatchWithHttpInfo(indexUid = indexUid, requestBody = requestBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/documents/delete-batch
-     * Delete documents by IDs
-     * 
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchDeleteDocumentsBatchWithHttpInfo(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.String>) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchDeleteDocumentsBatchRequestConfig(indexUid = indexUid, requestBody = requestBody)
-
-        return request<kotlin.collections.List<kotlin.String>, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchDeleteDocumentsBatch
-     *
-     * @param indexUid Unique index identifier
-     * @param requestBody 
-     * @return RequestConfig
-     */
-    fun searchDeleteDocumentsBatchRequestConfig(indexUid: kotlin.String, requestBody: kotlin.collections.List<kotlin.String>) : RequestConfig<kotlin.collections.List<kotlin.String>> {
-        val localVariableBody = requestBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/search/indexes/{indexUid}/documents/delete-batch".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/documents/delete
-     * Delete documents by filter
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchDeleteDocumentsByFilterRequest 
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchDeleteDocumentsByFilter(indexUid: kotlin.String, searchDeleteDocumentsByFilterRequest: SearchDeleteDocumentsByFilterRequest) : SearchSummarizedTaskView {
-        val localVarResponse = searchDeleteDocumentsByFilterWithHttpInfo(indexUid = indexUid, searchDeleteDocumentsByFilterRequest = searchDeleteDocumentsByFilterRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/documents/delete
-     * Delete documents by filter
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchDeleteDocumentsByFilterRequest 
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchDeleteDocumentsByFilterWithHttpInfo(indexUid: kotlin.String, searchDeleteDocumentsByFilterRequest: SearchDeleteDocumentsByFilterRequest) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchDeleteDocumentsByFilterRequestConfig(indexUid = indexUid, searchDeleteDocumentsByFilterRequest = searchDeleteDocumentsByFilterRequest)
-
-        return request<SearchDeleteDocumentsByFilterRequest, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchDeleteDocumentsByFilter
-     *
-     * @param indexUid Unique index identifier
-     * @param searchDeleteDocumentsByFilterRequest 
-     * @return RequestConfig
-     */
-    fun searchDeleteDocumentsByFilterRequestConfig(indexUid: kotlin.String, searchDeleteDocumentsByFilterRequest: SearchDeleteDocumentsByFilterRequest) : RequestConfig<SearchDeleteDocumentsByFilterRequest> {
-        val localVariableBody = searchDeleteDocumentsByFilterRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/search/indexes/{indexUid}/documents/delete".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/documents/edit
-     * Edit documents using a function
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchEditDocumentsByFunctionRequest 
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchEditDocumentsByFunction(indexUid: kotlin.String, searchEditDocumentsByFunctionRequest: SearchEditDocumentsByFunctionRequest) : SearchSummarizedTaskView {
-        val localVarResponse = searchEditDocumentsByFunctionWithHttpInfo(indexUid = indexUid, searchEditDocumentsByFunctionRequest = searchEditDocumentsByFunctionRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/documents/edit
-     * Edit documents using a function
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchEditDocumentsByFunctionRequest 
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchEditDocumentsByFunctionWithHttpInfo(indexUid: kotlin.String, searchEditDocumentsByFunctionRequest: SearchEditDocumentsByFunctionRequest) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchEditDocumentsByFunctionRequestConfig(indexUid = indexUid, searchEditDocumentsByFunctionRequest = searchEditDocumentsByFunctionRequest)
-
-        return request<SearchEditDocumentsByFunctionRequest, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchEditDocumentsByFunction
-     *
-     * @param indexUid Unique index identifier
-     * @param searchEditDocumentsByFunctionRequest 
-     * @return RequestConfig
-     */
-    fun searchEditDocumentsByFunctionRequestConfig(indexUid: kotlin.String, searchEditDocumentsByFunctionRequest: SearchEditDocumentsByFunctionRequest) : RequestConfig<SearchEditDocumentsByFunctionRequest> {
-        val localVariableBody = searchEditDocumentsByFunctionRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/search/indexes/{indexUid}/documents/edit".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/documents/{documentId}
-     * Get a single document
-     * 
-     * @param indexUid Unique index identifier
-     * @param documentId 
-     * @param fields  (optional)
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchGetDocument(indexUid: kotlin.String, documentId: kotlin.String, fields: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = searchGetDocumentWithHttpInfo(indexUid = indexUid, documentId = documentId, fields = fields)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/documents/{documentId}
-     * Get a single document
-     * 
-     * @param indexUid Unique index identifier
-     * @param documentId 
-     * @param fields  (optional)
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchGetDocumentWithHttpInfo(indexUid: kotlin.String, documentId: kotlin.String, fields: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = searchGetDocumentRequestConfig(indexUid = indexUid, documentId = documentId, fields = fields)
-
-        return request<Unit, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchGetDocument
-     *
-     * @param indexUid Unique index identifier
-     * @param documentId 
-     * @param fields  (optional)
-     * @return RequestConfig
-     */
-    fun searchGetDocumentRequestConfig(indexUid: kotlin.String, documentId: kotlin.String, fields: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (fields != null) {
-                    put("fields", listOf(fields.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/search/indexes/{indexUid}/documents/{documentId}".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())).replace("{"+"documentId"+"}", encodeURIComponent(documentId.toString())),
+            path = "/v1/documents/{file_id}/context",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/documents
-     * Browse documents
-     * 
-     * @param indexUid Unique index identifier
-     * @param offset  (optional, default to 0)
-     * @param limit  (optional, default to 20)
-     * @param fields Comma-separated fields to return (optional)
-     * @param filter  (optional)
-     * @return SearchPaginatedDocuments
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchGetDocuments(indexUid: kotlin.String, offset: kotlin.Int? = 0, limit: kotlin.Int? = 20, fields: kotlin.String? = null, filter: kotlin.String? = null) : SearchPaginatedDocuments {
-        val localVarResponse = searchGetDocumentsWithHttpInfo(indexUid = indexUid, offset = offset, limit = limit, fields = fields, filter = filter)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchPaginatedDocuments
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/documents
-     * Browse documents
-     * 
-     * @param indexUid Unique index identifier
-     * @param offset  (optional, default to 0)
-     * @param limit  (optional, default to 20)
-     * @param fields Comma-separated fields to return (optional)
-     * @param filter  (optional)
-     * @return ApiResponse<SearchPaginatedDocuments?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchGetDocumentsWithHttpInfo(indexUid: kotlin.String, offset: kotlin.Int?, limit: kotlin.Int?, fields: kotlin.String?, filter: kotlin.String?) : ApiResponse<SearchPaginatedDocuments?> {
-        val localVariableConfig = searchGetDocumentsRequestConfig(indexUid = indexUid, offset = offset, limit = limit, fields = fields, filter = filter)
-
-        return request<Unit, SearchPaginatedDocuments>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchGetDocuments
-     *
-     * @param indexUid Unique index identifier
-     * @param offset  (optional, default to 0)
-     * @param limit  (optional, default to 20)
-     * @param fields Comma-separated fields to return (optional)
-     * @param filter  (optional)
-     * @return RequestConfig
-     */
-    fun searchGetDocumentsRequestConfig(indexUid: kotlin.String, offset: kotlin.Int?, limit: kotlin.Int?, fields: kotlin.String?, filter: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (offset != null) {
-                    put("offset", listOf(offset.toString()))
-                }
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-                if (fields != null) {
-                    put("fields", listOf(fields.toString()))
-                }
-                if (filter != null) {
-                    put("filter", listOf(filter.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/search/indexes/{indexUid}/documents".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

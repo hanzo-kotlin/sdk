@@ -19,6 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.ReleaseState
+import ai.hanzo.cloud.model.RunnerBuildReq
+import ai.hanzo.cloud.model.RunnerBuildResp
+import ai.hanzo.cloud.model.SelfReleaseList
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +50,22 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/runner/releases
-     * 
-     * 
-     * @return void
+     * Lists the self-publish releases this process has run.
+     * Lists the self-publish releases this process has run.  It lists the platform&#39;s own release runs with their current state, so a release that answered 202 with an id can be followed to its end. SuperAdmin only — this is the platform&#39;s own publishing record, not a tenant surface.  The record lives in THIS process&#39;s memory, so it covers the releases this instance started and does not survive a restart.
+     * @return SelfReleaseList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1RunnerReleases() : Unit {
-        val localVarResponse = cloudGetV1RunnerReleasesWithHttpInfo()
+    fun getV1RunnerReleases() : SelfReleaseList {
+        val localVarResponse = getV1RunnerReleasesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SelfReleaseList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,59 +81,62 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/runner/releases
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Lists the self-publish releases this process has run.
+     * Lists the self-publish releases this process has run.  It lists the platform&#39;s own release runs with their current state, so a release that answered 202 with an id can be followed to its end. SuperAdmin only — this is the platform&#39;s own publishing record, not a tenant surface.  The record lives in THIS process&#39;s memory, so it covers the releases this instance started and does not survive a restart.
+     * @return ApiResponse<SelfReleaseList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1RunnerReleasesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1RunnerReleasesRequestConfig()
+    fun getV1RunnerReleasesWithHttpInfo() : ApiResponse<SelfReleaseList?> {
+        val localVariableConfig = getV1RunnerReleasesRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, SelfReleaseList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1RunnerReleases
+     * To obtain the request config of the operation getV1RunnerReleases
      *
      * @return RequestConfig
      */
-    fun cloudGetV1RunnerReleasesRequestConfig() : RequestConfig<Unit> {
+    fun getV1RunnerReleasesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/runner/releases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/runner/releases/{id}
-     * 
-     * 
-     * @param id 
-     * @return void
+     * Returns one self-publish release by the id its 202 returned.
+     * Returns one self-publish release by the id its 202 returned.  It returns the state of one release run — which is the whole reason the trigger answers with an id, because without this a release that died in the detached pipeline would look exactly like one still in flight. SuperAdmin only.  A 404 means the id is unknown OR has aged out of this process&#39;s in-memory record. That is the honest answer either way: the process genuinely cannot tell the two apart.
+     * @param id ID is the build id the release trigger answered with, from the path.
+     * @return ReleaseState
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1RunnerReleasesById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1RunnerReleasesByIdWithHttpInfo(id = id)
+    fun getV1RunnerReleasesById(id: kotlin.String) : ReleaseState {
+        val localVarResponse = getV1RunnerReleasesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReleaseState
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -144,60 +152,64 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/runner/releases/{id}
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
+     * Returns one self-publish release by the id its 202 returned.
+     * Returns one self-publish release by the id its 202 returned.  It returns the state of one release run — which is the whole reason the trigger answers with an id, because without this a release that died in the detached pipeline would look exactly like one still in flight. SuperAdmin only.  A 404 means the id is unknown OR has aged out of this process&#39;s in-memory record. That is the honest answer either way: the process genuinely cannot tell the two apart.
+     * @param id ID is the build id the release trigger answered with, from the path.
+     * @return ApiResponse<ReleaseState?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1RunnerReleasesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1RunnerReleasesByIdRequestConfig(id = id)
+    fun getV1RunnerReleasesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<ReleaseState?> {
+        val localVariableConfig = getV1RunnerReleasesByIdRequestConfig(id = id)
 
-        return request<Unit, Unit>(
+        return request<Unit, ReleaseState>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1RunnerReleasesById
+     * To obtain the request config of the operation getV1RunnerReleasesById
      *
-     * @param id 
+     * @param id ID is the build id the release trigger answered with, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1RunnerReleasesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1RunnerReleasesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/runner/releases/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/runner
-     * 
-     * 
-     * @return void
+     * Triggers a native build — an image, or the binaries a repo declares.
+     * Triggers a native build — an image, or the binaries a repo declares.  The fabric&#39;s own build trigger, and what &#x60;hanzo build&#x60;, git-push-to-deploy and cloud&#39;s own self-release all call. It answers 202 with the build job id: a queued build, not a pushed artifact.  Two lanes, and a build is exactly one of them. The IMAGE lane takes &#x60;repo&#x60; and the output &#x60;image&#x60; and launches a BuildKit Job that pushes it. The ARTIFACT lane takes &#x60;binaries&#x60; — the same recipe the repo&#39;s hanzo.yml declares — and publishes to object storage instead; it must carry no &#x60;image&#x60;, because a build produces binaries or an image, never both. &#x60;release: true&#x60; is the third mode: cloud self-publishing its own image, version computed, built, smoke-tested, tagged and announced.  PRIVILEGED, with exactly two credentials and never a third: the shared build-callback token compared in constant time — the machine path, which a user never holds — or a validated IAM principal who is an ADMIN of their org, which is the &#x60;hanzo build&#x60; user path and means one IAM login authorizes a build with no separate build token. A plain member is refused.  Both paths are bounded the same way: the output must push to a registry the fabric owns, and on the IAM path the image&#39;s registry namespace must MATCH the caller&#39;s own validated org — so an org admin can only publish into their own brand and can never overwrite another&#39;s through the shared push credential. The same confinement applies to the artifact lane&#39;s repo owner.  &#x60;release: true&#x60; is the exception, and takes SUPERADMIN. It publishes the platform&#39;s own image — the binary the whole fleet runs — so what it lands reaches every org at the next reconcile, and no role inside the caller&#39;s own org can authorize that. An org admin is refused however the registry namespace lines up, and the build token, which carries no identity at all, may enqueue an ordinary build but never a release.  The output image is parsed and validated as a single well-formed OCI ref before any authorization decision reads it, so a crafted ref cannot smuggle a build-exporter attribute past the check.
+     * @param runnerBuildReq 
+     * @return RunnerBuildResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Runner() : Unit {
-        val localVarResponse = cloudPostV1RunnerWithHttpInfo()
+    fun postV1Runner(runnerBuildReq: RunnerBuildReq) : RunnerBuildResp {
+        val localVarResponse = postV1RunnerWithHttpInfo(runnerBuildReq = runnerBuildReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunnerBuildResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -213,37 +225,42 @@ class RunnerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/runner
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Triggers a native build — an image, or the binaries a repo declares.
+     * Triggers a native build — an image, or the binaries a repo declares.  The fabric&#39;s own build trigger, and what &#x60;hanzo build&#x60;, git-push-to-deploy and cloud&#39;s own self-release all call. It answers 202 with the build job id: a queued build, not a pushed artifact.  Two lanes, and a build is exactly one of them. The IMAGE lane takes &#x60;repo&#x60; and the output &#x60;image&#x60; and launches a BuildKit Job that pushes it. The ARTIFACT lane takes &#x60;binaries&#x60; — the same recipe the repo&#39;s hanzo.yml declares — and publishes to object storage instead; it must carry no &#x60;image&#x60;, because a build produces binaries or an image, never both. &#x60;release: true&#x60; is the third mode: cloud self-publishing its own image, version computed, built, smoke-tested, tagged and announced.  PRIVILEGED, with exactly two credentials and never a third: the shared build-callback token compared in constant time — the machine path, which a user never holds — or a validated IAM principal who is an ADMIN of their org, which is the &#x60;hanzo build&#x60; user path and means one IAM login authorizes a build with no separate build token. A plain member is refused.  Both paths are bounded the same way: the output must push to a registry the fabric owns, and on the IAM path the image&#39;s registry namespace must MATCH the caller&#39;s own validated org — so an org admin can only publish into their own brand and can never overwrite another&#39;s through the shared push credential. The same confinement applies to the artifact lane&#39;s repo owner.  &#x60;release: true&#x60; is the exception, and takes SUPERADMIN. It publishes the platform&#39;s own image — the binary the whole fleet runs — so what it lands reaches every org at the next reconcile, and no role inside the caller&#39;s own org can authorize that. An org admin is refused however the registry namespace lines up, and the build token, which carries no identity at all, may enqueue an ordinary build but never a release.  The output image is parsed and validated as a single well-formed OCI ref before any authorization decision reads it, so a crafted ref cannot smuggle a build-exporter attribute past the check.
+     * @param runnerBuildReq 
+     * @return ApiResponse<RunnerBuildResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1RunnerWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1RunnerRequestConfig()
+    fun postV1RunnerWithHttpInfo(runnerBuildReq: RunnerBuildReq) : ApiResponse<RunnerBuildResp?> {
+        val localVariableConfig = postV1RunnerRequestConfig(runnerBuildReq = runnerBuildReq)
 
-        return request<Unit, Unit>(
+        return request<RunnerBuildReq, RunnerBuildResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Runner
+     * To obtain the request config of the operation postV1Runner
      *
+     * @param runnerBuildReq 
      * @return RequestConfig
      */
-    fun cloudPostV1RunnerRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1RunnerRequestConfig(runnerBuildReq: RunnerBuildReq) : RequestConfig<RunnerBuildReq> {
+        val localVariableBody = runnerBuildReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/runner",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

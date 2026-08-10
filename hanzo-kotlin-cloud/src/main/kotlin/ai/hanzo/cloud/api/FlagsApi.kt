@@ -19,13 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudActivityOut
-import ai.hanzo.cloud.model.CloudDefRow
-import ai.hanzo.cloud.model.CloudDefsOut
-import ai.hanzo.cloud.model.CloudDeletedOut
-import ai.hanzo.cloud.model.CloudEvaluateIn
-import ai.hanzo.cloud.model.CloudHealthOut
-import ai.hanzo.cloud.model.CloudWaitlistModeView
+import ai.hanzo.cloud.model.ActivityOut
+import ai.hanzo.cloud.model.DefRow
+import ai.hanzo.cloud.model.DefsOut
+import ai.hanzo.cloud.model.DeletedOut
+import ai.hanzo.cloud.model.EvaluateIn
+import ai.hanzo.cloud.model.HealthOut
+import ai.hanzo.cloud.model.WaitlistModeView
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,10 +53,10 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/flags/defs/{key}
-     * DeleteFlagDefinition removes one flag definition by key and records the deletion in the change log.
-     * DeleteFlagDefinition removes one flag definition by key and records the deletion in the change log. A key the caller&#39;s store does not hold is a 404.
+     * Removes one flag definition by key and records the deletion in the change log.
+     * Removes one flag definition by key and records the deletion in the change log. A key the caller&#39;s store does not hold is a 404.
      * @param key Key is the flag key to act on, from the path.
-     * @return CloudDeletedOut
+     * @return DeletedOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -65,11 +65,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1FlagsDefsKey(key: kotlin.String) : CloudDeletedOut {
-        val localVarResponse = cloudDeleteV1FlagsDefsKeyWithHttpInfo(key = key)
+    fun deleteV1FlagsDefsByKey(key: kotlin.String) : DeletedOut {
+        val localVarResponse = deleteV1FlagsDefsByKeyWithHttpInfo(key = key)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDeletedOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeletedOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -85,30 +85,30 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/flags/defs/{key}
-     * DeleteFlagDefinition removes one flag definition by key and records the deletion in the change log.
-     * DeleteFlagDefinition removes one flag definition by key and records the deletion in the change log. A key the caller&#39;s store does not hold is a 404.
+     * Removes one flag definition by key and records the deletion in the change log.
+     * Removes one flag definition by key and records the deletion in the change log. A key the caller&#39;s store does not hold is a 404.
      * @param key Key is the flag key to act on, from the path.
-     * @return ApiResponse<CloudDeletedOut?>
+     * @return ApiResponse<DeletedOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1FlagsDefsKeyWithHttpInfo(key: kotlin.String) : ApiResponse<CloudDeletedOut?> {
-        val localVariableConfig = cloudDeleteV1FlagsDefsKeyRequestConfig(key = key)
+    fun deleteV1FlagsDefsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<DeletedOut?> {
+        val localVariableConfig = deleteV1FlagsDefsByKeyRequestConfig(key = key)
 
-        return request<Unit, CloudDeletedOut>(
+        return request<Unit, DeletedOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1FlagsDefsKey
+     * To obtain the request config of the operation deleteV1FlagsDefsByKey
      *
      * @param key Key is the flag key to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1FlagsDefsKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1FlagsDefsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -119,17 +119,17 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/flags/activity
-     * ListFlagActivity returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
-     * ListFlagActivity returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
+     * Returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
+     * Returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
      * @param limit Limit caps the rows returned. 1–500; anything else takes the default 100. (optional)
-     * @return CloudActivityOut
+     * @return ActivityOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -138,11 +138,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlagsActivity(limit: kotlin.Int? = null) : CloudActivityOut {
-        val localVarResponse = cloudGetV1FlagsActivityWithHttpInfo(limit = limit)
+    fun getV1FlagsActivity(limit: kotlin.Int? = null) : ActivityOut {
+        val localVarResponse = getV1FlagsActivityWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActivityOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActivityOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -158,30 +158,30 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/flags/activity
-     * ListFlagActivity returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
-     * ListFlagActivity returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
+     * Returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
+     * Returns the caller&#39;s flag change log newest-first: every create, update and delete, with the actor and the time.
      * @param limit Limit caps the rows returned. 1–500; anything else takes the default 100. (optional)
-     * @return ApiResponse<CloudActivityOut?>
+     * @return ApiResponse<ActivityOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlagsActivityWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudActivityOut?> {
-        val localVariableConfig = cloudGetV1FlagsActivityRequestConfig(limit = limit)
+    fun getV1FlagsActivityWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ActivityOut?> {
+        val localVariableConfig = getV1FlagsActivityRequestConfig(limit = limit)
 
-        return request<Unit, CloudActivityOut>(
+        return request<Unit, ActivityOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlagsActivity
+     * To obtain the request config of the operation getV1FlagsActivity
      *
      * @param limit Limit caps the rows returned. 1–500; anything else takes the default 100. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FlagsActivityRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1FlagsActivityRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -197,16 +197,16 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/activity",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/flags/defs
-     * ListFlagDefinitions returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
-     * ListFlagDefinitions returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
-     * @return CloudDefsOut
+     * Returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
+     * Returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
+     * @return DefsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -215,11 +215,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlagsDefs() : CloudDefsOut {
-        val localVarResponse = cloudGetV1FlagsDefsWithHttpInfo()
+    fun getV1FlagsDefs() : DefsOut {
+        val localVarResponse = getV1FlagsDefsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDefsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DefsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -235,28 +235,28 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/flags/defs
-     * ListFlagDefinitions returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
-     * ListFlagDefinitions returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
-     * @return ApiResponse<CloudDefsOut?>
+     * Returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
+     * Returns every flag definition in the caller&#39;s (org, project) store, by key, with its version and who last changed it.
+     * @return ApiResponse<DefsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlagsDefsWithHttpInfo() : ApiResponse<CloudDefsOut?> {
-        val localVariableConfig = cloudGetV1FlagsDefsRequestConfig()
+    fun getV1FlagsDefsWithHttpInfo() : ApiResponse<DefsOut?> {
+        val localVariableConfig = getV1FlagsDefsRequestConfig()
 
-        return request<Unit, CloudDefsOut>(
+        return request<Unit, DefsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlagsDefs
+     * To obtain the request config of the operation getV1FlagsDefs
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FlagsDefsRequestConfig() : RequestConfig<Unit> {
+    fun getV1FlagsDefsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -267,17 +267,17 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/flags/defs/{key}
-     * GetFlagDefinition returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
-     * GetFlagDefinition returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
+     * Returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
+     * Returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
      * @param key Key is the flag key to act on, from the path.
-     * @return CloudDefRow
+     * @return DefRow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -286,11 +286,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlagsDefsKey(key: kotlin.String) : CloudDefRow {
-        val localVarResponse = cloudGetV1FlagsDefsKeyWithHttpInfo(key = key)
+    fun getV1FlagsDefsByKey(key: kotlin.String) : DefRow {
+        val localVarResponse = getV1FlagsDefsByKeyWithHttpInfo(key = key)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDefRow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DefRow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -306,30 +306,30 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/flags/defs/{key}
-     * GetFlagDefinition returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
-     * GetFlagDefinition returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
+     * Returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
+     * Returns one flag definition by key, or 404 when the caller&#39;s store has none under that key.
      * @param key Key is the flag key to act on, from the path.
-     * @return ApiResponse<CloudDefRow?>
+     * @return ApiResponse<DefRow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlagsDefsKeyWithHttpInfo(key: kotlin.String) : ApiResponse<CloudDefRow?> {
-        val localVariableConfig = cloudGetV1FlagsDefsKeyRequestConfig(key = key)
+    fun getV1FlagsDefsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<DefRow?> {
+        val localVariableConfig = getV1FlagsDefsByKeyRequestConfig(key = key)
 
-        return request<Unit, CloudDefRow>(
+        return request<Unit, DefRow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlagsDefsKey
+     * To obtain the request config of the operation getV1FlagsDefsByKey
      *
      * @param key Key is the flag key to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1FlagsDefsKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
+    fun getV1FlagsDefsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -340,7 +340,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -349,7 +349,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/flags/health
      * Health reports that the flag engine is serving.
      * Health reports that the flag engine is serving. It is not gated: liveness must be probe-able without a token.
-     * @return CloudHealthOut
+     * @return HealthOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -358,11 +358,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlagsHealth() : CloudHealthOut {
-        val localVarResponse = cloudGetV1FlagsHealthWithHttpInfo()
+    fun getV1FlagsHealth() : HealthOut {
+        val localVarResponse = getV1FlagsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHealthOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HealthOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -380,26 +380,26 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/flags/health
      * Health reports that the flag engine is serving.
      * Health reports that the flag engine is serving. It is not gated: liveness must be probe-able without a token.
-     * @return ApiResponse<CloudHealthOut?>
+     * @return ApiResponse<HealthOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlagsHealthWithHttpInfo() : ApiResponse<CloudHealthOut?> {
-        val localVariableConfig = cloudGetV1FlagsHealthRequestConfig()
+    fun getV1FlagsHealthWithHttpInfo() : ApiResponse<HealthOut?> {
+        val localVariableConfig = getV1FlagsHealthRequestConfig()
 
-        return request<Unit, CloudHealthOut>(
+        return request<Unit, HealthOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlagsHealth
+     * To obtain the request config of the operation getV1FlagsHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FlagsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1FlagsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -410,17 +410,17 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/flags/waitlist
-     * WaitlistMode reports whether ONE host is currently gated by the launch waitlist.
-     * WaitlistMode reports whether ONE host is currently gated by the launch waitlist. It resolves the host to the service that governs it and reads that service&#39;s waitlist switch, so a guard sitting in front of a hosted surface can decide in one call whether to show the waitlist or the product. It answers for the ONE host asked about and never enumerates the registry, which is why it needs no credential. It FAILS OPEN: an unregistered host, an unmounted registry and a store fault all answer known&#x3D;false with mode&#x3D;false, so a request is never gated pre-boot or on a registry fault.
+     * Reports whether ONE host is currently gated by the launch waitlist.
+     * Reports whether ONE host is currently gated by the launch waitlist. It resolves the host to the service that governs it and reads that service&#39;s waitlist switch, so a guard sitting in front of a hosted surface can decide in one call whether to show the waitlist or the product. It answers for the ONE host asked about and never enumerates the registry, which is why it needs no credential. It FAILS OPEN: an unregistered host, an unmounted registry and a store fault all answer known&#x3D;false with mode&#x3D;false, so a request is never gated pre-boot or on a registry fault.
      * @param host Host is the host to resolve, e.g. \&quot;chat.hanzo.ai\&quot;. Defaults to the request&#39;s own Host header when omitted, which is what lets a guard running on the governed host ask about itself with no argument. (optional)
-     * @return CloudWaitlistModeView
+     * @return WaitlistModeView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -429,11 +429,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlagsWaitlist(host: kotlin.String? = null) : CloudWaitlistModeView {
-        val localVarResponse = cloudGetV1FlagsWaitlistWithHttpInfo(host = host)
+    fun getV1FlagsWaitlist(host: kotlin.String? = null) : WaitlistModeView {
+        val localVarResponse = getV1FlagsWaitlistWithHttpInfo(host = host)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWaitlistModeView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as WaitlistModeView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -449,30 +449,30 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/flags/waitlist
-     * WaitlistMode reports whether ONE host is currently gated by the launch waitlist.
-     * WaitlistMode reports whether ONE host is currently gated by the launch waitlist. It resolves the host to the service that governs it and reads that service&#39;s waitlist switch, so a guard sitting in front of a hosted surface can decide in one call whether to show the waitlist or the product. It answers for the ONE host asked about and never enumerates the registry, which is why it needs no credential. It FAILS OPEN: an unregistered host, an unmounted registry and a store fault all answer known&#x3D;false with mode&#x3D;false, so a request is never gated pre-boot or on a registry fault.
+     * Reports whether ONE host is currently gated by the launch waitlist.
+     * Reports whether ONE host is currently gated by the launch waitlist. It resolves the host to the service that governs it and reads that service&#39;s waitlist switch, so a guard sitting in front of a hosted surface can decide in one call whether to show the waitlist or the product. It answers for the ONE host asked about and never enumerates the registry, which is why it needs no credential. It FAILS OPEN: an unregistered host, an unmounted registry and a store fault all answer known&#x3D;false with mode&#x3D;false, so a request is never gated pre-boot or on a registry fault.
      * @param host Host is the host to resolve, e.g. \&quot;chat.hanzo.ai\&quot;. Defaults to the request&#39;s own Host header when omitted, which is what lets a guard running on the governed host ask about itself with no argument. (optional)
-     * @return ApiResponse<CloudWaitlistModeView?>
+     * @return ApiResponse<WaitlistModeView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlagsWaitlistWithHttpInfo(host: kotlin.String?) : ApiResponse<CloudWaitlistModeView?> {
-        val localVariableConfig = cloudGetV1FlagsWaitlistRequestConfig(host = host)
+    fun getV1FlagsWaitlistWithHttpInfo(host: kotlin.String?) : ApiResponse<WaitlistModeView?> {
+        val localVariableConfig = getV1FlagsWaitlistRequestConfig(host = host)
 
-        return request<Unit, CloudWaitlistModeView>(
+        return request<Unit, WaitlistModeView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlagsWaitlist
+     * To obtain the request config of the operation getV1FlagsWaitlist
      *
      * @param host Host is the host to resolve, e.g. \&quot;chat.hanzo.ai\&quot;. Defaults to the request&#39;s own Host header when omitted, which is what lets a guard running on the governed host ask about itself with no argument. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FlagsWaitlistRequestConfig(host: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1FlagsWaitlistRequestConfig(host: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -488,16 +488,16 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/waitlist",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/flags
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
-     * @param cloudEvaluateIn 
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
+     * @param evaluateIn 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -507,8 +507,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Flags(cloudEvaluateIn: CloudEvaluateIn) : kotlin.Any {
-        val localVarResponse = cloudPostV1FlagsWithHttpInfo(cloudEvaluateIn = cloudEvaluateIn)
+    fun postV1Flags(evaluateIn: EvaluateIn) : kotlin.Any {
+        val localVarResponse = postV1FlagsWithHttpInfo(evaluateIn = evaluateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -527,31 +527,31 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/flags
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
-     * @param cloudEvaluateIn 
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
+     * @param evaluateIn 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FlagsWithHttpInfo(cloudEvaluateIn: CloudEvaluateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPostV1FlagsRequestConfig(cloudEvaluateIn = cloudEvaluateIn)
+    fun postV1FlagsWithHttpInfo(evaluateIn: EvaluateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1FlagsRequestConfig(evaluateIn = evaluateIn)
 
-        return request<CloudEvaluateIn, kotlin.Any>(
+        return request<EvaluateIn, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Flags
+     * To obtain the request config of the operation postV1Flags
      *
-     * @param cloudEvaluateIn 
+     * @param evaluateIn 
      * @return RequestConfig
      */
-    fun cloudPostV1FlagsRequestConfig(cloudEvaluateIn: CloudEvaluateIn) : RequestConfig<CloudEvaluateIn> {
-        val localVariableBody = cloudEvaluateIn
+    fun postV1FlagsRequestConfig(evaluateIn: EvaluateIn) : RequestConfig<EvaluateIn> {
+        val localVariableBody = evaluateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -562,16 +562,16 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/flags/decide
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
-     * @param cloudEvaluateIn 
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
+     * @param evaluateIn 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -581,8 +581,8 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FlagsDecide(cloudEvaluateIn: CloudEvaluateIn) : kotlin.Any {
-        val localVarResponse = cloudPostV1FlagsDecideWithHttpInfo(cloudEvaluateIn = cloudEvaluateIn)
+    fun postV1FlagsDecide(evaluateIn: EvaluateIn) : kotlin.Any {
+        val localVarResponse = postV1FlagsDecideWithHttpInfo(evaluateIn = evaluateIn)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -601,31 +601,31 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/flags/decide
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
-     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the PostHog-shaped verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
-     * @param cloudEvaluateIn 
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute.
+     * Evaluate runs the caller&#39;s flag definitions for one identity and returns the flag verdict: which flags are on (or which variant), their payloads, and whether any definition failed to compute. Evaluation is in-process over the caller&#39;s own (org, project) definitions — no network hop, no shared KV — so a tenant can only ever evaluate its own flags.
+     * @param evaluateIn 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FlagsDecideWithHttpInfo(cloudEvaluateIn: CloudEvaluateIn) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPostV1FlagsDecideRequestConfig(cloudEvaluateIn = cloudEvaluateIn)
+    fun postV1FlagsDecideWithHttpInfo(evaluateIn: EvaluateIn) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1FlagsDecideRequestConfig(evaluateIn = evaluateIn)
 
-        return request<CloudEvaluateIn, kotlin.Any>(
+        return request<EvaluateIn, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FlagsDecide
+     * To obtain the request config of the operation postV1FlagsDecide
      *
-     * @param cloudEvaluateIn 
+     * @param evaluateIn 
      * @return RequestConfig
      */
-    fun cloudPostV1FlagsDecideRequestConfig(cloudEvaluateIn: CloudEvaluateIn) : RequestConfig<CloudEvaluateIn> {
-        val localVariableBody = cloudEvaluateIn
+    fun postV1FlagsDecideRequestConfig(evaluateIn: EvaluateIn) : RequestConfig<EvaluateIn> {
+        val localVariableBody = evaluateIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -636,18 +636,18 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/decide",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/flags/defs/{key}
-     * PutFlagDefinition creates or replaces the flag definition at the path&#39;s key and returns the stored row.
-     * PutFlagDefinition creates or replaces the flag definition at the path&#39;s key and returns the stored row. The BODY IS THE DEFINITION DOCUMENT — the PostHog-shaped JSON object the evaluator consumes — and it is stored verbatim except that its \&quot;key\&quot; is forced to the key in the URL, so a document can never be filed under a name other than the one it was addressed by. Every write bumps the version and appends to the change log under the caller&#39;s identity.
+     * Creates or replaces the flag definition at the path&#39;s key and returns the stored row.
+     * Creates or replaces the flag definition at the path&#39;s key and returns the stored row. The BODY IS THE DEFINITION DOCUMENT — the flag-definition JSON object the evaluator consumes — and it is stored verbatim except that its \&quot;key\&quot; is forced to the key in the URL, so a document can never be filed under a name other than the one it was addressed by. Every write bumps the version and appends to the change log under the caller&#39;s identity.
      * @param key Key is the flag key to write, from the path.
      * @param body 
-     * @return CloudDefRow
+     * @return DefRow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -656,11 +656,11 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1FlagsDefsKey(key: kotlin.String, body: kotlin.Any) : CloudDefRow {
-        val localVarResponse = cloudPutV1FlagsDefsKeyWithHttpInfo(key = key, body = body)
+    fun putV1FlagsDefsByKey(key: kotlin.String, body: kotlin.Any) : DefRow {
+        val localVarResponse = putV1FlagsDefsByKeyWithHttpInfo(key = key, body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDefRow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DefRow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -676,32 +676,32 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/flags/defs/{key}
-     * PutFlagDefinition creates or replaces the flag definition at the path&#39;s key and returns the stored row.
-     * PutFlagDefinition creates or replaces the flag definition at the path&#39;s key and returns the stored row. The BODY IS THE DEFINITION DOCUMENT — the PostHog-shaped JSON object the evaluator consumes — and it is stored verbatim except that its \&quot;key\&quot; is forced to the key in the URL, so a document can never be filed under a name other than the one it was addressed by. Every write bumps the version and appends to the change log under the caller&#39;s identity.
+     * Creates or replaces the flag definition at the path&#39;s key and returns the stored row.
+     * Creates or replaces the flag definition at the path&#39;s key and returns the stored row. The BODY IS THE DEFINITION DOCUMENT — the flag-definition JSON object the evaluator consumes — and it is stored verbatim except that its \&quot;key\&quot; is forced to the key in the URL, so a document can never be filed under a name other than the one it was addressed by. Every write bumps the version and appends to the change log under the caller&#39;s identity.
      * @param key Key is the flag key to write, from the path.
      * @param body 
-     * @return ApiResponse<CloudDefRow?>
+     * @return ApiResponse<DefRow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1FlagsDefsKeyWithHttpInfo(key: kotlin.String, body: kotlin.Any) : ApiResponse<CloudDefRow?> {
-        val localVariableConfig = cloudPutV1FlagsDefsKeyRequestConfig(key = key, body = body)
+    fun putV1FlagsDefsByKeyWithHttpInfo(key: kotlin.String, body: kotlin.Any) : ApiResponse<DefRow?> {
+        val localVariableConfig = putV1FlagsDefsByKeyRequestConfig(key = key, body = body)
 
-        return request<kotlin.Any, CloudDefRow>(
+        return request<kotlin.Any, DefRow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1FlagsDefsKey
+     * To obtain the request config of the operation putV1FlagsDefsByKey
      *
      * @param key Key is the flag key to write, from the path.
      * @param body 
      * @return RequestConfig
      */
-    fun cloudPutV1FlagsDefsKeyRequestConfig(key: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
+    fun putV1FlagsDefsByKeyRequestConfig(key: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -713,7 +713,7 @@ class FlagsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/flags/defs/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -46,8 +46,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/traces/health
-     * 
-     * 
+     * How many spans this deployment holds for your org
+     * Reports the native trace store&#39;s live state for the calling tenant: the subsystem version and &#x60;spans&#x60;, the count actually held right now. Not a dependency probe — the store is in-process, so this answers 200 whenever the process is up.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -56,8 +56,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TracesHealth() : Unit {
-        val localVarResponse = cloudGetV1TracesHealthWithHttpInfo()
+    fun getV1TracesHealth() : Unit {
+        val localVarResponse = getV1TracesHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -76,15 +76,15 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/traces/health
-     * 
-     * 
+     * How many spans this deployment holds for your org
+     * Reports the native trace store&#39;s live state for the calling tenant: the subsystem version and &#x60;spans&#x60;, the count actually held right now. Not a dependency probe — the store is in-process, so this answers 200 whenever the process is up.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TracesHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TracesHealthRequestConfig()
+    fun getV1TracesHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TracesHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TracesHealth
+     * To obtain the request config of the operation getV1TracesHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TracesHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1TracesHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -106,15 +106,15 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/traces/query
-     * 
-     * 
+     * Recent spans for your org over a time range
+     * Answers &#x60;{count, spans}&#x60;, newest first, filtered on each span&#39;s START time. &#x60;start&#x60; and &#x60;end&#x60; are nanosecond bounds where 0 — which is what an absent, empty or unparseable value becomes — means UNBOUNDED, so a malformed bound widens the listing instead of failing it. &#x60;limit&#x60; defaults to 100 when absent or non-positive.  It lists SPANS, not traces: several spans of one trace each count separately and each take a slot against &#x60;limit&#x60;. Assembling one trace is /v1/traces/trace. The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -123,8 +123,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TracesQuery() : Unit {
-        val localVarResponse = cloudGetV1TracesQueryWithHttpInfo()
+    fun getV1TracesQuery() : Unit {
+        val localVarResponse = getV1TracesQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -143,15 +143,15 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/traces/query
-     * 
-     * 
+     * Recent spans for your org over a time range
+     * Answers &#x60;{count, spans}&#x60;, newest first, filtered on each span&#39;s START time. &#x60;start&#x60; and &#x60;end&#x60; are nanosecond bounds where 0 — which is what an absent, empty or unparseable value becomes — means UNBOUNDED, so a malformed bound widens the listing instead of failing it. &#x60;limit&#x60; defaults to 100 when absent or non-positive.  It lists SPANS, not traces: several spans of one trace each count separately and each take a slot against &#x60;limit&#x60;. Assembling one trace is /v1/traces/trace. The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TracesQueryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TracesQueryRequestConfig()
+    fun getV1TracesQueryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TracesQueryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TracesQuery
+     * To obtain the request config of the operation getV1TracesQuery
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TracesQueryRequestConfig() : RequestConfig<Unit> {
+    fun getV1TracesQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -173,15 +173,15 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/traces/trace
-     * 
-     * 
+     * Every span of one trace — the waterfall
+     * Answers &#x60;{spans}&#x60;: every span the org holds for the trace id in &#x60;id&#x60;, in the order they were appended, which is what a waterfall view renders. Unlike the other reads there is no count, no time range and no limit — a trace is addressed by id or not at all.  An id with no spans answers an EMPTY list, never a 404: the store cannot tell a trace that never existed from one whose spans retention has already dropped, so it does not pretend to. The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;, and a trace id belonging to another org is simply not in this org&#39;s store.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -190,8 +190,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TracesTrace() : Unit {
-        val localVarResponse = cloudGetV1TracesTraceWithHttpInfo()
+    fun getV1TracesTrace() : Unit {
+        val localVarResponse = getV1TracesTraceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -210,15 +210,15 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/traces/trace
-     * 
-     * 
+     * Every span of one trace — the waterfall
+     * Answers &#x60;{spans}&#x60;: every span the org holds for the trace id in &#x60;id&#x60;, in the order they were appended, which is what a waterfall view renders. Unlike the other reads there is no count, no time range and no limit — a trace is addressed by id or not at all.  An id with no spans answers an EMPTY list, never a 404: the store cannot tell a trace that never existed from one whose spans retention has already dropped, so it does not pretend to. The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;, and a trace id belonging to another org is simply not in this org&#39;s store.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TracesTraceWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TracesTraceRequestConfig()
+    fun getV1TracesTraceWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TracesTraceRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TracesTrace
+     * To obtain the request config of the operation getV1TracesTrace
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TracesTraceRequestConfig() : RequestConfig<Unit> {
+    fun getV1TracesTraceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -240,15 +240,15 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/trace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/traces/write
-     * 
-     * 
+     * Append spans for your org
+     * Takes &#x60;{spans:[{traceId, spanId, parentId, name, startNs, endNs, attrs}]}&#x60;, appends each, and answers &#x60;{written}&#x60; — the number of spans sent. Every span is indexed by its trace id as it lands, which is what makes the waterfall read possible without a second store.  Times are NANOSECONDS since the Unix epoch. Retention is a bounded ring of 1048576 spans per org: past that the OLDEST are evicted to keep the newest 1048576, and the trace index is rebuilt — so a long-lived trace can lose its early spans while its later ones survive, and a waterfall read is best-effort against retention, not a guarantee.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;. A body that does not decode is 400.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -257,8 +257,8 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1TracesWrite() : Unit {
-        val localVarResponse = cloudPostV1TracesWriteWithHttpInfo()
+    fun postV1TracesWrite() : Unit {
+        val localVarResponse = postV1TracesWriteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -277,15 +277,15 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/traces/write
-     * 
-     * 
+     * Append spans for your org
+     * Takes &#x60;{spans:[{traceId, spanId, parentId, name, startNs, endNs, attrs}]}&#x60;, appends each, and answers &#x60;{written}&#x60; — the number of spans sent. Every span is indexed by its trace id as it lands, which is what makes the waterfall read possible without a second store.  Times are NANOSECONDS since the Unix epoch. Retention is a bounded ring of 1048576 spans per org: past that the OLDEST are evicted to keep the newest 1048576, and the trace index is rebuilt — so a long-lived trace can lose its early spans while its later ones survive, and a waterfall read is best-effort against retention, not a guarantee.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;. A body that does not decode is 400.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TracesWriteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TracesWriteRequestConfig()
+    fun postV1TracesWriteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1TracesWriteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +293,11 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1TracesWrite
+     * To obtain the request config of the operation postV1TracesWrite
      *
      * @return RequestConfig
      */
-    fun cloudPostV1TracesWriteRequestConfig() : RequestConfig<Unit> {
+    fun postV1TracesWriteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -307,7 +307,7 @@ class TracesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/traces/write",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

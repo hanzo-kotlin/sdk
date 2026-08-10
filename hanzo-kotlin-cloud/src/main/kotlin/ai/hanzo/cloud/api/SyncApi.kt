@@ -19,11 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudPatchSyncIn
-import ai.hanzo.cloud.model.CloudSyncList
-import ai.hanzo.cloud.model.CloudSyncQueued
-import ai.hanzo.cloud.model.CloudSyncReq
-import ai.hanzo.cloud.model.CloudSyncView
+import ai.hanzo.cloud.model.PatchSyncIn
+import ai.hanzo.cloud.model.SyncList
+import ai.hanzo.cloud.model.SyncQueued
+import ai.hanzo.cloud.model.SyncReq
+import ai.hanzo.cloud.model.SyncView
 
 import com.google.gson.annotations.SerializedName
 
@@ -62,8 +62,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1SyncId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1SyncIdWithHttpInfo(id = id)
+    fun deleteV1SyncById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1SyncByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,8 +90,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1SyncIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1SyncIdRequestConfig(id = id)
+    fun deleteV1SyncByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1SyncByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -99,12 +99,12 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1SyncId
+     * To obtain the request config of the operation deleteV1SyncById
      *
      * @param id ID is the sync to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1SyncIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1SyncByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -114,7 +114,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -123,7 +123,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/sync
      * List returns every sync link the caller&#39;s org has, each with its two endpoints, its direction and trigger policy, and the time it last reconciled.
      * List returns every sync link the caller&#39;s org has, each with its two endpoints, its direction and trigger policy, and the time it last reconciled. Scoped to the caller&#39;s own org — another tenant&#39;s links are structurally unreachable.
-     * @return CloudSyncList
+     * @return SyncList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -132,11 +132,11 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Sync() : CloudSyncList {
-        val localVarResponse = cloudGetV1SyncWithHttpInfo()
+    fun getV1Sync() : SyncList {
+        val localVarResponse = getV1SyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSyncList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SyncList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -154,26 +154,26 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/sync
      * List returns every sync link the caller&#39;s org has, each with its two endpoints, its direction and trigger policy, and the time it last reconciled.
      * List returns every sync link the caller&#39;s org has, each with its two endpoints, its direction and trigger policy, and the time it last reconciled. Scoped to the caller&#39;s own org — another tenant&#39;s links are structurally unreachable.
-     * @return ApiResponse<CloudSyncList?>
+     * @return ApiResponse<SyncList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SyncWithHttpInfo() : ApiResponse<CloudSyncList?> {
-        val localVariableConfig = cloudGetV1SyncRequestConfig()
+    fun getV1SyncWithHttpInfo() : ApiResponse<SyncList?> {
+        val localVariableConfig = getV1SyncRequestConfig()
 
-        return request<Unit, CloudSyncList>(
+        return request<Unit, SyncList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Sync
+     * To obtain the request config of the operation getV1Sync
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SyncRequestConfig() : RequestConfig<Unit> {
+    fun getV1SyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -184,7 +184,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -194,7 +194,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Get returns one sync by id.
      * Get returns one sync by id. It is org-scoped: an id belonging to another tenant is the same 404 an unknown id gives, so a probe learns nothing about what exists.
      * @param id ID is the sync to act on, from the path.
-     * @return CloudSyncView
+     * @return SyncView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -203,11 +203,11 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SyncId(id: kotlin.String) : CloudSyncView {
-        val localVarResponse = cloudGetV1SyncIdWithHttpInfo(id = id)
+    fun getV1SyncById(id: kotlin.String) : SyncView {
+        val localVarResponse = getV1SyncByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSyncView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SyncView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -226,27 +226,27 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Get returns one sync by id.
      * Get returns one sync by id. It is org-scoped: an id belonging to another tenant is the same 404 an unknown id gives, so a probe learns nothing about what exists.
      * @param id ID is the sync to act on, from the path.
-     * @return ApiResponse<CloudSyncView?>
+     * @return ApiResponse<SyncView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SyncIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudSyncView?> {
-        val localVariableConfig = cloudGetV1SyncIdRequestConfig(id = id)
+    fun getV1SyncByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SyncView?> {
+        val localVariableConfig = getV1SyncByIdRequestConfig(id = id)
 
-        return request<Unit, CloudSyncView>(
+        return request<Unit, SyncView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SyncId
+     * To obtain the request config of the operation getV1SyncById
      *
      * @param id ID is the sync to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1SyncIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SyncByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -257,7 +257,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -267,8 +267,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Patch updates one sync&#39;s mutable policy — direction, trigger and actor — in place.
      * Patch updates one sync&#39;s mutable policy — direction, trigger and actor — in place. The endpoints and the kind are immutable: re-pointing a sync is a delete and a create, so a link can never silently start syncing somewhere else. A field the request omits is left as it was. Changing the direction immediately reconciles the derived outbound mirror, so turning push off stops the upstream being written to rather than merely recording the intent.
      * @param id ID is the sync to update, from the path.
-     * @param cloudPatchSyncIn 
-     * @return CloudSyncView
+     * @param patchSyncIn 
+     * @return SyncView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -277,11 +277,11 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1SyncId(id: kotlin.String, cloudPatchSyncIn: CloudPatchSyncIn) : CloudSyncView {
-        val localVarResponse = cloudPatchV1SyncIdWithHttpInfo(id = id, cloudPatchSyncIn = cloudPatchSyncIn)
+    fun patchV1SyncById(id: kotlin.String, patchSyncIn: PatchSyncIn) : SyncView {
+        val localVarResponse = patchV1SyncByIdWithHttpInfo(id = id, patchSyncIn = patchSyncIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSyncView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SyncView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -300,30 +300,30 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Patch updates one sync&#39;s mutable policy — direction, trigger and actor — in place.
      * Patch updates one sync&#39;s mutable policy — direction, trigger and actor — in place. The endpoints and the kind are immutable: re-pointing a sync is a delete and a create, so a link can never silently start syncing somewhere else. A field the request omits is left as it was. Changing the direction immediately reconciles the derived outbound mirror, so turning push off stops the upstream being written to rather than merely recording the intent.
      * @param id ID is the sync to update, from the path.
-     * @param cloudPatchSyncIn 
-     * @return ApiResponse<CloudSyncView?>
+     * @param patchSyncIn 
+     * @return ApiResponse<SyncView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1SyncIdWithHttpInfo(id: kotlin.String, cloudPatchSyncIn: CloudPatchSyncIn) : ApiResponse<CloudSyncView?> {
-        val localVariableConfig = cloudPatchV1SyncIdRequestConfig(id = id, cloudPatchSyncIn = cloudPatchSyncIn)
+    fun patchV1SyncByIdWithHttpInfo(id: kotlin.String, patchSyncIn: PatchSyncIn) : ApiResponse<SyncView?> {
+        val localVariableConfig = patchV1SyncByIdRequestConfig(id = id, patchSyncIn = patchSyncIn)
 
-        return request<CloudPatchSyncIn, CloudSyncView>(
+        return request<PatchSyncIn, SyncView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1SyncId
+     * To obtain the request config of the operation patchV1SyncById
      *
      * @param id ID is the sync to update, from the path.
-     * @param cloudPatchSyncIn 
+     * @param patchSyncIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1SyncIdRequestConfig(id: kotlin.String, cloudPatchSyncIn: CloudPatchSyncIn) : RequestConfig<CloudPatchSyncIn> {
-        val localVariableBody = cloudPatchSyncIn
+    fun patchV1SyncByIdRequestConfig(id: kotlin.String, patchSyncIn: PatchSyncIn) : RequestConfig<PatchSyncIn> {
+        val localVariableBody = patchSyncIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -334,7 +334,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -343,8 +343,8 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/sync
      * Create declares a sync between two endpoints and returns it.
      * Create declares a sync between two endpoints and returns it. It is an UPSERT: re-declaring the same source and target updates that link rather than piling up duplicates, so a console that re-submits is safe. The org comes from the validated principal, never from the request, so a sync can only ever bind endpoints inside the caller&#39;s own org. A git source must be an https clone URL on the provider&#39;s own host with no embedded credentials; a target left empty is derived as a native repository named after the source. With run&#x3D;true the first reconcile is queued in the background, so a large initial import never blocks this response.
-     * @param cloudSyncReq 
-     * @return CloudSyncView
+     * @param syncReq 
+     * @return SyncView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -353,11 +353,11 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Sync(cloudSyncReq: CloudSyncReq) : CloudSyncView {
-        val localVarResponse = cloudPostV1SyncWithHttpInfo(cloudSyncReq = cloudSyncReq)
+    fun postV1Sync(syncReq: SyncReq) : SyncView {
+        val localVarResponse = postV1SyncWithHttpInfo(syncReq = syncReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSyncView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SyncView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -375,29 +375,29 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/sync
      * Create declares a sync between two endpoints and returns it.
      * Create declares a sync between two endpoints and returns it. It is an UPSERT: re-declaring the same source and target updates that link rather than piling up duplicates, so a console that re-submits is safe. The org comes from the validated principal, never from the request, so a sync can only ever bind endpoints inside the caller&#39;s own org. A git source must be an https clone URL on the provider&#39;s own host with no embedded credentials; a target left empty is derived as a native repository named after the source. With run&#x3D;true the first reconcile is queued in the background, so a large initial import never blocks this response.
-     * @param cloudSyncReq 
-     * @return ApiResponse<CloudSyncView?>
+     * @param syncReq 
+     * @return ApiResponse<SyncView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SyncWithHttpInfo(cloudSyncReq: CloudSyncReq) : ApiResponse<CloudSyncView?> {
-        val localVariableConfig = cloudPostV1SyncRequestConfig(cloudSyncReq = cloudSyncReq)
+    fun postV1SyncWithHttpInfo(syncReq: SyncReq) : ApiResponse<SyncView?> {
+        val localVariableConfig = postV1SyncRequestConfig(syncReq = syncReq)
 
-        return request<CloudSyncReq, CloudSyncView>(
+        return request<SyncReq, SyncView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Sync
+     * To obtain the request config of the operation postV1Sync
      *
-     * @param cloudSyncReq 
+     * @param syncReq 
      * @return RequestConfig
      */
-    fun cloudPostV1SyncRequestConfig(cloudSyncReq: CloudSyncReq) : RequestConfig<CloudSyncReq> {
-        val localVariableBody = cloudSyncReq
+    fun postV1SyncRequestConfig(syncReq: SyncReq) : RequestConfig<SyncReq> {
+        val localVariableBody = syncReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -408,7 +408,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -418,7 +418,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Run reconciles one sync now — the manual re-sync, and the initial import for a link created without run&#x3D;true.
      * Run reconciles one sync now — the manual re-sync, and the initial import for a link created without run&#x3D;true. The work is handed to a bounded background worker and the call answers 202 immediately, so a large mirror-in never holds the request open; queued&#x3D;true means accepted, not finished.
      * @param id ID is the sync to act on, from the path.
-     * @return CloudSyncQueued
+     * @return SyncQueued
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -427,11 +427,11 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1SyncIdRun(id: kotlin.String) : CloudSyncQueued {
-        val localVarResponse = cloudPostV1SyncIdRunWithHttpInfo(id = id)
+    fun postV1SyncByIdRun(id: kotlin.String) : SyncQueued {
+        val localVarResponse = postV1SyncByIdRunWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSyncQueued
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SyncQueued
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -450,27 +450,27 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Run reconciles one sync now — the manual re-sync, and the initial import for a link created without run&#x3D;true.
      * Run reconciles one sync now — the manual re-sync, and the initial import for a link created without run&#x3D;true. The work is handed to a bounded background worker and the call answers 202 immediately, so a large mirror-in never holds the request open; queued&#x3D;true means accepted, not finished.
      * @param id ID is the sync to act on, from the path.
-     * @return ApiResponse<CloudSyncQueued?>
+     * @return ApiResponse<SyncQueued?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SyncIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<CloudSyncQueued?> {
-        val localVariableConfig = cloudPostV1SyncIdRunRequestConfig(id = id)
+    fun postV1SyncByIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<SyncQueued?> {
+        val localVariableConfig = postV1SyncByIdRunRequestConfig(id = id)
 
-        return request<Unit, CloudSyncQueued>(
+        return request<Unit, SyncQueued>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1SyncIdRun
+     * To obtain the request config of the operation postV1SyncByIdRun
      *
      * @param id ID is the sync to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1SyncIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1SyncByIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -481,7 +481,7 @@ class SyncApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sync/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

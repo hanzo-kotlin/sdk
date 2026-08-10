@@ -19,19 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudClusterAttach
-import ai.hanzo.cloud.model.CloudClusterDetached
-import ai.hanzo.cloud.model.CloudClusterList
-import ai.hanzo.cloud.model.CloudClusterView
-import ai.hanzo.cloud.model.CloudNodePoolView
-import ai.hanzo.cloud.model.CloudPoolCreate
-import ai.hanzo.cloud.model.CloudPoolScale
-import ai.hanzo.cloud.model.KvCluster
-import ai.hanzo.cloud.model.KvClusterCreate
-import ai.hanzo.cloud.model.KvError
-import ai.hanzo.cloud.model.KvGetClusterStats200Response
-import ai.hanzo.cloud.model.KvListClusters200Response
-import ai.hanzo.cloud.model.KvUpdateClusterRequest
+import ai.hanzo.cloud.model.ClusterAttach
+import ai.hanzo.cloud.model.ClusterDetached
+import ai.hanzo.cloud.model.ClusterList
+import ai.hanzo.cloud.model.ClusterView
+import ai.hanzo.cloud.model.NodePoolView
+import ai.hanzo.cloud.model.PoolCreate
+import ai.hanzo.cloud.model.PoolScale
 
 import com.google.gson.annotations.SerializedName
 
@@ -61,8 +55,8 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/clusters
      * Attaches a BYO cluster to the caller&#39;s org — the kubeconfig is validated, KMS-sealed and added to the fleet — and answers 201 with the cluster as it now appears on GET /v1/clusters.
      * Attaches a BYO cluster to the caller&#39;s org — the kubeconfig is validated, KMS-sealed and added to the fleet — and answers 201 with the cluster as it now appears on GET /v1/clusters. Billed the nominal management fee: the customer brings the compute, Hanzo meters the management plane.
-     * @param cloudClusterAttach 
-     * @return CloudClusterView
+     * @param clusterAttach 
+     * @return ClusterView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -71,11 +65,11 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudAttachCluster(cloudClusterAttach: CloudClusterAttach) : CloudClusterView {
-        val localVarResponse = cloudAttachClusterWithHttpInfo(cloudClusterAttach = cloudClusterAttach)
+    fun attachCluster(clusterAttach: ClusterAttach) : ClusterView {
+        val localVarResponse = attachClusterWithHttpInfo(clusterAttach = clusterAttach)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClusterView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClusterView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -93,29 +87,29 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/clusters
      * Attaches a BYO cluster to the caller&#39;s org — the kubeconfig is validated, KMS-sealed and added to the fleet — and answers 201 with the cluster as it now appears on GET /v1/clusters.
      * Attaches a BYO cluster to the caller&#39;s org — the kubeconfig is validated, KMS-sealed and added to the fleet — and answers 201 with the cluster as it now appears on GET /v1/clusters. Billed the nominal management fee: the customer brings the compute, Hanzo meters the management plane.
-     * @param cloudClusterAttach 
-     * @return ApiResponse<CloudClusterView?>
+     * @param clusterAttach 
+     * @return ApiResponse<ClusterView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudAttachClusterWithHttpInfo(cloudClusterAttach: CloudClusterAttach) : ApiResponse<CloudClusterView?> {
-        val localVariableConfig = cloudAttachClusterRequestConfig(cloudClusterAttach = cloudClusterAttach)
+    fun attachClusterWithHttpInfo(clusterAttach: ClusterAttach) : ApiResponse<ClusterView?> {
+        val localVariableConfig = attachClusterRequestConfig(clusterAttach = clusterAttach)
 
-        return request<CloudClusterAttach, CloudClusterView>(
+        return request<ClusterAttach, ClusterView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudAttachCluster
+     * To obtain the request config of the operation attachCluster
      *
-     * @param cloudClusterAttach 
+     * @param clusterAttach 
      * @return RequestConfig
      */
-    fun cloudAttachClusterRequestConfig(cloudClusterAttach: CloudClusterAttach) : RequestConfig<CloudClusterAttach> {
-        val localVariableBody = cloudClusterAttach
+    fun attachClusterRequestConfig(clusterAttach: ClusterAttach) : RequestConfig<ClusterAttach> {
+        val localVariableBody = clusterAttach
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -126,7 +120,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -136,8 +130,8 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Adds a node pool to one of the caller org&#39;s clusters and answers 201 with the created pool.
      * Adds a node pool to one of the caller org&#39;s clusters and answers 201 with the created pool. Only the CreateNodePoolSpec fields are forwarded; owner/provider/clusterId ride in the query exactly as Visor expects them.
      * @param clusterId ClusterID is the cluster to add the pool to, from the URL path.
-     * @param cloudPoolCreate 
-     * @return CloudNodePoolView
+     * @param poolCreate 
+     * @return NodePoolView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -146,11 +140,11 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudCreateNodePool(clusterId: kotlin.String, cloudPoolCreate: CloudPoolCreate) : CloudNodePoolView {
-        val localVarResponse = cloudCreateNodePoolWithHttpInfo(clusterId = clusterId, cloudPoolCreate = cloudPoolCreate)
+    fun createNodePool(clusterId: kotlin.String, poolCreate: PoolCreate) : NodePoolView {
+        val localVarResponse = createNodePoolWithHttpInfo(clusterId = clusterId, poolCreate = poolCreate)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNodePoolView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NodePoolView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -169,30 +163,30 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Adds a node pool to one of the caller org&#39;s clusters and answers 201 with the created pool.
      * Adds a node pool to one of the caller org&#39;s clusters and answers 201 with the created pool. Only the CreateNodePoolSpec fields are forwarded; owner/provider/clusterId ride in the query exactly as Visor expects them.
      * @param clusterId ClusterID is the cluster to add the pool to, from the URL path.
-     * @param cloudPoolCreate 
-     * @return ApiResponse<CloudNodePoolView?>
+     * @param poolCreate 
+     * @return ApiResponse<NodePoolView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudCreateNodePoolWithHttpInfo(clusterId: kotlin.String, cloudPoolCreate: CloudPoolCreate) : ApiResponse<CloudNodePoolView?> {
-        val localVariableConfig = cloudCreateNodePoolRequestConfig(clusterId = clusterId, cloudPoolCreate = cloudPoolCreate)
+    fun createNodePoolWithHttpInfo(clusterId: kotlin.String, poolCreate: PoolCreate) : ApiResponse<NodePoolView?> {
+        val localVariableConfig = createNodePoolRequestConfig(clusterId = clusterId, poolCreate = poolCreate)
 
-        return request<CloudPoolCreate, CloudNodePoolView>(
+        return request<PoolCreate, NodePoolView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudCreateNodePool
+     * To obtain the request config of the operation createNodePool
      *
      * @param clusterId ClusterID is the cluster to add the pool to, from the URL path.
-     * @param cloudPoolCreate 
+     * @param poolCreate 
      * @return RequestConfig
      */
-    fun cloudCreateNodePoolRequestConfig(clusterId: kotlin.String, cloudPoolCreate: CloudPoolCreate) : RequestConfig<CloudPoolCreate> {
-        val localVariableBody = cloudPoolCreate
+    fun createNodePoolRequestConfig(clusterId: kotlin.String, poolCreate: PoolCreate) : RequestConfig<PoolCreate> {
+        val localVariableBody = poolCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -203,7 +197,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{clusterId}/pools".replace("{"+"clusterId"+"}", encodeURIComponent(clusterId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -223,8 +217,8 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteNodePool(clusterId: kotlin.String, poolId: kotlin.String, provider: kotlin.String? = null) : Unit {
-        val localVarResponse = cloudDeleteNodePoolWithHttpInfo(clusterId = clusterId, poolId = poolId, provider = provider)
+    fun deleteNodePool(clusterId: kotlin.String, poolId: kotlin.String, provider: kotlin.String? = null) : Unit {
+        val localVarResponse = deleteNodePoolWithHttpInfo(clusterId = clusterId, poolId = poolId, provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -253,8 +247,8 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteNodePoolWithHttpInfo(clusterId: kotlin.String, poolId: kotlin.String, provider: kotlin.String?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteNodePoolRequestConfig(clusterId = clusterId, poolId = poolId, provider = provider)
+    fun deleteNodePoolWithHttpInfo(clusterId: kotlin.String, poolId: kotlin.String, provider: kotlin.String?) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteNodePoolRequestConfig(clusterId = clusterId, poolId = poolId, provider = provider)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -262,14 +256,14 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteNodePool
+     * To obtain the request config of the operation deleteNodePool
      *
      * @param clusterId ClusterID and PoolID address the pool, from the URL path.
      * @param poolId 
      * @param provider Provider is the cloud the cluster lives on, from ?provider&#x3D;. Required. (optional)
      * @return RequestConfig
      */
-    fun cloudDeleteNodePoolRequestConfig(clusterId: kotlin.String, poolId: kotlin.String, provider: kotlin.String?) : RequestConfig<Unit> {
+    fun deleteNodePoolRequestConfig(clusterId: kotlin.String, poolId: kotlin.String, provider: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -284,7 +278,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{clusterId}/pools/{poolId}".replace("{"+"clusterId"+"}", encodeURIComponent(clusterId.toString())).replace("{"+"poolId"+"}", encodeURIComponent(poolId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -294,7 +288,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Removes a BYO cluster from the caller org&#39;s fleet.
      * Removes a BYO cluster from the caller org&#39;s fleet. It only ever touches BYO clusters — a managed cluster&#39;s nodes are removed through the node-pool routes — and answers 404 when the name is not in this org&#39;s fleet.
      * @param id ID is the cluster&#39;s fleet name (the &#x60;name&#x60; it was attached under), matched lower-cased.
-     * @return CloudClusterDetached
+     * @return ClusterDetached
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -303,11 +297,11 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDetachCluster(id: kotlin.String) : CloudClusterDetached {
-        val localVarResponse = cloudDetachClusterWithHttpInfo(id = id)
+    fun detachCluster(id: kotlin.String) : ClusterDetached {
+        val localVarResponse = detachClusterWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClusterDetached
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClusterDetached
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -326,27 +320,27 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Removes a BYO cluster from the caller org&#39;s fleet.
      * Removes a BYO cluster from the caller org&#39;s fleet. It only ever touches BYO clusters — a managed cluster&#39;s nodes are removed through the node-pool routes — and answers 404 when the name is not in this org&#39;s fleet.
      * @param id ID is the cluster&#39;s fleet name (the &#x60;name&#x60; it was attached under), matched lower-cased.
-     * @return ApiResponse<CloudClusterDetached?>
+     * @return ApiResponse<ClusterDetached?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDetachClusterWithHttpInfo(id: kotlin.String) : ApiResponse<CloudClusterDetached?> {
-        val localVariableConfig = cloudDetachClusterRequestConfig(id = id)
+    fun detachClusterWithHttpInfo(id: kotlin.String) : ApiResponse<ClusterDetached?> {
+        val localVariableConfig = detachClusterRequestConfig(id = id)
 
-        return request<Unit, CloudClusterDetached>(
+        return request<Unit, ClusterDetached>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDetachCluster
+     * To obtain the request config of the operation detachCluster
      *
      * @param id ID is the cluster&#39;s fleet name (the &#x60;name&#x60; it was attached under), matched lower-cased.
      * @return RequestConfig
      */
-    fun cloudDetachClusterRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun detachClusterRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -357,7 +351,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -366,7 +360,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/clusters
      * Returns the caller org&#39;s clusters from both sources: the managed clusters projected from Visor&#39;s node pools, and the BYO clusters attached to the caller&#39;s project.
      * Returns the caller org&#39;s clusters from both sources: the managed clusters projected from Visor&#39;s node pools, and the BYO clusters attached to the caller&#39;s project. A Visor outage costs the managed half only — the BYO half still lists, because a page that 502s on an optional provider is worse than a page that shows what it can.
-     * @return CloudClusterList
+     * @return ClusterList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -375,11 +369,11 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListClusters() : CloudClusterList {
-        val localVarResponse = cloudListClustersWithHttpInfo()
+    fun listClusters() : ClusterList {
+        val localVarResponse = listClustersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClusterList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClusterList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -397,26 +391,26 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/clusters
      * Returns the caller org&#39;s clusters from both sources: the managed clusters projected from Visor&#39;s node pools, and the BYO clusters attached to the caller&#39;s project.
      * Returns the caller org&#39;s clusters from both sources: the managed clusters projected from Visor&#39;s node pools, and the BYO clusters attached to the caller&#39;s project. A Visor outage costs the managed half only — the BYO half still lists, because a page that 502s on an optional provider is worse than a page that shows what it can.
-     * @return ApiResponse<CloudClusterList?>
+     * @return ApiResponse<ClusterList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListClustersWithHttpInfo() : ApiResponse<CloudClusterList?> {
-        val localVariableConfig = cloudListClustersRequestConfig()
+    fun listClustersWithHttpInfo() : ApiResponse<ClusterList?> {
+        val localVariableConfig = listClustersRequestConfig()
 
-        return request<Unit, CloudClusterList>(
+        return request<Unit, ClusterList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListClusters
+     * To obtain the request config of the operation listClusters
      *
      * @return RequestConfig
      */
-    fun cloudListClustersRequestConfig() : RequestConfig<Unit> {
+    fun listClustersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -427,7 +421,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -438,8 +432,8 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Resizes a node pool to an absolute node count and returns the pool as Visor reports it after the change.
      * @param clusterId ClusterID and PoolID address the pool, from the URL path.
      * @param poolId 
-     * @param cloudPoolScale 
-     * @return CloudNodePoolView
+     * @param poolScale 
+     * @return NodePoolView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -448,11 +442,11 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudScaleNodePool(clusterId: kotlin.String, poolId: kotlin.String, cloudPoolScale: CloudPoolScale) : CloudNodePoolView {
-        val localVarResponse = cloudScaleNodePoolWithHttpInfo(clusterId = clusterId, poolId = poolId, cloudPoolScale = cloudPoolScale)
+    fun scaleNodePool(clusterId: kotlin.String, poolId: kotlin.String, poolScale: PoolScale) : NodePoolView {
+        val localVarResponse = scaleNodePoolWithHttpInfo(clusterId = clusterId, poolId = poolId, poolScale = poolScale)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNodePoolView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NodePoolView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -472,31 +466,31 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Resizes a node pool to an absolute node count and returns the pool as Visor reports it after the change.
      * @param clusterId ClusterID and PoolID address the pool, from the URL path.
      * @param poolId 
-     * @param cloudPoolScale 
-     * @return ApiResponse<CloudNodePoolView?>
+     * @param poolScale 
+     * @return ApiResponse<NodePoolView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudScaleNodePoolWithHttpInfo(clusterId: kotlin.String, poolId: kotlin.String, cloudPoolScale: CloudPoolScale) : ApiResponse<CloudNodePoolView?> {
-        val localVariableConfig = cloudScaleNodePoolRequestConfig(clusterId = clusterId, poolId = poolId, cloudPoolScale = cloudPoolScale)
+    fun scaleNodePoolWithHttpInfo(clusterId: kotlin.String, poolId: kotlin.String, poolScale: PoolScale) : ApiResponse<NodePoolView?> {
+        val localVariableConfig = scaleNodePoolRequestConfig(clusterId = clusterId, poolId = poolId, poolScale = poolScale)
 
-        return request<CloudPoolScale, CloudNodePoolView>(
+        return request<PoolScale, NodePoolView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudScaleNodePool
+     * To obtain the request config of the operation scaleNodePool
      *
      * @param clusterId ClusterID and PoolID address the pool, from the URL path.
      * @param poolId 
-     * @param cloudPoolScale 
+     * @param poolScale 
      * @return RequestConfig
      */
-    fun cloudScaleNodePoolRequestConfig(clusterId: kotlin.String, poolId: kotlin.String, cloudPoolScale: CloudPoolScale) : RequestConfig<CloudPoolScale> {
-        val localVariableBody = cloudPoolScale
+    fun scaleNodePoolRequestConfig(clusterId: kotlin.String, poolId: kotlin.String, poolScale: PoolScale) : RequestConfig<PoolScale> {
+        val localVariableBody = poolScale
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -507,474 +501,7 @@ class ClustersApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/clusters/{clusterId}/pools/{poolId}/scale".replace("{"+"clusterId"+"}", encodeURIComponent(clusterId.toString())).replace("{"+"poolId"+"}", encodeURIComponent(poolId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/kv/clusters
-     * Create KV cluster
-     * 
-     * @param kvClusterCreate 
-     * @return KvCluster
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvCreateCluster(kvClusterCreate: KvClusterCreate) : KvCluster {
-        val localVarResponse = kvCreateClusterWithHttpInfo(kvClusterCreate = kvClusterCreate)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KvCluster
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/kv/clusters
-     * Create KV cluster
-     * 
-     * @param kvClusterCreate 
-     * @return ApiResponse<KvCluster?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvCreateClusterWithHttpInfo(kvClusterCreate: KvClusterCreate) : ApiResponse<KvCluster?> {
-        val localVariableConfig = kvCreateClusterRequestConfig(kvClusterCreate = kvClusterCreate)
-
-        return request<KvClusterCreate, KvCluster>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvCreateCluster
-     *
-     * @param kvClusterCreate 
-     * @return RequestConfig
-     */
-    fun kvCreateClusterRequestConfig(kvClusterCreate: KvClusterCreate) : RequestConfig<KvClusterCreate> {
-        val localVariableBody = kvClusterCreate
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/kv/clusters",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/kv/clusters/{id}
-     * Delete cluster
-     * 
-     * @param id 
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvDeleteCluster(id: java.util.UUID) : kotlin.Any {
-        val localVarResponse = kvDeleteClusterWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/kv/clusters/{id}
-     * Delete cluster
-     * 
-     * @param id 
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvDeleteClusterWithHttpInfo(id: java.util.UUID) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = kvDeleteClusterRequestConfig(id = id)
-
-        return request<Unit, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvDeleteCluster
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun kvDeleteClusterRequestConfig(id: java.util.UUID) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/kv/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/kv/clusters/{id}
-     * Get cluster
-     * 
-     * @param id 
-     * @return KvCluster
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvGetCluster(id: java.util.UUID) : KvCluster {
-        val localVarResponse = kvGetClusterWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KvCluster
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kv/clusters/{id}
-     * Get cluster
-     * 
-     * @param id 
-     * @return ApiResponse<KvCluster?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvGetClusterWithHttpInfo(id: java.util.UUID) : ApiResponse<KvCluster?> {
-        val localVariableConfig = kvGetClusterRequestConfig(id = id)
-
-        return request<Unit, KvCluster>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvGetCluster
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun kvGetClusterRequestConfig(id: java.util.UUID) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kv/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/kv/clusters/{id}/stats
-     * Get cluster stats
-     * 
-     * @param id 
-     * @return KvGetClusterStats200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvGetClusterStats(id: java.util.UUID) : KvGetClusterStats200Response {
-        val localVarResponse = kvGetClusterStatsWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KvGetClusterStats200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kv/clusters/{id}/stats
-     * Get cluster stats
-     * 
-     * @param id 
-     * @return ApiResponse<KvGetClusterStats200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvGetClusterStatsWithHttpInfo(id: java.util.UUID) : ApiResponse<KvGetClusterStats200Response?> {
-        val localVariableConfig = kvGetClusterStatsRequestConfig(id = id)
-
-        return request<Unit, KvGetClusterStats200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvGetClusterStats
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun kvGetClusterStatsRequestConfig(id: java.util.UUID) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kv/clusters/{id}/stats".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter status
-     */
-     enum class StatusKvListClusters(val value: kotlin.String) {
-         @SerializedName(value = "provisioning") provisioning("provisioning"),
-         @SerializedName(value = "running") running("running"),
-         @SerializedName(value = "degraded") degraded("degraded"),
-         @SerializedName(value = "stopped") stopped("stopped");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/kv/clusters
-     * List KV clusters
-     * 
-     * @param status  (optional)
-     * @return KvListClusters200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvListClusters(status: StatusKvListClusters? = null) : KvListClusters200Response {
-        val localVarResponse = kvListClustersWithHttpInfo(status = status)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KvListClusters200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kv/clusters
-     * List KV clusters
-     * 
-     * @param status  (optional)
-     * @return ApiResponse<KvListClusters200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvListClustersWithHttpInfo(status: StatusKvListClusters?) : ApiResponse<KvListClusters200Response?> {
-        val localVariableConfig = kvListClustersRequestConfig(status = status)
-
-        return request<Unit, KvListClusters200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvListClusters
-     *
-     * @param status  (optional)
-     * @return RequestConfig
-     */
-    fun kvListClustersRequestConfig(status: StatusKvListClusters?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (status != null) {
-                    put("status", listOf(status.value))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kv/clusters",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/kv/clusters/{id}
-     * Update cluster
-     * 
-     * @param id 
-     * @param kvUpdateClusterRequest 
-     * @return KvCluster
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvUpdateCluster(id: java.util.UUID, kvUpdateClusterRequest: KvUpdateClusterRequest) : KvCluster {
-        val localVarResponse = kvUpdateClusterWithHttpInfo(id = id, kvUpdateClusterRequest = kvUpdateClusterRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KvCluster
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/kv/clusters/{id}
-     * Update cluster
-     * 
-     * @param id 
-     * @param kvUpdateClusterRequest 
-     * @return ApiResponse<KvCluster?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvUpdateClusterWithHttpInfo(id: java.util.UUID, kvUpdateClusterRequest: KvUpdateClusterRequest) : ApiResponse<KvCluster?> {
-        val localVariableConfig = kvUpdateClusterRequestConfig(id = id, kvUpdateClusterRequest = kvUpdateClusterRequest)
-
-        return request<KvUpdateClusterRequest, KvCluster>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvUpdateCluster
-     *
-     * @param id 
-     * @param kvUpdateClusterRequest 
-     * @return RequestConfig
-     */
-    fun kvUpdateClusterRequestConfig(id: java.util.UUID, kvUpdateClusterRequest: KvUpdateClusterRequest) : RequestConfig<KvUpdateClusterRequest> {
-        val localVariableBody = kvUpdateClusterRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/kv/clusters/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

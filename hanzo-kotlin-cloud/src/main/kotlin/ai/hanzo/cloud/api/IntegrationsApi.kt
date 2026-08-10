@@ -19,26 +19,31 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.BotGetIntegration200Response
-import ai.hanzo.cloud.model.BotListIntegrations200Response
-import ai.hanzo.cloud.model.CloudAuthorizeOut
-import ai.hanzo.cloud.model.CloudConnectIn
-import ai.hanzo.cloud.model.CloudConnectOut
-import ai.hanzo.cloud.model.CloudDisconnectOut
-import ai.hanzo.cloud.model.CloudGithubBackfillIn
-import ai.hanzo.cloud.model.CloudGithubBackfillResult
-import ai.hanzo.cloud.model.CloudGithubImportIn
-import ai.hanzo.cloud.model.CloudGithubImportOut
-import ai.hanzo.cloud.model.CloudGithubPagesBuildOut
-import ai.hanzo.cloud.model.CloudGithubPagesDisabledOut
-import ai.hanzo.cloud.model.CloudGithubPagesEnableReq
-import ai.hanzo.cloud.model.CloudGithubPagesUpdateReq
-import ai.hanzo.cloud.model.CloudGithubPagesUpdatedOut
-import ai.hanzo.cloud.model.CloudGithubPagesView
-import ai.hanzo.cloud.model.CloudGithubReposOut
-import ai.hanzo.cloud.model.CloudListOut
-import ai.hanzo.cloud.model.CloudProviderView
-import ai.hanzo.cloud.model.CloudVerifyOut
+import ai.hanzo.cloud.model.AuthorizeOut
+import ai.hanzo.cloud.model.ConnectIn
+import ai.hanzo.cloud.model.ConnectOut
+import ai.hanzo.cloud.model.DisconnectOut
+import ai.hanzo.cloud.model.GithubBackfillIn
+import ai.hanzo.cloud.model.GithubBackfillResult
+import ai.hanzo.cloud.model.GithubClaimIn
+import ai.hanzo.cloud.model.GithubClaimOut
+import ai.hanzo.cloud.model.GithubForkOut
+import ai.hanzo.cloud.model.GithubForkReq
+import ai.hanzo.cloud.model.GithubImportIn
+import ai.hanzo.cloud.model.GithubImportOut
+import ai.hanzo.cloud.model.GithubInstallationsOut
+import ai.hanzo.cloud.model.GithubPagesBuildOut
+import ai.hanzo.cloud.model.GithubPagesDisabledOut
+import ai.hanzo.cloud.model.GithubPagesEnableReq
+import ai.hanzo.cloud.model.GithubPagesUpdateReq
+import ai.hanzo.cloud.model.GithubPagesUpdatedOut
+import ai.hanzo.cloud.model.GithubPagesView
+import ai.hanzo.cloud.model.GithubReposOut
+import ai.hanzo.cloud.model.GithubSearchOut
+import ai.hanzo.cloud.model.GithubSearchReq
+import ai.hanzo.cloud.model.ListOut
+import ai.hanzo.cloud.model.ProviderView
+import ai.hanzo.cloud.model.VerifyOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -65,192 +70,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * GET /v1/bot/integrations/{slug}
-     * Get integration detail with latest version
-     * 
-     * @param slug 
-     * @return BotGetIntegration200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botGetIntegration(slug: kotlin.String) : BotGetIntegration200Response {
-        val localVarResponse = botGetIntegrationWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotGetIntegration200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/integrations/{slug}
-     * Get integration detail with latest version
-     * 
-     * @param slug 
-     * @return ApiResponse<BotGetIntegration200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botGetIntegrationWithHttpInfo(slug: kotlin.String) : ApiResponse<BotGetIntegration200Response?> {
-        val localVariableConfig = botGetIntegrationRequestConfig(slug = slug)
-
-        return request<Unit, BotGetIntegration200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botGetIntegration
-     *
-     * @param slug 
-     * @return RequestConfig
-     */
-    fun botGetIntegrationRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/integrations/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter sort
-     */
-     enum class SortBotListIntegrations(val value: kotlin.String) {
-         @SerializedName(value = "updated") updated("updated"),
-         @SerializedName(value = "downloads") downloads("downloads"),
-         @SerializedName(value = "name") NAME("name");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/bot/integrations
-     * List integrations (paginated)
-     * 
-     * @param sort  (optional, default to updated)
-     * @param limit  (optional, default to 50)
-     * @param cursor  (optional)
-     * @return BotListIntegrations200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botListIntegrations(sort: SortBotListIntegrations? = SortBotListIntegrations.updated, limit: kotlin.Int? = 50, cursor: java.time.OffsetDateTime? = null) : BotListIntegrations200Response {
-        val localVarResponse = botListIntegrationsWithHttpInfo(sort = sort, limit = limit, cursor = cursor)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotListIntegrations200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/integrations
-     * List integrations (paginated)
-     * 
-     * @param sort  (optional, default to updated)
-     * @param limit  (optional, default to 50)
-     * @param cursor  (optional)
-     * @return ApiResponse<BotListIntegrations200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botListIntegrationsWithHttpInfo(sort: SortBotListIntegrations?, limit: kotlin.Int?, cursor: java.time.OffsetDateTime?) : ApiResponse<BotListIntegrations200Response?> {
-        val localVariableConfig = botListIntegrationsRequestConfig(sort = sort, limit = limit, cursor = cursor)
-
-        return request<Unit, BotListIntegrations200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botListIntegrations
-     *
-     * @param sort  (optional, default to updated)
-     * @param limit  (optional, default to 50)
-     * @param cursor  (optional)
-     * @return RequestConfig
-     */
-    fun botListIntegrationsRequestConfig(sort: SortBotListIntegrations?, limit: kotlin.Int?, cursor: java.time.OffsetDateTime?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (sort != null) {
-                    put("sort", listOf(sort.value))
-                }
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-                if (cursor != null) {
-                    put("cursor", listOf(parseDateToQueryString(cursor)))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/integrations",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * DELETE /v1/integrations/github/repos/{repo}/pages
      * Deletes the repo&#39;s Pages site.
      * Deletes the repo&#39;s Pages site. 404 when there is none, so a caller can tell \&quot;turned it off\&quot; from \&quot;there was nothing on\&quot;.
      * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudGithubPagesDisabledOut
+     * @return GithubPagesDisabledOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -259,11 +83,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1IntegrationsGithubReposRepoPages(repo: kotlin.String) : CloudGithubPagesDisabledOut {
-        val localVarResponse = cloudDeleteV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo = repo)
+    fun deleteV1IntegrationsGithubReposByRepoPages(repo: kotlin.String) : GithubPagesDisabledOut {
+        val localVarResponse = deleteV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubPagesDisabledOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesDisabledOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -282,27 +106,27 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Deletes the repo&#39;s Pages site.
      * Deletes the repo&#39;s Pages site. 404 when there is none, so a caller can tell \&quot;turned it off\&quot; from \&quot;there was nothing on\&quot;.
      * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudGithubPagesDisabledOut?>
+     * @return ApiResponse<GithubPagesDisabledOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<CloudGithubPagesDisabledOut?> {
-        val localVariableConfig = cloudDeleteV1IntegrationsGithubReposRepoPagesRequestConfig(repo = repo)
+    fun deleteV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesDisabledOut?> {
+        val localVariableConfig = deleteV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo)
 
-        return request<Unit, CloudGithubPagesDisabledOut>(
+        return request<Unit, GithubPagesDisabledOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1IntegrationsGithubReposRepoPages
+     * To obtain the request config of the operation deleteV1IntegrationsGithubReposByRepoPages
      *
      * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
      * @return RequestConfig
      */
-    fun cloudDeleteV1IntegrationsGithubReposRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -313,7 +137,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -322,7 +146,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/integrations
      * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders.
      * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders. Org-authed: a caller with no validated principal is 403, because the status is per-org and there is no org-less answer. User-plane providers (the /v1/connectors surface) are omitted; the two planes are disjoint.
-     * @return CloudListOut
+     * @return ListOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -331,11 +155,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Integrations() : CloudListOut {
-        val localVarResponse = cloudGetV1IntegrationsWithHttpInfo()
+    fun getV1Integrations() : ListOut {
+        val localVarResponse = getV1IntegrationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudListOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -353,26 +177,26 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/integrations
      * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders.
      * Returns every registered integration provider together with THIS org&#39;s connection status for it — the catalog the console&#39;s Integrations page renders. Org-authed: a caller with no validated principal is 403, because the status is per-org and there is no org-less answer. User-plane providers (the /v1/connectors surface) are omitted; the two planes are disjoint.
-     * @return ApiResponse<CloudListOut?>
+     * @return ApiResponse<ListOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsWithHttpInfo() : ApiResponse<CloudListOut?> {
-        val localVariableConfig = cloudGetV1IntegrationsRequestConfig()
+    fun getV1IntegrationsWithHttpInfo() : ApiResponse<ListOut?> {
+        val localVariableConfig = getV1IntegrationsRequestConfig()
 
-        return request<Unit, CloudListOut>(
+        return request<Unit, ListOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Integrations
+     * To obtain the request config of the operation getV1Integrations
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -383,421 +207,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/integrations/{provider}/callback
-     * 
-     * 
-     * @param provider 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsByProviderCallback(provider: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1IntegrationsByProviderCallbackWithHttpInfo(provider = provider)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/integrations/{provider}/callback
-     * 
-     * 
-     * @param provider 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsByProviderCallbackRequestConfig(provider = provider)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsByProviderCallback
-     *
-     * @param provider 
-     * @return RequestConfig
-     */
-    fun cloudGetV1IntegrationsByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/integrations/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/integrations/discord/link
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsDiscordLink() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsDiscordLinkWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/integrations/discord/link
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsDiscordLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsDiscordLinkRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsDiscordLink
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1IntegrationsDiscordLinkRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/integrations/discord/link",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/integrations/discord/link/callback
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsDiscordLinkCallback() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsDiscordLinkCallbackWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/integrations/discord/link/callback
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsDiscordLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsDiscordLinkCallbackRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsDiscordLinkCallback
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1IntegrationsDiscordLinkCallbackRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/integrations/discord/link/callback",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/integrations/discord/link/discord
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsDiscordLinkDiscord() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsDiscordLinkDiscordWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/integrations/discord/link/discord
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsDiscordLinkDiscordWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsDiscordLinkDiscordRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsDiscordLinkDiscord
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1IntegrationsDiscordLinkDiscordRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/integrations/discord/link/discord",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/integrations/github/repos
-     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane.
-     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane. Org-authed: the org comes from the validated principal, and the granted set is bounded to THAT org&#39;s installation token — an org can never enumerate another org&#39;s repos. The console polls it to watch an import flip a repo to imported.
-     * @return CloudGithubReposOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsGithubRepos() : CloudGithubReposOut {
-        val localVarResponse = cloudGetV1IntegrationsGithubReposWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubReposOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/integrations/github/repos
-     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane.
-     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane. Org-authed: the org comes from the validated principal, and the granted set is bounded to THAT org&#39;s installation token — an org can never enumerate another org&#39;s repos. The console polls it to watch an import flip a repo to imported.
-     * @return ApiResponse<CloudGithubReposOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsGithubReposWithHttpInfo() : ApiResponse<CloudGithubReposOut?> {
-        val localVariableConfig = cloudGetV1IntegrationsGithubReposRequestConfig()
-
-        return request<Unit, CloudGithubReposOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsGithubRepos
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1IntegrationsGithubReposRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/integrations/github/repos",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/integrations/github/repos/{repo}/pages
-     * Returns the repo&#39;s Pages status, live URL, custom domain and build source.
-     * Returns the repo&#39;s Pages status, live URL, custom domain and build source. The repo is resolved against the org installation&#39;s GRANTED set, so a caller can never address a repo the App was not granted; 404 when the repo has no Pages site.
-     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudGithubPagesView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsGithubReposRepoPages(repo: kotlin.String) : CloudGithubPagesView {
-        val localVarResponse = cloudGetV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo = repo)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubPagesView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/integrations/github/repos/{repo}/pages
-     * Returns the repo&#39;s Pages status, live URL, custom domain and build source.
-     * Returns the repo&#39;s Pages status, live URL, custom domain and build source. The repo is resolved against the org installation&#39;s GRANTED set, so a caller can never address a repo the App was not granted; 404 when the repo has no Pages site.
-     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudGithubPagesView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<CloudGithubPagesView?> {
-        val localVariableConfig = cloudGetV1IntegrationsGithubReposRepoPagesRequestConfig(repo = repo)
-
-        return request<Unit, CloudGithubPagesView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsGithubReposRepoPages
-     *
-     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return RequestConfig
-     */
-    fun cloudGetV1IntegrationsGithubReposRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -807,7 +217,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id.
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id. An unknown id is 404, and so is a user-plane provider: the org surface never resolves one.
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
-     * @return CloudProviderView
+     * @return ProviderView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -816,11 +226,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsProvider(provider: kotlin.String) : CloudProviderView {
-        val localVarResponse = cloudGetV1IntegrationsProviderWithHttpInfo(provider = provider)
+    fun getV1IntegrationsByProvider(provider: kotlin.String) : ProviderView {
+        val localVarResponse = getV1IntegrationsByProviderWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProviderView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProviderView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -839,27 +249,27 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id.
      * Returns ONE provider with this org&#39;s connection status — the same view list carries, for a single id. An unknown id is 404, and so is a user-plane provider: the org surface never resolves one.
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
-     * @return ApiResponse<CloudProviderView?>
+     * @return ApiResponse<ProviderView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<CloudProviderView?> {
-        val localVariableConfig = cloudGetV1IntegrationsProviderRequestConfig(provider = provider)
+    fun getV1IntegrationsByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<ProviderView?> {
+        val localVariableConfig = getV1IntegrationsByProviderRequestConfig(provider = provider)
 
-        return request<Unit, CloudProviderView>(
+        return request<Unit, ProviderView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsProvider
+     * To obtain the request config of the operation getV1IntegrationsByProvider
      *
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IntegrationsByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -870,15 +280,16 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/integrations/slack/link
-     * 
-     * 
+     * GET /v1/integrations/{provider}/callback
+     * OAuth return for any connector
+     * The single address every connector&#39;s OAuth flow returns to. It exchanges the authorization the provider granted, records the connection, and ALWAYS redirects the browser back to the console — on success and on every labeled failure alike, so a user never lands on a raw JSON dead end.  It is public and carries no principal, so the org is taken ONLY from the signed state minted when the flow began; no header is trusted here. That state is single-use and is burned BEFORE the exchange, so one authorization is one attempt and a replayed return fails instead of exchanging twice.  Tokens are sealed into the org&#39;s KMS namespace BEFORE the connection row is written, so a failure of the secret store leaves no half-connected integration advertising a credential that was never stored. Token values never appear in the redirect, in a log line or in an error.  One generalization is worth knowing: a GitHub App installation returns an installation identifier instead of an OAuth code, and it is accepted in the code&#39;s place so the App model needs no second address.
+     * @param provider 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -887,8 +298,558 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsSlackLink() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsSlackLinkWithHttpInfo()
+    fun getV1IntegrationsByProviderCallback(provider: kotlin.String) : Unit {
+        val localVarResponse = getV1IntegrationsByProviderCallbackWithHttpInfo(provider = provider)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/{provider}/callback
+     * OAuth return for any connector
+     * The single address every connector&#39;s OAuth flow returns to. It exchanges the authorization the provider granted, records the connection, and ALWAYS redirects the browser back to the console — on success and on every labeled failure alike, so a user never lands on a raw JSON dead end.  It is public and carries no principal, so the org is taken ONLY from the signed state minted when the flow began; no header is trusted here. That state is single-use and is burned BEFORE the exchange, so one authorization is one attempt and a replayed return fails instead of exchanging twice.  Tokens are sealed into the org&#39;s KMS namespace BEFORE the connection row is written, so a failure of the secret store leaves no half-connected integration advertising a credential that was never stored. Token values never appear in the redirect, in a log line or in an error.  One generalization is worth knowing: a GitHub App installation returns an installation identifier instead of an OAuth code, and it is accepted in the code&#39;s place so the App model needs no second address.
+     * @param provider 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsByProviderCallbackRequestConfig(provider = provider)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsByProviderCallback
+     *
+     * @param provider 
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/discord/link
+     * Begin linking a Hanzo account from Discord
+     * The entry point behind the connect prompt Hanzo shows in a Discord server. It starts a link session and redirects to Discord&#39;s OAuth &#x60;identify&#x60; consent — the narrowest scope that establishes which Discord user is asking, and nothing more.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsDiscordLink() : Unit {
+        val localVarResponse = getV1IntegrationsDiscordLinkWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/discord/link
+     * Begin linking a Hanzo account from Discord
+     * The entry point behind the connect prompt Hanzo shows in a Discord server. It starts a link session and redirects to Discord&#39;s OAuth &#x60;identify&#x60; consent — the narrowest scope that establishes which Discord user is asking, and nothing more.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsDiscordLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsDiscordLinkRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsDiscordLink
+     *
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsDiscordLinkRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/discord/link",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/discord/link/callback
+     * Complete the Discord account link
+     * The final leg: it binds the verified Discord user to the Hanzo account that just signed in, and answers a short confirmation page telling them to return to Discord. The Hanzo credential is sealed into the connected org&#39;s KMS namespace rather than stored beside the link.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsDiscordLinkCallback() : Unit {
+        val localVarResponse = getV1IntegrationsDiscordLinkCallbackWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/discord/link/callback
+     * Complete the Discord account link
+     * The final leg: it binds the verified Discord user to the Hanzo account that just signed in, and answers a short confirmation page telling them to return to Discord. The Hanzo credential is sealed into the connected org&#39;s KMS namespace rather than stored beside the link.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsDiscordLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsDiscordLinkCallbackRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsDiscordLinkCallback
+     *
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsDiscordLinkCallbackRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/discord/link/callback",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/discord/link/discord
+     * Discord sign-in return leg
+     * Where Discord returns the user after the identify consent. It resolves the verified Discord user, confirms the server is connected to an org, and hands the browser to the Hanzo sign-in that completes the link.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsDiscordLinkDiscord() : Unit {
+        val localVarResponse = getV1IntegrationsDiscordLinkDiscordWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/discord/link/discord
+     * Discord sign-in return leg
+     * Where Discord returns the user after the identify consent. It resolves the verified Discord user, confirms the server is connected to an org, and hands the browser to the Hanzo sign-in that completes the link.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsDiscordLinkDiscordWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsDiscordLinkDiscordRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsDiscordLinkDiscord
+     *
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsDiscordLinkDiscordRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/discord/link/discord",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/github/installations
+     * Lists the GitHub accounts the caller may see the App installed on, each confirmed against the App&#39;s own list, plus where to add another.
+     * Lists the GitHub accounts the caller may see the App installed on, each confirmed against the App&#39;s own list, plus where to add another.  The confirmation is the point. A connection row holds an installation id, and an id whose installation was since removed on GitHub is a row that mints nothing — every list and import against it fails with a token error, which reads as \&quot;our git integration is broken\&quot; rather than \&quot;that install is gone\&quot;. Checking the App&#39;s view turns that into a fact the caller can act on.  ORG-SCOPED for a tenant, deliberately. The App is installed across every customer, so the raw list is the customer list; a tenant sees only accounts its own org has bound. It discovers a NEW account by installing it (InstallURL), which is GitHub&#39;s own consent screen — not by reading ours.  A SUPER ADMIN sees the App&#39;s whole install list, because that list is the platform&#39;s own inventory rather than any one tenant&#39;s data, and platform sudo is the single cross-tenant scope this house has. Without it an App installed out-of-band — granted straight from GitHub, so no connect flow ever ran and no connection row exists — is invisible to everyone: the console card reads \&quot;not connected\&quot; and an operator asked \&quot;which GitHub orgs do you see\&quot; can only answer for accounts already bound, which is precisely the accounts that were never the question.
+     * @return GithubInstallationsOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsGithubInstallations() : GithubInstallationsOut {
+        val localVarResponse = getV1IntegrationsGithubInstallationsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubInstallationsOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/github/installations
+     * Lists the GitHub accounts the caller may see the App installed on, each confirmed against the App&#39;s own list, plus where to add another.
+     * Lists the GitHub accounts the caller may see the App installed on, each confirmed against the App&#39;s own list, plus where to add another.  The confirmation is the point. A connection row holds an installation id, and an id whose installation was since removed on GitHub is a row that mints nothing — every list and import against it fails with a token error, which reads as \&quot;our git integration is broken\&quot; rather than \&quot;that install is gone\&quot;. Checking the App&#39;s view turns that into a fact the caller can act on.  ORG-SCOPED for a tenant, deliberately. The App is installed across every customer, so the raw list is the customer list; a tenant sees only accounts its own org has bound. It discovers a NEW account by installing it (InstallURL), which is GitHub&#39;s own consent screen — not by reading ours.  A SUPER ADMIN sees the App&#39;s whole install list, because that list is the platform&#39;s own inventory rather than any one tenant&#39;s data, and platform sudo is the single cross-tenant scope this house has. Without it an App installed out-of-band — granted straight from GitHub, so no connect flow ever ran and no connection row exists — is invisible to everyone: the console card reads \&quot;not connected\&quot; and an operator asked \&quot;which GitHub orgs do you see\&quot; can only answer for accounts already bound, which is precisely the accounts that were never the question.
+     * @return ApiResponse<GithubInstallationsOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsGithubInstallationsWithHttpInfo() : ApiResponse<GithubInstallationsOut?> {
+        val localVariableConfig = getV1IntegrationsGithubInstallationsRequestConfig()
+
+        return request<Unit, GithubInstallationsOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsGithubInstallations
+     *
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsGithubInstallationsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/github/installations",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/github/repos
+     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane.
+     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane. Org-authed: the org comes from the validated principal, and the granted set is bounded to THAT org&#39;s installation token — an org can never enumerate another org&#39;s repos. The console polls it to watch an import flip a repo to imported.
+     * @return GithubReposOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsGithubRepos() : GithubReposOut {
+        val localVarResponse = getV1IntegrationsGithubReposWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubReposOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/github/repos
+     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane.
+     * Lists the org&#39;s granted GitHub repositories, each annotated with its native import + sync status from the git object plane. Org-authed: the org comes from the validated principal, and the granted set is bounded to THAT org&#39;s installation token — an org can never enumerate another org&#39;s repos. The console polls it to watch an import flip a repo to imported.
+     * @return ApiResponse<GithubReposOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsGithubReposWithHttpInfo() : ApiResponse<GithubReposOut?> {
+        val localVariableConfig = getV1IntegrationsGithubReposRequestConfig()
+
+        return request<Unit, GithubReposOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsGithubRepos
+     *
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsGithubReposRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/github/repos",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/github/repos/{repo}/pages
+     * Returns the repo&#39;s Pages status, live URL, custom domain and build source.
+     * Returns the repo&#39;s Pages status, live URL, custom domain and build source. The repo is resolved against the org installation&#39;s GRANTED set, so a caller can never address a repo the App was not granted; 404 when the repo has no Pages site.
+     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
+     * @return GithubPagesView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsGithubReposByRepoPages(repo: kotlin.String) : GithubPagesView {
+        val localVarResponse = getV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/github/repos/{repo}/pages
+     * Returns the repo&#39;s Pages status, live URL, custom domain and build source.
+     * Returns the repo&#39;s Pages status, live URL, custom domain and build source. The repo is resolved against the org installation&#39;s GRANTED set, so a caller can never address a repo the App was not granted; 404 when the repo has no Pages site.
+     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
+     * @return ApiResponse<GithubPagesView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesView?> {
+        val localVariableConfig = getV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo)
+
+        return request<Unit, GithubPagesView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsGithubReposByRepoPages
+     *
+     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/slack/install
+     * Install the Hanzo app into a Slack workspace
+     * The address behind Slack&#39;s \&quot;Add to Slack\&quot; and Marketplace Install buttons. It answers a 302 to Slack&#39;s own consent screen and does nothing else — it is a redirector by design.  It exists because Slack refuses a slack.com URL in that field and requires one of ours that redirects there, which makes the field an ATTRIBUTION hook: routing the click through our own address is what lets an install be counted, and always answering the redirect is what keeps the counter from becoming a detour that never reaches consent. The destination is the same consent URL every time, built from the same scopes the console&#39;s Connect button asks for, so a workspace is asked to grant one thing however the install began.  It is PUBLIC and carries no principal, because whoever clicks Install in Slack&#39;s directory has no Hanzo session yet. It binds no org either, and that is deliberate rather than missing: the org is resolved at the shared provider callback, from the signed state a console connect minted or from the workspace&#39;s existing connection. Minting an org for an anonymous click is the one thing that would break tenant isolation, so an install begun here finishes under exactly the rules every other install obeys.  Where the app is not configured it answers 503, rather than a consent URL carrying an empty client_id that Slack would render as its own dead-end error page.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsSlackInstall() : Unit {
+        val localVarResponse = getV1IntegrationsSlackInstallWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/integrations/slack/install
+     * Install the Hanzo app into a Slack workspace
+     * The address behind Slack&#39;s \&quot;Add to Slack\&quot; and Marketplace Install buttons. It answers a 302 to Slack&#39;s own consent screen and does nothing else — it is a redirector by design.  It exists because Slack refuses a slack.com URL in that field and requires one of ours that redirects there, which makes the field an ATTRIBUTION hook: routing the click through our own address is what lets an install be counted, and always answering the redirect is what keeps the counter from becoming a detour that never reaches consent. The destination is the same consent URL every time, built from the same scopes the console&#39;s Connect button asks for, so a workspace is asked to grant one thing however the install began.  It is PUBLIC and carries no principal, because whoever clicks Install in Slack&#39;s directory has no Hanzo session yet. It binds no org either, and that is deliberate rather than missing: the org is resolved at the shared provider callback, from the signed state a console connect minted or from the workspace&#39;s existing connection. Minting an org for an anonymous click is the one thing that would break tenant isolation, so an install begun here finishes under exactly the rules every other install obeys.  Where the app is not configured it answers 503, rather than a consent URL carrying an empty client_id that Slack would render as its own dead-end error page.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1IntegrationsSlackInstallWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsSlackInstallRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1IntegrationsSlackInstall
+     *
+     * @return RequestConfig
+     */
+    fun getV1IntegrationsSlackInstallRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/integrations/slack/install",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/integrations/slack/link
+     * Begin linking a Hanzo account from Slack
+     * The entry point behind the connect prompt Hanzo posts in Slack. It starts a link session in the browser and redirects to Slack&#39;s own sign-in, which is what proves which Slack user is asking.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1IntegrationsSlackLink() : Unit {
+        val localVarResponse = getV1IntegrationsSlackLinkWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -907,15 +868,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/slack/link
-     * 
-     * 
+     * Begin linking a Hanzo account from Slack
+     * The entry point behind the connect prompt Hanzo posts in Slack. It starts a link session in the browser and redirects to Slack&#39;s own sign-in, which is what proves which Slack user is asking.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsSlackLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsSlackLinkRequestConfig()
+    fun getV1IntegrationsSlackLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsSlackLinkRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -923,11 +884,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsSlackLink
+     * To obtain the request config of the operation getV1IntegrationsSlackLink
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsSlackLinkRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsSlackLinkRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -937,15 +898,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/slack/link/callback
-     * 
-     * 
+     * Complete the Slack account link
+     * The final leg: the user has proved both who they are in Slack and who they are in Hanzo, and this binds the two. It answers a short confirmation page telling them to return to Slack.  The Hanzo credential obtained here is sealed into the connected workspace&#39;s own KMS namespace; it is never written to a database column and never logged. A deployment whose secret store is unavailable refuses the link rather than completing it without custody of the credential.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -954,8 +915,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsSlackLinkCallback() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsSlackLinkCallbackWithHttpInfo()
+    fun getV1IntegrationsSlackLinkCallback() : Unit {
+        val localVarResponse = getV1IntegrationsSlackLinkCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -974,15 +935,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/slack/link/callback
-     * 
-     * 
+     * Complete the Slack account link
+     * The final leg: the user has proved both who they are in Slack and who they are in Hanzo, and this binds the two. It answers a short confirmation page telling them to return to Slack.  The Hanzo credential obtained here is sealed into the connected workspace&#39;s own KMS namespace; it is never written to a database column and never logged. A deployment whose secret store is unavailable refuses the link rather than completing it without custody of the credential.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsSlackLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsSlackLinkCallbackRequestConfig()
+    fun getV1IntegrationsSlackLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsSlackLinkCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -990,11 +951,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsSlackLinkCallback
+     * To obtain the request config of the operation getV1IntegrationsSlackLinkCallback
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsSlackLinkCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsSlackLinkCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1004,15 +965,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/link/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/slack/link/slack
-     * 
-     * 
+     * Slack sign-in return leg
+     * Where Slack returns the user after they sign in. It establishes the verified Slack workspace and user, confirms that workspace is connected to an org, and hands the browser on to the Hanzo sign-in that completes the link.  The verified pair is carried onward in a host-bound cookie rather than in the URL, so the identity being linked cannot be edited in transit.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1021,8 +982,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsSlackLinkSlack() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsSlackLinkSlackWithHttpInfo()
+    fun getV1IntegrationsSlackLinkSlack() : Unit {
+        val localVarResponse = getV1IntegrationsSlackLinkSlackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1041,15 +1002,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/slack/link/slack
-     * 
-     * 
+     * Slack sign-in return leg
+     * Where Slack returns the user after they sign in. It establishes the verified Slack workspace and user, confirms that workspace is connected to an org, and hands the browser on to the Hanzo sign-in that completes the link.  The verified pair is carried onward in a host-bound cookie rather than in the URL, so the identity being linked cannot be edited in transit.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsSlackLinkSlackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsSlackLinkSlackRequestConfig()
+    fun getV1IntegrationsSlackLinkSlackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsSlackLinkSlackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1057,11 +1018,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsSlackLinkSlack
+     * To obtain the request config of the operation getV1IntegrationsSlackLinkSlack
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsSlackLinkSlackRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsSlackLinkSlackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1071,15 +1032,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/link/slack",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/teams/link
-     * 
-     * 
+     * Begin linking a Hanzo account from Teams
+     * The entry point behind the connect prompt Hanzo shows in Teams. It starts a link session and redirects to Microsoft sign-in addressed to the CHAT&#39;S OWN tenant, not the common endpoint, so only a member of that tenant can complete it.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1088,8 +1049,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsTeamsLink() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsTeamsLinkWithHttpInfo()
+    fun getV1IntegrationsTeamsLink() : Unit {
+        val localVarResponse = getV1IntegrationsTeamsLinkWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1108,15 +1069,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/teams/link
-     * 
-     * 
+     * Begin linking a Hanzo account from Teams
+     * The entry point behind the connect prompt Hanzo shows in Teams. It starts a link session and redirects to Microsoft sign-in addressed to the CHAT&#39;S OWN tenant, not the common endpoint, so only a member of that tenant can complete it.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsTeamsLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsTeamsLinkRequestConfig()
+    fun getV1IntegrationsTeamsLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsTeamsLinkRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1124,11 +1085,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsTeamsLink
+     * To obtain the request config of the operation getV1IntegrationsTeamsLink
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsTeamsLinkRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsTeamsLinkRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1138,15 +1099,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/teams/link/aad
-     * 
-     * 
+     * Microsoft sign-in return leg
+     * Where Microsoft returns the user after sign-in. It resolves the verified directory identity and then re-checks the tenant: the signed-in user&#39;s tenant must equal the tenant of the chat the link started from, so a valid Microsoft sign-in from a different organization is refused here rather than accepted.  This is the leg Teams has and the other platforms do not, which is why the Teams flow has an extra address.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1155,8 +1116,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsTeamsLinkAad() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsTeamsLinkAadWithHttpInfo()
+    fun getV1IntegrationsTeamsLinkAad() : Unit {
+        val localVarResponse = getV1IntegrationsTeamsLinkAadWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1175,15 +1136,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/teams/link/aad
-     * 
-     * 
+     * Microsoft sign-in return leg
+     * Where Microsoft returns the user after sign-in. It resolves the verified directory identity and then re-checks the tenant: the signed-in user&#39;s tenant must equal the tenant of the chat the link started from, so a valid Microsoft sign-in from a different organization is refused here rather than accepted.  This is the leg Teams has and the other platforms do not, which is why the Teams flow has an extra address.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsTeamsLinkAadWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsTeamsLinkAadRequestConfig()
+    fun getV1IntegrationsTeamsLinkAadWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsTeamsLinkAadRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1191,11 +1152,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsTeamsLinkAad
+     * To obtain the request config of the operation getV1IntegrationsTeamsLinkAad
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsTeamsLinkAadRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsTeamsLinkAadRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1205,15 +1166,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/link/aad",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/teams/link/callback
-     * 
-     * 
+     * Complete the Teams account link
+     * The final leg: it binds the verified directory identity to the Hanzo account that just signed in, and answers a short confirmation page telling them to return to Teams. The Hanzo credential is sealed into the connected org&#39;s KMS namespace.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1222,8 +1183,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsTeamsLinkCallback() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsTeamsLinkCallbackWithHttpInfo()
+    fun getV1IntegrationsTeamsLinkCallback() : Unit {
+        val localVarResponse = getV1IntegrationsTeamsLinkCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1242,15 +1203,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/teams/link/callback
-     * 
-     * 
+     * Complete the Teams account link
+     * The final leg: it binds the verified directory identity to the Hanzo account that just signed in, and answers a short confirmation page telling them to return to Teams. The Hanzo credential is sealed into the connected org&#39;s KMS namespace.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsTeamsLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsTeamsLinkCallbackRequestConfig()
+    fun getV1IntegrationsTeamsLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsTeamsLinkCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1258,11 +1219,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsTeamsLinkCallback
+     * To obtain the request config of the operation getV1IntegrationsTeamsLinkCallback
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsTeamsLinkCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsTeamsLinkCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1272,15 +1233,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/link/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/telegram/link
-     * 
-     * 
+     * Begin linking a Hanzo account from Telegram
+     * The entry point behind the connect prompt Hanzo sends in Telegram. Unlike the other platforms it answers an HTML PAGE rather than a redirect: Telegram has no OAuth flow, so the page hosts Telegram&#39;s Login Widget, and the browser is sent onward only after the user signs in through it.  The widget only appears on the domain registered for the bot, so a deployment whose bot domain is unset renders a page with nothing on it.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1289,8 +1250,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsTelegramLink() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsTelegramLinkWithHttpInfo()
+    fun getV1IntegrationsTelegramLink() : Unit {
+        val localVarResponse = getV1IntegrationsTelegramLinkWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1309,15 +1270,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/telegram/link
-     * 
-     * 
+     * Begin linking a Hanzo account from Telegram
+     * The entry point behind the connect prompt Hanzo sends in Telegram. Unlike the other platforms it answers an HTML PAGE rather than a redirect: Telegram has no OAuth flow, so the page hosts Telegram&#39;s Login Widget, and the browser is sent onward only after the user signs in through it.  The widget only appears on the domain registered for the bot, so a deployment whose bot domain is unset renders a page with nothing on it.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsTelegramLinkWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsTelegramLinkRequestConfig()
+    fun getV1IntegrationsTelegramLinkWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsTelegramLinkRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1325,11 +1286,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsTelegramLink
+     * To obtain the request config of the operation getV1IntegrationsTelegramLink
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsTelegramLinkRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsTelegramLinkRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1339,15 +1300,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/link",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/telegram/link/auth
-     * 
-     * 
+     * Telegram Login Widget return leg
+     * Where Telegram&#39;s Login Widget sends the user with its signed authentication data. That data is verified against the bot token — this is the identity source, and it is the widget&#39;s signature rather than a code exchange — and the chat is confirmed to be bound to an org before the browser is handed to the Hanzo sign-in.  Widget data is only accepted while it is fresh, so a captured sign-in blob cannot be replayed later even though its signature stays valid.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1356,8 +1317,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsTelegramLinkAuth() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsTelegramLinkAuthWithHttpInfo()
+    fun getV1IntegrationsTelegramLinkAuth() : Unit {
+        val localVarResponse = getV1IntegrationsTelegramLinkAuthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1376,15 +1337,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/telegram/link/auth
-     * 
-     * 
+     * Telegram Login Widget return leg
+     * Where Telegram&#39;s Login Widget sends the user with its signed authentication data. That data is verified against the bot token — this is the identity source, and it is the widget&#39;s signature rather than a code exchange — and the chat is confirmed to be bound to an org before the browser is handed to the Hanzo sign-in.  Widget data is only accepted while it is fresh, so a captured sign-in blob cannot be replayed later even though its signature stays valid.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsTelegramLinkAuthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsTelegramLinkAuthRequestConfig()
+    fun getV1IntegrationsTelegramLinkAuthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsTelegramLinkAuthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1392,11 +1353,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsTelegramLinkAuth
+     * To obtain the request config of the operation getV1IntegrationsTelegramLinkAuth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsTelegramLinkAuthRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsTelegramLinkAuthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1406,15 +1367,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/link/auth",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/integrations/telegram/link/callback
-     * 
-     * 
+     * Complete the Telegram account link
+     * The final leg: it binds the verified Telegram user to the Hanzo account that just signed in, and answers a short confirmation page telling them to return to Telegram. The Hanzo credential is sealed into the connected org&#39;s KMS namespace.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1423,8 +1384,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IntegrationsTelegramLinkCallback() : Unit {
-        val localVarResponse = cloudGetV1IntegrationsTelegramLinkCallbackWithHttpInfo()
+    fun getV1IntegrationsTelegramLinkCallback() : Unit {
+        val localVarResponse = getV1IntegrationsTelegramLinkCallbackWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1443,15 +1404,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * GET /v1/integrations/telegram/link/callback
-     * 
-     * 
+     * Complete the Telegram account link
+     * The final leg: it binds the verified Telegram user to the Hanzo account that just signed in, and answers a short confirmation page telling them to return to Telegram. The Hanzo credential is sealed into the connected org&#39;s KMS namespace.  This is one leg of a three-leg flow, and the legs are not interchangeable: a browser is expected to arrive here only from the leg before it. The link URL&#39;s state proves the prompt was server-minted and carries the CHAT it started from — it is provenance only, and it never decides which account gets linked. The account identity always comes from the platform&#39;s own verified sign-in and a host-bound cookie, so forwarding a link to someone else cannot bind their account, and a session lifted into another browser is refused rather than completed. Each link is single-use, and a deployment without linking configured answers 503.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IntegrationsTelegramLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IntegrationsTelegramLinkCallbackRequestConfig()
+    fun getV1IntegrationsTelegramLinkCallbackWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IntegrationsTelegramLinkCallbackRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1459,11 +1420,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IntegrationsTelegramLinkCallback
+     * To obtain the request config of the operation getV1IntegrationsTelegramLinkCallback
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IntegrationsTelegramLinkCallbackRequestConfig() : RequestConfig<Unit> {
+    fun getV1IntegrationsTelegramLinkCallbackRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1473,372 +1434,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/link/callback",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/integrations/discord/interactions
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsDiscordInteractions() : Unit {
-        val localVarResponse = cloudPostV1IntegrationsDiscordInteractionsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/integrations/discord/interactions
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsDiscordInteractionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IntegrationsDiscordInteractionsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsDiscordInteractions
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1IntegrationsDiscordInteractionsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/integrations/discord/interactions",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/integrations/github/issues/backfill
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
-     * @param cloudGithubBackfillIn 
-     * @return CloudGithubBackfillResult
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsGithubIssuesBackfill(cloudGithubBackfillIn: CloudGithubBackfillIn) : CloudGithubBackfillResult {
-        val localVarResponse = cloudPostV1IntegrationsGithubIssuesBackfillWithHttpInfo(cloudGithubBackfillIn = cloudGithubBackfillIn)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubBackfillResult
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/integrations/github/issues/backfill
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
-     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
-     * @param cloudGithubBackfillIn 
-     * @return ApiResponse<CloudGithubBackfillResult?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsGithubIssuesBackfillWithHttpInfo(cloudGithubBackfillIn: CloudGithubBackfillIn) : ApiResponse<CloudGithubBackfillResult?> {
-        val localVariableConfig = cloudPostV1IntegrationsGithubIssuesBackfillRequestConfig(cloudGithubBackfillIn = cloudGithubBackfillIn)
-
-        return request<CloudGithubBackfillIn, CloudGithubBackfillResult>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsGithubIssuesBackfill
-     *
-     * @param cloudGithubBackfillIn 
-     * @return RequestConfig
-     */
-    fun cloudPostV1IntegrationsGithubIssuesBackfillRequestConfig(cloudGithubBackfillIn: CloudGithubBackfillIn) : RequestConfig<CloudGithubBackfillIn> {
-        val localVariableBody = cloudGithubBackfillIn
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/integrations/github/issues/backfill",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/integrations/github/repos/import
-     * GithubImport imports the selected (or all) granted repos into git.hanzo.ai.
-     * GithubImport imports the selected (or all) granted repos into git.hanzo.ai. The selection is intersected with the installation&#39;s GRANTED set, so a client can never import a repo the App was not granted (org isolation + a grant check). The import runs in a bounded background worker (don&#39;t block the request), so the answer is 202 Accepted; poll GET /v1/integrations/github/repos for the per-repo status to flip to imported.
-     * @param cloudGithubImportIn 
-     * @return CloudGithubImportOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsGithubReposImport(cloudGithubImportIn: CloudGithubImportIn) : CloudGithubImportOut {
-        val localVarResponse = cloudPostV1IntegrationsGithubReposImportWithHttpInfo(cloudGithubImportIn = cloudGithubImportIn)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubImportOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/integrations/github/repos/import
-     * GithubImport imports the selected (or all) granted repos into git.hanzo.ai.
-     * GithubImport imports the selected (or all) granted repos into git.hanzo.ai. The selection is intersected with the installation&#39;s GRANTED set, so a client can never import a repo the App was not granted (org isolation + a grant check). The import runs in a bounded background worker (don&#39;t block the request), so the answer is 202 Accepted; poll GET /v1/integrations/github/repos for the per-repo status to flip to imported.
-     * @param cloudGithubImportIn 
-     * @return ApiResponse<CloudGithubImportOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsGithubReposImportWithHttpInfo(cloudGithubImportIn: CloudGithubImportIn) : ApiResponse<CloudGithubImportOut?> {
-        val localVariableConfig = cloudPostV1IntegrationsGithubReposImportRequestConfig(cloudGithubImportIn = cloudGithubImportIn)
-
-        return request<CloudGithubImportIn, CloudGithubImportOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsGithubReposImport
-     *
-     * @param cloudGithubImportIn 
-     * @return RequestConfig
-     */
-    fun cloudPostV1IntegrationsGithubReposImportRequestConfig(cloudGithubImportIn: CloudGithubImportIn) : RequestConfig<CloudGithubImportIn> {
-        val localVariableBody = cloudGithubImportIn
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/integrations/github/repos/import",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/integrations/github/repos/{repo}/pages
-     * Creates the repo&#39;s Pages site and answers 201 Created with it.
-     * Creates the repo&#39;s Pages site and answers 201 Created with it. With buildType \&quot;workflow\&quot; the site builds via GitHub Actions; otherwise it builds from a branch source, defaulting to the repo&#39;s own default branch when none is given. Only \&quot;/\&quot; and \&quot;/docs\&quot; are legal source paths (GitHub&#39;s rule).
-     * @param repo Repo is the repository, from the :repo path segment.
-     * @param cloudGithubPagesEnableReq 
-     * @return CloudGithubPagesView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsGithubReposRepoPages(repo: kotlin.String, cloudGithubPagesEnableReq: CloudGithubPagesEnableReq) : CloudGithubPagesView {
-        val localVarResponse = cloudPostV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo = repo, cloudGithubPagesEnableReq = cloudGithubPagesEnableReq)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubPagesView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/integrations/github/repos/{repo}/pages
-     * Creates the repo&#39;s Pages site and answers 201 Created with it.
-     * Creates the repo&#39;s Pages site and answers 201 Created with it. With buildType \&quot;workflow\&quot; the site builds via GitHub Actions; otherwise it builds from a branch source, defaulting to the repo&#39;s own default branch when none is given. Only \&quot;/\&quot; and \&quot;/docs\&quot; are legal source paths (GitHub&#39;s rule).
-     * @param repo Repo is the repository, from the :repo path segment.
-     * @param cloudGithubPagesEnableReq 
-     * @return ApiResponse<CloudGithubPagesView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo: kotlin.String, cloudGithubPagesEnableReq: CloudGithubPagesEnableReq) : ApiResponse<CloudGithubPagesView?> {
-        val localVariableConfig = cloudPostV1IntegrationsGithubReposRepoPagesRequestConfig(repo = repo, cloudGithubPagesEnableReq = cloudGithubPagesEnableReq)
-
-        return request<CloudGithubPagesEnableReq, CloudGithubPagesView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsGithubReposRepoPages
-     *
-     * @param repo Repo is the repository, from the :repo path segment.
-     * @param cloudGithubPagesEnableReq 
-     * @return RequestConfig
-     */
-    fun cloudPostV1IntegrationsGithubReposRepoPagesRequestConfig(repo: kotlin.String, cloudGithubPagesEnableReq: CloudGithubPagesEnableReq) : RequestConfig<CloudGithubPagesEnableReq> {
-        val localVariableBody = cloudGithubPagesEnableReq
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/integrations/github/repos/{repo}/pages/builds
-     * GithubPagesBuild requests a Pages rebuild and returns the queued build&#39;s status.
-     * GithubPagesBuild requests a Pages rebuild and returns the queued build&#39;s status. The build is queued AT GITHUB, not completed here, so the answer is 202 Accepted and its status is the one GitHub reported at queue time. 404 when the repository has no Pages site, or when the org&#39;s installation was not granted it.
-     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return CloudGithubPagesBuildOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsGithubReposRepoPagesBuilds(repo: kotlin.String) : CloudGithubPagesBuildOut {
-        val localVarResponse = cloudPostV1IntegrationsGithubReposRepoPagesBuildsWithHttpInfo(repo = repo)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubPagesBuildOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/integrations/github/repos/{repo}/pages/builds
-     * GithubPagesBuild requests a Pages rebuild and returns the queued build&#39;s status.
-     * GithubPagesBuild requests a Pages rebuild and returns the queued build&#39;s status. The build is queued AT GITHUB, not completed here, so the answer is 202 Accepted and its status is the one GitHub reported at queue time. 404 when the repository has no Pages site, or when the org&#39;s installation was not granted it.
-     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return ApiResponse<CloudGithubPagesBuildOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsGithubReposRepoPagesBuildsWithHttpInfo(repo: kotlin.String) : ApiResponse<CloudGithubPagesBuildOut?> {
-        val localVariableConfig = cloudPostV1IntegrationsGithubReposRepoPagesBuildsRequestConfig(repo = repo)
-
-        return request<Unit, CloudGithubPagesBuildOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsGithubReposRepoPagesBuilds
-     *
-     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
-     * @return RequestConfig
-     */
-    fun cloudPostV1IntegrationsGithubReposRepoPagesBuildsRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/integrations/github/repos/{repo}/pages/builds".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1848,8 +1444,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Acquires the org&#39;s credential for one provider.
      * Acquires the org&#39;s credential for one provider. It has TWO paths and the REQUEST picks which: a \&quot;token\&quot; key in the body seals that credential directly (verify-before-store), and its absence begins the 3-legged OAuth flow — minting a single-use nonce plus an HMAC-signed state that binds this org to this provider, and answering with the provider&#39;s authorize URL for the caller to redirect to.  Fail-closed order, unchanged: no principal → 403; unknown provider → 404; an AdminOnly connector without the caller&#39;s own-org admin bit → 403; not configured → 503; KMS not ready → 503 (the flow WILL need to seal a token, so refuse now rather than dead-end at the callback).
      * @param provider Provider is the connector&#39;s registry id, from the :provider path segment.
-     * @param cloudConnectIn 
-     * @return CloudConnectOut
+     * @param connectIn 
+     * @return ConnectOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1858,11 +1454,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsProviderConnect(provider: kotlin.String, cloudConnectIn: CloudConnectIn) : CloudConnectOut {
-        val localVarResponse = cloudPostV1IntegrationsProviderConnectWithHttpInfo(provider = provider, cloudConnectIn = cloudConnectIn)
+    fun postV1IntegrationsByProviderConnect(provider: kotlin.String, connectIn: ConnectIn) : ConnectOut {
+        val localVarResponse = postV1IntegrationsByProviderConnectWithHttpInfo(provider = provider, connectIn = connectIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConnectOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1881,30 +1477,30 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Acquires the org&#39;s credential for one provider.
      * Acquires the org&#39;s credential for one provider. It has TWO paths and the REQUEST picks which: a \&quot;token\&quot; key in the body seals that credential directly (verify-before-store), and its absence begins the 3-legged OAuth flow — minting a single-use nonce plus an HMAC-signed state that binds this org to this provider, and answering with the provider&#39;s authorize URL for the caller to redirect to.  Fail-closed order, unchanged: no principal → 403; unknown provider → 404; an AdminOnly connector without the caller&#39;s own-org admin bit → 403; not configured → 503; KMS not ready → 503 (the flow WILL need to seal a token, so refuse now rather than dead-end at the callback).
      * @param provider Provider is the connector&#39;s registry id, from the :provider path segment.
-     * @param cloudConnectIn 
-     * @return ApiResponse<CloudConnectOut?>
+     * @param connectIn 
+     * @return ApiResponse<ConnectOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsProviderConnectWithHttpInfo(provider: kotlin.String, cloudConnectIn: CloudConnectIn) : ApiResponse<CloudConnectOut?> {
-        val localVariableConfig = cloudPostV1IntegrationsProviderConnectRequestConfig(provider = provider, cloudConnectIn = cloudConnectIn)
+    fun postV1IntegrationsByProviderConnectWithHttpInfo(provider: kotlin.String, connectIn: ConnectIn) : ApiResponse<ConnectOut?> {
+        val localVariableConfig = postV1IntegrationsByProviderConnectRequestConfig(provider = provider, connectIn = connectIn)
 
-        return request<CloudConnectIn, CloudConnectOut>(
+        return request<ConnectIn, ConnectOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsProviderConnect
+     * To obtain the request config of the operation postV1IntegrationsByProviderConnect
      *
      * @param provider Provider is the connector&#39;s registry id, from the :provider path segment.
-     * @param cloudConnectIn 
+     * @param connectIn 
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsProviderConnectRequestConfig(provider: kotlin.String, cloudConnectIn: CloudConnectIn) : RequestConfig<CloudConnectIn> {
-        val localVariableBody = cloudConnectIn
+    fun postV1IntegrationsByProviderConnectRequestConfig(provider: kotlin.String, connectIn: ConnectIn) : RequestConfig<ConnectIn> {
+        val localVariableBody = connectIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1915,7 +1511,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}/connect".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1925,7 +1521,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row.
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row. Idempotent — disconnecting a provider that was never connected still returns {disconnected:true}. Symmetric with connect: an AdminOnly connector needs the caller&#39;s own-org admin bit.
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
-     * @return CloudDisconnectOut
+     * @return DisconnectOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1934,11 +1530,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsProviderDisconnect(provider: kotlin.String) : CloudDisconnectOut {
-        val localVarResponse = cloudPostV1IntegrationsProviderDisconnectWithHttpInfo(provider = provider)
+    fun postV1IntegrationsByProviderDisconnect(provider: kotlin.String) : DisconnectOut {
+        val localVarResponse = postV1IntegrationsByProviderDisconnectWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDisconnectOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DisconnectOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1957,27 +1553,27 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row.
      * Revokes (best-effort) and forgets an org&#39;s connection: it deletes every custodied KMS secret and the connection row. Idempotent — disconnecting a provider that was never connected still returns {disconnected:true}. Symmetric with connect: an AdminOnly connector needs the caller&#39;s own-org admin bit.
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
-     * @return ApiResponse<CloudDisconnectOut?>
+     * @return ApiResponse<DisconnectOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsProviderDisconnectWithHttpInfo(provider: kotlin.String) : ApiResponse<CloudDisconnectOut?> {
-        val localVariableConfig = cloudPostV1IntegrationsProviderDisconnectRequestConfig(provider = provider)
+    fun postV1IntegrationsByProviderDisconnectWithHttpInfo(provider: kotlin.String) : ApiResponse<DisconnectOut?> {
+        val localVariableConfig = postV1IntegrationsByProviderDisconnectRequestConfig(provider = provider)
 
-        return request<Unit, CloudDisconnectOut>(
+        return request<Unit, DisconnectOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsProviderDisconnect
+     * To obtain the request config of the operation postV1IntegrationsByProviderDisconnect
      *
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsProviderDisconnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun postV1IntegrationsByProviderDisconnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1988,7 +1584,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}/disconnect".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1998,7 +1594,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;).
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;). Org-scoped (any member may check status); the credential is read from KMS, verified, and NEVER returned or logged. A verification failure is reported as {active:false}, not an error — the console/ CLI renders it. Only apikey providers support verify (OAuth tokens are checked at use, not re-verified here).
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
-     * @return CloudVerifyOut
+     * @return VerifyOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2007,11 +1603,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsProviderVerify(provider: kotlin.String) : CloudVerifyOut {
-        val localVarResponse = cloudPostV1IntegrationsProviderVerifyWithHttpInfo(provider = provider)
+    fun postV1IntegrationsByProviderVerify(provider: kotlin.String) : VerifyOut {
+        val localVarResponse = postV1IntegrationsByProviderVerifyWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVerifyOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VerifyOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2030,27 +1626,27 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;).
      * Re-checks a CONNECTED apikey connector&#39;s stored credential against the provider, live (&#x60;hanzo connector verify&#x60;). Org-scoped (any member may check status); the credential is read from KMS, verified, and NEVER returned or logged. A verification failure is reported as {active:false}, not an error — the console/ CLI renders it. Only apikey providers support verify (OAuth tokens are checked at use, not re-verified here).
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
-     * @return ApiResponse<CloudVerifyOut?>
+     * @return ApiResponse<VerifyOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsProviderVerifyWithHttpInfo(provider: kotlin.String) : ApiResponse<CloudVerifyOut?> {
-        val localVariableConfig = cloudPostV1IntegrationsProviderVerifyRequestConfig(provider = provider)
+    fun postV1IntegrationsByProviderVerifyWithHttpInfo(provider: kotlin.String) : ApiResponse<VerifyOut?> {
+        val localVariableConfig = postV1IntegrationsByProviderVerifyRequestConfig(provider = provider)
 
-        return request<Unit, CloudVerifyOut>(
+        return request<Unit, VerifyOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsProviderVerify
+     * To obtain the request config of the operation postV1IntegrationsByProviderVerify
      *
      * @param provider Provider is the registry id of the connector — \&quot;slack\&quot;, \&quot;github\&quot;, \&quot;cloudflare\&quot;. Unknown ids are 404, as are the user-plane (/v1/connectors) providers, which this surface never resolves.
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsProviderVerifyRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun postV1IntegrationsByProviderVerifyRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2061,15 +1657,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/{provider}/verify".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/integrations/slack/commands
-     * 
-     * 
+     * POST /v1/integrations/discord/interactions
+     * Discord interactions endpoint
+     * The Interactions Endpoint URL for the Discord app. It answers Discord&#39;s PING with a PONG, and handles the &#x60;/hanzo&#x60; slash command by acknowledging with a deferred ephemeral reply and editing that reply with the answer once the agent has run. Any other interaction is acknowledged and ignored.  Requests are verified by ED25519 SIGNATURE over the timestamp and body against the app&#39;s public key — not by HMAC, unlike the Slack webhooks. Interactions work over plain HTTP, so no gateway connection and no message-content intent is involved.  Discord does not retry, so this is the one channel where being at capacity is shown to the user as an ephemeral ask-to-run-it-again rather than answered as a retriable failure — nothing is recorded either way, so the next attempt is clean.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2078,8 +1674,595 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsSlackCommands() : Unit {
-        val localVarResponse = cloudPostV1IntegrationsSlackCommandsWithHttpInfo()
+    fun postV1IntegrationsDiscordInteractions() : Unit {
+        val localVarResponse = postV1IntegrationsDiscordInteractionsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/discord/interactions
+     * Discord interactions endpoint
+     * The Interactions Endpoint URL for the Discord app. It answers Discord&#39;s PING with a PONG, and handles the &#x60;/hanzo&#x60; slash command by acknowledging with a deferred ephemeral reply and editing that reply with the answer once the agent has run. Any other interaction is acknowledged and ignored.  Requests are verified by ED25519 SIGNATURE over the timestamp and body against the app&#39;s public key — not by HMAC, unlike the Slack webhooks. Interactions work over plain HTTP, so no gateway connection and no message-content intent is involved.  Discord does not retry, so this is the one channel where being at capacity is shown to the user as an ephemeral ask-to-run-it-again rather than answered as a retriable failure — nothing is recorded either way, so the next attempt is clean.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsDiscordInteractionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IntegrationsDiscordInteractionsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsDiscordInteractions
+     *
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsDiscordInteractionsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/discord/interactions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/github/claim
+     * Binds installations the App ALREADY holds to the org the caller is acting in — the reconciliation for a grant that happened outside our connect flow.
+     * Binds installations the App ALREADY holds to the org the caller is acting in — the reconciliation for a grant that happened outside our connect flow.  An installation IS the grant: GitHub recorded the consent when the App was installed, and our connection row is bookkeeping that never got written because nobody came through our callback. This writes that row from the App&#39;s own view, so 23 accounts granted straight from GitHub stop reading as nothing.  The org is taken from the VALIDATED PRINCIPAL and never from the body, because it is the one part GitHub cannot tell us. An installation carries an account login, a type and a repository selection — nothing that names a Hanzo org. So the binding cannot be DERIVED, only asserted, and the only unforgeable assertion available is the org the caller is already acting in. Inferring one from the account name would be a guess the store cannot catch: its key is (org,provider,owner), so a wrong org is a valid row, and a valid row is a mirror pointed at the wrong tenant.  SUPER ADMIN only, for that same reason. A tenant&#39;s proof that an account is theirs is GitHub&#39;s own consent screen — the connect flow — and without it any org could claim any account the App holds. Platform sudo is already the scope that reads the whole install list, so it is the scope that may bind from it; giving a tenant this verb would hand it every other tenant&#39;s repositories.  Idempotent: the row is keyed (org,provider,owner) and connected_at survives an upsert, so claiming twice rebinds the same account to the same org and reports it under &#x60;already&#x60;. Re-claiming also REFRESHES the installation id, so an account reinstalled on GitHub — new id, same login — self-heals instead of minting tokens against a dead installation.  Claiming an account another org holds ADDS this org&#39;s row and leaves theirs standing, so no org loses an integration it is using.
+     * @param githubClaimIn 
+     * @return GithubClaimOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsGithubClaim(githubClaimIn: GithubClaimIn) : GithubClaimOut {
+        val localVarResponse = postV1IntegrationsGithubClaimWithHttpInfo(githubClaimIn = githubClaimIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubClaimOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/claim
+     * Binds installations the App ALREADY holds to the org the caller is acting in — the reconciliation for a grant that happened outside our connect flow.
+     * Binds installations the App ALREADY holds to the org the caller is acting in — the reconciliation for a grant that happened outside our connect flow.  An installation IS the grant: GitHub recorded the consent when the App was installed, and our connection row is bookkeeping that never got written because nobody came through our callback. This writes that row from the App&#39;s own view, so 23 accounts granted straight from GitHub stop reading as nothing.  The org is taken from the VALIDATED PRINCIPAL and never from the body, because it is the one part GitHub cannot tell us. An installation carries an account login, a type and a repository selection — nothing that names a Hanzo org. So the binding cannot be DERIVED, only asserted, and the only unforgeable assertion available is the org the caller is already acting in. Inferring one from the account name would be a guess the store cannot catch: its key is (org,provider,owner), so a wrong org is a valid row, and a valid row is a mirror pointed at the wrong tenant.  SUPER ADMIN only, for that same reason. A tenant&#39;s proof that an account is theirs is GitHub&#39;s own consent screen — the connect flow — and without it any org could claim any account the App holds. Platform sudo is already the scope that reads the whole install list, so it is the scope that may bind from it; giving a tenant this verb would hand it every other tenant&#39;s repositories.  Idempotent: the row is keyed (org,provider,owner) and connected_at survives an upsert, so claiming twice rebinds the same account to the same org and reports it under &#x60;already&#x60;. Re-claiming also REFRESHES the installation id, so an account reinstalled on GitHub — new id, same login — self-heals instead of minting tokens against a dead installation.  Claiming an account another org holds ADDS this org&#39;s row and leaves theirs standing, so no org loses an integration it is using.
+     * @param githubClaimIn 
+     * @return ApiResponse<GithubClaimOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsGithubClaimWithHttpInfo(githubClaimIn: GithubClaimIn) : ApiResponse<GithubClaimOut?> {
+        val localVariableConfig = postV1IntegrationsGithubClaimRequestConfig(githubClaimIn = githubClaimIn)
+
+        return request<GithubClaimIn, GithubClaimOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsGithubClaim
+     *
+     * @param githubClaimIn 
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsGithubClaimRequestConfig(githubClaimIn: GithubClaimIn) : RequestConfig<GithubClaimIn> {
+        val localVariableBody = githubClaimIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/claim",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/github/fork
+     * Forks a granted repository.
+     * Forks a granted repository.  GitHub&#39;s fork is ASYNCHRONOUS: it answers 202 with the target repo and populates it in the background, and it answers the same 202 when the fork already exists. So this reports what GitHub said rather than waiting — a call that blocked until the clone finished would time out on a large repository and tell the caller nothing it does not already know.
+     * @param githubForkReq 
+     * @return GithubForkOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsGithubFork(githubForkReq: GithubForkReq) : GithubForkOut {
+        val localVarResponse = postV1IntegrationsGithubForkWithHttpInfo(githubForkReq = githubForkReq)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubForkOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/fork
+     * Forks a granted repository.
+     * Forks a granted repository.  GitHub&#39;s fork is ASYNCHRONOUS: it answers 202 with the target repo and populates it in the background, and it answers the same 202 when the fork already exists. So this reports what GitHub said rather than waiting — a call that blocked until the clone finished would time out on a large repository and tell the caller nothing it does not already know.
+     * @param githubForkReq 
+     * @return ApiResponse<GithubForkOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsGithubForkWithHttpInfo(githubForkReq: GithubForkReq) : ApiResponse<GithubForkOut?> {
+        val localVariableConfig = postV1IntegrationsGithubForkRequestConfig(githubForkReq = githubForkReq)
+
+        return request<GithubForkReq, GithubForkOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsGithubFork
+     *
+     * @param githubForkReq 
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsGithubForkRequestConfig(githubForkReq: GithubForkReq) : RequestConfig<GithubForkReq> {
+        val localVariableBody = githubForkReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/fork",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/github/issues/backfill
+     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
+     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
+     * @param githubBackfillIn 
+     * @return GithubBackfillResult
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsGithubIssuesBackfill(githubBackfillIn: GithubBackfillIn) : GithubBackfillResult {
+        val localVarResponse = postV1IntegrationsGithubIssuesBackfillWithHttpInfo(githubBackfillIn = githubBackfillIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubBackfillResult
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/issues/backfill
+     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter.
+     * Seeds the native tracker with the EXISTING issues across the org&#39;s granted repos (default state&#x3D;open); the webhook keeps them live thereafter. Org-scoped by the validated principal — a caller only ever backfills its OWN org. Synchronous + bounded (a total time budget and an issue cap) so it returns the counts directly; idempotent by ExtRef, so a re-run continues where a truncated pass left off and never duplicates.
+     * @param githubBackfillIn 
+     * @return ApiResponse<GithubBackfillResult?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsGithubIssuesBackfillWithHttpInfo(githubBackfillIn: GithubBackfillIn) : ApiResponse<GithubBackfillResult?> {
+        val localVariableConfig = postV1IntegrationsGithubIssuesBackfillRequestConfig(githubBackfillIn = githubBackfillIn)
+
+        return request<GithubBackfillIn, GithubBackfillResult>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsGithubIssuesBackfill
+     *
+     * @param githubBackfillIn 
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsGithubIssuesBackfillRequestConfig(githubBackfillIn: GithubBackfillIn) : RequestConfig<GithubBackfillIn> {
+        val localVariableBody = githubBackfillIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/issues/backfill",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/github/repos/{repo}/pages
+     * Creates the repo&#39;s Pages site and answers 201 Created with it.
+     * Creates the repo&#39;s Pages site and answers 201 Created with it. With buildType \&quot;workflow\&quot; the site builds via GitHub Actions; otherwise it builds from a branch source, defaulting to the repo&#39;s own default branch when none is given. Only \&quot;/\&quot; and \&quot;/docs\&quot; are legal source paths (GitHub&#39;s rule).
+     * @param repo Repo is the repository, from the :repo path segment.
+     * @param githubPagesEnableReq 
+     * @return GithubPagesView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsGithubReposByRepoPages(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : GithubPagesView {
+        val localVarResponse = postV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo, githubPagesEnableReq = githubPagesEnableReq)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/repos/{repo}/pages
+     * Creates the repo&#39;s Pages site and answers 201 Created with it.
+     * Creates the repo&#39;s Pages site and answers 201 Created with it. With buildType \&quot;workflow\&quot; the site builds via GitHub Actions; otherwise it builds from a branch source, defaulting to the repo&#39;s own default branch when none is given. Only \&quot;/\&quot; and \&quot;/docs\&quot; are legal source paths (GitHub&#39;s rule).
+     * @param repo Repo is the repository, from the :repo path segment.
+     * @param githubPagesEnableReq 
+     * @return ApiResponse<GithubPagesView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : ApiResponse<GithubPagesView?> {
+        val localVariableConfig = postV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo, githubPagesEnableReq = githubPagesEnableReq)
+
+        return request<GithubPagesEnableReq, GithubPagesView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsGithubReposByRepoPages
+     *
+     * @param repo Repo is the repository, from the :repo path segment.
+     * @param githubPagesEnableReq 
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String, githubPagesEnableReq: GithubPagesEnableReq) : RequestConfig<GithubPagesEnableReq> {
+        val localVariableBody = githubPagesEnableReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/github/repos/{repo}/pages/builds
+     * Requests a Pages rebuild and returns the queued build&#39;s status.
+     * Requests a Pages rebuild and returns the queued build&#39;s status. The build is queued AT GITHUB, not completed here, so the answer is 202 Accepted and its status is the one GitHub reported at queue time. 404 when the repository has no Pages site, or when the org&#39;s installation was not granted it.
+     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
+     * @return GithubPagesBuildOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsGithubReposByRepoPagesBuilds(repo: kotlin.String) : GithubPagesBuildOut {
+        val localVarResponse = postV1IntegrationsGithubReposByRepoPagesBuildsWithHttpInfo(repo = repo)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesBuildOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/repos/{repo}/pages/builds
+     * Requests a Pages rebuild and returns the queued build&#39;s status.
+     * Requests a Pages rebuild and returns the queued build&#39;s status. The build is queued AT GITHUB, not completed here, so the answer is 202 Accepted and its status is the one GitHub reported at queue time. 404 when the repository has no Pages site, or when the org&#39;s installation was not granted it.
+     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
+     * @return ApiResponse<GithubPagesBuildOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsGithubReposByRepoPagesBuildsWithHttpInfo(repo: kotlin.String) : ApiResponse<GithubPagesBuildOut?> {
+        val localVariableConfig = postV1IntegrationsGithubReposByRepoPagesBuildsRequestConfig(repo = repo)
+
+        return request<Unit, GithubPagesBuildOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsGithubReposByRepoPagesBuilds
+     *
+     * @param repo Repo is the repository&#39;s short name within the org&#39;s installation, with no owner prefix (the owner is server-derived from the grant). A trailing \&quot;.git\&quot; is stripped.
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsGithubReposByRepoPagesBuildsRequestConfig(repo: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/repos/{repo}/pages/builds".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/github/repos/import
+     * Imports the selected (or all) granted repos into git.hanzo.ai.
+     * Imports the selected (or all) granted repos into git.hanzo.ai. The selection is intersected with the installation&#39;s GRANTED set, so a client can never import a repo the App was not granted (org isolation + a grant check). The import runs in a bounded background worker (don&#39;t block the request), so the answer is 202 Accepted; poll GET /v1/integrations/github/repos for the per-repo status to flip to imported.
+     * @param githubImportIn 
+     * @return GithubImportOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsGithubReposImport(githubImportIn: GithubImportIn) : GithubImportOut {
+        val localVarResponse = postV1IntegrationsGithubReposImportWithHttpInfo(githubImportIn = githubImportIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubImportOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/repos/import
+     * Imports the selected (or all) granted repos into git.hanzo.ai.
+     * Imports the selected (or all) granted repos into git.hanzo.ai. The selection is intersected with the installation&#39;s GRANTED set, so a client can never import a repo the App was not granted (org isolation + a grant check). The import runs in a bounded background worker (don&#39;t block the request), so the answer is 202 Accepted; poll GET /v1/integrations/github/repos for the per-repo status to flip to imported.
+     * @param githubImportIn 
+     * @return ApiResponse<GithubImportOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsGithubReposImportWithHttpInfo(githubImportIn: GithubImportIn) : ApiResponse<GithubImportOut?> {
+        val localVariableConfig = postV1IntegrationsGithubReposImportRequestConfig(githubImportIn = githubImportIn)
+
+        return request<GithubImportIn, GithubImportOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsGithubReposImport
+     *
+     * @param githubImportIn 
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsGithubReposImportRequestConfig(githubImportIn: GithubImportIn) : RequestConfig<GithubImportIn> {
+        val localVariableBody = githubImportIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/repos/import",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/github/search
+     * Finds repositories on GitHub.
+     * Finds repositories on GitHub.  This reads the PUBLIC index and returns nothing an installation unlocks: it is how you find a repository to fork, not a way to see inside one. The org&#39;s own token is used only so the query is rate-limited against the installation rather than anonymously — the results are the same ones anyone would get.
+     * @param githubSearchReq 
+     * @return GithubSearchOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsGithubSearch(githubSearchReq: GithubSearchReq) : GithubSearchOut {
+        val localVarResponse = postV1IntegrationsGithubSearchWithHttpInfo(githubSearchReq = githubSearchReq)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubSearchOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/integrations/github/search
+     * Finds repositories on GitHub.
+     * Finds repositories on GitHub.  This reads the PUBLIC index and returns nothing an installation unlocks: it is how you find a repository to fork, not a way to see inside one. The org&#39;s own token is used only so the query is rate-limited against the installation rather than anonymously — the results are the same ones anyone would get.
+     * @param githubSearchReq 
+     * @return ApiResponse<GithubSearchOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1IntegrationsGithubSearchWithHttpInfo(githubSearchReq: GithubSearchReq) : ApiResponse<GithubSearchOut?> {
+        val localVariableConfig = postV1IntegrationsGithubSearchRequestConfig(githubSearchReq = githubSearchReq)
+
+        return request<GithubSearchReq, GithubSearchOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1IntegrationsGithubSearch
+     *
+     * @param githubSearchReq 
+     * @return RequestConfig
+     */
+    fun postV1IntegrationsGithubSearchRequestConfig(githubSearchReq: GithubSearchReq) : RequestConfig<GithubSearchReq> {
+        val localVariableBody = githubSearchReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/integrations/github/search",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/integrations/slack/commands
+     * Slack slash command webhook
+     * The address Slack posts a slash command to, form-encoded. It acknowledges inside Slack&#39;s three-second budget and posts the answer afterwards to the command&#39;s own response URL, which is why the immediate reply is empty.  The body is verified against the same app signing secret as the events webhook, and a repeat of the same command invocation is absorbed rather than answered twice.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1IntegrationsSlackCommands() : Unit {
+        val localVarResponse = postV1IntegrationsSlackCommandsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2098,15 +2281,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * POST /v1/integrations/slack/commands
-     * 
-     * 
+     * Slack slash command webhook
+     * The address Slack posts a slash command to, form-encoded. It acknowledges inside Slack&#39;s three-second budget and posts the answer afterwards to the command&#39;s own response URL, which is why the immediate reply is empty.  The body is verified against the same app signing secret as the events webhook, and a repeat of the same command invocation is absorbed rather than answered twice.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsSlackCommandsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IntegrationsSlackCommandsRequestConfig()
+    fun postV1IntegrationsSlackCommandsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IntegrationsSlackCommandsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2114,11 +2297,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsSlackCommands
+     * To obtain the request config of the operation postV1IntegrationsSlackCommands
      *
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsSlackCommandsRequestConfig() : RequestConfig<Unit> {
+    fun postV1IntegrationsSlackCommandsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2128,15 +2311,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/commands",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/integrations/slack/events
-     * 
-     * 
+     * Slack Events API webhook
+     * The address a Slack app posts workspace events to. It answers Slack&#39;s url_verification handshake with the challenge, and routes an @mention or a direct message to an agent turn that replies in the same thread. A prompt beginning with &#x60;code:&#x60; is routed to the coding flow instead, which runs under its own pool.  The raw body and its timestamp are verified against the app&#39;s signing secret before anything is read from them. Hanzo&#39;s own bot messages are dropped, so a reply cannot trigger another reply.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2145,8 +2328,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsSlackEvents() : Unit {
-        val localVarResponse = cloudPostV1IntegrationsSlackEventsWithHttpInfo()
+    fun postV1IntegrationsSlackEvents() : Unit {
+        val localVarResponse = postV1IntegrationsSlackEventsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2165,15 +2348,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * POST /v1/integrations/slack/events
-     * 
-     * 
+     * Slack Events API webhook
+     * The address a Slack app posts workspace events to. It answers Slack&#39;s url_verification handshake with the challenge, and routes an @mention or a direct message to an agent turn that replies in the same thread. A prompt beginning with &#x60;code:&#x60; is routed to the coding flow instead, which runs under its own pool.  The raw body and its timestamp are verified against the app&#39;s signing secret before anything is read from them. Hanzo&#39;s own bot messages are dropped, so a reply cannot trigger another reply.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsSlackEventsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IntegrationsSlackEventsRequestConfig()
+    fun postV1IntegrationsSlackEventsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IntegrationsSlackEventsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2181,11 +2364,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsSlackEvents
+     * To obtain the request config of the operation postV1IntegrationsSlackEvents
      *
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsSlackEventsRequestConfig() : RequestConfig<Unit> {
+    fun postV1IntegrationsSlackEventsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2195,15 +2378,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/slack/events",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/integrations/teams/events
-     * 
-     * 
+     * Microsoft Teams Bot Framework webhook
+     * The messaging endpoint for the Teams bot. A message activity is routed to an agent turn and answered proactively through the Bot Connection; anything that is not a message with text is acknowledged and ignored.  Authentication is the Bot Framework&#39;s RS256 JWT, verified against its published keys and bound BOTH to this deployment&#39;s app id and to the activity&#39;s own service URL. The service-URL binding is the part that matters: without it a token valid for one activity could point the outbound reply somewhere else.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2212,8 +2395,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsTeamsEvents() : Unit {
-        val localVarResponse = cloudPostV1IntegrationsTeamsEventsWithHttpInfo()
+    fun postV1IntegrationsTeamsEvents() : Unit {
+        val localVarResponse = postV1IntegrationsTeamsEventsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2232,15 +2415,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * POST /v1/integrations/teams/events
-     * 
-     * 
+     * Microsoft Teams Bot Framework webhook
+     * The messaging endpoint for the Teams bot. A message activity is routed to an agent turn and answered proactively through the Bot Connection; anything that is not a message with text is acknowledged and ignored.  Authentication is the Bot Framework&#39;s RS256 JWT, verified against its published keys and bound BOTH to this deployment&#39;s app id and to the activity&#39;s own service URL. The service-URL binding is the part that matters: without it a token valid for one activity could point the outbound reply somewhere else.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsTeamsEventsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IntegrationsTeamsEventsRequestConfig()
+    fun postV1IntegrationsTeamsEventsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IntegrationsTeamsEventsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2248,11 +2431,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsTeamsEvents
+     * To obtain the request config of the operation postV1IntegrationsTeamsEvents
      *
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsTeamsEventsRequestConfig() : RequestConfig<Unit> {
+    fun postV1IntegrationsTeamsEventsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2262,7 +2445,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/teams/events",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2271,7 +2454,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * POST /v1/integrations/telegram/connect
      * Mints a short, single-use deep-link code bound to the caller&#39;s org and returns the t.me link the console navigates to.
      * Mints a short, single-use deep-link code bound to the caller&#39;s org and returns the t.me link the console navigates to. Org-authed: a caller with no validated principal is 403 (same gate as the framework connect). The code is stored as an oauth_nonce (org,telegram); the webhook&#39;s /start handler claims it to bind chat→org. It is short (128-bit hex) so it fits Telegram&#39;s 64-char &#x60;start&#x60; payload limit.
-     * @return CloudAuthorizeOut
+     * @return AuthorizeOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2280,11 +2463,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsTelegramConnect() : CloudAuthorizeOut {
-        val localVarResponse = cloudPostV1IntegrationsTelegramConnectWithHttpInfo()
+    fun postV1IntegrationsTelegramConnect() : AuthorizeOut {
+        val localVarResponse = postV1IntegrationsTelegramConnectWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAuthorizeOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthorizeOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2302,26 +2485,26 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * POST /v1/integrations/telegram/connect
      * Mints a short, single-use deep-link code bound to the caller&#39;s org and returns the t.me link the console navigates to.
      * Mints a short, single-use deep-link code bound to the caller&#39;s org and returns the t.me link the console navigates to. Org-authed: a caller with no validated principal is 403 (same gate as the framework connect). The code is stored as an oauth_nonce (org,telegram); the webhook&#39;s /start handler claims it to bind chat→org. It is short (128-bit hex) so it fits Telegram&#39;s 64-char &#x60;start&#x60; payload limit.
-     * @return ApiResponse<CloudAuthorizeOut?>
+     * @return ApiResponse<AuthorizeOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsTelegramConnectWithHttpInfo() : ApiResponse<CloudAuthorizeOut?> {
-        val localVariableConfig = cloudPostV1IntegrationsTelegramConnectRequestConfig()
+    fun postV1IntegrationsTelegramConnectWithHttpInfo() : ApiResponse<AuthorizeOut?> {
+        val localVariableConfig = postV1IntegrationsTelegramConnectRequestConfig()
 
-        return request<Unit, CloudAuthorizeOut>(
+        return request<Unit, AuthorizeOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsTelegramConnect
+     * To obtain the request config of the operation postV1IntegrationsTelegramConnect
      *
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsTelegramConnectRequestConfig() : RequestConfig<Unit> {
+    fun postV1IntegrationsTelegramConnectRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2332,15 +2515,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/connect",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/integrations/telegram/webhook
-     * 
-     * 
+     * Telegram Bot API webhook
+     * The update webhook for the Telegram bot. It does two jobs: &#x60;/start &lt;code&gt;&#x60; or &#x60;/connect &lt;code&gt;&#x60; binds the chat it was sent from to an org, idempotently; anything else is treated as a possible agent trigger.  What counts as a trigger differs by chat type, and it is easy to get wrong: in a private chat every message is a trigger, while in a group the message must mention the bot or use the &#x60;/hanzo&#x60; command. Non-triggers and non-message updates are acknowledged and dropped.  Authentication is the secret token Telegram echoes on every update, compared in constant time. A message in a chat that has never been bound is dropped, which is why the bind command exists.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2349,8 +2532,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IntegrationsTelegramWebhook() : Unit {
-        val localVarResponse = cloudPostV1IntegrationsTelegramWebhookWithHttpInfo()
+    fun postV1IntegrationsTelegramWebhook() : Unit {
+        val localVarResponse = postV1IntegrationsTelegramWebhookWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2369,15 +2552,15 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * POST /v1/integrations/telegram/webhook
-     * 
-     * 
+     * Telegram Bot API webhook
+     * The update webhook for the Telegram bot. It does two jobs: &#x60;/start &lt;code&gt;&#x60; or &#x60;/connect &lt;code&gt;&#x60; binds the chat it was sent from to an org, idempotently; anything else is treated as a possible agent trigger.  What counts as a trigger differs by chat type, and it is easy to get wrong: in a private chat every message is a trigger, while in a group the message must mention the bot or use the &#x60;/hanzo&#x60; command. Non-triggers and non-message updates are acknowledged and dropped.  Authentication is the secret token Telegram echoes on every update, compared in constant time. A message in a chat that has never been bound is dropped, which is why the bind command exists.  The caller here is the PLATFORM, not a Hanzo tenant, so there is no bearer and no principal. The signature check IS the authentication, and it fails closed. The tenant is never read from the payload either: it is resolved from the verified platform identifier through the connection map, so an event from a workspace nobody connected does nothing. Refusals are written with their own status rather than being flattened to a 500, so a rejected signature reads as 401 and a malformed body as 400.  The answer is acknowledged immediately and the work happens afterwards, because every one of these platforms times out a slow webhook. Duplicate deliveries are absorbed durably, so a platform retry of an event that already ran never runs it a second time or bills for it twice. When the agent pool is full nothing at all is recorded and the delivery is refused as retriable, so the message is re-delivered later rather than being lost or half-processed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IntegrationsTelegramWebhookWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IntegrationsTelegramWebhookRequestConfig()
+    fun postV1IntegrationsTelegramWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IntegrationsTelegramWebhookRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2385,11 +2568,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IntegrationsTelegramWebhook
+     * To obtain the request config of the operation postV1IntegrationsTelegramWebhook
      *
      * @return RequestConfig
      */
-    fun cloudPostV1IntegrationsTelegramWebhookRequestConfig() : RequestConfig<Unit> {
+    fun postV1IntegrationsTelegramWebhookRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2399,7 +2582,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/telegram/webhook",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2409,8 +2592,8 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Sets or clears the custom domain (cname) and updates HTTPS enforcement, build type, or source.
      * Sets or clears the custom domain (cname) and updates HTTPS enforcement, build type, or source. ONLY the provided fields are sent to GitHub, so an update never resets a setting the caller did not mention.
      * @param repo Repo is the repository, from the :repo path segment.
-     * @param cloudGithubPagesUpdateReq 
-     * @return CloudGithubPagesUpdatedOut
+     * @param githubPagesUpdateReq 
+     * @return GithubPagesUpdatedOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2419,11 +2602,11 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1IntegrationsGithubReposRepoPages(repo: kotlin.String, cloudGithubPagesUpdateReq: CloudGithubPagesUpdateReq) : CloudGithubPagesUpdatedOut {
-        val localVarResponse = cloudPutV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo = repo, cloudGithubPagesUpdateReq = cloudGithubPagesUpdateReq)
+    fun putV1IntegrationsGithubReposByRepoPages(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : GithubPagesUpdatedOut {
+        val localVarResponse = putV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo = repo, githubPagesUpdateReq = githubPagesUpdateReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGithubPagesUpdatedOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GithubPagesUpdatedOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2442,30 +2625,30 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Sets or clears the custom domain (cname) and updates HTTPS enforcement, build type, or source.
      * Sets or clears the custom domain (cname) and updates HTTPS enforcement, build type, or source. ONLY the provided fields are sent to GitHub, so an update never resets a setting the caller did not mention.
      * @param repo Repo is the repository, from the :repo path segment.
-     * @param cloudGithubPagesUpdateReq 
-     * @return ApiResponse<CloudGithubPagesUpdatedOut?>
+     * @param githubPagesUpdateReq 
+     * @return ApiResponse<GithubPagesUpdatedOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1IntegrationsGithubReposRepoPagesWithHttpInfo(repo: kotlin.String, cloudGithubPagesUpdateReq: CloudGithubPagesUpdateReq) : ApiResponse<CloudGithubPagesUpdatedOut?> {
-        val localVariableConfig = cloudPutV1IntegrationsGithubReposRepoPagesRequestConfig(repo = repo, cloudGithubPagesUpdateReq = cloudGithubPagesUpdateReq)
+    fun putV1IntegrationsGithubReposByRepoPagesWithHttpInfo(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : ApiResponse<GithubPagesUpdatedOut?> {
+        val localVariableConfig = putV1IntegrationsGithubReposByRepoPagesRequestConfig(repo = repo, githubPagesUpdateReq = githubPagesUpdateReq)
 
-        return request<CloudGithubPagesUpdateReq, CloudGithubPagesUpdatedOut>(
+        return request<GithubPagesUpdateReq, GithubPagesUpdatedOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1IntegrationsGithubReposRepoPages
+     * To obtain the request config of the operation putV1IntegrationsGithubReposByRepoPages
      *
      * @param repo Repo is the repository, from the :repo path segment.
-     * @param cloudGithubPagesUpdateReq 
+     * @param githubPagesUpdateReq 
      * @return RequestConfig
      */
-    fun cloudPutV1IntegrationsGithubReposRepoPagesRequestConfig(repo: kotlin.String, cloudGithubPagesUpdateReq: CloudGithubPagesUpdateReq) : RequestConfig<CloudGithubPagesUpdateReq> {
-        val localVariableBody = cloudGithubPagesUpdateReq
+    fun putV1IntegrationsGithubReposByRepoPagesRequestConfig(repo: kotlin.String, githubPagesUpdateReq: GithubPagesUpdateReq) : RequestConfig<GithubPagesUpdateReq> {
+        val localVariableBody = githubPagesUpdateReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2476,7 +2659,7 @@ class IntegrationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/integrations/github/repos/{repo}/pages".replace("{"+"repo"+"}", encodeURIComponent(repo.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

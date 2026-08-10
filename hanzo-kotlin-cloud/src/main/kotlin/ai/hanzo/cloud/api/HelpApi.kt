@@ -19,11 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudHelpArticle
-import ai.hanzo.cloud.model.CloudHelpArticleList
-import ai.hanzo.cloud.model.CloudHelpCategoryList
-import ai.hanzo.cloud.model.CloudHelpTicketFiled
-import ai.hanzo.cloud.model.CloudHelpTicketIntake
+import ai.hanzo.cloud.model.HelpArticle
+import ai.hanzo.cloud.model.HelpArticleList
+import ai.hanzo.cloud.model.HelpCategoryList
+import ai.hanzo.cloud.model.HelpTicketFiled
+import ai.hanzo.cloud.model.HelpTicketIntake
 
 import com.google.gson.annotations.SerializedName
 
@@ -55,7 +55,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns the public knowledge base: the help center&#39;s Published, publicly-visible articles as cards. The org is server-fixed and the status/is_public filter is server-set, so neither the tenant nor the visibility can be widened by the caller. A deployment with no help center answers 404.
      * @param category Category narrows the list to one knowledge-base section, matched against the article&#39;s category by exact name. Empty lists every section. (optional)
      * @param limit Limit caps how many articles are returned. Anything that is not a positive integer uses 50, and values above 200 are clamped to 200. (optional)
-     * @return CloudHelpArticleList
+     * @return HelpArticleList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -64,11 +64,11 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1HelpArticles(category: kotlin.String? = null, limit: kotlin.Int? = null) : CloudHelpArticleList {
-        val localVarResponse = cloudGetV1HelpArticlesWithHttpInfo(category = category, limit = limit)
+    fun getV1HelpArticles(category: kotlin.String? = null, limit: kotlin.Int? = null) : HelpArticleList {
+        val localVarResponse = getV1HelpArticlesWithHttpInfo(category = category, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHelpArticleList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HelpArticleList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -88,28 +88,28 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns the public knowledge base: the help center&#39;s Published, publicly-visible articles as cards. The org is server-fixed and the status/is_public filter is server-set, so neither the tenant nor the visibility can be widened by the caller. A deployment with no help center answers 404.
      * @param category Category narrows the list to one knowledge-base section, matched against the article&#39;s category by exact name. Empty lists every section. (optional)
      * @param limit Limit caps how many articles are returned. Anything that is not a positive integer uses 50, and values above 200 are clamped to 200. (optional)
-     * @return ApiResponse<CloudHelpArticleList?>
+     * @return ApiResponse<HelpArticleList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1HelpArticlesWithHttpInfo(category: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudHelpArticleList?> {
-        val localVariableConfig = cloudGetV1HelpArticlesRequestConfig(category = category, limit = limit)
+    fun getV1HelpArticlesWithHttpInfo(category: kotlin.String?, limit: kotlin.Int?) : ApiResponse<HelpArticleList?> {
+        val localVariableConfig = getV1HelpArticlesRequestConfig(category = category, limit = limit)
 
-        return request<Unit, CloudHelpArticleList>(
+        return request<Unit, HelpArticleList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1HelpArticles
+     * To obtain the request config of the operation getV1HelpArticles
      *
      * @param category Category narrows the list to one knowledge-base section, matched against the article&#39;s category by exact name. Empty lists every section. (optional)
      * @param limit Limit caps how many articles are returned. Anything that is not a positive integer uses 50, and values above 200 are clamped to 200. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1HelpArticlesRequestConfig(category: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1HelpArticlesRequestConfig(category: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -128,7 +128,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/articles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -138,7 +138,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns one public article by slug, with its body.
      * Returns one public article by slug, with its body. A missing, Draft, or internal (non-public) article is 404 — fail-closed, so this route is no existence oracle for anything beyond \&quot;published and public\&quot;.
      * @param slug Slug is the article&#39;s public identifier, from the path. It IS the document name in the help center&#39;s store.
-     * @return CloudHelpArticle
+     * @return HelpArticle
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -147,11 +147,11 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1HelpArticlesSlug(slug: kotlin.String) : CloudHelpArticle {
-        val localVarResponse = cloudGetV1HelpArticlesSlugWithHttpInfo(slug = slug)
+    fun getV1HelpArticlesBySlug(slug: kotlin.String) : HelpArticle {
+        val localVarResponse = getV1HelpArticlesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHelpArticle
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HelpArticle
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -170,27 +170,27 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns one public article by slug, with its body.
      * Returns one public article by slug, with its body. A missing, Draft, or internal (non-public) article is 404 — fail-closed, so this route is no existence oracle for anything beyond \&quot;published and public\&quot;.
      * @param slug Slug is the article&#39;s public identifier, from the path. It IS the document name in the help center&#39;s store.
-     * @return ApiResponse<CloudHelpArticle?>
+     * @return ApiResponse<HelpArticle?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1HelpArticlesSlugWithHttpInfo(slug: kotlin.String) : ApiResponse<CloudHelpArticle?> {
-        val localVariableConfig = cloudGetV1HelpArticlesSlugRequestConfig(slug = slug)
+    fun getV1HelpArticlesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<HelpArticle?> {
+        val localVariableConfig = getV1HelpArticlesBySlugRequestConfig(slug = slug)
 
-        return request<Unit, CloudHelpArticle>(
+        return request<Unit, HelpArticle>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1HelpArticlesSlug
+     * To obtain the request config of the operation getV1HelpArticlesBySlug
      *
      * @param slug Slug is the article&#39;s public identifier, from the path. It IS the document name in the help center&#39;s store.
      * @return RequestConfig
      */
-    fun cloudGetV1HelpArticlesSlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getV1HelpArticlesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -201,7 +201,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/articles/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -210,7 +210,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/help/categories
      * Returns the knowledge-base sections for the public center&#39;s navigation — but ONLY the sections that front at least one Published, public article, so an internal (agent-only) category name or description never leaks.
      * Returns the knowledge-base sections for the public center&#39;s navigation — but ONLY the sections that front at least one Published, public article, so an internal (agent-only) category name or description never leaks. A section with no public article is invisible; a center with no public articles has no sections, which is an empty list rather than an error.
-     * @return CloudHelpCategoryList
+     * @return HelpCategoryList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -219,11 +219,11 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1HelpCategories() : CloudHelpCategoryList {
-        val localVarResponse = cloudGetV1HelpCategoriesWithHttpInfo()
+    fun getV1HelpCategories() : HelpCategoryList {
+        val localVarResponse = getV1HelpCategoriesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHelpCategoryList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HelpCategoryList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -241,26 +241,26 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/help/categories
      * Returns the knowledge-base sections for the public center&#39;s navigation — but ONLY the sections that front at least one Published, public article, so an internal (agent-only) category name or description never leaks.
      * Returns the knowledge-base sections for the public center&#39;s navigation — but ONLY the sections that front at least one Published, public article, so an internal (agent-only) category name or description never leaks. A section with no public article is invisible; a center with no public articles has no sections, which is an empty list rather than an error.
-     * @return ApiResponse<CloudHelpCategoryList?>
+     * @return ApiResponse<HelpCategoryList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1HelpCategoriesWithHttpInfo() : ApiResponse<CloudHelpCategoryList?> {
-        val localVariableConfig = cloudGetV1HelpCategoriesRequestConfig()
+    fun getV1HelpCategoriesWithHttpInfo() : ApiResponse<HelpCategoryList?> {
+        val localVariableConfig = getV1HelpCategoriesRequestConfig()
 
-        return request<Unit, CloudHelpCategoryList>(
+        return request<Unit, HelpCategoryList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1HelpCategories
+     * To obtain the request config of the operation getV1HelpCategories
      *
      * @return RequestConfig
      */
-    fun cloudGetV1HelpCategoriesRequestConfig() : RequestConfig<Unit> {
+    fun getV1HelpCategoriesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -271,7 +271,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/categories",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -280,8 +280,8 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/help/tickets
      * Files a customer support ticket into the public help center.
      * Files a customer support ticket into the public help center. It creates the ticket (status Open, source portal) with the customer&#39;s message on the description, then records that same message as the opening entry of the ticket&#39;s conversation thread; the description carries it regardless, so failing to write that entry loses nothing. Answers 201 with an opaque reference.  A deployment with no help center answers 404, one whose center has not installed the Help model answers 503, and a body over 64 KiB answers 413 — in that order, which is the order the route has always decided them in.
-     * @param cloudHelpTicketIntake 
-     * @return CloudHelpTicketFiled
+     * @param helpTicketIntake 
+     * @return HelpTicketFiled
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -290,11 +290,11 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1HelpTickets(cloudHelpTicketIntake: CloudHelpTicketIntake) : CloudHelpTicketFiled {
-        val localVarResponse = cloudPostV1HelpTicketsWithHttpInfo(cloudHelpTicketIntake = cloudHelpTicketIntake)
+    fun postV1HelpTickets(helpTicketIntake: HelpTicketIntake) : HelpTicketFiled {
+        val localVarResponse = postV1HelpTicketsWithHttpInfo(helpTicketIntake = helpTicketIntake)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHelpTicketFiled
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HelpTicketFiled
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -312,29 +312,29 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/help/tickets
      * Files a customer support ticket into the public help center.
      * Files a customer support ticket into the public help center. It creates the ticket (status Open, source portal) with the customer&#39;s message on the description, then records that same message as the opening entry of the ticket&#39;s conversation thread; the description carries it regardless, so failing to write that entry loses nothing. Answers 201 with an opaque reference.  A deployment with no help center answers 404, one whose center has not installed the Help model answers 503, and a body over 64 KiB answers 413 — in that order, which is the order the route has always decided them in.
-     * @param cloudHelpTicketIntake 
-     * @return ApiResponse<CloudHelpTicketFiled?>
+     * @param helpTicketIntake 
+     * @return ApiResponse<HelpTicketFiled?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1HelpTicketsWithHttpInfo(cloudHelpTicketIntake: CloudHelpTicketIntake) : ApiResponse<CloudHelpTicketFiled?> {
-        val localVariableConfig = cloudPostV1HelpTicketsRequestConfig(cloudHelpTicketIntake = cloudHelpTicketIntake)
+    fun postV1HelpTicketsWithHttpInfo(helpTicketIntake: HelpTicketIntake) : ApiResponse<HelpTicketFiled?> {
+        val localVariableConfig = postV1HelpTicketsRequestConfig(helpTicketIntake = helpTicketIntake)
 
-        return request<CloudHelpTicketIntake, CloudHelpTicketFiled>(
+        return request<HelpTicketIntake, HelpTicketFiled>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1HelpTickets
+     * To obtain the request config of the operation postV1HelpTickets
      *
-     * @param cloudHelpTicketIntake 
+     * @param helpTicketIntake 
      * @return RequestConfig
      */
-    fun cloudPostV1HelpTicketsRequestConfig(cloudHelpTicketIntake: CloudHelpTicketIntake) : RequestConfig<CloudHelpTicketIntake> {
-        val localVariableBody = cloudHelpTicketIntake
+    fun postV1HelpTicketsRequestConfig(helpTicketIntake: HelpTicketIntake) : RequestConfig<HelpTicketIntake> {
+        val localVariableBody = helpTicketIntake
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -345,7 +345,7 @@ class HelpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/help/tickets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

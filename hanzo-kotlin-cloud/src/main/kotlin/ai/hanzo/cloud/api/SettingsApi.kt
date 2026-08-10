@@ -19,10 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudSettingsReq
-import ai.hanzo.cloud.model.CloudSettingsView
-import ai.hanzo.cloud.model.SearchSettings
-import ai.hanzo.cloud.model.SearchSummarizedTaskView
+import ai.hanzo.cloud.model.SettingsReq
+import ai.hanzo.cloud.model.SettingsView
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,10 +48,10 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/settings/{product}
-     * GetSettings reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS.
-     * GetSettings reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS. A product the org has never configured is not a 404: it answers 200 with an empty config object, so the console&#39;s Settings tab always renders and merges its own display defaults on top.
+     * Reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS.
+     * Reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS. A product the org has never configured is not a 404: it answers 200 with an empty config object, so the console&#39;s Settings tab always renders and merges its own display defaults on top.
      * @param product Product is the catalog slug, from the path. Must match ^[a-z0-9][a-z0-9._-]{0,62}$.
-     * @return CloudSettingsView
+     * @return SettingsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -62,11 +60,11 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SettingsProduct(product: kotlin.String) : CloudSettingsView {
-        val localVarResponse = cloudGetV1SettingsProductWithHttpInfo(product = product)
+    fun getV1SettingsByProduct(product: kotlin.String) : SettingsView {
+        val localVarResponse = getV1SettingsByProductWithHttpInfo(product = product)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSettingsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SettingsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -82,30 +80,30 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/settings/{product}
-     * GetSettings reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS.
-     * GetSettings reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS. A product the org has never configured is not a 404: it answers 200 with an empty config object, so the console&#39;s Settings tab always renders and merges its own display defaults on top.
+     * Reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS.
+     * Reads the caller org&#39;s configuration for one product, with every secret field MASKED — only the names of the set secrets come back, never their values, which live in KMS. A product the org has never configured is not a 404: it answers 200 with an empty config object, so the console&#39;s Settings tab always renders and merges its own display defaults on top.
      * @param product Product is the catalog slug, from the path. Must match ^[a-z0-9][a-z0-9._-]{0,62}$.
-     * @return ApiResponse<CloudSettingsView?>
+     * @return ApiResponse<SettingsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SettingsProductWithHttpInfo(product: kotlin.String) : ApiResponse<CloudSettingsView?> {
-        val localVariableConfig = cloudGetV1SettingsProductRequestConfig(product = product)
+    fun getV1SettingsByProductWithHttpInfo(product: kotlin.String) : ApiResponse<SettingsView?> {
+        val localVariableConfig = getV1SettingsByProductRequestConfig(product = product)
 
-        return request<Unit, CloudSettingsView>(
+        return request<Unit, SettingsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SettingsProduct
+     * To obtain the request config of the operation getV1SettingsByProduct
      *
      * @param product Product is the catalog slug, from the path. Must match ^[a-z0-9][a-z0-9._-]{0,62}$.
      * @return RequestConfig
      */
-    fun cloudGetV1SettingsProductRequestConfig(product: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SettingsByProductRequestConfig(product: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -116,18 +114,18 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/settings/{product}".replace("{"+"product"+"}", encodeURIComponent(product.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/settings/{product}
-     * PutSettings writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked.
-     * PutSettings writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked. Secret VALUES are sealed into KMS under orgs/{org}/settings/{product}/{key} and never touch this deployment&#39;s database; with no KMS configured a write that carries any secret is refused whole (503) rather than dropping it or persisting it in the clear. A secret the body omits keeps its stored value, so a partial write never silently clears one.
+     * Writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked.
+     * Writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked. Secret VALUES are sealed into KMS under orgs/{org}/settings/{product}/{key} and never touch this deployment&#39;s database; with no KMS configured a write that carries any secret is refused whole (503) rather than dropping it or persisting it in the clear. A secret the body omits keeps its stored value, so a partial write never silently clears one.
      * @param product Product is the catalog slug, from the PATH. zip binds the path last, so the URL names the product being written whatever a body field claims.
-     * @param cloudSettingsReq 
-     * @return CloudSettingsView
+     * @param settingsReq 
+     * @return SettingsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -136,11 +134,11 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1SettingsProduct(product: kotlin.String, cloudSettingsReq: CloudSettingsReq) : CloudSettingsView {
-        val localVarResponse = cloudPutV1SettingsProductWithHttpInfo(product = product, cloudSettingsReq = cloudSettingsReq)
+    fun putV1SettingsByProduct(product: kotlin.String, settingsReq: SettingsReq) : SettingsView {
+        val localVarResponse = putV1SettingsByProductWithHttpInfo(product = product, settingsReq = settingsReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSettingsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SettingsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -156,33 +154,33 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * PUT /v1/settings/{product}
-     * PutSettings writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked.
-     * PutSettings writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked. Secret VALUES are sealed into KMS under orgs/{org}/settings/{product}/{key} and never touch this deployment&#39;s database; with no KMS configured a write that carries any secret is refused whole (503) rather than dropping it or persisting it in the clear. A secret the body omits keeps its stored value, so a partial write never silently clears one.
+     * Writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked.
+     * Writes the caller org&#39;s configuration for one product and answers the stored result, secrets masked. Secret VALUES are sealed into KMS under orgs/{org}/settings/{product}/{key} and never touch this deployment&#39;s database; with no KMS configured a write that carries any secret is refused whole (503) rather than dropping it or persisting it in the clear. A secret the body omits keeps its stored value, so a partial write never silently clears one.
      * @param product Product is the catalog slug, from the PATH. zip binds the path last, so the URL names the product being written whatever a body field claims.
-     * @param cloudSettingsReq 
-     * @return ApiResponse<CloudSettingsView?>
+     * @param settingsReq 
+     * @return ApiResponse<SettingsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1SettingsProductWithHttpInfo(product: kotlin.String, cloudSettingsReq: CloudSettingsReq) : ApiResponse<CloudSettingsView?> {
-        val localVariableConfig = cloudPutV1SettingsProductRequestConfig(product = product, cloudSettingsReq = cloudSettingsReq)
+    fun putV1SettingsByProductWithHttpInfo(product: kotlin.String, settingsReq: SettingsReq) : ApiResponse<SettingsView?> {
+        val localVariableConfig = putV1SettingsByProductRequestConfig(product = product, settingsReq = settingsReq)
 
-        return request<CloudSettingsReq, CloudSettingsView>(
+        return request<SettingsReq, SettingsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1SettingsProduct
+     * To obtain the request config of the operation putV1SettingsByProduct
      *
      * @param product Product is the catalog slug, from the PATH. zip binds the path last, so the URL names the product being written whatever a body field claims.
-     * @param cloudSettingsReq 
+     * @param settingsReq 
      * @return RequestConfig
      */
-    fun cloudPutV1SettingsProductRequestConfig(product: kotlin.String, cloudSettingsReq: CloudSettingsReq) : RequestConfig<CloudSettingsReq> {
-        val localVariableBody = cloudSettingsReq
+    fun putV1SettingsByProductRequestConfig(product: kotlin.String, settingsReq: SettingsReq) : RequestConfig<SettingsReq> {
+        val localVariableBody = settingsReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -193,230 +191,7 @@ class SettingsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/settings/{product}".replace("{"+"product"+"}", encodeURIComponent(product.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/settings
-     * Get all index settings
-     * 
-     * @param indexUid Unique index identifier
-     * @return SearchSettings
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchGetSettings(indexUid: kotlin.String) : SearchSettings {
-        val localVarResponse = searchGetSettingsWithHttpInfo(indexUid = indexUid)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSettings
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/settings
-     * Get all index settings
-     * 
-     * @param indexUid Unique index identifier
-     * @return ApiResponse<SearchSettings?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchGetSettingsWithHttpInfo(indexUid: kotlin.String) : ApiResponse<SearchSettings?> {
-        val localVariableConfig = searchGetSettingsRequestConfig(indexUid = indexUid)
-
-        return request<Unit, SearchSettings>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchGetSettings
-     *
-     * @param indexUid Unique index identifier
-     * @return RequestConfig
-     */
-    fun searchGetSettingsRequestConfig(indexUid: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/search/indexes/{indexUid}/settings".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/search/indexes/{indexUid}/settings
-     * Reset all settings to defaults
-     * 
-     * @param indexUid Unique index identifier
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchResetSettings(indexUid: kotlin.String) : SearchSummarizedTaskView {
-        val localVarResponse = searchResetSettingsWithHttpInfo(indexUid = indexUid)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/search/indexes/{indexUid}/settings
-     * Reset all settings to defaults
-     * 
-     * @param indexUid Unique index identifier
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchResetSettingsWithHttpInfo(indexUid: kotlin.String) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchResetSettingsRequestConfig(indexUid = indexUid)
-
-        return request<Unit, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchResetSettings
-     *
-     * @param indexUid Unique index identifier
-     * @return RequestConfig
-     */
-    fun searchResetSettingsRequestConfig(indexUid: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/search/indexes/{indexUid}/settings".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/search/indexes/{indexUid}/settings
-     * Update index settings
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchSettings 
-     * @return SearchSummarizedTaskView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchUpdateSettings(indexUid: kotlin.String, searchSettings: SearchSettings) : SearchSummarizedTaskView {
-        val localVarResponse = searchUpdateSettingsWithHttpInfo(indexUid = indexUid, searchSettings = searchSettings)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSummarizedTaskView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/search/indexes/{indexUid}/settings
-     * Update index settings
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchSettings 
-     * @return ApiResponse<SearchSummarizedTaskView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchUpdateSettingsWithHttpInfo(indexUid: kotlin.String, searchSettings: SearchSettings) : ApiResponse<SearchSummarizedTaskView?> {
-        val localVariableConfig = searchUpdateSettingsRequestConfig(indexUid = indexUid, searchSettings = searchSettings)
-
-        return request<SearchSettings, SearchSummarizedTaskView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchUpdateSettings
-     *
-     * @param indexUid Unique index identifier
-     * @param searchSettings 
-     * @return RequestConfig
-     */
-    fun searchUpdateSettingsRequestConfig(indexUid: kotlin.String, searchSettings: SearchSettings) : RequestConfig<SearchSettings> {
-        val localVariableBody = searchSettings
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/search/indexes/{indexUid}/settings".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudMeshServiceList
+import ai.hanzo.cloud.model.MeshServiceList
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,8 +48,8 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * GET /v1/mesh/services
      * Returns the Zero Trust edge services the caller&#39;s org owns.
-     * Returns the Zero Trust edge services the caller&#39;s org owns.  One row per real ZT edge service tagged with the org&#39;s \&quot;org-&lt;org&gt;\&quot; role attribute: mtls is \&quot;required\&quot; when the service mandates end-to-end encryption and \&quot;enabled\&quot; otherwise (the fabric always mutually authenticates every link), and status is \&quot;active\&quot; because a listed service is a configured, dialable entry. A service tagged for another org, or tagged for none, is invisible here.  Unlike the network and edge-node reads this does NOT degrade: an unconfigured deployment answers 503 and an unreachable controller surfaces the upstream&#39;s status, so a mesh page never renders \&quot;no services\&quot; for a fabric it simply could not read.
-     * @return CloudMeshServiceList
+     * Returns the Zero Trust edge services the caller&#39;s org owns.  One row per real ZT edge service tagged with the org&#39;s \&quot;org-&lt;org&gt;\&quot; role attribute: mtls is \&quot;required\&quot; when the service mandates end-to-end encryption and \&quot;enabled\&quot; otherwise (the fabric always mutually authenticates every link), and status is \&quot;active\&quot; because a listed service is a configured, dialable entry. A service tagged for another org, or tagged for none, is invisible here.  Unlike the network and router reads this does NOT degrade: an unconfigured deployment answers 503 and an unreachable controller surfaces the upstream&#39;s status, so a mesh page never renders \&quot;no services\&quot; for a fabric it simply could not read.
+     * @return MeshServiceList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +58,11 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MeshServices() : CloudMeshServiceList {
-        val localVarResponse = cloudGetV1MeshServicesWithHttpInfo()
+    fun getV1MeshServices() : MeshServiceList {
+        val localVarResponse = getV1MeshServicesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMeshServiceList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MeshServiceList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -79,27 +79,27 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     /**
      * GET /v1/mesh/services
      * Returns the Zero Trust edge services the caller&#39;s org owns.
-     * Returns the Zero Trust edge services the caller&#39;s org owns.  One row per real ZT edge service tagged with the org&#39;s \&quot;org-&lt;org&gt;\&quot; role attribute: mtls is \&quot;required\&quot; when the service mandates end-to-end encryption and \&quot;enabled\&quot; otherwise (the fabric always mutually authenticates every link), and status is \&quot;active\&quot; because a listed service is a configured, dialable entry. A service tagged for another org, or tagged for none, is invisible here.  Unlike the network and edge-node reads this does NOT degrade: an unconfigured deployment answers 503 and an unreachable controller surfaces the upstream&#39;s status, so a mesh page never renders \&quot;no services\&quot; for a fabric it simply could not read.
-     * @return ApiResponse<CloudMeshServiceList?>
+     * Returns the Zero Trust edge services the caller&#39;s org owns.  One row per real ZT edge service tagged with the org&#39;s \&quot;org-&lt;org&gt;\&quot; role attribute: mtls is \&quot;required\&quot; when the service mandates end-to-end encryption and \&quot;enabled\&quot; otherwise (the fabric always mutually authenticates every link), and status is \&quot;active\&quot; because a listed service is a configured, dialable entry. A service tagged for another org, or tagged for none, is invisible here.  Unlike the network and router reads this does NOT degrade: an unconfigured deployment answers 503 and an unreachable controller surfaces the upstream&#39;s status, so a mesh page never renders \&quot;no services\&quot; for a fabric it simply could not read.
+     * @return ApiResponse<MeshServiceList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MeshServicesWithHttpInfo() : ApiResponse<CloudMeshServiceList?> {
-        val localVariableConfig = cloudGetV1MeshServicesRequestConfig()
+    fun getV1MeshServicesWithHttpInfo() : ApiResponse<MeshServiceList?> {
+        val localVariableConfig = getV1MeshServicesRequestConfig()
 
-        return request<Unit, CloudMeshServiceList>(
+        return request<Unit, MeshServiceList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MeshServices
+     * To obtain the request config of the operation getV1MeshServices
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MeshServicesRequestConfig() : RequestConfig<Unit> {
+    fun getV1MeshServicesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +110,7 @@ class MeshApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/mesh/services",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

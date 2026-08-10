@@ -19,10 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudIssuePatch
-import ai.hanzo.cloud.model.CloudIssueView
-import ai.hanzo.cloud.model.CloudProjectPatch
-import ai.hanzo.cloud.model.CloudTrackerProject
+import ai.hanzo.cloud.model.IssueEdit
+import ai.hanzo.cloud.model.IssueHit
+import ai.hanzo.cloud.model.IssueHits
+import ai.hanzo.cloud.model.IssueView
+import ai.hanzo.cloud.model.MilestoneView
+import ai.hanzo.cloud.model.NewIssue
+import ai.hanzo.cloud.model.TrackerProject
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,9 +53,9 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/tracker/projects/{key}
-     * DeleteProject removes one tracker project of the caller&#39;s org AND every issue filed under it, and answers 204 with no body.
-     * DeleteProject removes one tracker project of the caller&#39;s org AND every issue filed under it, and answers 204 with no body. 404 when the org has no project under that key.  The cascade is the point: an issue has no meaning without the board whose key names it, so deleting the board deletes them together rather than leaving orphans addressable by an identifier that no longer resolves.
-     * @param key Key is the project&#39;s org-unique handle: 2-8 uppercase alphanumerics starting with a letter (\&quot;ENG\&quot;, \&quot;OPS2\&quot;). Matched case-insensitively.
+     * Refused — a board is a repository on the forge
+     * Answers 405. A tracker board IS a repository on this deployment&#39;s forge, so creating, renaming and deleting one is a FORGE operation carried out with FORGE permissions.  Offering it here would put a second door on the same object, guarded by this surface instead of by the forge — a weaker guard on the same thing. So the route exists and refuses, rather than 404ing: \&quot;not this service&#39;s job\&quot; and \&quot;no such thing\&quot; are different facts, and the body names the forge so a caller knows where the job IS done.  What this surface DOES own is the work on a board: list the boards you can see, read and file their issues, move a card between columns, and roll milestones up across the org. Those are the routes beside this one.
+     * @param key 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -61,8 +64,8 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1TrackerProjectsKey(key: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1TrackerProjectsKeyWithHttpInfo(key = key)
+    fun deleteV1TrackerProjectsByKey(key: kotlin.String) : Unit {
+        val localVarResponse = deleteV1TrackerProjectsByKeyWithHttpInfo(key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -81,16 +84,16 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/tracker/projects/{key}
-     * DeleteProject removes one tracker project of the caller&#39;s org AND every issue filed under it, and answers 204 with no body.
-     * DeleteProject removes one tracker project of the caller&#39;s org AND every issue filed under it, and answers 204 with no body. 404 when the org has no project under that key.  The cascade is the point: an issue has no meaning without the board whose key names it, so deleting the board deletes them together rather than leaving orphans addressable by an identifier that no longer resolves.
-     * @param key Key is the project&#39;s org-unique handle: 2-8 uppercase alphanumerics starting with a letter (\&quot;ENG\&quot;, \&quot;OPS2\&quot;). Matched case-insensitively.
+     * Refused — a board is a repository on the forge
+     * Answers 405. A tracker board IS a repository on this deployment&#39;s forge, so creating, renaming and deleting one is a FORGE operation carried out with FORGE permissions.  Offering it here would put a second door on the same object, guarded by this surface instead of by the forge — a weaker guard on the same thing. So the route exists and refuses, rather than 404ing: \&quot;not this service&#39;s job\&quot; and \&quot;no such thing\&quot; are different facts, and the body names the forge so a caller knows where the job IS done.  What this surface DOES own is the work on a board: list the boards you can see, read and file their issues, move a card between columns, and roll milestones up across the org. Those are the routes beside this one.
+     * @param key 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1TrackerProjectsKeyWithHttpInfo(key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1TrackerProjectsKeyRequestConfig(key = key)
+    fun deleteV1TrackerProjectsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1TrackerProjectsByKeyRequestConfig(key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +101,12 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1TrackerProjectsKey
+     * To obtain the request config of the operation deleteV1TrackerProjectsByKey
      *
-     * @param key Key is the project&#39;s org-unique handle: 2-8 uppercase alphanumerics starting with a letter (\&quot;ENG\&quot;, \&quot;OPS2\&quot;). Matched case-insensitively.
+     * @param key 
      * @return RequestConfig
      */
-    fun cloudDeleteV1TrackerProjectsKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1TrackerProjectsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -113,30 +116,37 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/tracker/projects/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * DELETE /v1/tracker/projects/{key}/issues/{num}
-     * DeleteIssue removes one issue from a tracker project and answers 204 with no body.
-     * DeleteIssue removes one issue from a tracker project and answers 204 with no body. 404 when the project or the issue does not exist in the caller&#39;s org.  The issue&#39;s number is NOT reused: the next issue on the board takes the next number, so a deleted identifier stays retired rather than silently pointing at different work.
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project — the digits of KEY-14. Positive; anything else is refused with 400.
-     * @return void
+     * GET /v1/tracker/issues
+     * Answers across every project in the org.
+     * Answers across every project in the org.  The org comes from the validated principal and never from the request: a caller able to name the org could read another tenant&#39;s backlog, and a search is exactly the shape that would quietly return it.
+     * @param q Q matches an issue&#39;s title or description. A word from the issue, which is what someone remembers — not its number, which is what they are looking up. (optional)
+     * @param project Project narrows to one team key; \&quot;\&quot; searches every project in the org, which is the point of this op. (optional)
+     * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
+     * @param kind Kind keeps one shape: issue, pr, epic. (optional)
+     * @param repo Repo keeps issues bound to one git repository. (optional)
+     * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
+     * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
+     * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
+     * @return IssueHits
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1TrackerProjectsKeyIssuesNum(key: kotlin.String, num: kotlin.Int) : Unit {
-        val localVarResponse = cloudDeleteV1TrackerProjectsKeyIssuesNumWithHttpInfo(key = key, num = num)
+    fun getV1TrackerIssues(q: kotlin.String? = null, project: kotlin.String? = null, status: kotlin.String? = null, kind: kotlin.String? = null, repo: kotlin.String? = null, source: kotlin.String? = null, assignee: kotlin.String? = null, limit: kotlin.Int? = null) : IssueHits {
+        val localVarResponse = getV1TrackerIssuesWithHttpInfo(q = q, project = project, status = status, kind = kind, repo = repo, source = source, assignee = assignee, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IssueHits
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -151,51 +161,161 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * DELETE /v1/tracker/projects/{key}/issues/{num}
-     * DeleteIssue removes one issue from a tracker project and answers 204 with no body.
-     * DeleteIssue removes one issue from a tracker project and answers 204 with no body. 404 when the project or the issue does not exist in the caller&#39;s org.  The issue&#39;s number is NOT reused: the next issue on the board takes the next number, so a deleted identifier stays retired rather than silently pointing at different work.
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project — the digits of KEY-14. Positive; anything else is refused with 400.
-     * @return ApiResponse<Unit?>
+     * GET /v1/tracker/issues
+     * Answers across every project in the org.
+     * Answers across every project in the org.  The org comes from the validated principal and never from the request: a caller able to name the org could read another tenant&#39;s backlog, and a search is exactly the shape that would quietly return it.
+     * @param q Q matches an issue&#39;s title or description. A word from the issue, which is what someone remembers — not its number, which is what they are looking up. (optional)
+     * @param project Project narrows to one team key; \&quot;\&quot; searches every project in the org, which is the point of this op. (optional)
+     * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
+     * @param kind Kind keeps one shape: issue, pr, epic. (optional)
+     * @param repo Repo keeps issues bound to one git repository. (optional)
+     * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
+     * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
+     * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
+     * @return ApiResponse<IssueHits?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1TrackerProjectsKeyIssuesNumWithHttpInfo(key: kotlin.String, num: kotlin.Int) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1TrackerProjectsKeyIssuesNumRequestConfig(key = key, num = num)
+    fun getV1TrackerIssuesWithHttpInfo(q: kotlin.String?, project: kotlin.String?, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?, assignee: kotlin.String?, limit: kotlin.Int?) : ApiResponse<IssueHits?> {
+        val localVariableConfig = getV1TrackerIssuesRequestConfig(q = q, project = project, status = status, kind = kind, repo = repo, source = source, assignee = assignee, limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, IssueHits>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1TrackerProjectsKeyIssuesNum
+     * To obtain the request config of the operation getV1TrackerIssues
      *
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project — the digits of KEY-14. Positive; anything else is refused with 400.
+     * @param q Q matches an issue&#39;s title or description. A word from the issue, which is what someone remembers — not its number, which is what they are looking up. (optional)
+     * @param project Project narrows to one team key; \&quot;\&quot; searches every project in the org, which is the point of this op. (optional)
+     * @param status Status keeps one board column: backlog, todo, in_progress, done, canceled. (optional)
+     * @param kind Kind keeps one shape: issue, pr, epic. (optional)
+     * @param repo Repo keeps issues bound to one git repository. (optional)
+     * @param source Source keeps one origin: team, git, crm, helpdesk, cms, agent. \&quot;git\&quot; is how you ask for the mirrored GitHub issues specifically. (optional)
+     * @param assignee Assignee keeps issues held by one person. Pass \&quot;me\&quot; for yourself. (optional)
+     * @param limit Limit caps the answer; 0 means the default, and anything above the ceiling is clamped rather than refused — a search that errors on being too broad teaches people to guess. (optional)
      * @return RequestConfig
      */
-    fun cloudDeleteV1TrackerProjectsKeyIssuesNumRequestConfig(key: kotlin.String, num: kotlin.Int) : RequestConfig<Unit> {
+    fun getV1TrackerIssuesRequestConfig(q: kotlin.String?, project: kotlin.String?, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?, assignee: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (q != null) {
+                    put("q", listOf(q.toString()))
+                }
+                if (project != null) {
+                    put("project", listOf(project.toString()))
+                }
+                if (status != null) {
+                    put("status", listOf(status.toString()))
+                }
+                if (kind != null) {
+                    put("kind", listOf(kind.toString()))
+                }
+                if (repo != null) {
+                    put("repo", listOf(repo.toString()))
+                }
+                if (source != null) {
+                    put("source", listOf(source.toString()))
+                }
+                if (assignee != null) {
+                    put("assignee", listOf(assignee.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/tracker/issues",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/tracker/milestones
+     * Returns every milestone across your org&#39;s repositories, each stamped with the repository it belongs to.
+     * Returns every milestone across your org&#39;s repositories, each stamped with the repository it belongs to.  The forge scopes milestones to a repository and publishes no org-level list, so this is a server-side fan-out over the repositories you can see. It runs here rather than in the browser because a client-side fan-out would need the forge reachable from the page and a credential held there.
+     * @return kotlin.collections.List<MilestoneView>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1TrackerMilestones() : kotlin.collections.List<MilestoneView> {
+        val localVarResponse = getV1TrackerMilestonesWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<MilestoneView>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/tracker/milestones
+     * Returns every milestone across your org&#39;s repositories, each stamped with the repository it belongs to.
+     * Returns every milestone across your org&#39;s repositories, each stamped with the repository it belongs to.  The forge scopes milestones to a repository and publishes no org-level list, so this is a server-side fan-out over the repositories you can see. It runs here rather than in the browser because a client-side fan-out would need the forge reachable from the page and a credential held there.
+     * @return ApiResponse<kotlin.collections.List<MilestoneView>?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1TrackerMilestonesWithHttpInfo() : ApiResponse<kotlin.collections.List<MilestoneView>?> {
+        val localVariableConfig = getV1TrackerMilestonesRequestConfig()
+
+        return request<Unit, kotlin.collections.List<MilestoneView>>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1TrackerMilestones
+     *
+     * @return RequestConfig
+     */
+    fun getV1TrackerMilestonesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/tracker/projects/{key}/issues/{num}".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
+            method = RequestMethod.GET,
+            path = "/v1/tracker/milestones",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tracker/projects
-     * ListProjects returns every tracker project in the caller&#39;s org, newest first.
-     * ListProjects returns every tracker project in the caller&#39;s org, newest first.  A project is the board: it owns a KEY (the uppercase handle that prefixes every issue identifier, \&quot;ENG-14\&quot;) and the issues filed under it. The listing is org-scoped server-side — the org is the validated bearer claim, never a client-supplied header — so one org can never see another&#39;s boards.
-     * @return kotlin.collections.List<CloudTrackerProject>
+     * Returns the boards of your org — one per repository on the deployment&#39;s forge that you can see.
+     * Returns the boards of your org — one per repository on the deployment&#39;s forge that you can see. The key is the repository name, and it is what addresses the board&#39;s issues.  Archived repositories are omitted: they are not live work. The set is the FORGE&#39;s answer for your own account, so two people in one org can legitimately see different boards.
+     * @return kotlin.collections.List<TrackerProject>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -204,11 +324,11 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TrackerProjects() : kotlin.collections.List<CloudTrackerProject> {
-        val localVarResponse = cloudGetV1TrackerProjectsWithHttpInfo()
+    fun getV1TrackerProjects() : kotlin.collections.List<TrackerProject> {
+        val localVarResponse = getV1TrackerProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudTrackerProject>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<TrackerProject>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -224,28 +344,28 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/tracker/projects
-     * ListProjects returns every tracker project in the caller&#39;s org, newest first.
-     * ListProjects returns every tracker project in the caller&#39;s org, newest first.  A project is the board: it owns a KEY (the uppercase handle that prefixes every issue identifier, \&quot;ENG-14\&quot;) and the issues filed under it. The listing is org-scoped server-side — the org is the validated bearer claim, never a client-supplied header — so one org can never see another&#39;s boards.
-     * @return ApiResponse<kotlin.collections.List<CloudTrackerProject>?>
+     * Returns the boards of your org — one per repository on the deployment&#39;s forge that you can see.
+     * Returns the boards of your org — one per repository on the deployment&#39;s forge that you can see. The key is the repository name, and it is what addresses the board&#39;s issues.  Archived repositories are omitted: they are not live work. The set is the FORGE&#39;s answer for your own account, so two people in one org can legitimately see different boards.
+     * @return ApiResponse<kotlin.collections.List<TrackerProject>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TrackerProjectsWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudTrackerProject>?> {
-        val localVariableConfig = cloudGetV1TrackerProjectsRequestConfig()
+    fun getV1TrackerProjectsWithHttpInfo() : ApiResponse<kotlin.collections.List<TrackerProject>?> {
+        val localVariableConfig = getV1TrackerProjectsRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudTrackerProject>>(
+        return request<Unit, kotlin.collections.List<TrackerProject>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TrackerProjects
+     * To obtain the request config of the operation getV1TrackerProjects
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TrackerProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getV1TrackerProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -256,17 +376,17 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/tracker/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tracker/projects/{key}
-     * GetProject returns one tracker project of the caller&#39;s org by its key — its name, description and timestamps.
-     * GetProject returns one tracker project of the caller&#39;s org by its key — its name, description and timestamps. 404 when the org has no project under that key.
+     * Returns one board of your org by its key — the repository name.
+     * Returns one board of your org by its key — the repository name. 404 when your org has no repository under that key, or when your own forge account cannot see it.
      * @param key Key is the project&#39;s org-unique handle: 2-8 uppercase alphanumerics starting with a letter (\&quot;ENG\&quot;, \&quot;OPS2\&quot;). Matched case-insensitively.
-     * @return CloudTrackerProject
+     * @return TrackerProject
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -275,11 +395,11 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TrackerProjectsKey(key: kotlin.String) : CloudTrackerProject {
-        val localVarResponse = cloudGetV1TrackerProjectsKeyWithHttpInfo(key = key)
+    fun getV1TrackerProjectsByKey(key: kotlin.String) : TrackerProject {
+        val localVarResponse = getV1TrackerProjectsByKeyWithHttpInfo(key = key)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTrackerProject
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrackerProject
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -295,30 +415,30 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/tracker/projects/{key}
-     * GetProject returns one tracker project of the caller&#39;s org by its key — its name, description and timestamps.
-     * GetProject returns one tracker project of the caller&#39;s org by its key — its name, description and timestamps. 404 when the org has no project under that key.
+     * Returns one board of your org by its key — the repository name.
+     * Returns one board of your org by its key — the repository name. 404 when your org has no repository under that key, or when your own forge account cannot see it.
      * @param key Key is the project&#39;s org-unique handle: 2-8 uppercase alphanumerics starting with a letter (\&quot;ENG\&quot;, \&quot;OPS2\&quot;). Matched case-insensitively.
-     * @return ApiResponse<CloudTrackerProject?>
+     * @return ApiResponse<TrackerProject?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TrackerProjectsKeyWithHttpInfo(key: kotlin.String) : ApiResponse<CloudTrackerProject?> {
-        val localVariableConfig = cloudGetV1TrackerProjectsKeyRequestConfig(key = key)
+    fun getV1TrackerProjectsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<TrackerProject?> {
+        val localVariableConfig = getV1TrackerProjectsByKeyRequestConfig(key = key)
 
-        return request<Unit, CloudTrackerProject>(
+        return request<Unit, TrackerProject>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TrackerProjectsKey
+     * To obtain the request config of the operation getV1TrackerProjectsByKey
      *
      * @param key Key is the project&#39;s org-unique handle: 2-8 uppercase alphanumerics starting with a letter (\&quot;ENG\&quot;, \&quot;OPS2\&quot;). Matched case-insensitively.
      * @return RequestConfig
      */
-    fun cloudGetV1TrackerProjectsKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TrackerProjectsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -329,21 +449,22 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/tracker/projects/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tracker/projects/{key}/issues
-     * ListIssues returns the issues of one tracker project, optionally filtered by status, kind, repo and source.
-     * ListIssues returns the issues of one tracker project, optionally filtered by status, kind, repo and source.  This is the ONE place a surface takes its slice of the shared issue table: hanzo.team passes no filter or a status, a git repository&#39;s Issues tab passes kind&#x3D;issue&amp;repo&#x3D;&lt;r&gt; and its Pull Requests tab kind&#x3D;pr&amp;repo&#x3D;&lt;r&gt;. A filter value outside its closed set is refused with 400 rather than silently returning an empty board.
+     * Returns one board&#39;s issues — the work items of that repository on the forge, with their column, priority, assignee and labels.
+     * Returns one board&#39;s issues — the work items of that repository on the forge, with their column, priority, assignee and labels.  The column is a LABEL on the forge, so the board and the forge web UI are the same object seen twice: relabelling in either moves the card in both. A closed issue reads as done whatever its labels say.
      * @param key Key is the project whose issues to list, from the path.
      * @param status Status keeps only issues in that board column: backlog, todo, in_progress, done or canceled. An unknown value is refused with 400. (optional)
      * @param kind Kind keeps only work items of that shape: issue, pr or epic. An unknown value is refused with 400. (optional)
      * @param repo Repo keeps only issues bound to that git repository. (optional)
      * @param source Source keeps only issues opened from that surface: team, git, crm, helpdesk, cms or agent. An unknown value is refused with 400. (optional)
-     * @return kotlin.collections.List<CloudIssueView>
+     * @param scheduled Scheduled keeps only issues that carry a date — a start, a due date or both. This is the timeline&#39;s slice of the board: pass scheduled&#x3D;true to get exactly the rows a gantt has somewhere to draw, instead of fetching every issue and discarding the undated ones client-side. (optional)
+     * @return kotlin.collections.List<IssueView>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -352,11 +473,11 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TrackerProjectsKeyIssues(key: kotlin.String, status: kotlin.String? = null, kind: kotlin.String? = null, repo: kotlin.String? = null, source: kotlin.String? = null) : kotlin.collections.List<CloudIssueView> {
-        val localVarResponse = cloudGetV1TrackerProjectsKeyIssuesWithHttpInfo(key = key, status = status, kind = kind, repo = repo, source = source)
+    fun getV1TrackerProjectsByKeyIssues(key: kotlin.String, status: kotlin.String? = null, kind: kotlin.String? = null, repo: kotlin.String? = null, source: kotlin.String? = null, scheduled: kotlin.Boolean? = null) : kotlin.collections.List<IssueView> {
+        val localVarResponse = getV1TrackerProjectsByKeyIssuesWithHttpInfo(key = key, status = status, kind = kind, repo = repo, source = source, scheduled = scheduled)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudIssueView>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<IssueView>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -372,38 +493,40 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/tracker/projects/{key}/issues
-     * ListIssues returns the issues of one tracker project, optionally filtered by status, kind, repo and source.
-     * ListIssues returns the issues of one tracker project, optionally filtered by status, kind, repo and source.  This is the ONE place a surface takes its slice of the shared issue table: hanzo.team passes no filter or a status, a git repository&#39;s Issues tab passes kind&#x3D;issue&amp;repo&#x3D;&lt;r&gt; and its Pull Requests tab kind&#x3D;pr&amp;repo&#x3D;&lt;r&gt;. A filter value outside its closed set is refused with 400 rather than silently returning an empty board.
+     * Returns one board&#39;s issues — the work items of that repository on the forge, with their column, priority, assignee and labels.
+     * Returns one board&#39;s issues — the work items of that repository on the forge, with their column, priority, assignee and labels.  The column is a LABEL on the forge, so the board and the forge web UI are the same object seen twice: relabelling in either moves the card in both. A closed issue reads as done whatever its labels say.
      * @param key Key is the project whose issues to list, from the path.
      * @param status Status keeps only issues in that board column: backlog, todo, in_progress, done or canceled. An unknown value is refused with 400. (optional)
      * @param kind Kind keeps only work items of that shape: issue, pr or epic. An unknown value is refused with 400. (optional)
      * @param repo Repo keeps only issues bound to that git repository. (optional)
      * @param source Source keeps only issues opened from that surface: team, git, crm, helpdesk, cms or agent. An unknown value is refused with 400. (optional)
-     * @return ApiResponse<kotlin.collections.List<CloudIssueView>?>
+     * @param scheduled Scheduled keeps only issues that carry a date — a start, a due date or both. This is the timeline&#39;s slice of the board: pass scheduled&#x3D;true to get exactly the rows a gantt has somewhere to draw, instead of fetching every issue and discarding the undated ones client-side. (optional)
+     * @return ApiResponse<kotlin.collections.List<IssueView>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TrackerProjectsKeyIssuesWithHttpInfo(key: kotlin.String, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?) : ApiResponse<kotlin.collections.List<CloudIssueView>?> {
-        val localVariableConfig = cloudGetV1TrackerProjectsKeyIssuesRequestConfig(key = key, status = status, kind = kind, repo = repo, source = source)
+    fun getV1TrackerProjectsByKeyIssuesWithHttpInfo(key: kotlin.String, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?, scheduled: kotlin.Boolean?) : ApiResponse<kotlin.collections.List<IssueView>?> {
+        val localVariableConfig = getV1TrackerProjectsByKeyIssuesRequestConfig(key = key, status = status, kind = kind, repo = repo, source = source, scheduled = scheduled)
 
-        return request<Unit, kotlin.collections.List<CloudIssueView>>(
+        return request<Unit, kotlin.collections.List<IssueView>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TrackerProjectsKeyIssues
+     * To obtain the request config of the operation getV1TrackerProjectsByKeyIssues
      *
      * @param key Key is the project whose issues to list, from the path.
      * @param status Status keeps only issues in that board column: backlog, todo, in_progress, done or canceled. An unknown value is refused with 400. (optional)
      * @param kind Kind keeps only work items of that shape: issue, pr or epic. An unknown value is refused with 400. (optional)
      * @param repo Repo keeps only issues bound to that git repository. (optional)
      * @param source Source keeps only issues opened from that surface: team, git, crm, helpdesk, cms or agent. An unknown value is refused with 400. (optional)
+     * @param scheduled Scheduled keeps only issues that carry a date — a start, a due date or both. This is the timeline&#39;s slice of the board: pass scheduled&#x3D;true to get exactly the rows a gantt has somewhere to draw, instead of fetching every issue and discarding the undated ones client-side. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1TrackerProjectsKeyIssuesRequestConfig(key: kotlin.String, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1TrackerProjectsByKeyIssuesRequestConfig(key: kotlin.String, status: kotlin.String?, kind: kotlin.String?, repo: kotlin.String?, source: kotlin.String?, scheduled: kotlin.Boolean?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -419,6 +542,9 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
                 if (source != null) {
                     put("source", listOf(source.toString()))
                 }
+                if (scheduled != null) {
+                    put("scheduled", listOf(scheduled.toString()))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
@@ -428,248 +554,16 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/tracker/projects/{key}/issues".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/tracker/projects/{key}/issues/{num}
-     * GetIssue returns one issue of one tracker project by its per-project number — title, description, status, priority, assignee, labels, kind, source and its git bindings.
-     * GetIssue returns one issue of one tracker project by its per-project number — title, description, status, priority, assignee, labels, kind, source and its git bindings. 404 when the project or the issue does not exist in the caller&#39;s org.
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project — the digits of KEY-14. Positive; anything else is refused with 400.
-     * @return CloudIssueView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TrackerProjectsKeyIssuesNum(key: kotlin.String, num: kotlin.Int) : CloudIssueView {
-        val localVarResponse = cloudGetV1TrackerProjectsKeyIssuesNumWithHttpInfo(key = key, num = num)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIssueView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/tracker/projects/{key}/issues/{num}
-     * GetIssue returns one issue of one tracker project by its per-project number — title, description, status, priority, assignee, labels, kind, source and its git bindings.
-     * GetIssue returns one issue of one tracker project by its per-project number — title, description, status, priority, assignee, labels, kind, source and its git bindings. 404 when the project or the issue does not exist in the caller&#39;s org.
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project — the digits of KEY-14. Positive; anything else is refused with 400.
-     * @return ApiResponse<CloudIssueView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TrackerProjectsKeyIssuesNumWithHttpInfo(key: kotlin.String, num: kotlin.Int) : ApiResponse<CloudIssueView?> {
-        val localVariableConfig = cloudGetV1TrackerProjectsKeyIssuesNumRequestConfig(key = key, num = num)
-
-        return request<Unit, CloudIssueView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1TrackerProjectsKeyIssuesNum
-     *
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project — the digits of KEY-14. Positive; anything else is refused with 400.
-     * @return RequestConfig
-     */
-    fun cloudGetV1TrackerProjectsKeyIssuesNumRequestConfig(key: kotlin.String, num: kotlin.Int) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/tracker/projects/{key}/issues/{num}".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/tracker/projects/{key}
-     * UpdateProject renames a tracker project or rewrites its description, and returns the updated project.
-     * UpdateProject renames a tracker project or rewrites its description, and returns the updated project. Both fields are optional: one the caller omits keeps its stored value.  The project KEY is never editable — it prefixes every issue identifier already filed under the board, so changing it would rewrite the human handle of every issue in it.
-     * @param key Key is the project to update, from the path.
-     * @param cloudProjectPatch 
-     * @return CloudTrackerProject
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1TrackerProjectsKey(key: kotlin.String, cloudProjectPatch: CloudProjectPatch) : CloudTrackerProject {
-        val localVarResponse = cloudPatchV1TrackerProjectsKeyWithHttpInfo(key = key, cloudProjectPatch = cloudProjectPatch)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTrackerProject
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/tracker/projects/{key}
-     * UpdateProject renames a tracker project or rewrites its description, and returns the updated project.
-     * UpdateProject renames a tracker project or rewrites its description, and returns the updated project. Both fields are optional: one the caller omits keeps its stored value.  The project KEY is never editable — it prefixes every issue identifier already filed under the board, so changing it would rewrite the human handle of every issue in it.
-     * @param key Key is the project to update, from the path.
-     * @param cloudProjectPatch 
-     * @return ApiResponse<CloudTrackerProject?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1TrackerProjectsKeyWithHttpInfo(key: kotlin.String, cloudProjectPatch: CloudProjectPatch) : ApiResponse<CloudTrackerProject?> {
-        val localVariableConfig = cloudPatchV1TrackerProjectsKeyRequestConfig(key = key, cloudProjectPatch = cloudProjectPatch)
-
-        return request<CloudProjectPatch, CloudTrackerProject>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPatchV1TrackerProjectsKey
-     *
-     * @param key Key is the project to update, from the path.
-     * @param cloudProjectPatch 
-     * @return RequestConfig
-     */
-    fun cloudPatchV1TrackerProjectsKeyRequestConfig(key: kotlin.String, cloudProjectPatch: CloudProjectPatch) : RequestConfig<CloudProjectPatch> {
-        val localVariableBody = cloudProjectPatch
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/tracker/projects/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/tracker/projects/{key}/issues/{num}
-     * UpdateIssue edits one issue in place and returns it — retitle it, rewrite its body, move it between board columns, reprioritize, reassign, or replace its labels.
-     * UpdateIssue edits one issue in place and returns it — retitle it, rewrite its body, move it between board columns, reprioritize, reassign, or replace its labels. Every field is optional: one the caller omits keeps its stored value, and &#x60;labels&#x60; REPLACES the set rather than adding to it.  The issue&#39;s kind, source and git bindings are not editable here: they record where the work item came FROM, which is a fact about its origin rather than its current state.
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project, from the path.
-     * @param cloudIssuePatch 
-     * @return CloudIssueView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1TrackerProjectsKeyIssuesNum(key: kotlin.String, num: kotlin.Int, cloudIssuePatch: CloudIssuePatch) : CloudIssueView {
-        val localVarResponse = cloudPatchV1TrackerProjectsKeyIssuesNumWithHttpInfo(key = key, num = num, cloudIssuePatch = cloudIssuePatch)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIssueView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/tracker/projects/{key}/issues/{num}
-     * UpdateIssue edits one issue in place and returns it — retitle it, rewrite its body, move it between board columns, reprioritize, reassign, or replace its labels.
-     * UpdateIssue edits one issue in place and returns it — retitle it, rewrite its body, move it between board columns, reprioritize, reassign, or replace its labels. Every field is optional: one the caller omits keeps its stored value, and &#x60;labels&#x60; REPLACES the set rather than adding to it.  The issue&#39;s kind, source and git bindings are not editable here: they record where the work item came FROM, which is a fact about its origin rather than its current state.
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project, from the path.
-     * @param cloudIssuePatch 
-     * @return ApiResponse<CloudIssueView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1TrackerProjectsKeyIssuesNumWithHttpInfo(key: kotlin.String, num: kotlin.Int, cloudIssuePatch: CloudIssuePatch) : ApiResponse<CloudIssueView?> {
-        val localVariableConfig = cloudPatchV1TrackerProjectsKeyIssuesNumRequestConfig(key = key, num = num, cloudIssuePatch = cloudIssuePatch)
-
-        return request<CloudIssuePatch, CloudIssueView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPatchV1TrackerProjectsKeyIssuesNum
-     *
-     * @param key Key is the issue&#39;s project, from the path.
-     * @param num Num is the issue&#39;s number within that project, from the path.
-     * @param cloudIssuePatch 
-     * @return RequestConfig
-     */
-    fun cloudPatchV1TrackerProjectsKeyIssuesNumRequestConfig(key: kotlin.String, num: kotlin.Int, cloudIssuePatch: CloudIssuePatch) : RequestConfig<CloudIssuePatch> {
-        val localVariableBody = cloudIssuePatch
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/tracker/projects/{key}/issues/{num}".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/tracker/projects
-     * 
-     * 
+     * Refused — a board is a repository on the forge
+     * Answers 405. A tracker board IS a repository on this deployment&#39;s forge, so creating, renaming and deleting one is a FORGE operation carried out with FORGE permissions.  Offering it here would put a second door on the same object, guarded by this surface instead of by the forge — a weaker guard on the same thing. So the route exists and refuses, rather than 404ing: \&quot;not this service&#39;s job\&quot; and \&quot;no such thing\&quot; are different facts, and the body names the forge so a caller knows where the job IS done.  What this surface DOES own is the work on a board: list the boards you can see, read and file their issues, move a card between columns, and roll milestones up across the org. Those are the routes beside this one.
+     * @param key 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -678,8 +572,157 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1TrackerProjects() : Unit {
-        val localVarResponse = cloudPostV1TrackerProjectsWithHttpInfo()
+    fun patchV1TrackerProjectsByKey(key: kotlin.String) : Unit {
+        val localVarResponse = patchV1TrackerProjectsByKeyWithHttpInfo(key = key)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/tracker/projects/{key}
+     * Refused — a board is a repository on the forge
+     * Answers 405. A tracker board IS a repository on this deployment&#39;s forge, so creating, renaming and deleting one is a FORGE operation carried out with FORGE permissions.  Offering it here would put a second door on the same object, guarded by this surface instead of by the forge — a weaker guard on the same thing. So the route exists and refuses, rather than 404ing: \&quot;not this service&#39;s job\&quot; and \&quot;no such thing\&quot; are different facts, and the body names the forge so a caller knows where the job IS done.  What this surface DOES own is the work on a board: list the boards you can see, read and file their issues, move a card between columns, and roll milestones up across the org. Those are the routes beside this one.
+     * @param key 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1TrackerProjectsByKeyWithHttpInfo(key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1TrackerProjectsByKeyRequestConfig(key = key)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1TrackerProjectsByKey
+     *
+     * @param key 
+     * @return RequestConfig
+     */
+    fun patchV1TrackerProjectsByKeyRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/tracker/projects/{key}".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/tracker/projects/{key}/issues/{num}
+     * Edits a work item — rename it, rewrite it, move it to another column, or re-prioritise it.
+     * Edits a work item — rename it, rewrite it, move it to another column, or re-prioritise it. Absent fields are left alone.  MOVING A CARD IS A RELABEL. The column lives in the forge&#39;s label set, so the move replaces that set rather than writing a status column here that a forge-side change could contradict. Moving to &#x60;done&#x60; also CLOSES the issue on the forge, because a done card and an open issue are a contradiction.
+     * @param key Key is the board — the repository name, from the path.
+     * @param num Num is the issue number on that repository, from the path.
+     * @param issueEdit 
+     * @return IssueView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1TrackerProjectsByKeyIssuesByNum(key: kotlin.String, num: kotlin.Int, issueEdit: IssueEdit) : IssueView {
+        val localVarResponse = patchV1TrackerProjectsByKeyIssuesByNumWithHttpInfo(key = key, num = num, issueEdit = issueEdit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IssueView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/tracker/projects/{key}/issues/{num}
+     * Edits a work item — rename it, rewrite it, move it to another column, or re-prioritise it.
+     * Edits a work item — rename it, rewrite it, move it to another column, or re-prioritise it. Absent fields are left alone.  MOVING A CARD IS A RELABEL. The column lives in the forge&#39;s label set, so the move replaces that set rather than writing a status column here that a forge-side change could contradict. Moving to &#x60;done&#x60; also CLOSES the issue on the forge, because a done card and an open issue are a contradiction.
+     * @param key Key is the board — the repository name, from the path.
+     * @param num Num is the issue number on that repository, from the path.
+     * @param issueEdit 
+     * @return ApiResponse<IssueView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1TrackerProjectsByKeyIssuesByNumWithHttpInfo(key: kotlin.String, num: kotlin.Int, issueEdit: IssueEdit) : ApiResponse<IssueView?> {
+        val localVariableConfig = patchV1TrackerProjectsByKeyIssuesByNumRequestConfig(key = key, num = num, issueEdit = issueEdit)
+
+        return request<IssueEdit, IssueView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1TrackerProjectsByKeyIssuesByNum
+     *
+     * @param key Key is the board — the repository name, from the path.
+     * @param num Num is the issue number on that repository, from the path.
+     * @param issueEdit 
+     * @return RequestConfig
+     */
+    fun patchV1TrackerProjectsByKeyIssuesByNumRequestConfig(key: kotlin.String, num: kotlin.Int, issueEdit: IssueEdit) : RequestConfig<IssueEdit> {
+        val localVariableBody = issueEdit
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/tracker/projects/{key}/issues/{num}".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/tracker/projects
+     * Refused — a board is a repository on the forge
+     * Answers 405. A tracker board IS a repository on this deployment&#39;s forge, so creating, renaming and deleting one is a FORGE operation carried out with FORGE permissions.  Offering it here would put a second door on the same object, guarded by this surface instead of by the forge — a weaker guard on the same thing. So the route exists and refuses, rather than 404ing: \&quot;not this service&#39;s job\&quot; and \&quot;no such thing\&quot; are different facts, and the body names the forge so a caller knows where the job IS done.  What this surface DOES own is the work on a board: list the boards you can see, read and file their issues, move a card between columns, and roll milestones up across the org. Those are the routes beside this one.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1TrackerProjects() : Unit {
+        val localVarResponse = postV1TrackerProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -698,15 +741,15 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/tracker/projects
-     * 
-     * 
+     * Refused — a board is a repository on the forge
+     * Answers 405. A tracker board IS a repository on this deployment&#39;s forge, so creating, renaming and deleting one is a FORGE operation carried out with FORGE permissions.  Offering it here would put a second door on the same object, guarded by this surface instead of by the forge — a weaker guard on the same thing. So the route exists and refuses, rather than 404ing: \&quot;not this service&#39;s job\&quot; and \&quot;no such thing\&quot; are different facts, and the body names the forge so a caller knows where the job IS done.  What this surface DOES own is the work on a board: list the boards you can see, read and file their issues, move a card between columns, and roll milestones up across the org. Those are the routes beside this one.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TrackerProjectsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TrackerProjectsRequestConfig()
+    fun postV1TrackerProjectsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1TrackerProjectsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -714,11 +757,11 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1TrackerProjects
+     * To obtain the request config of the operation postV1TrackerProjects
      *
      * @return RequestConfig
      */
-    fun cloudPostV1TrackerProjectsRequestConfig() : RequestConfig<Unit> {
+    fun postV1TrackerProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -728,29 +771,31 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/tracker/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/tracker/projects/{key}/issues
-     * 
-     * 
-     * @param key 
-     * @return void
+     * Opens a work item on the board — an issue on that repository on the deployment&#39;s forge, filed as YOU.
+     * Opens a work item on the board — an issue on that repository on the deployment&#39;s forge, filed as YOU.  The column and priority are written as LABELS, which is what makes the card and the forge issue the same object: someone relabelling in the forge web UI has moved your card.
+     * @param key Key is the board — the repository name, from the path.
+     * @param newIssue 
+     * @return IssueView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1TrackerProjectsByKeyIssues(key: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1TrackerProjectsByKeyIssuesWithHttpInfo(key = key)
+    fun postV1TrackerProjectsByKeyIssues(key: kotlin.String, newIssue: NewIssue) : IssueView {
+        val localVarResponse = postV1TrackerProjectsByKeyIssuesWithHttpInfo(key = key, newIssue = newIssue)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IssueView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -766,39 +811,120 @@ class TrackerApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/tracker/projects/{key}/issues
-     * 
-     * 
-     * @param key 
-     * @return ApiResponse<Unit?>
+     * Opens a work item on the board — an issue on that repository on the deployment&#39;s forge, filed as YOU.
+     * Opens a work item on the board — an issue on that repository on the deployment&#39;s forge, filed as YOU.  The column and priority are written as LABELS, which is what makes the card and the forge issue the same object: someone relabelling in the forge web UI has moved your card.
+     * @param key Key is the board — the repository name, from the path.
+     * @param newIssue 
+     * @return ApiResponse<IssueView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TrackerProjectsByKeyIssuesWithHttpInfo(key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TrackerProjectsByKeyIssuesRequestConfig(key = key)
+    fun postV1TrackerProjectsByKeyIssuesWithHttpInfo(key: kotlin.String, newIssue: NewIssue) : ApiResponse<IssueView?> {
+        val localVariableConfig = postV1TrackerProjectsByKeyIssuesRequestConfig(key = key, newIssue = newIssue)
 
-        return request<Unit, Unit>(
+        return request<NewIssue, IssueView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1TrackerProjectsByKeyIssues
+     * To obtain the request config of the operation postV1TrackerProjectsByKeyIssues
      *
-     * @param key 
+     * @param key Key is the board — the repository name, from the path.
+     * @param newIssue 
      * @return RequestConfig
      */
-    fun cloudPostV1TrackerProjectsByKeyIssuesRequestConfig(key: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1TrackerProjectsByKeyIssuesRequestConfig(key: kotlin.String, newIssue: NewIssue) : RequestConfig<NewIssue> {
+        val localVariableBody = newIssue
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/tracker/projects/{key}/issues".replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/tracker/projects/{key}/issues/{num}/claim
+     * Takes an issue: it becomes yours and it moves to in_progress.
+     * Takes an issue: it becomes yours and it moves to in_progress.  The holder is the CALLER, never an argument. \&quot;Assign this to someone else\&quot; is a different act with different authority, and it already exists as a PATCH; conflating them would let anyone hand work to anyone by naming them.  Claiming something already held by someone else is refused rather than silently taken — two agents on one issue is the failure this prevents, and a claim that quietly wins a race is worse than one that says no.
+     * @param key 
+     * @param num 
+     * @return IssueHit
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1TrackerProjectsByKeyIssuesByNumClaim(key: kotlin.String, num: kotlin.Int) : IssueHit {
+        val localVarResponse = postV1TrackerProjectsByKeyIssuesByNumClaimWithHttpInfo(key = key, num = num)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IssueHit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/tracker/projects/{key}/issues/{num}/claim
+     * Takes an issue: it becomes yours and it moves to in_progress.
+     * Takes an issue: it becomes yours and it moves to in_progress.  The holder is the CALLER, never an argument. \&quot;Assign this to someone else\&quot; is a different act with different authority, and it already exists as a PATCH; conflating them would let anyone hand work to anyone by naming them.  Claiming something already held by someone else is refused rather than silently taken — two agents on one issue is the failure this prevents, and a claim that quietly wins a race is worse than one that says no.
+     * @param key 
+     * @param num 
+     * @return ApiResponse<IssueHit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1TrackerProjectsByKeyIssuesByNumClaimWithHttpInfo(key: kotlin.String, num: kotlin.Int) : ApiResponse<IssueHit?> {
+        val localVariableConfig = postV1TrackerProjectsByKeyIssuesByNumClaimRequestConfig(key = key, num = num)
+
+        return request<Unit, IssueHit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1TrackerProjectsByKeyIssuesByNumClaim
+     *
+     * @param key 
+     * @param num 
+     * @return RequestConfig
+     */
+    fun postV1TrackerProjectsByKeyIssuesByNumClaimRequestConfig(key: kotlin.String, num: kotlin.Int) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/tracker/projects/{key}/issues/{num}/claim".replace("{"+"key"+"}", encodeURIComponent(key.toString())).replace("{"+"num"+"}", encodeURIComponent(num.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

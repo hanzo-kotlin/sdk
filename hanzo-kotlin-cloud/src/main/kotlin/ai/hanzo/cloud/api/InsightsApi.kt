@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudEventList
-import ai.hanzo.cloud.model.CloudInsightsStatus
+import ai.hanzo.cloud.model.EventList
+import ai.hanzo.cloud.model.InsightsStatus
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,10 +48,10 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/insights/events
-     * InsightsEvents returns the caller org&#39;s most recent product events, newest first.
-     * InsightsEvents returns the caller org&#39;s most recent product events, newest first. The console&#39;s raw-event view over the same table the capture doors write: one row per stored event, with the caller&#39;s own property bag returned verbatim.  The org is the validated principal&#39;s — never a parameter — and a read requires a real bearer, never the write-only publishable key. 403 without a validated bearer, 503 when the warehouse is unreachable.
+     * Returns the caller org&#39;s most recent product events, newest first.
+     * Returns the caller org&#39;s most recent product events, newest first. The console&#39;s raw-event view over event.event — the same table the capture doors fill — one row per stored event, with the row&#39;s attributes returned as the properties object.  The org is the validated principal&#39;s — never a parameter — and a read requires a real bearer, never the write-only publishable key. 403 without a validated bearer, 503 when the warehouse is unreachable.
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
-     * @return CloudEventList
+     * @return EventList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1InsightsEvents(limit: kotlin.Int? = null) : CloudEventList {
-        val localVarResponse = cloudGetV1InsightsEventsWithHttpInfo(limit = limit)
+    fun getV1InsightsEvents(limit: kotlin.Int? = null) : EventList {
+        val localVarResponse = getV1InsightsEventsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEventList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EventList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,30 +80,30 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/insights/events
-     * InsightsEvents returns the caller org&#39;s most recent product events, newest first.
-     * InsightsEvents returns the caller org&#39;s most recent product events, newest first. The console&#39;s raw-event view over the same table the capture doors write: one row per stored event, with the caller&#39;s own property bag returned verbatim.  The org is the validated principal&#39;s — never a parameter — and a read requires a real bearer, never the write-only publishable key. 403 without a validated bearer, 503 when the warehouse is unreachable.
+     * Returns the caller org&#39;s most recent product events, newest first.
+     * Returns the caller org&#39;s most recent product events, newest first. The console&#39;s raw-event view over event.event — the same table the capture doors fill — one row per stored event, with the row&#39;s attributes returned as the properties object.  The org is the validated principal&#39;s — never a parameter — and a read requires a real bearer, never the write-only publishable key. 403 without a validated bearer, 503 when the warehouse is unreachable.
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
-     * @return ApiResponse<CloudEventList?>
+     * @return ApiResponse<EventList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1InsightsEventsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudEventList?> {
-        val localVariableConfig = cloudGetV1InsightsEventsRequestConfig(limit = limit)
+    fun getV1InsightsEventsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<EventList?> {
+        val localVariableConfig = getV1InsightsEventsRequestConfig(limit = limit)
 
-        return request<Unit, CloudEventList>(
+        return request<Unit, EventList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1InsightsEvents
+     * To obtain the request config of the operation getV1InsightsEvents
      *
      * @param limit Limit is how many rows to return, newest first. Default 50, maximum 200; a value at or below zero, or one that is not a number, takes the default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1InsightsEventsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1InsightsEventsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -119,16 +119,16 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/insights/events",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/insights/health
-     * InsightsHealth reports that the unified insights surface is serving.
-     * InsightsHealth reports that the unified insights surface is serving. It reads no tenant data and consults no dependency, so it answers 200 unconditionally and needs no principal — liveness must be probe-able. The warehouse-connectivity probe is a different question and lives at GET /v1/analytics/health.
-     * @return CloudInsightsStatus
+     * Reports that the unified insights surface is serving.
+     * Reports that the unified insights surface is serving. It reads no tenant data and consults no dependency, so it answers 200 unconditionally and needs no principal — liveness must be probe-able. The warehouse-connectivity probe is a different question and lives at GET /v1/analytics/health.
+     * @return InsightsStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -137,11 +137,11 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1InsightsHealth() : CloudInsightsStatus {
-        val localVarResponse = cloudGetV1InsightsHealthWithHttpInfo()
+    fun getV1InsightsHealth() : InsightsStatus {
+        val localVarResponse = getV1InsightsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInsightsStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InsightsStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -157,28 +157,28 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/insights/health
-     * InsightsHealth reports that the unified insights surface is serving.
-     * InsightsHealth reports that the unified insights surface is serving. It reads no tenant data and consults no dependency, so it answers 200 unconditionally and needs no principal — liveness must be probe-able. The warehouse-connectivity probe is a different question and lives at GET /v1/analytics/health.
-     * @return ApiResponse<CloudInsightsStatus?>
+     * Reports that the unified insights surface is serving.
+     * Reports that the unified insights surface is serving. It reads no tenant data and consults no dependency, so it answers 200 unconditionally and needs no principal — liveness must be probe-able. The warehouse-connectivity probe is a different question and lives at GET /v1/analytics/health.
+     * @return ApiResponse<InsightsStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1InsightsHealthWithHttpInfo() : ApiResponse<CloudInsightsStatus?> {
-        val localVariableConfig = cloudGetV1InsightsHealthRequestConfig()
+    fun getV1InsightsHealthWithHttpInfo() : ApiResponse<InsightsStatus?> {
+        val localVariableConfig = getV1InsightsHealthRequestConfig()
 
-        return request<Unit, CloudInsightsStatus>(
+        return request<Unit, InsightsStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1InsightsHealth
+     * To obtain the request config of the operation getV1InsightsHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1InsightsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1InsightsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -189,7 +189,7 @@ class InsightsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/insights/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

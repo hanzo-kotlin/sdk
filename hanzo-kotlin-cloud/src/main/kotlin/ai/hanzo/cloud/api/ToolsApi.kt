@@ -19,15 +19,15 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudActivationReq
-import ai.hanzo.cloud.model.CloudActivationSet
-import ai.hanzo.cloud.model.CloudCurateReq
-import ai.hanzo.cloud.model.CloudMCPListing
-import ai.hanzo.cloud.model.CloudMcpCatalog
-import ai.hanzo.cloud.model.CloudMcpCatalogSync
-import ai.hanzo.cloud.model.CloudToolCall
-import ai.hanzo.cloud.model.CloudToolList
-import ai.hanzo.cloud.model.CloudToolResult
+import ai.hanzo.cloud.model.ActivationReq
+import ai.hanzo.cloud.model.ActivationSet
+import ai.hanzo.cloud.model.CurateReq
+import ai.hanzo.cloud.model.MCPListing
+import ai.hanzo.cloud.model.McpCatalog
+import ai.hanzo.cloud.model.McpCatalogSync
+import ai.hanzo.cloud.model.ToolCall
+import ai.hanzo.cloud.model.ToolList
+import ai.hanzo.cloud.model.ToolResult
 
 import com.google.gson.annotations.SerializedName
 
@@ -55,11 +55,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/tools
-     * ListTools lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated.
-     * ListTools lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated. This is the discovery surface: one flat set of names spanning connector actions, user functions, zap-service routes, agents, skills and the org&#39;s own external MCP servers, deduplicated by name so the highest-precedence source wins a collision. It lists; it does not call — dispatch is POST /v1/tools/call.
+     * Lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated.
+     * Lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated. This is the discovery surface: one flat set of names spanning connector actions, user functions, zap-service routes, agents, skills and the org&#39;s own external MCP servers, deduplicated by name so the highest-precedence source wins a collision. It lists; it does not call — dispatch is POST /v1/tools/call.
      * @param source Source keeps only tools from one source — connector, function, zap-service, agent, skill or mcp. Empty keeps every source. (optional)
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
-     * @return CloudToolList
+     * @return ToolList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -68,11 +68,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Tools(source: kotlin.String? = null, activated: kotlin.String? = null) : CloudToolList {
-        val localVarResponse = cloudGetV1ToolsWithHttpInfo(source = source, activated = activated)
+    fun getV1Tools(source: kotlin.String? = null, activated: kotlin.String? = null) : ToolList {
+        val localVarResponse = getV1ToolsWithHttpInfo(source = source, activated = activated)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudToolList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ToolList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -88,32 +88,32 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/tools
-     * ListTools lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated.
-     * ListTools lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated. This is the discovery surface: one flat set of names spanning connector actions, user functions, zap-service routes, agents, skills and the org&#39;s own external MCP servers, deduplicated by name so the highest-precedence source wins a collision. It lists; it does not call — dispatch is POST /v1/tools/call.
+     * Lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated.
+     * Lists every tool the caller&#39;s org and project can reach, from every source, each flagged with whether it is activated. This is the discovery surface: one flat set of names spanning connector actions, user functions, zap-service routes, agents, skills and the org&#39;s own external MCP servers, deduplicated by name so the highest-precedence source wins a collision. It lists; it does not call — dispatch is POST /v1/tools/call.
      * @param source Source keeps only tools from one source — connector, function, zap-service, agent, skill or mcp. Empty keeps every source. (optional)
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
-     * @return ApiResponse<CloudToolList?>
+     * @return ApiResponse<ToolList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ToolsWithHttpInfo(source: kotlin.String?, activated: kotlin.String?) : ApiResponse<CloudToolList?> {
-        val localVariableConfig = cloudGetV1ToolsRequestConfig(source = source, activated = activated)
+    fun getV1ToolsWithHttpInfo(source: kotlin.String?, activated: kotlin.String?) : ApiResponse<ToolList?> {
+        val localVariableConfig = getV1ToolsRequestConfig(source = source, activated = activated)
 
-        return request<Unit, CloudToolList>(
+        return request<Unit, ToolList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Tools
+     * To obtain the request config of the operation getV1Tools
      *
      * @param source Source keeps only tools from one source — connector, function, zap-service, agent, skill or mcp. Empty keeps every source. (optional)
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ToolsRequestConfig(source: kotlin.String?, activated: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1ToolsRequestConfig(source: kotlin.String?, activated: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -132,16 +132,16 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tools/activation
-     * GetActivation reports which tools are switched on for the caller&#39;s org and project.
-     * GetActivation reports which tools are switched on for the caller&#39;s org and project. Activation is what makes a tool dispatchable and what makes it visible to an agent, so this is the set the MCP tool list is drawn from — every other tool in the registry is discoverable but refused at call time.
-     * @return CloudActivationSet
+     * Reports which tools are switched on for the caller&#39;s org and project.
+     * Reports which tools are switched on for the caller&#39;s org and project. Activation is what makes a tool dispatchable and what makes it visible to an agent, so this is the set the MCP tool list is drawn from — every other tool in the registry is discoverable but refused at call time.
+     * @return ActivationSet
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -150,11 +150,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ToolsActivation() : CloudActivationSet {
-        val localVarResponse = cloudGetV1ToolsActivationWithHttpInfo()
+    fun getV1ToolsActivation() : ActivationSet {
+        val localVarResponse = getV1ToolsActivationWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActivationSet
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActivationSet
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -170,28 +170,28 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/tools/activation
-     * GetActivation reports which tools are switched on for the caller&#39;s org and project.
-     * GetActivation reports which tools are switched on for the caller&#39;s org and project. Activation is what makes a tool dispatchable and what makes it visible to an agent, so this is the set the MCP tool list is drawn from — every other tool in the registry is discoverable but refused at call time.
-     * @return ApiResponse<CloudActivationSet?>
+     * Reports which tools are switched on for the caller&#39;s org and project.
+     * Reports which tools are switched on for the caller&#39;s org and project. Activation is what makes a tool dispatchable and what makes it visible to an agent, so this is the set the MCP tool list is drawn from — every other tool in the registry is discoverable but refused at call time.
+     * @return ApiResponse<ActivationSet?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ToolsActivationWithHttpInfo() : ApiResponse<CloudActivationSet?> {
-        val localVariableConfig = cloudGetV1ToolsActivationRequestConfig()
+    fun getV1ToolsActivationWithHttpInfo() : ApiResponse<ActivationSet?> {
+        val localVariableConfig = getV1ToolsActivationRequestConfig()
 
-        return request<Unit, CloudActivationSet>(
+        return request<Unit, ActivationSet>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ToolsActivation
+     * To obtain the request config of the operation getV1ToolsActivation
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ToolsActivationRequestConfig() : RequestConfig<Unit> {
+    fun getV1ToolsActivationRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -202,21 +202,21 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/activation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tools/catalog
-     * ListCatalog lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.
-     * ListCatalog lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
+     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.
+     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
      * @param q Q matches the name, title or description, case-insensitively. (optional)
      * @param featured Featured keeps only the listings we put on the front of the shelf, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @param official Official keeps only the vendors&#39; OWN servers — not third-party copies of them — and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @param limit Limit bounds the page: default 50, maximum 200. A value that is not a positive integer reads as the default. (optional)
      * @param offset Offset skips that many listings. (optional)
-     * @return CloudMcpCatalog
+     * @return McpCatalog
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -225,11 +225,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ToolsCatalog(q: kotlin.String? = null, featured: kotlin.String? = null, official: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : CloudMcpCatalog {
-        val localVarResponse = cloudGetV1ToolsCatalogWithHttpInfo(q = q, featured = featured, official = official, limit = limit, offset = offset)
+    fun getV1ToolsCatalog(q: kotlin.String? = null, featured: kotlin.String? = null, official: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : McpCatalog {
+        val localVarResponse = getV1ToolsCatalogWithHttpInfo(q = q, featured = featured, official = official, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMcpCatalog
+            ResponseType.Success -> (localVarResponse as Success<*>).data as McpCatalog
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -245,29 +245,29 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/tools/catalog
-     * ListCatalog lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.
-     * ListCatalog lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
+     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.
+     * Lists the MCP servers the public registries publish, as we hold them: our canonical copy of registry.modelcontextprotocol.io, plus what we decided about each entry.  This is the SHELF an org picks from. A listing with a streamable-http endpoint can be enabled as-is — POST /v1/mcp/servers with its id — and its tools then join the org&#39;s tool plane and the fleet&#39;s MCP door. A listing that only ships a stdio package needs a process to run it, which is why the transports are on every entry rather than implied.  Hidden entries are absent: they are the ones we took off the shelf. A platform SuperAdmin sees them, because the same query answers \&quot;what is on the shelf\&quot; and \&quot;what is in the catalog\&quot; and two queries would drift apart.  It is PAGED — 50 by default, 200 at most. The public registry publishes tens of thousands of servers, so an unbounded answer is a twenty-megabyte response and a storefront that renders in a minute. total is the whole match, not the page.
      * @param q Q matches the name, title or description, case-insensitively. (optional)
      * @param featured Featured keeps only the listings we put on the front of the shelf, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @param official Official keeps only the vendors&#39; OWN servers — not third-party copies of them — and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @param limit Limit bounds the page: default 50, maximum 200. A value that is not a positive integer reads as the default. (optional)
      * @param offset Offset skips that many listings. (optional)
-     * @return ApiResponse<CloudMcpCatalog?>
+     * @return ApiResponse<McpCatalog?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ToolsCatalogWithHttpInfo(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<CloudMcpCatalog?> {
-        val localVariableConfig = cloudGetV1ToolsCatalogRequestConfig(q = q, featured = featured, official = official, limit = limit, offset = offset)
+    fun getV1ToolsCatalogWithHttpInfo(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<McpCatalog?> {
+        val localVariableConfig = getV1ToolsCatalogRequestConfig(q = q, featured = featured, official = official, limit = limit, offset = offset)
 
-        return request<Unit, CloudMcpCatalog>(
+        return request<Unit, McpCatalog>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ToolsCatalog
+     * To obtain the request config of the operation getV1ToolsCatalog
      *
      * @param q Q matches the name, title or description, case-insensitively. (optional)
      * @param featured Featured keeps only the listings we put on the front of the shelf, and only when it is exactly the string \&quot;true\&quot;. (optional)
@@ -276,7 +276,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param offset Offset skips that many listings. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ToolsCatalogRequestConfig(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ToolsCatalogRequestConfig(q: kotlin.String?, featured: kotlin.String?, official: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -304,17 +304,17 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/tools/catalog/{id}
-     * GetListing returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint.
-     * GetListing returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint. It is what a branding page renders, and what tells a caller whether the listing can be enabled here and now (a streamable-http remote) or needs somewhere to run first (a stdio package).  A HIDDEN listing is not served to an org — a shelf that renders what it does not list would be a way around the shelf — but is served to a SuperAdmin, who is the one deciding whether to put it back.
+     * Returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint.
+     * Returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint. It is what a branding page renders, and what tells a caller whether the listing can be enabled here and now (a streamable-http remote) or needs somewhere to run first (a stdio package).  A HIDDEN listing is not served to an org — a shelf that renders what it does not list would be a way around the shelf — but is served to a SuperAdmin, who is the one deciding whether to put it back.
      * @param id ID is the listing, from the path. It is the publisher&#39;s reverse-DNS name with its one slash written as an underscore — \&quot;com.stripe_mcp\&quot;.
-     * @return CloudMCPListing
+     * @return MCPListing
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -323,11 +323,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ToolsCatalogId(id: kotlin.String) : CloudMCPListing {
-        val localVarResponse = cloudGetV1ToolsCatalogIdWithHttpInfo(id = id)
+    fun getV1ToolsCatalogById(id: kotlin.String) : MCPListing {
+        val localVarResponse = getV1ToolsCatalogByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMCPListing
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MCPListing
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -343,30 +343,30 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/tools/catalog/{id}
-     * GetListing returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint.
-     * GetListing returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint. It is what a branding page renders, and what tells a caller whether the listing can be enabled here and now (a streamable-http remote) or needs somewhere to run first (a stdio package).  A HIDDEN listing is not served to an org — a shelf that renders what it does not list would be a way around the shelf — but is served to a SuperAdmin, who is the one deciding whether to put it back.
+     * Returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint.
+     * Returns one catalog entry in full: the publisher&#39;s description, its repository and site, every package form with the runtime that launches it, and every hosted endpoint. It is what a branding page renders, and what tells a caller whether the listing can be enabled here and now (a streamable-http remote) or needs somewhere to run first (a stdio package).  A HIDDEN listing is not served to an org — a shelf that renders what it does not list would be a way around the shelf — but is served to a SuperAdmin, who is the one deciding whether to put it back.
      * @param id ID is the listing, from the path. It is the publisher&#39;s reverse-DNS name with its one slash written as an underscore — \&quot;com.stripe_mcp\&quot;.
-     * @return ApiResponse<CloudMCPListing?>
+     * @return ApiResponse<MCPListing?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ToolsCatalogIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudMCPListing?> {
-        val localVariableConfig = cloudGetV1ToolsCatalogIdRequestConfig(id = id)
+    fun getV1ToolsCatalogByIdWithHttpInfo(id: kotlin.String) : ApiResponse<MCPListing?> {
+        val localVariableConfig = getV1ToolsCatalogByIdRequestConfig(id = id)
 
-        return request<Unit, CloudMCPListing>(
+        return request<Unit, MCPListing>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ToolsCatalogId
+     * To obtain the request config of the operation getV1ToolsCatalogById
      *
      * @param id ID is the listing, from the path. It is the publisher&#39;s reverse-DNS name with its one slash written as an underscore — \&quot;com.stripe_mcp\&quot;.
      * @return RequestConfig
      */
-    fun cloudGetV1ToolsCatalogIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1ToolsCatalogByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -377,18 +377,18 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/tools/catalog/{id}
-     * CurateListing sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing.
-     * CurateListing sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing. SuperAdmin only; every other caller is refused.  Curation is the half of a catalog row a sync cannot write, and this is the only thing that writes it. The upstream half is never editable here: a description that disagreed with the publisher&#39;s would be a fork of their listing, and the next sync would silently undo it.
+     * Sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing.
+     * Sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing. SuperAdmin only; every other caller is refused.  Curation is the half of a catalog row a sync cannot write, and this is the only thing that writes it. The upstream half is never editable here: a description that disagreed with the publisher&#39;s would be a fork of their listing, and the next sync would silently undo it.
      * @param id ID is the listing to curate, from the path.
-     * @param cloudCurateReq 
-     * @return CloudMCPListing
+     * @param curateReq 
+     * @return MCPListing
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -397,11 +397,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1ToolsCatalogId(id: kotlin.String, cloudCurateReq: CloudCurateReq) : CloudMCPListing {
-        val localVarResponse = cloudPatchV1ToolsCatalogIdWithHttpInfo(id = id, cloudCurateReq = cloudCurateReq)
+    fun patchV1ToolsCatalogById(id: kotlin.String, curateReq: CurateReq) : MCPListing {
+        val localVarResponse = patchV1ToolsCatalogByIdWithHttpInfo(id = id, curateReq = curateReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMCPListing
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MCPListing
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -417,33 +417,33 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/tools/catalog/{id}
-     * CurateListing sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing.
-     * CurateListing sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing. SuperAdmin only; every other caller is refused.  Curation is the half of a catalog row a sync cannot write, and this is the only thing that writes it. The upstream half is never editable here: a description that disagreed with the publisher&#39;s would be a fork of their listing, and the next sync would silently undo it.
+     * Sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing.
+     * Sets what WE say about one catalog entry — hidden, featured, official, logo — and answers with the stored listing. SuperAdmin only; every other caller is refused.  Curation is the half of a catalog row a sync cannot write, and this is the only thing that writes it. The upstream half is never editable here: a description that disagreed with the publisher&#39;s would be a fork of their listing, and the next sync would silently undo it.
      * @param id ID is the listing to curate, from the path.
-     * @param cloudCurateReq 
-     * @return ApiResponse<CloudMCPListing?>
+     * @param curateReq 
+     * @return ApiResponse<MCPListing?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1ToolsCatalogIdWithHttpInfo(id: kotlin.String, cloudCurateReq: CloudCurateReq) : ApiResponse<CloudMCPListing?> {
-        val localVariableConfig = cloudPatchV1ToolsCatalogIdRequestConfig(id = id, cloudCurateReq = cloudCurateReq)
+    fun patchV1ToolsCatalogByIdWithHttpInfo(id: kotlin.String, curateReq: CurateReq) : ApiResponse<MCPListing?> {
+        val localVariableConfig = patchV1ToolsCatalogByIdRequestConfig(id = id, curateReq = curateReq)
 
-        return request<CloudCurateReq, CloudMCPListing>(
+        return request<CurateReq, MCPListing>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1ToolsCatalogId
+     * To obtain the request config of the operation patchV1ToolsCatalogById
      *
      * @param id ID is the listing to curate, from the path.
-     * @param cloudCurateReq 
+     * @param curateReq 
      * @return RequestConfig
      */
-    fun cloudPatchV1ToolsCatalogIdRequestConfig(id: kotlin.String, cloudCurateReq: CloudCurateReq) : RequestConfig<CloudCurateReq> {
-        val localVariableBody = cloudCurateReq
+    fun patchV1ToolsCatalogByIdRequestConfig(id: kotlin.String, curateReq: CurateReq) : RequestConfig<CurateReq> {
+        val localVariableBody = curateReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -454,17 +454,17 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/tools/call
-     * CallTool runs one of the caller&#39;s activated tools and answers with its output.
-     * CallTool runs one of the caller&#39;s activated tools and answers with its output.  This is the door onto the tool plane&#39;s DYNAMIC half — the half no build-time catalogue can hold, because it is per-tenant: an org&#39;s connected connector actions, its authored skills, its agents and functions, and the tools of every external MCP server it registered. A tool&#39;s existence, its price and its activation are all rows, not code, so they cannot be known until the caller is.  One policy, the registry&#39;s: resolve by precedence, refuse an unactivated tool 403, settle a priced one through the x402 seam or fail closed 402, then dispatch to the winning source bound to the caller&#39;s own (org, project). One metered unit, one audit record. A caller can only ever dispatch its own tools.  Discovery is GET /v1/tools — ?activated&#x3D;true for the callable set.
-     * @param cloudToolCall 
-     * @return CloudToolResult
+     * Runs one of the caller&#39;s activated tools and answers with its output.
+     * Runs one of the caller&#39;s activated tools and answers with its output.  This is the door onto the tool plane&#39;s DYNAMIC half — the half no build-time catalogue can hold, because it is per-tenant: an org&#39;s connected connector actions, its authored skills, its agents and functions, and the tools of every external MCP server it registered. A tool&#39;s existence, its price and its activation are all rows, not code, so they cannot be known until the caller is.  One policy, the registry&#39;s: resolve by precedence, refuse an unactivated tool 403, settle a priced one through the x402 seam or fail closed 402, then dispatch to the winning source bound to the caller&#39;s own (org, project). One metered unit, one audit record. A caller can only ever dispatch its own tools.  Discovery is GET /v1/tools — ?activated&#x3D;true for the callable set.
+     * @param toolCall 
+     * @return ToolResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -473,11 +473,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ToolsCall(cloudToolCall: CloudToolCall) : CloudToolResult {
-        val localVarResponse = cloudPostV1ToolsCallWithHttpInfo(cloudToolCall = cloudToolCall)
+    fun postV1ToolsCall(toolCall: ToolCall) : ToolResult {
+        val localVarResponse = postV1ToolsCallWithHttpInfo(toolCall = toolCall)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudToolResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ToolResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -493,31 +493,31 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/tools/call
-     * CallTool runs one of the caller&#39;s activated tools and answers with its output.
-     * CallTool runs one of the caller&#39;s activated tools and answers with its output.  This is the door onto the tool plane&#39;s DYNAMIC half — the half no build-time catalogue can hold, because it is per-tenant: an org&#39;s connected connector actions, its authored skills, its agents and functions, and the tools of every external MCP server it registered. A tool&#39;s existence, its price and its activation are all rows, not code, so they cannot be known until the caller is.  One policy, the registry&#39;s: resolve by precedence, refuse an unactivated tool 403, settle a priced one through the x402 seam or fail closed 402, then dispatch to the winning source bound to the caller&#39;s own (org, project). One metered unit, one audit record. A caller can only ever dispatch its own tools.  Discovery is GET /v1/tools — ?activated&#x3D;true for the callable set.
-     * @param cloudToolCall 
-     * @return ApiResponse<CloudToolResult?>
+     * Runs one of the caller&#39;s activated tools and answers with its output.
+     * Runs one of the caller&#39;s activated tools and answers with its output.  This is the door onto the tool plane&#39;s DYNAMIC half — the half no build-time catalogue can hold, because it is per-tenant: an org&#39;s connected connector actions, its authored skills, its agents and functions, and the tools of every external MCP server it registered. A tool&#39;s existence, its price and its activation are all rows, not code, so they cannot be known until the caller is.  One policy, the registry&#39;s: resolve by precedence, refuse an unactivated tool 403, settle a priced one through the x402 seam or fail closed 402, then dispatch to the winning source bound to the caller&#39;s own (org, project). One metered unit, one audit record. A caller can only ever dispatch its own tools.  Discovery is GET /v1/tools — ?activated&#x3D;true for the callable set.
+     * @param toolCall 
+     * @return ApiResponse<ToolResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ToolsCallWithHttpInfo(cloudToolCall: CloudToolCall) : ApiResponse<CloudToolResult?> {
-        val localVariableConfig = cloudPostV1ToolsCallRequestConfig(cloudToolCall = cloudToolCall)
+    fun postV1ToolsCallWithHttpInfo(toolCall: ToolCall) : ApiResponse<ToolResult?> {
+        val localVariableConfig = postV1ToolsCallRequestConfig(toolCall = toolCall)
 
-        return request<CloudToolCall, CloudToolResult>(
+        return request<ToolCall, ToolResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ToolsCall
+     * To obtain the request config of the operation postV1ToolsCall
      *
-     * @param cloudToolCall 
+     * @param toolCall 
      * @return RequestConfig
      */
-    fun cloudPostV1ToolsCallRequestConfig(cloudToolCall: CloudToolCall) : RequestConfig<CloudToolCall> {
-        val localVariableBody = cloudToolCall
+    fun postV1ToolsCallRequestConfig(toolCall: ToolCall) : RequestConfig<ToolCall> {
+        val localVariableBody = toolCall
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -528,16 +528,16 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/call",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/tools/catalog/sync
-     * SyncCatalog pulls the public MCP registry into our canonical copy and reports what changed.
-     * SyncCatalog pulls the public MCP registry into our canonical copy and reports what changed. SuperAdmin only; every other caller is refused.  It is IDEMPOTENT: a listing is keyed by the publisher&#39;s own reverse-DNS name, so a second pass over an unchanged registry rewrites the same rows and reports added&#x3D;0, updated&#x3D;0. It never deletes — a listing that vanishes upstream may be one an org has already enabled, and dropping its description would not drop its server. And it never touches CURATION: hidden, featured, an admin-set official and a logo survive every sync, because the write does not name those columns.
-     * @return CloudMcpCatalogSync
+     * Pulls the public MCP registry into our canonical copy and reports what changed.
+     * Pulls the public MCP registry into our canonical copy and reports what changed. SuperAdmin only; every other caller is refused.  It is IDEMPOTENT: a listing is keyed by the publisher&#39;s own reverse-DNS name, so a second pass over an unchanged registry rewrites the same rows and reports added&#x3D;0, updated&#x3D;0. It never deletes — a listing that vanishes upstream may be one an org has already enabled, and dropping its description would not drop its server. And it never touches CURATION: hidden, featured, an admin-set official and a logo survive every sync, because the write does not name those columns.
+     * @return McpCatalogSync
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -546,11 +546,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ToolsCatalogSync() : CloudMcpCatalogSync {
-        val localVarResponse = cloudPostV1ToolsCatalogSyncWithHttpInfo()
+    fun postV1ToolsCatalogSync() : McpCatalogSync {
+        val localVarResponse = postV1ToolsCatalogSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMcpCatalogSync
+            ResponseType.Success -> (localVarResponse as Success<*>).data as McpCatalogSync
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -566,28 +566,28 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/tools/catalog/sync
-     * SyncCatalog pulls the public MCP registry into our canonical copy and reports what changed.
-     * SyncCatalog pulls the public MCP registry into our canonical copy and reports what changed. SuperAdmin only; every other caller is refused.  It is IDEMPOTENT: a listing is keyed by the publisher&#39;s own reverse-DNS name, so a second pass over an unchanged registry rewrites the same rows and reports added&#x3D;0, updated&#x3D;0. It never deletes — a listing that vanishes upstream may be one an org has already enabled, and dropping its description would not drop its server. And it never touches CURATION: hidden, featured, an admin-set official and a logo survive every sync, because the write does not name those columns.
-     * @return ApiResponse<CloudMcpCatalogSync?>
+     * Pulls the public MCP registry into our canonical copy and reports what changed.
+     * Pulls the public MCP registry into our canonical copy and reports what changed. SuperAdmin only; every other caller is refused.  It is IDEMPOTENT: a listing is keyed by the publisher&#39;s own reverse-DNS name, so a second pass over an unchanged registry rewrites the same rows and reports added&#x3D;0, updated&#x3D;0. It never deletes — a listing that vanishes upstream may be one an org has already enabled, and dropping its description would not drop its server. And it never touches CURATION: hidden, featured, an admin-set official and a logo survive every sync, because the write does not name those columns.
+     * @return ApiResponse<McpCatalogSync?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ToolsCatalogSyncWithHttpInfo() : ApiResponse<CloudMcpCatalogSync?> {
-        val localVariableConfig = cloudPostV1ToolsCatalogSyncRequestConfig()
+    fun postV1ToolsCatalogSyncWithHttpInfo() : ApiResponse<McpCatalogSync?> {
+        val localVariableConfig = postV1ToolsCatalogSyncRequestConfig()
 
-        return request<Unit, CloudMcpCatalogSync>(
+        return request<Unit, McpCatalogSync>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ToolsCatalogSync
+     * To obtain the request config of the operation postV1ToolsCatalogSync
      *
      * @return RequestConfig
      */
-    fun cloudPostV1ToolsCatalogSyncRequestConfig() : RequestConfig<Unit> {
+    fun postV1ToolsCatalogSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -598,17 +598,17 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/catalog/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/tools/activation
-     * PutActivation switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set.
-     * PutActivation switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set. It is the ONE write path that turns skills, plugins and connectors into callable tools — an unactivated tool is listed by discovery but refused 403 at dispatch. Activate is applied before Deactivate, so a name in both lists ends up off. More than 256 toggles in one request is refused 413.
-     * @param cloudActivationReq 
-     * @return CloudActivationSet
+     * Switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set.
+     * Switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set. It is the ONE write path that turns skills, plugins and connectors into callable tools — an unactivated tool is listed by discovery but refused 403 at dispatch. Activate is applied before Deactivate, so a name in both lists ends up off. More than 256 toggles in one request is refused 413.
+     * @param activationReq 
+     * @return ActivationSet
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -617,11 +617,11 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1ToolsActivation(cloudActivationReq: CloudActivationReq) : CloudActivationSet {
-        val localVarResponse = cloudPutV1ToolsActivationWithHttpInfo(cloudActivationReq = cloudActivationReq)
+    fun putV1ToolsActivation(activationReq: ActivationReq) : ActivationSet {
+        val localVarResponse = putV1ToolsActivationWithHttpInfo(activationReq = activationReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActivationSet
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActivationSet
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -637,31 +637,31 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/tools/activation
-     * PutActivation switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set.
-     * PutActivation switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set. It is the ONE write path that turns skills, plugins and connectors into callable tools — an unactivated tool is listed by discovery but refused 403 at dispatch. Activate is applied before Deactivate, so a name in both lists ends up off. More than 256 toggles in one request is refused 413.
-     * @param cloudActivationReq 
-     * @return ApiResponse<CloudActivationSet?>
+     * Switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set.
+     * Switches tools on and off for the caller&#39;s org and project, and answers with the resulting activated set. It is the ONE write path that turns skills, plugins and connectors into callable tools — an unactivated tool is listed by discovery but refused 403 at dispatch. Activate is applied before Deactivate, so a name in both lists ends up off. More than 256 toggles in one request is refused 413.
+     * @param activationReq 
+     * @return ApiResponse<ActivationSet?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1ToolsActivationWithHttpInfo(cloudActivationReq: CloudActivationReq) : ApiResponse<CloudActivationSet?> {
-        val localVariableConfig = cloudPutV1ToolsActivationRequestConfig(cloudActivationReq = cloudActivationReq)
+    fun putV1ToolsActivationWithHttpInfo(activationReq: ActivationReq) : ApiResponse<ActivationSet?> {
+        val localVariableConfig = putV1ToolsActivationRequestConfig(activationReq = activationReq)
 
-        return request<CloudActivationReq, CloudActivationSet>(
+        return request<ActivationReq, ActivationSet>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1ToolsActivation
+     * To obtain the request config of the operation putV1ToolsActivation
      *
-     * @param cloudActivationReq 
+     * @param activationReq 
      * @return RequestConfig
      */
-    fun cloudPutV1ToolsActivationRequestConfig(cloudActivationReq: CloudActivationReq) : RequestConfig<CloudActivationReq> {
-        val localVariableBody = cloudActivationReq
+    fun putV1ToolsActivationRequestConfig(activationReq: ActivationReq) : RequestConfig<ActivationReq> {
+        val localVariableBody = activationReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -672,7 +672,7 @@ class ToolsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/tools/activation",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -15,104 +15,81 @@
 
 package ai.hanzo.cloud.model
 
+import ai.hanzo.cloud.model.ProjectsUploadGrant
 
 import com.google.gson.annotations.SerializedName
 
 /**
- * One deployment of a project — a versioned deploy record.
+ * 
  *
- * @param id 
- * @param projectId 
- * @param version Monotonic per project, 1-based.
- * @param status Deployment status.
- * @param source How the artifact was produced.
- * @param files 
+ * @param bucket 
  * @param bytes 
- * @param createdAt 
- * @param updatedAt 
  * @param commit 
- * @param liveUrl Canonical live URL, https://<slug>.<apex>.
- * @param bucket S3-origin bucket.
- * @param prefix S3-origin key prefix the site is served from (<org>/<slug>).
+ * @param createdAt 
+ * @param files 
+ * @param id 
+ * @param liveUrl 
  * @param message 
+ * @param prefix 
+ * @param projectId 
+ * @param source 
+ * @param status 
+ * @param updatedAt 
+ * @param upload Upload is the prefix-scoped, short-lived S3 write grant handed to CI with a queued git deployment, so it needs no bucket credential (grant.go). Present ONLY on the 202 that creates the deployment — it is never stored and never replayed on a later read, so a grant cannot outlive the build it was minted for by being fetched again.
+ * @param version 
  */
 
 
 data class ProjectsDeployment (
 
-    @SerializedName("id")
-    val id: kotlin.String,
-
-    @SerializedName("projectId")
-    val projectId: kotlin.String,
-
-    /* Monotonic per project, 1-based. */
-    @SerializedName("version")
-    val version: kotlin.Int,
-
-    /* Deployment status. */
-    @SerializedName("status")
-    val status: ProjectsDeployment.Status,
-
-    /* How the artifact was produced. */
-    @SerializedName("source")
-    val source: ProjectsDeployment.Source,
-
-    @SerializedName("files")
-    val files: kotlin.Int,
+    @SerializedName("bucket")
+    val bucket: kotlin.String? = null,
 
     @SerializedName("bytes")
-    val bytes: kotlin.Long,
-
-    @SerializedName("createdAt")
-    val createdAt: kotlin.Long,
-
-    @SerializedName("updatedAt")
-    val updatedAt: kotlin.Long,
+    val bytes: kotlin.Int? = null,
 
     @SerializedName("commit")
     val commit: kotlin.String? = null,
 
-    /* Canonical live URL, https://<slug>.<apex>. */
+    @SerializedName("createdAt")
+    val createdAt: kotlin.Int? = null,
+
+    @SerializedName("files")
+    val files: kotlin.Int? = null,
+
+    @SerializedName("id")
+    val id: kotlin.String? = null,
+
     @SerializedName("liveUrl")
     val liveUrl: kotlin.String? = null,
 
-    /* S3-origin bucket. */
-    @SerializedName("bucket")
-    val bucket: kotlin.String? = null,
+    @SerializedName("message")
+    val message: kotlin.String? = null,
 
-    /* S3-origin key prefix the site is served from (<org>/<slug>). */
     @SerializedName("prefix")
     val prefix: kotlin.String? = null,
 
-    @SerializedName("message")
-    val message: kotlin.String? = null
+    @SerializedName("projectId")
+    val projectId: kotlin.String? = null,
+
+    @SerializedName("source")
+    val source: kotlin.String? = null,
+
+    @SerializedName("status")
+    val status: kotlin.String? = null,
+
+    @SerializedName("updatedAt")
+    val updatedAt: kotlin.Int? = null,
+
+    /* Upload is the prefix-scoped, short-lived S3 write grant handed to CI with a queued git deployment, so it needs no bucket credential (grant.go). Present ONLY on the 202 that creates the deployment — it is never stored and never replayed on a later read, so a grant cannot outlive the build it was minted for by being fetched again. */
+    @SerializedName("upload")
+    val upload: ProjectsUploadGrant? = null,
+
+    @SerializedName("version")
+    val version: kotlin.Int? = null
 
 ) {
 
-    /**
-     * Deployment status.
-     *
-     * Values: queued,building,uploading,live,error
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "queued") queued("queued"),
-        @SerializedName(value = "building") building("building"),
-        @SerializedName(value = "uploading") uploading("uploading"),
-        @SerializedName(value = "live") live("live"),
-        @SerializedName(value = "error") error("error");
-    }
-    /**
-     * How the artifact was produced.
-     *
-     * Values: upload,generated,deploy,git
-     */
-    enum class Source(val value: kotlin.String) {
-        @SerializedName(value = "upload") upload("upload"),
-        @SerializedName(value = "generated") generated("generated"),
-        @SerializedName(value = "deploy") deploy("deploy"),
-        @SerializedName(value = "git") git("git");
-    }
 
 }
 

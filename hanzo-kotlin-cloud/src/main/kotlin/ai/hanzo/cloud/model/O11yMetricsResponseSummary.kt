@@ -21,26 +21,26 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param requests 
- * @param errors 
  * @param errorRate 
+ * @param errors 
  * @param p95Ms 
+ * @param requests 
  */
 
 
 data class O11yMetricsResponseSummary (
 
-    @SerializedName("requests")
-    val requests: kotlin.Long? = null,
-
-    @SerializedName("errors")
-    val errors: kotlin.Long? = null,
-
     @SerializedName("errorRate")
     val errorRate: java.math.BigDecimal? = null,
 
+    @SerializedName("errors")
+    val errors: kotlin.Int? = null,
+
     @SerializedName("p95Ms")
-    val p95Ms: java.math.BigDecimal? = null
+    val p95Ms: java.math.BigDecimal? = null,
+
+    @SerializedName("requests")
+    val requests: kotlin.Int? = null
 
 ) {
 

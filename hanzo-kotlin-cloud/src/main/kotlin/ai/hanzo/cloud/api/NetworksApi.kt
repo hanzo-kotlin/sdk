@@ -19,8 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudNetworkList
-import ai.hanzo.cloud.model.CloudNetworkView
+import ai.hanzo.cloud.model.NetworkList
+import ai.hanzo.cloud.model.NetworkView
+import ai.hanzo.cloud.model.RouterList
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,7 +51,7 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/networks
      * Returns the caller&#39;s org overlay network on the Zero Trust fabric.
      * Returns the caller&#39;s org overlay network on the Zero Trust fabric.  The org has at most ONE overlay, projected from the edge-routers tagged with its \&quot;org-&lt;org&gt;\&quot; role attribute: nodes is the real router count and status is \&quot;connected\&quot; once at least one router has dialed home, \&quot;provisioning\&quot; while none has. An org with no routers gets an empty list, never a fabricated network.  The read degrades rather than erroring: a deployment with no ZT credential, and a controller that cannot be reached, both answer 200 with an empty list so the console&#39;s Networks page renders a clean empty state instead of an error.
-     * @return CloudNetworkList
+     * @return NetworkList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -59,11 +60,11 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Networks() : CloudNetworkList {
-        val localVarResponse = cloudGetV1NetworksWithHttpInfo()
+    fun getV1Networks() : NetworkList {
+        val localVarResponse = getV1NetworksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNetworkList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NetworkList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,26 +82,26 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/networks
      * Returns the caller&#39;s org overlay network on the Zero Trust fabric.
      * Returns the caller&#39;s org overlay network on the Zero Trust fabric.  The org has at most ONE overlay, projected from the edge-routers tagged with its \&quot;org-&lt;org&gt;\&quot; role attribute: nodes is the real router count and status is \&quot;connected\&quot; once at least one router has dialed home, \&quot;provisioning\&quot; while none has. An org with no routers gets an empty list, never a fabricated network.  The read degrades rather than erroring: a deployment with no ZT credential, and a controller that cannot be reached, both answer 200 with an empty list so the console&#39;s Networks page renders a clean empty state instead of an error.
-     * @return ApiResponse<CloudNetworkList?>
+     * @return ApiResponse<NetworkList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1NetworksWithHttpInfo() : ApiResponse<CloudNetworkList?> {
-        val localVariableConfig = cloudGetV1NetworksRequestConfig()
+    fun getV1NetworksWithHttpInfo() : ApiResponse<NetworkList?> {
+        val localVariableConfig = getV1NetworksRequestConfig()
 
-        return request<Unit, CloudNetworkList>(
+        return request<Unit, NetworkList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Networks
+     * To obtain the request config of the operation getV1Networks
      *
      * @return RequestConfig
      */
-    fun cloudGetV1NetworksRequestConfig() : RequestConfig<Unit> {
+    fun getV1NetworksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -111,7 +112,7 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/networks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -121,7 +122,7 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns one overlay network by id, scoped to the caller&#39;s org.
      * Returns one overlay network by id, scoped to the caller&#39;s org.  The org has exactly one overlay network and its id is derived from the org, so any other id — another tenant&#39;s, or one that does not exist — is 404 rather than a peek across the tenant boundary. An org whose network exists but has no edge-routers is 404 too, for the same reason the list is empty: there is no overlay until something is on it.
      * @param id ID is the network id from the path. The URL is the addressing authority, so it binds from there whatever else the request carries.
-     * @return CloudNetworkView
+     * @return NetworkView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -130,11 +131,11 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1NetworksId(id: kotlin.String) : CloudNetworkView {
-        val localVarResponse = cloudGetV1NetworksIdWithHttpInfo(id = id)
+    fun getV1NetworksById(id: kotlin.String) : NetworkView {
+        val localVarResponse = getV1NetworksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNetworkView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NetworkView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -153,27 +154,27 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns one overlay network by id, scoped to the caller&#39;s org.
      * Returns one overlay network by id, scoped to the caller&#39;s org.  The org has exactly one overlay network and its id is derived from the org, so any other id — another tenant&#39;s, or one that does not exist — is 404 rather than a peek across the tenant boundary. An org whose network exists but has no edge-routers is 404 too, for the same reason the list is empty: there is no overlay until something is on it.
      * @param id ID is the network id from the path. The URL is the addressing authority, so it binds from there whatever else the request carries.
-     * @return ApiResponse<CloudNetworkView?>
+     * @return ApiResponse<NetworkView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1NetworksIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudNetworkView?> {
-        val localVariableConfig = cloudGetV1NetworksIdRequestConfig(id = id)
+    fun getV1NetworksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<NetworkView?> {
+        val localVariableConfig = getV1NetworksByIdRequestConfig(id = id)
 
-        return request<Unit, CloudNetworkView>(
+        return request<Unit, NetworkView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1NetworksId
+     * To obtain the request config of the operation getV1NetworksById
      *
      * @param id ID is the network id from the path. The URL is the addressing authority, so it binds from there whatever else the request carries.
      * @return RequestConfig
      */
-    fun cloudGetV1NetworksIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1NetworksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -184,7 +185,77 @@ class NetworksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/networks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/networks/routers
+     * Returns the Zero Trust routers the caller&#39;s org owns.
+     * Returns the Zero Trust routers the caller&#39;s org owns.  One row per real ZT edge-router tagged with the org&#39;s \&quot;org-&lt;org&gt;\&quot; role attribute, carrying the controller&#39;s own health signal: \&quot;online\&quot; when connected, \&quot;disabled\&quot; when administratively disabled, \&quot;offline\&quot; otherwise. region is filled only from a \&quot;region-&lt;slug&gt;\&quot; role attribute and omitted when the router carries none, so the column renders \&quot;—\&quot; rather than a guess.  The read degrades rather than erroring: a deployment with no ZT credential, and a controller that cannot be reached, both answer 200 with an empty list.
+     * @return RouterList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1NetworksRouters() : RouterList {
+        val localVarResponse = getV1NetworksRoutersWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RouterList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/networks/routers
+     * Returns the Zero Trust routers the caller&#39;s org owns.
+     * Returns the Zero Trust routers the caller&#39;s org owns.  One row per real ZT edge-router tagged with the org&#39;s \&quot;org-&lt;org&gt;\&quot; role attribute, carrying the controller&#39;s own health signal: \&quot;online\&quot; when connected, \&quot;disabled\&quot; when administratively disabled, \&quot;offline\&quot; otherwise. region is filled only from a \&quot;region-&lt;slug&gt;\&quot; role attribute and omitted when the router carries none, so the column renders \&quot;—\&quot; rather than a guess.  The read degrades rather than erroring: a deployment with no ZT credential, and a controller that cannot be reached, both answer 200 with an empty list.
+     * @return ApiResponse<RouterList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1NetworksRoutersWithHttpInfo() : ApiResponse<RouterList?> {
+        val localVariableConfig = getV1NetworksRoutersRequestConfig()
+
+        return request<Unit, RouterList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1NetworksRouters
+     *
+     * @return RequestConfig
+     */
+    fun getV1NetworksRoutersRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/networks/routers",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

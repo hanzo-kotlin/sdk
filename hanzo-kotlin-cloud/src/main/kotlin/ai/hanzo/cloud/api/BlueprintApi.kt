@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudBlueprintHealth
-import ai.hanzo.cloud.model.CloudBlueprintIndex
+import ai.hanzo.cloud.model.BlueprintHealth
+import ai.hanzo.cloud.model.BlueprintIndex
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,7 +50,7 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/blueprint
      * Returns every deployable blueprint with its service count and estimated monthly compute cost.
      * Returns every deployable blueprint with its service count and estimated monthly compute cost.  It is the lightweight index the console renders as a template gallery before drilling into one stack&#39;s bill of images — GET /v1/blueprint/sbom?template&#x3D;&lt;id&gt; is the detail view. The cost is the same figure the deploy path meters the deploying org on and the 20% author royalty is taken from, priced from the active rate card (GET /v1/blueprint/health echoes that card).
-     * @return CloudBlueprintIndex
+     * @return BlueprintIndex
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -59,11 +59,11 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Blueprint() : CloudBlueprintIndex {
-        val localVarResponse = cloudGetV1BlueprintWithHttpInfo()
+    fun getV1Blueprint() : BlueprintIndex {
+        val localVarResponse = getV1BlueprintWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBlueprintIndex
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintIndex
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,26 +81,26 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/blueprint
      * Returns every deployable blueprint with its service count and estimated monthly compute cost.
      * Returns every deployable blueprint with its service count and estimated monthly compute cost.  It is the lightweight index the console renders as a template gallery before drilling into one stack&#39;s bill of images — GET /v1/blueprint/sbom?template&#x3D;&lt;id&gt; is the detail view. The cost is the same figure the deploy path meters the deploying org on and the 20% author royalty is taken from, priced from the active rate card (GET /v1/blueprint/health echoes that card).
-     * @return ApiResponse<CloudBlueprintIndex?>
+     * @return ApiResponse<BlueprintIndex?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BlueprintWithHttpInfo() : ApiResponse<CloudBlueprintIndex?> {
-        val localVariableConfig = cloudGetV1BlueprintRequestConfig()
+    fun getV1BlueprintWithHttpInfo() : ApiResponse<BlueprintIndex?> {
+        val localVariableConfig = getV1BlueprintRequestConfig()
 
-        return request<Unit, CloudBlueprintIndex>(
+        return request<Unit, BlueprintIndex>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Blueprint
+     * To obtain the request config of the operation getV1Blueprint
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BlueprintRequestConfig() : RequestConfig<Unit> {
+    fun getV1BlueprintRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -111,7 +111,7 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/blueprint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -120,7 +120,7 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/blueprint/health
      * Reports blueprint liveness and echoes the compute rate card in force.
      * Reports blueprint liveness and echoes the compute rate card in force.  The rate card is the one the estimator actually applies after the operator env overlay, so an operator can confirm a tuned knob took effect rather than inferring it from a price. Not JWT-gated — a liveness probe must be reachable — and it always answers 200 while the subsystem is mounted.
-     * @return CloudBlueprintHealth
+     * @return BlueprintHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -129,11 +129,11 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BlueprintHealth() : CloudBlueprintHealth {
-        val localVarResponse = cloudGetV1BlueprintHealthWithHttpInfo()
+    fun getV1BlueprintHealth() : BlueprintHealth {
+        val localVarResponse = getV1BlueprintHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBlueprintHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -151,26 +151,26 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/blueprint/health
      * Reports blueprint liveness and echoes the compute rate card in force.
      * Reports blueprint liveness and echoes the compute rate card in force.  The rate card is the one the estimator actually applies after the operator env overlay, so an operator can confirm a tuned knob took effect rather than inferring it from a price. Not JWT-gated — a liveness probe must be reachable — and it always answers 200 while the subsystem is mounted.
-     * @return ApiResponse<CloudBlueprintHealth?>
+     * @return ApiResponse<BlueprintHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BlueprintHealthWithHttpInfo() : ApiResponse<CloudBlueprintHealth?> {
-        val localVariableConfig = cloudGetV1BlueprintHealthRequestConfig()
+    fun getV1BlueprintHealthWithHttpInfo() : ApiResponse<BlueprintHealth?> {
+        val localVariableConfig = getV1BlueprintHealthRequestConfig()
 
-        return request<Unit, CloudBlueprintHealth>(
+        return request<Unit, BlueprintHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BlueprintHealth
+     * To obtain the request config of the operation getV1BlueprintHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BlueprintHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1BlueprintHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -181,15 +181,15 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/blueprint/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/blueprint/sbom
-     * 
-     * 
+     * A blueprint&#39;s bill of images and what running it costs
+     * Answers a blueprint&#39;s SBOM — the container images its compose stack runs, each with the CPU/memory footprint that was applied to it — together with the compute cost that footprint prices out to on the active rate card.  ONE address, TWO shapes at 200: &#x60;?template&#x3D;&lt;id&gt;&#x60; returns that blueprint&#39;s Estimate alone (404 on an id no embedded blueprint carries), and no &#x60;template&#x60; returns &#x60;{data:[Estimate]}&#x60; for every blueprint — the batch the console&#39;s template gallery reads in one round-trip.  The blueprints are reference content embedded in the binary and validated at mount, so this read is the same for every caller and is scoped to no tenant. The per-hour figure it returns is the one the deploy path meters the deploying org on and the 20% author royalty is taken from; GET /v1/blueprint/health echoes the rate card it was priced from.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -198,8 +198,8 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BlueprintSbom() : Unit {
-        val localVarResponse = cloudGetV1BlueprintSbomWithHttpInfo()
+    fun getV1BlueprintSbom() : Unit {
+        val localVarResponse = getV1BlueprintSbomWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -218,15 +218,15 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/blueprint/sbom
-     * 
-     * 
+     * A blueprint&#39;s bill of images and what running it costs
+     * Answers a blueprint&#39;s SBOM — the container images its compose stack runs, each with the CPU/memory footprint that was applied to it — together with the compute cost that footprint prices out to on the active rate card.  ONE address, TWO shapes at 200: &#x60;?template&#x3D;&lt;id&gt;&#x60; returns that blueprint&#39;s Estimate alone (404 on an id no embedded blueprint carries), and no &#x60;template&#x60; returns &#x60;{data:[Estimate]}&#x60; for every blueprint — the batch the console&#39;s template gallery reads in one round-trip.  The blueprints are reference content embedded in the binary and validated at mount, so this read is the same for every caller and is scoped to no tenant. The per-hour figure it returns is the one the deploy path meters the deploying org on and the 20% author royalty is taken from; GET /v1/blueprint/health echoes the rate card it was priced from.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BlueprintSbomWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BlueprintSbomRequestConfig()
+    fun getV1BlueprintSbomWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1BlueprintSbomRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -234,11 +234,11 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BlueprintSbom
+     * To obtain the request config of the operation getV1BlueprintSbom
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BlueprintSbomRequestConfig() : RequestConfig<Unit> {
+    fun getV1BlueprintSbomRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -248,7 +248,7 @@ class BlueprintApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/blueprint/sbom",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

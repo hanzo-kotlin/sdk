@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCrawlRequest
-import ai.hanzo.cloud.model.CloudCrawlResult
+import ai.hanzo.cloud.model.CrawlRequest
+import ai.hanzo.cloud.model.CrawlResult
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,10 +48,10 @@ class CrawlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/crawl
-     * 
-     * 
-     * @param cloudCrawlRequest  (optional)
-     * @return CloudCrawlResult
+     * Fetch one URL and read it back as markdown
+     * Reads one URL and answers with the page as markdown.  It fetches a single URL from inside the cluster and answers with the address it actually landed on, the document&#39;s title, its content rendered to MARKDOWN, and whatever the page said about itself. One URL per call: batching would make the answer a partial-failure envelope every caller then has to unpack.  A PAGE THAT COULD NOT BE FETCHED IS A NORMAL ANSWER, not a fault. An unreachable host, a refused address and a content type that is not a document all answer 200 with &#x60;success:false&#x60; and the reason in &#x60;error&#x60;, because the caller sent a well-formed ask and gets a well-formed answer. Non-2xx is reserved for a caller problem — 400 with the same body when there is no url, 401 for a bad key, 503 when the surface is unconfigured — so error handling can trust the status. Check &#x60;success&#x60; before reading &#x60;data&#x60;.  Admission is either a validated principal or the shared service key, presented as X-API-Key or a Bearer; neither is refused, and an unset key fails closed rather than opening the fetcher to the private network. Pages are archived under the scope of the VERIFIED principal and NEVER a scope named in the body, so a URL already read under that scope is answered from the archive without touching the network; a service caller has no org and its pages land in the shared corpus.  The URL is caller-supplied and dialled from INSIDE the cluster, which makes this a request-forgery primitive by construction. Only http and https are accepted, and every address actually dialled must be public unicast — loopback, link-local, private and multicast are refused. The check lives in the DIALER rather than on the hostname, because resolving a name to validate it and then letting the transport resolve it again is a gap DNS rebinding walks straight through; redirects re-enter the same dialer.
+     * @param crawlRequest 
+     * @return CrawlResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ class CrawlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Crawl(cloudCrawlRequest: CloudCrawlRequest? = null) : CloudCrawlResult {
-        val localVarResponse = cloudPostV1CrawlWithHttpInfo(cloudCrawlRequest = cloudCrawlRequest)
+    fun readPage(crawlRequest: CrawlRequest) : CrawlResult {
+        val localVarResponse = readPageWithHttpInfo(crawlRequest = crawlRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCrawlResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CrawlResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,31 +80,31 @@ class CrawlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/crawl
-     * 
-     * 
-     * @param cloudCrawlRequest  (optional)
-     * @return ApiResponse<CloudCrawlResult?>
+     * Fetch one URL and read it back as markdown
+     * Reads one URL and answers with the page as markdown.  It fetches a single URL from inside the cluster and answers with the address it actually landed on, the document&#39;s title, its content rendered to MARKDOWN, and whatever the page said about itself. One URL per call: batching would make the answer a partial-failure envelope every caller then has to unpack.  A PAGE THAT COULD NOT BE FETCHED IS A NORMAL ANSWER, not a fault. An unreachable host, a refused address and a content type that is not a document all answer 200 with &#x60;success:false&#x60; and the reason in &#x60;error&#x60;, because the caller sent a well-formed ask and gets a well-formed answer. Non-2xx is reserved for a caller problem — 400 with the same body when there is no url, 401 for a bad key, 503 when the surface is unconfigured — so error handling can trust the status. Check &#x60;success&#x60; before reading &#x60;data&#x60;.  Admission is either a validated principal or the shared service key, presented as X-API-Key or a Bearer; neither is refused, and an unset key fails closed rather than opening the fetcher to the private network. Pages are archived under the scope of the VERIFIED principal and NEVER a scope named in the body, so a URL already read under that scope is answered from the archive without touching the network; a service caller has no org and its pages land in the shared corpus.  The URL is caller-supplied and dialled from INSIDE the cluster, which makes this a request-forgery primitive by construction. Only http and https are accepted, and every address actually dialled must be public unicast — loopback, link-local, private and multicast are refused. The check lives in the DIALER rather than on the hostname, because resolving a name to validate it and then letting the transport resolve it again is a gap DNS rebinding walks straight through; redirects re-enter the same dialer.
+     * @param crawlRequest 
+     * @return ApiResponse<CrawlResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CrawlWithHttpInfo(cloudCrawlRequest: CloudCrawlRequest?) : ApiResponse<CloudCrawlResult?> {
-        val localVariableConfig = cloudPostV1CrawlRequestConfig(cloudCrawlRequest = cloudCrawlRequest)
+    fun readPageWithHttpInfo(crawlRequest: CrawlRequest) : ApiResponse<CrawlResult?> {
+        val localVariableConfig = readPageRequestConfig(crawlRequest = crawlRequest)
 
-        return request<CloudCrawlRequest, CloudCrawlResult>(
+        return request<CrawlRequest, CrawlResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Crawl
+     * To obtain the request config of the operation readPage
      *
-     * @param cloudCrawlRequest  (optional)
+     * @param crawlRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1CrawlRequestConfig(cloudCrawlRequest: CloudCrawlRequest?) : RequestConfig<CloudCrawlRequest> {
-        val localVariableBody = cloudCrawlRequest
+    fun readPageRequestConfig(crawlRequest: CrawlRequest) : RequestConfig<CrawlRequest> {
+        val localVariableBody = crawlRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -115,7 +115,7 @@ class CrawlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/crawl",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

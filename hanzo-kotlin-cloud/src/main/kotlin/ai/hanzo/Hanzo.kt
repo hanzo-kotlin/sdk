@@ -6,23 +6,24 @@ import okhttp3.OkHttpClient
 /**
  * Endpoint and credentials, resolved once.
  *
- * Everything under `ai.hanzo.cloud` is generated from hanzoai/openapi `hanzo.yaml`
- * by `scripts/generate.sh`. This file is not: it is the hand-written seam that
- * turns the generated transport into an authenticated client, and it is the one
- * place in the repo that reads the environment. It lives beside the generated
- * package rather than inside it because `sdks.yaml` gives the generator
- * `src/main/kotlin/ai/hanzo/cloud` outright — a file in there would be deleted
- * by the next regeneration.
+ * Everything under `ai.hanzo.cloud` is generated from the API document
+ * hanzoai/cloud emits, by `scripts/generate.sh`. This file is not: it is the
+ * hand-written seam that turns the generated transport into an authenticated
+ * client, and it is the one place in the repo that reads the environment. It
+ * lives beside the generated package rather than inside it because `sdks.yaml`
+ * gives the generator `src/main/kotlin/ai/hanzo/cloud` outright — a file in
+ * there would be deleted by the next regeneration.
  *
- * Auth is an interceptor on a shared [OkHttpClient] rather than the generated
- * `ApiClient.accessToken`. That field is a global mutable static, so two orgs in
- * one process would race on it; and an interceptor is the only way to add
- * `X-Org-Id`, which the KV and agents routes require and which no generated
- * signature accepts.
+ * Auth is an interceptor on a shared [OkHttpClient], and it is what makes the
+ * client authenticated AT ALL: the document declares no `securitySchemes`, so
+ * the generator registers no credential and every generated call would go out
+ * bare. An interceptor is also the only way to add `X-Org-Id`, which the KV and
+ * agents routes require and which no generated signature accepts. One transport
+ * carries both, so neither can be set on one call and forgotten on the next.
  *
  * ```
  * val hanzo = Hanzo()
- * val me = hanzo.api(::AuthApi).botAuthMe()
+ * val keys = hanzo.api(::KeysApi).getV1Keys()
  * ```
  */
 class Hanzo(

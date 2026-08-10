@@ -19,23 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AnalyticsHeartbeat200Response
-import ai.hanzo.cloud.model.BotComment
-import ai.hanzo.cloud.model.BotCreateSkillCommentRequest
-import ai.hanzo.cloud.model.BotError
-import ai.hanzo.cloud.model.BotGetSkillVersionFiles200Response
-import ai.hanzo.cloud.model.BotListSkillComments200Response
-import ai.hanzo.cloud.model.BotListSkillVersions200Response
-import ai.hanzo.cloud.model.BotListSkills200Response
-import ai.hanzo.cloud.model.BotPublishSkillVersion200Response
-import ai.hanzo.cloud.model.BotPublishSkillVersionRequest
-import ai.hanzo.cloud.model.BotSkill
-import ai.hanzo.cloud.model.BotToggleSkillStar200Response
-import ai.hanzo.cloud.model.CloudAuthoredSkillList
-import ai.hanzo.cloud.model.CloudSkillDeleted
-import ai.hanzo.cloud.model.CloudSkillIn
-import ai.hanzo.cloud.model.CloudSkillWritten
-import ai.hanzo.cloud.model.CloudSourceToolList
+import ai.hanzo.cloud.model.AuthoredSkillList
+import ai.hanzo.cloud.model.SkillDeleted
+import ai.hanzo.cloud.model.SkillIn
+import ai.hanzo.cloud.model.SkillWritten
+import ai.hanzo.cloud.model.SourceToolList
 
 import com.google.gson.annotations.SerializedName
 
@@ -62,951 +50,11 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * POST /v1/bot/skills/{slug}/comments
-     * Add a comment to a skill
-     * 
-     * @param slug 
-     * @param botCreateSkillCommentRequest 
-     * @return BotComment
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botCreateSkillComment(slug: kotlin.String, botCreateSkillCommentRequest: BotCreateSkillCommentRequest) : BotComment {
-        val localVarResponse = botCreateSkillCommentWithHttpInfo(slug = slug, botCreateSkillCommentRequest = botCreateSkillCommentRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotComment
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/bot/skills/{slug}/comments
-     * Add a comment to a skill
-     * 
-     * @param slug 
-     * @param botCreateSkillCommentRequest 
-     * @return ApiResponse<BotComment?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botCreateSkillCommentWithHttpInfo(slug: kotlin.String, botCreateSkillCommentRequest: BotCreateSkillCommentRequest) : ApiResponse<BotComment?> {
-        val localVariableConfig = botCreateSkillCommentRequestConfig(slug = slug, botCreateSkillCommentRequest = botCreateSkillCommentRequest)
-
-        return request<BotCreateSkillCommentRequest, BotComment>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botCreateSkillComment
-     *
-     * @param slug 
-     * @param botCreateSkillCommentRequest 
-     * @return RequestConfig
-     */
-    fun botCreateSkillCommentRequestConfig(slug: kotlin.String, botCreateSkillCommentRequest: BotCreateSkillCommentRequest) : RequestConfig<BotCreateSkillCommentRequest> {
-        val localVariableBody = botCreateSkillCommentRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/bot/skills/{slug}/comments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/bot/skills/{slug}
-     * Soft-delete a skill (owner or admin only)
-     * 
-     * @param slug 
-     * @return AnalyticsHeartbeat200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botDeleteSkill(slug: kotlin.String) : AnalyticsHeartbeat200Response {
-        val localVarResponse = botDeleteSkillWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AnalyticsHeartbeat200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/bot/skills/{slug}
-     * Soft-delete a skill (owner or admin only)
-     * 
-     * @param slug 
-     * @return ApiResponse<AnalyticsHeartbeat200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botDeleteSkillWithHttpInfo(slug: kotlin.String) : ApiResponse<AnalyticsHeartbeat200Response?> {
-        val localVariableConfig = botDeleteSkillRequestConfig(slug = slug)
-
-        return request<Unit, AnalyticsHeartbeat200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botDeleteSkill
-     *
-     * @param slug 
-     * @return RequestConfig
-     */
-    fun botDeleteSkillRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/bot/skills/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/bot/skills/{slug}/comments/{commentId}
-     * Delete a comment (author or admin only)
-     * 
-     * @param slug 
-     * @param commentId 
-     * @return AnalyticsHeartbeat200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botDeleteSkillComment(slug: kotlin.String, commentId: java.util.UUID) : AnalyticsHeartbeat200Response {
-        val localVarResponse = botDeleteSkillCommentWithHttpInfo(slug = slug, commentId = commentId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AnalyticsHeartbeat200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/bot/skills/{slug}/comments/{commentId}
-     * Delete a comment (author or admin only)
-     * 
-     * @param slug 
-     * @param commentId 
-     * @return ApiResponse<AnalyticsHeartbeat200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botDeleteSkillCommentWithHttpInfo(slug: kotlin.String, commentId: java.util.UUID) : ApiResponse<AnalyticsHeartbeat200Response?> {
-        val localVariableConfig = botDeleteSkillCommentRequestConfig(slug = slug, commentId = commentId)
-
-        return request<Unit, AnalyticsHeartbeat200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botDeleteSkillComment
-     *
-     * @param slug 
-     * @param commentId 
-     * @return RequestConfig
-     */
-    fun botDeleteSkillCommentRequestConfig(slug: kotlin.String, commentId: java.util.UUID) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/bot/skills/{slug}/comments/{commentId}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"commentId"+"}", encodeURIComponent(commentId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}
-     * Get skill details by slug
-     * 
-     * @param slug 
-     * @return BotSkill
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botGetSkill(slug: kotlin.String) : BotSkill {
-        val localVarResponse = botGetSkillWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotSkill
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}
-     * Get skill details by slug
-     * 
-     * @param slug 
-     * @return ApiResponse<BotSkill?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botGetSkillWithHttpInfo(slug: kotlin.String) : ApiResponse<BotSkill?> {
-        val localVariableConfig = botGetSkillRequestConfig(slug = slug)
-
-        return request<Unit, BotSkill>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botGetSkill
-     *
-     * @param slug 
-     * @return RequestConfig
-     */
-    fun botGetSkillRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/skills/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/stars/me
-     * Check if current user has starred this skill
-     * 
-     * @param slug 
-     * @return BotToggleSkillStar200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botGetSkillStarStatus(slug: kotlin.String) : BotToggleSkillStar200Response {
-        val localVarResponse = botGetSkillStarStatusWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotToggleSkillStar200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/stars/me
-     * Check if current user has starred this skill
-     * 
-     * @param slug 
-     * @return ApiResponse<BotToggleSkillStar200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botGetSkillStarStatusWithHttpInfo(slug: kotlin.String) : ApiResponse<BotToggleSkillStar200Response?> {
-        val localVariableConfig = botGetSkillStarStatusRequestConfig(slug = slug)
-
-        return request<Unit, BotToggleSkillStar200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botGetSkillStarStatus
-     *
-     * @param slug 
-     * @return RequestConfig
-     */
-    fun botGetSkillStarStatusRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/skills/{slug}/stars/me".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/versions/{version}/files
-     * Get file listing for a specific version
-     * 
-     * @param slug 
-     * @param version 
-     * @return BotGetSkillVersionFiles200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botGetSkillVersionFiles(slug: kotlin.String, version: kotlin.String) : BotGetSkillVersionFiles200Response {
-        val localVarResponse = botGetSkillVersionFilesWithHttpInfo(slug = slug, version = version)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotGetSkillVersionFiles200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/versions/{version}/files
-     * Get file listing for a specific version
-     * 
-     * @param slug 
-     * @param version 
-     * @return ApiResponse<BotGetSkillVersionFiles200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botGetSkillVersionFilesWithHttpInfo(slug: kotlin.String, version: kotlin.String) : ApiResponse<BotGetSkillVersionFiles200Response?> {
-        val localVariableConfig = botGetSkillVersionFilesRequestConfig(slug = slug, version = version)
-
-        return request<Unit, BotGetSkillVersionFiles200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botGetSkillVersionFiles
-     *
-     * @param slug 
-     * @param version 
-     * @return RequestConfig
-     */
-    fun botGetSkillVersionFilesRequestConfig(slug: kotlin.String, version: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/skills/{slug}/versions/{version}/files".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())).replace("{"+"version"+"}", encodeURIComponent(version.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/comments
-     * List comments on a skill
-     * 
-     * @param slug 
-     * @return BotListSkillComments200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botListSkillComments(slug: kotlin.String) : BotListSkillComments200Response {
-        val localVarResponse = botListSkillCommentsWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotListSkillComments200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/comments
-     * List comments on a skill
-     * 
-     * @param slug 
-     * @return ApiResponse<BotListSkillComments200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botListSkillCommentsWithHttpInfo(slug: kotlin.String) : ApiResponse<BotListSkillComments200Response?> {
-        val localVariableConfig = botListSkillCommentsRequestConfig(slug = slug)
-
-        return request<Unit, BotListSkillComments200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botListSkillComments
-     *
-     * @param slug 
-     * @return RequestConfig
-     */
-    fun botListSkillCommentsRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/skills/{slug}/comments".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/versions
-     * List versions of a skill
-     * 
-     * @param slug 
-     * @param limit  (optional, default to 50)
-     * @return BotListSkillVersions200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botListSkillVersions(slug: kotlin.String, limit: kotlin.Int? = 50) : BotListSkillVersions200Response {
-        val localVarResponse = botListSkillVersionsWithHttpInfo(slug = slug, limit = limit)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotListSkillVersions200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/skills/{slug}/versions
-     * List versions of a skill
-     * 
-     * @param slug 
-     * @param limit  (optional, default to 50)
-     * @return ApiResponse<BotListSkillVersions200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botListSkillVersionsWithHttpInfo(slug: kotlin.String, limit: kotlin.Int?) : ApiResponse<BotListSkillVersions200Response?> {
-        val localVariableConfig = botListSkillVersionsRequestConfig(slug = slug, limit = limit)
-
-        return request<Unit, BotListSkillVersions200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botListSkillVersions
-     *
-     * @param slug 
-     * @param limit  (optional, default to 50)
-     * @return RequestConfig
-     */
-    fun botListSkillVersionsRequestConfig(slug: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/skills/{slug}/versions".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter sort
-     */
-     enum class SortBotListSkills(val value: kotlin.String) {
-         @SerializedName(value = "updated") updated("updated"),
-         @SerializedName(value = "downloads") downloads("downloads"),
-         @SerializedName(value = "stars") stars("stars"),
-         @SerializedName(value = "created") created("created");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/bot/skills
-     * List published skills (paginated)
-     * 
-     * @param sort  (optional, default to updated)
-     * @param limit  (optional, default to 50)
-     * @param cursor Cursor for pagination (updatedAt ISO timestamp) (optional)
-     * @param batch Filter by batch grouping key (optional)
-     * @return BotListSkills200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botListSkills(sort: SortBotListSkills? = SortBotListSkills.updated, limit: kotlin.Int? = 50, cursor: java.time.OffsetDateTime? = null, batch: kotlin.String? = null) : BotListSkills200Response {
-        val localVarResponse = botListSkillsWithHttpInfo(sort = sort, limit = limit, cursor = cursor, batch = batch)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotListSkills200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/skills
-     * List published skills (paginated)
-     * 
-     * @param sort  (optional, default to updated)
-     * @param limit  (optional, default to 50)
-     * @param cursor Cursor for pagination (updatedAt ISO timestamp) (optional)
-     * @param batch Filter by batch grouping key (optional)
-     * @return ApiResponse<BotListSkills200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botListSkillsWithHttpInfo(sort: SortBotListSkills?, limit: kotlin.Int?, cursor: java.time.OffsetDateTime?, batch: kotlin.String?) : ApiResponse<BotListSkills200Response?> {
-        val localVariableConfig = botListSkillsRequestConfig(sort = sort, limit = limit, cursor = cursor, batch = batch)
-
-        return request<Unit, BotListSkills200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botListSkills
-     *
-     * @param sort  (optional, default to updated)
-     * @param limit  (optional, default to 50)
-     * @param cursor Cursor for pagination (updatedAt ISO timestamp) (optional)
-     * @param batch Filter by batch grouping key (optional)
-     * @return RequestConfig
-     */
-    fun botListSkillsRequestConfig(sort: SortBotListSkills?, limit: kotlin.Int?, cursor: java.time.OffsetDateTime?, batch: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (sort != null) {
-                    put("sort", listOf(sort.value))
-                }
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-                if (cursor != null) {
-                    put("cursor", listOf(parseDateToQueryString(cursor)))
-                }
-                if (batch != null) {
-                    put("batch", listOf(batch.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/skills",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/bot/skills/{slug}/publish
-     * Publish a new version of a skill (creates skill if new)
-     * 
-     * @param slug 
-     * @param botPublishSkillVersionRequest 
-     * @return BotPublishSkillVersion200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botPublishSkillVersion(slug: kotlin.String, botPublishSkillVersionRequest: BotPublishSkillVersionRequest) : BotPublishSkillVersion200Response {
-        val localVarResponse = botPublishSkillVersionWithHttpInfo(slug = slug, botPublishSkillVersionRequest = botPublishSkillVersionRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotPublishSkillVersion200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/bot/skills/{slug}/publish
-     * Publish a new version of a skill (creates skill if new)
-     * 
-     * @param slug 
-     * @param botPublishSkillVersionRequest 
-     * @return ApiResponse<BotPublishSkillVersion200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botPublishSkillVersionWithHttpInfo(slug: kotlin.String, botPublishSkillVersionRequest: BotPublishSkillVersionRequest) : ApiResponse<BotPublishSkillVersion200Response?> {
-        val localVariableConfig = botPublishSkillVersionRequestConfig(slug = slug, botPublishSkillVersionRequest = botPublishSkillVersionRequest)
-
-        return request<BotPublishSkillVersionRequest, BotPublishSkillVersion200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botPublishSkillVersion
-     *
-     * @param slug 
-     * @param botPublishSkillVersionRequest 
-     * @return RequestConfig
-     */
-    fun botPublishSkillVersionRequestConfig(slug: kotlin.String, botPublishSkillVersionRequest: BotPublishSkillVersionRequest) : RequestConfig<BotPublishSkillVersionRequest> {
-        val localVariableBody = botPublishSkillVersionRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/bot/skills/{slug}/publish".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/bot/skills/{slug}/stars
-     * Star or unstar a skill (toggle)
-     * 
-     * @param slug 
-     * @return BotToggleSkillStar200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botToggleSkillStar(slug: kotlin.String) : BotToggleSkillStar200Response {
-        val localVarResponse = botToggleSkillStarWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotToggleSkillStar200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/bot/skills/{slug}/stars
-     * Star or unstar a skill (toggle)
-     * 
-     * @param slug 
-     * @return ApiResponse<BotToggleSkillStar200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botToggleSkillStarWithHttpInfo(slug: kotlin.String) : ApiResponse<BotToggleSkillStar200Response?> {
-        val localVariableConfig = botToggleSkillStarRequestConfig(slug = slug)
-
-        return request<Unit, BotToggleSkillStar200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botToggleSkillStar
-     *
-     * @param slug 
-     * @return RequestConfig
-     */
-    fun botToggleSkillStarRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/bot/skills/{slug}/stars".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/bot/skills/{slug}/undelete
-     * Restore a soft-deleted skill
-     * 
-     * @param slug 
-     * @return AnalyticsHeartbeat200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botUndeleteSkill(slug: kotlin.String) : AnalyticsHeartbeat200Response {
-        val localVarResponse = botUndeleteSkillWithHttpInfo(slug = slug)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AnalyticsHeartbeat200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/bot/skills/{slug}/undelete
-     * Restore a soft-deleted skill
-     * 
-     * @param slug 
-     * @return ApiResponse<AnalyticsHeartbeat200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botUndeleteSkillWithHttpInfo(slug: kotlin.String) : ApiResponse<AnalyticsHeartbeat200Response?> {
-        val localVariableConfig = botUndeleteSkillRequestConfig(slug = slug)
-
-        return request<Unit, AnalyticsHeartbeat200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botUndeleteSkill
-     *
-     * @param slug 
-     * @return RequestConfig
-     */
-    fun botUndeleteSkillRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/bot/skills/{slug}/undelete".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * DELETE /v1/skills/{id}
-     * DeleteSkill removes one of the caller org&#39;s authored skills.
-     * DeleteSkill removes one of the caller org&#39;s authored skills. Scoped to the caller&#39;s org, so an id belonging to another tenant is never reached. Removing what is not there is not an error — the caller&#39;s intent is \&quot;gone\&quot;, and it is.
+     * Removes one of the caller org&#39;s authored skills.
+     * Removes one of the caller org&#39;s authored skills. Scoped to the caller&#39;s org, so an id belonging to another tenant is never reached. Removing what is not there is not an error — the caller&#39;s intent is \&quot;gone\&quot;, and it is.
      * @param id ID is the skill to remove, from the path. It is the skill&#39;s name.
-     * @return CloudSkillDeleted
+     * @return SkillDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1015,11 +63,11 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1SkillsId(id: kotlin.String) : CloudSkillDeleted {
-        val localVarResponse = cloudDeleteV1SkillsIdWithHttpInfo(id = id)
+    fun deleteV1SkillsById(id: kotlin.String) : SkillDeleted {
+        val localVarResponse = deleteV1SkillsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSkillDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SkillDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1035,30 +83,30 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/skills/{id}
-     * DeleteSkill removes one of the caller org&#39;s authored skills.
-     * DeleteSkill removes one of the caller org&#39;s authored skills. Scoped to the caller&#39;s org, so an id belonging to another tenant is never reached. Removing what is not there is not an error — the caller&#39;s intent is \&quot;gone\&quot;, and it is.
+     * Removes one of the caller org&#39;s authored skills.
+     * Removes one of the caller org&#39;s authored skills. Scoped to the caller&#39;s org, so an id belonging to another tenant is never reached. Removing what is not there is not an error — the caller&#39;s intent is \&quot;gone\&quot;, and it is.
      * @param id ID is the skill to remove, from the path. It is the skill&#39;s name.
-     * @return ApiResponse<CloudSkillDeleted?>
+     * @return ApiResponse<SkillDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1SkillsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudSkillDeleted?> {
-        val localVariableConfig = cloudDeleteV1SkillsIdRequestConfig(id = id)
+    fun deleteV1SkillsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SkillDeleted?> {
+        val localVariableConfig = deleteV1SkillsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudSkillDeleted>(
+        return request<Unit, SkillDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1SkillsId
+     * To obtain the request config of the operation deleteV1SkillsById
      *
      * @param id ID is the skill to remove, from the path. It is the skill&#39;s name.
      * @return RequestConfig
      */
-    fun cloudDeleteV1SkillsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1SkillsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1069,17 +117,17 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/skills
-     * ListSkills lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag.
-     * ListSkills lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag. A skill is discovery and activation metadata attached to an agent, never called directly, so every entry here is non-dispatchable. It is GET /v1/tools narrowed to one source, not a second store: a name a caller sees here is the same entry, with the same activation state, that discovery reports.
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag.
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag. A skill is discovery and activation metadata attached to an agent, never called directly, so every entry here is non-dispatchable. It is GET /v1/tools narrowed to one source, not a second store: a name a caller sees here is the same entry, with the same activation state, that discovery reports.
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
-     * @return CloudSourceToolList
+     * @return SourceToolList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1088,11 +136,11 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Skills(activated: kotlin.String? = null) : CloudSourceToolList {
-        val localVarResponse = cloudGetV1SkillsWithHttpInfo(activated = activated)
+    fun getV1Skills(activated: kotlin.String? = null) : SourceToolList {
+        val localVarResponse = getV1SkillsWithHttpInfo(activated = activated)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSourceToolList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SourceToolList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1108,30 +156,30 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/skills
-     * ListSkills lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag.
-     * ListSkills lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag. A skill is discovery and activation metadata attached to an agent, never called directly, so every entry here is non-dispatchable. It is GET /v1/tools narrowed to one source, not a second store: a name a caller sees here is the same entry, with the same activation state, that discovery reports.
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag.
+     * Lists the skills the caller&#39;s org can reach — the brand&#39;s embedded catalogue plus the org&#39;s own authored ones — with each one&#39;s activation flag. A skill is discovery and activation metadata attached to an agent, never called directly, so every entry here is non-dispatchable. It is GET /v1/tools narrowed to one source, not a second store: a name a caller sees here is the same entry, with the same activation state, that discovery reports.
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
-     * @return ApiResponse<CloudSourceToolList?>
+     * @return ApiResponse<SourceToolList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SkillsWithHttpInfo(activated: kotlin.String?) : ApiResponse<CloudSourceToolList?> {
-        val localVariableConfig = cloudGetV1SkillsRequestConfig(activated = activated)
+    fun getV1SkillsWithHttpInfo(activated: kotlin.String?) : ApiResponse<SourceToolList?> {
+        val localVariableConfig = getV1SkillsRequestConfig(activated = activated)
 
-        return request<Unit, CloudSourceToolList>(
+        return request<Unit, SourceToolList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Skills
+     * To obtain the request config of the operation getV1Skills
      *
      * @param activated Activated keeps only the tools activated for the caller&#39;s org and project, and only when it is exactly the string \&quot;true\&quot;. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1SkillsRequestConfig(activated: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1SkillsRequestConfig(activated: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1147,16 +195,16 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/skills/authored
-     * ListAuthoredSkills lists the caller org&#39;s OWN skills with their SKILL.md bodies.
-     * ListAuthoredSkills lists the caller org&#39;s OWN skills with their SKILL.md bodies. GET /v1/skills is the registry view — the brand&#39;s catalogue plus this org&#39;s, with activation flags and no bodies; this is the EDITABLE set, so it carries the content that view omits and nothing the org did not write.
-     * @return CloudAuthoredSkillList
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies.
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies. GET /v1/skills is the registry view — the brand&#39;s catalogue plus this org&#39;s, with activation flags and no bodies; this is the EDITABLE set, so it carries the content that view omits and nothing the org did not write.
+     * @return AuthoredSkillList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1165,11 +213,11 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SkillsAuthored() : CloudAuthoredSkillList {
-        val localVarResponse = cloudGetV1SkillsAuthoredWithHttpInfo()
+    fun getV1SkillsAuthored() : AuthoredSkillList {
+        val localVarResponse = getV1SkillsAuthoredWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAuthoredSkillList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthoredSkillList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1185,28 +233,28 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/skills/authored
-     * ListAuthoredSkills lists the caller org&#39;s OWN skills with their SKILL.md bodies.
-     * ListAuthoredSkills lists the caller org&#39;s OWN skills with their SKILL.md bodies. GET /v1/skills is the registry view — the brand&#39;s catalogue plus this org&#39;s, with activation flags and no bodies; this is the EDITABLE set, so it carries the content that view omits and nothing the org did not write.
-     * @return ApiResponse<CloudAuthoredSkillList?>
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies.
+     * Lists the caller org&#39;s OWN skills with their SKILL.md bodies. GET /v1/skills is the registry view — the brand&#39;s catalogue plus this org&#39;s, with activation flags and no bodies; this is the EDITABLE set, so it carries the content that view omits and nothing the org did not write.
+     * @return ApiResponse<AuthoredSkillList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SkillsAuthoredWithHttpInfo() : ApiResponse<CloudAuthoredSkillList?> {
-        val localVariableConfig = cloudGetV1SkillsAuthoredRequestConfig()
+    fun getV1SkillsAuthoredWithHttpInfo() : ApiResponse<AuthoredSkillList?> {
+        val localVariableConfig = getV1SkillsAuthoredRequestConfig()
 
-        return request<Unit, CloudAuthoredSkillList>(
+        return request<Unit, AuthoredSkillList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SkillsAuthored
+     * To obtain the request config of the operation getV1SkillsAuthored
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SkillsAuthoredRequestConfig() : RequestConfig<Unit> {
+    fun getV1SkillsAuthoredRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1217,17 +265,17 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills/authored",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/skills
-     * PutSkill adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record.
-     * PutSkill adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record. The id is derived from the name, so writing the same name again REVISES that skill rather than accumulating near-duplicates that would then collide in the registry. An org&#39;s skills are private to it by construction — they live in a different store from the brand&#39;s embedded catalogue and have no path into the public gallery — and a brand skill always wins a name collision against an org&#39;s.
-     * @param cloudSkillIn 
-     * @return CloudSkillWritten
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record.
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record. The id is derived from the name, so writing the same name again REVISES that skill rather than accumulating near-duplicates that would then collide in the registry. An org&#39;s skills are private to it by construction — they live in a different store from the brand&#39;s embedded catalogue and have no path into the public gallery — and a brand skill always wins a name collision against an org&#39;s.
+     * @param skillIn 
+     * @return SkillWritten
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1236,11 +284,11 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Skills(cloudSkillIn: CloudSkillIn) : CloudSkillWritten {
-        val localVarResponse = cloudPostV1SkillsWithHttpInfo(cloudSkillIn = cloudSkillIn)
+    fun postV1Skills(skillIn: SkillIn) : SkillWritten {
+        val localVarResponse = postV1SkillsWithHttpInfo(skillIn = skillIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSkillWritten
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SkillWritten
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1256,31 +304,31 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/skills
-     * PutSkill adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record.
-     * PutSkill adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record. The id is derived from the name, so writing the same name again REVISES that skill rather than accumulating near-duplicates that would then collide in the registry. An org&#39;s skills are private to it by construction — they live in a different store from the brand&#39;s embedded catalogue and have no path into the public gallery — and a brand skill always wins a name collision against an org&#39;s.
-     * @param cloudSkillIn 
-     * @return ApiResponse<CloudSkillWritten?>
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record.
+     * Adds or revises one of the caller org&#39;s own skills, and answers 201 with the stored record. The id is derived from the name, so writing the same name again REVISES that skill rather than accumulating near-duplicates that would then collide in the registry. An org&#39;s skills are private to it by construction — they live in a different store from the brand&#39;s embedded catalogue and have no path into the public gallery — and a brand skill always wins a name collision against an org&#39;s.
+     * @param skillIn 
+     * @return ApiResponse<SkillWritten?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SkillsWithHttpInfo(cloudSkillIn: CloudSkillIn) : ApiResponse<CloudSkillWritten?> {
-        val localVariableConfig = cloudPostV1SkillsRequestConfig(cloudSkillIn = cloudSkillIn)
+    fun postV1SkillsWithHttpInfo(skillIn: SkillIn) : ApiResponse<SkillWritten?> {
+        val localVariableConfig = postV1SkillsRequestConfig(skillIn = skillIn)
 
-        return request<CloudSkillIn, CloudSkillWritten>(
+        return request<SkillIn, SkillWritten>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Skills
+     * To obtain the request config of the operation postV1Skills
      *
-     * @param cloudSkillIn 
+     * @param skillIn 
      * @return RequestConfig
      */
-    fun cloudPostV1SkillsRequestConfig(cloudSkillIn: CloudSkillIn) : RequestConfig<CloudSkillIn> {
-        val localVariableBody = cloudSkillIn
+    fun postV1SkillsRequestConfig(skillIn: SkillIn) : RequestConfig<SkillIn> {
+        val localVariableBody = skillIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1291,7 +339,7 @@ class SkillsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/skills",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

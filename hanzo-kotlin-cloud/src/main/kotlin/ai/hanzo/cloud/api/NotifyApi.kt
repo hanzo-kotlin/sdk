@@ -19,7 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudNotifyHealth
+import ai.hanzo.cloud.model.NotifyHealth
+import ai.hanzo.cloud.model.NotifySend
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,7 +50,7 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * GET /v1/notify/health
      * Reports that the notify send surface is mounted.
      * Reports that the notify send surface is mounted.  It is a pure liveness probe: it answers 200 whenever this subsystem is mounted and checks nothing downstream, so an \&quot;ok\&quot; here says the routes are reachable, not that any provider credential is configured. The body is notifyd&#39;s verbatim, so probes and clients that keyed on the standalone service keep working unchanged.
-     * @return CloudNotifyHealth
+     * @return NotifyHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +59,11 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1NotifyHealth() : CloudNotifyHealth {
-        val localVarResponse = cloudGetV1NotifyHealthWithHttpInfo()
+    fun getV1NotifyHealth() : NotifyHealth {
+        val localVarResponse = getV1NotifyHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNotifyHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NotifyHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,26 +81,26 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * GET /v1/notify/health
      * Reports that the notify send surface is mounted.
      * Reports that the notify send surface is mounted.  It is a pure liveness probe: it answers 200 whenever this subsystem is mounted and checks nothing downstream, so an \&quot;ok\&quot; here says the routes are reachable, not that any provider credential is configured. The body is notifyd&#39;s verbatim, so probes and clients that keyed on the standalone service keep working unchanged.
-     * @return ApiResponse<CloudNotifyHealth?>
+     * @return ApiResponse<NotifyHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1NotifyHealthWithHttpInfo() : ApiResponse<CloudNotifyHealth?> {
-        val localVariableConfig = cloudGetV1NotifyHealthRequestConfig()
+    fun getV1NotifyHealthWithHttpInfo() : ApiResponse<NotifyHealth?> {
+        val localVariableConfig = getV1NotifyHealthRequestConfig()
 
-        return request<Unit, CloudNotifyHealth>(
+        return request<Unit, NotifyHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1NotifyHealth
+     * To obtain the request config of the operation getV1NotifyHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1NotifyHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1NotifyHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,28 +111,30 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/notify/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/notify/send
-     * 
-     * 
-     * @return void
+     * Delivers one transactional message by email or SMS through the caller org&#39;s own provider credential.
+     * Delivers one transactional message by email or SMS through the caller org&#39;s own provider credential.  The channel comes from the body — sms or email — and the provider credential is read from KMS at orgs/&lt;org&gt;/notify/&lt;service&gt;/&lt;key&gt;, never from the environment. The org is the validated principal&#39;s, never a client-supplied value, so a caller can only ever send as their own tenant; an unauthenticated caller gets 401. Naming no provider picks the one whose credentials are actually configured (Twilio, then Plivo for SMS; Twilio Email, then SMTP for email) and fails closed when none is. Delivery is synchronous and per recipient: one recipient answers the bare {message_id,status} outcome, several answer the {items:[…]} envelope. A terminal provider failure is a 200 whose status is failed with the reason in error, never a transport error. sync&#x3D;true is REQUIRED — an async dispatch answers 503, because the queue plane that would run it is owned elsewhere. The message body wins verbatim when present; otherwise template_id (or the event name) selects a built-in template rendered against template_vars.
+     * @param notifySend 
+     * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1NotifySend() : Unit {
-        val localVarResponse = cloudPostV1NotifySendWithHttpInfo()
+    fun postV1NotifySend(notifySend: NotifySend) : kotlin.Any {
+        val localVarResponse = postV1NotifySendWithHttpInfo(notifySend = notifySend)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -147,58 +150,65 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/notify/send
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Delivers one transactional message by email or SMS through the caller org&#39;s own provider credential.
+     * Delivers one transactional message by email or SMS through the caller org&#39;s own provider credential.  The channel comes from the body — sms or email — and the provider credential is read from KMS at orgs/&lt;org&gt;/notify/&lt;service&gt;/&lt;key&gt;, never from the environment. The org is the validated principal&#39;s, never a client-supplied value, so a caller can only ever send as their own tenant; an unauthenticated caller gets 401. Naming no provider picks the one whose credentials are actually configured (Twilio, then Plivo for SMS; Twilio Email, then SMTP for email) and fails closed when none is. Delivery is synchronous and per recipient: one recipient answers the bare {message_id,status} outcome, several answer the {items:[…]} envelope. A terminal provider failure is a 200 whose status is failed with the reason in error, never a transport error. sync&#x3D;true is REQUIRED — an async dispatch answers 503, because the queue plane that would run it is owned elsewhere. The message body wins verbatim when present; otherwise template_id (or the event name) selects a built-in template rendered against template_vars.
+     * @param notifySend 
+     * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1NotifySendWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1NotifySendRequestConfig()
+    fun postV1NotifySendWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1NotifySendRequestConfig(notifySend = notifySend)
 
-        return request<Unit, Unit>(
+        return request<NotifySend, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1NotifySend
+     * To obtain the request config of the operation postV1NotifySend
      *
+     * @param notifySend 
      * @return RequestConfig
      */
-    fun cloudPostV1NotifySendRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1NotifySendRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
+        val localVariableBody = notifySend
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/notify/send",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/notify/send/email
-     * 
-     * 
-     * @return void
+     * Delivers one transactional email through the caller org&#39;s own provider credential.
+     * Delivers one transactional email through the caller org&#39;s own provider credential.  It is the channel-pinned form of the generic send: identical in every respect except that the channel is fixed to email, OVERRIDING whatever the body names — so a body that says sms still goes out as mail. The provider is the org&#39;s own email credential from KMS (Twilio Email, then SMTP), resolved for the validated principal&#39;s org; an unauthenticated caller gets 401. Subject is carried on the email channel only.
+     * @param notifySend 
+     * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1NotifySendEmail() : Unit {
-        val localVarResponse = cloudPostV1NotifySendEmailWithHttpInfo()
+    fun postV1NotifySendEmail(notifySend: NotifySend) : kotlin.Any {
+        val localVarResponse = postV1NotifySendEmailWithHttpInfo(notifySend = notifySend)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -214,58 +224,65 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/notify/send/email
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Delivers one transactional email through the caller org&#39;s own provider credential.
+     * Delivers one transactional email through the caller org&#39;s own provider credential.  It is the channel-pinned form of the generic send: identical in every respect except that the channel is fixed to email, OVERRIDING whatever the body names — so a body that says sms still goes out as mail. The provider is the org&#39;s own email credential from KMS (Twilio Email, then SMTP), resolved for the validated principal&#39;s org; an unauthenticated caller gets 401. Subject is carried on the email channel only.
+     * @param notifySend 
+     * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1NotifySendEmailWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1NotifySendEmailRequestConfig()
+    fun postV1NotifySendEmailWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1NotifySendEmailRequestConfig(notifySend = notifySend)
 
-        return request<Unit, Unit>(
+        return request<NotifySend, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1NotifySendEmail
+     * To obtain the request config of the operation postV1NotifySendEmail
      *
+     * @param notifySend 
      * @return RequestConfig
      */
-    fun cloudPostV1NotifySendEmailRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1NotifySendEmailRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
+        val localVariableBody = notifySend
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/notify/send/email",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/notify/send/sms
-     * 
-     * 
-     * @return void
+     * Delivers one transactional SMS through the caller org&#39;s own provider credential.
+     * Delivers one transactional SMS through the caller org&#39;s own provider credential.  It is the channel-pinned form of the generic send: identical in every respect except that the channel is fixed to sms, OVERRIDING whatever the body names — so a body that says email still goes out as a text message. The provider is the org&#39;s own SMS credential from KMS (Twilio, then Plivo), resolved for the validated principal&#39;s org; an unauthenticated caller gets 401.
+     * @param notifySend 
+     * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1NotifySendSms() : Unit {
-        val localVarResponse = cloudPostV1NotifySendSmsWithHttpInfo()
+    fun postV1NotifySendSms(notifySend: NotifySend) : kotlin.Any {
+        val localVarResponse = postV1NotifySendSmsWithHttpInfo(notifySend = notifySend)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -281,37 +298,42 @@ class NotifyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/notify/send/sms
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Delivers one transactional SMS through the caller org&#39;s own provider credential.
+     * Delivers one transactional SMS through the caller org&#39;s own provider credential.  It is the channel-pinned form of the generic send: identical in every respect except that the channel is fixed to sms, OVERRIDING whatever the body names — so a body that says email still goes out as a text message. The provider is the org&#39;s own SMS credential from KMS (Twilio, then Plivo), resolved for the validated principal&#39;s org; an unauthenticated caller gets 401.
+     * @param notifySend 
+     * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1NotifySendSmsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1NotifySendSmsRequestConfig()
+    fun postV1NotifySendSmsWithHttpInfo(notifySend: NotifySend) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1NotifySendSmsRequestConfig(notifySend = notifySend)
 
-        return request<Unit, Unit>(
+        return request<NotifySend, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1NotifySendSms
+     * To obtain the request config of the operation postV1NotifySendSms
      *
+     * @param notifySend 
      * @return RequestConfig
      */
-    fun cloudPostV1NotifySendSmsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1NotifySendSmsRequestConfig(notifySend: NotifySend) : RequestConfig<NotifySend> {
+        val localVariableBody = notifySend
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/notify/send/sms",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
