@@ -19,9 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.VectorCreateCollection200Response
-import ai.hanzo.cloud.model.VectorCreateCollectionRequest
-import ai.hanzo.cloud.model.VectorGetCollection200Response
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,8 +46,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * DELETE /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -59,8 +56,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1Collections() : Unit {
-        val localVarResponse = cloudDeleteV1CollectionsWithHttpInfo()
+    fun deleteV1Collections() : Unit {
+        val localVarResponse = deleteV1CollectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -79,15 +76,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * DELETE /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1CollectionsRequestConfig()
+    fun deleteV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CollectionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,11 +92,11 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1Collections
+     * To obtain the request config of the operation deleteV1Collections
      *
      * @return RequestConfig
      */
-    fun cloudDeleteV1CollectionsRequestConfig() : RequestConfig<Unit> {
+    fun deleteV1CollectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -109,15 +106,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -127,8 +124,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -147,16 +144,16 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * DELETE /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +161,12 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CollectionsByWildcard1
+     * To obtain the request config of the operation deleteV1CollectionsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudDeleteV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -179,15 +176,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -196,8 +193,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Collections() : Unit {
-        val localVarResponse = cloudGetV1CollectionsWithHttpInfo()
+    fun getV1Collections() : Unit {
+        val localVarResponse = getV1CollectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -216,15 +213,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CollectionsRequestConfig()
+    fun getV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CollectionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -232,11 +229,11 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Collections
+     * To obtain the request config of the operation getV1Collections
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CollectionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1CollectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -246,15 +243,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -264,8 +261,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,16 +281,16 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -301,12 +298,12 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CollectionsByWildcard1
+     * To obtain the request config of the operation getV1CollectionsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -316,152 +313,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * OPTIONS /v1/collections
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1Collections() : Unit {
-        val localVarResponse = cloudOptionsV1CollectionsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * OPTIONS /v1/collections
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1CollectionsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudOptionsV1Collections
-     *
-     * @return RequestConfig
-     */
-    fun cloudOptionsV1CollectionsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/collections",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * OPTIONS /v1/collections/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudOptionsV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * OPTIONS /v1/collections/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudOptionsV1CollectionsByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun cloudOptionsV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/collections/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -470,8 +330,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1Collections() : Unit {
-        val localVarResponse = cloudPatchV1CollectionsWithHttpInfo()
+    fun patchV1Collections() : Unit {
+        val localVarResponse = patchV1CollectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -490,15 +350,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * PATCH /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1CollectionsRequestConfig()
+    fun patchV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CollectionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -506,11 +366,11 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1Collections
+     * To obtain the request config of the operation patchV1Collections
      *
      * @return RequestConfig
      */
-    fun cloudPatchV1CollectionsRequestConfig() : RequestConfig<Unit> {
+    fun patchV1CollectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -520,15 +380,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -538,8 +398,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -558,16 +418,16 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * PATCH /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -575,12 +435,12 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1CollectionsByWildcard1
+     * To obtain the request config of the operation patchV1CollectionsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPatchV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -590,15 +450,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -607,8 +467,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Collections() : Unit {
-        val localVarResponse = cloudPostV1CollectionsWithHttpInfo()
+    fun postV1Collections() : Unit {
+        val localVarResponse = postV1CollectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -627,15 +487,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CollectionsRequestConfig()
+    fun postV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CollectionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -643,11 +503,11 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Collections
+     * To obtain the request config of the operation postV1Collections
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CollectionsRequestConfig() : RequestConfig<Unit> {
+    fun postV1CollectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -657,15 +517,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -675,8 +535,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -695,16 +555,16 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -712,12 +572,12 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CollectionsByWildcard1
+     * To obtain the request config of the operation postV1CollectionsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPostV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -727,15 +587,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -744,8 +604,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1Collections() : Unit {
-        val localVarResponse = cloudPutV1CollectionsWithHttpInfo()
+    fun putV1Collections() : Unit {
+        val localVarResponse = putV1CollectionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -764,15 +624,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * PUT /v1/collections
-     * 
-     * 
+     * The org&#39;s Base content types
+     * Lists the content types in the org&#39;s managed Base, and creates one. This is what the console&#39;s Bases manager reads to render the schema.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1CollectionsRequestConfig()
+    fun putV1CollectionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CollectionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -780,11 +640,11 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1Collections
+     * To obtain the request config of the operation putV1Collections
      *
      * @return RequestConfig
      */
-    fun cloudPutV1CollectionsRequestConfig() : RequestConfig<Unit> {
+    fun putV1CollectionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -794,15 +654,15 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -812,8 +672,8 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putV1CollectionsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putV1CollectionsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -832,16 +692,16 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * PUT /v1/collections/{wildcard1}
-     * 
-     * 
+     * One Base content type, and its records
+     * Reads and writes below the collections root: &#x60;meta/scaffolds&#x60; is the field-template palette a new content type is built from, &#x60;&lt;name&gt;&#x60; is one content type (view, update, delete), &#x60;&lt;name&gt;/records&#x60; is that type&#39;s rows (list, create) and &#x60;&lt;name&gt;/records/&lt;id&gt;&#x60; is one row (get, update, delete). This is the data plane behind the console&#39;s Records browser.  Any other shape below /v1/collections is refused with 404 before it is forwarded, so the wildcard admits exactly those five addresses and nothing more.  The path is forwarded to the managed Base unchanged and its answer comes back verbatim, so the schema, the records and every refusal are the managed Base&#39;s own.  AUTH is one credential, forwarded and never minted: cloud validates the caller&#39;s hanzo.id bearer and passes THAT SAME token on, because the managed Base scopes each row by the token&#39;s own subject. A caller with no validated principal is refused here, before the request leaves the process, and the org header that rides along is the one cloud validated — a client-forged org was stripped upstream.  This is a COLLECTIONS proxy, not a Base tunnel: only the collections data plane is admitted, and everything else the managed Base mounts — settings, backups, logs — is 404 here whatever the caller&#39;s rights on that deployment are.  One registration owns this address for every method, so which methods answer is the managed Base&#39;s decision, not this edge&#39;s.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putV1CollectionsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CollectionsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -849,12 +709,12 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CollectionsByWildcard1
+     * To obtain the request config of the operation putV1CollectionsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPutV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putV1CollectionsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -864,230 +724,7 @@ class CollectionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/collections/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/vector/collections/{collection_name}
-     * Create collection
-     * 
-     * @param collectionName 
-     * @param vectorCreateCollectionRequest 
-     * @return VectorCreateCollection200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun vectorCreateCollection(collectionName: kotlin.String, vectorCreateCollectionRequest: VectorCreateCollectionRequest) : VectorCreateCollection200Response {
-        val localVarResponse = vectorCreateCollectionWithHttpInfo(collectionName = collectionName, vectorCreateCollectionRequest = vectorCreateCollectionRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorCreateCollection200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/vector/collections/{collection_name}
-     * Create collection
-     * 
-     * @param collectionName 
-     * @param vectorCreateCollectionRequest 
-     * @return ApiResponse<VectorCreateCollection200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun vectorCreateCollectionWithHttpInfo(collectionName: kotlin.String, vectorCreateCollectionRequest: VectorCreateCollectionRequest) : ApiResponse<VectorCreateCollection200Response?> {
-        val localVariableConfig = vectorCreateCollectionRequestConfig(collectionName = collectionName, vectorCreateCollectionRequest = vectorCreateCollectionRequest)
-
-        return request<VectorCreateCollectionRequest, VectorCreateCollection200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation vectorCreateCollection
-     *
-     * @param collectionName 
-     * @param vectorCreateCollectionRequest 
-     * @return RequestConfig
-     */
-    fun vectorCreateCollectionRequestConfig(collectionName: kotlin.String, vectorCreateCollectionRequest: VectorCreateCollectionRequest) : RequestConfig<VectorCreateCollectionRequest> {
-        val localVariableBody = vectorCreateCollectionRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/vector/collections/{collection_name}".replace("{"+"collection_name"+"}", encodeURIComponent(collectionName.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/vector/collections/{collection_name}
-     * Delete collection
-     * 
-     * @param collectionName 
-     * @return VectorCreateCollection200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun vectorDeleteCollection(collectionName: kotlin.String) : VectorCreateCollection200Response {
-        val localVarResponse = vectorDeleteCollectionWithHttpInfo(collectionName = collectionName)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorCreateCollection200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/vector/collections/{collection_name}
-     * Delete collection
-     * 
-     * @param collectionName 
-     * @return ApiResponse<VectorCreateCollection200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun vectorDeleteCollectionWithHttpInfo(collectionName: kotlin.String) : ApiResponse<VectorCreateCollection200Response?> {
-        val localVariableConfig = vectorDeleteCollectionRequestConfig(collectionName = collectionName)
-
-        return request<Unit, VectorCreateCollection200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation vectorDeleteCollection
-     *
-     * @param collectionName 
-     * @return RequestConfig
-     */
-    fun vectorDeleteCollectionRequestConfig(collectionName: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/vector/collections/{collection_name}".replace("{"+"collection_name"+"}", encodeURIComponent(collectionName.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/vector/collections/{collection_name}
-     * Get collection info
-     * 
-     * @param collectionName 
-     * @return VectorGetCollection200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun vectorGetCollection(collectionName: kotlin.String) : VectorGetCollection200Response {
-        val localVarResponse = vectorGetCollectionWithHttpInfo(collectionName = collectionName)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorGetCollection200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/vector/collections/{collection_name}
-     * Get collection info
-     * 
-     * @param collectionName 
-     * @return ApiResponse<VectorGetCollection200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun vectorGetCollectionWithHttpInfo(collectionName: kotlin.String) : ApiResponse<VectorGetCollection200Response?> {
-        val localVariableConfig = vectorGetCollectionRequestConfig(collectionName = collectionName)
-
-        return request<Unit, VectorGetCollection200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation vectorGetCollection
-     *
-     * @param collectionName 
-     * @return RequestConfig
-     */
-    fun vectorGetCollectionRequestConfig(collectionName: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/vector/collections/{collection_name}".replace("{"+"collection_name"+"}", encodeURIComponent(collectionName.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

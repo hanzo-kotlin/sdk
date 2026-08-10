@@ -19,11 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAdCampaign
-import ai.hanzo.cloud.model.CloudAdSummary
-import ai.hanzo.cloud.model.CloudCampaignInput
-import ai.hanzo.cloud.model.CloudCampaignList
-import ai.hanzo.cloud.model.CloudUpdateCampaignIn
+import ai.hanzo.cloud.model.AdCampaign
+import ai.hanzo.cloud.model.AdSummary
+import ai.hanzo.cloud.model.CampaignInput
+import ai.hanzo.cloud.model.CampaignList
+import ai.hanzo.cloud.model.UpdateCampaignIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -62,8 +62,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1AdsCampaignsId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1AdsCampaignsIdWithHttpInfo(id = id)
+    fun deleteV1AdsCampaignsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1AdsCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,8 +90,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1AdsCampaignsIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1AdsCampaignsIdRequestConfig(id = id)
+    fun deleteV1AdsCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1AdsCampaignsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -99,12 +99,12 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1AdsCampaignsId
+     * To obtain the request config of the operation deleteV1AdsCampaignsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudDeleteV1AdsCampaignsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1AdsCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -114,7 +114,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -125,7 +125,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns the caller org&#39;s ad campaigns, most recently updated first, optionally narrowed to one lifecycle status. The listing is bounded by the org: another tenant&#39;s campaigns are not reachable from here at all.
      * @param status Status filters to one lifecycle state (draft, active, paused, completed). Empty returns every campaign the org has. (optional)
      * @param limit Limit caps how many campaigns come back: default 200, maximum 1000. A value that is not a positive integer reads as the default. (optional)
-     * @return CloudCampaignList
+     * @return CampaignList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -134,11 +134,11 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdsCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CloudCampaignList {
-        val localVarResponse = cloudGetV1AdsCampaignsWithHttpInfo(status = status, limit = limit)
+    fun getV1AdsCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CampaignList {
+        val localVarResponse = getV1AdsCampaignsWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -158,28 +158,28 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns the caller org&#39;s ad campaigns, most recently updated first, optionally narrowed to one lifecycle status. The listing is bounded by the org: another tenant&#39;s campaigns are not reachable from here at all.
      * @param status Status filters to one lifecycle state (draft, active, paused, completed). Empty returns every campaign the org has. (optional)
      * @param limit Limit caps how many campaigns come back: default 200, maximum 1000. A value that is not a positive integer reads as the default. (optional)
-     * @return ApiResponse<CloudCampaignList?>
+     * @return ApiResponse<CampaignList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdsCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudCampaignList?> {
-        val localVariableConfig = cloudGetV1AdsCampaignsRequestConfig(status = status, limit = limit)
+    fun getV1AdsCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CampaignList?> {
+        val localVariableConfig = getV1AdsCampaignsRequestConfig(status = status, limit = limit)
 
-        return request<Unit, CloudCampaignList>(
+        return request<Unit, CampaignList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdsCampaigns
+     * To obtain the request config of the operation getV1AdsCampaigns
      *
      * @param status Status filters to one lifecycle state (draft, active, paused, completed). Empty returns every campaign the org has. (optional)
      * @param limit Limit caps how many campaigns come back: default 200, maximum 1000. A value that is not a positive integer reads as the default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AdsCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AdsCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -198,7 +198,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -208,7 +208,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns one of the caller org&#39;s campaigns.
      * Returns one of the caller org&#39;s campaigns. An id another org owns reads as not found, so the response cannot confirm that it exists.
      * @param id 
-     * @return CloudAdCampaign
+     * @return AdCampaign
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -217,11 +217,11 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdsCampaignsId(id: kotlin.String) : CloudAdCampaign {
-        val localVarResponse = cloudGetV1AdsCampaignsIdWithHttpInfo(id = id)
+    fun getV1AdsCampaignsById(id: kotlin.String) : AdCampaign {
+        val localVarResponse = getV1AdsCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdCampaign
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdCampaign
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -240,27 +240,27 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Returns one of the caller org&#39;s campaigns.
      * Returns one of the caller org&#39;s campaigns. An id another org owns reads as not found, so the response cannot confirm that it exists.
      * @param id 
-     * @return ApiResponse<CloudAdCampaign?>
+     * @return ApiResponse<AdCampaign?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdsCampaignsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudAdCampaign?> {
-        val localVariableConfig = cloudGetV1AdsCampaignsIdRequestConfig(id = id)
+    fun getV1AdsCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<AdCampaign?> {
+        val localVariableConfig = getV1AdsCampaignsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudAdCampaign>(
+        return request<Unit, AdCampaign>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdsCampaignsId
+     * To obtain the request config of the operation getV1AdsCampaignsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1AdsCampaignsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AdsCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -271,7 +271,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -280,7 +280,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/ads/summary
      * Rolls the caller org&#39;s ad campaigns up into four numbers: how many campaigns exist, how many are active, and the summed budget and spend across all of them.
      * Rolls the caller org&#39;s ad campaigns up into four numbers: how many campaigns exist, how many are active, and the summed budget and spend across all of them. Budget and spend are MINOR units (cents), the same units the campaign rows carry. It counts only this org&#39;s campaigns.
-     * @return CloudAdSummary
+     * @return AdSummary
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -289,11 +289,11 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AdsSummary() : CloudAdSummary {
-        val localVarResponse = cloudGetV1AdsSummaryWithHttpInfo()
+    fun getV1AdsSummary() : AdSummary {
+        val localVarResponse = getV1AdsSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdSummary
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdSummary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -311,26 +311,26 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * GET /v1/ads/summary
      * Rolls the caller org&#39;s ad campaigns up into four numbers: how many campaigns exist, how many are active, and the summed budget and spend across all of them.
      * Rolls the caller org&#39;s ad campaigns up into four numbers: how many campaigns exist, how many are active, and the summed budget and spend across all of them. Budget and spend are MINOR units (cents), the same units the campaign rows carry. It counts only this org&#39;s campaigns.
-     * @return ApiResponse<CloudAdSummary?>
+     * @return ApiResponse<AdSummary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AdsSummaryWithHttpInfo() : ApiResponse<CloudAdSummary?> {
-        val localVariableConfig = cloudGetV1AdsSummaryRequestConfig()
+    fun getV1AdsSummaryWithHttpInfo() : ApiResponse<AdSummary?> {
+        val localVariableConfig = getV1AdsSummaryRequestConfig()
 
-        return request<Unit, CloudAdSummary>(
+        return request<Unit, AdSummary>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AdsSummary
+     * To obtain the request config of the operation getV1AdsSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AdsSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1AdsSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -341,7 +341,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -350,8 +350,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/ads/campaigns
      * Registers a new ad campaign for the caller&#39;s org and answers 201 with the stored row.
      * Registers a new ad campaign for the caller&#39;s org and answers 201 with the stored row. It only records the campaign — nothing is sent to the ad network until POST /v1/ads/campaigns/{id}/launch runs it. The org is stamped by the server from the validated principal, so a body can never place a campaign in another tenant.
-     * @param cloudCampaignInput 
-     * @return CloudAdCampaign
+     * @param campaignInput 
+     * @return AdCampaign
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -360,11 +360,11 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdsCampaigns(cloudCampaignInput: CloudCampaignInput) : CloudAdCampaign {
-        val localVarResponse = cloudPostV1AdsCampaignsWithHttpInfo(cloudCampaignInput = cloudCampaignInput)
+    fun postV1AdsCampaigns(campaignInput: CampaignInput) : AdCampaign {
+        val localVarResponse = postV1AdsCampaignsWithHttpInfo(campaignInput = campaignInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdCampaign
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdCampaign
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -382,29 +382,29 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * POST /v1/ads/campaigns
      * Registers a new ad campaign for the caller&#39;s org and answers 201 with the stored row.
      * Registers a new ad campaign for the caller&#39;s org and answers 201 with the stored row. It only records the campaign — nothing is sent to the ad network until POST /v1/ads/campaigns/{id}/launch runs it. The org is stamped by the server from the validated principal, so a body can never place a campaign in another tenant.
-     * @param cloudCampaignInput 
-     * @return ApiResponse<CloudAdCampaign?>
+     * @param campaignInput 
+     * @return ApiResponse<AdCampaign?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdsCampaignsWithHttpInfo(cloudCampaignInput: CloudCampaignInput) : ApiResponse<CloudAdCampaign?> {
-        val localVariableConfig = cloudPostV1AdsCampaignsRequestConfig(cloudCampaignInput = cloudCampaignInput)
+    fun postV1AdsCampaignsWithHttpInfo(campaignInput: CampaignInput) : ApiResponse<AdCampaign?> {
+        val localVariableConfig = postV1AdsCampaignsRequestConfig(campaignInput = campaignInput)
 
-        return request<CloudCampaignInput, CloudAdCampaign>(
+        return request<CampaignInput, AdCampaign>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdsCampaigns
+     * To obtain the request config of the operation postV1AdsCampaigns
      *
-     * @param cloudCampaignInput 
+     * @param campaignInput 
      * @return RequestConfig
      */
-    fun cloudPostV1AdsCampaignsRequestConfig(cloudCampaignInput: CloudCampaignInput) : RequestConfig<CloudCampaignInput> {
-        val localVariableBody = cloudCampaignInput
+    fun postV1AdsCampaignsRequestConfig(campaignInput: CampaignInput) : RequestConfig<CampaignInput> {
+        val localVariableBody = campaignInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -415,15 +415,15 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/ads/campaigns/{id}/launch
-     * 
-     * 
+     * Run one of your stored campaigns on its ad network
+     * Creates the campaign on its platform under the CALLER ORG&#39;S own connected ad account, records the provider campaign id, flips the stored campaign to active and answers the updated record. No ad-network token is held here: it is resolved from KMS through the org&#39;s connector at launch time, BEFORE any provider call, so an org that has not connected that platform gets 424 and no spend can ever start on a connection the org did not make. Meta is executed for real; a campaign on a platform whose provider is not wired yet answers 501 even when the connector is connected, and an edge failure at the platform is 502. The optional {account} body overrides the target ad account for this launch and is TOLERANT — a malformed or non-JSON body is ignored and the campaign launches on its stored account rather than being refused. A campaign id another org owns reads as not found.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -433,8 +433,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AdsCampaignsByIdLaunch(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AdsCampaignsByIdLaunchWithHttpInfo(id = id)
+    fun postV1AdsCampaignsByIdLaunch(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AdsCampaignsByIdLaunchWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -453,16 +453,16 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/ads/campaigns/{id}/launch
-     * 
-     * 
+     * Run one of your stored campaigns on its ad network
+     * Creates the campaign on its platform under the CALLER ORG&#39;S own connected ad account, records the provider campaign id, flips the stored campaign to active and answers the updated record. No ad-network token is held here: it is resolved from KMS through the org&#39;s connector at launch time, BEFORE any provider call, so an org that has not connected that platform gets 424 and no spend can ever start on a connection the org did not make. Meta is executed for real; a campaign on a platform whose provider is not wired yet answers 501 even when the connector is connected, and an edge failure at the platform is 502. The optional {account} body overrides the target ad account for this launch and is TOLERANT — a malformed or non-JSON body is ignored and the campaign launches on its stored account rather than being refused. A campaign id another org owns reads as not found.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AdsCampaignsByIdLaunchWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AdsCampaignsByIdLaunchRequestConfig(id = id)
+    fun postV1AdsCampaignsByIdLaunchWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AdsCampaignsByIdLaunchRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -470,12 +470,12 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AdsCampaignsByIdLaunch
+     * To obtain the request config of the operation postV1AdsCampaignsByIdLaunch
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1AdsCampaignsByIdLaunchRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AdsCampaignsByIdLaunchRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -485,7 +485,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}/launch".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -495,8 +495,8 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Replaces the user-owned fields of one of the caller org&#39;s campaigns and answers the stored row.
      * Replaces the user-owned fields of one of the caller org&#39;s campaigns and answers the stored row. It is a full replace, not a patch: every field is written from the request, so an omitted one is cleared. externalId is launch-owned and is never touched here, so editing a campaign cannot break its link to a live provider execution.
      * @param id 
-     * @param cloudUpdateCampaignIn 
-     * @return CloudAdCampaign
+     * @param updateCampaignIn 
+     * @return AdCampaign
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -505,11 +505,11 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1AdsCampaignsId(id: kotlin.String, cloudUpdateCampaignIn: CloudUpdateCampaignIn) : CloudAdCampaign {
-        val localVarResponse = cloudPutV1AdsCampaignsIdWithHttpInfo(id = id, cloudUpdateCampaignIn = cloudUpdateCampaignIn)
+    fun putV1AdsCampaignsById(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : AdCampaign {
+        val localVarResponse = putV1AdsCampaignsByIdWithHttpInfo(id = id, updateCampaignIn = updateCampaignIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAdCampaign
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AdCampaign
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -528,30 +528,30 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Replaces the user-owned fields of one of the caller org&#39;s campaigns and answers the stored row.
      * Replaces the user-owned fields of one of the caller org&#39;s campaigns and answers the stored row. It is a full replace, not a patch: every field is written from the request, so an omitted one is cleared. externalId is launch-owned and is never touched here, so editing a campaign cannot break its link to a live provider execution.
      * @param id 
-     * @param cloudUpdateCampaignIn 
-     * @return ApiResponse<CloudAdCampaign?>
+     * @param updateCampaignIn 
+     * @return ApiResponse<AdCampaign?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1AdsCampaignsIdWithHttpInfo(id: kotlin.String, cloudUpdateCampaignIn: CloudUpdateCampaignIn) : ApiResponse<CloudAdCampaign?> {
-        val localVariableConfig = cloudPutV1AdsCampaignsIdRequestConfig(id = id, cloudUpdateCampaignIn = cloudUpdateCampaignIn)
+    fun putV1AdsCampaignsByIdWithHttpInfo(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : ApiResponse<AdCampaign?> {
+        val localVariableConfig = putV1AdsCampaignsByIdRequestConfig(id = id, updateCampaignIn = updateCampaignIn)
 
-        return request<CloudUpdateCampaignIn, CloudAdCampaign>(
+        return request<UpdateCampaignIn, AdCampaign>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1AdsCampaignsId
+     * To obtain the request config of the operation putV1AdsCampaignsById
      *
      * @param id 
-     * @param cloudUpdateCampaignIn 
+     * @param updateCampaignIn 
      * @return RequestConfig
      */
-    fun cloudPutV1AdsCampaignsIdRequestConfig(id: kotlin.String, cloudUpdateCampaignIn: CloudUpdateCampaignIn) : RequestConfig<CloudUpdateCampaignIn> {
-        val localVariableBody = cloudUpdateCampaignIn
+    fun putV1AdsCampaignsByIdRequestConfig(id: kotlin.String, updateCampaignIn: UpdateCampaignIn) : RequestConfig<UpdateCampaignIn> {
+        val localVariableBody = updateCampaignIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -562,7 +562,7 @@ class AdsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/ads/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

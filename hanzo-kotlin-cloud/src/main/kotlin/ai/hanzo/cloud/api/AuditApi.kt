@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudTrailPage
+import ai.hanzo.cloud.model.TrailPage
 
 import com.google.gson.annotations.SerializedName
 
@@ -58,7 +58,7 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param until Until is the upper time bound, RFC3339, with the same tolerance. (optional)
      * @param pageSize PageSize is rows per page, default 100. A value that is not a positive integer falls back to the default. (optional)
      * @param p Page is the 1-based page number, driving the offset. Anything below 2 reads the first page. (optional)
-     * @return CloudTrailPage
+     * @return TrailPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -67,11 +67,11 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Audit(sub: kotlin.String? = null, action: kotlin.String? = null, resource: kotlin.String? = null, resourceId: kotlin.String? = null, result: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, pageSize: kotlin.String? = null, p: kotlin.String? = null) : CloudTrailPage {
-        val localVarResponse = cloudGetV1AuditWithHttpInfo(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
+    fun getV1Audit(sub: kotlin.String? = null, action: kotlin.String? = null, resource: kotlin.String? = null, resourceId: kotlin.String? = null, result: kotlin.String? = null, since: kotlin.String? = null, until: kotlin.String? = null, pageSize: kotlin.String? = null, p: kotlin.String? = null) : TrailPage {
+        val localVarResponse = getV1AuditWithHttpInfo(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTrailPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrailPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -98,22 +98,22 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param until Until is the upper time bound, RFC3339, with the same tolerance. (optional)
      * @param pageSize PageSize is rows per page, default 100. A value that is not a positive integer falls back to the default. (optional)
      * @param p Page is the 1-based page number, driving the offset. Anything below 2 reads the first page. (optional)
-     * @return ApiResponse<CloudTrailPage?>
+     * @return ApiResponse<TrailPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AuditWithHttpInfo(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : ApiResponse<CloudTrailPage?> {
-        val localVariableConfig = cloudGetV1AuditRequestConfig(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
+    fun getV1AuditWithHttpInfo(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : ApiResponse<TrailPage?> {
+        val localVariableConfig = getV1AuditRequestConfig(sub = sub, action = action, resource = resource, resourceId = resourceId, result = result, since = since, until = until, pageSize = pageSize, p = p)
 
-        return request<Unit, CloudTrailPage>(
+        return request<Unit, TrailPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Audit
+     * To obtain the request config of the operation getV1Audit
      *
      * @param sub Sub narrows the trail to one actor — the validated subject that made the request. Blank means every actor in the org. (optional)
      * @param action Action narrows it to one action name, e.g. \&quot;machine.create\&quot;. (optional)
@@ -126,7 +126,7 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param p Page is the 1-based page number, driving the offset. Anything below 2 reads the first page. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AuditRequestConfig(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1AuditRequestConfig(sub: kotlin.String?, action: kotlin.String?, resource: kotlin.String?, resourceId: kotlin.String?, result: kotlin.String?, since: kotlin.String?, until: kotlin.String?, pageSize: kotlin.String?, p: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -166,7 +166,7 @@ class AuditApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/audit",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

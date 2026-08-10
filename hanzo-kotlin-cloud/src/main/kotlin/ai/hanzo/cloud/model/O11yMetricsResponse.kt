@@ -15,7 +15,7 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.CloudMetricsResponseRange
+import ai.hanzo.cloud.model.O11yAvailabilityResponseRange
 import ai.hanzo.cloud.model.O11yMetricsResponseSeries
 import ai.hanzo.cloud.model.O11yMetricsResponseSummary
 import ai.hanzo.cloud.model.O11yMetricsResponseUsage
@@ -23,32 +23,32 @@ import ai.hanzo.cloud.model.O11yMetricsResponseUsage
 import com.google.gson.annotations.SerializedName
 
 /**
- * Per-org RED series (rate, errors, latency) for a product plus the org LLM usage rollup. A non-admin sees only its own org attribution; a validated SuperAdmin sees the whole product. Usage is always the caller org.
+ * 
  *
  * @param product 
  * @param range 
  * @param series 
- * @param usage 
  * @param summary 
+ * @param usage 
  */
 
 
-data class O11yMetricsResponse (
+data class O11ymetricsResponse (
 
     @SerializedName("product")
     val product: kotlin.String? = null,
 
     @SerializedName("range")
-    val range: CloudMetricsResponseRange? = null,
+    val range: O11yAvailabilityResponseRange? = null,
 
     @SerializedName("series")
     val series: O11yMetricsResponseSeries? = null,
 
-    @SerializedName("usage")
-    val usage: O11yMetricsResponseUsage? = null,
-
     @SerializedName("summary")
-    val summary: O11yMetricsResponseSummary? = null
+    val summary: O11yMetricsResponseSummary? = null,
+
+    @SerializedName("usage")
+    val usage: O11yMetricsResponseUsage? = null
 
 ) {
 

@@ -19,11 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAgentBinding
-import ai.hanzo.cloud.model.CloudBindAgentReq
-import ai.hanzo.cloud.model.CloudBindingList
-import ai.hanzo.cloud.model.CloudMachineList
-import ai.hanzo.cloud.model.CloudMachineView
+import ai.hanzo.cloud.model.AgentBinding
+import ai.hanzo.cloud.model.BindAgentReq
+import ai.hanzo.cloud.model.BindingList
+import ai.hanzo.cloud.model.MachineList
+import ai.hanzo.cloud.model.MachineView
 
 import com.google.gson.annotations.SerializedName
 
@@ -54,8 +54,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Binds a cloud Agent to one of the caller org&#39;s machines: the machine is recorded as running that Agent&#39;s @hanzo/bot runtime.
      * Binds a cloud Agent to one of the caller org&#39;s machines: the machine is recorded as running that Agent&#39;s @hanzo/bot runtime. The owning org is the validated tenant, never a client field.
      * @param id ID is the machine to bind, from the URL path.
-     * @param cloudBindAgentReq 
-     * @return CloudAgentBinding
+     * @param bindAgentReq 
+     * @return AgentBinding
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -64,11 +64,11 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudBindMachineAgent(id: kotlin.String, cloudBindAgentReq: CloudBindAgentReq) : CloudAgentBinding {
-        val localVarResponse = cloudBindMachineAgentWithHttpInfo(id = id, cloudBindAgentReq = cloudBindAgentReq)
+    fun bindMachineAgent(id: kotlin.String, bindAgentReq: BindAgentReq) : AgentBinding {
+        val localVarResponse = bindMachineAgentWithHttpInfo(id = id, bindAgentReq = bindAgentReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAgentBinding
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AgentBinding
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -87,30 +87,30 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Binds a cloud Agent to one of the caller org&#39;s machines: the machine is recorded as running that Agent&#39;s @hanzo/bot runtime.
      * Binds a cloud Agent to one of the caller org&#39;s machines: the machine is recorded as running that Agent&#39;s @hanzo/bot runtime. The owning org is the validated tenant, never a client field.
      * @param id ID is the machine to bind, from the URL path.
-     * @param cloudBindAgentReq 
-     * @return ApiResponse<CloudAgentBinding?>
+     * @param bindAgentReq 
+     * @return ApiResponse<AgentBinding?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudBindMachineAgentWithHttpInfo(id: kotlin.String, cloudBindAgentReq: CloudBindAgentReq) : ApiResponse<CloudAgentBinding?> {
-        val localVariableConfig = cloudBindMachineAgentRequestConfig(id = id, cloudBindAgentReq = cloudBindAgentReq)
+    fun bindMachineAgentWithHttpInfo(id: kotlin.String, bindAgentReq: BindAgentReq) : ApiResponse<AgentBinding?> {
+        val localVariableConfig = bindMachineAgentRequestConfig(id = id, bindAgentReq = bindAgentReq)
 
-        return request<CloudBindAgentReq, CloudAgentBinding>(
+        return request<BindAgentReq, AgentBinding>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudBindMachineAgent
+     * To obtain the request config of the operation bindMachineAgent
      *
      * @param id ID is the machine to bind, from the URL path.
-     * @param cloudBindAgentReq 
+     * @param bindAgentReq 
      * @return RequestConfig
      */
-    fun cloudBindMachineAgentRequestConfig(id: kotlin.String, cloudBindAgentReq: CloudBindAgentReq) : RequestConfig<CloudBindAgentReq> {
-        val localVariableBody = cloudBindAgentReq
+    fun bindMachineAgentRequestConfig(id: kotlin.String, bindAgentReq: BindAgentReq) : RequestConfig<BindAgentReq> {
+        val localVariableBody = bindAgentReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -121,7 +121,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}/agent".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -139,8 +139,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteMachine(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteMachineWithHttpInfo(id = id)
+    fun deleteMachine(id: kotlin.String) : Unit {
+        val localVarResponse = deleteMachineWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -167,8 +167,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteMachineWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteMachineRequestConfig(id = id)
+    fun deleteMachineWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteMachineRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -176,12 +176,12 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteMachine
+     * To obtain the request config of the operation deleteMachine
      *
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
      * @return RequestConfig
      */
-    fun cloudDeleteMachineRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteMachineRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -191,7 +191,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -201,7 +201,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns one of the caller org&#39;s machines by its org-scoped name.
      * Returns one of the caller org&#39;s machines by its org-scoped name. Visor keys the lookup by owner/name, so an id belonging to another tenant resolves to not-found rather than another org&#39;s machine.
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
-     * @return CloudMachineView
+     * @return MachineView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -210,11 +210,11 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetMachine(id: kotlin.String) : CloudMachineView {
-        val localVarResponse = cloudGetMachineWithHttpInfo(id = id)
+    fun getMachine(id: kotlin.String) : MachineView {
+        val localVarResponse = getMachineWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMachineView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MachineView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -233,27 +233,27 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns one of the caller org&#39;s machines by its org-scoped name.
      * Returns one of the caller org&#39;s machines by its org-scoped name. Visor keys the lookup by owner/name, so an id belonging to another tenant resolves to not-found rather than another org&#39;s machine.
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
-     * @return ApiResponse<CloudMachineView?>
+     * @return ApiResponse<MachineView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetMachineWithHttpInfo(id: kotlin.String) : ApiResponse<CloudMachineView?> {
-        val localVariableConfig = cloudGetMachineRequestConfig(id = id)
+    fun getMachineWithHttpInfo(id: kotlin.String) : ApiResponse<MachineView?> {
+        val localVariableConfig = getMachineRequestConfig(id = id)
 
-        return request<Unit, CloudMachineView>(
+        return request<Unit, MachineView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetMachine
+     * To obtain the request config of the operation getMachine
      *
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
      * @return RequestConfig
      */
-    fun cloudGetMachineRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMachineRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -264,7 +264,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -274,7 +274,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns the agent binding of one of the caller org&#39;s machines, or 404 when the machine runs no bot runtime.
      * Returns the agent binding of one of the caller org&#39;s machines, or 404 when the machine runs no bot runtime.
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
-     * @return CloudAgentBinding
+     * @return AgentBinding
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -283,11 +283,11 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetMachineAgent(id: kotlin.String) : CloudAgentBinding {
-        val localVarResponse = cloudGetMachineAgentWithHttpInfo(id = id)
+    fun getMachineAgent(id: kotlin.String) : AgentBinding {
+        val localVarResponse = getMachineAgentWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAgentBinding
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AgentBinding
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -306,27 +306,27 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns the agent binding of one of the caller org&#39;s machines, or 404 when the machine runs no bot runtime.
      * Returns the agent binding of one of the caller org&#39;s machines, or 404 when the machine runs no bot runtime.
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
-     * @return ApiResponse<CloudAgentBinding?>
+     * @return ApiResponse<AgentBinding?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetMachineAgentWithHttpInfo(id: kotlin.String) : ApiResponse<CloudAgentBinding?> {
-        val localVariableConfig = cloudGetMachineAgentRequestConfig(id = id)
+    fun getMachineAgentWithHttpInfo(id: kotlin.String) : ApiResponse<AgentBinding?> {
+        val localVariableConfig = getMachineAgentRequestConfig(id = id)
 
-        return request<Unit, CloudAgentBinding>(
+        return request<Unit, AgentBinding>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetMachineAgent
+     * To obtain the request config of the operation getMachineAgent
      *
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
      * @return RequestConfig
      */
-    fun cloudGetMachineAgentRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getMachineAgentRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -337,7 +337,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}/agent".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -346,7 +346,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/machines/agents
      * Returns every agent↔machine binding in the caller&#39;s org — which machines are running which cloud Agent, with vm&#39;s own reconciled status.
      * Returns every agent↔machine binding in the caller&#39;s org — which machines are running which cloud Agent, with vm&#39;s own reconciled status.
-     * @return CloudBindingList
+     * @return BindingList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -355,11 +355,11 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListMachineAgents() : CloudBindingList {
-        val localVarResponse = cloudListMachineAgentsWithHttpInfo()
+    fun listMachineAgents() : BindingList {
+        val localVarResponse = listMachineAgentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBindingList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BindingList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -377,26 +377,26 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/machines/agents
      * Returns every agent↔machine binding in the caller&#39;s org — which machines are running which cloud Agent, with vm&#39;s own reconciled status.
      * Returns every agent↔machine binding in the caller&#39;s org — which machines are running which cloud Agent, with vm&#39;s own reconciled status.
-     * @return ApiResponse<CloudBindingList?>
+     * @return ApiResponse<BindingList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListMachineAgentsWithHttpInfo() : ApiResponse<CloudBindingList?> {
-        val localVariableConfig = cloudListMachineAgentsRequestConfig()
+    fun listMachineAgentsWithHttpInfo() : ApiResponse<BindingList?> {
+        val localVariableConfig = listMachineAgentsRequestConfig()
 
-        return request<Unit, CloudBindingList>(
+        return request<Unit, BindingList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListMachineAgents
+     * To obtain the request config of the operation listMachineAgents
      *
      * @return RequestConfig
      */
-    fun cloudListMachineAgentsRequestConfig() : RequestConfig<Unit> {
+    fun listMachineAgentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -407,7 +407,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/agents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -416,7 +416,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/machines
      * Returns every machine the caller&#39;s org has — Visor&#39;s registry, the live DigitalOcean droplets and the DOKS worker nodes (deduped into one union), plus the BYO machines that dialed in via &#x60;hanzo link&#x60; (provider \&quot;byo\&quot;).
      * Returns every machine the caller&#39;s org has — Visor&#39;s registry, the live DigitalOcean droplets and the DOKS worker nodes (deduped into one union), plus the BYO machines that dialed in via &#x60;hanzo link&#x60; (provider \&quot;byo\&quot;).  A source Visor cannot answer for is logged and skipped, never an error: one wedged upstream must not hide the machines the other sources can see.
-     * @return CloudMachineList
+     * @return MachineList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -425,11 +425,11 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListMachines() : CloudMachineList {
-        val localVarResponse = cloudListMachinesWithHttpInfo()
+    fun listMachines() : MachineList {
+        val localVarResponse = listMachinesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMachineList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MachineList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -447,26 +447,26 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/machines
      * Returns every machine the caller&#39;s org has — Visor&#39;s registry, the live DigitalOcean droplets and the DOKS worker nodes (deduped into one union), plus the BYO machines that dialed in via &#x60;hanzo link&#x60; (provider \&quot;byo\&quot;).
      * Returns every machine the caller&#39;s org has — Visor&#39;s registry, the live DigitalOcean droplets and the DOKS worker nodes (deduped into one union), plus the BYO machines that dialed in via &#x60;hanzo link&#x60; (provider \&quot;byo\&quot;).  A source Visor cannot answer for is logged and skipped, never an error: one wedged upstream must not hide the machines the other sources can see.
-     * @return ApiResponse<CloudMachineList?>
+     * @return ApiResponse<MachineList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListMachinesWithHttpInfo() : ApiResponse<CloudMachineList?> {
-        val localVariableConfig = cloudListMachinesRequestConfig()
+    fun listMachinesWithHttpInfo() : ApiResponse<MachineList?> {
+        val localVariableConfig = listMachinesRequestConfig()
 
-        return request<Unit, CloudMachineList>(
+        return request<Unit, MachineList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListMachines
+     * To obtain the request config of the operation listMachines
      *
      * @return RequestConfig
      */
-    fun cloudListMachinesRequestConfig() : RequestConfig<Unit> {
+    fun listMachinesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -477,15 +477,15 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/machines
-     * 
-     * 
+     * Launch a metered machine for your org, or price one first with dryRun
+     * Provisions a machine owned by the caller&#39;s org and answers 201 with the machine. Send &#x60;dryRun: true&#x60; to get a PRICE QUOTE instead: 200 with the upstream quote passed through verbatim, nothing launched and nothing spent. Two response shapes on one address is the rule to know, and it is why this is not a typed op.  Metering is not this plane&#39;s: the launch fronts the compute provider&#39;s resell endpoint, which owns the balance gate and the per-hour meter, and cloud only forwards the tenant. Ownership is the validated principal&#39;s org and is never read from the body, so a launch always lands in the caller&#39;s OWN tenant and the machine it creates is only ever visible to that tenant. Fails closed: a validated principal is required (403 without one) and &#x60;size&#x60; (or its &#x60;instanceType&#x60; alias) is required (400).
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -494,8 +494,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Machines() : Unit {
-        val localVarResponse = cloudPostV1MachinesWithHttpInfo()
+    fun postV1Machines() : Unit {
+        val localVarResponse = postV1MachinesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -514,15 +514,15 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/machines
-     * 
-     * 
+     * Launch a metered machine for your org, or price one first with dryRun
+     * Provisions a machine owned by the caller&#39;s org and answers 201 with the machine. Send &#x60;dryRun: true&#x60; to get a PRICE QUOTE instead: 200 with the upstream quote passed through verbatim, nothing launched and nothing spent. Two response shapes on one address is the rule to know, and it is why this is not a typed op.  Metering is not this plane&#39;s: the launch fronts the compute provider&#39;s resell endpoint, which owns the balance gate and the per-hour meter, and cloud only forwards the tenant. Ownership is the validated principal&#39;s org and is never read from the body, so a launch always lands in the caller&#39;s OWN tenant and the machine it creates is only ever visible to that tenant. Fails closed: a validated principal is required (403 without one) and &#x60;size&#x60; (or its &#x60;instanceType&#x60; alias) is required (400).
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MachinesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1MachinesRequestConfig()
+    fun postV1MachinesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MachinesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -530,11 +530,11 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Machines
+     * To obtain the request config of the operation postV1Machines
      *
      * @return RequestConfig
      */
-    fun cloudPostV1MachinesRequestConfig() : RequestConfig<Unit> {
+    fun postV1MachinesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -544,7 +544,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -562,8 +562,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudUnbindMachineAgent(id: kotlin.String) : Unit {
-        val localVarResponse = cloudUnbindMachineAgentWithHttpInfo(id = id)
+    fun unbindMachineAgent(id: kotlin.String) : Unit {
+        val localVarResponse = unbindMachineAgentWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -590,8 +590,8 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudUnbindMachineAgentWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudUnbindMachineAgentRequestConfig(id = id)
+    fun unbindMachineAgentWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = unbindMachineAgentRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -599,12 +599,12 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudUnbindMachineAgent
+     * To obtain the request config of the operation unbindMachineAgent
      *
      * @param id ID is the machine&#39;s org-scoped NAME — the stable key Visor addresses a machine by (owner/name), not the ephemeral provider id.
      * @return RequestConfig
      */
-    fun cloudUnbindMachineAgentRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun unbindMachineAgentRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -614,7 +614,7 @@ class MachinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/machines/{id}/agent".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

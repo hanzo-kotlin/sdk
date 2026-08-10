@@ -19,13 +19,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudRegistryImageList
-import ai.hanzo.cloud.model.CloudRegistryMint
-import ai.hanzo.cloud.model.CloudRegistryPackageList
-import ai.hanzo.cloud.model.CloudRegistryProjectList
-import ai.hanzo.cloud.model.CloudRegistryStatus
-import ai.hanzo.cloud.model.CloudRegistryTagList
-import ai.hanzo.cloud.model.CloudRegistryToken
+import ai.hanzo.cloud.model.RegistryImageList
+import ai.hanzo.cloud.model.RegistryMint
+import ai.hanzo.cloud.model.RegistryPackageList
+import ai.hanzo.cloud.model.RegistryProjectList
+import ai.hanzo.cloud.model.RegistryStatus
+import ai.hanzo.cloud.model.RegistryTagList
+import ai.hanzo.cloud.model.RegistryToken
 
 import com.google.gson.annotations.SerializedName
 
@@ -55,7 +55,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/registry/images
      * Images lists the org&#39;s container repositories, read live from the OCI catalog and filtered server-side to the org&#39;s namespace — the page can only ever hold the caller&#39;s own images.
      * Images lists the org&#39;s container repositories, read live from the OCI catalog and filtered server-side to the org&#39;s namespace — the page can only ever hold the caller&#39;s own images.
-     * @return CloudRegistryImageList
+     * @return RegistryImageList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -64,11 +64,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1RegistryImages() : CloudRegistryImageList {
-        val localVarResponse = cloudGetV1RegistryImagesWithHttpInfo()
+    fun getV1RegistryImages() : RegistryImageList {
+        val localVarResponse = getV1RegistryImagesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegistryImageList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryImageList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -86,26 +86,26 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/registry/images
      * Images lists the org&#39;s container repositories, read live from the OCI catalog and filtered server-side to the org&#39;s namespace — the page can only ever hold the caller&#39;s own images.
      * Images lists the org&#39;s container repositories, read live from the OCI catalog and filtered server-side to the org&#39;s namespace — the page can only ever hold the caller&#39;s own images.
-     * @return ApiResponse<CloudRegistryImageList?>
+     * @return ApiResponse<RegistryImageList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1RegistryImagesWithHttpInfo() : ApiResponse<CloudRegistryImageList?> {
-        val localVariableConfig = cloudGetV1RegistryImagesRequestConfig()
+    fun getV1RegistryImagesWithHttpInfo() : ApiResponse<RegistryImageList?> {
+        val localVariableConfig = getV1RegistryImagesRequestConfig()
 
-        return request<Unit, CloudRegistryImageList>(
+        return request<Unit, RegistryImageList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1RegistryImages
+     * To obtain the request config of the operation getV1RegistryImages
      *
      * @return RequestConfig
      */
-    fun cloudGetV1RegistryImagesRequestConfig() : RequestConfig<Unit> {
+    fun getV1RegistryImagesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -116,7 +116,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/images",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -126,7 +126,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Packages lists the org&#39;s npm packages — &#x60;&lt;org&gt;&#x60; and &#x60;@&lt;org&gt;/…&#x60; — from the npm registry&#39;s search index, optionally narrowed by a query within that scope.
      * Packages lists the org&#39;s npm packages — &#x60;&lt;org&gt;&#x60; and &#x60;@&lt;org&gt;/…&#x60; — from the npm registry&#39;s search index, optionally narrowed by a query within that scope. The org boundary is applied server-side after the search, so a query can never widen it.
      * @param query Query narrows the listing within the org&#39;s scope when present; the org boundary itself is never widened by it. It rides the query string. (optional)
-     * @return CloudRegistryPackageList
+     * @return RegistryPackageList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -135,11 +135,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1RegistryPackages(query: kotlin.String? = null) : CloudRegistryPackageList {
-        val localVarResponse = cloudGetV1RegistryPackagesWithHttpInfo(query = query)
+    fun getV1RegistryPackages(query: kotlin.String? = null) : RegistryPackageList {
+        val localVarResponse = getV1RegistryPackagesWithHttpInfo(query = query)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegistryPackageList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryPackageList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -158,27 +158,27 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Packages lists the org&#39;s npm packages — &#x60;&lt;org&gt;&#x60; and &#x60;@&lt;org&gt;/…&#x60; — from the npm registry&#39;s search index, optionally narrowed by a query within that scope.
      * Packages lists the org&#39;s npm packages — &#x60;&lt;org&gt;&#x60; and &#x60;@&lt;org&gt;/…&#x60; — from the npm registry&#39;s search index, optionally narrowed by a query within that scope. The org boundary is applied server-side after the search, so a query can never widen it.
      * @param query Query narrows the listing within the org&#39;s scope when present; the org boundary itself is never widened by it. It rides the query string. (optional)
-     * @return ApiResponse<CloudRegistryPackageList?>
+     * @return ApiResponse<RegistryPackageList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1RegistryPackagesWithHttpInfo(query: kotlin.String?) : ApiResponse<CloudRegistryPackageList?> {
-        val localVariableConfig = cloudGetV1RegistryPackagesRequestConfig(query = query)
+    fun getV1RegistryPackagesWithHttpInfo(query: kotlin.String?) : ApiResponse<RegistryPackageList?> {
+        val localVariableConfig = getV1RegistryPackagesRequestConfig(query = query)
 
-        return request<Unit, CloudRegistryPackageList>(
+        return request<Unit, RegistryPackageList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1RegistryPackages
+     * To obtain the request config of the operation getV1RegistryPackages
      *
      * @param query Query narrows the listing within the org&#39;s scope when present; the org boundary itself is never widened by it. It rides the query string. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1RegistryPackagesRequestConfig(query: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1RegistryPackagesRequestConfig(query: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -194,7 +194,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/packages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -203,7 +203,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/registry/projects
      * Projects lists the namespaces the caller can see with what each holds: the org&#39;s slug, its repository count on the OCI catalog, and its package count on the npm registry.
      * Projects lists the namespaces the caller can see with what each holds: the org&#39;s slug, its repository count on the OCI catalog, and its package count on the npm registry. Today that is exactly one row — the caller&#39;s org.
-     * @return CloudRegistryProjectList
+     * @return RegistryProjectList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -212,11 +212,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1RegistryProjects() : CloudRegistryProjectList {
-        val localVarResponse = cloudGetV1RegistryProjectsWithHttpInfo()
+    fun getV1RegistryProjects() : RegistryProjectList {
+        val localVarResponse = getV1RegistryProjectsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegistryProjectList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryProjectList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -234,26 +234,26 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/registry/projects
      * Projects lists the namespaces the caller can see with what each holds: the org&#39;s slug, its repository count on the OCI catalog, and its package count on the npm registry.
      * Projects lists the namespaces the caller can see with what each holds: the org&#39;s slug, its repository count on the OCI catalog, and its package count on the npm registry. Today that is exactly one row — the caller&#39;s org.
-     * @return ApiResponse<CloudRegistryProjectList?>
+     * @return ApiResponse<RegistryProjectList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1RegistryProjectsWithHttpInfo() : ApiResponse<CloudRegistryProjectList?> {
-        val localVariableConfig = cloudGetV1RegistryProjectsRequestConfig()
+    fun getV1RegistryProjectsWithHttpInfo() : ApiResponse<RegistryProjectList?> {
+        val localVariableConfig = getV1RegistryProjectsRequestConfig()
 
-        return request<Unit, CloudRegistryProjectList>(
+        return request<Unit, RegistryProjectList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1RegistryProjects
+     * To obtain the request config of the operation getV1RegistryProjects
      *
      * @return RequestConfig
      */
-    fun cloudGetV1RegistryProjectsRequestConfig() : RequestConfig<Unit> {
+    fun getV1RegistryProjectsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -264,7 +264,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/projects",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -273,7 +273,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/registry/status
      * Status reports whether the OCI and npm registries are reachable and, when the OCI half is auth-gated, which token realm its challenge advertises — an honest lens for \&quot;is the registry plane up\&quot;, never a fabricated ok.
      * Status reports whether the OCI and npm registries are reachable and, when the OCI half is auth-gated, which token realm its challenge advertises — an honest lens for \&quot;is the registry plane up\&quot;, never a fabricated ok.
-     * @return CloudRegistryStatus
+     * @return RegistryStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -282,11 +282,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1RegistryStatus() : CloudRegistryStatus {
-        val localVarResponse = cloudGetV1RegistryStatusWithHttpInfo()
+    fun getV1RegistryStatus() : RegistryStatus {
+        val localVarResponse = getV1RegistryStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegistryStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -304,26 +304,26 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/registry/status
      * Status reports whether the OCI and npm registries are reachable and, when the OCI half is auth-gated, which token realm its challenge advertises — an honest lens for \&quot;is the registry plane up\&quot;, never a fabricated ok.
      * Status reports whether the OCI and npm registries are reachable and, when the OCI half is auth-gated, which token realm its challenge advertises — an honest lens for \&quot;is the registry plane up\&quot;, never a fabricated ok.
-     * @return ApiResponse<CloudRegistryStatus?>
+     * @return ApiResponse<RegistryStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1RegistryStatusWithHttpInfo() : ApiResponse<CloudRegistryStatus?> {
-        val localVariableConfig = cloudGetV1RegistryStatusRequestConfig()
+    fun getV1RegistryStatusWithHttpInfo() : ApiResponse<RegistryStatus?> {
+        val localVariableConfig = getV1RegistryStatusRequestConfig()
 
-        return request<Unit, CloudRegistryStatus>(
+        return request<Unit, RegistryStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1RegistryStatus
+     * To obtain the request config of the operation getV1RegistryStatus
      *
      * @return RequestConfig
      */
-    fun cloudGetV1RegistryStatusRequestConfig() : RequestConfig<Unit> {
+    fun getV1RegistryStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -334,7 +334,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -344,7 +344,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Tags lists one org-owned repository&#39;s tags, read live from the OCI registry.
      * Tags lists one org-owned repository&#39;s tags, read live from the OCI registry. The repository is addressed inside the org&#39;s namespace — a name outside it cannot be expressed, and an unknown one answers 404.
      * @param image Image is the repository name inside the org&#39;s namespace, as returned by the images op. It rides the query string. (optional)
-     * @return CloudRegistryTagList
+     * @return RegistryTagList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -353,11 +353,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1RegistryTags(image: kotlin.String? = null) : CloudRegistryTagList {
-        val localVarResponse = cloudGetV1RegistryTagsWithHttpInfo(image = image)
+    fun getV1RegistryTags(image: kotlin.String? = null) : RegistryTagList {
+        val localVarResponse = getV1RegistryTagsWithHttpInfo(image = image)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegistryTagList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryTagList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -376,27 +376,27 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Tags lists one org-owned repository&#39;s tags, read live from the OCI registry.
      * Tags lists one org-owned repository&#39;s tags, read live from the OCI registry. The repository is addressed inside the org&#39;s namespace — a name outside it cannot be expressed, and an unknown one answers 404.
      * @param image Image is the repository name inside the org&#39;s namespace, as returned by the images op. It rides the query string. (optional)
-     * @return ApiResponse<CloudRegistryTagList?>
+     * @return ApiResponse<RegistryTagList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1RegistryTagsWithHttpInfo(image: kotlin.String?) : ApiResponse<CloudRegistryTagList?> {
-        val localVariableConfig = cloudGetV1RegistryTagsRequestConfig(image = image)
+    fun getV1RegistryTagsWithHttpInfo(image: kotlin.String?) : ApiResponse<RegistryTagList?> {
+        val localVariableConfig = getV1RegistryTagsRequestConfig(image = image)
 
-        return request<Unit, CloudRegistryTagList>(
+        return request<Unit, RegistryTagList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1RegistryTags
+     * To obtain the request config of the operation getV1RegistryTags
      *
      * @param image Image is the repository name inside the org&#39;s namespace, as returned by the images op. It rides the query string. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1RegistryTagsRequestConfig(image: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1RegistryTagsRequestConfig(image: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -412,7 +412,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/tags",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -421,8 +421,8 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/registry/token
      * Token mints a short-lived, pull-only registry token for exactly one of the org&#39;s images, through the same IAM realm the docker CLI authenticates against.
      * Token mints a short-lived, pull-only registry token for exactly one of the org&#39;s images, through the same IAM realm the docker CLI authenticates against. The scope is pinned server-side to &#x60;&lt;org&gt;/&lt;image&gt;&#x60; with the &#x60;pull&#x60; action — no field exists to name another org&#39;s image or ask for push. Use it as &#x60;Authorization: Bearer …&#x60; on the OCI wire; it expires in minutes.
-     * @param cloudRegistryMint 
-     * @return CloudRegistryToken
+     * @param registryMint 
+     * @return RegistryToken
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -431,11 +431,11 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1RegistryToken(cloudRegistryMint: CloudRegistryMint) : CloudRegistryToken {
-        val localVarResponse = cloudPostV1RegistryTokenWithHttpInfo(cloudRegistryMint = cloudRegistryMint)
+    fun postV1RegistryToken(registryMint: RegistryMint) : RegistryToken {
+        val localVarResponse = postV1RegistryTokenWithHttpInfo(registryMint = registryMint)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegistryToken
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegistryToken
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -453,29 +453,29 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/registry/token
      * Token mints a short-lived, pull-only registry token for exactly one of the org&#39;s images, through the same IAM realm the docker CLI authenticates against.
      * Token mints a short-lived, pull-only registry token for exactly one of the org&#39;s images, through the same IAM realm the docker CLI authenticates against. The scope is pinned server-side to &#x60;&lt;org&gt;/&lt;image&gt;&#x60; with the &#x60;pull&#x60; action — no field exists to name another org&#39;s image or ask for push. Use it as &#x60;Authorization: Bearer …&#x60; on the OCI wire; it expires in minutes.
-     * @param cloudRegistryMint 
-     * @return ApiResponse<CloudRegistryToken?>
+     * @param registryMint 
+     * @return ApiResponse<RegistryToken?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1RegistryTokenWithHttpInfo(cloudRegistryMint: CloudRegistryMint) : ApiResponse<CloudRegistryToken?> {
-        val localVariableConfig = cloudPostV1RegistryTokenRequestConfig(cloudRegistryMint = cloudRegistryMint)
+    fun postV1RegistryTokenWithHttpInfo(registryMint: RegistryMint) : ApiResponse<RegistryToken?> {
+        val localVariableConfig = postV1RegistryTokenRequestConfig(registryMint = registryMint)
 
-        return request<CloudRegistryMint, CloudRegistryToken>(
+        return request<RegistryMint, RegistryToken>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1RegistryToken
+     * To obtain the request config of the operation postV1RegistryToken
      *
-     * @param cloudRegistryMint 
+     * @param registryMint 
      * @return RequestConfig
      */
-    fun cloudPostV1RegistryTokenRequestConfig(cloudRegistryMint: CloudRegistryMint) : RequestConfig<CloudRegistryMint> {
-        val localVariableBody = cloudRegistryMint
+    fun postV1RegistryTokenRequestConfig(registryMint: RegistryMint) : RequestConfig<RegistryMint> {
+        val localVariableBody = registryMint
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -486,7 +486,7 @@ class RegistryApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/registry/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

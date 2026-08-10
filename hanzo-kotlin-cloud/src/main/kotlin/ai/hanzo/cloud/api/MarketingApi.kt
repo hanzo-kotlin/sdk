@@ -19,34 +19,33 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAudience
-import ai.hanzo.cloud.model.CloudAudienceList
-import ai.hanzo.cloud.model.CloudAudiencePreview
-import ai.hanzo.cloud.model.CloudCalendarPost
-import ai.hanzo.cloud.model.CloudCampaign
-import ai.hanzo.cloud.model.CloudCampaignList
-import ai.hanzo.cloud.model.CloudEnrollInput
-import ai.hanzo.cloud.model.CloudEnrollResult
-import ai.hanzo.cloud.model.CloudEnrollmentList
-import ai.hanzo.cloud.model.CloudPostList
-import ai.hanzo.cloud.model.CloudPromoList
-import ai.hanzo.cloud.model.CloudQuote
-import ai.hanzo.cloud.model.CloudRedeemInput
-import ai.hanzo.cloud.model.CloudRedeemResult
-import ai.hanzo.cloud.model.CloudRedemption
-import ai.hanzo.cloud.model.CloudScheduleInput
-import ai.hanzo.cloud.model.CloudSequence
-import ai.hanzo.cloud.model.CloudSequenceList
-import ai.hanzo.cloud.model.CloudSequenceStatus
-import ai.hanzo.cloud.model.CloudSequenceView
-import ai.hanzo.cloud.model.CloudStep
-import ai.hanzo.cloud.model.CloudStepInput
-import ai.hanzo.cloud.model.CloudStepList
-import ai.hanzo.cloud.model.CloudSummary
-import ai.hanzo.cloud.model.CloudSuppression
-import ai.hanzo.cloud.model.CloudSuppressionList
-import ai.hanzo.cloud.model.CloudUnsubscribed
-import ai.hanzo.cloud.model.CommerceError
+import ai.hanzo.cloud.model.Audience
+import ai.hanzo.cloud.model.AudienceList
+import ai.hanzo.cloud.model.AudiencePreview
+import ai.hanzo.cloud.model.CalendarPost
+import ai.hanzo.cloud.model.Campaign
+import ai.hanzo.cloud.model.CampaignList
+import ai.hanzo.cloud.model.EnrollInput
+import ai.hanzo.cloud.model.EnrollResult
+import ai.hanzo.cloud.model.EnrollmentList
+import ai.hanzo.cloud.model.PostList
+import ai.hanzo.cloud.model.PromoList
+import ai.hanzo.cloud.model.Quote
+import ai.hanzo.cloud.model.RedeemInput
+import ai.hanzo.cloud.model.RedeemResult
+import ai.hanzo.cloud.model.Redemption
+import ai.hanzo.cloud.model.ScheduleInput
+import ai.hanzo.cloud.model.Sequence
+import ai.hanzo.cloud.model.SequenceList
+import ai.hanzo.cloud.model.SequenceStatus
+import ai.hanzo.cloud.model.SequenceView
+import ai.hanzo.cloud.model.Step
+import ai.hanzo.cloud.model.StepInput
+import ai.hanzo.cloud.model.StepList
+import ai.hanzo.cloud.model.Summary
+import ai.hanzo.cloud.model.Suppression
+import ai.hanzo.cloud.model.SuppressionList
+import ai.hanzo.cloud.model.Unsubscribed
 
 import com.google.gson.annotations.SerializedName
 
@@ -85,8 +84,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MarketingAudiencesId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1MarketingAudiencesIdWithHttpInfo(id = id)
+    fun deleteV1MarketingAudiencesById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1MarketingAudiencesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -113,8 +112,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MarketingAudiencesIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MarketingAudiencesIdRequestConfig(id = id)
+    fun deleteV1MarketingAudiencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MarketingAudiencesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -122,12 +121,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MarketingAudiencesId
+     * To obtain the request config of the operation deleteV1MarketingAudiencesById
      *
      * @param id ID is the audience id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MarketingAudiencesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1MarketingAudiencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -137,7 +136,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -155,8 +154,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MarketingCalendarId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1MarketingCalendarIdWithHttpInfo(id = id)
+    fun deleteV1MarketingCalendarById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1MarketingCalendarByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -183,8 +182,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MarketingCalendarIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MarketingCalendarIdRequestConfig(id = id)
+    fun deleteV1MarketingCalendarByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MarketingCalendarByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -192,12 +191,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MarketingCalendarId
+     * To obtain the request config of the operation deleteV1MarketingCalendarById
      *
      * @param id ID is the post id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MarketingCalendarIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1MarketingCalendarByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -207,7 +206,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -225,8 +224,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MarketingCampaignsId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1MarketingCampaignsIdWithHttpInfo(id = id)
+    fun deleteV1MarketingCampaignsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1MarketingCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -253,8 +252,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MarketingCampaignsIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MarketingCampaignsIdRequestConfig(id = id)
+    fun deleteV1MarketingCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MarketingCampaignsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -262,12 +261,12 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MarketingCampaignsId
+     * To obtain the request config of the operation deleteV1MarketingCampaignsById
      *
      * @param id ID is the campaign id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MarketingCampaignsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1MarketingCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -277,7 +276,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -298,8 +297,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MarketingSuppressions(channel: kotlin.String? = null, address: kotlin.String? = null, reason: kotlin.String? = null, createdAt: kotlin.Int? = null) : Unit {
-        val localVarResponse = cloudDeleteV1MarketingSuppressionsWithHttpInfo(channel = channel, address = address, reason = reason, createdAt = createdAt)
+    fun deleteV1MarketingSuppressions(channel: kotlin.String? = null, address: kotlin.String? = null, reason: kotlin.String? = null, createdAt: kotlin.Int? = null) : Unit {
+        val localVarResponse = deleteV1MarketingSuppressionsWithHttpInfo(channel = channel, address = address, reason = reason, createdAt = createdAt)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -329,8 +328,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MarketingSuppressionsWithHttpInfo(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MarketingSuppressionsRequestConfig(channel = channel, address = address, reason = reason, createdAt = createdAt)
+    fun deleteV1MarketingSuppressionsWithHttpInfo(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MarketingSuppressionsRequestConfig(channel = channel, address = address, reason = reason, createdAt = createdAt)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -338,7 +337,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MarketingSuppressions
+     * To obtain the request config of the operation deleteV1MarketingSuppressions
      *
      * @param channel Channel is the surface opted out of: email, sms, social, meta, google or tiktok. Empty means email. Opting out of one leaves the others reachable. (optional)
      * @param address Address is the recipient, normalized (lower-cased, trimmed) so an opt-out cannot be slipped past on a case or whitespace difference. Required. (optional)
@@ -346,7 +345,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param createdAt CreatedAt is unix seconds, server-assigned. (optional)
      * @return RequestConfig
      */
-    fun cloudDeleteV1MarketingSuppressionsRequestConfig(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : RequestConfig<Unit> {
+    fun deleteV1MarketingSuppressionsRequestConfig(channel: kotlin.String?, address: kotlin.String?, reason: kotlin.String?, createdAt: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -370,7 +369,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/suppressions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -380,7 +379,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s saved audiences, most recently updated first.
      * Returns the org&#39;s saved audiences, most recently updated first.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return CloudAudienceList
+     * @return AudienceList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -389,11 +388,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingAudiences(limit: kotlin.Int? = null) : CloudAudienceList {
-        val localVarResponse = cloudGetV1MarketingAudiencesWithHttpInfo(limit = limit)
+    fun getV1MarketingAudiences(limit: kotlin.Int? = null) : AudienceList {
+        val localVarResponse = getV1MarketingAudiencesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAudienceList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AudienceList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -412,27 +411,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s saved audiences, most recently updated first.
      * Returns the org&#39;s saved audiences, most recently updated first.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return ApiResponse<CloudAudienceList?>
+     * @return ApiResponse<AudienceList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingAudiencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudAudienceList?> {
-        val localVariableConfig = cloudGetV1MarketingAudiencesRequestConfig(limit = limit)
+    fun getV1MarketingAudiencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<AudienceList?> {
+        val localVariableConfig = getV1MarketingAudiencesRequestConfig(limit = limit)
 
-        return request<Unit, CloudAudienceList>(
+        return request<Unit, AudienceList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingAudiences
+     * To obtain the request config of the operation getV1MarketingAudiences
      *
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingAudiencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MarketingAudiencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -448,7 +447,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -458,7 +457,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s saved audiences.
      * Returns one of the caller org&#39;s saved audiences. An audience belonging to another org reads as not found.
      * @param id ID is the audience id from the path, as returned by create.
-     * @return CloudAudience
+     * @return Audience
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -467,11 +466,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingAudiencesId(id: kotlin.String) : CloudAudience {
-        val localVarResponse = cloudGetV1MarketingAudiencesIdWithHttpInfo(id = id)
+    fun getV1MarketingAudiencesById(id: kotlin.String) : Audience {
+        val localVarResponse = getV1MarketingAudiencesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAudience
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Audience
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -490,27 +489,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s saved audiences.
      * Returns one of the caller org&#39;s saved audiences. An audience belonging to another org reads as not found.
      * @param id ID is the audience id from the path, as returned by create.
-     * @return ApiResponse<CloudAudience?>
+     * @return ApiResponse<Audience?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingAudiencesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudAudience?> {
-        val localVariableConfig = cloudGetV1MarketingAudiencesIdRequestConfig(id = id)
+    fun getV1MarketingAudiencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Audience?> {
+        val localVariableConfig = getV1MarketingAudiencesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudAudience>(
+        return request<Unit, Audience>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingAudiencesId
+     * To obtain the request config of the operation getV1MarketingAudiencesById
      *
      * @param id ID is the audience id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingAudiencesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MarketingAudiencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -521,7 +520,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -531,7 +530,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Evaluates the cohort LIVE — the same resolution an enrollment would run — and reports how big it is and how many real mailboxes it reaches.
      * Evaluates the cohort LIVE — the same resolution an enrollment would run — and reports how big it is and how many real mailboxes it reaches. It is the honest answer to \&quot;is this send worth making\&quot;: a cohort of 500 that mails 3 says so, in deliverable and unmatched. Nothing is sent.
      * @param id ID is the audience id from the path, as returned by create.
-     * @return CloudAudiencePreview
+     * @return AudiencePreview
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -540,11 +539,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingAudiencesIdPreview(id: kotlin.String) : CloudAudiencePreview {
-        val localVarResponse = cloudGetV1MarketingAudiencesIdPreviewWithHttpInfo(id = id)
+    fun getV1MarketingAudiencesByIdPreview(id: kotlin.String) : AudiencePreview {
+        val localVarResponse = getV1MarketingAudiencesByIdPreviewWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAudiencePreview
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AudiencePreview
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -563,27 +562,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Evaluates the cohort LIVE — the same resolution an enrollment would run — and reports how big it is and how many real mailboxes it reaches.
      * Evaluates the cohort LIVE — the same resolution an enrollment would run — and reports how big it is and how many real mailboxes it reaches. It is the honest answer to \&quot;is this send worth making\&quot;: a cohort of 500 that mails 3 says so, in deliverable and unmatched. Nothing is sent.
      * @param id ID is the audience id from the path, as returned by create.
-     * @return ApiResponse<CloudAudiencePreview?>
+     * @return ApiResponse<AudiencePreview?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingAudiencesIdPreviewWithHttpInfo(id: kotlin.String) : ApiResponse<CloudAudiencePreview?> {
-        val localVariableConfig = cloudGetV1MarketingAudiencesIdPreviewRequestConfig(id = id)
+    fun getV1MarketingAudiencesByIdPreviewWithHttpInfo(id: kotlin.String) : ApiResponse<AudiencePreview?> {
+        val localVariableConfig = getV1MarketingAudiencesByIdPreviewRequestConfig(id = id)
 
-        return request<Unit, CloudAudiencePreview>(
+        return request<Unit, AudiencePreview>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingAudiencesIdPreview
+     * To obtain the request config of the operation getV1MarketingAudiencesByIdPreview
      *
      * @param id ID is the audience id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingAudiencesIdPreviewRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MarketingAudiencesByIdPreviewRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -594,7 +593,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences/{id}/preview".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -605,7 +604,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s calendar, soonest scheduled first, optionally narrowed to one status.
      * @param status Status keeps only posts in that state (draft, scheduled, published, failed, canceled). Empty means every post. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return CloudPostList
+     * @return PostList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -614,11 +613,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingCalendar(status: kotlin.String? = null, limit: kotlin.Int? = null) : CloudPostList {
-        val localVarResponse = cloudGetV1MarketingCalendarWithHttpInfo(status = status, limit = limit)
+    fun getV1MarketingCalendar(status: kotlin.String? = null, limit: kotlin.Int? = null) : PostList {
+        val localVarResponse = getV1MarketingCalendarWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPostList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PostList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -638,28 +637,28 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s calendar, soonest scheduled first, optionally narrowed to one status.
      * @param status Status keeps only posts in that state (draft, scheduled, published, failed, canceled). Empty means every post. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return ApiResponse<CloudPostList?>
+     * @return ApiResponse<PostList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingCalendarWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudPostList?> {
-        val localVariableConfig = cloudGetV1MarketingCalendarRequestConfig(status = status, limit = limit)
+    fun getV1MarketingCalendarWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<PostList?> {
+        val localVariableConfig = getV1MarketingCalendarRequestConfig(status = status, limit = limit)
 
-        return request<Unit, CloudPostList>(
+        return request<Unit, PostList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingCalendar
+     * To obtain the request config of the operation getV1MarketingCalendar
      *
      * @param status Status keeps only posts in that state (draft, scheduled, published, failed, canceled). Empty means every post. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingCalendarRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MarketingCalendarRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -678,7 +677,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -688,7 +687,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s posts, including the exact error behind a failed publish.
      * Returns one of the caller org&#39;s posts, including the exact error behind a failed publish. A post belonging to another org reads as not found.
      * @param id ID is the post id from the path, as returned by create.
-     * @return CloudCalendarPost
+     * @return CalendarPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -697,11 +696,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingCalendarId(id: kotlin.String) : CloudCalendarPost {
-        val localVarResponse = cloudGetV1MarketingCalendarIdWithHttpInfo(id = id)
+    fun getV1MarketingCalendarById(id: kotlin.String) : CalendarPost {
+        val localVarResponse = getV1MarketingCalendarByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCalendarPost
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -720,27 +719,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s posts, including the exact error behind a failed publish.
      * Returns one of the caller org&#39;s posts, including the exact error behind a failed publish. A post belonging to another org reads as not found.
      * @param id ID is the post id from the path, as returned by create.
-     * @return ApiResponse<CloudCalendarPost?>
+     * @return ApiResponse<CalendarPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingCalendarIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCalendarPost?> {
-        val localVariableConfig = cloudGetV1MarketingCalendarIdRequestConfig(id = id)
+    fun getV1MarketingCalendarByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = getV1MarketingCalendarByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCalendarPost>(
+        return request<Unit, CalendarPost>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingCalendarId
+     * To obtain the request config of the operation getV1MarketingCalendarById
      *
      * @param id ID is the post id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingCalendarIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MarketingCalendarByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -751,7 +750,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -762,7 +761,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s campaigns, most recently updated first, optionally narrowed to one lifecycle status.
      * @param status Status keeps only campaigns in that lifecycle state (draft, scheduled, active, paused, completed). Empty means every campaign. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return CloudCampaignList
+     * @return CampaignList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -771,11 +770,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CloudCampaignList {
-        val localVarResponse = cloudGetV1MarketingCampaignsWithHttpInfo(status = status, limit = limit)
+    fun getV1MarketingCampaigns(status: kotlin.String? = null, limit: kotlin.Int? = null) : CampaignList {
+        val localVarResponse = getV1MarketingCampaignsWithHttpInfo(status = status, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaignList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CampaignList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -795,28 +794,28 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s campaigns, most recently updated first, optionally narrowed to one lifecycle status.
      * @param status Status keeps only campaigns in that lifecycle state (draft, scheduled, active, paused, completed). Empty means every campaign. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return ApiResponse<CloudCampaignList?>
+     * @return ApiResponse<CampaignList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudCampaignList?> {
-        val localVariableConfig = cloudGetV1MarketingCampaignsRequestConfig(status = status, limit = limit)
+    fun getV1MarketingCampaignsWithHttpInfo(status: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CampaignList?> {
+        val localVariableConfig = getV1MarketingCampaignsRequestConfig(status = status, limit = limit)
 
-        return request<Unit, CloudCampaignList>(
+        return request<Unit, CampaignList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingCampaigns
+     * To obtain the request config of the operation getV1MarketingCampaigns
      *
      * @param status Status keeps only campaigns in that lifecycle state (draft, scheduled, active, paused, completed). Empty means every campaign. (optional)
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MarketingCampaignsRequestConfig(status: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -835,7 +834,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -845,7 +844,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s campaigns.
      * Returns one of the caller org&#39;s campaigns. A campaign belonging to another org reads as not found.
      * @param id ID is the campaign id from the path, as returned by create.
-     * @return CloudCampaign
+     * @return Campaign
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -854,11 +853,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingCampaignsId(id: kotlin.String) : CloudCampaign {
-        val localVarResponse = cloudGetV1MarketingCampaignsIdWithHttpInfo(id = id)
+    fun getV1MarketingCampaignsById(id: kotlin.String) : Campaign {
+        val localVarResponse = getV1MarketingCampaignsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaign
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -877,27 +876,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s campaigns.
      * Returns one of the caller org&#39;s campaigns. A campaign belonging to another org reads as not found.
      * @param id ID is the campaign id from the path, as returned by create.
-     * @return ApiResponse<CloudCampaign?>
+     * @return ApiResponse<Campaign?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingCampaignsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCampaign?> {
-        val localVariableConfig = cloudGetV1MarketingCampaignsIdRequestConfig(id = id)
+    fun getV1MarketingCampaignsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Campaign?> {
+        val localVariableConfig = getV1MarketingCampaignsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCampaign>(
+        return request<Unit, Campaign>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingCampaignsId
+     * To obtain the request config of the operation getV1MarketingCampaignsById
      *
      * @param id ID is the campaign id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingCampaignsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MarketingCampaignsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -908,7 +907,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -917,7 +916,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/marketing/promos
      * Returns every promo the deployment offers with its live counters: how many orgs have redeemed it and how many redemptions remain under the cap.
      * Returns every promo the deployment offers with its live counters: how many orgs have redeemed it and how many redemptions remain under the cap. The promos are fleet-wide, not per-org — only the counters move.
-     * @return CloudPromoList
+     * @return PromoList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -926,11 +925,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingPromos() : CloudPromoList {
-        val localVarResponse = cloudGetV1MarketingPromosWithHttpInfo()
+    fun getV1MarketingPromos() : PromoList {
+        val localVarResponse = getV1MarketingPromosWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPromoList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PromoList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -948,26 +947,26 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/marketing/promos
      * Returns every promo the deployment offers with its live counters: how many orgs have redeemed it and how many redemptions remain under the cap.
      * Returns every promo the deployment offers with its live counters: how many orgs have redeemed it and how many redemptions remain under the cap. The promos are fleet-wide, not per-org — only the counters move.
-     * @return ApiResponse<CloudPromoList?>
+     * @return ApiResponse<PromoList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingPromosWithHttpInfo() : ApiResponse<CloudPromoList?> {
-        val localVariableConfig = cloudGetV1MarketingPromosRequestConfig()
+    fun getV1MarketingPromosWithHttpInfo() : ApiResponse<PromoList?> {
+        val localVariableConfig = getV1MarketingPromosRequestConfig()
 
-        return request<Unit, CloudPromoList>(
+        return request<Unit, PromoList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingPromos
+     * To obtain the request config of the operation getV1MarketingPromos
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingPromosRequestConfig() : RequestConfig<Unit> {
+    fun getV1MarketingPromosRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -978,7 +977,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -990,7 +989,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param code Code is the promo code from the path.
      * @param plan Plan is the plan being priced: pro, max or team. Anything else (including the free Developer plan) has no list price and so nothing to discount. (optional)
      * @param seats Seats is the Team seat count; 0 means 1, and it is ignored for the single-seat plans. (optional)
-     * @return CloudQuote
+     * @return Quote
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -999,11 +998,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingPromosCodeEligibility(code: kotlin.String, plan: kotlin.String? = null, seats: kotlin.Int? = null) : CloudQuote {
-        val localVarResponse = cloudGetV1MarketingPromosCodeEligibilityWithHttpInfo(code = code, plan = plan, seats = seats)
+    fun getV1MarketingPromosByCodeEligibility(code: kotlin.String, plan: kotlin.String? = null, seats: kotlin.Int? = null) : Quote {
+        val localVarResponse = getV1MarketingPromosByCodeEligibilityWithHttpInfo(code = code, plan = plan, seats = seats)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudQuote
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Quote
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1024,29 +1023,29 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param code Code is the promo code from the path.
      * @param plan Plan is the plan being priced: pro, max or team. Anything else (including the free Developer plan) has no list price and so nothing to discount. (optional)
      * @param seats Seats is the Team seat count; 0 means 1, and it is ignored for the single-seat plans. (optional)
-     * @return ApiResponse<CloudQuote?>
+     * @return ApiResponse<Quote?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingPromosCodeEligibilityWithHttpInfo(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : ApiResponse<CloudQuote?> {
-        val localVariableConfig = cloudGetV1MarketingPromosCodeEligibilityRequestConfig(code = code, plan = plan, seats = seats)
+    fun getV1MarketingPromosByCodeEligibilityWithHttpInfo(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : ApiResponse<Quote?> {
+        val localVariableConfig = getV1MarketingPromosByCodeEligibilityRequestConfig(code = code, plan = plan, seats = seats)
 
-        return request<Unit, CloudQuote>(
+        return request<Unit, Quote>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingPromosCodeEligibility
+     * To obtain the request config of the operation getV1MarketingPromosByCodeEligibility
      *
      * @param code Code is the promo code from the path.
      * @param plan Plan is the plan being priced: pro, max or team. Anything else (including the free Developer plan) has no list price and so nothing to discount. (optional)
      * @param seats Seats is the Team seat count; 0 means 1, and it is ignored for the single-seat plans. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingPromosCodeEligibilityRequestConfig(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MarketingPromosByCodeEligibilityRequestConfig(code: kotlin.String, plan: kotlin.String?, seats: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1065,7 +1064,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos/{code}/eligibility".replace("{"+"code"+"}", encodeURIComponent(code.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1075,7 +1074,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the caller org&#39;s OWN redemption of a promo — an org-scoped read, so it can never surface another tenant&#39;s.
      * Returns the caller org&#39;s OWN redemption of a promo — an org-scoped read, so it can never surface another tenant&#39;s. Not found when this org has not redeemed it.
      * @param code Code is the promo code from the path, e.g. \&quot;first1000\&quot;.
-     * @return CloudRedemption
+     * @return Redemption
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1084,11 +1083,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingPromosCodeRedemption(code: kotlin.String) : CloudRedemption {
-        val localVarResponse = cloudGetV1MarketingPromosCodeRedemptionWithHttpInfo(code = code)
+    fun getV1MarketingPromosByCodeRedemption(code: kotlin.String) : Redemption {
+        val localVarResponse = getV1MarketingPromosByCodeRedemptionWithHttpInfo(code = code)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRedemption
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Redemption
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1107,27 +1106,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the caller org&#39;s OWN redemption of a promo — an org-scoped read, so it can never surface another tenant&#39;s.
      * Returns the caller org&#39;s OWN redemption of a promo — an org-scoped read, so it can never surface another tenant&#39;s. Not found when this org has not redeemed it.
      * @param code Code is the promo code from the path, e.g. \&quot;first1000\&quot;.
-     * @return ApiResponse<CloudRedemption?>
+     * @return ApiResponse<Redemption?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingPromosCodeRedemptionWithHttpInfo(code: kotlin.String) : ApiResponse<CloudRedemption?> {
-        val localVariableConfig = cloudGetV1MarketingPromosCodeRedemptionRequestConfig(code = code)
+    fun getV1MarketingPromosByCodeRedemptionWithHttpInfo(code: kotlin.String) : ApiResponse<Redemption?> {
+        val localVariableConfig = getV1MarketingPromosByCodeRedemptionRequestConfig(code = code)
 
-        return request<Unit, CloudRedemption>(
+        return request<Unit, Redemption>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingPromosCodeRedemption
+     * To obtain the request config of the operation getV1MarketingPromosByCodeRedemption
      *
      * @param code Code is the promo code from the path, e.g. \&quot;first1000\&quot;.
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingPromosCodeRedemptionRequestConfig(code: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MarketingPromosByCodeRedemptionRequestConfig(code: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1138,7 +1137,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos/{code}/redemption".replace("{"+"code"+"}", encodeURIComponent(code.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1148,7 +1147,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s drip sequences, most recently updated first.
      * Returns the org&#39;s drip sequences, most recently updated first.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return CloudSequenceList
+     * @return SequenceList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1157,11 +1156,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingSequences(limit: kotlin.Int? = null) : CloudSequenceList {
-        val localVarResponse = cloudGetV1MarketingSequencesWithHttpInfo(limit = limit)
+    fun getV1MarketingSequences(limit: kotlin.Int? = null) : SequenceList {
+        val localVarResponse = getV1MarketingSequencesWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSequenceList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SequenceList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1180,27 +1179,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s drip sequences, most recently updated first.
      * Returns the org&#39;s drip sequences, most recently updated first.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return ApiResponse<CloudSequenceList?>
+     * @return ApiResponse<SequenceList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingSequencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudSequenceList?> {
-        val localVariableConfig = cloudGetV1MarketingSequencesRequestConfig(limit = limit)
+    fun getV1MarketingSequencesWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SequenceList?> {
+        val localVariableConfig = getV1MarketingSequencesRequestConfig(limit = limit)
 
-        return request<Unit, CloudSequenceList>(
+        return request<Unit, SequenceList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingSequences
+     * To obtain the request config of the operation getV1MarketingSequences
      *
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingSequencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MarketingSequencesRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1216,7 +1215,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1226,7 +1225,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s sequences together with its steps in send order.
      * Returns one of the caller org&#39;s sequences together with its steps in send order. A sequence belonging to another org reads as not found.
      * @param id ID is the sequence id from the path, as returned by create.
-     * @return CloudSequenceView
+     * @return SequenceView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1235,11 +1234,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingSequencesId(id: kotlin.String) : CloudSequenceView {
-        val localVarResponse = cloudGetV1MarketingSequencesIdWithHttpInfo(id = id)
+    fun getV1MarketingSequencesById(id: kotlin.String) : SequenceView {
+        val localVarResponse = getV1MarketingSequencesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSequenceView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SequenceView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1258,27 +1257,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one of the caller org&#39;s sequences together with its steps in send order.
      * Returns one of the caller org&#39;s sequences together with its steps in send order. A sequence belonging to another org reads as not found.
      * @param id ID is the sequence id from the path, as returned by create.
-     * @return ApiResponse<CloudSequenceView?>
+     * @return ApiResponse<SequenceView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingSequencesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudSequenceView?> {
-        val localVariableConfig = cloudGetV1MarketingSequencesIdRequestConfig(id = id)
+    fun getV1MarketingSequencesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SequenceView?> {
+        val localVariableConfig = getV1MarketingSequencesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudSequenceView>(
+        return request<Unit, SequenceView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingSequencesId
+     * To obtain the request config of the operation getV1MarketingSequencesById
      *
      * @param id ID is the sequence id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingSequencesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MarketingSequencesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1289,7 +1288,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1300,7 +1299,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns who is walking one sequence, most recently enrolled first, with each walk&#39;s current step and next due time.
      * @param id ID is the sequence id from the path.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return CloudEnrollmentList
+     * @return EnrollmentList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1309,11 +1308,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingSequencesIdEnrollments(id: kotlin.String, limit: kotlin.Int? = null) : CloudEnrollmentList {
-        val localVarResponse = cloudGetV1MarketingSequencesIdEnrollmentsWithHttpInfo(id = id, limit = limit)
+    fun getV1MarketingSequencesByIdEnrollments(id: kotlin.String, limit: kotlin.Int? = null) : EnrollmentList {
+        val localVarResponse = getV1MarketingSequencesByIdEnrollmentsWithHttpInfo(id = id, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEnrollmentList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EnrollmentList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1333,28 +1332,28 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns who is walking one sequence, most recently enrolled first, with each walk&#39;s current step and next due time.
      * @param id ID is the sequence id from the path.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return ApiResponse<CloudEnrollmentList?>
+     * @return ApiResponse<EnrollmentList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingSequencesIdEnrollmentsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<CloudEnrollmentList?> {
-        val localVariableConfig = cloudGetV1MarketingSequencesIdEnrollmentsRequestConfig(id = id, limit = limit)
+    fun getV1MarketingSequencesByIdEnrollmentsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<EnrollmentList?> {
+        val localVariableConfig = getV1MarketingSequencesByIdEnrollmentsRequestConfig(id = id, limit = limit)
 
-        return request<Unit, CloudEnrollmentList>(
+        return request<Unit, EnrollmentList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingSequencesIdEnrollments
+     * To obtain the request config of the operation getV1MarketingSequencesByIdEnrollments
      *
      * @param id ID is the sequence id from the path.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingSequencesIdEnrollmentsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MarketingSequencesByIdEnrollmentsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1370,7 +1369,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/enrollments".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1380,7 +1379,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one sequence&#39;s steps in send order.
      * Returns one sequence&#39;s steps in send order.
      * @param id ID is the sequence id from the path, as returned by create.
-     * @return CloudStepList
+     * @return StepList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1389,11 +1388,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingSequencesIdSteps(id: kotlin.String) : CloudStepList {
-        val localVarResponse = cloudGetV1MarketingSequencesIdStepsWithHttpInfo(id = id)
+    fun getV1MarketingSequencesByIdSteps(id: kotlin.String) : StepList {
+        val localVarResponse = getV1MarketingSequencesByIdStepsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStepList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StepList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1412,27 +1411,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one sequence&#39;s steps in send order.
      * Returns one sequence&#39;s steps in send order.
      * @param id ID is the sequence id from the path, as returned by create.
-     * @return ApiResponse<CloudStepList?>
+     * @return ApiResponse<StepList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingSequencesIdStepsWithHttpInfo(id: kotlin.String) : ApiResponse<CloudStepList?> {
-        val localVariableConfig = cloudGetV1MarketingSequencesIdStepsRequestConfig(id = id)
+    fun getV1MarketingSequencesByIdStepsWithHttpInfo(id: kotlin.String) : ApiResponse<StepList?> {
+        val localVariableConfig = getV1MarketingSequencesByIdStepsRequestConfig(id = id)
 
-        return request<Unit, CloudStepList>(
+        return request<Unit, StepList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingSequencesIdSteps
+     * To obtain the request config of the operation getV1MarketingSequencesByIdSteps
      *
      * @param id ID is the sequence id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingSequencesIdStepsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MarketingSequencesByIdStepsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1443,7 +1442,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/steps".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1452,7 +1451,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/marketing/summary
      * Rolls up the caller org&#39;s campaigns: how many there are, how many are active, and the summed budget and spend in cents.
      * Rolls up the caller org&#39;s campaigns: how many there are, how many are active, and the summed budget and spend in cents.
-     * @return CloudSummary
+     * @return Summary
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1461,11 +1460,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingSummary() : CloudSummary {
-        val localVarResponse = cloudGetV1MarketingSummaryWithHttpInfo()
+    fun getV1MarketingSummary() : Summary {
+        val localVarResponse = getV1MarketingSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSummary
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Summary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1483,26 +1482,26 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/marketing/summary
      * Rolls up the caller org&#39;s campaigns: how many there are, how many are active, and the summed budget and spend in cents.
      * Rolls up the caller org&#39;s campaigns: how many there are, how many are active, and the summed budget and spend in cents.
-     * @return ApiResponse<CloudSummary?>
+     * @return ApiResponse<Summary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingSummaryWithHttpInfo() : ApiResponse<CloudSummary?> {
-        val localVariableConfig = cloudGetV1MarketingSummaryRequestConfig()
+    fun getV1MarketingSummaryWithHttpInfo() : ApiResponse<Summary?> {
+        val localVariableConfig = getV1MarketingSummaryRequestConfig()
 
-        return request<Unit, CloudSummary>(
+        return request<Unit, Summary>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingSummary
+     * To obtain the request config of the operation getV1MarketingSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1MarketingSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1513,7 +1512,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1523,7 +1522,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s opt-out list, newest first — everyone the send gate will refuse to deliver to.
      * Returns the org&#39;s opt-out list, newest first — everyone the send gate will refuse to deliver to.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return CloudSuppressionList
+     * @return SuppressionList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1532,11 +1531,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingSuppressions(limit: kotlin.Int? = null) : CloudSuppressionList {
-        val localVarResponse = cloudGetV1MarketingSuppressionsWithHttpInfo(limit = limit)
+    fun getV1MarketingSuppressions(limit: kotlin.Int? = null) : SuppressionList {
+        val localVarResponse = getV1MarketingSuppressionsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSuppressionList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SuppressionList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1555,27 +1554,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns the org&#39;s opt-out list, newest first — everyone the send gate will refuse to deliver to.
      * Returns the org&#39;s opt-out list, newest first — everyone the send gate will refuse to deliver to.
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
-     * @return ApiResponse<CloudSuppressionList?>
+     * @return ApiResponse<SuppressionList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingSuppressionsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudSuppressionList?> {
-        val localVariableConfig = cloudGetV1MarketingSuppressionsRequestConfig(limit = limit)
+    fun getV1MarketingSuppressionsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<SuppressionList?> {
+        val localVariableConfig = getV1MarketingSuppressionsRequestConfig(limit = limit)
 
-        return request<Unit, CloudSuppressionList>(
+        return request<Unit, SuppressionList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingSuppressions
+     * To obtain the request config of the operation getV1MarketingSuppressions
      *
      * @param limit Limit caps the rows returned; 0 means 200 and nothing above 1000 is honoured. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingSuppressionsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MarketingSuppressionsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1591,7 +1590,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/suppressions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1604,7 +1603,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param channel Channel is the surface to opt out of. (optional)
      * @param address Address is the recipient to opt out. (optional)
      * @param token Token is the HMAC over (org, channel, address). It is the ONLY authority here — there is no principal — so it binds the request to one tuple and nothing else. (optional)
-     * @return CloudUnsubscribed
+     * @return Unsubscribed
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1613,11 +1612,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketingUnsubscribe(org: kotlin.String? = null, channel: kotlin.String? = null, address: kotlin.String? = null, token: kotlin.String? = null) : CloudUnsubscribed {
-        val localVarResponse = cloudGetV1MarketingUnsubscribeWithHttpInfo(org = org, channel = channel, address = address, token = token)
+    fun getV1MarketingUnsubscribe(org: kotlin.String? = null, channel: kotlin.String? = null, address: kotlin.String? = null, token: kotlin.String? = null) : Unsubscribed {
+        val localVarResponse = getV1MarketingUnsubscribeWithHttpInfo(org = org, channel = channel, address = address, token = token)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUnsubscribed
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Unsubscribed
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1639,22 +1638,22 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param channel Channel is the surface to opt out of. (optional)
      * @param address Address is the recipient to opt out. (optional)
      * @param token Token is the HMAC over (org, channel, address). It is the ONLY authority here — there is no principal — so it binds the request to one tuple and nothing else. (optional)
-     * @return ApiResponse<CloudUnsubscribed?>
+     * @return ApiResponse<Unsubscribed?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketingUnsubscribeWithHttpInfo(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : ApiResponse<CloudUnsubscribed?> {
-        val localVariableConfig = cloudGetV1MarketingUnsubscribeRequestConfig(org = org, channel = channel, address = address, token = token)
+    fun getV1MarketingUnsubscribeWithHttpInfo(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : ApiResponse<Unsubscribed?> {
+        val localVariableConfig = getV1MarketingUnsubscribeRequestConfig(org = org, channel = channel, address = address, token = token)
 
-        return request<Unit, CloudUnsubscribed>(
+        return request<Unit, Unsubscribed>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketingUnsubscribe
+     * To obtain the request config of the operation getV1MarketingUnsubscribe
      *
      * @param org Org is the org the link was minted for. (optional)
      * @param channel Channel is the surface to opt out of. (optional)
@@ -1662,7 +1661,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param token Token is the HMAC over (org, channel, address). It is the ONLY authority here — there is no principal — so it binds the request to one tuple and nothing else. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MarketingUnsubscribeRequestConfig(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1MarketingUnsubscribeRequestConfig(org: kotlin.String?, channel: kotlin.String?, address: kotlin.String?, token: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1687,7 +1686,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/unsubscribe",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1696,8 +1695,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/audiences
      * Saves a cohort filter for the caller&#39;s org.
      * Saves a cohort filter for the caller&#39;s org. Name is required. Omitting event saves the WHOLE-ORG audience — every mailable customer — which needs no analytics warehouse; naming one narrows that roster to the customers who fired it within windowDays.
-     * @param cloudAudience 
-     * @return CloudAudience
+     * @param audience 
+     * @return Audience
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1706,11 +1705,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingAudiences(cloudAudience: CloudAudience) : CloudAudience {
-        val localVarResponse = cloudPostV1MarketingAudiencesWithHttpInfo(cloudAudience = cloudAudience)
+    fun postV1MarketingAudiences(audience: Audience) : Audience {
+        val localVarResponse = postV1MarketingAudiencesWithHttpInfo(audience = audience)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAudience
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Audience
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1728,29 +1727,29 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/audiences
      * Saves a cohort filter for the caller&#39;s org.
      * Saves a cohort filter for the caller&#39;s org. Name is required. Omitting event saves the WHOLE-ORG audience — every mailable customer — which needs no analytics warehouse; naming one narrows that roster to the customers who fired it within windowDays.
-     * @param cloudAudience 
-     * @return ApiResponse<CloudAudience?>
+     * @param audience 
+     * @return ApiResponse<Audience?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingAudiencesWithHttpInfo(cloudAudience: CloudAudience) : ApiResponse<CloudAudience?> {
-        val localVariableConfig = cloudPostV1MarketingAudiencesRequestConfig(cloudAudience = cloudAudience)
+    fun postV1MarketingAudiencesWithHttpInfo(audience: Audience) : ApiResponse<Audience?> {
+        val localVariableConfig = postV1MarketingAudiencesRequestConfig(audience = audience)
 
-        return request<CloudAudience, CloudAudience>(
+        return request<Audience, Audience>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingAudiences
+     * To obtain the request config of the operation postV1MarketingAudiences
      *
-     * @param cloudAudience 
+     * @param audience 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingAudiencesRequestConfig(cloudAudience: CloudAudience) : RequestConfig<CloudAudience> {
-        val localVariableBody = cloudAudience
+    fun postV1MarketingAudiencesRequestConfig(audience: Audience) : RequestConfig<Audience> {
+        val localVariableBody = audience
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1761,7 +1760,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/audiences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1770,8 +1769,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/calendar
      * Adds a post to the content calendar.
      * Adds a post to the content calendar. Channel and body are required. A scheduledAt in the future makes the post \&quot;scheduled\&quot; and the durable sweep publishes it when it comes due — claimed once, so a post publishes at most once; without one it stays a draft.
-     * @param cloudCalendarPost 
-     * @return CloudCalendarPost
+     * @param calendarPost 
+     * @return CalendarPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1780,11 +1779,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingCalendar(cloudCalendarPost: CloudCalendarPost) : CloudCalendarPost {
-        val localVarResponse = cloudPostV1MarketingCalendarWithHttpInfo(cloudCalendarPost = cloudCalendarPost)
+    fun postV1MarketingCalendar(calendarPost: CalendarPost) : CalendarPost {
+        val localVarResponse = postV1MarketingCalendarWithHttpInfo(calendarPost = calendarPost)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCalendarPost
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1802,29 +1801,29 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/calendar
      * Adds a post to the content calendar.
      * Adds a post to the content calendar. Channel and body are required. A scheduledAt in the future makes the post \&quot;scheduled\&quot; and the durable sweep publishes it when it comes due — claimed once, so a post publishes at most once; without one it stays a draft.
-     * @param cloudCalendarPost 
-     * @return ApiResponse<CloudCalendarPost?>
+     * @param calendarPost 
+     * @return ApiResponse<CalendarPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingCalendarWithHttpInfo(cloudCalendarPost: CloudCalendarPost) : ApiResponse<CloudCalendarPost?> {
-        val localVariableConfig = cloudPostV1MarketingCalendarRequestConfig(cloudCalendarPost = cloudCalendarPost)
+    fun postV1MarketingCalendarWithHttpInfo(calendarPost: CalendarPost) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = postV1MarketingCalendarRequestConfig(calendarPost = calendarPost)
 
-        return request<CloudCalendarPost, CloudCalendarPost>(
+        return request<CalendarPost, CalendarPost>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingCalendar
+     * To obtain the request config of the operation postV1MarketingCalendar
      *
-     * @param cloudCalendarPost 
+     * @param calendarPost 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingCalendarRequestConfig(cloudCalendarPost: CloudCalendarPost) : RequestConfig<CloudCalendarPost> {
-        val localVariableBody = cloudCalendarPost
+    fun postV1MarketingCalendarRequestConfig(calendarPost: CalendarPost) : RequestConfig<CalendarPost> {
+        val localVariableBody = calendarPost
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1835,7 +1834,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1845,7 +1844,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Publishes a post NOW, synchronously, whatever its schedule.
      * Publishes a post NOW, synchronously, whatever its schedule. No social connector is wired today, so every channel answers an honest 501 naming the seam a real one would plug into, and the post is recorded failed with that exact reason — never a faked \&quot;published\&quot;.
      * @param id ID is the post id from the path, as returned by create.
-     * @return CloudCalendarPost
+     * @return CalendarPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1854,11 +1853,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingCalendarIdPublish(id: kotlin.String) : CloudCalendarPost {
-        val localVarResponse = cloudPostV1MarketingCalendarIdPublishWithHttpInfo(id = id)
+    fun postV1MarketingCalendarByIdPublish(id: kotlin.String) : CalendarPost {
+        val localVarResponse = postV1MarketingCalendarByIdPublishWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCalendarPost
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1877,27 +1876,27 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Publishes a post NOW, synchronously, whatever its schedule.
      * Publishes a post NOW, synchronously, whatever its schedule. No social connector is wired today, so every channel answers an honest 501 naming the seam a real one would plug into, and the post is recorded failed with that exact reason — never a faked \&quot;published\&quot;.
      * @param id ID is the post id from the path, as returned by create.
-     * @return ApiResponse<CloudCalendarPost?>
+     * @return ApiResponse<CalendarPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingCalendarIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCalendarPost?> {
-        val localVariableConfig = cloudPostV1MarketingCalendarIdPublishRequestConfig(id = id)
+    fun postV1MarketingCalendarByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = postV1MarketingCalendarByIdPublishRequestConfig(id = id)
 
-        return request<Unit, CloudCalendarPost>(
+        return request<Unit, CalendarPost>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingCalendarIdPublish
+     * To obtain the request config of the operation postV1MarketingCalendarByIdPublish
      *
      * @param id ID is the post id from the path, as returned by create.
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingCalendarIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1MarketingCalendarByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1908,7 +1907,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}/publish".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1917,8 +1916,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/campaigns
      * Registers a campaign in the caller&#39;s org.
      * Registers a campaign in the caller&#39;s org. Name is required; channel defaults to email and status to draft, and a future scheduledAt with no explicit status makes the campaign \&quot;scheduled\&quot;. Budget and spend are cents and are clamped to &gt;&#x3D; 0. The id, createdAt and updatedAt of the input are ignored — the server assigns them.
-     * @param cloudCampaign 
-     * @return CloudCampaign
+     * @param campaign 
+     * @return Campaign
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1927,11 +1926,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingCampaigns(cloudCampaign: CloudCampaign) : CloudCampaign {
-        val localVarResponse = cloudPostV1MarketingCampaignsWithHttpInfo(cloudCampaign = cloudCampaign)
+    fun postV1MarketingCampaigns(campaign: Campaign) : Campaign {
+        val localVarResponse = postV1MarketingCampaignsWithHttpInfo(campaign = campaign)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaign
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1949,29 +1948,29 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/campaigns
      * Registers a campaign in the caller&#39;s org.
      * Registers a campaign in the caller&#39;s org. Name is required; channel defaults to email and status to draft, and a future scheduledAt with no explicit status makes the campaign \&quot;scheduled\&quot;. Budget and spend are cents and are clamped to &gt;&#x3D; 0. The id, createdAt and updatedAt of the input are ignored — the server assigns them.
-     * @param cloudCampaign 
-     * @return ApiResponse<CloudCampaign?>
+     * @param campaign 
+     * @return ApiResponse<Campaign?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingCampaignsWithHttpInfo(cloudCampaign: CloudCampaign) : ApiResponse<CloudCampaign?> {
-        val localVariableConfig = cloudPostV1MarketingCampaignsRequestConfig(cloudCampaign = cloudCampaign)
+    fun postV1MarketingCampaignsWithHttpInfo(campaign: Campaign) : ApiResponse<Campaign?> {
+        val localVariableConfig = postV1MarketingCampaignsRequestConfig(campaign = campaign)
 
-        return request<CloudCampaign, CloudCampaign>(
+        return request<Campaign, Campaign>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingCampaigns
+     * To obtain the request config of the operation postV1MarketingCampaigns
      *
-     * @param cloudCampaign 
+     * @param campaign 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingCampaignsRequestConfig(cloudCampaign: CloudCampaign) : RequestConfig<CloudCampaign> {
-        val localVariableBody = cloudCampaign
+    fun postV1MarketingCampaignsRequestConfig(campaign: Campaign) : RequestConfig<Campaign> {
+        val localVariableBody = campaign
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1982,7 +1981,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1992,8 +1991,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Sets a campaign&#39;s send time and moves it to \&quot;scheduled\&quot;.
      * Sets a campaign&#39;s send time and moves it to \&quot;scheduled\&quot;. A scheduledAt of 0 clears the schedule and returns it to \&quot;draft\&quot;.
      * @param id ID is the campaign id from the path.
-     * @param cloudScheduleInput 
-     * @return CloudCampaign
+     * @param scheduleInput 
+     * @return Campaign
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2002,11 +2001,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingCampaignsIdSchedule(id: kotlin.String, cloudScheduleInput: CloudScheduleInput) : CloudCampaign {
-        val localVarResponse = cloudPostV1MarketingCampaignsIdScheduleWithHttpInfo(id = id, cloudScheduleInput = cloudScheduleInput)
+    fun postV1MarketingCampaignsByIdSchedule(id: kotlin.String, scheduleInput: ScheduleInput) : Campaign {
+        val localVarResponse = postV1MarketingCampaignsByIdScheduleWithHttpInfo(id = id, scheduleInput = scheduleInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaign
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2025,30 +2024,30 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Sets a campaign&#39;s send time and moves it to \&quot;scheduled\&quot;.
      * Sets a campaign&#39;s send time and moves it to \&quot;scheduled\&quot;. A scheduledAt of 0 clears the schedule and returns it to \&quot;draft\&quot;.
      * @param id ID is the campaign id from the path.
-     * @param cloudScheduleInput 
-     * @return ApiResponse<CloudCampaign?>
+     * @param scheduleInput 
+     * @return ApiResponse<Campaign?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingCampaignsIdScheduleWithHttpInfo(id: kotlin.String, cloudScheduleInput: CloudScheduleInput) : ApiResponse<CloudCampaign?> {
-        val localVariableConfig = cloudPostV1MarketingCampaignsIdScheduleRequestConfig(id = id, cloudScheduleInput = cloudScheduleInput)
+    fun postV1MarketingCampaignsByIdScheduleWithHttpInfo(id: kotlin.String, scheduleInput: ScheduleInput) : ApiResponse<Campaign?> {
+        val localVariableConfig = postV1MarketingCampaignsByIdScheduleRequestConfig(id = id, scheduleInput = scheduleInput)
 
-        return request<CloudScheduleInput, CloudCampaign>(
+        return request<ScheduleInput, Campaign>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingCampaignsIdSchedule
+     * To obtain the request config of the operation postV1MarketingCampaignsByIdSchedule
      *
      * @param id ID is the campaign id from the path.
-     * @param cloudScheduleInput 
+     * @param scheduleInput 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingCampaignsIdScheduleRequestConfig(id: kotlin.String, cloudScheduleInput: CloudScheduleInput) : RequestConfig<CloudScheduleInput> {
-        val localVariableBody = cloudScheduleInput
+    fun postV1MarketingCampaignsByIdScheduleRequestConfig(id: kotlin.String, scheduleInput: ScheduleInput) : RequestConfig<ScheduleInput> {
+        val localVariableBody = scheduleInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2059,18 +2058,18 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}/schedule".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/marketing/promos/{code}/redeem
-     * Redeems the promo for the caller&#39;s org, crediting the discount value to its wallet through the finance ledger.
-     * Redeems the promo for the caller&#39;s org, crediting the discount value to its wallet through the finance ledger. Three guards run under one lock so the cap cannot be raced past: the fleet-wide redemption cap, one redemption per org, and one per payment instrument.  It is IDEMPOTENT: an org that already redeemed gets its original redemption back with alreadyRedeemed true and is not credited twice.
+     * Records the caller org&#39;s claim on a promo.
+     * Records the caller org&#39;s claim on a promo. NOTHING IS CREDITED: the redemption is a row, and credit into an org is an admin decision made on the admin surface against an auditable ledger.  The plan is DERIVED from the org&#39;s live ACTIVE/TRIALING paid subscription and can never be named by the caller — an org with no qualifying subscription is refused, and so is one whose subscription cannot be read. The seat count is the single-seat floor (claimSeats), so the recorded figure has no input that can inflate it.  Guards run under one lock so the cap cannot be raced past: the fleet-wide redemption cap, one redemption per org, one per payment instrument (REQUIRED), and the per-redemption ceiling.  It is IDEMPOTENT: an org that already redeemed gets its original redemption back with alreadyRedeemed true.
      * @param code Code is the promo code from the path.
-     * @param cloudRedeemInput 
-     * @return CloudRedeemResult
+     * @param redeemInput 
+     * @return RedeemResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2079,11 +2078,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingPromosCodeRedeem(code: kotlin.String, cloudRedeemInput: CloudRedeemInput) : CloudRedeemResult {
-        val localVarResponse = cloudPostV1MarketingPromosCodeRedeemWithHttpInfo(code = code, cloudRedeemInput = cloudRedeemInput)
+    fun postV1MarketingPromosByCodeRedeem(code: kotlin.String, redeemInput: RedeemInput) : RedeemResult {
+        val localVarResponse = postV1MarketingPromosByCodeRedeemWithHttpInfo(code = code, redeemInput = redeemInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRedeemResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RedeemResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2099,33 +2098,33 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * POST /v1/marketing/promos/{code}/redeem
-     * Redeems the promo for the caller&#39;s org, crediting the discount value to its wallet through the finance ledger.
-     * Redeems the promo for the caller&#39;s org, crediting the discount value to its wallet through the finance ledger. Three guards run under one lock so the cap cannot be raced past: the fleet-wide redemption cap, one redemption per org, and one per payment instrument.  It is IDEMPOTENT: an org that already redeemed gets its original redemption back with alreadyRedeemed true and is not credited twice.
+     * Records the caller org&#39;s claim on a promo.
+     * Records the caller org&#39;s claim on a promo. NOTHING IS CREDITED: the redemption is a row, and credit into an org is an admin decision made on the admin surface against an auditable ledger.  The plan is DERIVED from the org&#39;s live ACTIVE/TRIALING paid subscription and can never be named by the caller — an org with no qualifying subscription is refused, and so is one whose subscription cannot be read. The seat count is the single-seat floor (claimSeats), so the recorded figure has no input that can inflate it.  Guards run under one lock so the cap cannot be raced past: the fleet-wide redemption cap, one redemption per org, one per payment instrument (REQUIRED), and the per-redemption ceiling.  It is IDEMPOTENT: an org that already redeemed gets its original redemption back with alreadyRedeemed true.
      * @param code Code is the promo code from the path.
-     * @param cloudRedeemInput 
-     * @return ApiResponse<CloudRedeemResult?>
+     * @param redeemInput 
+     * @return ApiResponse<RedeemResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingPromosCodeRedeemWithHttpInfo(code: kotlin.String, cloudRedeemInput: CloudRedeemInput) : ApiResponse<CloudRedeemResult?> {
-        val localVariableConfig = cloudPostV1MarketingPromosCodeRedeemRequestConfig(code = code, cloudRedeemInput = cloudRedeemInput)
+    fun postV1MarketingPromosByCodeRedeemWithHttpInfo(code: kotlin.String, redeemInput: RedeemInput) : ApiResponse<RedeemResult?> {
+        val localVariableConfig = postV1MarketingPromosByCodeRedeemRequestConfig(code = code, redeemInput = redeemInput)
 
-        return request<CloudRedeemInput, CloudRedeemResult>(
+        return request<RedeemInput, RedeemResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingPromosCodeRedeem
+     * To obtain the request config of the operation postV1MarketingPromosByCodeRedeem
      *
      * @param code Code is the promo code from the path.
-     * @param cloudRedeemInput 
+     * @param redeemInput 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingPromosCodeRedeemRequestConfig(code: kotlin.String, cloudRedeemInput: CloudRedeemInput) : RequestConfig<CloudRedeemInput> {
-        val localVariableBody = cloudRedeemInput
+    fun postV1MarketingPromosByCodeRedeemRequestConfig(code: kotlin.String, redeemInput: RedeemInput) : RequestConfig<RedeemInput> {
+        val localVariableBody = redeemInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2136,7 +2135,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/promos/{code}/redeem".replace("{"+"code"+"}", encodeURIComponent(code.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2145,8 +2144,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/sequences
      * Registers a drip sequence in the caller&#39;s org.
      * Registers a drip sequence in the caller&#39;s org. Name is required; status defaults to draft, and a sequence must be ACTIVE before it will accept enrollments. The id, createdAt and updatedAt of the input are ignored — the server assigns them.
-     * @param cloudSequence 
-     * @return CloudSequence
+     * @param sequence 
+     * @return Sequence
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2155,11 +2154,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingSequences(cloudSequence: CloudSequence) : CloudSequence {
-        val localVarResponse = cloudPostV1MarketingSequencesWithHttpInfo(cloudSequence = cloudSequence)
+    fun postV1MarketingSequences(sequence: Sequence) : Sequence {
+        val localVarResponse = postV1MarketingSequencesWithHttpInfo(sequence = sequence)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSequence
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Sequence
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2177,29 +2176,29 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/sequences
      * Registers a drip sequence in the caller&#39;s org.
      * Registers a drip sequence in the caller&#39;s org. Name is required; status defaults to draft, and a sequence must be ACTIVE before it will accept enrollments. The id, createdAt and updatedAt of the input are ignored — the server assigns them.
-     * @param cloudSequence 
-     * @return ApiResponse<CloudSequence?>
+     * @param sequence 
+     * @return ApiResponse<Sequence?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingSequencesWithHttpInfo(cloudSequence: CloudSequence) : ApiResponse<CloudSequence?> {
-        val localVariableConfig = cloudPostV1MarketingSequencesRequestConfig(cloudSequence = cloudSequence)
+    fun postV1MarketingSequencesWithHttpInfo(sequence: Sequence) : ApiResponse<Sequence?> {
+        val localVariableConfig = postV1MarketingSequencesRequestConfig(sequence = sequence)
 
-        return request<CloudSequence, CloudSequence>(
+        return request<Sequence, Sequence>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingSequences
+     * To obtain the request config of the operation postV1MarketingSequences
      *
-     * @param cloudSequence 
+     * @param sequence 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingSequencesRequestConfig(cloudSequence: CloudSequence) : RequestConfig<CloudSequence> {
-        val localVariableBody = cloudSequence
+    fun postV1MarketingSequencesRequestConfig(sequence: Sequence) : RequestConfig<Sequence> {
+        val localVariableBody = sequence
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2210,7 +2209,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2220,8 +2219,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Adds one contact or a whole audience to a sequence and schedules the first step for each.
      * Adds one contact or a whole audience to a sequence and schedules the first step for each. The sequence must be ACTIVE (a draft sends nothing), and the request must name exactly one of address or audienceId.  Enrolling is ALL this does: the message itself is sent later by the drip engine, through the suppression gate, so an opted-out customer can be enrolled here and still never be mailed. Re-posting is safe — an address this sequence already took is counted in alreadyEnrolled and never double-dripped — which is what makes retrying a partially-applied announcement a resume rather than a second send.
      * @param id ID is the sequence id from the path.
-     * @param cloudEnrollInput 
-     * @return CloudEnrollResult
+     * @param enrollInput 
+     * @return EnrollResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2230,11 +2229,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingSequencesIdEnroll(id: kotlin.String, cloudEnrollInput: CloudEnrollInput) : CloudEnrollResult {
-        val localVarResponse = cloudPostV1MarketingSequencesIdEnrollWithHttpInfo(id = id, cloudEnrollInput = cloudEnrollInput)
+    fun postV1MarketingSequencesByIdEnroll(id: kotlin.String, enrollInput: EnrollInput) : EnrollResult {
+        val localVarResponse = postV1MarketingSequencesByIdEnrollWithHttpInfo(id = id, enrollInput = enrollInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEnrollResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EnrollResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2253,30 +2252,30 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Adds one contact or a whole audience to a sequence and schedules the first step for each.
      * Adds one contact or a whole audience to a sequence and schedules the first step for each. The sequence must be ACTIVE (a draft sends nothing), and the request must name exactly one of address or audienceId.  Enrolling is ALL this does: the message itself is sent later by the drip engine, through the suppression gate, so an opted-out customer can be enrolled here and still never be mailed. Re-posting is safe — an address this sequence already took is counted in alreadyEnrolled and never double-dripped — which is what makes retrying a partially-applied announcement a resume rather than a second send.
      * @param id ID is the sequence id from the path.
-     * @param cloudEnrollInput 
-     * @return ApiResponse<CloudEnrollResult?>
+     * @param enrollInput 
+     * @return ApiResponse<EnrollResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingSequencesIdEnrollWithHttpInfo(id: kotlin.String, cloudEnrollInput: CloudEnrollInput) : ApiResponse<CloudEnrollResult?> {
-        val localVariableConfig = cloudPostV1MarketingSequencesIdEnrollRequestConfig(id = id, cloudEnrollInput = cloudEnrollInput)
+    fun postV1MarketingSequencesByIdEnrollWithHttpInfo(id: kotlin.String, enrollInput: EnrollInput) : ApiResponse<EnrollResult?> {
+        val localVariableConfig = postV1MarketingSequencesByIdEnrollRequestConfig(id = id, enrollInput = enrollInput)
 
-        return request<CloudEnrollInput, CloudEnrollResult>(
+        return request<EnrollInput, EnrollResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingSequencesIdEnroll
+     * To obtain the request config of the operation postV1MarketingSequencesByIdEnroll
      *
      * @param id ID is the sequence id from the path.
-     * @param cloudEnrollInput 
+     * @param enrollInput 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingSequencesIdEnrollRequestConfig(id: kotlin.String, cloudEnrollInput: CloudEnrollInput) : RequestConfig<CloudEnrollInput> {
-        val localVariableBody = cloudEnrollInput
+    fun postV1MarketingSequencesByIdEnrollRequestConfig(id: kotlin.String, enrollInput: EnrollInput) : RequestConfig<EnrollInput> {
+        val localVariableBody = enrollInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2287,7 +2286,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/enroll".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2306,8 +2305,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingSequencesIdEnrollmentsEidCancel(id: kotlin.String, eid: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1MarketingSequencesIdEnrollmentsEidCancelWithHttpInfo(id = id, eid = eid)
+    fun postV1MarketingSequencesByIdEnrollmentsByEidCancel(id: kotlin.String, eid: kotlin.String) : Unit {
+        val localVarResponse = postV1MarketingSequencesByIdEnrollmentsByEidCancelWithHttpInfo(id = id, eid = eid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2335,8 +2334,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingSequencesIdEnrollmentsEidCancelWithHttpInfo(id: kotlin.String, eid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1MarketingSequencesIdEnrollmentsEidCancelRequestConfig(id = id, eid = eid)
+    fun postV1MarketingSequencesByIdEnrollmentsByEidCancelWithHttpInfo(id: kotlin.String, eid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MarketingSequencesByIdEnrollmentsByEidCancelRequestConfig(id = id, eid = eid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2344,13 +2343,13 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingSequencesIdEnrollmentsEidCancel
+     * To obtain the request config of the operation postV1MarketingSequencesByIdEnrollmentsByEidCancel
      *
      * @param id ID is the sequence id from the path.
      * @param eid EID is the enrollment id from the path, as returned by a single-address enroll.
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingSequencesIdEnrollmentsEidCancelRequestConfig(id: kotlin.String, eid: kotlin.String) : RequestConfig<Unit> {
+    fun postV1MarketingSequencesByIdEnrollmentsByEidCancelRequestConfig(id: kotlin.String, eid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2360,7 +2359,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/enrollments/{eid}/cancel".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"eid"+"}", encodeURIComponent(eid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2370,8 +2369,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Flips draft/active/archived — the activation gate for sending, since only an active sequence accepts enrollments.
      * Flips draft/active/archived — the activation gate for sending, since only an active sequence accepts enrollments. It does not touch enrollments already walking: archiving stops new ones, not in-flight ones.
      * @param id ID is the sequence id from the path.
-     * @param cloudSequenceStatus 
-     * @return CloudSequenceStatus
+     * @param sequenceStatus 
+     * @return SequenceStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2380,11 +2379,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingSequencesIdStatus(id: kotlin.String, cloudSequenceStatus: CloudSequenceStatus) : CloudSequenceStatus {
-        val localVarResponse = cloudPostV1MarketingSequencesIdStatusWithHttpInfo(id = id, cloudSequenceStatus = cloudSequenceStatus)
+    fun postV1MarketingSequencesByIdStatus(id: kotlin.String, sequenceStatus: SequenceStatus) : SequenceStatus {
+        val localVarResponse = postV1MarketingSequencesByIdStatusWithHttpInfo(id = id, sequenceStatus = sequenceStatus)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSequenceStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SequenceStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2403,30 +2402,30 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Flips draft/active/archived — the activation gate for sending, since only an active sequence accepts enrollments.
      * Flips draft/active/archived — the activation gate for sending, since only an active sequence accepts enrollments. It does not touch enrollments already walking: archiving stops new ones, not in-flight ones.
      * @param id ID is the sequence id from the path.
-     * @param cloudSequenceStatus 
-     * @return ApiResponse<CloudSequenceStatus?>
+     * @param sequenceStatus 
+     * @return ApiResponse<SequenceStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingSequencesIdStatusWithHttpInfo(id: kotlin.String, cloudSequenceStatus: CloudSequenceStatus) : ApiResponse<CloudSequenceStatus?> {
-        val localVariableConfig = cloudPostV1MarketingSequencesIdStatusRequestConfig(id = id, cloudSequenceStatus = cloudSequenceStatus)
+    fun postV1MarketingSequencesByIdStatusWithHttpInfo(id: kotlin.String, sequenceStatus: SequenceStatus) : ApiResponse<SequenceStatus?> {
+        val localVariableConfig = postV1MarketingSequencesByIdStatusRequestConfig(id = id, sequenceStatus = sequenceStatus)
 
-        return request<CloudSequenceStatus, CloudSequenceStatus>(
+        return request<SequenceStatus, SequenceStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingSequencesIdStatus
+     * To obtain the request config of the operation postV1MarketingSequencesByIdStatus
      *
      * @param id ID is the sequence id from the path.
-     * @param cloudSequenceStatus 
+     * @param sequenceStatus 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingSequencesIdStatusRequestConfig(id: kotlin.String, cloudSequenceStatus: CloudSequenceStatus) : RequestConfig<CloudSequenceStatus> {
-        val localVariableBody = cloudSequenceStatus
+    fun postV1MarketingSequencesByIdStatusRequestConfig(id: kotlin.String, sequenceStatus: SequenceStatus) : RequestConfig<SequenceStatus> {
+        val localVariableBody = sequenceStatus
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2437,7 +2436,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/status".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2447,8 +2446,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Appends a message to the END of a sequence: the new step&#39;s idx is one past the last, so steps arrive in the order they are added.
      * Appends a message to the END of a sequence: the new step&#39;s idx is one past the last, so steps arrive in the order they are added. Body is required and delaySeconds must be &gt;&#x3D; 0. Adding a step does not disturb enrollments already walking — one that has passed this index simply never sees it.
      * @param id SequenceID is the sequence id from the path (the route&#39;s :id).
-     * @param cloudStepInput 
-     * @return CloudStep
+     * @param stepInput 
+     * @return Step
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2457,11 +2456,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingSequencesIdSteps(id: kotlin.String, cloudStepInput: CloudStepInput) : CloudStep {
-        val localVarResponse = cloudPostV1MarketingSequencesIdStepsWithHttpInfo(id = id, cloudStepInput = cloudStepInput)
+    fun postV1MarketingSequencesByIdSteps(id: kotlin.String, stepInput: StepInput) : Step {
+        val localVarResponse = postV1MarketingSequencesByIdStepsWithHttpInfo(id = id, stepInput = stepInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStep
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Step
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2480,30 +2479,30 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Appends a message to the END of a sequence: the new step&#39;s idx is one past the last, so steps arrive in the order they are added.
      * Appends a message to the END of a sequence: the new step&#39;s idx is one past the last, so steps arrive in the order they are added. Body is required and delaySeconds must be &gt;&#x3D; 0. Adding a step does not disturb enrollments already walking — one that has passed this index simply never sees it.
      * @param id SequenceID is the sequence id from the path (the route&#39;s :id).
-     * @param cloudStepInput 
-     * @return ApiResponse<CloudStep?>
+     * @param stepInput 
+     * @return ApiResponse<Step?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingSequencesIdStepsWithHttpInfo(id: kotlin.String, cloudStepInput: CloudStepInput) : ApiResponse<CloudStep?> {
-        val localVariableConfig = cloudPostV1MarketingSequencesIdStepsRequestConfig(id = id, cloudStepInput = cloudStepInput)
+    fun postV1MarketingSequencesByIdStepsWithHttpInfo(id: kotlin.String, stepInput: StepInput) : ApiResponse<Step?> {
+        val localVariableConfig = postV1MarketingSequencesByIdStepsRequestConfig(id = id, stepInput = stepInput)
 
-        return request<CloudStepInput, CloudStep>(
+        return request<StepInput, Step>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingSequencesIdSteps
+     * To obtain the request config of the operation postV1MarketingSequencesByIdSteps
      *
      * @param id SequenceID is the sequence id from the path (the route&#39;s :id).
-     * @param cloudStepInput 
+     * @param stepInput 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingSequencesIdStepsRequestConfig(id: kotlin.String, cloudStepInput: CloudStepInput) : RequestConfig<CloudStepInput> {
-        val localVariableBody = cloudStepInput
+    fun postV1MarketingSequencesByIdStepsRequestConfig(id: kotlin.String, stepInput: StepInput) : RequestConfig<StepInput> {
+        val localVariableBody = stepInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2514,7 +2513,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/sequences/{id}/steps".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2523,8 +2522,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/suppressions
      * Records an opt-out for the org (admin / self-service management).
      * Records an opt-out for the org (admin / self-service management). Address is required; channel defaults to email. It is idempotent: re-suppressing the same tuple keeps the original record rather than erroring. From here on the ONE send gate refuses that recipient on that channel.
-     * @param cloudSuppression 
-     * @return CloudSuppression
+     * @param suppression 
+     * @return Suppression
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2533,11 +2532,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketingSuppressions(cloudSuppression: CloudSuppression) : CloudSuppression {
-        val localVarResponse = cloudPostV1MarketingSuppressionsWithHttpInfo(cloudSuppression = cloudSuppression)
+    fun postV1MarketingSuppressions(suppression: Suppression) : Suppression {
+        val localVarResponse = postV1MarketingSuppressionsWithHttpInfo(suppression = suppression)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSuppression
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Suppression
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2555,29 +2554,29 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/marketing/suppressions
      * Records an opt-out for the org (admin / self-service management).
      * Records an opt-out for the org (admin / self-service management). Address is required; channel defaults to email. It is idempotent: re-suppressing the same tuple keeps the original record rather than erroring. From here on the ONE send gate refuses that recipient on that channel.
-     * @param cloudSuppression 
-     * @return ApiResponse<CloudSuppression?>
+     * @param suppression 
+     * @return ApiResponse<Suppression?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketingSuppressionsWithHttpInfo(cloudSuppression: CloudSuppression) : ApiResponse<CloudSuppression?> {
-        val localVariableConfig = cloudPostV1MarketingSuppressionsRequestConfig(cloudSuppression = cloudSuppression)
+    fun postV1MarketingSuppressionsWithHttpInfo(suppression: Suppression) : ApiResponse<Suppression?> {
+        val localVariableConfig = postV1MarketingSuppressionsRequestConfig(suppression = suppression)
 
-        return request<CloudSuppression, CloudSuppression>(
+        return request<Suppression, Suppression>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketingSuppressions
+     * To obtain the request config of the operation postV1MarketingSuppressions
      *
-     * @param cloudSuppression 
+     * @param suppression 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketingSuppressionsRequestConfig(cloudSuppression: CloudSuppression) : RequestConfig<CloudSuppression> {
-        val localVariableBody = cloudSuppression
+    fun postV1MarketingSuppressionsRequestConfig(suppression: Suppression) : RequestConfig<Suppression> {
+        val localVariableBody = suppression
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2588,7 +2587,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/suppressions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2598,8 +2597,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Replaces a post&#39;s editable fields.
      * Replaces a post&#39;s editable fields. It is a full write, not a patch, and it RESETS the lifecycle from the schedule: a scheduledAt makes the post \&quot;scheduled\&quot; again and none makes it a draft — so editing a failed post requeues it rather than leaving it stuck.
      * @param id ID is the server-assigned post id (\&quot;cal_\&quot; + 128 random bits).
-     * @param cloudCalendarPost 
-     * @return CloudCalendarPost
+     * @param calendarPost 
+     * @return CalendarPost
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2608,11 +2607,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1MarketingCalendarId(id: kotlin.String, cloudCalendarPost: CloudCalendarPost) : CloudCalendarPost {
-        val localVarResponse = cloudPutV1MarketingCalendarIdWithHttpInfo(id = id, cloudCalendarPost = cloudCalendarPost)
+    fun putV1MarketingCalendarById(id: kotlin.String, calendarPost: CalendarPost) : CalendarPost {
+        val localVarResponse = putV1MarketingCalendarByIdWithHttpInfo(id = id, calendarPost = calendarPost)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCalendarPost
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CalendarPost
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2631,30 +2630,30 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Replaces a post&#39;s editable fields.
      * Replaces a post&#39;s editable fields. It is a full write, not a patch, and it RESETS the lifecycle from the schedule: a scheduledAt makes the post \&quot;scheduled\&quot; again and none makes it a draft — so editing a failed post requeues it rather than leaving it stuck.
      * @param id ID is the server-assigned post id (\&quot;cal_\&quot; + 128 random bits).
-     * @param cloudCalendarPost 
-     * @return ApiResponse<CloudCalendarPost?>
+     * @param calendarPost 
+     * @return ApiResponse<CalendarPost?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1MarketingCalendarIdWithHttpInfo(id: kotlin.String, cloudCalendarPost: CloudCalendarPost) : ApiResponse<CloudCalendarPost?> {
-        val localVariableConfig = cloudPutV1MarketingCalendarIdRequestConfig(id = id, cloudCalendarPost = cloudCalendarPost)
+    fun putV1MarketingCalendarByIdWithHttpInfo(id: kotlin.String, calendarPost: CalendarPost) : ApiResponse<CalendarPost?> {
+        val localVariableConfig = putV1MarketingCalendarByIdRequestConfig(id = id, calendarPost = calendarPost)
 
-        return request<CloudCalendarPost, CloudCalendarPost>(
+        return request<CalendarPost, CalendarPost>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1MarketingCalendarId
+     * To obtain the request config of the operation putV1MarketingCalendarById
      *
      * @param id ID is the server-assigned post id (\&quot;cal_\&quot; + 128 random bits).
-     * @param cloudCalendarPost 
+     * @param calendarPost 
      * @return RequestConfig
      */
-    fun cloudPutV1MarketingCalendarIdRequestConfig(id: kotlin.String, cloudCalendarPost: CloudCalendarPost) : RequestConfig<CloudCalendarPost> {
-        val localVariableBody = cloudCalendarPost
+    fun putV1MarketingCalendarByIdRequestConfig(id: kotlin.String, calendarPost: CalendarPost) : RequestConfig<CalendarPost> {
+        val localVariableBody = calendarPost
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2665,7 +2664,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/calendar/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2675,8 +2674,8 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Replaces a campaign&#39;s editable fields.
      * Replaces a campaign&#39;s editable fields. It is a full write, not a patch: every field takes the value in the body, and an omitted one is cleared. The id comes from the path — the body cannot retarget another campaign — and createdAt is never rewritten.
      * @param id ID is the server-assigned campaign id (\&quot;camp_\&quot; + 128 random bits).
-     * @param cloudCampaign 
-     * @return CloudCampaign
+     * @param campaign 
+     * @return Campaign
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2685,11 +2684,11 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1MarketingCampaignsId(id: kotlin.String, cloudCampaign: CloudCampaign) : CloudCampaign {
-        val localVarResponse = cloudPutV1MarketingCampaignsIdWithHttpInfo(id = id, cloudCampaign = cloudCampaign)
+    fun putV1MarketingCampaignsById(id: kotlin.String, campaign: Campaign) : Campaign {
+        val localVarResponse = putV1MarketingCampaignsByIdWithHttpInfo(id = id, campaign = campaign)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCampaign
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Campaign
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2708,30 +2707,30 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Replaces a campaign&#39;s editable fields.
      * Replaces a campaign&#39;s editable fields. It is a full write, not a patch: every field takes the value in the body, and an omitted one is cleared. The id comes from the path — the body cannot retarget another campaign — and createdAt is never rewritten.
      * @param id ID is the server-assigned campaign id (\&quot;camp_\&quot; + 128 random bits).
-     * @param cloudCampaign 
-     * @return ApiResponse<CloudCampaign?>
+     * @param campaign 
+     * @return ApiResponse<Campaign?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1MarketingCampaignsIdWithHttpInfo(id: kotlin.String, cloudCampaign: CloudCampaign) : ApiResponse<CloudCampaign?> {
-        val localVariableConfig = cloudPutV1MarketingCampaignsIdRequestConfig(id = id, cloudCampaign = cloudCampaign)
+    fun putV1MarketingCampaignsByIdWithHttpInfo(id: kotlin.String, campaign: Campaign) : ApiResponse<Campaign?> {
+        val localVariableConfig = putV1MarketingCampaignsByIdRequestConfig(id = id, campaign = campaign)
 
-        return request<CloudCampaign, CloudCampaign>(
+        return request<Campaign, Campaign>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1MarketingCampaignsId
+     * To obtain the request config of the operation putV1MarketingCampaignsById
      *
      * @param id ID is the server-assigned campaign id (\&quot;camp_\&quot; + 128 random bits).
-     * @param cloudCampaign 
+     * @param campaign 
      * @return RequestConfig
      */
-    fun cloudPutV1MarketingCampaignsIdRequestConfig(id: kotlin.String, cloudCampaign: CloudCampaign) : RequestConfig<CloudCampaign> {
-        val localVariableBody = cloudCampaign
+    fun putV1MarketingCampaignsByIdRequestConfig(id: kotlin.String, campaign: Campaign) : RequestConfig<Campaign> {
+        val localVariableBody = campaign
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2742,81 +2741,7 @@ class MarketingApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/marketing/campaigns/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/commerce/marketing
-     * Create marketing campaign
-     * 
-     * @param body 
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceCreateMarketingCampaign(body: kotlin.Any) : kotlin.Any {
-        val localVarResponse = commerceCreateMarketingCampaignWithHttpInfo(body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/commerce/marketing
-     * Create marketing campaign
-     * 
-     * @param body 
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceCreateMarketingCampaignWithHttpInfo(body: kotlin.Any) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = commerceCreateMarketingCampaignRequestConfig(body = body)
-
-        return request<kotlin.Any, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceCreateMarketingCampaign
-     *
-     * @param body 
-     * @return RequestConfig
-     */
-    fun commerceCreateMarketingCampaignRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/commerce/marketing",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

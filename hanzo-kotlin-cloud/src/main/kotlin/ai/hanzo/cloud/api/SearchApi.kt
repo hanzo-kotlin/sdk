@@ -19,23 +19,12 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.BotSearchPersonas200Response
-import ai.hanzo.cloud.model.CloudProvisionRequest
-import ai.hanzo.cloud.model.CloudProvisionResult
-import ai.hanzo.cloud.model.CloudProvisionedResource
-import ai.hanzo.cloud.model.CloudProvisionedSummary
-import ai.hanzo.cloud.model.CommerceNote
-import ai.hanzo.cloud.model.CommerceOrder
-import ai.hanzo.cloud.model.CommerceSearchNotesRequest
-import ai.hanzo.cloud.model.CommerceUser
-import ai.hanzo.cloud.model.SearchResponseError
-import ai.hanzo.cloud.model.SearchSearchQuery
-import ai.hanzo.cloud.model.SearchSearchResult
-import ai.hanzo.cloud.model.VectorRecommendPoints200Response
-import ai.hanzo.cloud.model.VectorRecommendPointsRequest
-import ai.hanzo.cloud.model.VectorSearchBatch200Response
-import ai.hanzo.cloud.model.VectorSearchBatchRequest
-import ai.hanzo.cloud.model.VectorSearchRequest
+import ai.hanzo.cloud.model.ProvisionRequest
+import ai.hanzo.cloud.model.ProvisionResult
+import ai.hanzo.cloud.model.ProvisionedResource
+import ai.hanzo.cloud.model.ProvisionedSummary
+import ai.hanzo.cloud.model.SearchIndexList
+import ai.hanzo.cloud.model.SearchStats
 
 import com.google.gson.annotations.SerializedName
 
@@ -62,173 +51,9 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * GET /v1/bot/search/personas
-     * Lexical search for personas
-     * 
-     * @param q 
-     * @param limit  (optional, default to 20)
-     * @return BotSearchPersonas200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botSearchPersonas(q: kotlin.String, limit: kotlin.Int? = 20) : BotSearchPersonas200Response {
-        val localVarResponse = botSearchPersonasWithHttpInfo(q = q, limit = limit)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotSearchPersonas200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/search/personas
-     * Lexical search for personas
-     * 
-     * @param q 
-     * @param limit  (optional, default to 20)
-     * @return ApiResponse<BotSearchPersonas200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botSearchPersonasWithHttpInfo(q: kotlin.String, limit: kotlin.Int?) : ApiResponse<BotSearchPersonas200Response?> {
-        val localVariableConfig = botSearchPersonasRequestConfig(q = q, limit = limit)
-
-        return request<Unit, BotSearchPersonas200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botSearchPersonas
-     *
-     * @param q 
-     * @param limit  (optional, default to 20)
-     * @return RequestConfig
-     */
-    fun botSearchPersonasRequestConfig(q: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("q", listOf(q.toString()))
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/search/personas",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/bot/search/skills
-     * Hybrid vector + lexical search for skills
-     * 
-     * @param q Search query
-     * @param limit  (optional, default to 20)
-     * @return BotSearchPersonas200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun botSearchSkills(q: kotlin.String, limit: kotlin.Int? = 20) : BotSearchPersonas200Response {
-        val localVarResponse = botSearchSkillsWithHttpInfo(q = q, limit = limit)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as BotSearchPersonas200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bot/search/skills
-     * Hybrid vector + lexical search for skills
-     * 
-     * @param q Search query
-     * @param limit  (optional, default to 20)
-     * @return ApiResponse<BotSearchPersonas200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun botSearchSkillsWithHttpInfo(q: kotlin.String, limit: kotlin.Int?) : ApiResponse<BotSearchPersonas200Response?> {
-        val localVariableConfig = botSearchSkillsRequestConfig(q = q, limit = limit)
-
-        return request<Unit, BotSearchPersonas200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation botSearchSkills
-     *
-     * @param q Search query
-     * @param limit  (optional, default to 20)
-     * @return RequestConfig
-     */
-    fun botSearchSkillsRequestConfig(q: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("q", listOf(q.toString()))
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bot/search/skills",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * DELETE /v1/search/{name}
-     * DropSearch deletes one search index from the shared backend and removes its metadata row.
-     * DropSearch deletes one search index from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
+     * Deletes one search index from the shared backend and removes its metadata row.
+     * Deletes one search index from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -238,8 +63,8 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1SearchName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1SearchNameWithHttpInfo(name = name)
+    fun deleteV1SearchByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1SearchByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -258,16 +83,16 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/search/{name}
-     * DropSearch deletes one search index from the shared backend and removes its metadata row.
-     * DropSearch deletes one search index from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
+     * Deletes one search index from the shared backend and removes its metadata row.
+     * Deletes one search index from the shared backend and removes its metadata row. Answers 204 with no body; a second call is a 404.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1SearchNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1SearchNameRequestConfig(name = name)
+    fun deleteV1SearchByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1SearchByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -275,12 +100,12 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1SearchName
+     * To obtain the request config of the operation deleteV1SearchByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1SearchNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1SearchByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -290,16 +115,16 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/search/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/search
-     * ListSearch lists the caller org&#39;s search indexes.
-     * ListSearch lists the caller org&#39;s search indexes. An index is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
-     * @return kotlin.collections.List<CloudProvisionedSummary>
+     * Lists the caller org&#39;s search indexes.
+     * Lists the caller org&#39;s search indexes. An index is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
+     * @return kotlin.collections.List<ProvisionedSummary>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -308,11 +133,11 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Search() : kotlin.collections.List<CloudProvisionedSummary> {
-        val localVarResponse = cloudGetV1SearchWithHttpInfo()
+    fun getV1Search() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getV1SearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudProvisionedSummary>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -328,28 +153,28 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/search
-     * ListSearch lists the caller org&#39;s search indexes.
-     * ListSearch lists the caller org&#39;s search indexes. An index is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
-     * @return ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?>
+     * Lists the caller org&#39;s search indexes.
+     * Lists the caller org&#39;s search indexes. An index is a logical resource inside an already-live shared backend, so every one of them is reached through the public gateway rather than at an instance of its own.
+     * @return ApiResponse<kotlin.collections.List<ProvisionedSummary>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SearchWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?> {
-        val localVariableConfig = cloudGetV1SearchRequestConfig()
+    fun getV1SearchWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getV1SearchRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudProvisionedSummary>>(
+        return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Search
+     * To obtain the request config of the operation getV1Search
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SearchRequestConfig() : RequestConfig<Unit> {
+    fun getV1SearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -360,17 +185,17 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/search/{name}
-     * GetSearch returns one search index&#39;s metadata.
-     * GetSearch returns one search index&#39;s metadata. It carries the index&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-index credential.
+     * Returns one search index&#39;s metadata.
+     * Returns one search index&#39;s metadata. It carries the index&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-index credential.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return CloudProvisionedResource
+     * @return ProvisionedResource
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -379,11 +204,11 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SearchName(name: kotlin.String) : CloudProvisionedResource {
-        val localVarResponse = cloudGetV1SearchNameWithHttpInfo(name = name)
+    fun getV1SearchByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getV1SearchByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionedResource
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -399,30 +224,30 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/search/{name}
-     * GetSearch returns one search index&#39;s metadata.
-     * GetSearch returns one search index&#39;s metadata. It carries the index&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-index credential.
+     * Returns one search index&#39;s metadata.
+     * Returns one search index&#39;s metadata. It carries the index&#39;s status and the gateway address it is reached at, and no username: the backend authenticates with a shared, out-of-band key rather than a per-index credential.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<CloudProvisionedResource?>
+     * @return ApiResponse<ProvisionedResource?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SearchNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudProvisionedResource?> {
-        val localVariableConfig = cloudGetV1SearchNameRequestConfig(name = name)
+    fun getV1SearchByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getV1SearchByNameRequestConfig(name = name)
 
-        return request<Unit, CloudProvisionedResource>(
+        return request<Unit, ProvisionedResource>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SearchName
+     * To obtain the request config of the operation getV1SearchByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudGetV1SearchNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SearchByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -433,17 +258,17 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/search/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/search
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return CloudProvisionResult
+     * GET /v1/search/indexes
+     * Lists the search indexes with their document counts and timestamps.
+     * Lists the search indexes with their document counts and timestamps.  It reads the in-cluster Meilisearch service and reshapes its /stats and /indexes replies into the rows the console&#39;s Search panel renders. The read is degrade-friendly by design: an unreachable Meilisearch answers 200 with an EMPTY list, so the panel shows an honest empty state instead of an error. createdAt falls back to now and lastIndexedAt to null when the index list is unavailable.
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return SearchIndexList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -452,11 +277,159 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Search(cloudProvisionRequest: CloudProvisionRequest? = null) : CloudProvisionResult {
-        val localVarResponse = cloudPostV1SearchWithHttpInfo(cloudProvisionRequest = cloudProvisionRequest)
+    fun getV1SearchIndexes(authorization: kotlin.String? = null) : SearchIndexList {
+        val localVarResponse = getV1SearchIndexesWithHttpInfo(authorization = authorization)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchIndexList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/search/indexes
+     * Lists the search indexes with their document counts and timestamps.
+     * Lists the search indexes with their document counts and timestamps.  It reads the in-cluster Meilisearch service and reshapes its /stats and /indexes replies into the rows the console&#39;s Search panel renders. The read is degrade-friendly by design: an unreachable Meilisearch answers 200 with an EMPTY list, so the panel shows an honest empty state instead of an error. createdAt falls back to now and lastIndexedAt to null when the index list is unavailable.
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return ApiResponse<SearchIndexList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SearchIndexesWithHttpInfo(authorization: kotlin.String?) : ApiResponse<SearchIndexList?> {
+        val localVariableConfig = getV1SearchIndexesRequestConfig(authorization = authorization)
+
+        return request<Unit, SearchIndexList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SearchIndexes
+     *
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return RequestConfig
+     */
+    fun getV1SearchIndexesRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/search/indexes",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/search/stats
+     * Totals the documents across every search index.
+     * Totals the documents across every search index.  totalDocuments is summed from Meilisearch&#39;s own per-index counts. The other three fields are structurally zero rather than estimated: Meilisearch keeps no query-history counters, so searches, sessions and the per-day series are not derivable from the index and this surface reports the honest zero instead of a fabricated number. An unreachable Meilisearch answers 200 with all zeros.
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return SearchStats
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1SearchStats(authorization: kotlin.String? = null) : SearchStats {
+        val localVarResponse = getV1SearchStatsWithHttpInfo(authorization = authorization)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchStats
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/search/stats
+     * Totals the documents across every search index.
+     * Totals the documents across every search index.  totalDocuments is summed from Meilisearch&#39;s own per-index counts. The other three fields are structurally zero rather than estimated: Meilisearch keeps no query-history counters, so searches, sessions and the per-day series are not derivable from the index and this surface reports the honest zero instead of a fabricated number. An unreachable Meilisearch answers 200 with all zeros.
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return ApiResponse<SearchStats?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1SearchStatsWithHttpInfo(authorization: kotlin.String?) : ApiResponse<SearchStats?> {
+        val localVariableConfig = getV1SearchStatsRequestConfig(authorization = authorization)
+
+        return request<Unit, SearchStats>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1SearchStats
+     *
+     * @param authorization Authorization carries the surface&#39;s bearer key (&#x60;Bearer &lt;key&gt;&#x60;); the bare key is accepted too. Search and vector are two surfaces with two keys. It is not &#x60;validate:\&quot;required\&quot;&#x60; on purpose: requireKey answers absence itself, so an unconfigured surface 503s and a missing bearer 401s — a validation refusal would rewrite both statuses. (optional)
+     * @return RequestConfig
+     */
+    fun getV1SearchStatsRequestConfig(authorization: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/search/stats",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/search
+     * Provision a search index for your org
+     * Creates a search index inside the already-running shared search backend and answers with the endpoint that reaches it.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ProvisionResult
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1Search(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postV1SearchWithHttpInfo(provisionRequest = provisionRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -472,31 +445,31 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/search
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return ApiResponse<CloudProvisionResult?>
+     * Provision a search index for your org
+     * Creates a search index inside the already-running shared search backend and answers with the endpoint that reaches it.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ApiResponse<ProvisionResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SearchWithHttpInfo(cloudProvisionRequest: CloudProvisionRequest?) : ApiResponse<CloudProvisionResult?> {
-        val localVariableConfig = cloudPostV1SearchRequestConfig(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1SearchWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postV1SearchRequestConfig(provisionRequest = provisionRequest)
 
-        return request<CloudProvisionRequest, CloudProvisionResult>(
+        return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Search
+     * To obtain the request config of the operation postV1Search
      *
-     * @param cloudProvisionRequest  (optional)
+     * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1SearchRequestConfig(cloudProvisionRequest: CloudProvisionRequest?) : RequestConfig<CloudProvisionRequest> {
-        val localVariableBody = cloudProvisionRequest
+    fun postV1SearchRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+        val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -507,712 +480,7 @@ class SearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/commerce/search/note
-     * Search notes
-     * 
-     * @param commerceSearchNotesRequest 
-     * @return kotlin.collections.List<CommerceNote>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceSearchNotes(commerceSearchNotesRequest: CommerceSearchNotesRequest) : kotlin.collections.List<CommerceNote> {
-        val localVarResponse = commerceSearchNotesWithHttpInfo(commerceSearchNotesRequest = commerceSearchNotesRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CommerceNote>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/commerce/search/note
-     * Search notes
-     * 
-     * @param commerceSearchNotesRequest 
-     * @return ApiResponse<kotlin.collections.List<CommerceNote>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceSearchNotesWithHttpInfo(commerceSearchNotesRequest: CommerceSearchNotesRequest) : ApiResponse<kotlin.collections.List<CommerceNote>?> {
-        val localVariableConfig = commerceSearchNotesRequestConfig(commerceSearchNotesRequest = commerceSearchNotesRequest)
-
-        return request<CommerceSearchNotesRequest, kotlin.collections.List<CommerceNote>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceSearchNotes
-     *
-     * @param commerceSearchNotesRequest 
-     * @return RequestConfig
-     */
-    fun commerceSearchNotesRequestConfig(commerceSearchNotesRequest: CommerceSearchNotesRequest) : RequestConfig<CommerceSearchNotesRequest> {
-        val localVariableBody = commerceSearchNotesRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/commerce/search/note",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/commerce/search/order
-     * Search orders
-     * 
-     * @param q 
-     * @return kotlin.collections.List<CommerceOrder>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceSearchOrders(q: kotlin.String) : kotlin.collections.List<CommerceOrder> {
-        val localVarResponse = commerceSearchOrdersWithHttpInfo(q = q)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CommerceOrder>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/commerce/search/order
-     * Search orders
-     * 
-     * @param q 
-     * @return ApiResponse<kotlin.collections.List<CommerceOrder>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceSearchOrdersWithHttpInfo(q: kotlin.String) : ApiResponse<kotlin.collections.List<CommerceOrder>?> {
-        val localVariableConfig = commerceSearchOrdersRequestConfig(q = q)
-
-        return request<Unit, kotlin.collections.List<CommerceOrder>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceSearchOrders
-     *
-     * @param q 
-     * @return RequestConfig
-     */
-    fun commerceSearchOrdersRequestConfig(q: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("q", listOf(q.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/commerce/search/order",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/commerce/search/user
-     * Search users
-     * 
-     * @param q 
-     * @return kotlin.collections.List<CommerceUser>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceSearchUsers(q: kotlin.String) : kotlin.collections.List<CommerceUser> {
-        val localVarResponse = commerceSearchUsersWithHttpInfo(q = q)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CommerceUser>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/commerce/search/user
-     * Search users
-     * 
-     * @param q 
-     * @return ApiResponse<kotlin.collections.List<CommerceUser>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceSearchUsersWithHttpInfo(q: kotlin.String) : ApiResponse<kotlin.collections.List<CommerceUser>?> {
-        val localVariableConfig = commerceSearchUsersRequestConfig(q = q)
-
-        return request<Unit, kotlin.collections.List<CommerceUser>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceSearchUsers
-     *
-     * @param q 
-     * @return RequestConfig
-     */
-    fun commerceSearchUsersRequestConfig(q: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("q", listOf(q.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/commerce/search/user",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter matchingStrategy
-     */
-     enum class MatchingStrategySearchSearchGet(val value: kotlin.String) {
-         @SerializedName(value = "last") last("last"),
-         @SerializedName(value = "all") all("all"),
-         @SerializedName(value = "frequency") frequency("frequency");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/search
-     * Search documents (GET)
-     * 
-     * @param indexUid Unique index identifier
-     * @param q Search query (optional)
-     * @param offset  (optional, default to 0)
-     * @param limit  (optional, default to 20)
-     * @param attributesToRetrieve Comma-separated list of attributes to return (optional)
-     * @param attributesToHighlight  (optional)
-     * @param attributesToCrop  (optional)
-     * @param cropLength  (optional, default to 10)
-     * @param filter Filter expression (optional)
-     * @param sort Comma-separated sort rules (optional)
-     * @param facets Comma-separated facet attributes (optional)
-     * @param showMatchesPosition  (optional)
-     * @param showRankingScore  (optional)
-     * @param matchingStrategy  (optional)
-     * @return SearchSearchResult
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchSearchGet(indexUid: kotlin.String, q: kotlin.String? = null, offset: kotlin.Int? = 0, limit: kotlin.Int? = 20, attributesToRetrieve: kotlin.String? = null, attributesToHighlight: kotlin.String? = null, attributesToCrop: kotlin.String? = null, cropLength: kotlin.Int? = 10, filter: kotlin.String? = null, sort: kotlin.String? = null, facets: kotlin.String? = null, showMatchesPosition: kotlin.Boolean? = null, showRankingScore: kotlin.Boolean? = null, matchingStrategy: MatchingStrategySearchSearchGet? = null) : SearchSearchResult {
-        val localVarResponse = searchSearchGetWithHttpInfo(indexUid = indexUid, q = q, offset = offset, limit = limit, attributesToRetrieve = attributesToRetrieve, attributesToHighlight = attributesToHighlight, attributesToCrop = attributesToCrop, cropLength = cropLength, filter = filter, sort = sort, facets = facets, showMatchesPosition = showMatchesPosition, showRankingScore = showRankingScore, matchingStrategy = matchingStrategy)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSearchResult
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/indexes/{indexUid}/search
-     * Search documents (GET)
-     * 
-     * @param indexUid Unique index identifier
-     * @param q Search query (optional)
-     * @param offset  (optional, default to 0)
-     * @param limit  (optional, default to 20)
-     * @param attributesToRetrieve Comma-separated list of attributes to return (optional)
-     * @param attributesToHighlight  (optional)
-     * @param attributesToCrop  (optional)
-     * @param cropLength  (optional, default to 10)
-     * @param filter Filter expression (optional)
-     * @param sort Comma-separated sort rules (optional)
-     * @param facets Comma-separated facet attributes (optional)
-     * @param showMatchesPosition  (optional)
-     * @param showRankingScore  (optional)
-     * @param matchingStrategy  (optional)
-     * @return ApiResponse<SearchSearchResult?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchSearchGetWithHttpInfo(indexUid: kotlin.String, q: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, attributesToRetrieve: kotlin.String?, attributesToHighlight: kotlin.String?, attributesToCrop: kotlin.String?, cropLength: kotlin.Int?, filter: kotlin.String?, sort: kotlin.String?, facets: kotlin.String?, showMatchesPosition: kotlin.Boolean?, showRankingScore: kotlin.Boolean?, matchingStrategy: MatchingStrategySearchSearchGet?) : ApiResponse<SearchSearchResult?> {
-        val localVariableConfig = searchSearchGetRequestConfig(indexUid = indexUid, q = q, offset = offset, limit = limit, attributesToRetrieve = attributesToRetrieve, attributesToHighlight = attributesToHighlight, attributesToCrop = attributesToCrop, cropLength = cropLength, filter = filter, sort = sort, facets = facets, showMatchesPosition = showMatchesPosition, showRankingScore = showRankingScore, matchingStrategy = matchingStrategy)
-
-        return request<Unit, SearchSearchResult>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchSearchGet
-     *
-     * @param indexUid Unique index identifier
-     * @param q Search query (optional)
-     * @param offset  (optional, default to 0)
-     * @param limit  (optional, default to 20)
-     * @param attributesToRetrieve Comma-separated list of attributes to return (optional)
-     * @param attributesToHighlight  (optional)
-     * @param attributesToCrop  (optional)
-     * @param cropLength  (optional, default to 10)
-     * @param filter Filter expression (optional)
-     * @param sort Comma-separated sort rules (optional)
-     * @param facets Comma-separated facet attributes (optional)
-     * @param showMatchesPosition  (optional)
-     * @param showRankingScore  (optional)
-     * @param matchingStrategy  (optional)
-     * @return RequestConfig
-     */
-    fun searchSearchGetRequestConfig(indexUid: kotlin.String, q: kotlin.String?, offset: kotlin.Int?, limit: kotlin.Int?, attributesToRetrieve: kotlin.String?, attributesToHighlight: kotlin.String?, attributesToCrop: kotlin.String?, cropLength: kotlin.Int?, filter: kotlin.String?, sort: kotlin.String?, facets: kotlin.String?, showMatchesPosition: kotlin.Boolean?, showRankingScore: kotlin.Boolean?, matchingStrategy: MatchingStrategySearchSearchGet?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (q != null) {
-                    put("q", listOf(q.toString()))
-                }
-                if (offset != null) {
-                    put("offset", listOf(offset.toString()))
-                }
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-                if (attributesToRetrieve != null) {
-                    put("attributesToRetrieve", listOf(attributesToRetrieve.toString()))
-                }
-                if (attributesToHighlight != null) {
-                    put("attributesToHighlight", listOf(attributesToHighlight.toString()))
-                }
-                if (attributesToCrop != null) {
-                    put("attributesToCrop", listOf(attributesToCrop.toString()))
-                }
-                if (cropLength != null) {
-                    put("cropLength", listOf(cropLength.toString()))
-                }
-                if (filter != null) {
-                    put("filter", listOf(filter.toString()))
-                }
-                if (sort != null) {
-                    put("sort", listOf(sort.toString()))
-                }
-                if (facets != null) {
-                    put("facets", listOf(facets.toString()))
-                }
-                if (showMatchesPosition != null) {
-                    put("showMatchesPosition", listOf(showMatchesPosition.toString()))
-                }
-                if (showRankingScore != null) {
-                    put("showRankingScore", listOf(showRankingScore.toString()))
-                }
-                if (matchingStrategy != null) {
-                    put("matchingStrategy", listOf(matchingStrategy.value))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/search/indexes/{indexUid}/search".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/search
-     * Search documents (POST)
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchSearchQuery 
-     * @return SearchSearchResult
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchSearchPost(indexUid: kotlin.String, searchSearchQuery: SearchSearchQuery) : SearchSearchResult {
-        val localVarResponse = searchSearchPostWithHttpInfo(indexUid = indexUid, searchSearchQuery = searchSearchQuery)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSearchResult
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/search/indexes/{indexUid}/search
-     * Search documents (POST)
-     * 
-     * @param indexUid Unique index identifier
-     * @param searchSearchQuery 
-     * @return ApiResponse<SearchSearchResult?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchSearchPostWithHttpInfo(indexUid: kotlin.String, searchSearchQuery: SearchSearchQuery) : ApiResponse<SearchSearchResult?> {
-        val localVariableConfig = searchSearchPostRequestConfig(indexUid = indexUid, searchSearchQuery = searchSearchQuery)
-
-        return request<SearchSearchQuery, SearchSearchResult>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchSearchPost
-     *
-     * @param indexUid Unique index identifier
-     * @param searchSearchQuery 
-     * @return RequestConfig
-     */
-    fun searchSearchPostRequestConfig(indexUid: kotlin.String, searchSearchQuery: SearchSearchQuery) : RequestConfig<SearchSearchQuery> {
-        val localVariableBody = searchSearchQuery
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/search/indexes/{indexUid}/search".replace("{"+"indexUid"+"}", encodeURIComponent(indexUid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/vector/collections/{collection_name}/points/recommend
-     * Recommend points
-     * 
-     * @param collectionName 
-     * @param vectorRecommendPointsRequest 
-     * @return VectorRecommendPoints200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun vectorRecommendPoints(collectionName: kotlin.String, vectorRecommendPointsRequest: VectorRecommendPointsRequest) : VectorRecommendPoints200Response {
-        val localVarResponse = vectorRecommendPointsWithHttpInfo(collectionName = collectionName, vectorRecommendPointsRequest = vectorRecommendPointsRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorRecommendPoints200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/vector/collections/{collection_name}/points/recommend
-     * Recommend points
-     * 
-     * @param collectionName 
-     * @param vectorRecommendPointsRequest 
-     * @return ApiResponse<VectorRecommendPoints200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun vectorRecommendPointsWithHttpInfo(collectionName: kotlin.String, vectorRecommendPointsRequest: VectorRecommendPointsRequest) : ApiResponse<VectorRecommendPoints200Response?> {
-        val localVariableConfig = vectorRecommendPointsRequestConfig(collectionName = collectionName, vectorRecommendPointsRequest = vectorRecommendPointsRequest)
-
-        return request<VectorRecommendPointsRequest, VectorRecommendPoints200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation vectorRecommendPoints
-     *
-     * @param collectionName 
-     * @param vectorRecommendPointsRequest 
-     * @return RequestConfig
-     */
-    fun vectorRecommendPointsRequestConfig(collectionName: kotlin.String, vectorRecommendPointsRequest: VectorRecommendPointsRequest) : RequestConfig<VectorRecommendPointsRequest> {
-        val localVariableBody = vectorRecommendPointsRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/vector/collections/{collection_name}/points/recommend".replace("{"+"collection_name"+"}", encodeURIComponent(collectionName.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/vector/collections/{collection_name}/points/search/batch
-     * Batch search
-     * 
-     * @param collectionName 
-     * @param vectorSearchBatchRequest 
-     * @return VectorSearchBatch200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun vectorSearchBatch(collectionName: kotlin.String, vectorSearchBatchRequest: VectorSearchBatchRequest) : VectorSearchBatch200Response {
-        val localVarResponse = vectorSearchBatchWithHttpInfo(collectionName = collectionName, vectorSearchBatchRequest = vectorSearchBatchRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorSearchBatch200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/vector/collections/{collection_name}/points/search/batch
-     * Batch search
-     * 
-     * @param collectionName 
-     * @param vectorSearchBatchRequest 
-     * @return ApiResponse<VectorSearchBatch200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun vectorSearchBatchWithHttpInfo(collectionName: kotlin.String, vectorSearchBatchRequest: VectorSearchBatchRequest) : ApiResponse<VectorSearchBatch200Response?> {
-        val localVariableConfig = vectorSearchBatchRequestConfig(collectionName = collectionName, vectorSearchBatchRequest = vectorSearchBatchRequest)
-
-        return request<VectorSearchBatchRequest, VectorSearchBatch200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation vectorSearchBatch
-     *
-     * @param collectionName 
-     * @param vectorSearchBatchRequest 
-     * @return RequestConfig
-     */
-    fun vectorSearchBatchRequestConfig(collectionName: kotlin.String, vectorSearchBatchRequest: VectorSearchBatchRequest) : RequestConfig<VectorSearchBatchRequest> {
-        val localVariableBody = vectorSearchBatchRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/vector/collections/{collection_name}/points/search/batch".replace("{"+"collection_name"+"}", encodeURIComponent(collectionName.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/vector/collections/{collection_name}/points/search
-     * Search points
-     * 
-     * @param collectionName 
-     * @param vectorSearchRequest 
-     * @return VectorRecommendPoints200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun vectorSearchPoints(collectionName: kotlin.String, vectorSearchRequest: VectorSearchRequest) : VectorRecommendPoints200Response {
-        val localVarResponse = vectorSearchPointsWithHttpInfo(collectionName = collectionName, vectorSearchRequest = vectorSearchRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VectorRecommendPoints200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/vector/collections/{collection_name}/points/search
-     * Search points
-     * 
-     * @param collectionName 
-     * @param vectorSearchRequest 
-     * @return ApiResponse<VectorRecommendPoints200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun vectorSearchPointsWithHttpInfo(collectionName: kotlin.String, vectorSearchRequest: VectorSearchRequest) : ApiResponse<VectorRecommendPoints200Response?> {
-        val localVariableConfig = vectorSearchPointsRequestConfig(collectionName = collectionName, vectorSearchRequest = vectorSearchRequest)
-
-        return request<VectorSearchRequest, VectorRecommendPoints200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation vectorSearchPoints
-     *
-     * @param collectionName 
-     * @param vectorSearchRequest 
-     * @return RequestConfig
-     */
-    fun vectorSearchPointsRequestConfig(collectionName: kotlin.String, vectorSearchRequest: VectorSearchRequest) : RequestConfig<VectorSearchRequest> {
-        val localVariableBody = vectorSearchRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/vector/collections/{collection_name}/points/search".replace("{"+"collection_name"+"}", encodeURIComponent(collectionName.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

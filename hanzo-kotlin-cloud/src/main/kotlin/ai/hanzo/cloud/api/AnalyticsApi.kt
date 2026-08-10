@@ -19,12 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudHealthReport
-import ai.hanzo.cloud.model.CloudOverview
-import ai.hanzo.cloud.model.CloudTimeseries
-import ai.hanzo.cloud.model.CloudTop
-import ai.hanzo.cloud.model.DnsError
-import ai.hanzo.cloud.model.DnsQueryAnalytics
+import ai.hanzo.cloud.model.HealthReport
+import ai.hanzo.cloud.model.Overview
+import ai.hanzo.cloud.model.Timeseries
+import ai.hanzo.cloud.model.Top
 
 import com.google.gson.annotations.SerializedName
 
@@ -52,9 +50,9 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/analytics/health
-     * 
-     * 
-     * @return CloudHealthReport
+     * Health reports whether the event plane can take a write and the warehouse can answer a read.
+     * Health reports whether the event plane can take a write and the warehouse can answer a read.  It reports the analytics subsystem&#39;s own liveness in BOTH directions: plane is the event plane it WRITES (the bus and the JetStream stream every accepted event is published to, both named in the report), and datastore is the warehouse it READS, with each read lens&#39;s table reported as it is provisioned (the LLM usage ledger and the product-event table).  EITHER ONE DOWN IS A 503, and the report says WHICH — they are probed independently and never collapse into a single bit. This endpoint used to report the read half only, and answered 200/ok while every POST /v1/event failed on a stream that could not bind: a total ingest outage behind a green probe. A readiness gate here now gates on the write path too.  plane.ready IS A REAL PROBE and walks the ingest path itself — the same connection and the same stream a publish uses — so it cannot answer ready while a publish would 503. plane.reason carries the plane&#39;s own error text when it is false.  datastore IS NOT PROBED WITH A QUERY. It is the state of the process&#39;s own shared client — established, and not since closed — so a warehouse accepting connections and failing reads still reports true. Degraded CARRIES the report (status, the failing half, reason) as its body rather than an error envelope, so a gate reads the cause off the same object it got at 200.  A MISSING LENS TABLE IS NOT A FAILURE and never moves the status: a lens reported available:false answers honest-empty rather than erroring, so a fresh deployment whose collector has not emitted yet is legitimately 200 with the product-event lens unavailable. The lens block is reported whenever the warehouse is REACHABLE — including on a report degraded by the plane, where the tables genuinely were probed — and is absent only when the warehouse is not, having nothing to say about tables it could not reach.  Unauthenticated on purpose — liveness has to be probe-able — and it reads NO tenant data: table existence and stream presence only, never a row and never an event.
+     * @return HealthReport
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -63,11 +61,11 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AnalyticsHealth() : CloudHealthReport {
-        val localVarResponse = cloudGetV1AnalyticsHealthWithHttpInfo()
+    fun getV1AnalyticsHealth() : HealthReport {
+        val localVarResponse = getV1AnalyticsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHealthReport
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HealthReport
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -83,28 +81,28 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/analytics/health
-     * 
-     * 
-     * @return ApiResponse<CloudHealthReport?>
+     * Health reports whether the event plane can take a write and the warehouse can answer a read.
+     * Health reports whether the event plane can take a write and the warehouse can answer a read.  It reports the analytics subsystem&#39;s own liveness in BOTH directions: plane is the event plane it WRITES (the bus and the JetStream stream every accepted event is published to, both named in the report), and datastore is the warehouse it READS, with each read lens&#39;s table reported as it is provisioned (the LLM usage ledger and the product-event table).  EITHER ONE DOWN IS A 503, and the report says WHICH — they are probed independently and never collapse into a single bit. This endpoint used to report the read half only, and answered 200/ok while every POST /v1/event failed on a stream that could not bind: a total ingest outage behind a green probe. A readiness gate here now gates on the write path too.  plane.ready IS A REAL PROBE and walks the ingest path itself — the same connection and the same stream a publish uses — so it cannot answer ready while a publish would 503. plane.reason carries the plane&#39;s own error text when it is false.  datastore IS NOT PROBED WITH A QUERY. It is the state of the process&#39;s own shared client — established, and not since closed — so a warehouse accepting connections and failing reads still reports true. Degraded CARRIES the report (status, the failing half, reason) as its body rather than an error envelope, so a gate reads the cause off the same object it got at 200.  A MISSING LENS TABLE IS NOT A FAILURE and never moves the status: a lens reported available:false answers honest-empty rather than erroring, so a fresh deployment whose collector has not emitted yet is legitimately 200 with the product-event lens unavailable. The lens block is reported whenever the warehouse is REACHABLE — including on a report degraded by the plane, where the tables genuinely were probed — and is absent only when the warehouse is not, having nothing to say about tables it could not reach.  Unauthenticated on purpose — liveness has to be probe-able — and it reads NO tenant data: table existence and stream presence only, never a row and never an event.
+     * @return ApiResponse<HealthReport?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AnalyticsHealthWithHttpInfo() : ApiResponse<CloudHealthReport?> {
-        val localVariableConfig = cloudGetV1AnalyticsHealthRequestConfig()
+    fun getV1AnalyticsHealthWithHttpInfo() : ApiResponse<HealthReport?> {
+        val localVariableConfig = getV1AnalyticsHealthRequestConfig()
 
-        return request<Unit, CloudHealthReport>(
+        return request<Unit, HealthReport>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AnalyticsHealth
+     * To obtain the request config of the operation getV1AnalyticsHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AnalyticsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1AnalyticsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -115,7 +113,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -127,7 +125,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
-     * @return CloudOverview
+     * @return Overview
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -136,11 +134,11 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AnalyticsOverview(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : CloudOverview {
-        val localVarResponse = cloudGetV1AnalyticsOverviewWithHttpInfo(range = range, start = start, end = end)
+    fun getV1AnalyticsOverview(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : Overview {
+        val localVarResponse = getV1AnalyticsOverviewWithHttpInfo(range = range, start = start, end = end)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOverview
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Overview
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -161,29 +159,29 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
-     * @return ApiResponse<CloudOverview?>
+     * @return ApiResponse<Overview?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AnalyticsOverviewWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<CloudOverview?> {
-        val localVariableConfig = cloudGetV1AnalyticsOverviewRequestConfig(range = range, start = start, end = end)
+    fun getV1AnalyticsOverviewWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<Overview?> {
+        val localVariableConfig = getV1AnalyticsOverviewRequestConfig(range = range, start = start, end = end)
 
-        return request<Unit, CloudOverview>(
+        return request<Unit, Overview>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AnalyticsOverview
+     * To obtain the request config of the operation getV1AnalyticsOverview
      *
      * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AnalyticsOverviewRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1AnalyticsOverviewRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -205,7 +203,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -217,7 +215,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
-     * @return CloudTimeseries
+     * @return Timeseries
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -226,11 +224,11 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AnalyticsTimeseries(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : CloudTimeseries {
-        val localVarResponse = cloudGetV1AnalyticsTimeseriesWithHttpInfo(range = range, start = start, end = end)
+    fun getV1AnalyticsTimeseries(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : Timeseries {
+        val localVarResponse = getV1AnalyticsTimeseriesWithHttpInfo(range = range, start = start, end = end)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTimeseries
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Timeseries
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -251,29 +249,29 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
-     * @return ApiResponse<CloudTimeseries?>
+     * @return ApiResponse<Timeseries?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AnalyticsTimeseriesWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<CloudTimeseries?> {
-        val localVariableConfig = cloudGetV1AnalyticsTimeseriesRequestConfig(range = range, start = start, end = end)
+    fun getV1AnalyticsTimeseriesWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<Timeseries?> {
+        val localVariableConfig = getV1AnalyticsTimeseriesRequestConfig(range = range, start = start, end = end)
 
-        return request<Unit, CloudTimeseries>(
+        return request<Unit, Timeseries>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AnalyticsTimeseries
+     * To obtain the request config of the operation getV1AnalyticsTimeseries
      *
      * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AnalyticsTimeseriesRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1AnalyticsTimeseriesRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -295,7 +293,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/timeseries",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -308,7 +306,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @param limit Limit bounds every ranked lens in the response. Default 10, maximum 100; a value at or below zero, or one that is not a number, takes the default. (optional)
-     * @return CloudTop
+     * @return Top
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -317,11 +315,11 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AnalyticsTop(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null, limit: kotlin.Int? = null) : CloudTop {
-        val localVarResponse = cloudGetV1AnalyticsTopWithHttpInfo(range = range, start = start, end = end, limit = limit)
+    fun getV1AnalyticsTop(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null, limit: kotlin.Int? = null) : Top {
+        val localVarResponse = getV1AnalyticsTopWithHttpInfo(range = range, start = start, end = end, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTop
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Top
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -343,22 +341,22 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
      * @param end End is the exclusive upper bound of a custom window, RFC3339. Requires start. (optional)
      * @param limit Limit bounds every ranked lens in the response. Default 10, maximum 100; a value at or below zero, or one that is not a number, takes the default. (optional)
-     * @return ApiResponse<CloudTop?>
+     * @return ApiResponse<Top?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AnalyticsTopWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudTop?> {
-        val localVariableConfig = cloudGetV1AnalyticsTopRequestConfig(range = range, start = start, end = end, limit = limit)
+    fun getV1AnalyticsTopWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : ApiResponse<Top?> {
+        val localVariableConfig = getV1AnalyticsTopRequestConfig(range = range, start = start, end = end, limit = limit)
 
-        return request<Unit, CloudTop>(
+        return request<Unit, Top>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AnalyticsTop
+     * To obtain the request config of the operation getV1AnalyticsTop
      *
      * @param range Range is a relative window: 24h, 7d or 30d. Default 24h. Ignored when both start and end are given. An unknown value is a 400. (optional)
      * @param start Start is the inclusive lower bound of a custom window, RFC3339. Requires end. (optional)
@@ -366,7 +364,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param limit Limit bounds every ranked lens in the response. Default 10, maximum 100; a value at or below zero, or one that is not a number, takes the default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AnalyticsTopRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AnalyticsTopRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -391,118 +389,7 @@ class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/analytics/top",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter granularity
-     */
-     enum class GranularityDnsGetZoneAnalytics(val value: kotlin.String) {
-         @SerializedName(value = "hour") hour("hour"),
-         @SerializedName(value = "day") day("day"),
-         @SerializedName(value = "week") week("week");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/dns/zones/{zone}/analytics
-     * Get query analytics
-     * 
-     * @param zone 
-     * @param from  (optional)
-     * @param to  (optional)
-     * @param granularity  (optional, default to day)
-     * @return DnsQueryAnalytics
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun dnsGetZoneAnalytics(zone: kotlin.String, from: java.time.OffsetDateTime? = null, to: java.time.OffsetDateTime? = null, granularity: GranularityDnsGetZoneAnalytics? = GranularityDnsGetZoneAnalytics.day) : DnsQueryAnalytics {
-        val localVarResponse = dnsGetZoneAnalyticsWithHttpInfo(zone = zone, from = from, to = to, granularity = granularity)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as DnsQueryAnalytics
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/dns/zones/{zone}/analytics
-     * Get query analytics
-     * 
-     * @param zone 
-     * @param from  (optional)
-     * @param to  (optional)
-     * @param granularity  (optional, default to day)
-     * @return ApiResponse<DnsQueryAnalytics?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun dnsGetZoneAnalyticsWithHttpInfo(zone: kotlin.String, from: java.time.OffsetDateTime?, to: java.time.OffsetDateTime?, granularity: GranularityDnsGetZoneAnalytics?) : ApiResponse<DnsQueryAnalytics?> {
-        val localVariableConfig = dnsGetZoneAnalyticsRequestConfig(zone = zone, from = from, to = to, granularity = granularity)
-
-        return request<Unit, DnsQueryAnalytics>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation dnsGetZoneAnalytics
-     *
-     * @param zone 
-     * @param from  (optional)
-     * @param to  (optional)
-     * @param granularity  (optional, default to day)
-     * @return RequestConfig
-     */
-    fun dnsGetZoneAnalyticsRequestConfig(zone: kotlin.String, from: java.time.OffsetDateTime?, to: java.time.OffsetDateTime?, granularity: GranularityDnsGetZoneAnalytics?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (from != null) {
-                    put("from", listOf(parseDateToQueryString(from)))
-                }
-                if (to != null) {
-                    put("to", listOf(parseDateToQueryString(to)))
-                }
-                if (granularity != null) {
-                    put("granularity", listOf(granularity.value))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/dns/zones/{zone}/analytics".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

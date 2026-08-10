@@ -19,12 +19,17 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.EdgeDeployFunctionRequest
-import ai.hanzo.cloud.model.EdgeError
-import ai.hanzo.cloud.model.EdgeFunction
-import ai.hanzo.cloud.model.EdgeFunctionCreate
-import ai.hanzo.cloud.model.EdgeFunctionMetrics
-import ai.hanzo.cloud.model.EdgeFunctionUpdate
+import ai.hanzo.cloud.model.Definition
+import ai.hanzo.cloud.model.FnList
+import ai.hanzo.cloud.model.FunctionDetail
+import ai.hanzo.cloud.model.FunctionView
+import ai.hanzo.cloud.model.InvocationList
+import ai.hanzo.cloud.model.InvocationView
+import ai.hanzo.cloud.model.InvokeReq
+import ai.hanzo.cloud.model.LogLines
+import ai.hanzo.cloud.model.SecretList
+import ai.hanzo.cloud.model.TriggerList
+import ai.hanzo.cloud.model.Usage
 
 import com.google.gson.annotations.SerializedName
 
@@ -52,835 +57,9 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * DELETE /v1/functions/{name}
-     * 
-     * 
-     * @param name 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1FunctionsByName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1FunctionsByNameWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/functions/{name}
-     * 
-     * 
-     * @param name 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1FunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1FunctionsByNameRequestConfig(name = name)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudDeleteV1FunctionsByName
-     *
-     * @param name 
-     * @return RequestConfig
-     */
-    fun cloudDeleteV1FunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/functions/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Functions() : Unit {
-        val localVarResponse = cloudGetV1FunctionsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1Functions
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions/{name}
-     * 
-     * 
-     * @param name 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FunctionsByName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1FunctionsByNameWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions/{name}
-     * 
-     * 
-     * @param name 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsByNameRequestConfig(name = name)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1FunctionsByName
-     *
-     * @param name 
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions/{name}/invocations
-     * 
-     * 
-     * @param name 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FunctionsByNameInvocations(name: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1FunctionsByNameInvocationsWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions/{name}/invocations
-     * 
-     * 
-     * @param name 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsByNameInvocationsWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsByNameInvocationsRequestConfig(name = name)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1FunctionsByNameInvocations
-     *
-     * @param name 
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsByNameInvocationsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions/{name}/invocations".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions/{name}/logs
-     * 
-     * 
-     * @param name 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FunctionsByNameLogs(name: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1FunctionsByNameLogsWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions/{name}/logs
-     * 
-     * 
-     * @param name 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsByNameLogsWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsByNameLogsRequestConfig(name = name)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1FunctionsByNameLogs
-     *
-     * @param name 
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsByNameLogsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions/{name}/logs".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions/deployments
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FunctionsDeployments() : Unit {
-        val localVarResponse = cloudGetV1FunctionsDeploymentsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions/deployments
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsDeploymentsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsDeploymentsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1FunctionsDeployments
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsDeploymentsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions/deployments",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions/metrics
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FunctionsMetrics() : Unit {
-        val localVarResponse = cloudGetV1FunctionsMetricsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions/metrics
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsMetricsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsMetricsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1FunctionsMetrics
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsMetricsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions/metrics",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions/secrets
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FunctionsSecrets() : Unit {
-        val localVarResponse = cloudGetV1FunctionsSecretsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions/secrets
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsSecretsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsSecretsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1FunctionsSecrets
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsSecretsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions/secrets",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/functions/triggers
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FunctionsTriggers() : Unit {
-        val localVarResponse = cloudGetV1FunctionsTriggersWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/functions/triggers
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FunctionsTriggersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1FunctionsTriggersRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1FunctionsTriggers
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1FunctionsTriggersRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/functions/triggers",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/functions
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Functions() : Unit {
-        val localVarResponse = cloudPostV1FunctionsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/functions
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FunctionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1FunctionsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1Functions
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1FunctionsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/functions",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/functions/{name}/invoke
-     * 
-     * 
-     * @param name 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FunctionsByNameInvoke(name: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1FunctionsByNameInvokeWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/functions/{name}/invoke
-     * 
-     * 
-     * @param name 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FunctionsByNameInvokeWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1FunctionsByNameInvokeRequestConfig(name = name)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1FunctionsByNameInvoke
-     *
-     * @param name 
-     * @return RequestConfig
-     */
-    fun cloudPostV1FunctionsByNameInvokeRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/functions/{name}/invoke".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/edge/functions
-     * Create function
-     * 
-     * @param edgeFunctionCreate 
-     * @return EdgeFunction
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeCreateFunction(edgeFunctionCreate: EdgeFunctionCreate) : EdgeFunction {
-        val localVarResponse = edgeCreateFunctionWithHttpInfo(edgeFunctionCreate = edgeFunctionCreate)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as EdgeFunction
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/edge/functions
-     * Create function
-     * 
-     * @param edgeFunctionCreate 
-     * @return ApiResponse<EdgeFunction?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun edgeCreateFunctionWithHttpInfo(edgeFunctionCreate: EdgeFunctionCreate) : ApiResponse<EdgeFunction?> {
-        val localVariableConfig = edgeCreateFunctionRequestConfig(edgeFunctionCreate = edgeFunctionCreate)
-
-        return request<EdgeFunctionCreate, EdgeFunction>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation edgeCreateFunction
-     *
-     * @param edgeFunctionCreate 
-     * @return RequestConfig
-     */
-    fun edgeCreateFunctionRequestConfig(edgeFunctionCreate: EdgeFunctionCreate) : RequestConfig<EdgeFunctionCreate> {
-        val localVariableBody = edgeFunctionCreate
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/edge/functions",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/edge/functions/{slug}
-     * Delete function
-     * 
-     * @param slug 
+     * Removes one of the caller org&#39;s functions and answers 204.
+     * Removes one of the caller org&#39;s functions and answers 204.  A name this org does not hold is 404 — never a silent success — and a name belonging to another tenant is the same 404, because the delete is predicated on the validated org.
+     * @param name Name is the function the URL names.
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -890,8 +69,8 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeDeleteFunction(slug: kotlin.String) : kotlin.Any {
-        val localVarResponse = edgeDeleteFunctionWithHttpInfo(slug = slug)
+    fun deleteV1FunctionsByName(name: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteV1FunctionsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -909,18 +88,18 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * DELETE /v1/edge/functions/{slug}
-     * Delete function
-     * 
-     * @param slug 
+     * DELETE /v1/functions/{name}
+     * Removes one of the caller org&#39;s functions and answers 204.
+     * Removes one of the caller org&#39;s functions and answers 204.  A name this org does not hold is 404 — never a silent success — and a name belonging to another tenant is the same 404, because the delete is predicated on the validated org.
+     * @param name Name is the function the URL names.
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun edgeDeleteFunctionWithHttpInfo(slug: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = edgeDeleteFunctionRequestConfig(slug = slug)
+    fun deleteV1FunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteV1FunctionsByNameRequestConfig(name = name)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -928,12 +107,12 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation edgeDeleteFunction
+     * To obtain the request config of the operation deleteV1FunctionsByName
      *
-     * @param slug 
+     * @param name Name is the function the URL names.
      * @return RequestConfig
      */
-    fun edgeDeleteFunctionRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1FunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -941,21 +120,19 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
         return RequestConfig(
             method = RequestMethod.DELETE,
-            path = "/v1/edge/functions/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            path = "/v1/functions/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/edge/functions/{slug}/deploy
-     * Deploy function
-     * Deploy function source code. Upload a tarball or zip containing the function source. Creates a new version on success. 
-     * @param slug 
-     * @param body 
-     * @return EdgeFunction
+     * GET /v1/functions
+     * Is every serverless function the caller&#39;s org has published, each with its real 7-day rollup.
+     * Is every serverless function the caller&#39;s org has published, each with its real 7-day rollup.  A row carries the function&#39;s runtime, resource limits, deployment target and its invoke endpoint, plus envCount — how many secrets it mounts. The rollup fields are ABSENT rather than zero when the function has not run in the window, so a console renders \&quot;—\&quot; instead of a fabricated 0.  Requires a validated principal; the listing is scoped to its org.
+     * @return FnList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -964,11 +141,11 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeDeployFunction(slug: kotlin.String, body: java.io.File) : EdgeFunction {
-        val localVarResponse = edgeDeployFunctionWithHttpInfo(slug = slug, body = body)
+    fun getV1Functions() : FnList {
+        val localVarResponse = getV1FunctionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as EdgeFunction
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FnList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -983,55 +160,640 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * POST /v1/edge/functions/{slug}/deploy
-     * Deploy function
-     * Deploy function source code. Upload a tarball or zip containing the function source. Creates a new version on success. 
-     * @param slug 
-     * @param body 
-     * @return ApiResponse<EdgeFunction?>
+     * GET /v1/functions
+     * Is every serverless function the caller&#39;s org has published, each with its real 7-day rollup.
+     * Is every serverless function the caller&#39;s org has published, each with its real 7-day rollup.  A row carries the function&#39;s runtime, resource limits, deployment target and its invoke endpoint, plus envCount — how many secrets it mounts. The rollup fields are ABSENT rather than zero when the function has not run in the window, so a console renders \&quot;—\&quot; instead of a fabricated 0.  Requires a validated principal; the listing is scoped to its org.
+     * @return ApiResponse<FnList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun edgeDeployFunctionWithHttpInfo(slug: kotlin.String, body: java.io.File) : ApiResponse<EdgeFunction?> {
-        val localVariableConfig = edgeDeployFunctionRequestConfig(slug = slug, body = body)
+    fun getV1FunctionsWithHttpInfo() : ApiResponse<FnList?> {
+        val localVariableConfig = getV1FunctionsRequestConfig()
 
-        return request<java.io.File, EdgeFunction>(
+        return request<Unit, FnList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation edgeDeployFunction
+     * To obtain the request config of the operation getV1Functions
      *
-     * @param slug 
-     * @param body 
      * @return RequestConfig
      */
-    fun edgeDeployFunctionRequestConfig(slug: kotlin.String, body: java.io.File) : RequestConfig<java.io.File> {
-        val localVariableBody = body
+    fun getV1FunctionsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/octet-stream"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/functions/{name}
+     * Is one function with everything a detail page needs in one round-trip: its definition, its 7-day rollup, its trigger, its twenty most recent invocations and the NAMES of the secrets it mounts.
+     * Is one function with everything a detail page needs in one round-trip: its definition, its 7-day rollup, its trigger, its twenty most recent invocations and the NAMES of the secrets it mounts.  Secret values are never read or returned. A name the caller&#39;s org does not hold is 404, which is also what another tenant&#39;s function looks like from here.
+     * @param name Name is the function the URL names.
+     * @return FunctionDetail
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1FunctionsByName(name: kotlin.String) : FunctionDetail {
+        val localVarResponse = getV1FunctionsByNameWithHttpInfo(name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FunctionDetail
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/functions/{name}
+     * Is one function with everything a detail page needs in one round-trip: its definition, its 7-day rollup, its trigger, its twenty most recent invocations and the NAMES of the secrets it mounts.
+     * Is one function with everything a detail page needs in one round-trip: its definition, its 7-day rollup, its trigger, its twenty most recent invocations and the NAMES of the secrets it mounts.  Secret values are never read or returned. A name the caller&#39;s org does not hold is 404, which is also what another tenant&#39;s function looks like from here.
+     * @param name Name is the function the URL names.
+     * @return ApiResponse<FunctionDetail?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1FunctionsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<FunctionDetail?> {
+        val localVariableConfig = getV1FunctionsByNameRequestConfig(name = name)
+
+        return request<Unit, FunctionDetail>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1FunctionsByName
+     *
+     * @param name Name is the function the URL names.
+     * @return RequestConfig
+     */
+    fun getV1FunctionsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/functions/{name}/invocations
+     * Is one function&#39;s past runs, newest first — each with its status, HTTP code, method, time and duration.
+     * Is one function&#39;s past runs, newest first — each with its status, HTTP code, method, time and duration.  These are real recorded rows, not a projection: an invocation appears here only once it actually ran. Requires a validated principal; the read is scoped to its org.
+     * @param name Name is the function the URL names.
+     * @param limit Limit caps the page, defaulting to 100. (optional)
+     * @return InvocationList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1FunctionsByNameInvocations(name: kotlin.String, limit: kotlin.Int? = null) : InvocationList {
+        val localVarResponse = getV1FunctionsByNameInvocationsWithHttpInfo(name = name, limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvocationList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/functions/{name}/invocations
+     * Is one function&#39;s past runs, newest first — each with its status, HTTP code, method, time and duration.
+     * Is one function&#39;s past runs, newest first — each with its status, HTTP code, method, time and duration.  These are real recorded rows, not a projection: an invocation appears here only once it actually ran. Requires a validated principal; the read is scoped to its org.
+     * @param name Name is the function the URL names.
+     * @param limit Limit caps the page, defaulting to 100. (optional)
+     * @return ApiResponse<InvocationList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1FunctionsByNameInvocationsWithHttpInfo(name: kotlin.String, limit: kotlin.Int?) : ApiResponse<InvocationList?> {
+        val localVariableConfig = getV1FunctionsByNameInvocationsRequestConfig(name = name, limit = limit)
+
+        return request<Unit, InvocationList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1FunctionsByNameInvocations
+     *
+     * @param name Name is the function the URL names.
+     * @param limit Limit caps the page, defaulting to 100. (optional)
+     * @return RequestConfig
+     */
+    fun getV1FunctionsByNameInvocationsRequestConfig(name: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions/{name}/invocations".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/functions/{name}/logs
+     * Is the output of a function&#39;s most recent run — its error text when that run failed, else what it printed.
+     * Is the output of a function&#39;s most recent run — its error text when that run failed, else what it printed.  It is the LAST run only, and it is empty when the function has never run. There is no log retention behind this beyond the recorded invocation itself.
+     * @param name Name is the function the URL names.
+     * @return LogLines
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1FunctionsByNameLogs(name: kotlin.String) : LogLines {
+        val localVarResponse = getV1FunctionsByNameLogsWithHttpInfo(name = name)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LogLines
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/functions/{name}/logs
+     * Is the output of a function&#39;s most recent run — its error text when that run failed, else what it printed.
+     * Is the output of a function&#39;s most recent run — its error text when that run failed, else what it printed.  It is the LAST run only, and it is empty when the function has never run. There is no log retention behind this beyond the recorded invocation itself.
+     * @param name Name is the function the URL names.
+     * @return ApiResponse<LogLines?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1FunctionsByNameLogsWithHttpInfo(name: kotlin.String) : ApiResponse<LogLines?> {
+        val localVariableConfig = getV1FunctionsByNameLogsRequestConfig(name = name)
+
+        return request<Unit, LogLines>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1FunctionsByNameLogs
+     *
+     * @param name Name is the function the URL names.
+     * @return RequestConfig
+     */
+    fun getV1FunctionsByNameLogsRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions/{name}/logs".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/functions/deployments
+     * Is what is live right now — each function&#39;s current record IS its live deployment, so this is the deployment inventory.
+     * Is what is live right now — each function&#39;s current record IS its live deployment, so this is the deployment inventory.  There is no deployment history behind it: a function has one record, and publishing replaces it. The 7-day rollup is deliberately absent here, because this read is about what is deployed rather than about how it has performed.
+     * @return FnList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1FunctionsDeployments() : FnList {
+        val localVarResponse = getV1FunctionsDeploymentsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FnList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/functions/deployments
+     * Is what is live right now — each function&#39;s current record IS its live deployment, so this is the deployment inventory.
+     * Is what is live right now — each function&#39;s current record IS its live deployment, so this is the deployment inventory.  There is no deployment history behind it: a function has one record, and publishing replaces it. The 7-day rollup is deliberately absent here, because this read is about what is deployed rather than about how it has performed.
+     * @return ApiResponse<FnList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1FunctionsDeploymentsWithHttpInfo() : ApiResponse<FnList?> {
+        val localVariableConfig = getV1FunctionsDeploymentsRequestConfig()
+
+        return request<Unit, FnList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1FunctionsDeployments
+     *
+     * @return RequestConfig
+     */
+    fun getV1FunctionsDeploymentsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions/deployments",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/functions/metrics
+     * Is the org&#39;s serverless dashboard over a window: a per-function invocation costLine and how those invocations ended.
+     * Is the org&#39;s serverless dashboard over a window: a per-function invocation costLine and how those invocations ended.  Every point is a REAL count of rows that fell in that bucket — nothing is interpolated or invented, so an empty window draws a flat line rather than a fabricated one.  costCents is null and stays null: there is no per-invocation cost source to read, and reporting a number computed some other way would be a guess presented as a measurement. Requires a validated principal; the read is scoped to its org.
+     * @param range Range is 1H, 6H, 24H (the default), 7D or 30D. Anything else falls back to 24H rather than failing. (optional)
+     * @return Usage
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1FunctionsMetrics(range: kotlin.String? = null) : Usage {
+        val localVarResponse = getV1FunctionsMetricsWithHttpInfo(range = range)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Usage
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/functions/metrics
+     * Is the org&#39;s serverless dashboard over a window: a per-function invocation costLine and how those invocations ended.
+     * Is the org&#39;s serverless dashboard over a window: a per-function invocation costLine and how those invocations ended.  Every point is a REAL count of rows that fell in that bucket — nothing is interpolated or invented, so an empty window draws a flat line rather than a fabricated one.  costCents is null and stays null: there is no per-invocation cost source to read, and reporting a number computed some other way would be a guess presented as a measurement. Requires a validated principal; the read is scoped to its org.
+     * @param range Range is 1H, 6H, 24H (the default), 7D or 30D. Anything else falls back to 24H rather than failing. (optional)
+     * @return ApiResponse<Usage?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1FunctionsMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<Usage?> {
+        val localVariableConfig = getV1FunctionsMetricsRequestConfig(range = range)
+
+        return request<Unit, Usage>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1FunctionsMetrics
+     *
+     * @param range Range is 1H, 6H, 24H (the default), 7D or 30D. Anything else falls back to 24H rather than failing. (optional)
+     * @return RequestConfig
+     */
+    fun getV1FunctionsMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (range != null) {
+                    put("range", listOf(range.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions/metrics",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/functions/secrets
+     * Is the NAMES of the secrets the caller org&#39;s functions mount.
+     * Is the NAMES of the secrets the caller org&#39;s functions mount.  Values are NEVER read or returned — this surface knows which names a function asks for and nothing about what is behind them, which is what makes it safe to list at all. One row per distinct (namespace, name).
+     * @return SecretList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1FunctionsSecrets() : SecretList {
+        val localVarResponse = getV1FunctionsSecretsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SecretList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/functions/secrets
+     * Is the NAMES of the secrets the caller org&#39;s functions mount.
+     * Is the NAMES of the secrets the caller org&#39;s functions mount.  Values are NEVER read or returned — this surface knows which names a function asks for and nothing about what is behind them, which is what makes it safe to list at all. One row per distinct (namespace, name).
+     * @return ApiResponse<SecretList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1FunctionsSecretsWithHttpInfo() : ApiResponse<SecretList?> {
+        val localVariableConfig = getV1FunctionsSecretsRequestConfig()
+
+        return request<Unit, SecretList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1FunctionsSecrets
+     *
+     * @return RequestConfig
+     */
+    fun getV1FunctionsSecretsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions/secrets",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/functions/triggers
+     * Is what calls the caller org&#39;s functions — one row per function.
+     * Is what calls the caller org&#39;s functions — one row per function.  Every function has exactly one trigger today, its HTTP invoke endpoint, so this is the function list read as \&quot;how is each of these reached\&quot;.
+     * @return TriggerList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1FunctionsTriggers() : TriggerList {
+        val localVarResponse = getV1FunctionsTriggersWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TriggerList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/functions/triggers
+     * Is what calls the caller org&#39;s functions — one row per function.
+     * Is what calls the caller org&#39;s functions — one row per function.  Every function has exactly one trigger today, its HTTP invoke endpoint, so this is the function list read as \&quot;how is each of these reached\&quot;.
+     * @return ApiResponse<TriggerList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1FunctionsTriggersWithHttpInfo() : ApiResponse<TriggerList?> {
+        val localVariableConfig = getV1FunctionsTriggersRequestConfig()
+
+        return request<Unit, TriggerList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1FunctionsTriggers
+     *
+     * @return RequestConfig
+     */
+    fun getV1FunctionsTriggersRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/functions/triggers",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/functions
+     * Publishes a serverless function under the caller&#39;s org and answers 201 with it.
+     * Publishes a serverless function under the caller&#39;s org and answers 201 with it.  The name is the key and is claimed once; the names that would shadow a collection route are reserved. runtime and environment are the same field — either spelling is accepted — and default to node.  Bounds are clamped rather than refused where a clamp is honest: a timeout above the 900-second ceiling becomes the ceiling instead of silently reverting to the 30-second default, and an omitted memory limit becomes 256Mi. target&#x3D;fleet runs on the org&#39;s own GPU fleet and supports runtime&#x3D;python only.  Requires a validated principal; the function is owned by that principal&#39;s org.
+     * @param definition 
+     * @return FunctionView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1Functions(definition: Definition) : FunctionView {
+        val localVarResponse = postV1FunctionsWithHttpInfo(definition = definition)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FunctionView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/functions
+     * Publishes a serverless function under the caller&#39;s org and answers 201 with it.
+     * Publishes a serverless function under the caller&#39;s org and answers 201 with it.  The name is the key and is claimed once; the names that would shadow a collection route are reserved. runtime and environment are the same field — either spelling is accepted — and default to node.  Bounds are clamped rather than refused where a clamp is honest: a timeout above the 900-second ceiling becomes the ceiling instead of silently reverting to the 30-second default, and an omitted memory limit becomes 256Mi. target&#x3D;fleet runs on the org&#39;s own GPU fleet and supports runtime&#x3D;python only.  Requires a validated principal; the function is owned by that principal&#39;s org.
+     * @param definition 
+     * @return ApiResponse<FunctionView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1FunctionsWithHttpInfo(definition: Definition) : ApiResponse<FunctionView?> {
+        val localVariableConfig = postV1FunctionsRequestConfig(definition = definition)
+
+        return request<Definition, FunctionView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1Functions
+     *
+     * @param definition 
+     * @return RequestConfig
+     */
+    fun postV1FunctionsRequestConfig(definition: Definition) : RequestConfig<Definition> {
+        val localVariableBody = definition
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/edge/functions/{slug}/deploy".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            path = "/v1/functions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/edge/functions/{slug}
-     * Get function
-     * 
-     * @param slug 
-     * @return EdgeFunction
+     * POST /v1/functions/{name}/invoke
+     * Runs a function and records a REAL invocation.
+     * Runs a function and records a REAL invocation.  The answer is the invocation record whatever happened to it: 200 when the org&#39;s code ran clean, 502 when it ran and failed, 503 when this deployment has no sandbox to run code in. The record IS the evidence, so it rides the failure rather than being replaced by an error envelope.  Billing is two-part and both parts are prepaid-then-metered on the one shared meter: a flat per-invocation request fee, gated BEFORE any sandbox compute runs so an unfunded org gets 402 and nothing executes, and a usage-native GB-seconds compute debit taken after the run. Either is independently free when its fee is zero, so an operator can bill by request alone, by compute alone, or by both — and a zero request fee removes the balance gate with it.  A TRANSPORT failure is not charged: the sandbox being unreachable ran no billable compute. Code that ran and exited non-zero IS charged — that is a successful invocation of a failing program, not a billing failure.  When the sandbox is not configured on this deployment, a non-fleet function fails closed before anything is recorded — no execution and no fabricated output. Scoped to the caller&#39;s org; requires a validated principal.
+     * @param name 
+     * @param invokeReq 
+     * @return InvocationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1040,11 +802,11 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeGetFunction(slug: kotlin.String) : EdgeFunction {
-        val localVarResponse = edgeGetFunctionWithHttpInfo(slug = slug)
+    fun postV1FunctionsByNameInvoke(name: kotlin.String, invokeReq: InvokeReq) : InvocationView {
+        val localVarResponse = postV1FunctionsByNameInvokeWithHttpInfo(name = name, invokeReq = invokeReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as EdgeFunction
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InvocationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1059,416 +821,45 @@ class FunctionsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * GET /v1/edge/functions/{slug}
-     * Get function
-     * 
-     * @param slug 
-     * @return ApiResponse<EdgeFunction?>
+     * POST /v1/functions/{name}/invoke
+     * Runs a function and records a REAL invocation.
+     * Runs a function and records a REAL invocation.  The answer is the invocation record whatever happened to it: 200 when the org&#39;s code ran clean, 502 when it ran and failed, 503 when this deployment has no sandbox to run code in. The record IS the evidence, so it rides the failure rather than being replaced by an error envelope.  Billing is two-part and both parts are prepaid-then-metered on the one shared meter: a flat per-invocation request fee, gated BEFORE any sandbox compute runs so an unfunded org gets 402 and nothing executes, and a usage-native GB-seconds compute debit taken after the run. Either is independently free when its fee is zero, so an operator can bill by request alone, by compute alone, or by both — and a zero request fee removes the balance gate with it.  A TRANSPORT failure is not charged: the sandbox being unreachable ran no billable compute. Code that ran and exited non-zero IS charged — that is a successful invocation of a failing program, not a billing failure.  When the sandbox is not configured on this deployment, a non-fleet function fails closed before anything is recorded — no execution and no fabricated output. Scoped to the caller&#39;s org; requires a validated principal.
+     * @param name 
+     * @param invokeReq 
+     * @return ApiResponse<InvocationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun edgeGetFunctionWithHttpInfo(slug: kotlin.String) : ApiResponse<EdgeFunction?> {
-        val localVariableConfig = edgeGetFunctionRequestConfig(slug = slug)
+    fun postV1FunctionsByNameInvokeWithHttpInfo(name: kotlin.String, invokeReq: InvokeReq) : ApiResponse<InvocationView?> {
+        val localVariableConfig = postV1FunctionsByNameInvokeRequestConfig(name = name, invokeReq = invokeReq)
 
-        return request<Unit, EdgeFunction>(
+        return request<InvokeReq, InvocationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation edgeGetFunction
+     * To obtain the request config of the operation postV1FunctionsByNameInvoke
      *
-     * @param slug 
+     * @param name 
+     * @param invokeReq 
      * @return RequestConfig
      */
-    fun edgeGetFunctionRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/edge/functions/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter granularity
-     */
-     enum class GranularityEdgeGetFunctionMetrics(val value: kotlin.String) {
-         @SerializedName(value = "minute") minute("minute"),
-         @SerializedName(value = "hour") hour("hour"),
-         @SerializedName(value = "day") day("day");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/edge/functions/{slug}/metrics
-     * Get function metrics
-     * 
-     * @param slug 
-     * @param from  (optional)
-     * @param to  (optional)
-     * @param granularity  (optional, default to hour)
-     * @return kotlin.collections.List<EdgeFunctionMetrics>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeGetFunctionMetrics(slug: kotlin.String, from: java.time.OffsetDateTime? = null, to: java.time.OffsetDateTime? = null, granularity: GranularityEdgeGetFunctionMetrics? = GranularityEdgeGetFunctionMetrics.hour) : kotlin.collections.List<EdgeFunctionMetrics> {
-        val localVarResponse = edgeGetFunctionMetricsWithHttpInfo(slug = slug, from = from, to = to, granularity = granularity)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<EdgeFunctionMetrics>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/edge/functions/{slug}/metrics
-     * Get function metrics
-     * 
-     * @param slug 
-     * @param from  (optional)
-     * @param to  (optional)
-     * @param granularity  (optional, default to hour)
-     * @return ApiResponse<kotlin.collections.List<EdgeFunctionMetrics>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun edgeGetFunctionMetricsWithHttpInfo(slug: kotlin.String, from: java.time.OffsetDateTime?, to: java.time.OffsetDateTime?, granularity: GranularityEdgeGetFunctionMetrics?) : ApiResponse<kotlin.collections.List<EdgeFunctionMetrics>?> {
-        val localVariableConfig = edgeGetFunctionMetricsRequestConfig(slug = slug, from = from, to = to, granularity = granularity)
-
-        return request<Unit, kotlin.collections.List<EdgeFunctionMetrics>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation edgeGetFunctionMetrics
-     *
-     * @param slug 
-     * @param from  (optional)
-     * @param to  (optional)
-     * @param granularity  (optional, default to hour)
-     * @return RequestConfig
-     */
-    fun edgeGetFunctionMetricsRequestConfig(slug: kotlin.String, from: java.time.OffsetDateTime?, to: java.time.OffsetDateTime?, granularity: GranularityEdgeGetFunctionMetrics?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (from != null) {
-                    put("from", listOf(parseDateToQueryString(from)))
-                }
-                if (to != null) {
-                    put("to", listOf(parseDateToQueryString(to)))
-                }
-                if (granularity != null) {
-                    put("granularity", listOf(granularity.value))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/edge/functions/{slug}/metrics".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/edge/functions/{slug}/invoke
-     * Invoke function
-     * Invoke an edge function directly. The request body is passed through to the function handler. 
-     * @param slug 
-     * @param requestBody  (optional)
-     * @return kotlin.collections.Map<kotlin.String, kotlin.Any>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeInvokeFunction(slug: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = edgeInvokeFunctionWithHttpInfo(slug = slug, requestBody = requestBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/edge/functions/{slug}/invoke
-     * Invoke function
-     * Invoke an edge function directly. The request body is passed through to the function handler. 
-     * @param slug 
-     * @param requestBody  (optional)
-     * @return ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun edgeInvokeFunctionWithHttpInfo(slug: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = edgeInvokeFunctionRequestConfig(slug = slug, requestBody = requestBody)
-
-        return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation edgeInvokeFunction
-     *
-     * @param slug 
-     * @param requestBody  (optional)
-     * @return RequestConfig
-     */
-    fun edgeInvokeFunctionRequestConfig(slug: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
-        val localVariableBody = requestBody
+    fun postV1FunctionsByNameInvokeRequestConfig(name: kotlin.String, invokeReq: InvokeReq) : RequestConfig<InvokeReq> {
+        val localVariableBody = invokeReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json, text/plain"
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/edge/functions/{slug}/invoke".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
+            path = "/v1/functions/{name}/invoke".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter status
-     */
-     enum class StatusEdgeListFunctions(val value: kotlin.String) {
-         @SerializedName(value = "active") active("active"),
-         @SerializedName(value = "inactive") inactive("inactive"),
-         @SerializedName(value = "deploying") deploying("deploying"),
-         @SerializedName(value = "failed") failed("failed");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/edge/functions
-     * List functions
-     * 
-     * @param page  (optional, default to 1)
-     * @param pageSize  (optional, default to 20)
-     * @param status  (optional)
-     * @return kotlin.collections.List<EdgeFunction>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeListFunctions(page: kotlin.Int? = 1, pageSize: kotlin.Int? = 20, status: StatusEdgeListFunctions? = null) : kotlin.collections.List<EdgeFunction> {
-        val localVarResponse = edgeListFunctionsWithHttpInfo(page = page, pageSize = pageSize, status = status)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<EdgeFunction>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/edge/functions
-     * List functions
-     * 
-     * @param page  (optional, default to 1)
-     * @param pageSize  (optional, default to 20)
-     * @param status  (optional)
-     * @return ApiResponse<kotlin.collections.List<EdgeFunction>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun edgeListFunctionsWithHttpInfo(page: kotlin.Int?, pageSize: kotlin.Int?, status: StatusEdgeListFunctions?) : ApiResponse<kotlin.collections.List<EdgeFunction>?> {
-        val localVariableConfig = edgeListFunctionsRequestConfig(page = page, pageSize = pageSize, status = status)
-
-        return request<Unit, kotlin.collections.List<EdgeFunction>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation edgeListFunctions
-     *
-     * @param page  (optional, default to 1)
-     * @param pageSize  (optional, default to 20)
-     * @param status  (optional)
-     * @return RequestConfig
-     */
-    fun edgeListFunctionsRequestConfig(page: kotlin.Int?, pageSize: kotlin.Int?, status: StatusEdgeListFunctions?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (page != null) {
-                    put("page", listOf(page.toString()))
-                }
-                if (pageSize != null) {
-                    put("page_size", listOf(pageSize.toString()))
-                }
-                if (status != null) {
-                    put("status", listOf(status.value))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/edge/functions",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/edge/functions/{slug}
-     * Update function
-     * 
-     * @param slug 
-     * @param edgeFunctionUpdate 
-     * @return EdgeFunction
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun edgeUpdateFunction(slug: kotlin.String, edgeFunctionUpdate: EdgeFunctionUpdate) : EdgeFunction {
-        val localVarResponse = edgeUpdateFunctionWithHttpInfo(slug = slug, edgeFunctionUpdate = edgeFunctionUpdate)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as EdgeFunction
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/edge/functions/{slug}
-     * Update function
-     * 
-     * @param slug 
-     * @param edgeFunctionUpdate 
-     * @return ApiResponse<EdgeFunction?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun edgeUpdateFunctionWithHttpInfo(slug: kotlin.String, edgeFunctionUpdate: EdgeFunctionUpdate) : ApiResponse<EdgeFunction?> {
-        val localVariableConfig = edgeUpdateFunctionRequestConfig(slug = slug, edgeFunctionUpdate = edgeFunctionUpdate)
-
-        return request<EdgeFunctionUpdate, EdgeFunction>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation edgeUpdateFunction
-     *
-     * @param slug 
-     * @param edgeFunctionUpdate 
-     * @return RequestConfig
-     */
-    fun edgeUpdateFunctionRequestConfig(slug: kotlin.String, edgeFunctionUpdate: EdgeFunctionUpdate) : RequestConfig<EdgeFunctionUpdate> {
-        val localVariableBody = edgeFunctionUpdate
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/edge/functions/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

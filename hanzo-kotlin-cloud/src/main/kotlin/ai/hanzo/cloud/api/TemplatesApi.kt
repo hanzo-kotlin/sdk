@@ -19,12 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AiEnvelope
-import ai.hanzo.cloud.model.AiError
-import ai.hanzo.cloud.model.CloudKitList
-import ai.hanzo.cloud.model.CloudPublishKitIn
-import ai.hanzo.cloud.model.CloudReplaceKitIn
-import ai.hanzo.cloud.model.CloudStarterKit
+import ai.hanzo.cloud.model.KitList
+import ai.hanzo.cloud.model.PublishKitIn
+import ai.hanzo.cloud.model.ReplaceKitIn
+import ai.hanzo.cloud.model.StarterKit
 
 import com.google.gson.annotations.SerializedName
 
@@ -51,462 +49,6 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * POST /v1/ai/templates
-     * Create a template
-     * Create one template.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiAddTemplate(body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiAddTemplateWithHttpInfo(body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ai/templates
-     * Create a template
-     * Create one template.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiAddTemplateWithHttpInfo(body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiAddTemplateRequestConfig(body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiAddTemplate
-     *
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiAddTemplateRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ai/templates",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/ai/templates/{owner}/{name}
-     * Delete a template
-     * Delete one template.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiDeleteTemplate(owner: kotlin.String, name: kotlin.String) : AiEnvelope {
-        val localVarResponse = aiDeleteTemplateWithHttpInfo(owner = owner, name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/ai/templates/{owner}/{name}
-     * Delete a template
-     * Delete one template.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiDeleteTemplateWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiDeleteTemplateRequestConfig(owner = owner, name = name)
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiDeleteTemplate
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return RequestConfig
-     */
-    fun aiDeleteTemplateRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/templates/{owner}/{name}
-     * Retrieve a template
-     * Read one template by its (owner, name) key.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetTemplate(owner: kotlin.String, name: kotlin.String) : AiEnvelope {
-        val localVarResponse = aiGetTemplateWithHttpInfo(owner = owner, name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/templates/{owner}/{name}
-     * Retrieve a template
-     * Read one template by its (owner, name) key.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetTemplateWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetTemplateRequestConfig(owner = owner, name = name)
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetTemplate
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return RequestConfig
-     */
-    fun aiGetTemplateRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/templates
-     * List templates
-     * List the caller&#39;s templates.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetTemplates() : AiEnvelope {
-        val localVarResponse = aiGetTemplatesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/templates
-     * List templates
-     * List the caller&#39;s templates.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetTemplatesWithHttpInfo() : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetTemplatesRequestConfig()
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetTemplates
-     *
-     * @return RequestConfig
-     */
-    fun aiGetTemplatesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/templates",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/ai/templates/{owner}/{name}
-     * Replace a template
-     * Identical to PATCH — the handler takes a whole object either way.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiReplaceTemplate(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiReplaceTemplateWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/ai/templates/{owner}/{name}
-     * Replace a template
-     * Identical to PATCH — the handler takes a whole object either way.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiReplaceTemplateWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiReplaceTemplateRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiReplaceTemplate
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiReplaceTemplateRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/ai/templates/{owner}/{name}
-     * Update a template
-     * Update one template. PATCH and PUT reach the same handler, which has always taken a whole object.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiUpdateTemplate(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiUpdateTemplateWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/ai/templates/{owner}/{name}
-     * Update a template
-     * Update one template. PATCH and PUT reach the same handler, which has always taken a whole object.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiUpdateTemplateWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiUpdateTemplateRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiUpdateTemplate
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiUpdateTemplateRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/ai/templates/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * DELETE /v1/templates/{slug}
      * Deletes the caller org&#39;s OWN starter kit.
      * Deletes the caller org&#39;s OWN starter kit. A slug they do not own is a 404, never a delete: the DELETE binds org.
@@ -519,8 +61,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1TemplatesSlug(slug: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1TemplatesSlugWithHttpInfo(slug = slug)
+    fun deleteV1TemplatesBySlug(slug: kotlin.String) : Unit {
+        val localVarResponse = deleteV1TemplatesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -547,8 +89,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1TemplatesSlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1TemplatesSlugRequestConfig(slug = slug)
+    fun deleteV1TemplatesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1TemplatesBySlugRequestConfig(slug = slug)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -556,12 +98,12 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1TemplatesSlug
+     * To obtain the request config of the operation deleteV1TemplatesBySlug
      *
      * @param slug Slug is the starter kit to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1TemplatesSlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1TemplatesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -571,7 +113,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -580,7 +122,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/templates
      * Lists the public starter-kit catalog plus, for a validated caller, that org&#39;s own private kits.
      * Lists the public starter-kit catalog plus, for a validated caller, that org&#39;s own private kits. No request field can widen the scope: the org comes from the validated principal, so an anonymous or cross-org caller structurally sees the public catalog only.
-     * @return CloudKitList
+     * @return KitList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -589,11 +131,11 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Templates() : CloudKitList {
-        val localVarResponse = cloudGetV1TemplatesWithHttpInfo()
+    fun getV1Templates() : KitList {
+        val localVarResponse = getV1TemplatesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKitList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KitList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -611,26 +153,26 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/templates
      * Lists the public starter-kit catalog plus, for a validated caller, that org&#39;s own private kits.
      * Lists the public starter-kit catalog plus, for a validated caller, that org&#39;s own private kits. No request field can widen the scope: the org comes from the validated principal, so an anonymous or cross-org caller structurally sees the public catalog only.
-     * @return ApiResponse<CloudKitList?>
+     * @return ApiResponse<KitList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TemplatesWithHttpInfo() : ApiResponse<CloudKitList?> {
-        val localVariableConfig = cloudGetV1TemplatesRequestConfig()
+    fun getV1TemplatesWithHttpInfo() : ApiResponse<KitList?> {
+        val localVariableConfig = getV1TemplatesRequestConfig()
 
-        return request<Unit, CloudKitList>(
+        return request<Unit, KitList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Templates
+     * To obtain the request config of the operation getV1Templates
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TemplatesRequestConfig() : RequestConfig<Unit> {
+    fun getV1TemplatesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -641,7 +183,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -651,7 +193,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one starter kit: the caller org&#39;s own by that slug, else the public catalog&#39;s.
      * Returns one starter kit: the caller org&#39;s own by that slug, else the public catalog&#39;s. A slug another org owns reads as not found.
      * @param slug Slug is the starter kit to act on, from the path.
-     * @return CloudStarterKit
+     * @return StarterKit
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -660,11 +202,11 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TemplatesSlug(slug: kotlin.String) : CloudStarterKit {
-        val localVarResponse = cloudGetV1TemplatesSlugWithHttpInfo(slug = slug)
+    fun getV1TemplatesBySlug(slug: kotlin.String) : StarterKit {
+        val localVarResponse = getV1TemplatesBySlugWithHttpInfo(slug = slug)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStarterKit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StarterKit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -683,27 +225,27 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one starter kit: the caller org&#39;s own by that slug, else the public catalog&#39;s.
      * Returns one starter kit: the caller org&#39;s own by that slug, else the public catalog&#39;s. A slug another org owns reads as not found.
      * @param slug Slug is the starter kit to act on, from the path.
-     * @return ApiResponse<CloudStarterKit?>
+     * @return ApiResponse<StarterKit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TemplatesSlugWithHttpInfo(slug: kotlin.String) : ApiResponse<CloudStarterKit?> {
-        val localVariableConfig = cloudGetV1TemplatesSlugRequestConfig(slug = slug)
+    fun getV1TemplatesBySlugWithHttpInfo(slug: kotlin.String) : ApiResponse<StarterKit?> {
+        val localVariableConfig = getV1TemplatesBySlugRequestConfig(slug = slug)
 
-        return request<Unit, CloudStarterKit>(
+        return request<Unit, StarterKit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TemplatesSlug
+     * To obtain the request config of the operation getV1TemplatesBySlug
      *
      * @param slug Slug is the starter kit to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1TemplatesSlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TemplatesBySlugRequestConfig(slug: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -714,7 +256,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -723,8 +265,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/templates
      * Creates a starter kit PRIVATE to the caller&#39;s org and answers 201 with the stored kit.
      * Creates a starter kit PRIVATE to the caller&#39;s org and answers 201 with the stored kit. The owner is stamped by the server, so a body \&quot;org\&quot; is never trusted; publishing over a public-catalog slug is 409, so a slug still names exactly one kit.
-     * @param cloudPublishKitIn 
-     * @return CloudStarterKit
+     * @param publishKitIn 
+     * @return StarterKit
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -733,11 +275,11 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Templates(cloudPublishKitIn: CloudPublishKitIn) : CloudStarterKit {
-        val localVarResponse = cloudPostV1TemplatesWithHttpInfo(cloudPublishKitIn = cloudPublishKitIn)
+    fun postV1Templates(publishKitIn: PublishKitIn) : StarterKit {
+        val localVarResponse = postV1TemplatesWithHttpInfo(publishKitIn = publishKitIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStarterKit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StarterKit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -755,29 +297,29 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/templates
      * Creates a starter kit PRIVATE to the caller&#39;s org and answers 201 with the stored kit.
      * Creates a starter kit PRIVATE to the caller&#39;s org and answers 201 with the stored kit. The owner is stamped by the server, so a body \&quot;org\&quot; is never trusted; publishing over a public-catalog slug is 409, so a slug still names exactly one kit.
-     * @param cloudPublishKitIn 
-     * @return ApiResponse<CloudStarterKit?>
+     * @param publishKitIn 
+     * @return ApiResponse<StarterKit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TemplatesWithHttpInfo(cloudPublishKitIn: CloudPublishKitIn) : ApiResponse<CloudStarterKit?> {
-        val localVariableConfig = cloudPostV1TemplatesRequestConfig(cloudPublishKitIn = cloudPublishKitIn)
+    fun postV1TemplatesWithHttpInfo(publishKitIn: PublishKitIn) : ApiResponse<StarterKit?> {
+        val localVariableConfig = postV1TemplatesRequestConfig(publishKitIn = publishKitIn)
 
-        return request<CloudPublishKitIn, CloudStarterKit>(
+        return request<PublishKitIn, StarterKit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Templates
+     * To obtain the request config of the operation postV1Templates
      *
-     * @param cloudPublishKitIn 
+     * @param publishKitIn 
      * @return RequestConfig
      */
-    fun cloudPostV1TemplatesRequestConfig(cloudPublishKitIn: CloudPublishKitIn) : RequestConfig<CloudPublishKitIn> {
-        val localVariableBody = cloudPublishKitIn
+    fun postV1TemplatesRequestConfig(publishKitIn: PublishKitIn) : RequestConfig<PublishKitIn> {
+        val localVariableBody = publishKitIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -788,7 +330,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -798,8 +340,8 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Overwrites the caller org&#39;s OWN starter kit at the path slug, answering the stored kit.
      * Overwrites the caller org&#39;s OWN starter kit at the path slug, answering the stored kit. A slug they do not own is 404, never a create: the UPDATE binds org, so a PUT can never reach another org&#39;s kit.
      * @param slug Slug is the kit to replace, from the path.
-     * @param cloudReplaceKitIn 
-     * @return CloudStarterKit
+     * @param replaceKitIn 
+     * @return StarterKit
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -808,11 +350,11 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1TemplatesSlug(slug: kotlin.String, cloudReplaceKitIn: CloudReplaceKitIn) : CloudStarterKit {
-        val localVarResponse = cloudPutV1TemplatesSlugWithHttpInfo(slug = slug, cloudReplaceKitIn = cloudReplaceKitIn)
+    fun putV1TemplatesBySlug(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : StarterKit {
+        val localVarResponse = putV1TemplatesBySlugWithHttpInfo(slug = slug, replaceKitIn = replaceKitIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStarterKit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StarterKit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -831,30 +373,30 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Overwrites the caller org&#39;s OWN starter kit at the path slug, answering the stored kit.
      * Overwrites the caller org&#39;s OWN starter kit at the path slug, answering the stored kit. A slug they do not own is 404, never a create: the UPDATE binds org, so a PUT can never reach another org&#39;s kit.
      * @param slug Slug is the kit to replace, from the path.
-     * @param cloudReplaceKitIn 
-     * @return ApiResponse<CloudStarterKit?>
+     * @param replaceKitIn 
+     * @return ApiResponse<StarterKit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1TemplatesSlugWithHttpInfo(slug: kotlin.String, cloudReplaceKitIn: CloudReplaceKitIn) : ApiResponse<CloudStarterKit?> {
-        val localVariableConfig = cloudPutV1TemplatesSlugRequestConfig(slug = slug, cloudReplaceKitIn = cloudReplaceKitIn)
+    fun putV1TemplatesBySlugWithHttpInfo(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : ApiResponse<StarterKit?> {
+        val localVariableConfig = putV1TemplatesBySlugRequestConfig(slug = slug, replaceKitIn = replaceKitIn)
 
-        return request<CloudReplaceKitIn, CloudStarterKit>(
+        return request<ReplaceKitIn, StarterKit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1TemplatesSlug
+     * To obtain the request config of the operation putV1TemplatesBySlug
      *
      * @param slug Slug is the kit to replace, from the path.
-     * @param cloudReplaceKitIn 
+     * @param replaceKitIn 
      * @return RequestConfig
      */
-    fun cloudPutV1TemplatesSlugRequestConfig(slug: kotlin.String, cloudReplaceKitIn: CloudReplaceKitIn) : RequestConfig<CloudReplaceKitIn> {
-        val localVariableBody = cloudReplaceKitIn
+    fun putV1TemplatesBySlugRequestConfig(slug: kotlin.String, replaceKitIn: ReplaceKitIn) : RequestConfig<ReplaceKitIn> {
+        val localVariableBody = replaceKitIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -865,7 +407,7 @@ class TemplatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/templates/{slug}".replace("{"+"slug"+"}", encodeURIComponent(slug.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,6 +19,26 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.Board
+import ai.hanzo.cloud.model.DatasetList
+import ai.hanzo.cloud.model.DatasetReq
+import ai.hanzo.cloud.model.DatasetView
+import ai.hanzo.cloud.model.EvaluatorList
+import ai.hanzo.cloud.model.EvaluatorReq
+import ai.hanzo.cloud.model.EvaluatorView
+import ai.hanzo.cloud.model.ItemList
+import ai.hanzo.cloud.model.ItemReq
+import ai.hanzo.cloud.model.ItemView
+import ai.hanzo.cloud.model.RunRequest
+import ai.hanzo.cloud.model.RunSummary
+import ai.hanzo.cloud.model.Runs
+import ai.hanzo.cloud.model.ScoreConfigList
+import ai.hanzo.cloud.model.ScoreConfigReq
+import ai.hanzo.cloud.model.ScoreConfigView
+import ai.hanzo.cloud.model.ScoreList
+import ai.hanzo.cloud.model.ScoreReq
+import ai.hanzo.cloud.model.ScoreView
+import ai.hanzo.cloud.model.TraceList
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,22 +66,23 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/evals/datasets/{name}
-     * 
-     * 
-     * @param name 
-     * @return void
+     * Removes the named dataset of the caller&#39;s org AND all of its examples, in one transaction.
+     * Removes the named dataset of the caller&#39;s org AND all of its examples, in one transaction.  This is not a detach: the examples are gone with the set, so a dataset cannot be resurrected by re-creating the name. A name this org does not have is 404 — never a silent success — and a name belonging to another tenant is the same 404, because the delete is predicated on the validated org. Requires a validated principal; 403 without one. Runs and scores already recorded against the dataset are telemetry events and are NOT deleted with it.
+     * @param name Name is the dataset the URL names.
+     * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1EvalsDatasetsByName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1EvalsDatasetsByNameWithHttpInfo(name = name)
+    fun deleteV1EvalsDatasetsByName(name: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteV1EvalsDatasetsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -77,127 +98,64 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/evals/datasets/{name}
-     * 
-     * 
-     * @param name 
-     * @return ApiResponse<Unit?>
+     * Removes the named dataset of the caller&#39;s org AND all of its examples, in one transaction.
+     * Removes the named dataset of the caller&#39;s org AND all of its examples, in one transaction.  This is not a detach: the examples are gone with the set, so a dataset cannot be resurrected by re-creating the name. A name this org does not have is 404 — never a silent success — and a name belonging to another tenant is the same 404, because the delete is predicated on the validated org. Requires a validated principal; 403 without one. Runs and scores already recorded against the dataset are telemetry events and are NOT deleted with it.
+     * @param name Name is the dataset the URL names.
+     * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1EvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1EvalsDatasetsByNameRequestConfig(name = name)
+    fun deleteV1EvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteV1EvalsDatasetsByNameRequestConfig(name = name)
 
-        return request<Unit, Unit>(
+        return request<Unit, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1EvalsDatasetsByName
+     * To obtain the request config of the operation deleteV1EvalsDatasetsByName
      *
-     * @param name 
+     * @param name Name is the dataset the URL names.
      * @return RequestConfig
      */
-    fun cloudDeleteV1EvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1EvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.DELETE,
             path = "/v1/evals/datasets/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/evals/dataset-items
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsDatasetItems() : Unit {
-        val localVarResponse = cloudGetV1EvalsDatasetItemsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/evals/dataset-items
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsDatasetItemsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsDatasetItemsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1EvalsDatasetItems
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1EvalsDatasetItemsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/evals/dataset-items",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/evals/datasets
-     * 
-     * 
-     * @return void
+     * Is the datasets your org has, each with its name, description, metadata and timestamps.
+     * Is the datasets your org has, each with its name, description, metadata and timestamps.  It is the only way to enumerate what an org holds. Requires a validated principal; 403 without one. Every row is filtered on the validated org, so there is no parameter that reaches another tenant&#39;s datasets. The item count is NOT populated here — read one dataset to get it.
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
+     * @return DatasetList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsDatasets() : Unit {
-        val localVarResponse = cloudGetV1EvalsDatasetsWithHttpInfo()
+    fun getV1EvalsDatasets(limit: kotlin.Int? = null) : DatasetList {
+        val localVarResponse = getV1EvalsDatasetsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DatasetList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -213,59 +171,69 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/evals/datasets
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the datasets your org has, each with its name, description, metadata and timestamps.
+     * Is the datasets your org has, each with its name, description, metadata and timestamps.  It is the only way to enumerate what an org holds. Requires a validated principal; 403 without one. Every row is filtered on the validated org, so there is no parameter that reaches another tenant&#39;s datasets. The item count is NOT populated here — read one dataset to get it.
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
+     * @return ApiResponse<DatasetList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsDatasetsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsDatasetsRequestConfig()
+    fun getV1EvalsDatasetsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DatasetList?> {
+        val localVariableConfig = getV1EvalsDatasetsRequestConfig(limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, DatasetList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EvalsDatasets
+     * To obtain the request config of the operation getV1EvalsDatasets
      *
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1EvalsDatasetsRequestConfig() : RequestConfig<Unit> {
+    fun getV1EvalsDatasetsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/evals/datasets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/evals/datasets/{name}
-     * 
-     * 
-     * @param name 
-     * @return void
+     * Returns one dataset of the caller&#39;s org by name, together with its live item count — the one read that answers how big the set actually is.
+     * Returns one dataset of the caller&#39;s org by name, together with its live item count — the one read that answers how big the set actually is.  A name this org does not have is 404, which is also what another tenant&#39;s dataset looks like from here. Requires a validated principal; 403 without one.
+     * @param name Name is the dataset the URL names.
+     * @return DatasetView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsDatasetsByName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1EvalsDatasetsByNameWithHttpInfo(name = name)
+    fun getV1EvalsDatasetsByName(name: kotlin.String) : DatasetView {
+        val localVarResponse = getV1EvalsDatasetsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DatasetView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -281,60 +249,145 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/evals/datasets/{name}
-     * 
-     * 
-     * @param name 
-     * @return ApiResponse<Unit?>
+     * Returns one dataset of the caller&#39;s org by name, together with its live item count — the one read that answers how big the set actually is.
+     * Returns one dataset of the caller&#39;s org by name, together with its live item count — the one read that answers how big the set actually is.  A name this org does not have is 404, which is also what another tenant&#39;s dataset looks like from here. Requires a validated principal; 403 without one.
+     * @param name Name is the dataset the URL names.
+     * @return ApiResponse<DatasetView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsDatasetsByNameRequestConfig(name = name)
+    fun getV1EvalsDatasetsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<DatasetView?> {
+        val localVariableConfig = getV1EvalsDatasetsByNameRequestConfig(name = name)
 
-        return request<Unit, Unit>(
+        return request<Unit, DatasetView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EvalsDatasetsByName
+     * To obtain the request config of the operation getV1EvalsDatasetsByName
      *
-     * @param name 
+     * @param name Name is the dataset the URL names.
      * @return RequestConfig
      */
-    fun cloudGetV1EvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1EvalsDatasetsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/evals/datasets/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/evals/evaluators
-     * 
-     * 
-     * @return void
+     * GET /v1/evals/datasets/{name}/items
+     * Is the examples in one of your datasets — the set is named in the path, because this collection only exists inside one.
+     * Is the examples in one of your datasets — the set is named in the path, because this collection only exists inside one.  Archived examples are included, so the caller sees the whole set rather than only what a run would use. Requires a validated principal; 403 without one, and the read is filtered on the validated org, so naming another tenant&#39;s dataset returns nothing rather than its contents.
+     * @param name Dataset is the set to read, from the path — this collection only exists inside one.
+     * @param limit  (optional)
+     * @return ItemList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsEvaluators() : Unit {
-        val localVarResponse = cloudGetV1EvalsEvaluatorsWithHttpInfo()
+    fun getV1EvalsDatasetsByNameItems(name: kotlin.String, limit: kotlin.Int? = null) : ItemList {
+        val localVarResponse = getV1EvalsDatasetsByNameItemsWithHttpInfo(name = name, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ItemList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/evals/datasets/{name}/items
+     * Is the examples in one of your datasets — the set is named in the path, because this collection only exists inside one.
+     * Is the examples in one of your datasets — the set is named in the path, because this collection only exists inside one.  Archived examples are included, so the caller sees the whole set rather than only what a run would use. Requires a validated principal; 403 without one, and the read is filtered on the validated org, so naming another tenant&#39;s dataset returns nothing rather than its contents.
+     * @param name Dataset is the set to read, from the path — this collection only exists inside one.
+     * @param limit  (optional)
+     * @return ApiResponse<ItemList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1EvalsDatasetsByNameItemsWithHttpInfo(name: kotlin.String, limit: kotlin.Int?) : ApiResponse<ItemList?> {
+        val localVariableConfig = getV1EvalsDatasetsByNameItemsRequestConfig(name = name, limit = limit)
+
+        return request<Unit, ItemList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1EvalsDatasetsByNameItems
+     *
+     * @param name Dataset is the set to read, from the path — this collection only exists inside one.
+     * @param limit  (optional)
+     * @return RequestConfig
+     */
+    fun getV1EvalsDatasetsByNameItemsRequestConfig(name: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/evals/datasets/{name}/items".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/evals/evaluators
+     * Is the judges your org has defined, each with its judge model, criteria and the score name it writes under.
+     * Is the judges your org has defined, each with its judge model, criteria and the score name it writes under.  Requires a validated principal; 403 without one, and the listing is filtered on the validated org.
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
+     * @return EvaluatorList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1EvalsEvaluators(limit: kotlin.Int? = null) : EvaluatorList {
+        val localVarResponse = getV1EvalsEvaluatorsWithHttpInfo(limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EvaluatorList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -350,58 +403,70 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/evals/evaluators
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the judges your org has defined, each with its judge model, criteria and the score name it writes under.
+     * Is the judges your org has defined, each with its judge model, criteria and the score name it writes under.  Requires a validated principal; 403 without one, and the listing is filtered on the validated org.
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
+     * @return ApiResponse<EvaluatorList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsEvaluatorsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsEvaluatorsRequestConfig()
+    fun getV1EvalsEvaluatorsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<EvaluatorList?> {
+        val localVariableConfig = getV1EvalsEvaluatorsRequestConfig(limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, EvaluatorList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EvalsEvaluators
+     * To obtain the request config of the operation getV1EvalsEvaluators
      *
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1EvalsEvaluatorsRequestConfig() : RequestConfig<Unit> {
+    fun getV1EvalsEvaluatorsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/evals/evaluators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/evals/metrics
-     * 
-     * 
-     * @return void
+     * Is your org&#39;s AI overview board over a window: totals (generations, prompt and completion tokens, cost in cents, errors, success rate, distinct models and users), a gap-filled time series, a per-model breakdown with the long tail folded into \&quot;other\&quot;, and latency percentiles read from the GenAI spans.
+     * Is your org&#39;s AI overview board over a window: totals (generations, prompt and completion tokens, cost in cents, errors, success rate, distinct models and users), a gap-filled time series, a per-model breakdown with the long tail folded into \&quot;other\&quot;, and latency percentiles read from the GenAI spans.  The window the answer was actually computed over is echoed back, so a client never has to infer it. A platform admin sees the board across ALL orgs; everyone else sees their own.  The board is HONEST-EMPTY where it cannot be computed: with no datastore wired, or under a named project scope the usage ledger does not yet carry, it answers a valid board with zero totals and a flat series rather than a fabricated number or a 500. Requires a validated principal; 403 without one.
+     * @param range Range is 24h (the default), 7d or 30d. Anything else normalises to 24h rather than failing, so the board always has a valid window. (optional)
+     * @param interval Interval overrides the bucket the series is grouped into: \&quot;hour\&quot; or \&quot;day\&quot;. Any other value leaves the range&#39;s own default in place. (optional)
+     * @return Board
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsMetrics() : Unit {
-        val localVarResponse = cloudGetV1EvalsMetricsWithHttpInfo()
+    fun getV1EvalsMetrics(range: kotlin.String? = null, interval: kotlin.String? = null) : Board {
+        val localVarResponse = getV1EvalsMetricsWithHttpInfo(range = range, interval = interval)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Board
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -417,58 +482,153 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/evals/metrics
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is your org&#39;s AI overview board over a window: totals (generations, prompt and completion tokens, cost in cents, errors, success rate, distinct models and users), a gap-filled time series, a per-model breakdown with the long tail folded into \&quot;other\&quot;, and latency percentiles read from the GenAI spans.
+     * Is your org&#39;s AI overview board over a window: totals (generations, prompt and completion tokens, cost in cents, errors, success rate, distinct models and users), a gap-filled time series, a per-model breakdown with the long tail folded into \&quot;other\&quot;, and latency percentiles read from the GenAI spans.  The window the answer was actually computed over is echoed back, so a client never has to infer it. A platform admin sees the board across ALL orgs; everyone else sees their own.  The board is HONEST-EMPTY where it cannot be computed: with no datastore wired, or under a named project scope the usage ledger does not yet carry, it answers a valid board with zero totals and a flat series rather than a fabricated number or a 500. Requires a validated principal; 403 without one.
+     * @param range Range is 24h (the default), 7d or 30d. Anything else normalises to 24h rather than failing, so the board always has a valid window. (optional)
+     * @param interval Interval overrides the bucket the series is grouped into: \&quot;hour\&quot; or \&quot;day\&quot;. Any other value leaves the range&#39;s own default in place. (optional)
+     * @return ApiResponse<Board?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsMetricsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsMetricsRequestConfig()
+    fun getV1EvalsMetricsWithHttpInfo(range: kotlin.String?, interval: kotlin.String?) : ApiResponse<Board?> {
+        val localVariableConfig = getV1EvalsMetricsRequestConfig(range = range, interval = interval)
 
-        return request<Unit, Unit>(
+        return request<Unit, Board>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EvalsMetrics
+     * To obtain the request config of the operation getV1EvalsMetrics
      *
+     * @param range Range is 24h (the default), 7d or 30d. Anything else normalises to 24h rather than failing, so the board always has a valid window. (optional)
+     * @param interval Interval overrides the bucket the series is grouped into: \&quot;hour\&quot; or \&quot;day\&quot;. Any other value leaves the range&#39;s own default in place. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1EvalsMetricsRequestConfig() : RequestConfig<Unit> {
+    fun getV1EvalsMetricsRequestConfig(range: kotlin.String?, interval: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (range != null) {
+                    put("range", listOf(range.toString()))
+                }
+                if (interval != null) {
+                    put("interval", listOf(interval.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/evals/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/evals/runs
-     * 
-     * 
-     * @return void
+     * GET /v1/evals/rubrics
+     * Is the score shapes your org has declared — each name&#39;s data type, its numeric bounds and its allowed categories.
+     * Is the score shapes your org has declared — each name&#39;s data type, its numeric bounds and its allowed categories.  Requires a validated principal; 403 without one, and the listing is filtered on the validated org.
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
+     * @return ScoreConfigList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsRuns() : Unit {
-        val localVarResponse = cloudGetV1EvalsRunsWithHttpInfo()
+    fun getV1EvalsRubrics(limit: kotlin.Int? = null) : ScoreConfigList {
+        val localVarResponse = getV1EvalsRubricsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreConfigList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/evals/rubrics
+     * Is the score shapes your org has declared — each name&#39;s data type, its numeric bounds and its allowed categories.
+     * Is the score shapes your org has declared — each name&#39;s data type, its numeric bounds and its allowed categories.  Requires a validated principal; 403 without one, and the listing is filtered on the validated org.
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
+     * @return ApiResponse<ScoreConfigList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1EvalsRubricsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ScoreConfigList?> {
+        val localVariableConfig = getV1EvalsRubricsRequestConfig(limit = limit)
+
+        return request<Unit, ScoreConfigList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1EvalsRubrics
+     *
+     * @param limit Limit caps the rows returned. It defaults to 100 and is capped at 500; a non-positive or unparseable value falls back to the default rather than failing, because a typo about paging is not a reason to refuse a read. (optional)
+     * @return RequestConfig
+     */
+    fun getV1EvalsRubricsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/evals/rubrics",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/evals/runs
+     * Is your past runs and how they scored — the dataset and model, the judge model, how many examples were attempted and how many scored, the average score, and when it happened.
+     * Is your past runs and how they scored — the dataset and model, the judge model, how many examples were attempted and how many scored, the average score, and when it happened.  Requires a validated principal; 403 without one, and rows are filtered on the validated org. These records come from the metastore rather than the datastore, so they are readable on a deployment with no telemetry wired — but a run&#39;s traces and scores are not.
+     * @param datasetName Dataset narrows to the runs against one dataset. (optional)
+     * @param limit  (optional)
+     * @return Runs
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1EvalsRuns(datasetName: kotlin.String? = null, limit: kotlin.Int? = null) : Runs {
+        val localVarResponse = getV1EvalsRunsWithHttpInfo(datasetName = datasetName, limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Runs
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -484,125 +644,77 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/evals/runs
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is your past runs and how they scored — the dataset and model, the judge model, how many examples were attempted and how many scored, the average score, and when it happened.
+     * Is your past runs and how they scored — the dataset and model, the judge model, how many examples were attempted and how many scored, the average score, and when it happened.  Requires a validated principal; 403 without one, and rows are filtered on the validated org. These records come from the metastore rather than the datastore, so they are readable on a deployment with no telemetry wired — but a run&#39;s traces and scores are not.
+     * @param datasetName Dataset narrows to the runs against one dataset. (optional)
+     * @param limit  (optional)
+     * @return ApiResponse<Runs?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsRunsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsRunsRequestConfig()
+    fun getV1EvalsRunsWithHttpInfo(datasetName: kotlin.String?, limit: kotlin.Int?) : ApiResponse<Runs?> {
+        val localVariableConfig = getV1EvalsRunsRequestConfig(datasetName = datasetName, limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, Runs>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EvalsRuns
+     * To obtain the request config of the operation getV1EvalsRuns
      *
+     * @param datasetName Dataset narrows to the runs against one dataset. (optional)
+     * @param limit  (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1EvalsRunsRequestConfig() : RequestConfig<Unit> {
+    fun getV1EvalsRunsRequestConfig(datasetName: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (datasetName != null) {
+                    put("datasetName", listOf(datasetName.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/evals/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/evals/score-configs
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsScoreConfigs() : Unit {
-        val localVarResponse = cloudGetV1EvalsScoreConfigsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/evals/score-configs
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsScoreConfigsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsScoreConfigsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1EvalsScoreConfigs
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1EvalsScoreConfigsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/evals/score-configs",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/evals/scores
-     * 
-     * 
-     * @return void
+     * Is the score events your org has recorded, narrowed by any of name, runName and traceId.
+     * Is the score events your org has recorded, narrowed by any of name, runName and traceId.  The org is bound as an authoritative predicate on the query, never taken from a header, so a filter can narrow the caller&#39;s own scores but can never widen past them. Requires a validated principal; 403 without one. Scores live in the datastore, so a deployment with none wired answers 503 rather than an empty page that would read as \&quot;no scores\&quot;.
+     * @param name Name narrows to one score name. (optional)
+     * @param runName RunName narrows to the scores of one run. (optional)
+     * @param traceId TraceID narrows to the scores on one model call. (optional)
+     * @param limit  (optional)
+     * @return ScoreList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsScores() : Unit {
-        val localVarResponse = cloudGetV1EvalsScoresWithHttpInfo()
+    fun getV1EvalsScores(name: kotlin.String? = null, runName: kotlin.String? = null, traceId: kotlin.String? = null, limit: kotlin.Int? = null) : ScoreList {
+        val localVarResponse = getV1EvalsScoresWithHttpInfo(name = name, runName = runName, traceId = traceId, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -618,58 +730,87 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/evals/scores
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the score events your org has recorded, narrowed by any of name, runName and traceId.
+     * Is the score events your org has recorded, narrowed by any of name, runName and traceId.  The org is bound as an authoritative predicate on the query, never taken from a header, so a filter can narrow the caller&#39;s own scores but can never widen past them. Requires a validated principal; 403 without one. Scores live in the datastore, so a deployment with none wired answers 503 rather than an empty page that would read as \&quot;no scores\&quot;.
+     * @param name Name narrows to one score name. (optional)
+     * @param runName RunName narrows to the scores of one run. (optional)
+     * @param traceId TraceID narrows to the scores on one model call. (optional)
+     * @param limit  (optional)
+     * @return ApiResponse<ScoreList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsScoresWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsScoresRequestConfig()
+    fun getV1EvalsScoresWithHttpInfo(name: kotlin.String?, runName: kotlin.String?, traceId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ScoreList?> {
+        val localVariableConfig = getV1EvalsScoresRequestConfig(name = name, runName = runName, traceId = traceId, limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, ScoreList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EvalsScores
+     * To obtain the request config of the operation getV1EvalsScores
      *
+     * @param name Name narrows to one score name. (optional)
+     * @param runName RunName narrows to the scores of one run. (optional)
+     * @param traceId TraceID narrows to the scores on one model call. (optional)
+     * @param limit  (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1EvalsScoresRequestConfig() : RequestConfig<Unit> {
+    fun getV1EvalsScoresRequestConfig(name: kotlin.String?, runName: kotlin.String?, traceId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (name != null) {
+                    put("name", listOf(name.toString()))
+                }
+                if (runName != null) {
+                    put("runName", listOf(runName.toString()))
+                }
+                if (traceId != null) {
+                    put("traceId", listOf(traceId.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/evals/scores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/evals/traces
-     * 
-     * 
-     * @return void
+     * Is the traces behind your evaluations — one per model call an evaluation made, carrying its input, output, model and timing — narrowed by any of sessionId, runName and datasetName.
+     * Is the traces behind your evaluations — one per model call an evaluation made, carrying its input, output, model and timing — narrowed by any of sessionId, runName and datasetName.  Scoped by org AND by project: the project is the caller&#39;s server-minted scope, not a parameter, so it cannot be widened by asking. Requires a validated principal; 403 without one. Traces live in the datastore, so a deployment with none wired answers 503 rather than an empty page.
+     * @param sessionId SessionID narrows to one session, which for an evaluation is one run. (optional)
+     * @param runName RunName narrows to the calls one run made. (optional)
+     * @param datasetName Dataset narrows to the calls made against one dataset. (optional)
+     * @param limit  (optional)
+     * @return TraceList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1EvalsTraces() : Unit {
-        val localVarResponse = cloudGetV1EvalsTracesWithHttpInfo()
+    fun getV1EvalsTraces(sessionId: kotlin.String? = null, runName: kotlin.String? = null, datasetName: kotlin.String? = null, limit: kotlin.Int? = null) : TraceList {
+        val localVarResponse = getV1EvalsTracesWithHttpInfo(sessionId = sessionId, runName = runName, datasetName = datasetName, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TraceList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -685,125 +826,84 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/evals/traces
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Is the traces behind your evaluations — one per model call an evaluation made, carrying its input, output, model and timing — narrowed by any of sessionId, runName and datasetName.
+     * Is the traces behind your evaluations — one per model call an evaluation made, carrying its input, output, model and timing — narrowed by any of sessionId, runName and datasetName.  Scoped by org AND by project: the project is the caller&#39;s server-minted scope, not a parameter, so it cannot be widened by asking. Requires a validated principal; 403 without one. Traces live in the datastore, so a deployment with none wired answers 503 rather than an empty page.
+     * @param sessionId SessionID narrows to one session, which for an evaluation is one run. (optional)
+     * @param runName RunName narrows to the calls one run made. (optional)
+     * @param datasetName Dataset narrows to the calls made against one dataset. (optional)
+     * @param limit  (optional)
+     * @return ApiResponse<TraceList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EvalsTracesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1EvalsTracesRequestConfig()
+    fun getV1EvalsTracesWithHttpInfo(sessionId: kotlin.String?, runName: kotlin.String?, datasetName: kotlin.String?, limit: kotlin.Int?) : ApiResponse<TraceList?> {
+        val localVariableConfig = getV1EvalsTracesRequestConfig(sessionId = sessionId, runName = runName, datasetName = datasetName, limit = limit)
 
-        return request<Unit, Unit>(
+        return request<Unit, TraceList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1EvalsTraces
+     * To obtain the request config of the operation getV1EvalsTraces
      *
+     * @param sessionId SessionID narrows to one session, which for an evaluation is one run. (optional)
+     * @param runName RunName narrows to the calls one run made. (optional)
+     * @param datasetName Dataset narrows to the calls made against one dataset. (optional)
+     * @param limit  (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1EvalsTracesRequestConfig() : RequestConfig<Unit> {
+    fun getV1EvalsTracesRequestConfig(sessionId: kotlin.String?, runName: kotlin.String?, datasetName: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (sessionId != null) {
+                    put("sessionId", listOf(sessionId.toString()))
+                }
+                if (runName != null) {
+                    put("runName", listOf(runName.toString()))
+                }
+                if (datasetName != null) {
+                    put("datasetName", listOf(datasetName.toString()))
+                }
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+            }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/evals/traces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/evals/dataset-items
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EvalsDatasetItems() : Unit {
-        val localVarResponse = cloudPostV1EvalsDatasetItemsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/evals/dataset-items
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EvalsDatasetItemsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EvalsDatasetItemsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1EvalsDatasetItems
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1EvalsDatasetItemsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/evals/dataset-items",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/evals/datasets
-     * 
-     * 
-     * @return void
+     * Writes a dataset — the named set of graded examples a run scores a model against — under the caller&#39;s org and answers 201 with it.
+     * Writes a dataset — the named set of graded examples a run scores a model against — under the caller&#39;s org and answers 201 with it.  The NAME is the key, not an id: posting a name the org already has updates that dataset&#39;s description and metadata and keeps its original creation time, so this is create-or-edit and never a duplicate. Its items are untouched.  Requires a validated principal; 403 without one. The org comes from the validated owner claim, never from a client X-Org-Id, so a dataset can only ever be written under the caller&#39;s own tenant. A description over 64 KiB is 400.
+     * @param datasetReq 
+     * @return DatasetView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EvalsDatasets() : Unit {
-        val localVarResponse = cloudPostV1EvalsDatasetsWithHttpInfo()
+    fun postV1EvalsDatasets(datasetReq: DatasetReq) : DatasetView {
+        val localVarResponse = postV1EvalsDatasetsWithHttpInfo(datasetReq = datasetReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DatasetView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -819,58 +919,142 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/evals/datasets
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Writes a dataset — the named set of graded examples a run scores a model against — under the caller&#39;s org and answers 201 with it.
+     * Writes a dataset — the named set of graded examples a run scores a model against — under the caller&#39;s org and answers 201 with it.  The NAME is the key, not an id: posting a name the org already has updates that dataset&#39;s description and metadata and keeps its original creation time, so this is create-or-edit and never a duplicate. Its items are untouched.  Requires a validated principal; 403 without one. The org comes from the validated owner claim, never from a client X-Org-Id, so a dataset can only ever be written under the caller&#39;s own tenant. A description over 64 KiB is 400.
+     * @param datasetReq 
+     * @return ApiResponse<DatasetView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EvalsDatasetsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EvalsDatasetsRequestConfig()
+    fun postV1EvalsDatasetsWithHttpInfo(datasetReq: DatasetReq) : ApiResponse<DatasetView?> {
+        val localVariableConfig = postV1EvalsDatasetsRequestConfig(datasetReq = datasetReq)
 
-        return request<Unit, Unit>(
+        return request<DatasetReq, DatasetView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EvalsDatasets
+     * To obtain the request config of the operation postV1EvalsDatasets
      *
+     * @param datasetReq 
      * @return RequestConfig
      */
-    fun cloudPostV1EvalsDatasetsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1EvalsDatasetsRequestConfig(datasetReq: DatasetReq) : RequestConfig<DatasetReq> {
+        val localVariableBody = datasetReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/evals/datasets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/evals/evaluators
-     * 
-     * 
-     * @return void
+     * POST /v1/evals/datasets/{name}/items
+     * Writes one graded example — its input, its expected output, free-form metadata and a status — into the dataset named in the path, and answers 201 with it.
+     * Writes one graded example — its input, its expected output, free-form metadata and a status — into the dataset named in the path, and answers 201 with it.  That dataset MUST already exist for this org: an unknown one is 404, never a silent create. Requires a validated principal; 403 without one.
+     * @param name 
+     * @param itemReq 
+     * @return ItemView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EvalsEvaluators() : Unit {
-        val localVarResponse = cloudPostV1EvalsEvaluatorsWithHttpInfo()
+    fun postV1EvalsDatasetsByNameItems(name: kotlin.String, itemReq: ItemReq) : ItemView {
+        val localVarResponse = postV1EvalsDatasetsByNameItemsWithHttpInfo(name = name, itemReq = itemReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ItemView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/evals/datasets/{name}/items
+     * Writes one graded example — its input, its expected output, free-form metadata and a status — into the dataset named in the path, and answers 201 with it.
+     * Writes one graded example — its input, its expected output, free-form metadata and a status — into the dataset named in the path, and answers 201 with it.  That dataset MUST already exist for this org: an unknown one is 404, never a silent create. Requires a validated principal; 403 without one.
+     * @param name 
+     * @param itemReq 
+     * @return ApiResponse<ItemView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1EvalsDatasetsByNameItemsWithHttpInfo(name: kotlin.String, itemReq: ItemReq) : ApiResponse<ItemView?> {
+        val localVariableConfig = postV1EvalsDatasetsByNameItemsRequestConfig(name = name, itemReq = itemReq)
+
+        return request<ItemReq, ItemView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1EvalsDatasetsByNameItems
+     *
+     * @param name 
+     * @param itemReq 
+     * @return RequestConfig
+     */
+    fun postV1EvalsDatasetsByNameItemsRequestConfig(name: kotlin.String, itemReq: ItemReq) : RequestConfig<ItemReq> {
+        val localVariableBody = itemReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/evals/datasets/{name}/items".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/evals/evaluators
+     * Saves a reusable judge for the caller&#39;s org — the judge model and the written criteria it grades against — and answers 201 with it.
+     * Saves a reusable judge for the caller&#39;s org — the judge model and the written criteria it grades against — and answers 201 with it.  Like a dataset, the NAME is the key: re-posting a name edits that judge rather than adding a second one. Requires a validated principal; 403 without one.
+     * @param evaluatorReq 
+     * @return EvaluatorView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1EvalsEvaluators(evaluatorReq: EvaluatorReq) : EvaluatorView {
+        val localVarResponse = postV1EvalsEvaluatorsWithHttpInfo(evaluatorReq = evaluatorReq)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EvaluatorView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -886,58 +1070,140 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/evals/evaluators
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Saves a reusable judge for the caller&#39;s org — the judge model and the written criteria it grades against — and answers 201 with it.
+     * Saves a reusable judge for the caller&#39;s org — the judge model and the written criteria it grades against — and answers 201 with it.  Like a dataset, the NAME is the key: re-posting a name edits that judge rather than adding a second one. Requires a validated principal; 403 without one.
+     * @param evaluatorReq 
+     * @return ApiResponse<EvaluatorView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EvalsEvaluatorsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EvalsEvaluatorsRequestConfig()
+    fun postV1EvalsEvaluatorsWithHttpInfo(evaluatorReq: EvaluatorReq) : ApiResponse<EvaluatorView?> {
+        val localVariableConfig = postV1EvalsEvaluatorsRequestConfig(evaluatorReq = evaluatorReq)
 
-        return request<Unit, Unit>(
+        return request<EvaluatorReq, EvaluatorView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EvalsEvaluators
+     * To obtain the request config of the operation postV1EvalsEvaluators
      *
+     * @param evaluatorReq 
      * @return RequestConfig
      */
-    fun cloudPostV1EvalsEvaluatorsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1EvalsEvaluatorsRequestConfig(evaluatorReq: EvaluatorReq) : RequestConfig<EvaluatorReq> {
+        val localVariableBody = evaluatorReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/evals/evaluators",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/evals/runs
-     * 
-     * 
-     * @return void
+     * POST /v1/evals/rubrics
+     * Defines the shape of one score name for the caller&#39;s org and answers 201 with it.
+     * Defines the shape of one score name for the caller&#39;s org and answers 201 with it.  This is the integrity contract, not documentation: once a rubric exists for a name, every score recorded under that name is checked against it and the rubric&#39;s data type is AUTHORITATIVE — a caller cannot claim a different one. Out-of-range values, unlisted labels and non-finite numbers are refused at write time.  A CATEGORICAL rubric with no categories is 400, as is a non-finite bound or a minValue above maxValue. Requires a validated principal; 403 without one.
+     * @param scoreConfigReq 
+     * @return ScoreConfigView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EvalsRuns() : Unit {
-        val localVarResponse = cloudPostV1EvalsRunsWithHttpInfo()
+    fun postV1EvalsRubrics(scoreConfigReq: ScoreConfigReq) : ScoreConfigView {
+        val localVarResponse = postV1EvalsRubricsWithHttpInfo(scoreConfigReq = scoreConfigReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreConfigView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/evals/rubrics
+     * Defines the shape of one score name for the caller&#39;s org and answers 201 with it.
+     * Defines the shape of one score name for the caller&#39;s org and answers 201 with it.  This is the integrity contract, not documentation: once a rubric exists for a name, every score recorded under that name is checked against it and the rubric&#39;s data type is AUTHORITATIVE — a caller cannot claim a different one. Out-of-range values, unlisted labels and non-finite numbers are refused at write time.  A CATEGORICAL rubric with no categories is 400, as is a non-finite bound or a minValue above maxValue. Requires a validated principal; 403 without one.
+     * @param scoreConfigReq 
+     * @return ApiResponse<ScoreConfigView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1EvalsRubricsWithHttpInfo(scoreConfigReq: ScoreConfigReq) : ApiResponse<ScoreConfigView?> {
+        val localVariableConfig = postV1EvalsRubricsRequestConfig(scoreConfigReq = scoreConfigReq)
+
+        return request<ScoreConfigReq, ScoreConfigView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1EvalsRubrics
+     *
+     * @param scoreConfigReq 
+     * @return RequestConfig
+     */
+    fun postV1EvalsRubricsRequestConfig(scoreConfigReq: ScoreConfigReq) : RequestConfig<ScoreConfigReq> {
+        val localVariableBody = scoreConfigReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/evals/rubrics",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/evals/runs
+     * Runs a real evaluation and answers the summary when it is finished — this is synchronous work, not a job id.
+     * Runs a real evaluation and answers the summary when it is finished — this is synchronous work, not a job id.  For each ACTIVE example in the dataset it calls the model under test, records a trace, calls the LLM-as-judge, and records the judge&#39;s score with its reasoning. The answer carries the per-item results (item id, trace id, score, output or error) alongside items, scored and avgScore.  The dataset must belong to the caller&#39;s org (404 otherwise) and must have at least one ACTIVE example (422 otherwise).  It runs as YOU: the caller&#39;s own Authorization bearer drives the model gateway, so a request without one is 401 rather than a run made anonymously or under a service identity. Only a non-reversible hash of that credential is recorded on the traces.  Bounded and honest about it: an org may have at most 4 runs in flight and the fifth is 429 rather than queued, and the whole run is capped at 10 minutes — examples past the deadline come back with an error instead of a score, and scored counts only real successes. A run where NOTHING scored answers 502, not a 200 that looks like an evaluation. A run must be able to persist what it produces, so a deployment with no datastore wired is 503 up front. Requires a validated principal; 403 without one.
+     * @param runRequest 
+     * @param authorization  (optional)
+     * @return RunSummary
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1EvalsRuns(runRequest: RunRequest, authorization: kotlin.String? = null) : RunSummary {
+        val localVarResponse = postV1EvalsRunsWithHttpInfo(runRequest = runRequest, authorization = authorization)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunSummary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -953,125 +1219,68 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/evals/runs
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Runs a real evaluation and answers the summary when it is finished — this is synchronous work, not a job id.
+     * Runs a real evaluation and answers the summary when it is finished — this is synchronous work, not a job id.  For each ACTIVE example in the dataset it calls the model under test, records a trace, calls the LLM-as-judge, and records the judge&#39;s score with its reasoning. The answer carries the per-item results (item id, trace id, score, output or error) alongside items, scored and avgScore.  The dataset must belong to the caller&#39;s org (404 otherwise) and must have at least one ACTIVE example (422 otherwise).  It runs as YOU: the caller&#39;s own Authorization bearer drives the model gateway, so a request without one is 401 rather than a run made anonymously or under a service identity. Only a non-reversible hash of that credential is recorded on the traces.  Bounded and honest about it: an org may have at most 4 runs in flight and the fifth is 429 rather than queued, and the whole run is capped at 10 minutes — examples past the deadline come back with an error instead of a score, and scored counts only real successes. A run where NOTHING scored answers 502, not a 200 that looks like an evaluation. A run must be able to persist what it produces, so a deployment with no datastore wired is 503 up front. Requires a validated principal; 403 without one.
+     * @param runRequest 
+     * @param authorization  (optional)
+     * @return ApiResponse<RunSummary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EvalsRunsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EvalsRunsRequestConfig()
+    fun postV1EvalsRunsWithHttpInfo(runRequest: RunRequest, authorization: kotlin.String?) : ApiResponse<RunSummary?> {
+        val localVariableConfig = postV1EvalsRunsRequestConfig(runRequest = runRequest, authorization = authorization)
 
-        return request<Unit, Unit>(
+        return request<RunRequest, RunSummary>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EvalsRuns
+     * To obtain the request config of the operation postV1EvalsRuns
      *
+     * @param runRequest 
+     * @param authorization  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1EvalsRunsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1EvalsRunsRequestConfig(runRequest: RunRequest, authorization: kotlin.String?) : RequestConfig<RunRequest> {
+        val localVariableBody = runRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        authorization?.apply { localVariableHeaders["Authorization"] = this.toString() }
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/evals/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/evals/score-configs
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EvalsScoreConfigs() : Unit {
-        val localVarResponse = cloudPostV1EvalsScoreConfigsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/evals/score-configs
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EvalsScoreConfigsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EvalsScoreConfigsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1EvalsScoreConfigs
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1EvalsScoreConfigsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/evals/score-configs",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/evals/scores
-     * 
-     * 
-     * @return void
+     * Files one score event for the caller&#39;s org and answers 201 with it.
+     * Files one score event for the caller&#39;s org and answers 201 with it.  This is how human review and out-of-band graders land beside the automatic ones: name the score, give it a value (or a stringValue for a categorical label), and attach it to a trace, a run, a dataset example, or any combination.  Scores are validated fail-closed. A value must be FINITE — NaN and Inf are 400 — and if the org has declared a rubric for this name, that rubric decides the type and the value must satisfy it: inside the numeric bounds, or one of the allowed categories. A caller cannot override the declared type by sending a different dataType.  A score is TELEMETRY, not metadata, so it needs the datastore: a deployment with none wired answers 503 rather than accepting a score it cannot persist. Requires a validated principal; 403 without one, and the org is stamped from the validated claim rather than read off the body.
+     * @param scoreReq 
+     * @return ScoreView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1EvalsScores() : Unit {
-        val localVarResponse = cloudPostV1EvalsScoresWithHttpInfo()
+    fun postV1EvalsScores(scoreReq: ScoreReq) : ScoreView {
+        val localVarResponse = postV1EvalsScoresWithHttpInfo(scoreReq = scoreReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScoreView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1087,37 +1296,42 @@ class EvalsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/evals/scores
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Files one score event for the caller&#39;s org and answers 201 with it.
+     * Files one score event for the caller&#39;s org and answers 201 with it.  This is how human review and out-of-band graders land beside the automatic ones: name the score, give it a value (or a stringValue for a categorical label), and attach it to a trace, a run, a dataset example, or any combination.  Scores are validated fail-closed. A value must be FINITE — NaN and Inf are 400 — and if the org has declared a rubric for this name, that rubric decides the type and the value must satisfy it: inside the numeric bounds, or one of the allowed categories. A caller cannot override the declared type by sending a different dataType.  A score is TELEMETRY, not metadata, so it needs the datastore: a deployment with none wired answers 503 rather than accepting a score it cannot persist. Requires a validated principal; 403 without one, and the org is stamped from the validated claim rather than read off the body.
+     * @param scoreReq 
+     * @return ApiResponse<ScoreView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1EvalsScoresWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1EvalsScoresRequestConfig()
+    fun postV1EvalsScoresWithHttpInfo(scoreReq: ScoreReq) : ApiResponse<ScoreView?> {
+        val localVariableConfig = postV1EvalsScoresRequestConfig(scoreReq = scoreReq)
 
-        return request<Unit, Unit>(
+        return request<ScoreReq, ScoreView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1EvalsScores
+     * To obtain the request config of the operation postV1EvalsScores
      *
+     * @param scoreReq 
      * @return RequestConfig
      */
-    fun cloudPostV1EvalsScoresRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1EvalsScoresRequestConfig(scoreReq: ScoreReq) : RequestConfig<ScoreReq> {
+        val localVariableBody = scoreReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/evals/scores",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

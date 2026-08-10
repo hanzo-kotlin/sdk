@@ -5,7 +5,7 @@
 
 test:
   - name: sdk-build
-    # Compiles the generated cloud client (263 API classes, 2062 models) and all
+    # Compiles the generated cloud client (190 API classes, 2439 models) and all
     # six example flows.
     #
     # NOT `./scripts/build`, which builds every module and cannot pass:

@@ -19,9 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.InlineObject
-import ai.hanzo.cloud.model.WebsearchScrapeRequest
-import ai.hanzo.cloud.model.WebsearchScrapeResponse
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,8 +46,8 @@ class ScrapeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/scrape
-     * 
-     * 
+     * Fetch one page and get its extracted markdown, in the firecrawl envelope.
+     * Takes {url} and answers {success, data:{markdown, metadata}} — the exact contract a firecrawl client decodes. The fetch, extraction and optional browser render run in-process; there is no crawler pod to be down.  The shared service key is required as an Authorization Bearer, compared in constant time: unset on the deployment is 503, missing or wrong is 401. Unlike search, a validated principal does NOT substitute for it — this is the service-to-service door.  A page is archived under the caller&#39;s own org and project, taken from the verified principal when there is one, so a scrape lands in the same corpus /v1/crawl fills and a URL already read under that scope is answered from the archive without touching the network. A service caller carrying no principal shares the unscoped prefix.  The URL is caller-supplied and fetched from INSIDE the cluster, which makes this a request-forgery primitive by construction: in-namespace service DNS and a cloud metadata endpoint that hands credentials to anyone who asks are both a resolution away. Only http and https are accepted, and every address actually dialled must be public unicast — loopback, link-local, private and multicast are refused. The check lives in the DIALER rather than on the hostname, because resolving a name to validate it and then letting the transport resolve it again is a gap DNS rebinding walks straight through; redirects re-enter the same dialer, so a public URL that bounces to the metadata address is refused at the hop that matters.  The one thing to get right: FAILURE IS 200. A missing or unparseable url, a body over the 1 MiB read cap, and a fetch that could not be completed all answer HTTP 200 with success:false and a reason — a firecrawl client reads data.success, not the status line. Only the two auth refusals use a status code, so a caller that branches on HTTP status alone will read every failed scrape as a success.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -59,8 +56,8 @@ class ScrapeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Scrape() : Unit {
-        val localVarResponse = cloudPostV1ScrapeWithHttpInfo()
+    fun postV1Scrape() : Unit {
+        val localVarResponse = postV1ScrapeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -79,15 +76,15 @@ class ScrapeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/scrape
-     * 
-     * 
+     * Fetch one page and get its extracted markdown, in the firecrawl envelope.
+     * Takes {url} and answers {success, data:{markdown, metadata}} — the exact contract a firecrawl client decodes. The fetch, extraction and optional browser render run in-process; there is no crawler pod to be down.  The shared service key is required as an Authorization Bearer, compared in constant time: unset on the deployment is 503, missing or wrong is 401. Unlike search, a validated principal does NOT substitute for it — this is the service-to-service door.  A page is archived under the caller&#39;s own org and project, taken from the verified principal when there is one, so a scrape lands in the same corpus /v1/crawl fills and a URL already read under that scope is answered from the archive without touching the network. A service caller carrying no principal shares the unscoped prefix.  The URL is caller-supplied and fetched from INSIDE the cluster, which makes this a request-forgery primitive by construction: in-namespace service DNS and a cloud metadata endpoint that hands credentials to anyone who asks are both a resolution away. Only http and https are accepted, and every address actually dialled must be public unicast — loopback, link-local, private and multicast are refused. The check lives in the DIALER rather than on the hostname, because resolving a name to validate it and then letting the transport resolve it again is a gap DNS rebinding walks straight through; redirects re-enter the same dialer, so a public URL that bounces to the metadata address is refused at the hop that matters.  The one thing to get right: FAILURE IS 200. A missing or unparseable url, a body over the 1 MiB read cap, and a fetch that could not be completed all answer HTTP 200 with success:false and a reason — a firecrawl client reads data.success, not the status line. Only the two auth refusals use a status code, so a caller that branches on HTTP status alone will read every failed scrape as a success.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ScrapeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ScrapeRequestConfig()
+    fun postV1ScrapeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ScrapeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,11 +92,11 @@ class ScrapeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Scrape
+     * To obtain the request config of the operation postV1Scrape
      *
      * @return RequestConfig
      */
-    fun cloudPostV1ScrapeRequestConfig() : RequestConfig<Unit> {
+    fun postV1ScrapeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -109,155 +106,7 @@ class ScrapeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/scrape",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/websearch/v1/scrape
-     * Scrape a URL to markdown (Firecrawl response shape)
-     * 
-     * @param websearchScrapeRequest 
-     * @return WebsearchScrapeResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun websearchWebScrape(websearchScrapeRequest: WebsearchScrapeRequest) : WebsearchScrapeResponse {
-        val localVarResponse = websearchWebScrapeWithHttpInfo(websearchScrapeRequest = websearchScrapeRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as WebsearchScrapeResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/websearch/v1/scrape
-     * Scrape a URL to markdown (Firecrawl response shape)
-     * 
-     * @param websearchScrapeRequest 
-     * @return ApiResponse<WebsearchScrapeResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun websearchWebScrapeWithHttpInfo(websearchScrapeRequest: WebsearchScrapeRequest) : ApiResponse<WebsearchScrapeResponse?> {
-        val localVariableConfig = websearchWebScrapeRequestConfig(websearchScrapeRequest = websearchScrapeRequest)
-
-        return request<WebsearchScrapeRequest, WebsearchScrapeResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation websearchWebScrape
-     *
-     * @param websearchScrapeRequest 
-     * @return RequestConfig
-     */
-    fun websearchWebScrapeRequestConfig(websearchScrapeRequest: WebsearchScrapeRequest) : RequestConfig<WebsearchScrapeRequest> {
-        val localVariableBody = websearchScrapeRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/websearch/v1/scrape",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/websearch/scrape
-     * Scrape a URL to markdown (bare alias of /v1/websearch/v1/scrape)
-     * 
-     * @param websearchScrapeRequest 
-     * @return WebsearchScrapeResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun websearchWebScrapeBare(websearchScrapeRequest: WebsearchScrapeRequest) : WebsearchScrapeResponse {
-        val localVarResponse = websearchWebScrapeBareWithHttpInfo(websearchScrapeRequest = websearchScrapeRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as WebsearchScrapeResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/websearch/scrape
-     * Scrape a URL to markdown (bare alias of /v1/websearch/v1/scrape)
-     * 
-     * @param websearchScrapeRequest 
-     * @return ApiResponse<WebsearchScrapeResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun websearchWebScrapeBareWithHttpInfo(websearchScrapeRequest: WebsearchScrapeRequest) : ApiResponse<WebsearchScrapeResponse?> {
-        val localVariableConfig = websearchWebScrapeBareRequestConfig(websearchScrapeRequest = websearchScrapeRequest)
-
-        return request<WebsearchScrapeRequest, WebsearchScrapeResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation websearchWebScrapeBare
-     *
-     * @param websearchScrapeRequest 
-     * @return RequestConfig
-     */
-    fun websearchWebScrapeBareRequestConfig(websearchScrapeRequest: WebsearchScrapeRequest) : RequestConfig<WebsearchScrapeRequest> {
-        val localVariableBody = websearchScrapeRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/websearch/scrape",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

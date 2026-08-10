@@ -19,13 +19,15 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudBoardPage
-import ai.hanzo.cloud.model.CloudChannelList
-import ai.hanzo.cloud.model.CloudPublishInput
-import ai.hanzo.cloud.model.CloudPublishResult
-import ai.hanzo.cloud.model.CloudStateGraph
-import ai.hanzo.cloud.model.CloudTransitionIn
-import ai.hanzo.cloud.model.CloudTransitionResult
+import ai.hanzo.cloud.model.BoardPage
+import ai.hanzo.cloud.model.ChannelList
+import ai.hanzo.cloud.model.GenerateInput
+import ai.hanzo.cloud.model.GenerateResult
+import ai.hanzo.cloud.model.PublishInput
+import ai.hanzo.cloud.model.PublishResult
+import ai.hanzo.cloud.model.StateGraph
+import ai.hanzo.cloud.model.TransitionIn
+import ai.hanzo.cloud.model.TransitionResult
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,13 +55,13 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/content/board
-     * GetBoard aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give.
-     * GetBoard aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give. It never fails on a partial outage: a content type the org has not installed, or one whose search errors, is skipped and logged rather than failing the whole board.
+     * Aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give.
+     * Aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give. It never fails on a partial outage: a content type the org has not installed, or one whose search errors, is skipped and logged rather than failing the whole board.
      * @param status Status keeps only items in one lifecycle state (draft, in_review, approved, queued, published, archived). An undefined state is refused. (optional)
      * @param project Project keeps only items in one brand/site sub-scope. (optional)
      * @param doctype DocType keeps only one content type; omitted, the board spans every publishable type. An unknown type is refused. (optional)
      * @param limit Limit caps the rows returned, clamped to 1000. Defaults to 200, which is also what a non-positive or unparseable value takes. (optional)
-     * @return CloudBoardPage
+     * @return BoardPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -68,11 +70,11 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ContentBoard(status: kotlin.String? = null, project: kotlin.String? = null, doctype: kotlin.String? = null, limit: kotlin.Int? = null) : CloudBoardPage {
-        val localVarResponse = cloudGetV1ContentBoardWithHttpInfo(status = status, project = project, doctype = doctype, limit = limit)
+    fun getV1ContentBoard(status: kotlin.String? = null, project: kotlin.String? = null, doctype: kotlin.String? = null, limit: kotlin.Int? = null) : BoardPage {
+        val localVarResponse = getV1ContentBoardWithHttpInfo(status = status, project = project, doctype = doctype, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBoardPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BoardPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -88,28 +90,28 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/content/board
-     * GetBoard aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give.
-     * GetBoard aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give. It never fails on a partial outage: a content type the org has not installed, or one whose search errors, is skipped and logged rather than failing the whole board.
+     * Aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give.
+     * Aggregates the caller org&#39;s marketing content across every publishable content type into ONE queue board — the cross-type read the framework&#39;s per-DocType list cannot give. It never fails on a partial outage: a content type the org has not installed, or one whose search errors, is skipped and logged rather than failing the whole board.
      * @param status Status keeps only items in one lifecycle state (draft, in_review, approved, queued, published, archived). An undefined state is refused. (optional)
      * @param project Project keeps only items in one brand/site sub-scope. (optional)
      * @param doctype DocType keeps only one content type; omitted, the board spans every publishable type. An unknown type is refused. (optional)
      * @param limit Limit caps the rows returned, clamped to 1000. Defaults to 200, which is also what a non-positive or unparseable value takes. (optional)
-     * @return ApiResponse<CloudBoardPage?>
+     * @return ApiResponse<BoardPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ContentBoardWithHttpInfo(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudBoardPage?> {
-        val localVariableConfig = cloudGetV1ContentBoardRequestConfig(status = status, project = project, doctype = doctype, limit = limit)
+    fun getV1ContentBoardWithHttpInfo(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : ApiResponse<BoardPage?> {
+        val localVariableConfig = getV1ContentBoardRequestConfig(status = status, project = project, doctype = doctype, limit = limit)
 
-        return request<Unit, CloudBoardPage>(
+        return request<Unit, BoardPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ContentBoard
+     * To obtain the request config of the operation getV1ContentBoard
      *
      * @param status Status keeps only items in one lifecycle state (draft, in_review, approved, queued, published, archived). An undefined state is refused. (optional)
      * @param project Project keeps only items in one brand/site sub-scope. (optional)
@@ -117,7 +119,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param limit Limit caps the rows returned, clamped to 1000. Defaults to 200, which is also what a non-positive or unparseable value takes. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1ContentBoardRequestConfig(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1ContentBoardRequestConfig(status: kotlin.String?, project: kotlin.String?, doctype: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -142,16 +144,16 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/board",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/content/channels
-     * GetChannels lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target.
-     * GetChannels lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target. A deployment with no distribution edge wired answers 503 rather than an empty list that would read as \&quot;no channels\&quot;.
-     * @return CloudChannelList
+     * Lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target.
+     * Lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target. A deployment with no distribution edge wired answers 503 rather than an empty list that would read as \&quot;no channels\&quot;.
+     * @return ChannelList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -160,11 +162,11 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ContentChannels() : CloudChannelList {
-        val localVarResponse = cloudGetV1ContentChannelsWithHttpInfo()
+    fun getV1ContentChannels() : ChannelList {
+        val localVarResponse = getV1ContentChannelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudChannelList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ChannelList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -180,28 +182,28 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/content/channels
-     * GetChannels lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target.
-     * GetChannels lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target. A deployment with no distribution edge wired answers 503 rather than an empty list that would read as \&quot;no channels\&quot;.
-     * @return ApiResponse<CloudChannelList?>
+     * Lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target.
+     * Lists the distribution channels the caller&#39;s org has connected — the social integrations a publish can target. A deployment with no distribution edge wired answers 503 rather than an empty list that would read as \&quot;no channels\&quot;.
+     * @return ApiResponse<ChannelList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ContentChannelsWithHttpInfo() : ApiResponse<CloudChannelList?> {
-        val localVariableConfig = cloudGetV1ContentChannelsRequestConfig()
+    fun getV1ContentChannelsWithHttpInfo() : ApiResponse<ChannelList?> {
+        val localVariableConfig = getV1ContentChannelsRequestConfig()
 
-        return request<Unit, CloudChannelList>(
+        return request<Unit, ChannelList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ContentChannels
+     * To obtain the request config of the operation getV1ContentChannels
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ContentChannelsRequestConfig() : RequestConfig<Unit> {
+    fun getV1ContentChannelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -212,16 +214,16 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/channels",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/content/lifecycle
-     * GetLifecycle returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state.
-     * GetLifecycle returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state. The console builds its board columns and its per-item action buttons from this single answer, so the UI and the write-time enforcement hook can never disagree about what is legal.
-     * @return CloudStateGraph
+     * Returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state.
+     * Returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state. The console builds its board columns and its per-item action buttons from this single answer, so the UI and the write-time enforcement hook can never disagree about what is legal.
+     * @return StateGraph
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -230,11 +232,11 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ContentLifecycle() : CloudStateGraph {
-        val localVarResponse = cloudGetV1ContentLifecycleWithHttpInfo()
+    fun getV1ContentLifecycle() : StateGraph {
+        val localVarResponse = getV1ContentLifecycleWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStateGraph
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StateGraph
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -250,28 +252,28 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/content/lifecycle
-     * GetLifecycle returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state.
-     * GetLifecycle returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state. The console builds its board columns and its per-item action buttons from this single answer, so the UI and the write-time enforcement hook can never disagree about what is legal.
-     * @return ApiResponse<CloudStateGraph?>
+     * Returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state.
+     * Returns the ONE marketing-content state machine: the ordered lifecycle states, which state a fresh document starts in, which one is publicly live, and the legal successors of every state. The console builds its board columns and its per-item action buttons from this single answer, so the UI and the write-time enforcement hook can never disagree about what is legal.
+     * @return ApiResponse<StateGraph?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ContentLifecycleWithHttpInfo() : ApiResponse<CloudStateGraph?> {
-        val localVariableConfig = cloudGetV1ContentLifecycleRequestConfig()
+    fun getV1ContentLifecycleWithHttpInfo() : ApiResponse<StateGraph?> {
+        val localVariableConfig = getV1ContentLifecycleRequestConfig()
 
-        return request<Unit, CloudStateGraph>(
+        return request<Unit, StateGraph>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ContentLifecycle
+     * To obtain the request config of the operation getV1ContentLifecycle
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ContentLifecycleRequestConfig() : RequestConfig<Unit> {
+    fun getV1ContentLifecycleRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -282,19 +284,19 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/lifecycle",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/content/{doctype}/{name}/transition
-     * PostTransition moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels.
-     * PostTransition moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels. The edge must be legal for the item&#39;s current state — an illegal move is refused with 409 — and the status write re-validates it at the storage boundary. Distribution is best effort: its honest state is reported on the result and a distribution failure never rolls the status change back.
+     * Moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels.
+     * Moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels. The edge must be legal for the item&#39;s current state — an illegal move is refused with 409 — and the status write re-validates it at the storage boundary. Distribution is best effort: its honest state is reported on the result and a distribution failure never rolls the status change back.
      * @param doctype DocType is the content type to act on, from the path.
      * @param name Name is the document to act on, from the path.
-     * @param cloudTransitionIn 
-     * @return CloudTransitionResult
+     * @param transitionIn 
+     * @return TransitionResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -303,11 +305,11 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ContentDoctypeNameTransition(doctype: kotlin.String, name: kotlin.String, cloudTransitionIn: CloudTransitionIn) : CloudTransitionResult {
-        val localVarResponse = cloudPostV1ContentDoctypeNameTransitionWithHttpInfo(doctype = doctype, name = name, cloudTransitionIn = cloudTransitionIn)
+    fun postV1ContentByDoctypeByNameTransition(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : TransitionResult {
+        val localVarResponse = postV1ContentByDoctypeByNameTransitionWithHttpInfo(doctype = doctype, name = name, transitionIn = transitionIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTransitionResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TransitionResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -323,35 +325,35 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/content/{doctype}/{name}/transition
-     * PostTransition moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels.
-     * PostTransition moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels. The edge must be legal for the item&#39;s current state — an illegal move is refused with 409 — and the status write re-validates it at the storage boundary. Distribution is best effort: its honest state is reported on the result and a distribution failure never rolls the status change back.
+     * Moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels.
+     * Moves one content item to a new lifecycle state and, on the move to published, fans it out to the item&#39;s channels. The edge must be legal for the item&#39;s current state — an illegal move is refused with 409 — and the status write re-validates it at the storage boundary. Distribution is best effort: its honest state is reported on the result and a distribution failure never rolls the status change back.
      * @param doctype DocType is the content type to act on, from the path.
      * @param name Name is the document to act on, from the path.
-     * @param cloudTransitionIn 
-     * @return ApiResponse<CloudTransitionResult?>
+     * @param transitionIn 
+     * @return ApiResponse<TransitionResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ContentDoctypeNameTransitionWithHttpInfo(doctype: kotlin.String, name: kotlin.String, cloudTransitionIn: CloudTransitionIn) : ApiResponse<CloudTransitionResult?> {
-        val localVariableConfig = cloudPostV1ContentDoctypeNameTransitionRequestConfig(doctype = doctype, name = name, cloudTransitionIn = cloudTransitionIn)
+    fun postV1ContentByDoctypeByNameTransitionWithHttpInfo(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : ApiResponse<TransitionResult?> {
+        val localVariableConfig = postV1ContentByDoctypeByNameTransitionRequestConfig(doctype = doctype, name = name, transitionIn = transitionIn)
 
-        return request<CloudTransitionIn, CloudTransitionResult>(
+        return request<TransitionIn, TransitionResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ContentDoctypeNameTransition
+     * To obtain the request config of the operation postV1ContentByDoctypeByNameTransition
      *
      * @param doctype DocType is the content type to act on, from the path.
      * @param name Name is the document to act on, from the path.
-     * @param cloudTransitionIn 
+     * @param transitionIn 
      * @return RequestConfig
      */
-    fun cloudPostV1ContentDoctypeNameTransitionRequestConfig(doctype: kotlin.String, name: kotlin.String, cloudTransitionIn: CloudTransitionIn) : RequestConfig<CloudTransitionIn> {
-        val localVariableBody = cloudTransitionIn
+    fun postV1ContentByDoctypeByNameTransitionRequestConfig(doctype: kotlin.String, name: kotlin.String, transitionIn: TransitionIn) : RequestConfig<TransitionIn> {
+        val localVariableBody = transitionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -362,28 +364,30 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/{doctype}/{name}/transition".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/content/generate
-     * 
-     * 
-     * @return void
+     * Draft a piece of marketing content and file it in the CMS as a draft.
+     * Draft a piece of marketing content and file it in the CMS as a draft.  Answers 201 with the created draft&#39;s identity — {doctype, name, status} — and the document itself lands in the CMS through the SAME validate and lifecycle-hook pipeline an ordinary create runs. This is a WRITE, not a preview: there is no dry-run, and every call that succeeds leaves a document behind.  &#x60;doctype&#x60; picks which of two generation planes runs, and they are the only two. Campaign and SocialPost are drafted as brand COPY on the platform AI plane (zen5 by default, overridable per request with &#x60;model&#x60; or per deployment); Asset is a studio image render the AI plane never sees. Everything else about the call is identical.  MONEY, metered in exactly one place per mode and never both. Copy rides the platform&#39;s own inference meter — the org&#39;s balance is authorised before the model call and debited at the exact token cost after — so content never re-bills it. A studio render is invisible to that meter, so content is the sole meter for it: the org is gated BEFORE the GPU compute and refused 402 when out of funds or over its spend cap, and the debit is recorded only once the render actually returns, because the billable event is the consumed compute and not the CMS row. &#x60;project&#x60; rides the BODY rather than a server-minted identity claim, so it attributes spend but a project-scoped cap stays soft on it — the org is the value that is enforced.  The org is the caller&#39;s own, resolved once from the validated principal and never read from the body; a caller without one is refused 403. Status is not the generator&#39;s to choose: a generated item is ALWAYS a draft, and the storage-boundary hook enforces that a second time.  It fails closed rather than inventing anything. An unknown content type is 404 and a deployment whose marketing module is not installed is 409 naming the install call. An AI plane or studio that is unconfigured or unreachable, a graph the studio rejects, and a render that does not return in time all degrade to 503 — never fabricated copy, never a fake render. A &#x60;source_media&#x60; that fails the SSRF and traversal validator is 400 raised before the billing gate and before the studio is contacted, so a hostile source never costs the caller anything.
+     * @param generateInput 
+     * @return GenerateResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ContentGenerate() : Unit {
-        val localVarResponse = cloudPostV1ContentGenerateWithHttpInfo()
+    fun postV1ContentGenerate(generateInput: GenerateInput) : GenerateResult {
+        val localVarResponse = postV1ContentGenerateWithHttpInfo(generateInput = generateInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GenerateResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -399,37 +403,42 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/content/generate
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Draft a piece of marketing content and file it in the CMS as a draft.
+     * Draft a piece of marketing content and file it in the CMS as a draft.  Answers 201 with the created draft&#39;s identity — {doctype, name, status} — and the document itself lands in the CMS through the SAME validate and lifecycle-hook pipeline an ordinary create runs. This is a WRITE, not a preview: there is no dry-run, and every call that succeeds leaves a document behind.  &#x60;doctype&#x60; picks which of two generation planes runs, and they are the only two. Campaign and SocialPost are drafted as brand COPY on the platform AI plane (zen5 by default, overridable per request with &#x60;model&#x60; or per deployment); Asset is a studio image render the AI plane never sees. Everything else about the call is identical.  MONEY, metered in exactly one place per mode and never both. Copy rides the platform&#39;s own inference meter — the org&#39;s balance is authorised before the model call and debited at the exact token cost after — so content never re-bills it. A studio render is invisible to that meter, so content is the sole meter for it: the org is gated BEFORE the GPU compute and refused 402 when out of funds or over its spend cap, and the debit is recorded only once the render actually returns, because the billable event is the consumed compute and not the CMS row. &#x60;project&#x60; rides the BODY rather than a server-minted identity claim, so it attributes spend but a project-scoped cap stays soft on it — the org is the value that is enforced.  The org is the caller&#39;s own, resolved once from the validated principal and never read from the body; a caller without one is refused 403. Status is not the generator&#39;s to choose: a generated item is ALWAYS a draft, and the storage-boundary hook enforces that a second time.  It fails closed rather than inventing anything. An unknown content type is 404 and a deployment whose marketing module is not installed is 409 naming the install call. An AI plane or studio that is unconfigured or unreachable, a graph the studio rejects, and a render that does not return in time all degrade to 503 — never fabricated copy, never a fake render. A &#x60;source_media&#x60; that fails the SSRF and traversal validator is 400 raised before the billing gate and before the studio is contacted, so a hostile source never costs the caller anything.
+     * @param generateInput 
+     * @return ApiResponse<GenerateResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ContentGenerateWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ContentGenerateRequestConfig()
+    fun postV1ContentGenerateWithHttpInfo(generateInput: GenerateInput) : ApiResponse<GenerateResult?> {
+        val localVariableConfig = postV1ContentGenerateRequestConfig(generateInput = generateInput)
 
-        return request<Unit, Unit>(
+        return request<GenerateInput, GenerateResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ContentGenerate
+     * To obtain the request config of the operation postV1ContentGenerate
      *
+     * @param generateInput 
      * @return RequestConfig
      */
-    fun cloudPostV1ContentGenerateRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1ContentGenerateRequestConfig(generateInput: GenerateInput) : RequestConfig<GenerateInput> {
+        val localVariableBody = generateInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/v1/content/generate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -438,8 +447,8 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/content/publish
      * Publish distributes one CMS content item to the channels recorded on it and returns the honest per-channel outcome.
      * Publish distributes one CMS content item to the channels recorded on it and returns the honest per-channel outcome. The item names itself — its caption, media and channel list are read from the stored document, not from this request. It is idempotent per channel (a channel already posted for this item is skipped), and a publish that loses the per-item lease to a live publisher answers status \&quot;in_progress\&quot; having posted nothing.
-     * @param cloudPublishInput 
-     * @return CloudPublishResult
+     * @param publishInput 
+     * @return PublishResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -448,11 +457,11 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ContentPublish(cloudPublishInput: CloudPublishInput) : CloudPublishResult {
-        val localVarResponse = cloudPostV1ContentPublishWithHttpInfo(cloudPublishInput = cloudPublishInput)
+    fun postV1ContentPublish(publishInput: PublishInput) : PublishResult {
+        val localVarResponse = postV1ContentPublishWithHttpInfo(publishInput = publishInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPublishResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PublishResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -470,29 +479,29 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/content/publish
      * Publish distributes one CMS content item to the channels recorded on it and returns the honest per-channel outcome.
      * Publish distributes one CMS content item to the channels recorded on it and returns the honest per-channel outcome. The item names itself — its caption, media and channel list are read from the stored document, not from this request. It is idempotent per channel (a channel already posted for this item is skipped), and a publish that loses the per-item lease to a live publisher answers status \&quot;in_progress\&quot; having posted nothing.
-     * @param cloudPublishInput 
-     * @return ApiResponse<CloudPublishResult?>
+     * @param publishInput 
+     * @return ApiResponse<PublishResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ContentPublishWithHttpInfo(cloudPublishInput: CloudPublishInput) : ApiResponse<CloudPublishResult?> {
-        val localVariableConfig = cloudPostV1ContentPublishRequestConfig(cloudPublishInput = cloudPublishInput)
+    fun postV1ContentPublishWithHttpInfo(publishInput: PublishInput) : ApiResponse<PublishResult?> {
+        val localVariableConfig = postV1ContentPublishRequestConfig(publishInput = publishInput)
 
-        return request<CloudPublishInput, CloudPublishResult>(
+        return request<PublishInput, PublishResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ContentPublish
+     * To obtain the request config of the operation postV1ContentPublish
      *
-     * @param cloudPublishInput 
+     * @param publishInput 
      * @return RequestConfig
      */
-    fun cloudPostV1ContentPublishRequestConfig(cloudPublishInput: CloudPublishInput) : RequestConfig<CloudPublishInput> {
-        val localVariableBody = cloudPublishInput
+    fun postV1ContentPublishRequestConfig(publishInput: PublishInput) : RequestConfig<PublishInput> {
+        val localVariableBody = publishInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -503,7 +512,7 @@ class ContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/content/publish",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

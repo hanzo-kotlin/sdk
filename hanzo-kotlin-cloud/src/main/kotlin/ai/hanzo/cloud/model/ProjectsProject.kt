@@ -15,116 +15,127 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.ProjectsRepoRef
+import ai.hanzo.cloud.model.ProjectsRepo
 
 import com.google.gson.annotations.SerializedName
 
 /**
- * The org-scoped project — the slug-keyed record of a deployable site (the json shape console consumes).
+ * 
  *
- * @param id 
- * @param org 
- * @param slug 
- * @param name 
- * @param repo 
- * @param framework Build hint.
- * @param status Project lifecycle status.
+ * @param analytics Analytics is the wired-by-default web-analytics flag (default true). It is the value the app's static-builder reads as deployment.analytics to inject the beacon. Space is the project's Base data space (\"<org>/<slug>\") a deployed site posts form/forum/data submissions to under /v1/base.
+ * @param bucket 
+ * @param cacheControl Cache is the site's edge-cache state: the HTML/document Cache-Control policy in effect (TTL) and the last edge-purge time, so a console can show freshness.
  * @param createdAt 
- * @param updatedAt 
- * @param description 
- * @param liveUrl Canonical live URL, https://<slug>.<apex>. Set once deployed.
- * @param bucket S3-origin bucket holding the site.
  * @param currentDeploymentId 
- * @param cacheControl Per-project HTML/document Cache-Control policy applied at the S3 origin.
- * @param lastPurgeAt Unix time (seconds) of the last edge cache-tag purge.
+ * @param description 
+ * @param forkedFrom ForkedFrom is the parent this project was forked from (\"<org>/<slug>\" of a published project, or a catalog template slug) — the attribution edge a gallery credits.
+ * @param framework 
+ * @param hidden 
+ * @param hiddenReason 
+ * @param id 
+ * @param key Key is the project's publishable ingest key, minted at create. It is the value the injected beacon carries and the ONE thing that attributes this site's events; the static-builder reads it beside analytics.  Publishable means it belongs in a page's source: it names a write scope and mints no principal, so it is returned in full rather than masked. Masking it would only mean every caller needed a second endpoint to get the thing the page already ships.
+ * @param lastPurgeAt 
+ * @param license 
+ * @param liveUrl 
+ * @param name 
+ * @param org 
+ * @param repo 
+ * @param slug 
+ * @param space 
+ * @param status 
+ * @param tags Tags is the site's browser tag config: platform slug → non-secret pixel id (GA measurement, Meta pixel, …) — what track.js injects and the server CAPI reads, per site. Omitted when none are set. The API SECRET is never here (KMS).
+ * @param updatedAt 
+ * @param upstream Upstream/License credit the third-party work this project was published from, and the terms it carries. Omitted when nothing is declared: an absent credit means \"nobody has said\", not \"there is nothing to say\".
+ * @param visibility Visibility is \"public\" or \"private\", and Hidden reports platform moderation. Both are always present (never omitempty) so a consumer can tell a real answer from \"this API is too old to say\" — and so a console never renders a project as public because a field was missing.  Authorship is deliberately absent: it is Org, above.
  */
 
 
 data class ProjectsProject (
 
-    @SerializedName("id")
-    val id: kotlin.String,
+    /* Analytics is the wired-by-default web-analytics flag (default true). It is the value the app's static-builder reads as deployment.analytics to inject the beacon. Space is the project's Base data space (\"<org>/<slug>\") a deployed site posts form/forum/data submissions to under /v1/base. */
+    @SerializedName("analytics")
+    val analytics: kotlin.Boolean? = null,
 
-    @SerializedName("org")
-    val org: kotlin.String,
-
-    @SerializedName("slug")
-    val slug: kotlin.String,
-
-    @SerializedName("name")
-    val name: kotlin.String,
-
-    @SerializedName("repo")
-    val repo: ProjectsRepoRef,
-
-    /* Build hint. */
-    @SerializedName("framework")
-    val framework: ProjectsProject.Framework,
-
-    /* Project lifecycle status. */
-    @SerializedName("status")
-    val status: ProjectsProject.Status,
-
-    @SerializedName("createdAt")
-    val createdAt: kotlin.Long,
-
-    @SerializedName("updatedAt")
-    val updatedAt: kotlin.Long,
-
-    @SerializedName("description")
-    val description: kotlin.String? = null,
-
-    /* Canonical live URL, https://<slug>.<apex>. Set once deployed. */
-    @SerializedName("liveUrl")
-    val liveUrl: kotlin.String? = null,
-
-    /* S3-origin bucket holding the site. */
     @SerializedName("bucket")
     val bucket: kotlin.String? = null,
+
+    /* Cache is the site's edge-cache state: the HTML/document Cache-Control policy in effect (TTL) and the last edge-purge time, so a console can show freshness. */
+    @SerializedName("cacheControl")
+    val cacheControl: kotlin.String? = null,
+
+    @SerializedName("createdAt")
+    val createdAt: kotlin.Int? = null,
 
     @SerializedName("currentDeploymentId")
     val currentDeploymentId: kotlin.String? = null,
 
-    /* Per-project HTML/document Cache-Control policy applied at the S3 origin. */
-    @SerializedName("cacheControl")
-    val cacheControl: kotlin.String? = null,
+    @SerializedName("description")
+    val description: kotlin.String? = null,
 
-    /* Unix time (seconds) of the last edge cache-tag purge. */
+    /* ForkedFrom is the parent this project was forked from (\"<org>/<slug>\" of a published project, or a catalog template slug) — the attribution edge a gallery credits. */
+    @SerializedName("forkedFrom")
+    val forkedFrom: kotlin.String? = null,
+
+    @SerializedName("framework")
+    val framework: kotlin.String? = null,
+
+    @SerializedName("hidden")
+    val hidden: kotlin.Boolean? = null,
+
+    @SerializedName("hiddenReason")
+    val hiddenReason: kotlin.String? = null,
+
+    @SerializedName("id")
+    val id: kotlin.String? = null,
+
+    /* Key is the project's publishable ingest key, minted at create. It is the value the injected beacon carries and the ONE thing that attributes this site's events; the static-builder reads it beside analytics.  Publishable means it belongs in a page's source: it names a write scope and mints no principal, so it is returned in full rather than masked. Masking it would only mean every caller needed a second endpoint to get the thing the page already ships. */
+    @SerializedName("key")
+    val key: kotlin.String? = null,
+
     @SerializedName("lastPurgeAt")
-    val lastPurgeAt: kotlin.Long? = null
+    val lastPurgeAt: kotlin.Int? = null,
+
+    @SerializedName("license")
+    val license: kotlin.String? = null,
+
+    @SerializedName("liveUrl")
+    val liveUrl: kotlin.String? = null,
+
+    @SerializedName("name")
+    val name: kotlin.String? = null,
+
+    @SerializedName("org")
+    val org: kotlin.String? = null,
+
+    @SerializedName("repo")
+    val repo: ProjectsRepo? = null,
+
+    @SerializedName("slug")
+    val slug: kotlin.String? = null,
+
+    @SerializedName("space")
+    val space: kotlin.String? = null,
+
+    @SerializedName("status")
+    val status: kotlin.String? = null,
+
+    /* Tags is the site's browser tag config: platform slug → non-secret pixel id (GA measurement, Meta pixel, …) — what track.js injects and the server CAPI reads, per site. Omitted when none are set. The API SECRET is never here (KMS). */
+    @SerializedName("tags")
+    val tags: kotlin.collections.Map<kotlin.String, kotlin.String>? = null,
+
+    @SerializedName("updatedAt")
+    val updatedAt: kotlin.Int? = null,
+
+    /* Upstream/License credit the third-party work this project was published from, and the terms it carries. Omitted when nothing is declared: an absent credit means \"nobody has said\", not \"there is nothing to say\". */
+    @SerializedName("upstream")
+    val upstream: kotlin.String? = null,
+
+    /* Visibility is \"public\" or \"private\", and Hidden reports platform moderation. Both are always present (never omitempty) so a consumer can tell a real answer from \"this API is too old to say\" — and so a console never renders a project as public because a field was missing.  Authorship is deliberately absent: it is Org, above. */
+    @SerializedName("visibility")
+    val visibility: kotlin.String? = null
 
 ) {
 
-    /**
-     * Build hint.
-     *
-     * Values: static,vite,next,react,astro,svelte,vue,remix,nuxt,unity,unreal,godot
-     */
-    enum class Framework(val value: kotlin.String) {
-        @SerializedName(value = "static") static("static"),
-        @SerializedName(value = "vite") vite("vite"),
-        @SerializedName(value = "next") next("next"),
-        @SerializedName(value = "react") react("react"),
-        @SerializedName(value = "astro") astro("astro"),
-        @SerializedName(value = "svelte") svelte("svelte"),
-        @SerializedName(value = "vue") vue("vue"),
-        @SerializedName(value = "remix") remix("remix"),
-        @SerializedName(value = "nuxt") nuxt("nuxt"),
-        @SerializedName(value = "unity") unity("unity"),
-        @SerializedName(value = "unreal") unreal("unreal"),
-        @SerializedName(value = "godot") godot("godot");
-    }
-    /**
-     * Project lifecycle status.
-     *
-     * Values: draft,building,live,error
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "draft") draft("draft"),
-        @SerializedName(value = "building") building("building"),
-        @SerializedName(value = "live") live("live"),
-        @SerializedName(value = "error") error("error");
-    }
 
 }
 

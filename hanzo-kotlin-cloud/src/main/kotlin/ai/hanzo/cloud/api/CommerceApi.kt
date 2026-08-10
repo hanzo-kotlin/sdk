@@ -19,9 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudRailList
-import ai.hanzo.cloud.model.CloudWalletTopupReq
-import ai.hanzo.cloud.model.CloudWalletTopupResp
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,9 +45,10 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * GET /v1/commerce/admin/catalog
-     * 
-     * 
+     * DELETE /v1/commerce/collection/{collectionid}
+     * Delete a collection, keeping a recoverable copy
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteCollection.
+     * @param collectionid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -59,8 +57,1197 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CommerceAdminCatalog() : Unit {
-        val localVarResponse = cloudGetV1CommerceAdminCatalogWithHttpInfo()
+    fun deleteV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/collection/{collectionid}
+     * Delete a collection, keeping a recoverable copy
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteCollection.
+     * @param collectionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceCollectionByCollectionid
+     *
+     * @param collectionid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/disclosure/{disclosureid}
+     * Delete a disclosure, keeping a recoverable copy
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/disclosure/{disclosureid}
+     * Delete a disclosure, keeping a recoverable copy
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceDisclosureByDisclosureid
+     *
+     * @param disclosureid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/discount/{discountid}
+     * Delete a discount, keeping a recoverable copy
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/discount/{discountid}
+     * Delete a discount, keeping a recoverable copy
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceDiscountByDiscountid
+     *
+     * @param discountid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/movie/{movieid}
+     * Delete a movie, keeping a recoverable copy
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/movie/{movieid}
+     * Delete a movie, keeping a recoverable copy
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceMovieByMovieid
+     *
+     * @param movieid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/note/{noteid}
+     * Delete a note, keeping a recoverable copy
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/note/{noteid}
+     * Delete a note, keeping a recoverable copy
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceNoteByNoteid
+     *
+     * @param noteid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/product/{productid}
+     * Delete a product, keeping a recoverable copy
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteProduct.
+     * @param productid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceProductByProductidWithHttpInfo(productid = productid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/product/{productid}
+     * Delete a product, keeping a recoverable copy
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteProduct.
+     * @param productid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceProductByProductidRequestConfig(productid = productid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceProductByProductid
+     *
+     * @param productid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/return/{returnid}
+     * Delete a return, keeping a recoverable copy
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The token must also carry Admin or WriteReturn.
+     * @param returnid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/return/{returnid}
+     * Delete a return, keeping a recoverable copy
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The token must also carry Admin or WriteReturn.
+     * @param returnid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceReturnByReturnid
+     *
+     * @param returnid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/saleschannel/{saleschannelid}
+     * Delete a sales channel, keeping a recoverable copy
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/saleschannel/{saleschannelid}
+     * Delete a sales channel, keeping a recoverable copy
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceSaleschannelBySaleschannelid
+     *
+     * @param saleschannelid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/stocklocation/{stocklocationid}
+     * Delete a stock location, keeping a recoverable copy
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/stocklocation/{stocklocationid}
+     * Delete a stock location, keeping a recoverable copy
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceStocklocationByStocklocationid
+     *
+     * @param stocklocationid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/submission/{submissionid}
+     * Delete a submission, keeping a recoverable copy
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/submission/{submissionid}
+     * Delete a submission, keeping a recoverable copy
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceSubmissionBySubmissionid
+     *
+     * @param submissionid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/subscriber/{subscriberid}
+     * Delete a subscriber, keeping a recoverable copy
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The token must also carry Admin or WriteSubscriber.
+     * @param subscriberid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/subscriber/{subscriberid}
+     * Delete a subscriber, keeping a recoverable copy
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The token must also carry Admin or WriteSubscriber.
+     * @param subscriberid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceSubscriberBySubscriberid
+     *
+     * @param subscriberid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/tokentransaction/{tokentransactionid}
+     * Delete a token transaction, keeping a recoverable copy
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/tokentransaction/{tokentransactionid}
+     * Delete a token transaction, keeping a recoverable copy
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceTokentransactionByTokentransactionid
+     *
+     * @param tokentransactionid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/transfer/{transferid}
+     * Delete a transfer, keeping a recoverable copy
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/transfer/{transferid}
+     * Delete a transfer, keeping a recoverable copy
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceTransferByTransferid
+     *
+     * @param transferid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/variant/{variantid}
+     * Delete a variant, keeping a recoverable copy
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteVariant.
+     * @param variantid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/variant/{variantid}
+     * Delete a variant, keeping a recoverable copy
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteVariant.
+     * @param variantid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceVariantByVariantid
+     *
+     * @param variantid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/wallet/{walletid}
+     * Delete a wallet, keeping a recoverable copy
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/wallet/{walletid}
+     * Delete a wallet, keeping a recoverable copy
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceWalletByWalletid
+     *
+     * @param walletid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/watchlist/{watchlistid}
+     * Delete a watchlist, keeping a recoverable copy
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/watchlist/{watchlistid}
+     * Delete a watchlist, keeping a recoverable copy
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceWatchlistByWatchlistid
+     *
+     * @param watchlistid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /v1/commerce/webhook/{webhookid}
+     * Delete a webhook, keeping a recoverable copy
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /v1/commerce/webhook/{webhookid}
+     * Delete a webhook, keeping a recoverable copy
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Removes the addressed row and answers 204 with no body. Before the live row goes it is written once more under a deleted tombstone kind, so a deletion leaves a recoverable copy rather than destroying the record outright — and a tombstone that cannot be written fails the call with 500 before anything is removed. The id is resolved inside the caller org&#39;s own namespace, so an absent or foreign id is 404. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteV1CommerceWebhookByWebhookid
+     *
+     * @param webhookid 
+     * @return RequestConfig
+     */
+    fun deleteV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/admin/catalog
+     * The catalog projection with cost and margin included
+     * Returns the brand-scoped catalog carrying the administrative economics the public projection withholds — upstream cost and margin percentage — for the margin surface the platform console administrates. The brand comes from the query and defaults to hanzo. PLATFORM admin only, enforced by the handler on top of the route&#39;s IAM gate: an ORG-level admin is refused 403 precisely so upstream cost and margin never reach a tenant.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceAdminCatalog() : Unit {
+        val localVarResponse = getV1CommerceAdminCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -79,15 +1266,15 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/commerce/admin/catalog
-     * 
-     * 
+     * The catalog projection with cost and margin included
+     * Returns the brand-scoped catalog carrying the administrative economics the public projection withholds — upstream cost and margin percentage — for the margin surface the platform console administrates. The brand comes from the query and defaults to hanzo. PLATFORM admin only, enforced by the handler on top of the route&#39;s IAM gate: an ORG-level admin is refused 403 precisely so upstream cost and margin never reach a tenant.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CommerceAdminCatalogWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CommerceAdminCatalogRequestConfig()
+    fun getV1CommerceAdminCatalogWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceAdminCatalogRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -95,11 +1282,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CommerceAdminCatalog
+     * To obtain the request config of the operation getV1CommerceAdminCatalog
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CommerceAdminCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getV1CommerceAdminCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -109,15 +1296,15 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/admin/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/commerce/catalog
-     * 
-     * 
+     * The public product catalog projection for a brand
+     * Returns the brand&#39;s published catalog — the shared source docs, the console sidebar and the pricing pages all read — with the brand taken from the query and defaulting to hanzo. It is public and cacheable, and it is the projection that deliberately omits cost and margin; those live only on the platform-admin projection.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -126,8 +1313,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CommerceCatalog() : Unit {
-        val localVarResponse = cloudGetV1CommerceCatalogWithHttpInfo()
+    fun getV1CommerceCatalog() : Unit {
+        val localVarResponse = getV1CommerceCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -146,15 +1333,15 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/commerce/catalog
-     * 
-     * 
+     * The public product catalog projection for a brand
+     * Returns the brand&#39;s published catalog — the shared source docs, the console sidebar and the pricing pages all read — with the brand taken from the query and defaulting to hanzo. It is public and cacheable, and it is the projection that deliberately omits cost and margin; those live only on the platform-admin projection.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CommerceCatalogWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CommerceCatalogRequestConfig()
+    fun getV1CommerceCatalogWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceCatalogRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -162,11 +1349,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CommerceCatalog
+     * To obtain the request config of the operation getV1CommerceCatalog
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CommerceCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getV1CommerceCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -176,15 +1363,15 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/currencies
-     * 
-     * 
+     * GET /v1/commerce/collection/
+     * List your org&#39;s collections, as a page
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the slug and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or the Collection list scope.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -193,8 +1380,145 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CommerceCurrencies() : Unit {
-        val localVarResponse = cloudGetV1CommerceCurrenciesWithHttpInfo()
+    fun getV1CommerceCollection() : Unit {
+        val localVarResponse = getV1CommerceCollectionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/collection/
+     * List your org&#39;s collections, as a page
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the slug and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or the Collection list scope.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceCollectionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceCollectionRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceCollection
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceCollectionRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/collection/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/collection/{collectionid}
+     * Fetch one collection
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or ReadCollection.
+     * @param collectionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/collection/{collectionid}
+     * Fetch one collection
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or ReadCollection.
+     * @param collectionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceCollectionByCollectionid
+     *
+     * @param collectionid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/currencies
+     * The reference currency list the price and settings pickers render
+     * Returns every reference currency as one global list, so a store settings form or a product price picker binds real rows instead of a hardcoded array. It is a default-namespace read shared by every tenant rather than per-org data, and it is public and cacheable.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceCurrencies() : Unit {
+        val localVarResponse = getV1CommerceCurrenciesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -213,15 +1537,15 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/commerce/currencies
-     * 
-     * 
+     * The reference currency list the price and settings pickers render
+     * Returns every reference currency as one global list, so a store settings form or a product price picker binds real rows instead of a hardcoded array. It is a default-namespace read shared by every tenant rather than per-org data, and it is public and cacheable.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CommerceCurrenciesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CommerceCurrenciesRequestConfig()
+    fun getV1CommerceCurrenciesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceCurrenciesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -229,11 +1553,11 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CommerceCurrencies
+     * To obtain the request config of the operation getV1CommerceCurrencies
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CommerceCurrenciesRequestConfig() : RequestConfig<Unit> {
+    fun getV1CommerceCurrenciesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -243,16 +1567,15 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/commerce/currencies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/deposits/{id}/status
-     * 
-     * 
-     * @param id 
+     * GET /v1/commerce/disclosure/
+     * List your org&#39;s disclosures, as a page
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -261,8 +1584,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CommerceDepositsByIdStatus(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1CommerceDepositsByIdStatusWithHttpInfo(id = id)
+    fun getV1CommerceDisclosure() : Unit {
+        val localVarResponse = getV1CommerceDisclosureWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -280,17 +1603,16 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * GET /v1/commerce/deposits/{id}/status
-     * 
-     * 
-     * @param id 
+     * GET /v1/commerce/disclosure/
+     * List your org&#39;s disclosures, as a page
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CommerceDepositsByIdStatusWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CommerceDepositsByIdStatusRequestConfig(id = id)
+    fun getV1CommerceDisclosureWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceDisclosureRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -298,30 +1620,30 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CommerceDepositsByIdStatus
+     * To obtain the request config of the operation getV1CommerceDisclosure
      *
-     * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1CommerceDepositsByIdStatusRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CommerceDisclosureRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/commerce/deposits/{id}/status".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            path = "/v1/commerce/disclosure/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/tenant
-     * 
-     * 
+     * GET /v1/commerce/disclosure/{disclosureid}
+     * Fetch one disclosure
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -330,8 +1652,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CommerceTenant() : Unit {
-        val localVarResponse = cloudGetV1CommerceTenantWithHttpInfo()
+    fun getV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -349,16 +1671,17 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * GET /v1/commerce/tenant
-     * 
-     * 
+     * GET /v1/commerce/disclosure/{disclosureid}
+     * Fetch one disclosure
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CommerceTenantWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1CommerceTenantRequestConfig()
+    fun getV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -366,43 +1689,43 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CommerceTenant
+     * To obtain the request config of the operation getV1CommerceDisclosureByDisclosureid
      *
+     * @param disclosureid 
      * @return RequestConfig
      */
-    fun cloudGetV1CommerceTenantRequestConfig() : RequestConfig<Unit> {
+    fun getV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/commerce/tenant",
+            path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/topup/rails
-     * TopupRails lists the accepted (chain, token, treasury) triples, so a browser can render \&quot;send USDC here\&quot; without the addresses being baked into its bundle.
-     * TopupRails lists the accepted (chain, token, treasury) triples, so a browser can render \&quot;send USDC here\&quot; without the addresses being baked into its bundle.  This exists because the console previously gated its top-up UI on NEXT_PUBLIC_HANZO_HUSD_ADDRESS/_TREASURY — build-time constants. Enabling a rail therefore meant rebuilding and redeploying the frontend, and with them unset the UI reported \&quot;not available yet\&quot; no matter what the server could actually accept. Serving the set at runtime keeps ONE source of truth (the server&#39;s config) and lets a rail be switched on without shipping a bundle.  Everything here is public on-chain data; no secret is exposed, and the set is empty on a deployment that accepts no crypto rail.
-     * @return CloudRailList
+     * GET /v1/commerce/discount/
+     * List your org&#39;s discounts, as a page
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CommerceTopupRails() : CloudRailList {
-        val localVarResponse = cloudGetV1CommerceTopupRailsWithHttpInfo()
+    fun getV1CommerceDiscount() : Unit {
+        val localVarResponse = getV1CommerceDiscountWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRailList
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -417,48 +1740,47 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * GET /v1/commerce/topup/rails
-     * TopupRails lists the accepted (chain, token, treasury) triples, so a browser can render \&quot;send USDC here\&quot; without the addresses being baked into its bundle.
-     * TopupRails lists the accepted (chain, token, treasury) triples, so a browser can render \&quot;send USDC here\&quot; without the addresses being baked into its bundle.  This exists because the console previously gated its top-up UI on NEXT_PUBLIC_HANZO_HUSD_ADDRESS/_TREASURY — build-time constants. Enabling a rail therefore meant rebuilding and redeploying the frontend, and with them unset the UI reported \&quot;not available yet\&quot; no matter what the server could actually accept. Serving the set at runtime keeps ONE source of truth (the server&#39;s config) and lets a rail be switched on without shipping a bundle.  Everything here is public on-chain data; no secret is exposed, and the set is empty on a deployment that accepts no crypto rail.
-     * @return ApiResponse<CloudRailList?>
+     * GET /v1/commerce/discount/
+     * List your org&#39;s discounts, as a page
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CommerceTopupRailsWithHttpInfo() : ApiResponse<CloudRailList?> {
-        val localVariableConfig = cloudGetV1CommerceTopupRailsRequestConfig()
+    fun getV1CommerceDiscountWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceDiscountRequestConfig()
 
-        return request<Unit, CloudRailList>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CommerceTopupRails
+     * To obtain the request config of the operation getV1CommerceDiscount
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CommerceTopupRailsRequestConfig() : RequestConfig<Unit> {
+    fun getV1CommerceDiscountRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/commerce/topup/rails",
+            path = "/v1/commerce/discount/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/commerce/deposits
-     * 
-     * 
+     * GET /v1/commerce/discount/{discountid}
+     * Fetch one discount
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -467,8 +1789,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CommerceDeposits() : Unit {
-        val localVarResponse = cloudPostV1CommerceDepositsWithHttpInfo()
+    fun getV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -486,16 +1808,17 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/commerce/deposits
-     * 
-     * 
+     * GET /v1/commerce/discount/{discountid}
+     * Fetch one discount
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CommerceDepositsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CommerceDepositsRequestConfig()
+    fun getV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -503,30 +1826,30 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CommerceDeposits
+     * To obtain the request config of the operation getV1CommerceDiscountByDiscountid
      *
+     * @param discountid 
      * @return RequestConfig
      */
-    fun cloudPostV1CommerceDepositsRequestConfig() : RequestConfig<Unit> {
+    fun getV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/commerce/deposits",
+            method = RequestMethod.GET,
+            path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/commerce/deposits/{id}/confirm
-     * 
-     * 
-     * @param id 
+     * GET /v1/commerce/movie/
+     * List your org&#39;s movies, as a page
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the slug and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -535,8 +1858,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CommerceDepositsByIdConfirm(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1CommerceDepositsByIdConfirmWithHttpInfo(id = id)
+    fun getV1CommerceMovie() : Unit {
+        val localVarResponse = getV1CommerceMovieWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -554,17 +1877,16 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/commerce/deposits/{id}/confirm
-     * 
-     * 
-     * @param id 
+     * GET /v1/commerce/movie/
+     * List your org&#39;s movies, as a page
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the slug and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CommerceDepositsByIdConfirmWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CommerceDepositsByIdConfirmRequestConfig(id = id)
+    fun getV1CommerceMovieWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceMovieRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -572,105 +1894,30 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CommerceDepositsByIdConfirm
+     * To obtain the request config of the operation getV1CommerceMovie
      *
-     * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1CommerceDepositsByIdConfirmRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CommerceMovieRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/commerce/deposits/{id}/confirm".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            method = RequestMethod.GET,
+            path = "/v1/commerce/movie/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/commerce/topup/wallet
-     * WalletTopup credits the caller&#39;s org for a stablecoin transfer they already sent to the treasury.
-     * WalletTopup credits the caller&#39;s org for a stablecoin transfer they already sent to the treasury. It reads the receipt from that rail&#39;s chain, confirms a mined, successful ERC-20 Transfer to the rail&#39;s treasury, derives USD cents from the on-chain value using the token&#39;s own decimals, records the credit, and returns the amount plus the new balance.  The credited amount is the ON-CHAIN value, never a number the caller sends, and the credit lands on the caller&#39;s own validated org — there is no way to name a third-party subject. Nothing is credited that the chain did not confirm: a missing, failed or non-matching transaction is refused, and a deployment with no payment rail enabled says so rather than inventing a credit.
-     * @param cloudWalletTopupReq 
-     * @return CloudWalletTopupResp
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CommerceTopupWallet(cloudWalletTopupReq: CloudWalletTopupReq) : CloudWalletTopupResp {
-        val localVarResponse = cloudPostV1CommerceTopupWalletWithHttpInfo(cloudWalletTopupReq = cloudWalletTopupReq)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWalletTopupResp
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/commerce/topup/wallet
-     * WalletTopup credits the caller&#39;s org for a stablecoin transfer they already sent to the treasury.
-     * WalletTopup credits the caller&#39;s org for a stablecoin transfer they already sent to the treasury. It reads the receipt from that rail&#39;s chain, confirms a mined, successful ERC-20 Transfer to the rail&#39;s treasury, derives USD cents from the on-chain value using the token&#39;s own decimals, records the credit, and returns the amount plus the new balance.  The credited amount is the ON-CHAIN value, never a number the caller sends, and the credit lands on the caller&#39;s own validated org — there is no way to name a third-party subject. Nothing is credited that the chain did not confirm: a missing, failed or non-matching transaction is refused, and a deployment with no payment rail enabled says so rather than inventing a credit.
-     * @param cloudWalletTopupReq 
-     * @return ApiResponse<CloudWalletTopupResp?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CommerceTopupWalletWithHttpInfo(cloudWalletTopupReq: CloudWalletTopupReq) : ApiResponse<CloudWalletTopupResp?> {
-        val localVariableConfig = cloudPostV1CommerceTopupWalletRequestConfig(cloudWalletTopupReq = cloudWalletTopupReq)
-
-        return request<CloudWalletTopupReq, CloudWalletTopupResp>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1CommerceTopupWallet
-     *
-     * @param cloudWalletTopupReq 
-     * @return RequestConfig
-     */
-    fun cloudPostV1CommerceTopupWalletRequestConfig(cloudWalletTopupReq: CloudWalletTopupReq) : RequestConfig<CloudWalletTopupReq> {
-        val localVariableBody = cloudWalletTopupReq
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/commerce/topup/wallet",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/commerce/webhooks/{provider}
-     * 
-     * 
-     * @param provider 
+     * GET /v1/commerce/movie/{movieid}
+     * Fetch one movie
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -679,8 +1926,8 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CommerceWebhooksByProvider(provider: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1CommerceWebhooksByProviderWithHttpInfo(provider = provider)
+    fun getV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -698,17 +1945,17 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/commerce/webhooks/{provider}
-     * 
-     * 
-     * @param provider 
+     * GET /v1/commerce/movie/{movieid}
+     * Fetch one movie
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CommerceWebhooksByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CommerceWebhooksByProviderRequestConfig(provider = provider)
+    fun getV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -716,22 +1963,6579 @@ class CommerceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CommerceWebhooksByProvider
+     * To obtain the request config of the operation getV1CommerceMovieByMovieid
      *
-     * @param provider 
+     * @param movieid 
      * @return RequestConfig
      */
-    fun cloudPostV1CommerceWebhooksByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/note/
+     * List your org&#39;s notes, as a page
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceNote() : Unit {
+        val localVarResponse = getV1CommerceNoteWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/note/
+     * List your org&#39;s notes, as a page
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceNoteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceNoteRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceNote
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceNoteRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/note/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/note/{noteid}
+     * Fetch one note
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/note/{noteid}
+     * Fetch one note
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceNoteByNoteid
+     *
+     * @param noteid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/org
+     * The public org configuration a checkout page boots from
+     * Answers the branding, identity issuer and client id, identity-verification config, enabled payment providers, return-URL allowlist and public payment application config for the org the request HOST resolves to. It is genuinely public and unauthenticated — a checkout page calls it before anyone has signed in — and it carries the same public payment config the authenticated config read does, so the card iframe can never initialize against a different application than the one that will be charged. Only ENABLED providers are listed and no credential path is ever projected. An unresolvable host answers a constant 404 that does not echo the host, so the endpoint cannot be used to enumerate orgs; a successful answer is cacheable for a minute.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceOrg() : Unit {
+        val localVarResponse = getV1CommerceOrgWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/org
+     * The public org configuration a checkout page boots from
+     * Answers the branding, identity issuer and client id, identity-verification config, enabled payment providers, return-URL allowlist and public payment application config for the org the request HOST resolves to. It is genuinely public and unauthenticated — a checkout page calls it before anyone has signed in — and it carries the same public payment config the authenticated config read does, so the card iframe can never initialize against a different application than the one that will be charged. Only ENABLED providers are listed and no credential path is ever projected. An unresolvable host answers a constant 404 that does not echo the host, so the endpoint cannot be used to enumerate orgs; a successful answer is cacheable for a minute.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceOrgWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceOrgRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceOrg
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceOrgRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/org",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/product/
+     * List your org&#39;s products, as a page
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the slug and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or the Product list scope.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceProduct() : Unit {
+        val localVarResponse = getV1CommerceProductWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/product/
+     * List your org&#39;s products, as a page
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the slug and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or the Product list scope.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceProductWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceProductRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceProduct
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceProductRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/product/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/product/{productid}
+     * Fetch one product
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or ReadProduct.
+     * @param productid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceProductByProductidWithHttpInfo(productid = productid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/product/{productid}
+     * Fetch one product
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or ReadProduct.
+     * @param productid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceProductByProductidRequestConfig(productid = productid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceProductByProductid
+     *
+     * @param productid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/return/
+     * List your org&#39;s returns, as a page
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The token must also carry Admin or the Return list scope.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceReturn() : Unit {
+        val localVarResponse = getV1CommerceReturnWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/return/
+     * List your org&#39;s returns, as a page
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The token must also carry Admin or the Return list scope.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceReturnWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceReturnRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceReturn
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceReturnRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/return/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/return/{returnid}
+     * Fetch one return
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The token must also carry Admin or ReadReturn.
+     * @param returnid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/return/{returnid}
+     * Fetch one return
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The token must also carry Admin or ReadReturn.
+     * @param returnid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceReturnByReturnid
+     *
+     * @param returnid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/saleschannel/
+     * List your org&#39;s sales channels, as a page
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceSaleschannel() : Unit {
+        val localVarResponse = getV1CommerceSaleschannelWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/saleschannel/
+     * List your org&#39;s sales channels, as a page
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceSaleschannelWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceSaleschannelRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceSaleschannel
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceSaleschannelRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/saleschannel/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/saleschannel/{saleschannelid}
+     * Fetch one sales channel
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/saleschannel/{saleschannelid}
+     * Fetch one sales channel
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceSaleschannelBySaleschannelid
+     *
+     * @param saleschannelid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/stocklocation/
+     * List your org&#39;s stock locations, as a page
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceStocklocation() : Unit {
+        val localVarResponse = getV1CommerceStocklocationWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/stocklocation/
+     * List your org&#39;s stock locations, as a page
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceStocklocationWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceStocklocationRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceStocklocation
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceStocklocationRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/stocklocation/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/stocklocation/{stocklocationid}
+     * Fetch one stock location
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/stocklocation/{stocklocationid}
+     * Fetch one stock location
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceStocklocationByStocklocationid
+     *
+     * @param stocklocationid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/submission/
+     * List your org&#39;s submissions, as a page
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceSubmission() : Unit {
+        val localVarResponse = getV1CommerceSubmissionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/submission/
+     * List your org&#39;s submissions, as a page
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceSubmissionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceSubmissionRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceSubmission
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceSubmissionRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/submission/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/submission/{submissionid}
+     * Fetch one submission
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/submission/{submissionid}
+     * Fetch one submission
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceSubmissionBySubmissionid
+     *
+     * @param submissionid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/subscriber/
+     * List your org&#39;s subscribers, as a page
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The token must also carry Admin or the Subscriber list scope.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceSubscriber() : Unit {
+        val localVarResponse = getV1CommerceSubscriberWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/subscriber/
+     * List your org&#39;s subscribers, as a page
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The token must also carry Admin or the Subscriber list scope.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceSubscriberWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceSubscriberRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceSubscriber
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceSubscriberRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/subscriber/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/subscriber/{subscriberid}
+     * Fetch one subscriber
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The token must also carry Admin or ReadSubscriber.
+     * @param subscriberid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/subscriber/{subscriberid}
+     * Fetch one subscriber
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The token must also carry Admin or ReadSubscriber.
+     * @param subscriberid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceSubscriberBySubscriberid
+     *
+     * @param subscriberid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/tokentransaction/
+     * List your org&#39;s token transactions, as a page
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceTokentransaction() : Unit {
+        val localVarResponse = getV1CommerceTokentransactionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/tokentransaction/
+     * List your org&#39;s token transactions, as a page
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceTokentransactionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceTokentransactionRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceTokentransaction
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceTokentransactionRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/tokentransaction/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/tokentransaction/{tokentransactionid}
+     * Fetch one token transaction
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/tokentransaction/{tokentransactionid}
+     * Fetch one token transaction
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceTokentransactionByTokentransactionid
+     *
+     * @param tokentransactionid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/transfer/
+     * List your org&#39;s transfers, as a page
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceTransfer() : Unit {
+        val localVarResponse = getV1CommerceTransferWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/transfer/
+     * List your org&#39;s transfers, as a page
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceTransferWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceTransferRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceTransfer
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceTransferRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/transfer/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/transfer/{transferid}
+     * Fetch one transfer
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/transfer/{transferid}
+     * Fetch one transfer
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceTransferByTransferid
+     *
+     * @param transferid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/variant/
+     * List your org&#39;s variants, as a page
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the SKU and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or the Variant list scope.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceVariant() : Unit {
+        val localVarResponse = getV1CommerceVariantWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/variant/
+     * List your org&#39;s variants, as a page
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the SKU and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or the Variant list scope.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceVariantWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceVariantRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceVariant
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceVariantRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/variant/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/variant/{variantid}
+     * Fetch one variant
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or ReadVariant.
+     * @param variantid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/variant/{variantid}
+     * Fetch one variant
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or ReadVariant.
+     * @param variantid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceVariantByVariantid
+     *
+     * @param variantid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/wallet/
+     * List your org&#39;s wallets, as a page
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceWallet() : Unit {
+        val localVarResponse = getV1CommerceWalletWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/wallet/
+     * List your org&#39;s wallets, as a page
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceWalletWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceWalletRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceWallet
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceWalletRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/wallet/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/wallet/{walletid}
+     * Fetch one wallet
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/wallet/{walletid}
+     * Fetch one wallet
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceWalletByWalletid
+     *
+     * @param walletid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/watchlist/
+     * List your org&#39;s watchlists, as a page
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceWatchlist() : Unit {
+        val localVarResponse = getV1CommerceWatchlistWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/watchlist/
+     * List your org&#39;s watchlists, as a page
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceWatchlistWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceWatchlistRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceWatchlist
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceWatchlistRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/watchlist/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/watchlist/{watchlistid}
+     * Fetch one watchlist
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/watchlist/{watchlistid}
+     * Fetch one watchlist
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceWatchlistByWatchlistid
+     *
+     * @param watchlistid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/webhook/
+     * List your org&#39;s webhooks, as a page
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceWebhook() : Unit {
+        val localVarResponse = getV1CommerceWebhookWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/webhook/
+     * List your org&#39;s webhooks, as a page
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Answers a pagination envelope — the page and display echoed back, the rows under models, a total count and a facets array — read from the caller org&#39;s own namespaced store, so one tenant can never list another&#39;s. Sorting defaults to the last-updated time and is overridable with sort. display is the page size and page applies only alongside it; either one that is not a positive integer is refused with 500 rather than silently ignored, and the limit query overrides the reported COUNT only, never the rows returned. No search backend is wired, so the datastore is the one and only list path and facets is always empty. A request resolving no org namespace is served an EMPTY page rather than an unscoped scan: the namespace IS the tenant filter, so without one there is nothing safe to return. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceWebhookRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceWebhook
+     *
+     * @return RequestConfig
+     */
+    fun getV1CommerceWebhookRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/webhook/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/commerce/webhook/{webhookid}
+     * Fetch one webhook
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = getV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/commerce/webhook/{webhookid}
+     * Fetch one webhook
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Reads the addressed row from the caller org&#39;s own namespaced store. An id that is not there is 404 — and another tenant&#39;s id is not there by construction, so it reads exactly like a typo instead of confirming the row exists somewhere else. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CommerceWebhookByWebhookid
+     *
+     * @param webhookid 
+     * @return RequestConfig
+     */
+    fun getV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/collection/{collectionid}
+     * Change part of a collection
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadCollection and WriteCollection together.
+     * @param collectionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/collection/{collectionid}
+     * Change part of a collection
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadCollection and WriteCollection together.
+     * @param collectionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceCollectionByCollectionid
+     *
+     * @param collectionid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/disclosure/{disclosureid}
+     * Change part of a disclosure
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/disclosure/{disclosureid}
+     * Change part of a disclosure
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceDisclosureByDisclosureid
+     *
+     * @param disclosureid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/discount/{discountid}
+     * Change part of a discount
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/discount/{discountid}
+     * Change part of a discount
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceDiscountByDiscountid
+     *
+     * @param discountid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/movie/{movieid}
+     * Change part of a movie
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/movie/{movieid}
+     * Change part of a movie
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceMovieByMovieid
+     *
+     * @param movieid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/note/{noteid}
+     * Change part of a note
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/note/{noteid}
+     * Change part of a note
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceNoteByNoteid
+     *
+     * @param noteid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/product/{productid}
+     * Change part of a product
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadProduct and WriteProduct together.
+     * @param productid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceProductByProductidWithHttpInfo(productid = productid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/product/{productid}
+     * Change part of a product
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadProduct and WriteProduct together.
+     * @param productid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceProductByProductidRequestConfig(productid = productid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceProductByProductid
+     *
+     * @param productid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/return/{returnid}
+     * Change part of a return
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The token must also carry Admin, or ReadReturn and WriteReturn together.
+     * @param returnid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/return/{returnid}
+     * Change part of a return
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The token must also carry Admin, or ReadReturn and WriteReturn together.
+     * @param returnid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceReturnByReturnid
+     *
+     * @param returnid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/saleschannel/{saleschannelid}
+     * Change part of a sales channel
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/saleschannel/{saleschannelid}
+     * Change part of a sales channel
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceSaleschannelBySaleschannelid
+     *
+     * @param saleschannelid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/stocklocation/{stocklocationid}
+     * Change part of a stock location
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/stocklocation/{stocklocationid}
+     * Change part of a stock location
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceStocklocationByStocklocationid
+     *
+     * @param stocklocationid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/submission/{submissionid}
+     * Change part of a submission
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/submission/{submissionid}
+     * Change part of a submission
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceSubmissionBySubmissionid
+     *
+     * @param submissionid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/subscriber/{subscriberid}
+     * Change part of a subscriber
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The token must also carry Admin, or ReadSubscriber and WriteSubscriber together.
+     * @param subscriberid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/subscriber/{subscriberid}
+     * Change part of a subscriber
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The token must also carry Admin, or ReadSubscriber and WriteSubscriber together.
+     * @param subscriberid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceSubscriberBySubscriberid
+     *
+     * @param subscriberid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/tokentransaction/{tokentransactionid}
+     * Change part of a token transaction
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/tokentransaction/{tokentransactionid}
+     * Change part of a token transaction
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceTokentransactionByTokentransactionid
+     *
+     * @param tokentransactionid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/transfer/{transferid}
+     * Change part of a transfer
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/transfer/{transferid}
+     * Change part of a transfer
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceTransferByTransferid
+     *
+     * @param transferid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/variant/{variantid}
+     * Change part of a variant
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadVariant and WriteVariant together.
+     * @param variantid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/variant/{variantid}
+     * Change part of a variant
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadVariant and WriteVariant together.
+     * @param variantid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceVariantByVariantid
+     *
+     * @param variantid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/wallet/{walletid}
+     * Change part of a wallet
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/wallet/{walletid}
+     * Change part of a wallet
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceWalletByWalletid
+     *
+     * @param walletid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/watchlist/{watchlistid}
+     * Change part of a watchlist
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/watchlist/{watchlistid}
+     * Change part of a watchlist
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceWatchlistByWatchlistid
+     *
+     * @param watchlistid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PATCH /v1/commerce/webhook/{webhookid}
+     * Change part of a webhook
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun patchV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = patchV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PATCH /v1/commerce/webhook/{webhookid}
+     * Change part of a webhook
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Loads the stored row and decodes the body OVER it, so only the fields the body names change and everything else keeps its stored value — the difference from the full replace, which clears what it is not told. Answers the merged row. An id absent from the caller org&#39;s namespace is 404 and a body that fails to decode is 400. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun patchV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation patchV1CommerceWebhookByWebhookid
+     *
+     * @param webhookid 
+     * @return RequestConfig
+     */
+    fun patchV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PATCH,
+            path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/collection/
+     * Create a collection
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteCollection.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceCollection() : Unit {
+        val localVarResponse = postV1CommerceCollectionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/collection/
+     * Create a collection
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteCollection.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceCollectionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceCollectionRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceCollection
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceCollectionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/commerce/webhooks/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
+            path = "/v1/commerce/collection/",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/collection/{collectionid}
+     * Method-override tunnel for a collection — for clients that cannot send PUT, PATCH or DELETE
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param collectionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/collection/{collectionid}
+     * Method-override tunnel for a collection — for clients that cannot send PUT, PATCH or DELETE
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param collectionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceCollectionByCollectionid
+     *
+     * @param collectionid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/disclosure/
+     * Create a disclosure
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceDisclosure() : Unit {
+        val localVarResponse = postV1CommerceDisclosureWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/disclosure/
+     * Create a disclosure
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceDisclosureWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceDisclosureRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceDisclosure
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceDisclosureRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/disclosure/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/disclosure/{disclosureid}
+     * Method-override tunnel for a disclosure — for clients that cannot send PUT, PATCH or DELETE
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param disclosureid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/disclosure/{disclosureid}
+     * Method-override tunnel for a disclosure — for clients that cannot send PUT, PATCH or DELETE
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param disclosureid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceDisclosureByDisclosureid
+     *
+     * @param disclosureid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/discount/
+     * Create a discount
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceDiscount() : Unit {
+        val localVarResponse = postV1CommerceDiscountWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/discount/
+     * Create a discount
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceDiscountWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceDiscountRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceDiscount
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceDiscountRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/discount/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/discount/{discountid}
+     * Method-override tunnel for a discount — for clients that cannot send PUT, PATCH or DELETE
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param discountid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/discount/{discountid}
+     * Method-override tunnel for a discount — for clients that cannot send PUT, PATCH or DELETE
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param discountid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceDiscountByDiscountid
+     *
+     * @param discountid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/movie/
+     * Create a movie
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceMovie() : Unit {
+        val localVarResponse = postV1CommerceMovieWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/movie/
+     * Create a movie
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceMovieWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceMovieRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceMovie
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceMovieRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/movie/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/movie/{movieid}
+     * Method-override tunnel for a movie — for clients that cannot send PUT, PATCH or DELETE
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param movieid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/movie/{movieid}
+     * Method-override tunnel for a movie — for clients that cannot send PUT, PATCH or DELETE
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param movieid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceMovieByMovieid
+     *
+     * @param movieid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/note/
+     * Create a note
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceNote() : Unit {
+        val localVarResponse = postV1CommerceNoteWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/note/
+     * Create a note
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceNoteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceNoteRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceNote
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceNoteRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/note/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/note/{noteid}
+     * Method-override tunnel for a note — for clients that cannot send PUT, PATCH or DELETE
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param noteid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/note/{noteid}
+     * Method-override tunnel for a note — for clients that cannot send PUT, PATCH or DELETE
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param noteid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceNoteByNoteid
+     *
+     * @param noteid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/product/
+     * Create a product
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteProduct.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceProduct() : Unit {
+        val localVarResponse = postV1CommerceProductWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/product/
+     * Create a product
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteProduct.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceProductWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceProductRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceProduct
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceProductRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/product/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/product/{productid}
+     * Method-override tunnel for a product — for clients that cannot send PUT, PATCH or DELETE
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param productid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceProductByProductidWithHttpInfo(productid = productid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/product/{productid}
+     * Method-override tunnel for a product — for clients that cannot send PUT, PATCH or DELETE
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param productid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceProductByProductidRequestConfig(productid = productid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceProductByProductid
+     *
+     * @param productid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/return/
+     * Create a return
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The token must also carry Admin or WriteReturn.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceReturn() : Unit {
+        val localVarResponse = postV1CommerceReturnWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/return/
+     * Create a return
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The token must also carry Admin or WriteReturn.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceReturnWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceReturnRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceReturn
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceReturnRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/return/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/return/{returnid}
+     * Method-override tunnel for a return — for clients that cannot send PUT, PATCH or DELETE
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param returnid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/return/{returnid}
+     * Method-override tunnel for a return — for clients that cannot send PUT, PATCH or DELETE
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param returnid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceReturnByReturnid
+     *
+     * @param returnid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/saleschannel/
+     * Create a sales channel
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceSaleschannel() : Unit {
+        val localVarResponse = postV1CommerceSaleschannelWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/saleschannel/
+     * Create a sales channel
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceSaleschannelWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceSaleschannelRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceSaleschannel
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceSaleschannelRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/saleschannel/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/saleschannel/{saleschannelid}
+     * Method-override tunnel for a sales channel — for clients that cannot send PUT, PATCH or DELETE
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param saleschannelid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/saleschannel/{saleschannelid}
+     * Method-override tunnel for a sales channel — for clients that cannot send PUT, PATCH or DELETE
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param saleschannelid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceSaleschannelBySaleschannelid
+     *
+     * @param saleschannelid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/stocklocation/
+     * Create a stock location
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceStocklocation() : Unit {
+        val localVarResponse = postV1CommerceStocklocationWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/stocklocation/
+     * Create a stock location
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceStocklocationWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceStocklocationRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceStocklocation
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceStocklocationRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/stocklocation/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/stocklocation/{stocklocationid}
+     * Method-override tunnel for a stock location — for clients that cannot send PUT, PATCH or DELETE
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param stocklocationid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/stocklocation/{stocklocationid}
+     * Method-override tunnel for a stock location — for clients that cannot send PUT, PATCH or DELETE
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param stocklocationid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceStocklocationByStocklocationid
+     *
+     * @param stocklocationid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/submission/
+     * Create a submission
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceSubmission() : Unit {
+        val localVarResponse = postV1CommerceSubmissionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/submission/
+     * Create a submission
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceSubmissionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceSubmissionRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceSubmission
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceSubmissionRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/submission/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/submission/{submissionid}
+     * Method-override tunnel for a submission — for clients that cannot send PUT, PATCH or DELETE
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param submissionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/submission/{submissionid}
+     * Method-override tunnel for a submission — for clients that cannot send PUT, PATCH or DELETE
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param submissionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceSubmissionBySubmissionid
+     *
+     * @param submissionid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/subscriber/
+     * Create a subscriber
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The token must also carry Admin or WriteSubscriber.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceSubscriber() : Unit {
+        val localVarResponse = postV1CommerceSubscriberWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/subscriber/
+     * Create a subscriber
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The token must also carry Admin or WriteSubscriber.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceSubscriberWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceSubscriberRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceSubscriber
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceSubscriberRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/subscriber/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/subscriber/{subscriberid}
+     * Method-override tunnel for a subscriber — for clients that cannot send PUT, PATCH or DELETE
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param subscriberid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/subscriber/{subscriberid}
+     * Method-override tunnel for a subscriber — for clients that cannot send PUT, PATCH or DELETE
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param subscriberid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceSubscriberBySubscriberid
+     *
+     * @param subscriberid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/tokentransaction/
+     * Create a token transaction
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceTokentransaction() : Unit {
+        val localVarResponse = postV1CommerceTokentransactionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/tokentransaction/
+     * Create a token transaction
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceTokentransactionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceTokentransactionRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceTokentransaction
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceTokentransactionRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/tokentransaction/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/tokentransaction/{tokentransactionid}
+     * Method-override tunnel for a token transaction — for clients that cannot send PUT, PATCH or DELETE
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param tokentransactionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/tokentransaction/{tokentransactionid}
+     * Method-override tunnel for a token transaction — for clients that cannot send PUT, PATCH or DELETE
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param tokentransactionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceTokentransactionByTokentransactionid
+     *
+     * @param tokentransactionid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/transfer/
+     * Create a transfer
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceTransfer() : Unit {
+        val localVarResponse = postV1CommerceTransferWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/transfer/
+     * Create a transfer
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceTransferWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceTransferRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceTransfer
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceTransferRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/transfer/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/transfer/{transferid}
+     * Method-override tunnel for a transfer — for clients that cannot send PUT, PATCH or DELETE
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. The token must carry the ADMIN permission; an ordinary access token is refused.
+     * @param transferid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/transfer/{transferid}
+     * Method-override tunnel for a transfer — for clients that cannot send PUT, PATCH or DELETE
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. The token must carry the ADMIN permission; an ordinary access token is refused.
+     * @param transferid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceTransferByTransferid
+     *
+     * @param transferid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/variant/
+     * Create a variant
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteVariant.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceVariant() : Unit {
+        val localVarResponse = postV1CommerceVariantWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/variant/
+     * Create a variant
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin or WriteVariant.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceVariantWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceVariantRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceVariant
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceVariantRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/variant/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/variant/{variantid}
+     * Method-override tunnel for a variant — for clients that cannot send PUT, PATCH or DELETE
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param variantid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/variant/{variantid}
+     * Method-override tunnel for a variant — for clients that cannot send PUT, PATCH or DELETE
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through.
+     * @param variantid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceVariantByVariantid
+     *
+     * @param variantid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/wallet/
+     * Create a wallet
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceWallet() : Unit {
+        val localVarResponse = postV1CommerceWalletWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/wallet/
+     * Create a wallet
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceWalletWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceWalletRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceWallet
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceWalletRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/wallet/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/wallet/{walletid}
+     * Method-override tunnel for a wallet — for clients that cannot send PUT, PATCH or DELETE
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. The token must carry the ADMIN permission; an ordinary access token is refused.
+     * @param walletid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/wallet/{walletid}
+     * Method-override tunnel for a wallet — for clients that cannot send PUT, PATCH or DELETE
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. The token must carry the ADMIN permission; an ordinary access token is refused.
+     * @param walletid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceWalletByWalletid
+     *
+     * @param walletid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/watchlist/
+     * Create a watchlist
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceWatchlist() : Unit {
+        val localVarResponse = postV1CommerceWatchlistWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/watchlist/
+     * Create a watchlist
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceWatchlistWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceWatchlistRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceWatchlist
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceWatchlistRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/watchlist/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/watchlist/{watchlistid}
+     * Method-override tunnel for a watchlist — for clients that cannot send PUT, PATCH or DELETE
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param watchlistid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/watchlist/{watchlistid}
+     * Method-override tunnel for a watchlist — for clients that cannot send PUT, PATCH or DELETE
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. Any valid access token reaches it.
+     * @param watchlistid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceWatchlistByWatchlistid
+     *
+     * @param watchlistid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/webhook/
+     * Create a webhook
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceWebhook() : Unit {
+        val localVarResponse = postV1CommerceWebhookWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/webhook/
+     * Create a webhook
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Decodes the body into a new row in the caller org&#39;s own namespaced store — isolated to that tenant from its first write — and answers the stored row at 201 with a Location header naming its id. The id is assigned by the store, not taken from the body. A body that fails to decode is 400 and a store that refuses the write is 500. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceWebhookWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceWebhookRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceWebhook
+     *
+     * @return RequestConfig
+     */
+    fun postV1CommerceWebhookRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/webhook/",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/commerce/webhook/{webhookid}
+     * Method-override tunnel for a webhook — for clients that cannot send PUT, PATCH or DELETE
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. The token must carry the ADMIN permission; an ordinary access token is refused.
+     * @param webhookid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = postV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/commerce/webhook/{webhookid}
+     * Method-override tunnel for a webhook — for clients that cannot send PUT, PATCH or DELETE
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. Re-dispatches the request into the handler the intended verb would have reached, taking that verb from a _method form value or query parameter and then from the X-HTTP-Method-Override header. PUT replaces the row, PATCH changes part of it, DELETE removes it, and anything else is 405. The trap is the DEFAULT: naming no override at all leaves the method POST, which this tunnel maps to the PARTIAL UPDATE — it is never a create, and creating is the collection root&#39;s job. Behaviour and authorization are the underlying operation&#39;s, since the real handler runs. The token must carry the ADMIN permission; an ordinary access token is refused.
+     * @param webhookid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CommerceWebhookByWebhookid
+     *
+     * @param webhookid 
+     * @return RequestConfig
+     */
+    fun postV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/collection/{collectionid}
+     * Replace a collection outright
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadCollection and WriteCollection together.
+     * @param collectionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceCollectionByCollectionid(collectionid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceCollectionByCollectionidWithHttpInfo(collectionid = collectionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/collection/{collectionid}
+     * Replace a collection outright
+     * A collection is a merchandising group a storefront renders — a slug and name, copy and media, flat lists of the product and variant ids it holds, published, preorder and out-of-stock flags, and an availability window. Membership lives on the collection as those id lists rather than as a join, so putting a product into a collection is a write here and not on the product. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadCollection and WriteCollection together.
+     * @param collectionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceCollectionByCollectionidWithHttpInfo(collectionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceCollectionByCollectionidRequestConfig(collectionid = collectionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceCollectionByCollectionid
+     *
+     * @param collectionid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceCollectionByCollectionidRequestConfig(collectionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/collection/{collectionid}".replace("{"+"collectionid"+"}", encodeURIComponent(collectionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/disclosure/{disclosureid}
+     * Replace a disclosure outright
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceDisclosureByDisclosureid(disclosureid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid = disclosureid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/disclosure/{disclosureid}
+     * Replace a disclosure outright
+     * A disclosure is a published-document record — a publication body, a content hash, a type and a named receiver. The hash LOOKS like a field you set and is in fact derived, but only on update: a freshly created disclosure keeps whatever hash the caller sent until the first replace or patch recomputes it, so a new row&#39;s hash attests to nothing. This kind lives in commerce&#39;s demo tree — a live writable resource in your tenant&#39;s real store that nothing else in commerce reads. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for disclosure, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param disclosureid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceDisclosureByDisclosureidWithHttpInfo(disclosureid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid = disclosureid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceDisclosureByDisclosureid
+     *
+     * @param disclosureid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceDisclosureByDisclosureidRequestConfig(disclosureid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/disclosure/{disclosureid}".replace("{"+"disclosureid"+"}", encodeURIComponent(disclosureid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/discount/{discountid}
+     * Replace a discount outright
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceDiscountByDiscountid(discountid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceDiscountByDiscountidWithHttpInfo(discountid = discountid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/discount/{discountid}
+     * Replace a discount outright
+     * A discount is a price rule: a type (flat, percent, free-shipping, free-item or bulk), a window, a scope naming the store, collection, product or variant it applies to, a target, and rules pairing a trigger — a price or quantity threshold — with an action, an amount off or a percentage. It is ENABLED BY DEFAULT, so a bare create makes a live discount rather than a draft. The rule engine caches per replica for about thirty seconds, so a discount switched off here can keep applying briefly on other replicas. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for discount, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param discountid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceDiscountByDiscountidWithHttpInfo(discountid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceDiscountByDiscountidRequestConfig(discountid = discountid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceDiscountByDiscountid
+     *
+     * @param discountid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceDiscountByDiscountidRequestConfig(discountid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/discount/{discountid}".replace("{"+"discountid"+"}", encodeURIComponent(discountid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/movie/{movieid}
+     * Replace a movie outright
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceMovieByMovieid(movieid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceMovieByMovieidWithHttpInfo(movieid = movieid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/movie/{movieid}
+     * Replace a movie outright
+     * A movie is a film catalog record — a slug plus EIDR and IMDB ids, all three required, with title and synopsis copy, artwork, screenshots, trailers, cast and crew, and available and hidden flags. It carries NO price: the money for a film lives on the product that sells it. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for movie, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param movieid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceMovieByMovieidWithHttpInfo(movieid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceMovieByMovieidRequestConfig(movieid = movieid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceMovieByMovieid
+     *
+     * @param movieid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceMovieByMovieidRequestConfig(movieid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/movie/{movieid}".replace("{"+"movieid"+"}", encodeURIComponent(movieid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/note/{noteid}
+     * Replace a note outright
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceNoteByNoteid(noteid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceNoteByNoteidWithHttpInfo(noteid = noteid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/note/{noteid}
+     * Replace a note outright
+     * A note is a timestamped free-text log line — a caller-supplied time, a source, a message and an enabled flag. That time is the caller&#39;s own field and is distinct from the row&#39;s creation stamp; the note search filters on it, so a note written without one is a zero-time note the ops log will never surface. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for note, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param noteid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceNoteByNoteidWithHttpInfo(noteid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceNoteByNoteidRequestConfig(noteid = noteid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceNoteByNoteid
+     *
+     * @param noteid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceNoteByNoteidRequestConfig(noteid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/note/{noteid}".replace("{"+"noteid"+"}", encodeURIComponent(noteid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/product/{productid}
+     * Replace a product outright
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadProduct and WriteProduct together.
+     * @param productid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceProductByProductid(productid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceProductByProductidWithHttpInfo(productid = productid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/product/{productid}
+     * Replace a product outright
+     * A product is a sellable catalog item: slug, SKU and UPC, name and copy, media, availability and preorder flags, a reservation block, and its money — currency, price, MSRP, list price and inventory cost in minor units, inventory count, taxability, and the subscription interval when it is subscribeable. Its variants and options are carried as a denormalized JSON snapshot inside the product, separate from the standalone variant rows, and nothing keeps the two in step for you. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadProduct and WriteProduct together.
+     * @param productid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceProductByProductidWithHttpInfo(productid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceProductByProductidRequestConfig(productid = productid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceProductByProductid
+     *
+     * @param productid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceProductByProductidRequestConfig(productid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/product/{productid}".replace("{"+"productid"+"}", encodeURIComponent(productid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/return/{returnid}
+     * Replace a return outright
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The token must also carry Admin, or ReadReturn and WriteReturn together.
+     * @param returnid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceReturnByReturnid(returnid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceReturnByReturnidWithHttpInfo(returnid = returnid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/return/{returnid}
+     * Replace a return outright
+     * A return is an RMA — the store, user and order it belongs to, the line items coming back, a fulfillment block carrying its own type, status and pricing, a summary, and eight lifecycle timestamps from submitted through delivered and processed. Its status is a FREE STRING with no enumeration behind it, and there is no refund amount on the return itself: the money sits inside the line items and the fulfillment pricing. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The token must also carry Admin, or ReadReturn and WriteReturn together.
+     * @param returnid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceReturnByReturnidWithHttpInfo(returnid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceReturnByReturnidRequestConfig(returnid = returnid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceReturnByReturnid
+     *
+     * @param returnid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceReturnByReturnidRequestConfig(returnid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/return/{returnid}".replace("{"+"returnid"+"}", encodeURIComponent(returnid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/saleschannel/{saleschannelid}
+     * Replace a sales channel outright
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceSaleschannelBySaleschannelid(saleschannelid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid = saleschannelid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/saleschannel/{saleschannelid}
+     * Replace a sales channel outright
+     * A sales channel is a named selling surface — a name, a description, a disabled flag and metadata. The flag is NEGATIVE, so a channel created from an empty body is enabled. Nothing on this row links products, prices or stock to the channel; here it is a label other surfaces scope themselves by. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for saleschannel, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param saleschannelid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceSaleschannelBySaleschannelidWithHttpInfo(saleschannelid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid = saleschannelid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceSaleschannelBySaleschannelid
+     *
+     * @param saleschannelid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceSaleschannelBySaleschannelidRequestConfig(saleschannelid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/saleschannel/{saleschannelid}".replace("{"+"saleschannelid"+"}", encodeURIComponent(saleschannelid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/stocklocation/{stocklocationid}
+     * Replace a stock location outright
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceStocklocationByStocklocationid(stocklocationid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid = stocklocationid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/stocklocation/{stocklocationid}
+     * Replace a stock location outright
+     * A stock location is a physical address inventory can be held at — a name, street lines, city, province, country, postal code and a phone. None of it is validated, there are no coordinates, and the row carries no enabled flag and no inventory link, so deleting it is the only way to retire one. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The per-kind permission table has no entry for stocklocation, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param stocklocationid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceStocklocationByStocklocationidWithHttpInfo(stocklocationid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid = stocklocationid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceStocklocationByStocklocationid
+     *
+     * @param stocklocationid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceStocklocationByStocklocationidRequestConfig(stocklocationid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/stocklocation/{stocklocationid}".replace("{"+"stocklocationid"+"}", encodeURIComponent(stocklocationid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/submission/{submissionid}
+     * Replace a submission outright
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceSubmissionBySubmissionid(submissionid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid = submissionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/submission/{submissionid}
+     * Replace a submission outright
+     * A submission is one filled-in form from a site visitor — an email, an optional user id, the client details the server observed (user agent, referer, geography) and the form&#39;s own fields as free metadata. It carries no form id, so the link back to the form that produced it is not stored on the row. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for submission, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param submissionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceSubmissionBySubmissionidWithHttpInfo(submissionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceSubmissionBySubmissionidRequestConfig(submissionid = submissionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceSubmissionBySubmissionid
+     *
+     * @param submissionid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceSubmissionBySubmissionidRequestConfig(submissionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/submission/{submissionid}".replace("{"+"submissionid"+"}", encodeURIComponent(submissionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/subscriber/{subscriberid}
+     * Replace a subscriber outright
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The token must also carry Admin, or ReadSubscriber and WriteSubscriber together.
+     * @param subscriberid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceSubscriberBySubscriberid(subscriberid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid = subscriberid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/subscriber/{subscriberid}
+     * Replace a subscriber outright
+     * A subscriber is a mailing-list member — name, email, the form id that captured them, unsubscribed state and date, client details, tags and metadata. Writing one FIRES A WEBHOOK: subscriber.created on create and subscriber.updated on replace or patch, emitted BEFORE the write is known to have succeeded and carrying the row as sent, so the payload holds the raw email rather than the normalized one that gets stored. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The token must also carry Admin, or ReadSubscriber and WriteSubscriber together.
+     * @param subscriberid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceSubscriberBySubscriberidWithHttpInfo(subscriberid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid = subscriberid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceSubscriberBySubscriberid
+     *
+     * @param subscriberid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceSubscriberBySubscriberidRequestConfig(subscriberid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/subscriber/{subscriberid}".replace("{"+"subscriberid"+"}", encodeURIComponent(subscriberid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/tokentransaction/{tokentransactionid}
+     * Replace a token transaction outright
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceTokentransactionByTokentransactionid(tokentransactionid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid = tokentransactionid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/tokentransaction/{tokentransactionid}
+     * Replace a token transaction outright
+     * A token transaction records a transfer between two identified parties — amount and fees, a timestamp, sending and receiving addresses, names, user ids, states and countries, a flag per side, a protocol name and a transaction hash. Nothing here touches a chain: the hash is an unvalidated string and the flags are plain writable booleans with no screening behind them. Amounts are floating-point rather than the exact minor units every real money field in commerce uses, and there is no currency field at all — this kind lives in commerce&#39;s demo tree, so it is a live writable resource in your tenant&#39;s store that nothing else in commerce reads, and it must never carry real money. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for tokentransaction, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param tokentransactionid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceTokentransactionByTokentransactionidWithHttpInfo(tokentransactionid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid = tokentransactionid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceTokentransactionByTokentransactionid
+     *
+     * @param tokentransactionid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceTokentransactionByTokentransactionidRequestConfig(tokentransactionid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/tokentransaction/{tokentransactionid}".replace("{"+"tokentransactionid"+"}", encodeURIComponent(tokentransactionid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/transfer/{transferid}
+     * Replace a transfer outright
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceTransferByTransferid(transferid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceTransferByTransferidWithHttpInfo(transferid = transferid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/transfer/{transferid}
+     * Replace a transfer outright
+     * A transfer records that a payable WAS PAID — the annotation a human writes after paying out of band. Commerce executes no payout: creating one moves no money, and it marks the referenced payable settled. It carries the payable and payee ids, the amount it settles and the amount actually sent (which may be a different asset), a type of eth, wire or other, the transaction hash or wire reference, when it was paid and who recorded it; amounts are exact decimal strings with an asset, not cents. It is admin-gated because writing one settles money we owe, and nothing enforces uniqueness on the reference — so posting the same transfer twice settles the payable twice. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for transfer, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param transferid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceTransferByTransferidWithHttpInfo(transferid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceTransferByTransferidRequestConfig(transferid = transferid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceTransferByTransferid
+     *
+     * @param transferid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceTransferByTransferidRequestConfig(transferid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/transfer/{transferid}".replace("{"+"transferid"+"}", encodeURIComponent(transferid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/variant/{variantid}
+     * Replace a variant outright
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadVariant and WriteVariant together.
+     * @param variantid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceVariantByVariantid(variantid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceVariantByVariantidWithHttpInfo(variantid = variantid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/variant/{variantid}
+     * Replace a variant outright
+     * A variant is one purchasable SKU of a product — its product id, SKU and UPC, name, media, availability, the option name and value pairs that distinguish it, a sold counter, and its own money and stock: currency, price, MSRP, inventory cost, inventory count and taxability. Inventory and sold are plain writable numbers with no decrement logic behind them here. The same variant also exists as a JSON copy inside its product, and writing one does not update the other. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The org must also be entitled to the commerce admin: the paywall answers 402 subscription_required unless the org holds an active or trialing pro subscription, a live trial credit or a redeemed invite, and 503 when that entitlement cannot be read rather than admitting on an unknown. The internal service token and a platform superadmin pass straight through. The token must also carry Admin, or ReadVariant and WriteVariant together.
+     * @param variantid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceVariantByVariantidWithHttpInfo(variantid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceVariantByVariantidRequestConfig(variantid = variantid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceVariantByVariantid
+     *
+     * @param variantid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceVariantByVariantidRequestConfig(variantid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/variant/{variantid}".replace("{"+"variantid"+"}", encodeURIComponent(variantid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/wallet/{walletid}
+     * Replace a wallet outright
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceWalletByWalletid(walletid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceWalletByWalletidWithHttpInfo(walletid = walletid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/wallet/{walletid}
+     * Replace a wallet outright
+     * A wallet is a container of custodial blockchain accounts, and its only field is that account list — each account carrying a name, an address, a chain type, and the ENCRYPTED private key with its salt. Creating a wallet through this table generates NO KEYS: key generation lives on the account routes, so a wallet made here is an empty shell and an account posted into one is stored exactly as sent, with no key generation and no validation behind it. Know what a read renders: the plaintext private key is never marshalled and never stored, but the encrypted blob and its salt ARE returned, so whoever can read a wallet can attack it offline down to the strength of the owner&#39;s passphrase. That is why this kind is admin-gated. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for wallet, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param walletid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceWalletByWalletidWithHttpInfo(walletid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceWalletByWalletidRequestConfig(walletid = walletid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceWalletByWalletid
+     *
+     * @param walletid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceWalletByWalletidRequestConfig(walletid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/wallet/{walletid}".replace("{"+"walletid"+"}", encodeURIComponent(walletid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/watchlist/{watchlistid}
+     * Replace a watchlist outright
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceWatchlistByWatchlistid(watchlistid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid = watchlistid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/watchlist/{watchlistid}
+     * Replace a watchlist outright
+     * A watchlist is a viewer&#39;s saved list of movies — a user id, an email, and the movies themselves. It stores WHOLE MOVIE SNAPSHOTS rather than movie ids, so a list goes stale the moment a film record changes and grows without bound as it fills. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. Any valid access token reaches it. The per-kind permission table has no entry for watchlist, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param watchlistid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceWatchlistByWatchlistidWithHttpInfo(watchlistid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid = watchlistid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceWatchlistByWatchlistid
+     *
+     * @param watchlistid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceWatchlistByWatchlistidRequestConfig(watchlistid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/watchlist/{watchlistid}".replace("{"+"watchlistid"+"}", encodeURIComponent(watchlistid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/commerce/webhook/{webhookid}
+     * Replace a webhook outright
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1CommerceWebhookByWebhookid(webhookid: kotlin.String) : Unit {
+        val localVarResponse = putV1CommerceWebhookByWebhookidWithHttpInfo(webhookid = webhookid)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /v1/commerce/webhook/{webhookid}
+     * Replace a webhook outright
+     * A webhook is a merchant-registered endpoint that receives commerce event callbacks — a name, a URL, live and all flags, a per-event map, an enabled flag, and the shared access token each delivery posts IN THE BODY. Two things to know before registering one: that token is a plainly readable field, so anyone who may read webhooks reads every endpoint&#39;s secret, and delivery consults only the all flag and the event map — it does NOT consult enabled or live, so setting enabled false does not stop delivery and deleting the row is the only thing that does. Delivery is a single POST with a twenty-second timeout and no retry. This is a true REPLACEMENT, not a merge: the stored row&#39;s key is preserved, but the body is decoded onto a FRESH entity, so every field the body omits is written back as its ZERO value. Patch is the verb for changing part of a row. The id is resolved inside the caller org&#39;s own namespace and an absent one is 404 before anything is written; a body that fails to decode is 400. Answers the stored result. The token must carry the ADMIN permission; an ordinary access token is refused. The per-kind permission table has no entry for webhook, so the scaffold skips that second check with a warning and the gate above is the whole authorization story.
+     * @param webhookid 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun putV1CommerceWebhookByWebhookidWithHttpInfo(webhookid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1CommerceWebhookByWebhookidRequestConfig(webhookid = webhookid)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation putV1CommerceWebhookByWebhookid
+     *
+     * @param webhookid 
+     * @return RequestConfig
+     */
+    fun putV1CommerceWebhookByWebhookidRequestConfig(webhookid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/v1/commerce/webhook/{webhookid}".replace("{"+"webhookid"+"}", encodeURIComponent(webhookid.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

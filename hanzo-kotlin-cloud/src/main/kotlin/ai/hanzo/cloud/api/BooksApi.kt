@@ -19,30 +19,30 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAccount
-import ai.hanzo.cloud.model.CloudAskRequest
-import ai.hanzo.cloud.model.CloudAskResponse
-import ai.hanzo.cloud.model.CloudBalanceSheet
-import ai.hanzo.cloud.model.CloudBankTally
-import ai.hanzo.cloud.model.CloudBankTxnRow
-import ai.hanzo.cloud.model.CloudBookRequest
-import ai.hanzo.cloud.model.CloudBookResponse
-import ai.hanzo.cloud.model.CloudFinancialPackage
-import ai.hanzo.cloud.model.CloudGLRow
-import ai.hanzo.cloud.model.CloudInboxItem
-import ai.hanzo.cloud.model.CloudInboxOut
-import ai.hanzo.cloud.model.CloudMetricsResponse
-import ai.hanzo.cloud.model.CloudPnL
-import ai.hanzo.cloud.model.CloudQuestionsResponse
-import ai.hanzo.cloud.model.CloudRule
-import ai.hanzo.cloud.model.CloudRulesOut
-import ai.hanzo.cloud.model.CloudScanDraft
-import ai.hanzo.cloud.model.CloudSyncTally
-import ai.hanzo.cloud.model.CloudTransactionsOut
-import ai.hanzo.cloud.model.CloudTrialBalance
-import ai.hanzo.cloud.model.CloudUnreconciledOut
-import ai.hanzo.cloud.model.CloudVendorRow
-import ai.hanzo.cloud.model.CloudVendorsOut
+import ai.hanzo.cloud.model.Account
+import ai.hanzo.cloud.model.AskRequest
+import ai.hanzo.cloud.model.AskResponse
+import ai.hanzo.cloud.model.BalanceSheet
+import ai.hanzo.cloud.model.BankTally
+import ai.hanzo.cloud.model.BankTxnRow
+import ai.hanzo.cloud.model.BookRequest
+import ai.hanzo.cloud.model.BookResponse
+import ai.hanzo.cloud.model.FinancialPackage
+import ai.hanzo.cloud.model.GLRow
+import ai.hanzo.cloud.model.InboxItem
+import ai.hanzo.cloud.model.InboxOut
+import ai.hanzo.cloud.model.MetricsResponse
+import ai.hanzo.cloud.model.PnL
+import ai.hanzo.cloud.model.QuestionsResponse
+import ai.hanzo.cloud.model.Rule
+import ai.hanzo.cloud.model.RulesOut
+import ai.hanzo.cloud.model.ScanDraft
+import ai.hanzo.cloud.model.SyncTally
+import ai.hanzo.cloud.model.TransactionsOut
+import ai.hanzo.cloud.model.TrialBalance
+import ai.hanzo.cloud.model.UnreconciledOut
+import ai.hanzo.cloud.model.VendorRow
+import ai.hanzo.cloud.model.VendorsOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -70,10 +70,10 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/accounts
-     * ListAccounts returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
-     * ListAccounts returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
+     * Returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
+     * Returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return kotlin.collections.List<CloudAccount>
+     * @return kotlin.collections.List<Account>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -82,11 +82,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksAccounts(sandbox: kotlin.String? = null) : kotlin.collections.List<CloudAccount> {
-        val localVarResponse = cloudGetV1BooksAccountsWithHttpInfo(sandbox = sandbox)
+    fun getV1BooksAccounts(sandbox: kotlin.String? = null) : kotlin.collections.List<Account> {
+        val localVarResponse = getV1BooksAccountsWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudAccount>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<Account>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -102,30 +102,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/accounts
-     * ListAccounts returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
-     * ListAccounts returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
+     * Returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
+     * Returns the org&#39;s chart of accounts — the seeded fixed chart every posting key in the ledger refers to.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return ApiResponse<kotlin.collections.List<CloudAccount>?>
+     * @return ApiResponse<kotlin.collections.List<Account>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksAccountsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<kotlin.collections.List<CloudAccount>?> {
-        val localVariableConfig = cloudGetV1BooksAccountsRequestConfig(sandbox = sandbox)
+    fun getV1BooksAccountsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<kotlin.collections.List<Account>?> {
+        val localVariableConfig = getV1BooksAccountsRequestConfig(sandbox = sandbox)
 
-        return request<Unit, kotlin.collections.List<CloudAccount>>(
+        return request<Unit, kotlin.collections.List<Account>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksAccounts
+     * To obtain the request config of the operation getV1BooksAccounts
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksAccountsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksAccountsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -141,102 +141,18 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/books/balance-sheet
-     * BalanceSheet returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
-     * BalanceSheet returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
-     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
-     * @param to To is the RFC3339 instant the statement is struck as of. Empty means all time. (optional)
-     * @return CloudBalanceSheet
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksBalanceSheet(sandbox: kotlin.String? = null, to: kotlin.String? = null) : CloudBalanceSheet {
-        val localVarResponse = cloudGetV1BooksBalanceSheetWithHttpInfo(sandbox = sandbox, to = to)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBalanceSheet
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/books/balance-sheet
-     * BalanceSheet returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
-     * BalanceSheet returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
-     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
-     * @param to To is the RFC3339 instant the statement is struck as of. Empty means all time. (optional)
-     * @return ApiResponse<CloudBalanceSheet?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksBalanceSheetWithHttpInfo(sandbox: kotlin.String?, to: kotlin.String?) : ApiResponse<CloudBalanceSheet?> {
-        val localVariableConfig = cloudGetV1BooksBalanceSheetRequestConfig(sandbox = sandbox, to = to)
-
-        return request<Unit, CloudBalanceSheet>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1BooksBalanceSheet
-     *
-     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
-     * @param to To is the RFC3339 instant the statement is struck as of. Empty means all time. (optional)
-     * @return RequestConfig
-     */
-    fun cloudGetV1BooksBalanceSheetRequestConfig(sandbox: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (sandbox != null) {
-                    put("sandbox", listOf(sandbox.toString()))
-                }
-                if (to != null) {
-                    put("to", listOf(to.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/books/balance-sheet",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/bank/transactions
-     * ListBankTransactions returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
-     * ListBankTransactions returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
+     * Returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
+     * Returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
-     * @return kotlin.collections.List<CloudBankTxnRow>
+     * @return kotlin.collections.List<BankTxnRow>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -245,11 +161,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksBankTransactions(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<CloudBankTxnRow> {
-        val localVarResponse = cloudGetV1BooksBankTransactionsWithHttpInfo(sandbox = sandbox, limit = limit)
+    fun getV1BooksBankTransactions(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<BankTxnRow> {
+        val localVarResponse = getV1BooksBankTransactionsWithHttpInfo(sandbox = sandbox, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudBankTxnRow>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<BankTxnRow>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -265,32 +181,32 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/bank/transactions
-     * ListBankTransactions returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
-     * ListBankTransactions returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
+     * Returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
+     * Returns the org&#39;s normalized bank transactions, newest first — every row the import and connector paths have ingested, with its amount in exact cents, its direction, and whether it has been matched to a voucher yet.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
-     * @return ApiResponse<kotlin.collections.List<CloudBankTxnRow>?>
+     * @return ApiResponse<kotlin.collections.List<BankTxnRow>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksBankTransactionsWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<CloudBankTxnRow>?> {
-        val localVariableConfig = cloudGetV1BooksBankTransactionsRequestConfig(sandbox = sandbox, limit = limit)
+    fun getV1BooksBankTransactionsWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<BankTxnRow>?> {
+        val localVariableConfig = getV1BooksBankTransactionsRequestConfig(sandbox = sandbox, limit = limit)
 
-        return request<Unit, kotlin.collections.List<CloudBankTxnRow>>(
+        return request<Unit, kotlin.collections.List<BankTxnRow>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksBankTransactions
+     * To obtain the request config of the operation getV1BooksBankTransactions
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksBankTransactionsRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1BooksBankTransactionsRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -309,17 +225,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/transactions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/bank/unreconciled
-     * ListUnreconciled returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
-     * ListUnreconciled returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
+     * Returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
+     * Returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return CloudUnreconciledOut
+     * @return UnreconciledOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -328,11 +244,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksBankUnreconciled(sandbox: kotlin.String? = null) : CloudUnreconciledOut {
-        val localVarResponse = cloudGetV1BooksBankUnreconciledWithHttpInfo(sandbox = sandbox)
+    fun getV1BooksBankUnreconciled(sandbox: kotlin.String? = null) : UnreconciledOut {
+        val localVarResponse = getV1BooksBankUnreconciledWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUnreconciledOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UnreconciledOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -348,30 +264,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/bank/unreconciled
-     * ListUnreconciled returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
-     * ListUnreconciled returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
+     * Returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
+     * Returns the org&#39;s unmatched bank inflows and their open clarifying questions — the queue a human answers so an unexplained deposit is never guessed into revenue.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return ApiResponse<CloudUnreconciledOut?>
+     * @return ApiResponse<UnreconciledOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksBankUnreconciledWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<CloudUnreconciledOut?> {
-        val localVariableConfig = cloudGetV1BooksBankUnreconciledRequestConfig(sandbox = sandbox)
+    fun getV1BooksBankUnreconciledWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<UnreconciledOut?> {
+        val localVariableConfig = getV1BooksBankUnreconciledRequestConfig(sandbox = sandbox)
 
-        return request<Unit, CloudUnreconciledOut>(
+        return request<Unit, UnreconciledOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksBankUnreconciled
+     * To obtain the request config of the operation getV1BooksBankUnreconciled
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksBankUnreconciledRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksBankUnreconciledRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -387,21 +303,21 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/unreconciled",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/export
-     * ExportPackage returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
-     * ExportPackage returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
+     * Returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
+     * Returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @param format Format is the export encoding. Only \&quot;json\&quot; is supported; empty means json. (optional)
      * @param limit Limit caps the GL detail rows included as the audit trail; 5000 when absent or not positive. (optional)
-     * @return CloudFinancialPackage
+     * @return FinancialPackage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -410,11 +326,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksExport(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, format: kotlin.String? = null, limit: kotlin.Int? = null) : CloudFinancialPackage {
-        val localVarResponse = cloudGetV1BooksExportWithHttpInfo(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
+    fun getV1BooksExport(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, format: kotlin.String? = null, limit: kotlin.Int? = null) : FinancialPackage {
+        val localVarResponse = getV1BooksExportWithHttpInfo(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFinancialPackage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FinancialPackage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -430,29 +346,29 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/export
-     * ExportPackage returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
-     * ExportPackage returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
+     * Returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
+     * Returns the complete financial package for the caller&#39;s org over (from, to]: the trial balance, the P&amp;L, the balance sheet, and the GL detail behind them — the four statements a tax preparer or an investor asks for, assembled from the one ledger in a single read so they cannot disagree with each other.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @param format Format is the export encoding. Only \&quot;json\&quot; is supported; empty means json. (optional)
      * @param limit Limit caps the GL detail rows included as the audit trail; 5000 when absent or not positive. (optional)
-     * @return ApiResponse<CloudFinancialPackage?>
+     * @return ApiResponse<FinancialPackage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksExportWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudFinancialPackage?> {
-        val localVariableConfig = cloudGetV1BooksExportRequestConfig(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
+    fun getV1BooksExportWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : ApiResponse<FinancialPackage?> {
+        val localVariableConfig = getV1BooksExportRequestConfig(sandbox = sandbox, from = from, to = to, format = format, limit = limit)
 
-        return request<Unit, CloudFinancialPackage>(
+        return request<Unit, FinancialPackage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksExport
+     * To obtain the request config of the operation getV1BooksExport
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
@@ -461,7 +377,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit Limit caps the GL detail rows included as the audit trail; 5000 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksExportRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1BooksExportRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, format: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -489,7 +405,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/export",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -500,7 +416,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * ListGL returns the org&#39;s most recent GL Entry rows, newest first. This is the raw double-entry detail behind every statement: one row per leg, with its debit, credit, posting time and the source that booked it.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
-     * @return kotlin.collections.List<CloudGLRow>
+     * @return kotlin.collections.List<GLRow>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -509,11 +425,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksGl(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<CloudGLRow> {
-        val localVarResponse = cloudGetV1BooksGlWithHttpInfo(sandbox = sandbox, limit = limit)
+    fun getV1BooksGl(sandbox: kotlin.String? = null, limit: kotlin.Int? = null) : kotlin.collections.List<GLRow> {
+        val localVarResponse = getV1BooksGlWithHttpInfo(sandbox = sandbox, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudGLRow>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<GLRow>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -533,28 +449,28 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * ListGL returns the org&#39;s most recent GL Entry rows, newest first. This is the raw double-entry detail behind every statement: one row per leg, with its debit, credit, posting time and the source that booked it.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
-     * @return ApiResponse<kotlin.collections.List<CloudGLRow>?>
+     * @return ApiResponse<kotlin.collections.List<GLRow>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksGlWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<CloudGLRow>?> {
-        val localVariableConfig = cloudGetV1BooksGlRequestConfig(sandbox = sandbox, limit = limit)
+    fun getV1BooksGlWithHttpInfo(sandbox: kotlin.String?, limit: kotlin.Int?) : ApiResponse<kotlin.collections.List<GLRow>?> {
+        val localVariableConfig = getV1BooksGlRequestConfig(sandbox = sandbox, limit = limit)
 
-        return request<Unit, kotlin.collections.List<CloudGLRow>>(
+        return request<Unit, kotlin.collections.List<GLRow>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksGl
+     * To obtain the request config of the operation getV1BooksGl
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param limit Limit caps how many rows come back; 500 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksGlRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1BooksGlRequestConfig(sandbox: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -573,17 +489,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/gl",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/inbox
-     * ListInbox returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at.
-     * ListInbox returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at. A booked document drops out of the queue.
+     * Returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at.
+     * Returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at. A booked document drops out of the queue.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return CloudInboxOut
+     * @return InboxOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -592,11 +508,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksInbox(sandbox: kotlin.String? = null) : CloudInboxOut {
-        val localVarResponse = cloudGetV1BooksInboxWithHttpInfo(sandbox = sandbox)
+    fun getV1BooksInbox(sandbox: kotlin.String? = null) : InboxOut {
+        val localVarResponse = getV1BooksInboxWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInboxOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InboxOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -612,30 +528,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/inbox
-     * ListInbox returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at.
-     * ListInbox returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at. A booked document drops out of the queue.
+     * Returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at.
+     * Returns the org&#39;s open document queue — everything uploaded but not yet booked, newest first, each with its extracted summary and the confidence the scanner resolved its category at. A booked document drops out of the queue.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return ApiResponse<CloudInboxOut?>
+     * @return ApiResponse<InboxOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksInboxWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<CloudInboxOut?> {
-        val localVariableConfig = cloudGetV1BooksInboxRequestConfig(sandbox = sandbox)
+    fun getV1BooksInboxWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<InboxOut?> {
+        val localVariableConfig = getV1BooksInboxRequestConfig(sandbox = sandbox)
 
-        return request<Unit, CloudInboxOut>(
+        return request<Unit, InboxOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksInbox
+     * To obtain the request config of the operation getV1BooksInbox
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksInboxRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksInboxRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -651,7 +567,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/inbox",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -663,7 +579,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
-     * @return CloudMetricsResponse
+     * @return MetricsResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -672,11 +588,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksMetrics(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : CloudMetricsResponse {
-        val localVarResponse = cloudGetV1BooksMetricsWithHttpInfo(sandbox = sandbox, from = from, to = to)
+    fun getV1BooksMetrics(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : MetricsResponse {
+        val localVarResponse = getV1BooksMetricsWithHttpInfo(sandbox = sandbox, from = from, to = to)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMetricsResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MetricsResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -697,29 +613,29 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
-     * @return ApiResponse<CloudMetricsResponse?>
+     * @return ApiResponse<MetricsResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksMetricsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<CloudMetricsResponse?> {
-        val localVariableConfig = cloudGetV1BooksMetricsRequestConfig(sandbox = sandbox, from = from, to = to)
+    fun getV1BooksMetricsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<MetricsResponse?> {
+        val localVariableConfig = getV1BooksMetricsRequestConfig(sandbox = sandbox, from = from, to = to)
 
-        return request<Unit, CloudMetricsResponse>(
+        return request<Unit, MetricsResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksMetrics
+     * To obtain the request config of the operation getV1BooksMetrics
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksMetricsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksMetricsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -741,19 +657,19 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/pnl
-     * ProfitAndLoss returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
-     * ProfitAndLoss returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
+     * Returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
+     * Returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
-     * @return CloudPnL
+     * @return PnL
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -762,11 +678,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksPnl(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : CloudPnL {
-        val localVarResponse = cloudGetV1BooksPnlWithHttpInfo(sandbox = sandbox, from = from, to = to)
+    fun getV1BooksPnl(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : PnL {
+        val localVarResponse = getV1BooksPnlWithHttpInfo(sandbox = sandbox, from = from, to = to)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPnL
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PnL
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -782,34 +698,34 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/pnl
-     * ProfitAndLoss returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
-     * ProfitAndLoss returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
+     * Returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
+     * Returns the org&#39;s accrual-basis Profit &amp; Loss over an optional (from, to] window of RFC3339 posting times: recognized revenue, matched cost, and the net.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
-     * @return ApiResponse<CloudPnL?>
+     * @return ApiResponse<PnL?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksPnlWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<CloudPnL?> {
-        val localVariableConfig = cloudGetV1BooksPnlRequestConfig(sandbox = sandbox, from = from, to = to)
+    fun getV1BooksPnlWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<PnL?> {
+        val localVariableConfig = getV1BooksPnlRequestConfig(sandbox = sandbox, from = from, to = to)
 
-        return request<Unit, CloudPnL>(
+        return request<Unit, PnL>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksPnl
+     * To obtain the request config of the operation getV1BooksPnl
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksPnlRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksPnlRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -831,17 +747,18 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/pnl",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/books/questions
-     * ListQuestions returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first.
-     * ListQuestions returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first. An empty list means the books look clean; the detector is deterministic over the ledger and invents nothing.
-     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return CloudQuestionsResponse
+     * GET /v1/books/position
+     * Returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
+     * Returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
+     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
+     * @param to To is the RFC3339 instant the statement is struck as of. Empty means all time. (optional)
+     * @return BalanceSheet
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -850,11 +767,94 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksQuestions(sandbox: kotlin.String? = null) : CloudQuestionsResponse {
-        val localVarResponse = cloudGetV1BooksQuestionsWithHttpInfo(sandbox = sandbox)
+    fun getV1BooksPosition(sandbox: kotlin.String? = null, to: kotlin.String? = null) : BalanceSheet {
+        val localVarResponse = getV1BooksPositionWithHttpInfo(sandbox = sandbox, to = to)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudQuestionsResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BalanceSheet
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/books/position
+     * Returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
+     * Returns the org&#39;s Balance Sheet as of &#x60;to&#x60; (empty &#x3D; all time), with the Assets &#x3D;&#x3D; Liabilities + Equity equation proof.
+     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
+     * @param to To is the RFC3339 instant the statement is struck as of. Empty means all time. (optional)
+     * @return ApiResponse<BalanceSheet?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1BooksPositionWithHttpInfo(sandbox: kotlin.String?, to: kotlin.String?) : ApiResponse<BalanceSheet?> {
+        val localVariableConfig = getV1BooksPositionRequestConfig(sandbox = sandbox, to = to)
+
+        return request<Unit, BalanceSheet>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1BooksPosition
+     *
+     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
+     * @param to To is the RFC3339 instant the statement is struck as of. Empty means all time. (optional)
+     * @return RequestConfig
+     */
+    fun getV1BooksPositionRequestConfig(sandbox: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (sandbox != null) {
+                    put("sandbox", listOf(sandbox.toString()))
+                }
+                if (to != null) {
+                    put("to", listOf(to.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/books/position",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/books/questions
+     * Returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first.
+     * Returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first. An empty list means the books look clean; the detector is deterministic over the ledger and invents nothing.
+     * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
+     * @return QuestionsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1BooksQuestions(sandbox: kotlin.String? = null) : QuestionsResponse {
+        val localVarResponse = getV1BooksQuestionsWithHttpInfo(sandbox = sandbox)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as QuestionsResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -870,30 +870,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/questions
-     * ListQuestions returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first.
-     * ListQuestions returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first. An empty list means the books look clean; the detector is deterministic over the ledger and invents nothing.
+     * Returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first.
+     * Returns the clarifying questions the caller&#39;s own recent GL raises — the unusual postings a founder should look at (outliers, reversals, round-offs, uncosted revenue, an overdrawn wallet), sharpest first. An empty list means the books look clean; the detector is deterministic over the ledger and invents nothing.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return ApiResponse<CloudQuestionsResponse?>
+     * @return ApiResponse<QuestionsResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksQuestionsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<CloudQuestionsResponse?> {
-        val localVariableConfig = cloudGetV1BooksQuestionsRequestConfig(sandbox = sandbox)
+    fun getV1BooksQuestionsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<QuestionsResponse?> {
+        val localVariableConfig = getV1BooksQuestionsRequestConfig(sandbox = sandbox)
 
-        return request<Unit, CloudQuestionsResponse>(
+        return request<Unit, QuestionsResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksQuestions
+     * To obtain the request config of the operation getV1BooksQuestions
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksQuestionsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksQuestionsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -909,17 +909,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/questions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/rules
-     * ListRules returns the org&#39;s auto-categorization rules, highest priority first.
-     * ListRules returns the org&#39;s auto-categorization rules, highest priority first. A rule is a standing instruction — \&quot;anything whose merchant contains X books to category Y\&quot; — and it overrides a vendor&#39;s default category, so this is the list that decides how a future bill classifies itself.
+     * Returns the org&#39;s auto-categorization rules, highest priority first.
+     * Returns the org&#39;s auto-categorization rules, highest priority first. A rule is a standing instruction — \&quot;anything whose merchant contains X books to category Y\&quot; — and it overrides a vendor&#39;s default category, so this is the list that decides how a future bill classifies itself.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return CloudRulesOut
+     * @return RulesOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -928,11 +928,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksRules(sandbox: kotlin.String? = null) : CloudRulesOut {
-        val localVarResponse = cloudGetV1BooksRulesWithHttpInfo(sandbox = sandbox)
+    fun getV1BooksRules(sandbox: kotlin.String? = null) : RulesOut {
+        val localVarResponse = getV1BooksRulesWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRulesOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RulesOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -948,30 +948,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/rules
-     * ListRules returns the org&#39;s auto-categorization rules, highest priority first.
-     * ListRules returns the org&#39;s auto-categorization rules, highest priority first. A rule is a standing instruction — \&quot;anything whose merchant contains X books to category Y\&quot; — and it overrides a vendor&#39;s default category, so this is the list that decides how a future bill classifies itself.
+     * Returns the org&#39;s auto-categorization rules, highest priority first.
+     * Returns the org&#39;s auto-categorization rules, highest priority first. A rule is a standing instruction — \&quot;anything whose merchant contains X books to category Y\&quot; — and it overrides a vendor&#39;s default category, so this is the list that decides how a future bill classifies itself.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return ApiResponse<CloudRulesOut?>
+     * @return ApiResponse<RulesOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksRulesWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<CloudRulesOut?> {
-        val localVariableConfig = cloudGetV1BooksRulesRequestConfig(sandbox = sandbox)
+    fun getV1BooksRulesWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<RulesOut?> {
+        val localVariableConfig = getV1BooksRulesRequestConfig(sandbox = sandbox)
 
-        return request<Unit, CloudRulesOut>(
+        return request<Unit, RulesOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksRules
+     * To obtain the request config of the operation getV1BooksRules
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksRulesRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksRulesRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -987,22 +987,22 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/transactions
-     * ListTransactions returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents.
-     * ListTransactions returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents. It is the double-entry ledger projected to the register a human reads, filterable by posting-time window, category and vendor. Strictly read-only — it restates the books, it never moves them.
+     * Returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents.
+     * Returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents. It is the double-entry ledger projected to the register a human reads, filterable by posting-time window, category and vendor. Strictly read-only — it restates the books, it never moves them.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the posting-time window, inclusive. (optional)
      * @param to To is the RFC3339 end of the posting-time window, inclusive. (optional)
      * @param category Category filters to one COA account, named by number (\&quot;5300\&quot;) or by category slug (\&quot;software\&quot;). (optional)
      * @param vendor Vendor filters to rows whose vendor or description contains this text, case-insensitively. (optional)
      * @param limit Limit caps how many rows come back; 200 when absent or not positive. (optional)
-     * @return CloudTransactionsOut
+     * @return TransactionsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1011,11 +1011,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksTransactions(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, category: kotlin.String? = null, vendor: kotlin.String? = null, limit: kotlin.Int? = null) : CloudTransactionsOut {
-        val localVarResponse = cloudGetV1BooksTransactionsWithHttpInfo(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
+    fun getV1BooksTransactions(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null, category: kotlin.String? = null, vendor: kotlin.String? = null, limit: kotlin.Int? = null) : TransactionsOut {
+        val localVarResponse = getV1BooksTransactionsWithHttpInfo(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTransactionsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TransactionsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1031,30 +1031,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/transactions
-     * ListTransactions returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents.
-     * ListTransactions returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents. It is the double-entry ledger projected to the register a human reads, filterable by posting-time window, category and vendor. Strictly read-only — it restates the books, it never moves them.
+     * Returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents.
+     * Returns the org&#39;s booked ledger as a single-line register, newest first: one row per voucher, with its date, description, vendor, category, source and amount in exact cents. It is the double-entry ledger projected to the register a human reads, filterable by posting-time window, category and vendor. Strictly read-only — it restates the books, it never moves them.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the posting-time window, inclusive. (optional)
      * @param to To is the RFC3339 end of the posting-time window, inclusive. (optional)
      * @param category Category filters to one COA account, named by number (\&quot;5300\&quot;) or by category slug (\&quot;software\&quot;). (optional)
      * @param vendor Vendor filters to rows whose vendor or description contains this text, case-insensitively. (optional)
      * @param limit Limit caps how many rows come back; 200 when absent or not positive. (optional)
-     * @return ApiResponse<CloudTransactionsOut?>
+     * @return ApiResponse<TransactionsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksTransactionsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudTransactionsOut?> {
-        val localVariableConfig = cloudGetV1BooksTransactionsRequestConfig(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
+    fun getV1BooksTransactionsWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : ApiResponse<TransactionsOut?> {
+        val localVariableConfig = getV1BooksTransactionsRequestConfig(sandbox = sandbox, from = from, to = to, category = category, vendor = vendor, limit = limit)
 
-        return request<Unit, CloudTransactionsOut>(
+        return request<Unit, TransactionsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksTransactions
+     * To obtain the request config of the operation getV1BooksTransactions
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the posting-time window, inclusive. (optional)
@@ -1064,7 +1064,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit Limit caps how many rows come back; 200 when absent or not positive. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksTransactionsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1BooksTransactionsRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?, category: kotlin.String?, vendor: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1095,19 +1095,19 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/transactions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/books/trial-balance
-     * TrialBalance returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
-     * TrialBalance returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
+     * GET /v1/books/trial
+     * Returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
+     * Returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
-     * @return CloudTrialBalance
+     * @return TrialBalance
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1116,11 +1116,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksTrialBalance(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : CloudTrialBalance {
-        val localVarResponse = cloudGetV1BooksTrialBalanceWithHttpInfo(sandbox = sandbox, from = from, to = to)
+    fun getV1BooksTrial(sandbox: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : TrialBalance {
+        val localVarResponse = getV1BooksTrialWithHttpInfo(sandbox = sandbox, from = from, to = to)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTrialBalance
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrialBalance
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1135,35 +1135,35 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * GET /v1/books/trial-balance
-     * TrialBalance returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
-     * TrialBalance returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
+     * GET /v1/books/trial
+     * Returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
+     * Returns the org&#39;s trial balance over an optional [from, to] window of RFC3339 posting times, including the opening/closing columns and the TotalDebit &#x3D;&#x3D; TotalCredit proof that the books balance.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
-     * @return ApiResponse<CloudTrialBalance?>
+     * @return ApiResponse<TrialBalance?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksTrialBalanceWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<CloudTrialBalance?> {
-        val localVariableConfig = cloudGetV1BooksTrialBalanceRequestConfig(sandbox = sandbox, from = from, to = to)
+    fun getV1BooksTrialWithHttpInfo(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<TrialBalance?> {
+        val localVariableConfig = getV1BooksTrialRequestConfig(sandbox = sandbox, from = from, to = to)
 
-        return request<Unit, CloudTrialBalance>(
+        return request<Unit, TrialBalance>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksTrialBalance
+     * To obtain the request config of the operation getV1BooksTrial
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;. (optional)
      * @param from From is the RFC3339 start of the window, exclusive. Empty means all time. (optional)
      * @param to To is the RFC3339 end of the window, inclusive. Empty means up to now. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksTrialBalanceRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksTrialRequestConfig(sandbox: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1182,20 +1182,20 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/books/trial-balance",
+            path = "/v1/books/trial",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/books/vendors
-     * ListVendors returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to.
-     * ListVendors returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to. A vendor here is what makes a scanned bill self-classify instead of asking again.
+     * Returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to.
+     * Returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to. A vendor here is what makes a scanned bill self-classify instead of asking again.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return CloudVendorsOut
+     * @return VendorsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1204,11 +1204,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BooksVendors(sandbox: kotlin.String? = null) : CloudVendorsOut {
-        val localVarResponse = cloudGetV1BooksVendorsWithHttpInfo(sandbox = sandbox)
+    fun getV1BooksVendors(sandbox: kotlin.String? = null) : VendorsOut {
+        val localVarResponse = getV1BooksVendorsWithHttpInfo(sandbox = sandbox)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVendorsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VendorsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1224,30 +1224,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/books/vendors
-     * ListVendors returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to.
-     * ListVendors returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to. A vendor here is what makes a scanned bill self-classify instead of asking again.
+     * Returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to.
+     * Returns the org&#39;s vendor book: each canonical vendor, the alias spellings a receipt may print it under, and the expense account new bills from it default to. A vendor here is what makes a scanned bill self-classify instead of asking again.
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
-     * @return ApiResponse<CloudVendorsOut?>
+     * @return ApiResponse<VendorsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BooksVendorsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<CloudVendorsOut?> {
-        val localVariableConfig = cloudGetV1BooksVendorsRequestConfig(sandbox = sandbox)
+    fun getV1BooksVendorsWithHttpInfo(sandbox: kotlin.String?) : ApiResponse<VendorsOut?> {
+        val localVariableConfig = getV1BooksVendorsRequestConfig(sandbox = sandbox)
 
-        return request<Unit, CloudVendorsOut>(
+        return request<Unit, VendorsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BooksVendors
+     * To obtain the request config of the operation getV1BooksVendors
      *
      * @param sandbox Sandbox reads the org&#39;s SANDBOX ledger when it is exactly \&quot;true\&quot;; anything else reads the live one. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1BooksVendorsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1BooksVendorsRequestConfig(sandbox: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1263,17 +1263,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/vendors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/ask
-     * AskBooks answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number.
-     * AskBooks answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number. A deterministic keyword router picks the intent and reads the real metrics, and those figures, followups and report sources are computed BEFORE any model call and are never altered by one: the optional narration seam only rephrases the sentence, and it degrades silently to the templated answer when no AI plane is wired. It is strictly read-only — it restates the books, it never posts to them.
-     * @param cloudAskRequest 
-     * @return CloudAskResponse
+     * Answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number.
+     * Answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number. A deterministic keyword router picks the intent and reads the real metrics, and those figures, followups and report sources are computed BEFORE any model call and are never altered by one: the optional narration seam only rephrases the sentence, and it degrades silently to the templated answer when no AI plane is wired. It is strictly read-only — it restates the books, it never posts to them.
+     * @param askRequest 
+     * @return AskResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1282,11 +1282,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksAsk(cloudAskRequest: CloudAskRequest) : CloudAskResponse {
-        val localVarResponse = cloudPostV1BooksAskWithHttpInfo(cloudAskRequest = cloudAskRequest)
+    fun postV1BooksAsk(askRequest: AskRequest) : AskResponse {
+        val localVarResponse = postV1BooksAskWithHttpInfo(askRequest = askRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAskResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AskResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1302,31 +1302,31 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/ask
-     * AskBooks answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number.
-     * AskBooks answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number. A deterministic keyword router picks the intent and reads the real metrics, and those figures, followups and report sources are computed BEFORE any model call and are never altered by one: the optional narration seam only rephrases the sentence, and it degrades silently to the templated answer when no AI plane is wired. It is strictly read-only — it restates the books, it never posts to them.
-     * @param cloudAskRequest 
-     * @return ApiResponse<CloudAskResponse?>
+     * Answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number.
+     * Answers a plain-language question about the caller&#39;s own books — \&quot;what is my MRR?\&quot;, \&quot;how long is my runway?\&quot; — with figures taken from their ledger, never a guessed number. A deterministic keyword router picks the intent and reads the real metrics, and those figures, followups and report sources are computed BEFORE any model call and are never altered by one: the optional narration seam only rephrases the sentence, and it degrades silently to the templated answer when no AI plane is wired. It is strictly read-only — it restates the books, it never posts to them.
+     * @param askRequest 
+     * @return ApiResponse<AskResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksAskWithHttpInfo(cloudAskRequest: CloudAskRequest) : ApiResponse<CloudAskResponse?> {
-        val localVariableConfig = cloudPostV1BooksAskRequestConfig(cloudAskRequest = cloudAskRequest)
+    fun postV1BooksAskWithHttpInfo(askRequest: AskRequest) : ApiResponse<AskResponse?> {
+        val localVariableConfig = postV1BooksAskRequestConfig(askRequest = askRequest)
 
-        return request<CloudAskRequest, CloudAskResponse>(
+        return request<AskRequest, AskResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksAsk
+     * To obtain the request config of the operation postV1BooksAsk
      *
-     * @param cloudAskRequest 
+     * @param askRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1BooksAskRequestConfig(cloudAskRequest: CloudAskRequest) : RequestConfig<CloudAskRequest> {
-        val localVariableBody = cloudAskRequest
+    fun postV1BooksAskRequestConfig(askRequest: AskRequest) : RequestConfig<AskRequest> {
+        val localVariableBody = askRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1337,15 +1337,15 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/bank/exchange
-     * 
-     * 
+     * Finish connecting a bank account (not yet available)
+     * ANSWERS 501 UNCONDITIONALLY. It is the intended second hop of the bank-linking handshake — trade the provider&#39;s short-lived public token for the durable access credential and seal that credential into KMS — and nothing on the HTTP path reaches an implementation today.  The durable bank credential is the reason this hop exists: it is meant to be sealed server-side and never handed back to the caller. Since the route never succeeds, no credential is stored by it and no bank is connected through it.  Documented as refusing rather than declared with a success body, for the same reason as the first hop: it has never sent one, and stating a shape it has never produced would put a return type in every SDK for a call that always fails. A caller with no principal gets 401 before the 501.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1354,8 +1354,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksBankExchange() : Unit {
-        val localVarResponse = cloudPostV1BooksBankExchangeWithHttpInfo()
+    fun postV1BooksBankExchange() : Unit {
+        val localVarResponse = postV1BooksBankExchangeWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1374,15 +1374,15 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/bank/exchange
-     * 
-     * 
+     * Finish connecting a bank account (not yet available)
+     * ANSWERS 501 UNCONDITIONALLY. It is the intended second hop of the bank-linking handshake — trade the provider&#39;s short-lived public token for the durable access credential and seal that credential into KMS — and nothing on the HTTP path reaches an implementation today.  The durable bank credential is the reason this hop exists: it is meant to be sealed server-side and never handed back to the caller. Since the route never succeeds, no credential is stored by it and no bank is connected through it.  Documented as refusing rather than declared with a success body, for the same reason as the first hop: it has never sent one, and stating a shape it has never produced would put a return type in every SDK for a call that always fails. A caller with no principal gets 401 before the 501.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksBankExchangeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BooksBankExchangeRequestConfig()
+    fun postV1BooksBankExchangeWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BooksBankExchangeRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1390,11 +1390,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksBankExchange
+     * To obtain the request config of the operation postV1BooksBankExchange
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BooksBankExchangeRequestConfig() : RequestConfig<Unit> {
+    fun postV1BooksBankExchangeRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1404,17 +1404,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/exchange",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/bank/import
-     * 
-     * 
+     * Import a bank statement file into your books
+     * Takes a bank statement as RAW BYTES — the file exactly as downloaded, OFX, QFX or CSV, not wrapped in JSON — parses every row, books it against the caller org&#39;s own ledger, and answers the tally: how many rows were seen, how many vouchers posted, how many inflows reconciled, how many raised a question, how many were own-account transfers, and how many were skipped.  RE-IMPORTING THE SAME STATEMENT DOES NOT DOUBLE-BOOK. Every row goes through the same posting choke point every other source uses, keyed idempotently, so an overlapping statement — the usual case, since exports overlap at the month boundary — lands its new rows and counts the rest as skipped. Skipped is the number to read on a second import.  It is READ-ONLY against the bank: this ingests, it never sends money. Scoped to the caller&#39;s own org from the validated principal, and refused without one; &#x60;sandbox&#x3D;true&#x60; writes the org&#39;s sandbox ledger instead of its real books. An empty body is a 400, and a file the parser cannot read is a 400 carrying the parser&#39;s reason rather than a partial import. On a deployment whose import parser is not built, this answers 501 rather than mishandling the file.
      * @param body  (optional)
-     * @return CloudBankTally
+     * @return BankTally
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1423,11 +1423,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksBankImport(body: java.io.File? = null) : CloudBankTally {
-        val localVarResponse = cloudPostV1BooksBankImportWithHttpInfo(body = body)
+    fun postV1BooksBankImport(body: java.io.File? = null) : BankTally {
+        val localVarResponse = postV1BooksBankImportWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBankTally
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BankTally
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1443,30 +1443,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/bank/import
-     * 
-     * 
+     * Import a bank statement file into your books
+     * Takes a bank statement as RAW BYTES — the file exactly as downloaded, OFX, QFX or CSV, not wrapped in JSON — parses every row, books it against the caller org&#39;s own ledger, and answers the tally: how many rows were seen, how many vouchers posted, how many inflows reconciled, how many raised a question, how many were own-account transfers, and how many were skipped.  RE-IMPORTING THE SAME STATEMENT DOES NOT DOUBLE-BOOK. Every row goes through the same posting choke point every other source uses, keyed idempotently, so an overlapping statement — the usual case, since exports overlap at the month boundary — lands its new rows and counts the rest as skipped. Skipped is the number to read on a second import.  It is READ-ONLY against the bank: this ingests, it never sends money. Scoped to the caller&#39;s own org from the validated principal, and refused without one; &#x60;sandbox&#x3D;true&#x60; writes the org&#39;s sandbox ledger instead of its real books. An empty body is a 400, and a file the parser cannot read is a 400 carrying the parser&#39;s reason rather than a partial import. On a deployment whose import parser is not built, this answers 501 rather than mishandling the file.
      * @param body  (optional)
-     * @return ApiResponse<CloudBankTally?>
+     * @return ApiResponse<BankTally?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksBankImportWithHttpInfo(body: java.io.File?) : ApiResponse<CloudBankTally?> {
-        val localVariableConfig = cloudPostV1BooksBankImportRequestConfig(body = body)
+    fun postV1BooksBankImportWithHttpInfo(body: java.io.File?) : ApiResponse<BankTally?> {
+        val localVariableConfig = postV1BooksBankImportRequestConfig(body = body)
 
-        return request<java.io.File, CloudBankTally>(
+        return request<java.io.File, BankTally>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksBankImport
+     * To obtain the request config of the operation postV1BooksBankImport
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1BooksBankImportRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1BooksBankImportRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1478,15 +1478,85 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/bank/import",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/books/bank/link-token
-     * 
-     * 
+     * POST /v1/books/bank/sync
+     * Pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped.
+     * Pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped. One connector&#39;s outage is skipped rather than failing the whole sync. It reports the batch: how many transactions were seen, how many vouchers posted, how many inflows reconciled against the processor clearing account, how many raised a question, how many were own-account transfers, and how many were already-processed no-ops. It is READ-ONLY against the bank — it ingests, it never sends money.
+     * @return BankTally
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1BooksBankSync() : BankTally {
+        val localVarResponse = postV1BooksBankSyncWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BankTally
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/books/bank/sync
+     * Pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped.
+     * Pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped. One connector&#39;s outage is skipped rather than failing the whole sync. It reports the batch: how many transactions were seen, how many vouchers posted, how many inflows reconciled against the processor clearing account, how many raised a question, how many were own-account transfers, and how many were already-processed no-ops. It is READ-ONLY against the bank — it ingests, it never sends money.
+     * @return ApiResponse<BankTally?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1BooksBankSyncWithHttpInfo() : ApiResponse<BankTally?> {
+        val localVariableConfig = postV1BooksBankSyncRequestConfig()
+
+        return request<Unit, BankTally>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1BooksBankSync
+     *
+     * @return RequestConfig
+     */
+    fun postV1BooksBankSyncRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/books/bank/sync",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/books/bank/token
+     * Begin connecting a bank account (not yet available)
+     * ANSWERS 501 UNCONDITIONALLY. It is the intended first hop of the bank-linking handshake — mint the short-lived session token a browser hands to the provider&#39;s link widget — and nothing on the HTTP path reaches an implementation today.  The connectors behind it are written and tested; only the wiring is missing, so an org cannot connect a bank through the API at all. Until that lands, bank data reaches the books by statement import.  It is documented as refusing rather than declared with a success body precisely because it has never sent one. A response schema here would be invention: every generated SDK would carry a return type for a call that has only ever failed. A caller with no principal gets 401 before the 501.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1495,8 +1565,8 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksBankLinkToken() : Unit {
-        val localVarResponse = cloudPostV1BooksBankLinkTokenWithHttpInfo()
+    fun postV1BooksBankToken() : Unit {
+        val localVarResponse = postV1BooksBankTokenWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1514,16 +1584,16 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * POST /v1/books/bank/link-token
-     * 
-     * 
+     * POST /v1/books/bank/token
+     * Begin connecting a bank account (not yet available)
+     * ANSWERS 501 UNCONDITIONALLY. It is the intended first hop of the bank-linking handshake — mint the short-lived session token a browser hands to the provider&#39;s link widget — and nothing on the HTTP path reaches an implementation today.  The connectors behind it are written and tested; only the wiring is missing, so an org cannot connect a bank through the API at all. Until that lands, bank data reaches the books by statement import.  It is documented as refusing rather than declared with a success body precisely because it has never sent one. A response schema here would be invention: every generated SDK would carry a return type for a call that has only ever failed. A caller with no principal gets 401 before the 501.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksBankLinkTokenWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BooksBankLinkTokenRequestConfig()
+    fun postV1BooksBankTokenWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BooksBankTokenRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1531,101 +1601,31 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksBankLinkToken
+     * To obtain the request config of the operation postV1BooksBankToken
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BooksBankLinkTokenRequestConfig() : RequestConfig<Unit> {
+    fun postV1BooksBankTokenRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/books/bank/link-token",
+            path = "/v1/books/bank/token",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/books/bank/sync
-     * SyncBank pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped.
-     * SyncBank pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped. One connector&#39;s outage is skipped rather than failing the whole sync. It reports the batch: how many transactions were seen, how many vouchers posted, how many inflows reconciled against the processor clearing account, how many raised a question, how many were own-account transfers, and how many were already-processed no-ops. It is READ-ONLY against the bank — it ingests, it never sends money.
-     * @return CloudBankTally
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksBankSync() : CloudBankTally {
-        val localVarResponse = cloudPostV1BooksBankSyncWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBankTally
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/books/bank/sync
-     * SyncBank pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped.
-     * SyncBank pulls every connected bank (Plaid/Teller) for the caller&#39;s org, maps each fetched transaction to a posting and books it idempotently, then advances that connector&#39;s cursor so the next sync resumes where this one stopped. One connector&#39;s outage is skipped rather than failing the whole sync. It reports the batch: how many transactions were seen, how many vouchers posted, how many inflows reconciled against the processor clearing account, how many raised a question, how many were own-account transfers, and how many were already-processed no-ops. It is READ-ONLY against the bank — it ingests, it never sends money.
-     * @return ApiResponse<CloudBankTally?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksBankSyncWithHttpInfo() : ApiResponse<CloudBankTally?> {
-        val localVariableConfig = cloudPostV1BooksBankSyncRequestConfig()
-
-        return request<Unit, CloudBankTally>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1BooksBankSync
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1BooksBankSyncRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/books/bank/sync",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/inbox
-     * 
-     * 
+     * Queue a document for later scanning
+     * Takes a document as RAW BYTES and queues it in the caller org&#39;s inbox as &#x60;unsorted&#x60;, answering the queued item. It is the drop box: get the paperwork in now, read it later.  It EXTRACTS NOTHING and calls no model — that is what separates it from the scan. Nothing is proposed and nothing is posted; the item simply waits to be scanned, and a booked document leaves the queue.  IDEMPOTENT BY CONTENT: the item&#39;s id is the file hash, so re-uploading the same bytes answers the existing item rather than adding a duplicate row — and it is the same id a scan of those bytes uses, which is how the two routes address one document. Scoped to the caller&#39;s own org from the validated principal and refused without one; &#x60;sandbox&#x3D;true&#x60; targets the sandbox ledger, and &#x60;filename&#x60; is recorded for display. An empty or oversized upload is a 400.
      * @param body  (optional)
-     * @return CloudInboxItem
+     * @return InboxItem
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1634,11 +1634,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksInbox(body: java.io.File? = null) : CloudInboxItem {
-        val localVarResponse = cloudPostV1BooksInboxWithHttpInfo(body = body)
+    fun postV1BooksInbox(body: java.io.File? = null) : InboxItem {
+        val localVarResponse = postV1BooksInboxWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInboxItem
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InboxItem
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1654,30 +1654,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/inbox
-     * 
-     * 
+     * Queue a document for later scanning
+     * Takes a document as RAW BYTES and queues it in the caller org&#39;s inbox as &#x60;unsorted&#x60;, answering the queued item. It is the drop box: get the paperwork in now, read it later.  It EXTRACTS NOTHING and calls no model — that is what separates it from the scan. Nothing is proposed and nothing is posted; the item simply waits to be scanned, and a booked document leaves the queue.  IDEMPOTENT BY CONTENT: the item&#39;s id is the file hash, so re-uploading the same bytes answers the existing item rather than adding a duplicate row — and it is the same id a scan of those bytes uses, which is how the two routes address one document. Scoped to the caller&#39;s own org from the validated principal and refused without one; &#x60;sandbox&#x3D;true&#x60; targets the sandbox ledger, and &#x60;filename&#x60; is recorded for display. An empty or oversized upload is a 400.
      * @param body  (optional)
-     * @return ApiResponse<CloudInboxItem?>
+     * @return ApiResponse<InboxItem?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksInboxWithHttpInfo(body: java.io.File?) : ApiResponse<CloudInboxItem?> {
-        val localVariableConfig = cloudPostV1BooksInboxRequestConfig(body = body)
+    fun postV1BooksInboxWithHttpInfo(body: java.io.File?) : ApiResponse<InboxItem?> {
+        val localVariableConfig = postV1BooksInboxRequestConfig(body = body)
 
-        return request<java.io.File, CloudInboxItem>(
+        return request<java.io.File, InboxItem>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksInbox
+     * To obtain the request config of the operation postV1BooksInbox
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1BooksInboxRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1BooksInboxRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1689,17 +1689,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/inbox",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/rules
-     * UpsertRule creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority.
-     * UpsertRule creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority. The category is normalized to a real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. A rule overrides a vendor&#39;s default category, so this is the standing instruction that decides how a future bill classifies.
-     * @param cloudRule 
-     * @return CloudRule
+     * Creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority.
+     * Creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority. The category is normalized to a real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. A rule overrides a vendor&#39;s default category, so this is the standing instruction that decides how a future bill classifies.
+     * @param rule 
+     * @return Rule
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1708,11 +1708,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksRules(cloudRule: CloudRule) : CloudRule {
-        val localVarResponse = cloudPostV1BooksRulesWithHttpInfo(cloudRule = cloudRule)
+    fun postV1BooksRules(rule: Rule) : Rule {
+        val localVarResponse = postV1BooksRulesWithHttpInfo(rule = rule)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRule
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Rule
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1728,31 +1728,31 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/rules
-     * UpsertRule creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority.
-     * UpsertRule creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority. The category is normalized to a real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. A rule overrides a vendor&#39;s default category, so this is the standing instruction that decides how a future bill classifies.
-     * @param cloudRule 
-     * @return ApiResponse<CloudRule?>
+     * Creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority.
+     * Creates or updates one auto-categorization rule, keyed by its pattern — writing a pattern that already exists REPLACES that row&#39;s category and priority. The category is normalized to a real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. A rule overrides a vendor&#39;s default category, so this is the standing instruction that decides how a future bill classifies.
+     * @param rule 
+     * @return ApiResponse<Rule?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksRulesWithHttpInfo(cloudRule: CloudRule) : ApiResponse<CloudRule?> {
-        val localVariableConfig = cloudPostV1BooksRulesRequestConfig(cloudRule = cloudRule)
+    fun postV1BooksRulesWithHttpInfo(rule: Rule) : ApiResponse<Rule?> {
+        val localVariableConfig = postV1BooksRulesRequestConfig(rule = rule)
 
-        return request<CloudRule, CloudRule>(
+        return request<Rule, Rule>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksRules
+     * To obtain the request config of the operation postV1BooksRules
      *
-     * @param cloudRule 
+     * @param rule 
      * @return RequestConfig
      */
-    fun cloudPostV1BooksRulesRequestConfig(cloudRule: CloudRule) : RequestConfig<CloudRule> {
-        val localVariableBody = cloudRule
+    fun postV1BooksRulesRequestConfig(rule: Rule) : RequestConfig<Rule> {
+        val localVariableBody = rule
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1763,17 +1763,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/scan
-     * 
-     * 
+     * Scan a receipt or invoice into a proposed voucher
+     * Takes a receipt or invoice as RAW BYTES — a PDF, an image or plain text, uploaded under its own content type, not wrapped in JSON — extracts what the document says, resolves the vendor&#39;s expense category, and answers a DRAFT carrying a balanced voucher proposed for it.  NOTHING IS POSTED. That split is the whole design: the model only ever produces a structured reading of the document, the voucher is assembled deterministically in Go from that reading, and the ledger is written only by the separate book call a human confirms. So a misread scan can propose a wrong draft; it cannot move money. Amounts are exact integer cents end to end — the extraction returns cents, never a decimal — so no rounding enters the ledger.  The draft&#39;s id is the FILE HASH, and that is what makes booking idempotent: re-scanning the same bytes addresses the same draft rather than queuing a second one. A row is written to the org&#39;s document inbox as a side effect, moving it from unsorted to draft. Scoped to the caller&#39;s own org from the validated principal and refused without one; &#x60;sandbox&#x3D;true&#x60; targets the sandbox ledger, and &#x60;filename&#x60; is recorded for the inbox. An empty or oversized upload is a 400, and a deployment with no scanner model answers 501.
      * @param body  (optional)
-     * @return CloudScanDraft
+     * @return ScanDraft
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1782,11 +1782,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksScan(body: java.io.File? = null) : CloudScanDraft {
-        val localVarResponse = cloudPostV1BooksScanWithHttpInfo(body = body)
+    fun postV1BooksScan(body: java.io.File? = null) : ScanDraft {
+        val localVarResponse = postV1BooksScanWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudScanDraft
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ScanDraft
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1802,30 +1802,30 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/scan
-     * 
-     * 
+     * Scan a receipt or invoice into a proposed voucher
+     * Takes a receipt or invoice as RAW BYTES — a PDF, an image or plain text, uploaded under its own content type, not wrapped in JSON — extracts what the document says, resolves the vendor&#39;s expense category, and answers a DRAFT carrying a balanced voucher proposed for it.  NOTHING IS POSTED. That split is the whole design: the model only ever produces a structured reading of the document, the voucher is assembled deterministically in Go from that reading, and the ledger is written only by the separate book call a human confirms. So a misread scan can propose a wrong draft; it cannot move money. Amounts are exact integer cents end to end — the extraction returns cents, never a decimal — so no rounding enters the ledger.  The draft&#39;s id is the FILE HASH, and that is what makes booking idempotent: re-scanning the same bytes addresses the same draft rather than queuing a second one. A row is written to the org&#39;s document inbox as a side effect, moving it from unsorted to draft. Scoped to the caller&#39;s own org from the validated principal and refused without one; &#x60;sandbox&#x3D;true&#x60; targets the sandbox ledger, and &#x60;filename&#x60; is recorded for the inbox. An empty or oversized upload is a 400, and a deployment with no scanner model answers 501.
      * @param body  (optional)
-     * @return ApiResponse<CloudScanDraft?>
+     * @return ApiResponse<ScanDraft?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksScanWithHttpInfo(body: java.io.File?) : ApiResponse<CloudScanDraft?> {
-        val localVariableConfig = cloudPostV1BooksScanRequestConfig(body = body)
+    fun postV1BooksScanWithHttpInfo(body: java.io.File?) : ApiResponse<ScanDraft?> {
+        val localVariableConfig = postV1BooksScanRequestConfig(body = body)
 
-        return request<java.io.File, CloudScanDraft>(
+        return request<java.io.File, ScanDraft>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksScan
+     * To obtain the request config of the operation postV1BooksScan
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1BooksScanRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1BooksScanRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1837,17 +1837,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/scan",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/scan/book
-     * BookScan posts a reviewed scanned bill to the ledger.
-     * BookScan posts a reviewed scanned bill to the ledger. It is the scanner&#39;s ONLY write: the voucher goes through the same post() choke point every other source uses, so it is checked to balance (Σdebit &#x3D;&#x3D; Σcredit) and is idempotent by (scan, scanId) — re-booking the same scan answers posted&#x3D;false and writes nothing. A bill whose economic identity (vendor, total, issue date) already posted under a DIFFERENT scan is refused 409 unless override is set, which is what stops the same receipt re-scanned into a new file hash from double-booking. An unbalanced voucher is refused 400.
-     * @param cloudBookRequest 
-     * @return CloudBookResponse
+     * Posts a reviewed scanned bill to the ledger.
+     * Posts a reviewed scanned bill to the ledger. It is the scanner&#39;s ONLY write: the voucher goes through the same post() choke point every other source uses, so it is checked to balance (Σdebit &#x3D;&#x3D; Σcredit) and is idempotent by (scan, scanId) — re-booking the same scan answers posted&#x3D;false and writes nothing. A bill whose economic identity (vendor, total, issue date) already posted under a DIFFERENT scan is refused 409 unless override is set, which is what stops the same receipt re-scanned into a new file hash from double-booking. An unbalanced voucher is refused 400.
+     * @param bookRequest 
+     * @return BookResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1856,11 +1856,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksScanBook(cloudBookRequest: CloudBookRequest) : CloudBookResponse {
-        val localVarResponse = cloudPostV1BooksScanBookWithHttpInfo(cloudBookRequest = cloudBookRequest)
+    fun postV1BooksScanBook(bookRequest: BookRequest) : BookResponse {
+        val localVarResponse = postV1BooksScanBookWithHttpInfo(bookRequest = bookRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBookResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BookResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1876,31 +1876,31 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/scan/book
-     * BookScan posts a reviewed scanned bill to the ledger.
-     * BookScan posts a reviewed scanned bill to the ledger. It is the scanner&#39;s ONLY write: the voucher goes through the same post() choke point every other source uses, so it is checked to balance (Σdebit &#x3D;&#x3D; Σcredit) and is idempotent by (scan, scanId) — re-booking the same scan answers posted&#x3D;false and writes nothing. A bill whose economic identity (vendor, total, issue date) already posted under a DIFFERENT scan is refused 409 unless override is set, which is what stops the same receipt re-scanned into a new file hash from double-booking. An unbalanced voucher is refused 400.
-     * @param cloudBookRequest 
-     * @return ApiResponse<CloudBookResponse?>
+     * Posts a reviewed scanned bill to the ledger.
+     * Posts a reviewed scanned bill to the ledger. It is the scanner&#39;s ONLY write: the voucher goes through the same post() choke point every other source uses, so it is checked to balance (Σdebit &#x3D;&#x3D; Σcredit) and is idempotent by (scan, scanId) — re-booking the same scan answers posted&#x3D;false and writes nothing. A bill whose economic identity (vendor, total, issue date) already posted under a DIFFERENT scan is refused 409 unless override is set, which is what stops the same receipt re-scanned into a new file hash from double-booking. An unbalanced voucher is refused 400.
+     * @param bookRequest 
+     * @return ApiResponse<BookResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksScanBookWithHttpInfo(cloudBookRequest: CloudBookRequest) : ApiResponse<CloudBookResponse?> {
-        val localVariableConfig = cloudPostV1BooksScanBookRequestConfig(cloudBookRequest = cloudBookRequest)
+    fun postV1BooksScanBookWithHttpInfo(bookRequest: BookRequest) : ApiResponse<BookResponse?> {
+        val localVariableConfig = postV1BooksScanBookRequestConfig(bookRequest = bookRequest)
 
-        return request<CloudBookRequest, CloudBookResponse>(
+        return request<BookRequest, BookResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksScanBook
+     * To obtain the request config of the operation postV1BooksScanBook
      *
-     * @param cloudBookRequest 
+     * @param bookRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1BooksScanBookRequestConfig(cloudBookRequest: CloudBookRequest) : RequestConfig<CloudBookRequest> {
-        val localVariableBody = cloudBookRequest
+    fun postV1BooksScanBookRequestConfig(bookRequest: BookRequest) : RequestConfig<BookRequest> {
+        val localVariableBody = bookRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1911,7 +1911,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/scan/book",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1920,7 +1920,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/books/sync
      * Sync ingests the caller&#39;s OWN org from commerce into BOTH ledgers (live and sandbox) and reports how many new vouchers posted to each.
      * Sync ingests the caller&#39;s OWN org from commerce into BOTH ledgers (live and sandbox) and reports how many new vouchers posted to each. It is idempotent — money that has already been booked posts nothing on a repeat — and it is read-only against commerce: it never mints a deposit, a credit or a payout, only the accounting twin of money that already moved.
-     * @return CloudSyncTally
+     * @return SyncTally
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1929,11 +1929,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksSync() : CloudSyncTally {
-        val localVarResponse = cloudPostV1BooksSyncWithHttpInfo()
+    fun postV1BooksSync() : SyncTally {
+        val localVarResponse = postV1BooksSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSyncTally
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SyncTally
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1951,26 +1951,26 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/books/sync
      * Sync ingests the caller&#39;s OWN org from commerce into BOTH ledgers (live and sandbox) and reports how many new vouchers posted to each.
      * Sync ingests the caller&#39;s OWN org from commerce into BOTH ledgers (live and sandbox) and reports how many new vouchers posted to each. It is idempotent — money that has already been booked posts nothing on a repeat — and it is read-only against commerce: it never mints a deposit, a credit or a payout, only the accounting twin of money that already moved.
-     * @return ApiResponse<CloudSyncTally?>
+     * @return ApiResponse<SyncTally?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksSyncWithHttpInfo() : ApiResponse<CloudSyncTally?> {
-        val localVariableConfig = cloudPostV1BooksSyncRequestConfig()
+    fun postV1BooksSyncWithHttpInfo() : ApiResponse<SyncTally?> {
+        val localVariableConfig = postV1BooksSyncRequestConfig()
 
-        return request<Unit, CloudSyncTally>(
+        return request<Unit, SyncTally>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksSync
+     * To obtain the request config of the operation postV1BooksSync
      *
      * @return RequestConfig
      */
-    fun cloudPostV1BooksSyncRequestConfig() : RequestConfig<Unit> {
+    fun postV1BooksSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1981,17 +1981,17 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/books/vendors
-     * UpsertVendor creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category.
-     * UpsertVendor creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category. A category given as a slug (\&quot;software\&quot;) is normalized to its real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. Recording a vendor is what makes future bills from it self-classify instead of asking again.
-     * @param cloudVendorRow 
-     * @return CloudVendorRow
+     * Creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category.
+     * Creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category. A category given as a slug (\&quot;software\&quot;) is normalized to its real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. Recording a vendor is what makes future bills from it self-classify instead of asking again.
+     * @param vendorRow 
+     * @return VendorRow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2000,11 +2000,11 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BooksVendors(cloudVendorRow: CloudVendorRow) : CloudVendorRow {
-        val localVarResponse = cloudPostV1BooksVendorsWithHttpInfo(cloudVendorRow = cloudVendorRow)
+    fun postV1BooksVendors(vendorRow: VendorRow) : VendorRow {
+        val localVarResponse = postV1BooksVendorsWithHttpInfo(vendorRow = vendorRow)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVendorRow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VendorRow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2020,31 +2020,31 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/books/vendors
-     * UpsertVendor creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category.
-     * UpsertVendor creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category. A category given as a slug (\&quot;software\&quot;) is normalized to its real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. Recording a vendor is what makes future bills from it self-classify instead of asking again.
-     * @param cloudVendorRow 
-     * @return ApiResponse<CloudVendorRow?>
+     * Creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category.
+     * Creates or updates one vendor in the org&#39;s vendor book, keyed by its canonical name — writing a canonical name that already exists REPLACES that row&#39;s aliases and default category. A category given as a slug (\&quot;software\&quot;) is normalized to its real COA expense account, and anything unrecognized becomes 5900 Uncategorized rather than a guessed real account. It answers the row exactly as stored, so the caller sees the normalization. Recording a vendor is what makes future bills from it self-classify instead of asking again.
+     * @param vendorRow 
+     * @return ApiResponse<VendorRow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BooksVendorsWithHttpInfo(cloudVendorRow: CloudVendorRow) : ApiResponse<CloudVendorRow?> {
-        val localVariableConfig = cloudPostV1BooksVendorsRequestConfig(cloudVendorRow = cloudVendorRow)
+    fun postV1BooksVendorsWithHttpInfo(vendorRow: VendorRow) : ApiResponse<VendorRow?> {
+        val localVariableConfig = postV1BooksVendorsRequestConfig(vendorRow = vendorRow)
 
-        return request<CloudVendorRow, CloudVendorRow>(
+        return request<VendorRow, VendorRow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BooksVendors
+     * To obtain the request config of the operation postV1BooksVendors
      *
-     * @param cloudVendorRow 
+     * @param vendorRow 
      * @return RequestConfig
      */
-    fun cloudPostV1BooksVendorsRequestConfig(cloudVendorRow: CloudVendorRow) : RequestConfig<CloudVendorRow> {
-        val localVariableBody = cloudVendorRow
+    fun postV1BooksVendorsRequestConfig(vendorRow: VendorRow) : RequestConfig<VendorRow> {
+        val localVariableBody = vendorRow
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2055,7 +2055,7 @@ class BooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/books/vendors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

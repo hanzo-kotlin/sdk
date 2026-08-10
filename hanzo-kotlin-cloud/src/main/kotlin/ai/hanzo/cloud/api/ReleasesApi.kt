@@ -19,6 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.ReleaseBoard
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +47,22 @@ class ReleasesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/releases
-     * 
-     * 
-     * @return void
+     * Returns the versions that actually reached the cluster.
+     * Returns the versions that actually reached the cluster.  It lists the org&#39;s releases: the deployments that were genuinely applied to the cluster, with the app they belong to, their version, environment, status and when they were released. A deployment that failed or is still building is NOT a release and is excluded — reaching the cluster is what makes one. Requires a validated principal; 403 without one.
+     * @return ReleaseBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Releases() : Unit {
-        val localVarResponse = cloudGetV1ReleasesWithHttpInfo()
+    fun getV1Releases() : ReleaseBoard {
+        val localVarResponse = getV1ReleasesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReleaseBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,37 +78,39 @@ class ReleasesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/releases
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Returns the versions that actually reached the cluster.
+     * Returns the versions that actually reached the cluster.  It lists the org&#39;s releases: the deployments that were genuinely applied to the cluster, with the app they belong to, their version, environment, status and when they were released. A deployment that failed or is still building is NOT a release and is excluded — reaching the cluster is what makes one. Requires a validated principal; 403 without one.
+     * @return ApiResponse<ReleaseBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ReleasesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ReleasesRequestConfig()
+    fun getV1ReleasesWithHttpInfo() : ApiResponse<ReleaseBoard?> {
+        val localVariableConfig = getV1ReleasesRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, ReleaseBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Releases
+     * To obtain the request config of the operation getV1Releases
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ReleasesRequestConfig() : RequestConfig<Unit> {
+    fun getV1ReleasesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/releases",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

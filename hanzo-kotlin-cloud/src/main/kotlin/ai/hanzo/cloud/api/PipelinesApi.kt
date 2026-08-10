@@ -19,12 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.MlCreatePipelineRequest
-import ai.hanzo.cloud.model.MlListPipelineRuns200Response
-import ai.hanzo.cloud.model.MlListPipelines200Response
-import ai.hanzo.cloud.model.MlPipeline
-import ai.hanzo.cloud.model.MlPipelineRun
-import ai.hanzo.cloud.model.MlStartPipelineRunRequest
+import ai.hanzo.cloud.model.PipelineBoard
 
 import com.google.gson.annotations.SerializedName
 
@@ -52,21 +47,22 @@ class PipelinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/pipelines
-     * 
-     * 
-     * @return void
+     * Returns one build-and-deploy pipeline per app, with its latest run.
+     * Returns one build-and-deploy pipeline per app, with its latest run.  It returns one pipeline per application in the caller&#39;s org — its repo or image source, its current status, and when its most recent deployment ran and how long it took. A pipeline is a PROJECTION of an app plus its newest deployment, not a separate record: it comes into existence with the app and is triggered only through /deploy, never here. Requires a validated principal; 403 without one.
+     * @return PipelineBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Pipelines() : Unit {
-        val localVarResponse = cloudGetV1PipelinesWithHttpInfo()
+    fun getV1Pipelines() : PipelineBoard {
+        val localVarResponse = getV1PipelinesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PipelineBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -82,438 +78,39 @@ class PipelinesApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/pipelines
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Returns one build-and-deploy pipeline per app, with its latest run.
+     * Returns one build-and-deploy pipeline per app, with its latest run.  It returns one pipeline per application in the caller&#39;s org — its repo or image source, its current status, and when its most recent deployment ran and how long it took. A pipeline is a PROJECTION of an app plus its newest deployment, not a separate record: it comes into existence with the app and is triggered only through /deploy, never here. Requires a validated principal; 403 without one.
+     * @return ApiResponse<PipelineBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PipelinesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1PipelinesRequestConfig()
+    fun getV1PipelinesWithHttpInfo() : ApiResponse<PipelineBoard?> {
+        val localVariableConfig = getV1PipelinesRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, PipelineBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Pipelines
+     * To obtain the request config of the operation getV1Pipelines
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PipelinesRequestConfig() : RequestConfig<Unit> {
+    fun getV1PipelinesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/pipelines",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ml/pipelines
-     * Create a pipeline
-     * Create and optionally start a training pipeline.
-     * @param mlCreatePipelineRequest 
-     * @return MlPipeline
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlCreatePipeline(mlCreatePipelineRequest: MlCreatePipelineRequest) : MlPipeline {
-        val localVarResponse = mlCreatePipelineWithHttpInfo(mlCreatePipelineRequest = mlCreatePipelineRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlPipeline
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ml/pipelines
-     * Create a pipeline
-     * Create and optionally start a training pipeline.
-     * @param mlCreatePipelineRequest 
-     * @return ApiResponse<MlPipeline?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlCreatePipelineWithHttpInfo(mlCreatePipelineRequest: MlCreatePipelineRequest) : ApiResponse<MlPipeline?> {
-        val localVariableConfig = mlCreatePipelineRequestConfig(mlCreatePipelineRequest = mlCreatePipelineRequest)
-
-        return request<MlCreatePipelineRequest, MlPipeline>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlCreatePipeline
-     *
-     * @param mlCreatePipelineRequest 
-     * @return RequestConfig
-     */
-    fun mlCreatePipelineRequestConfig(mlCreatePipelineRequest: MlCreatePipelineRequest) : RequestConfig<MlCreatePipelineRequest> {
-        val localVariableBody = mlCreatePipelineRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ml/pipelines",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ml/pipelines/{pipeline_id}
-     * Get pipeline details
-     * 
-     * @param pipelineId 
-     * @return MlPipeline
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlGetPipeline(pipelineId: kotlin.String) : MlPipeline {
-        val localVarResponse = mlGetPipelineWithHttpInfo(pipelineId = pipelineId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlPipeline
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ml/pipelines/{pipeline_id}
-     * Get pipeline details
-     * 
-     * @param pipelineId 
-     * @return ApiResponse<MlPipeline?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlGetPipelineWithHttpInfo(pipelineId: kotlin.String) : ApiResponse<MlPipeline?> {
-        val localVariableConfig = mlGetPipelineRequestConfig(pipelineId = pipelineId)
-
-        return request<Unit, MlPipeline>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlGetPipeline
-     *
-     * @param pipelineId 
-     * @return RequestConfig
-     */
-    fun mlGetPipelineRequestConfig(pipelineId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ml/pipelines/{pipeline_id}".replace("{"+"pipeline_id"+"}", encodeURIComponent(pipelineId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ml/pipelines/{pipeline_id}/runs
-     * List pipeline runs
-     * 
-     * @param pipelineId 
-     * @return MlListPipelineRuns200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlListPipelineRuns(pipelineId: kotlin.String) : MlListPipelineRuns200Response {
-        val localVarResponse = mlListPipelineRunsWithHttpInfo(pipelineId = pipelineId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlListPipelineRuns200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ml/pipelines/{pipeline_id}/runs
-     * List pipeline runs
-     * 
-     * @param pipelineId 
-     * @return ApiResponse<MlListPipelineRuns200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlListPipelineRunsWithHttpInfo(pipelineId: kotlin.String) : ApiResponse<MlListPipelineRuns200Response?> {
-        val localVariableConfig = mlListPipelineRunsRequestConfig(pipelineId = pipelineId)
-
-        return request<Unit, MlListPipelineRuns200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlListPipelineRuns
-     *
-     * @param pipelineId 
-     * @return RequestConfig
-     */
-    fun mlListPipelineRunsRequestConfig(pipelineId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ml/pipelines/{pipeline_id}/runs".replace("{"+"pipeline_id"+"}", encodeURIComponent(pipelineId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter status
-     */
-     enum class StatusMlListPipelines(val value: kotlin.String) {
-         @SerializedName(value = "pending") pending("pending"),
-         @SerializedName(value = "running") running("running"),
-         @SerializedName(value = "succeeded") succeeded("succeeded"),
-         @SerializedName(value = "failed") failed("failed"),
-         @SerializedName(value = "cancelled") cancelled("cancelled");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/ml/pipelines
-     * List pipelines
-     * 
-     * @param status  (optional)
-     * @param limit  (optional, default to 50)
-     * @return MlListPipelines200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlListPipelines(status: StatusMlListPipelines? = null, limit: kotlin.Int? = 50) : MlListPipelines200Response {
-        val localVarResponse = mlListPipelinesWithHttpInfo(status = status, limit = limit)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlListPipelines200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ml/pipelines
-     * List pipelines
-     * 
-     * @param status  (optional)
-     * @param limit  (optional, default to 50)
-     * @return ApiResponse<MlListPipelines200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlListPipelinesWithHttpInfo(status: StatusMlListPipelines?, limit: kotlin.Int?) : ApiResponse<MlListPipelines200Response?> {
-        val localVariableConfig = mlListPipelinesRequestConfig(status = status, limit = limit)
-
-        return request<Unit, MlListPipelines200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlListPipelines
-     *
-     * @param status  (optional)
-     * @param limit  (optional, default to 50)
-     * @return RequestConfig
-     */
-    fun mlListPipelinesRequestConfig(status: StatusMlListPipelines?, limit: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (status != null) {
-                    put("status", listOf(status.value))
-                }
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ml/pipelines",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ml/pipelines/{pipeline_id}/runs
-     * Start a pipeline run
-     * 
-     * @param pipelineId 
-     * @param mlStartPipelineRunRequest  (optional)
-     * @return MlPipelineRun
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlStartPipelineRun(pipelineId: kotlin.String, mlStartPipelineRunRequest: MlStartPipelineRunRequest? = null) : MlPipelineRun {
-        val localVarResponse = mlStartPipelineRunWithHttpInfo(pipelineId = pipelineId, mlStartPipelineRunRequest = mlStartPipelineRunRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlPipelineRun
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ml/pipelines/{pipeline_id}/runs
-     * Start a pipeline run
-     * 
-     * @param pipelineId 
-     * @param mlStartPipelineRunRequest  (optional)
-     * @return ApiResponse<MlPipelineRun?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlStartPipelineRunWithHttpInfo(pipelineId: kotlin.String, mlStartPipelineRunRequest: MlStartPipelineRunRequest?) : ApiResponse<MlPipelineRun?> {
-        val localVariableConfig = mlStartPipelineRunRequestConfig(pipelineId = pipelineId, mlStartPipelineRunRequest = mlStartPipelineRunRequest)
-
-        return request<MlStartPipelineRunRequest, MlPipelineRun>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlStartPipelineRun
-     *
-     * @param pipelineId 
-     * @param mlStartPipelineRunRequest  (optional)
-     * @return RequestConfig
-     */
-    fun mlStartPipelineRunRequestConfig(pipelineId: kotlin.String, mlStartPipelineRunRequest: MlStartPipelineRunRequest?) : RequestConfig<MlStartPipelineRunRequest> {
-        val localVariableBody = mlStartPipelineRunRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ml/pipelines/{pipeline_id}/runs".replace("{"+"pipeline_id"+"}", encodeURIComponent(pipelineId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

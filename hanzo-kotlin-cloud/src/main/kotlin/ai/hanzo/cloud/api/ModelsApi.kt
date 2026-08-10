@@ -19,14 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AiError
-import ai.hanzo.cloud.model.AiModel
-import ai.hanzo.cloud.model.AiModelList
-import ai.hanzo.cloud.model.GatewayListModels200Response
-import ai.hanzo.cloud.model.GatewayModel
-import ai.hanzo.cloud.model.MlModel
-import ai.hanzo.cloud.model.MlPromoteModelRequest
-import ai.hanzo.cloud.model.MlRollbackModelRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -54,446 +46,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/models
-     * List available models
-     * OpenAI-compatible model list across every routable provider.
-     * @return AiModelList
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiListModels() : AiModelList {
-        val localVarResponse = aiListModelsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiModelList
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/models
-     * List available models
-     * OpenAI-compatible model list across every routable provider.
-     * @return ApiResponse<AiModelList?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiListModelsWithHttpInfo() : ApiResponse<AiModelList?> {
-        val localVariableConfig = aiListModelsRequestConfig()
-
-        return request<Unit, AiModelList>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiListModels
-     *
-     * @return RequestConfig
-     */
-    fun aiListModelsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/models",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/models/{model}
-     * Retrieve a model
-     * 
-     * @param model 
-     * @return AiModel
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiRetrieveModel(model: kotlin.String) : AiModel {
-        val localVarResponse = aiRetrieveModelWithHttpInfo(model = model)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiModel
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/models/{model}
-     * Retrieve a model
-     * 
-     * @param model 
-     * @return ApiResponse<AiModel?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiRetrieveModelWithHttpInfo(model: kotlin.String) : ApiResponse<AiModel?> {
-        val localVariableConfig = aiRetrieveModelRequestConfig(model = model)
-
-        return request<Unit, AiModel>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiRetrieveModel
-     *
-     * @param model 
-     * @return RequestConfig
-     */
-    fun aiRetrieveModelRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/models/{model}".replace("{"+"model"+"}", encodeURIComponent(model.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/gateway/models/{model}
-     * Get model
-     * 
-     * @param model 
-     * @return GatewayModel
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayGetModel(model: kotlin.String) : GatewayModel {
-        val localVarResponse = gatewayGetModelWithHttpInfo(model = model)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GatewayModel
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/gateway/models/{model}
-     * Get model
-     * 
-     * @param model 
-     * @return ApiResponse<GatewayModel?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayGetModelWithHttpInfo(model: kotlin.String) : ApiResponse<GatewayModel?> {
-        val localVariableConfig = gatewayGetModelRequestConfig(model = model)
-
-        return request<Unit, GatewayModel>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation gatewayGetModel
-     *
-     * @param model 
-     * @return RequestConfig
-     */
-    fun gatewayGetModelRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/gateway/models/{model}".replace("{"+"model"+"}", encodeURIComponent(model.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/gateway/models
-     * List models
-     * 
-     * @return GatewayListModels200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayListModels() : GatewayListModels200Response {
-        val localVarResponse = gatewayListModelsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GatewayListModels200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/gateway/models
-     * List models
-     * 
-     * @return ApiResponse<GatewayListModels200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayListModelsWithHttpInfo() : ApiResponse<GatewayListModels200Response?> {
-        val localVariableConfig = gatewayListModelsRequestConfig()
-
-        return request<Unit, GatewayListModels200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation gatewayListModels
-     *
-     * @return RequestConfig
-     */
-    fun gatewayListModelsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/gateway/models",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ml/models/{model_id}
-     * Get model details
-     * 
-     * @param modelId 
-     * @return MlModel
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlGetModel(modelId: kotlin.String) : MlModel {
-        val localVarResponse = mlGetModelWithHttpInfo(modelId = modelId)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlModel
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ml/models/{model_id}
-     * Get model details
-     * 
-     * @param modelId 
-     * @return ApiResponse<MlModel?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlGetModelWithHttpInfo(modelId: kotlin.String) : ApiResponse<MlModel?> {
-        val localVariableConfig = mlGetModelRequestConfig(modelId = modelId)
-
-        return request<Unit, MlModel>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlGetModel
-     *
-     * @param modelId 
-     * @return RequestConfig
-     */
-    fun mlGetModelRequestConfig(modelId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ml/models/{model_id}".replace("{"+"model_id"+"}", encodeURIComponent(modelId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ml/models/{model_id}/promote
-     * Promote a model
-     * Promote a model to the next deployment stage.
-     * @param modelId 
-     * @param mlPromoteModelRequest 
-     * @return MlModel
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlPromoteModel(modelId: kotlin.String, mlPromoteModelRequest: MlPromoteModelRequest) : MlModel {
-        val localVarResponse = mlPromoteModelWithHttpInfo(modelId = modelId, mlPromoteModelRequest = mlPromoteModelRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as MlModel
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/ml/models/{model_id}/promote
-     * Promote a model
-     * Promote a model to the next deployment stage.
-     * @param modelId 
-     * @param mlPromoteModelRequest 
-     * @return ApiResponse<MlModel?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mlPromoteModelWithHttpInfo(modelId: kotlin.String, mlPromoteModelRequest: MlPromoteModelRequest) : ApiResponse<MlModel?> {
-        val localVariableConfig = mlPromoteModelRequestConfig(modelId = modelId, mlPromoteModelRequest = mlPromoteModelRequest)
-
-        return request<MlPromoteModelRequest, MlModel>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mlPromoteModel
-     *
-     * @param modelId 
-     * @param mlPromoteModelRequest 
-     * @return RequestConfig
-     */
-    fun mlPromoteModelRequestConfig(modelId: kotlin.String, mlPromoteModelRequest: MlPromoteModelRequest) : RequestConfig<MlPromoteModelRequest> {
-        val localVariableBody = mlPromoteModelRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/ml/models/{model_id}/promote".replace("{"+"model_id"+"}", encodeURIComponent(modelId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/ml/models/{model_id}/rollback
-     * Rollback a model
-     * Rollback to a previous model version.
-     * @param modelId 
-     * @param mlRollbackModelRequest 
+     * Returns the list of available models from the routing table.
+     * Returns the list of available models from the routing table.  PUBLIC BY DESIGN, AND IT DOES NOT AUTHENTICATE — that is the whole contract, so it is stated here rather than left to be inferred. The catalogue is the same for everyone (listAvailableModels takes no principal), docs.hanzo.ai fetches it from the browser, and every policy layer around it already says so out loud: the authz filter lists \&quot;models\&quot; as public, filter_balance refuses to gate it (a 402 here was a console-wide outage), the rate limiter excludes it, and cloud&#39;s spend.Reachable carries /v1/models/ as \&quot;the model catalog the shell reads for discovery\&quot;.  SO THE Authorization HEADER IS NOT AN ADMISSION CHECK HERE. It is read for ONE thing — annotating gated SKUs with the caller&#39;s own access standing — and annotation degrades to nothing when there is no verified principal.  It used to hold a \&quot;require authentication\&quot; gate that authenticated nobody: it rejected an ABSENT credential and a MALFORMED one, then accepted any string that merely looked like a key. &#x60;Bearer sk-&#x60; followed by 36 zeroes returned 200 in production; so did a JWT three days expired. It was a shape check wearing an auth check&#39;s clothes, and its cost was diagnostic: /v1/models is the natural \&quot;is my auth working?\&quot; probe, and answering 200 to a dead credential sent people debugging the wrong system. A public endpoint must not appear to validate. Either check the credential or ignore it — this one ignores it, deliberately and visibly.  Removing that gate discloses nothing new: the catalogue was already reachable by anyone willing to type three characters, so there is no confidentiality delta, only an honesty one.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -502,8 +56,8 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mlRollbackModel(modelId: kotlin.String, mlRollbackModelRequest: MlRollbackModelRequest) : Unit {
-        val localVarResponse = mlRollbackModelWithHttpInfo(modelId = modelId, mlRollbackModelRequest = mlRollbackModelRequest)
+    fun getV1Models() : Unit {
+        val localVarResponse = getV1ModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -521,43 +75,245 @@ class ModelsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * POST /v1/ml/models/{model_id}/rollback
-     * Rollback a model
-     * Rollback to a previous model version.
-     * @param modelId 
-     * @param mlRollbackModelRequest 
+     * GET /v1/models
+     * Returns the list of available models from the routing table.
+     * Returns the list of available models from the routing table.  PUBLIC BY DESIGN, AND IT DOES NOT AUTHENTICATE — that is the whole contract, so it is stated here rather than left to be inferred. The catalogue is the same for everyone (listAvailableModels takes no principal), docs.hanzo.ai fetches it from the browser, and every policy layer around it already says so out loud: the authz filter lists \&quot;models\&quot; as public, filter_balance refuses to gate it (a 402 here was a console-wide outage), the rate limiter excludes it, and cloud&#39;s spend.Reachable carries /v1/models/ as \&quot;the model catalog the shell reads for discovery\&quot;.  SO THE Authorization HEADER IS NOT AN ADMISSION CHECK HERE. It is read for ONE thing — annotating gated SKUs with the caller&#39;s own access standing — and annotation degrades to nothing when there is no verified principal.  It used to hold a \&quot;require authentication\&quot; gate that authenticated nobody: it rejected an ABSENT credential and a MALFORMED one, then accepted any string that merely looked like a key. &#x60;Bearer sk-&#x60; followed by 36 zeroes returned 200 in production; so did a JWT three days expired. It was a shape check wearing an auth check&#39;s clothes, and its cost was diagnostic: /v1/models is the natural \&quot;is my auth working?\&quot; probe, and answering 200 to a dead credential sent people debugging the wrong system. A public endpoint must not appear to validate. Either check the credential or ignore it — this one ignores it, deliberately and visibly.  Removing that gate discloses nothing new: the catalogue was already reachable by anyone willing to type three characters, so there is no confidentiality delta, only an honesty one.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun mlRollbackModelWithHttpInfo(modelId: kotlin.String, mlRollbackModelRequest: MlRollbackModelRequest) : ApiResponse<Unit?> {
-        val localVariableConfig = mlRollbackModelRequestConfig(modelId = modelId, mlRollbackModelRequest = mlRollbackModelRequest)
+    fun getV1ModelsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1ModelsRequestConfig()
 
-        return request<MlRollbackModelRequest, Unit>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation mlRollbackModel
+     * To obtain the request config of the operation getV1Models
      *
-     * @param modelId 
-     * @param mlRollbackModelRequest 
      * @return RequestConfig
      */
-    fun mlRollbackModelRequestConfig(modelId: kotlin.String, mlRollbackModelRequest: MlRollbackModelRequest) : RequestConfig<MlRollbackModelRequest> {
-        val localVariableBody = mlRollbackModelRequest
+    fun getV1ModelsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/models",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/models/{model}/access
+     * Returns the caller&#39;s own standing for a gated model: \&quot;granted\&quot;, \&quot;requested\&quot;, or empty when they have never asked.
+     * Returns the caller&#39;s own standing for a gated model: \&quot;granted\&quot;, \&quot;requested\&quot;, or empty when they have never asked.
+     * @param model 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1ModelsByModelAccess(model: kotlin.String) : Unit {
+        val localVarResponse = getV1ModelsByModelAccessWithHttpInfo(model = model)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/models/{model}/access
+     * Returns the caller&#39;s own standing for a gated model: \&quot;granted\&quot;, \&quot;requested\&quot;, or empty when they have never asked.
+     * Returns the caller&#39;s own standing for a gated model: \&quot;granted\&quot;, \&quot;requested\&quot;, or empty when they have never asked.
+     * @param model 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1ModelsByModelAccessWithHttpInfo(model: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1ModelsByModelAccessRequestConfig(model = model)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1ModelsByModelAccess
+     *
+     * @param model 
+     * @return RequestConfig
+     */
+    fun getV1ModelsByModelAccessRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/models/{model}/access".replace("{"+"model"+"}", encodeURIComponent(model.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/models/providers
+     * Public, secret-free list of the providers serving the models that GET /v1/models lists — the same source, projected.
+     * Public, secret-free list of the providers serving the models that GET /v1/models lists — the same source, projected. Safe unauthenticated: no keys, URLs, or config are returned, and it reports a SET of names, never which provider serves which model.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1ModelsProviders() : Unit {
+        val localVarResponse = getV1ModelsProvidersWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/models/providers
+     * Public, secret-free list of the providers serving the models that GET /v1/models lists — the same source, projected.
+     * Public, secret-free list of the providers serving the models that GET /v1/models lists — the same source, projected. Safe unauthenticated: no keys, URLs, or config are returned, and it reports a SET of names, never which provider serves which model.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1ModelsProvidersWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1ModelsProvidersRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1ModelsProviders
+     *
+     * @return RequestConfig
+     */
+    fun getV1ModelsProvidersRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/models/providers",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/models/{model}/access
+     * Records the caller&#39;s waitlist request for a gated model and answers their new standing.
+     * Records the caller&#39;s waitlist request for a gated model and answers their new standing. Authed, idempotent, and self-scoped: the row is keyed to the caller&#39;s own org and identity, never to a body-supplied owner.
+     * @param model 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1ModelsByModelAccess(model: kotlin.String) : Unit {
+        val localVarResponse = postV1ModelsByModelAccessWithHttpInfo(model = model)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/models/{model}/access
+     * Records the caller&#39;s waitlist request for a gated model and answers their new standing.
+     * Records the caller&#39;s waitlist request for a gated model and answers their new standing. Authed, idempotent, and self-scoped: the row is keyed to the caller&#39;s own org and identity, never to a body-supplied owner.
+     * @param model 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1ModelsByModelAccessWithHttpInfo(model: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ModelsByModelAccessRequestConfig(model = model)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1ModelsByModelAccess
+     *
+     * @param model 
+     * @return RequestConfig
+     */
+    fun postV1ModelsByModelAccessRequestConfig(model: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/ml/models/{model_id}/rollback".replace("{"+"model_id"+"}", encodeURIComponent(modelId.toString())),
+            path = "/v1/models/{model}/access".replace("{"+"model"+"}", encodeURIComponent(model.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

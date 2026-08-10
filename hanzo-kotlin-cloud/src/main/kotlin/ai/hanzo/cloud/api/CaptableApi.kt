@@ -19,23 +19,23 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCaptableCompany
-import ai.hanzo.cloud.model.CloudCaptableCompanyUpdate
-import ai.hanzo.cloud.model.CloudCaptableDeleted
-import ai.hanzo.cloud.model.CloudCaptableEquityPlans
-import ai.hanzo.cloud.model.CloudCaptableInvestments
-import ai.hanzo.cloud.model.CloudCaptableNotes
-import ai.hanzo.cloud.model.CloudCaptableOptions
-import ai.hanzo.cloud.model.CloudCaptableRoundCloseRequest
-import ai.hanzo.cloud.model.CloudCaptableRoundDetail
-import ai.hanzo.cloud.model.CloudCaptableRounds
-import ai.hanzo.cloud.model.CloudCaptableSafes
-import ai.hanzo.cloud.model.CloudCaptableShareClass
-import ai.hanzo.cloud.model.CloudCaptableShares
-import ai.hanzo.cloud.model.CloudCaptableStakeholder
-import ai.hanzo.cloud.model.CloudCaptableStakeholderPatch
-import ai.hanzo.cloud.model.CloudCaptableSummary
-import ai.hanzo.cloud.model.CloudCaptableUpdated
+import ai.hanzo.cloud.model.CaptableCompany
+import ai.hanzo.cloud.model.CaptableCompanyUpdate
+import ai.hanzo.cloud.model.CaptableDeleted
+import ai.hanzo.cloud.model.CaptableEquityPlans
+import ai.hanzo.cloud.model.CaptableInvestments
+import ai.hanzo.cloud.model.CaptableNotes
+import ai.hanzo.cloud.model.CaptableOptions
+import ai.hanzo.cloud.model.CaptableRoundCloseRequest
+import ai.hanzo.cloud.model.CaptableRoundDetail
+import ai.hanzo.cloud.model.CaptableRounds
+import ai.hanzo.cloud.model.CaptableSafes
+import ai.hanzo.cloud.model.CaptableShareClass
+import ai.hanzo.cloud.model.CaptableShares
+import ai.hanzo.cloud.model.CaptableStakeholder
+import ai.hanzo.cloud.model.CaptableStakeholderPatch
+import ai.hanzo.cloud.model.CaptableSummary
+import ai.hanzo.cloud.model.CaptableUpdated
 
 import com.google.gson.annotations.SerializedName
 
@@ -63,10 +63,10 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/captable/convertibles/{id}
-     * DeleteConvertible removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals.
-     * DeleteConvertible removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals.
+     * Removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
      * @param id ID is the convertible note to delete.
-     * @return CloudCaptableDeleted
+     * @return CaptableDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -75,11 +75,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CaptableConvertiblesId(id: kotlin.String) : CloudCaptableDeleted {
-        val localVarResponse = cloudDeleteV1CaptableConvertiblesIdWithHttpInfo(id = id)
+    fun deleteV1CaptableConvertiblesById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteV1CaptableConvertiblesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -95,30 +95,30 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/captable/convertibles/{id}
-     * DeleteConvertible removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals.
-     * DeleteConvertible removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals.
+     * Removes one of the caller org&#39;s convertible notes, taking its principal out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
      * @param id ID is the convertible note to delete.
-     * @return ApiResponse<CloudCaptableDeleted?>
+     * @return ApiResponse<CaptableDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CaptableConvertiblesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCaptableDeleted?> {
-        val localVariableConfig = cloudDeleteV1CaptableConvertiblesIdRequestConfig(id = id)
+    fun deleteV1CaptableConvertiblesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteV1CaptableConvertiblesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCaptableDeleted>(
+        return request<Unit, CaptableDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CaptableConvertiblesId
+     * To obtain the request config of the operation deleteV1CaptableConvertiblesById
      *
      * @param id ID is the convertible note to delete.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CaptableConvertiblesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CaptableConvertiblesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -129,17 +129,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/convertibles/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/captable/options/{id}
-     * DeleteOption removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts.
-     * DeleteOption removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts.
+     * Removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts. An id this org does not hold is not found.
      * @param id ID is the option grant to delete.
-     * @return CloudCaptableDeleted
+     * @return CaptableDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -148,11 +148,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CaptableOptionsId(id: kotlin.String) : CloudCaptableDeleted {
-        val localVarResponse = cloudDeleteV1CaptableOptionsIdWithHttpInfo(id = id)
+    fun deleteV1CaptableOptionsById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteV1CaptableOptionsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -168,30 +168,30 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/captable/options/{id}
-     * DeleteOption removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts.
-     * DeleteOption removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts.
+     * Removes one of the caller org&#39;s option grants, taking its shares out of the cap table&#39;s granted-options and fully-diluted counts. An id this org does not hold is not found.
      * @param id ID is the option grant to delete.
-     * @return ApiResponse<CloudCaptableDeleted?>
+     * @return ApiResponse<CaptableDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CaptableOptionsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCaptableDeleted?> {
-        val localVariableConfig = cloudDeleteV1CaptableOptionsIdRequestConfig(id = id)
+    fun deleteV1CaptableOptionsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteV1CaptableOptionsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCaptableDeleted>(
+        return request<Unit, CaptableDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CaptableOptionsId
+     * To obtain the request config of the operation deleteV1CaptableOptionsById
      *
      * @param id ID is the option grant to delete.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CaptableOptionsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CaptableOptionsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -202,17 +202,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/options/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/captable/safes/{id}
-     * DeleteSafe removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals.
-     * DeleteSafe removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals.
+     * Removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
      * @param id ID is the SAFE to delete.
-     * @return CloudCaptableDeleted
+     * @return CaptableDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -221,11 +221,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CaptableSafesId(id: kotlin.String) : CloudCaptableDeleted {
-        val localVarResponse = cloudDeleteV1CaptableSafesIdWithHttpInfo(id = id)
+    fun deleteV1CaptableSafesById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteV1CaptableSafesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -241,30 +241,30 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/captable/safes/{id}
-     * DeleteSafe removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals.
-     * DeleteSafe removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals.
+     * Removes one of the caller org&#39;s SAFEs, taking its capital out of the cap table&#39;s unconverted-instrument totals. An id this org does not hold is not found.
      * @param id ID is the SAFE to delete.
-     * @return ApiResponse<CloudCaptableDeleted?>
+     * @return ApiResponse<CaptableDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CaptableSafesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCaptableDeleted?> {
-        val localVariableConfig = cloudDeleteV1CaptableSafesIdRequestConfig(id = id)
+    fun deleteV1CaptableSafesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteV1CaptableSafesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCaptableDeleted>(
+        return request<Unit, CaptableDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CaptableSafesId
+     * To obtain the request config of the operation deleteV1CaptableSafesById
      *
      * @param id ID is the SAFE to delete.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CaptableSafesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CaptableSafesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -275,17 +275,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/safes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/captable/shares/{id}
-     * DeleteShare removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts.
-     * DeleteShare removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts.
+     * Removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts. An id this org does not hold is not found.
      * @param id ID is the share certificate to delete.
-     * @return CloudCaptableDeleted
+     * @return CaptableDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -294,11 +294,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CaptableSharesId(id: kotlin.String) : CloudCaptableDeleted {
-        val localVarResponse = cloudDeleteV1CaptableSharesIdWithHttpInfo(id = id)
+    fun deleteV1CaptableSharesById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteV1CaptableSharesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -314,30 +314,30 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/captable/shares/{id}
-     * DeleteShare removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts.
-     * DeleteShare removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts.
+     * Removes one of the caller org&#39;s share certificates, taking its shares out of the cap table&#39;s outstanding and fully-diluted counts. An id this org does not hold is not found.
      * @param id ID is the share certificate to delete.
-     * @return ApiResponse<CloudCaptableDeleted?>
+     * @return ApiResponse<CaptableDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CaptableSharesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCaptableDeleted?> {
-        val localVariableConfig = cloudDeleteV1CaptableSharesIdRequestConfig(id = id)
+    fun deleteV1CaptableSharesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteV1CaptableSharesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCaptableDeleted>(
+        return request<Unit, CaptableDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CaptableSharesId
+     * To obtain the request config of the operation deleteV1CaptableSharesById
      *
      * @param id ID is the share certificate to delete.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CaptableSharesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CaptableSharesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -348,17 +348,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/captable/stakeholders/{id}
-     * DeleteStakeholder removes one of the caller org&#39;s stakeholders.
-     * DeleteStakeholder removes one of the caller org&#39;s stakeholders. It REFUSES to orphan issued equity: a holder that still holds share certificates or option grants cannot be deleted, and answers 400 saying so — release or transfer the holdings first. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s stakeholders.
+     * Removes one of the caller org&#39;s stakeholders. It REFUSES to orphan issued equity: a holder that still holds share certificates or option grants cannot be deleted, and answers 400 saying so — release or transfer the holdings first. An id this org does not hold is not found.
      * @param id ID is the stakeholder to delete.
-     * @return CloudCaptableDeleted
+     * @return CaptableDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -367,11 +367,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1CaptableStakeholdersId(id: kotlin.String) : CloudCaptableDeleted {
-        val localVarResponse = cloudDeleteV1CaptableStakeholdersIdWithHttpInfo(id = id)
+    fun deleteV1CaptableStakeholdersById(id: kotlin.String) : CaptableDeleted {
+        val localVarResponse = deleteV1CaptableStakeholdersByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -387,30 +387,30 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * DELETE /v1/captable/stakeholders/{id}
-     * DeleteStakeholder removes one of the caller org&#39;s stakeholders.
-     * DeleteStakeholder removes one of the caller org&#39;s stakeholders. It REFUSES to orphan issued equity: a holder that still holds share certificates or option grants cannot be deleted, and answers 400 saying so — release or transfer the holdings first. An id this org does not hold is not found.
+     * Removes one of the caller org&#39;s stakeholders.
+     * Removes one of the caller org&#39;s stakeholders. It REFUSES to orphan issued equity: a holder that still holds share certificates or option grants cannot be deleted, and answers 400 saying so — release or transfer the holdings first. An id this org does not hold is not found.
      * @param id ID is the stakeholder to delete.
-     * @return ApiResponse<CloudCaptableDeleted?>
+     * @return ApiResponse<CaptableDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1CaptableStakeholdersIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCaptableDeleted?> {
-        val localVariableConfig = cloudDeleteV1CaptableStakeholdersIdRequestConfig(id = id)
+    fun deleteV1CaptableStakeholdersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableDeleted?> {
+        val localVariableConfig = deleteV1CaptableStakeholdersByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCaptableDeleted>(
+        return request<Unit, CaptableDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1CaptableStakeholdersId
+     * To obtain the request config of the operation deleteV1CaptableStakeholdersById
      *
      * @param id ID is the stakeholder to delete.
      * @return RequestConfig
      */
-    fun cloudDeleteV1CaptableStakeholdersIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1CaptableStakeholdersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -421,16 +421,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/captable/company
-     * GetCompany returns the caller org&#39;s cap-table company record.
-     * GetCompany returns the caller org&#39;s cap-table company record. The row is seeded when the tenant&#39;s store first opens, so it always exists; its name and incorporation details are set with PUT /v1/captable/company.
-     * @return CloudCaptableCompany
+     * GET /v1/captable/classes
+     * Returns the caller org&#39;s share classes, in creation order.
+     * Returns the caller org&#39;s share classes, in creation order. A share class is what a certificate is issued in, and every class the company has authorized appears. The response is a bare JSON array, not an envelope.
+     * @return kotlin.collections.List<CaptableShareClass>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -439,11 +439,81 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableCompany() : CloudCaptableCompany {
-        val localVarResponse = cloudGetV1CaptableCompanyWithHttpInfo()
+    fun getV1CaptableClasses() : kotlin.collections.List<CaptableShareClass> {
+        val localVarResponse = getV1CaptableClassesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableCompany
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CaptableShareClass>
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/captable/classes
+     * Returns the caller org&#39;s share classes, in creation order.
+     * Returns the caller org&#39;s share classes, in creation order. A share class is what a certificate is issued in, and every class the company has authorized appears. The response is a bare JSON array, not an envelope.
+     * @return ApiResponse<kotlin.collections.List<CaptableShareClass>?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CaptableClassesWithHttpInfo() : ApiResponse<kotlin.collections.List<CaptableShareClass>?> {
+        val localVariableConfig = getV1CaptableClassesRequestConfig()
+
+        return request<Unit, kotlin.collections.List<CaptableShareClass>>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CaptableClasses
+     *
+     * @return RequestConfig
+     */
+    fun getV1CaptableClassesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/captable/classes",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/captable/company
+     * Returns the caller org&#39;s cap-table company record.
+     * Returns the caller org&#39;s cap-table company record. The row is seeded when the tenant&#39;s store first opens, so it always exists; its name and incorporation details are set with PUT /v1/captable/company.
+     * @return CaptableCompany
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CaptableCompany() : CaptableCompany {
+        val localVarResponse = getV1CaptableCompanyWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableCompany
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -459,28 +529,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/company
-     * GetCompany returns the caller org&#39;s cap-table company record.
-     * GetCompany returns the caller org&#39;s cap-table company record. The row is seeded when the tenant&#39;s store first opens, so it always exists; its name and incorporation details are set with PUT /v1/captable/company.
-     * @return ApiResponse<CloudCaptableCompany?>
+     * Returns the caller org&#39;s cap-table company record.
+     * Returns the caller org&#39;s cap-table company record. The row is seeded when the tenant&#39;s store first opens, so it always exists; its name and incorporation details are set with PUT /v1/captable/company.
+     * @return ApiResponse<CaptableCompany?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableCompanyWithHttpInfo() : ApiResponse<CloudCaptableCompany?> {
-        val localVariableConfig = cloudGetV1CaptableCompanyRequestConfig()
+    fun getV1CaptableCompanyWithHttpInfo() : ApiResponse<CaptableCompany?> {
+        val localVariableConfig = getV1CaptableCompanyRequestConfig()
 
-        return request<Unit, CloudCaptableCompany>(
+        return request<Unit, CaptableCompany>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableCompany
+     * To obtain the request config of the operation getV1CaptableCompany
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableCompanyRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableCompanyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -491,16 +561,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/convertibles
-     * ListConvertibles returns the caller org&#39;s convertible notes, newest first.
-     * ListConvertibles returns the caller org&#39;s convertible notes, newest first. A note&#39;s principal sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
-     * @return CloudCaptableNotes
+     * Returns the caller org&#39;s convertible notes, newest first.
+     * Returns the caller org&#39;s convertible notes, newest first. A note&#39;s principal sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
+     * @return CaptableNotes
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -509,11 +579,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableConvertibles() : CloudCaptableNotes {
-        val localVarResponse = cloudGetV1CaptableConvertiblesWithHttpInfo()
+    fun getV1CaptableConvertibles() : CaptableNotes {
+        val localVarResponse = getV1CaptableConvertiblesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableNotes
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableNotes
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -529,28 +599,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/convertibles
-     * ListConvertibles returns the caller org&#39;s convertible notes, newest first.
-     * ListConvertibles returns the caller org&#39;s convertible notes, newest first. A note&#39;s principal sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
-     * @return ApiResponse<CloudCaptableNotes?>
+     * Returns the caller org&#39;s convertible notes, newest first.
+     * Returns the caller org&#39;s convertible notes, newest first. A note&#39;s principal sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
+     * @return ApiResponse<CaptableNotes?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableConvertiblesWithHttpInfo() : ApiResponse<CloudCaptableNotes?> {
-        val localVariableConfig = cloudGetV1CaptableConvertiblesRequestConfig()
+    fun getV1CaptableConvertiblesWithHttpInfo() : ApiResponse<CaptableNotes?> {
+        val localVariableConfig = getV1CaptableConvertiblesRequestConfig()
 
-        return request<Unit, CloudCaptableNotes>(
+        return request<Unit, CaptableNotes>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableConvertibles
+     * To obtain the request config of the operation getV1CaptableConvertibles
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -561,86 +631,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/convertibles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/captable/equity-plans
-     * ListEquityPlans returns the caller org&#39;s equity plans, newest first.
-     * ListEquityPlans returns the caller org&#39;s equity plans, newest first. An equity plan is an option pool: a reserve of shares, drawn from one share class, that option grants are written against.
-     * @return CloudCaptableEquityPlans
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableEquityPlans() : CloudCaptableEquityPlans {
-        val localVarResponse = cloudGetV1CaptableEquityPlansWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableEquityPlans
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/captable/equity-plans
-     * ListEquityPlans returns the caller org&#39;s equity plans, newest first.
-     * ListEquityPlans returns the caller org&#39;s equity plans, newest first. An equity plan is an option pool: a reserve of shares, drawn from one share class, that option grants are written against.
-     * @return ApiResponse<CloudCaptableEquityPlans?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableEquityPlansWithHttpInfo() : ApiResponse<CloudCaptableEquityPlans?> {
-        val localVariableConfig = cloudGetV1CaptableEquityPlansRequestConfig()
-
-        return request<Unit, CloudCaptableEquityPlans>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1CaptableEquityPlans
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1CaptableEquityPlansRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/captable/equity-plans",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/investments
-     * ListInvestments returns the caller org&#39;s investments, newest first.
-     * ListInvestments returns the caller org&#39;s investments, newest first. It spans every round, so it is the flat ledger of cheques written into the company, each naming its investor and the round it went into.
-     * @return CloudCaptableInvestments
+     * Returns the caller org&#39;s investments, newest first.
+     * Returns the caller org&#39;s investments, newest first. It spans every round, so it is the flat ledger of cheques written into the company, each naming its investor and the round it went into.
+     * @return CaptableInvestments
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -649,11 +649,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableInvestments() : CloudCaptableInvestments {
-        val localVarResponse = cloudGetV1CaptableInvestmentsWithHttpInfo()
+    fun getV1CaptableInvestments() : CaptableInvestments {
+        val localVarResponse = getV1CaptableInvestmentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableInvestments
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableInvestments
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -669,28 +669,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/investments
-     * ListInvestments returns the caller org&#39;s investments, newest first.
-     * ListInvestments returns the caller org&#39;s investments, newest first. It spans every round, so it is the flat ledger of cheques written into the company, each naming its investor and the round it went into.
-     * @return ApiResponse<CloudCaptableInvestments?>
+     * Returns the caller org&#39;s investments, newest first.
+     * Returns the caller org&#39;s investments, newest first. It spans every round, so it is the flat ledger of cheques written into the company, each naming its investor and the round it went into.
+     * @return ApiResponse<CaptableInvestments?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableInvestmentsWithHttpInfo() : ApiResponse<CloudCaptableInvestments?> {
-        val localVariableConfig = cloudGetV1CaptableInvestmentsRequestConfig()
+    fun getV1CaptableInvestmentsWithHttpInfo() : ApiResponse<CaptableInvestments?> {
+        val localVariableConfig = getV1CaptableInvestmentsRequestConfig()
 
-        return request<Unit, CloudCaptableInvestments>(
+        return request<Unit, CaptableInvestments>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableInvestments
+     * To obtain the request config of the operation getV1CaptableInvestments
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableInvestmentsRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableInvestmentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -701,16 +701,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/investments",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/options
-     * ListOptions returns the caller org&#39;s option grants, newest first.
-     * ListOptions returns the caller org&#39;s option grants, newest first. Each row is joined to its grantee and its equity plan. Grants that are EXERCISED, EXPIRED or CANCELLED are listed here but do not dilute the cap table.
-     * @return CloudCaptableOptions
+     * Returns the caller org&#39;s option grants, newest first.
+     * Returns the caller org&#39;s option grants, newest first. Each row is joined to its grantee and its equity plan. Grants that are EXERCISED, EXPIRED or CANCELLED are listed here but do not dilute the cap table.
+     * @return CaptableOptions
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -719,11 +719,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableOptions() : CloudCaptableOptions {
-        val localVarResponse = cloudGetV1CaptableOptionsWithHttpInfo()
+    fun getV1CaptableOptions() : CaptableOptions {
+        val localVarResponse = getV1CaptableOptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableOptions
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableOptions
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -739,28 +739,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/options
-     * ListOptions returns the caller org&#39;s option grants, newest first.
-     * ListOptions returns the caller org&#39;s option grants, newest first. Each row is joined to its grantee and its equity plan. Grants that are EXERCISED, EXPIRED or CANCELLED are listed here but do not dilute the cap table.
-     * @return ApiResponse<CloudCaptableOptions?>
+     * Returns the caller org&#39;s option grants, newest first.
+     * Returns the caller org&#39;s option grants, newest first. Each row is joined to its grantee and its equity plan. Grants that are EXERCISED, EXPIRED or CANCELLED are listed here but do not dilute the cap table.
+     * @return ApiResponse<CaptableOptions?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableOptionsWithHttpInfo() : ApiResponse<CloudCaptableOptions?> {
-        val localVariableConfig = cloudGetV1CaptableOptionsRequestConfig()
+    fun getV1CaptableOptionsWithHttpInfo() : ApiResponse<CaptableOptions?> {
+        val localVariableConfig = getV1CaptableOptionsRequestConfig()
 
-        return request<Unit, CloudCaptableOptions>(
+        return request<Unit, CaptableOptions>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableOptions
+     * To obtain the request config of the operation getV1CaptableOptions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableOptionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableOptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -771,16 +771,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/options",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/captable/rounds
-     * ListRounds returns the caller org&#39;s fundraising rounds, newest first.
-     * ListRounds returns the caller org&#39;s fundraising rounds, newest first. A round groups a fundraising event; a PRICED round also carries the share class and price per share it issues at.
-     * @return CloudCaptableRounds
+     * GET /v1/captable/plans
+     * Returns the caller org&#39;s equity plans, newest first.
+     * Returns the caller org&#39;s equity plans, newest first. An equity plan is an option pool: a reserve of shares, drawn from one share class, that option grants are written against.
+     * @return CaptableEquityPlans
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -789,11 +789,81 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableRounds() : CloudCaptableRounds {
-        val localVarResponse = cloudGetV1CaptableRoundsWithHttpInfo()
+    fun getV1CaptablePlans() : CaptableEquityPlans {
+        val localVarResponse = getV1CaptablePlansWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableRounds
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableEquityPlans
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/captable/plans
+     * Returns the caller org&#39;s equity plans, newest first.
+     * Returns the caller org&#39;s equity plans, newest first. An equity plan is an option pool: a reserve of shares, drawn from one share class, that option grants are written against.
+     * @return ApiResponse<CaptableEquityPlans?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1CaptablePlansWithHttpInfo() : ApiResponse<CaptableEquityPlans?> {
+        val localVariableConfig = getV1CaptablePlansRequestConfig()
+
+        return request<Unit, CaptableEquityPlans>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1CaptablePlans
+     *
+     * @return RequestConfig
+     */
+    fun getV1CaptablePlansRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/captable/plans",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/captable/rounds
+     * Returns the caller org&#39;s fundraising rounds, newest first.
+     * Returns the caller org&#39;s fundraising rounds, newest first. A round groups a fundraising event; a PRICED round also carries the share class and price per share it issues at.
+     * @return CaptableRounds
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1CaptableRounds() : CaptableRounds {
+        val localVarResponse = getV1CaptableRoundsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableRounds
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -809,28 +879,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/rounds
-     * ListRounds returns the caller org&#39;s fundraising rounds, newest first.
-     * ListRounds returns the caller org&#39;s fundraising rounds, newest first. A round groups a fundraising event; a PRICED round also carries the share class and price per share it issues at.
-     * @return ApiResponse<CloudCaptableRounds?>
+     * Returns the caller org&#39;s fundraising rounds, newest first.
+     * Returns the caller org&#39;s fundraising rounds, newest first. A round groups a fundraising event; a PRICED round also carries the share class and price per share it issues at.
+     * @return ApiResponse<CaptableRounds?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableRoundsWithHttpInfo() : ApiResponse<CloudCaptableRounds?> {
-        val localVariableConfig = cloudGetV1CaptableRoundsRequestConfig()
+    fun getV1CaptableRoundsWithHttpInfo() : ApiResponse<CaptableRounds?> {
+        val localVariableConfig = getV1CaptableRoundsRequestConfig()
 
-        return request<Unit, CloudCaptableRounds>(
+        return request<Unit, CaptableRounds>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableRounds
+     * To obtain the request config of the operation getV1CaptableRounds
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableRoundsRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableRoundsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -841,17 +911,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/rounds/{id}
-     * GetRound returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first.
-     * GetRound returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first. A round id that does not exist in the caller&#39;s org is not found — including one that exists in another tenant, since the org comes from the caller&#39;s principal and is part of the lookup.
+     * Returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first.
+     * Returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first. A round id that does not exist in the caller&#39;s org is not found — including one that exists in another tenant, since the org comes from the caller&#39;s principal and is part of the lookup.
      * @param id ID is the round to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @return CloudCaptableRoundDetail
+     * @return CaptableRoundDetail
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -860,11 +930,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableRoundsId(id: kotlin.String) : CloudCaptableRoundDetail {
-        val localVarResponse = cloudGetV1CaptableRoundsIdWithHttpInfo(id = id)
+    fun getV1CaptableRoundsById(id: kotlin.String) : CaptableRoundDetail {
+        val localVarResponse = getV1CaptableRoundsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableRoundDetail
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableRoundDetail
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -880,30 +950,30 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/rounds/{id}
-     * GetRound returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first.
-     * GetRound returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first. A round id that does not exist in the caller&#39;s org is not found — including one that exists in another tenant, since the org comes from the caller&#39;s principal and is part of the lookup.
+     * Returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first.
+     * Returns one of the caller org&#39;s fundraising rounds together with every investment written into it, oldest first. A round id that does not exist in the caller&#39;s org is not found — including one that exists in another tenant, since the org comes from the caller&#39;s principal and is part of the lookup.
      * @param id ID is the round to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @return ApiResponse<CloudCaptableRoundDetail?>
+     * @return ApiResponse<CaptableRoundDetail?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableRoundsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudCaptableRoundDetail?> {
-        val localVariableConfig = cloudGetV1CaptableRoundsIdRequestConfig(id = id)
+    fun getV1CaptableRoundsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<CaptableRoundDetail?> {
+        val localVariableConfig = getV1CaptableRoundsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudCaptableRoundDetail>(
+        return request<Unit, CaptableRoundDetail>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableRoundsId
+     * To obtain the request config of the operation getV1CaptableRoundsById
      *
      * @param id ID is the round to read. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableRoundsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1CaptableRoundsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -914,16 +984,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/safes
-     * ListSafes returns the caller org&#39;s SAFEs, newest first.
-     * ListSafes returns the caller org&#39;s SAFEs, newest first. A SAFE is a simple agreement for future equity: its capital sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
-     * @return CloudCaptableSafes
+     * Returns the caller org&#39;s SAFEs, newest first.
+     * Returns the caller org&#39;s SAFEs, newest first. A SAFE is a simple agreement for future equity: its capital sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
+     * @return CaptableSafes
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -932,11 +1002,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableSafes() : CloudCaptableSafes {
-        val localVarResponse = cloudGetV1CaptableSafesWithHttpInfo()
+    fun getV1CaptableSafes() : CaptableSafes {
+        val localVarResponse = getV1CaptableSafesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableSafes
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableSafes
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -952,28 +1022,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/safes
-     * ListSafes returns the caller org&#39;s SAFEs, newest first.
-     * ListSafes returns the caller org&#39;s SAFEs, newest first. A SAFE is a simple agreement for future equity: its capital sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
-     * @return ApiResponse<CloudCaptableSafes?>
+     * Returns the caller org&#39;s SAFEs, newest first.
+     * Returns the caller org&#39;s SAFEs, newest first. A SAFE is a simple agreement for future equity: its capital sits OUTSIDE issued equity until it converts, so it is not part of the share counts.
+     * @return ApiResponse<CaptableSafes?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableSafesWithHttpInfo() : ApiResponse<CloudCaptableSafes?> {
-        val localVariableConfig = cloudGetV1CaptableSafesRequestConfig()
+    fun getV1CaptableSafesWithHttpInfo() : ApiResponse<CaptableSafes?> {
+        val localVariableConfig = getV1CaptableSafesRequestConfig()
 
-        return request<Unit, CloudCaptableSafes>(
+        return request<Unit, CaptableSafes>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableSafes
+     * To obtain the request config of the operation getV1CaptableSafes
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableSafesRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableSafesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -984,86 +1054,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/safes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/captable/share-classes
-     * ListShareClasses returns the caller org&#39;s share classes, in creation order.
-     * ListShareClasses returns the caller org&#39;s share classes, in creation order. A share class is what a certificate is issued in, and every class the company has authorized appears. The response is a bare JSON array, not an envelope.
-     * @return kotlin.collections.List<CloudCaptableShareClass>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableShareClasses() : kotlin.collections.List<CloudCaptableShareClass> {
-        val localVarResponse = cloudGetV1CaptableShareClassesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudCaptableShareClass>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/captable/share-classes
-     * ListShareClasses returns the caller org&#39;s share classes, in creation order.
-     * ListShareClasses returns the caller org&#39;s share classes, in creation order. A share class is what a certificate is issued in, and every class the company has authorized appears. The response is a bare JSON array, not an envelope.
-     * @return ApiResponse<kotlin.collections.List<CloudCaptableShareClass>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableShareClassesWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudCaptableShareClass>?> {
-        val localVariableConfig = cloudGetV1CaptableShareClassesRequestConfig()
-
-        return request<Unit, kotlin.collections.List<CloudCaptableShareClass>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1CaptableShareClasses
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1CaptableShareClassesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/captable/share-classes",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/shares
-     * ListShares returns the caller org&#39;s share certificates, newest first.
-     * ListShares returns the caller org&#39;s share certificates, newest first. Each row is joined to its holder and its share class, so a certificate names who holds it and what class it is in without a second call.
-     * @return CloudCaptableShares
+     * Returns the caller org&#39;s share certificates, newest first.
+     * Returns the caller org&#39;s share certificates, newest first. Each row is joined to its holder and its share class, so a certificate names who holds it and what class it is in without a second call.
+     * @return CaptableShares
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1072,11 +1072,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableShares() : CloudCaptableShares {
-        val localVarResponse = cloudGetV1CaptableSharesWithHttpInfo()
+    fun getV1CaptableShares() : CaptableShares {
+        val localVarResponse = getV1CaptableSharesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableShares
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableShares
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1092,28 +1092,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/shares
-     * ListShares returns the caller org&#39;s share certificates, newest first.
-     * ListShares returns the caller org&#39;s share certificates, newest first. Each row is joined to its holder and its share class, so a certificate names who holds it and what class it is in without a second call.
-     * @return ApiResponse<CloudCaptableShares?>
+     * Returns the caller org&#39;s share certificates, newest first.
+     * Returns the caller org&#39;s share certificates, newest first. Each row is joined to its holder and its share class, so a certificate names who holds it and what class it is in without a second call.
+     * @return ApiResponse<CaptableShares?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableSharesWithHttpInfo() : ApiResponse<CloudCaptableShares?> {
-        val localVariableConfig = cloudGetV1CaptableSharesRequestConfig()
+    fun getV1CaptableSharesWithHttpInfo() : ApiResponse<CaptableShares?> {
+        val localVariableConfig = getV1CaptableSharesRequestConfig()
 
-        return request<Unit, CloudCaptableShares>(
+        return request<Unit, CaptableShares>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableShares
+     * To obtain the request config of the operation getV1CaptableShares
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableSharesRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableSharesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1124,16 +1124,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/stakeholders
-     * ListStakeholders returns the caller org&#39;s stakeholders, newest first.
-     * ListStakeholders returns the caller org&#39;s stakeholders, newest first. The response is a bare JSON array, not an envelope. Each row carries the holder&#39;s contact and address fields alongside the company&#39;s name.
-     * @return kotlin.collections.List<CloudCaptableStakeholder>
+     * Returns the caller org&#39;s stakeholders, newest first.
+     * Returns the caller org&#39;s stakeholders, newest first. The response is a bare JSON array, not an envelope. Each row carries the holder&#39;s contact and address fields alongside the company&#39;s name.
+     * @return kotlin.collections.List<CaptableStakeholder>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1142,11 +1142,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableStakeholders() : kotlin.collections.List<CloudCaptableStakeholder> {
-        val localVarResponse = cloudGetV1CaptableStakeholdersWithHttpInfo()
+    fun getV1CaptableStakeholders() : kotlin.collections.List<CaptableStakeholder> {
+        val localVarResponse = getV1CaptableStakeholdersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudCaptableStakeholder>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CaptableStakeholder>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1162,28 +1162,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/stakeholders
-     * ListStakeholders returns the caller org&#39;s stakeholders, newest first.
-     * ListStakeholders returns the caller org&#39;s stakeholders, newest first. The response is a bare JSON array, not an envelope. Each row carries the holder&#39;s contact and address fields alongside the company&#39;s name.
-     * @return ApiResponse<kotlin.collections.List<CloudCaptableStakeholder>?>
+     * Returns the caller org&#39;s stakeholders, newest first.
+     * Returns the caller org&#39;s stakeholders, newest first. The response is a bare JSON array, not an envelope. Each row carries the holder&#39;s contact and address fields alongside the company&#39;s name.
+     * @return ApiResponse<kotlin.collections.List<CaptableStakeholder>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableStakeholdersWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudCaptableStakeholder>?> {
-        val localVariableConfig = cloudGetV1CaptableStakeholdersRequestConfig()
+    fun getV1CaptableStakeholdersWithHttpInfo() : ApiResponse<kotlin.collections.List<CaptableStakeholder>?> {
+        val localVariableConfig = getV1CaptableStakeholdersRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudCaptableStakeholder>>(
+        return request<Unit, kotlin.collections.List<CaptableStakeholder>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableStakeholders
+     * To obtain the request config of the operation getV1CaptableStakeholders
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1194,16 +1194,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/captable/summary
-     * GetSummary computes the caller org&#39;s cap table.
-     * GetSummary computes the caller org&#39;s cap table. It answers who owns what on a fully-diluted basis: outstanding shares, granted options, per-stakeholder ownership percentages, each share class&#39;s authorized versus issued position, and the capital sitting on SAFEs and convertible notes that have not yet converted. Only non-terminal option grants dilute — EXERCISED, EXPIRED and CANCELLED grants are excluded, so equity issued through an exercised option is never counted twice.
-     * @return CloudCaptableSummary
+     * Computes the caller org&#39;s cap table.
+     * Computes the caller org&#39;s cap table. It answers who owns what on a fully-diluted basis: outstanding shares, granted options, per-stakeholder ownership percentages, each share class&#39;s authorized versus issued position, and the capital sitting on SAFEs and convertible notes that have not yet converted. Only non-terminal option grants dilute — EXERCISED, EXPIRED and CANCELLED grants are excluded, so equity issued through an exercised option is never counted twice.
+     * @return CaptableSummary
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1212,11 +1212,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CaptableSummary() : CloudCaptableSummary {
-        val localVarResponse = cloudGetV1CaptableSummaryWithHttpInfo()
+    fun getV1CaptableSummary() : CaptableSummary {
+        val localVarResponse = getV1CaptableSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableSummary
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableSummary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1232,28 +1232,28 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * GET /v1/captable/summary
-     * GetSummary computes the caller org&#39;s cap table.
-     * GetSummary computes the caller org&#39;s cap table. It answers who owns what on a fully-diluted basis: outstanding shares, granted options, per-stakeholder ownership percentages, each share class&#39;s authorized versus issued position, and the capital sitting on SAFEs and convertible notes that have not yet converted. Only non-terminal option grants dilute — EXERCISED, EXPIRED and CANCELLED grants are excluded, so equity issued through an exercised option is never counted twice.
-     * @return ApiResponse<CloudCaptableSummary?>
+     * Computes the caller org&#39;s cap table.
+     * Computes the caller org&#39;s cap table. It answers who owns what on a fully-diluted basis: outstanding shares, granted options, per-stakeholder ownership percentages, each share class&#39;s authorized versus issued position, and the capital sitting on SAFEs and convertible notes that have not yet converted. Only non-terminal option grants dilute — EXERCISED, EXPIRED and CANCELLED grants are excluded, so equity issued through an exercised option is never counted twice.
+     * @return ApiResponse<CaptableSummary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CaptableSummaryWithHttpInfo() : ApiResponse<CloudCaptableSummary?> {
-        val localVariableConfig = cloudGetV1CaptableSummaryRequestConfig()
+    fun getV1CaptableSummaryWithHttpInfo() : ApiResponse<CaptableSummary?> {
+        val localVariableConfig = getV1CaptableSummaryRequestConfig()
 
-        return request<Unit, CloudCaptableSummary>(
+        return request<Unit, CaptableSummary>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CaptableSummary
+     * To obtain the request config of the operation getV1CaptableSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CaptableSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1CaptableSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1264,15 +1264,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * PATCH /v1/captable/share-classes/{id}
-     * 
-     * 
+     * PATCH /v1/captable/classes/{id}
+     * Amend a share class
+     * Rewrites one share class — the amendment path for a class whose authorized count, price, seniority or preference terms have changed.  It REPLACES the class rather than merging into it: every field is taken from this body, so an omitted field resets to the create-time default instead of keeping its current value. Send the full class. The index and the derived prefix are unchanged by an amendment. An id that is not this company&#39;s is not found.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1282,8 +1282,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1CaptableShareClassesById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1CaptableShareClassesByIdWithHttpInfo(id = id)
+    fun patchV1CaptableClassesById(id: kotlin.String) : Unit {
+        val localVarResponse = patchV1CaptableClassesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1301,17 +1301,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * PATCH /v1/captable/share-classes/{id}
-     * 
-     * 
+     * PATCH /v1/captable/classes/{id}
+     * Amend a share class
+     * Rewrites one share class — the amendment path for a class whose authorized count, price, seniority or preference terms have changed.  It REPLACES the class rather than merging into it: every field is taken from this body, so an omitted field resets to the create-time default instead of keeping its current value. Send the full class. The index and the derived prefix are unchanged by an amendment. An id that is not this company&#39;s is not found.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1CaptableShareClassesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1CaptableShareClassesByIdRequestConfig(id = id)
+    fun patchV1CaptableClassesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1CaptableClassesByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1319,33 +1319,33 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1CaptableShareClassesById
+     * To obtain the request config of the operation patchV1CaptableClassesById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPatchV1CaptableShareClassesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1CaptableClassesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         
         return RequestConfig(
             method = RequestMethod.PATCH,
-            path = "/v1/captable/share-classes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            path = "/v1/captable/classes/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/captable/stakeholders/{id}
-     * UpdateStakeholder changes one of the caller org&#39;s stakeholders.
-     * UpdateStakeholder changes one of the caller org&#39;s stakeholders. It is a PARTIAL update: only the fields the request names are written, and a field sent as null clears that column. A request that names no updatable field is refused, and an id this org does not hold is not found.  The values are stored as sent. Unlike adding a stakeholder, this route does not check the email&#39;s shape or the type and relationship vocabularies, so it can record a value that adding one would have rejected.
+     * Changes one of the caller org&#39;s stakeholders.
+     * Changes one of the caller org&#39;s stakeholders. It is a PARTIAL update: only the fields the request names are written, and a field sent as null clears that column. A request that names no updatable field is refused, and an id this org does not hold is not found.  The values are stored as sent. Unlike adding a stakeholder, this route does not check the email&#39;s shape or the type and relationship vocabularies, so it can record a value that adding one would have rejected.
      * @param id ID is the stakeholder to update. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @param cloudCaptableStakeholderPatch 
-     * @return CloudCaptableUpdated
+     * @param captableStakeholderPatch 
+     * @return CaptableUpdated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1354,11 +1354,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1CaptableStakeholdersId(id: kotlin.String, cloudCaptableStakeholderPatch: CloudCaptableStakeholderPatch) : CloudCaptableUpdated {
-        val localVarResponse = cloudPatchV1CaptableStakeholdersIdWithHttpInfo(id = id, cloudCaptableStakeholderPatch = cloudCaptableStakeholderPatch)
+    fun patchV1CaptableStakeholdersById(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : CaptableUpdated {
+        val localVarResponse = patchV1CaptableStakeholdersByIdWithHttpInfo(id = id, captableStakeholderPatch = captableStakeholderPatch)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableUpdated
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableUpdated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1374,33 +1374,33 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * PATCH /v1/captable/stakeholders/{id}
-     * UpdateStakeholder changes one of the caller org&#39;s stakeholders.
-     * UpdateStakeholder changes one of the caller org&#39;s stakeholders. It is a PARTIAL update: only the fields the request names are written, and a field sent as null clears that column. A request that names no updatable field is refused, and an id this org does not hold is not found.  The values are stored as sent. Unlike adding a stakeholder, this route does not check the email&#39;s shape or the type and relationship vocabularies, so it can record a value that adding one would have rejected.
+     * Changes one of the caller org&#39;s stakeholders.
+     * Changes one of the caller org&#39;s stakeholders. It is a PARTIAL update: only the fields the request names are written, and a field sent as null clears that column. A request that names no updatable field is refused, and an id this org does not hold is not found.  The values are stored as sent. Unlike adding a stakeholder, this route does not check the email&#39;s shape or the type and relationship vocabularies, so it can record a value that adding one would have rejected.
      * @param id ID is the stakeholder to update. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @param cloudCaptableStakeholderPatch 
-     * @return ApiResponse<CloudCaptableUpdated?>
+     * @param captableStakeholderPatch 
+     * @return ApiResponse<CaptableUpdated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1CaptableStakeholdersIdWithHttpInfo(id: kotlin.String, cloudCaptableStakeholderPatch: CloudCaptableStakeholderPatch) : ApiResponse<CloudCaptableUpdated?> {
-        val localVariableConfig = cloudPatchV1CaptableStakeholdersIdRequestConfig(id = id, cloudCaptableStakeholderPatch = cloudCaptableStakeholderPatch)
+    fun patchV1CaptableStakeholdersByIdWithHttpInfo(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : ApiResponse<CaptableUpdated?> {
+        val localVariableConfig = patchV1CaptableStakeholdersByIdRequestConfig(id = id, captableStakeholderPatch = captableStakeholderPatch)
 
-        return request<CloudCaptableStakeholderPatch, CloudCaptableUpdated>(
+        return request<CaptableStakeholderPatch, CaptableUpdated>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1CaptableStakeholdersId
+     * To obtain the request config of the operation patchV1CaptableStakeholdersById
      *
      * @param id ID is the stakeholder to update. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @param cloudCaptableStakeholderPatch 
+     * @param captableStakeholderPatch 
      * @return RequestConfig
      */
-    fun cloudPatchV1CaptableStakeholdersIdRequestConfig(id: kotlin.String, cloudCaptableStakeholderPatch: CloudCaptableStakeholderPatch) : RequestConfig<CloudCaptableStakeholderPatch> {
-        val localVariableBody = cloudCaptableStakeholderPatch
+    fun patchV1CaptableStakeholdersByIdRequestConfig(id: kotlin.String, captableStakeholderPatch: CaptableStakeholderPatch) : RequestConfig<CaptableStakeholderPatch> {
+        val localVariableBody = captableStakeholderPatch
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1411,15 +1411,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/captable/convertibles
-     * 
-     * 
+     * POST /v1/captable/classes
+     * Define a share class
+     * Creates a class of stock — its authorized share count, votes per share, par and issue price, seniority, conversion rights and liquidation/participation multiples — which is what shares, priced rounds and equity plans are then issued against.  Two fields are the company&#39;s to assign, not the caller&#39;s: the class index auto-increments per company, and the certificate prefix is DERIVED from the class type (CS for COMMON, PS for anything else), so a prefix in the body is ignored.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1428,8 +1428,75 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableConvertibles() : Unit {
-        val localVarResponse = cloudPostV1CaptableConvertiblesWithHttpInfo()
+    fun postV1CaptableClasses() : Unit {
+        val localVarResponse = postV1CaptableClassesWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/captable/classes
+     * Define a share class
+     * Creates a class of stock — its authorized share count, votes per share, par and issue price, seniority, conversion rights and liquidation/participation multiples — which is what shares, priced rounds and equity plans are then issued against.  Two fields are the company&#39;s to assign, not the caller&#39;s: the class index auto-increments per company, and the certificate prefix is DERIVED from the class type (CS for COMMON, PS for anything else), so a prefix in the body is ignored.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CaptableClassesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableClassesRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CaptableClasses
+     *
+     * @return RequestConfig
+     */
+    fun postV1CaptableClassesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/captable/classes",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/captable/convertibles
+     * Record a convertible note
+     * Records a convertible note held by a stakeholder: the principal, the conversion cap, discount and interest rate, MFN, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the note&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. Like a SAFE, this records the instrument only; conversion is not performed here.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CaptableConvertibles() : Unit {
+        val localVarResponse = postV1CaptableConvertiblesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1448,15 +1515,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/convertibles
-     * 
-     * 
+     * Record a convertible note
+     * Records a convertible note held by a stakeholder: the principal, the conversion cap, discount and interest rate, MFN, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the note&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. Like a SAFE, this records the instrument only; conversion is not performed here.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableConvertiblesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableConvertiblesRequestConfig()
+    fun postV1CaptableConvertiblesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableConvertiblesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1464,11 +1531,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableConvertibles
+     * To obtain the request config of the operation postV1CaptableConvertibles
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
+    fun postV1CaptableConvertiblesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1478,82 +1545,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/convertibles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/captable/equity-plans
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableEquityPlans() : Unit {
-        val localVarResponse = cloudPostV1CaptableEquityPlansWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/captable/equity-plans
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableEquityPlansWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableEquityPlansRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1CaptableEquityPlans
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1CaptableEquityPlansRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/captable/equity-plans",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/captable/options
-     * 
-     * 
+     * Grant options from an equity plan
+     * Records an option grant to a stakeholder under an equity plan — quantity, exercise price, ISO/NSO type, cliff and vesting years, and the issue, expiration, vesting-start, board-approval and Rule 144 dates.  The stakeholder and the equity plan must both already exist in this company, and the grant id must be unused there — a reused grant id is a conflict, so a grant can never be overwritten by a later one carrying the same number.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1562,8 +1562,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableOptions() : Unit {
-        val localVarResponse = cloudPostV1CaptableOptionsWithHttpInfo()
+    fun postV1CaptableOptions() : Unit {
+        val localVarResponse = postV1CaptableOptionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1582,15 +1582,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/options
-     * 
-     * 
+     * Grant options from an equity plan
+     * Records an option grant to a stakeholder under an equity plan — quantity, exercise price, ISO/NSO type, cliff and vesting years, and the issue, expiration, vesting-start, board-approval and Rule 144 dates.  The stakeholder and the equity plan must both already exist in this company, and the grant id must be unused there — a reused grant id is a conflict, so a grant can never be overwritten by a later one carrying the same number.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableOptionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableOptionsRequestConfig()
+    fun postV1CaptableOptionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableOptionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1598,11 +1598,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableOptions
+     * To obtain the request config of the operation postV1CaptableOptions
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableOptionsRequestConfig() : RequestConfig<Unit> {
+    fun postV1CaptableOptionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1612,15 +1612,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/options",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/captable/rounds
-     * 
-     * 
+     * POST /v1/captable/plans
+     * Open an equity incentive plan
+     * Reserves a pool of shares out of a share class for option grants, with the board approval and effective dates and what happens to cancelled options.  The share class must already exist in this company — a plan cannot reserve out of nothing. Note the field name the bundle reads for the cancellation behaviour is &#x60;defaultCancellatonBehavior&#x60;; that spelling is the wire, and a correctly spelled key is simply not seen.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1629,8 +1629,75 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableRounds() : Unit {
-        val localVarResponse = cloudPostV1CaptableRoundsWithHttpInfo()
+    fun postV1CaptablePlans() : Unit {
+        val localVarResponse = postV1CaptablePlansWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/captable/plans
+     * Open an equity incentive plan
+     * Reserves a pool of shares out of a share class for option grants, with the board approval and effective dates and what happens to cancelled options.  The share class must already exist in this company — a plan cannot reserve out of nothing. Note the field name the bundle reads for the cancellation behaviour is &#x60;defaultCancellatonBehavior&#x60;; that spelling is the wire, and a correctly spelled key is simply not seen.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CaptablePlansWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptablePlansRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CaptablePlans
+     *
+     * @return RequestConfig
+     */
+    fun postV1CaptablePlansRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/captable/plans",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/captable/rounds
+     * Open a funding round
+     * Opens a round with its name, type and target amount. It starts OPEN with nothing raised; investments are then added to it, and closing it is its own call.  A PRICED round is the constrained case: it requires a share class that exists in this company and a price per share above zero, because that price is what converts each investment into issued shares. Its pre-money valuation is optional. A non-priced round carries none of the three.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CaptableRounds() : Unit {
+        val localVarResponse = postV1CaptableRoundsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1649,15 +1716,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/rounds
-     * 
-     * 
+     * Open a funding round
+     * Opens a round with its name, type and target amount. It starts OPEN with nothing raised; investments are then added to it, and closing it is its own call.  A PRICED round is the constrained case: it requires a share class that exists in this company and a price per share above zero, because that price is what converts each investment into issued shares. Its pre-money valuation is optional. A non-priced round carries none of the three.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableRoundsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableRoundsRequestConfig()
+    fun postV1CaptableRoundsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableRoundsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1665,11 +1732,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableRounds
+     * To obtain the request config of the operation postV1CaptableRounds
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableRoundsRequestConfig() : RequestConfig<Unit> {
+    fun postV1CaptableRoundsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1679,88 +1746,18 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/captable/rounds/{id}/investments
-     * 
-     * 
-     * @param id 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableRoundsByIdInvestments(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1CaptableRoundsByIdInvestmentsWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/captable/rounds/{id}/investments
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableRoundsByIdInvestmentsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableRoundsByIdInvestmentsRequestConfig(id = id)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1CaptableRoundsByIdInvestments
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun cloudPostV1CaptableRoundsByIdInvestmentsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/captable/rounds/{id}/investments".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/captable/rounds/{id}/close
-     * CloseRound closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED.
-     * CloseRound closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED. Only an OPEN round can be closed: a round that is already closed — like an id this org does not hold — is not found. Closing a round does not change what was invested in it.
+     * Closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED.
+     * Closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED. Only an OPEN round can be closed: a round that is already closed — like an id this org does not hold — is not found. Closing a round does not change what was invested in it.
      * @param id ID is the round to close. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @param cloudCaptableRoundCloseRequest 
-     * @return CloudCaptableUpdated
+     * @param captableRoundCloseRequest 
+     * @return CaptableUpdated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1769,11 +1766,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableRoundsIdClose(id: kotlin.String, cloudCaptableRoundCloseRequest: CloudCaptableRoundCloseRequest) : CloudCaptableUpdated {
-        val localVarResponse = cloudPostV1CaptableRoundsIdCloseWithHttpInfo(id = id, cloudCaptableRoundCloseRequest = cloudCaptableRoundCloseRequest)
+    fun postV1CaptableRoundsByIdClose(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : CaptableUpdated {
+        val localVarResponse = postV1CaptableRoundsByIdCloseWithHttpInfo(id = id, captableRoundCloseRequest = captableRoundCloseRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableUpdated
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableUpdated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1789,33 +1786,33 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/rounds/{id}/close
-     * CloseRound closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED.
-     * CloseRound closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED. Only an OPEN round can be closed: a round that is already closed — like an id this org does not hold — is not found. Closing a round does not change what was invested in it.
+     * Closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED.
+     * Closes one of the caller org&#39;s fundraising rounds, recording the close date and moving its status to CLOSED. Only an OPEN round can be closed: a round that is already closed — like an id this org does not hold — is not found. Closing a round does not change what was invested in it.
      * @param id ID is the round to close. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @param cloudCaptableRoundCloseRequest 
-     * @return ApiResponse<CloudCaptableUpdated?>
+     * @param captableRoundCloseRequest 
+     * @return ApiResponse<CaptableUpdated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableRoundsIdCloseWithHttpInfo(id: kotlin.String, cloudCaptableRoundCloseRequest: CloudCaptableRoundCloseRequest) : ApiResponse<CloudCaptableUpdated?> {
-        val localVariableConfig = cloudPostV1CaptableRoundsIdCloseRequestConfig(id = id, cloudCaptableRoundCloseRequest = cloudCaptableRoundCloseRequest)
+    fun postV1CaptableRoundsByIdCloseWithHttpInfo(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : ApiResponse<CaptableUpdated?> {
+        val localVariableConfig = postV1CaptableRoundsByIdCloseRequestConfig(id = id, captableRoundCloseRequest = captableRoundCloseRequest)
 
-        return request<CloudCaptableRoundCloseRequest, CloudCaptableUpdated>(
+        return request<CaptableRoundCloseRequest, CaptableUpdated>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableRoundsIdClose
+     * To obtain the request config of the operation postV1CaptableRoundsByIdClose
      *
      * @param id ID is the round to close. It is the path segment: the URL is the addressing authority, and the org it is resolved in comes from the caller&#39;s principal, so an id from another tenant is simply not found.
-     * @param cloudCaptableRoundCloseRequest 
+     * @param captableRoundCloseRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableRoundsIdCloseRequestConfig(id: kotlin.String, cloudCaptableRoundCloseRequest: CloudCaptableRoundCloseRequest) : RequestConfig<CloudCaptableRoundCloseRequest> {
-        val localVariableBody = cloudCaptableRoundCloseRequest
+    fun postV1CaptableRoundsByIdCloseRequestConfig(id: kotlin.String, captableRoundCloseRequest: CaptableRoundCloseRequest) : RequestConfig<CaptableRoundCloseRequest> {
+        val localVariableBody = captableRoundCloseRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1826,15 +1823,16 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/rounds/{id}/close".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/captable/safes
-     * 
-     * 
+     * POST /v1/captable/rounds/{id}/investments
+     * Record an investment into a round
+     * Records what a stakeholder put into a round and adds it to the round&#39;s raised total.  On a PRICED round this ISSUES SHARES as well as recording the money: the amount is divided by the round&#39;s price per share, rounded DOWN to whole shares, and a new certificate for them is issued to the investor in the round&#39;s share class — so an amount too small to buy one whole share is refused rather than recorded as a zero-share investment. On a non-priced round the money is recorded and no shares are issued.  The round must exist in this company and still be OPEN — a closed round refuses further investment — and the investor must already be a stakeholder here. The date defaults to today when omitted.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
+     * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1843,8 +1841,77 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableSafes() : Unit {
-        val localVarResponse = cloudPostV1CaptableSafesWithHttpInfo()
+    fun postV1CaptableRoundsByIdInvestments(id: kotlin.String) : Unit {
+        val localVarResponse = postV1CaptableRoundsByIdInvestmentsWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/captable/rounds/{id}/investments
+     * Record an investment into a round
+     * Records what a stakeholder put into a round and adds it to the round&#39;s raised total.  On a PRICED round this ISSUES SHARES as well as recording the money: the amount is divided by the round&#39;s price per share, rounded DOWN to whole shares, and a new certificate for them is issued to the investor in the round&#39;s share class — so an amount too small to buy one whole share is refused rather than recorded as a zero-share investment. On a non-priced round the money is recorded and no shares are issued.  The round must exist in this company and still be OPEN — a closed round refuses further investment — and the investor must already be a stakeholder here. The date defaults to today when omitted.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CaptableRoundsByIdInvestmentsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableRoundsByIdInvestmentsRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CaptableRoundsByIdInvestments
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postV1CaptableRoundsByIdInvestmentsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/captable/rounds/{id}/investments".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/captable/safes
+     * Record a SAFE
+     * Records a Simple Agreement for Future Equity held by a stakeholder: the capital in, the valuation cap and discount, MFN and pro-rata rights, pre- or post-money type, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the SAFE&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. This records the instrument; it does not convert it, so nothing is issued against a share class until a round does that.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CaptableSafes() : Unit {
+        val localVarResponse = postV1CaptableSafesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1863,15 +1930,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/safes
-     * 
-     * 
+     * Record a SAFE
+     * Records a Simple Agreement for Future Equity held by a stakeholder: the capital in, the valuation cap and discount, MFN and pro-rata rights, pre- or post-money type, and the issue and board-approval dates.  The stakeholder must already exist in this company, and the SAFE&#39;s public id must be unused there — a reused id is a conflict rather than an overwrite. This records the instrument; it does not convert it, so nothing is issued against a share class until a round does that.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableSafesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableSafesRequestConfig()
+    fun postV1CaptableSafesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableSafesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1879,11 +1946,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableSafes
+     * To obtain the request config of the operation postV1CaptableSafes
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableSafesRequestConfig() : RequestConfig<Unit> {
+    fun postV1CaptableSafesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1893,82 +1960,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/safes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/captable/share-classes
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableShareClasses() : Unit {
-        val localVarResponse = cloudPostV1CaptableShareClassesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/captable/share-classes
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableShareClassesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableShareClassesRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1CaptableShareClasses
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1CaptableShareClassesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/captable/share-classes",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/captable/shares
-     * 
-     * 
+     * Issue a share certificate
+     * Issues shares of a class to a stakeholder as a certificate: quantity, price and capital contributed, the vesting cliff and term, the legends on the certificate, and the issue, Rule 144, vesting-start and board-approval dates.  Both the stakeholder and the share class must already exist in this company, and the certificate id must be unused there — a reused id is a conflict, never a silent overwrite of an existing certificate.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1977,8 +1977,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableShares() : Unit {
-        val localVarResponse = cloudPostV1CaptableSharesWithHttpInfo()
+    fun postV1CaptableShares() : Unit {
+        val localVarResponse = postV1CaptableSharesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1997,15 +1997,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/shares
-     * 
-     * 
+     * Issue a share certificate
+     * Issues shares of a class to a stakeholder as a certificate: quantity, price and capital contributed, the vesting cliff and term, the legends on the certificate, and the issue, Rule 144, vesting-start and board-approval dates.  Both the stakeholder and the share class must already exist in this company, and the certificate id must be unused there — a reused id is a conflict, never a silent overwrite of an existing certificate.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableSharesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableSharesRequestConfig()
+    fun postV1CaptableSharesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableSharesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2013,11 +2013,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableShares
+     * To obtain the request config of the operation postV1CaptableShares
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableSharesRequestConfig() : RequestConfig<Unit> {
+    fun postV1CaptableSharesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2027,15 +2027,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/captable/shares/transfer
-     * 
-     * 
+     * Transfer shares to another stakeholder
+     * Moves shares from one certificate to another stakeholder, in one atomic step.  OMITTING &#x60;quantity&#x60; transfers the WHOLE certificate, which simply reassigns it and answers newShareId null — that is the difference between a full and a partial transfer, and it is why quantity is absent rather than zero. A partial transfer shrinks the source certificate and issues a NEW one to the recipient, so it requires a &#x60;certificateId&#x60; for that new certificate and refuses a reused one. The quantity must be between 1 and what the source certificate actually holds; the recipient must be a stakeholder of this same company.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2044,8 +2044,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableSharesTransfer() : Unit {
-        val localVarResponse = cloudPostV1CaptableSharesTransferWithHttpInfo()
+    fun postV1CaptableSharesTransfer() : Unit {
+        val localVarResponse = postV1CaptableSharesTransferWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2064,15 +2064,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/shares/transfer
-     * 
-     * 
+     * Transfer shares to another stakeholder
+     * Moves shares from one certificate to another stakeholder, in one atomic step.  OMITTING &#x60;quantity&#x60; transfers the WHOLE certificate, which simply reassigns it and answers newShareId null — that is the difference between a full and a partial transfer, and it is why quantity is absent rather than zero. A partial transfer shrinks the source certificate and issues a NEW one to the recipient, so it requires a &#x60;certificateId&#x60; for that new certificate and refuses a reused one. The quantity must be between 1 and what the source certificate actually holds; the recipient must be a stakeholder of this same company.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableSharesTransferWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableSharesTransferRequestConfig()
+    fun postV1CaptableSharesTransferWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableSharesTransferRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2080,11 +2080,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableSharesTransfer
+     * To obtain the request config of the operation postV1CaptableSharesTransfer
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableSharesTransferRequestConfig() : RequestConfig<Unit> {
+    fun postV1CaptableSharesTransferRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2094,15 +2094,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/shares/transfer",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/captable/stakeholders
-     * 
-     * 
+     * Add stakeholders to the cap table
+     * Records the people and institutions that can hold equity — the rows every share, option, SAFE, note and investment is issued to.  The body is ONE stakeholder object or an ARRAY of them, and the array is the point: a whole roster loads in a single call. Email is the identity within the company, so a stakeholder whose email is already on the table is SKIPPED rather than duplicated or rejected — the 201 reports how many rows were actually inserted, which is what makes re-running an import safe. Validation is all-or-nothing across the batch: one bad entry refuses the whole array.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2111,8 +2111,8 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CaptableStakeholders() : Unit {
-        val localVarResponse = cloudPostV1CaptableStakeholdersWithHttpInfo()
+    fun postV1CaptableStakeholders() : Unit {
+        val localVarResponse = postV1CaptableStakeholdersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2131,15 +2131,15 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * POST /v1/captable/stakeholders
-     * 
-     * 
+     * Add stakeholders to the cap table
+     * Records the people and institutions that can hold equity — the rows every share, option, SAFE, note and investment is issued to.  The body is ONE stakeholder object or an ARRAY of them, and the array is the point: a whole roster loads in a single call. Email is the identity within the company, so a stakeholder whose email is already on the table is SKIPPED rather than duplicated or rejected — the 201 reports how many rows were actually inserted, which is what makes re-running an import safe. Validation is all-or-nothing across the batch: one bad entry refuses the whole array.  Writes the caller&#39;s OWN cap table: the org resolved from the validated principal selects the tenant&#39;s store and scopes every row, so there is no field by which a caller can write into another company&#39;s table; a request with no validated org is refused. The whole write runs in one transaction, so a refusal leaves nothing behind. Validation is the cap-table bundle&#39;s and so is its refusal: a bad body comes back as {success:false, message, errors:[…]} with the failing fields listed, and numeric fields accept a number OR a numeric string. Bodies are capped at 1 MiB.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CaptableStakeholdersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1CaptableStakeholdersRequestConfig()
+    fun postV1CaptableStakeholdersWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1CaptableStakeholdersRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2147,11 +2147,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CaptableStakeholders
+     * To obtain the request config of the operation postV1CaptableStakeholders
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
+    fun postV1CaptableStakeholdersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2161,17 +2161,17 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/stakeholders",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/captable/company
-     * UpdateCompany sets the caller org&#39;s company name and incorporation details.
-     * UpdateCompany sets the caller org&#39;s company name and incorporation details. The name is required; the three incorporation fields are optional and each is stored as empty when omitted, so a call that sends only a name CLEARS them. The company row itself is seeded when the tenant&#39;s store first opens, so this never creates one.
-     * @param cloudCaptableCompanyUpdate 
-     * @return CloudCaptableUpdated
+     * Sets the caller org&#39;s company name and incorporation details.
+     * Sets the caller org&#39;s company name and incorporation details. The name is required; the three incorporation fields are optional and each is stored as empty when omitted, so a call that sends only a name CLEARS them. The company row itself is seeded when the tenant&#39;s store first opens, so this never creates one.
+     * @param captableCompanyUpdate 
+     * @return CaptableUpdated
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2180,11 +2180,11 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CaptableCompany(cloudCaptableCompanyUpdate: CloudCaptableCompanyUpdate) : CloudCaptableUpdated {
-        val localVarResponse = cloudPutV1CaptableCompanyWithHttpInfo(cloudCaptableCompanyUpdate = cloudCaptableCompanyUpdate)
+    fun putV1CaptableCompany(captableCompanyUpdate: CaptableCompanyUpdate) : CaptableUpdated {
+        val localVarResponse = putV1CaptableCompanyWithHttpInfo(captableCompanyUpdate = captableCompanyUpdate)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCaptableUpdated
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CaptableUpdated
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2200,31 +2200,31 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
     /**
      * PUT /v1/captable/company
-     * UpdateCompany sets the caller org&#39;s company name and incorporation details.
-     * UpdateCompany sets the caller org&#39;s company name and incorporation details. The name is required; the three incorporation fields are optional and each is stored as empty when omitted, so a call that sends only a name CLEARS them. The company row itself is seeded when the tenant&#39;s store first opens, so this never creates one.
-     * @param cloudCaptableCompanyUpdate 
-     * @return ApiResponse<CloudCaptableUpdated?>
+     * Sets the caller org&#39;s company name and incorporation details.
+     * Sets the caller org&#39;s company name and incorporation details. The name is required; the three incorporation fields are optional and each is stored as empty when omitted, so a call that sends only a name CLEARS them. The company row itself is seeded when the tenant&#39;s store first opens, so this never creates one.
+     * @param captableCompanyUpdate 
+     * @return ApiResponse<CaptableUpdated?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CaptableCompanyWithHttpInfo(cloudCaptableCompanyUpdate: CloudCaptableCompanyUpdate) : ApiResponse<CloudCaptableUpdated?> {
-        val localVariableConfig = cloudPutV1CaptableCompanyRequestConfig(cloudCaptableCompanyUpdate = cloudCaptableCompanyUpdate)
+    fun putV1CaptableCompanyWithHttpInfo(captableCompanyUpdate: CaptableCompanyUpdate) : ApiResponse<CaptableUpdated?> {
+        val localVariableConfig = putV1CaptableCompanyRequestConfig(captableCompanyUpdate = captableCompanyUpdate)
 
-        return request<CloudCaptableCompanyUpdate, CloudCaptableUpdated>(
+        return request<CaptableCompanyUpdate, CaptableUpdated>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CaptableCompany
+     * To obtain the request config of the operation putV1CaptableCompany
      *
-     * @param cloudCaptableCompanyUpdate 
+     * @param captableCompanyUpdate 
      * @return RequestConfig
      */
-    fun cloudPutV1CaptableCompanyRequestConfig(cloudCaptableCompanyUpdate: CloudCaptableCompanyUpdate) : RequestConfig<CloudCaptableCompanyUpdate> {
-        val localVariableBody = cloudCaptableCompanyUpdate
+    fun putV1CaptableCompanyRequestConfig(captableCompanyUpdate: CaptableCompanyUpdate) : RequestConfig<CaptableCompanyUpdate> {
+        val localVariableBody = captableCompanyUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2235,7 +2235,7 @@ class CaptableApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/captable/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

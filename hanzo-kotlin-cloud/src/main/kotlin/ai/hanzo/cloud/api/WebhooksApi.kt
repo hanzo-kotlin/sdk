@@ -19,16 +19,12 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCreateEndpointIn
-import ai.hanzo.cloud.model.CloudDeliveryList
-import ai.hanzo.cloud.model.CloudEndpoint
-import ai.hanzo.cloud.model.CloudEndpointList
-import ai.hanzo.cloud.model.CloudTestResult
-import ai.hanzo.cloud.model.CloudUpdateEndpointIn
-import ai.hanzo.cloud.model.IamControllersResponse
-import ai.hanzo.cloud.model.IamObjectWebhook
-import ai.hanzo.cloud.model.SearchWebhookResultsValue
-import ai.hanzo.cloud.model.SearchWebhookSettingsValue
+import ai.hanzo.cloud.model.CreateEndpointIn
+import ai.hanzo.cloud.model.DeliveryList
+import ai.hanzo.cloud.model.Endpoint
+import ai.hanzo.cloud.model.EndpointList
+import ai.hanzo.cloud.model.TestResult
+import ai.hanzo.cloud.model.UpdateEndpointIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -67,8 +63,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1WebhooksId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1WebhooksIdWithHttpInfo(id = id)
+    fun deleteV1WebhooksById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1WebhooksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -95,8 +91,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1WebhooksIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1WebhooksIdRequestConfig(id = id)
+    fun deleteV1WebhooksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1WebhooksByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -104,12 +100,12 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1WebhooksId
+     * To obtain the request config of the operation deleteV1WebhooksById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudDeleteV1WebhooksIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1WebhooksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -119,7 +115,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -128,7 +124,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/webhooks
      * Returns every webhook endpoint the caller&#39;s org has registered, newest first, each with its 7-day delivery and failure counts.
      * Returns every webhook endpoint the caller&#39;s org has registered, newest first, each with its 7-day delivery and failure counts. Signing secrets are redacted here — a secret leaves the server only on create and on rotate. The listing is physically org-scoped, so another tenant&#39;s endpoints are not reachable from this route at all.
-     * @return CloudEndpointList
+     * @return EndpointList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -137,11 +133,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Webhooks() : CloudEndpointList {
-        val localVarResponse = cloudGetV1WebhooksWithHttpInfo()
+    fun getV1Webhooks() : EndpointList {
+        val localVarResponse = getV1WebhooksWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEndpointList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EndpointList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -159,26 +155,26 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * GET /v1/webhooks
      * Returns every webhook endpoint the caller&#39;s org has registered, newest first, each with its 7-day delivery and failure counts.
      * Returns every webhook endpoint the caller&#39;s org has registered, newest first, each with its 7-day delivery and failure counts. Signing secrets are redacted here — a secret leaves the server only on create and on rotate. The listing is physically org-scoped, so another tenant&#39;s endpoints are not reachable from this route at all.
-     * @return ApiResponse<CloudEndpointList?>
+     * @return ApiResponse<EndpointList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WebhooksWithHttpInfo() : ApiResponse<CloudEndpointList?> {
-        val localVariableConfig = cloudGetV1WebhooksRequestConfig()
+    fun getV1WebhooksWithHttpInfo() : ApiResponse<EndpointList?> {
+        val localVariableConfig = getV1WebhooksRequestConfig()
 
-        return request<Unit, CloudEndpointList>(
+        return request<Unit, EndpointList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Webhooks
+     * To obtain the request config of the operation getV1Webhooks
      *
      * @return RequestConfig
      */
-    fun cloudGetV1WebhooksRequestConfig() : RequestConfig<Unit> {
+    fun getV1WebhooksRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -189,7 +185,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -199,7 +195,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns one of the caller org&#39;s webhook endpoints with its 7-day delivery and failure counts, signing secret redacted.
      * Returns one of the caller org&#39;s webhook endpoints with its 7-day delivery and failure counts, signing secret redacted. An id another org owns reads as not found, so the response cannot confirm that it exists.
      * @param id 
-     * @return CloudEndpoint
+     * @return Endpoint
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -208,11 +204,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WebhooksId(id: kotlin.String) : CloudEndpoint {
-        val localVarResponse = cloudGetV1WebhooksIdWithHttpInfo(id = id)
+    fun getV1WebhooksById(id: kotlin.String) : Endpoint {
+        val localVarResponse = getV1WebhooksByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEndpoint
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -231,27 +227,27 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Returns one of the caller org&#39;s webhook endpoints with its 7-day delivery and failure counts, signing secret redacted.
      * Returns one of the caller org&#39;s webhook endpoints with its 7-day delivery and failure counts, signing secret redacted. An id another org owns reads as not found, so the response cannot confirm that it exists.
      * @param id 
-     * @return ApiResponse<CloudEndpoint?>
+     * @return ApiResponse<Endpoint?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WebhooksIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudEndpoint?> {
-        val localVariableConfig = cloudGetV1WebhooksIdRequestConfig(id = id)
+    fun getV1WebhooksByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Endpoint?> {
+        val localVariableConfig = getV1WebhooksByIdRequestConfig(id = id)
 
-        return request<Unit, CloudEndpoint>(
+        return request<Unit, Endpoint>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WebhooksId
+     * To obtain the request config of the operation getV1WebhooksById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1WebhooksIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1WebhooksByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -262,7 +258,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -274,7 +270,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param id 
      * @param limit Limit caps how many attempts come back: default 50, maximum 200. A value that is not a positive integer reads as the default. (optional)
      * @param status Status narrows the log to one outcome: \&quot;ok\&quot;, \&quot;retrying\&quot; or \&quot;failed\&quot;. Empty returns every attempt. (optional)
-     * @return CloudDeliveryList
+     * @return DeliveryList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -283,11 +279,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WebhooksIdDeliveries(id: kotlin.String, limit: kotlin.Int? = null, status: kotlin.String? = null) : CloudDeliveryList {
-        val localVarResponse = cloudGetV1WebhooksIdDeliveriesWithHttpInfo(id = id, limit = limit, status = status)
+    fun getV1WebhooksByIdDeliveries(id: kotlin.String, limit: kotlin.Int? = null, status: kotlin.String? = null) : DeliveryList {
+        val localVarResponse = getV1WebhooksByIdDeliveriesWithHttpInfo(id = id, limit = limit, status = status)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDeliveryList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeliveryList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -308,29 +304,29 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * @param id 
      * @param limit Limit caps how many attempts come back: default 50, maximum 200. A value that is not a positive integer reads as the default. (optional)
      * @param status Status narrows the log to one outcome: \&quot;ok\&quot;, \&quot;retrying\&quot; or \&quot;failed\&quot;. Empty returns every attempt. (optional)
-     * @return ApiResponse<CloudDeliveryList?>
+     * @return ApiResponse<DeliveryList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WebhooksIdDeliveriesWithHttpInfo(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : ApiResponse<CloudDeliveryList?> {
-        val localVariableConfig = cloudGetV1WebhooksIdDeliveriesRequestConfig(id = id, limit = limit, status = status)
+    fun getV1WebhooksByIdDeliveriesWithHttpInfo(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : ApiResponse<DeliveryList?> {
+        val localVariableConfig = getV1WebhooksByIdDeliveriesRequestConfig(id = id, limit = limit, status = status)
 
-        return request<Unit, CloudDeliveryList>(
+        return request<Unit, DeliveryList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WebhooksIdDeliveries
+     * To obtain the request config of the operation getV1WebhooksByIdDeliveries
      *
      * @param id 
      * @param limit Limit caps how many attempts come back: default 50, maximum 200. A value that is not a positive integer reads as the default. (optional)
      * @param status Status narrows the log to one outcome: \&quot;ok\&quot;, \&quot;retrying\&quot; or \&quot;failed\&quot;. Empty returns every attempt. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1WebhooksIdDeliveriesRequestConfig(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1WebhooksByIdDeliveriesRequestConfig(id: kotlin.String, limit: kotlin.Int?, status: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -349,7 +345,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}/deliveries".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -358,8 +354,8 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/webhooks
      * Registers a new webhook subscription for the caller&#39;s org and answers 201 with the endpoint INCLUDING its freshly minted signing secret.
      * Registers a new webhook subscription for the caller&#39;s org and answers 201 with the endpoint INCLUDING its freshly minted signing secret. This is one of only two responses that ever carry that secret (the other is rotate) — store it now, because no later read returns it. The org is stamped by the server from the validated principal, so a body can never register an endpoint in another tenant.
-     * @param cloudCreateEndpointIn 
-     * @return CloudEndpoint
+     * @param createEndpointIn 
+     * @return Endpoint
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -368,11 +364,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Webhooks(cloudCreateEndpointIn: CloudCreateEndpointIn) : CloudEndpoint {
-        val localVarResponse = cloudPostV1WebhooksWithHttpInfo(cloudCreateEndpointIn = cloudCreateEndpointIn)
+    fun postV1Webhooks(createEndpointIn: CreateEndpointIn) : Endpoint {
+        val localVarResponse = postV1WebhooksWithHttpInfo(createEndpointIn = createEndpointIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEndpoint
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -390,29 +386,29 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * POST /v1/webhooks
      * Registers a new webhook subscription for the caller&#39;s org and answers 201 with the endpoint INCLUDING its freshly minted signing secret.
      * Registers a new webhook subscription for the caller&#39;s org and answers 201 with the endpoint INCLUDING its freshly minted signing secret. This is one of only two responses that ever carry that secret (the other is rotate) — store it now, because no later read returns it. The org is stamped by the server from the validated principal, so a body can never register an endpoint in another tenant.
-     * @param cloudCreateEndpointIn 
-     * @return ApiResponse<CloudEndpoint?>
+     * @param createEndpointIn 
+     * @return ApiResponse<Endpoint?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WebhooksWithHttpInfo(cloudCreateEndpointIn: CloudCreateEndpointIn) : ApiResponse<CloudEndpoint?> {
-        val localVariableConfig = cloudPostV1WebhooksRequestConfig(cloudCreateEndpointIn = cloudCreateEndpointIn)
+    fun postV1WebhooksWithHttpInfo(createEndpointIn: CreateEndpointIn) : ApiResponse<Endpoint?> {
+        val localVariableConfig = postV1WebhooksRequestConfig(createEndpointIn = createEndpointIn)
 
-        return request<CloudCreateEndpointIn, CloudEndpoint>(
+        return request<CreateEndpointIn, Endpoint>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Webhooks
+     * To obtain the request config of the operation postV1Webhooks
      *
-     * @param cloudCreateEndpointIn 
+     * @param createEndpointIn 
      * @return RequestConfig
      */
-    fun cloudPostV1WebhooksRequestConfig(cloudCreateEndpointIn: CloudCreateEndpointIn) : RequestConfig<CloudCreateEndpointIn> {
-        val localVariableBody = cloudCreateEndpointIn
+    fun postV1WebhooksRequestConfig(createEndpointIn: CreateEndpointIn) : RequestConfig<CreateEndpointIn> {
+        val localVariableBody = createEndpointIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -423,17 +419,17 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/webhooks/{id}/rotate-secret
+     * POST /v1/webhooks/{id}/secret
      * Mints a NEW HMAC signing secret for the endpoint and answers the endpoint WITH it — the only other response besides create that ever carries a secret.
      * Mints a NEW HMAC signing secret for the endpoint and answers the endpoint WITH it — the only other response besides create that ever carries a secret. The old secret stops working the instant this returns: every subsequent delivery signs with the new one, with no overlap window. Call it when the subscriber is ready to swap the value on its side, not before.
      * @param id 
-     * @return CloudEndpoint
+     * @return Endpoint
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -442,11 +438,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1WebhooksIdRotateSecret(id: kotlin.String) : CloudEndpoint {
-        val localVarResponse = cloudPostV1WebhooksIdRotateSecretWithHttpInfo(id = id)
+    fun postV1WebhooksByIdSecret(id: kotlin.String) : Endpoint {
+        val localVarResponse = postV1WebhooksByIdSecretWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEndpoint
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -461,31 +457,31 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/webhooks/{id}/rotate-secret
+     * POST /v1/webhooks/{id}/secret
      * Mints a NEW HMAC signing secret for the endpoint and answers the endpoint WITH it — the only other response besides create that ever carries a secret.
      * Mints a NEW HMAC signing secret for the endpoint and answers the endpoint WITH it — the only other response besides create that ever carries a secret. The old secret stops working the instant this returns: every subsequent delivery signs with the new one, with no overlap window. Call it when the subscriber is ready to swap the value on its side, not before.
      * @param id 
-     * @return ApiResponse<CloudEndpoint?>
+     * @return ApiResponse<Endpoint?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WebhooksIdRotateSecretWithHttpInfo(id: kotlin.String) : ApiResponse<CloudEndpoint?> {
-        val localVariableConfig = cloudPostV1WebhooksIdRotateSecretRequestConfig(id = id)
+    fun postV1WebhooksByIdSecretWithHttpInfo(id: kotlin.String) : ApiResponse<Endpoint?> {
+        val localVariableConfig = postV1WebhooksByIdSecretRequestConfig(id = id)
 
-        return request<Unit, CloudEndpoint>(
+        return request<Unit, Endpoint>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1WebhooksIdRotateSecret
+     * To obtain the request config of the operation postV1WebhooksByIdSecret
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1WebhooksIdRotateSecretRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1WebhooksByIdSecretRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -493,10 +489,10 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/webhooks/{id}/rotate-secret".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            path = "/v1/webhooks/{id}/secret".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -506,7 +502,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Sends ONE signed test event to the endpoint right now and answers the outcome inline, so the console can show whether the subscriber is reachable without waiting for real traffic.
      * Sends ONE signed test event to the endpoint right now and answers the outcome inline, so the console can show whether the subscriber is reachable without waiting for real traffic. It takes the same attempt path the bus dispatcher takes — one attempt, 10s timeout, no retry ladder — and records the result in the endpoint&#39;s delivery log. It works on a DISABLED endpoint too: validating one you have paused is the whole point.
      * @param id 
-     * @return CloudTestResult
+     * @return TestResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -515,11 +511,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1WebhooksIdTest(id: kotlin.String) : CloudTestResult {
-        val localVarResponse = cloudPostV1WebhooksIdTestWithHttpInfo(id = id)
+    fun postV1WebhooksByIdTest(id: kotlin.String) : TestResult {
+        val localVarResponse = postV1WebhooksByIdTestWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTestResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TestResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -538,27 +534,27 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      * Sends ONE signed test event to the endpoint right now and answers the outcome inline, so the console can show whether the subscriber is reachable without waiting for real traffic.
      * Sends ONE signed test event to the endpoint right now and answers the outcome inline, so the console can show whether the subscriber is reachable without waiting for real traffic. It takes the same attempt path the bus dispatcher takes — one attempt, 10s timeout, no retry ladder — and records the result in the endpoint&#39;s delivery log. It works on a DISABLED endpoint too: validating one you have paused is the whole point.
      * @param id 
-     * @return ApiResponse<CloudTestResult?>
+     * @return ApiResponse<TestResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WebhooksIdTestWithHttpInfo(id: kotlin.String) : ApiResponse<CloudTestResult?> {
-        val localVariableConfig = cloudPostV1WebhooksIdTestRequestConfig(id = id)
+    fun postV1WebhooksByIdTestWithHttpInfo(id: kotlin.String) : ApiResponse<TestResult?> {
+        val localVariableConfig = postV1WebhooksByIdTestRequestConfig(id = id)
 
-        return request<Unit, CloudTestResult>(
+        return request<Unit, TestResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1WebhooksIdTest
+     * To obtain the request config of the operation postV1WebhooksByIdTest
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1WebhooksIdTestRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1WebhooksByIdTestRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -569,7 +565,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}/test".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -577,10 +573,10 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * PUT /v1/webhooks/{id}
      * Replaces the editable fields of one of the caller org&#39;s endpoints — url, events, status and description — and answers the stored row with its secret redacted.
-     * Replaces the editable fields of one of the caller org&#39;s endpoints — url, events, status and description — and answers the stored row with its secret redacted. It is a full replace, not a patch: an omitted field is written as its empty value, and an omitted or empty events list resubscribes the endpoint to EVERY event. The signing secret and the creation time are immutable here; rotate the secret with POST /v1/webhooks/{id}/rotate-secret.
+     * Replaces the editable fields of one of the caller org&#39;s endpoints — url, events, status and description — and answers the stored row with its secret redacted. It is a full replace, not a patch: an omitted field is written as its empty value, and an omitted or empty events list resubscribes the endpoint to EVERY event. The signing secret and the creation time are immutable here; rotate the secret with POST /v1/webhooks/{id}/secret.
      * @param id 
-     * @param cloudUpdateEndpointIn 
-     * @return CloudEndpoint
+     * @param updateEndpointIn 
+     * @return Endpoint
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -589,11 +585,11 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1WebhooksId(id: kotlin.String, cloudUpdateEndpointIn: CloudUpdateEndpointIn) : CloudEndpoint {
-        val localVarResponse = cloudPutV1WebhooksIdWithHttpInfo(id = id, cloudUpdateEndpointIn = cloudUpdateEndpointIn)
+    fun putV1WebhooksById(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : Endpoint {
+        val localVarResponse = putV1WebhooksByIdWithHttpInfo(id = id, updateEndpointIn = updateEndpointIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEndpoint
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Endpoint
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -610,32 +606,32 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     /**
      * PUT /v1/webhooks/{id}
      * Replaces the editable fields of one of the caller org&#39;s endpoints — url, events, status and description — and answers the stored row with its secret redacted.
-     * Replaces the editable fields of one of the caller org&#39;s endpoints — url, events, status and description — and answers the stored row with its secret redacted. It is a full replace, not a patch: an omitted field is written as its empty value, and an omitted or empty events list resubscribes the endpoint to EVERY event. The signing secret and the creation time are immutable here; rotate the secret with POST /v1/webhooks/{id}/rotate-secret.
+     * Replaces the editable fields of one of the caller org&#39;s endpoints — url, events, status and description — and answers the stored row with its secret redacted. It is a full replace, not a patch: an omitted field is written as its empty value, and an omitted or empty events list resubscribes the endpoint to EVERY event. The signing secret and the creation time are immutable here; rotate the secret with POST /v1/webhooks/{id}/secret.
      * @param id 
-     * @param cloudUpdateEndpointIn 
-     * @return ApiResponse<CloudEndpoint?>
+     * @param updateEndpointIn 
+     * @return ApiResponse<Endpoint?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1WebhooksIdWithHttpInfo(id: kotlin.String, cloudUpdateEndpointIn: CloudUpdateEndpointIn) : ApiResponse<CloudEndpoint?> {
-        val localVariableConfig = cloudPutV1WebhooksIdRequestConfig(id = id, cloudUpdateEndpointIn = cloudUpdateEndpointIn)
+    fun putV1WebhooksByIdWithHttpInfo(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : ApiResponse<Endpoint?> {
+        val localVariableConfig = putV1WebhooksByIdRequestConfig(id = id, updateEndpointIn = updateEndpointIn)
 
-        return request<CloudUpdateEndpointIn, CloudEndpoint>(
+        return request<UpdateEndpointIn, Endpoint>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1WebhooksId
+     * To obtain the request config of the operation putV1WebhooksById
      *
      * @param id 
-     * @param cloudUpdateEndpointIn 
+     * @param updateEndpointIn 
      * @return RequestConfig
      */
-    fun cloudPutV1WebhooksIdRequestConfig(id: kotlin.String, cloudUpdateEndpointIn: CloudUpdateEndpointIn) : RequestConfig<CloudUpdateEndpointIn> {
-        val localVariableBody = cloudUpdateEndpointIn
+    fun putV1WebhooksByIdRequestConfig(id: kotlin.String, updateEndpointIn: UpdateEndpointIn) : RequestConfig<UpdateEndpointIn> {
+        val localVariableBody = updateEndpointIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -646,598 +642,7 @@ class WebhooksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
             path = "/v1/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/iam/webhooks
-     * Api Controller Add Webhook
-     * add webhook
-     * @param iamObjectWebhook The details of the webhook
-     * @return IamControllersResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun iamApiControllerAddWebhook(iamObjectWebhook: IamObjectWebhook) : IamControllersResponse {
-        val localVarResponse = iamApiControllerAddWebhookWithHttpInfo(iamObjectWebhook = iamObjectWebhook)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamControllersResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/iam/webhooks
-     * Api Controller Add Webhook
-     * add webhook
-     * @param iamObjectWebhook The details of the webhook
-     * @return ApiResponse<IamControllersResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun iamApiControllerAddWebhookWithHttpInfo(iamObjectWebhook: IamObjectWebhook) : ApiResponse<IamControllersResponse?> {
-        val localVariableConfig = iamApiControllerAddWebhookRequestConfig(iamObjectWebhook = iamObjectWebhook)
-
-        return request<IamObjectWebhook, IamControllersResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation iamApiControllerAddWebhook
-     *
-     * @param iamObjectWebhook The details of the webhook
-     * @return RequestConfig
-     */
-    fun iamApiControllerAddWebhookRequestConfig(iamObjectWebhook: IamObjectWebhook) : RequestConfig<IamObjectWebhook> {
-        val localVariableBody = iamObjectWebhook
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/iam/webhooks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/iam/webhooks/{id}
-     * Api Controller Delete Webhook
-     * delete webhook
-     * @param id Resource identifier (owner/name)
-     * @param iamObjectWebhook The details of the webhook
-     * @return IamControllersResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun iamApiControllerDeleteWebhook(id: kotlin.String, iamObjectWebhook: IamObjectWebhook) : IamControllersResponse {
-        val localVarResponse = iamApiControllerDeleteWebhookWithHttpInfo(id = id, iamObjectWebhook = iamObjectWebhook)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamControllersResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/iam/webhooks/{id}
-     * Api Controller Delete Webhook
-     * delete webhook
-     * @param id Resource identifier (owner/name)
-     * @param iamObjectWebhook The details of the webhook
-     * @return ApiResponse<IamControllersResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun iamApiControllerDeleteWebhookWithHttpInfo(id: kotlin.String, iamObjectWebhook: IamObjectWebhook) : ApiResponse<IamControllersResponse?> {
-        val localVariableConfig = iamApiControllerDeleteWebhookRequestConfig(id = id, iamObjectWebhook = iamObjectWebhook)
-
-        return request<IamObjectWebhook, IamControllersResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation iamApiControllerDeleteWebhook
-     *
-     * @param id Resource identifier (owner/name)
-     * @param iamObjectWebhook The details of the webhook
-     * @return RequestConfig
-     */
-    fun iamApiControllerDeleteWebhookRequestConfig(id: kotlin.String, iamObjectWebhook: IamObjectWebhook) : RequestConfig<IamObjectWebhook> {
-        val localVariableBody = iamObjectWebhook
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/iam/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/webhooks/{id}
-     * Api Controller Get Webhook
-     * get webhook
-     * @param id The id ( owner/name ) of the webhook (default to "built-in/admin")
-     * @return IamObjectWebhook
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun iamApiControllerGetWebhook(id: kotlin.String = "built-in/admin") : IamObjectWebhook {
-        val localVarResponse = iamApiControllerGetWebhookWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamObjectWebhook
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/webhooks/{id}
-     * Api Controller Get Webhook
-     * get webhook
-     * @param id The id ( owner/name ) of the webhook (default to "built-in/admin")
-     * @return ApiResponse<IamObjectWebhook?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun iamApiControllerGetWebhookWithHttpInfo(id: kotlin.String) : ApiResponse<IamObjectWebhook?> {
-        val localVariableConfig = iamApiControllerGetWebhookRequestConfig(id = id)
-
-        return request<Unit, IamObjectWebhook>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation iamApiControllerGetWebhook
-     *
-     * @param id The id ( owner/name ) of the webhook (default to "built-in/admin")
-     * @return RequestConfig
-     */
-    fun iamApiControllerGetWebhookRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/iam/webhooks
-     * Api Controller Get Webhooks
-     * get webhooks
-     * @param owner The owner of webhooks (default to "built-in/admin")
-     * @return kotlin.collections.List<IamObjectWebhook>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun iamApiControllerGetWebhooks(owner: kotlin.String = "built-in/admin") : kotlin.collections.List<IamObjectWebhook> {
-        val localVarResponse = iamApiControllerGetWebhooksWithHttpInfo(owner = owner)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<IamObjectWebhook>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/iam/webhooks
-     * Api Controller Get Webhooks
-     * get webhooks
-     * @param owner The owner of webhooks (default to "built-in/admin")
-     * @return ApiResponse<kotlin.collections.List<IamObjectWebhook>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun iamApiControllerGetWebhooksWithHttpInfo(owner: kotlin.String) : ApiResponse<kotlin.collections.List<IamObjectWebhook>?> {
-        val localVariableConfig = iamApiControllerGetWebhooksRequestConfig(owner = owner)
-
-        return request<Unit, kotlin.collections.List<IamObjectWebhook>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation iamApiControllerGetWebhooks
-     *
-     * @param owner The owner of webhooks (default to "built-in/admin")
-     * @return RequestConfig
-     */
-    fun iamApiControllerGetWebhooksRequestConfig(owner: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("owner", listOf(owner.toString()))
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/iam/webhooks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/iam/webhooks/{id}
-     * Api Controller Update Webhook
-     * update webhook
-     * @param id The id ( owner/name ) of the webhook (default to "built-in/admin")
-     * @param iamObjectWebhook The details of the webhook
-     * @return IamControllersResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun iamApiControllerUpdateWebhook(id: kotlin.String = "built-in/admin", iamObjectWebhook: IamObjectWebhook) : IamControllersResponse {
-        val localVarResponse = iamApiControllerUpdateWebhookWithHttpInfo(id = id, iamObjectWebhook = iamObjectWebhook)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as IamControllersResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/iam/webhooks/{id}
-     * Api Controller Update Webhook
-     * update webhook
-     * @param id The id ( owner/name ) of the webhook (default to "built-in/admin")
-     * @param iamObjectWebhook The details of the webhook
-     * @return ApiResponse<IamControllersResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun iamApiControllerUpdateWebhookWithHttpInfo(id: kotlin.String, iamObjectWebhook: IamObjectWebhook) : ApiResponse<IamControllersResponse?> {
-        val localVariableConfig = iamApiControllerUpdateWebhookRequestConfig(id = id, iamObjectWebhook = iamObjectWebhook)
-
-        return request<IamObjectWebhook, IamControllersResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation iamApiControllerUpdateWebhook
-     *
-     * @param id The id ( owner/name ) of the webhook (default to "built-in/admin")
-     * @param iamObjectWebhook The details of the webhook
-     * @return RequestConfig
-     */
-    fun iamApiControllerUpdateWebhookRequestConfig(id: kotlin.String, iamObjectWebhook: IamObjectWebhook) : RequestConfig<IamObjectWebhook> {
-        val localVariableBody = iamObjectWebhook
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/iam/webhooks/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/search/webhooks
-     * Delete all webhooks
-     * 
-     * @return kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchDeleteWebhooks() : kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue> {
-        val localVarResponse = searchDeleteWebhooksWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/search/webhooks
-     * Delete all webhooks
-     * 
-     * @return ApiResponse<kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchDeleteWebhooksWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>?> {
-        val localVariableConfig = searchDeleteWebhooksRequestConfig()
-
-        return request<Unit, kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchDeleteWebhooks
-     *
-     * @return RequestConfig
-     */
-    fun searchDeleteWebhooksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/search/webhooks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/search/webhooks
-     * Get webhook configuration
-     * 
-     * @return kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchGetWebhooks() : kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue> {
-        val localVarResponse = searchGetWebhooksWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/search/webhooks
-     * Get webhook configuration
-     * 
-     * @return ApiResponse<kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchGetWebhooksWithHttpInfo() : ApiResponse<kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>?> {
-        val localVariableConfig = searchGetWebhooksRequestConfig()
-
-        return request<Unit, kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchGetWebhooks
-     *
-     * @return RequestConfig
-     */
-    fun searchGetWebhooksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/search/webhooks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/search/webhooks
-     * Update webhook configuration
-     * 
-     * @param requestBody 
-     * @return kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchUpdateWebhooks(requestBody: kotlin.collections.Map<kotlin.String, SearchWebhookSettingsValue>) : kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue> {
-        val localVarResponse = searchUpdateWebhooksWithHttpInfo(requestBody = requestBody)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/search/webhooks
-     * Update webhook configuration
-     * 
-     * @param requestBody 
-     * @return ApiResponse<kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun searchUpdateWebhooksWithHttpInfo(requestBody: kotlin.collections.Map<kotlin.String, SearchWebhookSettingsValue>) : ApiResponse<kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>?> {
-        val localVariableConfig = searchUpdateWebhooksRequestConfig(requestBody = requestBody)
-
-        return request<kotlin.collections.Map<kotlin.String, SearchWebhookSettingsValue>, kotlin.collections.Map<kotlin.String, SearchWebhookResultsValue>>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation searchUpdateWebhooks
-     *
-     * @param requestBody 
-     * @return RequestConfig
-     */
-    fun searchUpdateWebhooksRequestConfig(requestBody: kotlin.collections.Map<kotlin.String, SearchWebhookSettingsValue>) : RequestConfig<kotlin.collections.Map<kotlin.String, SearchWebhookSettingsValue>> {
-        val localVariableBody = requestBody
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/search/webhooks",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

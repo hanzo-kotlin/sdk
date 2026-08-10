@@ -19,10 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudProvisionRequest
-import ai.hanzo.cloud.model.CloudProvisionResult
-import ai.hanzo.cloud.model.CloudProvisionedResource
-import ai.hanzo.cloud.model.CloudProvisionedSummary
+import ai.hanzo.cloud.model.ProvisionRequest
+import ai.hanzo.cloud.model.ProvisionResult
+import ai.hanzo.cloud.model.ProvisionedResource
+import ai.hanzo.cloud.model.ProvisionedSummary
 
 import com.google.gson.annotations.SerializedName
 
@@ -61,8 +61,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1KvName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1KvNameWithHttpInfo(name = name)
+    fun deleteV1KvByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1KvByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1KvNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1KvNameRequestConfig(name = name)
+    fun deleteV1KvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1KvByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1KvName
+     * To obtain the request config of the operation deleteV1KvByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1KvNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1KvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -113,7 +113,7 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kv/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -122,7 +122,7 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/kv
      * ListKV lists the caller org&#39;s Hanzo KV stores.
      * ListKV lists the caller org&#39;s Hanzo KV stores. Each one is a DEDICATED Valkey instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is 6379.
-     * @return kotlin.collections.List<CloudProvisionedSummary>
+     * @return kotlin.collections.List<ProvisionedSummary>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -131,11 +131,11 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Kv() : kotlin.collections.List<CloudProvisionedSummary> {
-        val localVarResponse = cloudGetV1KvWithHttpInfo()
+    fun getV1Kv() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getV1KvWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudProvisionedSummary>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -153,26 +153,26 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/kv
      * ListKV lists the caller org&#39;s Hanzo KV stores.
      * ListKV lists the caller org&#39;s Hanzo KV stores. Each one is a DEDICATED Valkey instance the org alone runs, so the host is that instance&#39;s own in-cluster Service and the port is 6379.
-     * @return ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?>
+     * @return ApiResponse<kotlin.collections.List<ProvisionedSummary>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1KvWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?> {
-        val localVariableConfig = cloudGetV1KvRequestConfig()
+    fun getV1KvWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getV1KvRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudProvisionedSummary>>(
+        return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Kv
+     * To obtain the request config of the operation getV1Kv
      *
      * @return RequestConfig
      */
-    fun cloudGetV1KvRequestConfig() : RequestConfig<Unit> {
+    fun getV1KvRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -183,7 +183,7 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kv",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -193,7 +193,7 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GetKV returns one Hanzo KV store&#39;s metadata.
      * GetKV returns one Hanzo KV store&#39;s metadata. It carries the store&#39;s status, its instance address and the Valkey user it authenticates as (\&quot;default\&quot;, the only user a requirepass instance has) — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return CloudProvisionedResource
+     * @return ProvisionedResource
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -202,11 +202,11 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1KvName(name: kotlin.String) : CloudProvisionedResource {
-        val localVarResponse = cloudGetV1KvNameWithHttpInfo(name = name)
+    fun getV1KvByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getV1KvByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionedResource
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -225,27 +225,27 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GetKV returns one Hanzo KV store&#39;s metadata.
      * GetKV returns one Hanzo KV store&#39;s metadata. It carries the store&#39;s status, its instance address and the Valkey user it authenticates as (\&quot;default\&quot;, the only user a requirepass instance has) — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<CloudProvisionedResource?>
+     * @return ApiResponse<ProvisionedResource?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1KvNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudProvisionedResource?> {
-        val localVariableConfig = cloudGetV1KvNameRequestConfig(name = name)
+    fun getV1KvByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getV1KvByNameRequestConfig(name = name)
 
-        return request<Unit, CloudProvisionedResource>(
+        return request<Unit, ProvisionedResource>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1KvName
+     * To obtain the request config of the operation getV1KvByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudGetV1KvNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1KvByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -256,17 +256,17 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kv/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/kv
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return CloudProvisionResult
+     * Provision a key-value store for your org
+     * Launches your org&#39;s OWN key-value instance and answers with its &#x60;kv://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ProvisionResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -275,11 +275,11 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Kv(cloudProvisionRequest: CloudProvisionRequest? = null) : CloudProvisionResult {
-        val localVarResponse = cloudPostV1KvWithHttpInfo(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1Kv(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postV1KvWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -295,31 +295,31 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/kv
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return ApiResponse<CloudProvisionResult?>
+     * Provision a key-value store for your org
+     * Launches your org&#39;s OWN key-value instance and answers with its &#x60;kv://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ApiResponse<ProvisionResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1KvWithHttpInfo(cloudProvisionRequest: CloudProvisionRequest?) : ApiResponse<CloudProvisionResult?> {
-        val localVariableConfig = cloudPostV1KvRequestConfig(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1KvWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postV1KvRequestConfig(provisionRequest = provisionRequest)
 
-        return request<CloudProvisionRequest, CloudProvisionResult>(
+        return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Kv
+     * To obtain the request config of the operation postV1Kv
      *
-     * @param cloudProvisionRequest  (optional)
+     * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1KvRequestConfig(cloudProvisionRequest: CloudProvisionRequest?) : RequestConfig<CloudProvisionRequest> {
-        val localVariableBody = cloudProvisionRequest
+    fun postV1KvRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+        val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -330,7 +330,7 @@ class KvApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kv",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

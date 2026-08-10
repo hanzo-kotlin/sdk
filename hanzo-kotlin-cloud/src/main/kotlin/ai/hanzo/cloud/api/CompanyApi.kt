@@ -19,28 +19,28 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAdvanceIn
-import ai.hanzo.cloud.model.CloudBeginIn
-import ai.hanzo.cloud.model.CloudDecisionIn
-import ai.hanzo.cloud.model.CloudDeckOut
-import ai.hanzo.cloud.model.CloudEsignCompleteIn
-import ai.hanzo.cloud.model.CloudEsignOut
-import ai.hanzo.cloud.model.CloudFormationView
-import ai.hanzo.cloud.model.CloudFoundersIn
-import ai.hanzo.cloud.model.CloudImportCapTableIn
-import ai.hanzo.cloud.model.CloudImportCapTableOut
-import ai.hanzo.cloud.model.CloudImportDocumentsIn
-import ai.hanzo.cloud.model.CloudImportDocumentsOut
-import ai.hanzo.cloud.model.CloudKycRefreshOut
-import ai.hanzo.cloud.model.CloudKycStartOut
-import ai.hanzo.cloud.model.CloudRegisterCounts
-import ai.hanzo.cloud.model.CloudRegisterPage
-import ai.hanzo.cloud.model.CloudReviewQueue
-import ai.hanzo.cloud.model.CloudRoundInput
-import ai.hanzo.cloud.model.CloudRoundOut
-import ai.hanzo.cloud.model.CloudSafeIn
-import ai.hanzo.cloud.model.CloudSafeOut
-import ai.hanzo.cloud.model.CloudStructureIn
+import ai.hanzo.cloud.model.AdvanceIn
+import ai.hanzo.cloud.model.BeginIn
+import ai.hanzo.cloud.model.DecisionIn
+import ai.hanzo.cloud.model.DeckOut
+import ai.hanzo.cloud.model.EsignCompleteIn
+import ai.hanzo.cloud.model.EsignOut
+import ai.hanzo.cloud.model.FormationView
+import ai.hanzo.cloud.model.FoundersIn
+import ai.hanzo.cloud.model.ImportCapTableIn
+import ai.hanzo.cloud.model.ImportCapTableOut
+import ai.hanzo.cloud.model.ImportDocumentsIn
+import ai.hanzo.cloud.model.ImportDocumentsOut
+import ai.hanzo.cloud.model.KycRefreshOut
+import ai.hanzo.cloud.model.KycStartOut
+import ai.hanzo.cloud.model.RegisterCounts
+import ai.hanzo.cloud.model.RegisterPage
+import ai.hanzo.cloud.model.ReviewQueue
+import ai.hanzo.cloud.model.RoundInput
+import ai.hanzo.cloud.model.RoundOut
+import ai.hanzo.cloud.model.SafeIn
+import ai.hanzo.cloud.model.SafeOut
+import ai.hanzo.cloud.model.StructureIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -70,7 +70,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/company
      * Get returns the caller org&#39;s formation and the stages reachable from it, or 404 when the org has not begun one.
      * Get returns the caller org&#39;s formation and the stages reachable from it, or 404 when the org has not begun one.
-     * @return CloudFormationView
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -79,11 +79,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Company() : CloudFormationView {
-        val localVarResponse = cloudGetV1CompanyWithHttpInfo()
+    fun getV1Company() : FormationView {
+        val localVarResponse = getV1CompanyWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -101,26 +101,26 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/company
      * Get returns the caller org&#39;s formation and the stages reachable from it, or 404 when the org has not begun one.
      * Get returns the caller org&#39;s formation and the stages reachable from it, or 404 when the org has not begun one.
-     * @return ApiResponse<CloudFormationView?>
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CompanyWithHttpInfo() : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudGetV1CompanyRequestConfig()
+    fun getV1CompanyWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = getV1CompanyRequestConfig()
 
-        return request<Unit, CloudFormationView>(
+        return request<Unit, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Company
+     * To obtain the request config of the operation getV1Company
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CompanyRequestConfig() : RequestConfig<Unit> {
+    fun getV1CompanyRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,20 +131,20 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/company/register
-     * ListRegister returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s.
-     * ListRegister returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s. It is a Hanzo platform operation: a caller who is not a platform reviewer gets 403.  Filter by stage and structure, page with limit and offset. An unknown stage is refused with 400 rather than returning a silently empty page.
+     * Returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s.
+     * Returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s. It is a Hanzo platform operation: a caller who is not a platform reviewer gets 403.  Filter by stage and structure, page with limit and offset. An unknown stage is refused with 400 rather than returning a silently empty page.
      * @param stage Stage keeps only formations at that stage. Empty means any. (optional)
      * @param structure Structure keeps only formations of that entity kind. Empty means any. (optional)
      * @param limit Limit bounds the page; 0 or less means the default of 200. (optional)
      * @param offset Offset skips that many rows. (optional)
-     * @return CloudRegisterPage
+     * @return RegisterPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -153,11 +153,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CompanyRegister(stage: kotlin.String? = null, structure: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : CloudRegisterPage {
-        val localVarResponse = cloudGetV1CompanyRegisterWithHttpInfo(stage = stage, structure = structure, limit = limit, offset = offset)
+    fun getV1CompanyRegister(stage: kotlin.String? = null, structure: kotlin.String? = null, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : RegisterPage {
+        val localVarResponse = getV1CompanyRegisterWithHttpInfo(stage = stage, structure = structure, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegisterPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -173,28 +173,28 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/company/register
-     * ListRegister returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s.
-     * ListRegister returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s. It is a Hanzo platform operation: a caller who is not a platform reviewer gets 403.  Filter by stage and structure, page with limit and offset. An unknown stage is refused with 400 rather than returning a silently empty page.
+     * Returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s.
+     * Returns the platform&#39;s whole formation register, newest activity first — every org&#39;s formation, not the caller&#39;s. It is a Hanzo platform operation: a caller who is not a platform reviewer gets 403.  Filter by stage and structure, page with limit and offset. An unknown stage is refused with 400 rather than returning a silently empty page.
      * @param stage Stage keeps only formations at that stage. Empty means any. (optional)
      * @param structure Structure keeps only formations of that entity kind. Empty means any. (optional)
      * @param limit Limit bounds the page; 0 or less means the default of 200. (optional)
      * @param offset Offset skips that many rows. (optional)
-     * @return ApiResponse<CloudRegisterPage?>
+     * @return ApiResponse<RegisterPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CompanyRegisterWithHttpInfo(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<CloudRegisterPage?> {
-        val localVariableConfig = cloudGetV1CompanyRegisterRequestConfig(stage = stage, structure = structure, limit = limit, offset = offset)
+    fun getV1CompanyRegisterWithHttpInfo(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<RegisterPage?> {
+        val localVariableConfig = getV1CompanyRegisterRequestConfig(stage = stage, structure = structure, limit = limit, offset = offset)
 
-        return request<Unit, CloudRegisterPage>(
+        return request<Unit, RegisterPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CompanyRegister
+     * To obtain the request config of the operation getV1CompanyRegister
      *
      * @param stage Stage keeps only formations at that stage. Empty means any. (optional)
      * @param structure Structure keeps only formations of that entity kind. Empty means any. (optional)
@@ -202,7 +202,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param offset Offset skips that many rows. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CompanyRegisterRequestConfig(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CompanyRegisterRequestConfig(stage: kotlin.String?, structure: kotlin.String?, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -227,16 +227,16 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/register",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/company/register/summary
-     * SummarizeRegister counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list.
-     * SummarizeRegister counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.
-     * @return CloudRegisterCounts
+     * Counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list.
+     * Counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.
+     * @return RegisterCounts
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -245,11 +245,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CompanyRegisterSummary() : CloudRegisterCounts {
-        val localVarResponse = cloudGetV1CompanyRegisterSummaryWithHttpInfo()
+    fun getV1CompanyRegisterSummary() : RegisterCounts {
+        val localVarResponse = getV1CompanyRegisterSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRegisterCounts
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterCounts
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -265,28 +265,28 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/company/register/summary
-     * SummarizeRegister counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list.
-     * SummarizeRegister counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.
-     * @return ApiResponse<CloudRegisterCounts?>
+     * Counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list.
+     * Counts the platform&#39;s formations by stage — the register&#39;s shape in one read, so a queue that is growing is visible as a number rather than inferred by paging the list. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.
+     * @return ApiResponse<RegisterCounts?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CompanyRegisterSummaryWithHttpInfo() : ApiResponse<CloudRegisterCounts?> {
-        val localVariableConfig = cloudGetV1CompanyRegisterSummaryRequestConfig()
+    fun getV1CompanyRegisterSummaryWithHttpInfo() : ApiResponse<RegisterCounts?> {
+        val localVariableConfig = getV1CompanyRegisterSummaryRequestConfig()
 
-        return request<Unit, CloudRegisterCounts>(
+        return request<Unit, RegisterCounts>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CompanyRegisterSummary
+     * To obtain the request config of the operation getV1CompanyRegisterSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1CompanyRegisterSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1CompanyRegisterSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -297,17 +297,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/register/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/company/review
-     * ReviewQueue reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting.
-     * ReviewQueue reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.  It only says who is waiting; the decision itself is POST /v1/company/kyc/decision.
+     * Reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting.
+     * Reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.  It only says who is waiting; the decision itself is POST /v1/company/kyc/decision.
      * @param limit Limit bounds how many formations are scanned; 0 or less means the default of 200. (optional)
-     * @return CloudReviewQueue
+     * @return ReviewQueue
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -316,11 +316,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CompanyReview(limit: kotlin.Int? = null) : CloudReviewQueue {
-        val localVarResponse = cloudGetV1CompanyReviewWithHttpInfo(limit = limit)
+    fun getV1CompanyReview(limit: kotlin.Int? = null) : ReviewQueue {
+        val localVarResponse = getV1CompanyReviewWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReviewQueue
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReviewQueue
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -336,30 +336,30 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/company/review
-     * ReviewQueue reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting.
-     * ReviewQueue reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.  It only says who is waiting; the decision itself is POST /v1/company/kyc/decision.
+     * Reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting.
+     * Reports the founders whose KYC is not yet settled, oldest formation first, so the queue drains in the order founders have been waiting. A Hanzo platform operation: a caller who is not a platform reviewer gets 403.  It only says who is waiting; the decision itself is POST /v1/company/kyc/decision.
      * @param limit Limit bounds how many formations are scanned; 0 or less means the default of 200. (optional)
-     * @return ApiResponse<CloudReviewQueue?>
+     * @return ApiResponse<ReviewQueue?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CompanyReviewWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudReviewQueue?> {
-        val localVariableConfig = cloudGetV1CompanyReviewRequestConfig(limit = limit)
+    fun getV1CompanyReviewWithHttpInfo(limit: kotlin.Int?) : ApiResponse<ReviewQueue?> {
+        val localVariableConfig = getV1CompanyReviewRequestConfig(limit = limit)
 
-        return request<Unit, CloudReviewQueue>(
+        return request<Unit, ReviewQueue>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CompanyReview
+     * To obtain the request config of the operation getV1CompanyReview
      *
      * @param limit Limit bounds how many formations are scanned; 0 or less means the default of 200. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CompanyReviewRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CompanyReviewRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -375,7 +375,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/review",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -384,8 +384,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company
      * Begin starts the org&#39;s one formation and returns it with the stages reachable from it.
      * Begin starts the org&#39;s one formation and returns it with the stages reachable from it. It is idempotent: an org that already has a formation gets that one back with 200, while a first call creates it and answers 201.
-     * @param cloudBeginIn 
-     * @return CloudFormationView
+     * @param beginIn 
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -394,11 +394,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Company(cloudBeginIn: CloudBeginIn) : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyWithHttpInfo(cloudBeginIn = cloudBeginIn)
+    fun postV1Company(beginIn: BeginIn) : FormationView {
+        val localVarResponse = postV1CompanyWithHttpInfo(beginIn = beginIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -416,29 +416,29 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company
      * Begin starts the org&#39;s one formation and returns it with the stages reachable from it.
      * Begin starts the org&#39;s one formation and returns it with the stages reachable from it. It is idempotent: an org that already has a formation gets that one back with 200, while a first call creates it and answers 201.
-     * @param cloudBeginIn 
-     * @return ApiResponse<CloudFormationView?>
+     * @param beginIn 
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyWithHttpInfo(cloudBeginIn: CloudBeginIn) : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyRequestConfig(cloudBeginIn = cloudBeginIn)
+    fun postV1CompanyWithHttpInfo(beginIn: BeginIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyRequestConfig(beginIn = beginIn)
 
-        return request<CloudBeginIn, CloudFormationView>(
+        return request<BeginIn, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Company
+     * To obtain the request config of the operation postV1Company
      *
-     * @param cloudBeginIn 
+     * @param beginIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyRequestConfig(cloudBeginIn: CloudBeginIn) : RequestConfig<CloudBeginIn> {
-        val localVariableBody = cloudBeginIn
+    fun postV1CompanyRequestConfig(beginIn: BeginIn) : RequestConfig<BeginIn> {
+        val localVariableBody = beginIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -449,7 +449,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -458,8 +458,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/advance
      * Advance runs the ONE guarded transition of the formation machine.
      * Advance runs the ONE guarded transition of the formation machine. It is the only door between stages: the actions populate data, this decides ordering.  An edge the machine does not define answers 409; an edge whose guard is not yet satisfied answers 422 naming what is missing. Reaching the terminal &#x60;company&#x60; stage also records the incorporation on the canonical cap table, and that must succeed before the transition is persisted.
-     * @param cloudAdvanceIn 
-     * @return CloudFormationView
+     * @param advanceIn 
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -468,11 +468,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyAdvance(cloudAdvanceIn: CloudAdvanceIn) : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyAdvanceWithHttpInfo(cloudAdvanceIn = cloudAdvanceIn)
+    fun postV1CompanyAdvance(advanceIn: AdvanceIn) : FormationView {
+        val localVarResponse = postV1CompanyAdvanceWithHttpInfo(advanceIn = advanceIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -490,29 +490,29 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/advance
      * Advance runs the ONE guarded transition of the formation machine.
      * Advance runs the ONE guarded transition of the formation machine. It is the only door between stages: the actions populate data, this decides ordering.  An edge the machine does not define answers 409; an edge whose guard is not yet satisfied answers 422 naming what is missing. Reaching the terminal &#x60;company&#x60; stage also records the incorporation on the canonical cap table, and that must succeed before the transition is persisted.
-     * @param cloudAdvanceIn 
-     * @return ApiResponse<CloudFormationView?>
+     * @param advanceIn 
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyAdvanceWithHttpInfo(cloudAdvanceIn: CloudAdvanceIn) : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyAdvanceRequestConfig(cloudAdvanceIn = cloudAdvanceIn)
+    fun postV1CompanyAdvanceWithHttpInfo(advanceIn: AdvanceIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyAdvanceRequestConfig(advanceIn = advanceIn)
 
-        return request<CloudAdvanceIn, CloudFormationView>(
+        return request<AdvanceIn, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyAdvance
+     * To obtain the request config of the operation postV1CompanyAdvance
      *
-     * @param cloudAdvanceIn 
+     * @param advanceIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyAdvanceRequestConfig(cloudAdvanceIn: CloudAdvanceIn) : RequestConfig<CloudAdvanceIn> {
-        val localVariableBody = cloudAdvanceIn
+    fun postV1CompanyAdvanceRequestConfig(advanceIn: AdvanceIn) : RequestConfig<AdvanceIn> {
+        val localVariableBody = advanceIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -523,16 +523,16 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/advance",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/documents
-     * GenerateDocuments renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.
-     * GenerateDocuments renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.  With no filing partner wired the filing is recorded honestly as \&quot;manual\&quot; — no filing id is fabricated. Available only at the documents stage.
-     * @return CloudFormationView
+     * Renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.
+     * Renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.  With no filing partner wired the filing is recorded honestly as \&quot;manual\&quot; — no filing id is fabricated. Available only at the documents stage.
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -541,11 +541,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyDocuments() : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyDocumentsWithHttpInfo()
+    fun postV1CompanyDocuments() : FormationView {
+        val localVarResponse = postV1CompanyDocumentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -561,28 +561,28 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/documents
-     * GenerateDocuments renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.
-     * GenerateDocuments renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.  With no filing partner wired the filing is recorded honestly as \&quot;manual\&quot; — no filing id is fabricated. Available only at the documents stage.
-     * @return ApiResponse<CloudFormationView?>
+     * Renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.
+     * Renders the formation documents for the chosen structure and jurisdiction, ingests each into the org&#39;s data room, and submits the state filing through the filing seam.  With no filing partner wired the filing is recorded honestly as \&quot;manual\&quot; — no filing id is fabricated. Available only at the documents stage.
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyDocumentsWithHttpInfo() : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyDocumentsRequestConfig()
+    fun postV1CompanyDocumentsWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyDocumentsRequestConfig()
 
-        return request<Unit, CloudFormationView>(
+        return request<Unit, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyDocuments
+     * To obtain the request config of the operation postV1CompanyDocuments
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyDocumentsRequestConfig() : RequestConfig<Unit> {
+    fun postV1CompanyDocumentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -593,16 +593,16 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/esign
-     * RequestEsign sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation.
-     * RequestEsign sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation. Available only at the esign stage.
-     * @return CloudEsignOut
+     * Sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation.
+     * Sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation. Available only at the esign stage.
+     * @return EsignOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -611,11 +611,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyEsign() : CloudEsignOut {
-        val localVarResponse = cloudPostV1CompanyEsignWithHttpInfo()
+    fun postV1CompanyEsign() : EsignOut {
+        val localVarResponse = postV1CompanyEsignWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEsignOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EsignOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -631,28 +631,28 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/esign
-     * RequestEsign sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation.
-     * RequestEsign sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation. Available only at the esign stage.
-     * @return ApiResponse<CloudEsignOut?>
+     * Sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation.
+     * Sends the generated formation documents for signature by every founder and records the provider&#39;s reference on the formation. Available only at the esign stage.
+     * @return ApiResponse<EsignOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyEsignWithHttpInfo() : ApiResponse<CloudEsignOut?> {
-        val localVariableConfig = cloudPostV1CompanyEsignRequestConfig()
+    fun postV1CompanyEsignWithHttpInfo() : ApiResponse<EsignOut?> {
+        val localVariableConfig = postV1CompanyEsignRequestConfig()
 
-        return request<Unit, CloudEsignOut>(
+        return request<Unit, EsignOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyEsign
+     * To obtain the request config of the operation postV1CompanyEsign
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyEsignRequestConfig() : RequestConfig<Unit> {
+    fun postV1CompanyEsignRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -663,17 +663,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/esign",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/esign/complete
-     * CompleteEsign records whether the formation documents have been signed.
-     * CompleteEsign records whether the formation documents have been signed. It consults the e-signature provider, which a real provider&#39;s webhook drives; the signal is idempotent.  An explicit &#x60;signed&#x60; in the request overrides the provider&#39;s answer, which is the manual path for the stub provider that never self-completes.
-     * @param cloudEsignCompleteIn 
-     * @return CloudFormationView
+     * Records whether the formation documents have been signed.
+     * Records whether the formation documents have been signed. It consults the e-signature provider, which a real provider&#39;s webhook drives; the signal is idempotent.  An explicit &#x60;signed&#x60; in the request overrides the provider&#39;s answer, which is the manual path for the stub provider that never self-completes.
+     * @param esignCompleteIn 
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -682,11 +682,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyEsignComplete(cloudEsignCompleteIn: CloudEsignCompleteIn) : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyEsignCompleteWithHttpInfo(cloudEsignCompleteIn = cloudEsignCompleteIn)
+    fun postV1CompanyEsignComplete(esignCompleteIn: EsignCompleteIn) : FormationView {
+        val localVarResponse = postV1CompanyEsignCompleteWithHttpInfo(esignCompleteIn = esignCompleteIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -702,31 +702,31 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/esign/complete
-     * CompleteEsign records whether the formation documents have been signed.
-     * CompleteEsign records whether the formation documents have been signed. It consults the e-signature provider, which a real provider&#39;s webhook drives; the signal is idempotent.  An explicit &#x60;signed&#x60; in the request overrides the provider&#39;s answer, which is the manual path for the stub provider that never self-completes.
-     * @param cloudEsignCompleteIn 
-     * @return ApiResponse<CloudFormationView?>
+     * Records whether the formation documents have been signed.
+     * Records whether the formation documents have been signed. It consults the e-signature provider, which a real provider&#39;s webhook drives; the signal is idempotent.  An explicit &#x60;signed&#x60; in the request overrides the provider&#39;s answer, which is the manual path for the stub provider that never self-completes.
+     * @param esignCompleteIn 
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyEsignCompleteWithHttpInfo(cloudEsignCompleteIn: CloudEsignCompleteIn) : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyEsignCompleteRequestConfig(cloudEsignCompleteIn = cloudEsignCompleteIn)
+    fun postV1CompanyEsignCompleteWithHttpInfo(esignCompleteIn: EsignCompleteIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyEsignCompleteRequestConfig(esignCompleteIn = esignCompleteIn)
 
-        return request<CloudEsignCompleteIn, CloudFormationView>(
+        return request<EsignCompleteIn, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyEsignComplete
+     * To obtain the request config of the operation postV1CompanyEsignComplete
      *
-     * @param cloudEsignCompleteIn 
+     * @param esignCompleteIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyEsignCompleteRequestConfig(cloudEsignCompleteIn: CloudEsignCompleteIn) : RequestConfig<CloudEsignCompleteIn> {
-        val localVariableBody = cloudEsignCompleteIn
+    fun postV1CompanyEsignCompleteRequestConfig(esignCompleteIn: EsignCompleteIn) : RequestConfig<EsignCompleteIn> {
+        val localVariableBody = esignCompleteIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -737,17 +737,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/esign/complete",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/founders
-     * SetFounders replaces the formation&#39;s founders.
-     * SetFounders replaces the formation&#39;s founders. Each founder needs a name, an email and an equity share in basis points; every founder is (re)set to pending KYC, so a previously settled decision does not survive a change of the list.
-     * @param cloudFoundersIn 
-     * @return CloudFormationView
+     * Replaces the formation&#39;s founders.
+     * Replaces the formation&#39;s founders. Each founder needs a name, an email and an equity share in basis points; every founder is (re)set to pending KYC, so a previously settled decision does not survive a change of the list.
+     * @param foundersIn 
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -756,11 +756,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyFounders(cloudFoundersIn: CloudFoundersIn) : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyFoundersWithHttpInfo(cloudFoundersIn = cloudFoundersIn)
+    fun postV1CompanyFounders(foundersIn: FoundersIn) : FormationView {
+        val localVarResponse = postV1CompanyFoundersWithHttpInfo(foundersIn = foundersIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -776,31 +776,31 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/founders
-     * SetFounders replaces the formation&#39;s founders.
-     * SetFounders replaces the formation&#39;s founders. Each founder needs a name, an email and an equity share in basis points; every founder is (re)set to pending KYC, so a previously settled decision does not survive a change of the list.
-     * @param cloudFoundersIn 
-     * @return ApiResponse<CloudFormationView?>
+     * Replaces the formation&#39;s founders.
+     * Replaces the formation&#39;s founders. Each founder needs a name, an email and an equity share in basis points; every founder is (re)set to pending KYC, so a previously settled decision does not survive a change of the list.
+     * @param foundersIn 
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyFoundersWithHttpInfo(cloudFoundersIn: CloudFoundersIn) : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyFoundersRequestConfig(cloudFoundersIn = cloudFoundersIn)
+    fun postV1CompanyFoundersWithHttpInfo(foundersIn: FoundersIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyFoundersRequestConfig(foundersIn = foundersIn)
 
-        return request<CloudFoundersIn, CloudFormationView>(
+        return request<FoundersIn, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyFounders
+     * To obtain the request config of the operation postV1CompanyFounders
      *
-     * @param cloudFoundersIn 
+     * @param foundersIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyFoundersRequestConfig(cloudFoundersIn: CloudFoundersIn) : RequestConfig<CloudFoundersIn> {
-        val localVariableBody = cloudFoundersIn
+    fun postV1CompanyFoundersRequestConfig(foundersIn: FoundersIn) : RequestConfig<FoundersIn> {
+        val localVariableBody = foundersIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -811,17 +811,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/founders",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/fundraise/deck
-     * 
-     * 
+     * Share a pitch deck in the org&#39;s data room
+     * Stores the request body as a document in the caller org&#39;s data room and answers with the data room id to reference it by. The deck is RAW BYTES of whatever content type is sent — a PDF, a slide export — not a JSON document: the Content-Type header is carried through to the data room as given, and &#x60;?name&#x3D;&#x60; names the document, defaulting to &#x60;pitch-deck&#x60;.  Scoped to the caller&#39;s validated org, and only after incorporation: a formation still short of stage &#x60;company&#x60; is refused 409 and an org that never began one is 404. The route is registered AHEAD of the surface&#39;s JSON body cap deliberately, so a deck&#39;s size ceiling is the edge&#39;s rather than the cap meant for small structured records. An empty body is 400; a data room that will not take the bytes is 502.
      * @param body  (optional)
-     * @return CloudDeckOut
+     * @return DeckOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -830,11 +830,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyFundraiseDeck(body: java.io.File? = null) : CloudDeckOut {
-        val localVarResponse = cloudPostV1CompanyFundraiseDeckWithHttpInfo(body = body)
+    fun postV1CompanyFundraiseDeck(body: java.io.File? = null) : DeckOut {
+        val localVarResponse = postV1CompanyFundraiseDeckWithHttpInfo(body = body)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDeckOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeckOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -850,30 +850,30 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/fundraise/deck
-     * 
-     * 
+     * Share a pitch deck in the org&#39;s data room
+     * Stores the request body as a document in the caller org&#39;s data room and answers with the data room id to reference it by. The deck is RAW BYTES of whatever content type is sent — a PDF, a slide export — not a JSON document: the Content-Type header is carried through to the data room as given, and &#x60;?name&#x3D;&#x60; names the document, defaulting to &#x60;pitch-deck&#x60;.  Scoped to the caller&#39;s validated org, and only after incorporation: a formation still short of stage &#x60;company&#x60; is refused 409 and an org that never began one is 404. The route is registered AHEAD of the surface&#39;s JSON body cap deliberately, so a deck&#39;s size ceiling is the edge&#39;s rather than the cap meant for small structured records. An empty body is 400; a data room that will not take the bytes is 502.
      * @param body  (optional)
-     * @return ApiResponse<CloudDeckOut?>
+     * @return ApiResponse<DeckOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyFundraiseDeckWithHttpInfo(body: java.io.File?) : ApiResponse<CloudDeckOut?> {
-        val localVariableConfig = cloudPostV1CompanyFundraiseDeckRequestConfig(body = body)
+    fun postV1CompanyFundraiseDeckWithHttpInfo(body: java.io.File?) : ApiResponse<DeckOut?> {
+        val localVariableConfig = postV1CompanyFundraiseDeckRequestConfig(body = body)
 
-        return request<java.io.File, CloudDeckOut>(
+        return request<java.io.File, DeckOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyFundraiseDeck
+     * To obtain the request config of the operation postV1CompanyFundraiseDeck
      *
      * @param body  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyFundraiseDeckRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
+    fun postV1CompanyFundraiseDeckRequestConfig(body: java.io.File?) : RequestConfig<java.io.File> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -885,17 +885,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/fundraise/deck",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/fundraise/round
-     * RecordRound records a fundraising round on the org&#39;s canonical cap table.
-     * RecordRound records a fundraising round on the org&#39;s canonical cap table. Available only after incorporation (stage company); roundType defaults to PRICED.
-     * @param cloudRoundInput 
-     * @return CloudRoundOut
+     * Records a fundraising round on the org&#39;s canonical cap table.
+     * Records a fundraising round on the org&#39;s canonical cap table. Available only after incorporation (stage company); roundType defaults to PRICED.
+     * @param roundInput 
+     * @return RoundOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -904,11 +904,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyFundraiseRound(cloudRoundInput: CloudRoundInput) : CloudRoundOut {
-        val localVarResponse = cloudPostV1CompanyFundraiseRoundWithHttpInfo(cloudRoundInput = cloudRoundInput)
+    fun postV1CompanyFundraiseRound(roundInput: RoundInput) : RoundOut {
+        val localVarResponse = postV1CompanyFundraiseRoundWithHttpInfo(roundInput = roundInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRoundOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RoundOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -924,31 +924,31 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/fundraise/round
-     * RecordRound records a fundraising round on the org&#39;s canonical cap table.
-     * RecordRound records a fundraising round on the org&#39;s canonical cap table. Available only after incorporation (stage company); roundType defaults to PRICED.
-     * @param cloudRoundInput 
-     * @return ApiResponse<CloudRoundOut?>
+     * Records a fundraising round on the org&#39;s canonical cap table.
+     * Records a fundraising round on the org&#39;s canonical cap table. Available only after incorporation (stage company); roundType defaults to PRICED.
+     * @param roundInput 
+     * @return ApiResponse<RoundOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyFundraiseRoundWithHttpInfo(cloudRoundInput: CloudRoundInput) : ApiResponse<CloudRoundOut?> {
-        val localVariableConfig = cloudPostV1CompanyFundraiseRoundRequestConfig(cloudRoundInput = cloudRoundInput)
+    fun postV1CompanyFundraiseRoundWithHttpInfo(roundInput: RoundInput) : ApiResponse<RoundOut?> {
+        val localVariableConfig = postV1CompanyFundraiseRoundRequestConfig(roundInput = roundInput)
 
-        return request<CloudRoundInput, CloudRoundOut>(
+        return request<RoundInput, RoundOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyFundraiseRound
+     * To obtain the request config of the operation postV1CompanyFundraiseRound
      *
-     * @param cloudRoundInput 
+     * @param roundInput 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyFundraiseRoundRequestConfig(cloudRoundInput: CloudRoundInput) : RequestConfig<CloudRoundInput> {
-        val localVariableBody = cloudRoundInput
+    fun postV1CompanyFundraiseRoundRequestConfig(roundInput: RoundInput) : RequestConfig<RoundInput> {
+        val localVariableBody = roundInput
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -959,17 +959,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/fundraise/round",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/fundraise/safe
-     * RequestSafe raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper.
-     * RequestSafe raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper. Available only after incorporation (stage company).
-     * @param cloudSafeIn 
-     * @return CloudSafeOut
+     * Raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper.
+     * Raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper. Available only after incorporation (stage company).
+     * @param safeIn 
+     * @return SafeOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -978,11 +978,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyFundraiseSafe(cloudSafeIn: CloudSafeIn) : CloudSafeOut {
-        val localVarResponse = cloudPostV1CompanyFundraiseSafeWithHttpInfo(cloudSafeIn = cloudSafeIn)
+    fun postV1CompanyFundraiseSafe(safeIn: SafeIn) : SafeOut {
+        val localVarResponse = postV1CompanyFundraiseSafeWithHttpInfo(safeIn = safeIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSafeOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SafeOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -998,31 +998,31 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/fundraise/safe
-     * RequestSafe raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper.
-     * RequestSafe raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper. Available only after incorporation (stage company).
-     * @param cloudSafeIn 
-     * @return ApiResponse<CloudSafeOut?>
+     * Raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper.
+     * Raises an e-signature request over documents already in the org&#39;s data room — a SAFE, a convertible note, or any other fundraising paper. Available only after incorporation (stage company).
+     * @param safeIn 
+     * @return ApiResponse<SafeOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyFundraiseSafeWithHttpInfo(cloudSafeIn: CloudSafeIn) : ApiResponse<CloudSafeOut?> {
-        val localVariableConfig = cloudPostV1CompanyFundraiseSafeRequestConfig(cloudSafeIn = cloudSafeIn)
+    fun postV1CompanyFundraiseSafeWithHttpInfo(safeIn: SafeIn) : ApiResponse<SafeOut?> {
+        val localVariableConfig = postV1CompanyFundraiseSafeRequestConfig(safeIn = safeIn)
 
-        return request<CloudSafeIn, CloudSafeOut>(
+        return request<SafeIn, SafeOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyFundraiseSafe
+     * To obtain the request config of the operation postV1CompanyFundraiseSafe
      *
-     * @param cloudSafeIn 
+     * @param safeIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyFundraiseSafeRequestConfig(cloudSafeIn: CloudSafeIn) : RequestConfig<CloudSafeIn> {
-        val localVariableBody = cloudSafeIn
+    fun postV1CompanyFundraiseSafeRequestConfig(safeIn: SafeIn) : RequestConfig<SafeIn> {
+        val localVariableBody = safeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1033,16 +1033,16 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/fundraise/safe",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/genesis
-     * RecordGenesis seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.
-     * RecordGenesis seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.  It is idempotent: once a root is recorded the cap table is NOT re-seeded, which would double-issue founder share certificates. The root is persisted even when the on-chain submit fails, because the root is the tamper-evident witness and must not be recomputed on retry. Available only at the genesis stage.
-     * @return CloudFormationView
+     * Seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.
+     * Seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.  It is idempotent: once a root is recorded the cap table is NOT re-seeded, which would double-issue founder share certificates. The root is persisted even when the on-chain submit fails, because the root is the tamper-evident witness and must not be recomputed on retry. Available only at the genesis stage.
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1051,11 +1051,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyGenesis() : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyGenesisWithHttpInfo()
+    fun postV1CompanyGenesis() : FormationView {
+        val localVarResponse = postV1CompanyGenesisWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1071,28 +1071,28 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/genesis
-     * RecordGenesis seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.
-     * RecordGenesis seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.  It is idempotent: once a root is recorded the cap table is NOT re-seeded, which would double-issue founder share certificates. The root is persisted even when the on-chain submit fails, because the root is the tamper-evident witness and must not be recomputed on retry. Available only at the genesis stage.
-     * @return ApiResponse<CloudFormationView?>
+     * Seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.
+     * Seeds the canonical cap table with the founding allocation (stakeholders, a common share class, issued shares) and anchors the deterministic equity-genesis root on-chain.  It is idempotent: once a root is recorded the cap table is NOT re-seeded, which would double-issue founder share certificates. The root is persisted even when the on-chain submit fails, because the root is the tamper-evident witness and must not be recomputed on retry. Available only at the genesis stage.
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyGenesisWithHttpInfo() : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyGenesisRequestConfig()
+    fun postV1CompanyGenesisWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyGenesisRequestConfig()
 
-        return request<Unit, CloudFormationView>(
+        return request<Unit, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyGenesis
+     * To obtain the request config of the operation postV1CompanyGenesis
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyGenesisRequestConfig() : RequestConfig<Unit> {
+    fun postV1CompanyGenesisRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1103,17 +1103,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/genesis",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/import/captable
-     * ImportCapTable reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.
-     * ImportCapTable reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.  The first row is a header and columns are matched by name (case-insensitive): name and email are required, type/relationship/institution optional. A sheet without name and email columns, or with no usable data rows, is refused with 400. Available only at the import stage.
-     * @param cloudImportCapTableIn 
-     * @return CloudImportCapTableOut
+     * Reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.
+     * Reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.  The first row is a header and columns are matched by name (case-insensitive): name and email are required, type/relationship/institution optional. A sheet without name and email columns, or with no usable data rows, is refused with 400. Available only at the import stage.
+     * @param importCapTableIn 
+     * @return ImportCapTableOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1122,11 +1122,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyImportCaptable(cloudImportCapTableIn: CloudImportCapTableIn) : CloudImportCapTableOut {
-        val localVarResponse = cloudPostV1CompanyImportCaptableWithHttpInfo(cloudImportCapTableIn = cloudImportCapTableIn)
+    fun postV1CompanyImportCaptable(importCapTableIn: ImportCapTableIn) : ImportCapTableOut {
+        val localVarResponse = postV1CompanyImportCaptableWithHttpInfo(importCapTableIn = importCapTableIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudImportCapTableOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ImportCapTableOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1142,31 +1142,31 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/import/captable
-     * ImportCapTable reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.
-     * ImportCapTable reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.  The first row is a header and columns are matched by name (case-insensitive): name and email are required, type/relationship/institution optional. A sheet without name and email columns, or with no usable data rows, is refused with 400. Available only at the import stage.
-     * @param cloudImportCapTableIn 
-     * @return ApiResponse<CloudImportCapTableOut?>
+     * Reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.
+     * Reads an existing company&#39;s cap table from a Google Sheet and adds its stakeholders to the canonical cap table.  The first row is a header and columns are matched by name (case-insensitive): name and email are required, type/relationship/institution optional. A sheet without name and email columns, or with no usable data rows, is refused with 400. Available only at the import stage.
+     * @param importCapTableIn 
+     * @return ApiResponse<ImportCapTableOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyImportCaptableWithHttpInfo(cloudImportCapTableIn: CloudImportCapTableIn) : ApiResponse<CloudImportCapTableOut?> {
-        val localVariableConfig = cloudPostV1CompanyImportCaptableRequestConfig(cloudImportCapTableIn = cloudImportCapTableIn)
+    fun postV1CompanyImportCaptableWithHttpInfo(importCapTableIn: ImportCapTableIn) : ApiResponse<ImportCapTableOut?> {
+        val localVariableConfig = postV1CompanyImportCaptableRequestConfig(importCapTableIn = importCapTableIn)
 
-        return request<CloudImportCapTableIn, CloudImportCapTableOut>(
+        return request<ImportCapTableIn, ImportCapTableOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyImportCaptable
+     * To obtain the request config of the operation postV1CompanyImportCaptable
      *
-     * @param cloudImportCapTableIn 
+     * @param importCapTableIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyImportCaptableRequestConfig(cloudImportCapTableIn: CloudImportCapTableIn) : RequestConfig<CloudImportCapTableIn> {
-        val localVariableBody = cloudImportCapTableIn
+    fun postV1CompanyImportCaptableRequestConfig(importCapTableIn: ImportCapTableIn) : RequestConfig<ImportCapTableIn> {
+        val localVariableBody = importCapTableIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1177,17 +1177,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/import/captable",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/import/documents
-     * ImportDocuments ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room.
-     * ImportDocuments ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room. The import is shallow — sub-folders are skipped, not walked — and available only at the import stage.
-     * @param cloudImportDocumentsIn 
-     * @return CloudImportDocumentsOut
+     * Ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room.
+     * Ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room. The import is shallow — sub-folders are skipped, not walked — and available only at the import stage.
+     * @param importDocumentsIn 
+     * @return ImportDocumentsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1196,11 +1196,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyImportDocuments(cloudImportDocumentsIn: CloudImportDocumentsIn) : CloudImportDocumentsOut {
-        val localVarResponse = cloudPostV1CompanyImportDocumentsWithHttpInfo(cloudImportDocumentsIn = cloudImportDocumentsIn)
+    fun postV1CompanyImportDocuments(importDocumentsIn: ImportDocumentsIn) : ImportDocumentsOut {
+        val localVarResponse = postV1CompanyImportDocumentsWithHttpInfo(importDocumentsIn = importDocumentsIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudImportDocumentsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ImportDocumentsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1216,31 +1216,31 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/import/documents
-     * ImportDocuments ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room.
-     * ImportDocuments ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room. The import is shallow — sub-folders are skipped, not walked — and available only at the import stage.
-     * @param cloudImportDocumentsIn 
-     * @return ApiResponse<CloudImportDocumentsOut?>
+     * Ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room.
+     * Ingests an existing company&#39;s corporate documents from a Google Drive folder into the org&#39;s data room. The import is shallow — sub-folders are skipped, not walked — and available only at the import stage.
+     * @param importDocumentsIn 
+     * @return ApiResponse<ImportDocumentsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyImportDocumentsWithHttpInfo(cloudImportDocumentsIn: CloudImportDocumentsIn) : ApiResponse<CloudImportDocumentsOut?> {
-        val localVariableConfig = cloudPostV1CompanyImportDocumentsRequestConfig(cloudImportDocumentsIn = cloudImportDocumentsIn)
+    fun postV1CompanyImportDocumentsWithHttpInfo(importDocumentsIn: ImportDocumentsIn) : ApiResponse<ImportDocumentsOut?> {
+        val localVariableConfig = postV1CompanyImportDocumentsRequestConfig(importDocumentsIn = importDocumentsIn)
 
-        return request<CloudImportDocumentsIn, CloudImportDocumentsOut>(
+        return request<ImportDocumentsIn, ImportDocumentsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyImportDocuments
+     * To obtain the request config of the operation postV1CompanyImportDocuments
      *
-     * @param cloudImportDocumentsIn 
+     * @param importDocumentsIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyImportDocumentsRequestConfig(cloudImportDocumentsIn: CloudImportDocumentsIn) : RequestConfig<CloudImportDocumentsIn> {
-        val localVariableBody = cloudImportDocumentsIn
+    fun postV1CompanyImportDocumentsRequestConfig(importDocumentsIn: ImportDocumentsIn) : RequestConfig<ImportDocumentsIn> {
+        val localVariableBody = importDocumentsIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1251,7 +1251,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/import/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1260,7 +1260,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/kyc
      * StartKYC opens an identity-verification session for every founder with the wired provider and records each session&#39;s reference on the formation.
      * StartKYC opens an identity-verification session for every founder with the wired provider and records each session&#39;s reference on the formation.  A start is never a decision: any terminal status the provider reports at inquiry time is clamped back to pending, so the payment gate can never open here. A terminal status arrives only from POST /v1/company/kyc/refresh (the provider) or POST /v1/company/kyc/decision (a Hanzo platform reviewer).
-     * @return CloudKycStartOut
+     * @return KycStartOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1269,11 +1269,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyKyc() : CloudKycStartOut {
-        val localVarResponse = cloudPostV1CompanyKycWithHttpInfo()
+    fun postV1CompanyKyc() : KycStartOut {
+        val localVarResponse = postV1CompanyKycWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKycStartOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KycStartOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1291,26 +1291,26 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/kyc
      * StartKYC opens an identity-verification session for every founder with the wired provider and records each session&#39;s reference on the formation.
      * StartKYC opens an identity-verification session for every founder with the wired provider and records each session&#39;s reference on the formation.  A start is never a decision: any terminal status the provider reports at inquiry time is clamped back to pending, so the payment gate can never open here. A terminal status arrives only from POST /v1/company/kyc/refresh (the provider) or POST /v1/company/kyc/decision (a Hanzo platform reviewer).
-     * @return ApiResponse<CloudKycStartOut?>
+     * @return ApiResponse<KycStartOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyKycWithHttpInfo() : ApiResponse<CloudKycStartOut?> {
-        val localVariableConfig = cloudPostV1CompanyKycRequestConfig()
+    fun postV1CompanyKycWithHttpInfo() : ApiResponse<KycStartOut?> {
+        val localVariableConfig = postV1CompanyKycRequestConfig()
 
-        return request<Unit, CloudKycStartOut>(
+        return request<Unit, KycStartOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyKyc
+     * To obtain the request config of the operation postV1CompanyKyc
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyKycRequestConfig() : RequestConfig<Unit> {
+    fun postV1CompanyKycRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1321,7 +1321,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/kyc",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1330,8 +1330,8 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/kyc/decision
      * DecideKYC records a privileged reviewer&#39;s MANUAL decision on a founder&#39;s KYC — the human-in-the-loop path, and the ONLY route to a pass when no real provider is wired.
      * DecideKYC records a privileged reviewer&#39;s MANUAL decision on a founder&#39;s KYC — the human-in-the-loop path, and the ONLY route to a pass when no real provider is wired. It produces a DISTINCT reviewer_confirmed, never a provider \&quot;verified\&quot;.  Because Hanzo forms the entity and carries the formation KYC/AML obligation, the reviewer is a HANZO platform reviewer (SuperAdmin), and the decision is ATTRIBUTED to them.
-     * @param cloudDecisionIn 
-     * @return CloudFormationView
+     * @param decisionIn 
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1340,11 +1340,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyKycDecision(cloudDecisionIn: CloudDecisionIn) : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyKycDecisionWithHttpInfo(cloudDecisionIn = cloudDecisionIn)
+    fun postV1CompanyKycDecision(decisionIn: DecisionIn) : FormationView {
+        val localVarResponse = postV1CompanyKycDecisionWithHttpInfo(decisionIn = decisionIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1362,29 +1362,29 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/kyc/decision
      * DecideKYC records a privileged reviewer&#39;s MANUAL decision on a founder&#39;s KYC — the human-in-the-loop path, and the ONLY route to a pass when no real provider is wired.
      * DecideKYC records a privileged reviewer&#39;s MANUAL decision on a founder&#39;s KYC — the human-in-the-loop path, and the ONLY route to a pass when no real provider is wired. It produces a DISTINCT reviewer_confirmed, never a provider \&quot;verified\&quot;.  Because Hanzo forms the entity and carries the formation KYC/AML obligation, the reviewer is a HANZO platform reviewer (SuperAdmin), and the decision is ATTRIBUTED to them.
-     * @param cloudDecisionIn 
-     * @return ApiResponse<CloudFormationView?>
+     * @param decisionIn 
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyKycDecisionWithHttpInfo(cloudDecisionIn: CloudDecisionIn) : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyKycDecisionRequestConfig(cloudDecisionIn = cloudDecisionIn)
+    fun postV1CompanyKycDecisionWithHttpInfo(decisionIn: DecisionIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyKycDecisionRequestConfig(decisionIn = decisionIn)
 
-        return request<CloudDecisionIn, CloudFormationView>(
+        return request<DecisionIn, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyKycDecision
+     * To obtain the request config of the operation postV1CompanyKycDecision
      *
-     * @param cloudDecisionIn 
+     * @param decisionIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyKycDecisionRequestConfig(cloudDecisionIn: CloudDecisionIn) : RequestConfig<CloudDecisionIn> {
-        val localVariableBody = cloudDecisionIn
+    fun postV1CompanyKycDecisionRequestConfig(decisionIn: DecisionIn) : RequestConfig<DecisionIn> {
+        val localVariableBody = decisionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1395,7 +1395,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/kyc/decision",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1404,7 +1404,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/kyc/refresh
      * RefreshKYC reconciles each pending founder&#39;s KYC with the WIRED provider — the PULL path to a provider-reported terminal status.
      * RefreshKYC reconciles each pending founder&#39;s KYC with the WIRED provider — the PULL path to a provider-reported terminal status. For the manual provider the check stays pending; for a real provider it reflects the settled decision, ATTRIBUTED to the provider.  It NEVER trusts a client-asserted status — the status comes from the provider seam — so a client cannot force a pass here, and an already-passing founder (e.g. a reviewer confirmation) is left untouched.
-     * @return CloudKycRefreshOut
+     * @return KycRefreshOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1413,11 +1413,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyKycRefresh() : CloudKycRefreshOut {
-        val localVarResponse = cloudPostV1CompanyKycRefreshWithHttpInfo()
+    fun postV1CompanyKycRefresh() : KycRefreshOut {
+        val localVarResponse = postV1CompanyKycRefreshWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKycRefreshOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KycRefreshOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1435,26 +1435,26 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/kyc/refresh
      * RefreshKYC reconciles each pending founder&#39;s KYC with the WIRED provider — the PULL path to a provider-reported terminal status.
      * RefreshKYC reconciles each pending founder&#39;s KYC with the WIRED provider — the PULL path to a provider-reported terminal status. For the manual provider the check stays pending; for a real provider it reflects the settled decision, ATTRIBUTED to the provider.  It NEVER trusts a client-asserted status — the status comes from the provider seam — so a client cannot force a pass here, and an already-passing founder (e.g. a reviewer confirmation) is left untouched.
-     * @return ApiResponse<CloudKycRefreshOut?>
+     * @return ApiResponse<KycRefreshOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyKycRefreshWithHttpInfo() : ApiResponse<CloudKycRefreshOut?> {
-        val localVariableConfig = cloudPostV1CompanyKycRefreshRequestConfig()
+    fun postV1CompanyKycRefreshWithHttpInfo() : ApiResponse<KycRefreshOut?> {
+        val localVariableConfig = postV1CompanyKycRefreshRequestConfig()
 
-        return request<Unit, CloudKycRefreshOut>(
+        return request<Unit, KycRefreshOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyKycRefresh
+     * To obtain the request config of the operation postV1CompanyKycRefresh
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyKycRefreshRequestConfig() : RequestConfig<Unit> {
+    fun postV1CompanyKycRefreshRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1465,16 +1465,16 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/kyc/refresh",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/company/payment
-     * 
-     * 
-     * @return CloudFormationView
+     * Charge the one-time formation fee and mark the formation paid
+     * Bills the caller&#39;s own org the one-time Hanzo Company formation fee — $999 unless the deployment sets another — and answers with the formation record carrying its paid flag and the charge reference. Takes no body: the org is the validated tenant and the amount is the platform&#39;s, never the caller&#39;s to assert.  IDEMPOTENT on the formation rather than on the request: an already-paid formation answers 200 with the same record and is not charged again, so a retry or a double-clicked button costs nothing. Available only at the &#x60;payment&#x60; stage (409 anywhere else) and only for an org that has begun a formation (404 otherwise).  A refused charge answers the fleet-wide billing contract, not a formation error — 402 when the org cannot pay, 503 when metering is unavailable — which is exactly why this route is not a typed op.
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1483,11 +1483,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanyPayment() : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanyPaymentWithHttpInfo()
+    fun postV1CompanyPayment() : FormationView {
+        val localVarResponse = postV1CompanyPaymentWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1503,28 +1503,28 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/company/payment
-     * 
-     * 
-     * @return ApiResponse<CloudFormationView?>
+     * Charge the one-time formation fee and mark the formation paid
+     * Bills the caller&#39;s own org the one-time Hanzo Company formation fee — $999 unless the deployment sets another — and answers with the formation record carrying its paid flag and the charge reference. Takes no body: the org is the validated tenant and the amount is the platform&#39;s, never the caller&#39;s to assert.  IDEMPOTENT on the formation rather than on the request: an already-paid formation answers 200 with the same record and is not charged again, so a retry or a double-clicked button costs nothing. Available only at the &#x60;payment&#x60; stage (409 anywhere else) and only for an org that has begun a formation (404 otherwise).  A refused charge answers the fleet-wide billing contract, not a formation error — 402 when the org cannot pay, 503 when metering is unavailable — which is exactly why this route is not a typed op.
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanyPaymentWithHttpInfo() : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanyPaymentRequestConfig()
+    fun postV1CompanyPaymentWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanyPaymentRequestConfig()
 
-        return request<Unit, CloudFormationView>(
+        return request<Unit, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanyPayment
+     * To obtain the request config of the operation postV1CompanyPayment
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CompanyPaymentRequestConfig() : RequestConfig<Unit> {
+    fun postV1CompanyPaymentRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1535,7 +1535,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/payment",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1544,7 +1544,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/skip
      * Skip marks the org as already incorporated and moves it onto the import path, so an existing company brings its documents and cap table in instead of forming a new entity.
      * Skip marks the org as already incorporated and moves it onto the import path, so an existing company brings its documents and cap table in instead of forming a new entity. Available only at the structure stage.
-     * @return CloudFormationView
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1553,11 +1553,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CompanySkip() : CloudFormationView {
-        val localVarResponse = cloudPostV1CompanySkipWithHttpInfo()
+    fun postV1CompanySkip() : FormationView {
+        val localVarResponse = postV1CompanySkipWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1575,26 +1575,26 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/company/skip
      * Skip marks the org as already incorporated and moves it onto the import path, so an existing company brings its documents and cap table in instead of forming a new entity.
      * Skip marks the org as already incorporated and moves it onto the import path, so an existing company brings its documents and cap table in instead of forming a new entity. Available only at the structure stage.
-     * @return ApiResponse<CloudFormationView?>
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CompanySkipWithHttpInfo() : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPostV1CompanySkipRequestConfig()
+    fun postV1CompanySkipWithHttpInfo() : ApiResponse<FormationView?> {
+        val localVariableConfig = postV1CompanySkipRequestConfig()
 
-        return request<Unit, CloudFormationView>(
+        return request<Unit, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CompanySkip
+     * To obtain the request config of the operation postV1CompanySkip
      *
      * @return RequestConfig
      */
-    fun cloudPostV1CompanySkipRequestConfig() : RequestConfig<Unit> {
+    fun postV1CompanySkipRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1605,17 +1605,17 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/skip",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/company/structure
-     * SetStructure records the entity kind, the state of formation and the proposed name.
-     * SetStructure records the entity kind, the state of formation and the proposed name. Available only at the structure stage; an unknown structure or jurisdiction, or an empty name, is refused with 400.
-     * @param cloudStructureIn 
-     * @return CloudFormationView
+     * Records the entity kind, the state of formation and the proposed name.
+     * Records the entity kind, the state of formation and the proposed name. Available only at the structure stage; an unknown structure or jurisdiction, or an empty name, is refused with 400.
+     * @param structureIn 
+     * @return FormationView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1624,11 +1624,11 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1CompanyStructure(cloudStructureIn: CloudStructureIn) : CloudFormationView {
-        val localVarResponse = cloudPutV1CompanyStructureWithHttpInfo(cloudStructureIn = cloudStructureIn)
+    fun putV1CompanyStructure(structureIn: StructureIn) : FormationView {
+        val localVarResponse = putV1CompanyStructureWithHttpInfo(structureIn = structureIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFormationView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FormationView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1644,31 +1644,31 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * PUT /v1/company/structure
-     * SetStructure records the entity kind, the state of formation and the proposed name.
-     * SetStructure records the entity kind, the state of formation and the proposed name. Available only at the structure stage; an unknown structure or jurisdiction, or an empty name, is refused with 400.
-     * @param cloudStructureIn 
-     * @return ApiResponse<CloudFormationView?>
+     * Records the entity kind, the state of formation and the proposed name.
+     * Records the entity kind, the state of formation and the proposed name. Available only at the structure stage; an unknown structure or jurisdiction, or an empty name, is refused with 400.
+     * @param structureIn 
+     * @return ApiResponse<FormationView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1CompanyStructureWithHttpInfo(cloudStructureIn: CloudStructureIn) : ApiResponse<CloudFormationView?> {
-        val localVariableConfig = cloudPutV1CompanyStructureRequestConfig(cloudStructureIn = cloudStructureIn)
+    fun putV1CompanyStructureWithHttpInfo(structureIn: StructureIn) : ApiResponse<FormationView?> {
+        val localVariableConfig = putV1CompanyStructureRequestConfig(structureIn = structureIn)
 
-        return request<CloudStructureIn, CloudFormationView>(
+        return request<StructureIn, FormationView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1CompanyStructure
+     * To obtain the request config of the operation putV1CompanyStructure
      *
-     * @param cloudStructureIn 
+     * @param structureIn 
      * @return RequestConfig
      */
-    fun cloudPutV1CompanyStructureRequestConfig(cloudStructureIn: CloudStructureIn) : RequestConfig<CloudStructureIn> {
-        val localVariableBody = cloudStructureIn
+    fun putV1CompanyStructureRequestConfig(structureIn: StructureIn) : RequestConfig<StructureIn> {
+        val localVariableBody = structureIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1679,7 +1679,7 @@ class CompanyApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/company/structure",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

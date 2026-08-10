@@ -19,21 +19,21 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudActivityView
-import ai.hanzo.cloud.model.CloudBackfillQuery
-import ai.hanzo.cloud.model.CloudBackfillResult
-import ai.hanzo.cloud.model.CloudDashResp
-import ai.hanzo.cloud.model.CloudLeaderboardView
-import ai.hanzo.cloud.model.CloudOptinView
-import ai.hanzo.cloud.model.CloudOrgOptinReq
-import ai.hanzo.cloud.model.CloudOrgOptinView
-import ai.hanzo.cloud.model.CloudReportReq
-import ai.hanzo.cloud.model.CloudReportResp
-import ai.hanzo.cloud.model.CloudUsageAnalyticsAccess
-import ai.hanzo.cloud.model.CloudUsageAnalyticsView
-import ai.hanzo.cloud.model.CloudUsageSummary
-import ai.hanzo.cloud.model.CloudUserOptinReq
-import ai.hanzo.cloud.model.CloudUserOptinView
+import ai.hanzo.cloud.model.ActivityView
+import ai.hanzo.cloud.model.BackfillQuery
+import ai.hanzo.cloud.model.BackfillResult
+import ai.hanzo.cloud.model.DashResp
+import ai.hanzo.cloud.model.LeaderboardView
+import ai.hanzo.cloud.model.OptinView
+import ai.hanzo.cloud.model.OrgOptinReq
+import ai.hanzo.cloud.model.OrgOptinView
+import ai.hanzo.cloud.model.ReportReq
+import ai.hanzo.cloud.model.ReportResp
+import ai.hanzo.cloud.model.UsageAnalyticsAccess
+import ai.hanzo.cloud.model.UsageAnalyticsView
+import ai.hanzo.cloud.model.UsageSummary
+import ai.hanzo.cloud.model.UserOptinReq
+import ai.hanzo.cloud.model.UserOptinView
 
 import com.google.gson.annotations.SerializedName
 
@@ -67,7 +67,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param id ID names the subject within what the caller is entitled to see. Omitted (or \&quot;me\&quot;) it is the caller themselves, or their own org. Another user requires org admin and must belong to the caller&#39;s org; another org requires a SuperAdmin. (optional)
      * @param from From is the first day of the range, \&quot;2006-01-02\&quot;. Defaults to 90 days back. (optional)
      * @param to To is the last day of the range, \&quot;2006-01-02\&quot;. Defaults to today; the span is clamped to 366 days. (optional)
-     * @return CloudActivityView
+     * @return ActivityView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -76,11 +76,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1UsageActivity(subject: kotlin.String? = null, id: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : CloudActivityView {
-        val localVarResponse = cloudGetV1UsageActivityWithHttpInfo(subject = subject, id = id, from = from, to = to)
+    fun getV1UsageActivity(subject: kotlin.String? = null, id: kotlin.String? = null, from: kotlin.String? = null, to: kotlin.String? = null) : ActivityView {
+        val localVarResponse = getV1UsageActivityWithHttpInfo(subject = subject, id = id, from = from, to = to)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActivityView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActivityView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -102,22 +102,22 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param id ID names the subject within what the caller is entitled to see. Omitted (or \&quot;me\&quot;) it is the caller themselves, or their own org. Another user requires org admin and must belong to the caller&#39;s org; another org requires a SuperAdmin. (optional)
      * @param from From is the first day of the range, \&quot;2006-01-02\&quot;. Defaults to 90 days back. (optional)
      * @param to To is the last day of the range, \&quot;2006-01-02\&quot;. Defaults to today; the span is clamped to 366 days. (optional)
-     * @return ApiResponse<CloudActivityView?>
+     * @return ApiResponse<ActivityView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1UsageActivityWithHttpInfo(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<CloudActivityView?> {
-        val localVariableConfig = cloudGetV1UsageActivityRequestConfig(subject = subject, id = id, from = from, to = to)
+    fun getV1UsageActivityWithHttpInfo(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : ApiResponse<ActivityView?> {
+        val localVariableConfig = getV1UsageActivityRequestConfig(subject = subject, id = id, from = from, to = to)
 
-        return request<Unit, CloudActivityView>(
+        return request<Unit, ActivityView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1UsageActivity
+     * To obtain the request config of the operation getV1UsageActivity
      *
      * @param subject Subject is what the series is about: \&quot;user\&quot; (default), \&quot;org\&quot; or \&quot;project\&quot;. (optional)
      * @param id ID names the subject within what the caller is entitled to see. Omitted (or \&quot;me\&quot;) it is the caller themselves, or their own org. Another user requires org admin and must belong to the caller&#39;s org; another org requires a SuperAdmin. (optional)
@@ -125,7 +125,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param to To is the last day of the range, \&quot;2006-01-02\&quot;. Defaults to today; the span is clamped to 366 days. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1UsageActivityRequestConfig(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1UsageActivityRequestConfig(subject: kotlin.String?, id: kotlin.String?, from: kotlin.String?, to: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -150,7 +150,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/activity",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -163,7 +163,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param plan Plan is the plan id whose entitlement decides access and retention. INTERIM: cloud has no org-to-plan resolver yet, so the caller names the plan; when that resolver lands this becomes the caller org&#39;s own plan. (optional)
      * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom, and clamped forward to the plan&#39;s retention floor. (optional)
-     * @return CloudUsageAnalyticsView
+     * @return UsageAnalyticsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -172,11 +172,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1UsageAnalytics(end: kotlin.String? = null, plan: kotlin.String? = null, range: kotlin.String? = null, start: kotlin.String? = null) : CloudUsageAnalyticsView {
-        val localVarResponse = cloudGetV1UsageAnalyticsWithHttpInfo(end = end, plan = plan, range = range, start = start)
+    fun getV1UsageAnalytics(end: kotlin.String? = null, plan: kotlin.String? = null, range: kotlin.String? = null, start: kotlin.String? = null) : UsageAnalyticsView {
+        val localVarResponse = getV1UsageAnalyticsWithHttpInfo(end = end, plan = plan, range = range, start = start)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUsageAnalyticsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsageAnalyticsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -198,22 +198,22 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param plan Plan is the plan id whose entitlement decides access and retention. INTERIM: cloud has no org-to-plan resolver yet, so the caller names the plan; when that resolver lands this becomes the caller org&#39;s own plan. (optional)
      * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom, and clamped forward to the plan&#39;s retention floor. (optional)
-     * @return ApiResponse<CloudUsageAnalyticsView?>
+     * @return ApiResponse<UsageAnalyticsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1UsageAnalyticsWithHttpInfo(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : ApiResponse<CloudUsageAnalyticsView?> {
-        val localVariableConfig = cloudGetV1UsageAnalyticsRequestConfig(end = end, plan = plan, range = range, start = start)
+    fun getV1UsageAnalyticsWithHttpInfo(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : ApiResponse<UsageAnalyticsView?> {
+        val localVariableConfig = getV1UsageAnalyticsRequestConfig(end = end, plan = plan, range = range, start = start)
 
-        return request<Unit, CloudUsageAnalyticsView>(
+        return request<Unit, UsageAnalyticsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1UsageAnalytics
+     * To obtain the request config of the operation getV1UsageAnalytics
      *
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @param plan Plan is the plan id whose entitlement decides access and retention. INTERIM: cloud has no org-to-plan resolver yet, so the caller names the plan; when that resolver lands this becomes the caller org&#39;s own plan. (optional)
@@ -221,7 +221,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom, and clamped forward to the plan&#39;s retention floor. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1UsageAnalyticsRequestConfig(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1UsageAnalyticsRequestConfig(end: kotlin.String?, plan: kotlin.String?, range: kotlin.String?, start: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -246,7 +246,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/analytics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -256,7 +256,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Echoes a plan&#39;s resolved analytics entitlement so a dashboard can configure itself against the LIVE catalog instead of hardcoding tier numbers.
      * Echoes a plan&#39;s resolved analytics entitlement so a dashboard can configure itself against the LIVE catalog instead of hardcoding tier numbers. An empty plan resolves the free floor, and a catalog resolution failure serves that same floor rather than erroring — so this always answers 200. It is a read-only contract echo and carries no tenant data.
      * @param plan Plan is a plan id from the live @hanzo/plans catalog. Empty resolves the free floor, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
-     * @return CloudUsageAnalyticsAccess
+     * @return UsageAnalyticsAccess
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -265,11 +265,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1UsageAnalyticsAccess(plan: kotlin.String? = null) : CloudUsageAnalyticsAccess {
-        val localVarResponse = cloudGetV1UsageAnalyticsAccessWithHttpInfo(plan = plan)
+    fun getV1UsageAnalyticsAccess(plan: kotlin.String? = null) : UsageAnalyticsAccess {
+        val localVarResponse = getV1UsageAnalyticsAccessWithHttpInfo(plan = plan)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUsageAnalyticsAccess
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsageAnalyticsAccess
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -288,27 +288,27 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Echoes a plan&#39;s resolved analytics entitlement so a dashboard can configure itself against the LIVE catalog instead of hardcoding tier numbers.
      * Echoes a plan&#39;s resolved analytics entitlement so a dashboard can configure itself against the LIVE catalog instead of hardcoding tier numbers. An empty plan resolves the free floor, and a catalog resolution failure serves that same floor rather than erroring — so this always answers 200. It is a read-only contract echo and carries no tenant data.
      * @param plan Plan is a plan id from the live @hanzo/plans catalog. Empty resolves the free floor, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
-     * @return ApiResponse<CloudUsageAnalyticsAccess?>
+     * @return ApiResponse<UsageAnalyticsAccess?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1UsageAnalyticsAccessWithHttpInfo(plan: kotlin.String?) : ApiResponse<CloudUsageAnalyticsAccess?> {
-        val localVariableConfig = cloudGetV1UsageAnalyticsAccessRequestConfig(plan = plan)
+    fun getV1UsageAnalyticsAccessWithHttpInfo(plan: kotlin.String?) : ApiResponse<UsageAnalyticsAccess?> {
+        val localVariableConfig = getV1UsageAnalyticsAccessRequestConfig(plan = plan)
 
-        return request<Unit, CloudUsageAnalyticsAccess>(
+        return request<Unit, UsageAnalyticsAccess>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1UsageAnalyticsAccess
+     * To obtain the request config of the operation getV1UsageAnalyticsAccess
      *
      * @param plan Plan is a plan id from the live @hanzo/plans catalog. Empty resolves the free floor, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1UsageAnalyticsAccessRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1UsageAnalyticsAccessRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -324,7 +324,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/analytics/access",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -337,7 +337,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param metric Metric is the value ranked: tokens (default), requests, or cost. (optional)
      * @param period Period is the window ranked: day, week, month (default) or all. (optional)
      * @param limit Limit caps the rows returned, clamped to 100. Defaults to 10, which is also what a non-positive or unparseable value takes. (optional)
-     * @return CloudLeaderboardView
+     * @return LeaderboardView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -346,11 +346,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1UsageLeaderboard(scope: kotlin.String? = null, metric: kotlin.String? = null, period: kotlin.String? = null, limit: kotlin.Int? = null) : CloudLeaderboardView {
-        val localVarResponse = cloudGetV1UsageLeaderboardWithHttpInfo(scope = scope, metric = metric, period = period, limit = limit)
+    fun getV1UsageLeaderboard(scope: kotlin.String? = null, metric: kotlin.String? = null, period: kotlin.String? = null, limit: kotlin.Int? = null) : LeaderboardView {
+        val localVarResponse = getV1UsageLeaderboardWithHttpInfo(scope = scope, metric = metric, period = period, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudLeaderboardView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LeaderboardView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -372,22 +372,22 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param metric Metric is the value ranked: tokens (default), requests, or cost. (optional)
      * @param period Period is the window ranked: day, week, month (default) or all. (optional)
      * @param limit Limit caps the rows returned, clamped to 100. Defaults to 10, which is also what a non-positive or unparseable value takes. (optional)
-     * @return ApiResponse<CloudLeaderboardView?>
+     * @return ApiResponse<LeaderboardView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1UsageLeaderboardWithHttpInfo(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudLeaderboardView?> {
-        val localVariableConfig = cloudGetV1UsageLeaderboardRequestConfig(scope = scope, metric = metric, period = period, limit = limit)
+    fun getV1UsageLeaderboardWithHttpInfo(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : ApiResponse<LeaderboardView?> {
+        val localVariableConfig = getV1UsageLeaderboardRequestConfig(scope = scope, metric = metric, period = period, limit = limit)
 
-        return request<Unit, CloudLeaderboardView>(
+        return request<Unit, LeaderboardView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1UsageLeaderboard
+     * To obtain the request config of the operation getV1UsageLeaderboard
      *
      * @param scope Scope picks the board: \&quot;personal\&quot; (default) ranks the caller among their own org&#39;s users, \&quot;org\&quot; is that same org board named for an admin, \&quot;global\&quot; ranks organizations against each other. (optional)
      * @param metric Metric is the value ranked: tokens (default), requests, or cost. (optional)
@@ -395,7 +395,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param limit Limit caps the rows returned, clamped to 100. Defaults to 10, which is also what a non-positive or unparseable value takes. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1UsageLeaderboardRequestConfig(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1UsageLeaderboardRequestConfig(scope: kotlin.String?, metric: kotlin.String?, period: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -420,16 +420,16 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/usage/leaderboard/optin
-     * GetOptin returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it.
-     * GetOptin returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it. Public listing is opt-in and private by default, so a fresh caller reads listed&#x3D;false for both.
-     * @return CloudOptinView
+     * Returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it.
+     * Returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it. Public listing is opt-in and private by default, so a fresh caller reads listed&#x3D;false for both.
+     * @return OptinView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -438,11 +438,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1UsageLeaderboardOptin() : CloudOptinView {
-        val localVarResponse = cloudGetV1UsageLeaderboardOptinWithHttpInfo()
+    fun getV1UsageLeaderboardOptin() : OptinView {
+        val localVarResponse = getV1UsageLeaderboardOptinWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOptinView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OptinView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -458,28 +458,28 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/usage/leaderboard/optin
-     * GetOptin returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it.
-     * GetOptin returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it. Public listing is opt-in and private by default, so a fresh caller reads listed&#x3D;false for both.
-     * @return ApiResponse<CloudOptinView?>
+     * Returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it.
+     * Returns the caller&#39;s own public-listing preference and their org&#39;s, each with whether the caller may change it. Public listing is opt-in and private by default, so a fresh caller reads listed&#x3D;false for both.
+     * @return ApiResponse<OptinView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1UsageLeaderboardOptinWithHttpInfo() : ApiResponse<CloudOptinView?> {
-        val localVariableConfig = cloudGetV1UsageLeaderboardOptinRequestConfig()
+    fun getV1UsageLeaderboardOptinWithHttpInfo() : ApiResponse<OptinView?> {
+        val localVariableConfig = getV1UsageLeaderboardOptinRequestConfig()
 
-        return request<Unit, CloudOptinView>(
+        return request<Unit, OptinView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1UsageLeaderboardOptin
+     * To obtain the request config of the operation getV1UsageLeaderboardOptin
      *
      * @return RequestConfig
      */
-    fun cloudGetV1UsageLeaderboardOptinRequestConfig() : RequestConfig<Unit> {
+    fun getV1UsageLeaderboardOptinRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -490,20 +490,20 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard/optin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/usage/samples
-     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my Claude Max plan is 47% through its 6h window, resets at 14:20\&quot;.
-     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my Claude Max plan is 47% through its 6h window, resets at 14:20\&quot;.  &#x60;current&#x60; is the newest instance of each lane (the headline); &#x60;windows&#x60; is the history behind it. Both come from ONE deduped read, so they can never disagree. The rows are the caller&#39;s OWN linked accounts, scoped to the validated principal and its subject — never another user&#39;s, and never another org&#39;s.
+     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;.
+     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;.  &#x60;current&#x60; is the newest instance of each lane (the headline); &#x60;windows&#x60; is the history behind it. Both come from ONE deduped read, so they can never disagree. The rows are the caller&#39;s OWN linked accounts, scoped to the validated principal and its subject — never another user&#39;s, and never another org&#39;s.
      * @param account Account narrows to ONE linked account of that provider. Empty covers every account the caller has linked there. (optional)
      * @param provider Provider is the upstream to read, e.g. anthropic. Required. (optional)
      * @param range Range is the window to read: 1h, 24h, 7d or 30d. Empty means 24h, and any other label is refused rather than silently replaced. (optional)
      * @param window Window narrows to ONE window class: 6h, day, week or month. Empty covers every class. (optional)
-     * @return CloudDashResp
+     * @return DashResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -512,11 +512,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1UsageSamples(account: kotlin.String? = null, provider: kotlin.String? = null, range: kotlin.String? = null, window: kotlin.String? = null) : CloudDashResp {
-        val localVarResponse = cloudGetV1UsageSamplesWithHttpInfo(account = account, provider = provider, range = range, window = window)
+    fun getV1UsageSamples(account: kotlin.String? = null, provider: kotlin.String? = null, range: kotlin.String? = null, window: kotlin.String? = null) : DashResp {
+        val localVarResponse = getV1UsageSamplesWithHttpInfo(account = account, provider = provider, range = range, window = window)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDashResp
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DashResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -532,28 +532,28 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/usage/samples
-     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my Claude Max plan is 47% through its 6h window, resets at 14:20\&quot;.
-     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my Claude Max plan is 47% through its 6h window, resets at 14:20\&quot;.  &#x60;current&#x60; is the newest instance of each lane (the headline); &#x60;windows&#x60; is the history behind it. Both come from ONE deduped read, so they can never disagree. The rows are the caller&#39;s OWN linked accounts, scoped to the validated principal and its subject — never another user&#39;s, and never another org&#39;s.
+     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;.
+     * Is the PER-PROVIDER view: one connected account&#39;s own consumption of its own plan — \&quot;my plan is 47% through its 6h window, resets at 14:20\&quot;.  &#x60;current&#x60; is the newest instance of each lane (the headline); &#x60;windows&#x60; is the history behind it. Both come from ONE deduped read, so they can never disagree. The rows are the caller&#39;s OWN linked accounts, scoped to the validated principal and its subject — never another user&#39;s, and never another org&#39;s.
      * @param account Account narrows to ONE linked account of that provider. Empty covers every account the caller has linked there. (optional)
      * @param provider Provider is the upstream to read, e.g. anthropic. Required. (optional)
      * @param range Range is the window to read: 1h, 24h, 7d or 30d. Empty means 24h, and any other label is refused rather than silently replaced. (optional)
      * @param window Window narrows to ONE window class: 6h, day, week or month. Empty covers every class. (optional)
-     * @return ApiResponse<CloudDashResp?>
+     * @return ApiResponse<DashResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1UsageSamplesWithHttpInfo(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : ApiResponse<CloudDashResp?> {
-        val localVariableConfig = cloudGetV1UsageSamplesRequestConfig(account = account, provider = provider, range = range, window = window)
+    fun getV1UsageSamplesWithHttpInfo(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : ApiResponse<DashResp?> {
+        val localVariableConfig = getV1UsageSamplesRequestConfig(account = account, provider = provider, range = range, window = window)
 
-        return request<Unit, CloudDashResp>(
+        return request<Unit, DashResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1UsageSamples
+     * To obtain the request config of the operation getV1UsageSamples
      *
      * @param account Account narrows to ONE linked account of that provider. Empty covers every account the caller has linked there. (optional)
      * @param provider Provider is the upstream to read, e.g. anthropic. Required. (optional)
@@ -561,7 +561,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param window Window narrows to ONE window class: 6h, day, week or month. Empty covers every class. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1UsageSamplesRequestConfig(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1UsageSamplesRequestConfig(account: kotlin.String?, provider: kotlin.String?, range: kotlin.String?, window: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -586,7 +586,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/samples",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -598,7 +598,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. A label this surface does not know is refused rather than silently replaced. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom. (optional)
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
-     * @return CloudUsageSummary
+     * @return UsageSummary
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -607,11 +607,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1UsageSummary(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : CloudUsageSummary {
-        val localVarResponse = cloudGetV1UsageSummaryWithHttpInfo(range = range, start = start, end = end)
+    fun getV1UsageSummary(range: kotlin.String? = null, start: kotlin.String? = null, end: kotlin.String? = null) : UsageSummary {
+        val localVarResponse = getV1UsageSummaryWithHttpInfo(range = range, start = start, end = end)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUsageSummary
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsageSummary
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -632,29 +632,29 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. A label this surface does not know is refused rather than silently replaced. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom. (optional)
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
-     * @return ApiResponse<CloudUsageSummary?>
+     * @return ApiResponse<UsageSummary?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1UsageSummaryWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<CloudUsageSummary?> {
-        val localVariableConfig = cloudGetV1UsageSummaryRequestConfig(range = range, start = start, end = end)
+    fun getV1UsageSummaryWithHttpInfo(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : ApiResponse<UsageSummary?> {
+        val localVariableConfig = getV1UsageSummaryRequestConfig(range = range, start = start, end = end)
 
-        return request<Unit, CloudUsageSummary>(
+        return request<Unit, UsageSummary>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1UsageSummary
+     * To obtain the request config of the operation getV1UsageSummary
      *
      * @param range Range is the window: 24h, 7d, 30d, or custom. Empty means 24h. A label this surface does not know is refused rather than silently replaced. (optional)
      * @param start Start is the inclusive window start, RFC3339. Read only when Range is custom. (optional)
      * @param end End is the exclusive window end, RFC3339. Read only when Range is custom. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1UsageSummaryRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1UsageSummaryRequestConfig(range: kotlin.String?, start: kotlin.String?, end: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -676,7 +676,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -685,8 +685,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/usage
      * Ingests a batch of account-usage samples — what a developer&#39;s OWN AI accounts have consumed of their OWN plans, metered from each provider&#39;s own login — and appends them to the warehouse series.
      * Ingests a batch of account-usage samples — what a developer&#39;s OWN AI accounts have consumed of their OWN plans, metered from each provider&#39;s own login — and appends them to the warehouse series. Answers 202.  Send either a &#x60;samples&#x60; array or one sample&#39;s fields at the top level. Every sample needs a provider, a machine and a known window class; an unknown window or kind is refused rather than silently rewritten, because a dash filled with a class nobody reported is worse than an error. There is no timestamp field: the server owns the observation clock, and a sample says which window it measured with windowStart or resetsAt.  It is FAIL-SOFT on storage: a warehouse outage costs a poll of history (stored:false), never a failed request. It records usage ONLY — the link registry is refreshed separately via POST /v1/links, so there is one and only one way to update an account row.
-     * @param cloudReportReq 
-     * @return CloudReportResp
+     * @param reportReq 
+     * @return ReportResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -695,11 +695,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Usage(cloudReportReq: CloudReportReq) : CloudReportResp {
-        val localVarResponse = cloudPostV1UsageWithHttpInfo(cloudReportReq = cloudReportReq)
+    fun postV1Usage(reportReq: ReportReq) : ReportResp {
+        val localVarResponse = postV1UsageWithHttpInfo(reportReq = reportReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReportResp
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReportResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -717,29 +717,29 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/usage
      * Ingests a batch of account-usage samples — what a developer&#39;s OWN AI accounts have consumed of their OWN plans, metered from each provider&#39;s own login — and appends them to the warehouse series.
      * Ingests a batch of account-usage samples — what a developer&#39;s OWN AI accounts have consumed of their OWN plans, metered from each provider&#39;s own login — and appends them to the warehouse series. Answers 202.  Send either a &#x60;samples&#x60; array or one sample&#39;s fields at the top level. Every sample needs a provider, a machine and a known window class; an unknown window or kind is refused rather than silently rewritten, because a dash filled with a class nobody reported is worse than an error. There is no timestamp field: the server owns the observation clock, and a sample says which window it measured with windowStart or resetsAt.  It is FAIL-SOFT on storage: a warehouse outage costs a poll of history (stored:false), never a failed request. It records usage ONLY — the link registry is refreshed separately via POST /v1/links, so there is one and only one way to update an account row.
-     * @param cloudReportReq 
-     * @return ApiResponse<CloudReportResp?>
+     * @param reportReq 
+     * @return ApiResponse<ReportResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1UsageWithHttpInfo(cloudReportReq: CloudReportReq) : ApiResponse<CloudReportResp?> {
-        val localVariableConfig = cloudPostV1UsageRequestConfig(cloudReportReq = cloudReportReq)
+    fun postV1UsageWithHttpInfo(reportReq: ReportReq) : ApiResponse<ReportResp?> {
+        val localVariableConfig = postV1UsageRequestConfig(reportReq = reportReq)
 
-        return request<CloudReportReq, CloudReportResp>(
+        return request<ReportReq, ReportResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Usage
+     * To obtain the request config of the operation postV1Usage
      *
-     * @param cloudReportReq 
+     * @param reportReq 
      * @return RequestConfig
      */
-    fun cloudPostV1UsageRequestConfig(cloudReportReq: CloudReportReq) : RequestConfig<CloudReportReq> {
-        val localVariableBody = cloudReportReq
+    fun postV1UsageRequestConfig(reportReq: ReportReq) : RequestConfig<ReportReq> {
+        val localVariableBody = reportReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -750,7 +750,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -759,8 +759,8 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/usage/rollup/backfill
      * Backfill seeds the derived usage rollup from ledger history — the rows written before the incremental view existed, which that view can never capture.
      * Backfill seeds the derived usage rollup from ledger history — the rows written before the incremental view existed, which that view can never capture. SuperAdmin only. Because the rollup accumulates, a second unguarded run would double every day it re-reads, so it refuses with 409 when the rollup already holds rows unless force&#x3D;true is passed; forcing WILL double-count.
-     * @param cloudBackfillQuery 
-     * @return CloudBackfillResult
+     * @param backfillQuery 
+     * @return BackfillResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -769,11 +769,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1UsageRollupBackfill(cloudBackfillQuery: CloudBackfillQuery) : CloudBackfillResult {
-        val localVarResponse = cloudPostV1UsageRollupBackfillWithHttpInfo(cloudBackfillQuery = cloudBackfillQuery)
+    fun postV1UsageRollupBackfill(backfillQuery: BackfillQuery) : BackfillResult {
+        val localVarResponse = postV1UsageRollupBackfillWithHttpInfo(backfillQuery = backfillQuery)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBackfillResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BackfillResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -791,29 +791,29 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/usage/rollup/backfill
      * Backfill seeds the derived usage rollup from ledger history — the rows written before the incremental view existed, which that view can never capture.
      * Backfill seeds the derived usage rollup from ledger history — the rows written before the incremental view existed, which that view can never capture. SuperAdmin only. Because the rollup accumulates, a second unguarded run would double every day it re-reads, so it refuses with 409 when the rollup already holds rows unless force&#x3D;true is passed; forcing WILL double-count.
-     * @param cloudBackfillQuery 
-     * @return ApiResponse<CloudBackfillResult?>
+     * @param backfillQuery 
+     * @return ApiResponse<BackfillResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1UsageRollupBackfillWithHttpInfo(cloudBackfillQuery: CloudBackfillQuery) : ApiResponse<CloudBackfillResult?> {
-        val localVariableConfig = cloudPostV1UsageRollupBackfillRequestConfig(cloudBackfillQuery = cloudBackfillQuery)
+    fun postV1UsageRollupBackfillWithHttpInfo(backfillQuery: BackfillQuery) : ApiResponse<BackfillResult?> {
+        val localVariableConfig = postV1UsageRollupBackfillRequestConfig(backfillQuery = backfillQuery)
 
-        return request<CloudBackfillQuery, CloudBackfillResult>(
+        return request<BackfillQuery, BackfillResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1UsageRollupBackfill
+     * To obtain the request config of the operation postV1UsageRollupBackfill
      *
-     * @param cloudBackfillQuery 
+     * @param backfillQuery 
      * @return RequestConfig
      */
-    fun cloudPostV1UsageRollupBackfillRequestConfig(cloudBackfillQuery: CloudBackfillQuery) : RequestConfig<CloudBackfillQuery> {
-        val localVariableBody = cloudBackfillQuery
+    fun postV1UsageRollupBackfillRequestConfig(backfillQuery: BackfillQuery) : RequestConfig<BackfillQuery> {
+        val localVariableBody = backfillQuery
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -824,17 +824,17 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/rollup/backfill",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/usage/leaderboard/optin
-     * PutUserOptin sets the CALLER&#39;s own public-listing preference on the leaderboard.
-     * PutUserOptin sets the CALLER&#39;s own public-listing preference on the leaderboard. Self only: the row written is keyed by the caller&#39;s validated ledger identity, so this can never edit another member&#39;s visibility whatever the request says. A caller opting in with no handle is given their username, so a listed row never renders as \&quot;Anonymous\&quot; to its own owner.
-     * @param cloudUserOptinReq 
-     * @return CloudUserOptinView
+     * Sets the CALLER&#39;s own public-listing preference on the leaderboard.
+     * Sets the CALLER&#39;s own public-listing preference on the leaderboard. Self only: the row written is keyed by the caller&#39;s validated ledger identity, so this can never edit another member&#39;s visibility whatever the request says. A caller opting in with no handle is given their username, so a listed row never renders as \&quot;Anonymous\&quot; to its own owner.
+     * @param userOptinReq 
+     * @return UserOptinView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -843,11 +843,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1UsageLeaderboardOptin(cloudUserOptinReq: CloudUserOptinReq) : CloudUserOptinView {
-        val localVarResponse = cloudPutV1UsageLeaderboardOptinWithHttpInfo(cloudUserOptinReq = cloudUserOptinReq)
+    fun putV1UsageLeaderboardOptin(userOptinReq: UserOptinReq) : UserOptinView {
+        val localVarResponse = putV1UsageLeaderboardOptinWithHttpInfo(userOptinReq = userOptinReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudUserOptinView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UserOptinView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -863,31 +863,31 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/usage/leaderboard/optin
-     * PutUserOptin sets the CALLER&#39;s own public-listing preference on the leaderboard.
-     * PutUserOptin sets the CALLER&#39;s own public-listing preference on the leaderboard. Self only: the row written is keyed by the caller&#39;s validated ledger identity, so this can never edit another member&#39;s visibility whatever the request says. A caller opting in with no handle is given their username, so a listed row never renders as \&quot;Anonymous\&quot; to its own owner.
-     * @param cloudUserOptinReq 
-     * @return ApiResponse<CloudUserOptinView?>
+     * Sets the CALLER&#39;s own public-listing preference on the leaderboard.
+     * Sets the CALLER&#39;s own public-listing preference on the leaderboard. Self only: the row written is keyed by the caller&#39;s validated ledger identity, so this can never edit another member&#39;s visibility whatever the request says. A caller opting in with no handle is given their username, so a listed row never renders as \&quot;Anonymous\&quot; to its own owner.
+     * @param userOptinReq 
+     * @return ApiResponse<UserOptinView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1UsageLeaderboardOptinWithHttpInfo(cloudUserOptinReq: CloudUserOptinReq) : ApiResponse<CloudUserOptinView?> {
-        val localVariableConfig = cloudPutV1UsageLeaderboardOptinRequestConfig(cloudUserOptinReq = cloudUserOptinReq)
+    fun putV1UsageLeaderboardOptinWithHttpInfo(userOptinReq: UserOptinReq) : ApiResponse<UserOptinView?> {
+        val localVariableConfig = putV1UsageLeaderboardOptinRequestConfig(userOptinReq = userOptinReq)
 
-        return request<CloudUserOptinReq, CloudUserOptinView>(
+        return request<UserOptinReq, UserOptinView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1UsageLeaderboardOptin
+     * To obtain the request config of the operation putV1UsageLeaderboardOptin
      *
-     * @param cloudUserOptinReq 
+     * @param userOptinReq 
      * @return RequestConfig
      */
-    fun cloudPutV1UsageLeaderboardOptinRequestConfig(cloudUserOptinReq: CloudUserOptinReq) : RequestConfig<CloudUserOptinReq> {
-        val localVariableBody = cloudUserOptinReq
+    fun putV1UsageLeaderboardOptinRequestConfig(userOptinReq: UserOptinReq) : RequestConfig<UserOptinReq> {
+        val localVariableBody = userOptinReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -898,17 +898,17 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard/optin",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/usage/leaderboard/optin/org
-     * PutOrgOptin sets the ORG&#39;s listing on the cross-org global board.
-     * PutOrgOptin sets the ORG&#39;s listing on the cross-org global board. Only an admin of the caller&#39;s own org — an org admin or a platform SuperAdmin — may change it, and the org written is the caller&#39;s validated tenant, never a value from the request. Listing consents to publishing the org&#39;s usage VOLUME; cross-org spend stays restricted to platform admins regardless.
-     * @param cloudOrgOptinReq 
-     * @return CloudOrgOptinView
+     * Sets the ORG&#39;s listing on the cross-org global board.
+     * Sets the ORG&#39;s listing on the cross-org global board. Only an admin of the caller&#39;s own org — an org admin or a platform SuperAdmin — may change it, and the org written is the caller&#39;s validated tenant, never a value from the request. Listing consents to publishing the org&#39;s usage VOLUME; cross-org spend stays restricted to platform admins regardless.
+     * @param orgOptinReq 
+     * @return OrgOptinView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -917,11 +917,11 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1UsageLeaderboardOptinOrg(cloudOrgOptinReq: CloudOrgOptinReq) : CloudOrgOptinView {
-        val localVarResponse = cloudPutV1UsageLeaderboardOptinOrgWithHttpInfo(cloudOrgOptinReq = cloudOrgOptinReq)
+    fun putV1UsageLeaderboardOptinOrg(orgOptinReq: OrgOptinReq) : OrgOptinView {
+        val localVarResponse = putV1UsageLeaderboardOptinOrgWithHttpInfo(orgOptinReq = orgOptinReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOrgOptinView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OrgOptinView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -937,31 +937,31 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/usage/leaderboard/optin/org
-     * PutOrgOptin sets the ORG&#39;s listing on the cross-org global board.
-     * PutOrgOptin sets the ORG&#39;s listing on the cross-org global board. Only an admin of the caller&#39;s own org — an org admin or a platform SuperAdmin — may change it, and the org written is the caller&#39;s validated tenant, never a value from the request. Listing consents to publishing the org&#39;s usage VOLUME; cross-org spend stays restricted to platform admins regardless.
-     * @param cloudOrgOptinReq 
-     * @return ApiResponse<CloudOrgOptinView?>
+     * Sets the ORG&#39;s listing on the cross-org global board.
+     * Sets the ORG&#39;s listing on the cross-org global board. Only an admin of the caller&#39;s own org — an org admin or a platform SuperAdmin — may change it, and the org written is the caller&#39;s validated tenant, never a value from the request. Listing consents to publishing the org&#39;s usage VOLUME; cross-org spend stays restricted to platform admins regardless.
+     * @param orgOptinReq 
+     * @return ApiResponse<OrgOptinView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1UsageLeaderboardOptinOrgWithHttpInfo(cloudOrgOptinReq: CloudOrgOptinReq) : ApiResponse<CloudOrgOptinView?> {
-        val localVariableConfig = cloudPutV1UsageLeaderboardOptinOrgRequestConfig(cloudOrgOptinReq = cloudOrgOptinReq)
+    fun putV1UsageLeaderboardOptinOrgWithHttpInfo(orgOptinReq: OrgOptinReq) : ApiResponse<OrgOptinView?> {
+        val localVariableConfig = putV1UsageLeaderboardOptinOrgRequestConfig(orgOptinReq = orgOptinReq)
 
-        return request<CloudOrgOptinReq, CloudOrgOptinView>(
+        return request<OrgOptinReq, OrgOptinView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1UsageLeaderboardOptinOrg
+     * To obtain the request config of the operation putV1UsageLeaderboardOptinOrg
      *
-     * @param cloudOrgOptinReq 
+     * @param orgOptinReq 
      * @return RequestConfig
      */
-    fun cloudPutV1UsageLeaderboardOptinOrgRequestConfig(cloudOrgOptinReq: CloudOrgOptinReq) : RequestConfig<CloudOrgOptinReq> {
-        val localVariableBody = cloudOrgOptinReq
+    fun putV1UsageLeaderboardOptinOrgRequestConfig(orgOptinReq: OrgOptinReq) : RequestConfig<OrgOptinReq> {
+        val localVariableBody = orgOptinReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -972,7 +972,7 @@ class UsageApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/usage/leaderboard/optin/org",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

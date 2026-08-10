@@ -1,51 +1,28 @@
 // tools — what can this key call?
 //
-// POST /v1/mcp is the fleet's one MCP door: JSON-RPC 2.0 over the typed product
-// operations composed with the external MCP servers the caller's org has
-// enabled. `tools/list` is the discovery call; the same operation with
-// `tools/call` runs one.
+// The catalogue is per-key: it composes the typed product operations with the
+// external servers the caller's org has enabled, so two keys in two orgs see
+// different lists. `activated` says which of them this key may actually
+// dispatch, and `source` says where each one comes from — printing both is the
+// difference between a catalogue and a menu.
 //
-// JSON-RPC reports failure INSIDE a 200, through two channels, so both are read
-// before the result is: `error` when the call itself failed, then
-// `result.isError` when a tool ran and reported failure.
+// Operation: get_v1_tools (GET /v1/tools)
 //
-// Operation: mcp_rpc (POST /v1/mcp)
+// POST /v1/mcp is the JSON-RPC door onto the same catalogue and answers 200
+// with the tool list, but the document does not declare it, so there is no
+// generated method for it. GET /v1/tools is the REST view that there is.
 //
 //   HANZO_API_KEY=hk-... ./gradlew :examples:tools:run
 import ai.hanzo.Hanzo
-import ai.hanzo.cloud.api.MCPApi
-import ai.hanzo.cloud.model.McpRequest
+import ai.hanzo.cloud.api.ToolsApi
 
 fun main() {
-    val response =
-        Hanzo()
-            .api(::MCPApi)
-            .mcpRpc(
-                // No `id`. hanzo.yaml types it `oneOf: [integer, string]`, and
-                // openapi-generator projects a scalar oneOf as an empty class —
-                // `McpRequestId()` has no members and would serialize as `{}`,
-                // which is not a legal JSON-RPC id. Omitting it is the only
-                // thing the generated client can say that is still correct.
-                McpRequest(
-                    jsonrpc = McpRequest.Jsonrpc._2Period0,
-                    method = McpRequest.Method.toolsSlashList,
-                )
-            )
-
-    // Channel one: the call did not run.
-    response.error?.let { error("tools/list: ${it.code} ${it.message}") }
-    val result = response.result ?: error("tools/list: neither result nor error")
-    // Channel two: it ran and reported failure.
-    check(result.isError != true) { "tools/list: ${result.content?.mapNotNull { it.text }}" }
-
-    val tools = result.tools.orEmpty()
+    val tools = Hanzo().api(::ToolsApi).getV1Tools().tools.orEmpty()
     check(tools.isNotEmpty()) { "no tools are reachable for this key" }
 
     println("tools    ${tools.size}")
-    tools.take(3).forEach { tool ->
-        // Descriptions are prose and run to paragraphs; a listing wants the
-        // first line of one.
-        val summary = tool.description?.lineSequence()?.firstOrNull()?.take(64).orEmpty()
-        println("  ${tool.name.padEnd(28)} $summary")
+    tools.forEach { tool ->
+        val state = if (tool.activated == true) "activated" else "available"
+        println("  ${tool.name.orEmpty().padEnd(32)} ${tool.source.orEmpty().padEnd(12)} $state")
     }
 }

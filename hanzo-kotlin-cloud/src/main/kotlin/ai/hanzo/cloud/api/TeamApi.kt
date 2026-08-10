@@ -19,12 +19,12 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudBotRoster
-import ai.hanzo.cloud.model.CloudBotSync
-import ai.hanzo.cloud.model.CloudCookieAck
-import ai.hanzo.cloud.model.CloudPlanInfo
-import ai.hanzo.cloud.model.CloudProviderInfo
-import ai.hanzo.cloud.model.CloudStatsOut
+import ai.hanzo.cloud.model.BotRoster
+import ai.hanzo.cloud.model.BotSync
+import ai.hanzo.cloud.model.CookieAck
+import ai.hanzo.cloud.model.PlanInfo
+import ai.hanzo.cloud.model.ProviderInfo
+import ai.hanzo.cloud.model.StatsOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -52,9 +52,9 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/team/account/cookie
-     * ClearCookie signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set.
-     * ClearCookie signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set. It is the counterpart of the cookie PUT, it takes nothing — the cookie it clears is named by this service, never by the caller — and it is unconditional: a caller with no cookie, an expired one or a forged one all get the same acknowledgement, because clearing something that is not there is the same outcome as clearing something that is.  It clears ONLY the team session cookie. The IAM access-token cookie the same callback set is a different credential with a different lifetime and is left alone, so this is a team sign-out, not a platform one.
-     * @return CloudCookieAck
+     * Signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set.
+     * Signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set. It is the counterpart of the cookie PUT, it takes nothing — the cookie it clears is named by this service, never by the caller — and it is unconditional: a caller with no cookie, an expired one or a forged one all get the same acknowledgement, because clearing something that is not there is the same outcome as clearing something that is.  It clears ONLY the team session cookie. The IAM access-token cookie the same callback set is a different credential with a different lifetime and is left alone, so this is a team sign-out, not a platform one.
+     * @return CookieAck
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -63,11 +63,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1TeamAccountCookie() : CloudCookieAck {
-        val localVarResponse = cloudDeleteV1TeamAccountCookieWithHttpInfo()
+    fun deleteV1TeamAccountCookie() : CookieAck {
+        val localVarResponse = deleteV1TeamAccountCookieWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCookieAck
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CookieAck
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -83,28 +83,28 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/team/account/cookie
-     * ClearCookie signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set.
-     * ClearCookie signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set. It is the counterpart of the cookie PUT, it takes nothing — the cookie it clears is named by this service, never by the caller — and it is unconditional: a caller with no cookie, an expired one or a forged one all get the same acknowledgement, because clearing something that is not there is the same outcome as clearing something that is.  It clears ONLY the team session cookie. The IAM access-token cookie the same callback set is a different credential with a different lifetime and is left alone, so this is a team sign-out, not a platform one.
-     * @return ApiResponse<CloudCookieAck?>
+     * Signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set.
+     * Signs this browser out of team by expiring the HttpOnly account-token cookie the OAuth callback set. It is the counterpart of the cookie PUT, it takes nothing — the cookie it clears is named by this service, never by the caller — and it is unconditional: a caller with no cookie, an expired one or a forged one all get the same acknowledgement, because clearing something that is not there is the same outcome as clearing something that is.  It clears ONLY the team session cookie. The IAM access-token cookie the same callback set is a different credential with a different lifetime and is left alone, so this is a team sign-out, not a platform one.
+     * @return ApiResponse<CookieAck?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1TeamAccountCookieWithHttpInfo() : ApiResponse<CloudCookieAck?> {
-        val localVariableConfig = cloudDeleteV1TeamAccountCookieRequestConfig()
+    fun deleteV1TeamAccountCookieWithHttpInfo() : ApiResponse<CookieAck?> {
+        val localVariableConfig = deleteV1TeamAccountCookieRequestConfig()
 
-        return request<Unit, CloudCookieAck>(
+        return request<Unit, CookieAck>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1TeamAccountCookie
+     * To obtain the request config of the operation deleteV1TeamAccountCookie
      *
      * @return RequestConfig
      */
-    fun cloudDeleteV1TeamAccountCookieRequestConfig() : RequestConfig<Unit> {
+    fun deleteV1TeamAccountCookieRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -115,15 +115,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/cookie",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/team/files/{workspace}/{filename}
-     * DeleteBlob removes one blob from a workspace&#39;s file store.
-     * DeleteBlob removes one blob from a workspace&#39;s file store. The caller must hold a verified session AND be a member of the workspace; anything else — an unknown workspace, another tenant&#39;s workspace, a workspace the caller is not in — answers the same 404, so a probe learns nothing about what exists.  It is IDEMPOTENT: deleting a present or an absent blob both answer 204, so a delete never confirms a blob&#39;s existence and a foreign blob id (a physical key the caller can never name into another tenant&#39;s box) is a harmless no-op. A storage backend that is unavailable fails closed with 502 rather than lying about success.
+     * Removes one blob from a workspace&#39;s file store.
+     * Removes one blob from a workspace&#39;s file store. The caller must hold a verified session AND be a member of the workspace; anything else — an unknown workspace, another tenant&#39;s workspace, a workspace the caller is not in — answers the same 404, so a probe learns nothing about what exists.  It is IDEMPOTENT: deleting a present or an absent blob both answer 204, so a delete never confirms a blob&#39;s existence and a foreign blob id (a physical key the caller can never name into another tenant&#39;s box) is a harmless no-op. A storage backend that is unavailable fails closed with 502 rather than lying about success.
      * @param workspace Workspace is the workspace uuid the blob belongs to, from the path.
      * @param filename Filename is the last path segment, which the front sets to the blob id when it sends no explicit &#x60;file&#x60;.
      * @param file File is the blob id, and wins over the path segment when both are present. (optional)
@@ -135,8 +135,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1TeamFilesWorkspaceFilename(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String? = null) : Unit {
-        val localVarResponse = cloudDeleteV1TeamFilesWorkspaceFilenameWithHttpInfo(workspace = workspace, filename = filename, file = file)
+    fun deleteV1TeamFilesByWorkspaceByFilename(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String? = null) : Unit {
+        val localVarResponse = deleteV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace = workspace, filename = filename, file = file)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -155,8 +155,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/team/files/{workspace}/{filename}
-     * DeleteBlob removes one blob from a workspace&#39;s file store.
-     * DeleteBlob removes one blob from a workspace&#39;s file store. The caller must hold a verified session AND be a member of the workspace; anything else — an unknown workspace, another tenant&#39;s workspace, a workspace the caller is not in — answers the same 404, so a probe learns nothing about what exists.  It is IDEMPOTENT: deleting a present or an absent blob both answer 204, so a delete never confirms a blob&#39;s existence and a foreign blob id (a physical key the caller can never name into another tenant&#39;s box) is a harmless no-op. A storage backend that is unavailable fails closed with 502 rather than lying about success.
+     * Removes one blob from a workspace&#39;s file store.
+     * Removes one blob from a workspace&#39;s file store. The caller must hold a verified session AND be a member of the workspace; anything else — an unknown workspace, another tenant&#39;s workspace, a workspace the caller is not in — answers the same 404, so a probe learns nothing about what exists.  It is IDEMPOTENT: deleting a present or an absent blob both answer 204, so a delete never confirms a blob&#39;s existence and a foreign blob id (a physical key the caller can never name into another tenant&#39;s box) is a harmless no-op. A storage backend that is unavailable fails closed with 502 rather than lying about success.
      * @param workspace Workspace is the workspace uuid the blob belongs to, from the path.
      * @param filename Filename is the last path segment, which the front sets to the blob id when it sends no explicit &#x60;file&#x60;.
      * @param file File is the blob id, and wins over the path segment when both are present. (optional)
@@ -165,8 +165,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1TeamFilesWorkspaceFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1TeamFilesWorkspaceFilenameRequestConfig(workspace = workspace, filename = filename, file = file)
+    fun deleteV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace = workspace, filename = filename, file = file)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -174,14 +174,14 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1TeamFilesWorkspaceFilename
+     * To obtain the request config of the operation deleteV1TeamFilesByWorkspaceByFilename
      *
      * @param workspace Workspace is the workspace uuid the blob belongs to, from the path.
      * @param filename Filename is the last path segment, which the front sets to the blob id when it sends no explicit &#x60;file&#x60;.
      * @param file File is the blob id, and wins over the path segment when both are present. (optional)
      * @return RequestConfig
      */
-    fun cloudDeleteV1TeamFilesWorkspaceFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : RequestConfig<Unit> {
+    fun deleteV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String, file: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -196,15 +196,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/files/{workspace}/{filename}".replace("{"+"workspace"+"}", encodeURIComponent(workspace.toString())).replace("{"+"filename"+"}", encodeURIComponent(filename.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/account/auth/{provider}
-     * 
-     * 
+     * Start a sign-in at hanzo.id
+     * STARTS the OAuth hop: answers 302 to hanzo.id&#39;s authorize endpoint and sets the short-lived HttpOnly state cookie that binds the flow to this browser. NO TOKEN COMES BACK FROM THIS CALL — the session is minted by the callback below, and a client that expects JSON here gets a redirect with no body.  A browser is the intended caller. Anything else must follow the Location AND keep the Set-Cookie, because the callback refuses a flow whose state it cannot match. That cookie carries the random nonce plus the client&#39;s navigateUrl, so the round trip needs no second channel, and it lives ten minutes — the whole budget for the hop.  The provider segment only picks a hint: the redirect_uri is ALWAYS the canonical openid callback, the one IAM has registered. Measured end to end, hanzo.id strips that hint today, so /auth/google and /auth/openid land on the same Hanzo sign-in page — the federation shortcut is an upstream fix, not a second door here.
      * @param provider 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -214,8 +214,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamAccountAuthByProvider(provider: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1TeamAccountAuthByProviderWithHttpInfo(provider = provider)
+    fun getV1TeamAccountAuthByProvider(provider: kotlin.String) : Unit {
+        val localVarResponse = getV1TeamAccountAuthByProviderWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -234,16 +234,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/account/auth/{provider}
-     * 
-     * 
+     * Start a sign-in at hanzo.id
+     * STARTS the OAuth hop: answers 302 to hanzo.id&#39;s authorize endpoint and sets the short-lived HttpOnly state cookie that binds the flow to this browser. NO TOKEN COMES BACK FROM THIS CALL — the session is minted by the callback below, and a client that expects JSON here gets a redirect with no body.  A browser is the intended caller. Anything else must follow the Location AND keep the Set-Cookie, because the callback refuses a flow whose state it cannot match. That cookie carries the random nonce plus the client&#39;s navigateUrl, so the round trip needs no second channel, and it lives ten minutes — the whole budget for the hop.  The provider segment only picks a hint: the redirect_uri is ALWAYS the canonical openid callback, the one IAM has registered. Measured end to end, hanzo.id strips that hint today, so /auth/google and /auth/openid land on the same Hanzo sign-in page — the federation shortcut is an upstream fix, not a second door here.
      * @param provider 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamAccountAuthByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TeamAccountAuthByProviderRequestConfig(provider = provider)
+    fun getV1TeamAccountAuthByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TeamAccountAuthByProviderRequestConfig(provider = provider)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -251,12 +251,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamAccountAuthByProvider
+     * To obtain the request config of the operation getV1TeamAccountAuthByProvider
      *
      * @param provider 
      * @return RequestConfig
      */
-    fun cloudGetV1TeamAccountAuthByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TeamAccountAuthByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -266,15 +266,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/auth/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/account/auth/{provider}/callback
-     * 
-     * 
+     * Complete a sign-in and hand the browser its session
+     * COMPLETES the OAuth hop: hanzo.id redirects the browser here with ?code and ?state, and the answer is another 302 — back to the client&#39;s login route carrying the freshly minted team session token in the query. Never JSON, and never a token in this response&#39;s own body.  THE STATE IS CHECKED FIRST, before the code is even looked at: the flow cookie is read and cleared one-shot, and a callback whose ?state does not equal the nonce it held is bounced with error&#x3D;state_mismatch and NEVER exchanged. That is what makes a forged or replayed callback inert. Only then is the code exchanged server-side — team is a confidential client with a client_secret, so there is no PKCE and the code never passes through the browser&#39;s JS.  The tenant is derived from the IAM access token VERIFIED RS256 against the JWKS, the same trust anchor the identity boundary uses; a token whose owner claim is empty fails closed with no login at all. Every org that token proves gets a workspace ensured, so a member of two orgs is a counted seat in both. The IAM access token is also parked in an HttpOnly cookie for the same-origin agents proxy — page JS never reads it.  EVERY failure is a redirect, not a status: a denied consent, a missing code, a failed exchange, an unreadable userinfo, an unverifiable org and a token-mint failure each bounce to the login page with an ?error code naming the step.
      * @param provider 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -284,8 +284,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamAccountAuthByProviderCallback(provider: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1TeamAccountAuthByProviderCallbackWithHttpInfo(provider = provider)
+    fun getV1TeamAccountAuthByProviderCallback(provider: kotlin.String) : Unit {
+        val localVarResponse = getV1TeamAccountAuthByProviderCallbackWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -304,16 +304,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/account/auth/{provider}/callback
-     * 
-     * 
+     * Complete a sign-in and hand the browser its session
+     * COMPLETES the OAuth hop: hanzo.id redirects the browser here with ?code and ?state, and the answer is another 302 — back to the client&#39;s login route carrying the freshly minted team session token in the query. Never JSON, and never a token in this response&#39;s own body.  THE STATE IS CHECKED FIRST, before the code is even looked at: the flow cookie is read and cleared one-shot, and a callback whose ?state does not equal the nonce it held is bounced with error&#x3D;state_mismatch and NEVER exchanged. That is what makes a forged or replayed callback inert. Only then is the code exchanged server-side — team is a confidential client with a client_secret, so there is no PKCE and the code never passes through the browser&#39;s JS.  The tenant is derived from the IAM access token VERIFIED RS256 against the JWKS, the same trust anchor the identity boundary uses; a token whose owner claim is empty fails closed with no login at all. Every org that token proves gets a workspace ensured, so a member of two orgs is a counted seat in both. The IAM access token is also parked in an HttpOnly cookie for the same-origin agents proxy — page JS never reads it.  EVERY failure is a redirect, not a status: a denied consent, a missing code, a failed exchange, an unreadable userinfo, an unverifiable org and a token-mint failure each bounce to the login page with an ?error code naming the step.
      * @param provider 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamAccountAuthByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TeamAccountAuthByProviderCallbackRequestConfig(provider = provider)
+    fun getV1TeamAccountAuthByProviderCallbackWithHttpInfo(provider: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TeamAccountAuthByProviderCallbackRequestConfig(provider = provider)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -321,12 +321,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamAccountAuthByProviderCallback
+     * To obtain the request config of the operation getV1TeamAccountAuthByProviderCallback
      *
      * @param provider 
      * @return RequestConfig
      */
-    fun cloudGetV1TeamAccountAuthByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TeamAccountAuthByProviderCallbackRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -336,16 +336,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/auth/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/account/providers
-     * ListProviders returns the identity providers this deployment starts a login with.
-     * ListProviders returns the identity providers this deployment starts a login with. It is always exactly one — hanzo.id. Which identities that door accepts (Google, GitHub, passkey, password) is IAM&#39;s question, answered on IAM&#39;s own page next to the identity check and the training-data consent that must precede a first session; listing them here would be a second place holding that answer, and the two drift the moment IAM gains or drops one.
-     * @return kotlin.collections.List<CloudProviderInfo>
+     * Returns the identity providers this deployment starts a login with.
+     * Returns the identity providers this deployment starts a login with. It is always exactly one — hanzo.id. Which identities that door accepts (Google, GitHub, passkey, password) is IAM&#39;s question, answered on IAM&#39;s own page next to the identity check and the training-data consent that must precede a first session; listing them here would be a second place holding that answer, and the two drift the moment IAM gains or drops one.
+     * @return kotlin.collections.List<ProviderInfo>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -354,11 +354,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamAccountProviders() : kotlin.collections.List<CloudProviderInfo> {
-        val localVarResponse = cloudGetV1TeamAccountProvidersWithHttpInfo()
+    fun getV1TeamAccountProviders() : kotlin.collections.List<ProviderInfo> {
+        val localVarResponse = getV1TeamAccountProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudProviderInfo>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProviderInfo>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -374,28 +374,28 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/account/providers
-     * ListProviders returns the identity providers this deployment starts a login with.
-     * ListProviders returns the identity providers this deployment starts a login with. It is always exactly one — hanzo.id. Which identities that door accepts (Google, GitHub, passkey, password) is IAM&#39;s question, answered on IAM&#39;s own page next to the identity check and the training-data consent that must precede a first session; listing them here would be a second place holding that answer, and the two drift the moment IAM gains or drops one.
-     * @return ApiResponse<kotlin.collections.List<CloudProviderInfo>?>
+     * Returns the identity providers this deployment starts a login with.
+     * Returns the identity providers this deployment starts a login with. It is always exactly one — hanzo.id. Which identities that door accepts (Google, GitHub, passkey, password) is IAM&#39;s question, answered on IAM&#39;s own page next to the identity check and the training-data consent that must precede a first session; listing them here would be a second place holding that answer, and the two drift the moment IAM gains or drops one.
+     * @return ApiResponse<kotlin.collections.List<ProviderInfo>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamAccountProvidersWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudProviderInfo>?> {
-        val localVariableConfig = cloudGetV1TeamAccountProvidersRequestConfig()
+    fun getV1TeamAccountProvidersWithHttpInfo() : ApiResponse<kotlin.collections.List<ProviderInfo>?> {
+        val localVariableConfig = getV1TeamAccountProvidersRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudProviderInfo>>(
+        return request<Unit, kotlin.collections.List<ProviderInfo>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamAccountProviders
+     * To obtain the request config of the operation getV1TeamAccountProviders
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TeamAccountProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getV1TeamAccountProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -406,16 +406,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/billing/plan
-     * ReadPlan returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header.
-     * ReadPlan returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header. Seats and guests are the org&#39;s distinct active human members (a bot member is not a seat); the plan comes from the licensing entitlement and is empty when that read is unavailable, so the page shows an honest dash rather than a fabricated tier. A caller with no verified session gets 401, and a real seat-read failure is a 502 rather than a false \&quot;0 members\&quot;.
-     * @return CloudPlanInfo
+     * Returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header.
+     * Returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header. Seats and guests are the org&#39;s distinct active human members (a bot member is not a seat); the plan comes from the licensing entitlement and is empty when that read is unavailable, so the page shows an honest dash rather than a fabricated tier. A caller with no verified session gets 401, and a real seat-read failure is a 502 rather than a false \&quot;0 members\&quot;.
+     * @return PlanInfo
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -424,11 +424,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamBillingPlan() : CloudPlanInfo {
-        val localVarResponse = cloudGetV1TeamBillingPlanWithHttpInfo()
+    fun getV1TeamBillingPlan() : PlanInfo {
+        val localVarResponse = getV1TeamBillingPlanWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPlanInfo
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PlanInfo
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -444,28 +444,28 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/billing/plan
-     * ReadPlan returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header.
-     * ReadPlan returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header. Seats and guests are the org&#39;s distinct active human members (a bot member is not a seat); the plan comes from the licensing entitlement and is empty when that read is unavailable, so the page shows an honest dash rather than a fabricated tier. A caller with no verified session gets 401, and a real seat-read failure is a 502 rather than a false \&quot;0 members\&quot;.
-     * @return ApiResponse<CloudPlanInfo?>
+     * Returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header.
+     * Returns the plan and seat counts for the caller&#39;s OWN org, resolved from the VERIFIED team session token — never a client header. Seats and guests are the org&#39;s distinct active human members (a bot member is not a seat); the plan comes from the licensing entitlement and is empty when that read is unavailable, so the page shows an honest dash rather than a fabricated tier. A caller with no verified session gets 401, and a real seat-read failure is a 502 rather than a false \&quot;0 members\&quot;.
+     * @return ApiResponse<PlanInfo?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamBillingPlanWithHttpInfo() : ApiResponse<CloudPlanInfo?> {
-        val localVariableConfig = cloudGetV1TeamBillingPlanRequestConfig()
+    fun getV1TeamBillingPlanWithHttpInfo() : ApiResponse<PlanInfo?> {
+        val localVariableConfig = getV1TeamBillingPlanRequestConfig()
 
-        return request<Unit, CloudPlanInfo>(
+        return request<Unit, PlanInfo>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamBillingPlan
+     * To obtain the request config of the operation getV1TeamBillingPlan
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TeamBillingPlanRequestConfig() : RequestConfig<Unit> {
+    fun getV1TeamBillingPlanRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -476,15 +476,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/billing/plan",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/billing/ui
-     * 
-     * 
+     * Open the wallet page
+     * Serves the usage-and-wallet page the Team front links to — HTML, not JSON. It is a static React build compiled into this binary, so there is no upstream to be down and no build step at request time.  SESSION-GATED: without a verified team session token — bearer, else the HttpOnly account cookie — the caller gets 401 and not one byte of the page, so an anonymous browser meets a refusal rather than a shell that then fails to load anything.  The page is markup only. It reads money SAME-ORIGIN from cloud&#39;s own balance and usage endpoints, which pin the org from the IAM cookie the team OAuth callback set — nothing under this path proxies a money read, so there is no second auth mechanism here to get wrong. A deployment whose page was never built answers 503 naming the missing bundle, never a blank 200.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -493,8 +493,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamBillingUi() : Unit {
-        val localVarResponse = cloudGetV1TeamBillingUiWithHttpInfo()
+    fun getV1TeamBillingUi() : Unit {
+        val localVarResponse = getV1TeamBillingUiWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -513,15 +513,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/billing/ui
-     * 
-     * 
+     * Open the wallet page
+     * Serves the usage-and-wallet page the Team front links to — HTML, not JSON. It is a static React build compiled into this binary, so there is no upstream to be down and no build step at request time.  SESSION-GATED: without a verified team session token — bearer, else the HttpOnly account cookie — the caller gets 401 and not one byte of the page, so an anonymous browser meets a refusal rather than a shell that then fails to load anything.  The page is markup only. It reads money SAME-ORIGIN from cloud&#39;s own balance and usage endpoints, which pin the org from the IAM cookie the team OAuth callback set — nothing under this path proxies a money read, so there is no second auth mechanism here to get wrong. A deployment whose page was never built answers 503 naming the missing bundle, never a blank 200.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamBillingUiWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TeamBillingUiRequestConfig()
+    fun getV1TeamBillingUiWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TeamBillingUiRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -529,11 +529,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamBillingUi
+     * To obtain the request config of the operation getV1TeamBillingUi
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TeamBillingUiRequestConfig() : RequestConfig<Unit> {
+    fun getV1TeamBillingUiRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -543,15 +543,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/billing/ui",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/billing/ui/{wildcard1}
-     * 
-     * 
+     * Load an asset of the wallet page
+     * Serves one file of the embedded wallet bundle — a content-hashed script or stylesheet under assets/, an icon, or the page shell itself.  A path that names NO REAL FILE falls back to the shell instead of 404ing, which is what makes a deep link into the page&#39;s own routes survive a hard refresh. So a 200 here is not proof the asset exists — a typo answers HTML.  assets/ is immutable for a year (the names carry the content hash); the shell is no-cache, so a deploy is picked up on the next load. Gated exactly like the page: 401 without a verified session, 503 when the bundle was never built.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -561,8 +561,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamBillingUiByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1TeamBillingUiByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1TeamBillingUiByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1TeamBillingUiByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -581,16 +581,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/billing/ui/{wildcard1}
-     * 
-     * 
+     * Load an asset of the wallet page
+     * Serves one file of the embedded wallet bundle — a content-hashed script or stylesheet under assets/, an icon, or the page shell itself.  A path that names NO REAL FILE falls back to the shell instead of 404ing, which is what makes a deep link into the page&#39;s own routes survive a hard refresh. So a 200 here is not proof the asset exists — a typo answers HTML.  assets/ is immutable for a year (the names carry the content hash); the shell is no-cache, so a deploy is picked up on the next load. Gated exactly like the page: 401 without a verified session, 503 when the bundle was never built.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamBillingUiByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TeamBillingUiByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1TeamBillingUiByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TeamBillingUiByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -598,12 +598,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamBillingUiByWildcard1
+     * To obtain the request config of the operation getV1TeamBillingUiByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1TeamBillingUiByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TeamBillingUiByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -613,16 +613,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/billing/ui/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/bots
-     * ListBots returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by.
-     * ListBots returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by. An agents subsystem that is not mounted answers an empty list, never an error.
-     * @return CloudBotRoster
+     * Returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by.
+     * Returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by. An agents subsystem that is not mounted answers an empty list, never an error.
+     * @return BotRoster
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -631,11 +631,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamBots() : CloudBotRoster {
-        val localVarResponse = cloudGetV1TeamBotsWithHttpInfo()
+    fun getV1TeamBots() : BotRoster {
+        val localVarResponse = getV1TeamBotsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBotRoster
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BotRoster
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -651,28 +651,28 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/bots
-     * ListBots returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by.
-     * ListBots returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by. An agents subsystem that is not mounted answers an empty list, never an error.
-     * @return ApiResponse<CloudBotRoster?>
+     * Returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by.
+     * Returns the caller org&#39;s bot members — the org&#39;s agents projected as the workspace Employees they become, each with the member account uuid and Person reference the roster addresses it by. An agents subsystem that is not mounted answers an empty list, never an error.
+     * @return ApiResponse<BotRoster?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamBotsWithHttpInfo() : ApiResponse<CloudBotRoster?> {
-        val localVariableConfig = cloudGetV1TeamBotsRequestConfig()
+    fun getV1TeamBotsWithHttpInfo() : ApiResponse<BotRoster?> {
+        val localVariableConfig = getV1TeamBotsRequestConfig()
 
-        return request<Unit, CloudBotRoster>(
+        return request<Unit, BotRoster>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamBots
+     * To obtain the request config of the operation getV1TeamBots
      *
      * @return RequestConfig
      */
-    fun cloudGetV1TeamBotsRequestConfig() : RequestConfig<Unit> {
+    fun getV1TeamBotsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -683,15 +683,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/bots",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/files/{workspace}/{filename}
-     * 
-     * 
+     * Download a workspace file
+     * Streams one blob&#39;s raw BYTES back — this is the read side of the workspace file store, not a JSON envelope around it.  THE BLOB IS NAMED BY THE &#x60;file&#x60; QUERY PARAMETER, NOT BY :filename. The path segment is only the name a browser saves the download under; a request without ?file&#x3D; is a 400 no matter what the path says.  The Content-Type is derived from the STORED BYTES, never from the name: only png, jpeg, gif and webp, recognized by their magic bytes, are served inline under their true type, and everything else is served inert as application/octet-stream with an attachment disposition. Every response carries nosniff, so a file uploaded under an .svg or .html name cannot be talked into executing in a viewer&#39;s origin. Blobs are immutable, so a hit caches privately for a year.  Same gate as the upload: verified token, membership of the workspace. A genuine miss, another tenant&#39;s workspace, a workspace the caller is not in, and a blob id belonging to a different workspace are ONE answer — 404 — because the physical key is org- and workspace-scoped and a foreign id is simply a key that does not exist. An unavailable backend is a 502, never an empty 200.
      * @param workspace 
      * @param filename 
      * @return void
@@ -702,8 +702,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamFilesByWorkspaceByFilename(workspace: kotlin.String, filename: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace = workspace, filename = filename)
+    fun getV1TeamFilesByWorkspaceByFilename(workspace: kotlin.String, filename: kotlin.String) : Unit {
+        val localVarResponse = getV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace = workspace, filename = filename)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -722,8 +722,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/files/{workspace}/{filename}
-     * 
-     * 
+     * Download a workspace file
+     * Streams one blob&#39;s raw BYTES back — this is the read side of the workspace file store, not a JSON envelope around it.  THE BLOB IS NAMED BY THE &#x60;file&#x60; QUERY PARAMETER, NOT BY :filename. The path segment is only the name a browser saves the download under; a request without ?file&#x3D; is a 400 no matter what the path says.  The Content-Type is derived from the STORED BYTES, never from the name: only png, jpeg, gif and webp, recognized by their magic bytes, are served inline under their true type, and everything else is served inert as application/octet-stream with an attachment disposition. Every response carries nosniff, so a file uploaded under an .svg or .html name cannot be talked into executing in a viewer&#39;s origin. Blobs are immutable, so a hit caches privately for a year.  Same gate as the upload: verified token, membership of the workspace. A genuine miss, another tenant&#39;s workspace, a workspace the caller is not in, and a blob id belonging to a different workspace are ONE answer — 404 — because the physical key is org- and workspace-scoped and a foreign id is simply a key that does not exist. An unavailable backend is a 502, never an empty 200.
      * @param workspace 
      * @param filename 
      * @return ApiResponse<Unit?>
@@ -731,8 +731,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace = workspace, filename = filename)
+    fun getV1TeamFilesByWorkspaceByFilenameWithHttpInfo(workspace: kotlin.String, filename: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace = workspace, filename = filename)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -740,13 +740,13 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamFilesByWorkspaceByFilename
+     * To obtain the request config of the operation getV1TeamFilesByWorkspaceByFilename
      *
      * @param workspace 
      * @param filename 
      * @return RequestConfig
      */
-    fun cloudGetV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TeamFilesByWorkspaceByFilenameRequestConfig(workspace: kotlin.String, filename: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -756,17 +756,17 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/files/{workspace}/{filename}".replace("{"+"workspace"+"}", encodeURIComponent(workspace.toString())).replace("{"+"filename"+"}", encodeURIComponent(filename.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/transactor/api/v1/statistics
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. The token is verified exactly like the WebSocket upgrade is, and activeSessions carries ONLY that token&#39;s own workspace, never another tenant&#39;s sessions. An invalid or expired token is 401.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. &#x60;token&#x60; carries the same two lanes the socket&#39;s path segment does: a workspace UUID names the workspace and is authorized against the membership rows, an HS256 workspace token names it in its signed claims. activeSessions carries ONLY that one workspace, never another tenant&#39;s sessions. An unverifiable credential, or one the caller is no member under, is 401.
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
-     * @return CloudStatsOut
+     * @return StatsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -775,11 +775,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamTransactorApiV1Statistics(token: kotlin.String? = null) : CloudStatsOut {
-        val localVarResponse = cloudGetV1TeamTransactorApiV1StatisticsWithHttpInfo(token = token)
+    fun getV1TeamTransactorApiV1Statistics(token: kotlin.String? = null) : StatsOut {
+        val localVarResponse = getV1TeamTransactorApiV1StatisticsWithHttpInfo(token = token)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStatsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StatsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -795,30 +795,30 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/transactor/api/v1/statistics
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. The token is verified exactly like the WebSocket upgrade is, and activeSessions carries ONLY that token&#39;s own workspace, never another tenant&#39;s sessions. An invalid or expired token is 401.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. &#x60;token&#x60; carries the same two lanes the socket&#39;s path segment does: a workspace UUID names the workspace and is authorized against the membership rows, an HS256 workspace token names it in its signed claims. activeSessions carries ONLY that one workspace, never another tenant&#39;s sessions. An unverifiable credential, or one the caller is no member under, is 401.
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
-     * @return ApiResponse<CloudStatsOut?>
+     * @return ApiResponse<StatsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamTransactorApiV1StatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<CloudStatsOut?> {
-        val localVariableConfig = cloudGetV1TeamTransactorApiV1StatisticsRequestConfig(token = token)
+    fun getV1TeamTransactorApiV1StatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<StatsOut?> {
+        val localVariableConfig = getV1TeamTransactorApiV1StatisticsRequestConfig(token = token)
 
-        return request<Unit, CloudStatsOut>(
+        return request<Unit, StatsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamTransactorApiV1Statistics
+     * To obtain the request config of the operation getV1TeamTransactorApiV1Statistics
      *
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1TeamTransactorApiV1StatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1TeamTransactorApiV1StatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -834,15 +834,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/transactor/api/v1/statistics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/transactor/{token}
-     * 
-     * 
+     * Open the workspace data-plane socket
+     * Upgrades to the WebSocket the Team client runs an entire workspace over: every frame is a ZAP envelope wrapping one JSON-RPC message — findAll/findOne reads against the workspace&#39;s documents, tx writes that broadcast to the other live sessions, hello negotiating JSON rather than msgpack. The response is a protocol upgrade, so there is no body to read.  THE PATH SEGMENT IS THE CREDENTIAL. It is the workspace token selectWorkspace minted — bearer-equivalent, and sitting in a URL that proxies and access logs record, which is exactly why it expires in twelve hours and is re-minted on demand rather than being long-lived like the session token. It is decoded and verified (signature and expiry) BEFORE the upgrade, so a bad one is a 401 and never a socket that is accepted and then dropped, and it must carry both an account and a workspace claim. Nothing ambient authorizes this socket: a WebSocket is exempt from CORS, so a cookie-borne credential would make the Origin check the only access control on the whole data plane.  The tenant is the token&#39;s SIGNED org claim and it keys every store path, so no header can name another workspace&#39;s data. The upgrade ALSO refuses a browser Origin outside the team surfaces with 403 — otherwise any page could open an authenticated socket with a token it lured out of a logged-in browser — while a request with no Origin at all is admitted, because that is what a non-browser client sends.  On connect the workspace&#39;s system spaces are seeded once and the roster is reconciled every time, so the org&#39;s human members and its bots are present as workspace people without a separate sync call.
      * @param token 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -852,8 +852,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamTransactorByToken(token: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1TeamTransactorByTokenWithHttpInfo(token = token)
+    fun getV1TeamTransactorByToken(token: kotlin.String) : Unit {
+        val localVarResponse = getV1TeamTransactorByTokenWithHttpInfo(token = token)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -872,16 +872,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/transactor/{token}
-     * 
-     * 
+     * Open the workspace data-plane socket
+     * Upgrades to the WebSocket the Team client runs an entire workspace over: every frame is a ZAP envelope wrapping one JSON-RPC message — findAll/findOne reads against the workspace&#39;s documents, tx writes that broadcast to the other live sessions, hello negotiating JSON rather than msgpack. The response is a protocol upgrade, so there is no body to read.  THE PATH SEGMENT IS THE CREDENTIAL. It is the workspace token selectWorkspace minted — bearer-equivalent, and sitting in a URL that proxies and access logs record, which is exactly why it expires in twelve hours and is re-minted on demand rather than being long-lived like the session token. It is decoded and verified (signature and expiry) BEFORE the upgrade, so a bad one is a 401 and never a socket that is accepted and then dropped, and it must carry both an account and a workspace claim. Nothing ambient authorizes this socket: a WebSocket is exempt from CORS, so a cookie-borne credential would make the Origin check the only access control on the whole data plane.  The tenant is the token&#39;s SIGNED org claim and it keys every store path, so no header can name another workspace&#39;s data. The upgrade ALSO refuses a browser Origin outside the team surfaces with 403 — otherwise any page could open an authenticated socket with a token it lured out of a logged-in browser — while a request with no Origin at all is admitted, because that is what a non-browser client sends.  On connect the workspace&#39;s system spaces are seeded once and the roster is reconciled every time, so the org&#39;s human members and its bots are present as workspace people without a separate sync call.
      * @param token 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamTransactorByTokenWithHttpInfo(token: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1TeamTransactorByTokenRequestConfig(token = token)
+    fun getV1TeamTransactorByTokenWithHttpInfo(token: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1TeamTransactorByTokenRequestConfig(token = token)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -889,12 +889,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamTransactorByToken
+     * To obtain the request config of the operation getV1TeamTransactorByToken
      *
      * @param token 
      * @return RequestConfig
      */
-    fun cloudGetV1TeamTransactorByTokenRequestConfig(token: kotlin.String) : RequestConfig<Unit> {
+    fun getV1TeamTransactorByTokenRequestConfig(token: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -904,17 +904,17 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/transactor/{token}".replace("{"+"token"+"}", encodeURIComponent(token.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/team/transactor/statistics
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. The token is verified exactly like the WebSocket upgrade is, and activeSessions carries ONLY that token&#39;s own workspace, never another tenant&#39;s sessions. An invalid or expired token is 401.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. &#x60;token&#x60; carries the same two lanes the socket&#39;s path segment does: a workspace UUID names the workspace and is authorized against the membership rows, an HS256 workspace token names it in its signed claims. activeSessions carries ONLY that one workspace, never another tenant&#39;s sessions. An unverifiable credential, or one the caller is no member under, is 401.
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
-     * @return CloudStatsOut
+     * @return StatsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -923,11 +923,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TeamTransactorStatistics(token: kotlin.String? = null) : CloudStatsOut {
-        val localVarResponse = cloudGetV1TeamTransactorStatisticsWithHttpInfo(token = token)
+    fun getV1TeamTransactorStatistics(token: kotlin.String? = null) : StatsOut {
+        val localVarResponse = getV1TeamTransactorStatisticsWithHttpInfo(token = token)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStatsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StatsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -943,30 +943,30 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/team/transactor/statistics
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
-     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s token names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. The token is verified exactly like the WebSocket upgrade is, and activeSessions carries ONLY that token&#39;s own workspace, never another tenant&#39;s sessions. An invalid or expired token is 401.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base.
+     * Statistics returns the transactor&#39;s live sessions for the workspace the caller&#39;s credential names — the endpoint the front&#39;s workspace switcher and server panel poll on the transactor base. &#x60;token&#x60; carries the same two lanes the socket&#39;s path segment does: a workspace UUID names the workspace and is authorized against the membership rows, an HS256 workspace token names it in its signed claims. activeSessions carries ONLY that one workspace, never another tenant&#39;s sessions. An unverifiable credential, or one the caller is no member under, is 401.
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
-     * @return ApiResponse<CloudStatsOut?>
+     * @return ApiResponse<StatsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TeamTransactorStatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<CloudStatsOut?> {
-        val localVariableConfig = cloudGetV1TeamTransactorStatisticsRequestConfig(token = token)
+    fun getV1TeamTransactorStatisticsWithHttpInfo(token: kotlin.String?) : ApiResponse<StatsOut?> {
+        val localVariableConfig = getV1TeamTransactorStatisticsRequestConfig(token = token)
 
-        return request<Unit, CloudStatsOut>(
+        return request<Unit, StatsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TeamTransactorStatistics
+     * To obtain the request config of the operation getV1TeamTransactorStatistics
      *
      * @param token Token is the workspace token minted by selectWorkspace. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1TeamTransactorStatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1TeamTransactorStatisticsRequestConfig(token: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -982,15 +982,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/transactor/statistics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/team/account
-     * 
-     * 
+     * Read the caller&#39;s account and switch workspace
+     * The account control plane the Team client speaks: one POST carries a &#x60;method&#x60; verb and its &#x60;params&#x60;, and answers {\&quot;result\&quot;: …}. The verbs are the session&#39;s own reads and the workspace switch — getLoginInfoByToken, getUserWorkspaces, selectWorkspace, getWorkspaceInfo, getMemberships, getPerson, getSocialIds, getRegionInfo, isReadOnlyGuest — plus sendInvite, which adds a member to a workspace and is refused for a caller who is not its owner or admin.  A REFUSAL IS HTTP 200 carrying {\&quot;error\&quot;: {severity, code, params}} — the platform Status the client translates — not a 4xx. An unreadable body, an unauthorized session and an unknown verb all arrive that way, so a caller that reads only the status code reads every failure here as a success.  NO CREDENTIAL IS EVER HANDLED HERE. login, signUp, the OTP verbs, password change and reset, join and the guest-token exchange each answer Unauthorized with \&quot;sign in at hanzo.id\&quot; — a stated policy, not an unknown method, so the door being shut is a fact a test can pin. Sessions come from the OAuth pair under /account/auth.  Auth is the team session token: Authorization: Bearer, else the HttpOnly account-token cookie. The tenant is that token&#39;s SIGNED org claim, never a header, and selectWorkspace resolves only among the orgs the token proves membership of. It also demands an explicit workspaceUrl — it never falls back to a first workspace, and a slug that resolves in two of the caller&#39;s orgs answers Ambiguous rather than picking one.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -999,8 +999,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1TeamAccount() : Unit {
-        val localVarResponse = cloudPostV1TeamAccountWithHttpInfo()
+    fun postV1TeamAccount() : Unit {
+        val localVarResponse = postV1TeamAccountWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1019,15 +1019,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/team/account
-     * 
-     * 
+     * Read the caller&#39;s account and switch workspace
+     * The account control plane the Team client speaks: one POST carries a &#x60;method&#x60; verb and its &#x60;params&#x60;, and answers {\&quot;result\&quot;: …}. The verbs are the session&#39;s own reads and the workspace switch — getLoginInfoByToken, getUserWorkspaces, selectWorkspace, getWorkspaceInfo, getMemberships, getPerson, getSocialIds, getRegionInfo, isReadOnlyGuest — plus sendInvite, which adds a member to a workspace and is refused for a caller who is not its owner or admin.  A REFUSAL IS HTTP 200 carrying {\&quot;error\&quot;: {severity, code, params}} — the platform Status the client translates — not a 4xx. An unreadable body, an unauthorized session and an unknown verb all arrive that way, so a caller that reads only the status code reads every failure here as a success.  NO CREDENTIAL IS EVER HANDLED HERE. login, signUp, the OTP verbs, password change and reset, join and the guest-token exchange each answer Unauthorized with \&quot;sign in at hanzo.id\&quot; — a stated policy, not an unknown method, so the door being shut is a fact a test can pin. Sessions come from the OAuth pair under /account/auth.  Auth is the team session token: Authorization: Bearer, else the HttpOnly account-token cookie. The tenant is that token&#39;s SIGNED org claim, never a header, and selectWorkspace resolves only among the orgs the token proves membership of. It also demands an explicit workspaceUrl — it never falls back to a first workspace, and a slug that resolves in two of the caller&#39;s orgs answers Ambiguous rather than picking one.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TeamAccountWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TeamAccountRequestConfig()
+    fun postV1TeamAccountWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1TeamAccountRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1035,11 +1035,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1TeamAccount
+     * To obtain the request config of the operation postV1TeamAccount
      *
      * @return RequestConfig
      */
-    fun cloudPostV1TeamAccountRequestConfig() : RequestConfig<Unit> {
+    fun postV1TeamAccountRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1049,7 +1049,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1058,7 +1058,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/team/bots/sync
      * SyncBots re-projects the caller org&#39;s agents as workspace members into EVERY workspace of the org, and removes the ones whose agent is gone.
      * SyncBots re-projects the caller org&#39;s agents as workspace members into EVERY workspace of the org, and removes the ones whose agent is gone. It is idempotent, and admin only: mutating a workspace&#39;s roster requires the gateway-minted admin flag, which a client can never forge. It answers how many roster entries the reconcile touched.
-     * @return CloudBotSync
+     * @return BotSync
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1067,11 +1067,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1TeamBotsSync() : CloudBotSync {
-        val localVarResponse = cloudPostV1TeamBotsSyncWithHttpInfo()
+    fun postV1TeamBotsSync() : BotSync {
+        val localVarResponse = postV1TeamBotsSyncWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBotSync
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BotSync
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1089,26 +1089,26 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/team/bots/sync
      * SyncBots re-projects the caller org&#39;s agents as workspace members into EVERY workspace of the org, and removes the ones whose agent is gone.
      * SyncBots re-projects the caller org&#39;s agents as workspace members into EVERY workspace of the org, and removes the ones whose agent is gone. It is idempotent, and admin only: mutating a workspace&#39;s roster requires the gateway-minted admin flag, which a client can never forge. It answers how many roster entries the reconcile touched.
-     * @return ApiResponse<CloudBotSync?>
+     * @return ApiResponse<BotSync?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TeamBotsSyncWithHttpInfo() : ApiResponse<CloudBotSync?> {
-        val localVariableConfig = cloudPostV1TeamBotsSyncRequestConfig()
+    fun postV1TeamBotsSyncWithHttpInfo() : ApiResponse<BotSync?> {
+        val localVariableConfig = postV1TeamBotsSyncRequestConfig()
 
-        return request<Unit, CloudBotSync>(
+        return request<Unit, BotSync>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1TeamBotsSync
+     * To obtain the request config of the operation postV1TeamBotsSync
      *
      * @return RequestConfig
      */
-    fun cloudPostV1TeamBotsSyncRequestConfig() : RequestConfig<Unit> {
+    fun postV1TeamBotsSyncRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1119,15 +1119,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/bots/sync",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/team/files/{workspace}
-     * 
-     * 
+     * Upload a file into a workspace
+     * Stores one file in a workspace&#39;s blob store and answers the blob id it is addressable by, as plain text — the front discards that body, it is there for a caller driving this by hand.  The body is a multipart form with a &#x60;file&#x60; part, and THAT PART&#39;S FILENAME IS THE BLOB ID: the client mints it (a uuid v4) and the server stores under it, so a part whose filename is not a uuid is refused rather than assigned one. A file over 100 MiB is 413 and an empty one is 400.  The caller must hold a verified session or workspace token AND be a member of the workspace; an unknown workspace, another tenant&#39;s workspace and a workspace the caller is not in all answer the same 404, so a probe learns nothing about what exists. The stored key embeds the verified org and the workspace, so an upload cannot land in another tenant&#39;s box whatever id it names. A storage backend that is unavailable fails closed with 502 rather than reporting a write it never made.
      * @param workspace 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1137,8 +1137,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1TeamFilesByWorkspace(workspace: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1TeamFilesByWorkspaceWithHttpInfo(workspace = workspace)
+    fun postV1TeamFilesByWorkspace(workspace: kotlin.String) : Unit {
+        val localVarResponse = postV1TeamFilesByWorkspaceWithHttpInfo(workspace = workspace)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1157,16 +1157,16 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/team/files/{workspace}
-     * 
-     * 
+     * Upload a file into a workspace
+     * Stores one file in a workspace&#39;s blob store and answers the blob id it is addressable by, as plain text — the front discards that body, it is there for a caller driving this by hand.  The body is a multipart form with a &#x60;file&#x60; part, and THAT PART&#39;S FILENAME IS THE BLOB ID: the client mints it (a uuid v4) and the server stores under it, so a part whose filename is not a uuid is refused rather than assigned one. A file over 100 MiB is 413 and an empty one is 400.  The caller must hold a verified session or workspace token AND be a member of the workspace; an unknown workspace, another tenant&#39;s workspace and a workspace the caller is not in all answer the same 404, so a probe learns nothing about what exists. The stored key embeds the verified org and the workspace, so an upload cannot land in another tenant&#39;s box whatever id it names. A storage backend that is unavailable fails closed with 502 rather than reporting a write it never made.
      * @param workspace 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TeamFilesByWorkspaceWithHttpInfo(workspace: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TeamFilesByWorkspaceRequestConfig(workspace = workspace)
+    fun postV1TeamFilesByWorkspaceWithHttpInfo(workspace: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1TeamFilesByWorkspaceRequestConfig(workspace = workspace)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1174,12 +1174,12 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1TeamFilesByWorkspace
+     * To obtain the request config of the operation postV1TeamFilesByWorkspace
      *
      * @param workspace 
      * @return RequestConfig
      */
-    fun cloudPostV1TeamFilesByWorkspaceRequestConfig(workspace: kotlin.String) : RequestConfig<Unit> {
+    fun postV1TeamFilesByWorkspaceRequestConfig(workspace: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1189,15 +1189,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/files/{workspace}".replace("{"+"workspace"+"}", encodeURIComponent(workspace.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/team/account/cookie
-     * 
-     * 
+     * Store the session token as this browser&#39;s cookie
+     * Writes the team session token into the HttpOnly &#x60;account-token&#x60; cookie — Secure, SameSite&#x3D;Lax, whole-origin scope, thirty days — and answers {\&quot;result\&quot;: true}. This is how the client turns the token it caught off the OAuth bounce into a credential page JS can no longer read, which IS the security property: script that cannot see the cookie cannot exfiltrate it, and every later call on the files, billing and collaborator planes authenticates from it when no bearer is sent.  The token is VERIFIED — signature and expiry, against this service&#39;s own signing secret — BEFORE it is stored. Anything this service did not sign is 401 and nothing is written; persisting a caller-supplied value unchecked would be a session-fixation door, where an attacker pins a cookie the victim&#39;s browser then presents as its own.  The token may arrive as &#x60;token&#x60; in the JSON body or, when the body is absent or unparseable, from the Authorization bearer — an unreadable body is NOT an error here. The sibling DELETE clears this same cookie and signs the browser out of team only: the IAM cookie set alongside it is a different credential with its own lifetime and is left alone.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1206,8 +1206,8 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1TeamAccountCookie() : Unit {
-        val localVarResponse = cloudPutV1TeamAccountCookieWithHttpInfo()
+    fun putV1TeamAccountCookie() : Unit {
+        val localVarResponse = putV1TeamAccountCookieWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1226,15 +1226,15 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * PUT /v1/team/account/cookie
-     * 
-     * 
+     * Store the session token as this browser&#39;s cookie
+     * Writes the team session token into the HttpOnly &#x60;account-token&#x60; cookie — Secure, SameSite&#x3D;Lax, whole-origin scope, thirty days — and answers {\&quot;result\&quot;: true}. This is how the client turns the token it caught off the OAuth bounce into a credential page JS can no longer read, which IS the security property: script that cannot see the cookie cannot exfiltrate it, and every later call on the files, billing and collaborator planes authenticates from it when no bearer is sent.  The token is VERIFIED — signature and expiry, against this service&#39;s own signing secret — BEFORE it is stored. Anything this service did not sign is 401 and nothing is written; persisting a caller-supplied value unchecked would be a session-fixation door, where an attacker pins a cookie the victim&#39;s browser then presents as its own.  The token may arrive as &#x60;token&#x60; in the JSON body or, when the body is absent or unparseable, from the Authorization bearer — an unreadable body is NOT an error here. The sibling DELETE clears this same cookie and signs the browser out of team only: the IAM cookie set alongside it is a different credential with its own lifetime and is left alone.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1TeamAccountCookieWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1TeamAccountCookieRequestConfig()
+    fun putV1TeamAccountCookieWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putV1TeamAccountCookieRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1242,11 +1242,11 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1TeamAccountCookie
+     * To obtain the request config of the operation putV1TeamAccountCookie
      *
      * @return RequestConfig
      */
-    fun cloudPutV1TeamAccountCookieRequestConfig() : RequestConfig<Unit> {
+    fun putV1TeamAccountCookieRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1256,7 +1256,7 @@ class TeamApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/team/account/cookie",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

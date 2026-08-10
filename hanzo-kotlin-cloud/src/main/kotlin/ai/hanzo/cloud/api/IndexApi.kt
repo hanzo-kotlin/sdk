@@ -46,8 +46,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/index/indexes/{uid}
-     * 
-     * 
+     * Delete an index and everything in it
+     * Drops one index in the caller&#39;s org together with all of its documents. This is the only way to retire an index; without it a mistaken uid would be permanent. It is idempotent — dropping an index that is not there still succeeds. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -57,8 +57,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1IndexIndexesByUid(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1IndexIndexesByUidWithHttpInfo(uid = uid)
+    fun deleteV1IndexIndexesByUid(uid: kotlin.String) : Unit {
+        val localVarResponse = deleteV1IndexIndexesByUidWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -77,16 +77,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/index/indexes/{uid}
-     * 
-     * 
+     * Delete an index and everything in it
+     * Drops one index in the caller&#39;s org together with all of its documents. This is the only way to retire an index; without it a mistaken uid would be permanent. It is idempotent — dropping an index that is not there still succeeds. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1IndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1IndexIndexesByUidRequestConfig(uid = uid)
+    fun deleteV1IndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1IndexIndexesByUidRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1IndexIndexesByUid
+     * To obtain the request config of the operation deleteV1IndexIndexesByUid
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudDeleteV1IndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1IndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -109,15 +109,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/index/indexes/{uid}/documents/{id}
-     * 
-     * 
+     * Delete one document by its primary key
+     * Removes one document from an index. It is IDEMPOTENT: deleting a key that is not there succeeds rather than 404, so a retry after a lost response is safe. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @param id 
      * @return void
@@ -128,8 +128,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1IndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
+    fun deleteV1IndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -148,8 +148,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/index/indexes/{uid}/documents/{id}
-     * 
-     * 
+     * Delete one document by its primary key
+     * Removes one document from an index. It is IDEMPOTENT: deleting a key that is not there succeeds rather than 404, so a retry after a lost response is safe. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @param id 
      * @return ApiResponse<Unit?>
@@ -157,8 +157,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1IndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
+    fun deleteV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1IndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -166,13 +166,13 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1IndexIndexesByUidDocumentsById
+     * To obtain the request config of the operation deleteV1IndexIndexesByUidDocumentsById
      *
      * @param uid 
      * @param id 
      * @return RequestConfig
      */
-    fun cloudDeleteV1IndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1IndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -182,15 +182,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents/{id}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/health
-     * 
-     * 
+     * Report whether the search plane can serve
+     * Answers Meilisearch&#39;s &#x60;{\&quot;status\&quot;:\&quot;available\&quot;}&#x60; when the index store is readable. It FAILS CLOSED — an unreadable store answers 503 and &#x60;unavailable&#x60; — so a replica whose volume has gone bad stops taking traffic instead of answering every search with nothing found. It touches no tenant data and needs no credential.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -199,8 +199,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexHealth() : Unit {
-        val localVarResponse = cloudGetV1IndexHealthWithHttpInfo()
+    fun getV1IndexHealth() : Unit {
+        val localVarResponse = getV1IndexHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -219,15 +219,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/health
-     * 
-     * 
+     * Report whether the search plane can serve
+     * Answers Meilisearch&#39;s &#x60;{\&quot;status\&quot;:\&quot;available\&quot;}&#x60; when the index store is readable. It FAILS CLOSED — an unreadable store answers 503 and &#x60;unavailable&#x60; — so a replica whose volume has gone bad stops taking traffic instead of answering every search with nothing found. It touches no tenant data and needs no credential.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexHealthRequestConfig()
+    fun getV1IndexHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -235,11 +235,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexHealth
+     * To obtain the request config of the operation getV1IndexHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IndexHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1IndexHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -249,15 +249,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/indexes
-     * 
-     * 
+     * List the indexes your org holds
+     * Answers every index in the caller&#39;s org with its primary key and timestamps. It is the only way to enumerate what an org holds — without it an index whose uid a caller has forgotten is unreachable. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -266,8 +266,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexIndexes() : Unit {
-        val localVarResponse = cloudGetV1IndexIndexesWithHttpInfo()
+    fun getV1IndexIndexes() : Unit {
+        val localVarResponse = getV1IndexIndexesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -286,15 +286,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/indexes
-     * 
-     * 
+     * List the indexes your org holds
+     * Answers every index in the caller&#39;s org with its primary key and timestamps. It is the only way to enumerate what an org holds — without it an index whose uid a caller has forgotten is unreachable. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexIndexesRequestConfig()
+    fun getV1IndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexIndexesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -302,11 +302,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexIndexes
+     * To obtain the request config of the operation getV1IndexIndexes
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IndexIndexesRequestConfig() : RequestConfig<Unit> {
+    fun getV1IndexIndexesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -316,15 +316,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/indexes/{uid}
-     * 
-     * 
+     * Read one index&#39;s definition
+     * Answers a single index&#39;s uid, primary key and timestamps. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60; — which is the same answer another org&#39;s index gives, since the org is a bound predicate on the read. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -334,8 +334,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexIndexesByUid(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1IndexIndexesByUidWithHttpInfo(uid = uid)
+    fun getV1IndexIndexesByUid(uid: kotlin.String) : Unit {
+        val localVarResponse = getV1IndexIndexesByUidWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -354,16 +354,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/indexes/{uid}
-     * 
-     * 
+     * Read one index&#39;s definition
+     * Answers a single index&#39;s uid, primary key and timestamps. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60; — which is the same answer another org&#39;s index gives, since the org is a bound predicate on the read. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexIndexesByUidRequestConfig(uid = uid)
+    fun getV1IndexIndexesByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexIndexesByUidRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -371,12 +371,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexIndexesByUid
+     * To obtain the request config of the operation getV1IndexIndexesByUid
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudGetV1IndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IndexIndexesByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -386,15 +386,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/indexes/{uid}/documents
-     * 
-     * 
+     * Page through the documents in an index
+     * Answers the documents in one index with a total count. &#x60;limit&#x60; defaults to 20 and is capped at 1000, &#x60;offset&#x60; pages, and the response echoes both back so a pager knows what it actually got. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60;. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -404,8 +404,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
+    fun getV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
+        val localVarResponse = getV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -424,16 +424,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/indexes/{uid}/documents
-     * 
-     * 
+     * Page through the documents in an index
+     * Answers the documents in one index with a total count. &#x60;limit&#x60; defaults to 20 and is capped at 1000, &#x60;offset&#x60; pages, and the response echoes both back so a pager knows what it actually got. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60;. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
+    fun getV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -441,12 +441,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexIndexesByUidDocuments
+     * To obtain the request config of the operation getV1IndexIndexesByUidDocuments
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudGetV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -456,15 +456,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/indexes/{uid}/documents/{id}
-     * 
-     * 
+     * Read one document by its primary key
+     * Answers the stored document whose primary key matches, exactly as it was written. A missing document is 404 &#x60;document_not_found&#x60; and a missing index is 404 &#x60;index_not_found&#x60; — two different codes, because a client that branches on them treats the cases differently. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @param id 
      * @return void
@@ -475,8 +475,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
+    fun getV1IndexIndexesByUidDocumentsById(uid: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = getV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid = uid, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -495,8 +495,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/indexes/{uid}/documents/{id}
-     * 
-     * 
+     * Read one document by its primary key
+     * Answers the stored document whose primary key matches, exactly as it was written. A missing document is 404 &#x60;document_not_found&#x60; and a missing index is 404 &#x60;index_not_found&#x60; — two different codes, because a client that branches on them treats the cases differently. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @param id 
      * @return ApiResponse<Unit?>
@@ -504,8 +504,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
+    fun getV1IndexIndexesByUidDocumentsByIdWithHttpInfo(uid: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexIndexesByUidDocumentsByIdRequestConfig(uid = uid, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -513,13 +513,13 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexIndexesByUidDocumentsById
+     * To obtain the request config of the operation getV1IndexIndexesByUidDocumentsById
      *
      * @param uid 
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1IndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IndexIndexesByUidDocumentsByIdRequestConfig(uid: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -529,15 +529,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents/{id}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/indexes/{uid}/settings
-     * 
-     * 
+     * Read an index&#39;s filterable attributes
+     * Answers the attributes an index allows filtering on. This dialect implements the filterable-attributes setting and no other, so that is the whole of what comes back. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60;. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -547,8 +547,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexIndexesByUidSettings(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1IndexIndexesByUidSettingsWithHttpInfo(uid = uid)
+    fun getV1IndexIndexesByUidSettings(uid: kotlin.String) : Unit {
+        val localVarResponse = getV1IndexIndexesByUidSettingsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -567,16 +567,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/indexes/{uid}/settings
-     * 
-     * 
+     * Read an index&#39;s filterable attributes
+     * Answers the attributes an index allows filtering on. This dialect implements the filterable-attributes setting and no other, so that is the whole of what comes back. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60;. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexIndexesByUidSettingsRequestConfig(uid = uid)
+    fun getV1IndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexIndexesByUidSettingsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -584,12 +584,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexIndexesByUidSettings
+     * To obtain the request config of the operation getV1IndexIndexesByUidSettings
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudGetV1IndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -599,15 +599,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/settings".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/stats
-     * 
-     * 
+     * Count the documents in each of your indexes
+     * Answers a document count per index for the caller&#39;s org, plus their sum. &#x60;isIndexing&#x60; is always false, which is the honest answer here rather than a stub: writes are applied before their response, so there is never a backlog in progress to report. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -616,8 +616,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexStats() : Unit {
-        val localVarResponse = cloudGetV1IndexStatsWithHttpInfo()
+    fun getV1IndexStats() : Unit {
+        val localVarResponse = getV1IndexStatsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -636,15 +636,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/stats
-     * 
-     * 
+     * Count the documents in each of your indexes
+     * Answers a document count per index for the caller&#39;s org, plus their sum. &#x60;isIndexing&#x60; is always false, which is the honest answer here rather than a stub: writes are applied before their response, so there is never a backlog in progress to report. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexStatsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexStatsRequestConfig()
+    fun getV1IndexStatsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexStatsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -652,11 +652,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexStats
+     * To obtain the request config of the operation getV1IndexStats
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IndexStatsRequestConfig() : RequestConfig<Unit> {
+    fun getV1IndexStatsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -666,15 +666,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/stats",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/tasks/{uid}
-     * 
-     * 
+     * Check a write task, which has already finished
+     * Answers &#x60;succeeded&#x60; for the task id given. It ALWAYS answers succeeded, and that is honest rather than a stub: writes on this surface are applied before their response returns, so by the time any task id exists to ask about, its work is done. It exists so a Meilisearch client&#39;s waitForTask resolves at once instead of polling forever for a queue that was never there. It requires a validated principal but reads no tenant data.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -684,8 +684,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexTasksByUid(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1IndexTasksByUidWithHttpInfo(uid = uid)
+    fun getV1IndexTasksByUid(uid: kotlin.String) : Unit {
+        val localVarResponse = getV1IndexTasksByUidWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -704,16 +704,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/tasks/{uid}
-     * 
-     * 
+     * Check a write task, which has already finished
+     * Answers &#x60;succeeded&#x60; for the task id given. It ALWAYS answers succeeded, and that is honest rather than a stub: writes on this surface are applied before their response returns, so by the time any task id exists to ask about, its work is done. It exists so a Meilisearch client&#39;s waitForTask resolves at once instead of polling forever for a queue that was never there. It requires a validated principal but reads no tenant data.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexTasksByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexTasksByUidRequestConfig(uid = uid)
+    fun getV1IndexTasksByUidWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexTasksByUidRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -721,12 +721,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexTasksByUid
+     * To obtain the request config of the operation getV1IndexTasksByUid
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudGetV1IndexTasksByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun getV1IndexTasksByUidRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -736,15 +736,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/tasks/{uid}".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/index/version
-     * 
-     * 
+     * Identify the search implementation answering
+     * Answers the version shape a Meilisearch client expects. It names THIS implementation rather than a Meilisearch release — the commit field reads &#x60;hanzo-cloud&#x60; — so a client that logs it records which server actually answered instead of implying a Meilisearch build. Needs no credential.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -753,8 +753,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1IndexVersion() : Unit {
-        val localVarResponse = cloudGetV1IndexVersionWithHttpInfo()
+    fun getV1IndexVersion() : Unit {
+        val localVarResponse = getV1IndexVersionWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -773,15 +773,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/index/version
-     * 
-     * 
+     * Identify the search implementation answering
+     * Answers the version shape a Meilisearch client expects. It names THIS implementation rather than a Meilisearch release — the commit field reads &#x60;hanzo-cloud&#x60; — so a client that logs it records which server actually answered instead of implying a Meilisearch build. Needs no credential.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1IndexVersionWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1IndexVersionRequestConfig()
+    fun getV1IndexVersionWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1IndexVersionRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -789,11 +789,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1IndexVersion
+     * To obtain the request config of the operation getV1IndexVersion
      *
      * @return RequestConfig
      */
-    fun cloudGetV1IndexVersionRequestConfig() : RequestConfig<Unit> {
+    fun getV1IndexVersionRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -803,15 +803,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/version",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/index/indexes/{uid}/settings
-     * 
-     * 
+     * Set which attributes an index can be filtered on
+     * Replaces an index&#39;s filterable attributes with the list in &#x60;filterableAttributes&#x60;; omitting the field leaves them as they are. The index is CREATED ON DEMAND rather than 404&#39;d, because a client that configures an index it has just asked for should not have to create it first — this is the one read-shaped path on the surface that writes. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -821,8 +821,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1IndexIndexesByUidSettings(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1IndexIndexesByUidSettingsWithHttpInfo(uid = uid)
+    fun patchV1IndexIndexesByUidSettings(uid: kotlin.String) : Unit {
+        val localVarResponse = patchV1IndexIndexesByUidSettingsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -841,16 +841,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/index/indexes/{uid}/settings
-     * 
-     * 
+     * Set which attributes an index can be filtered on
+     * Replaces an index&#39;s filterable attributes with the list in &#x60;filterableAttributes&#x60;; omitting the field leaves them as they are. The index is CREATED ON DEMAND rather than 404&#39;d, because a client that configures an index it has just asked for should not have to create it first — this is the one read-shaped path on the surface that writes. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1IndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1IndexIndexesByUidSettingsRequestConfig(uid = uid)
+    fun patchV1IndexIndexesByUidSettingsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1IndexIndexesByUidSettingsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -858,12 +858,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1IndexIndexesByUidSettings
+     * To obtain the request config of the operation patchV1IndexIndexesByUidSettings
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudPatchV1IndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1IndexIndexesByUidSettingsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -873,15 +873,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/settings".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/index/indexes
-     * 
-     * 
+     * Create an index
+     * Creates an index named by &#x60;uid&#x60; in the caller&#39;s org. &#x60;primaryKey&#x60; names the document field that identifies a document and defaults to &#x60;id&#x60;. Creating an index that already exists is not an error — it settles on the existing one, primary key included — so a client that creates before every write is safe to run repeatedly. A missing or over-long uid is 400 &#x60;invalid_index_uid&#x60;. A new index starts with &#x60;user&#x60; filterable, which is what lets a multi-user app narrow searches to one end user without configuring anything. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -890,8 +890,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IndexIndexes() : Unit {
-        val localVarResponse = cloudPostV1IndexIndexesWithHttpInfo()
+    fun postV1IndexIndexes() : Unit {
+        val localVarResponse = postV1IndexIndexesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -910,15 +910,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/index/indexes
-     * 
-     * 
+     * Create an index
+     * Creates an index named by &#x60;uid&#x60; in the caller&#39;s org. &#x60;primaryKey&#x60; names the document field that identifies a document and defaults to &#x60;id&#x60;. Creating an index that already exists is not an error — it settles on the existing one, primary key included — so a client that creates before every write is safe to run repeatedly. A missing or over-long uid is 400 &#x60;invalid_index_uid&#x60;. A new index starts with &#x60;user&#x60; filterable, which is what lets a multi-user app narrow searches to one end user without configuring anything. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IndexIndexesRequestConfig()
+    fun postV1IndexIndexesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IndexIndexesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -926,11 +926,11 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IndexIndexes
+     * To obtain the request config of the operation postV1IndexIndexes
      *
      * @return RequestConfig
      */
-    fun cloudPostV1IndexIndexesRequestConfig() : RequestConfig<Unit> {
+    fun postV1IndexIndexesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -940,15 +940,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/index/indexes/{uid}/documents
-     * 
-     * 
+     * Add or replace documents in an index
+     * Upserts documents into one index, keyed by the index&#39;s primary key: a document whose key is already present is REPLACED, one that is not is added, and it becomes searchable immediately. Send an array, or a single object — a hand-rolled caller sending one document is accepted rather than 400&#39;d. The index is created on demand, so a first write needs no create call.  This and the PUT on the same path are the SAME operation: both are a whole document upsert, which is what a Meilisearch client&#39;s addDocuments and updateDocuments both reduce to here. A body that is neither an array nor an object is 400. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -958,8 +958,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
+    fun postV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
+        val localVarResponse = postV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -978,16 +978,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/index/indexes/{uid}/documents
-     * 
-     * 
+     * Add or replace documents in an index
+     * Upserts documents into one index, keyed by the index&#39;s primary key: a document whose key is already present is REPLACED, one that is not is added, and it becomes searchable immediately. Send an array, or a single object — a hand-rolled caller sending one document is accepted rather than 400&#39;d. The index is created on demand, so a first write needs no create call.  This and the PUT on the same path are the SAME operation: both are a whole document upsert, which is what a Meilisearch client&#39;s addDocuments and updateDocuments both reduce to here. A body that is neither an array nor an object is 400. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
+    fun postV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -995,12 +995,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IndexIndexesByUidDocuments
+     * To obtain the request config of the operation postV1IndexIndexesByUidDocuments
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudPostV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun postV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1010,15 +1010,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/index/indexes/{uid}/documents/delete-batch
-     * 
-     * 
+     * Delete many documents by primary key in one call
+     * Removes every document named by an array of primary keys. Keys may be sent as strings or numbers — a number keeps its exact decimal form, so an integer key round-trips as &#x60;42&#x60; and never as scientific notation. Keys that are absent from the index are skipped rather than failing the batch, so this is idempotent. A body that is not an array is 400. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1028,8 +1028,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IndexIndexesByUidDocumentsDeleteBatch(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1IndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid = uid)
+    fun postV1IndexIndexesByUidDocumentsDeleteBatch(uid: kotlin.String) : Unit {
+        val localVarResponse = postV1IndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1048,16 +1048,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/index/indexes/{uid}/documents/delete-batch
-     * 
-     * 
+     * Delete many documents by primary key in one call
+     * Removes every document named by an array of primary keys. Keys may be sent as strings or numbers — a number keeps its exact decimal form, so an integer key round-trips as &#x60;42&#x60; and never as scientific notation. Keys that are absent from the index are skipped rather than failing the batch, so this is idempotent. A body that is not an array is 400. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid = uid)
+    fun postV1IndexIndexesByUidDocumentsDeleteBatchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1065,12 +1065,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IndexIndexesByUidDocumentsDeleteBatch
+     * To obtain the request config of the operation postV1IndexIndexesByUidDocumentsDeleteBatch
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudPostV1IndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun postV1IndexIndexesByUidDocumentsDeleteBatchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1080,15 +1080,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents/delete-batch".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/index/indexes/{uid}/search
-     * 
-     * 
+     * Search an index, forgiving typos
+     * Answers the documents in one index matching &#x60;q&#x60;, ranked by how many of the query&#39;s terms they match, with prefix matching so a partial word still finds its document. &#x60;limit&#x60; defaults to 20 and is capped at 1000, &#x60;offset&#x60; pages; a negative value falls back to the default rather than erroring.  &#x60;filter&#x60; takes a Meilisearch filter expression, or an array of them, and the &#x60;user &#x3D; \&quot;…\&quot;&#x60; and &#x60;user IN […]&#x60; forms are honoured — that is how an app with many end users narrows results to one of them WITHIN the org. &#x60;estimatedTotalHits&#x60; is exact for the page returned, not an estimate, because every hit is materialised. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60;. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1098,8 +1098,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1IndexIndexesByUidSearch(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1IndexIndexesByUidSearchWithHttpInfo(uid = uid)
+    fun postV1IndexIndexesByUidSearch(uid: kotlin.String) : Unit {
+        val localVarResponse = postV1IndexIndexesByUidSearchWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1118,16 +1118,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/index/indexes/{uid}/search
-     * 
-     * 
+     * Search an index, forgiving typos
+     * Answers the documents in one index matching &#x60;q&#x60;, ranked by how many of the query&#39;s terms they match, with prefix matching so a partial word still finds its document. &#x60;limit&#x60; defaults to 20 and is capped at 1000, &#x60;offset&#x60; pages; a negative value falls back to the default rather than erroring.  &#x60;filter&#x60; takes a Meilisearch filter expression, or an array of them, and the &#x60;user &#x3D; \&quot;…\&quot;&#x60; and &#x60;user IN […]&#x60; forms are honoured — that is how an app with many end users narrows results to one of them WITHIN the org. &#x60;estimatedTotalHits&#x60; is exact for the page returned, not an estimate, because every hit is materialised. An index the caller&#39;s org does not hold is 404 &#x60;index_not_found&#x60;. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1IndexIndexesByUidSearchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1IndexIndexesByUidSearchRequestConfig(uid = uid)
+    fun postV1IndexIndexesByUidSearchWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1IndexIndexesByUidSearchRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1135,12 +1135,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1IndexIndexesByUidSearch
+     * To obtain the request config of the operation postV1IndexIndexesByUidSearch
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudPostV1IndexIndexesByUidSearchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun postV1IndexIndexesByUidSearchRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1150,15 +1150,15 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/search".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/index/indexes/{uid}/documents
-     * 
-     * 
+     * Add or update documents in an index
+     * Upserts documents into one index, keyed by the index&#39;s primary key: a document whose key is already present is REPLACED, one that is not is added, and it becomes searchable immediately. Send an array, or a single object — a hand-rolled caller sending one document is accepted rather than 400&#39;d. The index is created on demand, so a first write needs no create call.  This and the POST on the same path are the SAME operation, served by one handler. Both exist because the Meilisearch dialect has both verbs; there is no partial-update semantics on this one — a document is replaced whole either way. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1168,8 +1168,8 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
+    fun putV1IndexIndexesByUidDocuments(uid: kotlin.String) : Unit {
+        val localVarResponse = putV1IndexIndexesByUidDocumentsWithHttpInfo(uid = uid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1188,16 +1188,16 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/index/indexes/{uid}/documents
-     * 
-     * 
+     * Add or update documents in an index
+     * Upserts documents into one index, keyed by the index&#39;s primary key: a document whose key is already present is REPLACED, one that is not is added, and it becomes searchable immediately. Send an array, or a single object — a hand-rolled caller sending one document is accepted rather than 400&#39;d. The index is created on demand, so a first write needs no create call.  This and the POST on the same path are the SAME operation, served by one handler. Both exist because the Meilisearch dialect has both verbs; there is no partial-update semantics on this one — a document is replaced whole either way. The tenant is the org minted from the VALIDATED bearer&#39;s owner claim, never a client-supplied header, and every query filters on it, so two orgs may both hold an index named \&quot;messages\&quot; and neither can see the other&#39;s documents. Without a validated principal the answer is 403 carrying Meilisearch&#39;s &#x60;invalid_api_key&#x60; body. Errors use Meilisearch&#39;s {message, code, type, link} shape rather than cloud&#39;s, because that &#x60;code&#x60; is a wire contract a Meilisearch client branches on.  The 202 and its &#x60;enqueued&#x60; task are DIALECT COMPATIBILITY, not a promise of later work: the write is already applied when this answers, and the task it names is already complete. A client that polls waitForTask resolves immediately rather than waiting, and a client that does not poll has still had its write committed.
      * @param uid 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
+    fun putV1IndexIndexesByUidDocumentsWithHttpInfo(uid: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1IndexIndexesByUidDocumentsRequestConfig(uid = uid)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1205,12 +1205,12 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1IndexIndexesByUidDocuments
+     * To obtain the request config of the operation putV1IndexIndexesByUidDocuments
      *
      * @param uid 
      * @return RequestConfig
      */
-    fun cloudPutV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
+    fun putV1IndexIndexesByUidDocumentsRequestConfig(uid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1220,7 +1220,7 @@ class IndexApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/index/indexes/{uid}/documents".replace("{"+"uid"+"}", encodeURIComponent(uid.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

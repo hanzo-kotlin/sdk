@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudMlResource
-import ai.hanzo.cloud.model.CloudMlResourceList
+import ai.hanzo.cloud.model.MlResource
+import ai.hanzo.cloud.model.MlResourceList
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,8 +48,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * DELETE /v1/ml/models/{name}
-     * DeleteModel deletes a deployed inference model.
-     * DeleteModel deletes a deployed inference model. kserve owns the teardown: the InferenceService goes away and the serving deployment behind it follows, so the model stops answering predict calls. Answers 204, or 404 for a name the caller&#39;s org does not own.
+     * Deletes a deployed inference model.
+     * Deletes a deployed inference model. kserve owns the teardown: the InferenceService goes away and the serving deployment behind it follows, so the model stops answering predict calls. Answers 204, or 404 for a name the caller&#39;s org does not own.
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -59,8 +59,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MlModelsName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1MlModelsNameWithHttpInfo(name = name)
+    fun deleteV1MlModelsByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1MlModelsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -79,16 +79,16 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * DELETE /v1/ml/models/{name}
-     * DeleteModel deletes a deployed inference model.
-     * DeleteModel deletes a deployed inference model. kserve owns the teardown: the InferenceService goes away and the serving deployment behind it follows, so the model stops answering predict calls. Answers 204, or 404 for a name the caller&#39;s org does not own.
+     * Deletes a deployed inference model.
+     * Deletes a deployed inference model. kserve owns the teardown: the InferenceService goes away and the serving deployment behind it follows, so the model stops answering predict calls. Answers 204, or 404 for a name the caller&#39;s org does not own.
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MlModelsNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MlModelsNameRequestConfig(name = name)
+    fun deleteV1MlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MlModelsByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -96,12 +96,12 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MlModelsName
+     * To obtain the request config of the operation deleteV1MlModelsByName
      *
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MlModelsNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1MlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -111,15 +111,15 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ml/health
-     * 
-     * 
+     * Whether model serving can actually work right now
+     * Reports whether the model-serving plane is genuinely usable: that the Kubernetes API answers, that the InferenceService CRD is actually served by this cluster, and that the cluster holds at least one serving runtime to run a model ON. It is a REAL probe, not status theatre — it makes a live call rather than reporting a flag set at boot.  200 only when everything checks out. Otherwise 503 CARRYING THE REPORT — which component failed, and the real error — and that body is the reason this is not a typed op: a typed op reaches a non-2xx by returning an error, and the envelope that produces would drop exactly the detail the probe exists to deliver.  The runtime count is reported as its own field and is a SEPARATE fact from the CRD being served: a cluster with the CRD but no runtime accepts a deploy and then never schedules it, so reporting only the CRD would answer 200 while every model hangs. A runtime list this service cannot read reports the read error instead of a count, because a missing grant is a broken probe and not an empty cluster.  It answers about the cluster, not about a tenant, so it takes no org and reveals no tenant data. A cluster with no kserve CRD reports degraded honestly rather than failing later at the first deploy.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -128,8 +128,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MlHealth() : Unit {
-        val localVarResponse = cloudGetV1MlHealthWithHttpInfo()
+    fun getV1MlHealth() : Unit {
+        val localVarResponse = getV1MlHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -148,15 +148,15 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/ml/health
-     * 
-     * 
+     * Whether model serving can actually work right now
+     * Reports whether the model-serving plane is genuinely usable: that the Kubernetes API answers, that the InferenceService CRD is actually served by this cluster, and that the cluster holds at least one serving runtime to run a model ON. It is a REAL probe, not status theatre — it makes a live call rather than reporting a flag set at boot.  200 only when everything checks out. Otherwise 503 CARRYING THE REPORT — which component failed, and the real error — and that body is the reason this is not a typed op: a typed op reaches a non-2xx by returning an error, and the envelope that produces would drop exactly the detail the probe exists to deliver.  The runtime count is reported as its own field and is a SEPARATE fact from the CRD being served: a cluster with the CRD but no runtime accepts a deploy and then never schedules it, so reporting only the CRD would answer 200 while every model hangs. A runtime list this service cannot read reports the read error instead of a count, because a missing grant is a broken probe and not an empty cluster.  It answers about the cluster, not about a tenant, so it takes no org and reveals no tenant data. A cluster with no kserve CRD reports degraded honestly rather than failing later at the first deploy.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MlHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1MlHealthRequestConfig()
+    fun getV1MlHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1MlHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,11 +164,11 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MlHealth
+     * To obtain the request config of the operation getV1MlHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MlHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1MlHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -178,16 +178,16 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ml/models
-     * ListModels lists the inference models deployed in the caller&#39;s org.
-     * ListModels lists the inference models deployed in the caller&#39;s org. Each entry carries the model&#39;s name, when Kubernetes admitted it, and kserve&#39;s live status — the spec is on the single-model read. An org that has deployed nothing gets an empty list.
-     * @return CloudMlResourceList
+     * Lists the inference models deployed in the caller&#39;s org.
+     * Lists the inference models deployed in the caller&#39;s org. Each entry carries the model&#39;s name, when Kubernetes admitted it, and kserve&#39;s live status — the spec is on the single-model read. An org that has deployed nothing gets an empty list.
+     * @return MlResourceList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -196,11 +196,11 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MlModels() : CloudMlResourceList {
-        val localVarResponse = cloudGetV1MlModelsWithHttpInfo()
+    fun getV1MlModels() : MlResourceList {
+        val localVarResponse = getV1MlModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMlResourceList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MlResourceList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -216,28 +216,28 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/ml/models
-     * ListModels lists the inference models deployed in the caller&#39;s org.
-     * ListModels lists the inference models deployed in the caller&#39;s org. Each entry carries the model&#39;s name, when Kubernetes admitted it, and kserve&#39;s live status — the spec is on the single-model read. An org that has deployed nothing gets an empty list.
-     * @return ApiResponse<CloudMlResourceList?>
+     * Lists the inference models deployed in the caller&#39;s org.
+     * Lists the inference models deployed in the caller&#39;s org. Each entry carries the model&#39;s name, when Kubernetes admitted it, and kserve&#39;s live status — the spec is on the single-model read. An org that has deployed nothing gets an empty list.
+     * @return ApiResponse<MlResourceList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MlModelsWithHttpInfo() : ApiResponse<CloudMlResourceList?> {
-        val localVariableConfig = cloudGetV1MlModelsRequestConfig()
+    fun getV1MlModelsWithHttpInfo() : ApiResponse<MlResourceList?> {
+        val localVariableConfig = getV1MlModelsRequestConfig()
 
-        return request<Unit, CloudMlResourceList>(
+        return request<Unit, MlResourceList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MlModels
+     * To obtain the request config of the operation getV1MlModels
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MlModelsRequestConfig() : RequestConfig<Unit> {
+    fun getV1MlModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -248,17 +248,17 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/ml/models/{name}
-     * GetModel returns one deployed inference model.
-     * GetModel returns one deployed inference model. Its spec comes with it, and kserve&#39;s live status, which is where readiness and the serving address appear. A name the caller&#39;s org does not own answers 404, exactly as an unknown name does, so a probe learns nothing about another tenant&#39;s models.
+     * Returns one deployed inference model.
+     * Returns one deployed inference model. Its spec comes with it, and kserve&#39;s live status, which is where readiness and the serving address appear. A name the caller&#39;s org does not own answers 404, exactly as an unknown name does, so a probe learns nothing about another tenant&#39;s models.
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
-     * @return CloudMlResource
+     * @return MlResource
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -267,11 +267,11 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MlModelsName(name: kotlin.String) : CloudMlResource {
-        val localVarResponse = cloudGetV1MlModelsNameWithHttpInfo(name = name)
+    fun getV1MlModelsByName(name: kotlin.String) : MlResource {
+        val localVarResponse = getV1MlModelsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMlResource
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MlResource
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -287,30 +287,30 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/ml/models/{name}
-     * GetModel returns one deployed inference model.
-     * GetModel returns one deployed inference model. Its spec comes with it, and kserve&#39;s live status, which is where readiness and the serving address appear. A name the caller&#39;s org does not own answers 404, exactly as an unknown name does, so a probe learns nothing about another tenant&#39;s models.
+     * Returns one deployed inference model.
+     * Returns one deployed inference model. Its spec comes with it, and kserve&#39;s live status, which is where readiness and the serving address appear. A name the caller&#39;s org does not own answers 404, exactly as an unknown name does, so a probe learns nothing about another tenant&#39;s models.
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
-     * @return ApiResponse<CloudMlResource?>
+     * @return ApiResponse<MlResource?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MlModelsNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudMlResource?> {
-        val localVariableConfig = cloudGetV1MlModelsNameRequestConfig(name = name)
+    fun getV1MlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<MlResource?> {
+        val localVariableConfig = getV1MlModelsByNameRequestConfig(name = name)
 
-        return request<Unit, CloudMlResource>(
+        return request<Unit, MlResource>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MlModelsName
+     * To obtain the request config of the operation getV1MlModelsByName
      *
      * @param name Name is the resource to act on, taken from the path. Lower-cased and trimmed to the DNS-1123 label a CustomResource&#39;s metadata.name must be.
      * @return RequestConfig
      */
-    fun cloudGetV1MlModelsNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -321,15 +321,15 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/ml/models/{name}
-     * 
-     * 
+     * Change a deployed model in place
+     * Applies a JSON merge patch to one of the caller org&#39;s deployed models and answers the updated resource — the way to change a model&#39;s image, replica count or resource requests without tearing the deployment down.  The body is relayed to Kubernetes VERBATIM. That is deliberate and it is why this route is not a typed op: re-encoding a merge patch changes what it means, because an integer that round-trips through a generic decoder comes back a float. Merge-patch semantics apply as written — a null removes a field, and a list is replaced whole rather than merged.  Scoped to the caller&#39;s own tenant namespace, resolved from the validated org and project; a name the caller&#39;s tenant does not hold is a 404, never another tenant&#39;s resource. An empty body is refused, and a patch Kubernetes rejects comes back 422 with its reason rather than being silently dropped.
      * @param name 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -339,8 +339,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1MlModelsByName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1MlModelsByNameWithHttpInfo(name = name)
+    fun patchV1MlModelsByName(name: kotlin.String) : Unit {
+        val localVarResponse = patchV1MlModelsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -359,16 +359,16 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * PATCH /v1/ml/models/{name}
-     * 
-     * 
+     * Change a deployed model in place
+     * Applies a JSON merge patch to one of the caller org&#39;s deployed models and answers the updated resource — the way to change a model&#39;s image, replica count or resource requests without tearing the deployment down.  The body is relayed to Kubernetes VERBATIM. That is deliberate and it is why this route is not a typed op: re-encoding a merge patch changes what it means, because an integer that round-trips through a generic decoder comes back a float. Merge-patch semantics apply as written — a null removes a field, and a list is replaced whole rather than merged.  Scoped to the caller&#39;s own tenant namespace, resolved from the validated org and project; a name the caller&#39;s tenant does not hold is a 404, never another tenant&#39;s resource. An empty body is refused, and a patch Kubernetes rejects comes back 422 with its reason rather than being silently dropped.
      * @param name 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1MlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1MlModelsByNameRequestConfig(name = name)
+    fun patchV1MlModelsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1MlModelsByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -376,12 +376,12 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1MlModelsByName
+     * To obtain the request config of the operation patchV1MlModelsByName
      *
      * @param name 
      * @return RequestConfig
      */
-    fun cloudPatchV1MlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1MlModelsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -391,15 +391,15 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/ml/models
-     * 
-     * 
+     * Deploy an inference model
+     * Deploys a model into the caller&#39;s own tenant namespace and answers the created resource, 201. The spec is the kserve InferenceService spec, relayed as given, so anything kserve serves is deployable here without this layer knowing what it is.  THE BALANCE GATE RUNS FIRST, before a namespace or a resource exists, so an unfunded org cannot start GPU compute and then be billed for it. It fails CLOSED: a commerce that cannot be reached refuses rather than admits. The refusal carries the fleet&#39;s nested error body — the 402 shape a funded-balance client already parses — which is precisely why this route is not a typed op. On success the submission fee is debited from the caller org&#39;s own ledger, asynchronously and best-effort; ongoing GPU-hour cost is metered elsewhere.  The tenant namespace is derived from the VALIDATED org and project — never from a field — and the mapping is injective in both, so two tenants can never land in one namespace. An unvalidated caller is refused before any of that. The name must be a DNS-1123 label; a name already taken in the tenant&#39;s namespace is a 409.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -408,8 +408,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MlModels() : Unit {
-        val localVarResponse = cloudPostV1MlModelsWithHttpInfo()
+    fun postV1MlModels() : Unit {
+        val localVarResponse = postV1MlModelsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -428,15 +428,15 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/ml/models
-     * 
-     * 
+     * Deploy an inference model
+     * Deploys a model into the caller&#39;s own tenant namespace and answers the created resource, 201. The spec is the kserve InferenceService spec, relayed as given, so anything kserve serves is deployable here without this layer knowing what it is.  THE BALANCE GATE RUNS FIRST, before a namespace or a resource exists, so an unfunded org cannot start GPU compute and then be billed for it. It fails CLOSED: a commerce that cannot be reached refuses rather than admits. The refusal carries the fleet&#39;s nested error body — the 402 shape a funded-balance client already parses — which is precisely why this route is not a typed op. On success the submission fee is debited from the caller org&#39;s own ledger, asynchronously and best-effort; ongoing GPU-hour cost is metered elsewhere.  The tenant namespace is derived from the VALIDATED org and project — never from a field — and the mapping is injective in both, so two tenants can never land in one namespace. An unvalidated caller is refused before any of that. The name must be a DNS-1123 label; a name already taken in the tenant&#39;s namespace is a 409.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MlModelsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1MlModelsRequestConfig()
+    fun postV1MlModelsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MlModelsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -444,11 +444,11 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MlModels
+     * To obtain the request config of the operation postV1MlModels
      *
      * @return RequestConfig
      */
-    fun cloudPostV1MlModelsRequestConfig() : RequestConfig<Unit> {
+    fun postV1MlModelsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -458,15 +458,15 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/ml/models/{name}/predict
-     * 
-     * 
+     * Run inference against one of your deployed models
+     * Sends the request body to the named model&#39;s predictor and answers the predictor&#39;s reply — its status code, its body bytes and its Content-Type, all unchanged. This is the inference call itself, not a description of one.  VERBATIM IS THE CONTRACT, and it is why this route is not a typed op: a model-side error has to surface as the model&#39;s own error, not as this layer&#39;s paraphrase of it. The body shape is the kserve v2 inference protocol&#39;s, which means the runtime decides it, not this API. The v2 model name defaults to the resource name — kserve&#39;s single-model convention — and a multi-model runtime selects one with the &#x60;model&#x60; query parameter.  A model that exists but has no serving address yet answers 503 &#39;not ready&#39; rather than a confusing connection error: deployed is not the same as serving. Scoped to the caller&#39;s own tenant namespace from the validated org and project, so a name another tenant owns is simply a 404. The predictor&#39;s response body is read up to a fixed ceiling.
      * @param name 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -476,8 +476,8 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MlModelsByNamePredict(name: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1MlModelsByNamePredictWithHttpInfo(name = name)
+    fun postV1MlModelsByNamePredict(name: kotlin.String) : Unit {
+        val localVarResponse = postV1MlModelsByNamePredictWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -496,16 +496,16 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/ml/models/{name}/predict
-     * 
-     * 
+     * Run inference against one of your deployed models
+     * Sends the request body to the named model&#39;s predictor and answers the predictor&#39;s reply — its status code, its body bytes and its Content-Type, all unchanged. This is the inference call itself, not a description of one.  VERBATIM IS THE CONTRACT, and it is why this route is not a typed op: a model-side error has to surface as the model&#39;s own error, not as this layer&#39;s paraphrase of it. The body shape is the kserve v2 inference protocol&#39;s, which means the runtime decides it, not this API. The v2 model name defaults to the resource name — kserve&#39;s single-model convention — and a multi-model runtime selects one with the &#x60;model&#x60; query parameter.  A model that exists but has no serving address yet answers 503 &#39;not ready&#39; rather than a confusing connection error: deployed is not the same as serving. Scoped to the caller&#39;s own tenant namespace from the validated org and project, so a name another tenant owns is simply a 404. The predictor&#39;s response body is read up to a fixed ceiling.
      * @param name 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MlModelsByNamePredictWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1MlModelsByNamePredictRequestConfig(name = name)
+    fun postV1MlModelsByNamePredictWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MlModelsByNamePredictRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -513,12 +513,12 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MlModelsByNamePredict
+     * To obtain the request config of the operation postV1MlModelsByNamePredict
      *
      * @param name 
      * @return RequestConfig
      */
-    fun cloudPostV1MlModelsByNamePredictRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun postV1MlModelsByNamePredictRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -528,7 +528,7 @@ class MlApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/ml/models/{name}/predict".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

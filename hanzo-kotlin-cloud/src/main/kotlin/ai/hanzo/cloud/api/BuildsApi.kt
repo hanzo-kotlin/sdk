@@ -19,6 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.BuildBoard
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,21 +47,22 @@ class BuildsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/builds
-     * 
-     * 
-     * @return void
+     * Returns real build records for your org.
+     * Returns real build records for your org.  It lists the org&#39;s BuildKit build records — the git build step behind a deploy — each with the repo it built, the short commit, its status, when it started and how long it took. These are real records or an honest empty list; a build appears here because one ran, never because a page needed a row. Builds are created only by /deploy and the push-to-deploy hook. Requires a validated principal; 403 without one.
+     * @return BuildBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Builds() : Unit {
-        val localVarResponse = cloudGetV1BuildsWithHttpInfo()
+    fun getV1Builds() : BuildBoard {
+        val localVarResponse = getV1BuildsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BuildBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -76,37 +78,39 @@ class BuildsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/builds
-     * 
-     * 
-     * @return ApiResponse<Unit?>
+     * Returns real build records for your org.
+     * Returns real build records for your org.  It lists the org&#39;s BuildKit build records — the git build step behind a deploy — each with the repo it built, the short commit, its status, when it started and how long it took. These are real records or an honest empty list; a build appears here because one ran, never because a page needed a row. Builds are created only by /deploy and the push-to-deploy hook. Requires a validated principal; 403 without one.
+     * @return ApiResponse<BuildBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BuildsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1BuildsRequestConfig()
+    fun getV1BuildsWithHttpInfo() : ApiResponse<BuildBoard?> {
+        val localVariableConfig = getV1BuildsRequestConfig()
 
-        return request<Unit, Unit>(
+        return request<Unit, BuildBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Builds
+     * To obtain the request config of the operation getV1Builds
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BuildsRequestConfig() : RequestConfig<Unit> {
+    fun getV1BuildsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
+        localVariableHeaders["Accept"] = "application/json"
+
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/v1/builds",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

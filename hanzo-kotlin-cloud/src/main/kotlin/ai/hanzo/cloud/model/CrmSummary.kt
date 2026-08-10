@@ -21,20 +21,23 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param companies 
- * @param contacts 
- * @param opportunities 
+ * @param companies Companies is how many companies the org has.
+ * @param contacts Contacts is how many contacts the org has.
+ * @param opportunities Opportunities is how many opportunities the org has.
  */
 
 
 data class CrmSummary (
 
+    /* Companies is how many companies the org has. */
     @SerializedName("companies")
     val companies: kotlin.Int? = null,
 
+    /* Contacts is how many contacts the org has. */
     @SerializedName("contacts")
     val contacts: kotlin.Int? = null,
 
+    /* Opportunities is how many opportunities the org has. */
     @SerializedName("opportunities")
     val opportunities: kotlin.Int? = null
 

@@ -19,18 +19,18 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudDocumentPage
-import ai.hanzo.cloud.model.CloudDocumentReply
-import ai.hanzo.cloud.model.CloudFilingPage
-import ai.hanzo.cloud.model.CloudFilingReply
-import ai.hanzo.cloud.model.CloudFilingRequest
-import ai.hanzo.cloud.model.CloudGenerateRequest
-import ai.hanzo.cloud.model.CloudLegalHealth
-import ai.hanzo.cloud.model.CloudSignReply
-import ai.hanzo.cloud.model.CloudSignRequest
-import ai.hanzo.cloud.model.CloudTemplateCatalog
-import ai.hanzo.cloud.model.CloudTemplateOverride
-import ai.hanzo.cloud.model.CloudTemplateReply
+import ai.hanzo.cloud.model.DocumentPage
+import ai.hanzo.cloud.model.DocumentReply
+import ai.hanzo.cloud.model.FilingPage
+import ai.hanzo.cloud.model.FilingReply
+import ai.hanzo.cloud.model.FilingRequest
+import ai.hanzo.cloud.model.GenerateRequest
+import ai.hanzo.cloud.model.LegalHealth
+import ai.hanzo.cloud.model.SignReply
+import ai.hanzo.cloud.model.SignRequest
+import ai.hanzo.cloud.model.TemplateCatalog
+import ai.hanzo.cloud.model.TemplateOverride
+import ai.hanzo.cloud.model.TemplateReply
 
 import com.google.gson.annotations.SerializedName
 
@@ -58,10 +58,10 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/legal/documents
-     * ListLegalDocuments returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.
-     * ListLegalDocuments returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.  The response is marked no-store: these records name the counterparties an org is contracting with, and must not sit in a shared cache.
+     * Returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.
+     * Returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.  The response is marked no-store: these records name the counterparties an org is contracting with, and must not sit in a shared cache.
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
-     * @return CloudDocumentPage
+     * @return DocumentPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -70,11 +70,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LegalDocuments(limit: kotlin.Int? = null) : CloudDocumentPage {
-        val localVarResponse = cloudGetV1LegalDocumentsWithHttpInfo(limit = limit)
+    fun getV1LegalDocuments(limit: kotlin.Int? = null) : DocumentPage {
+        val localVarResponse = getV1LegalDocumentsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocumentPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -90,30 +90,30 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/legal/documents
-     * ListLegalDocuments returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.
-     * ListLegalDocuments returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.  The response is marked no-store: these records name the counterparties an org is contracting with, and must not sit in a shared cache.
+     * Returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.
+     * Returns the org&#39;s generated documents, newest first, WITHOUT their rendered content — fetch one document to read its body.  The response is marked no-store: these records name the counterparties an org is contracting with, and must not sit in a shared cache.
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
-     * @return ApiResponse<CloudDocumentPage?>
+     * @return ApiResponse<DocumentPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LegalDocumentsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudDocumentPage?> {
-        val localVariableConfig = cloudGetV1LegalDocumentsRequestConfig(limit = limit)
+    fun getV1LegalDocumentsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<DocumentPage?> {
+        val localVariableConfig = getV1LegalDocumentsRequestConfig(limit = limit)
 
-        return request<Unit, CloudDocumentPage>(
+        return request<Unit, DocumentPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LegalDocuments
+     * To obtain the request config of the operation getV1LegalDocuments
      *
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1LegalDocumentsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1LegalDocumentsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -129,17 +129,17 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/legal/documents/{id}
-     * GetLegalDocument returns one of the org&#39;s documents WITH its rendered body.
-     * GetLegalDocument returns one of the org&#39;s documents WITH its rendered body. 404 when the org has no document with that id — a document is never readable across orgs.  The response is marked no-store: the body is contract text, sealed at rest and returned only to the owning org, and must not sit in a shared cache.
+     * Returns one of the org&#39;s documents WITH its rendered body.
+     * Returns one of the org&#39;s documents WITH its rendered body. 404 when the org has no document with that id — a document is never readable across orgs.  The response is marked no-store: the body is contract text, sealed at rest and returned only to the owning org, and must not sit in a shared cache.
      * @param id ID is the document&#39;s server-minted handle, \&quot;doc_\&quot;-prefixed.
-     * @return CloudDocumentReply
+     * @return DocumentReply
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -148,11 +148,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LegalDocumentsId(id: kotlin.String) : CloudDocumentReply {
-        val localVarResponse = cloudGetV1LegalDocumentsIdWithHttpInfo(id = id)
+    fun getV1LegalDocumentsById(id: kotlin.String) : DocumentReply {
+        val localVarResponse = getV1LegalDocumentsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocumentReply
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentReply
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -168,30 +168,30 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/legal/documents/{id}
-     * GetLegalDocument returns one of the org&#39;s documents WITH its rendered body.
-     * GetLegalDocument returns one of the org&#39;s documents WITH its rendered body. 404 when the org has no document with that id — a document is never readable across orgs.  The response is marked no-store: the body is contract text, sealed at rest and returned only to the owning org, and must not sit in a shared cache.
+     * Returns one of the org&#39;s documents WITH its rendered body.
+     * Returns one of the org&#39;s documents WITH its rendered body. 404 when the org has no document with that id — a document is never readable across orgs.  The response is marked no-store: the body is contract text, sealed at rest and returned only to the owning org, and must not sit in a shared cache.
      * @param id ID is the document&#39;s server-minted handle, \&quot;doc_\&quot;-prefixed.
-     * @return ApiResponse<CloudDocumentReply?>
+     * @return ApiResponse<DocumentReply?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LegalDocumentsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudDocumentReply?> {
-        val localVariableConfig = cloudGetV1LegalDocumentsIdRequestConfig(id = id)
+    fun getV1LegalDocumentsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<DocumentReply?> {
+        val localVariableConfig = getV1LegalDocumentsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudDocumentReply>(
+        return request<Unit, DocumentReply>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LegalDocumentsId
+     * To obtain the request config of the operation getV1LegalDocumentsById
      *
      * @param id ID is the document&#39;s server-minted handle, \&quot;doc_\&quot;-prefixed.
      * @return RequestConfig
      */
-    fun cloudGetV1LegalDocumentsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1LegalDocumentsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -202,17 +202,17 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/legal/filings
-     * ListLegalFilings returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
-     * ListLegalFilings returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
+     * Returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
+     * Returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
-     * @return CloudFilingPage
+     * @return FilingPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -221,11 +221,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LegalFilings(limit: kotlin.Int? = null) : CloudFilingPage {
-        val localVarResponse = cloudGetV1LegalFilingsWithHttpInfo(limit = limit)
+    fun getV1LegalFilings(limit: kotlin.Int? = null) : FilingPage {
+        val localVarResponse = getV1LegalFilingsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFilingPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FilingPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -241,30 +241,30 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/legal/filings
-     * ListLegalFilings returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
-     * ListLegalFilings returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
+     * Returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
+     * Returns the org&#39;s filing records, newest first — which documents were filed where, through which provider, and what the filing&#39;s honest status is.
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
-     * @return ApiResponse<CloudFilingPage?>
+     * @return ApiResponse<FilingPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LegalFilingsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudFilingPage?> {
-        val localVariableConfig = cloudGetV1LegalFilingsRequestConfig(limit = limit)
+    fun getV1LegalFilingsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<FilingPage?> {
+        val localVariableConfig = getV1LegalFilingsRequestConfig(limit = limit)
 
-        return request<Unit, CloudFilingPage>(
+        return request<Unit, FilingPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LegalFilings
+     * To obtain the request config of the operation getV1LegalFilings
      *
      * @param limit Limit bounds the page. Absent or unparseable means the store&#39;s own default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1LegalFilingsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1LegalFilingsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -280,16 +280,16 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/filings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/legal/health
-     * LegalHealth reports that the legal subsystem is serving and how many built-in templates its catalog carries.
-     * LegalHealth reports that the legal subsystem is serving and how many built-in templates its catalog carries. It reads no tenant, so a liveness prober that sends no principal is answered rather than refused.
-     * @return CloudLegalHealth
+     * Reports that the legal subsystem is serving and how many built-in templates its catalog carries.
+     * Reports that the legal subsystem is serving and how many built-in templates its catalog carries. It reads no tenant, so a liveness prober that sends no principal is answered rather than refused.
+     * @return LegalHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -298,11 +298,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LegalHealth() : CloudLegalHealth {
-        val localVarResponse = cloudGetV1LegalHealthWithHttpInfo()
+    fun getV1LegalHealth() : LegalHealth {
+        val localVarResponse = getV1LegalHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudLegalHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LegalHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -318,28 +318,28 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/legal/health
-     * LegalHealth reports that the legal subsystem is serving and how many built-in templates its catalog carries.
-     * LegalHealth reports that the legal subsystem is serving and how many built-in templates its catalog carries. It reads no tenant, so a liveness prober that sends no principal is answered rather than refused.
-     * @return ApiResponse<CloudLegalHealth?>
+     * Reports that the legal subsystem is serving and how many built-in templates its catalog carries.
+     * Reports that the legal subsystem is serving and how many built-in templates its catalog carries. It reads no tenant, so a liveness prober that sends no principal is answered rather than refused.
+     * @return ApiResponse<LegalHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LegalHealthWithHttpInfo() : ApiResponse<CloudLegalHealth?> {
-        val localVariableConfig = cloudGetV1LegalHealthRequestConfig()
+    fun getV1LegalHealthWithHttpInfo() : ApiResponse<LegalHealth?> {
+        val localVariableConfig = getV1LegalHealthRequestConfig()
 
-        return request<Unit, CloudLegalHealth>(
+        return request<Unit, LegalHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LegalHealth
+     * To obtain the request config of the operation getV1LegalHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1LegalHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1LegalHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -350,16 +350,16 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/legal/templates
-     * ListLegalTemplates returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.
-     * ListLegalTemplates returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.  The listing carries each template&#39;s metadata and its declared MERGE FIELDS — the keys a document generation must supply — but never the template bodies; fetch one template to get its body. Templates in the formation and equity categories are marked counselReview: every document rendered from them carries a counsel notice, and that posture cannot be dropped by an override.
-     * @return CloudTemplateCatalog
+     * Returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.
+     * Returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.  The listing carries each template&#39;s metadata and its declared MERGE FIELDS — the keys a document generation must supply — but never the template bodies; fetch one template to get its body. Templates in the formation and equity categories are marked counselReview: every document rendered from them carries a counsel notice, and that posture cannot be dropped by an override.
+     * @return TemplateCatalog
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -368,11 +368,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LegalTemplates() : CloudTemplateCatalog {
-        val localVarResponse = cloudGetV1LegalTemplatesWithHttpInfo()
+    fun getV1LegalTemplates() : TemplateCatalog {
+        val localVarResponse = getV1LegalTemplatesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTemplateCatalog
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TemplateCatalog
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -388,28 +388,28 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/legal/templates
-     * ListLegalTemplates returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.
-     * ListLegalTemplates returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.  The listing carries each template&#39;s metadata and its declared MERGE FIELDS — the keys a document generation must supply — but never the template bodies; fetch one template to get its body. Templates in the formation and equity categories are marked counselReview: every document rendered from them carries a counsel notice, and that posture cannot be dropped by an override.
-     * @return ApiResponse<CloudTemplateCatalog?>
+     * Returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.
+     * Returns the org&#39;s effective template catalog: every built-in template, with any the org has overridden replaced by its own latest version.  The listing carries each template&#39;s metadata and its declared MERGE FIELDS — the keys a document generation must supply — but never the template bodies; fetch one template to get its body. Templates in the formation and equity categories are marked counselReview: every document rendered from them carries a counsel notice, and that posture cannot be dropped by an override.
+     * @return ApiResponse<TemplateCatalog?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LegalTemplatesWithHttpInfo() : ApiResponse<CloudTemplateCatalog?> {
-        val localVariableConfig = cloudGetV1LegalTemplatesRequestConfig()
+    fun getV1LegalTemplatesWithHttpInfo() : ApiResponse<TemplateCatalog?> {
+        val localVariableConfig = getV1LegalTemplatesRequestConfig()
 
-        return request<Unit, CloudTemplateCatalog>(
+        return request<Unit, TemplateCatalog>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LegalTemplates
+     * To obtain the request config of the operation getV1LegalTemplates
      *
      * @return RequestConfig
      */
-    fun cloudGetV1LegalTemplatesRequestConfig() : RequestConfig<Unit> {
+    fun getV1LegalTemplatesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -420,17 +420,17 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/templates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/legal/templates/{id}
-     * GetLegalTemplate returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields.
-     * GetLegalTemplate returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields. 404 when neither exists.
+     * Returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields.
+     * Returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields. 404 when neither exists.
      * @param id ID is the template&#39;s stable id, e.g. \&quot;nda\&quot; or \&quot;safe\&quot;.
-     * @return CloudTemplateReply
+     * @return TemplateReply
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -439,11 +439,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1LegalTemplatesId(id: kotlin.String) : CloudTemplateReply {
-        val localVarResponse = cloudGetV1LegalTemplatesIdWithHttpInfo(id = id)
+    fun getV1LegalTemplatesById(id: kotlin.String) : TemplateReply {
+        val localVarResponse = getV1LegalTemplatesByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTemplateReply
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TemplateReply
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -459,30 +459,30 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/legal/templates/{id}
-     * GetLegalTemplate returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields.
-     * GetLegalTemplate returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields. 404 when neither exists.
+     * Returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields.
+     * Returns one template resolved for the caller&#39;s org — the org&#39;s own override if it has saved one, else the built-in — with its full text/template body and its declared merge fields. 404 when neither exists.
      * @param id ID is the template&#39;s stable id, e.g. \&quot;nda\&quot; or \&quot;safe\&quot;.
-     * @return ApiResponse<CloudTemplateReply?>
+     * @return ApiResponse<TemplateReply?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1LegalTemplatesIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudTemplateReply?> {
-        val localVariableConfig = cloudGetV1LegalTemplatesIdRequestConfig(id = id)
+    fun getV1LegalTemplatesByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TemplateReply?> {
+        val localVariableConfig = getV1LegalTemplatesByIdRequestConfig(id = id)
 
-        return request<Unit, CloudTemplateReply>(
+        return request<Unit, TemplateReply>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1LegalTemplatesId
+     * To obtain the request config of the operation getV1LegalTemplatesById
      *
      * @param id ID is the template&#39;s stable id, e.g. \&quot;nda\&quot; or \&quot;safe\&quot;.
      * @return RequestConfig
      */
-    fun cloudGetV1LegalTemplatesIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1LegalTemplatesByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -493,17 +493,17 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/templates/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/legal/documents
-     * GenerateLegalDocument renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.
-     * GenerateLegalDocument renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.  The render is PURE and deterministic — no clock, no I/O — so the same template version and the same data always produce identical bytes, which is what makes a generated contract reproducible. It fails CLOSED on a missing merge field: there is no blank-filled contract, only a 400 naming the fields that were absent. When the template is counsel-review the rendered body opens with the counsel notice, which no caller can suppress.  The document is a DRAFT. Hanzo Legal manages documents; it does not give legal advice and does not determine that a document is valid or sufficient.
-     * @param cloudGenerateRequest 
-     * @return CloudDocumentReply
+     * Renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.
+     * Renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.  The render is PURE and deterministic — no clock, no I/O — so the same template version and the same data always produce identical bytes, which is what makes a generated contract reproducible. It fails CLOSED on a missing merge field: there is no blank-filled contract, only a 400 naming the fields that were absent. When the template is counsel-review the rendered body opens with the counsel notice, which no caller can suppress.  The document is a DRAFT. Hanzo Legal manages documents; it does not give legal advice and does not determine that a document is valid or sufficient.
+     * @param generateRequest 
+     * @return DocumentReply
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -512,11 +512,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1LegalDocuments(cloudGenerateRequest: CloudGenerateRequest) : CloudDocumentReply {
-        val localVarResponse = cloudPostV1LegalDocumentsWithHttpInfo(cloudGenerateRequest = cloudGenerateRequest)
+    fun postV1LegalDocuments(generateRequest: GenerateRequest) : DocumentReply {
+        val localVarResponse = postV1LegalDocumentsWithHttpInfo(generateRequest = generateRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocumentReply
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentReply
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -532,31 +532,31 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/legal/documents
-     * GenerateLegalDocument renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.
-     * GenerateLegalDocument renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.  The render is PURE and deterministic — no clock, no I/O — so the same template version and the same data always produce identical bytes, which is what makes a generated contract reproducible. It fails CLOSED on a missing merge field: there is no blank-filled contract, only a 400 naming the fields that were absent. When the template is counsel-review the rendered body opens with the counsel notice, which no caller can suppress.  The document is a DRAFT. Hanzo Legal manages documents; it does not give legal advice and does not determine that a document is valid or sufficient.
-     * @param cloudGenerateRequest 
-     * @return ApiResponse<CloudDocumentReply?>
+     * Renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.
+     * Renders a document from a template and the caller&#39;s own merge data, seals it in the org&#39;s store, and returns it with its rendered body.  The render is PURE and deterministic — no clock, no I/O — so the same template version and the same data always produce identical bytes, which is what makes a generated contract reproducible. It fails CLOSED on a missing merge field: there is no blank-filled contract, only a 400 naming the fields that were absent. When the template is counsel-review the rendered body opens with the counsel notice, which no caller can suppress.  The document is a DRAFT. Hanzo Legal manages documents; it does not give legal advice and does not determine that a document is valid or sufficient.
+     * @param generateRequest 
+     * @return ApiResponse<DocumentReply?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LegalDocumentsWithHttpInfo(cloudGenerateRequest: CloudGenerateRequest) : ApiResponse<CloudDocumentReply?> {
-        val localVariableConfig = cloudPostV1LegalDocumentsRequestConfig(cloudGenerateRequest = cloudGenerateRequest)
+    fun postV1LegalDocumentsWithHttpInfo(generateRequest: GenerateRequest) : ApiResponse<DocumentReply?> {
+        val localVariableConfig = postV1LegalDocumentsRequestConfig(generateRequest = generateRequest)
 
-        return request<CloudGenerateRequest, CloudDocumentReply>(
+        return request<GenerateRequest, DocumentReply>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1LegalDocuments
+     * To obtain the request config of the operation postV1LegalDocuments
      *
-     * @param cloudGenerateRequest 
+     * @param generateRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1LegalDocumentsRequestConfig(cloudGenerateRequest: CloudGenerateRequest) : RequestConfig<CloudGenerateRequest> {
-        val localVariableBody = cloudGenerateRequest
+    fun postV1LegalDocumentsRequestConfig(generateRequest: GenerateRequest) : RequestConfig<GenerateRequest> {
+        val localVariableBody = generateRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -567,15 +567,92 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/legal/documents/{id}/sign
+     * Opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.
+     * Opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.  The provider is whatever this deployment has wired. The honest default is \&quot;manual\&quot;: the request is recorded and the org fulfils it out of band — nothing here fabricates a signature, and the stub never reports itself complete.
+     * @param id ID is the document to send for signature, from the path.
+     * @param signRequest 
+     * @return SignReply
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1LegalDocumentsByIdSign(id: kotlin.String, signRequest: SignRequest) : SignReply {
+        val localVarResponse = postV1LegalDocumentsByIdSignWithHttpInfo(id = id, signRequest = signRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SignReply
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/legal/documents/{id}/sign
+     * Opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.
+     * Opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.  The provider is whatever this deployment has wired. The honest default is \&quot;manual\&quot;: the request is recorded and the org fulfils it out of band — nothing here fabricates a signature, and the stub never reports itself complete.
+     * @param id ID is the document to send for signature, from the path.
+     * @param signRequest 
+     * @return ApiResponse<SignReply?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1LegalDocumentsByIdSignWithHttpInfo(id: kotlin.String, signRequest: SignRequest) : ApiResponse<SignReply?> {
+        val localVariableConfig = postV1LegalDocumentsByIdSignRequestConfig(id = id, signRequest = signRequest)
+
+        return request<SignRequest, SignReply>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1LegalDocumentsByIdSign
+     *
+     * @param id ID is the document to send for signature, from the path.
+     * @param signRequest 
+     * @return RequestConfig
+     */
+    fun postV1LegalDocumentsByIdSignRequestConfig(id: kotlin.String, signRequest: SignRequest) : RequestConfig<SignRequest> {
+        val localVariableBody = signRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/legal/documents/{id}/sign".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/legal/documents/{id}/sign/complete
-     * 
-     * 
+     * Record that a generated document&#39;s signature request completed
+     * Records completion of the signature request opened over a generated document and answers the document with a &#x60;signed&#x60; flag.  The e-sign provider&#39;s own status is consulted FIRST and is the default answer; an explicit &#x60;signed&#x60; field in the body overrides it. That override is the whole point: the default &#x60;manual&#x60; provider never self-completes, so a reviewer (or a real provider&#39;s webhook) is what moves the document. A completion flips the document to &#x60;signed&#x60;, stamps &#x60;signedAt&#x60;, and writes a &#x60;legal.document.signed&#x60; audit event; a provider still reporting incomplete answers 200 with the document unchanged, so the call is safe to repeat and never fabricates a signature.  Org-scoped and fails closed: a validated principal is required (403 without one), the document is read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, a document with no open signature request is a 400, and a provider whose status call errors is a 502.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -585,8 +662,8 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1LegalDocumentsByIdSignComplete(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1LegalDocumentsByIdSignCompleteWithHttpInfo(id = id)
+    fun postV1LegalDocumentsByIdSignComplete(id: kotlin.String) : Unit {
+        val localVarResponse = postV1LegalDocumentsByIdSignCompleteWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -605,16 +682,16 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/legal/documents/{id}/sign/complete
-     * 
-     * 
+     * Record that a generated document&#39;s signature request completed
+     * Records completion of the signature request opened over a generated document and answers the document with a &#x60;signed&#x60; flag.  The e-sign provider&#39;s own status is consulted FIRST and is the default answer; an explicit &#x60;signed&#x60; field in the body overrides it. That override is the whole point: the default &#x60;manual&#x60; provider never self-completes, so a reviewer (or a real provider&#39;s webhook) is what moves the document. A completion flips the document to &#x60;signed&#x60;, stamps &#x60;signedAt&#x60;, and writes a &#x60;legal.document.signed&#x60; audit event; a provider still reporting incomplete answers 200 with the document unchanged, so the call is safe to repeat and never fabricates a signature.  Org-scoped and fails closed: a validated principal is required (403 without one), the document is read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, a document with no open signature request is a 400, and a provider whose status call errors is a 502.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LegalDocumentsByIdSignCompleteWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1LegalDocumentsByIdSignCompleteRequestConfig(id = id)
+    fun postV1LegalDocumentsByIdSignCompleteWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1LegalDocumentsByIdSignCompleteRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -622,12 +699,12 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1LegalDocumentsByIdSignComplete
+     * To obtain the request config of the operation postV1LegalDocumentsByIdSignComplete
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1LegalDocumentsByIdSignCompleteRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1LegalDocumentsByIdSignCompleteRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -637,94 +714,17 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/documents/{id}/sign/complete".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/legal/documents/{id}/sign
-     * RequestLegalSignature opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.
-     * RequestLegalSignature opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.  The provider is whatever this deployment has wired. The honest default is \&quot;manual\&quot;: the request is recorded and the org fulfils it out of band — nothing here fabricates a signature, and the stub never reports itself complete.
-     * @param id ID is the document to send for signature, from the path.
-     * @param cloudSignRequest 
-     * @return CloudSignReply
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1LegalDocumentsIdSign(id: kotlin.String, cloudSignRequest: CloudSignRequest) : CloudSignReply {
-        val localVarResponse = cloudPostV1LegalDocumentsIdSignWithHttpInfo(id = id, cloudSignRequest = cloudSignRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSignReply
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/legal/documents/{id}/sign
-     * RequestLegalSignature opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.
-     * RequestLegalSignature opens an e-signature request over one document and moves it to out_for_signature, returning the provider&#39;s reference for the request.  The provider is whatever this deployment has wired. The honest default is \&quot;manual\&quot;: the request is recorded and the org fulfils it out of band — nothing here fabricates a signature, and the stub never reports itself complete.
-     * @param id ID is the document to send for signature, from the path.
-     * @param cloudSignRequest 
-     * @return ApiResponse<CloudSignReply?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LegalDocumentsIdSignWithHttpInfo(id: kotlin.String, cloudSignRequest: CloudSignRequest) : ApiResponse<CloudSignReply?> {
-        val localVariableConfig = cloudPostV1LegalDocumentsIdSignRequestConfig(id = id, cloudSignRequest = cloudSignRequest)
-
-        return request<CloudSignRequest, CloudSignReply>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1LegalDocumentsIdSign
-     *
-     * @param id ID is the document to send for signature, from the path.
-     * @param cloudSignRequest 
-     * @return RequestConfig
-     */
-    fun cloudPostV1LegalDocumentsIdSignRequestConfig(id: kotlin.String, cloudSignRequest: CloudSignRequest) : RequestConfig<CloudSignRequest> {
-        val localVariableBody = cloudSignRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/legal/documents/{id}/sign".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/legal/filings
-     * CreateLegalFiling records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.
-     * CreateLegalFiling records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.  It is a TRACKING record, not an autonomous filing. With no filing partner wired the honest status is \&quot;manual\&quot; and the note says so: the documents were generated for signature, and the org files them through its registered agent. Nothing here invents a filing id it does not have.  Every document id must belong to the caller&#39;s org; one that does not is a 404 naming it, so a filing can never reach across tenants.
-     * @param cloudFilingRequest 
-     * @return CloudFilingReply
+     * Records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.
+     * Records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.  It is a TRACKING record, not an autonomous filing. With no filing partner wired the honest status is \&quot;manual\&quot; and the note says so: the documents were generated for signature, and the org files them through its registered agent. Nothing here invents a filing id it does not have.  Every document id must belong to the caller&#39;s org; one that does not is a 404 naming it, so a filing can never reach across tenants.
+     * @param filingRequest 
+     * @return FilingReply
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -733,11 +733,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1LegalFilings(cloudFilingRequest: CloudFilingRequest) : CloudFilingReply {
-        val localVarResponse = cloudPostV1LegalFilingsWithHttpInfo(cloudFilingRequest = cloudFilingRequest)
+    fun postV1LegalFilings(filingRequest: FilingRequest) : FilingReply {
+        val localVarResponse = postV1LegalFilingsWithHttpInfo(filingRequest = filingRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFilingReply
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FilingReply
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -753,31 +753,31 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/legal/filings
-     * CreateLegalFiling records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.
-     * CreateLegalFiling records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.  It is a TRACKING record, not an autonomous filing. With no filing partner wired the honest status is \&quot;manual\&quot; and the note says so: the documents were generated for signature, and the org files them through its registered agent. Nothing here invents a filing id it does not have.  Every document id must belong to the caller&#39;s org; one that does not is a 404 naming it, so a filing can never reach across tenants.
-     * @param cloudFilingRequest 
-     * @return ApiResponse<CloudFilingReply?>
+     * Records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.
+     * Records a filing of one or more of the org&#39;s documents with a state or agency, and returns the tracking record.  It is a TRACKING record, not an autonomous filing. With no filing partner wired the honest status is \&quot;manual\&quot; and the note says so: the documents were generated for signature, and the org files them through its registered agent. Nothing here invents a filing id it does not have.  Every document id must belong to the caller&#39;s org; one that does not is a 404 naming it, so a filing can never reach across tenants.
+     * @param filingRequest 
+     * @return ApiResponse<FilingReply?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1LegalFilingsWithHttpInfo(cloudFilingRequest: CloudFilingRequest) : ApiResponse<CloudFilingReply?> {
-        val localVariableConfig = cloudPostV1LegalFilingsRequestConfig(cloudFilingRequest = cloudFilingRequest)
+    fun postV1LegalFilingsWithHttpInfo(filingRequest: FilingRequest) : ApiResponse<FilingReply?> {
+        val localVariableConfig = postV1LegalFilingsRequestConfig(filingRequest = filingRequest)
 
-        return request<CloudFilingRequest, CloudFilingReply>(
+        return request<FilingRequest, FilingReply>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1LegalFilings
+     * To obtain the request config of the operation postV1LegalFilings
      *
-     * @param cloudFilingRequest 
+     * @param filingRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1LegalFilingsRequestConfig(cloudFilingRequest: CloudFilingRequest) : RequestConfig<CloudFilingRequest> {
-        val localVariableBody = cloudFilingRequest
+    fun postV1LegalFilingsRequestConfig(filingRequest: FilingRequest) : RequestConfig<FilingRequest> {
+        val localVariableBody = filingRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -788,18 +788,18 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/filings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/legal/templates/{id}
-     * SaveLegalTemplateOverride saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number.
-     * SaveLegalTemplateOverride saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number. It takes effect for that org only; other orgs keep the built-in.  Two boundaries cannot be crossed here. Overriding a built-in INHERITS its category and its counsel-review posture, which can be raised but never dropped; and a formation or equity template is counsel-review whatever the caller sends, so no org can generate a securities-class document without the notice.  The body is validated on save, not at generation: a template that references an UNDECLARED merge field is refused with 400 rather than stored and rendered blank into a contract months later.
+     * Saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number.
+     * Saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number. It takes effect for that org only; other orgs keep the built-in.  Two boundaries cannot be crossed here. Overriding a built-in INHERITS its category and its counsel-review posture, which can be raised but never dropped; and a formation or equity template is counsel-review whatever the caller sends, so no org can generate a securities-class document without the notice.  The body is validated on save, not at generation: a template that references an UNDECLARED merge field is refused with 400 rather than stored and rendered blank into a contract months later.
      * @param id ID is the template to override, from the path. Overriding a built-in id inherits that built-in&#39;s category, title and counsel-review posture.
-     * @param cloudTemplateOverride 
-     * @return CloudTemplateReply
+     * @param templateOverride 
+     * @return TemplateReply
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -808,11 +808,11 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1LegalTemplatesId(id: kotlin.String, cloudTemplateOverride: CloudTemplateOverride) : CloudTemplateReply {
-        val localVarResponse = cloudPutV1LegalTemplatesIdWithHttpInfo(id = id, cloudTemplateOverride = cloudTemplateOverride)
+    fun putV1LegalTemplatesById(id: kotlin.String, templateOverride: TemplateOverride) : TemplateReply {
+        val localVarResponse = putV1LegalTemplatesByIdWithHttpInfo(id = id, templateOverride = templateOverride)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTemplateReply
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TemplateReply
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -828,33 +828,33 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/legal/templates/{id}
-     * SaveLegalTemplateOverride saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number.
-     * SaveLegalTemplateOverride saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number. It takes effect for that org only; other orgs keep the built-in.  Two boundaries cannot be crossed here. Overriding a built-in INHERITS its category and its counsel-review posture, which can be raised but never dropped; and a formation or equity template is counsel-review whatever the caller sends, so no org can generate a securities-class document without the notice.  The body is validated on save, not at generation: a template that references an UNDECLARED merge field is refused with 400 rather than stored and rendered blank into a contract months later.
+     * Saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number.
+     * Saves the org&#39;s own version of a template — a custom NDA, a house MSA — and returns it with its new version number. It takes effect for that org only; other orgs keep the built-in.  Two boundaries cannot be crossed here. Overriding a built-in INHERITS its category and its counsel-review posture, which can be raised but never dropped; and a formation or equity template is counsel-review whatever the caller sends, so no org can generate a securities-class document without the notice.  The body is validated on save, not at generation: a template that references an UNDECLARED merge field is refused with 400 rather than stored and rendered blank into a contract months later.
      * @param id ID is the template to override, from the path. Overriding a built-in id inherits that built-in&#39;s category, title and counsel-review posture.
-     * @param cloudTemplateOverride 
-     * @return ApiResponse<CloudTemplateReply?>
+     * @param templateOverride 
+     * @return ApiResponse<TemplateReply?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1LegalTemplatesIdWithHttpInfo(id: kotlin.String, cloudTemplateOverride: CloudTemplateOverride) : ApiResponse<CloudTemplateReply?> {
-        val localVariableConfig = cloudPutV1LegalTemplatesIdRequestConfig(id = id, cloudTemplateOverride = cloudTemplateOverride)
+    fun putV1LegalTemplatesByIdWithHttpInfo(id: kotlin.String, templateOverride: TemplateOverride) : ApiResponse<TemplateReply?> {
+        val localVariableConfig = putV1LegalTemplatesByIdRequestConfig(id = id, templateOverride = templateOverride)
 
-        return request<CloudTemplateOverride, CloudTemplateReply>(
+        return request<TemplateOverride, TemplateReply>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1LegalTemplatesId
+     * To obtain the request config of the operation putV1LegalTemplatesById
      *
      * @param id ID is the template to override, from the path. Overriding a built-in id inherits that built-in&#39;s category, title and counsel-review posture.
-     * @param cloudTemplateOverride 
+     * @param templateOverride 
      * @return RequestConfig
      */
-    fun cloudPutV1LegalTemplatesIdRequestConfig(id: kotlin.String, cloudTemplateOverride: CloudTemplateOverride) : RequestConfig<CloudTemplateOverride> {
-        val localVariableBody = cloudTemplateOverride
+    fun putV1LegalTemplatesByIdRequestConfig(id: kotlin.String, templateOverride: TemplateOverride) : RequestConfig<TemplateOverride> {
+        val localVariableBody = templateOverride
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -865,7 +865,7 @@ class LegalApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/legal/templates/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

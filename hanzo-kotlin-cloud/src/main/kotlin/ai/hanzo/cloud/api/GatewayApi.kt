@@ -19,7 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudPolicy
+import ai.hanzo.cloud.model.Policy
+import ai.hanzo.cloud.model.TrafficView
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,10 +47,10 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * GET /v1/gateway/config
-     * Read returns the EFFECTIVE edge policy the caller is subject to: the platform CORS allowlist and pre-auth per-IP flood cap in force, plus the caller&#39;s own authenticated rate ceiling, edge-cache TTLs and accepted-method allowlist.
-     * Read returns the EFFECTIVE edge policy the caller is subject to: the platform CORS allowlist and pre-auth per-IP flood cap in force, plus the caller&#39;s own authenticated rate ceiling, edge-cache TTLs and accepted-method allowlist. A SuperAdmin may inspect a specific tenant&#39;s effective policy with ?org&#x3D;&lt;slug&gt;.
-     * @return CloudPolicy
+     * GET /v1/gateway/traffic
+     * Report who is calling this org&#39;s API right now
+     * Traffic reports who is calling this organization&#39;s API right now: the request count for the last minute split by AGENCY LANE — agent, human, bot, unknown — and the busiest callers behind it, each with its request count, its authentication-failure count, how many distinct paths it touched, and any verdict currently held against it.  The lane split is the answer to the question a generic bot filter cannot answer: which of this traffic is the customer&#39;s own automation and which is somebody working through a list. It is computed from credentials we issued, not from the client&#39;s self-description, so a scraper cannot move itself into the agent lane by editing a header.  A validated caller appears as a FINGERPRINT — a one-way, per-process digest. It is stable enough to recognise the same caller across a minute and cannot be turned back into a key, so this report is safe to read, screenshot and paste.  It also reports what the sensor&#39;s own ceilings are doing (strain, tracked, ceiling, refused) and how many screens the scorer did not answer (unscored), so a control that has stopped measuring or a judge that has stopped answering is a number here rather than a quiet day.  Scoped to the caller&#39;s own validated organization. A SuperAdmin may inspect a specific tenant with ?org&#x3D;&lt;slug&gt;, or the lane that has no tenant — every caller the identity boundary could not validate — with an empty ?org&#x3D;.
+     * @return TrafficView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +59,81 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GatewayConfig() : CloudPolicy {
-        val localVarResponse = cloudGetV1GatewayConfigWithHttpInfo()
+    fun gatewayTraffic() : TrafficView {
+        val localVarResponse = gatewayTrafficWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPolicy
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TrafficView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/gateway/traffic
+     * Report who is calling this org&#39;s API right now
+     * Traffic reports who is calling this organization&#39;s API right now: the request count for the last minute split by AGENCY LANE — agent, human, bot, unknown — and the busiest callers behind it, each with its request count, its authentication-failure count, how many distinct paths it touched, and any verdict currently held against it.  The lane split is the answer to the question a generic bot filter cannot answer: which of this traffic is the customer&#39;s own automation and which is somebody working through a list. It is computed from credentials we issued, not from the client&#39;s self-description, so a scraper cannot move itself into the agent lane by editing a header.  A validated caller appears as a FINGERPRINT — a one-way, per-process digest. It is stable enough to recognise the same caller across a minute and cannot be turned back into a key, so this report is safe to read, screenshot and paste.  It also reports what the sensor&#39;s own ceilings are doing (strain, tracked, ceiling, refused) and how many screens the scorer did not answer (unscored), so a control that has stopped measuring or a judge that has stopped answering is a number here rather than a quiet day.  Scoped to the caller&#39;s own validated organization. A SuperAdmin may inspect a specific tenant with ?org&#x3D;&lt;slug&gt;, or the lane that has no tenant — every caller the identity boundary could not validate — with an empty ?org&#x3D;.
+     * @return ApiResponse<TrafficView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun gatewayTrafficWithHttpInfo() : ApiResponse<TrafficView?> {
+        val localVariableConfig = gatewayTrafficRequestConfig()
+
+        return request<Unit, TrafficView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation gatewayTraffic
+     *
+     * @return RequestConfig
+     */
+    fun gatewayTrafficRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/gateway/traffic",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/gateway/config
+     * Read returns the EFFECTIVE edge policy the caller is subject to: the platform CORS allowlist and pre-auth per-IP flood cap in force, plus the caller&#39;s own authenticated rate ceiling, edge-cache TTLs and accepted-method allowlist.
+     * Read returns the EFFECTIVE edge policy the caller is subject to: the platform CORS allowlist and pre-auth per-IP flood cap in force, plus the caller&#39;s own authenticated rate ceiling, edge-cache TTLs and accepted-method allowlist. A SuperAdmin may inspect a specific tenant&#39;s effective policy with ?org&#x3D;&lt;slug&gt;.
+     * @return Policy
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1GatewayConfig() : Policy {
+        val localVarResponse = getV1GatewayConfigWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Policy
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,26 +151,26 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/gateway/config
      * Read returns the EFFECTIVE edge policy the caller is subject to: the platform CORS allowlist and pre-auth per-IP flood cap in force, plus the caller&#39;s own authenticated rate ceiling, edge-cache TTLs and accepted-method allowlist.
      * Read returns the EFFECTIVE edge policy the caller is subject to: the platform CORS allowlist and pre-auth per-IP flood cap in force, plus the caller&#39;s own authenticated rate ceiling, edge-cache TTLs and accepted-method allowlist. A SuperAdmin may inspect a specific tenant&#39;s effective policy with ?org&#x3D;&lt;slug&gt;.
-     * @return ApiResponse<CloudPolicy?>
+     * @return ApiResponse<Policy?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GatewayConfigWithHttpInfo() : ApiResponse<CloudPolicy?> {
-        val localVariableConfig = cloudGetV1GatewayConfigRequestConfig()
+    fun getV1GatewayConfigWithHttpInfo() : ApiResponse<Policy?> {
+        val localVariableConfig = getV1GatewayConfigRequestConfig()
 
-        return request<Unit, CloudPolicy>(
+        return request<Unit, Policy>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GatewayConfig
+     * To obtain the request config of the operation getV1GatewayConfig
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GatewayConfigRequestConfig() : RequestConfig<Unit> {
+    fun getV1GatewayConfigRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +181,7 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/gateway/config",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -118,9 +189,9 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * PUT /v1/gateway/config
      * Write updates one policy scope and returns the policy in force after the write.
-     * Write updates one policy scope and returns the policy in force after the write. A body carrying any PLATFORM field (cors_origins, per_ip_rpm, window_sec) is a platform write and requires SuperAdmin; otherwise it is a per-org write (org_rpm, cache_ttl_sec, cache_paths, methods) scoped to the caller&#39;s own org — or, for a SuperAdmin, the tenant named by ?org&#x3D;&lt;slug&gt;. A body that sets nothing is a 400. updated_at and updated_by are server-stamped; a client-supplied value is ignored.
-     * @param cloudPolicy 
-     * @return CloudPolicy
+     * Write updates one policy scope and returns the policy in force after the write. A body carrying any PLATFORM field (cors_origins, per_ip_rpm, window_sec) is a platform write and requires SuperAdmin; otherwise it is a per-org write (org_rpm, cache_ttl_sec, cache_paths, methods) scoped to the caller&#39;s own org — or, for a SuperAdmin, the tenant named by ?org&#x3D;&lt;slug&gt;. A body that sets nothing is a 400. The abuse gate&#39;s mode is an OPERATOR field: setting it requires SuperAdmin, whichever organization it lands on. updated_at and updated_by are server-stamped; a client-supplied value is ignored.
+     * @param policy 
+     * @return Policy
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -129,11 +200,11 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1GatewayConfig(cloudPolicy: CloudPolicy) : CloudPolicy {
-        val localVarResponse = cloudPutV1GatewayConfigWithHttpInfo(cloudPolicy = cloudPolicy)
+    fun putV1GatewayConfig(policy: Policy) : Policy {
+        val localVarResponse = putV1GatewayConfigWithHttpInfo(policy = policy)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPolicy
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Policy
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -150,30 +221,30 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     /**
      * PUT /v1/gateway/config
      * Write updates one policy scope and returns the policy in force after the write.
-     * Write updates one policy scope and returns the policy in force after the write. A body carrying any PLATFORM field (cors_origins, per_ip_rpm, window_sec) is a platform write and requires SuperAdmin; otherwise it is a per-org write (org_rpm, cache_ttl_sec, cache_paths, methods) scoped to the caller&#39;s own org — or, for a SuperAdmin, the tenant named by ?org&#x3D;&lt;slug&gt;. A body that sets nothing is a 400. updated_at and updated_by are server-stamped; a client-supplied value is ignored.
-     * @param cloudPolicy 
-     * @return ApiResponse<CloudPolicy?>
+     * Write updates one policy scope and returns the policy in force after the write. A body carrying any PLATFORM field (cors_origins, per_ip_rpm, window_sec) is a platform write and requires SuperAdmin; otherwise it is a per-org write (org_rpm, cache_ttl_sec, cache_paths, methods) scoped to the caller&#39;s own org — or, for a SuperAdmin, the tenant named by ?org&#x3D;&lt;slug&gt;. A body that sets nothing is a 400. The abuse gate&#39;s mode is an OPERATOR field: setting it requires SuperAdmin, whichever organization it lands on. updated_at and updated_by are server-stamped; a client-supplied value is ignored.
+     * @param policy 
+     * @return ApiResponse<Policy?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1GatewayConfigWithHttpInfo(cloudPolicy: CloudPolicy) : ApiResponse<CloudPolicy?> {
-        val localVariableConfig = cloudPutV1GatewayConfigRequestConfig(cloudPolicy = cloudPolicy)
+    fun putV1GatewayConfigWithHttpInfo(policy: Policy) : ApiResponse<Policy?> {
+        val localVariableConfig = putV1GatewayConfigRequestConfig(policy = policy)
 
-        return request<CloudPolicy, CloudPolicy>(
+        return request<Policy, Policy>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1GatewayConfig
+     * To obtain the request config of the operation putV1GatewayConfig
      *
-     * @param cloudPolicy 
+     * @param policy 
      * @return RequestConfig
      */
-    fun cloudPutV1GatewayConfigRequestConfig(cloudPolicy: CloudPolicy) : RequestConfig<CloudPolicy> {
-        val localVariableBody = cloudPolicy
+    fun putV1GatewayConfigRequestConfig(policy: Policy) : RequestConfig<Policy> {
+        val localVariableBody = policy
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -184,7 +255,7 @@ class GatewayApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/gateway/config",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

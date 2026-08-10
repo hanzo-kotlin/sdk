@@ -19,8 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudEntitlementsView
-import ai.hanzo.cloud.model.CloudMutateReq
+import ai.hanzo.cloud.model.EntitlementsView
+import ai.hanzo.cloud.model.MutateReq
+import ai.hanzo.cloud.model.OnboardReq
+import ai.hanzo.cloud.model.OnboardResp
 
 import com.google.gson.annotations.SerializedName
 
@@ -51,7 +53,7 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Get lists the products an org has ENABLED — its own intent, which the console&#39;s paid-product sidebar reads to decide what to show.
      * Get lists the products an org has ENABLED — its own intent, which the console&#39;s paid-product sidebar reads to decide what to show. It is distinct from what the org&#39;s plan ENTITLES it to (that is GET /v1/entitlements, resolved from commerce).  A caller may only read its OWN org&#39;s row; a platform super admin may read any.
      * @param org 
-     * @return CloudEntitlementsView
+     * @return EntitlementsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +62,11 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1OrgsOrgEntitlements(org: kotlin.String) : CloudEntitlementsView {
-        val localVarResponse = cloudGetV1OrgsOrgEntitlementsWithHttpInfo(org = org)
+    fun getV1OrgsByOrgEntitlements(org: kotlin.String) : EntitlementsView {
+        val localVarResponse = getV1OrgsByOrgEntitlementsWithHttpInfo(org = org)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEntitlementsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EntitlementsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -83,27 +85,27 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Get lists the products an org has ENABLED — its own intent, which the console&#39;s paid-product sidebar reads to decide what to show.
      * Get lists the products an org has ENABLED — its own intent, which the console&#39;s paid-product sidebar reads to decide what to show. It is distinct from what the org&#39;s plan ENTITLES it to (that is GET /v1/entitlements, resolved from commerce).  A caller may only read its OWN org&#39;s row; a platform super admin may read any.
      * @param org 
-     * @return ApiResponse<CloudEntitlementsView?>
+     * @return ApiResponse<EntitlementsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1OrgsOrgEntitlementsWithHttpInfo(org: kotlin.String) : ApiResponse<CloudEntitlementsView?> {
-        val localVariableConfig = cloudGetV1OrgsOrgEntitlementsRequestConfig(org = org)
+    fun getV1OrgsByOrgEntitlementsWithHttpInfo(org: kotlin.String) : ApiResponse<EntitlementsView?> {
+        val localVariableConfig = getV1OrgsByOrgEntitlementsRequestConfig(org = org)
 
-        return request<Unit, CloudEntitlementsView>(
+        return request<Unit, EntitlementsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1OrgsOrgEntitlements
+     * To obtain the request config of the operation getV1OrgsByOrgEntitlements
      *
      * @param org 
      * @return RequestConfig
      */
-    fun cloudGetV1OrgsOrgEntitlementsRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
+    fun getV1OrgsByOrgEntitlementsRequestConfig(org: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -114,7 +116,81 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/orgs/{org}/entitlements".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/orgs
+     * Onboard creates the caller&#39;s organization.
+     * Onboard creates the caller&#39;s organization. Two flows, keyed on whether the caller already has a home org (mirrors app/onboard/route.ts):    - FIRST-RUN (no home org): create + MOVE the user in as admin, so their next     JWT carries the new owner and the cloud scopes everything to it. This is the     path a fresh OAuth sign-up takes, from the sign-up application&#39;s org.   - ADDITIONAL (owner set): create the org but do NOT move the user — a move     changes their IAM owner (stripping a SuperAdmin&#39;s status + orphaning their     current org). They reach the new org via the OrgSwitcher, which re-scopes     X-Org-Id without touching IAM membership. A personal-org request from someone     who already has an org is meaningless → 409.
+     * @param onboardReq 
+     * @return OnboardResp
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1Orgs(onboardReq: OnboardReq) : OnboardResp {
+        val localVarResponse = postV1OrgsWithHttpInfo(onboardReq = onboardReq)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OnboardResp
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/orgs
+     * Onboard creates the caller&#39;s organization.
+     * Onboard creates the caller&#39;s organization. Two flows, keyed on whether the caller already has a home org (mirrors app/onboard/route.ts):    - FIRST-RUN (no home org): create + MOVE the user in as admin, so their next     JWT carries the new owner and the cloud scopes everything to it. This is the     path a fresh OAuth sign-up takes, from the sign-up application&#39;s org.   - ADDITIONAL (owner set): create the org but do NOT move the user — a move     changes their IAM owner (stripping a SuperAdmin&#39;s status + orphaning their     current org). They reach the new org via the OrgSwitcher, which re-scopes     X-Org-Id without touching IAM membership. A personal-org request from someone     who already has an org is meaningless → 409.
+     * @param onboardReq 
+     * @return ApiResponse<OnboardResp?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1OrgsWithHttpInfo(onboardReq: OnboardReq) : ApiResponse<OnboardResp?> {
+        val localVariableConfig = postV1OrgsRequestConfig(onboardReq = onboardReq)
+
+        return request<OnboardReq, OnboardResp>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1Orgs
+     *
+     * @param onboardReq 
+     * @return RequestConfig
+     */
+    fun postV1OrgsRequestConfig(onboardReq: OnboardReq) : RequestConfig<OnboardReq> {
+        val localVariableBody = onboardReq
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/orgs",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -124,8 +200,8 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Post turns products on or off for an org and returns the enabled set afterwards.
      * Post turns products on or off for an org and returns the enabled set afterwards.  A product may only be ENABLED if the org&#39;s plan already ENTITLES it, so enabling never spends new money — a product the plan does not grant answers 402 and the console routes that to an upgrade prompt. DISABLING is never gated. A platform super admin bypasses the plan check (operator comp/grant) and may target any org; everyone else may only change their own. Commerce unreachable is a 503, never an implicit yes.
      * @param org 
-     * @param cloudMutateReq 
-     * @return CloudEntitlementsView
+     * @param mutateReq 
+     * @return EntitlementsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -134,11 +210,11 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1OrgsOrgEntitlements(org: kotlin.String, cloudMutateReq: CloudMutateReq) : CloudEntitlementsView {
-        val localVarResponse = cloudPostV1OrgsOrgEntitlementsWithHttpInfo(org = org, cloudMutateReq = cloudMutateReq)
+    fun postV1OrgsByOrgEntitlements(org: kotlin.String, mutateReq: MutateReq) : EntitlementsView {
+        val localVarResponse = postV1OrgsByOrgEntitlementsWithHttpInfo(org = org, mutateReq = mutateReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudEntitlementsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as EntitlementsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -157,30 +233,30 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Post turns products on or off for an org and returns the enabled set afterwards.
      * Post turns products on or off for an org and returns the enabled set afterwards.  A product may only be ENABLED if the org&#39;s plan already ENTITLES it, so enabling never spends new money — a product the plan does not grant answers 402 and the console routes that to an upgrade prompt. DISABLING is never gated. A platform super admin bypasses the plan check (operator comp/grant) and may target any org; everyone else may only change their own. Commerce unreachable is a 503, never an implicit yes.
      * @param org 
-     * @param cloudMutateReq 
-     * @return ApiResponse<CloudEntitlementsView?>
+     * @param mutateReq 
+     * @return ApiResponse<EntitlementsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1OrgsOrgEntitlementsWithHttpInfo(org: kotlin.String, cloudMutateReq: CloudMutateReq) : ApiResponse<CloudEntitlementsView?> {
-        val localVariableConfig = cloudPostV1OrgsOrgEntitlementsRequestConfig(org = org, cloudMutateReq = cloudMutateReq)
+    fun postV1OrgsByOrgEntitlementsWithHttpInfo(org: kotlin.String, mutateReq: MutateReq) : ApiResponse<EntitlementsView?> {
+        val localVariableConfig = postV1OrgsByOrgEntitlementsRequestConfig(org = org, mutateReq = mutateReq)
 
-        return request<CloudMutateReq, CloudEntitlementsView>(
+        return request<MutateReq, EntitlementsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1OrgsOrgEntitlements
+     * To obtain the request config of the operation postV1OrgsByOrgEntitlements
      *
      * @param org 
-     * @param cloudMutateReq 
+     * @param mutateReq 
      * @return RequestConfig
      */
-    fun cloudPostV1OrgsOrgEntitlementsRequestConfig(org: kotlin.String, cloudMutateReq: CloudMutateReq) : RequestConfig<CloudMutateReq> {
-        val localVariableBody = cloudMutateReq
+    fun postV1OrgsByOrgEntitlementsRequestConfig(org: kotlin.String, mutateReq: MutateReq) : RequestConfig<MutateReq> {
+        val localVariableBody = mutateReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -191,7 +267,7 @@ class OrgsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/orgs/{org}/entitlements".replace("{"+"org"+"}", encodeURIComponent(org.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,15 +19,15 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudDocType
-import ai.hanzo.cloud.model.CloudDocTypeList
-import ai.hanzo.cloud.model.CloudDocumentList
-import ai.hanzo.cloud.model.CloudInstall
-import ai.hanzo.cloud.model.CloudModuleList
-import ai.hanzo.cloud.model.CloudModuleState
-import ai.hanzo.cloud.model.CloudRole
-import ai.hanzo.cloud.model.CloudRoleList
-import ai.hanzo.cloud.model.CloudSummaryView
+import ai.hanzo.cloud.model.DocType
+import ai.hanzo.cloud.model.DocTypeList
+import ai.hanzo.cloud.model.DocumentList
+import ai.hanzo.cloud.model.Install
+import ai.hanzo.cloud.model.ModuleList
+import ai.hanzo.cloud.model.ModuleState
+import ai.hanzo.cloud.model.RoleAssignment
+import ai.hanzo.cloud.model.RoleList
+import ai.hanzo.cloud.model.SummaryView
 
 import com.google.gson.annotations.SerializedName
 
@@ -67,8 +67,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1FrameworkDoctypeName(doctype: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1FrameworkDoctypeNameWithHttpInfo(doctype = doctype, name = name)
+    fun deleteV1FrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1FrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -96,8 +96,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1FrameworkDoctypeNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1FrameworkDoctypeNameRequestConfig(doctype = doctype, name = name)
+    fun deleteV1FrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1FrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -105,13 +105,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1FrameworkDoctypeName
+     * To obtain the request config of the operation deleteV1FrameworkByDoctypeByName
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun cloudDeleteV1FrameworkDoctypeNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1FrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -121,7 +121,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -139,8 +139,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1FrameworkDoctypesName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1FrameworkDoctypesNameWithHttpInfo(name = name)
+    fun deleteV1FrameworkDoctypesByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1FrameworkDoctypesByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -167,8 +167,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1FrameworkDoctypesNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1FrameworkDoctypesNameRequestConfig(name = name)
+    fun deleteV1FrameworkDoctypesByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1FrameworkDoctypesByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -176,12 +176,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1FrameworkDoctypesName
+     * To obtain the request config of the operation deleteV1FrameworkDoctypesByName
      *
      * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun cloudDeleteV1FrameworkDoctypesNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1FrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -191,7 +191,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -210,8 +210,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1FrameworkRolesUserRole(user: kotlin.String, role: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1FrameworkRolesUserRoleWithHttpInfo(user = user, role = role)
+    fun deleteV1FrameworkRolesByUserByRole(user: kotlin.String, role: kotlin.String) : Unit {
+        val localVarResponse = deleteV1FrameworkRolesByUserByRoleWithHttpInfo(user = user, role = role)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -239,8 +239,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1FrameworkRolesUserRoleWithHttpInfo(user: kotlin.String, role: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1FrameworkRolesUserRoleRequestConfig(user = user, role = role)
+    fun deleteV1FrameworkRolesByUserByRoleWithHttpInfo(user: kotlin.String, role: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1FrameworkRolesByUserByRoleRequestConfig(user = user, role = role)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -248,13 +248,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1FrameworkRolesUserRole
+     * To obtain the request config of the operation deleteV1FrameworkRolesByUserByRole
      *
      * @param user User is the assignee whose grant is being revoked, from the path.
      * @param role Role is the role to revoke, from the path. A role name containing a space (\&quot;System Manager\&quot;) arrives percent-encoded and is decoded before it is matched against the stored assignment.
      * @return RequestConfig
      */
-    fun cloudDeleteV1FrameworkRolesUserRoleRequestConfig(user: kotlin.String, role: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1FrameworkRolesByUserByRoleRequestConfig(user: kotlin.String, role: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -264,7 +264,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/roles/{user}/{role}".replace("{"+"user"+"}", encodeURIComponent(user.toString())).replace("{"+"role"+"}", encodeURIComponent(role.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -278,7 +278,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param fields Fields projects the response to a subset — a JSON array [\&quot;a\&quot;,\&quot;b\&quot;] or a comma list \&quot;a,b\&quot;. The envelope keys are always returned. (optional)
      * @param orderBy OrderBy is \&quot;&lt;field&gt; [asc|desc]\&quot;. Empty means most-recently-updated first. (optional)
      * @param limit Limit caps the rows returned. Anything that is not a positive integer leaves the engine&#39;s default in place. (optional)
-     * @return CloudDocumentList
+     * @return DocumentList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -287,11 +287,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkDoctype(doctype: kotlin.String, filters: kotlin.String? = null, fields: kotlin.String? = null, orderBy: kotlin.String? = null, limit: kotlin.String? = null) : CloudDocumentList {
-        val localVarResponse = cloudGetV1FrameworkDoctypeWithHttpInfo(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
+    fun getV1FrameworkByDoctype(doctype: kotlin.String, filters: kotlin.String? = null, fields: kotlin.String? = null, orderBy: kotlin.String? = null, limit: kotlin.String? = null) : DocumentList {
+        val localVarResponse = getV1FrameworkByDoctypeWithHttpInfo(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocumentList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocumentList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -314,22 +314,22 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param fields Fields projects the response to a subset — a JSON array [\&quot;a\&quot;,\&quot;b\&quot;] or a comma list \&quot;a,b\&quot;. The envelope keys are always returned. (optional)
      * @param orderBy OrderBy is \&quot;&lt;field&gt; [asc|desc]\&quot;. Empty means most-recently-updated first. (optional)
      * @param limit Limit caps the rows returned. Anything that is not a positive integer leaves the engine&#39;s default in place. (optional)
-     * @return ApiResponse<CloudDocumentList?>
+     * @return ApiResponse<DocumentList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkDoctypeWithHttpInfo(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : ApiResponse<CloudDocumentList?> {
-        val localVariableConfig = cloudGetV1FrameworkDoctypeRequestConfig(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
+    fun getV1FrameworkByDoctypeWithHttpInfo(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : ApiResponse<DocumentList?> {
+        val localVariableConfig = getV1FrameworkByDoctypeRequestConfig(doctype = doctype, filters = filters, fields = fields, orderBy = orderBy, limit = limit)
 
-        return request<Unit, CloudDocumentList>(
+        return request<Unit, DocumentList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkDoctype
+     * To obtain the request config of the operation getV1FrameworkByDoctype
      *
      * @param doctype DocType is the DocType to list, from the path.
      * @param filters Filters is a JSON object of equality matches, e.g. {\&quot;priority\&quot;:\&quot;High\&quot;}. Every key must be a field the DocType declares (or the managed name / docstatus); an undeclared one is refused rather than silently ignored. (optional)
@@ -338,7 +338,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param limit Limit caps the rows returned. Anything that is not a positive integer leaves the engine&#39;s default in place. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkDoctypeRequestConfig(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1FrameworkByDoctypeRequestConfig(doctype: kotlin.String, filters: kotlin.String?, fields: kotlin.String?, orderBy: kotlin.String?, limit: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -363,7 +363,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -383,8 +383,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkDoctypeName(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudGetV1FrameworkDoctypeNameWithHttpInfo(doctype = doctype, name = name)
+    fun getV1FrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = getV1FrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -413,8 +413,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkDoctypeNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudGetV1FrameworkDoctypeNameRequestConfig(doctype = doctype, name = name)
+    fun getV1FrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = getV1FrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -422,13 +422,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkDoctypeName
+     * To obtain the request config of the operation getV1FrameworkByDoctypeByName
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkDoctypeNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1FrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -439,7 +439,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -448,7 +448,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/doctypes
      * Returns every DocType defined in the caller&#39;s org.
      * Returns every DocType defined in the caller&#39;s org. Another tenant&#39;s definitions are never included: the org is part of the store key.
-     * @return CloudDocTypeList
+     * @return DocTypeList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -457,11 +457,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkDoctypes() : CloudDocTypeList {
-        val localVarResponse = cloudGetV1FrameworkDoctypesWithHttpInfo()
+    fun getV1FrameworkDoctypes() : DocTypeList {
+        val localVarResponse = getV1FrameworkDoctypesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocTypeList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocTypeList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -479,26 +479,26 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/doctypes
      * Returns every DocType defined in the caller&#39;s org.
      * Returns every DocType defined in the caller&#39;s org. Another tenant&#39;s definitions are never included: the org is part of the store key.
-     * @return ApiResponse<CloudDocTypeList?>
+     * @return ApiResponse<DocTypeList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkDoctypesWithHttpInfo() : ApiResponse<CloudDocTypeList?> {
-        val localVariableConfig = cloudGetV1FrameworkDoctypesRequestConfig()
+    fun getV1FrameworkDoctypesWithHttpInfo() : ApiResponse<DocTypeList?> {
+        val localVariableConfig = getV1FrameworkDoctypesRequestConfig()
 
-        return request<Unit, CloudDocTypeList>(
+        return request<Unit, DocTypeList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkDoctypes
+     * To obtain the request config of the operation getV1FrameworkDoctypes
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkDoctypesRequestConfig() : RequestConfig<Unit> {
+    fun getV1FrameworkDoctypesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -509,7 +509,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -519,7 +519,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags.
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags. Scoped to the caller&#39;s org, so another tenant&#39;s DocType of the same name is simply not found.
      * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
-     * @return CloudDocType
+     * @return DocType
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -528,11 +528,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkDoctypesName(name: kotlin.String) : CloudDocType {
-        val localVarResponse = cloudGetV1FrameworkDoctypesNameWithHttpInfo(name = name)
+    fun getV1FrameworkDoctypesByName(name: kotlin.String) : DocType {
+        val localVarResponse = getV1FrameworkDoctypesByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocType
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocType
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -551,27 +551,27 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags.
      * Returns one DocType definition — its fields, naming rule, permissions and lifecycle flags. Scoped to the caller&#39;s org, so another tenant&#39;s DocType of the same name is simply not found.
      * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
-     * @return ApiResponse<CloudDocType?>
+     * @return ApiResponse<DocType?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkDoctypesNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudDocType?> {
-        val localVariableConfig = cloudGetV1FrameworkDoctypesNameRequestConfig(name = name)
+    fun getV1FrameworkDoctypesByNameWithHttpInfo(name: kotlin.String) : ApiResponse<DocType?> {
+        val localVariableConfig = getV1FrameworkDoctypesByNameRequestConfig(name = name)
 
-        return request<Unit, CloudDocType>(
+        return request<Unit, DocType>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkDoctypesName
+     * To obtain the request config of the operation getV1FrameworkDoctypesByName
      *
      * @param name Name is the DocType&#39;s name, from the path. A name containing a space (\&quot;Sales Invoice\&quot;) arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkDoctypesNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1FrameworkDoctypesByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -582,7 +582,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -591,7 +591,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/modules
      * Returns every app lane compiled into this deployment and the DocTypes each one installs.
      * Returns every app lane compiled into this deployment and the DocTypes each one installs. It describes the BINARY, not the org: what a given org has actually installed is the per-module state below.
-     * @return CloudModuleList
+     * @return ModuleList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -600,11 +600,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkModules() : CloudModuleList {
-        val localVarResponse = cloudGetV1FrameworkModulesWithHttpInfo()
+    fun getV1FrameworkModules() : ModuleList {
+        val localVarResponse = getV1FrameworkModulesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudModuleList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ModuleList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -622,26 +622,26 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/modules
      * Returns every app lane compiled into this deployment and the DocTypes each one installs.
      * Returns every app lane compiled into this deployment and the DocTypes each one installs. It describes the BINARY, not the org: what a given org has actually installed is the per-module state below.
-     * @return ApiResponse<CloudModuleList?>
+     * @return ApiResponse<ModuleList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkModulesWithHttpInfo() : ApiResponse<CloudModuleList?> {
-        val localVariableConfig = cloudGetV1FrameworkModulesRequestConfig()
+    fun getV1FrameworkModulesWithHttpInfo() : ApiResponse<ModuleList?> {
+        val localVariableConfig = getV1FrameworkModulesRequestConfig()
 
-        return request<Unit, CloudModuleList>(
+        return request<Unit, ModuleList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkModules
+     * To obtain the request config of the operation getV1FrameworkModules
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkModulesRequestConfig() : RequestConfig<Unit> {
+    fun getV1FrameworkModulesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -652,7 +652,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/modules",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -662,7 +662,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one app lane&#39;s install state for the caller&#39;s org: the DocTypes the lane declares, and which of them already exist in the org.
      * Returns one app lane&#39;s install state for the caller&#39;s org: the DocTypes the lane declares, and which of them already exist in the org. That is the honest \&quot;set up\&quot; versus \&quot;installed\&quot; answer a console renders.
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
-     * @return CloudModuleState
+     * @return ModuleState
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -671,11 +671,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkModulesModule(module: kotlin.String) : CloudModuleState {
-        val localVarResponse = cloudGetV1FrameworkModulesModuleWithHttpInfo(module = module)
+    fun getV1FrameworkModulesByModule(module: kotlin.String) : ModuleState {
+        val localVarResponse = getV1FrameworkModulesByModuleWithHttpInfo(module = module)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudModuleState
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ModuleState
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -694,27 +694,27 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Returns one app lane&#39;s install state for the caller&#39;s org: the DocTypes the lane declares, and which of them already exist in the org.
      * Returns one app lane&#39;s install state for the caller&#39;s org: the DocTypes the lane declares, and which of them already exist in the org. That is the honest \&quot;set up\&quot; versus \&quot;installed\&quot; answer a console renders.
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
-     * @return ApiResponse<CloudModuleState?>
+     * @return ApiResponse<ModuleState?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkModulesModuleWithHttpInfo(module: kotlin.String) : ApiResponse<CloudModuleState?> {
-        val localVariableConfig = cloudGetV1FrameworkModulesModuleRequestConfig(module = module)
+    fun getV1FrameworkModulesByModuleWithHttpInfo(module: kotlin.String) : ApiResponse<ModuleState?> {
+        val localVariableConfig = getV1FrameworkModulesByModuleRequestConfig(module = module)
 
-        return request<Unit, CloudModuleState>(
+        return request<Unit, ModuleState>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkModulesModule
+     * To obtain the request config of the operation getV1FrameworkModulesByModule
      *
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkModulesModuleRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
+    fun getV1FrameworkModulesByModuleRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -725,7 +725,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/modules/{module}".replace("{"+"module"+"}", encodeURIComponent(module.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -734,7 +734,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/roles
      * Returns every (user, role) assignment in the caller&#39;s org.
      * Returns every (user, role) assignment in the caller&#39;s org. Roles are what DocType permissions are written against, so this is the grant table the permission calculus resolves a member&#39;s rights from.
-     * @return CloudRoleList
+     * @return RoleList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -743,11 +743,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkRoles() : CloudRoleList {
-        val localVarResponse = cloudGetV1FrameworkRolesWithHttpInfo()
+    fun getV1FrameworkRoles() : RoleList {
+        val localVarResponse = getV1FrameworkRolesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRoleList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RoleList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -765,26 +765,26 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/roles
      * Returns every (user, role) assignment in the caller&#39;s org.
      * Returns every (user, role) assignment in the caller&#39;s org. Roles are what DocType permissions are written against, so this is the grant table the permission calculus resolves a member&#39;s rights from.
-     * @return ApiResponse<CloudRoleList?>
+     * @return ApiResponse<RoleList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkRolesWithHttpInfo() : ApiResponse<CloudRoleList?> {
-        val localVariableConfig = cloudGetV1FrameworkRolesRequestConfig()
+    fun getV1FrameworkRolesWithHttpInfo() : ApiResponse<RoleList?> {
+        val localVariableConfig = getV1FrameworkRolesRequestConfig()
 
-        return request<Unit, CloudRoleList>(
+        return request<Unit, RoleList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkRoles
+     * To obtain the request config of the operation getV1FrameworkRoles
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkRolesRequestConfig() : RequestConfig<Unit> {
+    fun getV1FrameworkRolesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -795,7 +795,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -804,7 +804,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/summary
      * Reports how much of the DocType surface the caller&#39;s org uses: how many DocTypes it has defined, and how many documents exist across them.
      * Reports how much of the DocType surface the caller&#39;s org uses: how many DocTypes it has defined, and how many documents exist across them.
-     * @return CloudSummaryView
+     * @return SummaryView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -813,11 +813,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FrameworkSummary() : CloudSummaryView {
-        val localVarResponse = cloudGetV1FrameworkSummaryWithHttpInfo()
+    fun getV1FrameworkSummary() : SummaryView {
+        val localVarResponse = getV1FrameworkSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSummaryView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SummaryView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -835,26 +835,26 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * GET /v1/framework/summary
      * Reports how much of the DocType surface the caller&#39;s org uses: how many DocTypes it has defined, and how many documents exist across them.
      * Reports how much of the DocType surface the caller&#39;s org uses: how many DocTypes it has defined, and how many documents exist across them.
-     * @return ApiResponse<CloudSummaryView?>
+     * @return ApiResponse<SummaryView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FrameworkSummaryWithHttpInfo() : ApiResponse<CloudSummaryView?> {
-        val localVariableConfig = cloudGetV1FrameworkSummaryRequestConfig()
+    fun getV1FrameworkSummaryWithHttpInfo() : ApiResponse<SummaryView?> {
+        val localVariableConfig = getV1FrameworkSummaryRequestConfig()
 
-        return request<Unit, CloudSummaryView>(
+        return request<Unit, SummaryView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FrameworkSummary
+     * To obtain the request config of the operation getV1FrameworkSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FrameworkSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1FrameworkSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -865,15 +865,15 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/framework/{doctype}
-     * 
-     * 
+     * Create one document of a DocType, from that DocType&#39;s own fields.
+     * The body is the DOCUMENT&#39;S field data: a flat JSON object whose properties are the fieldnames the DocType declares, not a fixed envelope. That is why this operation publishes no request schema — the shape is metadata the DocType defines at run time, and no Go struct both accepts it verbatim and describes it, so nothing is asserted rather than something false.  The engine validates and coerces every field against the DocType, runs the before_insert and before_save hooks (either may reject the write), stores the document, then runs the after hooks. It answers 201 with the stored document: the field data plus the managed envelope — &#x60;name&#x60;, &#x60;doctype&#x60;, &#x60;docstatus&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;. A Password field comes back as a fixed redaction marker and is dropped when empty; its stored value is never returned by this or any other read on this surface.  &#x60;name&#x60; in the body is the REQUESTED DOCUMENT NAME, not a data field. A DocType with an autoname rule names the document itself and ignores it; a prompt-named DocType takes it. This collision is also why the two path segments cannot be folded into the body, and so why the route stays untyped.  Scoped to the org of the validated principal, and the engine&#39;s own permission calculus decides the rest: the caller needs create rights on this DocType through a role it holds, or a platform admin bit. A caller with no validated principal reaches the engine as the zero Caller and is refused before any store is opened — a forged org header alone buys nothing.  A DocType declared Single has exactly ONE document per org, so this writes that one instance instead of adding a row. The body is size-bounded by the engine, the same bound on every host.
      * @param doctype 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -883,8 +883,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FrameworkByDoctype(doctype: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1FrameworkByDoctypeWithHttpInfo(doctype = doctype)
+    fun postV1FrameworkByDoctype(doctype: kotlin.String) : Unit {
+        val localVarResponse = postV1FrameworkByDoctypeWithHttpInfo(doctype = doctype)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -903,16 +903,16 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * POST /v1/framework/{doctype}
-     * 
-     * 
+     * Create one document of a DocType, from that DocType&#39;s own fields.
+     * The body is the DOCUMENT&#39;S field data: a flat JSON object whose properties are the fieldnames the DocType declares, not a fixed envelope. That is why this operation publishes no request schema — the shape is metadata the DocType defines at run time, and no Go struct both accepts it verbatim and describes it, so nothing is asserted rather than something false.  The engine validates and coerces every field against the DocType, runs the before_insert and before_save hooks (either may reject the write), stores the document, then runs the after hooks. It answers 201 with the stored document: the field data plus the managed envelope — &#x60;name&#x60;, &#x60;doctype&#x60;, &#x60;docstatus&#x60;, &#x60;createdAt&#x60;, &#x60;updatedAt&#x60;. A Password field comes back as a fixed redaction marker and is dropped when empty; its stored value is never returned by this or any other read on this surface.  &#x60;name&#x60; in the body is the REQUESTED DOCUMENT NAME, not a data field. A DocType with an autoname rule names the document itself and ignores it; a prompt-named DocType takes it. This collision is also why the two path segments cannot be folded into the body, and so why the route stays untyped.  Scoped to the org of the validated principal, and the engine&#39;s own permission calculus decides the rest: the caller needs create rights on this DocType through a role it holds, or a platform admin bit. A caller with no validated principal reaches the engine as the zero Caller and is refused before any store is opened — a forged org header alone buys nothing.  A DocType declared Single has exactly ONE document per org, so this writes that one instance instead of adding a row. The body is size-bounded by the engine, the same bound on every host.
      * @param doctype 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FrameworkByDoctypeWithHttpInfo(doctype: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1FrameworkByDoctypeRequestConfig(doctype = doctype)
+    fun postV1FrameworkByDoctypeWithHttpInfo(doctype: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1FrameworkByDoctypeRequestConfig(doctype = doctype)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -920,12 +920,12 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FrameworkByDoctype
+     * To obtain the request config of the operation postV1FrameworkByDoctype
      *
      * @param doctype 
      * @return RequestConfig
      */
-    fun cloudPostV1FrameworkByDoctypeRequestConfig(doctype: kotlin.String) : RequestConfig<Unit> {
+    fun postV1FrameworkByDoctypeRequestConfig(doctype: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -935,7 +935,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -955,8 +955,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FrameworkDoctypeNameCancel(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudPostV1FrameworkDoctypeNameCancelWithHttpInfo(doctype = doctype, name = name)
+    fun postV1FrameworkByDoctypeByNameCancel(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = postV1FrameworkByDoctypeByNameCancelWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -985,8 +985,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FrameworkDoctypeNameCancelWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudPostV1FrameworkDoctypeNameCancelRequestConfig(doctype = doctype, name = name)
+    fun postV1FrameworkByDoctypeByNameCancelWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = postV1FrameworkByDoctypeByNameCancelRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -994,13 +994,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FrameworkDoctypeNameCancel
+     * To obtain the request config of the operation postV1FrameworkByDoctypeByNameCancel
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun cloudPostV1FrameworkDoctypeNameCancelRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun postV1FrameworkByDoctypeByNameCancelRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1011,7 +1011,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}/cancel".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1031,8 +1031,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FrameworkDoctypeNameSubmit(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
-        val localVarResponse = cloudPostV1FrameworkDoctypeNameSubmitWithHttpInfo(doctype = doctype, name = name)
+    fun postV1FrameworkByDoctypeByNameSubmit(doctype: kotlin.String, name: kotlin.String) : kotlin.collections.Map<kotlin.String, kotlin.Any> {
+        val localVarResponse = postV1FrameworkByDoctypeByNameSubmitWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.Map<kotlin.String, kotlin.Any>
@@ -1061,8 +1061,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FrameworkDoctypeNameSubmitWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
-        val localVariableConfig = cloudPostV1FrameworkDoctypeNameSubmitRequestConfig(doctype = doctype, name = name)
+    fun postV1FrameworkByDoctypeByNameSubmitWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<kotlin.collections.Map<kotlin.String, kotlin.Any>?> {
+        val localVariableConfig = postV1FrameworkByDoctypeByNameSubmitRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, kotlin.collections.Map<kotlin.String, kotlin.Any>>(
             localVariableConfig
@@ -1070,13 +1070,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FrameworkDoctypeNameSubmit
+     * To obtain the request config of the operation postV1FrameworkByDoctypeByNameSubmit
      *
      * @param doctype DocType is the document&#39;s DocType, from the path.
      * @param name Name is the document&#39;s name — its key within the DocType — from the path. A name containing a space arrives percent-encoded and is decoded before it is matched against the stored one.
      * @return RequestConfig
      */
-    fun cloudPostV1FrameworkDoctypeNameSubmitRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun postV1FrameworkByDoctypeByNameSubmitRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1087,7 +1087,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}/submit".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1096,8 +1096,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/doctypes
      * Defines a DocType in the caller&#39;s org: the metadata that gives a document surface its fields, its naming rule, whether it has a submit/cancel lifecycle, and which role may do what to it.
      * Defines a DocType in the caller&#39;s org: the metadata that gives a document surface its fields, its naming rule, whether it has a submit/cancel lifecycle, and which role may do what to it. Manager-only — on a fresh org the first caller to administer it is seeded as its System Manager, after which only a System Manager (or a platform admin) may define. Answers 201.
-     * @param cloudDocType 
-     * @return CloudDocType
+     * @param docType 
+     * @return DocType
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1106,11 +1106,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FrameworkDoctypes(cloudDocType: CloudDocType) : CloudDocType {
-        val localVarResponse = cloudPostV1FrameworkDoctypesWithHttpInfo(cloudDocType = cloudDocType)
+    fun postV1FrameworkDoctypes(docType: DocType) : DocType {
+        val localVarResponse = postV1FrameworkDoctypesWithHttpInfo(docType = docType)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocType
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocType
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1128,29 +1128,29 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/doctypes
      * Defines a DocType in the caller&#39;s org: the metadata that gives a document surface its fields, its naming rule, whether it has a submit/cancel lifecycle, and which role may do what to it.
      * Defines a DocType in the caller&#39;s org: the metadata that gives a document surface its fields, its naming rule, whether it has a submit/cancel lifecycle, and which role may do what to it. Manager-only — on a fresh org the first caller to administer it is seeded as its System Manager, after which only a System Manager (or a platform admin) may define. Answers 201.
-     * @param cloudDocType 
-     * @return ApiResponse<CloudDocType?>
+     * @param docType 
+     * @return ApiResponse<DocType?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FrameworkDoctypesWithHttpInfo(cloudDocType: CloudDocType) : ApiResponse<CloudDocType?> {
-        val localVariableConfig = cloudPostV1FrameworkDoctypesRequestConfig(cloudDocType = cloudDocType)
+    fun postV1FrameworkDoctypesWithHttpInfo(docType: DocType) : ApiResponse<DocType?> {
+        val localVariableConfig = postV1FrameworkDoctypesRequestConfig(docType = docType)
 
-        return request<CloudDocType, CloudDocType>(
+        return request<DocType, DocType>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FrameworkDoctypes
+     * To obtain the request config of the operation postV1FrameworkDoctypes
      *
-     * @param cloudDocType 
+     * @param docType 
      * @return RequestConfig
      */
-    fun cloudPostV1FrameworkDoctypesRequestConfig(cloudDocType: CloudDocType) : RequestConfig<CloudDocType> {
-        val localVariableBody = cloudDocType
+    fun postV1FrameworkDoctypesRequestConfig(docType: DocType) : RequestConfig<DocType> {
+        val localVariableBody = docType
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1161,7 +1161,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1171,7 +1171,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Creates an app lane&#39;s DocTypes in the caller&#39;s org.
      * Creates an app lane&#39;s DocTypes in the caller&#39;s org. Idempotent and create-if-absent: a DocType the org already has is reported as existing and never replaced, so re-installing cannot clobber a definition the org has since edited. Manager-only.
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
-     * @return CloudInstall
+     * @return Install
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1180,11 +1180,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FrameworkModulesModuleInstall(module: kotlin.String) : CloudInstall {
-        val localVarResponse = cloudPostV1FrameworkModulesModuleInstallWithHttpInfo(module = module)
+    fun postV1FrameworkModulesByModuleInstall(module: kotlin.String) : Install {
+        val localVarResponse = postV1FrameworkModulesByModuleInstallWithHttpInfo(module = module)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInstall
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Install
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1203,27 +1203,27 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Creates an app lane&#39;s DocTypes in the caller&#39;s org.
      * Creates an app lane&#39;s DocTypes in the caller&#39;s org. Idempotent and create-if-absent: a DocType the org already has is reported as existing and never replaced, so re-installing cannot clobber a definition the org has since edited. Manager-only.
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
-     * @return ApiResponse<CloudInstall?>
+     * @return ApiResponse<Install?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FrameworkModulesModuleInstallWithHttpInfo(module: kotlin.String) : ApiResponse<CloudInstall?> {
-        val localVariableConfig = cloudPostV1FrameworkModulesModuleInstallRequestConfig(module = module)
+    fun postV1FrameworkModulesByModuleInstallWithHttpInfo(module: kotlin.String) : ApiResponse<Install?> {
+        val localVariableConfig = postV1FrameworkModulesByModuleInstallRequestConfig(module = module)
 
-        return request<Unit, CloudInstall>(
+        return request<Unit, Install>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FrameworkModulesModuleInstall
+     * To obtain the request config of the operation postV1FrameworkModulesByModuleInstall
      *
      * @param module Module is the lane&#39;s registered name (\&quot;cms\&quot;, \&quot;erp\&quot;), from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1FrameworkModulesModuleInstallRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
+    fun postV1FrameworkModulesByModuleInstallRequestConfig(module: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1234,7 +1234,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/modules/{module}/install".replace("{"+"module"+"}", encodeURIComponent(module.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1243,8 +1243,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/roles
      * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users.
      * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users. Manager-only. Answers 201.
-     * @param cloudRole 
-     * @return CloudRole
+     * @param roleAssignment 
+     * @return RoleAssignment
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1253,11 +1253,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FrameworkRoles(cloudRole: CloudRole) : CloudRole {
-        val localVarResponse = cloudPostV1FrameworkRolesWithHttpInfo(cloudRole = cloudRole)
+    fun postV1FrameworkRoles(roleAssignment: RoleAssignment) : RoleAssignment {
+        val localVarResponse = postV1FrameworkRolesWithHttpInfo(roleAssignment = roleAssignment)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRole
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RoleAssignment
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1275,29 +1275,29 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * POST /v1/framework/roles
      * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users.
      * Grants one user one role in the caller&#39;s org — how a member gains rights on a DocType, since permissions name roles and never users. Manager-only. Answers 201.
-     * @param cloudRole 
-     * @return ApiResponse<CloudRole?>
+     * @param roleAssignment 
+     * @return ApiResponse<RoleAssignment?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FrameworkRolesWithHttpInfo(cloudRole: CloudRole) : ApiResponse<CloudRole?> {
-        val localVariableConfig = cloudPostV1FrameworkRolesRequestConfig(cloudRole = cloudRole)
+    fun postV1FrameworkRolesWithHttpInfo(roleAssignment: RoleAssignment) : ApiResponse<RoleAssignment?> {
+        val localVariableConfig = postV1FrameworkRolesRequestConfig(roleAssignment = roleAssignment)
 
-        return request<CloudRole, CloudRole>(
+        return request<RoleAssignment, RoleAssignment>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FrameworkRoles
+     * To obtain the request config of the operation postV1FrameworkRoles
      *
-     * @param cloudRole 
+     * @param roleAssignment 
      * @return RequestConfig
      */
-    fun cloudPostV1FrameworkRolesRequestConfig(cloudRole: CloudRole) : RequestConfig<CloudRole> {
-        val localVariableBody = cloudRole
+    fun postV1FrameworkRolesRequestConfig(roleAssignment: RoleAssignment) : RequestConfig<RoleAssignment> {
+        val localVariableBody = roleAssignment
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1308,15 +1308,15 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/roles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/framework/{doctype}/{name}
-     * 
-     * 
+     * Replace a draft document&#39;s field data wholesale.
+     * PUT semantics: the stored field data BECOMES the body, so a field the body omits is not left at its previous value. The body is the document&#39;s own field data — the same metadata-defined open object the create takes, and the same reason this operation publishes no request schema.  Only a DRAFT can be edited. A document that has been submitted or cancelled is immutable and the write is refused as a conflict, so the submit lifecycle cannot be bypassed by a plain update — cancel it first, and note that a cancelled document can be deleted but never re-submitted or re-edited. The engine validates the new data against the DocType, runs before_save (which may reject), writes, then runs the after hooks, and answers 200 with the stored document plus its managed envelope, Password fields redacted.  The document name in the path is percent-decoded before it is matched, so a name containing a space is addressed as it is stored. An unknown DocType or document is not found, and the same answer covers a document that exists in another tenant: the org comes from the validated principal and is part of the store key, so a caller cannot learn that another org&#39;s document exists. Write rights on the DocType are required, decided by the engine&#39;s permission calculus.  For a Single DocType the path name is ignored — there is one instance per org and this writes it.
      * @param doctype 
      * @param name 
      * @return void
@@ -1327,8 +1327,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1FrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1FrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
+    fun putV1FrameworkByDoctypeByName(doctype: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = putV1FrameworkByDoctypeByNameWithHttpInfo(doctype = doctype, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1347,8 +1347,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * PUT /v1/framework/{doctype}/{name}
-     * 
-     * 
+     * Replace a draft document&#39;s field data wholesale.
+     * PUT semantics: the stored field data BECOMES the body, so a field the body omits is not left at its previous value. The body is the document&#39;s own field data — the same metadata-defined open object the create takes, and the same reason this operation publishes no request schema.  Only a DRAFT can be edited. A document that has been submitted or cancelled is immutable and the write is refused as a conflict, so the submit lifecycle cannot be bypassed by a plain update — cancel it first, and note that a cancelled document can be deleted but never re-submitted or re-edited. The engine validates the new data against the DocType, runs before_save (which may reject), writes, then runs the after hooks, and answers 200 with the stored document plus its managed envelope, Password fields redacted.  The document name in the path is percent-decoded before it is matched, so a name containing a space is addressed as it is stored. An unknown DocType or document is not found, and the same answer covers a document that exists in another tenant: the org comes from the validated principal and is part of the store key, so a caller cannot learn that another org&#39;s document exists. Write rights on the DocType are required, decided by the engine&#39;s permission calculus.  For a Single DocType the path name is ignored — there is one instance per org and this writes it.
      * @param doctype 
      * @param name 
      * @return ApiResponse<Unit?>
@@ -1356,8 +1356,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1FrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1FrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
+    fun putV1FrameworkByDoctypeByNameWithHttpInfo(doctype: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1FrameworkByDoctypeByNameRequestConfig(doctype = doctype, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1365,13 +1365,13 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1FrameworkByDoctypeByName
+     * To obtain the request config of the operation putV1FrameworkByDoctypeByName
      *
      * @param doctype 
      * @param name 
      * @return RequestConfig
      */
-    fun cloudPutV1FrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun putV1FrameworkByDoctypeByNameRequestConfig(doctype: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1381,7 +1381,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/{doctype}/{name}".replace("{"+"doctype"+"}", encodeURIComponent(doctype.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1391,8 +1391,8 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Replaces a DocType definition wholesale (PUT semantics): the stored definition becomes the body.
      * Replaces a DocType definition wholesale (PUT semantics): the stored definition becomes the body. The name in the URL is authoritative over the body&#39;s, and documents already stored under the DocType are left intact. Manager-only.
      * @param name 
-     * @param cloudDocType 
-     * @return CloudDocType
+     * @param docType 
+     * @return DocType
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1401,11 +1401,11 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1FrameworkDoctypesName(name: kotlin.String, cloudDocType: CloudDocType) : CloudDocType {
-        val localVarResponse = cloudPutV1FrameworkDoctypesNameWithHttpInfo(name = name, cloudDocType = cloudDocType)
+    fun putV1FrameworkDoctypesByName(name: kotlin.String, docType: DocType) : DocType {
+        val localVarResponse = putV1FrameworkDoctypesByNameWithHttpInfo(name = name, docType = docType)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDocType
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DocType
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1424,30 +1424,30 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * Replaces a DocType definition wholesale (PUT semantics): the stored definition becomes the body.
      * Replaces a DocType definition wholesale (PUT semantics): the stored definition becomes the body. The name in the URL is authoritative over the body&#39;s, and documents already stored under the DocType are left intact. Manager-only.
      * @param name 
-     * @param cloudDocType 
-     * @return ApiResponse<CloudDocType?>
+     * @param docType 
+     * @return ApiResponse<DocType?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1FrameworkDoctypesNameWithHttpInfo(name: kotlin.String, cloudDocType: CloudDocType) : ApiResponse<CloudDocType?> {
-        val localVariableConfig = cloudPutV1FrameworkDoctypesNameRequestConfig(name = name, cloudDocType = cloudDocType)
+    fun putV1FrameworkDoctypesByNameWithHttpInfo(name: kotlin.String, docType: DocType) : ApiResponse<DocType?> {
+        val localVariableConfig = putV1FrameworkDoctypesByNameRequestConfig(name = name, docType = docType)
 
-        return request<CloudDocType, CloudDocType>(
+        return request<DocType, DocType>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1FrameworkDoctypesName
+     * To obtain the request config of the operation putV1FrameworkDoctypesByName
      *
      * @param name 
-     * @param cloudDocType 
+     * @param docType 
      * @return RequestConfig
      */
-    fun cloudPutV1FrameworkDoctypesNameRequestConfig(name: kotlin.String, cloudDocType: CloudDocType) : RequestConfig<CloudDocType> {
-        val localVariableBody = cloudDocType
+    fun putV1FrameworkDoctypesByNameRequestConfig(name: kotlin.String, docType: DocType) : RequestConfig<DocType> {
+        val localVariableBody = docType
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1458,7 +1458,7 @@ class FrameworkApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/framework/doctypes/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

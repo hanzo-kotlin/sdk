@@ -46,8 +46,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/authz/health
-     * 
-     * 
+     * Liveness of the policy engine
+     * Reports that the authz process is up. Unauthenticated by design and never org-scoped: it answers while every tenant&#39;s enforcer is still cold, because a probe that needed a tenant would fail for reasons that have nothing to do with the process being alive.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -56,8 +56,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AuthzHealth() : Unit {
-        val localVarResponse = cloudGetV1AuthzHealthWithHttpInfo()
+    fun getV1AuthzHealth() : Unit {
+        val localVarResponse = getV1AuthzHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -76,15 +76,15 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/authz/health
-     * 
-     * 
+     * Liveness of the policy engine
+     * Reports that the authz process is up. Unauthenticated by design and never org-scoped: it answers while every tenant&#39;s enforcer is still cold, because a probe that needed a tenant would fail for reasons that have nothing to do with the process being alive.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AuthzHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AuthzHealthRequestConfig()
+    fun getV1AuthzHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1AuthzHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +92,11 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AuthzHealth
+     * To obtain the request config of the operation getV1AuthzHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AuthzHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1AuthzHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -106,15 +106,15 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/authz/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/authz/readyz
-     * 
-     * 
+     * Readiness of the policy engine
+     * Reports that the authz process is ready to serve decisions. Unauthenticated and not org-scoped, for the same reason health is: readiness is a property of this process, not of any one tenant&#39;s policy set.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -123,8 +123,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AuthzReadyz() : Unit {
-        val localVarResponse = cloudGetV1AuthzReadyzWithHttpInfo()
+    fun getV1AuthzReadyz() : Unit {
+        val localVarResponse = getV1AuthzReadyzWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -143,15 +143,15 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/authz/readyz
-     * 
-     * 
+     * Readiness of the policy engine
+     * Reports that the authz process is ready to serve decisions. Unauthenticated and not org-scoped, for the same reason health is: readiness is a property of this process, not of any one tenant&#39;s policy set.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AuthzReadyzWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AuthzReadyzRequestConfig()
+    fun getV1AuthzReadyzWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1AuthzReadyzRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +159,11 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AuthzReadyz
+     * To obtain the request config of the operation getV1AuthzReadyz
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AuthzReadyzRequestConfig() : RequestConfig<Unit> {
+    fun getV1AuthzReadyzRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -173,15 +173,15 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/authz/readyz",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/authz/check
-     * 
-     * 
+     * Ask whether a subject may act on an object
+     * Answers one policy question — may this subject take this action on this object — against the CALLER&#39;S OWN org policy set, and answers it with a bare allow/deny.  The org comes from the gateway-minted X-Org-Id and picks the per-org enforcer, so a decision is always rendered by that tenant&#39;s policies and never by another&#39;s. A request carrying no org is refused rather than answered from a shared or default set: collapsing tenants together is the one failure a policy engine must not have.  Body: {sub, obj, act}, all three required. The reply echoes them beside &#x60;allow&#x60; so a cached or logged decision carries the question it answered.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -190,8 +190,8 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AuthzCheck() : Unit {
-        val localVarResponse = cloudPostV1AuthzCheckWithHttpInfo()
+    fun postV1AuthzCheck() : Unit {
+        val localVarResponse = postV1AuthzCheckWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -210,15 +210,15 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/authz/check
-     * 
-     * 
+     * Ask whether a subject may act on an object
+     * Answers one policy question — may this subject take this action on this object — against the CALLER&#39;S OWN org policy set, and answers it with a bare allow/deny.  The org comes from the gateway-minted X-Org-Id and picks the per-org enforcer, so a decision is always rendered by that tenant&#39;s policies and never by another&#39;s. A request carrying no org is refused rather than answered from a shared or default set: collapsing tenants together is the one failure a policy engine must not have.  Body: {sub, obj, act}, all three required. The reply echoes them beside &#x60;allow&#x60; so a cached or logged decision carries the question it answered.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AuthzCheckWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AuthzCheckRequestConfig()
+    fun postV1AuthzCheckWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AuthzCheckRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -226,11 +226,11 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AuthzCheck
+     * To obtain the request config of the operation postV1AuthzCheck
      *
      * @return RequestConfig
      */
-    fun cloudPostV1AuthzCheckRequestConfig() : RequestConfig<Unit> {
+    fun postV1AuthzCheckRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -240,7 +240,7 @@ class AuthzApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/authz/check",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

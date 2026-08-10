@@ -19,9 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudMemoryEntry
-import ai.hanzo.cloud.model.CloudMemoryPage
-import ai.hanzo.cloud.model.CloudReviewRequest
+import ai.hanzo.cloud.model.MemoryEntry
+import ai.hanzo.cloud.model.MemoryPage
+import ai.hanzo.cloud.model.ReviewRequest
 
 import com.google.gson.annotations.SerializedName
 
@@ -54,7 +54,7 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param target Target narrows to one target language tag (BCP-47, e.g. \&quot;es\&quot; or \&quot;pt-BR\&quot;). (optional)
      * @param state State narrows to one position on the review ladder: machine, suggested, approved or published. (optional)
      * @param limit Limit caps the rows returned. Non-positive or unparseable means the server default (200); the ceiling is 1000. (optional)
-     * @return CloudMemoryPage
+     * @return MemoryPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -63,11 +63,11 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1TranslateMemory(target: kotlin.String? = null, state: kotlin.String? = null, limit: kotlin.Int? = null) : CloudMemoryPage {
-        val localVarResponse = cloudGetV1TranslateMemoryWithHttpInfo(target = target, state = state, limit = limit)
+    fun getV1TranslateMemory(target: kotlin.String? = null, state: kotlin.String? = null, limit: kotlin.Int? = null) : MemoryPage {
+        val localVarResponse = getV1TranslateMemoryWithHttpInfo(target = target, state = state, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMemoryPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MemoryPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -88,29 +88,29 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param target Target narrows to one target language tag (BCP-47, e.g. \&quot;es\&quot; or \&quot;pt-BR\&quot;). (optional)
      * @param state State narrows to one position on the review ladder: machine, suggested, approved or published. (optional)
      * @param limit Limit caps the rows returned. Non-positive or unparseable means the server default (200); the ceiling is 1000. (optional)
-     * @return ApiResponse<CloudMemoryPage?>
+     * @return ApiResponse<MemoryPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1TranslateMemoryWithHttpInfo(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudMemoryPage?> {
-        val localVariableConfig = cloudGetV1TranslateMemoryRequestConfig(target = target, state = state, limit = limit)
+    fun getV1TranslateMemoryWithHttpInfo(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : ApiResponse<MemoryPage?> {
+        val localVariableConfig = getV1TranslateMemoryRequestConfig(target = target, state = state, limit = limit)
 
-        return request<Unit, CloudMemoryPage>(
+        return request<Unit, MemoryPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1TranslateMemory
+     * To obtain the request config of the operation getV1TranslateMemory
      *
      * @param target Target narrows to one target language tag (BCP-47, e.g. \&quot;es\&quot; or \&quot;pt-BR\&quot;). (optional)
      * @param state State narrows to one position on the review ladder: machine, suggested, approved or published. (optional)
      * @param limit Limit caps the rows returned. Non-positive or unparseable means the server default (200); the ceiling is 1000. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1TranslateMemoryRequestConfig(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1TranslateMemoryRequestConfig(target: kotlin.String?, state: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -132,15 +132,15 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/translate/memory",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/translate
-     * 
-     * 
+     * Translate a string or a batch into one target language
+     * Returns one translation per input string, in input order, each carrying where it sits on the review ladder and whether it came from your memory rather than an engine — plus a usage block of REAL counts (strings, cached, translated, and the source characters that actually reached an engine). Send &#x60;text&#x60; for one string or &#x60;batch&#x60; for many, never both. When you name no &#x60;source&#x60;, the detected one is reported back.  THE TRANSLATION MEMORY IS CONSULTED FIRST AND IT IS NORMATIVE, NOT A CACHE. Every string keys on (source text, target, glossary version, tier); a hit is returned VERBATIM and never re-translated, which is what makes a locale rebuild idempotent under a non-deterministic model and the bill proportional to what actually changed. Misses go to the engine and are written back at state &#x60;machine&#x60;. Editing a glossary term changes the key, so a stale rendering can never be served.  IT CANNOT TRAMPLE REVIEWED WORK. A write from this route may create an entry or refresh one still at &#x60;machine&#x60;, and nothing else — a string a human moved to approved or published through the memory review lane survives every rebuild, and comes back here unchanged. The memory is the caller&#39;s OWN org&#39;s, a separate store per org: the source text you send is customer content and lands nowhere else. Read it back or review it at /v1/translate/memory.  &#x60;tier&#x60; picks the engine and defaults to quality — the model plane, which carries context, terminology and tone, and which bills its own tokens, so nothing is charged twice here. &#x60;bulk&#x60; is the high-volume engine and is metered HERE, on the source characters that reached it: a fully-cached rebuild reports zero characters and costs zero. BULK NEVER FALLS BACK TO QUALITY — on a deployment that does not serve it the answer is 503 for that tier, so a caller is never quietly served, or charged, at a tier it did not ask for. A bulk request beyond its balance is refused with the nested {\&quot;error\&quot;:{\&quot;code\&quot;,\&quot;message\&quot;}} body at 402/503.  &#x60;target&#x60; IS CHECKED FOR SHAPE, NOT FOR SUPPORT: anything BCP-47-shaped is accepted (&#x60;es&#x60;, &#x60;pt-BR&#x60;), anything else is 400. There is no unsupported-language error — a well-formed tag no engine can actually render is passed straight through, and whatever comes back is what gets stored and returned. &#x60;format&#x60; (text, html, markdown) tells the engine what markup to preserve; &#x60;glossary&#x60; fixes terms verbatim.  Requires a validated principal — 401 without one, and the org is always that principal&#39;s. At most 512 strings per call and 32768 characters per string; an engine that fails or answers a reply that does not cover every input is 502, and nothing is stored.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -149,8 +149,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Translate() : Unit {
-        val localVarResponse = cloudPostV1TranslateWithHttpInfo()
+    fun postV1Translate() : Unit {
+        val localVarResponse = postV1TranslateWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -169,15 +169,15 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * POST /v1/translate
-     * 
-     * 
+     * Translate a string or a batch into one target language
+     * Returns one translation per input string, in input order, each carrying where it sits on the review ladder and whether it came from your memory rather than an engine — plus a usage block of REAL counts (strings, cached, translated, and the source characters that actually reached an engine). Send &#x60;text&#x60; for one string or &#x60;batch&#x60; for many, never both. When you name no &#x60;source&#x60;, the detected one is reported back.  THE TRANSLATION MEMORY IS CONSULTED FIRST AND IT IS NORMATIVE, NOT A CACHE. Every string keys on (source text, target, glossary version, tier); a hit is returned VERBATIM and never re-translated, which is what makes a locale rebuild idempotent under a non-deterministic model and the bill proportional to what actually changed. Misses go to the engine and are written back at state &#x60;machine&#x60;. Editing a glossary term changes the key, so a stale rendering can never be served.  IT CANNOT TRAMPLE REVIEWED WORK. A write from this route may create an entry or refresh one still at &#x60;machine&#x60;, and nothing else — a string a human moved to approved or published through the memory review lane survives every rebuild, and comes back here unchanged. The memory is the caller&#39;s OWN org&#39;s, a separate store per org: the source text you send is customer content and lands nowhere else. Read it back or review it at /v1/translate/memory.  &#x60;tier&#x60; picks the engine and defaults to quality — the model plane, which carries context, terminology and tone, and which bills its own tokens, so nothing is charged twice here. &#x60;bulk&#x60; is the high-volume engine and is metered HERE, on the source characters that reached it: a fully-cached rebuild reports zero characters and costs zero. BULK NEVER FALLS BACK TO QUALITY — on a deployment that does not serve it the answer is 503 for that tier, so a caller is never quietly served, or charged, at a tier it did not ask for. A bulk request beyond its balance is refused with the nested {\&quot;error\&quot;:{\&quot;code\&quot;,\&quot;message\&quot;}} body at 402/503.  &#x60;target&#x60; IS CHECKED FOR SHAPE, NOT FOR SUPPORT: anything BCP-47-shaped is accepted (&#x60;es&#x60;, &#x60;pt-BR&#x60;), anything else is 400. There is no unsupported-language error — a well-formed tag no engine can actually render is passed straight through, and whatever comes back is what gets stored and returned. &#x60;format&#x60; (text, html, markdown) tells the engine what markup to preserve; &#x60;glossary&#x60; fixes terms verbatim.  Requires a validated principal — 401 without one, and the org is always that principal&#39;s. At most 512 strings per call and 32768 characters per string; an engine that fails or answers a reply that does not cover every input is 502, and nothing is stored.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1TranslateWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1TranslateRequestConfig()
+    fun postV1TranslateWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1TranslateRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -185,11 +185,11 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Translate
+     * To obtain the request config of the operation postV1Translate
      *
      * @return RequestConfig
      */
-    fun cloudPostV1TranslateRequestConfig() : RequestConfig<Unit> {
+    fun postV1TranslateRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -199,7 +199,7 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/translate",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -208,8 +208,8 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * PUT /v1/translate/memory
      * Review records a human decision on one translation-memory entry, and returns the entry as stored.
      * Review records a human decision on one translation-memory entry, and returns the entry as stored. A human write always wins over the stored value, and once it lands at approved or published no machine write can move it again — which is what makes a locale rebuild safe to run against reviewed work.  The org is ALWAYS the validated principal&#39;s org, never a request field, so a review can only ever land in the caller&#39;s own memory.
-     * @param cloudReviewRequest 
-     * @return CloudMemoryEntry
+     * @param reviewRequest 
+     * @return MemoryEntry
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -218,11 +218,11 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1TranslateMemory(cloudReviewRequest: CloudReviewRequest) : CloudMemoryEntry {
-        val localVarResponse = cloudPutV1TranslateMemoryWithHttpInfo(cloudReviewRequest = cloudReviewRequest)
+    fun putV1TranslateMemory(reviewRequest: ReviewRequest) : MemoryEntry {
+        val localVarResponse = putV1TranslateMemoryWithHttpInfo(reviewRequest = reviewRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMemoryEntry
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MemoryEntry
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -240,29 +240,29 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * PUT /v1/translate/memory
      * Review records a human decision on one translation-memory entry, and returns the entry as stored.
      * Review records a human decision on one translation-memory entry, and returns the entry as stored. A human write always wins over the stored value, and once it lands at approved or published no machine write can move it again — which is what makes a locale rebuild safe to run against reviewed work.  The org is ALWAYS the validated principal&#39;s org, never a request field, so a review can only ever land in the caller&#39;s own memory.
-     * @param cloudReviewRequest 
-     * @return ApiResponse<CloudMemoryEntry?>
+     * @param reviewRequest 
+     * @return ApiResponse<MemoryEntry?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1TranslateMemoryWithHttpInfo(cloudReviewRequest: CloudReviewRequest) : ApiResponse<CloudMemoryEntry?> {
-        val localVariableConfig = cloudPutV1TranslateMemoryRequestConfig(cloudReviewRequest = cloudReviewRequest)
+    fun putV1TranslateMemoryWithHttpInfo(reviewRequest: ReviewRequest) : ApiResponse<MemoryEntry?> {
+        val localVariableConfig = putV1TranslateMemoryRequestConfig(reviewRequest = reviewRequest)
 
-        return request<CloudReviewRequest, CloudMemoryEntry>(
+        return request<ReviewRequest, MemoryEntry>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1TranslateMemory
+     * To obtain the request config of the operation putV1TranslateMemory
      *
-     * @param cloudReviewRequest 
+     * @param reviewRequest 
      * @return RequestConfig
      */
-    fun cloudPutV1TranslateMemoryRequestConfig(cloudReviewRequest: CloudReviewRequest) : RequestConfig<CloudReviewRequest> {
-        val localVariableBody = cloudReviewRequest
+    fun putV1TranslateMemoryRequestConfig(reviewRequest: ReviewRequest) : RequestConfig<ReviewRequest> {
+        val localVariableBody = reviewRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -273,7 +273,7 @@ class TranslateApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/translate/memory",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

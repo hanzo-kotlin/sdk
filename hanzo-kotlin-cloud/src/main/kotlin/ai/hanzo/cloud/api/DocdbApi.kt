@@ -19,10 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudProvisionRequest
-import ai.hanzo.cloud.model.CloudProvisionResult
-import ai.hanzo.cloud.model.CloudProvisionedResource
-import ai.hanzo.cloud.model.CloudProvisionedSummary
+import ai.hanzo.cloud.model.ProvisionRequest
+import ai.hanzo.cloud.model.ProvisionResult
+import ai.hanzo.cloud.model.ProvisionedResource
+import ai.hanzo.cloud.model.ProvisionedSummary
 
 import com.google.gson.annotations.SerializedName
 
@@ -61,8 +61,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1DocdbName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1DocdbNameWithHttpInfo(name = name)
+    fun deleteV1DocdbByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1DocdbByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -89,8 +89,8 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1DocdbNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1DocdbNameRequestConfig(name = name)
+    fun deleteV1DocdbByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1DocdbByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -98,12 +98,12 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1DocdbName
+     * To obtain the request config of the operation deleteV1DocdbByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudDeleteV1DocdbNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1DocdbByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -113,7 +113,7 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/docdb/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -122,7 +122,7 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/docdb
      * ListDocDB lists the caller org&#39;s Hanzo DocDB document databases.
      * ListDocDB lists the caller org&#39;s Hanzo DocDB document databases. Each one is a DEDICATED FerretDB instance the org alone runs, speaking the MongoDB wire protocol, so the host is that instance&#39;s own in-cluster Service and the port is 27017.
-     * @return kotlin.collections.List<CloudProvisionedSummary>
+     * @return kotlin.collections.List<ProvisionedSummary>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -131,11 +131,11 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Docdb() : kotlin.collections.List<CloudProvisionedSummary> {
-        val localVarResponse = cloudGetV1DocdbWithHttpInfo()
+    fun getV1Docdb() : kotlin.collections.List<ProvisionedSummary> {
+        val localVarResponse = getV1DocdbWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<CloudProvisionedSummary>
+            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<ProvisionedSummary>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -153,26 +153,26 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/docdb
      * ListDocDB lists the caller org&#39;s Hanzo DocDB document databases.
      * ListDocDB lists the caller org&#39;s Hanzo DocDB document databases. Each one is a DEDICATED FerretDB instance the org alone runs, speaking the MongoDB wire protocol, so the host is that instance&#39;s own in-cluster Service and the port is 27017.
-     * @return ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?>
+     * @return ApiResponse<kotlin.collections.List<ProvisionedSummary>?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DocdbWithHttpInfo() : ApiResponse<kotlin.collections.List<CloudProvisionedSummary>?> {
-        val localVariableConfig = cloudGetV1DocdbRequestConfig()
+    fun getV1DocdbWithHttpInfo() : ApiResponse<kotlin.collections.List<ProvisionedSummary>?> {
+        val localVariableConfig = getV1DocdbRequestConfig()
 
-        return request<Unit, kotlin.collections.List<CloudProvisionedSummary>>(
+        return request<Unit, kotlin.collections.List<ProvisionedSummary>>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Docdb
+     * To obtain the request config of the operation getV1Docdb
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DocdbRequestConfig() : RequestConfig<Unit> {
+    fun getV1DocdbRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -183,7 +183,7 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/docdb",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -193,7 +193,7 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GetDocDB returns one Hanzo DocDB database&#39;s metadata.
      * GetDocDB returns one Hanzo DocDB database&#39;s metadata. It carries the database&#39;s status, its instance address and the SCRAM user the instance was set up with — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return CloudProvisionedResource
+     * @return ProvisionedResource
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -202,11 +202,11 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DocdbName(name: kotlin.String) : CloudProvisionedResource {
-        val localVarResponse = cloudGetV1DocdbNameWithHttpInfo(name = name)
+    fun getV1DocdbByName(name: kotlin.String) : ProvisionedResource {
+        val localVarResponse = getV1DocdbByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionedResource
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionedResource
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -225,27 +225,27 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GetDocDB returns one Hanzo DocDB database&#39;s metadata.
      * GetDocDB returns one Hanzo DocDB database&#39;s metadata. It carries the database&#39;s status, its instance address and the SCRAM user the instance was set up with — never the password. A still-booting instance reads \&quot;provisioning\&quot;, reconciled from the operator&#39;s live view.
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
-     * @return ApiResponse<CloudProvisionedResource?>
+     * @return ApiResponse<ProvisionedResource?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DocdbNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudProvisionedResource?> {
-        val localVariableConfig = cloudGetV1DocdbNameRequestConfig(name = name)
+    fun getV1DocdbByNameWithHttpInfo(name: kotlin.String) : ApiResponse<ProvisionedResource?> {
+        val localVariableConfig = getV1DocdbByNameRequestConfig(name = name)
 
-        return request<Unit, CloudProvisionedResource>(
+        return request<Unit, ProvisionedResource>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DocdbName
+     * To obtain the request config of the operation getV1DocdbByName
      *
      * @param name Name is the resource&#39;s org-unique slug, from the path. Lower-cased and trimmed before lookup, exactly as it was at create.
      * @return RequestConfig
      */
-    fun cloudGetV1DocdbNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DocdbByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -256,17 +256,17 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/docdb/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/docdb
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return CloudProvisionResult
+     * Provision a document database for your org
+     * Launches your org&#39;s OWN document-database instance — it speaks the MongoDB wire protocol, so existing MongoDB drivers connect unchanged — and answers with its &#x60;mongodb://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ProvisionResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -275,11 +275,11 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Docdb(cloudProvisionRequest: CloudProvisionRequest? = null) : CloudProvisionResult {
-        val localVarResponse = cloudPostV1DocdbWithHttpInfo(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1Docdb(provisionRequest: ProvisionRequest? = null) : ProvisionResult {
+        val localVarResponse = postV1DocdbWithHttpInfo(provisionRequest = provisionRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProvisionResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProvisionResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -295,31 +295,31 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/docdb
-     * 
-     * 
-     * @param cloudProvisionRequest  (optional)
-     * @return ApiResponse<CloudProvisionResult?>
+     * Provision a document database for your org
+     * Launches your org&#39;s OWN document-database instance — it speaks the MongoDB wire protocol, so existing MongoDB drivers connect unchanged — and answers with its &#x60;mongodb://&#x60; connection string. The instance is yours alone: a deployment in your own tenant namespace, so its admin credential is naturally scoped to you and no other tenant shares the process. Off-cluster, where there is no orchestrator to launch one, this fails closed with 503 rather than handing back a shared one.  &#x60;name&#x60; is the org-unique slug every physical name derives from, and must match ^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$. &#x60;instance&#x60; optionally BINDS the add-on to one of your app instances: the DSN is injected into that instance&#39;s addons secret as &lt;KIND&gt;_URL, switching the app off its built-in store and onto this one. Omit it and the connection string is yours to wire.  THE CREDENTIAL COMES BACK ONCE. The connection string and password are in this response and nowhere else — every read beside it omits the password — so a caller that does not keep them has to provision again. Where KMS is configured the password is sealed there and only a reference is persisted; where it is not, it is returned this once and stored nowhere. It is never held in plaintext.  Scoped to the caller&#39;s validated org (403 without one), which also namespaces the physical resource under a fixed-width hash, so two tenants can never fold onto one backend resource — a residual collision fails closed with 409 rather than silently sharing. A name already taken in your org is 409; an invalid name or instance slug is 400; a backend that refuses the create is 502. Where a later step fails after the backend resource already exists, it is torn back down rather than left orphaned.  Billing is gated BEFORE anything is created: an unfunded org — or, in the fail-closed default, an unreachable meter — gets the fleet-wide 402/503 and nothing is provisioned. The fee is per-kind and set by the deployment.
+     * @param provisionRequest  (optional)
+     * @return ApiResponse<ProvisionResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DocdbWithHttpInfo(cloudProvisionRequest: CloudProvisionRequest?) : ApiResponse<CloudProvisionResult?> {
-        val localVariableConfig = cloudPostV1DocdbRequestConfig(cloudProvisionRequest = cloudProvisionRequest)
+    fun postV1DocdbWithHttpInfo(provisionRequest: ProvisionRequest?) : ApiResponse<ProvisionResult?> {
+        val localVariableConfig = postV1DocdbRequestConfig(provisionRequest = provisionRequest)
 
-        return request<CloudProvisionRequest, CloudProvisionResult>(
+        return request<ProvisionRequest, ProvisionResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Docdb
+     * To obtain the request config of the operation postV1Docdb
      *
-     * @param cloudProvisionRequest  (optional)
+     * @param provisionRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1DocdbRequestConfig(cloudProvisionRequest: CloudProvisionRequest?) : RequestConfig<CloudProvisionRequest> {
-        val localVariableBody = cloudProvisionRequest
+    fun postV1DocdbRequestConfig(provisionRequest: ProvisionRequest?) : RequestConfig<ProvisionRequest> {
+        val localVariableBody = provisionRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -330,7 +330,7 @@ class DocdbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/docdb",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

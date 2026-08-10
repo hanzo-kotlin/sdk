@@ -19,10 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudDestinationDisconnected
-import ai.hanzo.cloud.model.CloudDestinationList
-import ai.hanzo.cloud.model.CloudDestinationStatus
-import ai.hanzo.cloud.model.CloudDestinationTest
+import ai.hanzo.cloud.model.DestinationDisconnected
+import ai.hanzo.cloud.model.DestinationList
+import ai.hanzo.cloud.model.DestinationStatus
+import ai.hanzo.cloud.model.DestinationTest
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,7 +53,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Forgets a destination for the caller&#39;s org: every credential held in KMS, then the stored config.
      * Forgets a destination for the caller&#39;s org: every credential held in KMS, then the stored config. Idempotent, and it requires org admin.
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
-     * @return CloudDestinationDisconnected
+     * @return DestinationDisconnected
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -62,11 +62,11 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1DestinationsPlatform(platform: kotlin.String) : CloudDestinationDisconnected {
-        val localVarResponse = cloudDeleteV1DestinationsPlatformWithHttpInfo(platform = platform)
+    fun deleteV1DestinationsByPlatform(platform: kotlin.String) : DestinationDisconnected {
+        val localVarResponse = deleteV1DestinationsByPlatformWithHttpInfo(platform = platform)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDestinationDisconnected
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationDisconnected
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -85,27 +85,27 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Forgets a destination for the caller&#39;s org: every credential held in KMS, then the stored config.
      * Forgets a destination for the caller&#39;s org: every credential held in KMS, then the stored config. Idempotent, and it requires org admin.
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
-     * @return ApiResponse<CloudDestinationDisconnected?>
+     * @return ApiResponse<DestinationDisconnected?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1DestinationsPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<CloudDestinationDisconnected?> {
-        val localVariableConfig = cloudDeleteV1DestinationsPlatformRequestConfig(platform = platform)
+    fun deleteV1DestinationsByPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationDisconnected?> {
+        val localVariableConfig = deleteV1DestinationsByPlatformRequestConfig(platform = platform)
 
-        return request<Unit, CloudDestinationDisconnected>(
+        return request<Unit, DestinationDisconnected>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1DestinationsPlatform
+     * To obtain the request config of the operation deleteV1DestinationsByPlatform
      *
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
      * @return RequestConfig
      */
-    fun cloudDeleteV1DestinationsPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1DestinationsByPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -116,7 +116,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -125,7 +125,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/destinations
      * Reports every destination this deployment can forward to, each with the caller org&#39;s connection state: whether it is connected, whether it is enabled, whether a credential resolves right now, and the config fields the console renders for it.
      * Reports every destination this deployment can forward to, each with the caller org&#39;s connection state: whether it is connected, whether it is enabled, whether a credential resolves right now, and the config fields the console renders for it.
-     * @return CloudDestinationList
+     * @return DestinationList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -134,11 +134,11 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Destinations() : CloudDestinationList {
-        val localVarResponse = cloudGetV1DestinationsWithHttpInfo()
+    fun getV1Destinations() : DestinationList {
+        val localVarResponse = getV1DestinationsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDestinationList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -156,26 +156,26 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/destinations
      * Reports every destination this deployment can forward to, each with the caller org&#39;s connection state: whether it is connected, whether it is enabled, whether a credential resolves right now, and the config fields the console renders for it.
      * Reports every destination this deployment can forward to, each with the caller org&#39;s connection state: whether it is connected, whether it is enabled, whether a credential resolves right now, and the config fields the console renders for it.
-     * @return ApiResponse<CloudDestinationList?>
+     * @return ApiResponse<DestinationList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DestinationsWithHttpInfo() : ApiResponse<CloudDestinationList?> {
-        val localVariableConfig = cloudGetV1DestinationsRequestConfig()
+    fun getV1DestinationsWithHttpInfo() : ApiResponse<DestinationList?> {
+        val localVariableConfig = getV1DestinationsRequestConfig()
 
-        return request<Unit, CloudDestinationList>(
+        return request<Unit, DestinationList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Destinations
+     * To obtain the request config of the operation getV1Destinations
      *
      * @return RequestConfig
      */
-    fun cloudGetV1DestinationsRequestConfig() : RequestConfig<Unit> {
+    fun getV1DestinationsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -186,7 +186,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -196,7 +196,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Reports one destination&#39;s card for the caller&#39;s org — its config fields, its connection state, and whether a credential resolves right now.
      * Reports one destination&#39;s card for the caller&#39;s org — its config fields, its connection state, and whether a credential resolves right now. A platform this deployment does not carry is not found.
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
-     * @return CloudDestinationStatus
+     * @return DestinationStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -205,11 +205,11 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DestinationsPlatform(platform: kotlin.String) : CloudDestinationStatus {
-        val localVarResponse = cloudGetV1DestinationsPlatformWithHttpInfo(platform = platform)
+    fun getV1DestinationsByPlatform(platform: kotlin.String) : DestinationStatus {
+        val localVarResponse = getV1DestinationsByPlatformWithHttpInfo(platform = platform)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDestinationStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -228,27 +228,27 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Reports one destination&#39;s card for the caller&#39;s org — its config fields, its connection state, and whether a credential resolves right now.
      * Reports one destination&#39;s card for the caller&#39;s org — its config fields, its connection state, and whether a credential resolves right now. A platform this deployment does not carry is not found.
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
-     * @return ApiResponse<CloudDestinationStatus?>
+     * @return ApiResponse<DestinationStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DestinationsPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<CloudDestinationStatus?> {
-        val localVariableConfig = cloudGetV1DestinationsPlatformRequestConfig(platform = platform)
+    fun getV1DestinationsByPlatformWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationStatus?> {
+        val localVariableConfig = getV1DestinationsByPlatformRequestConfig(platform = platform)
 
-        return request<Unit, CloudDestinationStatus>(
+        return request<Unit, DestinationStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DestinationsPlatform
+     * To obtain the request config of the operation getV1DestinationsByPlatform
      *
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
      * @return RequestConfig
      */
-    fun cloudGetV1DestinationsPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DestinationsByPlatformRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -259,18 +259,18 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/destinations/{platform}
-     * 
-     * 
+     * Connect one conversion destination for your org, or update the one you have
+     * Stores the addressed platform&#39;s non-secret ids (its measurement, pixel or dataset ids) and seals its API credential into KMS under a path scoped to the caller&#39;s own org, then answers the same status card the read routes do — with live telling you whether the credential actually resolves right now. The body&#39;s property NAMES are the platform&#39;s own: each field the platform declares, plus each secret under its camelCase name, so the accepted keys differ per platform and a missing REQUIRED field is refused. Connecting is an ORG ADMIN action — a validated member without the admin bit gets 403 — and it fails closed with 503 when the KMS master key is unavailable rather than persisting a destination whose secret was never sealed. The secret itself never appears in the response, in the store, or in a log line; only its NAME is ever published. Set enabled to false to keep the connection but stop the analytics fan-out to it.
      * @param platform 
      * @param requestBody  (optional)
-     * @return CloudDestinationStatus
+     * @return DestinationStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -279,11 +279,11 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DestinationsByPlatform(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null) : CloudDestinationStatus {
-        val localVarResponse = cloudPostV1DestinationsByPlatformWithHttpInfo(platform = platform, requestBody = requestBody)
+    fun postV1DestinationsByPlatform(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null) : DestinationStatus {
+        val localVarResponse = postV1DestinationsByPlatformWithHttpInfo(platform = platform, requestBody = requestBody)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDestinationStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -299,32 +299,32 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
 
     /**
      * POST /v1/destinations/{platform}
-     * 
-     * 
+     * Connect one conversion destination for your org, or update the one you have
+     * Stores the addressed platform&#39;s non-secret ids (its measurement, pixel or dataset ids) and seals its API credential into KMS under a path scoped to the caller&#39;s own org, then answers the same status card the read routes do — with live telling you whether the credential actually resolves right now. The body&#39;s property NAMES are the platform&#39;s own: each field the platform declares, plus each secret under its camelCase name, so the accepted keys differ per platform and a missing REQUIRED field is refused. Connecting is an ORG ADMIN action — a validated member without the admin bit gets 403 — and it fails closed with 503 when the KMS master key is unavailable rather than persisting a destination whose secret was never sealed. The secret itself never appears in the response, in the store, or in a log line; only its NAME is ever published. Set enabled to false to keep the connection but stop the analytics fan-out to it.
      * @param platform 
      * @param requestBody  (optional)
-     * @return ApiResponse<CloudDestinationStatus?>
+     * @return ApiResponse<DestinationStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DestinationsByPlatformWithHttpInfo(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : ApiResponse<CloudDestinationStatus?> {
-        val localVariableConfig = cloudPostV1DestinationsByPlatformRequestConfig(platform = platform, requestBody = requestBody)
+    fun postV1DestinationsByPlatformWithHttpInfo(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : ApiResponse<DestinationStatus?> {
+        val localVariableConfig = postV1DestinationsByPlatformRequestConfig(platform = platform, requestBody = requestBody)
 
-        return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, CloudDestinationStatus>(
+        return request<kotlin.collections.Map<kotlin.String, kotlin.Any>, DestinationStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DestinationsByPlatform
+     * To obtain the request config of the operation postV1DestinationsByPlatform
      *
      * @param platform 
      * @param requestBody  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1DestinationsByPlatformRequestConfig(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
+    fun postV1DestinationsByPlatformRequestConfig(platform: kotlin.String, requestBody: kotlin.collections.Map<kotlin.String, kotlin.Any>?) : RequestConfig<kotlin.collections.Map<kotlin.String, kotlin.Any>> {
         val localVariableBody = requestBody
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -336,7 +336,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -346,7 +346,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Sends ONE synthetic pageview through the connected destination end to end and reports what the platform said.
      * Sends ONE synthetic pageview through the connected destination end to end and reports what the platform said. A send the platform refuses is reported as data — {\&quot;ok\&quot;: false, \&quot;error\&quot;: …} at 200 — so the console shows the platform&#39;s own words rather than an error about Hanzo. It requires org admin.
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
-     * @return CloudDestinationTest
+     * @return DestinationTest
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -355,11 +355,11 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DestinationsPlatformTest(platform: kotlin.String) : CloudDestinationTest {
-        val localVarResponse = cloudPostV1DestinationsPlatformTestWithHttpInfo(platform = platform)
+    fun postV1DestinationsByPlatformTest(platform: kotlin.String) : DestinationTest {
+        val localVarResponse = postV1DestinationsByPlatformTestWithHttpInfo(platform = platform)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudDestinationTest
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DestinationTest
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -378,27 +378,27 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * Sends ONE synthetic pageview through the connected destination end to end and reports what the platform said.
      * Sends ONE synthetic pageview through the connected destination end to end and reports what the platform said. A send the platform refuses is reported as data — {\&quot;ok\&quot;: false, \&quot;error\&quot;: …} at 200 — so the console shows the platform&#39;s own words rather than an error about Hanzo. It requires org admin.
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
-     * @return ApiResponse<CloudDestinationTest?>
+     * @return ApiResponse<DestinationTest?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DestinationsPlatformTestWithHttpInfo(platform: kotlin.String) : ApiResponse<CloudDestinationTest?> {
-        val localVariableConfig = cloudPostV1DestinationsPlatformTestRequestConfig(platform = platform)
+    fun postV1DestinationsByPlatformTestWithHttpInfo(platform: kotlin.String) : ApiResponse<DestinationTest?> {
+        val localVariableConfig = postV1DestinationsByPlatformTestRequestConfig(platform = platform)
 
-        return request<Unit, CloudDestinationTest>(
+        return request<Unit, DestinationTest>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DestinationsPlatformTest
+     * To obtain the request config of the operation postV1DestinationsByPlatformTest
      *
      * @param platform Platform is the destination to act on, from the path: ga4 | meta | tiktok | linkedin | x | reddit | posthog | umami.
      * @return RequestConfig
      */
-    fun cloudPostV1DestinationsPlatformTestRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
+    fun postV1DestinationsByPlatformTestRequestConfig(platform: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -409,7 +409,7 @@ class DestinationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/destinations/{platform}/test".replace("{"+"platform"+"}", encodeURIComponent(platform.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

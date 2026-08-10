@@ -19,9 +19,21 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CommerceAffiliate
-import ai.hanzo.cloud.model.CommerceError
-import ai.hanzo.cloud.model.CommercePaginatedAffiliates
+import ai.hanzo.cloud.model.AffiliateBoard
+import ai.hanzo.cloud.model.AffiliateEarnings
+import ai.hanzo.cloud.model.AffiliateLinks
+import ai.hanzo.cloud.model.AffiliateSelf
+import ai.hanzo.cloud.model.AffiliateStanding
+import ai.hanzo.cloud.model.Application
+import ai.hanzo.cloud.model.ApplyRequest
+import ai.hanzo.cloud.model.AttributeRequest
+import ai.hanzo.cloud.model.Attribution
+import ai.hanzo.cloud.model.ClickCount
+import ai.hanzo.cloud.model.ClickRequest
+import ai.hanzo.cloud.model.CreateLinkRequest
+import ai.hanzo.cloud.model.HandleRequest
+import ai.hanzo.cloud.model.HandleSet
+import ai.hanzo.cloud.model.LinkMint
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,21 +61,22 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/affiliates
-     * 
-     * 
-     * @return void
+     * Answers the caller org&#39;s OWN affiliate standing: status, referral code and share link, commission rate, how many orgs it has referred, and its lifetime accrued, still-pending and already-paid commission in integer cents, with its payout history.
+     * Answers the caller org&#39;s OWN affiliate standing: status, referral code and share link, commission rate, how many orgs it has referred, and its lifetime accrued, still-pending and already-paid commission in integer cents, with its payout history.  An org that never applied gets an honest &#x60;isAffiliate:false&#x60; and the default rate rather than a 404 — the console renders the apply form off that answer.  The affiliate is resolved from the VALIDATED org, never from a field, so this can only ever read the caller&#39;s own row; without a principal it is refused. It is a PURE READ: nothing accrues until the sweep runs. Commission is earned on Hanzo&#39;s MARGIN, never on the referred customer&#39;s bill, so nothing here changes what that customer pays.
+     * @return AffiliateStanding
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
+    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Affiliates() : Unit {
-        val localVarResponse = cloudGetV1AffiliatesWithHttpInfo()
+    fun getV1Affiliates() : AffiliateStanding {
+        val localVarResponse = getV1AffiliatesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateStanding
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -79,702 +92,28 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
     /**
      * GET /v1/affiliates
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AffiliatesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AffiliatesRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1Affiliates
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1AffiliatesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/affiliates",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/affiliates/leaderboard
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AffiliatesLeaderboard() : Unit {
-        val localVarResponse = cloudGetV1AffiliatesLeaderboardWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/affiliates/leaderboard
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AffiliatesLeaderboardWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AffiliatesLeaderboardRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1AffiliatesLeaderboard
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1AffiliatesLeaderboardRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/affiliates/leaderboard",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/affiliates/me
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AffiliatesMe() : Unit {
-        val localVarResponse = cloudGetV1AffiliatesMeWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/affiliates/me
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AffiliatesMeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AffiliatesMeRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1AffiliatesMe
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1AffiliatesMeRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/affiliates/me",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/affiliates/me/earnings
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AffiliatesMeEarnings() : Unit {
-        val localVarResponse = cloudGetV1AffiliatesMeEarningsWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/affiliates/me/earnings
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AffiliatesMeEarningsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AffiliatesMeEarningsRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1AffiliatesMeEarnings
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1AffiliatesMeEarningsRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/affiliates/me/earnings",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/affiliates/me/links
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AffiliatesMeLinks() : Unit {
-        val localVarResponse = cloudGetV1AffiliatesMeLinksWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/affiliates/me/links
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AffiliatesMeLinksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AffiliatesMeLinksRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1AffiliatesMeLinks
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1AffiliatesMeLinksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/affiliates/me/links",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/affiliates/apply
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AffiliatesApply() : Unit {
-        val localVarResponse = cloudPostV1AffiliatesApplyWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/affiliates/apply
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AffiliatesApplyWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AffiliatesApplyRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1AffiliatesApply
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1AffiliatesApplyRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/affiliates/apply",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/affiliates/attribute
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AffiliatesAttribute() : Unit {
-        val localVarResponse = cloudPostV1AffiliatesAttributeWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/affiliates/attribute
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AffiliatesAttributeWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AffiliatesAttributeRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1AffiliatesAttribute
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1AffiliatesAttributeRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/affiliates/attribute",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/affiliates/click
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AffiliatesClick() : Unit {
-        val localVarResponse = cloudPostV1AffiliatesClickWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/affiliates/click
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AffiliatesClickWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AffiliatesClickRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1AffiliatesClick
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1AffiliatesClickRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/affiliates/click",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/affiliates/me/handle
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AffiliatesMeHandle() : Unit {
-        val localVarResponse = cloudPostV1AffiliatesMeHandleWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/affiliates/me/handle
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AffiliatesMeHandleWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AffiliatesMeHandleRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1AffiliatesMeHandle
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1AffiliatesMeHandleRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/affiliates/me/handle",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/affiliates/me/links
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AffiliatesMeLinks() : Unit {
-        val localVarResponse = cloudPostV1AffiliatesMeLinksWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/affiliates/me/links
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AffiliatesMeLinksWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AffiliatesMeLinksRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1AffiliatesMeLinks
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1AffiliatesMeLinksRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/affiliates/me/links",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/commerce/affiliate/{affiliateid}/connect
-     * Connect affiliate
-     * 
-     * @param affiliateid 
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceConnectAffiliate(affiliateid: kotlin.String) : kotlin.Any {
-        val localVarResponse = commerceConnectAffiliateWithHttpInfo(affiliateid = affiliateid)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/commerce/affiliate/{affiliateid}/connect
-     * Connect affiliate
-     * 
-     * @param affiliateid 
-     * @return ApiResponse<kotlin.Any?>
+     * Answers the caller org&#39;s OWN affiliate standing: status, referral code and share link, commission rate, how many orgs it has referred, and its lifetime accrued, still-pending and already-paid commission in integer cents, with its payout history.
+     * Answers the caller org&#39;s OWN affiliate standing: status, referral code and share link, commission rate, how many orgs it has referred, and its lifetime accrued, still-pending and already-paid commission in integer cents, with its payout history.  An org that never applied gets an honest &#x60;isAffiliate:false&#x60; and the default rate rather than a 404 — the console renders the apply form off that answer.  The affiliate is resolved from the VALIDATED org, never from a field, so this can only ever read the caller&#39;s own row; without a principal it is refused. It is a PURE READ: nothing accrues until the sweep runs. Commission is earned on Hanzo&#39;s MARGIN, never on the referred customer&#39;s bill, so nothing here changes what that customer pays.
+     * @return ApiResponse<AffiliateStanding?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceConnectAffiliateWithHttpInfo(affiliateid: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = commerceConnectAffiliateRequestConfig(affiliateid = affiliateid)
+    fun getV1AffiliatesWithHttpInfo() : ApiResponse<AffiliateStanding?> {
+        val localVariableConfig = getV1AffiliatesRequestConfig()
 
-        return request<Unit, kotlin.Any>(
+        return request<Unit, AffiliateStanding>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceConnectAffiliate
+     * To obtain the request config of the operation getV1Affiliates
      *
-     * @param affiliateid 
      * @return RequestConfig
      */
-    fun commerceConnectAffiliateRequestConfig(affiliateid: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AffiliatesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -782,20 +121,19 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/commerce/affiliate/{affiliateid}/connect".replace("{"+"affiliateid"+"}", encodeURIComponent(affiliateid.toString())),
+            path = "/v1/affiliates",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/commerce/affiliate
-     * Create affiliate
-     * 
-     * @param commerceAffiliate 
-     * @return CommerceAffiliate
+     * GET /v1/affiliates/leaderboard
+     * Answers the top affiliates by lifetime accrued commission, shown by OPT-IN HANDLE with aggregate figures only, plus the caller&#39;s own exact rank.
+     * Answers the top affiliates by lifetime accrued commission, shown by OPT-IN HANDLE with aggregate figures only, plus the caller&#39;s own exact rank.  It never discloses an org identity and never a referred org&#39;s usage. An affiliate that has set no handle still OCCUPIES its rank but is not listed — so opting out hides the name, not the position, and the visible board must not be read as a complete roster.  The caller&#39;s own row carries its exact GLOBAL rank, computed over the whole approved set rather than over the page, so it is right well outside the top of the board. Only an approved affiliate has a rank. Requires a validated principal; a signed-in non-affiliate may read the board but gets no personal row.
+     * @return AffiliateBoard
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -804,11 +142,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceCreateAffiliate(commerceAffiliate: CommerceAffiliate) : CommerceAffiliate {
-        val localVarResponse = commerceCreateAffiliateWithHttpInfo(commerceAffiliate = commerceAffiliate)
+    fun getV1AffiliatesLeaderboard() : AffiliateBoard {
+        val localVarResponse = getV1AffiliatesLeaderboardWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceAffiliate
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateBoard
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -823,32 +161,313 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * POST /v1/commerce/affiliate
-     * Create affiliate
-     * 
-     * @param commerceAffiliate 
-     * @return ApiResponse<CommerceAffiliate?>
+     * GET /v1/affiliates/leaderboard
+     * Answers the top affiliates by lifetime accrued commission, shown by OPT-IN HANDLE with aggregate figures only, plus the caller&#39;s own exact rank.
+     * Answers the top affiliates by lifetime accrued commission, shown by OPT-IN HANDLE with aggregate figures only, plus the caller&#39;s own exact rank.  It never discloses an org identity and never a referred org&#39;s usage. An affiliate that has set no handle still OCCUPIES its rank but is not listed — so opting out hides the name, not the position, and the visible board must not be read as a complete roster.  The caller&#39;s own row carries its exact GLOBAL rank, computed over the whole approved set rather than over the page, so it is right well outside the top of the board. Only an approved affiliate has a rank. Requires a validated principal; a signed-in non-affiliate may read the board but gets no personal row.
+     * @return ApiResponse<AffiliateBoard?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceCreateAffiliateWithHttpInfo(commerceAffiliate: CommerceAffiliate) : ApiResponse<CommerceAffiliate?> {
-        val localVariableConfig = commerceCreateAffiliateRequestConfig(commerceAffiliate = commerceAffiliate)
+    fun getV1AffiliatesLeaderboardWithHttpInfo() : ApiResponse<AffiliateBoard?> {
+        val localVariableConfig = getV1AffiliatesLeaderboardRequestConfig()
 
-        return request<CommerceAffiliate, CommerceAffiliate>(
+        return request<Unit, AffiliateBoard>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceCreateAffiliate
+     * To obtain the request config of the operation getV1AffiliatesLeaderboard
      *
-     * @param commerceAffiliate 
      * @return RequestConfig
      */
-    fun commerceCreateAffiliateRequestConfig(commerceAffiliate: CommerceAffiliate) : RequestConfig<CommerceAffiliate> {
-        val localVariableBody = commerceAffiliate
+    fun getV1AffiliatesLeaderboardRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/affiliates/leaderboard",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/affiliates/me
+     * Answers the richer self-view: the same lifetime accrued, pending and paid commission and payout history, plus the caller&#39;s downline broken out by upline LEVEL — direct, second, third — each with the rate paid at that level and how many orgs sit there.
+     * Answers the richer self-view: the same lifetime accrued, pending and paid commission and payout history, plus the caller&#39;s downline broken out by upline LEVEL — direct, second, third — each with the rate paid at that level and how many orgs sit there.  Commission is MULTI-LEVEL: a referred org&#39;s spend pays up its referral chain, three levels deep and no further. The direct level is the affiliate&#39;s own negotiated rate; the second and third are platform-wide switches, read live, so the schedule shown is the one actually in force rather than one compiled in. A caller that has not applied still gets that schedule alongside &#x60;isAffiliate:false&#x60;, so the console can show what it would earn.  Scoped to the validated org and nothing else, and refused without a principal. A PURE READ — it reports the downline but accrues nothing.
+     * @return AffiliateSelf
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1AffiliatesMe() : AffiliateSelf {
+        val localVarResponse = getV1AffiliatesMeWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateSelf
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/affiliates/me
+     * Answers the richer self-view: the same lifetime accrued, pending and paid commission and payout history, plus the caller&#39;s downline broken out by upline LEVEL — direct, second, third — each with the rate paid at that level and how many orgs sit there.
+     * Answers the richer self-view: the same lifetime accrued, pending and paid commission and payout history, plus the caller&#39;s downline broken out by upline LEVEL — direct, second, third — each with the rate paid at that level and how many orgs sit there.  Commission is MULTI-LEVEL: a referred org&#39;s spend pays up its referral chain, three levels deep and no further. The direct level is the affiliate&#39;s own negotiated rate; the second and third are platform-wide switches, read live, so the schedule shown is the one actually in force rather than one compiled in. A caller that has not applied still gets that schedule alongside &#x60;isAffiliate:false&#x60;, so the console can show what it would earn.  Scoped to the validated org and nothing else, and refused without a principal. A PURE READ — it reports the downline but accrues nothing.
+     * @return ApiResponse<AffiliateSelf?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1AffiliatesMeWithHttpInfo() : ApiResponse<AffiliateSelf?> {
+        val localVariableConfig = getV1AffiliatesMeRequestConfig()
+
+        return request<Unit, AffiliateSelf>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1AffiliatesMe
+     *
+     * @return RequestConfig
+     */
+    fun getV1AffiliatesMeRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/affiliates/me",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/affiliates/me/earnings
+     * Answers the caller&#39;s own commission ledger: per period, the margin it earned against and the commission taken from that margin; and per referred org, that referral&#39;s aggregate contribution.
+     * Answers the caller&#39;s own commission ledger: per period, the margin it earned against and the commission taken from that margin; and per referred org, that referral&#39;s aggregate contribution. Integer cents throughout.  The per-org view deliberately carries the affiliate&#39;s OWN earned share and NOT the referred org&#39;s spend or margin. An affiliate is entitled to what it earned, not to a restatement of its customer&#39;s usage — the period view is where the margin base appears, aggregated across every referral.  Scoped server-side to the validated caller&#39;s affiliate; a caller that is not one gets &#x60;isAffiliate:false&#x60;.
+     * @return AffiliateEarnings
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1AffiliatesMeEarnings() : AffiliateEarnings {
+        val localVarResponse = getV1AffiliatesMeEarningsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateEarnings
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/affiliates/me/earnings
+     * Answers the caller&#39;s own commission ledger: per period, the margin it earned against and the commission taken from that margin; and per referred org, that referral&#39;s aggregate contribution.
+     * Answers the caller&#39;s own commission ledger: per period, the margin it earned against and the commission taken from that margin; and per referred org, that referral&#39;s aggregate contribution. Integer cents throughout.  The per-org view deliberately carries the affiliate&#39;s OWN earned share and NOT the referred org&#39;s spend or margin. An affiliate is entitled to what it earned, not to a restatement of its customer&#39;s usage — the period view is where the margin base appears, aggregated across every referral.  Scoped server-side to the validated caller&#39;s affiliate; a caller that is not one gets &#x60;isAffiliate:false&#x60;.
+     * @return ApiResponse<AffiliateEarnings?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1AffiliatesMeEarningsWithHttpInfo() : ApiResponse<AffiliateEarnings?> {
+        val localVariableConfig = getV1AffiliatesMeEarningsRequestConfig()
+
+        return request<Unit, AffiliateEarnings>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1AffiliatesMeEarnings
+     *
+     * @return RequestConfig
+     */
+    fun getV1AffiliatesMeEarningsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/affiliates/me/earnings",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/affiliates/me/links
+     * Answers the caller&#39;s share links, each with its URL and its funnel: clicks tracked, signups — orgs attributed with that code — and conversions, meaning how many of those signups have actually produced commission.
+     * Answers the caller&#39;s share links, each with its URL and its funnel: clicks tracked, signups — orgs attributed with that code — and conversions, meaning how many of those signups have actually produced commission.  Signups and conversions are DERIVED from the commission ledger and never stored, so they cannot drift from the money. Clicks are the one stored counter and the one that is pure vanity.  Any pending public click pings are folded into the store before the read, in one batch — which is how the counters stay current without a database write per click. Scoped to the validated caller&#39;s own affiliate; a non-affiliate gets &#x60;isAffiliate:false&#x60; and the link cap.
+     * @return AffiliateLinks
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1AffiliatesMeLinks() : AffiliateLinks {
+        val localVarResponse = getV1AffiliatesMeLinksWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AffiliateLinks
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/affiliates/me/links
+     * Answers the caller&#39;s share links, each with its URL and its funnel: clicks tracked, signups — orgs attributed with that code — and conversions, meaning how many of those signups have actually produced commission.
+     * Answers the caller&#39;s share links, each with its URL and its funnel: clicks tracked, signups — orgs attributed with that code — and conversions, meaning how many of those signups have actually produced commission.  Signups and conversions are DERIVED from the commission ledger and never stored, so they cannot drift from the money. Clicks are the one stored counter and the one that is pure vanity.  Any pending public click pings are folded into the store before the read, in one batch — which is how the counters stay current without a database write per click. Scoped to the validated caller&#39;s own affiliate; a non-affiliate gets &#x60;isAffiliate:false&#x60; and the link cap.
+     * @return ApiResponse<AffiliateLinks?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1AffiliatesMeLinksWithHttpInfo() : ApiResponse<AffiliateLinks?> {
+        val localVariableConfig = getV1AffiliatesMeLinksRequestConfig()
+
+        return request<Unit, AffiliateLinks>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1AffiliatesMeLinks
+     *
+     * @return RequestConfig
+     */
+    fun getV1AffiliatesMeLinksRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/affiliates/me/links",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/affiliates/apply
+     * Enrolls the caller&#39;s OWN org as an affiliate at status &#x60;applied&#x60;, optionally requesting a vanity code, and answers the record — 201 on the first apply, 200 with &#x60;created:false&#x60; afterwards.
+     * Enrolls the caller&#39;s OWN org as an affiliate at status &#x60;applied&#x60;, optionally requesting a vanity code, and answers the record — 201 on the first apply, 200 with &#x60;created:false&#x60; afterwards.  IDEMPOTENT, first apply wins: one affiliate per org, so re-applying never creates a second row and never resets an existing approval. Applying is not joining — no code is minted and nothing accrues until staff approve, which is where both the code and the commission rate come from.  The org is the validated caller&#39;s, never a field. A malformed vanity code is refused up front; the code is only REQUESTED here, and approval may mint a different one if the requested code is taken.
+     * @param applyRequest 
+     * @return Application
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1AffiliatesApply(applyRequest: ApplyRequest) : Application {
+        val localVarResponse = postV1AffiliatesApplyWithHttpInfo(applyRequest = applyRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Application
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/affiliates/apply
+     * Enrolls the caller&#39;s OWN org as an affiliate at status &#x60;applied&#x60;, optionally requesting a vanity code, and answers the record — 201 on the first apply, 200 with &#x60;created:false&#x60; afterwards.
+     * Enrolls the caller&#39;s OWN org as an affiliate at status &#x60;applied&#x60;, optionally requesting a vanity code, and answers the record — 201 on the first apply, 200 with &#x60;created:false&#x60; afterwards.  IDEMPOTENT, first apply wins: one affiliate per org, so re-applying never creates a second row and never resets an existing approval. Applying is not joining — no code is minted and nothing accrues until staff approve, which is where both the code and the commission rate come from.  The org is the validated caller&#39;s, never a field. A malformed vanity code is refused up front; the code is only REQUESTED here, and approval may mint a different one if the requested code is taken.
+     * @param applyRequest 
+     * @return ApiResponse<Application?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1AffiliatesApplyWithHttpInfo(applyRequest: ApplyRequest) : ApiResponse<Application?> {
+        val localVariableConfig = postV1AffiliatesApplyRequestConfig(applyRequest = applyRequest)
+
+        return request<ApplyRequest, Application>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1AffiliatesApply
+     *
+     * @param applyRequest 
+     * @return RequestConfig
+     */
+    fun postV1AffiliatesApplyRequestConfig(applyRequest: ApplyRequest) : RequestConfig<ApplyRequest> {
+        val localVariableBody = applyRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -856,20 +475,20 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/commerce/affiliate",
+            path = "/v1/affiliates/apply",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/affiliate/{affiliateid}
-     * Get affiliate
-     * 
-     * @param affiliateid 
-     * @return CommerceAffiliate
+     * POST /v1/affiliates/attribute
+     * Records the first-touch edge every later commission is computed from: the caller&#39;s org was referred by the affiliate that owns this code.
+     * Records the first-touch edge every later commission is computed from: the caller&#39;s org was referred by the affiliate that owns this code.  The REFERRED org is the validated caller, never a field. A caller that could name the referred org could attach itself to somebody else&#39;s revenue. The affiliate is resolved from the code, and only an APPROVED affiliate&#39;s code resolves.  FIRST TOUCH WINS, set once: one affiliate per referred org, so a re-post answers the existing edge with &#x60;created:false&#x60; rather than moving the attribution. Self-attribution is refused, and so is a code that would make a cycle in the upline chain. An unknown code is a 404, deliberately: an affiliate code IS a public shareable link, so whether one is real is public by design, and the caller legitimately needs to know its link resolved.  A user-level mirror of the edge is written best-effort; a conflict there never fails the org attribution, which is the money-bearing one.
+     * @param attributeRequest 
+     * @return Attribution
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -878,11 +497,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceGetAffiliate(affiliateid: kotlin.String) : CommerceAffiliate {
-        val localVarResponse = commerceGetAffiliateWithHttpInfo(affiliateid = affiliateid)
+    fun postV1AffiliatesAttribute(attributeRequest: AttributeRequest) : Attribution {
+        val localVarResponse = postV1AffiliatesAttributeWithHttpInfo(attributeRequest = attributeRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceAffiliate
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Attribution
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -897,53 +516,53 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * GET /v1/commerce/affiliate/{affiliateid}
-     * Get affiliate
-     * 
-     * @param affiliateid 
-     * @return ApiResponse<CommerceAffiliate?>
+     * POST /v1/affiliates/attribute
+     * Records the first-touch edge every later commission is computed from: the caller&#39;s org was referred by the affiliate that owns this code.
+     * Records the first-touch edge every later commission is computed from: the caller&#39;s org was referred by the affiliate that owns this code.  The REFERRED org is the validated caller, never a field. A caller that could name the referred org could attach itself to somebody else&#39;s revenue. The affiliate is resolved from the code, and only an APPROVED affiliate&#39;s code resolves.  FIRST TOUCH WINS, set once: one affiliate per referred org, so a re-post answers the existing edge with &#x60;created:false&#x60; rather than moving the attribution. Self-attribution is refused, and so is a code that would make a cycle in the upline chain. An unknown code is a 404, deliberately: an affiliate code IS a public shareable link, so whether one is real is public by design, and the caller legitimately needs to know its link resolved.  A user-level mirror of the edge is written best-effort; a conflict there never fails the org attribution, which is the money-bearing one.
+     * @param attributeRequest 
+     * @return ApiResponse<Attribution?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceGetAffiliateWithHttpInfo(affiliateid: kotlin.String) : ApiResponse<CommerceAffiliate?> {
-        val localVariableConfig = commerceGetAffiliateRequestConfig(affiliateid = affiliateid)
+    fun postV1AffiliatesAttributeWithHttpInfo(attributeRequest: AttributeRequest) : ApiResponse<Attribution?> {
+        val localVariableConfig = postV1AffiliatesAttributeRequestConfig(attributeRequest = attributeRequest)
 
-        return request<Unit, CommerceAffiliate>(
+        return request<AttributeRequest, Attribution>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceGetAffiliate
+     * To obtain the request config of the operation postV1AffiliatesAttribute
      *
-     * @param affiliateid 
+     * @param attributeRequest 
      * @return RequestConfig
      */
-    fun commerceGetAffiliateRequestConfig(affiliateid: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
+    fun postV1AffiliatesAttributeRequestConfig(attributeRequest: AttributeRequest) : RequestConfig<AttributeRequest> {
+        val localVariableBody = attributeRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/commerce/affiliate/{affiliateid}".replace("{"+"affiliateid"+"}", encodeURIComponent(affiliateid.toString())),
+            method = RequestMethod.POST,
+            path = "/v1/affiliates/attribute",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/affiliate
-     * List affiliates
-     * 
-     * @param page Page number (1-indexed) (optional, default to 1)
-     * @param display Number of items per page (optional, default to 20)
-     * @return CommercePaginatedAffiliates
+     * POST /v1/affiliates/click
+     * Counts a click on a share link.
+     * Counts a click on a share link. PUBLIC — it takes no principal, because a visitor clicking a shareable link has no session yet.  The ping folds into an in-memory buffer and NEVER writes the money database synchronously, so a click flood cannot contend with the accrual and payout write path; tallies are flushed in one batch on the next authenticated links read and at shutdown. Clicks are a vanity metric: no accrual and no payout ever reads them — those key on real metered spend — so click inflation cannot move money.  Any well-formed code is accepted WITHOUT checking that it exists, deliberately: this is not a code-existence oracle. &#x60;counted&#x60; reports that the buffer took the ping, not that the code is real; an unknown code simply no-ops at flush time.
+     * @param clickRequest 
+     * @return ClickCount
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -952,11 +571,11 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceListAffiliates(page: kotlin.Int? = 1, display: kotlin.Int? = 20) : CommercePaginatedAffiliates {
-        val localVarResponse = commerceListAffiliatesWithHttpInfo(page = page, display = display)
+    fun postV1AffiliatesClick(clickRequest: ClickRequest) : ClickCount {
+        val localVarResponse = postV1AffiliatesClickWithHttpInfo(clickRequest = clickRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommercePaginatedAffiliates
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClickCount
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -971,52 +590,191 @@ class AffiliatesApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
     }
 
     /**
-     * GET /v1/commerce/affiliate
-     * List affiliates
-     * 
-     * @param page Page number (1-indexed) (optional, default to 1)
-     * @param display Number of items per page (optional, default to 20)
-     * @return ApiResponse<CommercePaginatedAffiliates?>
+     * POST /v1/affiliates/click
+     * Counts a click on a share link.
+     * Counts a click on a share link. PUBLIC — it takes no principal, because a visitor clicking a shareable link has no session yet.  The ping folds into an in-memory buffer and NEVER writes the money database synchronously, so a click flood cannot contend with the accrual and payout write path; tallies are flushed in one batch on the next authenticated links read and at shutdown. Clicks are a vanity metric: no accrual and no payout ever reads them — those key on real metered spend — so click inflation cannot move money.  Any well-formed code is accepted WITHOUT checking that it exists, deliberately: this is not a code-existence oracle. &#x60;counted&#x60; reports that the buffer took the ping, not that the code is real; an unknown code simply no-ops at flush time.
+     * @param clickRequest 
+     * @return ApiResponse<ClickCount?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceListAffiliatesWithHttpInfo(page: kotlin.Int?, display: kotlin.Int?) : ApiResponse<CommercePaginatedAffiliates?> {
-        val localVariableConfig = commerceListAffiliatesRequestConfig(page = page, display = display)
+    fun postV1AffiliatesClickWithHttpInfo(clickRequest: ClickRequest) : ApiResponse<ClickCount?> {
+        val localVariableConfig = postV1AffiliatesClickRequestConfig(clickRequest = clickRequest)
 
-        return request<Unit, CommercePaginatedAffiliates>(
+        return request<ClickRequest, ClickCount>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceListAffiliates
+     * To obtain the request config of the operation postV1AffiliatesClick
      *
-     * @param page Page number (1-indexed) (optional, default to 1)
-     * @param display Number of items per page (optional, default to 20)
+     * @param clickRequest 
      * @return RequestConfig
      */
-    fun commerceListAffiliatesRequestConfig(page: kotlin.Int?, display: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (page != null) {
-                    put("page", listOf(page.toString()))
-                }
-                if (display != null) {
-                    put("display", listOf(display.toString()))
-                }
-            }
+    fun postV1AffiliatesClickRequestConfig(clickRequest: ClickRequest) : RequestConfig<ClickRequest> {
+        val localVariableBody = clickRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/commerce/affiliate",
+            method = RequestMethod.POST,
+            path = "/v1/affiliates/click",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/affiliates/me/handle
+     * Sets the caller&#39;s public leaderboard display name, or clears it.
+     * Sets the caller&#39;s public leaderboard display name, or clears it.  The handle IS the opt-in. An empty handle opts out: the affiliate keeps its rank and can still see its own row, it simply stops being listed to anyone else. That is the whole privacy control — there is no separate visibility flag, and no way to be listed without choosing a name.  Requires a validated principal and an existing affiliate record; apply first. The handle is bounded and restricted to letters, digits, space, hyphen, underscore and dot.
+     * @param handleRequest 
+     * @return HandleSet
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1AffiliatesMeHandle(handleRequest: HandleRequest) : HandleSet {
+        val localVarResponse = postV1AffiliatesMeHandleWithHttpInfo(handleRequest = handleRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as HandleSet
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/affiliates/me/handle
+     * Sets the caller&#39;s public leaderboard display name, or clears it.
+     * Sets the caller&#39;s public leaderboard display name, or clears it.  The handle IS the opt-in. An empty handle opts out: the affiliate keeps its rank and can still see its own row, it simply stops being listed to anyone else. That is the whole privacy control — there is no separate visibility flag, and no way to be listed without choosing a name.  Requires a validated principal and an existing affiliate record; apply first. The handle is bounded and restricted to letters, digits, space, hyphen, underscore and dot.
+     * @param handleRequest 
+     * @return ApiResponse<HandleSet?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1AffiliatesMeHandleWithHttpInfo(handleRequest: HandleRequest) : ApiResponse<HandleSet?> {
+        val localVariableConfig = postV1AffiliatesMeHandleRequestConfig(handleRequest = handleRequest)
+
+        return request<HandleRequest, HandleSet>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1AffiliatesMeHandle
+     *
+     * @param handleRequest 
+     * @return RequestConfig
+     */
+    fun postV1AffiliatesMeHandleRequestConfig(handleRequest: HandleRequest) : RequestConfig<HandleRequest> {
+        val localVariableBody = handleRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/affiliates/me/handle",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/affiliates/me/links
+     * Mints a new share link for the caller&#39;s own affiliate and answers it with its full URL, 201.
+     * Mints a new share link for the caller&#39;s own affiliate and answers it with its full URL, 201.  APPROVAL IS REQUIRED: an org that has applied but is not approved is refused, because a link that cannot accrue is a link that quietly loses the referral. A requested vanity code must be valid and free across the WHOLE directory — codes are one global namespace, so a taken code is a 409 rather than a silent alias. Omit the code and a random one is minted.  Bounded per affiliate. The label is cosmetic: it is trimmed, stripped of control characters and capped, and it is never part of a code.
+     * @param createLinkRequest 
+     * @return LinkMint
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1AffiliatesMeLinks(createLinkRequest: CreateLinkRequest) : LinkMint {
+        val localVarResponse = postV1AffiliatesMeLinksWithHttpInfo(createLinkRequest = createLinkRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LinkMint
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/affiliates/me/links
+     * Mints a new share link for the caller&#39;s own affiliate and answers it with its full URL, 201.
+     * Mints a new share link for the caller&#39;s own affiliate and answers it with its full URL, 201.  APPROVAL IS REQUIRED: an org that has applied but is not approved is refused, because a link that cannot accrue is a link that quietly loses the referral. A requested vanity code must be valid and free across the WHOLE directory — codes are one global namespace, so a taken code is a 409 rather than a silent alias. Omit the code and a random one is minted.  Bounded per affiliate. The label is cosmetic: it is trimmed, stripped of control characters and capped, and it is never part of a code.
+     * @param createLinkRequest 
+     * @return ApiResponse<LinkMint?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1AffiliatesMeLinksWithHttpInfo(createLinkRequest: CreateLinkRequest) : ApiResponse<LinkMint?> {
+        val localVariableConfig = postV1AffiliatesMeLinksRequestConfig(createLinkRequest = createLinkRequest)
+
+        return request<CreateLinkRequest, LinkMint>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1AffiliatesMeLinks
+     *
+     * @param createLinkRequest 
+     * @return RequestConfig
+     */
+    fun postV1AffiliatesMeLinksRequestConfig(createLinkRequest: CreateLinkRequest) : RequestConfig<CreateLinkRequest> {
+        val localVariableBody = createLinkRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/affiliates/me/links",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,32 +19,32 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudActivityFeed
-import ai.hanzo.cloud.model.CloudAgentDetail
-import ai.hanzo.cloud.model.CloudAgentList
-import ai.hanzo.cloud.model.CloudAgentView
-import ai.hanzo.cloud.model.CloudBuildList
-import ai.hanzo.cloud.model.CloudBuildView
-import ai.hanzo.cloud.model.CloudClaimKeyOut
-import ai.hanzo.cloud.model.CloudControlDrain
-import ai.hanzo.cloud.model.CloudCreateAgentIn
-import ai.hanzo.cloud.model.CloudMetricsView
-import ai.hanzo.cloud.model.CloudPatchSessionIn
-import ai.hanzo.cloud.model.CloudPatchTargetIn
-import ai.hanzo.cloud.model.CloudRegisterReq
-import ai.hanzo.cloud.model.CloudReportOut
-import ai.hanzo.cloud.model.CloudReportRunIn
-import ai.hanzo.cloud.model.CloudRoutedRunOut
-import ai.hanzo.cloud.model.CloudRunList
-import ai.hanzo.cloud.model.CloudSessionDetail
-import ai.hanzo.cloud.model.CloudSessionList
-import ai.hanzo.cloud.model.CloudSessionView
-import ai.hanzo.cloud.model.CloudTargetDeleted
-import ai.hanzo.cloud.model.CloudTargetList
-import ai.hanzo.cloud.model.CloudTargetReq
-import ai.hanzo.cloud.model.CloudTargetView
-import ai.hanzo.cloud.model.CloudTreeNode
-import ai.hanzo.cloud.model.CloudUpdateAgentIn
+import ai.hanzo.cloud.model.ActivityFeed
+import ai.hanzo.cloud.model.AgentDetail
+import ai.hanzo.cloud.model.AgentList
+import ai.hanzo.cloud.model.AgentView
+import ai.hanzo.cloud.model.BuildList
+import ai.hanzo.cloud.model.BuildView
+import ai.hanzo.cloud.model.ClaimKeyOut
+import ai.hanzo.cloud.model.ControlDrain
+import ai.hanzo.cloud.model.CreateAgentIn
+import ai.hanzo.cloud.model.MetricsView
+import ai.hanzo.cloud.model.PatchSessionIn
+import ai.hanzo.cloud.model.PatchTargetIn
+import ai.hanzo.cloud.model.RegisterReq
+import ai.hanzo.cloud.model.ReportOut
+import ai.hanzo.cloud.model.ReportRunIn
+import ai.hanzo.cloud.model.RoutedRunOut
+import ai.hanzo.cloud.model.RunList
+import ai.hanzo.cloud.model.SessionDetail
+import ai.hanzo.cloud.model.SessionList
+import ai.hanzo.cloud.model.SessionView
+import ai.hanzo.cloud.model.TargetDeleted
+import ai.hanzo.cloud.model.TargetList
+import ai.hanzo.cloud.model.TargetReq
+import ai.hanzo.cloud.model.TargetView
+import ai.hanzo.cloud.model.TreeNode
+import ai.hanzo.cloud.model.UpdateAgentIn
 
 import com.google.gson.annotations.SerializedName
 
@@ -72,8 +72,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/agents/{ref}
-     * DeleteAgent removes an agent and every run recorded against it.
-     * DeleteAgent removes an agent and every run recorded against it. Answers 204.
+     * Removes an agent and every run recorded against it.
+     * Removes an agent and every run recorded against it. Answers 204.
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -83,8 +83,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1AgentsRef(ref: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1AgentsRefWithHttpInfo(ref = ref)
+    fun deleteV1AgentsByRef(ref: kotlin.String) : Unit {
+        val localVarResponse = deleteV1AgentsByRefWithHttpInfo(ref = ref)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -103,16 +103,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/agents/{ref}
-     * DeleteAgent removes an agent and every run recorded against it.
-     * DeleteAgent removes an agent and every run recorded against it. Answers 204.
+     * Removes an agent and every run recorded against it.
+     * Removes an agent and every run recorded against it. Answers 204.
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1AgentsRefWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1AgentsRefRequestConfig(ref = ref)
+    fun deleteV1AgentsByRefWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1AgentsByRefRequestConfig(ref = ref)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -120,12 +120,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1AgentsRef
+     * To obtain the request config of the operation deleteV1AgentsByRef
      *
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
      * @return RequestConfig
      */
-    fun cloudDeleteV1AgentsRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1AgentsByRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -135,17 +135,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/agents/targets/{id}
-     * DeleteTarget deregisters one machine.
-     * DeleteTarget deregisters one machine. Only its owner, or an org admin, may remove it; an unknown id, a cross-org id and a machine owned by someone else all answer the same not-found, so a probe learns nothing about what exists.
+     * Deregisters one machine.
+     * Deregisters one machine. Only its owner, or an org admin, may remove it; an unknown id, a cross-org id and a machine owned by someone else all answer the same not-found, so a probe learns nothing about what exists.
      * @param id ID is the target to act on, from the path.
-     * @return CloudTargetDeleted
+     * @return TargetDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -154,11 +154,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1AgentsTargetsId(id: kotlin.String) : CloudTargetDeleted {
-        val localVarResponse = cloudDeleteV1AgentsTargetsIdWithHttpInfo(id = id)
+    fun deleteV1AgentsTargetsById(id: kotlin.String) : TargetDeleted {
+        val localVarResponse = deleteV1AgentsTargetsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTargetDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TargetDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -174,30 +174,30 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/agents/targets/{id}
-     * DeleteTarget deregisters one machine.
-     * DeleteTarget deregisters one machine. Only its owner, or an org admin, may remove it; an unknown id, a cross-org id and a machine owned by someone else all answer the same not-found, so a probe learns nothing about what exists.
+     * Deregisters one machine.
+     * Deregisters one machine. Only its owner, or an org admin, may remove it; an unknown id, a cross-org id and a machine owned by someone else all answer the same not-found, so a probe learns nothing about what exists.
      * @param id ID is the target to act on, from the path.
-     * @return ApiResponse<CloudTargetDeleted?>
+     * @return ApiResponse<TargetDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1AgentsTargetsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudTargetDeleted?> {
-        val localVariableConfig = cloudDeleteV1AgentsTargetsIdRequestConfig(id = id)
+    fun deleteV1AgentsTargetsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TargetDeleted?> {
+        val localVariableConfig = deleteV1AgentsTargetsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudTargetDeleted>(
+        return request<Unit, TargetDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1AgentsTargetsId
+     * To obtain the request config of the operation deleteV1AgentsTargetsById
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1AgentsTargetsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1AgentsTargetsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -208,16 +208,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents
-     * ListAgents returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
-     * ListAgents returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
-     * @return CloudAgentList
+     * Returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
+     * Returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
+     * @return AgentList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -226,11 +226,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Agents() : CloudAgentList {
-        val localVarResponse = cloudGetV1AgentsWithHttpInfo()
+    fun getV1Agents() : AgentList {
+        val localVarResponse = getV1AgentsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAgentList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AgentList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -246,28 +246,28 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents
-     * ListAgents returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
-     * ListAgents returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
-     * @return ApiResponse<CloudAgentList?>
+     * Returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
+     * Returns every agent defined in the caller&#39;s org, each with the number of runs recorded against it.
+     * @return ApiResponse<AgentList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsWithHttpInfo() : ApiResponse<CloudAgentList?> {
-        val localVariableConfig = cloudGetV1AgentsRequestConfig()
+    fun getV1AgentsWithHttpInfo() : ApiResponse<AgentList?> {
+        val localVariableConfig = getV1AgentsRequestConfig()
 
-        return request<Unit, CloudAgentList>(
+        return request<Unit, AgentList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Agents
+     * To obtain the request config of the operation getV1Agents
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsRequestConfig() : RequestConfig<Unit> {
+    fun getV1AgentsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -278,16 +278,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/activity
-     * AgentActivity serves the org-wide recent-activity feed.
-     * AgentActivity serves the org-wide recent-activity feed. Events are REAL: each recorded run is an invoked (ok) or failed (error) event; each agent&#39;s own create/update timestamps are created/updated events. Merged, newest first, capped. Nothing is invented — an org with no agents and no runs gets [].
-     * @return CloudActivityFeed
+     * Serves the org-wide recent-activity feed.
+     * Serves the org-wide recent-activity feed. Events are REAL: each recorded run is an invoked (ok) or failed (error) event; each agent&#39;s own create/update timestamps are created/updated events. Merged, newest first, capped. Nothing is invented — an org with no agents and no runs gets [].
+     * @return ActivityFeed
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -296,11 +296,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsActivity() : CloudActivityFeed {
-        val localVarResponse = cloudGetV1AgentsActivityWithHttpInfo()
+    fun getV1AgentsActivity() : ActivityFeed {
+        val localVarResponse = getV1AgentsActivityWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActivityFeed
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActivityFeed
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -316,28 +316,28 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/activity
-     * AgentActivity serves the org-wide recent-activity feed.
-     * AgentActivity serves the org-wide recent-activity feed. Events are REAL: each recorded run is an invoked (ok) or failed (error) event; each agent&#39;s own create/update timestamps are created/updated events. Merged, newest first, capped. Nothing is invented — an org with no agents and no runs gets [].
-     * @return ApiResponse<CloudActivityFeed?>
+     * Serves the org-wide recent-activity feed.
+     * Serves the org-wide recent-activity feed. Events are REAL: each recorded run is an invoked (ok) or failed (error) event; each agent&#39;s own create/update timestamps are created/updated events. Merged, newest first, capped. Nothing is invented — an org with no agents and no runs gets [].
+     * @return ApiResponse<ActivityFeed?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsActivityWithHttpInfo() : ApiResponse<CloudActivityFeed?> {
-        val localVariableConfig = cloudGetV1AgentsActivityRequestConfig()
+    fun getV1AgentsActivityWithHttpInfo() : ApiResponse<ActivityFeed?> {
+        val localVariableConfig = getV1AgentsActivityRequestConfig()
 
-        return request<Unit, CloudActivityFeed>(
+        return request<Unit, ActivityFeed>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsActivity
+     * To obtain the request config of the operation getV1AgentsActivity
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsActivityRequestConfig() : RequestConfig<Unit> {
+    fun getV1AgentsActivityRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -348,17 +348,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/activity",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/builds
-     * ListBuilds returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product.
-     * ListBuilds returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product. PUBLIC, no tenancy: publishing is the author&#39;s act, and only published root sessions appear here.
+     * Returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product.
+     * Returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product. PUBLIC, no tenancy: publishing is the author&#39;s act, and only published root sessions appear here.
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
-     * @return CloudBuildList
+     * @return BuildList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -367,11 +367,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsBuilds(limit: kotlin.Int? = null) : CloudBuildList {
-        val localVarResponse = cloudGetV1AgentsBuildsWithHttpInfo(limit = limit)
+    fun getV1AgentsBuilds(limit: kotlin.Int? = null) : BuildList {
+        val localVarResponse = getV1AgentsBuildsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBuildList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BuildList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -387,30 +387,30 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/builds
-     * ListBuilds returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product.
-     * ListBuilds returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product. PUBLIC, no tenancy: publishing is the author&#39;s act, and only published root sessions appear here.
+     * Returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product.
+     * Returns the public index of every published build, most recently updated first, so a gallery can link straight to the story behind each product. PUBLIC, no tenancy: publishing is the author&#39;s act, and only published root sessions appear here.
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
-     * @return ApiResponse<CloudBuildList?>
+     * @return ApiResponse<BuildList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsBuildsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudBuildList?> {
-        val localVariableConfig = cloudGetV1AgentsBuildsRequestConfig(limit = limit)
+    fun getV1AgentsBuildsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<BuildList?> {
+        val localVariableConfig = getV1AgentsBuildsRequestConfig(limit = limit)
 
-        return request<Unit, CloudBuildList>(
+        return request<Unit, BuildList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsBuilds
+     * To obtain the request config of the operation getV1AgentsBuilds
      *
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsBuildsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AgentsBuildsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -426,18 +426,18 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/builds",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/builds/{org}/{project}
-     * ReadBuild returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.
-     * ReadBuild returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.  PUBLIC, no tenancy: it answers only for a session its author explicitly published, which is what makes it safe to be anonymous. An unpublished session is invisible here no matter who asks; its owner reads it through the org-scoped /v1/agents/sessions routes, which need a validated principal.
+     * Returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.
+     * Returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.  PUBLIC, no tenancy: it answers only for a session its author explicitly published, which is what makes it safe to be anonymous. An unpublished session is invisible here no matter who asks; its owner reads it through the org-scoped /v1/agents/sessions routes, which need a validated principal.
      * @param org Org is the org that published the build, from the path.
      * @param project Project is the product&#39;s slug, from the path.
-     * @return CloudBuildView
+     * @return BuildView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -446,11 +446,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsBuildsOrgProject(org: kotlin.String, project: kotlin.String) : CloudBuildView {
-        val localVarResponse = cloudGetV1AgentsBuildsOrgProjectWithHttpInfo(org = org, project = project)
+    fun getV1AgentsBuildsByOrgByProject(org: kotlin.String, project: kotlin.String) : BuildView {
+        val localVarResponse = getV1AgentsBuildsByOrgByProjectWithHttpInfo(org = org, project = project)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBuildView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BuildView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -466,32 +466,32 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/builds/{org}/{project}
-     * ReadBuild returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.
-     * ReadBuild returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.  PUBLIC, no tenancy: it answers only for a session its author explicitly published, which is what makes it safe to be anonymous. An unpublished session is invisible here no matter who asks; its owner reads it through the org-scoped /v1/agents/sessions routes, which need a validated principal.
+     * Returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.
+     * Returns the readable build of one product: the agent session that produced it, turn by turn — the prompts, the reasoning, the commits each turn produced — plus the exact &#x60;git log&#x60; that re-derives every commit binding from git itself, so nothing here has to be taken on trust.  PUBLIC, no tenancy: it answers only for a session its author explicitly published, which is what makes it safe to be anonymous. An unpublished session is invisible here no matter who asks; its owner reads it through the org-scoped /v1/agents/sessions routes, which need a validated principal.
      * @param org Org is the org that published the build, from the path.
      * @param project Project is the product&#39;s slug, from the path.
-     * @return ApiResponse<CloudBuildView?>
+     * @return ApiResponse<BuildView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsBuildsOrgProjectWithHttpInfo(org: kotlin.String, project: kotlin.String) : ApiResponse<CloudBuildView?> {
-        val localVariableConfig = cloudGetV1AgentsBuildsOrgProjectRequestConfig(org = org, project = project)
+    fun getV1AgentsBuildsByOrgByProjectWithHttpInfo(org: kotlin.String, project: kotlin.String) : ApiResponse<BuildView?> {
+        val localVariableConfig = getV1AgentsBuildsByOrgByProjectRequestConfig(org = org, project = project)
 
-        return request<Unit, CloudBuildView>(
+        return request<Unit, BuildView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsBuildsOrgProject
+     * To obtain the request config of the operation getV1AgentsBuildsByOrgByProject
      *
      * @param org Org is the org that published the build, from the path.
      * @param project Project is the product&#39;s slug, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsBuildsOrgProjectRequestConfig(org: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AgentsBuildsByOrgByProjectRequestConfig(org: kotlin.String, project: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -502,95 +502,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/builds/{org}/{project}".replace("{"+"org"+"}", encodeURIComponent(org.toString())).replace("{"+"project"+"}", encodeURIComponent(project.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/agents/metrics
-     * AgentMetrics serves the invocations-over-time histogram for the org&#39;s Agents dashboard.
-     * AgentMetrics serves the invocations-over-time histogram for the org&#39;s Agents dashboard. Every point is a REAL count of recorded runs in that time bucket — one series line per agent that ran in the window. The Resource Usage rollup is all-null because this store meters no CPU/memory/storage/cost; the console renders those as \&quot;—\&quot; rather than a fabricated figure. No runs &#x3D;&gt; empty series (an honest \&quot;not connected / no activity yet\&quot;), never a synthesized trend.
-     * @param range Range is the window to bucket: 24H, 7D or 30D. Anything else reads as 30D. (optional)
-     * @return CloudMetricsView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsMetrics(range: kotlin.String? = null) : CloudMetricsView {
-        val localVarResponse = cloudGetV1AgentsMetricsWithHttpInfo(range = range)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMetricsView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/agents/metrics
-     * AgentMetrics serves the invocations-over-time histogram for the org&#39;s Agents dashboard.
-     * AgentMetrics serves the invocations-over-time histogram for the org&#39;s Agents dashboard. Every point is a REAL count of recorded runs in that time bucket — one series line per agent that ran in the window. The Resource Usage rollup is all-null because this store meters no CPU/memory/storage/cost; the console renders those as \&quot;—\&quot; rather than a fabricated figure. No runs &#x3D;&gt; empty series (an honest \&quot;not connected / no activity yet\&quot;), never a synthesized trend.
-     * @param range Range is the window to bucket: 24H, 7D or 30D. Anything else reads as 30D. (optional)
-     * @return ApiResponse<CloudMetricsView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<CloudMetricsView?> {
-        val localVariableConfig = cloudGetV1AgentsMetricsRequestConfig(range = range)
-
-        return request<Unit, CloudMetricsView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1AgentsMetrics
-     *
-     * @param range Range is the window to bucket: 24H, 7D or 30D. Anything else reads as 30D. (optional)
-     * @return RequestConfig
-     */
-    fun cloudGetV1AgentsMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (range != null) {
-                    put("range", listOf(range.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/agents/metrics",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/{ref}
-     * GetAgent returns one agent with its system prompt and its 20 most recent runs.
-     * GetAgent returns one agent with its system prompt and its 20 most recent runs. The ref is the agent&#39;s public id or its org-unique name — a created agent is immediately gettable by whatever create handed back.
+     * Returns one agent with its system prompt and its 20 most recent runs.
+     * Returns one agent with its system prompt and its 20 most recent runs. The ref is the agent&#39;s public id or its org-unique name — a created agent is immediately gettable by whatever create handed back.
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
-     * @return CloudAgentDetail
+     * @return AgentDetail
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -599,11 +521,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsRef(ref: kotlin.String) : CloudAgentDetail {
-        val localVarResponse = cloudGetV1AgentsRefWithHttpInfo(ref = ref)
+    fun getV1AgentsByRef(ref: kotlin.String) : AgentDetail {
+        val localVarResponse = getV1AgentsByRefWithHttpInfo(ref = ref)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAgentDetail
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AgentDetail
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -619,30 +541,30 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/{ref}
-     * GetAgent returns one agent with its system prompt and its 20 most recent runs.
-     * GetAgent returns one agent with its system prompt and its 20 most recent runs. The ref is the agent&#39;s public id or its org-unique name — a created agent is immediately gettable by whatever create handed back.
+     * Returns one agent with its system prompt and its 20 most recent runs.
+     * Returns one agent with its system prompt and its 20 most recent runs. The ref is the agent&#39;s public id or its org-unique name — a created agent is immediately gettable by whatever create handed back.
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
-     * @return ApiResponse<CloudAgentDetail?>
+     * @return ApiResponse<AgentDetail?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsRefWithHttpInfo(ref: kotlin.String) : ApiResponse<CloudAgentDetail?> {
-        val localVariableConfig = cloudGetV1AgentsRefRequestConfig(ref = ref)
+    fun getV1AgentsByRefWithHttpInfo(ref: kotlin.String) : ApiResponse<AgentDetail?> {
+        val localVariableConfig = getV1AgentsByRefRequestConfig(ref = ref)
 
-        return request<Unit, CloudAgentDetail>(
+        return request<Unit, AgentDetail>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsRef
+     * To obtain the request config of the operation getV1AgentsByRef
      *
      * @param ref Ref is the agent&#39;s public id (the agent_… handle create and list return) or its org-unique name, from the path. Either resolves the same agent.
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AgentsByRefRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -653,18 +575,18 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/{ref}/runs
-     * ListAgentRuns returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took.
-     * ListAgentRuns returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took. Every row is a run that actually happened.
+     * Returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took.
+     * Returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took. Every row is a run that actually happened.
      * @param ref Ref is the agent&#39;s public id or its org-unique name, from the path.
      * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
-     * @return CloudRunList
+     * @return RunList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -673,11 +595,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsRefRuns(ref: kotlin.String, limit: kotlin.Int? = null) : CloudRunList {
-        val localVarResponse = cloudGetV1AgentsRefRunsWithHttpInfo(ref = ref, limit = limit)
+    fun getV1AgentsByRefRuns(ref: kotlin.String, limit: kotlin.Int? = null) : RunList {
+        val localVarResponse = getV1AgentsByRefRunsWithHttpInfo(ref = ref, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRunList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -693,32 +615,32 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/{ref}/runs
-     * ListAgentRuns returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took.
-     * ListAgentRuns returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took. Every row is a run that actually happened.
+     * Returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took.
+     * Returns one agent&#39;s execution history, newest first — each run&#39;s input, its output or its error, and how long it took. Every row is a run that actually happened.
      * @param ref Ref is the agent&#39;s public id or its org-unique name, from the path.
      * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
-     * @return ApiResponse<CloudRunList?>
+     * @return ApiResponse<RunList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsRefRunsWithHttpInfo(ref: kotlin.String, limit: kotlin.Int?) : ApiResponse<CloudRunList?> {
-        val localVariableConfig = cloudGetV1AgentsRefRunsRequestConfig(ref = ref, limit = limit)
+    fun getV1AgentsByRefRunsWithHttpInfo(ref: kotlin.String, limit: kotlin.Int?) : ApiResponse<RunList?> {
+        val localVariableConfig = getV1AgentsByRefRunsRequestConfig(ref = ref, limit = limit)
 
-        return request<Unit, CloudRunList>(
+        return request<Unit, RunList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsRefRuns
+     * To obtain the request config of the operation getV1AgentsByRefRuns
      *
      * @param ref Ref is the agent&#39;s public id or its org-unique name, from the path.
      * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsRefRunsRequestConfig(ref: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AgentsByRefRunsRequestConfig(ref: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -734,21 +656,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}/runs".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/agents/sessions
-     * ListSessions returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event.
-     * ListSessions returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event. With no filter it returns ROOT sessions only, so a dashboard shows one row per flow rather than one per subagent; ?root&#x3D; or ?parent&#x3D; descends.
-     * @param root Root scopes the page to one subagent tree (its root session id). (optional)
-     * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
-     * @param status Status filters to running, paused, done or error. (optional)
-     * @param project Project filters to the sessions tagged with one product slug. (optional)
-     * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
-     * @return CloudSessionList
+     * GET /v1/agents/metrics
+     * Serves the invocations-over-time histogram for the org&#39;s Agents dashboard.
+     * Serves the invocations-over-time histogram for the org&#39;s Agents dashboard. Every point is a REAL count of recorded runs in that time bucket — one series line per agent that ran in the window. The Resource Usage rollup is all-null because this store meters no CPU/memory/storage/cost; the console renders those as \&quot;—\&quot; rather than a fabricated figure. No runs &#x3D;&gt; empty series (an honest \&quot;not connected / no activity yet\&quot;), never a synthesized trend.
+     * @param range Range is the window to bucket: 24H, 7D or 30D. Anything else reads as 30D. (optional)
+     * @return MetricsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -757,11 +675,177 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsSessions(root: kotlin.String? = null, parent: kotlin.String? = null, status: kotlin.String? = null, project: kotlin.String? = null, limit: kotlin.Int? = null) : CloudSessionList {
-        val localVarResponse = cloudGetV1AgentsSessionsWithHttpInfo(root = root, parent = parent, status = status, project = project, limit = limit)
+    fun getV1AgentsMetrics(range: kotlin.String? = null) : MetricsView {
+        val localVarResponse = getV1AgentsMetricsWithHttpInfo(range = range)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSessionList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MetricsView
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/agents/metrics
+     * Serves the invocations-over-time histogram for the org&#39;s Agents dashboard.
+     * Serves the invocations-over-time histogram for the org&#39;s Agents dashboard. Every point is a REAL count of recorded runs in that time bucket — one series line per agent that ran in the window. The Resource Usage rollup is all-null because this store meters no CPU/memory/storage/cost; the console renders those as \&quot;—\&quot; rather than a fabricated figure. No runs &#x3D;&gt; empty series (an honest \&quot;not connected / no activity yet\&quot;), never a synthesized trend.
+     * @param range Range is the window to bucket: 24H, 7D or 30D. Anything else reads as 30D. (optional)
+     * @return ApiResponse<MetricsView?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1AgentsMetricsWithHttpInfo(range: kotlin.String?) : ApiResponse<MetricsView?> {
+        val localVariableConfig = getV1AgentsMetricsRequestConfig(range = range)
+
+        return request<Unit, MetricsView>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1AgentsMetrics
+     *
+     * @param range Range is the window to bucket: 24H, 7D or 30D. Anything else reads as 30D. (optional)
+     * @return RequestConfig
+     */
+    fun getV1AgentsMetricsRequestConfig(range: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (range != null) {
+                    put("range", listOf(range.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/agents/metrics",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/agents/runs
+     * Returns the org&#39;s agent runs across EVERY agent, newest first — what ran here, for whom, on which model, how long it took, and why it failed.
+     * Returns the org&#39;s agent runs across EVERY agent, newest first — what ran here, for whom, on which model, how long it took, and why it failed.  It is the feed the per-agent history could not be: an operator asking \&quot;what is this tenant&#39;s agent plane doing\&quot; does not start out knowing an agent ref, and answering by listing the agents and then paging each one&#39;s history is N+1 round trips to reconstruct one ordering the database already has (RunsSince, ordered by created_at over the org index).  The org is the CALLER&#39;s, resolved from identity by tenantStore — never a parameter. There is deliberately no org field on orgRunsQuery to forge: run history is the tenant&#39;s own record, and the only tenant this can answer for is the one asking.
+     * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
+     * @param status Status keeps only runs with this outcome (\&quot;ok\&quot; or \&quot;error\&quot;). Empty keeps both. It is the filter an operator reaches for first — \&quot;show me what broke\&quot; — and answering it here rather than by paging the whole history client-side is the difference between a usable feed and a download. (optional)
+     * @return RunList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1AgentsRuns(limit: kotlin.Int? = null, status: kotlin.String? = null) : RunList {
+        val localVarResponse = getV1AgentsRunsWithHttpInfo(limit = limit, status = status)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunList
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/agents/runs
+     * Returns the org&#39;s agent runs across EVERY agent, newest first — what ran here, for whom, on which model, how long it took, and why it failed.
+     * Returns the org&#39;s agent runs across EVERY agent, newest first — what ran here, for whom, on which model, how long it took, and why it failed.  It is the feed the per-agent history could not be: an operator asking \&quot;what is this tenant&#39;s agent plane doing\&quot; does not start out knowing an agent ref, and answering by listing the agents and then paging each one&#39;s history is N+1 round trips to reconstruct one ordering the database already has (RunsSince, ordered by created_at over the org index).  The org is the CALLER&#39;s, resolved from identity by tenantStore — never a parameter. There is deliberately no org field on orgRunsQuery to forge: run history is the tenant&#39;s own record, and the only tenant this can answer for is the one asking.
+     * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
+     * @param status Status keeps only runs with this outcome (\&quot;ok\&quot; or \&quot;error\&quot;). Empty keeps both. It is the filter an operator reaches for first — \&quot;show me what broke\&quot; — and answering it here rather than by paging the whole history client-side is the difference between a usable feed and a download. (optional)
+     * @return ApiResponse<RunList?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1AgentsRunsWithHttpInfo(limit: kotlin.Int?, status: kotlin.String?) : ApiResponse<RunList?> {
+        val localVariableConfig = getV1AgentsRunsRequestConfig(limit = limit, status = status)
+
+        return request<Unit, RunList>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1AgentsRuns
+     *
+     * @param limit Limit caps how many runs come back, newest first. Absent, zero or out of range (1..200) reads as 50. (optional)
+     * @param status Status keeps only runs with this outcome (\&quot;ok\&quot; or \&quot;error\&quot;). Empty keeps both. It is the filter an operator reaches for first — \&quot;show me what broke\&quot; — and answering it here rather than by paging the whole history client-side is the difference between a usable feed and a download. (optional)
+     * @return RequestConfig
+     */
+    fun getV1AgentsRunsRequestConfig(limit: kotlin.Int?, status: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (limit != null) {
+                    put("limit", listOf(limit.toString()))
+                }
+                if (status != null) {
+                    put("status", listOf(status.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/agents/runs",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/agents/sessions
+     * Returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event.
+     * Returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event. With no filter it returns ROOT sessions only, so a dashboard shows one row per flow rather than one per subagent; ?root&#x3D; or ?parent&#x3D; descends.
+     * @param root Root scopes the page to one subagent tree (its root session id). (optional)
+     * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
+     * @param status Status filters to running, paused, done or error. (optional)
+     * @param project Project filters to the sessions tagged with one product slug. (optional)
+     * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
+     * @return SessionList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1AgentsSessions(root: kotlin.String? = null, parent: kotlin.String? = null, status: kotlin.String? = null, project: kotlin.String? = null, limit: kotlin.Int? = null) : SessionList {
+        val localVarResponse = getV1AgentsSessionsWithHttpInfo(root = root, parent = parent, status = status, project = project, limit = limit)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SessionList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -777,29 +861,29 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/sessions
-     * ListSessions returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event.
-     * ListSessions returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event. With no filter it returns ROOT sessions only, so a dashboard shows one row per flow rather than one per subagent; ?root&#x3D; or ?parent&#x3D; descends.
+     * Returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event.
+     * Returns the caller org&#39;s live sessions, newest first — each with its event count, its direct-child count and a one-line preview of its latest event. With no filter it returns ROOT sessions only, so a dashboard shows one row per flow rather than one per subagent; ?root&#x3D; or ?parent&#x3D; descends.
      * @param root Root scopes the page to one subagent tree (its root session id). (optional)
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
      * @param status Status filters to running, paused, done or error. (optional)
      * @param project Project filters to the sessions tagged with one product slug. (optional)
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
-     * @return ApiResponse<CloudSessionList?>
+     * @return ApiResponse<SessionList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsSessionsWithHttpInfo(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudSessionList?> {
-        val localVariableConfig = cloudGetV1AgentsSessionsRequestConfig(root = root, parent = parent, status = status, project = project, limit = limit)
+    fun getV1AgentsSessionsWithHttpInfo(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SessionList?> {
+        val localVariableConfig = getV1AgentsSessionsRequestConfig(root = root, parent = parent, status = status, project = project, limit = limit)
 
-        return request<Unit, CloudSessionList>(
+        return request<Unit, SessionList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsSessions
+     * To obtain the request config of the operation getV1AgentsSessions
      *
      * @param root Root scopes the page to one subagent tree (its root session id). (optional)
      * @param parent Parent scopes the page to the direct children of one session. Ignored when root is set; with neither, only ROOT sessions come back. (optional)
@@ -808,7 +892,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @param limit Limit caps the page. Absent, zero or over 500 reads as 100. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsSessionsRequestConfig(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AgentsSessionsRequestConfig(root: kotlin.String?, parent: kotlin.String?, status: kotlin.String?, project: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -836,17 +920,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/sessions/{id}
-     * GetSession returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
-     * GetSession returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
+     * Returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
+     * Returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
      * @param id ID is the session to act on, from the path.
-     * @return CloudSessionDetail
+     * @return SessionDetail
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -855,11 +939,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsSessionsId(id: kotlin.String) : CloudSessionDetail {
-        val localVarResponse = cloudGetV1AgentsSessionsIdWithHttpInfo(id = id)
+    fun getV1AgentsSessionsById(id: kotlin.String) : SessionDetail {
+        val localVarResponse = getV1AgentsSessionsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSessionDetail
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SessionDetail
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -875,30 +959,30 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/sessions/{id}
-     * GetSession returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
-     * GetSession returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
+     * Returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
+     * Returns one session with its direct child sessions and its 50 most recent events, oldest of those first.
      * @param id ID is the session to act on, from the path.
-     * @return ApiResponse<CloudSessionDetail?>
+     * @return ApiResponse<SessionDetail?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsSessionsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudSessionDetail?> {
-        val localVariableConfig = cloudGetV1AgentsSessionsIdRequestConfig(id = id)
+    fun getV1AgentsSessionsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<SessionDetail?> {
+        val localVariableConfig = getV1AgentsSessionsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudSessionDetail>(
+        return request<Unit, SessionDetail>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsSessionsId
+     * To obtain the request config of the operation getV1AgentsSessionsById
      *
      * @param id ID is the session to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsSessionsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AgentsSessionsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -909,18 +993,18 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/sessions/{id}/control
-     * DrainSessionControl returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next.
-     * DrainSessionControl returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next. It is how a locally started &#x60;hanzo code&#x60; session — which is not task-backed, so nothing forwards its commands to an execution engine — consumes what the dashboard posted. Read-only and bounded at 200 per poll, so a steady poll is cheap and an applied command is never redelivered.
+     * Returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next.
+     * Returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next. It is how a locally started &#x60;hanzo code&#x60; session — which is not task-backed, so nothing forwards its commands to an execution engine — consumes what the dashboard posted. Read-only and bounded at 200 per poll, so a steady poll is cheap and an applied command is never redelivered.
      * @param id ID is the session whose commands are being drained, from the path.
      * @param after After is the last seq this poller applied; only commands newer than it come back. Absent or negative reads as 0, which drains from the beginning. (optional)
-     * @return CloudControlDrain
+     * @return ControlDrain
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -929,11 +1013,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsSessionsIdControl(id: kotlin.String, after: kotlin.Int? = null) : CloudControlDrain {
-        val localVarResponse = cloudGetV1AgentsSessionsIdControlWithHttpInfo(id = id, after = after)
+    fun getV1AgentsSessionsByIdControl(id: kotlin.String, after: kotlin.Int? = null) : ControlDrain {
+        val localVarResponse = getV1AgentsSessionsByIdControlWithHttpInfo(id = id, after = after)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudControlDrain
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ControlDrain
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -949,32 +1033,32 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/sessions/{id}/control
-     * DrainSessionControl returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next.
-     * DrainSessionControl returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next. It is how a locally started &#x60;hanzo code&#x60; session — which is not task-backed, so nothing forwards its commands to an execution engine — consumes what the dashboard posted. Read-only and bounded at 200 per poll, so a steady poll is cheap and an applied command is never redelivered.
+     * Returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next.
+     * Returns the steering commands (pause/resume/stop/message) recorded against the caller&#39;s own session that are newer than the cursor, oldest first, with the cursor to poll from next. It is how a locally started &#x60;hanzo code&#x60; session — which is not task-backed, so nothing forwards its commands to an execution engine — consumes what the dashboard posted. Read-only and bounded at 200 per poll, so a steady poll is cheap and an applied command is never redelivered.
      * @param id ID is the session whose commands are being drained, from the path.
      * @param after After is the last seq this poller applied; only commands newer than it come back. Absent or negative reads as 0, which drains from the beginning. (optional)
-     * @return ApiResponse<CloudControlDrain?>
+     * @return ApiResponse<ControlDrain?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsSessionsIdControlWithHttpInfo(id: kotlin.String, after: kotlin.Int?) : ApiResponse<CloudControlDrain?> {
-        val localVariableConfig = cloudGetV1AgentsSessionsIdControlRequestConfig(id = id, after = after)
+    fun getV1AgentsSessionsByIdControlWithHttpInfo(id: kotlin.String, after: kotlin.Int?) : ApiResponse<ControlDrain?> {
+        val localVariableConfig = getV1AgentsSessionsByIdControlRequestConfig(id = id, after = after)
 
-        return request<Unit, CloudControlDrain>(
+        return request<Unit, ControlDrain>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsSessionsIdControl
+     * To obtain the request config of the operation getV1AgentsSessionsByIdControl
      *
      * @param id ID is the session whose commands are being drained, from the path.
      * @param after After is the last seq this poller applied; only commands newer than it come back. Absent or negative reads as 0, which drains from the beginning. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsSessionsIdControlRequestConfig(id: kotlin.String, after: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AgentsSessionsByIdControlRequestConfig(id: kotlin.String, after: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -990,17 +1074,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/control".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/sessions/{id}/tree
-     * SessionTree returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count.
-     * SessionTree returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count. One indexed read pulls the whole flow (every node of a flow shares a root id), so the shape is assembled in memory rather than by walking the store per node.
+     * Returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count.
+     * Returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count. One indexed read pulls the whole flow (every node of a flow shares a root id), so the shape is assembled in memory rather than by walking the store per node.
      * @param id ID is the session to act on, from the path.
-     * @return CloudTreeNode
+     * @return TreeNode
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1009,11 +1093,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsSessionsIdTree(id: kotlin.String) : CloudTreeNode {
-        val localVarResponse = cloudGetV1AgentsSessionsIdTreeWithHttpInfo(id = id)
+    fun getV1AgentsSessionsByIdTree(id: kotlin.String) : TreeNode {
+        val localVarResponse = getV1AgentsSessionsByIdTreeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTreeNode
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TreeNode
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1029,30 +1113,30 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/sessions/{id}/tree
-     * SessionTree returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count.
-     * SessionTree returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count. One indexed read pulls the whole flow (every node of a flow shares a root id), so the shape is assembled in memory rather than by walking the store per node.
+     * Returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count.
+     * Returns the subagent-flow graph rooted at this session: the session, its children, their children, each node carrying its own event count. One indexed read pulls the whole flow (every node of a flow shares a root id), so the shape is assembled in memory rather than by walking the store per node.
      * @param id ID is the session to act on, from the path.
-     * @return ApiResponse<CloudTreeNode?>
+     * @return ApiResponse<TreeNode?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsSessionsIdTreeWithHttpInfo(id: kotlin.String) : ApiResponse<CloudTreeNode?> {
-        val localVariableConfig = cloudGetV1AgentsSessionsIdTreeRequestConfig(id = id)
+    fun getV1AgentsSessionsByIdTreeWithHttpInfo(id: kotlin.String) : ApiResponse<TreeNode?> {
+        val localVariableConfig = getV1AgentsSessionsByIdTreeRequestConfig(id = id)
 
-        return request<Unit, CloudTreeNode>(
+        return request<Unit, TreeNode>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsSessionsIdTree
+     * To obtain the request config of the operation getV1AgentsSessionsByIdTree
      *
      * @param id ID is the session to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsSessionsIdTreeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AgentsSessionsByIdTreeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1063,15 +1147,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/tree".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/sessions/stream
-     * 
-     * 
+     * Live session and event updates for the caller&#39;s org, as Server-Sent Events.
+     * Holds the connection open as text/event-stream and pushes a frame each time the org&#39;s registry moves: an &#x60;event: session&#x60; frame carrying the same session shape the list and detail reads answer with (a registration, an update, or a login-manager revoke tearing a session down), and an &#x60;event: event&#x60; frame carrying one appended turn. Optional ?root&#x3D;&lt;session id&gt; narrows the feed to a single subagent tree.  Requires a validated principal carrying an org; 403 without one. Org-scoped fail-closed: the bus filters on tenant before it fans out, so a subscriber only ever receives its own org&#39;s updates, and ?root&#x3D; narrows that further but can never widen it.  Delivery is best-effort and the GET reads remain the source of truth. A subscriber that falls more than 256 frames behind is DROPPED — its channel is closed and the stream ends — so one stuck dashboard can never back-pressure a session write; the client reconnects and re-reads the session endpoints to resynchronise. A &#x60;: ping&#x60; comment every 25 seconds holds the connection open through proxies and is how a departed client is noticed.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1080,8 +1164,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsSessionsStream() : Unit {
-        val localVarResponse = cloudGetV1AgentsSessionsStreamWithHttpInfo()
+    fun getV1AgentsSessionsStream() : Unit {
+        val localVarResponse = getV1AgentsSessionsStreamWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1100,15 +1184,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/sessions/stream
-     * 
-     * 
+     * Live session and event updates for the caller&#39;s org, as Server-Sent Events.
+     * Holds the connection open as text/event-stream and pushes a frame each time the org&#39;s registry moves: an &#x60;event: session&#x60; frame carrying the same session shape the list and detail reads answer with (a registration, an update, or a login-manager revoke tearing a session down), and an &#x60;event: event&#x60; frame carrying one appended turn. Optional ?root&#x3D;&lt;session id&gt; narrows the feed to a single subagent tree.  Requires a validated principal carrying an org; 403 without one. Org-scoped fail-closed: the bus filters on tenant before it fans out, so a subscriber only ever receives its own org&#39;s updates, and ?root&#x3D; narrows that further but can never widen it.  Delivery is best-effort and the GET reads remain the source of truth. A subscriber that falls more than 256 frames behind is DROPPED — its channel is closed and the stream ends — so one stuck dashboard can never back-pressure a session write; the client reconnects and re-reads the session endpoints to resynchronise. A &#x60;: ping&#x60; comment every 25 seconds holds the connection open through proxies and is how a departed client is noticed.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsSessionsStreamWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1AgentsSessionsStreamRequestConfig()
+    fun getV1AgentsSessionsStreamWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1AgentsSessionsStreamRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1116,11 +1200,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsSessionsStream
+     * To obtain the request config of the operation getV1AgentsSessionsStream
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsSessionsStreamRequestConfig() : RequestConfig<Unit> {
+    fun getV1AgentsSessionsStreamRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1130,16 +1214,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/stream",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/targets
-     * ListTargets returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
-     * ListTargets returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
-     * @return CloudTargetList
+     * Returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
+     * Returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
+     * @return TargetList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1148,11 +1232,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsTargets() : CloudTargetList {
-        val localVarResponse = cloudGetV1AgentsTargetsWithHttpInfo()
+    fun getV1AgentsTargets() : TargetList {
+        val localVarResponse = getV1AgentsTargetsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTargetList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TargetList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1168,28 +1252,28 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/targets
-     * ListTargets returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
-     * ListTargets returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
-     * @return ApiResponse<CloudTargetList?>
+     * Returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
+     * Returns every machine registered to the caller&#39;s org, newest first, each with its live session load.
+     * @return ApiResponse<TargetList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsTargetsWithHttpInfo() : ApiResponse<CloudTargetList?> {
-        val localVariableConfig = cloudGetV1AgentsTargetsRequestConfig()
+    fun getV1AgentsTargetsWithHttpInfo() : ApiResponse<TargetList?> {
+        val localVariableConfig = getV1AgentsTargetsRequestConfig()
 
-        return request<Unit, CloudTargetList>(
+        return request<Unit, TargetList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsTargets
+     * To obtain the request config of the operation getV1AgentsTargets
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsTargetsRequestConfig() : RequestConfig<Unit> {
+    fun getV1AgentsTargetsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1200,17 +1284,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/agents/targets/{id}
-     * GetTarget returns one registered machine, with its live session load.
-     * GetTarget returns one registered machine, with its live session load.
+     * Returns one registered machine, with its live session load.
+     * Returns one registered machine, with its live session load.
      * @param id ID is the target to act on, from the path.
-     * @return CloudTargetView
+     * @return TargetView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1219,11 +1303,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AgentsTargetsId(id: kotlin.String) : CloudTargetView {
-        val localVarResponse = cloudGetV1AgentsTargetsIdWithHttpInfo(id = id)
+    fun getV1AgentsTargetsById(id: kotlin.String) : TargetView {
+        val localVarResponse = getV1AgentsTargetsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTargetView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TargetView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1239,30 +1323,30 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/agents/targets/{id}
-     * GetTarget returns one registered machine, with its live session load.
-     * GetTarget returns one registered machine, with its live session load.
+     * Returns one registered machine, with its live session load.
+     * Returns one registered machine, with its live session load.
      * @param id ID is the target to act on, from the path.
-     * @return ApiResponse<CloudTargetView?>
+     * @return ApiResponse<TargetView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AgentsTargetsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudTargetView?> {
-        val localVariableConfig = cloudGetV1AgentsTargetsIdRequestConfig(id = id)
+    fun getV1AgentsTargetsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<TargetView?> {
+        val localVariableConfig = getV1AgentsTargetsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudTargetView>(
+        return request<Unit, TargetView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AgentsTargetsId
+     * To obtain the request config of the operation getV1AgentsTargetsById
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AgentsTargetsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AgentsTargetsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1273,18 +1357,18 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/agents/{ref}
-     * UpdateAgent changes an agent in place.
-     * UpdateAgent changes an agent in place. Every field is optional; a field the request omits keeps its stored value. The resulting mode+schedule are re-validated together, so a partial update can never leave a long-running agent without the cron the scheduler needs to fire it, and a transition INTO long-running counts against the per-org cap on scheduled agents.
+     * Changes an agent in place.
+     * Changes an agent in place. Every field is optional; a field the request omits keeps its stored value. The resulting mode+schedule are re-validated together, so a partial update can never leave a long-running agent without the cron the scheduler needs to fire it, and a transition INTO long-running counts against the per-org cap on scheduled agents.
      * @param ref Ref is the agent to update — its public id or org-unique name, from the path.
-     * @param cloudUpdateAgentIn 
-     * @return CloudAgentView
+     * @param updateAgentIn 
+     * @return AgentView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1293,11 +1377,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1AgentsRef(ref: kotlin.String, cloudUpdateAgentIn: CloudUpdateAgentIn) : CloudAgentView {
-        val localVarResponse = cloudPatchV1AgentsRefWithHttpInfo(ref = ref, cloudUpdateAgentIn = cloudUpdateAgentIn)
+    fun patchV1AgentsByRef(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : AgentView {
+        val localVarResponse = patchV1AgentsByRefWithHttpInfo(ref = ref, updateAgentIn = updateAgentIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAgentView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AgentView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1313,33 +1397,33 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PATCH /v1/agents/{ref}
-     * UpdateAgent changes an agent in place.
-     * UpdateAgent changes an agent in place. Every field is optional; a field the request omits keeps its stored value. The resulting mode+schedule are re-validated together, so a partial update can never leave a long-running agent without the cron the scheduler needs to fire it, and a transition INTO long-running counts against the per-org cap on scheduled agents.
+     * Changes an agent in place.
+     * Changes an agent in place. Every field is optional; a field the request omits keeps its stored value. The resulting mode+schedule are re-validated together, so a partial update can never leave a long-running agent without the cron the scheduler needs to fire it, and a transition INTO long-running counts against the per-org cap on scheduled agents.
      * @param ref Ref is the agent to update — its public id or org-unique name, from the path.
-     * @param cloudUpdateAgentIn 
-     * @return ApiResponse<CloudAgentView?>
+     * @param updateAgentIn 
+     * @return ApiResponse<AgentView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1AgentsRefWithHttpInfo(ref: kotlin.String, cloudUpdateAgentIn: CloudUpdateAgentIn) : ApiResponse<CloudAgentView?> {
-        val localVariableConfig = cloudPatchV1AgentsRefRequestConfig(ref = ref, cloudUpdateAgentIn = cloudUpdateAgentIn)
+    fun patchV1AgentsByRefWithHttpInfo(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : ApiResponse<AgentView?> {
+        val localVariableConfig = patchV1AgentsByRefRequestConfig(ref = ref, updateAgentIn = updateAgentIn)
 
-        return request<CloudUpdateAgentIn, CloudAgentView>(
+        return request<UpdateAgentIn, AgentView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1AgentsRef
+     * To obtain the request config of the operation patchV1AgentsByRef
      *
      * @param ref Ref is the agent to update — its public id or org-unique name, from the path.
-     * @param cloudUpdateAgentIn 
+     * @param updateAgentIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1AgentsRefRequestConfig(ref: kotlin.String, cloudUpdateAgentIn: CloudUpdateAgentIn) : RequestConfig<CloudUpdateAgentIn> {
-        val localVariableBody = cloudUpdateAgentIn
+    fun patchV1AgentsByRefRequestConfig(ref: kotlin.String, updateAgentIn: UpdateAgentIn) : RequestConfig<UpdateAgentIn> {
+        val localVariableBody = updateAgentIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1350,18 +1434,18 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/agents/sessions/{id}
-     * PatchSession updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public.
-     * PatchSession updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public. A FINISHED session stays finished — reopening a done/error run would fabricate liveness — and publishing is refused unless the session names the project it built, because the public build route is keyed on (org, project).
+     * Updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public.
+     * Updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public. A FINISHED session stays finished — reopening a done/error run would fabricate liveness — and publishing is refused unless the session names the project it built, because the public build route is keyed on (org, project).
      * @param id ID is the session to update, from the path.
-     * @param cloudPatchSessionIn 
-     * @return CloudSessionView
+     * @param patchSessionIn 
+     * @return SessionView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1370,11 +1454,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1AgentsSessionsId(id: kotlin.String, cloudPatchSessionIn: CloudPatchSessionIn) : CloudSessionView {
-        val localVarResponse = cloudPatchV1AgentsSessionsIdWithHttpInfo(id = id, cloudPatchSessionIn = cloudPatchSessionIn)
+    fun patchV1AgentsSessionsById(id: kotlin.String, patchSessionIn: PatchSessionIn) : SessionView {
+        val localVarResponse = patchV1AgentsSessionsByIdWithHttpInfo(id = id, patchSessionIn = patchSessionIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSessionView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SessionView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1390,33 +1474,33 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PATCH /v1/agents/sessions/{id}
-     * PatchSession updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public.
-     * PatchSession updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public. A FINISHED session stays finished — reopening a done/error run would fabricate liveness — and publishing is refused unless the session names the project it built, because the public build route is keyed on (org, project).
+     * Updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public.
+     * Updates a session&#39;s surface-owned truth: its status, its title, the run-target it is dispatched to, and the product it built plus whether that build&#39;s story is public. A FINISHED session stays finished — reopening a done/error run would fabricate liveness — and publishing is refused unless the session names the project it built, because the public build route is keyed on (org, project).
      * @param id ID is the session to update, from the path.
-     * @param cloudPatchSessionIn 
-     * @return ApiResponse<CloudSessionView?>
+     * @param patchSessionIn 
+     * @return ApiResponse<SessionView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1AgentsSessionsIdWithHttpInfo(id: kotlin.String, cloudPatchSessionIn: CloudPatchSessionIn) : ApiResponse<CloudSessionView?> {
-        val localVariableConfig = cloudPatchV1AgentsSessionsIdRequestConfig(id = id, cloudPatchSessionIn = cloudPatchSessionIn)
+    fun patchV1AgentsSessionsByIdWithHttpInfo(id: kotlin.String, patchSessionIn: PatchSessionIn) : ApiResponse<SessionView?> {
+        val localVariableConfig = patchV1AgentsSessionsByIdRequestConfig(id = id, patchSessionIn = patchSessionIn)
 
-        return request<CloudPatchSessionIn, CloudSessionView>(
+        return request<PatchSessionIn, SessionView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1AgentsSessionsId
+     * To obtain the request config of the operation patchV1AgentsSessionsById
      *
      * @param id ID is the session to update, from the path.
-     * @param cloudPatchSessionIn 
+     * @param patchSessionIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1AgentsSessionsIdRequestConfig(id: kotlin.String, cloudPatchSessionIn: CloudPatchSessionIn) : RequestConfig<CloudPatchSessionIn> {
-        val localVariableBody = cloudPatchSessionIn
+    fun patchV1AgentsSessionsByIdRequestConfig(id: kotlin.String, patchSessionIn: PatchSessionIn) : RequestConfig<PatchSessionIn> {
+        val localVariableBody = patchSessionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1427,18 +1511,18 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/agents/targets/{id}
-     * PatchTarget updates one machine in place.
-     * PatchTarget updates one machine in place. Every field is optional; a field the request omits is left alone. A metrics patch IS a heartbeat — the server stamps its own clock, so a client can neither forge nor backdate staleness.
+     * Updates one machine in place.
+     * Updates one machine in place. Every field is optional; a field the request omits is left alone. A metrics patch IS a heartbeat — the server stamps its own clock, so a client can neither forge nor backdate staleness.
      * @param id ID is the target to update, from the path.
-     * @param cloudPatchTargetIn 
-     * @return CloudTargetView
+     * @param patchTargetIn 
+     * @return TargetView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1447,11 +1531,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1AgentsTargetsId(id: kotlin.String, cloudPatchTargetIn: CloudPatchTargetIn) : CloudTargetView {
-        val localVarResponse = cloudPatchV1AgentsTargetsIdWithHttpInfo(id = id, cloudPatchTargetIn = cloudPatchTargetIn)
+    fun patchV1AgentsTargetsById(id: kotlin.String, patchTargetIn: PatchTargetIn) : TargetView {
+        val localVarResponse = patchV1AgentsTargetsByIdWithHttpInfo(id = id, patchTargetIn = patchTargetIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTargetView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TargetView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1467,33 +1551,33 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PATCH /v1/agents/targets/{id}
-     * PatchTarget updates one machine in place.
-     * PatchTarget updates one machine in place. Every field is optional; a field the request omits is left alone. A metrics patch IS a heartbeat — the server stamps its own clock, so a client can neither forge nor backdate staleness.
+     * Updates one machine in place.
+     * Updates one machine in place. Every field is optional; a field the request omits is left alone. A metrics patch IS a heartbeat — the server stamps its own clock, so a client can neither forge nor backdate staleness.
      * @param id ID is the target to update, from the path.
-     * @param cloudPatchTargetIn 
-     * @return ApiResponse<CloudTargetView?>
+     * @param patchTargetIn 
+     * @return ApiResponse<TargetView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1AgentsTargetsIdWithHttpInfo(id: kotlin.String, cloudPatchTargetIn: CloudPatchTargetIn) : ApiResponse<CloudTargetView?> {
-        val localVariableConfig = cloudPatchV1AgentsTargetsIdRequestConfig(id = id, cloudPatchTargetIn = cloudPatchTargetIn)
+    fun patchV1AgentsTargetsByIdWithHttpInfo(id: kotlin.String, patchTargetIn: PatchTargetIn) : ApiResponse<TargetView?> {
+        val localVariableConfig = patchV1AgentsTargetsByIdRequestConfig(id = id, patchTargetIn = patchTargetIn)
 
-        return request<CloudPatchTargetIn, CloudTargetView>(
+        return request<PatchTargetIn, TargetView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1AgentsTargetsId
+     * To obtain the request config of the operation patchV1AgentsTargetsById
      *
      * @param id ID is the target to update, from the path.
-     * @param cloudPatchTargetIn 
+     * @param patchTargetIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1AgentsTargetsIdRequestConfig(id: kotlin.String, cloudPatchTargetIn: CloudPatchTargetIn) : RequestConfig<CloudPatchTargetIn> {
-        val localVariableBody = cloudPatchTargetIn
+    fun patchV1AgentsTargetsByIdRequestConfig(id: kotlin.String, patchTargetIn: PatchTargetIn) : RequestConfig<PatchTargetIn> {
+        val localVariableBody = patchTargetIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1504,17 +1588,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents
-     * CreateAgent defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names.
-     * CreateAgent defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names. The name must be unique in the org and match ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$. An omitted model takes the deployment&#39;s configured default; a named one is checked against the gateway&#39;s served catalog, so a model this deployment never serves is refused here rather than failing at run time. A long-running agent must carry a 5-field cron schedule (the scheduler would otherwise never fire it) and counts against a per-org cap on scheduled agents.
-     * @param cloudCreateAgentIn 
-     * @return CloudAgentView
+     * Defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names.
+     * Defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names. The name must be unique in the org and match ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$. An omitted model takes the deployment&#39;s configured default; a named one is checked against the gateway&#39;s served catalog, so a model this deployment never serves is refused here rather than failing at run time. A long-running agent must carry a 5-field cron schedule (the scheduler would otherwise never fire it) and counts against a per-org cap on scheduled agents.
+     * @param createAgentIn 
+     * @return AgentView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1523,11 +1607,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Agents(cloudCreateAgentIn: CloudCreateAgentIn) : CloudAgentView {
-        val localVarResponse = cloudPostV1AgentsWithHttpInfo(cloudCreateAgentIn = cloudCreateAgentIn)
+    fun postV1Agents(createAgentIn: CreateAgentIn) : AgentView {
+        val localVarResponse = postV1AgentsWithHttpInfo(createAgentIn = createAgentIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAgentView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AgentView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1543,31 +1627,31 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents
-     * CreateAgent defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names.
-     * CreateAgent defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names. The name must be unique in the org and match ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$. An omitted model takes the deployment&#39;s configured default; a named one is checked against the gateway&#39;s served catalog, so a model this deployment never serves is refused here rather than failing at run time. A long-running agent must carry a 5-field cron schedule (the scheduler would otherwise never fire it) and counts against a per-org cap on scheduled agents.
-     * @param cloudCreateAgentIn 
-     * @return ApiResponse<CloudAgentView?>
+     * Defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names.
+     * Defines an agent in the caller&#39;s org: a model, a system prompt (instructions) and a set of tool names. The name must be unique in the org and match ^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$. An omitted model takes the deployment&#39;s configured default; a named one is checked against the gateway&#39;s served catalog, so a model this deployment never serves is refused here rather than failing at run time. A long-running agent must carry a 5-field cron schedule (the scheduler would otherwise never fire it) and counts against a per-org cap on scheduled agents.
+     * @param createAgentIn 
+     * @return ApiResponse<AgentView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsWithHttpInfo(cloudCreateAgentIn: CloudCreateAgentIn) : ApiResponse<CloudAgentView?> {
-        val localVariableConfig = cloudPostV1AgentsRequestConfig(cloudCreateAgentIn = cloudCreateAgentIn)
+    fun postV1AgentsWithHttpInfo(createAgentIn: CreateAgentIn) : ApiResponse<AgentView?> {
+        val localVariableConfig = postV1AgentsRequestConfig(createAgentIn = createAgentIn)
 
-        return request<CloudCreateAgentIn, CloudAgentView>(
+        return request<CreateAgentIn, AgentView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Agents
+     * To obtain the request config of the operation postV1Agents
      *
-     * @param cloudCreateAgentIn 
+     * @param createAgentIn 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsRequestConfig(cloudCreateAgentIn: CloudCreateAgentIn) : RequestConfig<CloudCreateAgentIn> {
-        val localVariableBody = cloudCreateAgentIn
+    fun postV1AgentsRequestConfig(createAgentIn: CreateAgentIn) : RequestConfig<CreateAgentIn> {
+        val localVariableBody = createAgentIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1578,15 +1662,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/{ref}/run
-     * 
-     * 
+     * Run one of your org&#39;s agents and get the recorded run back.
+     * Composes the agent&#39;s stored instructions with the caller&#39;s &#x60;input&#x60;, executes one real chat completion through the same in-process AI client the rest of the console uses, and answers with the run that was recorded: its id, status, model, output, duration and error. Every run this returns reflects an execution that actually happened — a model failure is recorded and reported, never hidden and never fabricated. A transient upstream failure (429, 5xx, empty choices) is retried up to three times with jittered backoff, and a configured failover model is tried before the run is called an error.  &#x60;ref&#x60; is the agent&#39;s public &#x60;agent_…&#x60; id or its org-unique name; either resolves the same agent, and it must belong to the caller&#39;s org, so an agent in another tenant is a 404 exactly like one that does not exist. A validated principal is required and the check is made twice on purpose: this route MOVES MONEY, so the debit&#39;s principal requirement is asserted where the money moves rather than inherited from the tenant lookup.  The org&#39;s balance is authorized BEFORE any inference, so an unfunded tenant gets 402 and no free compute, and a billing plane that cannot answer gets 503 rather than a free run. The flat per-run fee is an operator knob; setting it to zero makes runs free and removes the balance gate with them. Only a SUCCESSFUL run is billed, attributed to the model actually used — a failover run bills the model it fell over to, not the one it started on. A deployment with no inference wired answers 503 before any of this.  THE RULE A READER GETS WRONG: a failed run is a 502 whose body is the RUN, not an error envelope. The execution happened, the run was persisted to this agent&#39;s history, and its &#x60;error&#x60; field is the product — so a client that treats every non-2xx as an opaque failure throws away the only account of what went wrong. Each run also opens a root session in the live session registry, best-effort: a bookkeeping failure there never fails the run, because the run and its billing already happened.
      * @param ref 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1596,8 +1680,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsByRefRun(ref: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AgentsByRefRunWithHttpInfo(ref = ref)
+    fun postV1AgentsByRefRun(ref: kotlin.String) : Unit {
+        val localVarResponse = postV1AgentsByRefRunWithHttpInfo(ref = ref)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1616,16 +1700,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/{ref}/run
-     * 
-     * 
+     * Run one of your org&#39;s agents and get the recorded run back.
+     * Composes the agent&#39;s stored instructions with the caller&#39;s &#x60;input&#x60;, executes one real chat completion through the same in-process AI client the rest of the console uses, and answers with the run that was recorded: its id, status, model, output, duration and error. Every run this returns reflects an execution that actually happened — a model failure is recorded and reported, never hidden and never fabricated. A transient upstream failure (429, 5xx, empty choices) is retried up to three times with jittered backoff, and a configured failover model is tried before the run is called an error.  &#x60;ref&#x60; is the agent&#39;s public &#x60;agent_…&#x60; id or its org-unique name; either resolves the same agent, and it must belong to the caller&#39;s org, so an agent in another tenant is a 404 exactly like one that does not exist. A validated principal is required and the check is made twice on purpose: this route MOVES MONEY, so the debit&#39;s principal requirement is asserted where the money moves rather than inherited from the tenant lookup.  The org&#39;s balance is authorized BEFORE any inference, so an unfunded tenant gets 402 and no free compute, and a billing plane that cannot answer gets 503 rather than a free run. The flat per-run fee is an operator knob; setting it to zero makes runs free and removes the balance gate with them. Only a SUCCESSFUL run is billed, attributed to the model actually used — a failover run bills the model it fell over to, not the one it started on. A deployment with no inference wired answers 503 before any of this.  THE RULE A READER GETS WRONG: a failed run is a 502 whose body is the RUN, not an error envelope. The execution happened, the run was persisted to this agent&#39;s history, and its &#x60;error&#x60; field is the product — so a client that treats every non-2xx as an opaque failure throws away the only account of what went wrong. Each run also opens a root session in the live session registry, best-effort: a bookkeeping failure there never fails the run, because the run and its billing already happened.
      * @param ref 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsByRefRunWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AgentsByRefRunRequestConfig(ref = ref)
+    fun postV1AgentsByRefRunWithHttpInfo(ref: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AgentsByRefRunRequestConfig(ref = ref)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1633,12 +1717,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsByRefRun
+     * To obtain the request config of the operation postV1AgentsByRefRun
      *
      * @param ref 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsByRefRunRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsByRefRunRequestConfig(ref: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1648,17 +1732,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/{ref}/run".replace("{"+"ref"+"}", encodeURIComponent(ref.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/sessions
-     * RegisterSession opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off.
-     * RegisterSession opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off. A session with a parentSessionId becomes a subagent of that session and inherits its root, so one flow is one tree; without one it is itself a root. Registering with a terminal status records a session that has already finished.
-     * @param cloudRegisterReq 
-     * @return CloudSessionView
+     * Opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off.
+     * Opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off. A session with a parentSessionId becomes a subagent of that session and inherits its root, so one flow is one tree; without one it is itself a root. Registering with a terminal status records a session that has already finished.
+     * @param registerReq 
+     * @return SessionView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1667,11 +1751,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsSessions(cloudRegisterReq: CloudRegisterReq) : CloudSessionView {
-        val localVarResponse = cloudPostV1AgentsSessionsWithHttpInfo(cloudRegisterReq = cloudRegisterReq)
+    fun postV1AgentsSessions(registerReq: RegisterReq) : SessionView {
+        val localVarResponse = postV1AgentsSessionsWithHttpInfo(registerReq = registerReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSessionView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SessionView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1687,31 +1771,31 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions
-     * RegisterSession opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off.
-     * RegisterSession opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off. A session with a parentSessionId becomes a subagent of that session and inherits its root, so one flow is one tree; without one it is itself a root. Registering with a terminal status records a session that has already finished.
-     * @param cloudRegisterReq 
-     * @return ApiResponse<CloudSessionView?>
+     * Opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off.
+     * Opens a live agent session in the caller&#39;s org — the row every surface (the CLI&#39;s outer agent, hanzo.bot, the console, chat) hangs its activity off. A session with a parentSessionId becomes a subagent of that session and inherits its root, so one flow is one tree; without one it is itself a root. Registering with a terminal status records a session that has already finished.
+     * @param registerReq 
+     * @return ApiResponse<SessionView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsSessionsWithHttpInfo(cloudRegisterReq: CloudRegisterReq) : ApiResponse<CloudSessionView?> {
-        val localVariableConfig = cloudPostV1AgentsSessionsRequestConfig(cloudRegisterReq = cloudRegisterReq)
+    fun postV1AgentsSessionsWithHttpInfo(registerReq: RegisterReq) : ApiResponse<SessionView?> {
+        val localVariableConfig = postV1AgentsSessionsRequestConfig(registerReq = registerReq)
 
-        return request<CloudRegisterReq, CloudSessionView>(
+        return request<RegisterReq, SessionView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsSessions
+     * To obtain the request config of the operation postV1AgentsSessions
      *
-     * @param cloudRegisterReq 
+     * @param registerReq 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsSessionsRequestConfig(cloudRegisterReq: CloudRegisterReq) : RequestConfig<CloudRegisterReq> {
-        val localVariableBody = cloudRegisterReq
+    fun postV1AgentsSessionsRequestConfig(registerReq: RegisterReq) : RequestConfig<RegisterReq> {
+        val localVariableBody = registerReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1722,15 +1806,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/sessions/{id}/events
-     * 
-     * 
+     * Append one turn to a session&#39;s ordered log.
+     * Records a message, tool-call, spawn, log, status or control turn against the session and answers 201 with the stored event, including the monotonic &#x60;seq&#x60; the store assigned — the cursor every reader pages from. The same turn is fanned out live to every stream subscriber watching that session&#39;s tree.  Requires a validated principal carrying an org, and the session must already exist IN THAT ORG: an id belonging to another tenant is a 404 exactly like one that does not exist, so the log can never be written across a tenant boundary. &#x60;actor&#x60; defaults to the calling principal when the body names none. &#x60;kind&#x60; must be one of the six above, and &#x60;payload&#x60; must be valid JSON of at most 64 KiB.  The payload is scanned for credentials BEFORE it is stored, and a hit REFUSES the write with 422 rather than redacting it: {status, code: \&quot;secret_in_transcript\&quot;, error, findings:[…]}, each finding naming the rule, severity, line, a masked preview and a SHA-256 fingerprint the author can match against the value they rotate. The detected value itself appears nowhere in that body, because it was never stored. That in-band findings array is the reason this operation cannot be typed.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1740,8 +1824,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsSessionsByIdEvents(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AgentsSessionsByIdEventsWithHttpInfo(id = id)
+    fun postV1AgentsSessionsByIdEvents(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AgentsSessionsByIdEventsWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1760,16 +1844,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/events
-     * 
-     * 
+     * Append one turn to a session&#39;s ordered log.
+     * Records a message, tool-call, spawn, log, status or control turn against the session and answers 201 with the stored event, including the monotonic &#x60;seq&#x60; the store assigned — the cursor every reader pages from. The same turn is fanned out live to every stream subscriber watching that session&#39;s tree.  Requires a validated principal carrying an org, and the session must already exist IN THAT ORG: an id belonging to another tenant is a 404 exactly like one that does not exist, so the log can never be written across a tenant boundary. &#x60;actor&#x60; defaults to the calling principal when the body names none. &#x60;kind&#x60; must be one of the six above, and &#x60;payload&#x60; must be valid JSON of at most 64 KiB.  The payload is scanned for credentials BEFORE it is stored, and a hit REFUSES the write with 422 rather than redacting it: {status, code: \&quot;secret_in_transcript\&quot;, error, findings:[…]}, each finding naming the rule, severity, line, a masked preview and a SHA-256 fingerprint the author can match against the value they rotate. The detected value itself appears nowhere in that body, because it was never stored. That in-band findings array is the reason this operation cannot be typed.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsSessionsByIdEventsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AgentsSessionsByIdEventsRequestConfig(id = id)
+    fun postV1AgentsSessionsByIdEventsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AgentsSessionsByIdEventsRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1777,12 +1861,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsSessionsByIdEvents
+     * To obtain the request config of the operation postV1AgentsSessionsByIdEvents
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsSessionsByIdEventsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsSessionsByIdEventsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1792,15 +1876,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/events".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/sessions/{id}/message
-     * 
-     * 
+     * Send text into a running session.
+     * Records &#x60;message&#x60; as a durable control event carrying the caller&#39;s text and answers 200 with {command, event, forwarded} — this is how a dashboard steers an agent mid-run. It is the one command with a required body: a &#x60;message&#x60; (up to 16 KiB) or a &#x60;payload&#x60;, and 400 with neither. The credential scan that guards an appended turn covers &#x60;payload&#x60; here; &#x60;message&#x60; is bounded but not scanned.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1810,8 +1894,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsSessionsByIdMessage(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AgentsSessionsByIdMessageWithHttpInfo(id = id)
+    fun postV1AgentsSessionsByIdMessage(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AgentsSessionsByIdMessageWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1830,16 +1914,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/message
-     * 
-     * 
+     * Send text into a running session.
+     * Records &#x60;message&#x60; as a durable control event carrying the caller&#39;s text and answers 200 with {command, event, forwarded} — this is how a dashboard steers an agent mid-run. It is the one command with a required body: a &#x60;message&#x60; (up to 16 KiB) or a &#x60;payload&#x60;, and 400 with neither. The credential scan that guards an appended turn covers &#x60;payload&#x60; here; &#x60;message&#x60; is bounded but not scanned.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsSessionsByIdMessageWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AgentsSessionsByIdMessageRequestConfig(id = id)
+    fun postV1AgentsSessionsByIdMessageWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AgentsSessionsByIdMessageRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1847,12 +1931,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsSessionsByIdMessage
+     * To obtain the request config of the operation postV1AgentsSessionsByIdMessage
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsSessionsByIdMessageRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsSessionsByIdMessageRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1862,15 +1946,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/message".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/sessions/{id}/pause
-     * 
-     * 
+     * Ask a running session to pause.
+     * Records &#x60;pause&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded} — the stored event carries the &#x60;seq&#x60; that orders it against every other turn.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1880,8 +1964,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsSessionsByIdPause(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AgentsSessionsByIdPauseWithHttpInfo(id = id)
+    fun postV1AgentsSessionsByIdPause(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AgentsSessionsByIdPauseWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1900,16 +1984,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/pause
-     * 
-     * 
+     * Ask a running session to pause.
+     * Records &#x60;pause&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded} — the stored event carries the &#x60;seq&#x60; that orders it against every other turn.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsSessionsByIdPauseWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AgentsSessionsByIdPauseRequestConfig(id = id)
+    fun postV1AgentsSessionsByIdPauseWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AgentsSessionsByIdPauseRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1917,12 +2001,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsSessionsByIdPause
+     * To obtain the request config of the operation postV1AgentsSessionsByIdPause
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsSessionsByIdPauseRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsSessionsByIdPauseRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1932,15 +2016,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/pause".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/sessions/{id}/resume
-     * 
-     * 
+     * Ask a paused session to carry on.
+     * Records &#x60;resume&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. The session is NOT required to be paused first: the only status this refuses is a finished one, because the live status is the running surface&#39;s to report rather than this endpoint&#39;s to enforce.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1950,8 +2034,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsSessionsByIdResume(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AgentsSessionsByIdResumeWithHttpInfo(id = id)
+    fun postV1AgentsSessionsByIdResume(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AgentsSessionsByIdResumeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1970,16 +2054,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/resume
-     * 
-     * 
+     * Ask a paused session to carry on.
+     * Records &#x60;resume&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. The session is NOT required to be paused first: the only status this refuses is a finished one, because the live status is the running surface&#39;s to report rather than this endpoint&#39;s to enforce.   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsSessionsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AgentsSessionsByIdResumeRequestConfig(id = id)
+    fun postV1AgentsSessionsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AgentsSessionsByIdResumeRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1987,12 +2071,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsSessionsByIdResume
+     * To obtain the request config of the operation postV1AgentsSessionsByIdResume
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsSessionsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsSessionsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2002,15 +2086,15 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/resume".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/sessions/{id}/stop
-     * 
-     * 
+     * Ask a session to stop for good.
+     * Records &#x60;stop&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. Stop is the one command that CANCELS a task-backed session&#39;s durable workflow instead of signalling it — pause, resume and message are cooperative signals the workflow decides how to act on, while this tears it down, with the request&#39;s &#x60;message&#x60; recorded as the cancellation reason (a default stands in when none is given).   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -2020,8 +2104,8 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsSessionsByIdStop(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AgentsSessionsByIdStopWithHttpInfo(id = id)
+    fun postV1AgentsSessionsByIdStop(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AgentsSessionsByIdStopWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -2040,16 +2124,16 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/sessions/{id}/stop
-     * 
-     * 
+     * Ask a session to stop for good.
+     * Records &#x60;stop&#x60; as a durable control event on the session and answers 200 with {command, event, forwarded}. Stop is the one command that CANCELS a task-backed session&#39;s durable workflow instead of signalling it — pause, resume and message are cooperative signals the workflow decides how to act on, while this tears it down, with the request&#39;s &#x60;message&#x60; recorded as the cancellation reason (a default stands in when none is given).   Requires a validated principal carrying an org, and the session must exist IN THAT ORG — a foreign id is a 404, so no tenant can steer another&#39;s agents. A FINISHED session (done or error) refuses every command with 409: a run that has ended cannot be steered.  THE COMMAND IS AN INTENT, NOT A STATE CHANGE. Nothing here writes the session&#39;s status. A 200 means the command was durably recorded and delivered, never that the agent has actually paused, resumed or stopped; the status becomes paused, done or error only when the surface running the agent reports it back through a session update. That surface learns of the command in one of two ways: a task-backed session (one carrying a workflow id, with a tasks backend wired) has it forwarded to the durable-execution engine, and &#x60;forwarded&#x60; says so; everything else is record-only, and the running surface — a locally started &#x60;hanzo code&#x60; session, for one — drains it by polling the session&#39;s control endpoint. Today that is every session: the only controller wired forwards nothing, so &#x60;forwarded&#x60; is false and polling is how a command arrives. If a forward is attempted and fails, the answer is 502 stating that the command was recorded but not forwarded: the intent is never lost.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsSessionsByIdStopWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AgentsSessionsByIdStopRequestConfig(id = id)
+    fun postV1AgentsSessionsByIdStopWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AgentsSessionsByIdStopRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -2057,12 +2141,12 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsSessionsByIdStop
+     * To obtain the request config of the operation postV1AgentsSessionsByIdStop
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsSessionsByIdStopRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsSessionsByIdStopRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2072,17 +2156,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/sessions/{id}/stop".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/targets
-     * RegisterTarget registers a machine as an agent target, or re-links one that is already registered.
-     * RegisterTarget registers a machine as an agent target, or re-links one that is already registered. Re-linking is idempotent and keyed on org+host+owner, so a machine that reconnects refreshes its own row rather than piling up duplicates; it answers 200, while a first registration answers 201.
-     * @param cloudTargetReq 
-     * @return CloudTargetView
+     * Registers a machine as an agent target, or re-links one that is already registered.
+     * Registers a machine as an agent target, or re-links one that is already registered. Re-linking is idempotent and keyed on org+host+owner, so a machine that reconnects refreshes its own row rather than piling up duplicates; it answers 200, while a first registration answers 201.
+     * @param targetReq 
+     * @return TargetView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2091,11 +2175,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsTargets(cloudTargetReq: CloudTargetReq) : CloudTargetView {
-        val localVarResponse = cloudPostV1AgentsTargetsWithHttpInfo(cloudTargetReq = cloudTargetReq)
+    fun postV1AgentsTargets(targetReq: TargetReq) : TargetView {
+        val localVarResponse = postV1AgentsTargetsWithHttpInfo(targetReq = targetReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudTargetView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as TargetView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2111,31 +2195,31 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/targets
-     * RegisterTarget registers a machine as an agent target, or re-links one that is already registered.
-     * RegisterTarget registers a machine as an agent target, or re-links one that is already registered. Re-linking is idempotent and keyed on org+host+owner, so a machine that reconnects refreshes its own row rather than piling up duplicates; it answers 200, while a first registration answers 201.
-     * @param cloudTargetReq 
-     * @return ApiResponse<CloudTargetView?>
+     * Registers a machine as an agent target, or re-links one that is already registered.
+     * Registers a machine as an agent target, or re-links one that is already registered. Re-linking is idempotent and keyed on org+host+owner, so a machine that reconnects refreshes its own row rather than piling up duplicates; it answers 200, while a first registration answers 201.
+     * @param targetReq 
+     * @return ApiResponse<TargetView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsTargetsWithHttpInfo(cloudTargetReq: CloudTargetReq) : ApiResponse<CloudTargetView?> {
-        val localVariableConfig = cloudPostV1AgentsTargetsRequestConfig(cloudTargetReq = cloudTargetReq)
+    fun postV1AgentsTargetsWithHttpInfo(targetReq: TargetReq) : ApiResponse<TargetView?> {
+        val localVariableConfig = postV1AgentsTargetsRequestConfig(targetReq = targetReq)
 
-        return request<CloudTargetReq, CloudTargetView>(
+        return request<TargetReq, TargetView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsTargets
+     * To obtain the request config of the operation postV1AgentsTargets
      *
-     * @param cloudTargetReq 
+     * @param targetReq 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsTargetsRequestConfig(cloudTargetReq: CloudTargetReq) : RequestConfig<CloudTargetReq> {
-        val localVariableBody = cloudTargetReq
+    fun postV1AgentsTargetsRequestConfig(targetReq: TargetReq) : RequestConfig<TargetReq> {
+        val localVariableBody = targetReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2146,7 +2230,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -2156,7 +2240,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * ClaimRoutedRun is the machine&#39;s long poll for work: it authenticates the daemon, stamps the liveness the dispatch gate reads (the poll IS the proof a runner is listening), and waits up to 25 seconds for the next run addressed to THIS machine.
      * ClaimRoutedRun is the machine&#39;s long poll for work: it authenticates the daemon, stamps the liveness the dispatch gate reads (the poll IS the proof a runner is listening), and waits up to 25 seconds for the next run addressed to THIS machine. It answers the run when one arrives and 204 with no body when the window elapses, on which the daemon re-polls immediately.  TWO independent proofs are required and both fail closed to the same 403: the caller must own this machine (or be an org admin) AND present its claim key in X-Target-Key. A run offered to one machine is unreachable from another&#39;s claim.
      * @param id ID is the target to act on, from the path.
-     * @return CloudRoutedRunOut
+     * @return RoutedRunOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2165,11 +2249,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsTargetsIdClaim(id: kotlin.String) : CloudRoutedRunOut {
-        val localVarResponse = cloudPostV1AgentsTargetsIdClaimWithHttpInfo(id = id)
+    fun postV1AgentsTargetsByIdClaim(id: kotlin.String) : RoutedRunOut {
+        val localVarResponse = postV1AgentsTargetsByIdClaimWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRoutedRunOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RoutedRunOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2188,27 +2272,27 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * ClaimRoutedRun is the machine&#39;s long poll for work: it authenticates the daemon, stamps the liveness the dispatch gate reads (the poll IS the proof a runner is listening), and waits up to 25 seconds for the next run addressed to THIS machine.
      * ClaimRoutedRun is the machine&#39;s long poll for work: it authenticates the daemon, stamps the liveness the dispatch gate reads (the poll IS the proof a runner is listening), and waits up to 25 seconds for the next run addressed to THIS machine. It answers the run when one arrives and 204 with no body when the window elapses, on which the daemon re-polls immediately.  TWO independent proofs are required and both fail closed to the same 403: the caller must own this machine (or be an org admin) AND present its claim key in X-Target-Key. A run offered to one machine is unreachable from another&#39;s claim.
      * @param id ID is the target to act on, from the path.
-     * @return ApiResponse<CloudRoutedRunOut?>
+     * @return ApiResponse<RoutedRunOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsTargetsIdClaimWithHttpInfo(id: kotlin.String) : ApiResponse<CloudRoutedRunOut?> {
-        val localVariableConfig = cloudPostV1AgentsTargetsIdClaimRequestConfig(id = id)
+    fun postV1AgentsTargetsByIdClaimWithHttpInfo(id: kotlin.String) : ApiResponse<RoutedRunOut?> {
+        val localVariableConfig = postV1AgentsTargetsByIdClaimRequestConfig(id = id)
 
-        return request<Unit, CloudRoutedRunOut>(
+        return request<Unit, RoutedRunOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsTargetsIdClaim
+     * To obtain the request config of the operation postV1AgentsTargetsByIdClaim
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsTargetsIdClaimRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsTargetsByIdClaimRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2219,17 +2303,17 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}/claim".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * POST /v1/agents/targets/{id}/claim-key
-     * MintTargetClaimKey mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored.
-     * MintTargetClaimKey mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored. Rotating supersedes any prior daemon, so only the machine&#39;s owner — or an org admin — may call it; every other caller gets the same not-found an unknown id gets, and learns nothing about what exists.
+     * POST /v1/agents/targets/{id}/key
+     * Mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored.
+     * Mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored. Rotating supersedes any prior daemon, so only the machine&#39;s owner — or an org admin — may call it; every other caller gets the same not-found an unknown id gets, and learns nothing about what exists.
      * @param id ID is the target to act on, from the path.
-     * @return CloudClaimKeyOut
+     * @return ClaimKeyOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2238,11 +2322,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsTargetsIdClaimKey(id: kotlin.String) : CloudClaimKeyOut {
-        val localVarResponse = cloudPostV1AgentsTargetsIdClaimKeyWithHttpInfo(id = id)
+    fun postV1AgentsTargetsByIdKey(id: kotlin.String) : ClaimKeyOut {
+        val localVarResponse = postV1AgentsTargetsByIdKeyWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClaimKeyOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClaimKeyOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2257,31 +2341,31 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * POST /v1/agents/targets/{id}/claim-key
-     * MintTargetClaimKey mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored.
-     * MintTargetClaimKey mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored. Rotating supersedes any prior daemon, so only the machine&#39;s owner — or an org admin — may call it; every other caller gets the same not-found an unknown id gets, and learns nothing about what exists.
+     * POST /v1/agents/targets/{id}/key
+     * Mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored.
+     * Mints (or rotates) the claim key a &#x60;hanzo code --serve&#x60; daemon presents to claim work for this machine, and returns it ONCE: only its SHA-256 hash is stored. Rotating supersedes any prior daemon, so only the machine&#39;s owner — or an org admin — may call it; every other caller gets the same not-found an unknown id gets, and learns nothing about what exists.
      * @param id ID is the target to act on, from the path.
-     * @return ApiResponse<CloudClaimKeyOut?>
+     * @return ApiResponse<ClaimKeyOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsTargetsIdClaimKeyWithHttpInfo(id: kotlin.String) : ApiResponse<CloudClaimKeyOut?> {
-        val localVariableConfig = cloudPostV1AgentsTargetsIdClaimKeyRequestConfig(id = id)
+    fun postV1AgentsTargetsByIdKeyWithHttpInfo(id: kotlin.String) : ApiResponse<ClaimKeyOut?> {
+        val localVariableConfig = postV1AgentsTargetsByIdKeyRequestConfig(id = id)
 
-        return request<Unit, CloudClaimKeyOut>(
+        return request<Unit, ClaimKeyOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsTargetsIdClaimKey
+     * To obtain the request config of the operation postV1AgentsTargetsByIdKey
      *
      * @param id ID is the target to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsTargetsIdClaimKeyRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AgentsTargetsByIdKeyRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -2289,22 +2373,22 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/agents/targets/{id}/claim-key".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            path = "/v1/agents/targets/{id}/key".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/agents/targets/{id}/runs/{runId}/report
-     * ReportRoutedRun completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish.
-     * ReportRoutedRun completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish. Scoped to (org, target, run) and claim-key-authenticated, so a machine can only ever report a run it legitimately holds. Idempotent — a report for an unknown or already-finished run answers delivered:false rather than failing, because the session&#39;s terminal state was already set by the machine&#39;s own stream.
+     * Completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish.
+     * Completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish. Scoped to (org, target, run) and claim-key authenticated, so a machine can only ever report a run it legitimately holds. Idempotent — a report for an unknown or already-finished run answers delivered:false rather than failing, because the session&#39;s terminal state was already set by the machine&#39;s own stream.
      * @param id ID is the machine reporting, from the path.
      * @param runId RunID is the routed run being completed, from the path.
-     * @param cloudReportRunIn 
-     * @return CloudReportOut
+     * @param reportRunIn 
+     * @return ReportOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -2313,11 +2397,11 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AgentsTargetsIdRunsRunIdReport(id: kotlin.String, runId: kotlin.String, cloudReportRunIn: CloudReportRunIn) : CloudReportOut {
-        val localVarResponse = cloudPostV1AgentsTargetsIdRunsRunIdReportWithHttpInfo(id = id, runId = runId, cloudReportRunIn = cloudReportRunIn)
+    fun postV1AgentsTargetsByIdRunsByRunidReport(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : ReportOut {
+        val localVarResponse = postV1AgentsTargetsByIdRunsByRunidReportWithHttpInfo(id = id, runId = runId, reportRunIn = reportRunIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReportOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReportOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -2333,35 +2417,35 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/agents/targets/{id}/runs/{runId}/report
-     * ReportRoutedRun completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish.
-     * ReportRoutedRun completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish. Scoped to (org, target, run) and claim-key-authenticated, so a machine can only ever report a run it legitimately holds. Idempotent — a report for an unknown or already-finished run answers delivered:false rather than failing, because the session&#39;s terminal state was already set by the machine&#39;s own stream.
+     * Completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish.
+     * Completes a claimed run: it delivers the terminal result to the run&#39;s durable owner, which is what lets that workflow finish. Scoped to (org, target, run) and claim-key authenticated, so a machine can only ever report a run it legitimately holds. Idempotent — a report for an unknown or already-finished run answers delivered:false rather than failing, because the session&#39;s terminal state was already set by the machine&#39;s own stream.
      * @param id ID is the machine reporting, from the path.
      * @param runId RunID is the routed run being completed, from the path.
-     * @param cloudReportRunIn 
-     * @return ApiResponse<CloudReportOut?>
+     * @param reportRunIn 
+     * @return ApiResponse<ReportOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AgentsTargetsIdRunsRunIdReportWithHttpInfo(id: kotlin.String, runId: kotlin.String, cloudReportRunIn: CloudReportRunIn) : ApiResponse<CloudReportOut?> {
-        val localVariableConfig = cloudPostV1AgentsTargetsIdRunsRunIdReportRequestConfig(id = id, runId = runId, cloudReportRunIn = cloudReportRunIn)
+    fun postV1AgentsTargetsByIdRunsByRunidReportWithHttpInfo(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : ApiResponse<ReportOut?> {
+        val localVariableConfig = postV1AgentsTargetsByIdRunsByRunidReportRequestConfig(id = id, runId = runId, reportRunIn = reportRunIn)
 
-        return request<CloudReportRunIn, CloudReportOut>(
+        return request<ReportRunIn, ReportOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AgentsTargetsIdRunsRunIdReport
+     * To obtain the request config of the operation postV1AgentsTargetsByIdRunsByRunidReport
      *
      * @param id ID is the machine reporting, from the path.
      * @param runId RunID is the routed run being completed, from the path.
-     * @param cloudReportRunIn 
+     * @param reportRunIn 
      * @return RequestConfig
      */
-    fun cloudPostV1AgentsTargetsIdRunsRunIdReportRequestConfig(id: kotlin.String, runId: kotlin.String, cloudReportRunIn: CloudReportRunIn) : RequestConfig<CloudReportRunIn> {
-        val localVariableBody = cloudReportRunIn
+    fun postV1AgentsTargetsByIdRunsByRunidReportRequestConfig(id: kotlin.String, runId: kotlin.String, reportRunIn: ReportRunIn) : RequestConfig<ReportRunIn> {
+        val localVariableBody = reportRunIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -2372,7 +2456,7 @@ class AgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/agents/targets/{id}/runs/{runId}/report".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"runId"+"}", encodeURIComponent(runId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

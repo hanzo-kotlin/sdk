@@ -19,15 +19,17 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAskAnswer
-import ai.hanzo.cloud.model.CloudAskPostIn
-import ai.hanzo.cloud.model.CloudContextBundle
-import ai.hanzo.cloud.model.CloudContextIn
-import ai.hanzo.cloud.model.CloudFileContent
-import ai.hanzo.cloud.model.CloudIndexIn
-import ai.hanzo.cloud.model.CloudIndexResult
-import ai.hanzo.cloud.model.CloudRepoTree
-import ai.hanzo.cloud.model.CloudSearchResults
+import ai.hanzo.cloud.model.Answer
+import ai.hanzo.cloud.model.AskAnswer
+import ai.hanzo.cloud.model.AskPostIn
+import ai.hanzo.cloud.model.ContextBundle
+import ai.hanzo.cloud.model.ContextIn
+import ai.hanzo.cloud.model.FileContent
+import ai.hanzo.cloud.model.IndexIn
+import ai.hanzo.cloud.model.IndexResult
+import ai.hanzo.cloud.model.Query
+import ai.hanzo.cloud.model.RepoTree
+import ai.hanzo.cloud.model.SearchResults
 
 import com.google.gson.annotations.SerializedName
 
@@ -59,7 +61,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Answers a question about the caller org&#39;s code with a CITED answer: retrieval packs grounding context, then the synthesizer writes the answer over exactly those spans, which come back alongside it. It never answers without grounding — with no matched code the answer is empty and says so, and with no synthesizer available the citations still come back with \&quot;degraded\&quot;: true so the caller can reason over the spans itself.
      * @param q Q is the question to answer. Required, max 4000 bytes. (optional)
      * @param repo Repo narrows retrieval to one repository. Empty searches every repo the org has indexed. (optional)
-     * @return CloudAskAnswer
+     * @return AskAnswer
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -68,11 +70,11 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CodeAsk(q: kotlin.String? = null, repo: kotlin.String? = null) : CloudAskAnswer {
-        val localVarResponse = cloudGetV1CodeAskWithHttpInfo(q = q, repo = repo)
+    fun getV1CodeAsk(q: kotlin.String? = null, repo: kotlin.String? = null) : AskAnswer {
+        val localVarResponse = getV1CodeAskWithHttpInfo(q = q, repo = repo)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAskAnswer
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AskAnswer
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -92,28 +94,28 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Answers a question about the caller org&#39;s code with a CITED answer: retrieval packs grounding context, then the synthesizer writes the answer over exactly those spans, which come back alongside it. It never answers without grounding — with no matched code the answer is empty and says so, and with no synthesizer available the citations still come back with \&quot;degraded\&quot;: true so the caller can reason over the spans itself.
      * @param q Q is the question to answer. Required, max 4000 bytes. (optional)
      * @param repo Repo narrows retrieval to one repository. Empty searches every repo the org has indexed. (optional)
-     * @return ApiResponse<CloudAskAnswer?>
+     * @return ApiResponse<AskAnswer?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CodeAskWithHttpInfo(q: kotlin.String?, repo: kotlin.String?) : ApiResponse<CloudAskAnswer?> {
-        val localVariableConfig = cloudGetV1CodeAskRequestConfig(q = q, repo = repo)
+    fun getV1CodeAskWithHttpInfo(q: kotlin.String?, repo: kotlin.String?) : ApiResponse<AskAnswer?> {
+        val localVariableConfig = getV1CodeAskRequestConfig(q = q, repo = repo)
 
-        return request<Unit, CloudAskAnswer>(
+        return request<Unit, AskAnswer>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CodeAsk
+     * To obtain the request config of the operation getV1CodeAsk
      *
      * @param q Q is the question to answer. Required, max 4000 bytes. (optional)
      * @param repo Repo narrows retrieval to one repository. Empty searches every repo the org has indexed. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CodeAskRequestConfig(q: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1CodeAskRequestConfig(q: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -132,7 +134,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -143,7 +145,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns the INDEXED content of one file — read_file over the chunks the search tiers hold, for pulling up code an agent just found. It is NOT byte-verbatim: the git object plane is the source of record for exact bytes, history and blame. A file absent from the index is a 404, so an agent can tell \&quot;not indexed\&quot; from \&quot;empty file\&quot;.
      * @param path Path is the file&#39;s repo-relative path. Required. (optional)
      * @param repo Repo is the repository the file belongs to. REQUIRED. (optional)
-     * @return CloudFileContent
+     * @return FileContent
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -152,11 +154,11 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CodeFile(path: kotlin.String? = null, repo: kotlin.String? = null) : CloudFileContent {
-        val localVarResponse = cloudGetV1CodeFileWithHttpInfo(path = path, repo = repo)
+    fun getV1CodeFile(path: kotlin.String? = null, repo: kotlin.String? = null) : FileContent {
+        val localVarResponse = getV1CodeFileWithHttpInfo(path = path, repo = repo)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFileContent
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FileContent
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -176,28 +178,28 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns the INDEXED content of one file — read_file over the chunks the search tiers hold, for pulling up code an agent just found. It is NOT byte-verbatim: the git object plane is the source of record for exact bytes, history and blame. A file absent from the index is a 404, so an agent can tell \&quot;not indexed\&quot; from \&quot;empty file\&quot;.
      * @param path Path is the file&#39;s repo-relative path. Required. (optional)
      * @param repo Repo is the repository the file belongs to. REQUIRED. (optional)
-     * @return ApiResponse<CloudFileContent?>
+     * @return ApiResponse<FileContent?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CodeFileWithHttpInfo(path: kotlin.String?, repo: kotlin.String?) : ApiResponse<CloudFileContent?> {
-        val localVariableConfig = cloudGetV1CodeFileRequestConfig(path = path, repo = repo)
+    fun getV1CodeFileWithHttpInfo(path: kotlin.String?, repo: kotlin.String?) : ApiResponse<FileContent?> {
+        val localVariableConfig = getV1CodeFileRequestConfig(path = path, repo = repo)
 
-        return request<Unit, CloudFileContent>(
+        return request<Unit, FileContent>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CodeFile
+     * To obtain the request config of the operation getV1CodeFile
      *
      * @param path Path is the file&#39;s repo-relative path. Required. (optional)
      * @param repo Repo is the repository the file belongs to. REQUIRED. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CodeFileRequestConfig(path: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1CodeFileRequestConfig(path: kotlin.String?, repo: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -216,7 +218,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/file",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -229,7 +231,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param type Type selects the retrieval tier: \&quot;text\&quot; (FTS5 trigram), \&quot;regex\&quot;, \&quot;symbol\&quot; (definitions), \&quot;semantic\&quot; (embeddings) or \&quot;hybrid\&quot;. Anything else — including empty — reads as hybrid. (optional)
      * @param repo Repo narrows to one repository. Empty searches every repo the org has indexed. (optional)
      * @param limit Limit caps how many spans come back: default 20, maximum 100. A value that is not a positive integer reads as the default. (optional)
-     * @return CloudSearchResults
+     * @return SearchResults
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -238,11 +240,11 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CodeSearch(q: kotlin.String? = null, type: kotlin.String? = null, repo: kotlin.String? = null, limit: kotlin.Int? = null) : CloudSearchResults {
-        val localVarResponse = cloudGetV1CodeSearchWithHttpInfo(q = q, type = type, repo = repo, limit = limit)
+    fun getV1CodeSearch(q: kotlin.String? = null, type: kotlin.String? = null, repo: kotlin.String? = null, limit: kotlin.Int? = null) : SearchResults {
+        val localVarResponse = getV1CodeSearchWithHttpInfo(q = q, type = type, repo = repo, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSearchResults
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchResults
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -264,22 +266,22 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param type Type selects the retrieval tier: \&quot;text\&quot; (FTS5 trigram), \&quot;regex\&quot;, \&quot;symbol\&quot; (definitions), \&quot;semantic\&quot; (embeddings) or \&quot;hybrid\&quot;. Anything else — including empty — reads as hybrid. (optional)
      * @param repo Repo narrows to one repository. Empty searches every repo the org has indexed. (optional)
      * @param limit Limit caps how many spans come back: default 20, maximum 100. A value that is not a positive integer reads as the default. (optional)
-     * @return ApiResponse<CloudSearchResults?>
+     * @return ApiResponse<SearchResults?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CodeSearchWithHttpInfo(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudSearchResults?> {
-        val localVariableConfig = cloudGetV1CodeSearchRequestConfig(q = q, type = type, repo = repo, limit = limit)
+    fun getV1CodeSearchWithHttpInfo(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : ApiResponse<SearchResults?> {
+        val localVariableConfig = getV1CodeSearchRequestConfig(q = q, type = type, repo = repo, limit = limit)
 
-        return request<Unit, CloudSearchResults>(
+        return request<Unit, SearchResults>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CodeSearch
+     * To obtain the request config of the operation getV1CodeSearch
      *
      * @param q Q is the search query. Required, max 4000 bytes. For type&#x3D;regex it is a regular expression; for type&#x3D;symbol it is a symbol name. (optional)
      * @param type Type selects the retrieval tier: \&quot;text\&quot; (FTS5 trigram), \&quot;regex\&quot;, \&quot;symbol\&quot; (definitions), \&quot;semantic\&quot; (embeddings) or \&quot;hybrid\&quot;. Anything else — including empty — reads as hybrid. (optional)
@@ -287,7 +289,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @param limit Limit caps how many spans come back: default 20, maximum 100. A value that is not a positive integer reads as the default. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CodeSearchRequestConfig(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1CodeSearchRequestConfig(q: kotlin.String?, type: kotlin.String?, repo: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -312,7 +314,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -322,7 +324,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns one repository&#39;s file structure with a per-file symbol count — get_repo_structure over the org&#39;s own index, with no git checkout involved.
      * Returns one repository&#39;s file structure with a per-file symbol count — get_repo_structure over the org&#39;s own index, with no git checkout involved. A repository that has not been indexed answers an empty tree rather than an error, so an agent can tell \&quot;nothing here\&quot; without handling a failure.
      * @param repo Repo is the repository to walk. REQUIRED — a tree is repo-scoped. (optional)
-     * @return CloudRepoTree
+     * @return RepoTree
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -331,11 +333,11 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1CodeTree(repo: kotlin.String? = null) : CloudRepoTree {
-        val localVarResponse = cloudGetV1CodeTreeWithHttpInfo(repo = repo)
+    fun getV1CodeTree(repo: kotlin.String? = null) : RepoTree {
+        val localVarResponse = getV1CodeTreeWithHttpInfo(repo = repo)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRepoTree
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RepoTree
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -354,27 +356,27 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Returns one repository&#39;s file structure with a per-file symbol count — get_repo_structure over the org&#39;s own index, with no git checkout involved.
      * Returns one repository&#39;s file structure with a per-file symbol count — get_repo_structure over the org&#39;s own index, with no git checkout involved. A repository that has not been indexed answers an empty tree rather than an error, so an agent can tell \&quot;nothing here\&quot; without handling a failure.
      * @param repo Repo is the repository to walk. REQUIRED — a tree is repo-scoped. (optional)
-     * @return ApiResponse<CloudRepoTree?>
+     * @return ApiResponse<RepoTree?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1CodeTreeWithHttpInfo(repo: kotlin.String?) : ApiResponse<CloudRepoTree?> {
-        val localVariableConfig = cloudGetV1CodeTreeRequestConfig(repo = repo)
+    fun getV1CodeTreeWithHttpInfo(repo: kotlin.String?) : ApiResponse<RepoTree?> {
+        val localVariableConfig = getV1CodeTreeRequestConfig(repo = repo)
 
-        return request<Unit, CloudRepoTree>(
+        return request<Unit, RepoTree>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1CodeTree
+     * To obtain the request config of the operation getV1CodeTree
      *
      * @param repo Repo is the repository to walk. REQUIRED — a tree is repo-scoped. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1CodeTreeRequestConfig(repo: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1CodeTreeRequestConfig(repo: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -390,7 +392,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/tree",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -399,8 +401,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/code/ask
      * Is askGet with the question in the request BODY, for a question too long or too awkward to put in a URL.
      * Is askGet with the question in the request BODY, for a question too long or too awkward to put in a URL. &#x60;query&#x60; and &#x60;repo&#x60; in the body take precedence over &#x60;?q&#x3D;&#x60; and &#x60;?repo&#x3D;&#x60;; either source works alone.
-     * @param cloudAskPostIn 
-     * @return CloudAskAnswer
+     * @param askPostIn 
+     * @return AskAnswer
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -409,11 +411,11 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CodeAsk(cloudAskPostIn: CloudAskPostIn) : CloudAskAnswer {
-        val localVarResponse = cloudPostV1CodeAskWithHttpInfo(cloudAskPostIn = cloudAskPostIn)
+    fun postV1CodeAsk(askPostIn: AskPostIn) : AskAnswer {
+        val localVarResponse = postV1CodeAskWithHttpInfo(askPostIn = askPostIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAskAnswer
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AskAnswer
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -431,29 +433,29 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/code/ask
      * Is askGet with the question in the request BODY, for a question too long or too awkward to put in a URL.
      * Is askGet with the question in the request BODY, for a question too long or too awkward to put in a URL. &#x60;query&#x60; and &#x60;repo&#x60; in the body take precedence over &#x60;?q&#x3D;&#x60; and &#x60;?repo&#x3D;&#x60;; either source works alone.
-     * @param cloudAskPostIn 
-     * @return ApiResponse<CloudAskAnswer?>
+     * @param askPostIn 
+     * @return ApiResponse<AskAnswer?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CodeAskWithHttpInfo(cloudAskPostIn: CloudAskPostIn) : ApiResponse<CloudAskAnswer?> {
-        val localVariableConfig = cloudPostV1CodeAskRequestConfig(cloudAskPostIn = cloudAskPostIn)
+    fun postV1CodeAskWithHttpInfo(askPostIn: AskPostIn) : ApiResponse<AskAnswer?> {
+        val localVariableConfig = postV1CodeAskRequestConfig(askPostIn = askPostIn)
 
-        return request<CloudAskPostIn, CloudAskAnswer>(
+        return request<AskPostIn, AskAnswer>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CodeAsk
+     * To obtain the request config of the operation postV1CodeAsk
      *
-     * @param cloudAskPostIn 
+     * @param askPostIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CodeAskRequestConfig(cloudAskPostIn: CloudAskPostIn) : RequestConfig<CloudAskPostIn> {
-        val localVariableBody = cloudAskPostIn
+    fun postV1CodeAskRequestConfig(askPostIn: AskPostIn) : RequestConfig<AskPostIn> {
+        val localVariableBody = askPostIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -464,7 +466,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/ask",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -473,8 +475,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/code/context
      * Packs the most relevant code for a query into a token budget — THE primitive for a coding agent that has to decide what to put in a prompt.
      * Packs the most relevant code for a query into a token budget — THE primitive for a coding agent that has to decide what to put in a prompt. It retrieves seed spans, expands each with the definitions it calls and its key callers, then greedily fills the budget, so the answer is a coherent slice of the codebase rather than a list of disconnected matches. The top match is always included, truncated if it alone overflows, so a matched query never comes back empty. A retrieval outage answers 200 with an empty bundle rather than a 5xx.
-     * @param cloudContextIn 
-     * @return CloudContextBundle
+     * @param contextIn 
+     * @return ContextBundle
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -483,11 +485,11 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CodeContext(cloudContextIn: CloudContextIn) : CloudContextBundle {
-        val localVarResponse = cloudPostV1CodeContextWithHttpInfo(cloudContextIn = cloudContextIn)
+    fun postV1CodeContext(contextIn: ContextIn) : ContextBundle {
+        val localVarResponse = postV1CodeContextWithHttpInfo(contextIn = contextIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudContextBundle
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ContextBundle
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -505,29 +507,29 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/code/context
      * Packs the most relevant code for a query into a token budget — THE primitive for a coding agent that has to decide what to put in a prompt.
      * Packs the most relevant code for a query into a token budget — THE primitive for a coding agent that has to decide what to put in a prompt. It retrieves seed spans, expands each with the definitions it calls and its key callers, then greedily fills the budget, so the answer is a coherent slice of the codebase rather than a list of disconnected matches. The top match is always included, truncated if it alone overflows, so a matched query never comes back empty. A retrieval outage answers 200 with an empty bundle rather than a 5xx.
-     * @param cloudContextIn 
-     * @return ApiResponse<CloudContextBundle?>
+     * @param contextIn 
+     * @return ApiResponse<ContextBundle?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CodeContextWithHttpInfo(cloudContextIn: CloudContextIn) : ApiResponse<CloudContextBundle?> {
-        val localVariableConfig = cloudPostV1CodeContextRequestConfig(cloudContextIn = cloudContextIn)
+    fun postV1CodeContextWithHttpInfo(contextIn: ContextIn) : ApiResponse<ContextBundle?> {
+        val localVariableConfig = postV1CodeContextRequestConfig(contextIn = contextIn)
 
-        return request<CloudContextIn, CloudContextBundle>(
+        return request<ContextIn, ContextBundle>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CodeContext
+     * To obtain the request config of the operation postV1CodeContext
      *
-     * @param cloudContextIn 
+     * @param contextIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CodeContextRequestConfig(cloudContextIn: CloudContextIn) : RequestConfig<CloudContextIn> {
-        val localVariableBody = cloudContextIn
+    fun postV1CodeContextRequestConfig(contextIn: ContextIn) : RequestConfig<ContextIn> {
+        val localVariableBody = contextIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -538,7 +540,7 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/context",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -547,8 +549,8 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/code/index
      * (re)indexes a repository for the caller&#39;s org, incrementally: files whose content hash is unchanged are skipped, so re-sending a whole tree is cheap.
      * (re)indexes a repository for the caller&#39;s org, incrementally: files whose content hash is unchanged are skipped, so re-sending a whole tree is cheap. Each file is parsed for symbols, split at AST boundaries and — when the semantic tier is available — embedded, which is what makes it searchable across all three retrieval tiers. Pass &#x60;prune&#x60; to also DELETE indexed files absent from the request, which turns the call into a full sync; without it the call is an upsert. The index is written to the caller org&#39;s own physically separate database.
-     * @param cloudIndexIn 
-     * @return CloudIndexResult
+     * @param indexIn 
+     * @return IndexResult
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -557,11 +559,11 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1CodeIndex(cloudIndexIn: CloudIndexIn) : CloudIndexResult {
-        val localVarResponse = cloudPostV1CodeIndexWithHttpInfo(cloudIndexIn = cloudIndexIn)
+    fun postV1CodeIndex(indexIn: IndexIn) : IndexResult {
+        val localVarResponse = postV1CodeIndexWithHttpInfo(indexIn = indexIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudIndexResult
+            ResponseType.Success -> (localVarResponse as Success<*>).data as IndexResult
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -579,29 +581,29 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/code/index
      * (re)indexes a repository for the caller&#39;s org, incrementally: files whose content hash is unchanged are skipped, so re-sending a whole tree is cheap.
      * (re)indexes a repository for the caller&#39;s org, incrementally: files whose content hash is unchanged are skipped, so re-sending a whole tree is cheap. Each file is parsed for symbols, split at AST boundaries and — when the semantic tier is available — embedded, which is what makes it searchable across all three retrieval tiers. Pass &#x60;prune&#x60; to also DELETE indexed files absent from the request, which turns the call into a full sync; without it the call is an upsert. The index is written to the caller org&#39;s own physically separate database.
-     * @param cloudIndexIn 
-     * @return ApiResponse<CloudIndexResult?>
+     * @param indexIn 
+     * @return ApiResponse<IndexResult?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1CodeIndexWithHttpInfo(cloudIndexIn: CloudIndexIn) : ApiResponse<CloudIndexResult?> {
-        val localVariableConfig = cloudPostV1CodeIndexRequestConfig(cloudIndexIn = cloudIndexIn)
+    fun postV1CodeIndexWithHttpInfo(indexIn: IndexIn) : ApiResponse<IndexResult?> {
+        val localVariableConfig = postV1CodeIndexRequestConfig(indexIn = indexIn)
 
-        return request<CloudIndexIn, CloudIndexResult>(
+        return request<IndexIn, IndexResult>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1CodeIndex
+     * To obtain the request config of the operation postV1CodeIndex
      *
-     * @param cloudIndexIn 
+     * @param indexIn 
      * @return RequestConfig
      */
-    fun cloudPostV1CodeIndexRequestConfig(cloudIndexIn: CloudIndexIn) : RequestConfig<CloudIndexIn> {
-        val localVariableBody = cloudIndexIn
+    fun postV1CodeIndexRequestConfig(indexIn: IndexIn) : RequestConfig<IndexIn> {
+        val localVariableBody = indexIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -612,7 +614,377 @@ class CodeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/code/index",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/code/lsp/complete
+     * Offers the candidates a language server has at a position, typed and resolved through the repository&#39;s dependencies rather than guessed from text.
+     * Offers the candidates a language server has at a position, typed and resolved through the repository&#39;s dependencies rather than guessed from text.
+     * @param query 
+     * @return Answer
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CodeLspComplete(query: Query) : Answer {
+        val localVarResponse = postV1CodeLspCompleteWithHttpInfo(query = query)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/code/lsp/complete
+     * Offers the candidates a language server has at a position, typed and resolved through the repository&#39;s dependencies rather than guessed from text.
+     * Offers the candidates a language server has at a position, typed and resolved through the repository&#39;s dependencies rather than guessed from text.
+     * @param query 
+     * @return ApiResponse<Answer?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CodeLspCompleteWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postV1CodeLspCompleteRequestConfig(query = query)
+
+        return request<Query, Answer>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CodeLspComplete
+     *
+     * @param query 
+     * @return RequestConfig
+     */
+    fun postV1CodeLspCompleteRequestConfig(query: Query) : RequestConfig<Query> {
+        val localVariableBody = query
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/code/lsp/complete",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/code/lsp/diagnostics
+     * Reports every problem the language server finds in one file — compile errors, type errors and lints, each with its span and its severity (1 error, 2 warning, 3 information, 4 hint).
+     * Reports every problem the language server finds in one file — compile errors, type errors and lints, each with its span and its severity (1 error, 2 warning, 3 information, 4 hint). The position is ignored.
+     * @param query 
+     * @return Answer
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CodeLspDiagnostics(query: Query) : Answer {
+        val localVarResponse = postV1CodeLspDiagnosticsWithHttpInfo(query = query)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/code/lsp/diagnostics
+     * Reports every problem the language server finds in one file — compile errors, type errors and lints, each with its span and its severity (1 error, 2 warning, 3 information, 4 hint).
+     * Reports every problem the language server finds in one file — compile errors, type errors and lints, each with its span and its severity (1 error, 2 warning, 3 information, 4 hint). The position is ignored.
+     * @param query 
+     * @return ApiResponse<Answer?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CodeLspDiagnosticsWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postV1CodeLspDiagnosticsRequestConfig(query = query)
+
+        return request<Query, Answer>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CodeLspDiagnostics
+     *
+     * @param query 
+     * @return RequestConfig
+     */
+    fun postV1CodeLspDiagnosticsRequestConfig(query: Query) : RequestConfig<Query> {
+        val localVariableBody = query
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/code/lsp/diagnostics",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/code/lsp/hover
+     * Renders the type and documentation of the symbol at a position, as the language server itself renders it.
+     * Renders the type and documentation of the symbol at a position, as the language server itself renders it.  Positions are the LSP&#39;s: line and character are 0-BASED and character counts UTF-16 code units, so an editor&#39;s 1-based line must have 1 subtracted before it is sent. The repository is named by slug and is always one in the caller&#39;s own org; rev pins a branch, tag or commit sha, and empty means the default branch.
+     * @param query 
+     * @return Answer
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CodeLspHover(query: Query) : Answer {
+        val localVarResponse = postV1CodeLspHoverWithHttpInfo(query = query)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/code/lsp/hover
+     * Renders the type and documentation of the symbol at a position, as the language server itself renders it.
+     * Renders the type and documentation of the symbol at a position, as the language server itself renders it.  Positions are the LSP&#39;s: line and character are 0-BASED and character counts UTF-16 code units, so an editor&#39;s 1-based line must have 1 subtracted before it is sent. The repository is named by slug and is always one in the caller&#39;s own org; rev pins a branch, tag or commit sha, and empty means the default branch.
+     * @param query 
+     * @return ApiResponse<Answer?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CodeLspHoverWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postV1CodeLspHoverRequestConfig(query = query)
+
+        return request<Query, Answer>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CodeLspHover
+     *
+     * @param query 
+     * @return RequestConfig
+     */
+    fun postV1CodeLspHoverRequestConfig(query: Query) : RequestConfig<Query> {
+        val localVariableBody = query
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/code/lsp/hover",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/code/lsp/locate
+     * Finds where a symbol lives: its definition, its references, its type or its implementations, chosen by relation (definition, reference, type, implementation — empty means definition).
+     * Finds where a symbol lives: its definition, its references, its type or its implementations, chosen by relation (definition, reference, type, implementation — empty means definition).  It resolves THROUGH dependencies. An answer whose external flag is set left the repository, and its path is then the module coordinate it landed in — which is the question a static index cannot answer and this service exists for.
+     * @param query 
+     * @return Answer
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CodeLspLocate(query: Query) : Answer {
+        val localVarResponse = postV1CodeLspLocateWithHttpInfo(query = query)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/code/lsp/locate
+     * Finds where a symbol lives: its definition, its references, its type or its implementations, chosen by relation (definition, reference, type, implementation — empty means definition).
+     * Finds where a symbol lives: its definition, its references, its type or its implementations, chosen by relation (definition, reference, type, implementation — empty means definition).  It resolves THROUGH dependencies. An answer whose external flag is set left the repository, and its path is then the module coordinate it landed in — which is the question a static index cannot answer and this service exists for.
+     * @param query 
+     * @return ApiResponse<Answer?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CodeLspLocateWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postV1CodeLspLocateRequestConfig(query = query)
+
+        return request<Query, Answer>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CodeLspLocate
+     *
+     * @param query 
+     * @return RequestConfig
+     */
+    fun postV1CodeLspLocateRequestConfig(query: Query) : RequestConfig<Query> {
+        val localVariableBody = query
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/code/lsp/locate",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/code/lsp/symbols
+     * Outlines one file: every declaration in it, with its kind and its span.
+     * Outlines one file: every declaration in it, with its kind and its span. The position is ignored — the answer is the whole file.
+     * @param query 
+     * @return Answer
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1CodeLspSymbols(query: Query) : Answer {
+        val localVarResponse = postV1CodeLspSymbolsWithHttpInfo(query = query)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Answer
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/code/lsp/symbols
+     * Outlines one file: every declaration in it, with its kind and its span.
+     * Outlines one file: every declaration in it, with its kind and its span. The position is ignored — the answer is the whole file.
+     * @param query 
+     * @return ApiResponse<Answer?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1CodeLspSymbolsWithHttpInfo(query: Query) : ApiResponse<Answer?> {
+        val localVariableConfig = postV1CodeLspSymbolsRequestConfig(query = query)
+
+        return request<Query, Answer>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1CodeLspSymbols
+     *
+     * @param query 
+     * @return RequestConfig
+     */
+    fun postV1CodeLspSymbolsRequestConfig(query: Query) : RequestConfig<Query> {
+        val localVariableBody = query
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/code/lsp/symbols",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,19 +19,19 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCatalog
-import ai.hanzo.cloud.model.CloudCreateFlowReq
-import ai.hanzo.cloud.model.CloudCreateVersionIn
-import ai.hanzo.cloud.model.CloudFlow
-import ai.hanzo.cloud.model.CloudFlowPage
-import ai.hanzo.cloud.model.CloudFlowRun
-import ai.hanzo.cloud.model.CloudFlowVersion
-import ai.hanzo.cloud.model.CloudPatchFlowIn
-import ai.hanzo.cloud.model.CloudPopulatedFlow
-import ai.hanzo.cloud.model.CloudRunIn
-import ai.hanzo.cloud.model.CloudRunPage
-import ai.hanzo.cloud.model.CloudRunResp
-import ai.hanzo.cloud.model.CloudVersionPage
+import ai.hanzo.cloud.model.Catalog
+import ai.hanzo.cloud.model.CreateFlowReq
+import ai.hanzo.cloud.model.CreateVersionIn
+import ai.hanzo.cloud.model.Flow
+import ai.hanzo.cloud.model.FlowPage
+import ai.hanzo.cloud.model.FlowRun
+import ai.hanzo.cloud.model.FlowVersion
+import ai.hanzo.cloud.model.PatchFlowIn
+import ai.hanzo.cloud.model.PopulatedFlow
+import ai.hanzo.cloud.model.RunIn
+import ai.hanzo.cloud.model.RunPage
+import ai.hanzo.cloud.model.RunResp
+import ai.hanzo.cloud.model.VersionPage
 
 import com.google.gson.annotations.SerializedName
 
@@ -59,8 +59,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * DELETE /v1/automations/flows/{id}
-     * DeleteFlow deletes one automation, its versions and its run history.
-     * DeleteFlow deletes one automation, its versions and its run history. It answers no content, and a flow of another org answers not-found.
+     * Deletes one automation, its versions and its run history.
+     * Deletes one automation, its versions and its run history. It answers no content, and a flow of another org answers not-found.
      * @param id ID is the flow to act on, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -70,8 +70,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1AutomationsFlowsId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1AutomationsFlowsIdWithHttpInfo(id = id)
+    fun deleteV1AutomationsFlowsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1AutomationsFlowsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,16 +90,16 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * DELETE /v1/automations/flows/{id}
-     * DeleteFlow deletes one automation, its versions and its run history.
-     * DeleteFlow deletes one automation, its versions and its run history. It answers no content, and a flow of another org answers not-found.
+     * Deletes one automation, its versions and its run history.
+     * Deletes one automation, its versions and its run history. It answers no content, and a flow of another org answers not-found.
      * @param id ID is the flow to act on, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1AutomationsFlowsIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1AutomationsFlowsIdRequestConfig(id = id)
+    fun deleteV1AutomationsFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1AutomationsFlowsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -107,12 +107,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1AutomationsFlowsId
+     * To obtain the request config of the operation deleteV1AutomationsFlowsById
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1AutomationsFlowsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1AutomationsFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -122,7 +122,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -131,7 +131,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * GET /v1/automations/connectors
      * Connectors returns the connector catalogue.
      * Connectors returns the connector catalogue. Each entry is an external service a flow step can invoke, carrying its auth descriptor and the input properties of its actions and triggers. The catalogue is the same for every tenant, so the gate is a validated principal rather than a per-org view.
-     * @return CloudCatalog
+     * @return Catalog
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -140,11 +140,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutomationsConnectors() : CloudCatalog {
-        val localVarResponse = cloudGetV1AutomationsConnectorsWithHttpInfo()
+    fun getV1AutomationsConnectors() : Catalog {
+        val localVarResponse = getV1AutomationsConnectorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCatalog
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Catalog
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -162,26 +162,26 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * GET /v1/automations/connectors
      * Connectors returns the connector catalogue.
      * Connectors returns the connector catalogue. Each entry is an external service a flow step can invoke, carrying its auth descriptor and the input properties of its actions and triggers. The catalogue is the same for every tenant, so the gate is a validated principal rather than a per-org view.
-     * @return ApiResponse<CloudCatalog?>
+     * @return ApiResponse<Catalog?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutomationsConnectorsWithHttpInfo() : ApiResponse<CloudCatalog?> {
-        val localVariableConfig = cloudGetV1AutomationsConnectorsRequestConfig()
+    fun getV1AutomationsConnectorsWithHttpInfo() : ApiResponse<Catalog?> {
+        val localVariableConfig = getV1AutomationsConnectorsRequestConfig()
 
-        return request<Unit, CloudCatalog>(
+        return request<Unit, Catalog>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutomationsConnectors
+     * To obtain the request config of the operation getV1AutomationsConnectors
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AutomationsConnectorsRequestConfig() : RequestConfig<Unit> {
+    fun getV1AutomationsConnectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -192,17 +192,17 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/connectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/automations/flows
-     * ListFlows returns the caller org&#39;s automations, most-recently-updated first.
-     * ListFlows returns the caller org&#39;s automations, most-recently-updated first. The optional &#x60;limit&#x60; query bounds the page.
+     * Returns the caller org&#39;s automations, most-recently-updated first.
+     * Returns the caller org&#39;s automations, most-recently-updated first. The optional &#x60;limit&#x60; query bounds the page.
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
-     * @return CloudFlowPage
+     * @return FlowPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -211,11 +211,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutomationsFlows(limit: kotlin.Int? = null) : CloudFlowPage {
-        val localVarResponse = cloudGetV1AutomationsFlowsWithHttpInfo(limit = limit)
+    fun getV1AutomationsFlows(limit: kotlin.Int? = null) : FlowPage {
+        val localVarResponse = getV1AutomationsFlowsWithHttpInfo(limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlowPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -231,30 +231,30 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/automations/flows
-     * ListFlows returns the caller org&#39;s automations, most-recently-updated first.
-     * ListFlows returns the caller org&#39;s automations, most-recently-updated first. The optional &#x60;limit&#x60; query bounds the page.
+     * Returns the caller org&#39;s automations, most-recently-updated first.
+     * Returns the caller org&#39;s automations, most-recently-updated first. The optional &#x60;limit&#x60; query bounds the page.
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
-     * @return ApiResponse<CloudFlowPage?>
+     * @return ApiResponse<FlowPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutomationsFlowsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<CloudFlowPage?> {
-        val localVariableConfig = cloudGetV1AutomationsFlowsRequestConfig(limit = limit)
+    fun getV1AutomationsFlowsWithHttpInfo(limit: kotlin.Int?) : ApiResponse<FlowPage?> {
+        val localVariableConfig = getV1AutomationsFlowsRequestConfig(limit = limit)
 
-        return request<Unit, CloudFlowPage>(
+        return request<Unit, FlowPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutomationsFlows
+     * To obtain the request config of the operation getV1AutomationsFlows
      *
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AutomationsFlowsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AutomationsFlowsRequestConfig(limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -270,17 +270,17 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/automations/flows/{id}
-     * GetFlow returns one automation and its latest version.
-     * GetFlow returns one automation and its latest version. That is the flow record plus the step tree the builder edits; a flow of another org answers not-found.
+     * Returns one automation and its latest version.
+     * Returns one automation and its latest version. That is the flow record plus the step tree the builder edits; a flow of another org answers not-found.
      * @param id ID is the flow to act on, from the path.
-     * @return CloudPopulatedFlow
+     * @return PopulatedFlow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -289,11 +289,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutomationsFlowsId(id: kotlin.String) : CloudPopulatedFlow {
-        val localVarResponse = cloudGetV1AutomationsFlowsIdWithHttpInfo(id = id)
+    fun getV1AutomationsFlowsById(id: kotlin.String) : PopulatedFlow {
+        val localVarResponse = getV1AutomationsFlowsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPopulatedFlow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PopulatedFlow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -309,30 +309,30 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/automations/flows/{id}
-     * GetFlow returns one automation and its latest version.
-     * GetFlow returns one automation and its latest version. That is the flow record plus the step tree the builder edits; a flow of another org answers not-found.
+     * Returns one automation and its latest version.
+     * Returns one automation and its latest version. That is the flow record plus the step tree the builder edits; a flow of another org answers not-found.
      * @param id ID is the flow to act on, from the path.
-     * @return ApiResponse<CloudPopulatedFlow?>
+     * @return ApiResponse<PopulatedFlow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutomationsFlowsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudPopulatedFlow?> {
-        val localVariableConfig = cloudGetV1AutomationsFlowsIdRequestConfig(id = id)
+    fun getV1AutomationsFlowsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PopulatedFlow?> {
+        val localVariableConfig = getV1AutomationsFlowsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudPopulatedFlow>(
+        return request<Unit, PopulatedFlow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutomationsFlowsId
+     * To obtain the request config of the operation getV1AutomationsFlowsById
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AutomationsFlowsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AutomationsFlowsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -343,18 +343,18 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/automations/flows/{id}/versions
-     * ListVersions returns one flow&#39;s versions, newest first.
-     * ListVersions returns one flow&#39;s versions, newest first. The optional &#x60;limit&#x60; query bounds the page.
+     * Returns one flow&#39;s versions, newest first.
+     * Returns one flow&#39;s versions, newest first. The optional &#x60;limit&#x60; query bounds the page.
      * @param id ID is the flow whose versions to list, from the path.
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
-     * @return CloudVersionPage
+     * @return VersionPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -363,11 +363,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutomationsFlowsIdVersions(id: kotlin.String, limit: kotlin.Int? = null) : CloudVersionPage {
-        val localVarResponse = cloudGetV1AutomationsFlowsIdVersionsWithHttpInfo(id = id, limit = limit)
+    fun getV1AutomationsFlowsByIdVersions(id: kotlin.String, limit: kotlin.Int? = null) : VersionPage {
+        val localVarResponse = getV1AutomationsFlowsByIdVersionsWithHttpInfo(id = id, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudVersionPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as VersionPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -383,32 +383,32 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/automations/flows/{id}/versions
-     * ListVersions returns one flow&#39;s versions, newest first.
-     * ListVersions returns one flow&#39;s versions, newest first. The optional &#x60;limit&#x60; query bounds the page.
+     * Returns one flow&#39;s versions, newest first.
+     * Returns one flow&#39;s versions, newest first. The optional &#x60;limit&#x60; query bounds the page.
      * @param id ID is the flow whose versions to list, from the path.
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
-     * @return ApiResponse<CloudVersionPage?>
+     * @return ApiResponse<VersionPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutomationsFlowsIdVersionsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<CloudVersionPage?> {
-        val localVariableConfig = cloudGetV1AutomationsFlowsIdVersionsRequestConfig(id = id, limit = limit)
+    fun getV1AutomationsFlowsByIdVersionsWithHttpInfo(id: kotlin.String, limit: kotlin.Int?) : ApiResponse<VersionPage?> {
+        val localVariableConfig = getV1AutomationsFlowsByIdVersionsRequestConfig(id = id, limit = limit)
 
-        return request<Unit, CloudVersionPage>(
+        return request<Unit, VersionPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutomationsFlowsIdVersions
+     * To obtain the request config of the operation getV1AutomationsFlowsByIdVersions
      *
      * @param id ID is the flow whose versions to list, from the path.
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AutomationsFlowsIdVersionsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AutomationsFlowsByIdVersionsRequestConfig(id: kotlin.String, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -424,7 +424,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/versions".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -433,7 +433,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * GET /v1/automations/pieces
      * Pieces is the retired-name alias of the connector catalogue.
      * Pieces is the retired-name alias of the connector catalogue. It serves exactly what GET /v1/automations/connectors serves, under the name this surface used before \&quot;piece\&quot; (the ActivePieces term) became \&quot;connector\&quot;, and stays valid for clients pinned to the old path. Prefer /connectors.
-     * @return CloudCatalog
+     * @return Catalog
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -442,11 +442,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutomationsPieces() : CloudCatalog {
-        val localVarResponse = cloudGetV1AutomationsPiecesWithHttpInfo()
+    fun getV1AutomationsPieces() : Catalog {
+        val localVarResponse = getV1AutomationsPiecesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCatalog
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Catalog
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -464,26 +464,26 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * GET /v1/automations/pieces
      * Pieces is the retired-name alias of the connector catalogue.
      * Pieces is the retired-name alias of the connector catalogue. It serves exactly what GET /v1/automations/connectors serves, under the name this surface used before \&quot;piece\&quot; (the ActivePieces term) became \&quot;connector\&quot;, and stays valid for clients pinned to the old path. Prefer /connectors.
-     * @return ApiResponse<CloudCatalog?>
+     * @return ApiResponse<Catalog?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutomationsPiecesWithHttpInfo() : ApiResponse<CloudCatalog?> {
-        val localVariableConfig = cloudGetV1AutomationsPiecesRequestConfig()
+    fun getV1AutomationsPiecesWithHttpInfo() : ApiResponse<Catalog?> {
+        val localVariableConfig = getV1AutomationsPiecesRequestConfig()
 
-        return request<Unit, CloudCatalog>(
+        return request<Unit, Catalog>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutomationsPieces
+     * To obtain the request config of the operation getV1AutomationsPieces
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AutomationsPiecesRequestConfig() : RequestConfig<Unit> {
+    fun getV1AutomationsPiecesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -494,18 +494,18 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/pieces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/automations/runs
-     * ListRuns returns the caller org&#39;s run history, newest first.
-     * ListRuns returns the caller org&#39;s run history, newest first. The optional &#x60;flowId&#x60; query narrows it to one flow and &#x60;limit&#x60; bounds the page.
+     * Returns the caller org&#39;s run history, newest first.
+     * Returns the caller org&#39;s run history, newest first. The optional &#x60;flowId&#x60; query narrows it to one flow and &#x60;limit&#x60; bounds the page.
      * @param flowId FlowID narrows the history to one flow. Omit it for the whole org&#39;s runs. (optional)
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
-     * @return CloudRunPage
+     * @return RunPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -514,11 +514,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutomationsRuns(flowId: kotlin.String? = null, limit: kotlin.Int? = null) : CloudRunPage {
-        val localVarResponse = cloudGetV1AutomationsRunsWithHttpInfo(flowId = flowId, limit = limit)
+    fun getV1AutomationsRuns(flowId: kotlin.String? = null, limit: kotlin.Int? = null) : RunPage {
+        val localVarResponse = getV1AutomationsRunsWithHttpInfo(flowId = flowId, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRunPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -534,32 +534,32 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/automations/runs
-     * ListRuns returns the caller org&#39;s run history, newest first.
-     * ListRuns returns the caller org&#39;s run history, newest first. The optional &#x60;flowId&#x60; query narrows it to one flow and &#x60;limit&#x60; bounds the page.
+     * Returns the caller org&#39;s run history, newest first.
+     * Returns the caller org&#39;s run history, newest first. The optional &#x60;flowId&#x60; query narrows it to one flow and &#x60;limit&#x60; bounds the page.
      * @param flowId FlowID narrows the history to one flow. Omit it for the whole org&#39;s runs. (optional)
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
-     * @return ApiResponse<CloudRunPage?>
+     * @return ApiResponse<RunPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutomationsRunsWithHttpInfo(flowId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudRunPage?> {
-        val localVariableConfig = cloudGetV1AutomationsRunsRequestConfig(flowId = flowId, limit = limit)
+    fun getV1AutomationsRunsWithHttpInfo(flowId: kotlin.String?, limit: kotlin.Int?) : ApiResponse<RunPage?> {
+        val localVariableConfig = getV1AutomationsRunsRequestConfig(flowId = flowId, limit = limit)
 
-        return request<Unit, CloudRunPage>(
+        return request<Unit, RunPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutomationsRuns
+     * To obtain the request config of the operation getV1AutomationsRuns
      *
      * @param flowId FlowID narrows the history to one flow. Omit it for the whole org&#39;s runs. (optional)
      * @param limit Limit bounds the page (default 200, maximum 1000). (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AutomationsRunsRequestConfig(flowId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1AutomationsRunsRequestConfig(flowId: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -578,17 +578,17 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/automations/runs/{id}
-     * GetRun returns one run.
-     * GetRun returns one run. A run that has not reached a terminal status is refreshed from the durable engine first — scoped to the org&#39;s own namespace — so the caller sees live progress rather than the last status that happened to be persisted.
+     * Returns one run.
+     * Returns one run. A run that has not reached a terminal status is refreshed from the durable engine first — scoped to the org&#39;s own namespace — so the caller sees live progress rather than the last status that happened to be persisted.
      * @param id ID is the run to read, from the path.
-     * @return CloudFlowRun
+     * @return FlowRun
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -597,11 +597,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutomationsRunsId(id: kotlin.String) : CloudFlowRun {
-        val localVarResponse = cloudGetV1AutomationsRunsIdWithHttpInfo(id = id)
+    fun getV1AutomationsRunsById(id: kotlin.String) : FlowRun {
+        val localVarResponse = getV1AutomationsRunsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlowRun
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowRun
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -617,30 +617,30 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/automations/runs/{id}
-     * GetRun returns one run.
-     * GetRun returns one run. A run that has not reached a terminal status is refreshed from the durable engine first — scoped to the org&#39;s own namespace — so the caller sees live progress rather than the last status that happened to be persisted.
+     * Returns one run.
+     * Returns one run. A run that has not reached a terminal status is refreshed from the durable engine first — scoped to the org&#39;s own namespace — so the caller sees live progress rather than the last status that happened to be persisted.
      * @param id ID is the run to read, from the path.
-     * @return ApiResponse<CloudFlowRun?>
+     * @return ApiResponse<FlowRun?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutomationsRunsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudFlowRun?> {
-        val localVariableConfig = cloudGetV1AutomationsRunsIdRequestConfig(id = id)
+    fun getV1AutomationsRunsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
+        val localVariableConfig = getV1AutomationsRunsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudFlowRun>(
+        return request<Unit, FlowRun>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutomationsRunsId
+     * To obtain the request config of the operation getV1AutomationsRunsById
      *
      * @param id ID is the run to read, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AutomationsRunsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AutomationsRunsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -651,18 +651,18 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/runs/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/automations/flows/{id}
-     * UpdateFlow updates one automation&#39;s metadata in place.
-     * UpdateFlow updates one automation&#39;s metadata in place. Every field is optional; a field the request omits is left alone. Publishing a version pins which one runs, and is refused unless that version belongs to this flow.
+     * Updates one automation&#39;s metadata in place.
+     * Updates one automation&#39;s metadata in place. Every field is optional; a field the request omits is left alone. Publishing a version pins which one runs, and is refused unless that version belongs to this flow.
      * @param id ID is the flow to update, from the path.
-     * @param cloudPatchFlowIn 
-     * @return CloudFlow
+     * @param patchFlowIn 
+     * @return Flow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -671,11 +671,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1AutomationsFlowsId(id: kotlin.String, cloudPatchFlowIn: CloudPatchFlowIn) : CloudFlow {
-        val localVarResponse = cloudPatchV1AutomationsFlowsIdWithHttpInfo(id = id, cloudPatchFlowIn = cloudPatchFlowIn)
+    fun patchV1AutomationsFlowsById(id: kotlin.String, patchFlowIn: PatchFlowIn) : Flow {
+        val localVarResponse = patchV1AutomationsFlowsByIdWithHttpInfo(id = id, patchFlowIn = patchFlowIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -691,33 +691,33 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * PATCH /v1/automations/flows/{id}
-     * UpdateFlow updates one automation&#39;s metadata in place.
-     * UpdateFlow updates one automation&#39;s metadata in place. Every field is optional; a field the request omits is left alone. Publishing a version pins which one runs, and is refused unless that version belongs to this flow.
+     * Updates one automation&#39;s metadata in place.
+     * Updates one automation&#39;s metadata in place. Every field is optional; a field the request omits is left alone. Publishing a version pins which one runs, and is refused unless that version belongs to this flow.
      * @param id ID is the flow to update, from the path.
-     * @param cloudPatchFlowIn 
-     * @return ApiResponse<CloudFlow?>
+     * @param patchFlowIn 
+     * @return ApiResponse<Flow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1AutomationsFlowsIdWithHttpInfo(id: kotlin.String, cloudPatchFlowIn: CloudPatchFlowIn) : ApiResponse<CloudFlow?> {
-        val localVariableConfig = cloudPatchV1AutomationsFlowsIdRequestConfig(id = id, cloudPatchFlowIn = cloudPatchFlowIn)
+    fun patchV1AutomationsFlowsByIdWithHttpInfo(id: kotlin.String, patchFlowIn: PatchFlowIn) : ApiResponse<Flow?> {
+        val localVariableConfig = patchV1AutomationsFlowsByIdRequestConfig(id = id, patchFlowIn = patchFlowIn)
 
-        return request<CloudPatchFlowIn, CloudFlow>(
+        return request<PatchFlowIn, Flow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1AutomationsFlowsId
+     * To obtain the request config of the operation patchV1AutomationsFlowsById
      *
      * @param id ID is the flow to update, from the path.
-     * @param cloudPatchFlowIn 
+     * @param patchFlowIn 
      * @return RequestConfig
      */
-    fun cloudPatchV1AutomationsFlowsIdRequestConfig(id: kotlin.String, cloudPatchFlowIn: CloudPatchFlowIn) : RequestConfig<CloudPatchFlowIn> {
-        val localVariableBody = cloudPatchFlowIn
+    fun patchV1AutomationsFlowsByIdRequestConfig(id: kotlin.String, patchFlowIn: PatchFlowIn) : RequestConfig<PatchFlowIn> {
+        val localVariableBody = patchFlowIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -728,7 +728,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -738,8 +738,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * Run executes one connector action in-process and answers the outcome.
      * Run executes one connector action in-process and answers the outcome. The caller&#39;s resolved credential travels in &#x60;auth&#x60;, delivered to the action verbatim — the runtime resolves no credential itself. An action that ran and failed (or an action name the connector does not have) answers ok:false with the failure message, not an HTTP error; an unknown connector is 404 and a missing action 422.
      * @param id ID is the connector to run, from the path.
-     * @param cloudRunIn 
-     * @return CloudRunResp
+     * @param runIn 
+     * @return RunResp
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -748,11 +748,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsConnectorsIdRun(id: kotlin.String, cloudRunIn: CloudRunIn) : CloudRunResp {
-        val localVarResponse = cloudPostV1AutomationsConnectorsIdRunWithHttpInfo(id = id, cloudRunIn = cloudRunIn)
+    fun postV1AutomationsConnectorsByIdRun(id: kotlin.String, runIn: RunIn) : RunResp {
+        val localVarResponse = postV1AutomationsConnectorsByIdRunWithHttpInfo(id = id, runIn = runIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudRunResp
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RunResp
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -771,30 +771,30 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * Run executes one connector action in-process and answers the outcome.
      * Run executes one connector action in-process and answers the outcome. The caller&#39;s resolved credential travels in &#x60;auth&#x60;, delivered to the action verbatim — the runtime resolves no credential itself. An action that ran and failed (or an action name the connector does not have) answers ok:false with the failure message, not an HTTP error; an unknown connector is 404 and a missing action 422.
      * @param id ID is the connector to run, from the path.
-     * @param cloudRunIn 
-     * @return ApiResponse<CloudRunResp?>
+     * @param runIn 
+     * @return ApiResponse<RunResp?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsConnectorsIdRunWithHttpInfo(id: kotlin.String, cloudRunIn: CloudRunIn) : ApiResponse<CloudRunResp?> {
-        val localVariableConfig = cloudPostV1AutomationsConnectorsIdRunRequestConfig(id = id, cloudRunIn = cloudRunIn)
+    fun postV1AutomationsConnectorsByIdRunWithHttpInfo(id: kotlin.String, runIn: RunIn) : ApiResponse<RunResp?> {
+        val localVariableConfig = postV1AutomationsConnectorsByIdRunRequestConfig(id = id, runIn = runIn)
 
-        return request<CloudRunIn, CloudRunResp>(
+        return request<RunIn, RunResp>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsConnectorsIdRun
+     * To obtain the request config of the operation postV1AutomationsConnectorsByIdRun
      *
      * @param id ID is the connector to run, from the path.
-     * @param cloudRunIn 
+     * @param runIn 
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsConnectorsIdRunRequestConfig(id: kotlin.String, cloudRunIn: CloudRunIn) : RequestConfig<CloudRunIn> {
-        val localVariableBody = cloudRunIn
+    fun postV1AutomationsConnectorsByIdRunRequestConfig(id: kotlin.String, runIn: RunIn) : RequestConfig<RunIn> {
+        val localVariableBody = runIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -805,17 +805,17 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/connectors/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/automations/flows
-     * CreateFlow creates an automation and its initial DRAFT version in one call.
-     * CreateFlow creates an automation and its initial DRAFT version in one call. The new flow is DISABLED — creating it does not arm its trigger; POST /v1/automations/flows/{id}/enable does that.
-     * @param cloudCreateFlowReq 
-     * @return CloudPopulatedFlow
+     * Creates an automation and its initial DRAFT version in one call.
+     * Creates an automation and its initial DRAFT version in one call. The new flow is DISABLED — creating it does not arm its trigger; POST /v1/automations/flows/{id}/enable does that.
+     * @param createFlowReq 
+     * @return PopulatedFlow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -824,11 +824,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsFlows(cloudCreateFlowReq: CloudCreateFlowReq) : CloudPopulatedFlow {
-        val localVarResponse = cloudPostV1AutomationsFlowsWithHttpInfo(cloudCreateFlowReq = cloudCreateFlowReq)
+    fun postV1AutomationsFlows(createFlowReq: CreateFlowReq) : PopulatedFlow {
+        val localVarResponse = postV1AutomationsFlowsWithHttpInfo(createFlowReq = createFlowReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPopulatedFlow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PopulatedFlow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -844,31 +844,31 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/automations/flows
-     * CreateFlow creates an automation and its initial DRAFT version in one call.
-     * CreateFlow creates an automation and its initial DRAFT version in one call. The new flow is DISABLED — creating it does not arm its trigger; POST /v1/automations/flows/{id}/enable does that.
-     * @param cloudCreateFlowReq 
-     * @return ApiResponse<CloudPopulatedFlow?>
+     * Creates an automation and its initial DRAFT version in one call.
+     * Creates an automation and its initial DRAFT version in one call. The new flow is DISABLED — creating it does not arm its trigger; POST /v1/automations/flows/{id}/enable does that.
+     * @param createFlowReq 
+     * @return ApiResponse<PopulatedFlow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsFlowsWithHttpInfo(cloudCreateFlowReq: CloudCreateFlowReq) : ApiResponse<CloudPopulatedFlow?> {
-        val localVariableConfig = cloudPostV1AutomationsFlowsRequestConfig(cloudCreateFlowReq = cloudCreateFlowReq)
+    fun postV1AutomationsFlowsWithHttpInfo(createFlowReq: CreateFlowReq) : ApiResponse<PopulatedFlow?> {
+        val localVariableConfig = postV1AutomationsFlowsRequestConfig(createFlowReq = createFlowReq)
 
-        return request<CloudCreateFlowReq, CloudPopulatedFlow>(
+        return request<CreateFlowReq, PopulatedFlow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsFlows
+     * To obtain the request config of the operation postV1AutomationsFlows
      *
-     * @param cloudCreateFlowReq 
+     * @param createFlowReq 
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsFlowsRequestConfig(cloudCreateFlowReq: CloudCreateFlowReq) : RequestConfig<CloudCreateFlowReq> {
-        val localVariableBody = cloudCreateFlowReq
+    fun postV1AutomationsFlowsRequestConfig(createFlowReq: CreateFlowReq) : RequestConfig<CreateFlowReq> {
+        val localVariableBody = createFlowReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -879,87 +879,17 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/automations/flows/{id}/operations
-     * 
-     * 
-     * @param id 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsFlowsByIdOperations(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AutomationsFlowsByIdOperationsWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/automations/flows/{id}/operations
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsFlowsByIdOperationsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AutomationsFlowsByIdOperationsRequestConfig(id = id)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1AutomationsFlowsByIdOperations
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun cloudPostV1AutomationsFlowsByIdOperationsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/automations/flows/{id}/operations".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/automations/flows/{id}/disable
-     * DisableFlow disarms a flow&#39;s trigger and marks it DISABLED.
-     * DisableFlow disarms a flow&#39;s trigger and marks it DISABLED. Its schedule and its event subscriptions are dropped, so a disabled flow is never a live target; runs already in flight are unaffected, and it can still be started on demand.
+     * Disarms a flow&#39;s trigger and marks it DISABLED.
+     * Disarms a flow&#39;s trigger and marks it DISABLED. Its schedule and its event subscriptions are dropped, so a disabled flow is never a live target; runs already in flight are unaffected, and it can still be started on demand.
      * @param id ID is the flow to act on, from the path.
-     * @return CloudFlow
+     * @return Flow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -968,11 +898,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsFlowsIdDisable(id: kotlin.String) : CloudFlow {
-        val localVarResponse = cloudPostV1AutomationsFlowsIdDisableWithHttpInfo(id = id)
+    fun postV1AutomationsFlowsByIdDisable(id: kotlin.String) : Flow {
+        val localVarResponse = postV1AutomationsFlowsByIdDisableWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -988,30 +918,30 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/automations/flows/{id}/disable
-     * DisableFlow disarms a flow&#39;s trigger and marks it DISABLED.
-     * DisableFlow disarms a flow&#39;s trigger and marks it DISABLED. Its schedule and its event subscriptions are dropped, so a disabled flow is never a live target; runs already in flight are unaffected, and it can still be started on demand.
+     * Disarms a flow&#39;s trigger and marks it DISABLED.
+     * Disarms a flow&#39;s trigger and marks it DISABLED. Its schedule and its event subscriptions are dropped, so a disabled flow is never a live target; runs already in flight are unaffected, and it can still be started on demand.
      * @param id ID is the flow to act on, from the path.
-     * @return ApiResponse<CloudFlow?>
+     * @return ApiResponse<Flow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsFlowsIdDisableWithHttpInfo(id: kotlin.String) : ApiResponse<CloudFlow?> {
-        val localVariableConfig = cloudPostV1AutomationsFlowsIdDisableRequestConfig(id = id)
+    fun postV1AutomationsFlowsByIdDisableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
+        val localVariableConfig = postV1AutomationsFlowsByIdDisableRequestConfig(id = id)
 
-        return request<Unit, CloudFlow>(
+        return request<Unit, Flow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsFlowsIdDisable
+     * To obtain the request config of the operation postV1AutomationsFlowsByIdDisable
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsFlowsIdDisableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AutomationsFlowsByIdDisableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1022,17 +952,17 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/disable".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/automations/flows/{id}/enable
-     * EnableFlow arms a flow&#39;s trigger and marks it ENABLED.
-     * EnableFlow arms a flow&#39;s trigger and marks it ENABLED. A POLLING trigger gets a cron schedule on the durable engine; a WEBHOOK trigger gets a subscription in the routing index, so an inbound event starts it; a MANUAL trigger arms nothing and still runs on demand.
+     * Arms a flow&#39;s trigger and marks it ENABLED.
+     * Arms a flow&#39;s trigger and marks it ENABLED. A POLLING trigger gets a cron schedule on the durable engine; a WEBHOOK trigger gets a subscription in the routing index, so an inbound event starts it; a MANUAL trigger arms nothing and still runs on demand.
      * @param id ID is the flow to act on, from the path.
-     * @return CloudFlow
+     * @return Flow
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1041,11 +971,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsFlowsIdEnable(id: kotlin.String) : CloudFlow {
-        val localVarResponse = cloudPostV1AutomationsFlowsIdEnableWithHttpInfo(id = id)
+    fun postV1AutomationsFlowsByIdEnable(id: kotlin.String) : Flow {
+        val localVarResponse = postV1AutomationsFlowsByIdEnableWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlow
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Flow
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1061,30 +991,30 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/automations/flows/{id}/enable
-     * EnableFlow arms a flow&#39;s trigger and marks it ENABLED.
-     * EnableFlow arms a flow&#39;s trigger and marks it ENABLED. A POLLING trigger gets a cron schedule on the durable engine; a WEBHOOK trigger gets a subscription in the routing index, so an inbound event starts it; a MANUAL trigger arms nothing and still runs on demand.
+     * Arms a flow&#39;s trigger and marks it ENABLED.
+     * Arms a flow&#39;s trigger and marks it ENABLED. A POLLING trigger gets a cron schedule on the durable engine; a WEBHOOK trigger gets a subscription in the routing index, so an inbound event starts it; a MANUAL trigger arms nothing and still runs on demand.
      * @param id ID is the flow to act on, from the path.
-     * @return ApiResponse<CloudFlow?>
+     * @return ApiResponse<Flow?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsFlowsIdEnableWithHttpInfo(id: kotlin.String) : ApiResponse<CloudFlow?> {
-        val localVariableConfig = cloudPostV1AutomationsFlowsIdEnableRequestConfig(id = id)
+    fun postV1AutomationsFlowsByIdEnableWithHttpInfo(id: kotlin.String) : ApiResponse<Flow?> {
+        val localVariableConfig = postV1AutomationsFlowsByIdEnableRequestConfig(id = id)
 
-        return request<Unit, CloudFlow>(
+        return request<Unit, Flow>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsFlowsIdEnable
+     * To obtain the request config of the operation postV1AutomationsFlowsByIdEnable
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsFlowsIdEnableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AutomationsFlowsByIdEnableRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1095,17 +1025,87 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/enable".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/automations/flows/{id}/operations
+     * Edit a flow — rename it, retarget its trigger, or add, move and delete steps
+     * Applies ONE flow operation and answers the thing it changed. The operation is named by &#x60;type&#x60;, with its arguments under &#x60;request&#x60;: &#x60;CHANGE_NAME&#x60;, &#x60;UPDATE_TRIGGER&#x60;, &#x60;ADD_ACTION&#x60;, &#x60;UPDATE_ACTION&#x60;, &#x60;MOVE_ACTION&#x60;, &#x60;DELETE_ACTION&#x60; edit the flow&#39;s LATEST version and answer with that version, and &#x60;CHANGE_STATUS&#x60; instead enables or disables the flow and answers with the FLOW. Two response shapes on one address is the rule a reader would otherwise get wrong, and it is why this route is not a typed op.  Edits land on the latest version only — the published version a run executes is untouched until it is republished — and the whole resulting step tree is re-validated against the step-count and size caps after every operation, so a long sequence of &#x60;ADD_ACTION&#x60; calls cannot grow a flow past a bound one step at a time (422 when it would). Org-scoped and fails closed: a validated principal is required (403 without one), the flow and its version are read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, and an operation whose &#x60;request&#x60; does not decode is a 400.
+     * @param id 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1AutomationsFlowsByIdOperations(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AutomationsFlowsByIdOperationsWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/automations/flows/{id}/operations
+     * Edit a flow — rename it, retarget its trigger, or add, move and delete steps
+     * Applies ONE flow operation and answers the thing it changed. The operation is named by &#x60;type&#x60;, with its arguments under &#x60;request&#x60;: &#x60;CHANGE_NAME&#x60;, &#x60;UPDATE_TRIGGER&#x60;, &#x60;ADD_ACTION&#x60;, &#x60;UPDATE_ACTION&#x60;, &#x60;MOVE_ACTION&#x60;, &#x60;DELETE_ACTION&#x60; edit the flow&#39;s LATEST version and answer with that version, and &#x60;CHANGE_STATUS&#x60; instead enables or disables the flow and answers with the FLOW. Two response shapes on one address is the rule a reader would otherwise get wrong, and it is why this route is not a typed op.  Edits land on the latest version only — the published version a run executes is untouched until it is republished — and the whole resulting step tree is re-validated against the step-count and size caps after every operation, so a long sequence of &#x60;ADD_ACTION&#x60; calls cannot grow a flow past a bound one step at a time (422 when it would). Org-scoped and fails closed: a validated principal is required (403 without one), the flow and its version are read under the caller&#39;s OWN org so another tenant&#39;s id is a 404, and an operation whose &#x60;request&#x60; does not decode is a 400.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1AutomationsFlowsByIdOperationsWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AutomationsFlowsByIdOperationsRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1AutomationsFlowsByIdOperations
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postV1AutomationsFlowsByIdOperationsRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/automations/flows/{id}/operations".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/automations/flows/{id}/run
-     * RunFlow starts one durable run of a flow now.
-     * RunFlow starts one durable run of a flow now. It runs the flow&#39;s published version if one is pinned, else its latest, and answers the run record it created. The run is bounded by the org&#39;s per-minute run-start budget and its in-flight concurrency ceiling; over either, or with the engine not ready, no run is started and no run id is burned.
+     * Starts one durable run of a flow now.
+     * Starts one durable run of a flow now. It runs the flow&#39;s published version if one is pinned, else its latest, and answers the run record it created. The run is bounded by the org&#39;s per-minute run-start budget and its in-flight concurrency ceiling; over either, or with the engine not ready, no run is started and no run id is burned.
      * @param id ID is the flow to act on, from the path.
-     * @return CloudFlowRun
+     * @return FlowRun
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1114,11 +1114,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsFlowsIdRun(id: kotlin.String) : CloudFlowRun {
-        val localVarResponse = cloudPostV1AutomationsFlowsIdRunWithHttpInfo(id = id)
+    fun postV1AutomationsFlowsByIdRun(id: kotlin.String) : FlowRun {
+        val localVarResponse = postV1AutomationsFlowsByIdRunWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlowRun
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowRun
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1134,30 +1134,30 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/automations/flows/{id}/run
-     * RunFlow starts one durable run of a flow now.
-     * RunFlow starts one durable run of a flow now. It runs the flow&#39;s published version if one is pinned, else its latest, and answers the run record it created. The run is bounded by the org&#39;s per-minute run-start budget and its in-flight concurrency ceiling; over either, or with the engine not ready, no run is started and no run id is burned.
+     * Starts one durable run of a flow now.
+     * Starts one durable run of a flow now. It runs the flow&#39;s published version if one is pinned, else its latest, and answers the run record it created. The run is bounded by the org&#39;s per-minute run-start budget and its in-flight concurrency ceiling; over either, or with the engine not ready, no run is started and no run id is burned.
      * @param id ID is the flow to act on, from the path.
-     * @return ApiResponse<CloudFlowRun?>
+     * @return ApiResponse<FlowRun?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsFlowsIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<CloudFlowRun?> {
-        val localVariableConfig = cloudPostV1AutomationsFlowsIdRunRequestConfig(id = id)
+    fun postV1AutomationsFlowsByIdRunWithHttpInfo(id: kotlin.String) : ApiResponse<FlowRun?> {
+        val localVariableConfig = postV1AutomationsFlowsByIdRunRequestConfig(id = id)
 
-        return request<Unit, CloudFlowRun>(
+        return request<Unit, FlowRun>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsFlowsIdRun
+     * To obtain the request config of the operation postV1AutomationsFlowsByIdRun
      *
      * @param id ID is the flow to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsFlowsIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AutomationsFlowsByIdRunRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1168,18 +1168,18 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/run".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/automations/flows/{id}/versions
-     * CreateVersion adds a new DRAFT version to a flow.
-     * CreateVersion adds a new DRAFT version to a flow. The version is created invalid unless it carries a trigger, and it does not become the running version until it is published (PATCH the flow&#39;s publishedVersionId) or becomes the latest.
+     * Adds a new DRAFT version to a flow.
+     * Adds a new DRAFT version to a flow. The version is created invalid unless it carries a trigger, and it does not become the running version until it is published (PATCH the flow&#39;s publishedVersionId) or becomes the latest.
      * @param id ID is the flow to add a version to, from the path.
-     * @param cloudCreateVersionIn 
-     * @return CloudFlowVersion
+     * @param createVersionIn 
+     * @return FlowVersion
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1188,11 +1188,11 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsFlowsIdVersions(id: kotlin.String, cloudCreateVersionIn: CloudCreateVersionIn) : CloudFlowVersion {
-        val localVarResponse = cloudPostV1AutomationsFlowsIdVersionsWithHttpInfo(id = id, cloudCreateVersionIn = cloudCreateVersionIn)
+    fun postV1AutomationsFlowsByIdVersions(id: kotlin.String, createVersionIn: CreateVersionIn) : FlowVersion {
+        val localVarResponse = postV1AutomationsFlowsByIdVersionsWithHttpInfo(id = id, createVersionIn = createVersionIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlowVersion
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowVersion
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1208,33 +1208,33 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/automations/flows/{id}/versions
-     * CreateVersion adds a new DRAFT version to a flow.
-     * CreateVersion adds a new DRAFT version to a flow. The version is created invalid unless it carries a trigger, and it does not become the running version until it is published (PATCH the flow&#39;s publishedVersionId) or becomes the latest.
+     * Adds a new DRAFT version to a flow.
+     * Adds a new DRAFT version to a flow. The version is created invalid unless it carries a trigger, and it does not become the running version until it is published (PATCH the flow&#39;s publishedVersionId) or becomes the latest.
      * @param id ID is the flow to add a version to, from the path.
-     * @param cloudCreateVersionIn 
-     * @return ApiResponse<CloudFlowVersion?>
+     * @param createVersionIn 
+     * @return ApiResponse<FlowVersion?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsFlowsIdVersionsWithHttpInfo(id: kotlin.String, cloudCreateVersionIn: CloudCreateVersionIn) : ApiResponse<CloudFlowVersion?> {
-        val localVariableConfig = cloudPostV1AutomationsFlowsIdVersionsRequestConfig(id = id, cloudCreateVersionIn = cloudCreateVersionIn)
+    fun postV1AutomationsFlowsByIdVersionsWithHttpInfo(id: kotlin.String, createVersionIn: CreateVersionIn) : ApiResponse<FlowVersion?> {
+        val localVariableConfig = postV1AutomationsFlowsByIdVersionsRequestConfig(id = id, createVersionIn = createVersionIn)
 
-        return request<CloudCreateVersionIn, CloudFlowVersion>(
+        return request<CreateVersionIn, FlowVersion>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsFlowsIdVersions
+     * To obtain the request config of the operation postV1AutomationsFlowsByIdVersions
      *
      * @param id ID is the flow to add a version to, from the path.
-     * @param cloudCreateVersionIn 
+     * @param createVersionIn 
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsFlowsIdVersionsRequestConfig(id: kotlin.String, cloudCreateVersionIn: CloudCreateVersionIn) : RequestConfig<CloudCreateVersionIn> {
-        val localVariableBody = cloudCreateVersionIn
+    fun postV1AutomationsFlowsByIdVersionsRequestConfig(id: kotlin.String, createVersionIn: CreateVersionIn) : RequestConfig<CreateVersionIn> {
+        val localVariableBody = createVersionIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1245,15 +1245,15 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/flows/{id}/versions".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/automations/hooks/{source}/{event}
-     * 
-     * 
+     * Fire an event that starts every enabled flow subscribed to it
+     * Delivers one event to the org&#39;s automation triggers and answers &#x60;{matched:n}&#x60; — how many enabled flows had a webhook trigger on this &#x60;(source, event)&#x60; key and were started by it. A zero match is a success, not an error: nothing was subscribed.  The path is the trigger key and the JSON object body is the event payload, threaded into each started run as &#x60;{{trigger.*}}&#x60; with all of its keys intact — which is why this is not a typed op, since a declared input struct would silently DISCARD every payload key it had no field for. Re-delivery is a no-op: an &#x60;X-Idempotency-Key&#x60; header dedupes, and with none the body is content-hashed instead, so a hammer of identical posts collapses to ONE run rather than minting a fresh one per post. An in-platform producer may propagate &#x60;X-Causation-Depth&#x60; so a firing that a flow caused is bounded against a loop; an absent or invalid header reads as depth 0, an external origin.  Authenticated and org-scoped, unlike a provider&#39;s public webhook URL: a validated principal is required (403 without one) and the org is that principal&#39;s, never the body&#39;s, so a producer can only fire into its own tenant&#39;s flows. Both path segments are required (400) and a payload over the size limit is a 413.
      * @param source 
      * @param event 
      * @return void
@@ -1264,8 +1264,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsHooksBySourceByEvent(source: kotlin.String, event: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AutomationsHooksBySourceByEventWithHttpInfo(source = source, event = event)
+    fun postV1AutomationsHooksBySourceByEvent(source: kotlin.String, event: kotlin.String) : Unit {
+        val localVarResponse = postV1AutomationsHooksBySourceByEventWithHttpInfo(source = source, event = event)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1284,8 +1284,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/automations/hooks/{source}/{event}
-     * 
-     * 
+     * Fire an event that starts every enabled flow subscribed to it
+     * Delivers one event to the org&#39;s automation triggers and answers &#x60;{matched:n}&#x60; — how many enabled flows had a webhook trigger on this &#x60;(source, event)&#x60; key and were started by it. A zero match is a success, not an error: nothing was subscribed.  The path is the trigger key and the JSON object body is the event payload, threaded into each started run as &#x60;{{trigger.*}}&#x60; with all of its keys intact — which is why this is not a typed op, since a declared input struct would silently DISCARD every payload key it had no field for. Re-delivery is a no-op: an &#x60;X-Idempotency-Key&#x60; header dedupes, and with none the body is content-hashed instead, so a hammer of identical posts collapses to ONE run rather than minting a fresh one per post. An in-platform producer may propagate &#x60;X-Causation-Depth&#x60; so a firing that a flow caused is bounded against a loop; an absent or invalid header reads as depth 0, an external origin.  Authenticated and org-scoped, unlike a provider&#39;s public webhook URL: a validated principal is required (403 without one) and the org is that principal&#39;s, never the body&#39;s, so a producer can only fire into its own tenant&#39;s flows. Both path segments are required (400) and a payload over the size limit is a 413.
      * @param source 
      * @param event 
      * @return ApiResponse<Unit?>
@@ -1293,8 +1293,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsHooksBySourceByEventWithHttpInfo(source: kotlin.String, event: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AutomationsHooksBySourceByEventRequestConfig(source = source, event = event)
+    fun postV1AutomationsHooksBySourceByEventWithHttpInfo(source: kotlin.String, event: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AutomationsHooksBySourceByEventRequestConfig(source = source, event = event)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1302,13 +1302,13 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsHooksBySourceByEvent
+     * To obtain the request config of the operation postV1AutomationsHooksBySourceByEvent
      *
      * @param source 
      * @param event 
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsHooksBySourceByEventRequestConfig(source: kotlin.String, event: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AutomationsHooksBySourceByEventRequestConfig(source: kotlin.String, event: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1318,15 +1318,15 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/hooks/{source}/{event}".replace("{"+"source"+"}", encodeURIComponent(source.toString())).replace("{"+"event"+"}", encodeURIComponent(event.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/automations/runs/{id}/resume
-     * 
-     * 
+     * Release a run waiting at an approval step, with the approval payload
+     * Delivers the durable &#x60;resume&#x60; signal to a run parked on a &#x60;wait_for_approval&#x60; waitpoint and answers &#x60;{resumed:true}&#x60; once the engine has taken it.  The body is an ARBITRARY JSON value — object, array, string, number — delivered VERBATIM into the workflow as that waitpoint&#39;s output, so it is what the steps after the approval read as their input. An empty body resumes with no payload. That open shape is why this route is not a typed op: an operation&#39;s input can carry the payload or the run address, never both.  Org-scoped and fails closed: a validated principal is required (403 without one), the run is read under the caller&#39;s OWN org so another tenant&#39;s run id is a 404, a body that is not JSON is a 400, and a payload over the size limit is a 413 — it becomes durable engine state, so it is bounded here rather than after it lands. The resume is audited as &#x60;automations.run.resume&#x60;.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1336,8 +1336,8 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutomationsRunsByIdResume(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1AutomationsRunsByIdResumeWithHttpInfo(id = id)
+    fun postV1AutomationsRunsByIdResume(id: kotlin.String) : Unit {
+        val localVarResponse = postV1AutomationsRunsByIdResumeWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1356,16 +1356,16 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * POST /v1/automations/runs/{id}/resume
-     * 
-     * 
+     * Release a run waiting at an approval step, with the approval payload
+     * Delivers the durable &#x60;resume&#x60; signal to a run parked on a &#x60;wait_for_approval&#x60; waitpoint and answers &#x60;{resumed:true}&#x60; once the engine has taken it.  The body is an ARBITRARY JSON value — object, array, string, number — delivered VERBATIM into the workflow as that waitpoint&#39;s output, so it is what the steps after the approval read as their input. An empty body resumes with no payload. That open shape is why this route is not a typed op: an operation&#39;s input can carry the payload or the run address, never both.  Org-scoped and fails closed: a validated principal is required (403 without one), the run is read under the caller&#39;s OWN org so another tenant&#39;s run id is a 404, a body that is not JSON is a 400, and a payload over the size limit is a 413 — it becomes durable engine state, so it is bounded here rather than after it lands. The resume is audited as &#x60;automations.run.resume&#x60;.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutomationsRunsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1AutomationsRunsByIdResumeRequestConfig(id = id)
+    fun postV1AutomationsRunsByIdResumeWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1AutomationsRunsByIdResumeRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1373,12 +1373,12 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutomationsRunsByIdResume
+     * To obtain the request config of the operation postV1AutomationsRunsByIdResume
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1AutomationsRunsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AutomationsRunsByIdResumeRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1388,7 +1388,7 @@ class AutomationsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/automations/runs/{id}/resume".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

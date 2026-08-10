@@ -15,7 +15,7 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.O11yUsagePoint
+import ai.hanzo.cloud.model.O11yusageBucket
 
 import com.google.gson.annotations.SerializedName
 
@@ -23,25 +23,25 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param calls 
- * @param tokens 
  * @param costCents 
  * @param series 
+ * @param tokens 
  */
 
 
 data class O11yMetricsResponseUsage (
 
     @SerializedName("calls")
-    val calls: kotlin.Long? = null,
-
-    @SerializedName("tokens")
-    val tokens: kotlin.Long? = null,
+    val calls: kotlin.Int? = null,
 
     @SerializedName("costCents")
-    val costCents: kotlin.Long? = null,
+    val costCents: kotlin.Int? = null,
 
     @SerializedName("series")
-    val series: kotlin.collections.List<O11yUsagePoint>? = null
+    val series: kotlin.collections.List<O11yusageBucket>? = null,
+
+    @SerializedName("tokens")
+    val tokens: kotlin.Int? = null
 
 ) {
 

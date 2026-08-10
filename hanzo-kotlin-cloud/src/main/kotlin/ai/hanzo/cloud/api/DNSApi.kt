@@ -36,7 +36,7 @@ import ai.hanzo.cloud.infrastructure.ResponseType
 import ai.hanzo.cloud.infrastructure.Success
 import ai.hanzo.cloud.infrastructure.toMultiValue
 
-class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+class DnsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
@@ -46,8 +46,8 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/dns/{wildcard1}
-     * 
-     * 
+     * Delete a DNS zone or record
+     * Removes a DNS zone or record from the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -57,8 +57,8 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun deleteV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = deleteV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -77,16 +77,16 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/dns/{wildcard1}
-     * 
-     * 
+     * Delete a DNS zone or record
+     * Removes a DNS zone or record from the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun deleteV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1DnsByWildcard1
+     * To obtain the request config of the operation deleteV1DnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudDeleteV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -109,15 +109,15 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/dns/{wildcard1}
-     * 
-     * 
+     * Read your org&#39;s DNS zones and records
+     * Reads DNS state — a zone, a record, a listing — from the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -127,8 +127,8 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -147,16 +147,16 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/dns/{wildcard1}
-     * 
-     * 
+     * Read your org&#39;s DNS zones and records
+     * Reads DNS state — a zone, a record, a listing — from the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +164,12 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1DnsByWildcard1
+     * To obtain the request config of the operation getV1DnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -179,85 +179,15 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * OPTIONS /v1/dns/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudOptionsV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * OPTIONS /v1/dns/{wildcard1}
-     * 
-     * 
-     * @param wildcard1 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudOptionsV1DnsByWildcard1
-     *
-     * @param wildcard1 
-     * @return RequestConfig
-     */
-    fun cloudOptionsV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/dns/{wildcard1}
-     * 
-     * 
+     * Amend a DNS zone or record
+     * Amends a DNS zone or record on the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -267,8 +197,8 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun patchV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = patchV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -287,16 +217,16 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PATCH /v1/dns/{wildcard1}
-     * 
-     * 
+     * Amend a DNS zone or record
+     * Amends a DNS zone or record on the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun patchV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -304,12 +234,12 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1DnsByWildcard1
+     * To obtain the request config of the operation patchV1DnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPatchV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -319,15 +249,15 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/dns/{wildcard1}
-     * 
-     * 
+     * Create a DNS zone or record
+     * Creates DNS state — a zone, a record — on the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -337,8 +267,8 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun postV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = postV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -357,16 +287,16 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/dns/{wildcard1}
-     * 
-     * 
+     * Create a DNS zone or record
+     * Creates DNS state — a zone, a record — on the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun postV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -374,12 +304,12 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1DnsByWildcard1
+     * To obtain the request config of the operation postV1DnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPostV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun postV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -389,15 +319,15 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/dns/{wildcard1}
-     * 
-     * 
+     * Replace a DNS zone or record
+     * Replaces a DNS zone or record on the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -407,8 +337,8 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun putV1DnsByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = putV1DnsByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -427,16 +357,16 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * PUT /v1/dns/{wildcard1}
-     * 
-     * 
+     * Replace a DNS zone or record
+     * Replaces a DNS zone or record on the Hanzo DNS control plane. The plane owns the authoritative zone and record store behind every name pointed at Hanzo; this head keeps none of it. The sub-path after /v1/dns and the query string ARE the plane&#39;s own API address, relayed verbatim, and the plane&#39;s answer comes back unchanged — its status code, its Content-Type, and its Location on a redirect this head never follows.  It travels under the CALLER&#39;S OWN identity and substitutes no service credential, which would collapse tenants: the caller&#39;s validated session bearer goes upstream as Authorization and the server-validated org as X-Org-Id, so a caller in one org reaches only that org&#39;s zones, exactly as if it had called the plane directly. The upstream host comes only from deployment config, never from the request, so no path can re-target another host.  Fails closed before a byte leaves cloud: no validated principal is 403; an API key is 401, because a pk-/sk- key is not a JWT the OIDC-gated plane can validate and there is no substitute credential to send in its place; a path that normalizes outside /v1/dns, or still carries a percent-escape or a &#x60;..&#x60; after one decode, is 400; an unconfigured plane is 503 and an unreachable one 502.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun putV1DnsByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1DnsByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -444,12 +374,12 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1DnsByWildcard1
+     * To obtain the request config of the operation putV1DnsByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudPutV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun putV1DnsByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -459,150 +389,7 @@ class DNSApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/dns/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/gateway/dns/zones/{zone}/records
-     * List DNS records (proxy to dns.hanzo.ai)
-     * 
-     * @param zone 
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayListDNSRecordsProxy(zone: kotlin.String) : kotlin.Any {
-        val localVarResponse = gatewayListDNSRecordsProxyWithHttpInfo(zone = zone)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/gateway/dns/zones/{zone}/records
-     * List DNS records (proxy to dns.hanzo.ai)
-     * 
-     * @param zone 
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayListDNSRecordsProxyWithHttpInfo(zone: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = gatewayListDNSRecordsProxyRequestConfig(zone = zone)
-
-        return request<Unit, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation gatewayListDNSRecordsProxy
-     *
-     * @param zone 
-     * @return RequestConfig
-     */
-    fun gatewayListDNSRecordsProxyRequestConfig(zone: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/gateway/dns/zones/{zone}/records".replace("{"+"zone"+"}", encodeURIComponent(zone.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/gateway/dns/zones
-     * List DNS zones (proxy to dns.hanzo.ai)
-     * 
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayListDNSZonesProxy() : kotlin.Any {
-        val localVarResponse = gatewayListDNSZonesProxyWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/gateway/dns/zones
-     * List DNS zones (proxy to dns.hanzo.ai)
-     * 
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayListDNSZonesProxyWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = gatewayListDNSZonesProxyRequestConfig()
-
-        return request<Unit, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation gatewayListDNSZonesProxy
-     *
-     * @return RequestConfig
-     */
-    fun gatewayListDNSZonesProxyRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/gateway/dns/zones",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

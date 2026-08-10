@@ -15,25 +15,30 @@ records the Stainless spec it was cut from. Do not hand-edit; it is regenerated
 upstream.
 
 **`hanzo-kotlin-cloud`** — the **full** cloud client, published as
-`ai.hanzo:hanzo-kotlin-cloud`. Every `/v1` route of the Hanzo API: 2478
-operations over 263 API classes and 2031 models, generated from
-[hanzoai/openapi](https://github.com/hanzoai/openapi) `hanzo.yaml`. `sdks.yaml`
-there is the registry that names this repo (`kotlin-sdk`) and every generator
-knob; this repo carries only a call site.
+`ai.hanzo:hanzo-kotlin-cloud`. Every `/v1` route of the Hanzo API: 2468
+operations over 190 API classes and 2439 models, generated from the
+`openapi.yaml` hanzoai/cloud emits from its own routers. `.spec-lock` names the
+release this tree is a projection of, and its digest. `sdks.yaml` in
+[hanzoai/openapi](https://github.com/hanzoai/openapi) is the registry that names
+this repo (`kotlin-sdk`) and every generator knob; this repo carries only a call
+site.
 
 The two are independent artifact lines and do not share code.
 
 ## Regenerating the cloud client
 
 ```sh
-./scripts/generate.sh          # rewrite it from hanzoai/openapi@main
-./scripts/generate.sh --check  # non-zero if the committed client drifted
+SPEC=…/openapi.yaml OPENAPI=…/hanzoai/openapi ./scripts/generate.sh
+SPEC=…/openapi.yaml OPENAPI=…/hanzoai/openapi ./scripts/generate.sh --check
 ```
 
 The invocation lives once, in `generate.py` in hanzoai/openapi; the per-language
 knobs are data in `sdks.yaml` beside it. Nothing here repeats them, so nothing
-here can drift on its own — `spec-drift-check` in `hanzo.yml` runs `--check` in
-CI to keep that true.
+here can drift on its own. Both inputs arrive as VALUES — the document and the
+checkout holding the driver — because hanzoai/ci's client lane holds the one
+credential that reads the forge they live on, and it regenerates this tree on
+every build before `test:` compiles it. A document change that produces a client
+which does not build therefore goes red here, which is the gate.
 
 `sdks.yaml` gives the generator `hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/cloud`
 outright: `generate.sh` replaces that directory wholesale. **Never hand-edit
@@ -60,9 +65,9 @@ HANZO_API_KEY=hk-… ./gradlew :examples:hello:run
 
 ## Gates
 
-`hanzo.yml` is read by hanzoai/ci: drift check, build, lint, flow tests, and the
-jar. `.github/workflows/cicd.yml` is the seven-line call into
-`hanzoai/ci/.github/workflows/build.yml@v1`.
+`hanzo.yml` is read by hanzoai/ci: regenerate, then build the client and the six
+examples, lint, run the flow tests, and produce the jar. `.hanzo/workflows` is
+the call into `hanzoai/ci`.
 
 ## Sibling repos
 

@@ -19,9 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudSbomHealth
-import ai.hanzo.cloud.model.CloudSbomIngest
-import ai.hanzo.cloud.model.CloudSbomIngested
+import ai.hanzo.cloud.model.SbomHealth
+import ai.hanzo.cloud.model.SbomIngest
+import ai.hanzo.cloud.model.SbomIngested
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,8 +49,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/sbom/{wildcard1}
-     * 
-     * 
+     * Resolve everything inside a container image
+     * Answers with the component set of one container image — each component&#39;s name, version, type, package URL and license — addressed by either the image digest or the image ref. The captured segment is greedy and percent-decoded, so a ref carrying slashes and a tag is passed whole.  This read is GLOBAL, not tenant-scoped, and deliberately so: a bill of materials belongs to a content-addressed digest rather than to an org, so every caller deploying the same image resolves the same components, and nothing tenant-owned is exposed by it. Ingest is the gated half of the pair.  A miss is not the end of the lookup. The registry is the source of truth, so an unmaterialized ref is pulled from the SBOM attached to that image, persisted, and answered from the store — the first read of a freshly built image pays for the pull, later ones do not. A bare digest with no repository is not pullable and answers an honest 404, as does a ref with no attached document. Repeated ingests collapse to the latest, components come back ordered by type then name, and a result over 5000 components is capped with &#x60;truncated&#x60; set. When the datastore is not connected the answer is 503 rather than a fabricated empty image.
      * @param wildcard1 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -60,8 +60,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SbomByWildcard1(wildcard1: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1SbomByWildcard1WithHttpInfo(wildcard1 = wildcard1)
+    fun getV1SbomByWildcard1(wildcard1: kotlin.String) : Unit {
+        val localVarResponse = getV1SbomByWildcard1WithHttpInfo(wildcard1 = wildcard1)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -80,16 +80,16 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/sbom/{wildcard1}
-     * 
-     * 
+     * Resolve everything inside a container image
+     * Answers with the component set of one container image — each component&#39;s name, version, type, package URL and license — addressed by either the image digest or the image ref. The captured segment is greedy and percent-decoded, so a ref carrying slashes and a tag is passed whole.  This read is GLOBAL, not tenant-scoped, and deliberately so: a bill of materials belongs to a content-addressed digest rather than to an org, so every caller deploying the same image resolves the same components, and nothing tenant-owned is exposed by it. Ingest is the gated half of the pair.  A miss is not the end of the lookup. The registry is the source of truth, so an unmaterialized ref is pulled from the SBOM attached to that image, persisted, and answered from the store — the first read of a freshly built image pays for the pull, later ones do not. A bare digest with no repository is not pullable and answers an honest 404, as does a ref with no attached document. Repeated ingests collapse to the latest, components come back ordered by type then name, and a result over 5000 components is capped with &#x60;truncated&#x60; set. When the datastore is not connected the answer is 503 rather than a fabricated empty image.
      * @param wildcard1 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SbomByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SbomByWildcard1RequestConfig(wildcard1 = wildcard1)
+    fun getV1SbomByWildcard1WithHttpInfo(wildcard1: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SbomByWildcard1RequestConfig(wildcard1 = wildcard1)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -97,12 +97,12 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SbomByWildcard1
+     * To obtain the request config of the operation getV1SbomByWildcard1
      *
      * @param wildcard1 
      * @return RequestConfig
      */
-    fun cloudGetV1SbomByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SbomByWildcard1RequestConfig(wildcard1: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -112,7 +112,7 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sbom/{wildcard1}".replace("{"+"wildcard1"+"}", encodeURIComponent(wildcard1.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -121,7 +121,7 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/sbom/health
      * Health is a pure liveness probe: the service is up; datastore reflects whether the datastore store is connected.
      * Health is a pure liveness probe: the service is up; datastore reflects whether the datastore store is connected. Not JWT-gated, always 200 (a disconnected datastore is degraded-but-alive; the data endpoints report that as 503).
-     * @return CloudSbomHealth
+     * @return SbomHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -130,11 +130,11 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SbomHealth() : CloudSbomHealth {
-        val localVarResponse = cloudGetV1SbomHealthWithHttpInfo()
+    fun getV1SbomHealth() : SbomHealth {
+        val localVarResponse = getV1SbomHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSbomHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SbomHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -152,26 +152,26 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/sbom/health
      * Health is a pure liveness probe: the service is up; datastore reflects whether the datastore store is connected.
      * Health is a pure liveness probe: the service is up; datastore reflects whether the datastore store is connected. Not JWT-gated, always 200 (a disconnected datastore is degraded-but-alive; the data endpoints report that as 503).
-     * @return ApiResponse<CloudSbomHealth?>
+     * @return ApiResponse<SbomHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SbomHealthWithHttpInfo() : ApiResponse<CloudSbomHealth?> {
-        val localVariableConfig = cloudGetV1SbomHealthRequestConfig()
+    fun getV1SbomHealthWithHttpInfo() : ApiResponse<SbomHealth?> {
+        val localVariableConfig = getV1SbomHealthRequestConfig()
 
-        return request<Unit, CloudSbomHealth>(
+        return request<Unit, SbomHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SbomHealth
+     * To obtain the request config of the operation getV1SbomHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SbomHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1SbomHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -182,7 +182,7 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sbom/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -191,8 +191,8 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/sbom
      * Ingest persists a CycloneDX SBOM&#39;s components keyed by image digest.
      * Ingest persists a CycloneDX SBOM&#39;s components keyed by image digest. Gated to a validated SuperAdmin (owner &#x3D;&#x3D; AdminOrg) — the canonical cloud super-admin check, which the build fleet / CI carries. Re-ingest is idempotent: rows share the (digest, name, version, purl) ORDER BY, so ReplacingMergeTree keeps the latest by ingested_at (and resolve reads FINAL).
-     * @param cloudSbomIngest 
-     * @return CloudSbomIngested
+     * @param sbomIngest 
+     * @return SbomIngested
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -201,11 +201,11 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Sbom(cloudSbomIngest: CloudSbomIngest) : CloudSbomIngested {
-        val localVarResponse = cloudPostV1SbomWithHttpInfo(cloudSbomIngest = cloudSbomIngest)
+    fun postV1Sbom(sbomIngest: SbomIngest) : SbomIngested {
+        val localVarResponse = postV1SbomWithHttpInfo(sbomIngest = sbomIngest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSbomIngested
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SbomIngested
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -223,29 +223,29 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/sbom
      * Ingest persists a CycloneDX SBOM&#39;s components keyed by image digest.
      * Ingest persists a CycloneDX SBOM&#39;s components keyed by image digest. Gated to a validated SuperAdmin (owner &#x3D;&#x3D; AdminOrg) — the canonical cloud super-admin check, which the build fleet / CI carries. Re-ingest is idempotent: rows share the (digest, name, version, purl) ORDER BY, so ReplacingMergeTree keeps the latest by ingested_at (and resolve reads FINAL).
-     * @param cloudSbomIngest 
-     * @return ApiResponse<CloudSbomIngested?>
+     * @param sbomIngest 
+     * @return ApiResponse<SbomIngested?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SbomWithHttpInfo(cloudSbomIngest: CloudSbomIngest) : ApiResponse<CloudSbomIngested?> {
-        val localVariableConfig = cloudPostV1SbomRequestConfig(cloudSbomIngest = cloudSbomIngest)
+    fun postV1SbomWithHttpInfo(sbomIngest: SbomIngest) : ApiResponse<SbomIngested?> {
+        val localVariableConfig = postV1SbomRequestConfig(sbomIngest = sbomIngest)
 
-        return request<CloudSbomIngest, CloudSbomIngested>(
+        return request<SbomIngest, SbomIngested>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Sbom
+     * To obtain the request config of the operation postV1Sbom
      *
-     * @param cloudSbomIngest 
+     * @param sbomIngest 
      * @return RequestConfig
      */
-    fun cloudPostV1SbomRequestConfig(cloudSbomIngest: CloudSbomIngest) : RequestConfig<CloudSbomIngest> {
-        val localVariableBody = cloudSbomIngest
+    fun postV1SbomRequestConfig(sbomIngest: SbomIngest) : RequestConfig<SbomIngest> {
+        val localVariableBody = sbomIngest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -256,7 +256,7 @@ class SbomApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/sbom",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

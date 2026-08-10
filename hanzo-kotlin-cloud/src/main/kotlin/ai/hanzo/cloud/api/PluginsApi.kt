@@ -19,11 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAuthoredPluginList
-import ai.hanzo.cloud.model.CloudBuildOut
-import ai.hanzo.cloud.model.CloudBuildRequest
-import ai.hanzo.cloud.model.CloudPluginDeleted
-import ai.hanzo.cloud.model.CloudPluginMountList
+import ai.hanzo.cloud.model.AuthoredPluginList
+import ai.hanzo.cloud.model.BuildOut
+import ai.hanzo.cloud.model.BuildRequest
+import ai.hanzo.cloud.model.PluginDeleted
+import ai.hanzo.cloud.model.PluginMountList
 
 import com.google.gson.annotations.SerializedName
 
@@ -51,10 +51,10 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/plugins/authored/{id}
-     * DeleteAuthoredPlugin removes one of the caller org&#39;s built plugins, so the runtime can no longer load it.
-     * DeleteAuthoredPlugin removes one of the caller org&#39;s built plugins, so the runtime can no longer load it. Scoped to the caller&#39;s org, so an id belonging to another tenant answers 404 and is not deleted.
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it.
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it. Scoped to the caller&#39;s org, so an id belonging to another tenant answers 404 and is not deleted.
      * @param id ID is the plugin to remove, from the path.
-     * @return CloudPluginDeleted
+     * @return PluginDeleted
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -63,11 +63,11 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1PluginsAuthoredId(id: kotlin.String) : CloudPluginDeleted {
-        val localVarResponse = cloudDeleteV1PluginsAuthoredIdWithHttpInfo(id = id)
+    fun deleteV1PluginsAuthoredById(id: kotlin.String) : PluginDeleted {
+        val localVarResponse = deleteV1PluginsAuthoredByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPluginDeleted
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PluginDeleted
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -83,30 +83,30 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * DELETE /v1/plugins/authored/{id}
-     * DeleteAuthoredPlugin removes one of the caller org&#39;s built plugins, so the runtime can no longer load it.
-     * DeleteAuthoredPlugin removes one of the caller org&#39;s built plugins, so the runtime can no longer load it. Scoped to the caller&#39;s org, so an id belonging to another tenant answers 404 and is not deleted.
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it.
+     * Removes one of the caller org&#39;s built plugins, so the runtime can no longer load it. Scoped to the caller&#39;s org, so an id belonging to another tenant answers 404 and is not deleted.
      * @param id ID is the plugin to remove, from the path.
-     * @return ApiResponse<CloudPluginDeleted?>
+     * @return ApiResponse<PluginDeleted?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1PluginsAuthoredIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudPluginDeleted?> {
-        val localVariableConfig = cloudDeleteV1PluginsAuthoredIdRequestConfig(id = id)
+    fun deleteV1PluginsAuthoredByIdWithHttpInfo(id: kotlin.String) : ApiResponse<PluginDeleted?> {
+        val localVariableConfig = deleteV1PluginsAuthoredByIdRequestConfig(id = id)
 
-        return request<Unit, CloudPluginDeleted>(
+        return request<Unit, PluginDeleted>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1PluginsAuthoredId
+     * To obtain the request config of the operation deleteV1PluginsAuthoredById
      *
      * @param id ID is the plugin to remove, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1PluginsAuthoredIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1PluginsAuthoredByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -117,17 +117,17 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins/authored/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plugins
-     * ListPlugins reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on.
-     * ListPlugins reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on. A plugin here is MOUNTED CODE that extends the deployment&#39;s own surface — not a tool an agent calls — so this is an inventory and not a tool source. It is read off the same boot snapshot every traced request resolves its subsystem label against, so it cannot drift from what is serving. Enabled-only by default, because a caller asking what this deployment can do wants what is running; ?all&#x3D;true adds the configured-but-off ones.
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on.
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on. A plugin here is MOUNTED CODE that extends the deployment&#39;s own surface — not a tool an agent calls — so this is an inventory and not a tool source. It is read off the same boot snapshot every traced request resolves its subsystem label against, so it cannot drift from what is serving. Enabled-only by default, because a caller asking what this deployment can do wants what is running; ?all&#x3D;true adds the configured-but-off ones.
      * @param all All includes the configured-but-disabled subsystems too, but only when it is exactly the string \&quot;true\&quot;. Otherwise only the running ones are reported. (optional)
-     * @return CloudPluginMountList
+     * @return PluginMountList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -136,11 +136,11 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Plugins(all: kotlin.String? = null) : CloudPluginMountList {
-        val localVarResponse = cloudGetV1PluginsWithHttpInfo(all = all)
+    fun getV1Plugins(all: kotlin.String? = null) : PluginMountList {
+        val localVarResponse = getV1PluginsWithHttpInfo(all = all)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPluginMountList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PluginMountList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -156,30 +156,30 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/plugins
-     * ListPlugins reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on.
-     * ListPlugins reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on. A plugin here is MOUNTED CODE that extends the deployment&#39;s own surface — not a tool an agent calls — so this is an inventory and not a tool source. It is read off the same boot snapshot every traced request resolves its subsystem label against, so it cannot drift from what is serving. Enabled-only by default, because a caller asking what this deployment can do wants what is running; ?all&#x3D;true adds the configured-but-off ones.
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on.
+     * Reports what this deployment actually mounted: every subsystem the composition root declared and whether it is switched on. A plugin here is MOUNTED CODE that extends the deployment&#39;s own surface — not a tool an agent calls — so this is an inventory and not a tool source. It is read off the same boot snapshot every traced request resolves its subsystem label against, so it cannot drift from what is serving. Enabled-only by default, because a caller asking what this deployment can do wants what is running; ?all&#x3D;true adds the configured-but-off ones.
      * @param all All includes the configured-but-disabled subsystems too, but only when it is exactly the string \&quot;true\&quot;. Otherwise only the running ones are reported. (optional)
-     * @return ApiResponse<CloudPluginMountList?>
+     * @return ApiResponse<PluginMountList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PluginsWithHttpInfo(all: kotlin.String?) : ApiResponse<CloudPluginMountList?> {
-        val localVariableConfig = cloudGetV1PluginsRequestConfig(all = all)
+    fun getV1PluginsWithHttpInfo(all: kotlin.String?) : ApiResponse<PluginMountList?> {
+        val localVariableConfig = getV1PluginsRequestConfig(all = all)
 
-        return request<Unit, CloudPluginMountList>(
+        return request<Unit, PluginMountList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Plugins
+     * To obtain the request config of the operation getV1Plugins
      *
      * @param all All includes the configured-but-disabled subsystems too, but only when it is exactly the string \&quot;true\&quot;. Otherwise only the running ones are reported. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1PluginsRequestConfig(all: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1PluginsRequestConfig(all: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -195,16 +195,16 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/plugins/authored
-     * ListAuthoredPlugins lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored.
-     * ListAuthoredPlugins lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored. That is a different set with a different lifecycle from GET /v1/plugins, which reports the subsystems this deployment mounted. The bundled CommonJS the runtime executes is never included, and neither is any credential — a plugin names the connectors provider it needs and reads the credential from ctx.auth at run time.
-     * @return CloudAuthoredPluginList
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored.
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored. That is a different set with a different lifecycle from GET /v1/plugins, which reports the subsystems this deployment mounted. The bundled CommonJS the runtime executes is never included, and neither is any credential — a plugin names the connectors provider it needs and reads the credential from ctx.auth at run time.
+     * @return AuthoredPluginList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -213,11 +213,11 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PluginsAuthored() : CloudAuthoredPluginList {
-        val localVarResponse = cloudGetV1PluginsAuthoredWithHttpInfo()
+    fun getV1PluginsAuthored() : AuthoredPluginList {
+        val localVarResponse = getV1PluginsAuthoredWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAuthoredPluginList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AuthoredPluginList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -233,28 +233,28 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/plugins/authored
-     * ListAuthoredPlugins lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored.
-     * ListAuthoredPlugins lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored. That is a different set with a different lifecycle from GET /v1/plugins, which reports the subsystems this deployment mounted. The bundled CommonJS the runtime executes is never included, and neither is any credential — a plugin names the connectors provider it needs and reads the credential from ctx.auth at run time.
-     * @return ApiResponse<CloudAuthoredPluginList?>
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored.
+     * Lists the plugins the caller&#39;s org BUILT, newest first, each with the TypeScript as authored. That is a different set with a different lifecycle from GET /v1/plugins, which reports the subsystems this deployment mounted. The bundled CommonJS the runtime executes is never included, and neither is any credential — a plugin names the connectors provider it needs and reads the credential from ctx.auth at run time.
+     * @return ApiResponse<AuthoredPluginList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PluginsAuthoredWithHttpInfo() : ApiResponse<CloudAuthoredPluginList?> {
-        val localVariableConfig = cloudGetV1PluginsAuthoredRequestConfig()
+    fun getV1PluginsAuthoredWithHttpInfo() : ApiResponse<AuthoredPluginList?> {
+        val localVariableConfig = getV1PluginsAuthoredRequestConfig()
 
-        return request<Unit, CloudAuthoredPluginList>(
+        return request<Unit, AuthoredPluginList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PluginsAuthored
+     * To obtain the request config of the operation getV1PluginsAuthored
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PluginsAuthoredRequestConfig() : RequestConfig<Unit> {
+    fun getV1PluginsAuthoredRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -265,17 +265,17 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins/authored",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/plugins/build
-     * 
-     * 
-     * @param cloudBuildRequest  (optional)
-     * @return CloudBuildOut
+     * Build a plugin for your org from TypeScript, or from an API spec a model writes it from
+     * Builds one plugin for the caller&#39;s org and answers 201 with the bundle&#39;s size, whether a model wrote the source, and the plugin as stored. Post &#x60;source&#x60; to build TypeScript as-is, or &#x60;spec&#x60; — an OpenAPI document or plain prose describing the endpoints — to have one generated; the generated source comes back in the answer, so a caller reads what will run before it runs. Exactly one of the two, and &#x60;name&#x60; must be one lowercase path segment; both or neither is 400.  COMPILING IS THE GATE. The source goes through the same pipeline the committed connectors do — esbuild to one CommonJS program, then compiled in the goja runtime that will actually execute it — and anything that fails is rejected and NEVER stored. So a plugin in the store is one this deployment has already loaded once, not one a model claimed was fine. A failed build answers 422 carrying the diagnostics a caller needs to fix it: the bundler&#39;s error, the source that failed, and whether the model wrote it — a body outside the declared success shape.  CREDENTIALS ARE NOT PART OF A PLUGIN. A plugin names the connectors &#x60;provider&#x60; it needs and reads that credential from &#x60;ctx.auth&#x60; at run time, under KMS custody. Source that contains something shaped like a key is REFUSED rather than silently scrubbed, so a caller who pasted one finds out instead of shipping it — register it as a connector instead.  Requires a validated principal; 403 without one. The plugin is stored under that principal&#39;s org and is what &#x60;/v1/plugins/authored&#x60; lists — never &#x60;/v1/plugins&#x60;, which is this deployment&#39;s mounted-subsystem inventory. Source over 512 KiB or a spec over 256 KiB is refused. Posting a &#x60;spec&#x60; to a deployment with no AI client configured is 503, and a generation that fails upstream is 502.
+     * @param buildRequest  (optional)
+     * @return BuildOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -284,11 +284,11 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PluginsBuild(cloudBuildRequest: CloudBuildRequest? = null) : CloudBuildOut {
-        val localVarResponse = cloudPostV1PluginsBuildWithHttpInfo(cloudBuildRequest = cloudBuildRequest)
+    fun postV1PluginsBuild(buildRequest: BuildRequest? = null) : BuildOut {
+        val localVarResponse = postV1PluginsBuildWithHttpInfo(buildRequest = buildRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBuildOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BuildOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -304,31 +304,31 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/plugins/build
-     * 
-     * 
-     * @param cloudBuildRequest  (optional)
-     * @return ApiResponse<CloudBuildOut?>
+     * Build a plugin for your org from TypeScript, or from an API spec a model writes it from
+     * Builds one plugin for the caller&#39;s org and answers 201 with the bundle&#39;s size, whether a model wrote the source, and the plugin as stored. Post &#x60;source&#x60; to build TypeScript as-is, or &#x60;spec&#x60; — an OpenAPI document or plain prose describing the endpoints — to have one generated; the generated source comes back in the answer, so a caller reads what will run before it runs. Exactly one of the two, and &#x60;name&#x60; must be one lowercase path segment; both or neither is 400.  COMPILING IS THE GATE. The source goes through the same pipeline the committed connectors do — esbuild to one CommonJS program, then compiled in the goja runtime that will actually execute it — and anything that fails is rejected and NEVER stored. So a plugin in the store is one this deployment has already loaded once, not one a model claimed was fine. A failed build answers 422 carrying the diagnostics a caller needs to fix it: the bundler&#39;s error, the source that failed, and whether the model wrote it — a body outside the declared success shape.  CREDENTIALS ARE NOT PART OF A PLUGIN. A plugin names the connectors &#x60;provider&#x60; it needs and reads that credential from &#x60;ctx.auth&#x60; at run time, under KMS custody. Source that contains something shaped like a key is REFUSED rather than silently scrubbed, so a caller who pasted one finds out instead of shipping it — register it as a connector instead.  Requires a validated principal; 403 without one. The plugin is stored under that principal&#39;s org and is what &#x60;/v1/plugins/authored&#x60; lists — never &#x60;/v1/plugins&#x60;, which is this deployment&#39;s mounted-subsystem inventory. Source over 512 KiB or a spec over 256 KiB is refused. Posting a &#x60;spec&#x60; to a deployment with no AI client configured is 503, and a generation that fails upstream is 502.
+     * @param buildRequest  (optional)
+     * @return ApiResponse<BuildOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PluginsBuildWithHttpInfo(cloudBuildRequest: CloudBuildRequest?) : ApiResponse<CloudBuildOut?> {
-        val localVariableConfig = cloudPostV1PluginsBuildRequestConfig(cloudBuildRequest = cloudBuildRequest)
+    fun postV1PluginsBuildWithHttpInfo(buildRequest: BuildRequest?) : ApiResponse<BuildOut?> {
+        val localVariableConfig = postV1PluginsBuildRequestConfig(buildRequest = buildRequest)
 
-        return request<CloudBuildRequest, CloudBuildOut>(
+        return request<BuildRequest, BuildOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PluginsBuild
+     * To obtain the request config of the operation postV1PluginsBuild
      *
-     * @param cloudBuildRequest  (optional)
+     * @param buildRequest  (optional)
      * @return RequestConfig
      */
-    fun cloudPostV1PluginsBuildRequestConfig(cloudBuildRequest: CloudBuildRequest?) : RequestConfig<CloudBuildRequest> {
-        val localVariableBody = cloudBuildRequest
+    fun postV1PluginsBuildRequestConfig(buildRequest: BuildRequest?) : RequestConfig<BuildRequest> {
+        val localVariableBody = buildRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -339,7 +339,7 @@ class PluginsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/plugins/build",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,28 +19,25 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudBucketRecord
-import ai.hanzo.cloud.model.CloudBucketWrite
-import ai.hanzo.cloud.model.CloudBusAck
-import ai.hanzo.cloud.model.CloudBusMessage
-import ai.hanzo.cloud.model.CloudBusPublish
-import ai.hanzo.cloud.model.CloudBusRequest
-import ai.hanzo.cloud.model.CloudConsumerPage
-import ai.hanzo.cloud.model.CloudConsumerRecord
-import ai.hanzo.cloud.model.CloudConsumerWrite
-import ai.hanzo.cloud.model.CloudFetchQuery
-import ai.hanzo.cloud.model.CloudKvAck
-import ai.hanzo.cloud.model.CloudKvEntry
-import ai.hanzo.cloud.model.CloudKvPage
-import ai.hanzo.cloud.model.CloudKvWrite
-import ai.hanzo.cloud.model.CloudMessagePage
-import ai.hanzo.cloud.model.CloudStreamPage
-import ai.hanzo.cloud.model.CloudStreamRecord
-import ai.hanzo.cloud.model.CloudStreamUpdate
-import ai.hanzo.cloud.model.CloudStreamWrite
-import ai.hanzo.cloud.model.KvListChannels200Response
-import ai.hanzo.cloud.model.KvPublish200Response
-import ai.hanzo.cloud.model.KvPublishRequest
+import ai.hanzo.cloud.model.BucketRecord
+import ai.hanzo.cloud.model.BucketWrite
+import ai.hanzo.cloud.model.BusAck
+import ai.hanzo.cloud.model.BusMessage
+import ai.hanzo.cloud.model.BusPublish
+import ai.hanzo.cloud.model.BusRequest
+import ai.hanzo.cloud.model.ConsumerPage
+import ai.hanzo.cloud.model.ConsumerRecord
+import ai.hanzo.cloud.model.ConsumerWrite
+import ai.hanzo.cloud.model.FetchQuery
+import ai.hanzo.cloud.model.KvAck
+import ai.hanzo.cloud.model.KvEntry
+import ai.hanzo.cloud.model.KvPage
+import ai.hanzo.cloud.model.KvWrite
+import ai.hanzo.cloud.model.MessagePage
+import ai.hanzo.cloud.model.StreamPage
+import ai.hanzo.cloud.model.StreamRecord
+import ai.hanzo.cloud.model.StreamUpdate
+import ai.hanzo.cloud.model.StreamWrite
 
 import com.google.gson.annotations.SerializedName
 
@@ -58,7 +55,7 @@ import ai.hanzo.cloud.infrastructure.ResponseType
 import ai.hanzo.cloud.infrastructure.Success
 import ai.hanzo.cloud.infrastructure.toMultiValue
 
-class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+class PubsubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
@@ -68,8 +65,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/pubsub/jetstream/streams/{stream}
-     * DeleteStream removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body.
-     * DeleteStream removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body. 404 when the org has no stream of that name.
+     * Removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body.
+     * Removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body. 404 when the org has no stream of that name.
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -79,8 +76,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1PubsubJetstreamStreamsStream(stream: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1PubsubJetstreamStreamsStreamWithHttpInfo(stream = stream)
+    fun deleteV1PubsubJetstreamStreamsByStream(stream: kotlin.String) : Unit {
+        val localVarResponse = deleteV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -99,16 +96,16 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/pubsub/jetstream/streams/{stream}
-     * DeleteStream removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body.
-     * DeleteStream removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body. 404 when the org has no stream of that name.
+     * Removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body.
+     * Removes one stream of the caller&#39;s org — its retained messages and its consumers with it — and answers 204 with no body. 404 when the org has no stream of that name.
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1PubsubJetstreamStreamsStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1PubsubJetstreamStreamsStreamRequestConfig(stream = stream)
+    fun deleteV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1PubsubJetstreamStreamsByStreamRequestConfig(stream = stream)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -116,12 +113,12 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1PubsubJetstreamStreamsStream
+     * To obtain the request config of the operation deleteV1PubsubJetstreamStreamsByStream
      *
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1PubsubJetstreamStreamsStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1PubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -131,15 +128,15 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/pubsub/jetstream/streams/{stream}/consumers/{name}
-     * DeleteConsumer removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body.
-     * DeleteConsumer removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body. 404 when the stream or the consumer does not exist.
+     * Removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body.
+     * Removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body. 404 when the stream or the consumer does not exist.
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
      * @return void
@@ -150,8 +147,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1PubsubJetstreamStreamsStreamConsumersName(stream: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1PubsubJetstreamStreamsStreamConsumersNameWithHttpInfo(stream = stream, name = name)
+    fun deleteV1PubsubJetstreamStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -170,8 +167,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/pubsub/jetstream/streams/{stream}/consumers/{name}
-     * DeleteConsumer removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body.
-     * DeleteConsumer removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body. 404 when the stream or the consumer does not exist.
+     * Removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body.
+     * Removes one consumer — its cursor, not the stream&#39;s messages — and answers 204 with no body. 404 when the stream or the consumer does not exist.
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
      * @return ApiResponse<Unit?>
@@ -179,8 +176,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1PubsubJetstreamStreamsStreamConsumersNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1PubsubJetstreamStreamsStreamConsumersNameRequestConfig(stream = stream, name = name)
+    fun deleteV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -188,13 +185,13 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1PubsubJetstreamStreamsStreamConsumersName
+     * To obtain the request config of the operation deleteV1PubsubJetstreamStreamsByStreamConsumersByName
      *
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1PubsubJetstreamStreamsStreamConsumersNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -204,15 +201,15 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/pubsub/kv/{bucket}
-     * DeleteBucket removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body.
-     * DeleteBucket removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body. 404 when the org has no bucket of that name.
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body.
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body. 404 when the org has no bucket of that name.
      * @param bucket Bucket is the bucket&#39;s name, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -222,8 +219,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1PubsubKvBucket(bucket: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1PubsubKvBucketWithHttpInfo(bucket = bucket)
+    fun deleteV1PubsubKvByBucket(bucket: kotlin.String) : Unit {
+        val localVarResponse = deleteV1PubsubKvByBucketWithHttpInfo(bucket = bucket)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -242,16 +239,16 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/pubsub/kv/{bucket}
-     * DeleteBucket removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body.
-     * DeleteBucket removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body. 404 when the org has no bucket of that name.
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body.
+     * Removes one bucket of the caller&#39;s org — every key and every revision with it — and answers 204 with no body. 404 when the org has no bucket of that name.
      * @param bucket Bucket is the bucket&#39;s name, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1PubsubKvBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1PubsubKvBucketRequestConfig(bucket = bucket)
+    fun deleteV1PubsubKvByBucketWithHttpInfo(bucket: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1PubsubKvByBucketRequestConfig(bucket = bucket)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -259,12 +256,12 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1PubsubKvBucket
+     * To obtain the request config of the operation deleteV1PubsubKvByBucket
      *
      * @param bucket Bucket is the bucket&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1PubsubKvBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1PubsubKvByBucketRequestConfig(bucket: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -274,7 +271,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -293,8 +290,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1PubsubKvBucketKey(bucket: kotlin.String, key: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1PubsubKvBucketKeyWithHttpInfo(bucket = bucket, key = key)
+    fun deleteV1PubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : Unit {
+        val localVarResponse = deleteV1PubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -322,8 +319,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1PubsubKvBucketKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1PubsubKvBucketKeyRequestConfig(bucket = bucket, key = key)
+    fun deleteV1PubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1PubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -331,13 +328,13 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1PubsubKvBucketKey
+     * To obtain the request config of the operation deleteV1PubsubKvByBucketByKey
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1PubsubKvBucketKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1PubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -347,16 +344,16 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pubsub/jetstream/streams
-     * ListStreams returns the org&#39;s streams, sorted by name.
-     * ListStreams returns the org&#39;s streams, sorted by name.  A stream is the durable log: it captures every message published to its subjects and retains them by its own limits, independent of any consumer. The listing is org-scoped server-side — one org can never see another&#39;s streams, and the platform&#39;s own planes never appear.
-     * @return CloudStreamPage
+     * Returns the org&#39;s streams, sorted by name.
+     * Returns the org&#39;s streams, sorted by name.  A stream is the durable log: it captures every message published to its subjects and retains them by its own limits, independent of any consumer. The listing is org-scoped server-side — one org can never see another&#39;s streams, and the platform&#39;s own planes never appear.
+     * @return StreamPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -365,11 +362,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PubsubJetstreamStreams() : CloudStreamPage {
-        val localVarResponse = cloudGetV1PubsubJetstreamStreamsWithHttpInfo()
+    fun getV1PubsubJetstreamStreams() : StreamPage {
+        val localVarResponse = getV1PubsubJetstreamStreamsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStreamPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StreamPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -385,28 +382,28 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/pubsub/jetstream/streams
-     * ListStreams returns the org&#39;s streams, sorted by name.
-     * ListStreams returns the org&#39;s streams, sorted by name.  A stream is the durable log: it captures every message published to its subjects and retains them by its own limits, independent of any consumer. The listing is org-scoped server-side — one org can never see another&#39;s streams, and the platform&#39;s own planes never appear.
-     * @return ApiResponse<CloudStreamPage?>
+     * Returns the org&#39;s streams, sorted by name.
+     * Returns the org&#39;s streams, sorted by name.  A stream is the durable log: it captures every message published to its subjects and retains them by its own limits, independent of any consumer. The listing is org-scoped server-side — one org can never see another&#39;s streams, and the platform&#39;s own planes never appear.
+     * @return ApiResponse<StreamPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PubsubJetstreamStreamsWithHttpInfo() : ApiResponse<CloudStreamPage?> {
-        val localVariableConfig = cloudGetV1PubsubJetstreamStreamsRequestConfig()
+    fun getV1PubsubJetstreamStreamsWithHttpInfo() : ApiResponse<StreamPage?> {
+        val localVariableConfig = getV1PubsubJetstreamStreamsRequestConfig()
 
-        return request<Unit, CloudStreamPage>(
+        return request<Unit, StreamPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PubsubJetstreamStreams
+     * To obtain the request config of the operation getV1PubsubJetstreamStreams
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PubsubJetstreamStreamsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PubsubJetstreamStreamsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -417,17 +414,17 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pubsub/jetstream/streams/{stream}
-     * GetStream returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count).
-     * GetStream returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count). 404 when the org has no stream of that name.
+     * Returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count).
+     * Returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count). 404 when the org has no stream of that name.
      * @param stream Stream is the stream&#39;s name, from the path.
-     * @return CloudStreamRecord
+     * @return StreamRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -436,11 +433,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PubsubJetstreamStreamsStream(stream: kotlin.String) : CloudStreamRecord {
-        val localVarResponse = cloudGetV1PubsubJetstreamStreamsStreamWithHttpInfo(stream = stream)
+    fun getV1PubsubJetstreamStreamsByStream(stream: kotlin.String) : StreamRecord {
+        val localVarResponse = getV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStreamRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StreamRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -456,30 +453,30 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/pubsub/jetstream/streams/{stream}
-     * GetStream returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count).
-     * GetStream returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count). 404 when the org has no stream of that name.
+     * Returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count).
+     * Returns one stream of the caller&#39;s org — its configuration and its live state (messages, bytes, sequence range, consumer count). 404 when the org has no stream of that name.
      * @param stream Stream is the stream&#39;s name, from the path.
-     * @return ApiResponse<CloudStreamRecord?>
+     * @return ApiResponse<StreamRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PubsubJetstreamStreamsStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<CloudStreamRecord?> {
-        val localVariableConfig = cloudGetV1PubsubJetstreamStreamsStreamRequestConfig(stream = stream)
+    fun getV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String) : ApiResponse<StreamRecord?> {
+        val localVariableConfig = getV1PubsubJetstreamStreamsByStreamRequestConfig(stream = stream)
 
-        return request<Unit, CloudStreamRecord>(
+        return request<Unit, StreamRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PubsubJetstreamStreamsStream
+     * To obtain the request config of the operation getV1PubsubJetstreamStreamsByStream
      *
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1PubsubJetstreamStreamsStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -490,17 +487,17 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pubsub/jetstream/streams/{stream}/consumers
-     * ListConsumers returns one stream&#39;s consumers, sorted by name.
-     * ListConsumers returns one stream&#39;s consumers, sorted by name. 404 when the org has no stream of that name.
+     * Returns one stream&#39;s consumers, sorted by name.
+     * Returns one stream&#39;s consumers, sorted by name. 404 when the org has no stream of that name.
      * @param stream Stream is the stream&#39;s name, from the path.
-     * @return CloudConsumerPage
+     * @return ConsumerPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -509,11 +506,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PubsubJetstreamStreamsStreamConsumers(stream: kotlin.String) : CloudConsumerPage {
-        val localVarResponse = cloudGetV1PubsubJetstreamStreamsStreamConsumersWithHttpInfo(stream = stream)
+    fun getV1PubsubJetstreamStreamsByStreamConsumers(stream: kotlin.String) : ConsumerPage {
+        val localVarResponse = getV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream = stream)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConsumerPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConsumerPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -529,30 +526,30 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/pubsub/jetstream/streams/{stream}/consumers
-     * ListConsumers returns one stream&#39;s consumers, sorted by name.
-     * ListConsumers returns one stream&#39;s consumers, sorted by name. 404 when the org has no stream of that name.
+     * Returns one stream&#39;s consumers, sorted by name.
+     * Returns one stream&#39;s consumers, sorted by name. 404 when the org has no stream of that name.
      * @param stream Stream is the stream&#39;s name, from the path.
-     * @return ApiResponse<CloudConsumerPage?>
+     * @return ApiResponse<ConsumerPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PubsubJetstreamStreamsStreamConsumersWithHttpInfo(stream: kotlin.String) : ApiResponse<CloudConsumerPage?> {
-        val localVariableConfig = cloudGetV1PubsubJetstreamStreamsStreamConsumersRequestConfig(stream = stream)
+    fun getV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String) : ApiResponse<ConsumerPage?> {
+        val localVariableConfig = getV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream = stream)
 
-        return request<Unit, CloudConsumerPage>(
+        return request<Unit, ConsumerPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PubsubJetstreamStreamsStreamConsumers
+     * To obtain the request config of the operation getV1PubsubJetstreamStreamsByStreamConsumers
      *
      * @param stream Stream is the stream&#39;s name, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1PubsubJetstreamStreamsStreamConsumersRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -563,18 +560,18 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/pubsub/jetstream/streams/{stream}/consumers/{name}
-     * GetConsumer returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts.
-     * GetConsumer returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts. 404 when the stream or the consumer does not exist.
+     * Returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts.
+     * Returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts. 404 when the stream or the consumer does not exist.
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
-     * @return CloudConsumerRecord
+     * @return ConsumerRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -583,11 +580,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PubsubJetstreamStreamsStreamConsumersName(stream: kotlin.String, name: kotlin.String) : CloudConsumerRecord {
-        val localVarResponse = cloudGetV1PubsubJetstreamStreamsStreamConsumersNameWithHttpInfo(stream = stream, name = name)
+    fun getV1PubsubJetstreamStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : ConsumerRecord {
+        val localVarResponse = getV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConsumerRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConsumerRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -603,32 +600,32 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/pubsub/jetstream/streams/{stream}/consumers/{name}
-     * GetConsumer returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts.
-     * GetConsumer returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts. 404 when the stream or the consumer does not exist.
+     * Returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts.
+     * Returns one consumer of one org stream — its configuration and its cursor: delivered and acknowledged sequences, pending and redelivered counts. 404 when the stream or the consumer does not exist.
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
-     * @return ApiResponse<CloudConsumerRecord?>
+     * @return ApiResponse<ConsumerRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PubsubJetstreamStreamsStreamConsumersNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<CloudConsumerRecord?> {
-        val localVariableConfig = cloudGetV1PubsubJetstreamStreamsStreamConsumersNameRequestConfig(stream = stream, name = name)
+    fun getV1PubsubJetstreamStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<ConsumerRecord?> {
+        val localVariableConfig = getV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
 
-        return request<Unit, CloudConsumerRecord>(
+        return request<Unit, ConsumerRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PubsubJetstreamStreamsStreamConsumersName
+     * To obtain the request config of the operation getV1PubsubJetstreamStreamsByStreamConsumersByName
      *
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1PubsubJetstreamStreamsStreamConsumersNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PubsubJetstreamStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -639,7 +636,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -650,7 +647,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Get returns one key&#39;s current value and revision. 404 when the bucket does not exist, the key was never written, or its latest revision is a delete.
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
-     * @return CloudKvEntry
+     * @return KvEntry
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -659,11 +656,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PubsubKvBucketKey(bucket: kotlin.String, key: kotlin.String) : CloudKvEntry {
-        val localVarResponse = cloudGetV1PubsubKvBucketKeyWithHttpInfo(bucket = bucket, key = key)
+    fun getV1PubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String) : KvEntry {
+        val localVarResponse = getV1PubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKvEntry
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KvEntry
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -683,28 +680,28 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Get returns one key&#39;s current value and revision. 404 when the bucket does not exist, the key was never written, or its latest revision is a delete.
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
-     * @return ApiResponse<CloudKvEntry?>
+     * @return ApiResponse<KvEntry?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PubsubKvBucketKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<CloudKvEntry?> {
-        val localVariableConfig = cloudGetV1PubsubKvBucketKeyRequestConfig(bucket = bucket, key = key)
+    fun getV1PubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvEntry?> {
+        val localVariableConfig = getV1PubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key)
 
-        return request<Unit, CloudKvEntry>(
+        return request<Unit, KvEntry>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PubsubKvBucketKey
+     * To obtain the request config of the operation getV1PubsubKvByBucketByKey
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1PubsubKvBucketKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -715,7 +712,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -726,7 +723,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * History returns one key&#39;s retained revisions, oldest first — every put and every delete marker up to the bucket&#39;s History depth. 404 when the bucket does not exist or the key was never written.
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
-     * @return CloudKvPage
+     * @return KvPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -735,11 +732,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PubsubKvBucketKeyHistory(bucket: kotlin.String, key: kotlin.String) : CloudKvPage {
-        val localVarResponse = cloudGetV1PubsubKvBucketKeyHistoryWithHttpInfo(bucket = bucket, key = key)
+    fun getV1PubsubKvByBucketByKeyHistory(bucket: kotlin.String, key: kotlin.String) : KvPage {
+        val localVarResponse = getV1PubsubKvByBucketByKeyHistoryWithHttpInfo(bucket = bucket, key = key)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKvPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KvPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -759,28 +756,28 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * History returns one key&#39;s retained revisions, oldest first — every put and every delete marker up to the bucket&#39;s History depth. 404 when the bucket does not exist or the key was never written.
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
-     * @return ApiResponse<CloudKvPage?>
+     * @return ApiResponse<KvPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PubsubKvBucketKeyHistoryWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<CloudKvPage?> {
-        val localVariableConfig = cloudGetV1PubsubKvBucketKeyHistoryRequestConfig(bucket = bucket, key = key)
+    fun getV1PubsubKvByBucketByKeyHistoryWithHttpInfo(bucket: kotlin.String, key: kotlin.String) : ApiResponse<KvPage?> {
+        val localVariableConfig = getV1PubsubKvByBucketByKeyHistoryRequestConfig(bucket = bucket, key = key)
 
-        return request<Unit, CloudKvPage>(
+        return request<Unit, KvPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PubsubKvBucketKeyHistory
+     * To obtain the request config of the operation getV1PubsubKvByBucketByKeyHistory
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1PubsubKvBucketKeyHistoryRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
+    fun getV1PubsubKvByBucketByKeyHistoryRequestConfig(bucket: kotlin.String, key: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -791,17 +788,17 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}/history".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/pubsub/jetstream/streams
-     * CreateStream creates a durable stream capturing the given subjects and returns it.
-     * CreateStream creates a durable stream capturing the given subjects and returns it. 409 when the org already has a stream of that name; the subjects are the org&#39;s own and cannot collide with another org&#39;s.
-     * @param cloudStreamWrite 
-     * @return CloudStreamRecord
+     * Creates a durable stream capturing the given subjects and returns it.
+     * Creates a durable stream capturing the given subjects and returns it. 409 when the org already has a stream of that name; the subjects are the org&#39;s own and cannot collide with another org&#39;s.
+     * @param streamWrite 
+     * @return StreamRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -810,11 +807,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PubsubJetstreamStreams(cloudStreamWrite: CloudStreamWrite) : CloudStreamRecord {
-        val localVarResponse = cloudPostV1PubsubJetstreamStreamsWithHttpInfo(cloudStreamWrite = cloudStreamWrite)
+    fun postV1PubsubJetstreamStreams(streamWrite: StreamWrite) : StreamRecord {
+        val localVarResponse = postV1PubsubJetstreamStreamsWithHttpInfo(streamWrite = streamWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStreamRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StreamRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -830,31 +827,31 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/pubsub/jetstream/streams
-     * CreateStream creates a durable stream capturing the given subjects and returns it.
-     * CreateStream creates a durable stream capturing the given subjects and returns it. 409 when the org already has a stream of that name; the subjects are the org&#39;s own and cannot collide with another org&#39;s.
-     * @param cloudStreamWrite 
-     * @return ApiResponse<CloudStreamRecord?>
+     * Creates a durable stream capturing the given subjects and returns it.
+     * Creates a durable stream capturing the given subjects and returns it. 409 when the org already has a stream of that name; the subjects are the org&#39;s own and cannot collide with another org&#39;s.
+     * @param streamWrite 
+     * @return ApiResponse<StreamRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PubsubJetstreamStreamsWithHttpInfo(cloudStreamWrite: CloudStreamWrite) : ApiResponse<CloudStreamRecord?> {
-        val localVariableConfig = cloudPostV1PubsubJetstreamStreamsRequestConfig(cloudStreamWrite = cloudStreamWrite)
+    fun postV1PubsubJetstreamStreamsWithHttpInfo(streamWrite: StreamWrite) : ApiResponse<StreamRecord?> {
+        val localVariableConfig = postV1PubsubJetstreamStreamsRequestConfig(streamWrite = streamWrite)
 
-        return request<CloudStreamWrite, CloudStreamRecord>(
+        return request<StreamWrite, StreamRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PubsubJetstreamStreams
+     * To obtain the request config of the operation postV1PubsubJetstreamStreams
      *
-     * @param cloudStreamWrite 
+     * @param streamWrite 
      * @return RequestConfig
      */
-    fun cloudPostV1PubsubJetstreamStreamsRequestConfig(cloudStreamWrite: CloudStreamWrite) : RequestConfig<CloudStreamWrite> {
-        val localVariableBody = cloudStreamWrite
+    fun postV1PubsubJetstreamStreamsRequestConfig(streamWrite: StreamWrite) : RequestConfig<StreamWrite> {
+        val localVariableBody = streamWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -865,18 +862,18 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/pubsub/jetstream/streams/{stream}/consumers
-     * CreateConsumer creates a durable consumer on one stream and returns it.
-     * CreateConsumer creates a durable consumer on one stream and returns it. A consumer is a named cursor: it tracks what has been delivered and what is acknowledged, so many workers can share it and none sees a message twice outside redelivery. 409 when the stream already has a consumer of that name with a different configuration.
+     * Creates a durable consumer on one stream and returns it.
+     * Creates a durable consumer on one stream and returns it. A consumer is a named cursor: it tracks what has been delivered and what is acknowledged, so many workers can share it and none sees a message twice outside redelivery. 409 when the stream already has a consumer of that name with a different configuration.
      * @param stream Stream is the stream to consume, from the path.
-     * @param cloudConsumerWrite 
-     * @return CloudConsumerRecord
+     * @param consumerWrite 
+     * @return ConsumerRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -885,11 +882,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PubsubJetstreamStreamsStreamConsumers(stream: kotlin.String, cloudConsumerWrite: CloudConsumerWrite) : CloudConsumerRecord {
-        val localVarResponse = cloudPostV1PubsubJetstreamStreamsStreamConsumersWithHttpInfo(stream = stream, cloudConsumerWrite = cloudConsumerWrite)
+    fun postV1PubsubJetstreamStreamsByStreamConsumers(stream: kotlin.String, consumerWrite: ConsumerWrite) : ConsumerRecord {
+        val localVarResponse = postV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream = stream, consumerWrite = consumerWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConsumerRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConsumerRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -905,33 +902,33 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/pubsub/jetstream/streams/{stream}/consumers
-     * CreateConsumer creates a durable consumer on one stream and returns it.
-     * CreateConsumer creates a durable consumer on one stream and returns it. A consumer is a named cursor: it tracks what has been delivered and what is acknowledged, so many workers can share it and none sees a message twice outside redelivery. 409 when the stream already has a consumer of that name with a different configuration.
+     * Creates a durable consumer on one stream and returns it.
+     * Creates a durable consumer on one stream and returns it. A consumer is a named cursor: it tracks what has been delivered and what is acknowledged, so many workers can share it and none sees a message twice outside redelivery. 409 when the stream already has a consumer of that name with a different configuration.
      * @param stream Stream is the stream to consume, from the path.
-     * @param cloudConsumerWrite 
-     * @return ApiResponse<CloudConsumerRecord?>
+     * @param consumerWrite 
+     * @return ApiResponse<ConsumerRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PubsubJetstreamStreamsStreamConsumersWithHttpInfo(stream: kotlin.String, cloudConsumerWrite: CloudConsumerWrite) : ApiResponse<CloudConsumerRecord?> {
-        val localVariableConfig = cloudPostV1PubsubJetstreamStreamsStreamConsumersRequestConfig(stream = stream, cloudConsumerWrite = cloudConsumerWrite)
+    fun postV1PubsubJetstreamStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String, consumerWrite: ConsumerWrite) : ApiResponse<ConsumerRecord?> {
+        val localVariableConfig = postV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream = stream, consumerWrite = consumerWrite)
 
-        return request<CloudConsumerWrite, CloudConsumerRecord>(
+        return request<ConsumerWrite, ConsumerRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PubsubJetstreamStreamsStreamConsumers
+     * To obtain the request config of the operation postV1PubsubJetstreamStreamsByStreamConsumers
      *
      * @param stream Stream is the stream to consume, from the path.
-     * @param cloudConsumerWrite 
+     * @param consumerWrite 
      * @return RequestConfig
      */
-    fun cloudPostV1PubsubJetstreamStreamsStreamConsumersRequestConfig(stream: kotlin.String, cloudConsumerWrite: CloudConsumerWrite) : RequestConfig<CloudConsumerWrite> {
-        val localVariableBody = cloudConsumerWrite
+    fun postV1PubsubJetstreamStreamsByStreamConsumersRequestConfig(stream: kotlin.String, consumerWrite: ConsumerWrite) : RequestConfig<ConsumerWrite> {
+        val localVariableBody = consumerWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -942,7 +939,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -953,8 +950,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Fetch pulls the next batch from a consumer and acknowledges it — the request/response way to consume a stream. The hand-off is at-most-once: a message returned here is acked here, so a caller that loses the response does not see it again. Workers needing at-least-once delivery consume the same consumer over the NATS port, where acks are theirs to send. An empty batch after the wait is an empty page, not an error.
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
-     * @param cloudFetchQuery 
-     * @return CloudMessagePage
+     * @param fetchQuery 
+     * @return MessagePage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -963,11 +960,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PubsubJetstreamStreamsStreamConsumersNameNext(stream: kotlin.String, name: kotlin.String, cloudFetchQuery: CloudFetchQuery) : CloudMessagePage {
-        val localVarResponse = cloudPostV1PubsubJetstreamStreamsStreamConsumersNameNextWithHttpInfo(stream = stream, name = name, cloudFetchQuery = cloudFetchQuery)
+    fun postV1PubsubJetstreamStreamsByStreamConsumersByNameNext(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : MessagePage {
+        val localVarResponse = postV1PubsubJetstreamStreamsByStreamConsumersByNameNextWithHttpInfo(stream = stream, name = name, fetchQuery = fetchQuery)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMessagePage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MessagePage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -987,31 +984,31 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Fetch pulls the next batch from a consumer and acknowledges it — the request/response way to consume a stream. The hand-off is at-most-once: a message returned here is acked here, so a caller that loses the response does not see it again. Workers needing at-least-once delivery consume the same consumer over the NATS port, where acks are theirs to send. An empty batch after the wait is an empty page, not an error.
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
-     * @param cloudFetchQuery 
-     * @return ApiResponse<CloudMessagePage?>
+     * @param fetchQuery 
+     * @return ApiResponse<MessagePage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PubsubJetstreamStreamsStreamConsumersNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, cloudFetchQuery: CloudFetchQuery) : ApiResponse<CloudMessagePage?> {
-        val localVariableConfig = cloudPostV1PubsubJetstreamStreamsStreamConsumersNameNextRequestConfig(stream = stream, name = name, cloudFetchQuery = cloudFetchQuery)
+    fun postV1PubsubJetstreamStreamsByStreamConsumersByNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : ApiResponse<MessagePage?> {
+        val localVariableConfig = postV1PubsubJetstreamStreamsByStreamConsumersByNameNextRequestConfig(stream = stream, name = name, fetchQuery = fetchQuery)
 
-        return request<CloudFetchQuery, CloudMessagePage>(
+        return request<FetchQuery, MessagePage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PubsubJetstreamStreamsStreamConsumersNameNext
+     * To obtain the request config of the operation postV1PubsubJetstreamStreamsByStreamConsumersByNameNext
      *
      * @param stream Stream is the stream, from the path.
      * @param name Name is the consumer, from the path.
-     * @param cloudFetchQuery 
+     * @param fetchQuery 
      * @return RequestConfig
      */
-    fun cloudPostV1PubsubJetstreamStreamsStreamConsumersNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, cloudFetchQuery: CloudFetchQuery) : RequestConfig<CloudFetchQuery> {
-        val localVariableBody = cloudFetchQuery
+    fun postV1PubsubJetstreamStreamsByStreamConsumersByNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, fetchQuery: FetchQuery) : RequestConfig<FetchQuery> {
+        val localVariableBody = fetchQuery
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1022,18 +1019,18 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}/consumers/{name}/next".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/pubsub/kv/{bucket}
-     * CreateBucket creates a KV bucket and returns it.
-     * CreateBucket creates a KV bucket and returns it. A bucket is keyed state on the same durable plane as the streams: each key holds up to History revisions, entries can expire by TTL, and watchers on the NATS port see every write. 409 when the org already has a bucket of that name.
+     * Creates a KV bucket and returns it.
+     * Creates a KV bucket and returns it. A bucket is keyed state on the same durable plane as the streams: each key holds up to History revisions, entries can expire by TTL, and watchers on the NATS port see every write. 409 when the org already has a bucket of that name.
      * @param bucket Bucket is the bucket&#39;s name within the org, from the path: 1–64 of [A-Za-z0-9_], no dash.
-     * @param cloudBucketWrite 
-     * @return CloudBucketRecord
+     * @param bucketWrite 
+     * @return BucketRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1042,11 +1039,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PubsubKvBucket(bucket: kotlin.String, cloudBucketWrite: CloudBucketWrite) : CloudBucketRecord {
-        val localVarResponse = cloudPostV1PubsubKvBucketWithHttpInfo(bucket = bucket, cloudBucketWrite = cloudBucketWrite)
+    fun postV1PubsubKvByBucket(bucket: kotlin.String, bucketWrite: BucketWrite) : BucketRecord {
+        val localVarResponse = postV1PubsubKvByBucketWithHttpInfo(bucket = bucket, bucketWrite = bucketWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBucketRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BucketRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1062,33 +1059,33 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/pubsub/kv/{bucket}
-     * CreateBucket creates a KV bucket and returns it.
-     * CreateBucket creates a KV bucket and returns it. A bucket is keyed state on the same durable plane as the streams: each key holds up to History revisions, entries can expire by TTL, and watchers on the NATS port see every write. 409 when the org already has a bucket of that name.
+     * Creates a KV bucket and returns it.
+     * Creates a KV bucket and returns it. A bucket is keyed state on the same durable plane as the streams: each key holds up to History revisions, entries can expire by TTL, and watchers on the NATS port see every write. 409 when the org already has a bucket of that name.
      * @param bucket Bucket is the bucket&#39;s name within the org, from the path: 1–64 of [A-Za-z0-9_], no dash.
-     * @param cloudBucketWrite 
-     * @return ApiResponse<CloudBucketRecord?>
+     * @param bucketWrite 
+     * @return ApiResponse<BucketRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PubsubKvBucketWithHttpInfo(bucket: kotlin.String, cloudBucketWrite: CloudBucketWrite) : ApiResponse<CloudBucketRecord?> {
-        val localVariableConfig = cloudPostV1PubsubKvBucketRequestConfig(bucket = bucket, cloudBucketWrite = cloudBucketWrite)
+    fun postV1PubsubKvByBucketWithHttpInfo(bucket: kotlin.String, bucketWrite: BucketWrite) : ApiResponse<BucketRecord?> {
+        val localVariableConfig = postV1PubsubKvByBucketRequestConfig(bucket = bucket, bucketWrite = bucketWrite)
 
-        return request<CloudBucketWrite, CloudBucketRecord>(
+        return request<BucketWrite, BucketRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PubsubKvBucket
+     * To obtain the request config of the operation postV1PubsubKvByBucket
      *
      * @param bucket Bucket is the bucket&#39;s name within the org, from the path: 1–64 of [A-Za-z0-9_], no dash.
-     * @param cloudBucketWrite 
+     * @param bucketWrite 
      * @return RequestConfig
      */
-    fun cloudPostV1PubsubKvBucketRequestConfig(bucket: kotlin.String, cloudBucketWrite: CloudBucketWrite) : RequestConfig<CloudBucketWrite> {
-        val localVariableBody = cloudBucketWrite
+    fun postV1PubsubKvByBucketRequestConfig(bucket: kotlin.String, bucketWrite: BucketWrite) : RequestConfig<BucketWrite> {
+        val localVariableBody = bucketWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1099,7 +1096,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1108,8 +1105,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * POST /v1/pubsub/publish
      * Publish puts one message on the org&#39;s bus.
      * Publish puts one message on the org&#39;s bus. When a stream captures the subject the write is DURABLE — the receipt names the stream and sequence only after JetStream has it on storage, and a repeated Nats-Msg-Id header within the dedup window answers duplicate instead of storing twice. When nothing captures it, the message goes out core NATS: delivered to current subscribers, receipt {ok}, nothing retained.
-     * @param cloudBusPublish 
-     * @return CloudBusAck
+     * @param busPublish 
+     * @return BusAck
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1118,11 +1115,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PubsubPublish(cloudBusPublish: CloudBusPublish) : CloudBusAck {
-        val localVarResponse = cloudPostV1PubsubPublishWithHttpInfo(cloudBusPublish = cloudBusPublish)
+    fun postV1PubsubPublish(busPublish: BusPublish) : BusAck {
+        val localVarResponse = postV1PubsubPublishWithHttpInfo(busPublish = busPublish)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBusAck
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BusAck
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1140,29 +1137,29 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * POST /v1/pubsub/publish
      * Publish puts one message on the org&#39;s bus.
      * Publish puts one message on the org&#39;s bus. When a stream captures the subject the write is DURABLE — the receipt names the stream and sequence only after JetStream has it on storage, and a repeated Nats-Msg-Id header within the dedup window answers duplicate instead of storing twice. When nothing captures it, the message goes out core NATS: delivered to current subscribers, receipt {ok}, nothing retained.
-     * @param cloudBusPublish 
-     * @return ApiResponse<CloudBusAck?>
+     * @param busPublish 
+     * @return ApiResponse<BusAck?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PubsubPublishWithHttpInfo(cloudBusPublish: CloudBusPublish) : ApiResponse<CloudBusAck?> {
-        val localVariableConfig = cloudPostV1PubsubPublishRequestConfig(cloudBusPublish = cloudBusPublish)
+    fun postV1PubsubPublishWithHttpInfo(busPublish: BusPublish) : ApiResponse<BusAck?> {
+        val localVariableConfig = postV1PubsubPublishRequestConfig(busPublish = busPublish)
 
-        return request<CloudBusPublish, CloudBusAck>(
+        return request<BusPublish, BusAck>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PubsubPublish
+     * To obtain the request config of the operation postV1PubsubPublish
      *
-     * @param cloudBusPublish 
+     * @param busPublish 
      * @return RequestConfig
      */
-    fun cloudPostV1PubsubPublishRequestConfig(cloudBusPublish: CloudBusPublish) : RequestConfig<CloudBusPublish> {
-        val localVariableBody = cloudBusPublish
+    fun postV1PubsubPublishRequestConfig(busPublish: BusPublish) : RequestConfig<BusPublish> {
+        val localVariableBody = busPublish
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1173,7 +1170,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/publish",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1182,8 +1179,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * POST /v1/pubsub/request
      * Request sends one request on the org&#39;s bus and waits for one reply — the synchronous half of pub/sub, for callers speaking to a responder subscribed on the NATS port.
      * Request sends one request on the org&#39;s bus and waits for one reply — the synchronous half of pub/sub, for callers speaking to a responder subscribed on the NATS port. 404 when nobody is listening on the subject; 408 when a responder exists but no reply arrived within the timeout.
-     * @param cloudBusRequest 
-     * @return CloudBusMessage
+     * @param busRequest 
+     * @return BusMessage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1192,11 +1189,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1PubsubRequest(cloudBusRequest: CloudBusRequest) : CloudBusMessage {
-        val localVarResponse = cloudPostV1PubsubRequestWithHttpInfo(cloudBusRequest = cloudBusRequest)
+    fun postV1PubsubRequest(busRequest: BusRequest) : BusMessage {
+        val localVarResponse = postV1PubsubRequestWithHttpInfo(busRequest = busRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBusMessage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BusMessage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1214,29 +1211,29 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * POST /v1/pubsub/request
      * Request sends one request on the org&#39;s bus and waits for one reply — the synchronous half of pub/sub, for callers speaking to a responder subscribed on the NATS port.
      * Request sends one request on the org&#39;s bus and waits for one reply — the synchronous half of pub/sub, for callers speaking to a responder subscribed on the NATS port. 404 when nobody is listening on the subject; 408 when a responder exists but no reply arrived within the timeout.
-     * @param cloudBusRequest 
-     * @return ApiResponse<CloudBusMessage?>
+     * @param busRequest 
+     * @return ApiResponse<BusMessage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PubsubRequestWithHttpInfo(cloudBusRequest: CloudBusRequest) : ApiResponse<CloudBusMessage?> {
-        val localVariableConfig = cloudPostV1PubsubRequestRequestConfig(cloudBusRequest = cloudBusRequest)
+    fun postV1PubsubRequestWithHttpInfo(busRequest: BusRequest) : ApiResponse<BusMessage?> {
+        val localVariableConfig = postV1PubsubRequestRequestConfig(busRequest = busRequest)
 
-        return request<CloudBusRequest, CloudBusMessage>(
+        return request<BusRequest, BusMessage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1PubsubRequest
+     * To obtain the request config of the operation postV1PubsubRequest
      *
-     * @param cloudBusRequest 
+     * @param busRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1PubsubRequestRequestConfig(cloudBusRequest: CloudBusRequest) : RequestConfig<CloudBusRequest> {
-        val localVariableBody = cloudBusRequest
+    fun postV1PubsubRequestRequestConfig(busRequest: BusRequest) : RequestConfig<BusRequest> {
+        val localVariableBody = busRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1247,18 +1244,18 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/request",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/pubsub/jetstream/streams/{stream}
-     * UpdateStream rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream.
-     * UpdateStream rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream. It is a PUT: the spec sent replaces the spec held, with one reading for the enums a caller omits — an empty storage, retention or discard keeps the stream&#39;s current one, because JetStream holds storage and retention immutable and refuses a change with a 400 rather than this door pretending it took.
+     * Rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream.
+     * Rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream. It is a PUT: the spec sent replaces the spec held, with one reading for the enums a caller omits — an empty storage, retention or discard keeps the stream&#39;s current one, because JetStream holds storage and retention immutable and refuses a change with a 400 rather than this door pretending it took.
      * @param stream Stream is the stream to update, from the path.
-     * @param cloudStreamUpdate 
-     * @return CloudStreamRecord
+     * @param streamUpdate 
+     * @return StreamRecord
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1267,11 +1264,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1PubsubJetstreamStreamsStream(stream: kotlin.String, cloudStreamUpdate: CloudStreamUpdate) : CloudStreamRecord {
-        val localVarResponse = cloudPutV1PubsubJetstreamStreamsStreamWithHttpInfo(stream = stream, cloudStreamUpdate = cloudStreamUpdate)
+    fun putV1PubsubJetstreamStreamsByStream(stream: kotlin.String, streamUpdate: StreamUpdate) : StreamRecord {
+        val localVarResponse = putV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream = stream, streamUpdate = streamUpdate)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStreamRecord
+            ResponseType.Success -> (localVarResponse as Success<*>).data as StreamRecord
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1287,33 +1284,33 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/pubsub/jetstream/streams/{stream}
-     * UpdateStream rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream.
-     * UpdateStream rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream. It is a PUT: the spec sent replaces the spec held, with one reading for the enums a caller omits — an empty storage, retention or discard keeps the stream&#39;s current one, because JetStream holds storage and retention immutable and refuses a change with a 400 rather than this door pretending it took.
+     * Rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream.
+     * Rewrites a stream&#39;s configuration — subjects, limits, discard — and returns the updated stream. It is a PUT: the spec sent replaces the spec held, with one reading for the enums a caller omits — an empty storage, retention or discard keeps the stream&#39;s current one, because JetStream holds storage and retention immutable and refuses a change with a 400 rather than this door pretending it took.
      * @param stream Stream is the stream to update, from the path.
-     * @param cloudStreamUpdate 
-     * @return ApiResponse<CloudStreamRecord?>
+     * @param streamUpdate 
+     * @return ApiResponse<StreamRecord?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1PubsubJetstreamStreamsStreamWithHttpInfo(stream: kotlin.String, cloudStreamUpdate: CloudStreamUpdate) : ApiResponse<CloudStreamRecord?> {
-        val localVariableConfig = cloudPutV1PubsubJetstreamStreamsStreamRequestConfig(stream = stream, cloudStreamUpdate = cloudStreamUpdate)
+    fun putV1PubsubJetstreamStreamsByStreamWithHttpInfo(stream: kotlin.String, streamUpdate: StreamUpdate) : ApiResponse<StreamRecord?> {
+        val localVariableConfig = putV1PubsubJetstreamStreamsByStreamRequestConfig(stream = stream, streamUpdate = streamUpdate)
 
-        return request<CloudStreamUpdate, CloudStreamRecord>(
+        return request<StreamUpdate, StreamRecord>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1PubsubJetstreamStreamsStream
+     * To obtain the request config of the operation putV1PubsubJetstreamStreamsByStream
      *
      * @param stream Stream is the stream to update, from the path.
-     * @param cloudStreamUpdate 
+     * @param streamUpdate 
      * @return RequestConfig
      */
-    fun cloudPutV1PubsubJetstreamStreamsStreamRequestConfig(stream: kotlin.String, cloudStreamUpdate: CloudStreamUpdate) : RequestConfig<CloudStreamUpdate> {
-        val localVariableBody = cloudStreamUpdate
+    fun putV1PubsubJetstreamStreamsByStreamRequestConfig(stream: kotlin.String, streamUpdate: StreamUpdate) : RequestConfig<StreamUpdate> {
+        val localVariableBody = streamUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1324,7 +1321,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/jetstream/streams/{stream}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1335,8 +1332,8 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Put sets one key to one value and returns the revision the write created. Writes are versioned: each put is a new revision and the bucket retains up to its History of them per key.
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
-     * @param cloudKvWrite 
-     * @return CloudKvAck
+     * @param kvWrite 
+     * @return KvAck
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1345,11 +1342,11 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1PubsubKvBucketKey(bucket: kotlin.String, key: kotlin.String, cloudKvWrite: CloudKvWrite) : CloudKvAck {
-        val localVarResponse = cloudPutV1PubsubKvBucketKeyWithHttpInfo(bucket = bucket, key = key, cloudKvWrite = cloudKvWrite)
+    fun putV1PubsubKvByBucketByKey(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : KvAck {
+        val localVarResponse = putV1PubsubKvByBucketByKeyWithHttpInfo(bucket = bucket, key = key, kvWrite = kvWrite)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKvAck
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KvAck
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1369,31 +1366,31 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * Put sets one key to one value and returns the revision the write created. Writes are versioned: each put is a new revision and the bucket retains up to its History of them per key.
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
-     * @param cloudKvWrite 
-     * @return ApiResponse<CloudKvAck?>
+     * @param kvWrite 
+     * @return ApiResponse<KvAck?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1PubsubKvBucketKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String, cloudKvWrite: CloudKvWrite) : ApiResponse<CloudKvAck?> {
-        val localVariableConfig = cloudPutV1PubsubKvBucketKeyRequestConfig(bucket = bucket, key = key, cloudKvWrite = cloudKvWrite)
+    fun putV1PubsubKvByBucketByKeyWithHttpInfo(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : ApiResponse<KvAck?> {
+        val localVariableConfig = putV1PubsubKvByBucketByKeyRequestConfig(bucket = bucket, key = key, kvWrite = kvWrite)
 
-        return request<CloudKvWrite, CloudKvAck>(
+        return request<KvWrite, KvAck>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1PubsubKvBucketKey
+     * To obtain the request config of the operation putV1PubsubKvByBucketByKey
      *
      * @param bucket Bucket is the bucket, from the path.
      * @param key Key is the key, from the path.
-     * @param cloudKvWrite 
+     * @param kvWrite 
      * @return RequestConfig
      */
-    fun cloudPutV1PubsubKvBucketKeyRequestConfig(bucket: kotlin.String, key: kotlin.String, cloudKvWrite: CloudKvWrite) : RequestConfig<CloudKvWrite> {
-        val localVariableBody = cloudKvWrite
+    fun putV1PubsubKvByBucketByKeyRequestConfig(bucket: kotlin.String, key: kotlin.String, kvWrite: KvWrite) : RequestConfig<KvWrite> {
+        val localVariableBody = kvWrite
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1404,240 +1401,7 @@ class PubSubApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/pubsub/kv/{bucket}/{key}".replace("{"+"bucket"+"}", encodeURIComponent(bucket.toString())).replace("{"+"key"+"}", encodeURIComponent(key.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/kv/pubsub/channels
-     * List active channels
-     * 
-     * @param pattern  (optional, default to "*")
-     * @return KvListChannels200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvListChannels(pattern: kotlin.String? = "*") : KvListChannels200Response {
-        val localVarResponse = kvListChannelsWithHttpInfo(pattern = pattern)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KvListChannels200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kv/pubsub/channels
-     * List active channels
-     * 
-     * @param pattern  (optional, default to "*")
-     * @return ApiResponse<KvListChannels200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvListChannelsWithHttpInfo(pattern: kotlin.String?) : ApiResponse<KvListChannels200Response?> {
-        val localVariableConfig = kvListChannelsRequestConfig(pattern = pattern)
-
-        return request<Unit, KvListChannels200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvListChannels
-     *
-     * @param pattern  (optional, default to "*")
-     * @return RequestConfig
-     */
-    fun kvListChannelsRequestConfig(pattern: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (pattern != null) {
-                    put("pattern", listOf(pattern.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kv/pubsub/channels",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/kv/pubsub/publish
-     * Publish message to channel
-     * 
-     * @param kvPublishRequest 
-     * @return KvPublish200Response
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvPublish(kvPublishRequest: KvPublishRequest) : KvPublish200Response {
-        val localVarResponse = kvPublishWithHttpInfo(kvPublishRequest = kvPublishRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as KvPublish200Response
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/kv/pubsub/publish
-     * Publish message to channel
-     * 
-     * @param kvPublishRequest 
-     * @return ApiResponse<KvPublish200Response?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvPublishWithHttpInfo(kvPublishRequest: KvPublishRequest) : ApiResponse<KvPublish200Response?> {
-        val localVariableConfig = kvPublishRequestConfig(kvPublishRequest = kvPublishRequest)
-
-        return request<KvPublishRequest, KvPublish200Response>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvPublish
-     *
-     * @param kvPublishRequest 
-     * @return RequestConfig
-     */
-    fun kvPublishRequestConfig(kvPublishRequest: KvPublishRequest) : RequestConfig<KvPublishRequest> {
-        val localVariableBody = kvPublishRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/kv/pubsub/publish",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/kv/pubsub/subscribe
-     * Subscribe to channels (SSE)
-     * 
-     * @param channels Channels to subscribe to
-     * @param pattern Pattern to subscribe to (e.g. user:*) (optional)
-     * @return kotlin.String
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun kvSubscribe(channels: kotlin.collections.List<kotlin.String>, pattern: kotlin.String? = null) : kotlin.String {
-        val localVarResponse = kvSubscribeWithHttpInfo(channels = channels, pattern = pattern)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.String
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kv/pubsub/subscribe
-     * Subscribe to channels (SSE)
-     * 
-     * @param channels Channels to subscribe to
-     * @param pattern Pattern to subscribe to (e.g. user:*) (optional)
-     * @return ApiResponse<kotlin.String?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun kvSubscribeWithHttpInfo(channels: kotlin.collections.List<kotlin.String>, pattern: kotlin.String?) : ApiResponse<kotlin.String?> {
-        val localVariableConfig = kvSubscribeRequestConfig(channels = channels, pattern = pattern)
-
-        return request<Unit, kotlin.String>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation kvSubscribe
-     *
-     * @param channels Channels to subscribe to
-     * @param pattern Pattern to subscribe to (e.g. user:*) (optional)
-     * @return RequestConfig
-     */
-    fun kvSubscribeRequestConfig(channels: kotlin.collections.List<kotlin.String>, pattern: kotlin.String?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                put("channels", toMultiValue(channels.toList(), "multi"))
-                if (pattern != null) {
-                    put("pattern", listOf(pattern.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kv/pubsub/subscribe",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

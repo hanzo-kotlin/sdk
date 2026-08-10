@@ -19,18 +19,18 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudConfig
-import ai.hanzo.cloud.model.CloudConsumer
-import ai.hanzo.cloud.model.CloudHealth
-import ai.hanzo.cloud.model.CloudInfoOut
-import ai.hanzo.cloud.model.CloudMakeIn
-import ai.hanzo.cloud.model.CloudNextIn
-import ai.hanzo.cloud.model.CloudPickOut
-import ai.hanzo.cloud.model.CloudPurge
-import ai.hanzo.cloud.model.CloudPurgeOut
-import ai.hanzo.cloud.model.CloudReadOut
-import ai.hanzo.cloud.model.CloudStream
-import ai.hanzo.cloud.model.CloudStreams
+import ai.hanzo.cloud.model.Config
+import ai.hanzo.cloud.model.Consumer
+import ai.hanzo.cloud.model.Health
+import ai.hanzo.cloud.model.InfoOut
+import ai.hanzo.cloud.model.MakeIn
+import ai.hanzo.cloud.model.NextIn
+import ai.hanzo.cloud.model.PickOut
+import ai.hanzo.cloud.model.Purge
+import ai.hanzo.cloud.model.PurgeOut
+import ai.hanzo.cloud.model.ReadOut
+import ai.hanzo.cloud.model.Stream
+import ai.hanzo.cloud.model.Streams
 
 import com.google.gson.annotations.SerializedName
 
@@ -69,8 +69,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MqStreamsName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1MqStreamsNameWithHttpInfo(name = name)
+    fun deleteV1MqStreamsByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1MqStreamsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -97,8 +97,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MqStreamsNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MqStreamsNameRequestConfig(name = name)
+    fun deleteV1MqStreamsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MqStreamsByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -106,12 +106,12 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MqStreamsName
+     * To obtain the request config of the operation deleteV1MqStreamsByName
      *
      * @param name Name is the stream name, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MqStreamsNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1MqStreamsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -121,7 +121,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -140,8 +140,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MqStreamsNameMessagesSeq(name: kotlin.String, seq: kotlin.Int) : Unit {
-        val localVarResponse = cloudDeleteV1MqStreamsNameMessagesSeqWithHttpInfo(name = name, seq = seq)
+    fun deleteV1MqStreamsByNameMessagesBySeq(name: kotlin.String, seq: kotlin.Int) : Unit {
+        val localVarResponse = deleteV1MqStreamsByNameMessagesBySeqWithHttpInfo(name = name, seq = seq)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -169,8 +169,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MqStreamsNameMessagesSeqWithHttpInfo(name: kotlin.String, seq: kotlin.Int) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MqStreamsNameMessagesSeqRequestConfig(name = name, seq = seq)
+    fun deleteV1MqStreamsByNameMessagesBySeqWithHttpInfo(name: kotlin.String, seq: kotlin.Int) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MqStreamsByNameMessagesBySeqRequestConfig(name = name, seq = seq)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -178,13 +178,13 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MqStreamsNameMessagesSeq
+     * To obtain the request config of the operation deleteV1MqStreamsByNameMessagesBySeq
      *
      * @param name Name is the stream name, from the path.
      * @param seq Seq is the message&#39;s stream sequence, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MqStreamsNameMessagesSeqRequestConfig(name: kotlin.String, seq: kotlin.Int) : RequestConfig<Unit> {
+    fun deleteV1MqStreamsByNameMessagesBySeqRequestConfig(name: kotlin.String, seq: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -194,7 +194,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}/messages/{seq}".replace("{"+"name"+"}", encodeURIComponent(name.toString())).replace("{"+"seq"+"}", encodeURIComponent(seq.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -213,8 +213,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MqStreamsStreamConsumersName(stream: kotlin.String, name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1MqStreamsStreamConsumersNameWithHttpInfo(stream = stream, name = name)
+    fun deleteV1MqStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1MqStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -242,8 +242,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MqStreamsStreamConsumersNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MqStreamsStreamConsumersNameRequestConfig(stream = stream, name = name)
+    fun deleteV1MqStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MqStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -251,13 +251,13 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MqStreamsStreamConsumersName
+     * To obtain the request config of the operation deleteV1MqStreamsByStreamConsumersByName
      *
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MqStreamsStreamConsumersNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1MqStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -267,7 +267,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -276,7 +276,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/mq/health
      * Reports whether the message plane behind this surface answers.
      * Reports whether the message plane behind this surface answers.
-     * @return CloudHealth
+     * @return Health
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -285,11 +285,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MqHealth() : CloudHealth {
-        val localVarResponse = cloudGetV1MqHealthWithHttpInfo()
+    fun getV1MqHealth() : Health {
+        val localVarResponse = getV1MqHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Health
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -307,26 +307,26 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/mq/health
      * Reports whether the message plane behind this surface answers.
      * Reports whether the message plane behind this surface answers.
-     * @return ApiResponse<CloudHealth?>
+     * @return ApiResponse<Health?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MqHealthWithHttpInfo() : ApiResponse<CloudHealth?> {
-        val localVariableConfig = cloudGetV1MqHealthRequestConfig()
+    fun getV1MqHealthWithHttpInfo() : ApiResponse<Health?> {
+        val localVariableConfig = getV1MqHealthRequestConfig()
 
-        return request<Unit, CloudHealth>(
+        return request<Unit, Health>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MqHealth
+     * To obtain the request config of the operation getV1MqHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MqHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1MqHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -337,7 +337,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -346,7 +346,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/mq/info
      * Returns the broker&#39;s identity and the org&#39;s stream count.
      * Returns the broker&#39;s identity and the org&#39;s stream count.
-     * @return CloudInfoOut
+     * @return InfoOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -355,11 +355,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MqInfo() : CloudInfoOut {
-        val localVarResponse = cloudGetV1MqInfoWithHttpInfo()
+    fun getV1MqInfo() : InfoOut {
+        val localVarResponse = getV1MqInfoWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInfoOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InfoOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -377,26 +377,26 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * GET /v1/mq/info
      * Returns the broker&#39;s identity and the org&#39;s stream count.
      * Returns the broker&#39;s identity and the org&#39;s stream count.
-     * @return ApiResponse<CloudInfoOut?>
+     * @return ApiResponse<InfoOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MqInfoWithHttpInfo() : ApiResponse<CloudInfoOut?> {
-        val localVariableConfig = cloudGetV1MqInfoRequestConfig()
+    fun getV1MqInfoWithHttpInfo() : ApiResponse<InfoOut?> {
+        val localVariableConfig = getV1MqInfoRequestConfig()
 
-        return request<Unit, CloudInfoOut>(
+        return request<Unit, InfoOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MqInfo
+     * To obtain the request config of the operation getV1MqInfo
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MqInfoRequestConfig() : RequestConfig<Unit> {
+    fun getV1MqInfoRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -407,7 +407,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/info",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -418,7 +418,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Returns the org&#39;s streams, name-ordered, with their live state.
      * @param limit Limit caps the streams returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many streams, name-ordered. (optional)
-     * @return CloudStreams
+     * @return Streams
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -427,11 +427,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MqStreams(limit: kotlin.Int? = null, offset: kotlin.Int? = null) : CloudStreams {
-        val localVarResponse = cloudGetV1MqStreamsWithHttpInfo(limit = limit, offset = offset)
+    fun getV1MqStreams(limit: kotlin.Int? = null, offset: kotlin.Int? = null) : Streams {
+        val localVarResponse = getV1MqStreamsWithHttpInfo(limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStreams
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Streams
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -451,28 +451,28 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Returns the org&#39;s streams, name-ordered, with their live state.
      * @param limit Limit caps the streams returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many streams, name-ordered. (optional)
-     * @return ApiResponse<CloudStreams?>
+     * @return ApiResponse<Streams?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MqStreamsWithHttpInfo(limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<CloudStreams?> {
-        val localVariableConfig = cloudGetV1MqStreamsRequestConfig(limit = limit, offset = offset)
+    fun getV1MqStreamsWithHttpInfo(limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<Streams?> {
+        val localVariableConfig = getV1MqStreamsRequestConfig(limit = limit, offset = offset)
 
-        return request<Unit, CloudStreams>(
+        return request<Unit, Streams>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MqStreams
+     * To obtain the request config of the operation getV1MqStreams
      *
      * @param limit Limit caps the streams returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many streams, name-ordered. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MqStreamsRequestConfig(limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MqStreamsRequestConfig(limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -491,7 +491,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -501,7 +501,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Returns one stream&#39;s configuration and live state.
      * Returns one stream&#39;s configuration and live state.
      * @param name Name is the stream name, from the path.
-     * @return CloudStream
+     * @return Stream
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -510,11 +510,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MqStreamsName(name: kotlin.String) : CloudStream {
-        val localVarResponse = cloudGetV1MqStreamsNameWithHttpInfo(name = name)
+    fun getV1MqStreamsByName(name: kotlin.String) : Stream {
+        val localVarResponse = getV1MqStreamsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStream
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Stream
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -533,27 +533,27 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Returns one stream&#39;s configuration and live state.
      * Returns one stream&#39;s configuration and live state.
      * @param name Name is the stream name, from the path.
-     * @return ApiResponse<CloudStream?>
+     * @return ApiResponse<Stream?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MqStreamsNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudStream?> {
-        val localVariableConfig = cloudGetV1MqStreamsNameRequestConfig(name = name)
+    fun getV1MqStreamsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Stream?> {
+        val localVariableConfig = getV1MqStreamsByNameRequestConfig(name = name)
 
-        return request<Unit, CloudStream>(
+        return request<Unit, Stream>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MqStreamsName
+     * To obtain the request config of the operation getV1MqStreamsByName
      *
      * @param name Name is the stream name, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1MqStreamsNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MqStreamsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -564,7 +564,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -578,7 +578,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param lastBySubject LastBySubject reads the newest message on this org-relative subject. (optional)
      * @param nextBySubject NextBySubject walks forward from seq collecting messages on this org-relative subject (wildcards supported). (optional)
      * @param limit Limit caps a next_by_subject walk (1–1000, default 100). (optional)
-     * @return CloudReadOut
+     * @return ReadOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -587,11 +587,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MqStreamsNameMessages(name: kotlin.String, seq: kotlin.Int? = null, lastBySubject: kotlin.String? = null, nextBySubject: kotlin.String? = null, limit: kotlin.Int? = null) : CloudReadOut {
-        val localVarResponse = cloudGetV1MqStreamsNameMessagesWithHttpInfo(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
+    fun getV1MqStreamsByNameMessages(name: kotlin.String, seq: kotlin.Int? = null, lastBySubject: kotlin.String? = null, nextBySubject: kotlin.String? = null, limit: kotlin.Int? = null) : ReadOut {
+        val localVarResponse = getV1MqStreamsByNameMessagesWithHttpInfo(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReadOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReadOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -614,22 +614,22 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param lastBySubject LastBySubject reads the newest message on this org-relative subject. (optional)
      * @param nextBySubject NextBySubject walks forward from seq collecting messages on this org-relative subject (wildcards supported). (optional)
      * @param limit Limit caps a next_by_subject walk (1–1000, default 100). (optional)
-     * @return ApiResponse<CloudReadOut?>
+     * @return ApiResponse<ReadOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MqStreamsNameMessagesWithHttpInfo(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : ApiResponse<CloudReadOut?> {
-        val localVariableConfig = cloudGetV1MqStreamsNameMessagesRequestConfig(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
+    fun getV1MqStreamsByNameMessagesWithHttpInfo(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : ApiResponse<ReadOut?> {
+        val localVariableConfig = getV1MqStreamsByNameMessagesRequestConfig(name = name, seq = seq, lastBySubject = lastBySubject, nextBySubject = nextBySubject, limit = limit)
 
-        return request<Unit, CloudReadOut>(
+        return request<Unit, ReadOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MqStreamsNameMessages
+     * To obtain the request config of the operation getV1MqStreamsByNameMessages
      *
      * @param name Name is the stream name, from the path.
      * @param seq Seq reads the message at this sequence (with next_by_subject: the walk&#39;s start). (optional)
@@ -638,7 +638,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param limit Limit caps a next_by_subject walk (1–1000, default 100). (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MqStreamsNameMessagesRequestConfig(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MqStreamsByNameMessagesRequestConfig(name: kotlin.String, seq: kotlin.Int?, lastBySubject: kotlin.String?, nextBySubject: kotlin.String?, limit: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -663,7 +663,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}/messages".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -675,7 +675,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param stream Stream is the stream name, from the path.
      * @param limit Limit caps the consumers returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many consumers, name-ordered. (optional)
-     * @return CloudPickOut
+     * @return PickOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -684,11 +684,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MqStreamsStreamConsumers(stream: kotlin.String, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : CloudPickOut {
-        val localVarResponse = cloudGetV1MqStreamsStreamConsumersWithHttpInfo(stream = stream, limit = limit, offset = offset)
+    fun getV1MqStreamsByStreamConsumers(stream: kotlin.String, limit: kotlin.Int? = null, offset: kotlin.Int? = null) : PickOut {
+        val localVarResponse = getV1MqStreamsByStreamConsumersWithHttpInfo(stream = stream, limit = limit, offset = offset)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPickOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PickOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -709,29 +709,29 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param stream Stream is the stream name, from the path.
      * @param limit Limit caps the consumers returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many consumers, name-ordered. (optional)
-     * @return ApiResponse<CloudPickOut?>
+     * @return ApiResponse<PickOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MqStreamsStreamConsumersWithHttpInfo(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<CloudPickOut?> {
-        val localVariableConfig = cloudGetV1MqStreamsStreamConsumersRequestConfig(stream = stream, limit = limit, offset = offset)
+    fun getV1MqStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : ApiResponse<PickOut?> {
+        val localVariableConfig = getV1MqStreamsByStreamConsumersRequestConfig(stream = stream, limit = limit, offset = offset)
 
-        return request<Unit, CloudPickOut>(
+        return request<Unit, PickOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MqStreamsStreamConsumers
+     * To obtain the request config of the operation getV1MqStreamsByStreamConsumers
      *
      * @param stream Stream is the stream name, from the path.
      * @param limit Limit caps the consumers returned (1–1000, default 100). (optional)
      * @param offset Offset skips that many consumers, name-ordered. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1MqStreamsStreamConsumersRequestConfig(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
+    fun getV1MqStreamsByStreamConsumersRequestConfig(stream: kotlin.String, limit: kotlin.Int?, offset: kotlin.Int?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -750,7 +750,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -761,7 +761,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Returns one consumer&#39;s configuration and delivery state.
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
-     * @return CloudConsumer
+     * @return Consumer
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -770,11 +770,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MqStreamsStreamConsumersName(stream: kotlin.String, name: kotlin.String) : CloudConsumer {
-        val localVarResponse = cloudGetV1MqStreamsStreamConsumersNameWithHttpInfo(stream = stream, name = name)
+    fun getV1MqStreamsByStreamConsumersByName(stream: kotlin.String, name: kotlin.String) : Consumer {
+        val localVarResponse = getV1MqStreamsByStreamConsumersByNameWithHttpInfo(stream = stream, name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConsumer
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Consumer
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -794,28 +794,28 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Returns one consumer&#39;s configuration and delivery state.
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
-     * @return ApiResponse<CloudConsumer?>
+     * @return ApiResponse<Consumer?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MqStreamsStreamConsumersNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<CloudConsumer?> {
-        val localVariableConfig = cloudGetV1MqStreamsStreamConsumersNameRequestConfig(stream = stream, name = name)
+    fun getV1MqStreamsByStreamConsumersByNameWithHttpInfo(stream: kotlin.String, name: kotlin.String) : ApiResponse<Consumer?> {
+        val localVariableConfig = getV1MqStreamsByStreamConsumersByNameRequestConfig(stream = stream, name = name)
 
-        return request<Unit, CloudConsumer>(
+        return request<Unit, Consumer>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MqStreamsStreamConsumersName
+     * To obtain the request config of the operation getV1MqStreamsByStreamConsumersByName
      *
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1MqStreamsStreamConsumersNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun getV1MqStreamsByStreamConsumersByNameRequestConfig(stream: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -826,7 +826,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers/{name}".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -835,8 +835,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * POST /v1/mq/streams
      * Creates a durable stream in the org&#39;s namespace and returns it.
      * Creates a durable stream in the org&#39;s namespace and returns it.
-     * @param cloudConfig 
-     * @return CloudStream
+     * @param config 
+     * @return Stream
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -845,11 +845,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MqStreams(cloudConfig: CloudConfig) : CloudStream {
-        val localVarResponse = cloudPostV1MqStreamsWithHttpInfo(cloudConfig = cloudConfig)
+    fun postV1MqStreams(config: Config) : Stream {
+        val localVarResponse = postV1MqStreamsWithHttpInfo(config = config)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStream
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Stream
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -867,29 +867,29 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * POST /v1/mq/streams
      * Creates a durable stream in the org&#39;s namespace and returns it.
      * Creates a durable stream in the org&#39;s namespace and returns it.
-     * @param cloudConfig 
-     * @return ApiResponse<CloudStream?>
+     * @param config 
+     * @return ApiResponse<Stream?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MqStreamsWithHttpInfo(cloudConfig: CloudConfig) : ApiResponse<CloudStream?> {
-        val localVariableConfig = cloudPostV1MqStreamsRequestConfig(cloudConfig = cloudConfig)
+    fun postV1MqStreamsWithHttpInfo(config: Config) : ApiResponse<Stream?> {
+        val localVariableConfig = postV1MqStreamsRequestConfig(config = config)
 
-        return request<CloudConfig, CloudStream>(
+        return request<Config, Stream>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MqStreams
+     * To obtain the request config of the operation postV1MqStreams
      *
-     * @param cloudConfig 
+     * @param config 
      * @return RequestConfig
      */
-    fun cloudPostV1MqStreamsRequestConfig(cloudConfig: CloudConfig) : RequestConfig<CloudConfig> {
-        val localVariableBody = cloudConfig
+    fun postV1MqStreamsRequestConfig(config: Config) : RequestConfig<Config> {
+        val localVariableBody = config
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -900,7 +900,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -910,8 +910,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Removes messages from a stream, leaving its consumers in place.
      * Removes messages from a stream, leaving its consumers in place.
      * @param name Name is the stream name, from the path.
-     * @param cloudPurge 
-     * @return CloudPurgeOut
+     * @param purge 
+     * @return PurgeOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -920,11 +920,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MqStreamsNamePurge(name: kotlin.String, cloudPurge: CloudPurge) : CloudPurgeOut {
-        val localVarResponse = cloudPostV1MqStreamsNamePurgeWithHttpInfo(name = name, cloudPurge = cloudPurge)
+    fun postV1MqStreamsByNamePurge(name: kotlin.String, purge: Purge) : PurgeOut {
+        val localVarResponse = postV1MqStreamsByNamePurgeWithHttpInfo(name = name, purge = purge)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPurgeOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PurgeOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -943,30 +943,30 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Removes messages from a stream, leaving its consumers in place.
      * Removes messages from a stream, leaving its consumers in place.
      * @param name Name is the stream name, from the path.
-     * @param cloudPurge 
-     * @return ApiResponse<CloudPurgeOut?>
+     * @param purge 
+     * @return ApiResponse<PurgeOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MqStreamsNamePurgeWithHttpInfo(name: kotlin.String, cloudPurge: CloudPurge) : ApiResponse<CloudPurgeOut?> {
-        val localVariableConfig = cloudPostV1MqStreamsNamePurgeRequestConfig(name = name, cloudPurge = cloudPurge)
+    fun postV1MqStreamsByNamePurgeWithHttpInfo(name: kotlin.String, purge: Purge) : ApiResponse<PurgeOut?> {
+        val localVariableConfig = postV1MqStreamsByNamePurgeRequestConfig(name = name, purge = purge)
 
-        return request<CloudPurge, CloudPurgeOut>(
+        return request<Purge, PurgeOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MqStreamsNamePurge
+     * To obtain the request config of the operation postV1MqStreamsByNamePurge
      *
      * @param name Name is the stream name, from the path.
-     * @param cloudPurge 
+     * @param purge 
      * @return RequestConfig
      */
-    fun cloudPostV1MqStreamsNamePurgeRequestConfig(name: kotlin.String, cloudPurge: CloudPurge) : RequestConfig<CloudPurge> {
-        val localVariableBody = cloudPurge
+    fun postV1MqStreamsByNamePurgeRequestConfig(name: kotlin.String, purge: Purge) : RequestConfig<Purge> {
+        val localVariableBody = purge
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -977,7 +977,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}/purge".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -987,8 +987,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Creates a durable pull consumer on a stream and returns it.
      * Creates a durable pull consumer on a stream and returns it.
      * @param stream Stream is the stream name, from the path.
-     * @param cloudMakeIn 
-     * @return CloudConsumer
+     * @param makeIn 
+     * @return Consumer
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -997,11 +997,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MqStreamsStreamConsumers(stream: kotlin.String, cloudMakeIn: CloudMakeIn) : CloudConsumer {
-        val localVarResponse = cloudPostV1MqStreamsStreamConsumersWithHttpInfo(stream = stream, cloudMakeIn = cloudMakeIn)
+    fun postV1MqStreamsByStreamConsumers(stream: kotlin.String, makeIn: MakeIn) : Consumer {
+        val localVarResponse = postV1MqStreamsByStreamConsumersWithHttpInfo(stream = stream, makeIn = makeIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConsumer
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Consumer
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1020,30 +1020,30 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Creates a durable pull consumer on a stream and returns it.
      * Creates a durable pull consumer on a stream and returns it.
      * @param stream Stream is the stream name, from the path.
-     * @param cloudMakeIn 
-     * @return ApiResponse<CloudConsumer?>
+     * @param makeIn 
+     * @return ApiResponse<Consumer?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MqStreamsStreamConsumersWithHttpInfo(stream: kotlin.String, cloudMakeIn: CloudMakeIn) : ApiResponse<CloudConsumer?> {
-        val localVariableConfig = cloudPostV1MqStreamsStreamConsumersRequestConfig(stream = stream, cloudMakeIn = cloudMakeIn)
+    fun postV1MqStreamsByStreamConsumersWithHttpInfo(stream: kotlin.String, makeIn: MakeIn) : ApiResponse<Consumer?> {
+        val localVariableConfig = postV1MqStreamsByStreamConsumersRequestConfig(stream = stream, makeIn = makeIn)
 
-        return request<CloudMakeIn, CloudConsumer>(
+        return request<MakeIn, Consumer>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MqStreamsStreamConsumers
+     * To obtain the request config of the operation postV1MqStreamsByStreamConsumers
      *
      * @param stream Stream is the stream name, from the path.
-     * @param cloudMakeIn 
+     * @param makeIn 
      * @return RequestConfig
      */
-    fun cloudPostV1MqStreamsStreamConsumersRequestConfig(stream: kotlin.String, cloudMakeIn: CloudMakeIn) : RequestConfig<CloudMakeIn> {
-        val localVariableBody = cloudMakeIn
+    fun postV1MqStreamsByStreamConsumersRequestConfig(stream: kotlin.String, makeIn: MakeIn) : RequestConfig<MakeIn> {
+        val localVariableBody = makeIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1054,7 +1054,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1065,8 +1065,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Pulls the consumer&#39;s next batch. Delivered messages are acknowledged on delivery — the broker will not redeliver what this call returns; an empty wait answers 408.
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
-     * @param cloudNextIn 
-     * @return CloudReadOut
+     * @param nextIn 
+     * @return ReadOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1075,11 +1075,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MqStreamsStreamConsumersNameNext(stream: kotlin.String, name: kotlin.String, cloudNextIn: CloudNextIn) : CloudReadOut {
-        val localVarResponse = cloudPostV1MqStreamsStreamConsumersNameNextWithHttpInfo(stream = stream, name = name, cloudNextIn = cloudNextIn)
+    fun postV1MqStreamsByStreamConsumersByNameNext(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : ReadOut {
+        val localVarResponse = postV1MqStreamsByStreamConsumersByNameNextWithHttpInfo(stream = stream, name = name, nextIn = nextIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudReadOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ReadOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1099,31 +1099,31 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Pulls the consumer&#39;s next batch. Delivered messages are acknowledged on delivery — the broker will not redeliver what this call returns; an empty wait answers 408.
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
-     * @param cloudNextIn 
-     * @return ApiResponse<CloudReadOut?>
+     * @param nextIn 
+     * @return ApiResponse<ReadOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MqStreamsStreamConsumersNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, cloudNextIn: CloudNextIn) : ApiResponse<CloudReadOut?> {
-        val localVariableConfig = cloudPostV1MqStreamsStreamConsumersNameNextRequestConfig(stream = stream, name = name, cloudNextIn = cloudNextIn)
+    fun postV1MqStreamsByStreamConsumersByNameNextWithHttpInfo(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : ApiResponse<ReadOut?> {
+        val localVariableConfig = postV1MqStreamsByStreamConsumersByNameNextRequestConfig(stream = stream, name = name, nextIn = nextIn)
 
-        return request<CloudNextIn, CloudReadOut>(
+        return request<NextIn, ReadOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MqStreamsStreamConsumersNameNext
+     * To obtain the request config of the operation postV1MqStreamsByStreamConsumersByNameNext
      *
      * @param stream Stream is the stream name, from the path.
      * @param name Name is the consumer name, from the path.
-     * @param cloudNextIn 
+     * @param nextIn 
      * @return RequestConfig
      */
-    fun cloudPostV1MqStreamsStreamConsumersNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, cloudNextIn: CloudNextIn) : RequestConfig<CloudNextIn> {
-        val localVariableBody = cloudNextIn
+    fun postV1MqStreamsByStreamConsumersByNameNextRequestConfig(stream: kotlin.String, name: kotlin.String, nextIn: NextIn) : RequestConfig<NextIn> {
+        val localVariableBody = nextIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1134,7 +1134,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{stream}/consumers/{name}/next".replace("{"+"stream"+"}", encodeURIComponent(stream.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -1144,8 +1144,8 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * @param name Name is the stream name, unique within the org (alphanumeric, hyphens, underscores).
-     * @param cloudConfig 
-     * @return CloudStream
+     * @param config 
+     * @return Stream
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1154,11 +1154,11 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1MqStreamsName(name: kotlin.String, cloudConfig: CloudConfig) : CloudStream {
-        val localVarResponse = cloudPutV1MqStreamsNameWithHttpInfo(name = name, cloudConfig = cloudConfig)
+    fun putV1MqStreamsByName(name: kotlin.String, config: Config) : Stream {
+        val localVarResponse = putV1MqStreamsByNameWithHttpInfo(name = name, config = config)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudStream
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Stream
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1177,30 +1177,30 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * Reconfigures an existing stream; the path names the stream, and the immutable fields (storage, retention) must restate what they are.
      * @param name Name is the stream name, unique within the org (alphanumeric, hyphens, underscores).
-     * @param cloudConfig 
-     * @return ApiResponse<CloudStream?>
+     * @param config 
+     * @return ApiResponse<Stream?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1MqStreamsNameWithHttpInfo(name: kotlin.String, cloudConfig: CloudConfig) : ApiResponse<CloudStream?> {
-        val localVariableConfig = cloudPutV1MqStreamsNameRequestConfig(name = name, cloudConfig = cloudConfig)
+    fun putV1MqStreamsByNameWithHttpInfo(name: kotlin.String, config: Config) : ApiResponse<Stream?> {
+        val localVariableConfig = putV1MqStreamsByNameRequestConfig(name = name, config = config)
 
-        return request<CloudConfig, CloudStream>(
+        return request<Config, Stream>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1MqStreamsName
+     * To obtain the request config of the operation putV1MqStreamsByName
      *
      * @param name Name is the stream name, unique within the org (alphanumeric, hyphens, underscores).
-     * @param cloudConfig 
+     * @param config 
      * @return RequestConfig
      */
-    fun cloudPutV1MqStreamsNameRequestConfig(name: kotlin.String, cloudConfig: CloudConfig) : RequestConfig<CloudConfig> {
-        val localVariableBody = cloudConfig
+    fun putV1MqStreamsByNameRequestConfig(name: kotlin.String, config: Config) : RequestConfig<Config> {
+        val localVariableBody = config
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -1211,7 +1211,7 @@ class MqApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/mq/streams/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,11 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AdminAdminDeletePromo200Response
-import ai.hanzo.cloud.model.CloudBotRuns
-import ai.hanzo.cloud.model.CloudBotStopped
-import ai.hanzo.cloud.model.VisorBotLaunchRequest
-import ai.hanzo.cloud.model.VisorBotView
+import ai.hanzo.cloud.model.BotRuns
+import ai.hanzo.cloud.model.BotStopped
 
 import com.google.gson.annotations.SerializedName
 
@@ -53,7 +50,7 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/bots
      * List returns the caller org&#39;s live bot runs, read from the bot runtime and projected into the console contract with each run&#39;s live session URL derived here.
      * List returns the caller org&#39;s live bot runs, read from the bot runtime and projected into the console contract with each run&#39;s live session URL derived here.  The org is ALWAYS the validated principal&#39;s org, NEVER a request field, and it is what scopes the runtime&#39;s answer — so one tenant can never enumerate another&#39;s runs. A runtime that cannot answer is an error, not an empty list: [] would tell the caller \&quot;your org has no runs\&quot;, which is a different claim from \&quot;we could not ask\&quot;, and the difference is the whole reason this endpoint exists.
-     * @return CloudBotRuns
+     * @return BotRuns
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -62,11 +59,11 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Bots() : CloudBotRuns {
-        val localVarResponse = cloudGetV1BotsWithHttpInfo()
+    fun getV1Bots() : BotRuns {
+        val localVarResponse = getV1BotsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBotRuns
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BotRuns
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -84,26 +81,26 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/bots
      * List returns the caller org&#39;s live bot runs, read from the bot runtime and projected into the console contract with each run&#39;s live session URL derived here.
      * List returns the caller org&#39;s live bot runs, read from the bot runtime and projected into the console contract with each run&#39;s live session URL derived here.  The org is ALWAYS the validated principal&#39;s org, NEVER a request field, and it is what scopes the runtime&#39;s answer — so one tenant can never enumerate another&#39;s runs. A runtime that cannot answer is an error, not an empty list: [] would tell the caller \&quot;your org has no runs\&quot;, which is a different claim from \&quot;we could not ask\&quot;, and the difference is the whole reason this endpoint exists.
-     * @return ApiResponse<CloudBotRuns?>
+     * @return ApiResponse<BotRuns?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BotsWithHttpInfo() : ApiResponse<CloudBotRuns?> {
-        val localVariableConfig = cloudGetV1BotsRequestConfig()
+    fun getV1BotsWithHttpInfo() : ApiResponse<BotRuns?> {
+        val localVariableConfig = getV1BotsRequestConfig()
 
-        return request<Unit, CloudBotRuns>(
+        return request<Unit, BotRuns>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Bots
+     * To obtain the request config of the operation getV1Bots
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BotsRequestConfig() : RequestConfig<Unit> {
+    fun getV1BotsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -114,74 +111,7 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/bots",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/bots/run
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BotsRun() : Unit {
-        val localVarResponse = cloudPostV1BotsRunWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/bots/run
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BotsRunWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1BotsRunRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1BotsRun
-     *
-     * @return RequestConfig
-     */
-    fun cloudPostV1BotsRunRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/bots/run",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -191,7 +121,7 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Stop terminates one of the caller org&#39;s own bot runs and reports its terminal state.
      * Stop terminates one of the caller org&#39;s own bot runs and reports its terminal state.  The own-key guard is the org: it is the caller&#39;s validated org, never theirs to choose, and the runtime resolves the run id UNDER it. A run belonging to another tenant is not among this org&#39;s runs, so it answers absent — the same 404 a nonexistent id gets, which is what keeps this from being an oracle.  Absence is honoured ONLY when the runtime answers it. A runtime that does not serve stop reports nothing about the run, and reporting \&quot;stopped\&quot; on that basis would be a stop that cannot fail — so it is a 502.
      * @param runId 
-     * @return CloudBotStopped
+     * @return BotStopped
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -200,11 +130,11 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1BotsRunIdStop(runId: kotlin.String) : CloudBotStopped {
-        val localVarResponse = cloudPostV1BotsRunIdStopWithHttpInfo(runId = runId)
+    fun postV1BotsByRunidStop(runId: kotlin.String) : BotStopped {
+        val localVarResponse = postV1BotsByRunidStopWithHttpInfo(runId = runId)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBotStopped
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BotStopped
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -223,27 +153,27 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * Stop terminates one of the caller org&#39;s own bot runs and reports its terminal state.
      * Stop terminates one of the caller org&#39;s own bot runs and reports its terminal state.  The own-key guard is the org: it is the caller&#39;s validated org, never theirs to choose, and the runtime resolves the run id UNDER it. A run belonging to another tenant is not among this org&#39;s runs, so it answers absent — the same 404 a nonexistent id gets, which is what keeps this from being an oracle.  Absence is honoured ONLY when the runtime answers it. A runtime that does not serve stop reports nothing about the run, and reporting \&quot;stopped\&quot; on that basis would be a stop that cannot fail — so it is a 502.
      * @param runId 
-     * @return ApiResponse<CloudBotStopped?>
+     * @return ApiResponse<BotStopped?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1BotsRunIdStopWithHttpInfo(runId: kotlin.String) : ApiResponse<CloudBotStopped?> {
-        val localVariableConfig = cloudPostV1BotsRunIdStopRequestConfig(runId = runId)
+    fun postV1BotsByRunidStopWithHttpInfo(runId: kotlin.String) : ApiResponse<BotStopped?> {
+        val localVariableConfig = postV1BotsByRunidStopRequestConfig(runId = runId)
 
-        return request<Unit, CloudBotStopped>(
+        return request<Unit, BotStopped>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1BotsRunIdStop
+     * To obtain the request config of the operation postV1BotsByRunidStop
      *
      * @param runId 
      * @return RequestConfig
      */
-    fun cloudPostV1BotsRunIdStopRequestConfig(runId: kotlin.String) : RequestConfig<Unit> {
+    fun postV1BotsByRunidStopRequestConfig(runId: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -254,114 +184,15 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/bots/{runId}/stop".replace("{"+"runId"+"}", encodeURIComponent(runId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * enum for parameter action
-     */
-     enum class ActionVisorBotAction(val value: kotlin.String) {
-         @SerializedName(value = "stop") stop("stop"),
-         @SerializedName(value = "pause") pause("pause"),
-         @SerializedName(value = "message") message("message");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * POST /v1/bots/{id}/{action}
-     * Act on a bot (stop, pause, or message)
-     * &#x60;stop&#x60; and &#x60;pause&#x60; both halt the bot&#39;s agent runtime (one honest capability). &#x60;message&#x60; runs the bot&#39;s bound agent via the agent runner and returns that run&#39;s output verbatim. 
-     * @param id 
-     * @param action 
-     * @param body  (optional)
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun visorBotAction(id: kotlin.String, action: ActionVisorBotAction, body: kotlin.Any? = null) : kotlin.Any {
-        val localVarResponse = visorBotActionWithHttpInfo(id = id, action = action, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/bots/{id}/{action}
-     * Act on a bot (stop, pause, or message)
-     * &#x60;stop&#x60; and &#x60;pause&#x60; both halt the bot&#39;s agent runtime (one honest capability). &#x60;message&#x60; runs the bot&#39;s bound agent via the agent runner and returns that run&#39;s output verbatim. 
-     * @param id 
-     * @param action 
-     * @param body  (optional)
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun visorBotActionWithHttpInfo(id: kotlin.String, action: ActionVisorBotAction, body: kotlin.Any?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = visorBotActionRequestConfig(id = id, action = action, body = body)
-
-        return request<kotlin.Any, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation visorBotAction
-     *
-     * @param id 
-     * @param action 
-     * @param body  (optional)
-     * @return RequestConfig
-     */
-    fun visorBotActionRequestConfig(id: kotlin.String, action: ActionVisorBotAction, body: kotlin.Any?) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/bots/{id}/{action}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"action"+"}", encodeURIComponent(action.value.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/bots/{id}
-     * Terminate a bot (unbind agent + delete machine)
-     * 
-     * @param id 
+     * POST /v1/bots/run
+     * Reserved address for launching a bot run — not implemented, always 501
+     * Answers 501 to every call. The bot runtime exposes no launch operation, so nothing here can start a sandbox, and this address is published rather than dropped because it is reserved: routes resolve by specificity, so the &#x60;run&#x60; literal can never bind as a run id against its neighbour &#x60;/v1/bots/:runId/stop&#x60;.  The refusal is total and takes no input. The handler never reads the body, so any bytes at all — malformed JSON included — get the same 501; no run id is minted, no session URL is handed back, and no per-run fee is charged. That is the point: the earlier version minted an id the runtime had never heard of, pointed it at a VNC node that did not exist, and took real money for it.  Listing and stopping runs are live and org-scoped. Only the launch is missing, and it returns in the same change that can prove a bot boots.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -370,8 +201,8 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun visorDeleteBot(id: kotlin.String) : Unit {
-        val localVarResponse = visorDeleteBotWithHttpInfo(id = id)
+    fun postV1BotsRun() : Unit {
+        val localVarResponse = postV1BotsRunWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -389,17 +220,16 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * DELETE /v1/bots/{id}
-     * Terminate a bot (unbind agent + delete machine)
-     * 
-     * @param id 
+     * POST /v1/bots/run
+     * Reserved address for launching a bot run — not implemented, always 501
+     * Answers 501 to every call. The bot runtime exposes no launch operation, so nothing here can start a sandbox, and this address is published rather than dropped because it is reserved: routes resolve by specificity, so the &#x60;run&#x60; literal can never bind as a run id against its neighbour &#x60;/v1/bots/:runId/stop&#x60;.  The refusal is total and takes no input. The handler never reads the body, so any bytes at all — malformed JSON included — get the same 501; no run id is minted, no session URL is handed back, and no per-run fee is charged. That is the point: the earlier version minted an id the runtime had never heard of, pointed it at a VNC node that did not exist, and took real money for it.  Listing and stopping runs are live and org-scoped. Only the launch is missing, and it returns in the same change that can prove a bot boots.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun visorDeleteBotWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = visorDeleteBotRequestConfig(id = id)
+    fun postV1BotsRunWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1BotsRunRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -407,170 +237,21 @@ class BotsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation visorDeleteBot
+     * To obtain the request config of the operation postV1BotsRun
      *
-     * @param id 
      * @return RequestConfig
      */
-    fun visorDeleteBotRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1BotsRunRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/bots/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/bots/{id}
-     * Get one bot by id
-     * 
-     * @param id 
-     * @return VisorBotView
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun visorGetBot(id: kotlin.String) : VisorBotView {
-        val localVarResponse = visorGetBotWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as VisorBotView
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/bots/{id}
-     * Get one bot by id
-     * 
-     * @param id 
-     * @return ApiResponse<VisorBotView?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun visorGetBotWithHttpInfo(id: kotlin.String) : ApiResponse<VisorBotView?> {
-        val localVariableConfig = visorGetBotRequestConfig(id = id)
-
-        return request<Unit, VisorBotView>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation visorGetBot
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun visorGetBotRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/bots/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/bots/launch
-     * Launch a bot (machine + agent binding), or dryRun for a quote
-     * 
-     * @param visorBotLaunchRequest 
-     * @return kotlin.Any
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun visorLaunchBot(visorBotLaunchRequest: VisorBotLaunchRequest) : kotlin.Any {
-        val localVarResponse = visorLaunchBotWithHttpInfo(visorBotLaunchRequest = visorBotLaunchRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/bots/launch
-     * Launch a bot (machine + agent binding), or dryRun for a quote
-     * 
-     * @param visorBotLaunchRequest 
-     * @return ApiResponse<kotlin.Any?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun visorLaunchBotWithHttpInfo(visorBotLaunchRequest: VisorBotLaunchRequest) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = visorLaunchBotRequestConfig(visorBotLaunchRequest = visorBotLaunchRequest)
-
-        return request<VisorBotLaunchRequest, kotlin.Any>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation visorLaunchBot
-     *
-     * @param visorBotLaunchRequest 
-     * @return RequestConfig
-     */
-    fun visorLaunchBotRequestConfig(visorBotLaunchRequest: VisorBotLaunchRequest) : RequestConfig<VisorBotLaunchRequest> {
-        val localVariableBody = visorBotLaunchRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/bots/launch",
+            path = "/v1/bots/run",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

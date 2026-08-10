@@ -15,40 +15,27 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.ResearchKindTotal
+import ai.hanzo.cloud.model.KindTotal
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param project 
- * @param projects 
- * @param experiments canonical
- * @param experimentsRetained 
  * @param attempts canonical
  * @param attemptsRetained 
- * @param models 
  * @param benchmarks 
- * @param costUsd 
  * @param byKind 
+ * @param costUsd 
+ * @param experiments canonical
+ * @param experimentsRetained 
+ * @param models 
+ * @param project 
+ * @param projects 
  */
 
 
 data class ResearchTotals (
-
-    @SerializedName("project")
-    val project: kotlin.String? = null,
-
-    @SerializedName("projects")
-    val projects: kotlin.Int? = null,
-
-    /* canonical */
-    @SerializedName("experiments")
-    val experiments: kotlin.Int? = null,
-
-    @SerializedName("experiments_retained")
-    val experimentsRetained: kotlin.Int? = null,
 
     /* canonical */
     @SerializedName("attempts")
@@ -57,17 +44,30 @@ data class ResearchTotals (
     @SerializedName("attempts_retained")
     val attemptsRetained: kotlin.Int? = null,
 
-    @SerializedName("models")
-    val models: kotlin.Int? = null,
-
     @SerializedName("benchmarks")
     val benchmarks: kotlin.Int? = null,
+
+    @SerializedName("by_kind")
+    val byKind: kotlin.collections.List<KindTotal>? = null,
 
     @SerializedName("cost_usd")
     val costUsd: java.math.BigDecimal? = null,
 
-    @SerializedName("by_kind")
-    val byKind: kotlin.collections.List<ResearchKindTotal>? = null
+    /* canonical */
+    @SerializedName("experiments")
+    val experiments: kotlin.Int? = null,
+
+    @SerializedName("experiments_retained")
+    val experimentsRetained: kotlin.Int? = null,
+
+    @SerializedName("models")
+    val models: kotlin.Int? = null,
+
+    @SerializedName("project")
+    val project: kotlin.String? = null,
+
+    @SerializedName("projects")
+    val projects: kotlin.Int? = null
 
 ) {
 

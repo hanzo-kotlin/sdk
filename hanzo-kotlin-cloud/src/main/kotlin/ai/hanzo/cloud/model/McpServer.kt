@@ -15,31 +15,61 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.McpServerCapabilities
-import ai.hanzo.cloud.model.McpServerServerInfo
 
 import com.google.gson.annotations.SerializedName
 
 /**
- * The `initialize` result.
+ * 
  *
- * @param protocolVersion The MCP protocol date this door implements, e.g. `2025-06-18`.
- * @param serverInfo 
- * @param capabilities 
+ * @param authHeader AuthHeader is the request header the KMS-held credential is injected into, e.g. \"Authorization\". Absent when the server needs no credential.
+ * @param createdAt CreatedAt is when the server was registered, Unix seconds.
+ * @param hasSecret HasSecret is whether a credential is sealed in KMS for this server. The VALUE is never returned by any route.
+ * @param id ID is the server's id within the org. It also PREFIXES every tool name the server contributes, which is what keeps two servers' \"search\" apart.
+ * @param listing Listing is the catalog entry this server was enabled from, when it was. Empty means the org typed the URL in itself.
+ * @param name Name is the org's label for the server.
+ * @param org Org is the org that registered the server — the validated caller's.
+ * @param source Source is where the registration came from: \"catalog\" when it was enabled off the shelf, \"org\" when the org registered the URL itself. It is DERIVED from Listing rather than stored, because two columns for one fact is two chances to disagree.
+ * @param url URL is the server's JSON-RPC endpoint. Always a public http(s) host: the registration boundary and the dialer both refuse anything else.
  */
 
 
-data class McpServer (
+data class MCPServer (
 
-    /* The MCP protocol date this door implements, e.g. `2025-06-18`. */
-    @SerializedName("protocolVersion")
-    val protocolVersion: kotlin.String? = null,
+    /* AuthHeader is the request header the KMS-held credential is injected into, e.g. \"Authorization\". Absent when the server needs no credential. */
+    @SerializedName("authHeader")
+    val authHeader: kotlin.String? = null,
 
-    @SerializedName("serverInfo")
-    val serverInfo: McpServerServerInfo? = null,
+    /* CreatedAt is when the server was registered, Unix seconds. */
+    @SerializedName("createdAt")
+    val createdAt: kotlin.Int? = null,
 
-    @SerializedName("capabilities")
-    val capabilities: McpServerCapabilities? = null
+    /* HasSecret is whether a credential is sealed in KMS for this server. The VALUE is never returned by any route. */
+    @SerializedName("hasSecret")
+    val hasSecret: kotlin.Boolean? = null,
+
+    /* ID is the server's id within the org. It also PREFIXES every tool name the server contributes, which is what keeps two servers' \"search\" apart. */
+    @SerializedName("id")
+    val id: kotlin.String? = null,
+
+    /* Listing is the catalog entry this server was enabled from, when it was. Empty means the org typed the URL in itself. */
+    @SerializedName("listing")
+    val listing: kotlin.String? = null,
+
+    /* Name is the org's label for the server. */
+    @SerializedName("name")
+    val name: kotlin.String? = null,
+
+    /* Org is the org that registered the server — the validated caller's. */
+    @SerializedName("org")
+    val org: kotlin.String? = null,
+
+    /* Source is where the registration came from: \"catalog\" when it was enabled off the shelf, \"org\" when the org registered the URL itself. It is DERIVED from Listing rather than stored, because two columns for one fact is two chances to disagree. */
+    @SerializedName("source")
+    val source: kotlin.String? = null,
+
+    /* URL is the server's JSON-RPC endpoint. Always a public http(s) host: the registration boundary and the dialer both refuse anything else. */
+    @SerializedName("url")
+    val url: kotlin.String? = null
 
 ) {
 

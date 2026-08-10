@@ -1,30 +1,31 @@
-// hello — who does this key belong to?
+// hello — prove the key works, and print what it can reach.
 //
-// The smallest complete round trip, and the one that has to be able to say no:
-// with no key, or a bogus one, GET /v1/bot/auth/me answers
-// 403 {"error":"no validated principal"}. That refusal is half of what the flow
-// demonstrates, so it is printed rather than thrown.
+// This is the call that says no. With no key, or a bogus one, GET /v1/keys
+// answers 403 {"code":"forbidden","error":"sign in to manage API keys"} while
+// the nonsense sibling GET /v1/keys-zzq9 answers 404 — so the refusal is this
+// route refusing rather than a wildcard door, which is what makes it usable as
+// proof that a credential works. The three obvious identity routes were
+// disqualified for answering 200 to a caller with no credential at all;
+// flows.yaml records the probe.
 //
-// Operation: bot_authMe (GET /v1/bot/auth/me)
+// Operation: get_v1_keys (GET /v1/keys)
 //
 //   HANZO_API_KEY=hk-... ./gradlew :examples:hello:run
 import ai.hanzo.Hanzo
-import ai.hanzo.cloud.api.AuthApi
-import ai.hanzo.cloud.infrastructure.ClientException
+import ai.hanzo.cloud.api.KeysApi
 
 fun main() {
-    val me =
-        try {
-            Hanzo().api(::AuthApi).botAuthMe()
-        } catch (refused: ClientException) {
-            println("refused  ${refused.message}")
-            return
-        }
-
-    // hanzo.yaml types this response as bot_User, whose identity fields are
-    // `handle` and `displayName`; the document has no `owner`.
-    println("id       ${me.id}")
-    println("handle   ${me.handle}")
-    println("name     ${me.displayName}")
-    println("email    ${me.email}")
+    // `propertyKeys`, not `keys`: the wire name is `keys`, which the Kotlin
+    // generator renames because a data class cannot carry it, and @SerializedName
+    // still sends the original.
+    val keys = Hanzo().api(::KeysApi).getV1Keys().propertyKeys.orEmpty()
+    if (keys.isEmpty()) {
+        println("the key is good, and it owns no keys of its own")
+        return
+    }
+    keys.forEach { key ->
+        println(
+            "${key.type.orEmpty().padEnd(8)} ${key.prefix.orEmpty().padEnd(24)} ${key.createdAt.orEmpty()}"
+        )
+    }
 }

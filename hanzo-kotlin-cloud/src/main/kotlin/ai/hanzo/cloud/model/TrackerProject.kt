@@ -21,23 +21,26 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param createdAt 
+ * @param description 
  * @param id 
- * @param org 
  * @param key 
  * @param name 
- * @param description 
- * @param createdAt Unix seconds
- * @param updatedAt Unix seconds
+ * @param org 
+ * @param updatedAt 
  */
 
 
 data class TrackerProject (
 
+    @SerializedName("createdAt")
+    val createdAt: kotlin.Int? = null,
+
+    @SerializedName("description")
+    val description: kotlin.String? = null,
+
     @SerializedName("id")
     val id: kotlin.String? = null,
-
-    @SerializedName("org")
-    val org: kotlin.String? = null,
 
     @SerializedName("key")
     val key: kotlin.String? = null,
@@ -45,16 +48,11 @@ data class TrackerProject (
     @SerializedName("name")
     val name: kotlin.String? = null,
 
-    @SerializedName("description")
-    val description: kotlin.String? = null,
+    @SerializedName("org")
+    val org: kotlin.String? = null,
 
-    /* Unix seconds */
-    @SerializedName("createdAt")
-    val createdAt: kotlin.Long? = null,
-
-    /* Unix seconds */
     @SerializedName("updatedAt")
-    val updatedAt: kotlin.Long? = null
+    val updatedAt: kotlin.Int? = null
 
 ) {
 

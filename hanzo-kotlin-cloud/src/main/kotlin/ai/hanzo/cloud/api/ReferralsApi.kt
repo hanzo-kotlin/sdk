@@ -19,9 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudClaimRequest
-import ai.hanzo.cloud.model.CloudClaimView
-import ai.hanzo.cloud.model.CloudMyReferrals
+import ai.hanzo.cloud.model.ClaimRequest
+import ai.hanzo.cloud.model.ClaimView
+import ai.hanzo.cloud.model.MyReferrals
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,8 +50,8 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * GET /v1/referrals
      * Returns the caller&#39;s referral code, share link and the referrals they have made.
-     * Returns the caller&#39;s referral code, share link and the referrals they have made.  The code is a stable, deterministic function of the org, so the link in this response is the same one every time. Each row carries the referee, its status and the credit this org earned from it; creditsEarnedCents is their sum.  The read is self-updating: before listing, it runs the qualify check over this org&#39;s still-pending referees, so a referee who has since made metered spend is credited by the act of the referrer loading their page. That check is best-effort and bounded — a commerce hiccup leaves the referral pending for the next check rather than failing the page — and the grant is latched at-most-once, so this path and the admin sweep can never double-pay.
-     * @return CloudMyReferrals
+     * Returns the caller&#39;s referral code, share link and the referrals they have made.  The code is a stable, deterministic function of the org, so the link in this response is the same one every time. Each row carries the referee and the status of that attribution.  IT IS A PURE READ. It advances no referral, grants nothing and deposits nothing — a GET reports state, it never changes it. Qualification is the admin sweep&#39;s job (POST /v1/admin/referrals/sweep). The one row this handler can write is the caller&#39;s OWN code-directory entry (EnsureCode), which materialises a value deriveCode already computes deterministically from the org id so the code has an O(1) reverse lookup; it carries no money, no referral state and no other tenant.
+     * @return MyReferrals
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Referrals() : CloudMyReferrals {
-        val localVarResponse = cloudGetV1ReferralsWithHttpInfo()
+    fun getV1Referrals() : MyReferrals {
+        val localVarResponse = getV1ReferralsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMyReferrals
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MyReferrals
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,27 +81,27 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * GET /v1/referrals
      * Returns the caller&#39;s referral code, share link and the referrals they have made.
-     * Returns the caller&#39;s referral code, share link and the referrals they have made.  The code is a stable, deterministic function of the org, so the link in this response is the same one every time. Each row carries the referee, its status and the credit this org earned from it; creditsEarnedCents is their sum.  The read is self-updating: before listing, it runs the qualify check over this org&#39;s still-pending referees, so a referee who has since made metered spend is credited by the act of the referrer loading their page. That check is best-effort and bounded — a commerce hiccup leaves the referral pending for the next check rather than failing the page — and the grant is latched at-most-once, so this path and the admin sweep can never double-pay.
-     * @return ApiResponse<CloudMyReferrals?>
+     * Returns the caller&#39;s referral code, share link and the referrals they have made.  The code is a stable, deterministic function of the org, so the link in this response is the same one every time. Each row carries the referee and the status of that attribution.  IT IS A PURE READ. It advances no referral, grants nothing and deposits nothing — a GET reports state, it never changes it. Qualification is the admin sweep&#39;s job (POST /v1/admin/referrals/sweep). The one row this handler can write is the caller&#39;s OWN code-directory entry (EnsureCode), which materialises a value deriveCode already computes deterministically from the org id so the code has an O(1) reverse lookup; it carries no money, no referral state and no other tenant.
+     * @return ApiResponse<MyReferrals?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ReferralsWithHttpInfo() : ApiResponse<CloudMyReferrals?> {
-        val localVariableConfig = cloudGetV1ReferralsRequestConfig()
+    fun getV1ReferralsWithHttpInfo() : ApiResponse<MyReferrals?> {
+        val localVariableConfig = getV1ReferralsRequestConfig()
 
-        return request<Unit, CloudMyReferrals>(
+        return request<Unit, MyReferrals>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Referrals
+     * To obtain the request config of the operation getV1Referrals
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ReferralsRequestConfig() : RequestConfig<Unit> {
+    fun getV1ReferralsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -112,7 +112,7 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/referrals",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -120,9 +120,9 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * POST /v1/referrals/claim
      * Records that the caller&#39;s org signed up through a referral code.
-     * Records that the caller&#39;s org signed up through a referral code.  The REFEREE is the validated caller, never a client field, and the referrer is resolved from the code — so a caller can only ever attach THEMSELVES to someone else&#39;s code. Referring yourself is 400 and an unknown code is 404.  It is idempotent and first-touch: an org can be referred once, ever. A repeat call returns the referral already on file with created&#x3D;false and 200, where the first call answers 201.  Recording a referral grants nothing. Both bonuses are granted later, when the referee actually makes metered spend — see GET /v1/referrals and POST /v1/admin/referrals/sweep.
-     * @param cloudClaimRequest 
-     * @return CloudClaimView
+     * Records that the caller&#39;s org signed up through a referral code.  The REFEREE is the validated caller, never a client field, and the referrer is resolved from the code — so a caller can only ever attach THEMSELVES to someone else&#39;s code. Referring yourself is 400 and an unknown code is 404.  It is idempotent and first-touch: an org can be referred once, ever. A repeat call returns the referral already on file with created&#x3D;false and 200, where the first call answers 201.  Recording a referral grants nothing, and neither does anything downstream of it: the edge later advances to qualified when the referee makes metered spend (POST /v1/admin/referrals/sweep), and that is the end of it. No credit is ever issued from this package.
+     * @param claimRequest 
+     * @return ClaimView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -131,11 +131,11 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ReferralsClaim(cloudClaimRequest: CloudClaimRequest) : CloudClaimView {
-        val localVarResponse = cloudPostV1ReferralsClaimWithHttpInfo(cloudClaimRequest = cloudClaimRequest)
+    fun postV1ReferralsClaim(claimRequest: ClaimRequest) : ClaimView {
+        val localVarResponse = postV1ReferralsClaimWithHttpInfo(claimRequest = claimRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudClaimView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ClaimView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -152,30 +152,30 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     /**
      * POST /v1/referrals/claim
      * Records that the caller&#39;s org signed up through a referral code.
-     * Records that the caller&#39;s org signed up through a referral code.  The REFEREE is the validated caller, never a client field, and the referrer is resolved from the code — so a caller can only ever attach THEMSELVES to someone else&#39;s code. Referring yourself is 400 and an unknown code is 404.  It is idempotent and first-touch: an org can be referred once, ever. A repeat call returns the referral already on file with created&#x3D;false and 200, where the first call answers 201.  Recording a referral grants nothing. Both bonuses are granted later, when the referee actually makes metered spend — see GET /v1/referrals and POST /v1/admin/referrals/sweep.
-     * @param cloudClaimRequest 
-     * @return ApiResponse<CloudClaimView?>
+     * Records that the caller&#39;s org signed up through a referral code.  The REFEREE is the validated caller, never a client field, and the referrer is resolved from the code — so a caller can only ever attach THEMSELVES to someone else&#39;s code. Referring yourself is 400 and an unknown code is 404.  It is idempotent and first-touch: an org can be referred once, ever. A repeat call returns the referral already on file with created&#x3D;false and 200, where the first call answers 201.  Recording a referral grants nothing, and neither does anything downstream of it: the edge later advances to qualified when the referee makes metered spend (POST /v1/admin/referrals/sweep), and that is the end of it. No credit is ever issued from this package.
+     * @param claimRequest 
+     * @return ApiResponse<ClaimView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ReferralsClaimWithHttpInfo(cloudClaimRequest: CloudClaimRequest) : ApiResponse<CloudClaimView?> {
-        val localVariableConfig = cloudPostV1ReferralsClaimRequestConfig(cloudClaimRequest = cloudClaimRequest)
+    fun postV1ReferralsClaimWithHttpInfo(claimRequest: ClaimRequest) : ApiResponse<ClaimView?> {
+        val localVariableConfig = postV1ReferralsClaimRequestConfig(claimRequest = claimRequest)
 
-        return request<CloudClaimRequest, CloudClaimView>(
+        return request<ClaimRequest, ClaimView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ReferralsClaim
+     * To obtain the request config of the operation postV1ReferralsClaim
      *
-     * @param cloudClaimRequest 
+     * @param claimRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1ReferralsClaimRequestConfig(cloudClaimRequest: CloudClaimRequest) : RequestConfig<CloudClaimRequest> {
-        val localVariableBody = cloudClaimRequest
+    fun postV1ReferralsClaimRequestConfig(claimRequest: ClaimRequest) : RequestConfig<ClaimRequest> {
+        val localVariableBody = claimRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -186,7 +186,7 @@ class ReferralsApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/referrals/claim",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

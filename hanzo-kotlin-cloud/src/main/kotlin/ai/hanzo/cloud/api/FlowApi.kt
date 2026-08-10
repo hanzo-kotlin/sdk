@@ -19,10 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudFlowCreate
-import ai.hanzo.cloud.model.CloudFlowRun
-import ai.hanzo.cloud.model.CloudFlowStatus
-import ai.hanzo.cloud.model.CloudFlowUpdate
+import ai.hanzo.cloud.model.FlowCreate
+import ai.hanzo.cloud.model.FlowRun
+import ai.hanzo.cloud.model.FlowStatus
+import ai.hanzo.cloud.model.FlowUpdate
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,8 +50,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/flow/workflows/{workflow}
-     * WorkflowDelete deletes one of the caller&#39;s workflows and its runs.
-     * WorkflowDelete deletes one of the caller&#39;s workflows and its runs. Ownership is verified first; a foreign id answers 404 and deletes nothing.
+     * Deletes one of the caller&#39;s workflows and its runs.
+     * Deletes one of the caller&#39;s workflows and its runs. Ownership is verified first; a foreign id answers 404 and deletes nothing.
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
@@ -62,8 +62,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1FlowWorkflowsWorkflow(workflow: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudDeleteV1FlowWorkflowsWorkflowWithHttpInfo(workflow = workflow)
+    fun deleteV1FlowWorkflowsByWorkflow(workflow: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteV1FlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -82,8 +82,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/flow/workflows/{workflow}
-     * WorkflowDelete deletes one of the caller&#39;s workflows and its runs.
-     * WorkflowDelete deletes one of the caller&#39;s workflows and its runs. Ownership is verified first; a foreign id answers 404 and deletes nothing.
+     * Deletes one of the caller&#39;s workflows and its runs.
+     * Deletes one of the caller&#39;s workflows and its runs. Ownership is verified first; a foreign id answers 404 and deletes nothing.
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -91,8 +91,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1FlowWorkflowsWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudDeleteV1FlowWorkflowsWorkflowRequestConfig(workflow = workflow)
+    fun deleteV1FlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteV1FlowWorkflowsByWorkflowRequestConfig(workflow = workflow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -100,12 +100,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1FlowWorkflowsWorkflow
+     * To obtain the request config of the operation deleteV1FlowWorkflowsByWorkflow
      *
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1FlowWorkflowsWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1FlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -116,7 +116,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows/{workflow}".replace("{"+"workflow"+"}", encodeURIComponent(workflow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -135,8 +135,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlowRuns(workflow: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = cloudGetV1FlowRunsWithHttpInfo(workflow = workflow)
+    fun getV1FlowRuns(workflow: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getV1FlowRunsWithHttpInfo(workflow = workflow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -164,8 +164,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlowRunsWithHttpInfo(workflow: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1FlowRunsRequestConfig(workflow = workflow)
+    fun getV1FlowRunsWithHttpInfo(workflow: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1FlowRunsRequestConfig(workflow = workflow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -173,12 +173,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlowRuns
+     * To obtain the request config of the operation getV1FlowRuns
      *
      * @param workflow Workflow is the UUID of the workflow whose run records to read. It rides the query string. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FlowRunsRequestConfig(workflow: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1FlowRunsRequestConfig(workflow: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -194,7 +194,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -203,7 +203,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/flow/status
      * Status reports whether the flow service is reachable and which version it runs.
      * Status reports whether the flow service is reachable and which version it runs. It is the product&#39;s own /health and /v1/version composed — an honest lens for \&quot;is the workflow plane up\&quot;, never a fabricated ok.
-     * @return CloudFlowStatus
+     * @return FlowStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -212,11 +212,11 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlowStatus() : CloudFlowStatus {
-        val localVarResponse = cloudGetV1FlowStatusWithHttpInfo()
+    fun getV1FlowStatus() : FlowStatus {
+        val localVarResponse = getV1FlowStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudFlowStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as FlowStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -234,26 +234,26 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/flow/status
      * Status reports whether the flow service is reachable and which version it runs.
      * Status reports whether the flow service is reachable and which version it runs. It is the product&#39;s own /health and /v1/version composed — an honest lens for \&quot;is the workflow plane up\&quot;, never a fabricated ok.
-     * @return ApiResponse<CloudFlowStatus?>
+     * @return ApiResponse<FlowStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlowStatusWithHttpInfo() : ApiResponse<CloudFlowStatus?> {
-        val localVariableConfig = cloudGetV1FlowStatusRequestConfig()
+    fun getV1FlowStatusWithHttpInfo() : ApiResponse<FlowStatus?> {
+        val localVariableConfig = getV1FlowStatusRequestConfig()
 
-        return request<Unit, CloudFlowStatus>(
+        return request<Unit, FlowStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlowStatus
+     * To obtain the request config of the operation getV1FlowStatus
      *
      * @return RequestConfig
      */
-    fun cloudGetV1FlowStatusRequestConfig() : RequestConfig<Unit> {
+    fun getV1FlowStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -264,7 +264,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -284,8 +284,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlowWorkflows(page: kotlin.String? = null, size: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = cloudGetV1FlowWorkflowsWithHttpInfo(page = page, size = size)
+    fun getV1FlowWorkflows(page: kotlin.String? = null, size: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getV1FlowWorkflowsWithHttpInfo(page = page, size = size)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -314,8 +314,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlowWorkflowsWithHttpInfo(page: kotlin.String?, size: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1FlowWorkflowsRequestConfig(page = page, size = size)
+    fun getV1FlowWorkflowsWithHttpInfo(page: kotlin.String?, size: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1FlowWorkflowsRequestConfig(page = page, size = size)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -323,13 +323,13 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlowWorkflows
+     * To obtain the request config of the operation getV1FlowWorkflows
      *
      * @param page Page is the 1-based page of workflows to return. (optional)
      * @param size Size is how many workflows one page holds (the product caps it at 100). (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1FlowWorkflowsRequestConfig(page: kotlin.String?, size: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1FlowWorkflowsRequestConfig(page: kotlin.String?, size: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -348,7 +348,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -367,8 +367,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1FlowWorkflowsWorkflow(workflow: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudGetV1FlowWorkflowsWorkflowWithHttpInfo(workflow = workflow)
+    fun getV1FlowWorkflowsByWorkflow(workflow: kotlin.String) : kotlin.Any {
+        val localVarResponse = getV1FlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -396,8 +396,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1FlowWorkflowsWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1FlowWorkflowsWorkflowRequestConfig(workflow = workflow)
+    fun getV1FlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1FlowWorkflowsByWorkflowRequestConfig(workflow = workflow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -405,12 +405,12 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1FlowWorkflowsWorkflow
+     * To obtain the request config of the operation getV1FlowWorkflowsByWorkflow
      *
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1FlowWorkflowsWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
+    fun getV1FlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -421,17 +421,17 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows/{workflow}".replace("{"+"workflow"+"}", encodeURIComponent(workflow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/flow/workflows/{workflow}
-     * WorkflowUpdate patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move.
-     * WorkflowUpdate patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move. Ownership is verified before the patch reaches the product.
+     * Patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move.
+     * Patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move. Ownership is verified before the patch reaches the product.
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
-     * @param cloudFlowUpdate 
+     * @param flowUpdate 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -441,8 +441,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1FlowWorkflowsWorkflow(workflow: kotlin.String, cloudFlowUpdate: CloudFlowUpdate) : kotlin.Any {
-        val localVarResponse = cloudPatchV1FlowWorkflowsWorkflowWithHttpInfo(workflow = workflow, cloudFlowUpdate = cloudFlowUpdate)
+    fun patchV1FlowWorkflowsByWorkflow(workflow: kotlin.String, flowUpdate: FlowUpdate) : kotlin.Any {
+        val localVarResponse = patchV1FlowWorkflowsByWorkflowWithHttpInfo(workflow = workflow, flowUpdate = flowUpdate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -461,33 +461,33 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * PATCH /v1/flow/workflows/{workflow}
-     * WorkflowUpdate patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move.
-     * WorkflowUpdate patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move. Ownership is verified before the patch reaches the product.
+     * Patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move.
+     * Patches one of the caller&#39;s workflows: name, description, graph, or the locked flag — only the stated fields move. Ownership is verified before the patch reaches the product.
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
-     * @param cloudFlowUpdate 
+     * @param flowUpdate 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1FlowWorkflowsWorkflowWithHttpInfo(workflow: kotlin.String, cloudFlowUpdate: CloudFlowUpdate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPatchV1FlowWorkflowsWorkflowRequestConfig(workflow = workflow, cloudFlowUpdate = cloudFlowUpdate)
+    fun patchV1FlowWorkflowsByWorkflowWithHttpInfo(workflow: kotlin.String, flowUpdate: FlowUpdate) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = patchV1FlowWorkflowsByWorkflowRequestConfig(workflow = workflow, flowUpdate = flowUpdate)
 
-        return request<CloudFlowUpdate, kotlin.Any>(
+        return request<FlowUpdate, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1FlowWorkflowsWorkflow
+     * To obtain the request config of the operation patchV1FlowWorkflowsByWorkflow
      *
      * @param workflow Workflow is the workflow&#39;s UUID, taken from the path.
-     * @param cloudFlowUpdate 
+     * @param flowUpdate 
      * @return RequestConfig
      */
-    fun cloudPatchV1FlowWorkflowsWorkflowRequestConfig(workflow: kotlin.String, cloudFlowUpdate: CloudFlowUpdate) : RequestConfig<CloudFlowUpdate> {
-        val localVariableBody = cloudFlowUpdate
+    fun patchV1FlowWorkflowsByWorkflowRequestConfig(workflow: kotlin.String, flowUpdate: FlowUpdate) : RequestConfig<FlowUpdate> {
+        val localVariableBody = flowUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -498,7 +498,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows/{workflow}".replace("{"+"workflow"+"}", encodeURIComponent(workflow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -507,7 +507,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/flow/runs
      * Run executes one of the caller&#39;s workflows synchronously: the graph runs in the flow service and the response carries the run&#39;s session and outputs.
      * Run executes one of the caller&#39;s workflows synchronously: the graph runs in the flow service and the response carries the run&#39;s session and outputs. A graph whose components fail reports the product&#39;s own error. Runs are bounded by the product&#39;s five-minute sync ceiling.
-     * @param cloudFlowRun 
+     * @param flowRun 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -517,8 +517,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FlowRuns(cloudFlowRun: CloudFlowRun) : kotlin.Any {
-        val localVarResponse = cloudPostV1FlowRunsWithHttpInfo(cloudFlowRun = cloudFlowRun)
+    fun postV1FlowRuns(flowRun: FlowRun) : kotlin.Any {
+        val localVarResponse = postV1FlowRunsWithHttpInfo(flowRun = flowRun)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -539,29 +539,29 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/flow/runs
      * Run executes one of the caller&#39;s workflows synchronously: the graph runs in the flow service and the response carries the run&#39;s session and outputs.
      * Run executes one of the caller&#39;s workflows synchronously: the graph runs in the flow service and the response carries the run&#39;s session and outputs. A graph whose components fail reports the product&#39;s own error. Runs are bounded by the product&#39;s five-minute sync ceiling.
-     * @param cloudFlowRun 
+     * @param flowRun 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FlowRunsWithHttpInfo(cloudFlowRun: CloudFlowRun) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPostV1FlowRunsRequestConfig(cloudFlowRun = cloudFlowRun)
+    fun postV1FlowRunsWithHttpInfo(flowRun: FlowRun) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1FlowRunsRequestConfig(flowRun = flowRun)
 
-        return request<CloudFlowRun, kotlin.Any>(
+        return request<FlowRun, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FlowRuns
+     * To obtain the request config of the operation postV1FlowRuns
      *
-     * @param cloudFlowRun 
+     * @param flowRun 
      * @return RequestConfig
      */
-    fun cloudPostV1FlowRunsRequestConfig(cloudFlowRun: CloudFlowRun) : RequestConfig<CloudFlowRun> {
-        val localVariableBody = cloudFlowRun
+    fun postV1FlowRunsRequestConfig(flowRun: FlowRun) : RequestConfig<FlowRun> {
+        val localVariableBody = flowRun
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -572,16 +572,16 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/flow/workflows
-     * WorkflowCreate creates a workflow in the caller&#39;s org.
-     * WorkflowCreate creates a workflow in the caller&#39;s org. The org&#39;s project id is pinned server-side from the validated principal — there is no field by which a caller could place a workflow in another org.
-     * @param cloudFlowCreate 
+     * Creates a workflow in the caller&#39;s org.
+     * Creates a workflow in the caller&#39;s org. The org&#39;s project id is pinned server-side from the validated principal — there is no field by which a caller could place a workflow in another org.
+     * @param flowCreate 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -591,8 +591,8 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1FlowWorkflows(cloudFlowCreate: CloudFlowCreate) : kotlin.Any {
-        val localVarResponse = cloudPostV1FlowWorkflowsWithHttpInfo(cloudFlowCreate = cloudFlowCreate)
+    fun postV1FlowWorkflows(flowCreate: FlowCreate) : kotlin.Any {
+        val localVarResponse = postV1FlowWorkflowsWithHttpInfo(flowCreate = flowCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -611,31 +611,31 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/flow/workflows
-     * WorkflowCreate creates a workflow in the caller&#39;s org.
-     * WorkflowCreate creates a workflow in the caller&#39;s org. The org&#39;s project id is pinned server-side from the validated principal — there is no field by which a caller could place a workflow in another org.
-     * @param cloudFlowCreate 
+     * Creates a workflow in the caller&#39;s org.
+     * Creates a workflow in the caller&#39;s org. The org&#39;s project id is pinned server-side from the validated principal — there is no field by which a caller could place a workflow in another org.
+     * @param flowCreate 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1FlowWorkflowsWithHttpInfo(cloudFlowCreate: CloudFlowCreate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPostV1FlowWorkflowsRequestConfig(cloudFlowCreate = cloudFlowCreate)
+    fun postV1FlowWorkflowsWithHttpInfo(flowCreate: FlowCreate) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1FlowWorkflowsRequestConfig(flowCreate = flowCreate)
 
-        return request<CloudFlowCreate, kotlin.Any>(
+        return request<FlowCreate, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1FlowWorkflows
+     * To obtain the request config of the operation postV1FlowWorkflows
      *
-     * @param cloudFlowCreate 
+     * @param flowCreate 
      * @return RequestConfig
      */
-    fun cloudPostV1FlowWorkflowsRequestConfig(cloudFlowCreate: CloudFlowCreate) : RequestConfig<CloudFlowCreate> {
-        val localVariableBody = cloudFlowCreate
+    fun postV1FlowWorkflowsRequestConfig(flowCreate: FlowCreate) : RequestConfig<FlowCreate> {
+        val localVariableBody = flowCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -646,7 +646,7 @@ class FlowApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/flow/workflows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

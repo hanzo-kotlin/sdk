@@ -19,16 +19,16 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAccountList
-import ai.hanzo.cloud.model.CloudCreateAccountIn
-import ai.hanzo.cloud.model.CloudCreateWalletIn
-import ai.hanzo.cloud.model.CloudSafeProposal
-import ai.hanzo.cloud.model.CloudSafeTxIn
-import ai.hanzo.cloud.model.CloudSignIn
-import ai.hanzo.cloud.model.CloudSignature
-import ai.hanzo.cloud.model.CloudWallet
-import ai.hanzo.cloud.model.CloudWalletAccount
-import ai.hanzo.cloud.model.CloudWalletList
+import ai.hanzo.cloud.model.AccountList
+import ai.hanzo.cloud.model.CreateAccountIn
+import ai.hanzo.cloud.model.CreateWalletIn
+import ai.hanzo.cloud.model.SafeProposal
+import ai.hanzo.cloud.model.SafeTxIn
+import ai.hanzo.cloud.model.SignIn
+import ai.hanzo.cloud.model.Signature
+import ai.hanzo.cloud.model.Wallet
+import ai.hanzo.cloud.model.WalletAccount
+import ai.hanzo.cloud.model.WalletList
 
 import com.google.gson.annotations.SerializedName
 
@@ -61,7 +61,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param project Project narrows to wallets scoped to one project. Must be a url-safe segment. (optional)
      * @param agent Agent narrows to wallets scoped to one agent. Must be a url-safe segment. (optional)
      * @param account Account narrows to wallets under one account id. Must be a url-safe segment. (optional)
-     * @return CloudWalletList
+     * @return WalletList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -70,11 +70,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Wallets(project: kotlin.String? = null, agent: kotlin.String? = null, account: kotlin.String? = null) : CloudWalletList {
-        val localVarResponse = cloudGetV1WalletsWithHttpInfo(project = project, agent = agent, account = account)
+    fun getV1Wallets(project: kotlin.String? = null, agent: kotlin.String? = null, account: kotlin.String? = null) : WalletList {
+        val localVarResponse = getV1WalletsWithHttpInfo(project = project, agent = agent, account = account)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWalletList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as WalletList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -95,29 +95,29 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @param project Project narrows to wallets scoped to one project. Must be a url-safe segment. (optional)
      * @param agent Agent narrows to wallets scoped to one agent. Must be a url-safe segment. (optional)
      * @param account Account narrows to wallets under one account id. Must be a url-safe segment. (optional)
-     * @return ApiResponse<CloudWalletList?>
+     * @return ApiResponse<WalletList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WalletsWithHttpInfo(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : ApiResponse<CloudWalletList?> {
-        val localVariableConfig = cloudGetV1WalletsRequestConfig(project = project, agent = agent, account = account)
+    fun getV1WalletsWithHttpInfo(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : ApiResponse<WalletList?> {
+        val localVariableConfig = getV1WalletsRequestConfig(project = project, agent = agent, account = account)
 
-        return request<Unit, CloudWalletList>(
+        return request<Unit, WalletList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Wallets
+     * To obtain the request config of the operation getV1Wallets
      *
      * @param project Project narrows to wallets scoped to one project. Must be a url-safe segment. (optional)
      * @param agent Agent narrows to wallets scoped to one agent. Must be a url-safe segment. (optional)
      * @param account Account narrows to wallets under one account id. Must be a url-safe segment. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1WalletsRequestConfig(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1WalletsRequestConfig(project: kotlin.String?, agent: kotlin.String?, account: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -139,7 +139,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/wallets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -148,7 +148,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/wallets/accounts
      * Returns the caller org&#39;s wallet accounts, newest first.
      * Returns the caller org&#39;s wallet accounts, newest first. Accounts are physically org-scoped, so another tenant&#39;s are not reachable from here.
-     * @return CloudAccountList
+     * @return AccountList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -157,11 +157,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WalletsAccounts() : CloudAccountList {
-        val localVarResponse = cloudGetV1WalletsAccountsWithHttpInfo()
+    fun getV1WalletsAccounts() : AccountList {
+        val localVarResponse = getV1WalletsAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAccountList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AccountList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -179,26 +179,26 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/wallets/accounts
      * Returns the caller org&#39;s wallet accounts, newest first.
      * Returns the caller org&#39;s wallet accounts, newest first. Accounts are physically org-scoped, so another tenant&#39;s are not reachable from here.
-     * @return ApiResponse<CloudAccountList?>
+     * @return ApiResponse<AccountList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WalletsAccountsWithHttpInfo() : ApiResponse<CloudAccountList?> {
-        val localVariableConfig = cloudGetV1WalletsAccountsRequestConfig()
+    fun getV1WalletsAccountsWithHttpInfo() : ApiResponse<AccountList?> {
+        val localVariableConfig = getV1WalletsAccountsRequestConfig()
 
-        return request<Unit, CloudAccountList>(
+        return request<Unit, AccountList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WalletsAccounts
+     * To obtain the request config of the operation getV1WalletsAccounts
      *
      * @return RequestConfig
      */
-    fun cloudGetV1WalletsAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getV1WalletsAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -209,7 +209,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/wallets/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -219,7 +219,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Returns one of the caller org&#39;s wallets: its scope, custody kind, tier, chain and on-chain address.
      * Returns one of the caller org&#39;s wallets: its scope, custody kind, tier, chain and on-chain address. The custody handle to the signing material is never part of the answer. A wallet id another org owns reads as not found, so the response cannot confirm that it exists.
      * @param id 
-     * @return CloudWallet
+     * @return Wallet
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -228,11 +228,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WalletsId(id: kotlin.String) : CloudWallet {
-        val localVarResponse = cloudGetV1WalletsIdWithHttpInfo(id = id)
+    fun getV1WalletsById(id: kotlin.String) : Wallet {
+        val localVarResponse = getV1WalletsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWallet
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Wallet
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -251,27 +251,27 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Returns one of the caller org&#39;s wallets: its scope, custody kind, tier, chain and on-chain address.
      * Returns one of the caller org&#39;s wallets: its scope, custody kind, tier, chain and on-chain address. The custody handle to the signing material is never part of the answer. A wallet id another org owns reads as not found, so the response cannot confirm that it exists.
      * @param id 
-     * @return ApiResponse<CloudWallet?>
+     * @return ApiResponse<Wallet?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WalletsIdWithHttpInfo(id: kotlin.String) : ApiResponse<CloudWallet?> {
-        val localVariableConfig = cloudGetV1WalletsIdRequestConfig(id = id)
+    fun getV1WalletsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Wallet?> {
+        val localVariableConfig = getV1WalletsByIdRequestConfig(id = id)
 
-        return request<Unit, CloudWallet>(
+        return request<Unit, Wallet>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WalletsId
+     * To obtain the request config of the operation getV1WalletsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1WalletsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1WalletsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -282,7 +282,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/wallets/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -291,8 +291,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/wallets
      * Provisions a new signing identity under one of the caller org&#39;s accounts and answers the stored wallet including its on-chain address.
      * Provisions a new signing identity under one of the caller org&#39;s accounts and answers the stored wallet including its on-chain address. The custody backend generates the key material — a KMS-sealed secp256k1 key, an MPC threshold key on the ring, or a Safe smart wallet owned by one — and the HANDLE to it is kept server-side and never returned. A custody kind the deployment has not wired fails CLOSED with 503: a signature is never fabricated. The wallet is scoped to the org, the caller&#39;s ambient project, and optionally an agent and the named account; those narrowings are what its key ref is derived from, so each must be a url-safe segment.
-     * @param cloudCreateWalletIn 
-     * @return CloudWallet
+     * @param createWalletIn 
+     * @return Wallet
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -301,11 +301,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Wallets(cloudCreateWalletIn: CloudCreateWalletIn) : CloudWallet {
-        val localVarResponse = cloudPostV1WalletsWithHttpInfo(cloudCreateWalletIn = cloudCreateWalletIn)
+    fun postV1Wallets(createWalletIn: CreateWalletIn) : Wallet {
+        val localVarResponse = postV1WalletsWithHttpInfo(createWalletIn = createWalletIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWallet
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Wallet
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -323,29 +323,29 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/wallets
      * Provisions a new signing identity under one of the caller org&#39;s accounts and answers the stored wallet including its on-chain address.
      * Provisions a new signing identity under one of the caller org&#39;s accounts and answers the stored wallet including its on-chain address. The custody backend generates the key material — a KMS-sealed secp256k1 key, an MPC threshold key on the ring, or a Safe smart wallet owned by one — and the HANDLE to it is kept server-side and never returned. A custody kind the deployment has not wired fails CLOSED with 503: a signature is never fabricated. The wallet is scoped to the org, the caller&#39;s ambient project, and optionally an agent and the named account; those narrowings are what its key ref is derived from, so each must be a url-safe segment.
-     * @param cloudCreateWalletIn 
-     * @return ApiResponse<CloudWallet?>
+     * @param createWalletIn 
+     * @return ApiResponse<Wallet?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WalletsWithHttpInfo(cloudCreateWalletIn: CloudCreateWalletIn) : ApiResponse<CloudWallet?> {
-        val localVariableConfig = cloudPostV1WalletsRequestConfig(cloudCreateWalletIn = cloudCreateWalletIn)
+    fun postV1WalletsWithHttpInfo(createWalletIn: CreateWalletIn) : ApiResponse<Wallet?> {
+        val localVariableConfig = postV1WalletsRequestConfig(createWalletIn = createWalletIn)
 
-        return request<CloudCreateWalletIn, CloudWallet>(
+        return request<CreateWalletIn, Wallet>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Wallets
+     * To obtain the request config of the operation postV1Wallets
      *
-     * @param cloudCreateWalletIn 
+     * @param createWalletIn 
      * @return RequestConfig
      */
-    fun cloudPostV1WalletsRequestConfig(cloudCreateWalletIn: CloudCreateWalletIn) : RequestConfig<CloudCreateWalletIn> {
-        val localVariableBody = cloudCreateWalletIn
+    fun postV1WalletsRequestConfig(createWalletIn: CreateWalletIn) : RequestConfig<CreateWalletIn> {
+        val localVariableBody = createWalletIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -356,7 +356,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/wallets",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -365,8 +365,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/wallets/accounts
      * Opens a named wallet account for the caller&#39;s org.
      * Opens a named wallet account for the caller&#39;s org. An account is a GROUPING of wallets, not a key or a balance: wallets are created under one and can be listed by it. The org is stamped by the server from the validated principal, so a request can never open an account in another tenant.
-     * @param cloudCreateAccountIn 
-     * @return CloudWalletAccount
+     * @param createAccountIn 
+     * @return WalletAccount
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -375,11 +375,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1WalletsAccounts(cloudCreateAccountIn: CloudCreateAccountIn) : CloudWalletAccount {
-        val localVarResponse = cloudPostV1WalletsAccountsWithHttpInfo(cloudCreateAccountIn = cloudCreateAccountIn)
+    fun postV1WalletsAccounts(createAccountIn: CreateAccountIn) : WalletAccount {
+        val localVarResponse = postV1WalletsAccountsWithHttpInfo(createAccountIn = createAccountIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWalletAccount
+            ResponseType.Success -> (localVarResponse as Success<*>).data as WalletAccount
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -397,29 +397,29 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/wallets/accounts
      * Opens a named wallet account for the caller&#39;s org.
      * Opens a named wallet account for the caller&#39;s org. An account is a GROUPING of wallets, not a key or a balance: wallets are created under one and can be listed by it. The org is stamped by the server from the validated principal, so a request can never open an account in another tenant.
-     * @param cloudCreateAccountIn 
-     * @return ApiResponse<CloudWalletAccount?>
+     * @param createAccountIn 
+     * @return ApiResponse<WalletAccount?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WalletsAccountsWithHttpInfo(cloudCreateAccountIn: CloudCreateAccountIn) : ApiResponse<CloudWalletAccount?> {
-        val localVariableConfig = cloudPostV1WalletsAccountsRequestConfig(cloudCreateAccountIn = cloudCreateAccountIn)
+    fun postV1WalletsAccountsWithHttpInfo(createAccountIn: CreateAccountIn) : ApiResponse<WalletAccount?> {
+        val localVariableConfig = postV1WalletsAccountsRequestConfig(createAccountIn = createAccountIn)
 
-        return request<CloudCreateAccountIn, CloudWalletAccount>(
+        return request<CreateAccountIn, WalletAccount>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1WalletsAccounts
+     * To obtain the request config of the operation postV1WalletsAccounts
      *
-     * @param cloudCreateAccountIn 
+     * @param createAccountIn 
      * @return RequestConfig
      */
-    fun cloudPostV1WalletsAccountsRequestConfig(cloudCreateAccountIn: CloudCreateAccountIn) : RequestConfig<CloudCreateAccountIn> {
-        val localVariableBody = cloudCreateAccountIn
+    fun postV1WalletsAccountsRequestConfig(createAccountIn: CreateAccountIn) : RequestConfig<CreateAccountIn> {
+        val localVariableBody = createAccountIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -430,7 +430,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/wallets/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -440,7 +440,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Rolls one wallet&#39;s signing material through its own custody backend and answers the wallet with whatever address that produced.
      * Rolls one wallet&#39;s signing material through its own custody backend and answers the wallet with whatever address that produced. For KMS custody a fresh secp256k1 key is generated and sealed, which CHANGES the address — funds and approvals at the old address do not move. For a Safe the address is counterfactual and the owner shares are ring-managed, so rotation is a no-op and the address is unchanged. A backend that is not configured fails closed with 503 rather than leaving the wallet half-rotated.
      * @param id 
-     * @return CloudWallet
+     * @return Wallet
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -449,11 +449,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1WalletsIdKeys(id: kotlin.String) : CloudWallet {
-        val localVarResponse = cloudPostV1WalletsIdKeysWithHttpInfo(id = id)
+    fun postV1WalletsByIdKeys(id: kotlin.String) : Wallet {
+        val localVarResponse = postV1WalletsByIdKeysWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudWallet
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Wallet
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -472,27 +472,27 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Rolls one wallet&#39;s signing material through its own custody backend and answers the wallet with whatever address that produced.
      * Rolls one wallet&#39;s signing material through its own custody backend and answers the wallet with whatever address that produced. For KMS custody a fresh secp256k1 key is generated and sealed, which CHANGES the address — funds and approvals at the old address do not move. For a Safe the address is counterfactual and the owner shares are ring-managed, so rotation is a no-op and the address is unchanged. A backend that is not configured fails closed with 503 rather than leaving the wallet half-rotated.
      * @param id 
-     * @return ApiResponse<CloudWallet?>
+     * @return ApiResponse<Wallet?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WalletsIdKeysWithHttpInfo(id: kotlin.String) : ApiResponse<CloudWallet?> {
-        val localVariableConfig = cloudPostV1WalletsIdKeysRequestConfig(id = id)
+    fun postV1WalletsByIdKeysWithHttpInfo(id: kotlin.String) : ApiResponse<Wallet?> {
+        val localVariableConfig = postV1WalletsByIdKeysRequestConfig(id = id)
 
-        return request<Unit, CloudWallet>(
+        return request<Unit, Wallet>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1WalletsIdKeys
+     * To obtain the request config of the operation postV1WalletsByIdKeys
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1WalletsIdKeysRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1WalletsByIdKeysRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -503,84 +503,7 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/wallets/{id}/keys".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/wallets/{id}/safe-tx
-     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced.
-     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced. Only a wallet whose custody is \&quot;safe\&quot; can do this — any other custody is a 400, because the backend itself is asked whether it can propose rather than the kind being switched on. The ring computes the Safe-tx hash bound to the Safe contract and the chain id, so the hash a caller gets back is the one the Safe will verify. This PROPOSES: it does not execute the transaction.
-     * @param id 
-     * @param cloudSafeTxIn 
-     * @return CloudSafeProposal
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1WalletsIdSafeTx(id: kotlin.String, cloudSafeTxIn: CloudSafeTxIn) : CloudSafeProposal {
-        val localVarResponse = cloudPostV1WalletsIdSafeTxWithHttpInfo(id = id, cloudSafeTxIn = cloudSafeTxIn)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSafeProposal
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/wallets/{id}/safe-tx
-     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced.
-     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced. Only a wallet whose custody is \&quot;safe\&quot; can do this — any other custody is a 400, because the backend itself is asked whether it can propose rather than the kind being switched on. The ring computes the Safe-tx hash bound to the Safe contract and the chain id, so the hash a caller gets back is the one the Safe will verify. This PROPOSES: it does not execute the transaction.
-     * @param id 
-     * @param cloudSafeTxIn 
-     * @return ApiResponse<CloudSafeProposal?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WalletsIdSafeTxWithHttpInfo(id: kotlin.String, cloudSafeTxIn: CloudSafeTxIn) : ApiResponse<CloudSafeProposal?> {
-        val localVariableConfig = cloudPostV1WalletsIdSafeTxRequestConfig(id = id, cloudSafeTxIn = cloudSafeTxIn)
-
-        return request<CloudSafeTxIn, CloudSafeProposal>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1WalletsIdSafeTx
-     *
-     * @param id 
-     * @param cloudSafeTxIn 
-     * @return RequestConfig
-     */
-    fun cloudPostV1WalletsIdSafeTxRequestConfig(id: kotlin.String, cloudSafeTxIn: CloudSafeTxIn) : RequestConfig<CloudSafeTxIn> {
-        val localVariableBody = cloudSafeTxIn
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/wallets/{id}/safe-tx".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -590,8 +513,8 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Produces a secp256k1 signature from one of the caller org&#39;s wallets over a 32-byte digest, through whichever custody backend that wallet uses.
      * Produces a secp256k1 signature from one of the caller org&#39;s wallets over a 32-byte digest, through whichever custody backend that wallet uses. Give it either a &#x60;digest&#x60; (32 bytes as hex, signed verbatim) or a &#x60;message&#x60; (hashed with Keccak256 first) — exactly one is required. The private key never leaves its backend: KMS custody opens the sealed key in-process, MPC custody produces a threshold signature on the ring. The answer carries the digest that was signed alongside the signature, so a caller can verify what it got.
      * @param id 
-     * @param cloudSignIn 
-     * @return CloudSignature
+     * @param signIn 
+     * @return Signature
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -600,11 +523,11 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1WalletsIdSign(id: kotlin.String, cloudSignIn: CloudSignIn) : CloudSignature {
-        val localVarResponse = cloudPostV1WalletsIdSignWithHttpInfo(id = id, cloudSignIn = cloudSignIn)
+    fun postV1WalletsByIdSign(id: kotlin.String, signIn: SignIn) : Signature {
+        val localVarResponse = postV1WalletsByIdSignWithHttpInfo(id = id, signIn = signIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSignature
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Signature
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -623,30 +546,30 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Produces a secp256k1 signature from one of the caller org&#39;s wallets over a 32-byte digest, through whichever custody backend that wallet uses.
      * Produces a secp256k1 signature from one of the caller org&#39;s wallets over a 32-byte digest, through whichever custody backend that wallet uses. Give it either a &#x60;digest&#x60; (32 bytes as hex, signed verbatim) or a &#x60;message&#x60; (hashed with Keccak256 first) — exactly one is required. The private key never leaves its backend: KMS custody opens the sealed key in-process, MPC custody produces a threshold signature on the ring. The answer carries the digest that was signed alongside the signature, so a caller can verify what it got.
      * @param id 
-     * @param cloudSignIn 
-     * @return ApiResponse<CloudSignature?>
+     * @param signIn 
+     * @return ApiResponse<Signature?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WalletsIdSignWithHttpInfo(id: kotlin.String, cloudSignIn: CloudSignIn) : ApiResponse<CloudSignature?> {
-        val localVariableConfig = cloudPostV1WalletsIdSignRequestConfig(id = id, cloudSignIn = cloudSignIn)
+    fun postV1WalletsByIdSignWithHttpInfo(id: kotlin.String, signIn: SignIn) : ApiResponse<Signature?> {
+        val localVariableConfig = postV1WalletsByIdSignRequestConfig(id = id, signIn = signIn)
 
-        return request<CloudSignIn, CloudSignature>(
+        return request<SignIn, Signature>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1WalletsIdSign
+     * To obtain the request config of the operation postV1WalletsByIdSign
      *
      * @param id 
-     * @param cloudSignIn 
+     * @param signIn 
      * @return RequestConfig
      */
-    fun cloudPostV1WalletsIdSignRequestConfig(id: kotlin.String, cloudSignIn: CloudSignIn) : RequestConfig<CloudSignIn> {
-        val localVariableBody = cloudSignIn
+    fun postV1WalletsByIdSignRequestConfig(id: kotlin.String, signIn: SignIn) : RequestConfig<SignIn> {
+        val localVariableBody = signIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -657,7 +580,84 @@ class WalletsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/wallets/{id}/sign".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/wallets/{id}/transactions
+     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced.
+     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced. Only a wallet whose custody is \&quot;safe\&quot; can do this — any other custody is a 400, because the backend itself is asked whether it can propose rather than the kind being switched on. The ring computes the Safe-tx hash bound to the Safe contract and the chain id, so the hash a caller gets back is the one the Safe will verify. This PROPOSES: it does not execute the transaction.
+     * @param id 
+     * @param safeTxIn 
+     * @return SafeProposal
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1WalletsByIdTransactions(id: kotlin.String, safeTxIn: SafeTxIn) : SafeProposal {
+        val localVarResponse = postV1WalletsByIdTransactionsWithHttpInfo(id = id, safeTxIn = safeTxIn)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SafeProposal
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/wallets/{id}/transactions
+     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced.
+     * Composes a Safe transaction on the MPC ring and answers its EIP-712 hash together with the owner approval the ring&#39;s threshold signature produced. Only a wallet whose custody is \&quot;safe\&quot; can do this — any other custody is a 400, because the backend itself is asked whether it can propose rather than the kind being switched on. The ring computes the Safe-tx hash bound to the Safe contract and the chain id, so the hash a caller gets back is the one the Safe will verify. This PROPOSES: it does not execute the transaction.
+     * @param id 
+     * @param safeTxIn 
+     * @return ApiResponse<SafeProposal?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1WalletsByIdTransactionsWithHttpInfo(id: kotlin.String, safeTxIn: SafeTxIn) : ApiResponse<SafeProposal?> {
+        val localVariableConfig = postV1WalletsByIdTransactionsRequestConfig(id = id, safeTxIn = safeTxIn)
+
+        return request<SafeTxIn, SafeProposal>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1WalletsByIdTransactions
+     *
+     * @param id 
+     * @param safeTxIn 
+     * @return RequestConfig
+     */
+    fun postV1WalletsByIdTransactionsRequestConfig(id: kotlin.String, safeTxIn: SafeTxIn) : RequestConfig<SafeTxIn> {
+        val localVariableBody = safeTxIn
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/wallets/{id}/transactions".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

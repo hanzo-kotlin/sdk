@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudGpuAlertList
-import ai.hanzo.cloud.model.CloudGpuList
+import ai.hanzo.cloud.model.GpuAlertList
+import ai.hanzo.cloud.model.GpuList
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,7 +50,7 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/gpus/alerts
      * Is an HONEST empty surface: Visor exposes no GPU alert inventory, so this returns [] rather than fabricating alerts.
      * Is an HONEST empty surface: Visor exposes no GPU alert inventory, so this returns [] rather than fabricating alerts. It stays a real, tenant-gated route so the console&#39;s alerts fetch resolves (200 [], not a 404) — an honest \&quot;no alerts\&quot;, the same discipline the rest of the surface follows.
-     * @return CloudGpuAlertList
+     * @return GpuAlertList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -59,11 +59,11 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListGpuAlerts() : CloudGpuAlertList {
-        val localVarResponse = cloudListGpuAlertsWithHttpInfo()
+    fun listGpuAlerts() : GpuAlertList {
+        val localVarResponse = listGpuAlertsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGpuAlertList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GpuAlertList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,26 +81,26 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/gpus/alerts
      * Is an HONEST empty surface: Visor exposes no GPU alert inventory, so this returns [] rather than fabricating alerts.
      * Is an HONEST empty surface: Visor exposes no GPU alert inventory, so this returns [] rather than fabricating alerts. It stays a real, tenant-gated route so the console&#39;s alerts fetch resolves (200 [], not a 404) — an honest \&quot;no alerts\&quot;, the same discipline the rest of the surface follows.
-     * @return ApiResponse<CloudGpuAlertList?>
+     * @return ApiResponse<GpuAlertList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListGpuAlertsWithHttpInfo() : ApiResponse<CloudGpuAlertList?> {
-        val localVariableConfig = cloudListGpuAlertsRequestConfig()
+    fun listGpuAlertsWithHttpInfo() : ApiResponse<GpuAlertList?> {
+        val localVariableConfig = listGpuAlertsRequestConfig()
 
-        return request<Unit, CloudGpuAlertList>(
+        return request<Unit, GpuAlertList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListGpuAlerts
+     * To obtain the request config of the operation listGpuAlerts
      *
      * @return RequestConfig
      */
-    fun cloudListGpuAlertsRequestConfig() : RequestConfig<Unit> {
+    fun listGpuAlertsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -111,7 +111,7 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/gpus/alerts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -120,7 +120,7 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/gpus
      * Returns one row per physical accelerator the caller&#39;s org has, derived from its real GPU machines (the size slug says how many cards a node holds) and from the accelerators BYO workers report through nvidia-smi.
      * Returns one row per physical accelerator the caller&#39;s org has, derived from its real GPU machines (the size slug says how many cards a node holds) and from the accelerators BYO workers report through nvidia-smi.  Live telemetry is absent on Visor rows because Visor&#39;s machine object carries none — an honest omission the console renders as \&quot;—\&quot;, never a fabricated 0.
-     * @return CloudGpuList
+     * @return GpuList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -129,11 +129,11 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListGpus() : CloudGpuList {
-        val localVarResponse = cloudListGpusWithHttpInfo()
+    fun listGpus() : GpuList {
+        val localVarResponse = listGpusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGpuList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GpuList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -151,26 +151,26 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/gpus
      * Returns one row per physical accelerator the caller&#39;s org has, derived from its real GPU machines (the size slug says how many cards a node holds) and from the accelerators BYO workers report through nvidia-smi.
      * Returns one row per physical accelerator the caller&#39;s org has, derived from its real GPU machines (the size slug says how many cards a node holds) and from the accelerators BYO workers report through nvidia-smi.  Live telemetry is absent on Visor rows because Visor&#39;s machine object carries none — an honest omission the console renders as \&quot;—\&quot;, never a fabricated 0.
-     * @return ApiResponse<CloudGpuList?>
+     * @return ApiResponse<GpuList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListGpusWithHttpInfo() : ApiResponse<CloudGpuList?> {
-        val localVariableConfig = cloudListGpusRequestConfig()
+    fun listGpusWithHttpInfo() : ApiResponse<GpuList?> {
+        val localVariableConfig = listGpusRequestConfig()
 
-        return request<Unit, CloudGpuList>(
+        return request<Unit, GpuList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListGpus
+     * To obtain the request config of the operation listGpus
      *
      * @return RequestConfig
      */
-    fun cloudListGpusRequestConfig() : RequestConfig<Unit> {
+    fun listGpusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -181,7 +181,7 @@ class GpusApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/gpus",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

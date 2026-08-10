@@ -19,12 +19,12 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudInstallReq
-import ai.hanzo.cloud.model.CloudInstallState
-import ai.hanzo.cloud.model.CloudListing
-import ai.hanzo.cloud.model.CloudListingPage
-import ai.hanzo.cloud.model.CloudMarketCatalog
-import ai.hanzo.cloud.model.CloudPublishReq
+import ai.hanzo.cloud.model.InstallReq
+import ai.hanzo.cloud.model.InstallState
+import ai.hanzo.cloud.model.Listing
+import ai.hanzo.cloud.model.ListingPage
+import ai.hanzo.cloud.model.MarketCatalog
+import ai.hanzo.cloud.model.PublishReq
 
 import com.google.gson.annotations.SerializedName
 
@@ -63,8 +63,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1MarketplaceListingsId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1MarketplaceListingsIdWithHttpInfo(id = id)
+    fun deleteV1MarketplaceListingsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1MarketplaceListingsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -91,8 +91,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1MarketplaceListingsIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1MarketplaceListingsIdRequestConfig(id = id)
+    fun deleteV1MarketplaceListingsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1MarketplaceListingsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -100,12 +100,12 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1MarketplaceListingsId
+     * To obtain the request config of the operation deleteV1MarketplaceListingsById
      *
      * @param id ID is the listing to unpublish, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1MarketplaceListingsIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1MarketplaceListingsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -115,7 +115,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/listings/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -124,7 +124,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * GET /v1/marketplace
      * Discover lists every tool and agent the caller can reach in their own org and project, enriched with any public listing&#39;s title, category and price, and with installed&#x3D;true on the ones already activated for that scope.
      * Discover lists every tool and agent the caller can reach in their own org and project, enriched with any public listing&#39;s title, category and price, and with installed&#x3D;true on the ones already activated for that scope. It is the shop window: one read that answers what exists, what it costs and what is already on.
-     * @return CloudMarketCatalog
+     * @return MarketCatalog
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -133,11 +133,11 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Marketplace() : CloudMarketCatalog {
-        val localVarResponse = cloudGetV1MarketplaceWithHttpInfo()
+    fun getV1Marketplace() : MarketCatalog {
+        val localVarResponse = getV1MarketplaceWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMarketCatalog
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MarketCatalog
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -155,26 +155,26 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * GET /v1/marketplace
      * Discover lists every tool and agent the caller can reach in their own org and project, enriched with any public listing&#39;s title, category and price, and with installed&#x3D;true on the ones already activated for that scope.
      * Discover lists every tool and agent the caller can reach in their own org and project, enriched with any public listing&#39;s title, category and price, and with installed&#x3D;true on the ones already activated for that scope. It is the shop window: one read that answers what exists, what it costs and what is already on.
-     * @return ApiResponse<CloudMarketCatalog?>
+     * @return ApiResponse<MarketCatalog?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketplaceWithHttpInfo() : ApiResponse<CloudMarketCatalog?> {
-        val localVariableConfig = cloudGetV1MarketplaceRequestConfig()
+    fun getV1MarketplaceWithHttpInfo() : ApiResponse<MarketCatalog?> {
+        val localVariableConfig = getV1MarketplaceRequestConfig()
 
-        return request<Unit, CloudMarketCatalog>(
+        return request<Unit, MarketCatalog>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Marketplace
+     * To obtain the request config of the operation getV1Marketplace
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MarketplaceRequestConfig() : RequestConfig<Unit> {
+    fun getV1MarketplaceRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -185,16 +185,16 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/marketplace/listings
-     * ListListings returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy.
-     * ListListings returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy. A publisher only ever sees its own rows.
-     * @return CloudListingPage
+     * Returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy.
+     * Returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy. A publisher only ever sees its own rows.
+     * @return ListingPage
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -203,11 +203,11 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MarketplaceListings() : CloudListingPage {
-        val localVarResponse = cloudGetV1MarketplaceListingsWithHttpInfo()
+    fun getV1MarketplaceListings() : ListingPage {
+        val localVarResponse = getV1MarketplaceListingsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudListingPage
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListingPage
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -223,28 +223,28 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
 
     /**
      * GET /v1/marketplace/listings
-     * ListListings returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy.
-     * ListListings returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy. A publisher only ever sees its own rows.
-     * @return ApiResponse<CloudListingPage?>
+     * Returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy.
+     * Returns the listings the caller&#39;s own org has published — what this org is offering, not what it can buy. A publisher only ever sees its own rows.
+     * @return ApiResponse<ListingPage?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MarketplaceListingsWithHttpInfo() : ApiResponse<CloudListingPage?> {
-        val localVariableConfig = cloudGetV1MarketplaceListingsRequestConfig()
+    fun getV1MarketplaceListingsWithHttpInfo() : ApiResponse<ListingPage?> {
+        val localVariableConfig = getV1MarketplaceListingsRequestConfig()
 
-        return request<Unit, CloudListingPage>(
+        return request<Unit, ListingPage>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MarketplaceListings
+     * To obtain the request config of the operation getV1MarketplaceListings
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MarketplaceListingsRequestConfig() : RequestConfig<Unit> {
+    fun getV1MarketplaceListingsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -255,7 +255,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/listings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -264,8 +264,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * POST /v1/marketplace/install
      * Install activates one tool for the caller&#39;s own org and project.
      * Install activates one tool for the caller&#39;s own org and project. A marketplace install IS the tool plane&#39;s activation write — one store, one truth — so an installed capability is immediately dispatchable and a monetized one is priced from its listing at every call. The tool must resolve in the caller&#39;s scope, so installing something that does not exist is refused rather than recorded.
-     * @param cloudInstallReq 
-     * @return CloudInstallState
+     * @param installReq 
+     * @return InstallState
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -274,11 +274,11 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketplaceInstall(cloudInstallReq: CloudInstallReq) : CloudInstallState {
-        val localVarResponse = cloudPostV1MarketplaceInstallWithHttpInfo(cloudInstallReq = cloudInstallReq)
+    fun postV1MarketplaceInstall(installReq: InstallReq) : InstallState {
+        val localVarResponse = postV1MarketplaceInstallWithHttpInfo(installReq = installReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInstallState
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InstallState
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -296,29 +296,29 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * POST /v1/marketplace/install
      * Install activates one tool for the caller&#39;s own org and project.
      * Install activates one tool for the caller&#39;s own org and project. A marketplace install IS the tool plane&#39;s activation write — one store, one truth — so an installed capability is immediately dispatchable and a monetized one is priced from its listing at every call. The tool must resolve in the caller&#39;s scope, so installing something that does not exist is refused rather than recorded.
-     * @param cloudInstallReq 
-     * @return ApiResponse<CloudInstallState?>
+     * @param installReq 
+     * @return ApiResponse<InstallState?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketplaceInstallWithHttpInfo(cloudInstallReq: CloudInstallReq) : ApiResponse<CloudInstallState?> {
-        val localVariableConfig = cloudPostV1MarketplaceInstallRequestConfig(cloudInstallReq = cloudInstallReq)
+    fun postV1MarketplaceInstallWithHttpInfo(installReq: InstallReq) : ApiResponse<InstallState?> {
+        val localVariableConfig = postV1MarketplaceInstallRequestConfig(installReq = installReq)
 
-        return request<CloudInstallReq, CloudInstallState>(
+        return request<InstallReq, InstallState>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketplaceInstall
+     * To obtain the request config of the operation postV1MarketplaceInstall
      *
-     * @param cloudInstallReq 
+     * @param installReq 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketplaceInstallRequestConfig(cloudInstallReq: CloudInstallReq) : RequestConfig<CloudInstallReq> {
-        val localVariableBody = cloudInstallReq
+    fun postV1MarketplaceInstallRequestConfig(installReq: InstallReq) : RequestConfig<InstallReq> {
+        val localVariableBody = installReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -329,7 +329,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/install",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -338,8 +338,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * POST /v1/marketplace/listings
      * Publish offers one tool on the marketplace, optionally monetized.
      * Publish offers one tool on the marketplace, optionally monetized. The tool must already resolve in the publisher&#39;s own scope, so a listing can never advertise a capability that does not exist; a listing with a price must name the payout wallet the x402 seam settles to, so a monetized offer is never unpayable. The price is exact to 18 decimal places, so a per-call price below a cent is a real price and not a rounded-away zero. The listing is owned by the publishing org, paid into a wallet of that same org, and answers 201 with the created row.
-     * @param cloudPublishReq 
-     * @return CloudListing
+     * @param publishReq 
+     * @return Listing
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -348,11 +348,11 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketplaceListings(cloudPublishReq: CloudPublishReq) : CloudListing {
-        val localVarResponse = cloudPostV1MarketplaceListingsWithHttpInfo(cloudPublishReq = cloudPublishReq)
+    fun postV1MarketplaceListings(publishReq: PublishReq) : Listing {
+        val localVarResponse = postV1MarketplaceListingsWithHttpInfo(publishReq = publishReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudListing
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Listing
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -370,29 +370,29 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * POST /v1/marketplace/listings
      * Publish offers one tool on the marketplace, optionally monetized.
      * Publish offers one tool on the marketplace, optionally monetized. The tool must already resolve in the publisher&#39;s own scope, so a listing can never advertise a capability that does not exist; a listing with a price must name the payout wallet the x402 seam settles to, so a monetized offer is never unpayable. The price is exact to 18 decimal places, so a per-call price below a cent is a real price and not a rounded-away zero. The listing is owned by the publishing org, paid into a wallet of that same org, and answers 201 with the created row.
-     * @param cloudPublishReq 
-     * @return ApiResponse<CloudListing?>
+     * @param publishReq 
+     * @return ApiResponse<Listing?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketplaceListingsWithHttpInfo(cloudPublishReq: CloudPublishReq) : ApiResponse<CloudListing?> {
-        val localVariableConfig = cloudPostV1MarketplaceListingsRequestConfig(cloudPublishReq = cloudPublishReq)
+    fun postV1MarketplaceListingsWithHttpInfo(publishReq: PublishReq) : ApiResponse<Listing?> {
+        val localVariableConfig = postV1MarketplaceListingsRequestConfig(publishReq = publishReq)
 
-        return request<CloudPublishReq, CloudListing>(
+        return request<PublishReq, Listing>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketplaceListings
+     * To obtain the request config of the operation postV1MarketplaceListings
      *
-     * @param cloudPublishReq 
+     * @param publishReq 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketplaceListingsRequestConfig(cloudPublishReq: CloudPublishReq) : RequestConfig<CloudPublishReq> {
-        val localVariableBody = cloudPublishReq
+    fun postV1MarketplaceListingsRequestConfig(publishReq: PublishReq) : RequestConfig<PublishReq> {
+        val localVariableBody = publishReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -403,7 +403,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/listings",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -412,8 +412,8 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * POST /v1/marketplace/uninstall
      * Uninstall deactivates one tool for the caller&#39;s own org and project, so it stops being dispatchable there.
      * Uninstall deactivates one tool for the caller&#39;s own org and project, so it stops being dispatchable there. It is the exact inverse of install and touches the same activation record; deactivating something that was never active is not an error. The listing itself is untouched — this withdraws the caller&#39;s use of a capability, not anyone&#39;s offer of it.
-     * @param cloudInstallReq 
-     * @return CloudInstallState
+     * @param installReq 
+     * @return InstallState
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -422,11 +422,11 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MarketplaceUninstall(cloudInstallReq: CloudInstallReq) : CloudInstallState {
-        val localVarResponse = cloudPostV1MarketplaceUninstallWithHttpInfo(cloudInstallReq = cloudInstallReq)
+    fun postV1MarketplaceUninstall(installReq: InstallReq) : InstallState {
+        val localVarResponse = postV1MarketplaceUninstallWithHttpInfo(installReq = installReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudInstallState
+            ResponseType.Success -> (localVarResponse as Success<*>).data as InstallState
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -444,29 +444,29 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
      * POST /v1/marketplace/uninstall
      * Uninstall deactivates one tool for the caller&#39;s own org and project, so it stops being dispatchable there.
      * Uninstall deactivates one tool for the caller&#39;s own org and project, so it stops being dispatchable there. It is the exact inverse of install and touches the same activation record; deactivating something that was never active is not an error. The listing itself is untouched — this withdraws the caller&#39;s use of a capability, not anyone&#39;s offer of it.
-     * @param cloudInstallReq 
-     * @return ApiResponse<CloudInstallState?>
+     * @param installReq 
+     * @return ApiResponse<InstallState?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MarketplaceUninstallWithHttpInfo(cloudInstallReq: CloudInstallReq) : ApiResponse<CloudInstallState?> {
-        val localVariableConfig = cloudPostV1MarketplaceUninstallRequestConfig(cloudInstallReq = cloudInstallReq)
+    fun postV1MarketplaceUninstallWithHttpInfo(installReq: InstallReq) : ApiResponse<InstallState?> {
+        val localVariableConfig = postV1MarketplaceUninstallRequestConfig(installReq = installReq)
 
-        return request<CloudInstallReq, CloudInstallState>(
+        return request<InstallReq, InstallState>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MarketplaceUninstall
+     * To obtain the request config of the operation postV1MarketplaceUninstall
      *
-     * @param cloudInstallReq 
+     * @param installReq 
      * @return RequestConfig
      */
-    fun cloudPostV1MarketplaceUninstallRequestConfig(cloudInstallReq: CloudInstallReq) : RequestConfig<CloudInstallReq> {
-        val localVariableBody = cloudInstallReq
+    fun postV1MarketplaceUninstallRequestConfig(installReq: InstallReq) : RequestConfig<InstallReq> {
+        val localVariableBody = installReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -477,7 +477,7 @@ class MarketplaceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
             path = "/v1/marketplace/uninstall",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

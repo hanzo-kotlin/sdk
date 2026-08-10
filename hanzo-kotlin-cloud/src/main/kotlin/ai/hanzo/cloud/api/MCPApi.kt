@@ -19,14 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AdminAdminDeletePromo200Response
-import ai.hanzo.cloud.model.AutomationsMcpRequest
-import ai.hanzo.cloud.model.AutomationsMcpResponse
-import ai.hanzo.cloud.model.CloudCreateServerReq
-import ai.hanzo.cloud.model.CloudMCPServer
-import ai.hanzo.cloud.model.CloudMcpServerList
-import ai.hanzo.cloud.model.McpRequest
-import ai.hanzo.cloud.model.McpResponse
+import ai.hanzo.cloud.model.CreateServerReq
+import ai.hanzo.cloud.model.MCPServer
+import ai.hanzo.cloud.model.McpServerList
 
 import com.google.gson.annotations.SerializedName
 
@@ -44,7 +39,7 @@ import ai.hanzo.cloud.infrastructure.ResponseType
 import ai.hanzo.cloud.infrastructure.Success
 import ai.hanzo.cloud.infrastructure.toMultiValue
 
-class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+class McpApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
@@ -53,83 +48,9 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * POST /v1/automations/mcp
-     * JSON-RPC 2.0 tool surface over connector actions
-     * HIP-0300 JSON-RPC 2.0. Methods: &#x60;initialize&#x60;, &#x60;ping&#x60;, &#x60;tools/list&#x60;, &#x60;tools/call&#x60;. Every connector action is a tool named &#x60;&lt;connector&gt;_&lt;action&gt;&#x60;. JSON-RPC errors are returned with HTTP 200 and an &#x60;error&#x60; member. 
-     * @param automationsMcpRequest 
-     * @return AutomationsMcpResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun automationsMcp(automationsMcpRequest: AutomationsMcpRequest) : AutomationsMcpResponse {
-        val localVarResponse = automationsMcpWithHttpInfo(automationsMcpRequest = automationsMcpRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AutomationsMcpResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/automations/mcp
-     * JSON-RPC 2.0 tool surface over connector actions
-     * HIP-0300 JSON-RPC 2.0. Methods: &#x60;initialize&#x60;, &#x60;ping&#x60;, &#x60;tools/list&#x60;, &#x60;tools/call&#x60;. Every connector action is a tool named &#x60;&lt;connector&gt;_&lt;action&gt;&#x60;. JSON-RPC errors are returned with HTTP 200 and an &#x60;error&#x60; member. 
-     * @param automationsMcpRequest 
-     * @return ApiResponse<AutomationsMcpResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun automationsMcpWithHttpInfo(automationsMcpRequest: AutomationsMcpRequest) : ApiResponse<AutomationsMcpResponse?> {
-        val localVariableConfig = automationsMcpRequestConfig(automationsMcpRequest = automationsMcpRequest)
-
-        return request<AutomationsMcpRequest, AutomationsMcpResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation automationsMcp
-     *
-     * @param automationsMcpRequest 
-     * @return RequestConfig
-     */
-    fun automationsMcpRequestConfig(automationsMcpRequest: AutomationsMcpRequest) : RequestConfig<AutomationsMcpRequest> {
-        val localVariableBody = automationsMcpRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/automations/mcp",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * DELETE /v1/mcp/servers/{id}
-     * DeleteServer deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry.
-     * DeleteServer deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry. Scoped to the caller&#39;s org, so an id belonging to another tenant is a 404 and not a delete. Answers 204 with no body; a server this org does not have is 404.
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry.
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry. Scoped to the caller&#39;s org, so an id belonging to another tenant is a 404 and not a delete. Answers 204 with no body; a server this org does not have is 404.
      * @param id ID is the server to deregister, from the path.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -139,8 +60,8 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1McpServersId(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1McpServersIdWithHttpInfo(id = id)
+    fun deleteV1McpServersById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1McpServersByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -159,16 +80,16 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * DELETE /v1/mcp/servers/{id}
-     * DeleteServer deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry.
-     * DeleteServer deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry. Scoped to the caller&#39;s org, so an id belonging to another tenant is a 404 and not a delete. Answers 204 with no body; a server this org does not have is 404.
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry.
+     * Deregisters one of the caller org&#39;s external MCP servers, so its tools leave the registry. Scoped to the caller&#39;s org, so an id belonging to another tenant is a 404 and not a delete. Answers 204 with no body; a server this org does not have is 404.
      * @param id ID is the server to deregister, from the path.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1McpServersIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1McpServersIdRequestConfig(id = id)
+    fun deleteV1McpServersByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1McpServersByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -176,12 +97,12 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1McpServersId
+     * To obtain the request config of the operation deleteV1McpServersById
      *
      * @param id ID is the server to deregister, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1McpServersIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1McpServersByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -191,16 +112,16 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/mcp/servers/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/mcp/servers
-     * ListServers lists the external MCP servers the caller&#39;s org has registered.
-     * ListServers lists the external MCP servers the caller&#39;s org has registered. Each record carries the URL and the name of the header its credential is injected into; the credential VALUE lives only in KMS and is never returned, so hasSecret is the whole of what this surface says about it.
-     * @return CloudMcpServerList
+     * Lists the external MCP servers the caller&#39;s org has registered.
+     * Lists the external MCP servers the caller&#39;s org has registered. Each record carries the URL and the name of the header its credential is injected into; the credential VALUE lives only in KMS and is never returned, so hasSecret is the whole of what this surface says about it.
+     * @return McpServerList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -209,11 +130,11 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1McpServers() : CloudMcpServerList {
-        val localVarResponse = cloudGetV1McpServersWithHttpInfo()
+    fun getV1McpServers() : McpServerList {
+        val localVarResponse = getV1McpServersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMcpServerList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as McpServerList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -229,28 +150,28 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * GET /v1/mcp/servers
-     * ListServers lists the external MCP servers the caller&#39;s org has registered.
-     * ListServers lists the external MCP servers the caller&#39;s org has registered. Each record carries the URL and the name of the header its credential is injected into; the credential VALUE lives only in KMS and is never returned, so hasSecret is the whole of what this surface says about it.
-     * @return ApiResponse<CloudMcpServerList?>
+     * Lists the external MCP servers the caller&#39;s org has registered.
+     * Lists the external MCP servers the caller&#39;s org has registered. Each record carries the URL and the name of the header its credential is injected into; the credential VALUE lives only in KMS and is never returned, so hasSecret is the whole of what this surface says about it.
+     * @return ApiResponse<McpServerList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1McpServersWithHttpInfo() : ApiResponse<CloudMcpServerList?> {
-        val localVariableConfig = cloudGetV1McpServersRequestConfig()
+    fun getV1McpServersWithHttpInfo() : ApiResponse<McpServerList?> {
+        val localVariableConfig = getV1McpServersRequestConfig()
 
-        return request<Unit, CloudMcpServerList>(
+        return request<Unit, McpServerList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1McpServers
+     * To obtain the request config of the operation getV1McpServers
      *
      * @return RequestConfig
      */
-    fun cloudGetV1McpServersRequestConfig() : RequestConfig<Unit> {
+    fun getV1McpServersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -261,17 +182,17 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/mcp/servers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/mcp/servers
-     * CreateServer gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door.
-     * CreateServer gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door. It is the ONE way an org gains a server, whether it typed the URL in or enabled a catalog listing: both write the SAME record, and &#x60;source&#x60; says which it was. A second registration path would be a second place for a server to exist, and then a second place to forget to check the credential.  The credential VALUE is sealed in KMS under a per-org ref; the row keeps only the URL, the header name to inject it into, and a has-secret flag — so a secret with no KMS configured is refused 503 rather than stored in the clear. The URL is SSRF-validated here and re-checked by the dialer at connect time, which is the DNS-rebinding defense.  Enabling a listing the org already enabled REVISES that server rather than adding a near-duplicate beside it, so a retried enable is the same one server. Answers 201 with the stored record.
-     * @param cloudCreateServerReq 
-     * @return CloudMCPServer
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door.
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door. It is the ONE way an org gains a server, whether it typed the URL in or enabled a catalog listing: both write the SAME record, and &#x60;source&#x60; says which it was. A second registration path would be a second place for a server to exist, and then a second place to forget to check the credential.  The credential VALUE is sealed in KMS under a per-org ref; the row keeps only the URL, the header name to inject it into, and a has-secret flag — so a secret with no KMS configured is refused 503 rather than stored in the clear. The URL is SSRF-validated here and re-checked by the dialer at connect time, which is the DNS-rebinding defense.  Enabling a listing the org already enabled REVISES that server rather than adding a near-duplicate beside it, so a retried enable is the same one server. Answers 201 with the stored record.
+     * @param createServerReq 
+     * @return MCPServer
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -280,11 +201,11 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1McpServers(cloudCreateServerReq: CloudCreateServerReq) : CloudMCPServer {
-        val localVarResponse = cloudPostV1McpServersWithHttpInfo(cloudCreateServerReq = cloudCreateServerReq)
+    fun postV1McpServers(createServerReq: CreateServerReq) : MCPServer {
+        val localVarResponse = postV1McpServersWithHttpInfo(createServerReq = createServerReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMCPServer
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MCPServer
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -300,31 +221,31 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
 
     /**
      * POST /v1/mcp/servers
-     * CreateServer gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door.
-     * CreateServer gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door. It is the ONE way an org gains a server, whether it typed the URL in or enabled a catalog listing: both write the SAME record, and &#x60;source&#x60; says which it was. A second registration path would be a second place for a server to exist, and then a second place to forget to check the credential.  The credential VALUE is sealed in KMS under a per-org ref; the row keeps only the URL, the header name to inject it into, and a has-secret flag — so a secret with no KMS configured is refused 503 rather than stored in the clear. The URL is SSRF-validated here and re-checked by the dialer at connect time, which is the DNS-rebinding defense.  Enabling a listing the org already enabled REVISES that server rather than adding a near-duplicate beside it, so a retried enable is the same one server. Answers 201 with the stored record.
-     * @param cloudCreateServerReq 
-     * @return ApiResponse<CloudMCPServer?>
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door.
+     * Gives the caller&#39;s org one more external MCP server, so its tools join the org&#39;s tool plane and the fleet&#39;s MCP door. It is the ONE way an org gains a server, whether it typed the URL in or enabled a catalog listing: both write the SAME record, and &#x60;source&#x60; says which it was. A second registration path would be a second place for a server to exist, and then a second place to forget to check the credential.  The credential VALUE is sealed in KMS under a per-org ref; the row keeps only the URL, the header name to inject it into, and a has-secret flag — so a secret with no KMS configured is refused 503 rather than stored in the clear. The URL is SSRF-validated here and re-checked by the dialer at connect time, which is the DNS-rebinding defense.  Enabling a listing the org already enabled REVISES that server rather than adding a near-duplicate beside it, so a retried enable is the same one server. Answers 201 with the stored record.
+     * @param createServerReq 
+     * @return ApiResponse<MCPServer?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1McpServersWithHttpInfo(cloudCreateServerReq: CloudCreateServerReq) : ApiResponse<CloudMCPServer?> {
-        val localVariableConfig = cloudPostV1McpServersRequestConfig(cloudCreateServerReq = cloudCreateServerReq)
+    fun postV1McpServersWithHttpInfo(createServerReq: CreateServerReq) : ApiResponse<MCPServer?> {
+        val localVariableConfig = postV1McpServersRequestConfig(createServerReq = createServerReq)
 
-        return request<CloudCreateServerReq, CloudMCPServer>(
+        return request<CreateServerReq, MCPServer>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1McpServers
+     * To obtain the request config of the operation postV1McpServers
      *
-     * @param cloudCreateServerReq 
+     * @param createServerReq 
      * @return RequestConfig
      */
-    fun cloudPostV1McpServersRequestConfig(cloudCreateServerReq: CloudCreateServerReq) : RequestConfig<CloudCreateServerReq> {
-        val localVariableBody = cloudCreateServerReq
+    fun postV1McpServersRequestConfig(createServerReq: CreateServerReq) : RequestConfig<CreateServerReq> {
+        val localVariableBody = createServerReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -335,81 +256,7 @@ class MCPApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
             path = "/v1/mcp/servers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/mcp
-     * JSON-RPC call
-     * One request, one response, three methods. &#x60;initialize&#x60; reports the protocol version and server capabilities; &#x60;tools/list&#x60; returns every tool this credential can reach; &#x60;tools/call&#x60; runs one by name.  Read &#x60;error&#x60; before &#x60;result&#x60;, and &#x60;result.isError&#x60; before &#x60;result.content&#x60;: both failure channels live inside a 200.
-     * @param mcpRequest 
-     * @return McpResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun mcpRpc(mcpRequest: McpRequest) : McpResponse {
-        val localVarResponse = mcpRpcWithHttpInfo(mcpRequest = mcpRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as McpResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/mcp
-     * JSON-RPC call
-     * One request, one response, three methods. &#x60;initialize&#x60; reports the protocol version and server capabilities; &#x60;tools/list&#x60; returns every tool this credential can reach; &#x60;tools/call&#x60; runs one by name.  Read &#x60;error&#x60; before &#x60;result&#x60;, and &#x60;result.isError&#x60; before &#x60;result.content&#x60;: both failure channels live inside a 200.
-     * @param mcpRequest 
-     * @return ApiResponse<McpResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun mcpRpcWithHttpInfo(mcpRequest: McpRequest) : ApiResponse<McpResponse?> {
-        val localVariableConfig = mcpRpcRequestConfig(mcpRequest = mcpRequest)
-
-        return request<McpRequest, McpResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation mcpRpc
-     *
-     * @param mcpRequest 
-     * @return RequestConfig
-     */
-    fun mcpRpcRequestConfig(mcpRequest: McpRequest) : RequestConfig<McpRequest> {
-        val localVariableBody = mcpRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/mcp",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

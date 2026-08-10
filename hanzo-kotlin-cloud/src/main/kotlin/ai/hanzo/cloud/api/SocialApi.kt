@@ -46,8 +46,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/social/accounts/{id}
-     * 
-     * 
+     * Disconnect one account
+     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.  It removes the account record only. Posts that already published through it keep their published state and their recorded external ids — this does not retract anything from the network.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -57,8 +57,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1SocialAccountsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1SocialAccountsByIdWithHttpInfo(id = id)
+    fun deleteV1SocialAccountsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1SocialAccountsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -77,16 +77,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/social/accounts/{id}
-     * 
-     * 
+     * Disconnect one account
+     * Removes one connected account from the org and answers 204 with no body; an id that is not there is 404.  It removes the account record only. Posts that already published through it keep their published state and their recorded external ids — this does not retract anything from the network.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1SocialAccountsByIdRequestConfig(id = id)
+    fun deleteV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1SocialAccountsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,12 +94,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1SocialAccountsById
+     * To obtain the request config of the operation deleteV1SocialAccountsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudDeleteV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -109,15 +109,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * DELETE /v1/social/posts/{id}
-     * 
-     * 
+     * Delete one post
+     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.  It deletes the record here only. A post that has already published is not retracted from the network by deleting it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -127,8 +127,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1SocialPostsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1SocialPostsByIdWithHttpInfo(id = id)
+    fun deleteV1SocialPostsById(id: kotlin.String) : Unit {
+        val localVarResponse = deleteV1SocialPostsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -147,16 +147,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * DELETE /v1/social/posts/{id}
-     * 
-     * 
+     * Delete one post
+     * Removes one post from the org and answers 204 with no body; an id that is not there is 404.  It deletes the record here only. A post that has already published is not retracted from the network by deleting it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1SocialPostsByIdRequestConfig(id = id)
+    fun deleteV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1SocialPostsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -164,12 +164,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1SocialPostsById
+     * To obtain the request config of the operation deleteV1SocialPostsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudDeleteV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -179,15 +179,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/social/accounts
-     * 
-     * 
+     * List the social accounts connected to your org
+     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps. &#x60;provider&#x60; filters to one network; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  An account&#39;s provider access token is NEVER included in any response on this surface. Only the publisher reads it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -196,8 +196,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SocialAccounts() : Unit {
-        val localVarResponse = cloudGetV1SocialAccountsWithHttpInfo()
+    fun getV1SocialAccounts() : Unit {
+        val localVarResponse = getV1SocialAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -216,15 +216,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/accounts
-     * 
-     * 
+     * List the social accounts connected to your org
+     * Returns the org&#39;s connected accounts — each one&#39;s id, network, handle, status and timestamps. &#x60;provider&#x60; filters to one network; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  An account&#39;s provider access token is NEVER included in any response on this surface. Only the publisher reads it.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SocialAccountsRequestConfig()
+    fun getV1SocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SocialAccountsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -232,11 +232,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SocialAccounts
+     * To obtain the request config of the operation getV1SocialAccounts
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SocialAccountsRequestConfig() : RequestConfig<Unit> {
+    fun getV1SocialAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -246,15 +246,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/social/accounts/{id}
-     * 
-     * 
+     * Read one connected account
+     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404. The provider access token is not part of the response.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -264,8 +264,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SocialAccountsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1SocialAccountsByIdWithHttpInfo(id = id)
+    fun getV1SocialAccountsById(id: kotlin.String) : Unit {
+        val localVarResponse = getV1SocialAccountsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -284,16 +284,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/accounts/{id}
-     * 
-     * 
+     * Read one connected account
+     * Returns one of the org&#39;s connected accounts by id — its network, handle, status and timestamps — or 404. The provider access token is not part of the response.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SocialAccountsByIdRequestConfig(id = id)
+    fun getV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SocialAccountsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -301,12 +301,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SocialAccountsById
+     * To obtain the request config of the operation getV1SocialAccountsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -316,15 +316,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/social/posts
-     * 
-     * 
+     * List your org&#39;s posts
+     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps. &#x60;status&#x60; filters to one of draft, scheduled, published or failed; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -333,8 +333,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SocialPosts() : Unit {
-        val localVarResponse = cloudGetV1SocialPostsWithHttpInfo()
+    fun getV1SocialPosts() : Unit {
+        val localVarResponse = getV1SocialPostsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -353,15 +353,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/posts
-     * 
-     * 
+     * List your org&#39;s posts
+     * Returns the org&#39;s posts — content, channel, status, scheduled time, media and timestamps. &#x60;status&#x60; filters to one of draft, scheduled, published or failed; &#x60;limit&#x60; bounds the page, defaulting to 200 and capped at 1000.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SocialPostsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SocialPostsRequestConfig()
+    fun getV1SocialPostsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SocialPostsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -369,11 +369,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SocialPosts
+     * To obtain the request config of the operation getV1SocialPosts
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SocialPostsRequestConfig() : RequestConfig<Unit> {
+    fun getV1SocialPostsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -383,15 +383,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/social/posts/{id}
-     * 
-     * 
+     * Read one post
+     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under. 404 when there is no such post for this org.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -401,8 +401,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SocialPostsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudGetV1SocialPostsByIdWithHttpInfo(id = id)
+    fun getV1SocialPostsById(id: kotlin.String) : Unit {
+        val localVarResponse = getV1SocialPostsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -421,16 +421,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/posts/{id}
-     * 
-     * 
+     * Read one post
+     * Returns one of the org&#39;s posts by id, with its current status, scheduled time, media and — once it has published — the account and external id it published under. 404 when there is no such post for this org.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SocialPostsByIdRequestConfig(id = id)
+    fun getV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SocialPostsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -438,12 +438,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SocialPostsById
+     * To obtain the request config of the operation getV1SocialPostsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudGetV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -453,15 +453,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/social/providers
-     * 
-     * 
+     * Which networks this deployment can actually publish to
+     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.  This is a live read of the deployment&#39;s own configuration, not a static list of networks — it answers \&quot;can I connect this today\&quot;, which is what a connect affordance and a pre-cutover checklist both need. It says nothing about whether the caller has connected an account; that is the accounts listing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -470,8 +470,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SocialProviders() : Unit {
-        val localVarResponse = cloudGetV1SocialProvidersWithHttpInfo()
+    fun getV1SocialProviders() : Unit {
+        val localVarResponse = getV1SocialProvidersWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -490,15 +490,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/providers
-     * 
-     * 
+     * Which networks this deployment can actually publish to
+     * Reports each supported network&#39;s publish-readiness: whether this deployment holds the OAuth application credentials for it and, when it does not, exactly which environment variables are missing.  This is a live read of the deployment&#39;s own configuration, not a static list of networks — it answers \&quot;can I connect this today\&quot;, which is what a connect affordance and a pre-cutover checklist both need. It says nothing about whether the caller has connected an account; that is the accounts listing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SocialProvidersWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SocialProvidersRequestConfig()
+    fun getV1SocialProvidersWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SocialProvidersRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -506,11 +506,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SocialProviders
+     * To obtain the request config of the operation getV1SocialProviders
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SocialProvidersRequestConfig() : RequestConfig<Unit> {
+    fun getV1SocialProvidersRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -520,15 +520,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/providers",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/social/summary
-     * 
-     * 
+     * Counts across your org&#39;s social presence
+     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected. It is the dashboard roll-up, computed over the org&#39;s own rows in one read.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -537,8 +537,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1SocialSummary() : Unit {
-        val localVarResponse = cloudGetV1SocialSummaryWithHttpInfo()
+    fun getV1SocialSummary() : Unit {
+        val localVarResponse = getV1SocialSummaryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -557,15 +557,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * GET /v1/social/summary
-     * 
-     * 
+     * Counts across your org&#39;s social presence
+     * Returns four counts for the caller&#39;s org: total posts, how many are scheduled, how many have published, and how many accounts are connected. It is the dashboard roll-up, computed over the org&#39;s own rows in one read.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1SocialSummaryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1SocialSummaryRequestConfig()
+    fun getV1SocialSummaryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1SocialSummaryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -573,11 +573,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1SocialSummary
+     * To obtain the request config of the operation getV1SocialSummary
      *
      * @return RequestConfig
      */
-    fun cloudGetV1SocialSummaryRequestConfig() : RequestConfig<Unit> {
+    fun getV1SocialSummaryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -587,15 +587,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/summary",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/social/accounts
-     * 
-     * 
+     * Connect a social account to your org
+     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.  &#x60;provider&#x60; must be one of x, facebook, instagram, linkedin, tiktok, youtube or threads, defaulting to x when omitted. &#x60;status&#x60; is one of connected, disconnected or error, defaulting to connected. The handle is trimmed and bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -604,8 +604,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1SocialAccounts() : Unit {
-        val localVarResponse = cloudPostV1SocialAccountsWithHttpInfo()
+    fun postV1SocialAccounts() : Unit {
+        val localVarResponse = postV1SocialAccountsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -624,15 +624,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/accounts
-     * 
-     * 
+     * Connect a social account to your org
+     * Records a social account for the org and answers 201 with the stored row, including the generated id later calls address it by.  &#x60;provider&#x60; must be one of x, facebook, instagram, linkedin, tiktok, youtube or threads, defaulting to x when omitted. &#x60;status&#x60; is one of connected, disconnected or error, defaulting to connected. The handle is trimmed and bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1SocialAccountsRequestConfig()
+    fun postV1SocialAccountsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1SocialAccountsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -640,11 +640,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1SocialAccounts
+     * To obtain the request config of the operation postV1SocialAccounts
      *
      * @return RequestConfig
      */
-    fun cloudPostV1SocialAccountsRequestConfig() : RequestConfig<Unit> {
+    fun postV1SocialAccountsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -654,15 +654,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/social/posts
-     * 
-     * 
+     * Create a post, and publish it if it is already due
+     * Stores a post for the org and answers 201 with the stored row.  A post created as scheduled for a time that has already passed is published IMMEDIATELY, and the row returned carries that outcome — this is the one behaviour a reader would otherwise miss. A future-scheduled post is left for the scheduler, and a draft is left alone. Publishing never fails the creation: the post is stored either way, and a publish that could not run leaves the row for the scheduler to retry.  &#x60;content&#x60; is required and bounded at 8192 characters; &#x60;channel&#x60; is one of the seven supported networks, defaulting to x; &#x60;status&#x60; is one of draft, scheduled, published or failed, defaulting to draft; up to 10 media URLs are kept, each bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -671,8 +671,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1SocialPosts() : Unit {
-        val localVarResponse = cloudPostV1SocialPostsWithHttpInfo()
+    fun postV1SocialPosts() : Unit {
+        val localVarResponse = postV1SocialPostsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -691,15 +691,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/posts
-     * 
-     * 
+     * Create a post, and publish it if it is already due
+     * Stores a post for the org and answers 201 with the stored row.  A post created as scheduled for a time that has already passed is published IMMEDIATELY, and the row returned carries that outcome — this is the one behaviour a reader would otherwise miss. A future-scheduled post is left for the scheduler, and a draft is left alone. Publishing never fails the creation: the post is stored either way, and a publish that could not run leaves the row for the scheduler to retry.  &#x60;content&#x60; is required and bounded at 8192 characters; &#x60;channel&#x60; is one of the seven supported networks, defaulting to x; &#x60;status&#x60; is one of draft, scheduled, published or failed, defaulting to draft; up to 10 media URLs are kept, each bounded at 1024 characters.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SocialPostsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1SocialPostsRequestConfig()
+    fun postV1SocialPostsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1SocialPostsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -707,11 +707,11 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1SocialPosts
+     * To obtain the request config of the operation postV1SocialPosts
      *
      * @return RequestConfig
      */
-    fun cloudPostV1SocialPostsRequestConfig() : RequestConfig<Unit> {
+    fun postV1SocialPostsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -721,15 +721,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/social/posts/{id}/publish
-     * 
-     * 
+     * Publish one post now
+     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.  It is IDEMPOTENT: a post that has already published, or that another caller is publishing right now, comes back unchanged rather than being posted twice. That claim is taken before any network call, which is what makes a double submit safe.  The two failure shapes differ on purpose. Having no connected account for the channel is the caller&#39;s to fix, so it is recorded ON the post as failed with the reason and answers normally. A deployment that lacks the network&#39;s own credentials cannot publish for anyone, so that is a 503 naming exactly what is missing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -739,8 +739,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1SocialPostsByIdPublish(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1SocialPostsByIdPublishWithHttpInfo(id = id)
+    fun postV1SocialPostsByIdPublish(id: kotlin.String) : Unit {
+        val localVarResponse = postV1SocialPostsByIdPublishWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -759,16 +759,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * POST /v1/social/posts/{id}/publish
-     * 
-     * 
+     * Publish one post now
+     * Publishes the post immediately to the connected accounts on its channel and answers with the updated row, carrying the account and external id it published under.  It is IDEMPOTENT: a post that has already published, or that another caller is publishing right now, comes back unchanged rather than being posted twice. That claim is taken before any network call, which is what makes a double submit safe.  The two failure shapes differ on purpose. Having no connected account for the channel is the caller&#39;s to fix, so it is recorded ON the post as failed with the reason and answers normally. A deployment that lacks the network&#39;s own credentials cannot publish for anyone, so that is a 503 naming exactly what is missing.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1SocialPostsByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1SocialPostsByIdPublishRequestConfig(id = id)
+    fun postV1SocialPostsByIdPublishWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1SocialPostsByIdPublishRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -776,12 +776,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1SocialPostsByIdPublish
+     * To obtain the request config of the operation postV1SocialPostsByIdPublish
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1SocialPostsByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1SocialPostsByIdPublishRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -791,15 +791,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}/publish".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/social/accounts/{id}
-     * 
-     * 
+     * Replace one connected account
+     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.  This is a REPLACEMENT, not a merge, which is the rule most easily got wrong: a field the body omits is written as its default, so leaving out the handle blanks it and leaving out the status resets it to connected. Send the whole record. The same vocabularies as create apply, and an unknown network or status is refused rather than coerced.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -809,8 +809,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1SocialAccountsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1SocialAccountsByIdWithHttpInfo(id = id)
+    fun putV1SocialAccountsById(id: kotlin.String) : Unit {
+        val localVarResponse = putV1SocialAccountsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -829,16 +829,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/social/accounts/{id}
-     * 
-     * 
+     * Replace one connected account
+     * Replaces the account&#39;s network, handle and status with what the body carries, and answers with the stored row.  This is a REPLACEMENT, not a merge, which is the rule most easily got wrong: a field the body omits is written as its default, so leaving out the handle blanks it and leaving out the status resets it to connected. Send the whole record. The same vocabularies as create apply, and an unknown network or status is refused rather than coerced.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1SocialAccountsByIdRequestConfig(id = id)
+    fun putV1SocialAccountsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1SocialAccountsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -846,12 +846,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1SocialAccountsById
+     * To obtain the request config of the operation putV1SocialAccountsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPutV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun putV1SocialAccountsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -861,15 +861,15 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/accounts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/social/posts/{id}
-     * 
-     * 
+     * Replace one post
+     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.  A REPLACEMENT, not a merge: an omitted field is written as its default, so omitting media clears it and omitting the status resets the post to draft. &#x60;content&#x60; is required on every update. Unlike create, this never triggers a publish — moving a post&#39;s scheduled time into the past here leaves it for the scheduler; publish now is its own operation.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -879,8 +879,8 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1SocialPostsById(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPutV1SocialPostsByIdWithHttpInfo(id = id)
+    fun putV1SocialPostsById(id: kotlin.String) : Unit {
+        val localVarResponse = putV1SocialPostsByIdWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -899,16 +899,16 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
 
     /**
      * PUT /v1/social/posts/{id}
-     * 
-     * 
+     * Replace one post
+     * Replaces the post&#39;s content, channel, status, scheduled time and media with what the body carries, and answers with the stored row.  A REPLACEMENT, not a merge: an omitted field is written as its default, so omitting media clears it and omitting the status resets the post to draft. &#x60;content&#x60; is required on every update. Unlike create, this never triggers a publish — moving a post&#39;s scheduled time into the past here leaves it for the scheduler; publish now is its own operation.  A validated principal is required; 403 without one. Every row is keyed by the caller&#39;s org taken from that principal and never from the request, so an id belonging to another tenant reads as not found rather than as a refusal.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1SocialPostsByIdRequestConfig(id = id)
+    fun putV1SocialPostsByIdWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = putV1SocialPostsByIdRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -916,12 +916,12 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1SocialPostsById
+     * To obtain the request config of the operation putV1SocialPostsById
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPutV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun putV1SocialPostsByIdRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -931,7 +931,7 @@ class SocialApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory 
             path = "/v1/social/posts/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

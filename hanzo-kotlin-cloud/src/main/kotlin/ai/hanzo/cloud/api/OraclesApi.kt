@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudOraclesOut
+import ai.hanzo.cloud.model.OraclesOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,9 +47,9 @@ class OraclesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/oracles
-     * ListOracles reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry.
-     * ListOracles reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry. A reachable graph with no feeds answers an honest empty list; an unreachable or erroring graph likewise degrades to an empty list at 200 rather than a 502, so the console never error-toasts. No feed is ever fabricated.
-     * @return CloudOraclesOut
+     * Reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry.
+     * Reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry. A reachable graph with no feeds answers an honest empty list; an unreachable or erroring graph likewise degrades to an empty list at 200 rather than a 502, so the console never error-toasts. No feed is ever fabricated.
+     * @return OraclesOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +58,11 @@ class OraclesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Oracles() : CloudOraclesOut {
-        val localVarResponse = cloudGetV1OraclesWithHttpInfo()
+    fun getV1Oracles() : OraclesOut {
+        val localVarResponse = getV1OraclesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOraclesOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OraclesOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -78,28 +78,28 @@ class OraclesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/oracles
-     * ListOracles reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry.
-     * ListOracles reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry. A reachable graph with no feeds answers an honest empty list; an unreachable or erroring graph likewise degrades to an empty list at 200 rather than a 502, so the console never error-toasts. No feed is ever fabricated.
-     * @return ApiResponse<CloudOraclesOut?>
+     * Reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry.
+     * Reports the on-chain price/data oracles from the graph&#39;s O-Chain PriceFeed registry. A reachable graph with no feeds answers an honest empty list; an unreachable or erroring graph likewise degrades to an empty list at 200 rather than a 502, so the console never error-toasts. No feed is ever fabricated.
+     * @return ApiResponse<OraclesOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1OraclesWithHttpInfo() : ApiResponse<CloudOraclesOut?> {
-        val localVariableConfig = cloudGetV1OraclesRequestConfig()
+    fun getV1OraclesWithHttpInfo() : ApiResponse<OraclesOut?> {
+        val localVariableConfig = getV1OraclesRequestConfig()
 
-        return request<Unit, CloudOraclesOut>(
+        return request<Unit, OraclesOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Oracles
+     * To obtain the request config of the operation getV1Oracles
      *
      * @return RequestConfig
      */
-    fun cloudGetV1OraclesRequestConfig() : RequestConfig<Unit> {
+    fun getV1OraclesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +110,7 @@ class OraclesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/oracles",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

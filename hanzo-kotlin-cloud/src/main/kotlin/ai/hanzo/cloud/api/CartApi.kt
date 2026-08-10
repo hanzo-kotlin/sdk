@@ -19,10 +19,9 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CommerceCart
-import ai.hanzo.cloud.model.CommerceError
-import ai.hanzo.cloud.model.CommercePaginatedCarts
-import ai.hanzo.cloud.model.CommerceSetCartItemRequest
+import ai.hanzo.cloud.model.Cart
+import ai.hanzo.cloud.model.CartItemSet
+import ai.hanzo.cloud.model.CartOpen
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,11 +48,11 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/commerce/cart
-     * Create cart
-     * 
-     * @param commerceCart 
-     * @return CommerceCart
+     * POST /v1/cart/{id}/discard
+     * Discard a cart the shopper abandoned
+     * Discards a cart the shopper abandoned, and answers it in its final state.  A discarded cart is CLOSED, not deleted: the row stays, so abandoned-basket reporting and any follow-up that keys on it still have something to read. It stops being a cart anything will check out, which is the point — it is how a storefront says \&quot;this basket is over\&quot; without destroying the evidence that it existed.  Discarding is idempotent: a cart already discarded answers its stored state rather than failing, so a retry is safe.  The cart is resolved inside the caller&#39;s own org namespace, so another tenant&#39;s id answers 404.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the cart&#39;s id, as the open call answered it.
+     * @return Cart
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -62,11 +61,11 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceCreateCart(commerceCart: CommerceCart) : CommerceCart {
-        val localVarResponse = commerceCreateCartWithHttpInfo(commerceCart = commerceCart)
+    fun discardCart(id: kotlin.String) : Cart {
+        val localVarResponse = discardCartWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceCart
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Cart
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -81,176 +80,31 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/commerce/cart
-     * Create cart
-     * 
-     * @param commerceCart 
-     * @return ApiResponse<CommerceCart?>
+     * POST /v1/cart/{id}/discard
+     * Discard a cart the shopper abandoned
+     * Discards a cart the shopper abandoned, and answers it in its final state.  A discarded cart is CLOSED, not deleted: the row stays, so abandoned-basket reporting and any follow-up that keys on it still have something to read. It stops being a cart anything will check out, which is the point — it is how a storefront says \&quot;this basket is over\&quot; without destroying the evidence that it existed.  Discarding is idempotent: a cart already discarded answers its stored state rather than failing, so a retry is safe.  The cart is resolved inside the caller&#39;s own org namespace, so another tenant&#39;s id answers 404.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the cart&#39;s id, as the open call answered it.
+     * @return ApiResponse<Cart?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceCreateCartWithHttpInfo(commerceCart: CommerceCart) : ApiResponse<CommerceCart?> {
-        val localVariableConfig = commerceCreateCartRequestConfig(commerceCart = commerceCart)
+    fun discardCartWithHttpInfo(id: kotlin.String) : ApiResponse<Cart?> {
+        val localVariableConfig = discardCartRequestConfig(id = id)
 
-        return request<CommerceCart, CommerceCart>(
+        return request<Unit, Cart>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceCreateCart
+     * To obtain the request config of the operation discardCart
      *
-     * @param commerceCart 
+     * @param id ID is the cart&#39;s id, as the open call answered it.
      * @return RequestConfig
      */
-    fun commerceCreateCartRequestConfig(commerceCart: CommerceCart) : RequestConfig<CommerceCart> {
-        val localVariableBody = commerceCart
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/commerce/cart",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/commerce/cart/{cartid}
-     * Delete cart
-     * 
-     * @param cartid 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceDeleteCart(cartid: kotlin.String) : Unit {
-        val localVarResponse = commerceDeleteCartWithHttpInfo(cartid = cartid)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/commerce/cart/{cartid}
-     * Delete cart
-     * 
-     * @param cartid 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceDeleteCartWithHttpInfo(cartid: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = commerceDeleteCartRequestConfig(cartid = cartid)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceDeleteCart
-     *
-     * @param cartid 
-     * @return RequestConfig
-     */
-    fun commerceDeleteCartRequestConfig(cartid: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/commerce/cart/{cartid}".replace("{"+"cartid"+"}", encodeURIComponent(cartid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/commerce/cart/{cartid}/discard
-     * Discard cart
-     * 
-     * @param cartid 
-     * @return CommerceCart
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceDiscardCart(cartid: kotlin.String) : CommerceCart {
-        val localVarResponse = commerceDiscardCartWithHttpInfo(cartid = cartid)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceCart
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/commerce/cart/{cartid}/discard
-     * Discard cart
-     * 
-     * @param cartid 
-     * @return ApiResponse<CommerceCart?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceDiscardCartWithHttpInfo(cartid: kotlin.String) : ApiResponse<CommerceCart?> {
-        val localVariableConfig = commerceDiscardCartRequestConfig(cartid = cartid)
-
-        return request<Unit, CommerceCart>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceDiscardCart
-     *
-     * @param cartid 
-     * @return RequestConfig
-     */
-    fun commerceDiscardCartRequestConfig(cartid: kotlin.String) : RequestConfig<Unit> {
+    fun discardCartRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -258,20 +112,20 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/commerce/cart/{cartid}/discard".replace("{"+"cartid"+"}", encodeURIComponent(cartid.toString())),
+            path = "/v1/cart/{id}/discard".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/cart/{cartid}
-     * Get cart
-     * 
-     * @param cartid 
-     * @return CommerceCart
+     * GET /v1/cart/{id}
+     * Read one cart with its lines and totals
+     * Reads one cart: its lines, its status and what it comes to.  This is what a storefront calls to render the basket, and what a support agent calls to see what a shopper is looking at. The totals are the cart&#39;s STORED tally — shipping and tax stay zero until checkout resolves a shipping option and a tax region, so a cart total before checkout is the merchandise total and is meant to be.  The org scopes the read by construction: the store is namespaced to it, so a cart id belonging to another tenant is simply not found rather than found and then filtered, and answers 404 rather than 403 so the id space cannot be probed.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the cart&#39;s id, as the open call answered it.
+     * @return Cart
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -280,11 +134,11 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceGetCart(cartid: kotlin.String) : CommerceCart {
-        val localVarResponse = commerceGetCartWithHttpInfo(cartid = cartid)
+    fun getCart(id: kotlin.String) : Cart {
+        val localVarResponse = getCartWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceCart
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Cart
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -299,31 +153,31 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/commerce/cart/{cartid}
-     * Get cart
-     * 
-     * @param cartid 
-     * @return ApiResponse<CommerceCart?>
+     * GET /v1/cart/{id}
+     * Read one cart with its lines and totals
+     * Reads one cart: its lines, its status and what it comes to.  This is what a storefront calls to render the basket, and what a support agent calls to see what a shopper is looking at. The totals are the cart&#39;s STORED tally — shipping and tax stay zero until checkout resolves a shipping option and a tax region, so a cart total before checkout is the merchandise total and is meant to be.  The org scopes the read by construction: the store is namespaced to it, so a cart id belonging to another tenant is simply not found rather than found and then filtered, and answers 404 rather than 403 so the id space cannot be probed.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the cart&#39;s id, as the open call answered it.
+     * @return ApiResponse<Cart?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceGetCartWithHttpInfo(cartid: kotlin.String) : ApiResponse<CommerceCart?> {
-        val localVariableConfig = commerceGetCartRequestConfig(cartid = cartid)
+    fun getCartWithHttpInfo(id: kotlin.String) : ApiResponse<Cart?> {
+        val localVariableConfig = getCartRequestConfig(id = id)
 
-        return request<Unit, CommerceCart>(
+        return request<Unit, Cart>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceGetCart
+     * To obtain the request config of the operation getCart
      *
-     * @param cartid 
+     * @param id ID is the cart&#39;s id, as the open call answered it.
      * @return RequestConfig
      */
-    fun commerceGetCartRequestConfig(cartid: kotlin.String) : RequestConfig<Unit> {
+    fun getCartRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -331,21 +185,20 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/v1/commerce/cart/{cartid}".replace("{"+"cartid"+"}", encodeURIComponent(cartid.toString())),
+            path = "/v1/cart/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/commerce/cart
-     * List carts
-     * 
-     * @param page Page number (1-indexed) (optional, default to 1)
-     * @param display Number of items per page (optional, default to 20)
-     * @return CommercePaginatedCarts
+     * POST /v1/cart
+     * Open a cart for a shopper to fill
+     * Opens an empty cart for a shopper to fill, and answers it with its new id.  This is the first step of a sale: hold the id, add items to it with setCartItem, then hand it to checkout. Every field of the request is optional — an empty body opens a perfectly good anonymous cart — and the fields exist only to pre-fill what is already known about the shopper.  The STORE defaults to the org&#39;s own default storefront, so a merchant selling through one storefront never has to name it. The CURRENCY defaults to usd; note that checkout overrides it with the store&#39;s own currency when the sale is authorized, so a currency set here is a hint rather than a commitment.  The cart is created in the CALLER&#39;S OWN org namespace, taken from the validated principal and never from the body, so a cart can never be opened on another tenant&#39;s books.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param cartOpen 
+     * @return Cart
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -354,11 +207,11 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceListCarts(page: kotlin.Int? = 1, display: kotlin.Int? = 20) : CommercePaginatedCarts {
-        val localVarResponse = commerceListCartsWithHttpInfo(page = page, display = display)
+    fun openCart(cartOpen: CartOpen) : Cart {
+        val localVarResponse = openCartWithHttpInfo(cartOpen = cartOpen)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommercePaginatedCarts
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Cart
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -373,195 +226,32 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * GET /v1/commerce/cart
-     * List carts
-     * 
-     * @param page Page number (1-indexed) (optional, default to 1)
-     * @param display Number of items per page (optional, default to 20)
-     * @return ApiResponse<CommercePaginatedCarts?>
+     * POST /v1/cart
+     * Open a cart for a shopper to fill
+     * Opens an empty cart for a shopper to fill, and answers it with its new id.  This is the first step of a sale: hold the id, add items to it with setCartItem, then hand it to checkout. Every field of the request is optional — an empty body opens a perfectly good anonymous cart — and the fields exist only to pre-fill what is already known about the shopper.  The STORE defaults to the org&#39;s own default storefront, so a merchant selling through one storefront never has to name it. The CURRENCY defaults to usd; note that checkout overrides it with the store&#39;s own currency when the sale is authorized, so a currency set here is a hint rather than a commitment.  The cart is created in the CALLER&#39;S OWN org namespace, taken from the validated principal and never from the body, so a cart can never be opened on another tenant&#39;s books.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param cartOpen 
+     * @return ApiResponse<Cart?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceListCartsWithHttpInfo(page: kotlin.Int?, display: kotlin.Int?) : ApiResponse<CommercePaginatedCarts?> {
-        val localVariableConfig = commerceListCartsRequestConfig(page = page, display = display)
+    fun openCartWithHttpInfo(cartOpen: CartOpen) : ApiResponse<Cart?> {
+        val localVariableConfig = openCartRequestConfig(cartOpen = cartOpen)
 
-        return request<Unit, CommercePaginatedCarts>(
+        return request<CartOpen, Cart>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceListCarts
+     * To obtain the request config of the operation openCart
      *
-     * @param page Page number (1-indexed) (optional, default to 1)
-     * @param display Number of items per page (optional, default to 20)
+     * @param cartOpen 
      * @return RequestConfig
      */
-    fun commerceListCartsRequestConfig(page: kotlin.Int?, display: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (page != null) {
-                    put("page", listOf(page.toString()))
-                }
-                if (display != null) {
-                    put("display", listOf(display.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/commerce/cart",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/commerce/cart/{cartid}
-     * Partially update cart
-     * 
-     * @param cartid 
-     * @param commerceCart 
-     * @return CommerceCart
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commercePatchCart(cartid: kotlin.String, commerceCart: CommerceCart) : CommerceCart {
-        val localVarResponse = commercePatchCartWithHttpInfo(cartid = cartid, commerceCart = commerceCart)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceCart
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/commerce/cart/{cartid}
-     * Partially update cart
-     * 
-     * @param cartid 
-     * @param commerceCart 
-     * @return ApiResponse<CommerceCart?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commercePatchCartWithHttpInfo(cartid: kotlin.String, commerceCart: CommerceCart) : ApiResponse<CommerceCart?> {
-        val localVariableConfig = commercePatchCartRequestConfig(cartid = cartid, commerceCart = commerceCart)
-
-        return request<CommerceCart, CommerceCart>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commercePatchCart
-     *
-     * @param cartid 
-     * @param commerceCart 
-     * @return RequestConfig
-     */
-    fun commercePatchCartRequestConfig(cartid: kotlin.String, commerceCart: CommerceCart) : RequestConfig<CommerceCart> {
-        val localVariableBody = commerceCart
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/commerce/cart/{cartid}".replace("{"+"cartid"+"}", encodeURIComponent(cartid.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/commerce/cart/{cartid}/set
-     * Set item in cart
-     * 
-     * @param cartid 
-     * @param commerceSetCartItemRequest 
-     * @return CommerceCart
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceSetCartItem(cartid: kotlin.String, commerceSetCartItemRequest: CommerceSetCartItemRequest) : CommerceCart {
-        val localVarResponse = commerceSetCartItemWithHttpInfo(cartid = cartid, commerceSetCartItemRequest = commerceSetCartItemRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceCart
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/commerce/cart/{cartid}/set
-     * Set item in cart
-     * 
-     * @param cartid 
-     * @param commerceSetCartItemRequest 
-     * @return ApiResponse<CommerceCart?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceSetCartItemWithHttpInfo(cartid: kotlin.String, commerceSetCartItemRequest: CommerceSetCartItemRequest) : ApiResponse<CommerceCart?> {
-        val localVariableConfig = commerceSetCartItemRequestConfig(cartid = cartid, commerceSetCartItemRequest = commerceSetCartItemRequest)
-
-        return request<CommerceSetCartItemRequest, CommerceCart>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceSetCartItem
-     *
-     * @param cartid 
-     * @param commerceSetCartItemRequest 
-     * @return RequestConfig
-     */
-    fun commerceSetCartItemRequestConfig(cartid: kotlin.String, commerceSetCartItemRequest: CommerceSetCartItemRequest) : RequestConfig<CommerceSetCartItemRequest> {
-        val localVariableBody = commerceSetCartItemRequest
+    fun openCartRequestConfig(cartOpen: CartOpen) : RequestConfig<CartOpen> {
+        val localVariableBody = cartOpen
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -569,21 +259,21 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/commerce/cart/{cartid}/set".replace("{"+"cartid"+"}", encodeURIComponent(cartid.toString())),
+            path = "/v1/cart",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * PUT /v1/commerce/cart/{cartid}
-     * Update cart
-     * 
-     * @param cartid 
-     * @param commerceCart 
-     * @return CommerceCart
+     * POST /v1/cart/{id}/item
+     * Set one item&#39;s quantity in a cart; zero removes it
+     * Sets how many of one item a cart holds, and answers the whole updated cart.  This is the ONE way a cart&#39;s contents change. The quantity is the RESULT, not a delta: sending 3 leaves 3 however many were there before, so a retry is safe and a double-submit cannot double an order. ZERO REMOVES the line — there is deliberately no separate delete, because removal is the same act at the boundary value and a second spelling would be a second set of edge cases.  Name the item with EITHER product OR variant, never both. Prefer variant for anything sold in sizes, colours or tiers: the price and the stock belong to the variant, so a product-level line on a varianted product prices the wrong thing. Either may be given as an id or as the human key — a product&#39;s URL slug, a variant&#39;s SKU — which is what lets a storefront add to cart straight from a product page URL without a lookup first.  The item&#39;s price and name are CACHED onto the line as it is added, so the cart keeps the price the shopper was shown even if the catalog moves underneath it.  An item that resolves to nothing in the catalog is refused 400 and the cart is left exactly as it was; nothing is partially applied.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the cart to amend, from the path.
+     * @param cartItemSet 
+     * @return Cart
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -592,11 +282,11 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceUpdateCart(cartid: kotlin.String, commerceCart: CommerceCart) : CommerceCart {
-        val localVarResponse = commerceUpdateCartWithHttpInfo(cartid = cartid, commerceCart = commerceCart)
+    fun setCartItem(id: kotlin.String, cartItemSet: CartItemSet) : Cart {
+        val localVarResponse = setCartItemWithHttpInfo(id = id, cartItemSet = cartItemSet)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceCart
+            ResponseType.Success -> (localVarResponse as Success<*>).data as Cart
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -611,45 +301,45 @@ class CartApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * PUT /v1/commerce/cart/{cartid}
-     * Update cart
-     * 
-     * @param cartid 
-     * @param commerceCart 
-     * @return ApiResponse<CommerceCart?>
+     * POST /v1/cart/{id}/item
+     * Set one item&#39;s quantity in a cart; zero removes it
+     * Sets how many of one item a cart holds, and answers the whole updated cart.  This is the ONE way a cart&#39;s contents change. The quantity is the RESULT, not a delta: sending 3 leaves 3 however many were there before, so a retry is safe and a double-submit cannot double an order. ZERO REMOVES the line — there is deliberately no separate delete, because removal is the same act at the boundary value and a second spelling would be a second set of edge cases.  Name the item with EITHER product OR variant, never both. Prefer variant for anything sold in sizes, colours or tiers: the price and the stock belong to the variant, so a product-level line on a varianted product prices the wrong thing. Either may be given as an id or as the human key — a product&#39;s URL slug, a variant&#39;s SKU — which is what lets a storefront add to cart straight from a product page URL without a lookup first.  The item&#39;s price and name are CACHED onto the line as it is added, so the cart keeps the price the shopper was shown even if the catalog moves underneath it.  An item that resolves to nothing in the catalog is refused 400 and the cart is left exactly as it was; nothing is partially applied.  A named handler, not a closure, so zipdoc can lift this prose into the registry.
+     * @param id ID is the cart to amend, from the path.
+     * @param cartItemSet 
+     * @return ApiResponse<Cart?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun commerceUpdateCartWithHttpInfo(cartid: kotlin.String, commerceCart: CommerceCart) : ApiResponse<CommerceCart?> {
-        val localVariableConfig = commerceUpdateCartRequestConfig(cartid = cartid, commerceCart = commerceCart)
+    fun setCartItemWithHttpInfo(id: kotlin.String, cartItemSet: CartItemSet) : ApiResponse<Cart?> {
+        val localVariableConfig = setCartItemRequestConfig(id = id, cartItemSet = cartItemSet)
 
-        return request<CommerceCart, CommerceCart>(
+        return request<CartItemSet, Cart>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation commerceUpdateCart
+     * To obtain the request config of the operation setCartItem
      *
-     * @param cartid 
-     * @param commerceCart 
+     * @param id ID is the cart to amend, from the path.
+     * @param cartItemSet 
      * @return RequestConfig
      */
-    fun commerceUpdateCartRequestConfig(cartid: kotlin.String, commerceCart: CommerceCart) : RequestConfig<CommerceCart> {
-        val localVariableBody = commerceCart
+    fun setCartItemRequestConfig(id: kotlin.String, cartItemSet: CartItemSet) : RequestConfig<CartItemSet> {
+        val localVariableBody = cartItemSet
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/commerce/cart/{cartid}".replace("{"+"cartid"+"}", encodeURIComponent(cartid.toString())),
+            method = RequestMethod.POST,
+            path = "/v1/cart/{id}/item".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,6 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import ai.hanzo.cloud.model.WebSearchQuery
+import ai.hanzo.cloud.model.WebSearchResults
 
 import com.google.gson.annotations.SerializedName
 
@@ -46,8 +48,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * DELETE /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -56,8 +58,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1WebsearchSearch() : Unit {
-        val localVarResponse = cloudDeleteV1WebsearchSearchWithHttpInfo()
+    fun deleteV1WebsearchSearch() : Unit {
+        val localVarResponse = deleteV1WebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -76,15 +78,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * DELETE /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1WebsearchSearchRequestConfig()
+    fun deleteV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1WebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -92,11 +94,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1WebsearchSearch
+     * To obtain the request config of the operation deleteV1WebsearchSearch
      *
      * @return RequestConfig
      */
-    fun cloudDeleteV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun deleteV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -106,15 +108,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -123,8 +125,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WebsearchSearch() : Unit {
-        val localVarResponse = cloudGetV1WebsearchSearchWithHttpInfo()
+    fun getV1WebsearchSearch() : Unit {
+        val localVarResponse = getV1WebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -143,15 +145,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * GET /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1WebsearchSearchRequestConfig()
+    fun getV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1WebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -159,11 +161,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WebsearchSearch
+     * To obtain the request config of the operation getV1WebsearchSearch
      *
      * @return RequestConfig
      */
-    fun cloudGetV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun getV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -173,82 +175,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * OPTIONS /v1/websearch/search
-     * 
-     * 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudOptionsV1WebsearchSearch() : Unit {
-        val localVarResponse = cloudOptionsV1WebsearchSearchWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * OPTIONS /v1/websearch/search
-     * 
-     * 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudOptionsV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudOptionsV1WebsearchSearchRequestConfig()
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudOptionsV1WebsearchSearch
-     *
-     * @return RequestConfig
-     */
-    fun cloudOptionsV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.OPTIONS,
-            path = "/v1/websearch/search",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -257,8 +192,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1WebsearchSearch() : Unit {
-        val localVarResponse = cloudPatchV1WebsearchSearchWithHttpInfo()
+    fun patchV1WebsearchSearch() : Unit {
+        val localVarResponse = patchV1WebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -277,15 +212,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * PATCH /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1WebsearchSearchRequestConfig()
+    fun patchV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1WebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -293,11 +228,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1WebsearchSearch
+     * To obtain the request config of the operation patchV1WebsearchSearch
      *
      * @return RequestConfig
      */
-    fun cloudPatchV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun patchV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -307,15 +242,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -324,8 +259,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1WebsearchSearch() : Unit {
-        val localVarResponse = cloudPostV1WebsearchSearchWithHttpInfo()
+    fun postV1WebsearchSearch() : Unit {
+        val localVarResponse = postV1WebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -344,15 +279,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * POST /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1WebsearchSearchRequestConfig()
+    fun postV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1WebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -360,11 +295,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1WebsearchSearch
+     * To obtain the request config of the operation postV1WebsearchSearch
      *
      * @return RequestConfig
      */
-    fun cloudPostV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun postV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -374,15 +309,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -391,8 +326,8 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1WebsearchSearch() : Unit {
-        val localVarResponse = cloudPutV1WebsearchSearchWithHttpInfo()
+    fun putV1WebsearchSearch() : Unit {
+        val localVarResponse = putV1WebsearchSearchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -411,15 +346,15 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
 
     /**
      * PUT /v1/websearch/search
-     * 
-     * 
+     * Keyless web meta-search, in the SearXNG JSON envelope.
+     * Answers {query, number_of_results, results:[{url, title, content, engine}]} — the exact /search?format&#x3D;json contract a SearXNG client decodes, so an agent tool configured against SearXNG reaches this with no change. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it; both are read from the QUERY STRING.  Served in-process by a Go meta-search over keyless public engines, never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept — distinct queries are distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  TWO WAYS IN, one-way equivalent, and no third: a validated principal — the same gate the whole data plane uses — passes straight through, and a caller without one must present the shared service key as X-API-Key, compared in constant time. A deployment with no key configured answers 503 rather than opening the surface to everyone, and a missing or wrong key is 401. It is never an open proxy. There is no tenant scoping beyond that gate, and there is nothing to scope: the results are public web pages, identical for every caller.  It fails SOFT on the engines and closed only on the gate. An engine that errors or is served a bot-challenge page contributes zero results and never fails the request, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  The one thing to get right: every method answers identically. This is one handler registered for all of them, and it reads only the query string, so a body sent on the write verbs is ignored rather than refused.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1WebsearchSearchRequestConfig()
+    fun putV1WebsearchSearchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putV1WebsearchSearchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -427,11 +362,11 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1WebsearchSearch
+     * To obtain the request config of the operation putV1WebsearchSearch
      *
      * @return RequestConfig
      */
-    fun cloudPutV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
+    fun putV1WebsearchSearchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -441,7 +376,81 @@ class WebsearchApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
             path = "/v1/websearch/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/websearch
+     * Search the live web
+     * Searches the live web and answers with ranked results.  This is the fleet&#39;s path to what is happening RIGHT NOW — today&#39;s weather, an outage, a release that postdates any model&#39;s training. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it to a locale. The answer is &#x60;{query, number_of_results, results:[{url, title, content, engine}]}&#x60;, where &#x60;content&#x60; is the ENGINE&#39;s snippet and not the page: read a page with POST /v1/crawl.  It is served in-process by a Go meta-search over keyless public engines — never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept, so distinct queries stay distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  It fails SOFT on the engines. One that errors, times out or is served a bot-challenge page contributes zero results and never fails the call, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  A VALIDATED PRINCIPAL IS REQUIRED, and there is no tenant beyond that: the results are public web pages, identical for every caller, so nothing here is scoped and nothing here can leak across orgs. A typed op is also an MCP tool and a CLI command, and tools/call invokes it with no route and therefore no middleware — so the gate is in the handler, where every door reaches it, rather than in a middleware only one door passes through.
+     * @param webSearchQuery 
+     * @return WebSearchResults
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun searchWeb(webSearchQuery: WebSearchQuery) : WebSearchResults {
+        val localVarResponse = searchWebWithHttpInfo(webSearchQuery = webSearchQuery)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as WebSearchResults
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/websearch
+     * Search the live web
+     * Searches the live web and answers with ranked results.  This is the fleet&#39;s path to what is happening RIGHT NOW — today&#39;s weather, an outage, a release that postdates any model&#39;s training. &#x60;q&#x60; is the query and &#x60;language&#x60; narrows it to a locale. The answer is &#x60;{query, number_of_results, results:[{url, title, content, engine}]}&#x60;, where &#x60;content&#x60; is the ENGINE&#39;s snippet and not the page: read a page with POST /v1/crawl.  It is served in-process by a Go meta-search over keyless public engines — never a third-party search API and never a search key. The enabled engines run concurrently and their hits are merged, deduplicated by normalised URL (host and path, trailing slash and fragment dropped, query kept, so distinct queries stay distinct results) and capped at 30. Ranking is deterministic rather than scored: the first configured engine&#39;s hits lead.  It fails SOFT on the engines. One that errors, times out or is served a bot-challenge page contributes zero results and never fails the call, so an empty &#x60;results&#x60; is a real answer — nothing was found — and not an outage. The array is always present, never null.  A VALIDATED PRINCIPAL IS REQUIRED, and there is no tenant beyond that: the results are public web pages, identical for every caller, so nothing here is scoped and nothing here can leak across orgs. A typed op is also an MCP tool and a CLI command, and tools/call invokes it with no route and therefore no middleware — so the gate is in the handler, where every door reaches it, rather than in a middleware only one door passes through.
+     * @param webSearchQuery 
+     * @return ApiResponse<WebSearchResults?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun searchWebWithHttpInfo(webSearchQuery: WebSearchQuery) : ApiResponse<WebSearchResults?> {
+        val localVariableConfig = searchWebRequestConfig(webSearchQuery = webSearchQuery)
+
+        return request<WebSearchQuery, WebSearchResults>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation searchWeb
+     *
+     * @param webSearchQuery 
+     * @return RequestConfig
+     */
+    fun searchWebRequestConfig(webSearchQuery: WebSearchQuery) : RequestConfig<WebSearchQuery> {
+        val localVariableBody = webSearchQuery
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/websearch",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

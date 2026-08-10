@@ -19,11 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCatalogList
-import ai.hanzo.cloud.model.CloudMetricList
-import ai.hanzo.cloud.model.CloudPromptDetail
-import ai.hanzo.cloud.model.CloudPromptList
-import ai.hanzo.cloud.model.CloudPromptReq
+import ai.hanzo.cloud.model.CatalogList
+import ai.hanzo.cloud.model.MetricList
+import ai.hanzo.cloud.model.PromptDetail
+import ai.hanzo.cloud.model.PromptList
+import ai.hanzo.cloud.model.PromptReq
 
 import com.google.gson.annotations.SerializedName
 
@@ -62,8 +62,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1PromptsName(name: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteV1PromptsNameWithHttpInfo(name = name)
+    fun deleteV1PromptsByName(name: kotlin.String) : Unit {
+        val localVarResponse = deleteV1PromptsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -90,8 +90,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1PromptsNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteV1PromptsNameRequestConfig(name = name)
+    fun deleteV1PromptsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteV1PromptsByNameRequestConfig(name = name)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -99,12 +99,12 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1PromptsName
+     * To obtain the request config of the operation deleteV1PromptsByName
      *
      * @param name Name is the prompt to act on, from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1PromptsNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1PromptsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -114,7 +114,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -123,7 +123,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/prompts
      * List returns the caller org&#39;s prompt library as one row per prompt: its name, type, every version number it has, its taxonomy and when it last changed.
      * List returns the caller org&#39;s prompt library as one row per prompt: its name, type, every version number it has, its taxonomy and when it last changed. The template bodies are deliberately absent — fetch one prompt to read its text.
-     * @return CloudPromptList
+     * @return PromptList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -132,11 +132,11 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Prompts() : CloudPromptList {
-        val localVarResponse = cloudGetV1PromptsWithHttpInfo()
+    fun getV1Prompts() : PromptList {
+        val localVarResponse = getV1PromptsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPromptList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PromptList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -154,26 +154,26 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/prompts
      * List returns the caller org&#39;s prompt library as one row per prompt: its name, type, every version number it has, its taxonomy and when it last changed.
      * List returns the caller org&#39;s prompt library as one row per prompt: its name, type, every version number it has, its taxonomy and when it last changed. The template bodies are deliberately absent — fetch one prompt to read its text.
-     * @return ApiResponse<CloudPromptList?>
+     * @return ApiResponse<PromptList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PromptsWithHttpInfo() : ApiResponse<CloudPromptList?> {
-        val localVariableConfig = cloudGetV1PromptsRequestConfig()
+    fun getV1PromptsWithHttpInfo() : ApiResponse<PromptList?> {
+        val localVariableConfig = getV1PromptsRequestConfig()
 
-        return request<Unit, CloudPromptList>(
+        return request<Unit, PromptList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Prompts
+     * To obtain the request config of the operation getV1Prompts
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PromptsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PromptsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -184,16 +184,17 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/prompts/catalog
-     * Catalog returns the read-only starter prompt library shipped with the binary — reference content every tenant sees the same, NOT the caller&#39;s own prompts and never mixed into them.
-     * Catalog returns the read-only starter prompt library shipped with the binary — reference content every tenant sees the same, NOT the caller&#39;s own prompts and never mixed into them. An org&#39;s library stays honestly empty until someone explicitly imports a starter, which is an ordinary POST /v1/prompts. Entries that would fail the create guards are dropped, so everything offered here can actually be imported.
-     * @return CloudCatalogList
+     * GET /v1/prompts/{name}
+     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had.
+     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had. The history carries version numbers, types and timestamps only — not each version&#39;s body — so a long history cannot inflate this response. A name the caller&#39;s org does not own is 404, whoever owns it.
+     * @param name Name is the prompt to act on, from the path.
+     * @return PromptDetail
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -202,11 +203,83 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PromptsCatalog() : CloudCatalogList {
-        val localVarResponse = cloudGetV1PromptsCatalogWithHttpInfo()
+    fun getV1PromptsByName(name: kotlin.String) : PromptDetail {
+        val localVarResponse = getV1PromptsByNameWithHttpInfo(name = name)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCatalogList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PromptDetail
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/prompts/{name}
+     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had.
+     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had. The history carries version numbers, types and timestamps only — not each version&#39;s body — so a long history cannot inflate this response. A name the caller&#39;s org does not own is 404, whoever owns it.
+     * @param name Name is the prompt to act on, from the path.
+     * @return ApiResponse<PromptDetail?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1PromptsByNameWithHttpInfo(name: kotlin.String) : ApiResponse<PromptDetail?> {
+        val localVariableConfig = getV1PromptsByNameRequestConfig(name = name)
+
+        return request<Unit, PromptDetail>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1PromptsByName
+     *
+     * @param name Name is the prompt to act on, from the path.
+     * @return RequestConfig
+     */
+    fun getV1PromptsByNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/prompts/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/prompts/catalog
+     * Catalog returns the read-only starter prompt library shipped with the binary — reference content every tenant sees the same, NOT the caller&#39;s own prompts and never mixed into them.
+     * Catalog returns the read-only starter prompt library shipped with the binary — reference content every tenant sees the same, NOT the caller&#39;s own prompts and never mixed into them. An org&#39;s library stays honestly empty until someone explicitly imports a starter, which is an ordinary POST /v1/prompts. Entries that would fail the create guards are dropped, so everything offered here can actually be imported.
+     * @return CatalogList
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1PromptsCatalog() : CatalogList {
+        val localVarResponse = getV1PromptsCatalogWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CatalogList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -224,26 +297,26 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/prompts/catalog
      * Catalog returns the read-only starter prompt library shipped with the binary — reference content every tenant sees the same, NOT the caller&#39;s own prompts and never mixed into them.
      * Catalog returns the read-only starter prompt library shipped with the binary — reference content every tenant sees the same, NOT the caller&#39;s own prompts and never mixed into them. An org&#39;s library stays honestly empty until someone explicitly imports a starter, which is an ordinary POST /v1/prompts. Entries that would fail the create guards are dropped, so everything offered here can actually be imported.
-     * @return ApiResponse<CloudCatalogList?>
+     * @return ApiResponse<CatalogList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PromptsCatalogWithHttpInfo() : ApiResponse<CloudCatalogList?> {
-        val localVariableConfig = cloudGetV1PromptsCatalogRequestConfig()
+    fun getV1PromptsCatalogWithHttpInfo() : ApiResponse<CatalogList?> {
+        val localVariableConfig = getV1PromptsCatalogRequestConfig()
 
-        return request<Unit, CloudCatalogList>(
+        return request<Unit, CatalogList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PromptsCatalog
+     * To obtain the request config of the operation getV1PromptsCatalog
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PromptsCatalogRequestConfig() : RequestConfig<Unit> {
+    fun getV1PromptsCatalogRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -254,7 +327,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts/catalog",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -263,7 +336,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/prompts/metrics
      * Metrics returns real per-prompt statistics for the caller&#39;s org: how many versions each prompt has, which one is current, and when it was created and last changed.
      * Metrics returns real per-prompt statistics for the caller&#39;s org: how many versions each prompt has, which one is current, and when it was created and last changed. Every number is counted from the store — nothing here is estimated or fabricated.
-     * @return CloudMetricList
+     * @return MetricList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -272,11 +345,11 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PromptsMetrics() : CloudMetricList {
-        val localVarResponse = cloudGetV1PromptsMetricsWithHttpInfo()
+    fun getV1PromptsMetrics() : MetricList {
+        val localVarResponse = getV1PromptsMetricsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudMetricList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as MetricList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -294,26 +367,26 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/prompts/metrics
      * Metrics returns real per-prompt statistics for the caller&#39;s org: how many versions each prompt has, which one is current, and when it was created and last changed.
      * Metrics returns real per-prompt statistics for the caller&#39;s org: how many versions each prompt has, which one is current, and when it was created and last changed. Every number is counted from the store — nothing here is estimated or fabricated.
-     * @return ApiResponse<CloudMetricList?>
+     * @return ApiResponse<MetricList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PromptsMetricsWithHttpInfo() : ApiResponse<CloudMetricList?> {
-        val localVariableConfig = cloudGetV1PromptsMetricsRequestConfig()
+    fun getV1PromptsMetricsWithHttpInfo() : ApiResponse<MetricList?> {
+        val localVariableConfig = getV1PromptsMetricsRequestConfig()
 
-        return request<Unit, CloudMetricList>(
+        return request<Unit, MetricList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1PromptsMetrics
+     * To obtain the request config of the operation getV1PromptsMetrics
      *
      * @return RequestConfig
      */
-    fun cloudGetV1PromptsMetricsRequestConfig() : RequestConfig<Unit> {
+    fun getV1PromptsMetricsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -324,80 +397,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts/metrics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/prompts/{name}
-     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had.
-     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had. The history carries version numbers, types and timestamps only — not each version&#39;s body — so a long history cannot inflate this response. A name the caller&#39;s org does not own is 404, whoever owns it.
-     * @param name Name is the prompt to act on, from the path.
-     * @return CloudPromptDetail
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1PromptsName(name: kotlin.String) : CloudPromptDetail {
-        val localVarResponse = cloudGetV1PromptsNameWithHttpInfo(name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPromptDetail
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/prompts/{name}
-     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had.
-     * Get returns one of the caller org&#39;s prompts: its CURRENT template text plus the metadata of every version it has had. The history carries version numbers, types and timestamps only — not each version&#39;s body — so a long history cannot inflate this response. A name the caller&#39;s org does not own is 404, whoever owns it.
-     * @param name Name is the prompt to act on, from the path.
-     * @return ApiResponse<CloudPromptDetail?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1PromptsNameWithHttpInfo(name: kotlin.String) : ApiResponse<CloudPromptDetail?> {
-        val localVariableConfig = cloudGetV1PromptsNameRequestConfig(name = name)
-
-        return request<Unit, CloudPromptDetail>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1PromptsName
-     *
-     * @param name Name is the prompt to act on, from the path.
-     * @return RequestConfig
-     */
-    fun cloudGetV1PromptsNameRequestConfig(name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/prompts/{name}".replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -406,8 +406,8 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/prompts
      * Create records a prompt for the caller&#39;s org and answers 201 with it.
      * Create records a prompt for the caller&#39;s org and answers 201 with it. A name the org already uses is NOT an error and NOT an overwrite: it appends a new version, so the library keeps real, inspectable history and the response carries the whole version list. The name is also the URL segment the prompt is fetched by, which is why its shape is constrained and a handful of names are reserved.
-     * @param cloudPromptReq 
-     * @return CloudPromptDetail
+     * @param promptReq 
+     * @return PromptDetail
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -416,11 +416,11 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1Prompts(cloudPromptReq: CloudPromptReq) : CloudPromptDetail {
-        val localVarResponse = cloudPostV1PromptsWithHttpInfo(cloudPromptReq = cloudPromptReq)
+    fun postV1Prompts(promptReq: PromptReq) : PromptDetail {
+        val localVarResponse = postV1PromptsWithHttpInfo(promptReq = promptReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPromptDetail
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PromptDetail
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -438,29 +438,29 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * POST /v1/prompts
      * Create records a prompt for the caller&#39;s org and answers 201 with it.
      * Create records a prompt for the caller&#39;s org and answers 201 with it. A name the org already uses is NOT an error and NOT an overwrite: it appends a new version, so the library keeps real, inspectable history and the response carries the whole version list. The name is also the URL segment the prompt is fetched by, which is why its shape is constrained and a handful of names are reserved.
-     * @param cloudPromptReq 
-     * @return ApiResponse<CloudPromptDetail?>
+     * @param promptReq 
+     * @return ApiResponse<PromptDetail?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1PromptsWithHttpInfo(cloudPromptReq: CloudPromptReq) : ApiResponse<CloudPromptDetail?> {
-        val localVariableConfig = cloudPostV1PromptsRequestConfig(cloudPromptReq = cloudPromptReq)
+    fun postV1PromptsWithHttpInfo(promptReq: PromptReq) : ApiResponse<PromptDetail?> {
+        val localVariableConfig = postV1PromptsRequestConfig(promptReq = promptReq)
 
-        return request<CloudPromptReq, CloudPromptDetail>(
+        return request<PromptReq, PromptDetail>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1Prompts
+     * To obtain the request config of the operation postV1Prompts
      *
-     * @param cloudPromptReq 
+     * @param promptReq 
      * @return RequestConfig
      */
-    fun cloudPostV1PromptsRequestConfig(cloudPromptReq: CloudPromptReq) : RequestConfig<CloudPromptReq> {
-        val localVariableBody = cloudPromptReq
+    fun postV1PromptsRequestConfig(promptReq: PromptReq) : RequestConfig<PromptReq> {
+        val localVariableBody = promptReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -471,7 +471,7 @@ class PromptsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/prompts",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

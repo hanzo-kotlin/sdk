@@ -19,8 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.AiEnvelope
-import ai.hanzo.cloud.model.AiError
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,24 +45,22 @@ class MessagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/ai/messages
-     * Create a message
-     * Create one message.
-     * @param body 
-     * @return AiEnvelope
+     * POST /v1/messages
+     * Implements the Anthropic Messages API.
+     * Implements the Anthropic Messages API.
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiAddMessage(body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiAddMessageWithHttpInfo(body = body)
+    fun postV1Messages() : Unit {
+        val localVarResponse = postV1MessagesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -79,67 +75,59 @@ class MessagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * POST /v1/ai/messages
-     * Create a message
-     * Create one message.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
+     * POST /v1/messages
+     * Implements the Anthropic Messages API.
+     * Implements the Anthropic Messages API.
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun aiAddMessageWithHttpInfo(body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiAddMessageRequestConfig(body = body)
+    fun postV1MessagesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MessagesRequestConfig()
 
-        return request<kotlin.Any, AiEnvelope>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation aiAddMessage
+     * To obtain the request config of the operation postV1Messages
      *
-     * @param body 
      * @return RequestConfig
      */
-    fun aiAddMessageRequestConfig(body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
+    fun postV1MessagesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/ai/messages",
+            path = "/v1/messages",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * DELETE /v1/ai/messages/{owner}/{name}
-     * Delete a message
-     * Delete one message.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return AiEnvelope
+     * POST /v1/messages/count_tokens
+     * Implements POST /v1/messages/count_tokens.
+     * Implements POST /v1/messages/count_tokens. Claude Code calls it before a request; it returns {\&quot;input_tokens\&quot;: N} for the given model + messages + tools.
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiDeleteMessage(owner: kotlin.String, name: kotlin.String) : AiEnvelope {
-        val localVarResponse = aiDeleteMessageWithHttpInfo(owner = owner, name = name)
+    fun postV1MessagesCountTokens() : Unit {
+        val localVarResponse = postV1MessagesCountTokensWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -154,566 +142,38 @@ class MessagesApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
     }
 
     /**
-     * DELETE /v1/ai/messages/{owner}/{name}
-     * Delete a message
-     * Delete one message.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return ApiResponse<AiEnvelope?>
+     * POST /v1/messages/count_tokens
+     * Implements POST /v1/messages/count_tokens.
+     * Implements POST /v1/messages/count_tokens. Claude Code calls it before a request; it returns {\&quot;input_tokens\&quot;: N} for the given model + messages + tools.
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun aiDeleteMessageWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiDeleteMessageRequestConfig(owner = owner, name = name)
+    fun postV1MessagesCountTokensWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MessagesCountTokensRequestConfig()
 
-        return request<Unit, AiEnvelope>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation aiDeleteMessage
+     * To obtain the request config of the operation postV1MessagesCountTokens
      *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
      * @return RequestConfig
      */
-    fun aiDeleteMessageRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
+    fun postV1MessagesCountTokensRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
+            method = RequestMethod.POST,
+            path = "/v1/messages/count_tokens",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * DELETE /v1/ai/messages/welcome
-     * Welcome (message)
-     * 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiDeleteWelcomeMessage() : AiEnvelope {
-        val localVarResponse = aiDeleteWelcomeMessageWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * DELETE /v1/ai/messages/welcome
-     * Welcome (message)
-     * 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiDeleteWelcomeMessageWithHttpInfo() : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiDeleteWelcomeMessageRequestConfig()
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiDeleteWelcomeMessage
-     *
-     * @return RequestConfig
-     */
-    fun aiDeleteWelcomeMessageRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.DELETE,
-            path = "/v1/ai/messages/welcome",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/messages/global
-     * List messages across tenants
-     * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetGlobalMessages() : AiEnvelope {
-        val localVarResponse = aiGetGlobalMessagesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/messages/global
-     * List messages across tenants
-     * Cross-tenant listing. Admin-only; a tenant caller is refused.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetGlobalMessagesWithHttpInfo() : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetGlobalMessagesRequestConfig()
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetGlobalMessages
-     *
-     * @return RequestConfig
-     */
-    fun aiGetGlobalMessagesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/messages/global",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/messages/{owner}/{name}
-     * Retrieve a message
-     * Read one message by its (owner, name) key.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetMessage(owner: kotlin.String, name: kotlin.String) : AiEnvelope {
-        val localVarResponse = aiGetMessageWithHttpInfo(owner = owner, name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/messages/{owner}/{name}
-     * Retrieve a message
-     * Read one message by its (owner, name) key.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetMessageWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetMessageRequestConfig(owner = owner, name = name)
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetMessage
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return RequestConfig
-     */
-    fun aiGetMessageRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/messages/{owner}/{name}/answer
-     * Answer (message)
-     * 
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetMessageAnswer(owner: kotlin.String, name: kotlin.String) : AiEnvelope {
-        val localVarResponse = aiGetMessageAnswerWithHttpInfo(owner = owner, name = name)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/messages/{owner}/{name}/answer
-     * Answer (message)
-     * 
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetMessageAnswerWithHttpInfo(owner: kotlin.String, name: kotlin.String) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetMessageAnswerRequestConfig(owner = owner, name = name)
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetMessageAnswer
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @return RequestConfig
-     */
-    fun aiGetMessageAnswerRequestConfig(owner: kotlin.String, name: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/messages/{owner}/{name}/answer".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/ai/messages
-     * List messages
-     * List the caller&#39;s messages.
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGetMessages() : AiEnvelope {
-        val localVarResponse = aiGetMessagesWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/ai/messages
-     * List messages
-     * List the caller&#39;s messages.
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiGetMessagesWithHttpInfo() : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiGetMessagesRequestConfig()
-
-        return request<Unit, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiGetMessages
-     *
-     * @return RequestConfig
-     */
-    fun aiGetMessagesRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/ai/messages",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PUT /v1/ai/messages/{owner}/{name}
-     * Replace a message
-     * Identical to PATCH — the handler takes a whole object either way.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiReplaceMessage(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiReplaceMessageWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PUT /v1/ai/messages/{owner}/{name}
-     * Replace a message
-     * Identical to PATCH — the handler takes a whole object either way.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiReplaceMessageWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiReplaceMessageRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiReplaceMessage
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiReplaceMessageRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * PATCH /v1/ai/messages/{owner}/{name}
-     * Update a message
-     * Update one message. PATCH and PUT reach the same handler, which has always taken a whole object.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return AiEnvelope
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiUpdateMessage(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : AiEnvelope {
-        val localVarResponse = aiUpdateMessageWithHttpInfo(owner = owner, name = name, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as AiEnvelope
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * PATCH /v1/ai/messages/{owner}/{name}
-     * Update a message
-     * Update one message. PATCH and PUT reach the same handler, which has always taken a whole object.
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return ApiResponse<AiEnvelope?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun aiUpdateMessageWithHttpInfo(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : ApiResponse<AiEnvelope?> {
-        val localVariableConfig = aiUpdateMessageRequestConfig(owner = owner, name = name, body = body)
-
-        return request<kotlin.Any, AiEnvelope>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation aiUpdateMessage
-     *
-     * @param owner Owning organization.
-     * @param name Resource name, unique within the owner.
-     * @param body 
-     * @return RequestConfig
-     */
-    fun aiUpdateMessageRequestConfig(owner: kotlin.String, name: kotlin.String, body: kotlin.Any) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.PATCH,
-            path = "/v1/ai/messages/{owner}/{name}".replace("{"+"owner"+"}", encodeURIComponent(owner.toString())).replace("{"+"name"+"}", encodeURIComponent(name.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

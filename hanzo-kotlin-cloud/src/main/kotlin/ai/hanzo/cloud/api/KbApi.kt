@@ -19,14 +19,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudCatalogOut
-import ai.hanzo.cloud.model.CloudConnectionOut
-import ai.hanzo.cloud.model.CloudGraphOut
-import ai.hanzo.cloud.model.CloudKbAuthorizeOut
-import ai.hanzo.cloud.model.CloudKbConnectorsOut
-import ai.hanzo.cloud.model.CloudKbSyncOut
-import ai.hanzo.cloud.model.CloudSearchIn
-import ai.hanzo.cloud.model.CloudSearchOut
+import ai.hanzo.cloud.model.CatalogOut
+import ai.hanzo.cloud.model.ConnectionOut
+import ai.hanzo.cloud.model.GraphOut
+import ai.hanzo.cloud.model.KbAuthorizeOut
+import ai.hanzo.cloud.model.KbConnectorsOut
+import ai.hanzo.cloud.model.KbSyncOut
+import ai.hanzo.cloud.model.SearchIn
+import ai.hanzo.cloud.model.SearchOut
 
 import com.google.gson.annotations.SerializedName
 
@@ -54,10 +54,10 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * DELETE /v1/kb/connectors/{provider}
-     * DisconnectConnector revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected.
-     * DisconnectConnector revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected. The documents already ingested stay in the org&#39;s store — they are the org&#39;s own data — but stop being retrievable by search; a caller deletes them through the document surface.
+     * Revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected.
+     * Revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected. The documents already ingested stay in the org&#39;s store — they are the org&#39;s own data — but stop being retrievable by search; a caller deletes them through the document surface.
      * @param provider Provider is the connector to act on: github, slack, google or notion.
-     * @return CloudConnectionOut
+     * @return ConnectionOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -66,11 +66,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1KbConnectorsProvider(provider: kotlin.String) : CloudConnectionOut {
-        val localVarResponse = cloudDeleteV1KbConnectorsProviderWithHttpInfo(provider = provider)
+    fun deleteV1KbConnectorsByProvider(provider: kotlin.String) : ConnectionOut {
+        val localVarResponse = deleteV1KbConnectorsByProviderWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConnectionOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectionOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -86,30 +86,30 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * DELETE /v1/kb/connectors/{provider}
-     * DisconnectConnector revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected.
-     * DisconnectConnector revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected. The documents already ingested stay in the org&#39;s store — they are the org&#39;s own data — but stop being retrievable by search; a caller deletes them through the document surface.
+     * Revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected.
+     * Revokes a connection: it tombstones the stored credential so a later sync cannot reuse it, purges this provider&#39;s points from the org&#39;s vector namespace, and marks the connector disconnected. The documents already ingested stay in the org&#39;s store — they are the org&#39;s own data — but stop being retrievable by search; a caller deletes them through the document surface.
      * @param provider Provider is the connector to act on: github, slack, google or notion.
-     * @return ApiResponse<CloudConnectionOut?>
+     * @return ApiResponse<ConnectionOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1KbConnectorsProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<CloudConnectionOut?> {
-        val localVariableConfig = cloudDeleteV1KbConnectorsProviderRequestConfig(provider = provider)
+    fun deleteV1KbConnectorsByProviderWithHttpInfo(provider: kotlin.String) : ApiResponse<ConnectionOut?> {
+        val localVariableConfig = deleteV1KbConnectorsByProviderRequestConfig(provider = provider)
 
-        return request<Unit, CloudConnectionOut>(
+        return request<Unit, ConnectionOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1KbConnectorsProvider
+     * To obtain the request config of the operation deleteV1KbConnectorsByProvider
      *
      * @param provider Provider is the connector to act on: github, slack, google or notion.
      * @return RequestConfig
      */
-    fun cloudDeleteV1KbConnectorsProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1KbConnectorsByProviderRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -120,16 +120,16 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/kb/connectors
-     * ListConnectors returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store.
-     * ListConnectors returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store. A provider that is configured for the deployment but not yet connected appears as disconnected, so the console can offer a Connect button. No secret is ever returned.
-     * @return CloudKbConnectorsOut
+     * Returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store.
+     * Returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store. A provider that is configured for the deployment but not yet connected appears as disconnected, so the console can offer a Connect button. No secret is ever returned.
+     * @return KbConnectorsOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -138,11 +138,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1KbConnectors() : CloudKbConnectorsOut {
-        val localVarResponse = cloudGetV1KbConnectorsWithHttpInfo()
+    fun getV1KbConnectors() : KbConnectorsOut {
+        val localVarResponse = getV1KbConnectorsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKbConnectorsOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KbConnectorsOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -158,28 +158,28 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/kb/connectors
-     * ListConnectors returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store.
-     * ListConnectors returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store. A provider that is configured for the deployment but not yet connected appears as disconnected, so the console can offer a Connect button. No secret is ever returned.
-     * @return ApiResponse<CloudKbConnectorsOut?>
+     * Returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store.
+     * Returns every supported knowledge connector with THIS org&#39;s connection state and the REAL number of documents each has ingested into the org&#39;s store. A provider that is configured for the deployment but not yet connected appears as disconnected, so the console can offer a Connect button. No secret is ever returned.
+     * @return ApiResponse<KbConnectorsOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1KbConnectorsWithHttpInfo() : ApiResponse<CloudKbConnectorsOut?> {
-        val localVariableConfig = cloudGetV1KbConnectorsRequestConfig()
+    fun getV1KbConnectorsWithHttpInfo() : ApiResponse<KbConnectorsOut?> {
+        val localVariableConfig = getV1KbConnectorsRequestConfig()
 
-        return request<Unit, CloudKbConnectorsOut>(
+        return request<Unit, KbConnectorsOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1KbConnectors
+     * To obtain the request config of the operation getV1KbConnectors
      *
      * @return RequestConfig
      */
-    fun cloudGetV1KbConnectorsRequestConfig() : RequestConfig<Unit> {
+    fun getV1KbConnectorsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,77 +190,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * GET /v1/kb/connectors/catalog
-     * ListConnectorCatalog returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider.
-     * ListConnectorCatalog returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider. &#x60;configured&#x60; reports whether this deployment holds OAuth credentials for a source, so the console can show Connect rather than a dead button, and &#x60;kind&#x60; is a badge only — the connect and sync lifecycle is identical for both. The catalog itself is org-independent; a validated principal is still required. It is metadata only: no secret is ever returned.
-     * @return CloudCatalogOut
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1KbConnectorsCatalog() : CloudCatalogOut {
-        val localVarResponse = cloudGetV1KbConnectorsCatalogWithHttpInfo()
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCatalogOut
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/kb/connectors/catalog
-     * ListConnectorCatalog returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider.
-     * ListConnectorCatalog returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider. &#x60;configured&#x60; reports whether this deployment holds OAuth credentials for a source, so the console can show Connect rather than a dead button, and &#x60;kind&#x60; is a badge only — the connect and sync lifecycle is identical for both. The catalog itself is org-independent; a validated principal is still required. It is metadata only: no secret is ever returned.
-     * @return ApiResponse<CloudCatalogOut?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1KbConnectorsCatalogWithHttpInfo() : ApiResponse<CloudCatalogOut?> {
-        val localVariableConfig = cloudGetV1KbConnectorsCatalogRequestConfig()
-
-        return request<Unit, CloudCatalogOut>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudGetV1KbConnectorsCatalog
-     *
-     * @return RequestConfig
-     */
-    fun cloudGetV1KbConnectorsCatalogRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/kb/connectors/catalog",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -273,7 +203,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param code Code is the provider&#39;s authorization code, exchanged for a token. (optional)
      * @param state State is the org-bound value this server signed at connect time. (optional)
      * @param error Error is the provider&#39;s denial reason when the user refused consent. (optional)
-     * @return CloudConnectionOut
+     * @return ConnectionOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -282,11 +212,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1KbConnectorsProviderCallback(provider: kotlin.String, code: kotlin.String? = null, state: kotlin.String? = null, error: kotlin.String? = null) : CloudConnectionOut {
-        val localVarResponse = cloudGetV1KbConnectorsProviderCallbackWithHttpInfo(provider = provider, code = code, state = state, error = error)
+    fun getV1KbConnectorsByProviderCallback(provider: kotlin.String, code: kotlin.String? = null, state: kotlin.String? = null, error: kotlin.String? = null) : ConnectionOut {
+        val localVarResponse = getV1KbConnectorsByProviderCallbackWithHttpInfo(provider = provider, code = code, state = state, error = error)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudConnectionOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ConnectionOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -308,22 +238,22 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param code Code is the provider&#39;s authorization code, exchanged for a token. (optional)
      * @param state State is the org-bound value this server signed at connect time. (optional)
      * @param error Error is the provider&#39;s denial reason when the user refused consent. (optional)
-     * @return ApiResponse<CloudConnectionOut?>
+     * @return ApiResponse<ConnectionOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1KbConnectorsProviderCallbackWithHttpInfo(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : ApiResponse<CloudConnectionOut?> {
-        val localVariableConfig = cloudGetV1KbConnectorsProviderCallbackRequestConfig(provider = provider, code = code, state = state, error = error)
+    fun getV1KbConnectorsByProviderCallbackWithHttpInfo(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : ApiResponse<ConnectionOut?> {
+        val localVariableConfig = getV1KbConnectorsByProviderCallbackRequestConfig(provider = provider, code = code, state = state, error = error)
 
-        return request<Unit, CloudConnectionOut>(
+        return request<Unit, ConnectionOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1KbConnectorsProviderCallback
+     * To obtain the request config of the operation getV1KbConnectorsByProviderCallback
      *
      * @param provider Provider is the connector completing its flow, from the path.
      * @param code Code is the provider&#39;s authorization code, exchanged for a token. (optional)
@@ -331,7 +261,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @param error Error is the provider&#39;s denial reason when the user refused consent. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1KbConnectorsProviderCallbackRequestConfig(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1KbConnectorsByProviderCallbackRequestConfig(provider: kotlin.String, code: kotlin.String?, state: kotlin.String?, error: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -353,7 +283,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}/callback".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -363,7 +293,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * StartConnectorOAuth returns the provider authorize URL the console opens to connect this org&#39;s account.
      * StartConnectorOAuth returns the provider authorize URL the console opens to connect this org&#39;s account. There is no server-side redirect — the console stays in control of the navigation. The URL carries a state this server SIGNED over the caller&#39;s validated org, so the connection the callback completes can only ever land in that org.
      * @param provider Provider is the connector to act on: github, slack, google or notion.
-     * @return CloudKbAuthorizeOut
+     * @return KbAuthorizeOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -372,11 +302,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1KbConnectorsProviderConnect(provider: kotlin.String) : CloudKbAuthorizeOut {
-        val localVarResponse = cloudGetV1KbConnectorsProviderConnectWithHttpInfo(provider = provider)
+    fun getV1KbConnectorsByProviderConnect(provider: kotlin.String) : KbAuthorizeOut {
+        val localVarResponse = getV1KbConnectorsByProviderConnectWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKbAuthorizeOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KbAuthorizeOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -395,27 +325,27 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * StartConnectorOAuth returns the provider authorize URL the console opens to connect this org&#39;s account.
      * StartConnectorOAuth returns the provider authorize URL the console opens to connect this org&#39;s account. There is no server-side redirect — the console stays in control of the navigation. The URL carries a state this server SIGNED over the caller&#39;s validated org, so the connection the callback completes can only ever land in that org.
      * @param provider Provider is the connector to act on: github, slack, google or notion.
-     * @return ApiResponse<CloudKbAuthorizeOut?>
+     * @return ApiResponse<KbAuthorizeOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1KbConnectorsProviderConnectWithHttpInfo(provider: kotlin.String) : ApiResponse<CloudKbAuthorizeOut?> {
-        val localVariableConfig = cloudGetV1KbConnectorsProviderConnectRequestConfig(provider = provider)
+    fun getV1KbConnectorsByProviderConnectWithHttpInfo(provider: kotlin.String) : ApiResponse<KbAuthorizeOut?> {
+        val localVariableConfig = getV1KbConnectorsByProviderConnectRequestConfig(provider = provider)
 
-        return request<Unit, CloudKbAuthorizeOut>(
+        return request<Unit, KbAuthorizeOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1KbConnectorsProviderConnect
+     * To obtain the request config of the operation getV1KbConnectorsByProviderConnect
      *
      * @param provider Provider is the connector to act on: github, slack, google or notion.
      * @return RequestConfig
      */
-    fun cloudGetV1KbConnectorsProviderConnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun getV1KbConnectorsByProviderConnectRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -426,17 +356,16 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}/connect".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * GET /v1/kb/graph
-     * GetKnowledgeGraph returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges.
-     * GetKnowledgeGraph returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges. Wikilink targets are resolved HERE by title or slug, so a rename never needs an edge rewrite and a link that matches no page renders as its own \&quot;unresolved\&quot; node instead of vanishing. ?project&#x3D; narrows it. A store outage degrades to an honest empty graph, never a 5xx.
-     * @param project Project narrows the graph to one project scope. Empty reads the whole org. (optional)
-     * @return CloudGraphOut
+     * GET /v1/kb/connectors/catalog
+     * Returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider.
+     * Returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider. &#x60;configured&#x60; reports whether this deployment holds OAuth credentials for a source, so the console can show Connect rather than a dead button, and &#x60;kind&#x60; is a badge only — the connect and sync lifecycle is identical for both. The catalog itself is org-independent; a validated principal is still required. It is metadata only: no secret is ever returned.
+     * @return CatalogOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -445,11 +374,82 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1KbGraph(project: kotlin.String? = null) : CloudGraphOut {
-        val localVarResponse = cloudGetV1KbGraphWithHttpInfo(project = project)
+    fun getV1KbConnectorsCatalog() : CatalogOut {
+        val localVarResponse = getV1KbConnectorsCatalogWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudGraphOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CatalogOut
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/kb/connectors/catalog
+     * Returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider.
+     * Returns the ONE catalog of everything a caller can connect: every first-party connector and every long-tail one, in a single list sorted by provider. &#x60;configured&#x60; reports whether this deployment holds OAuth credentials for a source, so the console can show Connect rather than a dead button, and &#x60;kind&#x60; is a badge only — the connect and sync lifecycle is identical for both. The catalog itself is org-independent; a validated principal is still required. It is metadata only: no secret is ever returned.
+     * @return ApiResponse<CatalogOut?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1KbConnectorsCatalogWithHttpInfo() : ApiResponse<CatalogOut?> {
+        val localVariableConfig = getV1KbConnectorsCatalogRequestConfig()
+
+        return request<Unit, CatalogOut>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1KbConnectorsCatalog
+     *
+     * @return RequestConfig
+     */
+    fun getV1KbConnectorsCatalogRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/kb/connectors/catalog",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/kb/graph
+     * Returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges.
+     * Returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges. Wikilink targets are resolved HERE by title or slug, so a rename never needs an edge rewrite and a link that matches no page renders as its own \&quot;unresolved\&quot; node instead of vanishing. ?project&#x3D; narrows it. A store outage degrades to an honest empty graph, never a 5xx.
+     * @param project Project narrows the graph to one project scope. Empty reads the whole org. (optional)
+     * @return GraphOut
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1KbGraph(project: kotlin.String? = null) : GraphOut {
+        val localVarResponse = getV1KbGraphWithHttpInfo(project = project)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GraphOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -465,30 +465,30 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * GET /v1/kb/graph
-     * GetKnowledgeGraph returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges.
-     * GetKnowledgeGraph returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges. Wikilink targets are resolved HERE by title or slug, so a rename never needs an edge rewrite and a link that matches no page renders as its own \&quot;unresolved\&quot; node instead of vanishing. ?project&#x3D; narrows it. A store outage degrades to an honest empty graph, never a 5xx.
+     * Returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges.
+     * Returns the caller org&#39;s knowledge as a node/edge graph shaped for a force-directed renderer: pages, memories and synced sources as nodes; the page parent tree, the wikilinks between pages, and each source&#39;s connector provenance as edges. Wikilink targets are resolved HERE by title or slug, so a rename never needs an edge rewrite and a link that matches no page renders as its own \&quot;unresolved\&quot; node instead of vanishing. ?project&#x3D; narrows it. A store outage degrades to an honest empty graph, never a 5xx.
      * @param project Project narrows the graph to one project scope. Empty reads the whole org. (optional)
-     * @return ApiResponse<CloudGraphOut?>
+     * @return ApiResponse<GraphOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1KbGraphWithHttpInfo(project: kotlin.String?) : ApiResponse<CloudGraphOut?> {
-        val localVariableConfig = cloudGetV1KbGraphRequestConfig(project = project)
+    fun getV1KbGraphWithHttpInfo(project: kotlin.String?) : ApiResponse<GraphOut?> {
+        val localVariableConfig = getV1KbGraphRequestConfig(project = project)
 
-        return request<Unit, CloudGraphOut>(
+        return request<Unit, GraphOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1KbGraph
+     * To obtain the request config of the operation getV1KbGraph
      *
      * @param project Project narrows the graph to one project scope. Empty reads the whole org. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1KbGraphRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1KbGraphRequestConfig(project: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -504,17 +504,17 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/graph",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/kb/connectors/{provider}/sync
-     * SyncConnector pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page.
-     * SyncConnector pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page. The org is the validated tenant and the credential is read from KMS, so an org can only ever sync its own connection. A provider failure is reported honestly (502) and recorded on the connector rather than silently swallowed.
+     * Pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page.
+     * Pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page. The org is the validated tenant and the credential is read from KMS, so an org can only ever sync its own connection. A provider failure is reported honestly (502) and recorded on the connector rather than silently swallowed.
      * @param provider Provider is the connector to act on: github, slack, google or notion.
-     * @return CloudKbSyncOut
+     * @return KbSyncOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -523,11 +523,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1KbConnectorsProviderSync(provider: kotlin.String) : CloudKbSyncOut {
-        val localVarResponse = cloudPostV1KbConnectorsProviderSyncWithHttpInfo(provider = provider)
+    fun postV1KbConnectorsByProviderSync(provider: kotlin.String) : KbSyncOut {
+        val localVarResponse = postV1KbConnectorsByProviderSyncWithHttpInfo(provider = provider)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudKbSyncOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as KbSyncOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -543,30 +543,30 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/kb/connectors/{provider}/sync
-     * SyncConnector pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page.
-     * SyncConnector pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page. The org is the validated tenant and the credential is read from KMS, so an org can only ever sync its own connection. A provider failure is reported honestly (502) and recorded on the connector rather than silently swallowed.
+     * Pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page.
+     * Pulls the provider&#39;s documents for the caller&#39;s org and files them as knowledge sources, which the store&#39;s own hook then indexes — so a synced document is retrievable exactly like a hand-written page. The org is the validated tenant and the credential is read from KMS, so an org can only ever sync its own connection. A provider failure is reported honestly (502) and recorded on the connector rather than silently swallowed.
      * @param provider Provider is the connector to act on: github, slack, google or notion.
-     * @return ApiResponse<CloudKbSyncOut?>
+     * @return ApiResponse<KbSyncOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1KbConnectorsProviderSyncWithHttpInfo(provider: kotlin.String) : ApiResponse<CloudKbSyncOut?> {
-        val localVariableConfig = cloudPostV1KbConnectorsProviderSyncRequestConfig(provider = provider)
+    fun postV1KbConnectorsByProviderSyncWithHttpInfo(provider: kotlin.String) : ApiResponse<KbSyncOut?> {
+        val localVariableConfig = postV1KbConnectorsByProviderSyncRequestConfig(provider = provider)
 
-        return request<Unit, CloudKbSyncOut>(
+        return request<Unit, KbSyncOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1KbConnectorsProviderSync
+     * To obtain the request config of the operation postV1KbConnectorsByProviderSync
      *
      * @param provider Provider is the connector to act on: github, slack, google or notion.
      * @return RequestConfig
      */
-    fun cloudPostV1KbConnectorsProviderSyncRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
+    fun postV1KbConnectorsByProviderSyncRequestConfig(provider: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -577,15 +577,15 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/connectors/{provider}/sync".replace("{"+"provider"+"}", encodeURIComponent(provider.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/kb/import
-     * 
-     * 
+     * Import an Obsidian, Notion, Roam or Evernote export into the org&#39;s knowledge base
+     * Ingests an uploaded export as a tree of kb-page documents with its link structure intact. &#x60;?format&#x3D;&#x60; picks the normalizer — obsidian, notion, roam or evernote — and the export arrives as a multipart &#x60;file&#x60; part, or as the raw request body when there is no multipart part: an Obsidian or Notion vault zip, a Roam JSON (raw or inside the zip Roam downloads), or an Evernote .enex.  The pages are filed through the SAME ingest path a connector sync uses, so the kb-page hook indexes each one for retrieval AND extracts its &#x60;[[wikilinks]]&#x60; into kb-link edges — the imported vault is searchable and its graph is navigable without a second pass. Parents are filed before their children, and each page takes a slug unique within the org (suffixed -2, -3, … on collision), so a re-import adds pages rather than overwriting the ones already there.  Scoped to the caller&#39;s validated org; &#x60;?project&#x3D;&#x60; narrows every imported page to one project. No validated principal is 403, and an org that has not installed the kb module is refused with the install call to make first. The bounds are 64 MB per upload, 5000 pages and 8 MB per archive entry: pages past the five-thousandth are dropped and a larger entry is truncated at its bound, and a page the store rejects is skipped — so the answer&#39;s &#x60;imported&#x60; count is what was actually filed, not what was sent.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -594,8 +594,8 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1KbImport() : Unit {
-        val localVarResponse = cloudPostV1KbImportWithHttpInfo()
+    fun postV1KbImport() : Unit {
+        val localVarResponse = postV1KbImportWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -614,15 +614,15 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/kb/import
-     * 
-     * 
+     * Import an Obsidian, Notion, Roam or Evernote export into the org&#39;s knowledge base
+     * Ingests an uploaded export as a tree of kb-page documents with its link structure intact. &#x60;?format&#x3D;&#x60; picks the normalizer — obsidian, notion, roam or evernote — and the export arrives as a multipart &#x60;file&#x60; part, or as the raw request body when there is no multipart part: an Obsidian or Notion vault zip, a Roam JSON (raw or inside the zip Roam downloads), or an Evernote .enex.  The pages are filed through the SAME ingest path a connector sync uses, so the kb-page hook indexes each one for retrieval AND extracts its &#x60;[[wikilinks]]&#x60; into kb-link edges — the imported vault is searchable and its graph is navigable without a second pass. Parents are filed before their children, and each page takes a slug unique within the org (suffixed -2, -3, … on collision), so a re-import adds pages rather than overwriting the ones already there.  Scoped to the caller&#39;s validated org; &#x60;?project&#x3D;&#x60; narrows every imported page to one project. No validated principal is 403, and an org that has not installed the kb module is refused with the install call to make first. The bounds are 64 MB per upload, 5000 pages and 8 MB per archive entry: pages past the five-thousandth are dropped and a larger entry is truncated at its bound, and a page the store rejects is skipped — so the answer&#39;s &#x60;imported&#x60; count is what was actually filed, not what was sent.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1KbImportWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1KbImportRequestConfig()
+    fun postV1KbImportWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1KbImportRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -630,11 +630,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1KbImport
+     * To obtain the request config of the operation postV1KbImport
      *
      * @return RequestConfig
      */
-    fun cloudPostV1KbImportRequestConfig() : RequestConfig<Unit> {
+    fun postV1KbImportRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -644,17 +644,17 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/import",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/kb/search
-     * SearchKnowledge runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages.
-     * SearchKnowledge runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages. This is the RAG entry point: an agent asks \&quot;what does this org know about X\&quot; and the org&#39;s OWN vector namespace answers. The org comes from the validated principal, and both the collection and the payload filter are pinned to it, so cross-tenant retrieval is impossible. An unreachable index returns an honest empty result set with degraded&#x3D;true, never a 5xx.
-     * @param cloudSearchIn 
-     * @return CloudSearchOut
+     * Runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages.
+     * Runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages. This is the RAG entry point: an agent asks \&quot;what does this org know about X\&quot; and the org&#39;s OWN vector namespace answers. The org comes from the validated principal, and both the collection and the payload filter are pinned to it, so cross-tenant retrieval is impossible. An unreachable index returns an honest empty result set with degraded&#x3D;true, never a 5xx.
+     * @param searchIn 
+     * @return SearchOut
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -663,11 +663,11 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1KbSearch(cloudSearchIn: CloudSearchIn) : CloudSearchOut {
-        val localVarResponse = cloudPostV1KbSearchWithHttpInfo(cloudSearchIn = cloudSearchIn)
+    fun postV1KbSearch(searchIn: SearchIn) : SearchOut {
+        val localVarResponse = postV1KbSearchWithHttpInfo(searchIn = searchIn)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSearchOut
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchOut
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -683,31 +683,31 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
 
     /**
      * POST /v1/kb/search
-     * SearchKnowledge runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages.
-     * SearchKnowledge runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages. This is the RAG entry point: an agent asks \&quot;what does this org know about X\&quot; and the org&#39;s OWN vector namespace answers. The org comes from the validated principal, and both the collection and the payload filter are pinned to it, so cross-tenant retrieval is impossible. An unreachable index returns an honest empty result set with degraded&#x3D;true, never a 5xx.
-     * @param cloudSearchIn 
-     * @return ApiResponse<CloudSearchOut?>
+     * Runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages.
+     * Runs a semantic search over the caller org&#39;s own knowledge — its wiki pages, its agent memories and everything its connectors have synced — and returns the matching passages. This is the RAG entry point: an agent asks \&quot;what does this org know about X\&quot; and the org&#39;s OWN vector namespace answers. The org comes from the validated principal, and both the collection and the payload filter are pinned to it, so cross-tenant retrieval is impossible. An unreachable index returns an honest empty result set with degraded&#x3D;true, never a 5xx.
+     * @param searchIn 
+     * @return ApiResponse<SearchOut?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1KbSearchWithHttpInfo(cloudSearchIn: CloudSearchIn) : ApiResponse<CloudSearchOut?> {
-        val localVariableConfig = cloudPostV1KbSearchRequestConfig(cloudSearchIn = cloudSearchIn)
+    fun postV1KbSearchWithHttpInfo(searchIn: SearchIn) : ApiResponse<SearchOut?> {
+        val localVariableConfig = postV1KbSearchRequestConfig(searchIn = searchIn)
 
-        return request<CloudSearchIn, CloudSearchOut>(
+        return request<SearchIn, SearchOut>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1KbSearch
+     * To obtain the request config of the operation postV1KbSearch
      *
-     * @param cloudSearchIn 
+     * @param searchIn 
      * @return RequestConfig
      */
-    fun cloudPostV1KbSearchRequestConfig(cloudSearchIn: CloudSearchIn) : RequestConfig<CloudSearchIn> {
-        val localVariableBody = cloudSearchIn
+    fun postV1KbSearchRequestConfig(searchIn: SearchIn) : RequestConfig<SearchIn> {
+        val localVariableBody = searchIn
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -718,7 +718,7 @@ class KbApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = Ap
             path = "/v1/kb/search",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,8 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CommerceError
-import ai.hanzo.cloud.model.CommerceSaaSMetrics
 
 import com.google.gson.annotations.SerializedName
 
@@ -48,8 +46,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/metrics/health
-     * 
-     * 
+     * How many metric series this deployment holds for your org
+     * Reports the native metrics store&#39;s live state for the calling tenant: the subsystem version, the resolved &#x60;org&#x60;, and &#x60;series&#x60; — the number of distinct series actually held right now, read out of the store rather than a constant. It is not a dependency probe and has nothing downstream to fail on: the store is in-process, so this answers 200 whenever the process is up.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;. This surface trusts the edge rather than re-deriving the org from a validated claim of its own, so it belongs behind the gateway and nowhere else.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -58,8 +56,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MetricsHealth() : Unit {
-        val localVarResponse = cloudGetV1MetricsHealthWithHttpInfo()
+    fun getV1MetricsHealth() : Unit {
+        val localVarResponse = getV1MetricsHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -78,15 +76,15 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/metrics/health
-     * 
-     * 
+     * How many metric series this deployment holds for your org
+     * Reports the native metrics store&#39;s live state for the calling tenant: the subsystem version, the resolved &#x60;org&#x60;, and &#x60;series&#x60; — the number of distinct series actually held right now, read out of the store rather than a constant. It is not a dependency probe and has nothing downstream to fail on: the store is in-process, so this answers 200 whenever the process is up.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;. This surface trusts the edge rather than re-deriving the org from a validated claim of its own, so it belongs behind the gateway and nowhere else.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MetricsHealthWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1MetricsHealthRequestConfig()
+    fun getV1MetricsHealthWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1MetricsHealthRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -94,11 +92,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MetricsHealth
+     * To obtain the request config of the operation getV1MetricsHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MetricsHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1MetricsHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -108,15 +106,15 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/metrics/query
-     * 
-     * 
+     * Read your org&#39;s series back over a time range
+     * Answers &#x60;{count, series}&#x60;, where &#x60;count&#x60; is the number of matching SERIES and each series carries the samples that fall inside the window. &#x60;name&#x60; selects one series name, and an absent or empty &#x60;name&#x60; returns every series the org holds. &#x60;match&#x60; is a &#x60;k&#x3D;v,k2&#x3D;v2&#x60; label matcher applied as a SUPERSET test: a series matches when it carries all the named labels with those values, extra labels and all.  &#x60;start&#x60; and &#x60;end&#x60; are nanoseconds since the Unix epoch, and here is the rule worth knowing: a bound that is absent, empty or unparseable becomes 0, which this store reads as UNBOUNDED. A malformed &#x60;start&#x60; therefore silently widens the query instead of failing it. There is no limit parameter — the window and the matcher are the whole of what bounds the answer.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;, so a query can only ever read the org the edge asserted.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -125,8 +123,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1MetricsQuery() : Unit {
-        val localVarResponse = cloudGetV1MetricsQueryWithHttpInfo()
+    fun getV1MetricsQuery() : Unit {
+        val localVarResponse = getV1MetricsQueryWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -145,15 +143,15 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/metrics/query
-     * 
-     * 
+     * Read your org&#39;s series back over a time range
+     * Answers &#x60;{count, series}&#x60;, where &#x60;count&#x60; is the number of matching SERIES and each series carries the samples that fall inside the window. &#x60;name&#x60; selects one series name, and an absent or empty &#x60;name&#x60; returns every series the org holds. &#x60;match&#x60; is a &#x60;k&#x3D;v,k2&#x3D;v2&#x60; label matcher applied as a SUPERSET test: a series matches when it carries all the named labels with those values, extra labels and all.  &#x60;start&#x60; and &#x60;end&#x60; are nanoseconds since the Unix epoch, and here is the rule worth knowing: a bound that is absent, empty or unparseable becomes 0, which this store reads as UNBOUNDED. A malformed &#x60;start&#x60; therefore silently widens the query instead of failing it. There is no limit parameter — the window and the matcher are the whole of what bounds the answer.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;, so a query can only ever read the org the edge asserted.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1MetricsQueryWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1MetricsQueryRequestConfig()
+    fun getV1MetricsQueryWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1MetricsQueryRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -161,11 +159,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1MetricsQuery
+     * To obtain the request config of the operation getV1MetricsQuery
      *
      * @return RequestConfig
      */
-    fun cloudGetV1MetricsQueryRequestConfig() : RequestConfig<Unit> {
+    fun getV1MetricsQueryRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -175,15 +173,15 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/query",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/metrics/batch
-     * 
-     * 
+     * Ingest a MetricBatch — the same payload the ZAP transport carries
+     * Writes every sample in a luxfi/metric &#x60;MetricBatch&#x60; into the calling org&#39;s store and answers &#x60;{written}&#x60;: the number of SAMPLES stored, not families and not metrics. This is the exact wire shape the ZAP &#x60;MsgMetricBatch&#x60; transport carries, so the HTTP door and the optional ZAP push receiver share one code path and one meaning — the transport is an optimisation, never a different contract.  A counter or gauge lands as one sample. A histogram or summary contributes DERIVED &#x60;&lt;name&gt;_sum&#x60; and &#x60;&lt;name&gt;_count&#x60; series, so one metric can write more than one sample and &#x60;written&#x60; can exceed the number of metrics you sent. The batch&#39;s own &#x60;TimestampNs&#x60; stamps every sample it carries.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;; each org gets its own store, WAL-durable under the deployment&#39;s data dir. A body that does not decode is 400.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -192,8 +190,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MetricsBatch() : Unit {
-        val localVarResponse = cloudPostV1MetricsBatchWithHttpInfo()
+    fun postV1MetricsBatch() : Unit {
+        val localVarResponse = postV1MetricsBatchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -212,15 +210,15 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/metrics/batch
-     * 
-     * 
+     * Ingest a MetricBatch — the same payload the ZAP transport carries
+     * Writes every sample in a luxfi/metric &#x60;MetricBatch&#x60; into the calling org&#39;s store and answers &#x60;{written}&#x60;: the number of SAMPLES stored, not families and not metrics. This is the exact wire shape the ZAP &#x60;MsgMetricBatch&#x60; transport carries, so the HTTP door and the optional ZAP push receiver share one code path and one meaning — the transport is an optimisation, never a different contract.  A counter or gauge lands as one sample. A histogram or summary contributes DERIVED &#x60;&lt;name&gt;_sum&#x60; and &#x60;&lt;name&gt;_count&#x60; series, so one metric can write more than one sample and &#x60;written&#x60; can exceed the number of metrics you sent. The batch&#39;s own &#x60;TimestampNs&#x60; stamps every sample it carries.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;; each org gets its own store, WAL-durable under the deployment&#39;s data dir. A body that does not decode is 400.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MetricsBatchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1MetricsBatchRequestConfig()
+    fun postV1MetricsBatchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MetricsBatchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -228,11 +226,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MetricsBatch
+     * To obtain the request config of the operation postV1MetricsBatch
      *
      * @return RequestConfig
      */
-    fun cloudPostV1MetricsBatchRequestConfig() : RequestConfig<Unit> {
+    fun postV1MetricsBatchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -242,15 +240,15 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/batch",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/metrics/write
-     * 
-     * 
+     * Append samples to your org&#39;s named, labelled series
+     * Takes &#x60;{series:[{name, labels, samples:[{t, v}]}]}&#x60;, appends every sample, creating each series on first write, and answers &#x60;{written}&#x60; — again counting SAMPLES, so three series of ten samples is 30.  A series is identified by its name PLUS its whole label set, so adding one label makes a different series rather than annotating an existing one. Timestamps &#x60;t&#x60; are NANOSECONDS since the Unix epoch; a sample sent without one is stored at 0 and is then excluded by any query that sets a lower bound, which is the usual reason a write that reported success does not read back. Retention is per series and bounded — past 65536 samples the oldest are evicted.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;. A body that does not decode is 400; nothing else is validated or rejected.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -259,8 +257,8 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1MetricsWrite() : Unit {
-        val localVarResponse = cloudPostV1MetricsWriteWithHttpInfo()
+    fun postV1MetricsWrite() : Unit {
+        val localVarResponse = postV1MetricsWriteWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -279,15 +277,15 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/metrics/write
-     * 
-     * 
+     * Append samples to your org&#39;s named, labelled series
+     * Takes &#x60;{series:[{name, labels, samples:[{t, v}]}]}&#x60;, appends every sample, creating each series on first write, and answers &#x60;{written}&#x60; — again counting SAMPLES, so three series of ten samples is 30.  A series is identified by its name PLUS its whole label set, so adding one label makes a different series rather than annotating an existing one. Timestamps &#x60;t&#x60; are NANOSECONDS since the Unix epoch; a sample sent without one is stored at 0 and is then excluded by any query that sets a lower bound, which is the usual reason a write that reported success does not read back. Retention is per series and bounded — past 65536 samples the oldest are evicted.  The tenant is the gateway-minted &#x60;X-Org-Id&#x60; header, falling back to the deployment brand and then &#x60;default&#x60;. A body that does not decode is 400; nothing else is validated or rejected.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1MetricsWriteWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1MetricsWriteRequestConfig()
+    fun postV1MetricsWriteWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1MetricsWriteRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -295,11 +293,11 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1MetricsWrite
+     * To obtain the request config of the operation postV1MetricsWrite
      *
      * @return RequestConfig
      */
-    fun cloudPostV1MetricsWriteRequestConfig() : RequestConfig<Unit> {
+    fun postV1MetricsWriteRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -309,111 +307,7 @@ class MetricsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/metrics/write",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * enum for parameter window
-     */
-     enum class WindowCommerceGetSaaSMetrics(val value: kotlin.String) {
-         @SerializedName(value = "7d") _7d("7d"),
-         @SerializedName(value = "30d") _30d("30d"),
-         @SerializedName(value = "90d") _90d("90d"),
-         @SerializedName(value = "mtd") mtd("mtd"),
-         @SerializedName(value = "all") all("all");
-
-        /**
-         * Override [toString()] to avoid using the enum variable name as the value, and instead use
-         * the actual value defined in the API spec file.
-         *
-         * This solves a problem when the variable name and its value are different, and ensures that
-         * the client sends the correct enum values to the server always.
-         */
-        override fun toString(): kotlin.String = "$value"
-     }
-
-    /**
-     * GET /v1/commerce/metrics/saas
-     * SaaS operations snapshot (platform god-view)
-     * The whole-business SaaS operations snapshot — recurring revenue (MRR/ARR, new/churned MRR, MRR by plan category), subscription mix (per plan, trials, seats, a recent create/cancel events feed), metered pay-as-you-go revenue totals, and the top customers by revenue — computed in commerce (the system of record for subscriptions + the usage ledger) from ONE cross-org walk. Money is USD cents end to end.  PLATFORM god-view: gated on a global admin OR the trusted internal service token (the console&#39;s global-admin-gated proxy forwards COMMERCE_SERVICE_TOKEN with no user identity). An org-level admin is refused (403) — this is cross-tenant data.  Per-model LLM tokens/latency/error and the per-org AI-spend ranking are deliberately NOT here: the canonical fleet LLM-observability aggregate is GET /v1/admin/o11y. The &#x60;gaps&#x60; array names what is not instrumented (e.g. plan-change upgrade/downgrade counts, per-model latency) rather than fabricating it. 
-     * @param window Usage + new/churn window: 7d | 30d | 90d | mtd | all (default 30d) (optional, default to 30d)
-     * @param limit Cap for the customers list (1-200, default 20) (optional, default to 20)
-     * @return CommerceSaaSMetrics
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun commerceGetSaaSMetrics(window: WindowCommerceGetSaaSMetrics? = WindowCommerceGetSaaSMetrics._30d, limit: kotlin.Int? = 20) : CommerceSaaSMetrics {
-        val localVarResponse = commerceGetSaaSMetricsWithHttpInfo(window = window, limit = limit)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CommerceSaaSMetrics
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * GET /v1/commerce/metrics/saas
-     * SaaS operations snapshot (platform god-view)
-     * The whole-business SaaS operations snapshot — recurring revenue (MRR/ARR, new/churned MRR, MRR by plan category), subscription mix (per plan, trials, seats, a recent create/cancel events feed), metered pay-as-you-go revenue totals, and the top customers by revenue — computed in commerce (the system of record for subscriptions + the usage ledger) from ONE cross-org walk. Money is USD cents end to end.  PLATFORM god-view: gated on a global admin OR the trusted internal service token (the console&#39;s global-admin-gated proxy forwards COMMERCE_SERVICE_TOKEN with no user identity). An org-level admin is refused (403) — this is cross-tenant data.  Per-model LLM tokens/latency/error and the per-org AI-spend ranking are deliberately NOT here: the canonical fleet LLM-observability aggregate is GET /v1/admin/o11y. The &#x60;gaps&#x60; array names what is not instrumented (e.g. plan-change upgrade/downgrade counts, per-model latency) rather than fabricating it. 
-     * @param window Usage + new/churn window: 7d | 30d | 90d | mtd | all (default 30d) (optional, default to 30d)
-     * @param limit Cap for the customers list (1-200, default 20) (optional, default to 20)
-     * @return ApiResponse<CommerceSaaSMetrics?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun commerceGetSaaSMetricsWithHttpInfo(window: WindowCommerceGetSaaSMetrics?, limit: kotlin.Int?) : ApiResponse<CommerceSaaSMetrics?> {
-        val localVariableConfig = commerceGetSaaSMetricsRequestConfig(window = window, limit = limit)
-
-        return request<Unit, CommerceSaaSMetrics>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation commerceGetSaaSMetrics
-     *
-     * @param window Usage + new/churn window: 7d | 30d | 90d | mtd | all (default 30d) (optional, default to 30d)
-     * @param limit Cap for the customers list (1-200, default 20) (optional, default to 20)
-     * @return RequestConfig
-     */
-    fun commerceGetSaaSMetricsRequestConfig(window: WindowCommerceGetSaaSMetrics?, limit: kotlin.Int?) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
-            .apply {
-                if (window != null) {
-                    put("window", listOf(window.value))
-                }
-                if (limit != null) {
-                    put("limit", listOf(limit.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.GET,
-            path = "/v1/commerce/metrics/saas",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

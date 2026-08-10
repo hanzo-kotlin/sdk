@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudBaseHealth
+import ai.hanzo.cloud.model.BaseHealth
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,9 +47,9 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/base/health
-     * BaseHealth reports that the base subsystem is serving.
-     * BaseHealth reports that the base subsystem is serving.  It is deliberately INDEPENDENT of whether this deployment actually embeds the Base engine: the route answers before the CLOUD_BASE_EMBED gate and before the /v1/base/_* wildcard, so a liveness probe measures the process rather than an optional feature, and the wildcard can never shadow it. It reads no tenant, so a prober that sends no principal is answered rather than refused.
-     * @return CloudBaseHealth
+     * Reports that the base subsystem is serving.
+     * Reports that the base subsystem is serving.  It is deliberately INDEPENDENT of whether this deployment actually embeds the Base engine: the route answers before the CLOUD_BASE_EMBED gate and before the /v1/base/_* wildcard, so a liveness probe measures the process rather than an optional feature, and the wildcard can never shadow it. It reads no tenant, so a prober that sends no principal is answered rather than refused.
+     * @return BaseHealth
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +58,11 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1BaseHealth() : CloudBaseHealth {
-        val localVarResponse = cloudGetV1BaseHealthWithHttpInfo()
+    fun getV1BaseHealth() : BaseHealth {
+        val localVarResponse = getV1BaseHealthWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBaseHealth
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BaseHealth
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -78,28 +78,28 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * GET /v1/base/health
-     * BaseHealth reports that the base subsystem is serving.
-     * BaseHealth reports that the base subsystem is serving.  It is deliberately INDEPENDENT of whether this deployment actually embeds the Base engine: the route answers before the CLOUD_BASE_EMBED gate and before the /v1/base/_* wildcard, so a liveness probe measures the process rather than an optional feature, and the wildcard can never shadow it. It reads no tenant, so a prober that sends no principal is answered rather than refused.
-     * @return ApiResponse<CloudBaseHealth?>
+     * Reports that the base subsystem is serving.
+     * Reports that the base subsystem is serving.  It is deliberately INDEPENDENT of whether this deployment actually embeds the Base engine: the route answers before the CLOUD_BASE_EMBED gate and before the /v1/base/_* wildcard, so a liveness probe measures the process rather than an optional feature, and the wildcard can never shadow it. It reads no tenant, so a prober that sends no principal is answered rather than refused.
+     * @return ApiResponse<BaseHealth?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1BaseHealthWithHttpInfo() : ApiResponse<CloudBaseHealth?> {
-        val localVariableConfig = cloudGetV1BaseHealthRequestConfig()
+    fun getV1BaseHealthWithHttpInfo() : ApiResponse<BaseHealth?> {
+        val localVariableConfig = getV1BaseHealthRequestConfig()
 
-        return request<Unit, CloudBaseHealth>(
+        return request<Unit, BaseHealth>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1BaseHealth
+     * To obtain the request config of the operation getV1BaseHealth
      *
      * @return RequestConfig
      */
-    fun cloudGetV1BaseHealthRequestConfig() : RequestConfig<Unit> {
+    fun getV1BaseHealthRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +110,7 @@ class BaseApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/base/health",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

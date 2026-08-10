@@ -19,17 +19,17 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudActionsView
-import ai.hanzo.cloud.model.CloudAnalyticsView
-import ai.hanzo.cloud.model.CloudBlueprintVersionsView
-import ai.hanzo.cloud.model.CloudBlueprintView
-import ai.hanzo.cloud.model.CloudChatRequest
-import ai.hanzo.cloud.model.CloudChatResponse
-import ai.hanzo.cloud.model.CloudCorpusView
-import ai.hanzo.cloud.model.CloudCurriculumView
-import ai.hanzo.cloud.model.CloudOverviewView
-import ai.hanzo.cloud.model.CloudProfileResponse
-import ai.hanzo.cloud.model.CloudSuggestResponse
+import ai.hanzo.cloud.model.ActionsView
+import ai.hanzo.cloud.model.AnalyticsView
+import ai.hanzo.cloud.model.BlueprintVersionsView
+import ai.hanzo.cloud.model.BlueprintView
+import ai.hanzo.cloud.model.ChatRequest
+import ai.hanzo.cloud.model.ChatResponse
+import ai.hanzo.cloud.model.CorpusView
+import ai.hanzo.cloud.model.CurriculumView
+import ai.hanzo.cloud.model.OverviewView
+import ai.hanzo.cloud.model.ProfileResponse
+import ai.hanzo.cloud.model.SuggestResponse
 
 import com.google.gson.annotations.SerializedName
 
@@ -57,9 +57,9 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/guide/curriculum
-     * DeleteCurriculum clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture.
-     * DeleteCurriculum clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture. Clearing an org that never set one is a no-op that answers the same default.
-     * @return CloudCurriculumView
+     * Clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture.
+     * Clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture. Clearing an org that never set one is a no-op that answers the same default.
+     * @return CurriculumView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -68,11 +68,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1GuideCurriculum() : CloudCurriculumView {
-        val localVarResponse = cloudDeleteV1GuideCurriculumWithHttpInfo()
+    fun deleteV1GuideCurriculum() : CurriculumView {
+        val localVarResponse = deleteV1GuideCurriculumWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCurriculumView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CurriculumView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -88,28 +88,28 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * DELETE /v1/guide/curriculum
-     * DeleteCurriculum clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture.
-     * DeleteCurriculum clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture. Clearing an org that never set one is a no-op that answers the same default.
-     * @return ApiResponse<CloudCurriculumView?>
+     * Clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture.
+     * Clears the caller org&#39;s curriculum override and returns the journey it falls back to — the brand blueprint, else the embedded fixture. Clearing an org that never set one is a no-op that answers the same default.
+     * @return ApiResponse<CurriculumView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1GuideCurriculumWithHttpInfo() : ApiResponse<CloudCurriculumView?> {
-        val localVariableConfig = cloudDeleteV1GuideCurriculumRequestConfig()
+    fun deleteV1GuideCurriculumWithHttpInfo() : ApiResponse<CurriculumView?> {
+        val localVariableConfig = deleteV1GuideCurriculumRequestConfig()
 
-        return request<Unit, CloudCurriculumView>(
+        return request<Unit, CurriculumView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1GuideCurriculum
+     * To obtain the request config of the operation deleteV1GuideCurriculum
      *
      * @return RequestConfig
      */
-    fun cloudDeleteV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
+    fun deleteV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -120,7 +120,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/curriculum",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -129,7 +129,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide
      * Overview returns the caller org&#39;s launch journey: the active curriculum&#39;s version and title, every step with its state, whether it is available, what blocks it and whether the Business AI can run it, the done/total/percent progress with the next step to take, and the org&#39;s analytics funnel folded in.
      * Overview returns the caller org&#39;s launch journey: the active curriculum&#39;s version and title, every step with its state, whether it is available, what blocks it and whether the Business AI can run it, the done/total/percent progress with the next step to take, and the org&#39;s analytics funnel folded in. Auto-detect runs first, so a step the org has already completed elsewhere reads done without anyone marking it.
-     * @return CloudOverviewView
+     * @return OverviewView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -138,11 +138,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Guide() : CloudOverviewView {
-        val localVarResponse = cloudGetV1GuideWithHttpInfo()
+    fun getV1Guide() : OverviewView {
+        val localVarResponse = getV1GuideWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOverviewView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -160,26 +160,26 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide
      * Overview returns the caller org&#39;s launch journey: the active curriculum&#39;s version and title, every step with its state, whether it is available, what blocks it and whether the Business AI can run it, the done/total/percent progress with the next step to take, and the org&#39;s analytics funnel folded in.
      * Overview returns the caller org&#39;s launch journey: the active curriculum&#39;s version and title, every step with its state, whether it is available, what blocks it and whether the Business AI can run it, the done/total/percent progress with the next step to take, and the org&#39;s analytics funnel folded in. Auto-detect runs first, so a step the org has already completed elsewhere reads done without anyone marking it.
-     * @return ApiResponse<CloudOverviewView?>
+     * @return ApiResponse<OverviewView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideWithHttpInfo() : ApiResponse<CloudOverviewView?> {
-        val localVariableConfig = cloudGetV1GuideRequestConfig()
+    fun getV1GuideWithHttpInfo() : ApiResponse<OverviewView?> {
+        val localVariableConfig = getV1GuideRequestConfig()
 
-        return request<Unit, CloudOverviewView>(
+        return request<Unit, OverviewView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Guide
+     * To obtain the request config of the operation getV1Guide
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -190,16 +190,16 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/guide/actions
-     * ListActions returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded.
-     * ListActions returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded. It is the audit-visible record of what the agent did on the org&#39;s behalf, and the backing state for the \&quot;acted\&quot; auto-detect signal.
-     * @return CloudActionsView
+     * Returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded.
+     * Returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded. It is the audit-visible record of what the agent did on the org&#39;s behalf, and the backing state for the \&quot;acted\&quot; auto-detect signal.
+     * @return ActionsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -208,11 +208,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideActions() : CloudActionsView {
-        val localVarResponse = cloudGetV1GuideActionsWithHttpInfo()
+    fun getV1GuideActions() : ActionsView {
+        val localVarResponse = getV1GuideActionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudActionsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ActionsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -228,28 +228,28 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/guide/actions
-     * ListActions returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded.
-     * ListActions returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded. It is the audit-visible record of what the agent did on the org&#39;s behalf, and the backing state for the \&quot;acted\&quot; auto-detect signal.
-     * @return ApiResponse<CloudActionsView?>
+     * Returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded.
+     * Returns the caller org&#39;s Business AI action ledger, most recent first: every \&quot;do it for me\&quot; tool call, the arguments it ran with, its result and whether it succeeded. It is the audit-visible record of what the agent did on the org&#39;s behalf, and the backing state for the \&quot;acted\&quot; auto-detect signal.
+     * @return ApiResponse<ActionsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideActionsWithHttpInfo() : ApiResponse<CloudActionsView?> {
-        val localVariableConfig = cloudGetV1GuideActionsRequestConfig()
+    fun getV1GuideActionsWithHttpInfo() : ApiResponse<ActionsView?> {
+        val localVariableConfig = getV1GuideActionsRequestConfig()
 
-        return request<Unit, CloudActionsView>(
+        return request<Unit, ActionsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideActions
+     * To obtain the request config of the operation getV1GuideActions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideActionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideActionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -260,7 +260,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/actions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -269,7 +269,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide/analytics
      * Analytics returns the caller org&#39;s funnel from the analytics lens plus the GTM recommendations derived from it.
      * Analytics returns the caller org&#39;s funnel from the analytics lens plus the GTM recommendations derived from it. It is the Business AI&#39;s data-grounded read — what the funnel is doing, and the next-best action to move its weakest stage. An unreachable or silent warehouse answers available&#x3D;false, never a fabricated number.
-     * @return CloudAnalyticsView
+     * @return AnalyticsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -278,11 +278,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideAnalytics() : CloudAnalyticsView {
-        val localVarResponse = cloudGetV1GuideAnalyticsWithHttpInfo()
+    fun getV1GuideAnalytics() : AnalyticsView {
+        val localVarResponse = getV1GuideAnalyticsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAnalyticsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AnalyticsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -300,26 +300,26 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide/analytics
      * Analytics returns the caller org&#39;s funnel from the analytics lens plus the GTM recommendations derived from it.
      * Analytics returns the caller org&#39;s funnel from the analytics lens plus the GTM recommendations derived from it. It is the Business AI&#39;s data-grounded read — what the funnel is doing, and the next-best action to move its weakest stage. An unreachable or silent warehouse answers available&#x3D;false, never a fabricated number.
-     * @return ApiResponse<CloudAnalyticsView?>
+     * @return ApiResponse<AnalyticsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideAnalyticsWithHttpInfo() : ApiResponse<CloudAnalyticsView?> {
-        val localVariableConfig = cloudGetV1GuideAnalyticsRequestConfig()
+    fun getV1GuideAnalyticsWithHttpInfo() : ApiResponse<AnalyticsView?> {
+        val localVariableConfig = getV1GuideAnalyticsRequestConfig()
 
-        return request<Unit, CloudAnalyticsView>(
+        return request<Unit, AnalyticsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideAnalytics
+     * To obtain the request config of the operation getV1GuideAnalytics
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideAnalyticsRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideAnalyticsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -330,16 +330,16 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/analytics",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/guide/blueprint
-     * GetBlueprint returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts.
-     * GetBlueprint returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts. It is the SuperAdmin authoring view of the platform blueprint, so it is refused 403 for anyone else, including a per-org admin: the brand blueprint is shared platform content, not a per-customer surface.
-     * @return CloudBlueprintView
+     * Returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts.
+     * Returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts. It is the SuperAdmin authoring view of the platform blueprint, so it is refused 403 for anyone else, including a per-org admin: the brand blueprint is shared platform content, not a per-customer surface.
+     * @return BlueprintView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -348,11 +348,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideBlueprint() : CloudBlueprintView {
-        val localVarResponse = cloudGetV1GuideBlueprintWithHttpInfo()
+    fun getV1GuideBlueprint() : BlueprintView {
+        val localVarResponse = getV1GuideBlueprintWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBlueprintView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -368,28 +368,28 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/guide/blueprint
-     * GetBlueprint returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts.
-     * GetBlueprint returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts. It is the SuperAdmin authoring view of the platform blueprint, so it is refused 403 for anyone else, including a per-org admin: the brand blueprint is shared platform content, not a per-customer surface.
-     * @return ApiResponse<CloudBlueprintView?>
+     * Returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts.
+     * Returns the FULL authored brand blueprint — every principle, section, step, strategy and template WITH its enabled flag made explicit, including the disabled items the org-facing reads never see — plus the active version number, the brand key it is stored under and the item counts. It is the SuperAdmin authoring view of the platform blueprint, so it is refused 403 for anyone else, including a per-org admin: the brand blueprint is shared platform content, not a per-customer surface.
+     * @return ApiResponse<BlueprintView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideBlueprintWithHttpInfo() : ApiResponse<CloudBlueprintView?> {
-        val localVariableConfig = cloudGetV1GuideBlueprintRequestConfig()
+    fun getV1GuideBlueprintWithHttpInfo() : ApiResponse<BlueprintView?> {
+        val localVariableConfig = getV1GuideBlueprintRequestConfig()
 
-        return request<Unit, CloudBlueprintView>(
+        return request<Unit, BlueprintView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideBlueprint
+     * To obtain the request config of the operation getV1GuideBlueprint
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideBlueprintRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideBlueprintRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -400,16 +400,16 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/guide/blueprint/versions
-     * ListBlueprintVersions returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane.
-     * ListBlueprintVersions returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane. Metadata only: the documents are not returned. SuperAdmin only, like the rest of this plane. The history is listable even when the current stored document no longer parses, so a schema-drifted row can still be diagnosed.
-     * @return CloudBlueprintVersionsView
+     * Returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane.
+     * Returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane. Metadata only: the documents are not returned. SuperAdmin only, like the rest of this plane. The history is listable even when the current stored document no longer parses, so a schema-drifted row can still be diagnosed.
+     * @return BlueprintVersionsView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -418,11 +418,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideBlueprintVersions() : CloudBlueprintVersionsView {
-        val localVarResponse = cloudGetV1GuideBlueprintVersionsWithHttpInfo()
+    fun getV1GuideBlueprintVersions() : BlueprintVersionsView {
+        val localVarResponse = getV1GuideBlueprintVersionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBlueprintVersionsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BlueprintVersionsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -438,28 +438,28 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/guide/blueprint/versions
-     * ListBlueprintVersions returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane.
-     * ListBlueprintVersions returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane. Metadata only: the documents are not returned. SuperAdmin only, like the rest of this plane. The history is listable even when the current stored document no longer parses, so a schema-drifted row can still be diagnosed.
-     * @return ApiResponse<CloudBlueprintVersionsView?>
+     * Returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane.
+     * Returns the brand blueprint&#39;s version history — every stored version&#39;s number and edit time, newest first — which is the point-in-time-recovery and audit trail behind the authoring plane. Metadata only: the documents are not returned. SuperAdmin only, like the rest of this plane. The history is listable even when the current stored document no longer parses, so a schema-drifted row can still be diagnosed.
+     * @return ApiResponse<BlueprintVersionsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideBlueprintVersionsWithHttpInfo() : ApiResponse<CloudBlueprintVersionsView?> {
-        val localVariableConfig = cloudGetV1GuideBlueprintVersionsRequestConfig()
+    fun getV1GuideBlueprintVersionsWithHttpInfo() : ApiResponse<BlueprintVersionsView?> {
+        val localVariableConfig = getV1GuideBlueprintVersionsRequestConfig()
 
-        return request<Unit, CloudBlueprintVersionsView>(
+        return request<Unit, BlueprintVersionsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideBlueprintVersions
+     * To obtain the request config of the operation getV1GuideBlueprintVersions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideBlueprintVersionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideBlueprintVersionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -470,16 +470,16 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint/versions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/guide/curriculum
-     * GetCurriculum returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
-     * GetCurriculum returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
-     * @return CloudCurriculumView
+     * Returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
+     * Returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
+     * @return CurriculumView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -488,11 +488,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideCurriculum() : CloudCurriculumView {
-        val localVarResponse = cloudGetV1GuideCurriculumWithHttpInfo()
+    fun getV1GuideCurriculum() : CurriculumView {
+        val localVarResponse = getV1GuideCurriculumWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCurriculumView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CurriculumView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -508,28 +508,28 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * GET /v1/guide/curriculum
-     * GetCurriculum returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
-     * GetCurriculum returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
-     * @return ApiResponse<CloudCurriculumView?>
+     * Returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
+     * Returns the journey the caller&#39;s org is actually running, and whether it comes from the org&#39;s OWN override (custom) or from the platform default — the brand blueprint, else the embedded fixture.
+     * @return ApiResponse<CurriculumView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideCurriculumWithHttpInfo() : ApiResponse<CloudCurriculumView?> {
-        val localVariableConfig = cloudGetV1GuideCurriculumRequestConfig()
+    fun getV1GuideCurriculumWithHttpInfo() : ApiResponse<CurriculumView?> {
+        val localVariableConfig = getV1GuideCurriculumRequestConfig()
 
-        return request<Unit, CloudCurriculumView>(
+        return request<Unit, CurriculumView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideCurriculum
+     * To obtain the request config of the operation getV1GuideCurriculum
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -540,7 +540,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/curriculum",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -549,7 +549,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide/profile
      * Profile returns the caller org&#39;s OBSERVED growth profile — the signal set, the classified growth stage, and the org&#39;s own key metrics.
      * Profile returns the caller org&#39;s OBSERVED growth profile — the signal set, the classified growth stage, and the org&#39;s own key metrics. It is a pure READ, recomputed from the org&#39;s CURRENT state each request (real-time by pull): it reuses the reconcile path (snapshotFor runs the detectors) for launch progress and runs the growth probes (observe) for the signals — it never caches, never runs a billable effect, never targets another org. Org-scoped on the validated principal; fail-closed without one. It PRODUCES the profile and classifies the stage; it decides NO recommendation (that is a later surface).
-     * @return CloudProfileResponse
+     * @return ProfileResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -558,11 +558,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideProfile() : CloudProfileResponse {
-        val localVarResponse = cloudGetV1GuideProfileWithHttpInfo()
+    fun getV1GuideProfile() : ProfileResponse {
+        val localVarResponse = getV1GuideProfileWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProfileResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProfileResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -580,26 +580,26 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide/profile
      * Profile returns the caller org&#39;s OBSERVED growth profile — the signal set, the classified growth stage, and the org&#39;s own key metrics.
      * Profile returns the caller org&#39;s OBSERVED growth profile — the signal set, the classified growth stage, and the org&#39;s own key metrics. It is a pure READ, recomputed from the org&#39;s CURRENT state each request (real-time by pull): it reuses the reconcile path (snapshotFor runs the detectors) for launch progress and runs the growth probes (observe) for the signals — it never caches, never runs a billable effect, never targets another org. Org-scoped on the validated principal; fail-closed without one. It PRODUCES the profile and classifies the stage; it decides NO recommendation (that is a later surface).
-     * @return ApiResponse<CloudProfileResponse?>
+     * @return ApiResponse<ProfileResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideProfileWithHttpInfo() : ApiResponse<CloudProfileResponse?> {
-        val localVariableConfig = cloudGetV1GuideProfileRequestConfig()
+    fun getV1GuideProfileWithHttpInfo() : ApiResponse<ProfileResponse?> {
+        val localVariableConfig = getV1GuideProfileRequestConfig()
 
-        return request<Unit, CloudProfileResponse>(
+        return request<Unit, ProfileResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideProfile
+     * To obtain the request config of the operation getV1GuideProfile
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideProfileRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideProfileRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -610,7 +610,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/profile",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -622,7 +622,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param category Category filters to tactics in exactly this category. (optional)
      * @param stage Stage previews the corpus at a chosen growth stage (research|formed|launched|activated|scaling), overriding the org&#39;s observed one. An unknown value is ignored and the observed stage stands. (optional)
      * @param workload Workload filters to tactics with exactly this workload. (optional)
-     * @return CloudCorpusView
+     * @return CorpusView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -631,11 +631,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideStrategies(category: kotlin.String? = null, stage: kotlin.String? = null, workload: kotlin.String? = null) : CloudCorpusView {
-        val localVarResponse = cloudGetV1GuideStrategiesWithHttpInfo(category = category, stage = stage, workload = workload)
+    fun getV1GuideStrategies(category: kotlin.String? = null, stage: kotlin.String? = null, workload: kotlin.String? = null) : CorpusView {
+        val localVarResponse = getV1GuideStrategiesWithHttpInfo(category = category, stage = stage, workload = workload)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudCorpusView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CorpusView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -656,29 +656,29 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param category Category filters to tactics in exactly this category. (optional)
      * @param stage Stage previews the corpus at a chosen growth stage (research|formed|launched|activated|scaling), overriding the org&#39;s observed one. An unknown value is ignored and the observed stage stands. (optional)
      * @param workload Workload filters to tactics with exactly this workload. (optional)
-     * @return ApiResponse<CloudCorpusView?>
+     * @return ApiResponse<CorpusView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideStrategiesWithHttpInfo(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : ApiResponse<CloudCorpusView?> {
-        val localVariableConfig = cloudGetV1GuideStrategiesRequestConfig(category = category, stage = stage, workload = workload)
+    fun getV1GuideStrategiesWithHttpInfo(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : ApiResponse<CorpusView?> {
+        val localVariableConfig = getV1GuideStrategiesRequestConfig(category = category, stage = stage, workload = workload)
 
-        return request<Unit, CloudCorpusView>(
+        return request<Unit, CorpusView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideStrategies
+     * To obtain the request config of the operation getV1GuideStrategies
      *
      * @param category Category filters to tactics in exactly this category. (optional)
      * @param stage Stage previews the corpus at a chosen growth stage (research|formed|launched|activated|scaling), overriding the org&#39;s observed one. An unknown value is ignored and the observed stage stands. (optional)
      * @param workload Workload filters to tactics with exactly this workload. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1GuideStrategiesRequestConfig(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1GuideStrategiesRequestConfig(category: kotlin.String?, stage: kotlin.String?, workload: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -700,7 +700,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/strategies",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -709,7 +709,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide/suggest
      * Suggest returns the caller org&#39;s next-best quests: the available, non-terminal steps of its journey ranked by how much downstream work each unblocks, each with the grounded reason it is a good next move and whether the Business AI can run it, plus the org&#39;s funnel and the GTM recommendations derived from it.
      * Suggest returns the caller org&#39;s next-best quests: the available, non-terminal steps of its journey ranked by how much downstream work each unblocks, each with the grounded reason it is a good next move and whether the Business AI can run it, plus the org&#39;s funnel and the GTM recommendations derived from it. A best-effort AI narrative over exactly those quests and numbers is included when an AI plane is wired. READ-ONLY: it advises and never runs a step — the only executing path is POST /v1/guide/steps/{id}/do.
-     * @return CloudSuggestResponse
+     * @return SuggestResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -718,11 +718,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1GuideSuggest() : CloudSuggestResponse {
-        val localVarResponse = cloudGetV1GuideSuggestWithHttpInfo()
+    fun getV1GuideSuggest() : SuggestResponse {
+        val localVarResponse = getV1GuideSuggestWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudSuggestResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SuggestResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -740,26 +740,26 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/guide/suggest
      * Suggest returns the caller org&#39;s next-best quests: the available, non-terminal steps of its journey ranked by how much downstream work each unblocks, each with the grounded reason it is a good next move and whether the Business AI can run it, plus the org&#39;s funnel and the GTM recommendations derived from it.
      * Suggest returns the caller org&#39;s next-best quests: the available, non-terminal steps of its journey ranked by how much downstream work each unblocks, each with the grounded reason it is a good next move and whether the Business AI can run it, plus the org&#39;s funnel and the GTM recommendations derived from it. A best-effort AI narrative over exactly those quests and numbers is included when an AI plane is wired. READ-ONLY: it advises and never runs a step — the only executing path is POST /v1/guide/steps/{id}/do.
-     * @return ApiResponse<CloudSuggestResponse?>
+     * @return ApiResponse<SuggestResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1GuideSuggestWithHttpInfo() : ApiResponse<CloudSuggestResponse?> {
-        val localVariableConfig = cloudGetV1GuideSuggestRequestConfig()
+    fun getV1GuideSuggestWithHttpInfo() : ApiResponse<SuggestResponse?> {
+        val localVariableConfig = getV1GuideSuggestRequestConfig()
 
-        return request<Unit, CloudSuggestResponse>(
+        return request<Unit, SuggestResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1GuideSuggest
+     * To obtain the request config of the operation getV1GuideSuggest
      *
      * @return RequestConfig
      */
-    fun cloudGetV1GuideSuggestRequestConfig() : RequestConfig<Unit> {
+    fun getV1GuideSuggestRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -770,15 +770,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/suggest",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/guide/blueprint/{collection}/{id}
-     * 
-     * 
+     * Edit — or retire — one item of the brand blueprint
+     * Edits a single item of the brand blueprint by id and saves it as a NEW VERSION, answering the whole blueprint after the edit. &#x60;collection&#x60; is one of &#x60;sections&#x60;, &#x60;steps&#x60;, &#x60;strategies&#x60; or &#x60;templates&#x60;; anything else is 400, and an id that collection does not hold is 404. This is also the retire lever: &#x60;{\&quot;enabled\&quot;: false}&#x60; takes an item out of every org&#39;s journey without deleting it or its history.  SuperAdmin ONLY, like the rest of the authoring plane; a per-org admin is 403. The write is audited.  The patch is a SHALLOW merge over the item&#39;s own top-level keys — a key you send replaces that key whole, a key you omit is left alone — and &#x60;id&#x60; is dropped from the patch before it is applied, so an edit can never rekey an item. That is why the body has no declarable shape: its keys are the patched item&#39;s, not this route&#39;s.  Fail-closed on the WHOLE document, not just the item: the blueprint is re-validated after the merge, so a patch that would dangle a dependency, break the step DAG or empty the journey is 422 and nothing is saved. An empty patch is 400 and one over 16 MiB is 413.
      * @param collection 
      * @param id 
      * @return void
@@ -789,8 +789,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1GuideBlueprintByCollectionById(collection: kotlin.String, id: kotlin.String) : Unit {
-        val localVarResponse = cloudPatchV1GuideBlueprintByCollectionByIdWithHttpInfo(collection = collection, id = id)
+    fun patchV1GuideBlueprintByCollectionById(collection: kotlin.String, id: kotlin.String) : Unit {
+        val localVarResponse = patchV1GuideBlueprintByCollectionByIdWithHttpInfo(collection = collection, id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -809,8 +809,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PATCH /v1/guide/blueprint/{collection}/{id}
-     * 
-     * 
+     * Edit — or retire — one item of the brand blueprint
+     * Edits a single item of the brand blueprint by id and saves it as a NEW VERSION, answering the whole blueprint after the edit. &#x60;collection&#x60; is one of &#x60;sections&#x60;, &#x60;steps&#x60;, &#x60;strategies&#x60; or &#x60;templates&#x60;; anything else is 400, and an id that collection does not hold is 404. This is also the retire lever: &#x60;{\&quot;enabled\&quot;: false}&#x60; takes an item out of every org&#39;s journey without deleting it or its history.  SuperAdmin ONLY, like the rest of the authoring plane; a per-org admin is 403. The write is audited.  The patch is a SHALLOW merge over the item&#39;s own top-level keys — a key you send replaces that key whole, a key you omit is left alone — and &#x60;id&#x60; is dropped from the patch before it is applied, so an edit can never rekey an item. That is why the body has no declarable shape: its keys are the patched item&#39;s, not this route&#39;s.  Fail-closed on the WHOLE document, not just the item: the blueprint is re-validated after the merge, so a patch that would dangle a dependency, break the step DAG or empty the journey is 422 and nothing is saved. An empty patch is 400 and one over 16 MiB is 413.
      * @param collection 
      * @param id 
      * @return ApiResponse<Unit?>
@@ -818,8 +818,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1GuideBlueprintByCollectionByIdWithHttpInfo(collection: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPatchV1GuideBlueprintByCollectionByIdRequestConfig(collection = collection, id = id)
+    fun patchV1GuideBlueprintByCollectionByIdWithHttpInfo(collection: kotlin.String, id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = patchV1GuideBlueprintByCollectionByIdRequestConfig(collection = collection, id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -827,13 +827,13 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1GuideBlueprintByCollectionById
+     * To obtain the request config of the operation patchV1GuideBlueprintByCollectionById
      *
      * @param collection 
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPatchV1GuideBlueprintByCollectionByIdRequestConfig(collection: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
+    fun patchV1GuideBlueprintByCollectionByIdRequestConfig(collection: kotlin.String, id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -843,7 +843,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint/{collection}/{id}".replace("{"+"collection"+"}", encodeURIComponent(collection.toString())).replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -852,8 +852,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/guide/chat
      * Chat answers a founder&#39;s question about their launch journey as the Business AI coach: it grounds the reply in the org&#39;s REAL progress, its ranked available quests and its analytics funnel, and returns those candidate quests alongside so the caller can act on one.
      * Chat answers a founder&#39;s question about their launch journey as the Business AI coach: it grounds the reply in the org&#39;s REAL progress, its ranked available quests and its analytics funnel, and returns those candidate quests alongside so the caller can act on one. READ-ONLY — it advises and never runs a step, so it cannot be talked into performing an action; the only executing path is POST /v1/guide/steps/{id}/do. One AI completion per call, billed to the caller&#39;s own payer.
-     * @param cloudChatRequest 
-     * @return CloudChatResponse
+     * @param chatRequest 
+     * @return ChatResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -862,11 +862,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GuideChat(cloudChatRequest: CloudChatRequest) : CloudChatResponse {
-        val localVarResponse = cloudPostV1GuideChatWithHttpInfo(cloudChatRequest = cloudChatRequest)
+    fun postV1GuideChat(chatRequest: ChatRequest) : ChatResponse {
+        val localVarResponse = postV1GuideChatWithHttpInfo(chatRequest = chatRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudChatResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ChatResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -884,29 +884,29 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * POST /v1/guide/chat
      * Chat answers a founder&#39;s question about their launch journey as the Business AI coach: it grounds the reply in the org&#39;s REAL progress, its ranked available quests and its analytics funnel, and returns those candidate quests alongside so the caller can act on one.
      * Chat answers a founder&#39;s question about their launch journey as the Business AI coach: it grounds the reply in the org&#39;s REAL progress, its ranked available quests and its analytics funnel, and returns those candidate quests alongside so the caller can act on one. READ-ONLY — it advises and never runs a step, so it cannot be talked into performing an action; the only executing path is POST /v1/guide/steps/{id}/do. One AI completion per call, billed to the caller&#39;s own payer.
-     * @param cloudChatRequest 
-     * @return ApiResponse<CloudChatResponse?>
+     * @param chatRequest 
+     * @return ApiResponse<ChatResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GuideChatWithHttpInfo(cloudChatRequest: CloudChatRequest) : ApiResponse<CloudChatResponse?> {
-        val localVariableConfig = cloudPostV1GuideChatRequestConfig(cloudChatRequest = cloudChatRequest)
+    fun postV1GuideChatWithHttpInfo(chatRequest: ChatRequest) : ApiResponse<ChatResponse?> {
+        val localVariableConfig = postV1GuideChatRequestConfig(chatRequest = chatRequest)
 
-        return request<CloudChatRequest, CloudChatResponse>(
+        return request<ChatRequest, ChatResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GuideChat
+     * To obtain the request config of the operation postV1GuideChat
      *
-     * @param cloudChatRequest 
+     * @param chatRequest 
      * @return RequestConfig
      */
-    fun cloudPostV1GuideChatRequestConfig(cloudChatRequest: CloudChatRequest) : RequestConfig<CloudChatRequest> {
-        val localVariableBody = cloudChatRequest
+    fun postV1GuideChatRequestConfig(chatRequest: ChatRequest) : RequestConfig<ChatRequest> {
+        val localVariableBody = chatRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -917,15 +917,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/chat",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/guide/steps/{id}/do
-     * 
-     * 
+     * Have the Business AI actually do the step for you
+     * Executes one step of the caller org&#39;s journey through that principal&#39;s OWN tool plane and answers the action log — &#x60;{step, events, state}&#x60; — so the caller sees every tool call the agent made and where the step ended up. This is the ONE executing path in guide: suggest and chat advise, this acts, and the work is charged to the calling principal&#39;s ledger.  Ask for it live and the same actions arrive as Server-Sent Events instead, on either of two triggers — &#x60;Accept: text/event-stream&#x60; or &#x60;?stream&#x3D;1&#x60;. The stream opens with a comment, emits one frame per action as it happens, and closes with an &#x60;end&#x60; frame carrying &#x60;ok&#x60; and the final state. The streamed run is detached and bounded at 120 seconds, so it finishes on its own clock once the response has begun.  An agent that FAILS is not a failed request: the JSON answer still comes back 200 with &#x60;error&#x60; beside the events it did manage, and the stream still ends with &#x60;ok:false&#x60;. The refusals are the ones before the agent runs — 409 with &#x60;{error, step, blockedBy}&#x60; for a step whose dependencies are unfinished, 404 for an id the journey does not contain, 403 without a validated org.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -935,8 +935,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GuideStepsByIdDo(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1GuideStepsByIdDoWithHttpInfo(id = id)
+    fun postV1GuideStepsByIdDo(id: kotlin.String) : Unit {
+        val localVarResponse = postV1GuideStepsByIdDoWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -955,16 +955,16 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/do
-     * 
-     * 
+     * Have the Business AI actually do the step for you
+     * Executes one step of the caller org&#39;s journey through that principal&#39;s OWN tool plane and answers the action log — &#x60;{step, events, state}&#x60; — so the caller sees every tool call the agent made and where the step ended up. This is the ONE executing path in guide: suggest and chat advise, this acts, and the work is charged to the calling principal&#39;s ledger.  Ask for it live and the same actions arrive as Server-Sent Events instead, on either of two triggers — &#x60;Accept: text/event-stream&#x60; or &#x60;?stream&#x3D;1&#x60;. The stream opens with a comment, emits one frame per action as it happens, and closes with an &#x60;end&#x60; frame carrying &#x60;ok&#x60; and the final state. The streamed run is detached and bounded at 120 seconds, so it finishes on its own clock once the response has begun.  An agent that FAILS is not a failed request: the JSON answer still comes back 200 with &#x60;error&#x60; beside the events it did manage, and the stream still ends with &#x60;ok:false&#x60;. The refusals are the ones before the agent runs — 409 with &#x60;{error, step, blockedBy}&#x60; for a step whose dependencies are unfinished, 404 for an id the journey does not contain, 403 without a validated org.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GuideStepsByIdDoWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GuideStepsByIdDoRequestConfig(id = id)
+    fun postV1GuideStepsByIdDoWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GuideStepsByIdDoRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -972,12 +972,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GuideStepsByIdDo
+     * To obtain the request config of the operation postV1GuideStepsByIdDo
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1GuideStepsByIdDoRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1GuideStepsByIdDoRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -987,15 +987,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/do".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/guide/steps/{id}/done
-     * 
-     * 
+     * Mark a step of your org&#39;s journey finished
+     * Moves one step of the caller org&#39;s journey to done and answers the whole refreshed journey, which is what unblocks everything downstream of it.  Dependency-GATED like start: finishing a step whose prerequisites are themselves unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60; naming what is in the way, not a silent success. A step id the org&#39;s active journey does not contain is 404. Skipping is the ungated alternative — a founder declaring a step does not apply — and it lives at /skip.  Requires a validated org; 403 without one. The mark is recorded as &#x60;manual&#x60;, and /reset returns the step to todo.
      * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
@@ -1005,8 +1005,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GuideStepsByIdDone(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1GuideStepsByIdDoneWithHttpInfo(id = id)
+    fun postV1GuideStepsByIdDone(id: kotlin.String) : Unit {
+        val localVarResponse = postV1GuideStepsByIdDoneWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1025,16 +1025,16 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/done
-     * 
-     * 
+     * Mark a step of your org&#39;s journey finished
+     * Moves one step of the caller org&#39;s journey to done and answers the whole refreshed journey, which is what unblocks everything downstream of it.  Dependency-GATED like start: finishing a step whose prerequisites are themselves unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60; naming what is in the way, not a silent success. A step id the org&#39;s active journey does not contain is 404. Skipping is the ungated alternative — a founder declaring a step does not apply — and it lives at /skip.  Requires a validated org; 403 without one. The mark is recorded as &#x60;manual&#x60;, and /reset returns the step to todo.
      * @param id 
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GuideStepsByIdDoneWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GuideStepsByIdDoneRequestConfig(id = id)
+    fun postV1GuideStepsByIdDoneWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GuideStepsByIdDoneRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1042,12 +1042,12 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GuideStepsByIdDone
+     * To obtain the request config of the operation postV1GuideStepsByIdDone
      *
      * @param id 
      * @return RequestConfig
      */
-    fun cloudPostV1GuideStepsByIdDoneRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1GuideStepsByIdDoneRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1057,87 +1057,17 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/done".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /v1/guide/steps/{id}/start
-     * 
-     * 
-     * @param id 
-     * @return void
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GuideStepsByIdStart(id: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1GuideStepsByIdStartWithHttpInfo(id = id)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /v1/guide/steps/{id}/start
-     * 
-     * 
-     * @param id 
-     * @return ApiResponse<Unit?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GuideStepsByIdStartWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1GuideStepsByIdStartRequestConfig(id = id)
-
-        return request<Unit, Unit>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation cloudPostV1GuideStepsByIdStart
-     *
-     * @param id 
-     * @return RequestConfig
-     */
-    fun cloudPostV1GuideStepsByIdStartRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/v1/guide/steps/{id}/start".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/guide/steps/{id}/reset
-     * ResetStep returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey.
-     * ResetStep returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey. Reset is never dependency-gated. Auto-detect runs on the next read, so a step the org has in fact completed elsewhere goes straight back to done.
+     * Returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey.
+     * Returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey. Reset is never dependency-gated. Auto-detect runs on the next read, so a step the org has in fact completed elsewhere goes straight back to done.
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
-     * @return CloudOverviewView
+     * @return OverviewView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1146,11 +1076,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GuideStepsIdReset(id: kotlin.String) : CloudOverviewView {
-        val localVarResponse = cloudPostV1GuideStepsIdResetWithHttpInfo(id = id)
+    fun postV1GuideStepsByIdReset(id: kotlin.String) : OverviewView {
+        val localVarResponse = postV1GuideStepsByIdResetWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOverviewView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1166,30 +1096,30 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/reset
-     * ResetStep returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey.
-     * ResetStep returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey. Reset is never dependency-gated. Auto-detect runs on the next read, so a step the org has in fact completed elsewhere goes straight back to done.
+     * Returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey.
+     * Returns one step of the caller org&#39;s journey to todo — clearing a manual mark or a skip — and returns the refreshed journey. Reset is never dependency-gated. Auto-detect runs on the next read, so a step the org has in fact completed elsewhere goes straight back to done.
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
-     * @return ApiResponse<CloudOverviewView?>
+     * @return ApiResponse<OverviewView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GuideStepsIdResetWithHttpInfo(id: kotlin.String) : ApiResponse<CloudOverviewView?> {
-        val localVariableConfig = cloudPostV1GuideStepsIdResetRequestConfig(id = id)
+    fun postV1GuideStepsByIdResetWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
+        val localVariableConfig = postV1GuideStepsByIdResetRequestConfig(id = id)
 
-        return request<Unit, CloudOverviewView>(
+        return request<Unit, OverviewView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GuideStepsIdReset
+     * To obtain the request config of the operation postV1GuideStepsByIdReset
      *
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
      * @return RequestConfig
      */
-    fun cloudPostV1GuideStepsIdResetRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1GuideStepsByIdResetRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1200,17 +1130,17 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/reset".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/guide/steps/{id}/skip
-     * SkipStep marks one step of the caller org&#39;s journey skipped and returns the refreshed journey.
-     * SkipStep marks one step of the caller org&#39;s journey skipped and returns the refreshed journey. Skipping is never dependency-gated — the founder is declaring the step does not apply to them — so a step whose dependencies are unfinished can still be skipped, and a skipped step counts as terminal for everything downstream of it.
+     * Marks one step of the caller org&#39;s journey skipped and returns the refreshed journey.
+     * Marks one step of the caller org&#39;s journey skipped and returns the refreshed journey. Skipping is never dependency-gated — the founder is declaring the step does not apply to them — so a step whose dependencies are unfinished can still be skipped, and a skipped step counts as terminal for everything downstream of it.
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
-     * @return CloudOverviewView
+     * @return OverviewView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -1219,11 +1149,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1GuideStepsIdSkip(id: kotlin.String) : CloudOverviewView {
-        val localVarResponse = cloudPostV1GuideStepsIdSkipWithHttpInfo(id = id)
+    fun postV1GuideStepsByIdSkip(id: kotlin.String) : OverviewView {
+        val localVarResponse = postV1GuideStepsByIdSkipWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudOverviewView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OverviewView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -1239,30 +1169,30 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * POST /v1/guide/steps/{id}/skip
-     * SkipStep marks one step of the caller org&#39;s journey skipped and returns the refreshed journey.
-     * SkipStep marks one step of the caller org&#39;s journey skipped and returns the refreshed journey. Skipping is never dependency-gated — the founder is declaring the step does not apply to them — so a step whose dependencies are unfinished can still be skipped, and a skipped step counts as terminal for everything downstream of it.
+     * Marks one step of the caller org&#39;s journey skipped and returns the refreshed journey.
+     * Marks one step of the caller org&#39;s journey skipped and returns the refreshed journey. Skipping is never dependency-gated — the founder is declaring the step does not apply to them — so a step whose dependencies are unfinished can still be skipped, and a skipped step counts as terminal for everything downstream of it.
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
-     * @return ApiResponse<CloudOverviewView?>
+     * @return ApiResponse<OverviewView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1GuideStepsIdSkipWithHttpInfo(id: kotlin.String) : ApiResponse<CloudOverviewView?> {
-        val localVariableConfig = cloudPostV1GuideStepsIdSkipRequestConfig(id = id)
+    fun postV1GuideStepsByIdSkipWithHttpInfo(id: kotlin.String) : ApiResponse<OverviewView?> {
+        val localVariableConfig = postV1GuideStepsByIdSkipRequestConfig(id = id)
 
-        return request<Unit, CloudOverviewView>(
+        return request<Unit, OverviewView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1GuideStepsIdSkip
+     * To obtain the request config of the operation postV1GuideStepsByIdSkip
      *
      * @param id ID is the step&#39;s id, as it appears in the journey (e.g. \&quot;gsuite\&quot;).
      * @return RequestConfig
      */
-    fun cloudPostV1GuideStepsIdSkipRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun postV1GuideStepsByIdSkipRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1273,15 +1203,16 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/steps/{id}/skip".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
-     * PUT /v1/guide/blueprint
-     * 
-     * 
+     * POST /v1/guide/steps/{id}/start
+     * Mark a step of your org&#39;s journey started
+     * Moves one step of the caller org&#39;s journey to in-progress and answers the whole refreshed journey, so a console needs no second read.  The transition is dependency-GATED, and that is why the answer set is wider than a success: a step whose prerequisites are unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60;, where &#x60;blockedBy&#x60; names the exact steps in the way — enough to render the blockage rather than merely report it. A step id the org&#39;s active journey does not contain is 404.  Requires a validated org; 403 without one, and the journey read and written is that org&#39;s alone. The mark is recorded as &#x60;manual&#x60;, and the journey is reconciled against the auto-detectors on every read, so a step the org has demonstrably completed elsewhere can still be moved to done underneath it.
+     * @param id 
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1290,8 +1221,77 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1GuideBlueprint() : Unit {
-        val localVarResponse = cloudPutV1GuideBlueprintWithHttpInfo()
+    fun postV1GuideStepsByIdStart(id: kotlin.String) : Unit {
+        val localVarResponse = postV1GuideStepsByIdStartWithHttpInfo(id = id)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/guide/steps/{id}/start
+     * Mark a step of your org&#39;s journey started
+     * Moves one step of the caller org&#39;s journey to in-progress and answers the whole refreshed journey, so a console needs no second read.  The transition is dependency-GATED, and that is why the answer set is wider than a success: a step whose prerequisites are unfinished is 409 carrying &#x60;{error, step, blockedBy}&#x60;, where &#x60;blockedBy&#x60; names the exact steps in the way — enough to render the blockage rather than merely report it. A step id the org&#39;s active journey does not contain is 404.  Requires a validated org; 403 without one, and the journey read and written is that org&#39;s alone. The mark is recorded as &#x60;manual&#x60;, and the journey is reconciled against the auto-detectors on every read, so a step the org has demonstrably completed elsewhere can still be moved to done underneath it.
+     * @param id 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1GuideStepsByIdStartWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1GuideStepsByIdStartRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1GuideStepsByIdStart
+     *
+     * @param id 
+     * @return RequestConfig
+     */
+    fun postV1GuideStepsByIdStartRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/guide/steps/{id}/start".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /v1/guide/blueprint
+     * Publish a new version of the brand blueprint
+     * Replaces the deployment&#39;s brand blueprint — the shared journey, sections, strategies and templates every org starts from — as a NEW VERSION, and answers the stored document with its key and version number. The previous versions are kept, so /blueprint/versions is a real recovery trail.  SuperAdmin ONLY. A per-org admin is 403: this is platform content, not a per-customer surface — the per-customer surface is /v1/guide/curriculum. The write is audited.  The body is a blueprint document accepted as YAML **or** JSON, which is the caller-visible reason it takes a raw body. It must parse AND validate — unique ids throughout, an acyclic step graph with no dangling dependencies, every step&#39;s section and every strategy&#39;s principle resolving to a real one — or it is 422 and never becomes active, leaving the version already serving authoritative. An empty body is 400 and one over 16 MiB is 413.  Edits are live: the next resolve reads the newest version. A stored document that is itself corrupt or schema-drifted does not block this write — the target is resolved without parsing what is there — so a bad version can always be published over.
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun putV1GuideBlueprint() : Unit {
+        val localVarResponse = putV1GuideBlueprintWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1310,15 +1310,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/guide/blueprint
-     * 
-     * 
+     * Publish a new version of the brand blueprint
+     * Replaces the deployment&#39;s brand blueprint — the shared journey, sections, strategies and templates every org starts from — as a NEW VERSION, and answers the stored document with its key and version number. The previous versions are kept, so /blueprint/versions is a real recovery trail.  SuperAdmin ONLY. A per-org admin is 403: this is platform content, not a per-customer surface — the per-customer surface is /v1/guide/curriculum. The write is audited.  The body is a blueprint document accepted as YAML **or** JSON, which is the caller-visible reason it takes a raw body. It must parse AND validate — unique ids throughout, an acyclic step graph with no dangling dependencies, every step&#39;s section and every strategy&#39;s principle resolving to a real one — or it is 422 and never becomes active, leaving the version already serving authoritative. An empty body is 400 and one over 16 MiB is 413.  Edits are live: the next resolve reads the newest version. A stored document that is itself corrupt or schema-drifted does not block this write — the target is resolved without parsing what is there — so a bad version can always be published over.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1GuideBlueprintWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1GuideBlueprintRequestConfig()
+    fun putV1GuideBlueprintWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putV1GuideBlueprintRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1326,11 +1326,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1GuideBlueprint
+     * To obtain the request config of the operation putV1GuideBlueprint
      *
      * @return RequestConfig
      */
-    fun cloudPutV1GuideBlueprintRequestConfig() : RequestConfig<Unit> {
+    fun putV1GuideBlueprintRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1340,15 +1340,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/blueprint",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PUT /v1/guide/curriculum
-     * 
-     * 
+     * Replace your org&#39;s journey with a curriculum you author
+     * Sets the caller org&#39;s OWN curriculum — the per-customer override — and answers the journey now in force with &#x60;custom: true&#x60;. The body is a curriculum document, and it is accepted as YAML **or** JSON: that is the caller-visible reason this takes a raw body rather than a declared shape. Whatever the syntax, the CANONICAL parsed form is what is stored, so the document the engine runs never depends on how it was written.  Fail-closed: a body that does not parse, or parses but is not a valid journey (unique step ids, no dangling or cyclic dependencies), is 422 and NEVER becomes active — the org keeps the journey it had. Requires a validated org; 403 without one. An empty body is 400 and one over 256 KiB is 413.  This is tier one only. It overrides nothing but this org&#39;s own journey; the shared brand blueprint is a different surface with a different gate. DELETE the same path to drop the override and fall back to it.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1357,8 +1357,8 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1GuideCurriculum() : Unit {
-        val localVarResponse = cloudPutV1GuideCurriculumWithHttpInfo()
+    fun putV1GuideCurriculum() : Unit {
+        val localVarResponse = putV1GuideCurriculumWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -1377,15 +1377,15 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
 
     /**
      * PUT /v1/guide/curriculum
-     * 
-     * 
+     * Replace your org&#39;s journey with a curriculum you author
+     * Sets the caller org&#39;s OWN curriculum — the per-customer override — and answers the journey now in force with &#x60;custom: true&#x60;. The body is a curriculum document, and it is accepted as YAML **or** JSON: that is the caller-visible reason this takes a raw body rather than a declared shape. Whatever the syntax, the CANONICAL parsed form is what is stored, so the document the engine runs never depends on how it was written.  Fail-closed: a body that does not parse, or parses but is not a valid journey (unique step ids, no dangling or cyclic dependencies), is 422 and NEVER becomes active — the org keeps the journey it had. Requires a validated org; 403 without one. An empty body is 400 and one over 256 KiB is 413.  This is tier one only. It overrides nothing but this org&#39;s own journey; the shared brand blueprint is a different surface with a different gate. DELETE the same path to drop the override and fall back to it.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1GuideCurriculumWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPutV1GuideCurriculumRequestConfig()
+    fun putV1GuideCurriculumWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = putV1GuideCurriculumRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -1393,11 +1393,11 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1GuideCurriculum
+     * To obtain the request config of the operation putV1GuideCurriculum
      *
      * @return RequestConfig
      */
-    fun cloudPutV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
+    fun putV1GuideCurriculumRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -1407,7 +1407,7 @@ class GuideApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/guide/curriculum",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

@@ -19,34 +19,32 @@ package ai.hanzo.cloud.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * A live site in the org's list — a live project at its canonical live URL.
+ * 
  *
- * @param slug 
- * @param url Canonical live URL, https://<slug>.<apex>.
  * @param name 
- * @param status Always \"live\" in this list.
+ * @param slug 
+ * @param status 
  * @param updatedAt 
+ * @param url 
  */
 
 
 data class ProjectsSite (
 
-    @SerializedName("slug")
-    val slug: kotlin.String,
-
-    /* Canonical live URL, https://<slug>.<apex>. */
-    @SerializedName("url")
-    val url: kotlin.String,
-
     @SerializedName("name")
-    val name: kotlin.String,
+    val name: kotlin.String? = null,
 
-    /* Always \"live\" in this list. */
+    @SerializedName("slug")
+    val slug: kotlin.String? = null,
+
     @SerializedName("status")
-    val status: kotlin.String,
+    val status: kotlin.String? = null,
 
     @SerializedName("updatedAt")
-    val updatedAt: kotlin.Long
+    val updatedAt: kotlin.Int? = null,
+
+    @SerializedName("url")
+    val url: kotlin.String? = null
 
 ) {
 

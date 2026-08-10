@@ -19,8 +19,6 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.GatewayChatCompletionRequest
-import ai.hanzo.cloud.model.GatewayChatCompletionResponse
 
 import com.google.gson.annotations.SerializedName
 
@@ -47,24 +45,22 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/gateway/chat/completions
-     * Create chat completion
-     * 
-     * @param gatewayChatCompletionRequest 
-     * @return GatewayChatCompletionResponse
+     * POST /v1/chat
+     * Implements the OpenAI-compatible chat completions API
+     * Implements the OpenAI-compatible chat completions API
+     * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
      * @throws ClientException If the API returns a client error response
      * @throws ServerException If the API returns a server error response
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun gatewayCreateChatCompletion(gatewayChatCompletionRequest: GatewayChatCompletionRequest) : GatewayChatCompletionResponse {
-        val localVarResponse = gatewayCreateChatCompletionWithHttpInfo(gatewayChatCompletionRequest = gatewayChatCompletionRequest)
+    fun postV1Chat() : Unit {
+        val localVarResponse = postV1ChatWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GatewayChatCompletionResponse
+            ResponseType.Success -> Unit
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -79,43 +75,105 @@ class ChatApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * POST /v1/gateway/chat/completions
-     * Create chat completion
-     * 
-     * @param gatewayChatCompletionRequest 
-     * @return ApiResponse<GatewayChatCompletionResponse?>
+     * POST /v1/chat
+     * Implements the OpenAI-compatible chat completions API
+     * Implements the OpenAI-compatible chat completions API
+     * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
-    @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun gatewayCreateChatCompletionWithHttpInfo(gatewayChatCompletionRequest: GatewayChatCompletionRequest) : ApiResponse<GatewayChatCompletionResponse?> {
-        val localVariableConfig = gatewayCreateChatCompletionRequestConfig(gatewayChatCompletionRequest = gatewayChatCompletionRequest)
+    fun postV1ChatWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ChatRequestConfig()
 
-        return request<GatewayChatCompletionRequest, GatewayChatCompletionResponse>(
+        return request<Unit, Unit>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation gatewayCreateChatCompletion
+     * To obtain the request config of the operation postV1Chat
      *
-     * @param gatewayChatCompletionRequest 
      * @return RequestConfig
      */
-    fun gatewayCreateChatCompletionRequestConfig(gatewayChatCompletionRequest: GatewayChatCompletionRequest) : RequestConfig<GatewayChatCompletionRequest> {
-        val localVariableBody = gatewayChatCompletionRequest
+    fun postV1ChatRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
+        
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/v1/gateway/chat/completions",
+            path = "/v1/chat",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /v1/chat/completions
+     * Implements the OpenAI-compatible chat completions API
+     * Implements the OpenAI-compatible chat completions API
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun postV1ChatCompletions() : Unit {
+        val localVarResponse = postV1ChatCompletionsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /v1/chat/completions
+     * Implements the OpenAI-compatible chat completions API
+     * Implements the OpenAI-compatible chat completions API
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun postV1ChatCompletionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ChatCompletionsRequestConfig()
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation postV1ChatCompletions
+     *
+     * @return RequestConfig
+     */
+    fun postV1ChatCompletionsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/v1/chat/completions",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

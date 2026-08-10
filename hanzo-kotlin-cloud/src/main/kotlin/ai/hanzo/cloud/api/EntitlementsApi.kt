@@ -19,7 +19,7 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudProjectionView
+import ai.hanzo.cloud.model.ProjectionView
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,7 +49,7 @@ class EntitlementsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/entitlements
      * Projection reports which console apps the CALLER&#39;s org may open, and the plan slug that decides it.
      * Projection reports which console apps the CALLER&#39;s org may open, and the plan slug that decides it. It is the READ side of the unified paywall: the org&#39;s plan tier resolved from commerce, which is a different authority from the enablement store behind GET /v1/orgs/{org}/entitlements (that one is the org&#39;s own on/off intent).  It fails SAFE-TO-LOCKED, never 500: an unvalidated principal is a 403, but a commerce outage reports every app locked at 200 rather than breaking the shell. The ENFORCEMENT path still fails open, so functionality survives the same outage even while the UI conservatively shows locked.
-     * @return CloudProjectionView
+     * @return ProjectionView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -58,11 +58,11 @@ class EntitlementsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1Entitlements() : CloudProjectionView {
-        val localVarResponse = cloudGetV1EntitlementsWithHttpInfo()
+    fun getV1Entitlements() : ProjectionView {
+        val localVarResponse = getV1EntitlementsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudProjectionView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ProjectionView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,26 +80,26 @@ class EntitlementsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
      * GET /v1/entitlements
      * Projection reports which console apps the CALLER&#39;s org may open, and the plan slug that decides it.
      * Projection reports which console apps the CALLER&#39;s org may open, and the plan slug that decides it. It is the READ side of the unified paywall: the org&#39;s plan tier resolved from commerce, which is a different authority from the enablement store behind GET /v1/orgs/{org}/entitlements (that one is the org&#39;s own on/off intent).  It fails SAFE-TO-LOCKED, never 500: an unvalidated principal is a 403, but a commerce outage reports every app locked at 200 rather than breaking the shell. The ENFORCEMENT path still fails open, so functionality survives the same outage even while the UI conservatively shows locked.
-     * @return ApiResponse<CloudProjectionView?>
+     * @return ApiResponse<ProjectionView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1EntitlementsWithHttpInfo() : ApiResponse<CloudProjectionView?> {
-        val localVariableConfig = cloudGetV1EntitlementsRequestConfig()
+    fun getV1EntitlementsWithHttpInfo() : ApiResponse<ProjectionView?> {
+        val localVariableConfig = getV1EntitlementsRequestConfig()
 
-        return request<Unit, CloudProjectionView>(
+        return request<Unit, ProjectionView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1Entitlements
+     * To obtain the request config of the operation getV1Entitlements
      *
      * @return RequestConfig
      */
-    fun cloudGetV1EntitlementsRequestConfig() : RequestConfig<Unit> {
+    fun getV1EntitlementsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -110,7 +110,7 @@ class EntitlementsApi(basePath: kotlin.String = defaultBasePath, client: Call.Fa
             path = "/v1/entitlements",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

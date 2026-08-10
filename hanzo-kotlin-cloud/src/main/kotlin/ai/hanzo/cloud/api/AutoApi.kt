@@ -19,10 +19,10 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudAutoCreate
-import ai.hanzo.cloud.model.CloudAutoStart
-import ai.hanzo.cloud.model.CloudAutoStatus
-import ai.hanzo.cloud.model.CloudAutoUpdate
+import ai.hanzo.cloud.model.AutoCreate
+import ai.hanzo.cloud.model.AutoStart
+import ai.hanzo.cloud.model.AutoStatus
+import ai.hanzo.cloud.model.AutoUpdate
 
 import com.google.gson.annotations.SerializedName
 
@@ -50,8 +50,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/auto/flows/{flow}
-     * FlowDelete deletes one of the caller&#39;s flows.
-     * FlowDelete deletes one of the caller&#39;s flows. A foreign id answers 404 and deletes nothing.
+     * Deletes one of the caller&#39;s flows.
+     * Deletes one of the caller&#39;s flows. A foreign id answers 404 and deletes nothing.
      * @param flow Flow is the flow&#39;s id, taken from the path.
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
@@ -62,8 +62,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteV1AutoFlowsFlow(flow: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudDeleteV1AutoFlowsFlowWithHttpInfo(flow = flow)
+    fun deleteV1AutoFlowsByFlow(flow: kotlin.String) : kotlin.Any {
+        val localVarResponse = deleteV1AutoFlowsByFlowWithHttpInfo(flow = flow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -82,8 +82,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * DELETE /v1/auto/flows/{flow}
-     * FlowDelete deletes one of the caller&#39;s flows.
-     * FlowDelete deletes one of the caller&#39;s flows. A foreign id answers 404 and deletes nothing.
+     * Deletes one of the caller&#39;s flows.
+     * Deletes one of the caller&#39;s flows. A foreign id answers 404 and deletes nothing.
      * @param flow Flow is the flow&#39;s id, taken from the path.
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -91,8 +91,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteV1AutoFlowsFlowWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudDeleteV1AutoFlowsFlowRequestConfig(flow = flow)
+    fun deleteV1AutoFlowsByFlowWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = deleteV1AutoFlowsByFlowRequestConfig(flow = flow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -100,12 +100,12 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteV1AutoFlowsFlow
+     * To obtain the request config of the operation deleteV1AutoFlowsByFlow
      *
      * @param flow Flow is the flow&#39;s id, taken from the path.
      * @return RequestConfig
      */
-    fun cloudDeleteV1AutoFlowsFlowRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
+    fun deleteV1AutoFlowsByFlowRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -116,7 +116,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -134,8 +134,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutoFlows() : kotlin.Any {
-        val localVarResponse = cloudGetV1AutoFlowsWithHttpInfo()
+    fun getV1AutoFlows() : kotlin.Any {
+        val localVarResponse = getV1AutoFlowsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -162,8 +162,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutoFlowsWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1AutoFlowsRequestConfig()
+    fun getV1AutoFlowsWithHttpInfo() : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1AutoFlowsRequestConfig()
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -171,11 +171,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutoFlows
+     * To obtain the request config of the operation getV1AutoFlows
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AutoFlowsRequestConfig() : RequestConfig<Unit> {
+    fun getV1AutoFlowsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -186,7 +186,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -205,8 +205,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutoFlowsFlow(flow: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudGetV1AutoFlowsFlowWithHttpInfo(flow = flow)
+    fun getV1AutoFlowsByFlow(flow: kotlin.String) : kotlin.Any {
+        val localVarResponse = getV1AutoFlowsByFlowWithHttpInfo(flow = flow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -234,8 +234,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutoFlowsFlowWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1AutoFlowsFlowRequestConfig(flow = flow)
+    fun getV1AutoFlowsByFlowWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1AutoFlowsByFlowRequestConfig(flow = flow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -243,12 +243,12 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutoFlowsFlow
+     * To obtain the request config of the operation getV1AutoFlowsByFlow
      *
      * @param flow Flow is the flow&#39;s id, taken from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AutoFlowsFlowRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AutoFlowsByFlowRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -259,7 +259,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -277,8 +277,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutoPieces() : kotlin.Any {
-        val localVarResponse = cloudGetV1AutoPiecesWithHttpInfo()
+    fun getV1AutoPieces() : kotlin.Any {
+        val localVarResponse = getV1AutoPiecesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -305,8 +305,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutoPiecesWithHttpInfo() : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1AutoPiecesRequestConfig()
+    fun getV1AutoPiecesWithHttpInfo() : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1AutoPiecesRequestConfig()
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -314,11 +314,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutoPieces
+     * To obtain the request config of the operation getV1AutoPieces
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AutoPiecesRequestConfig() : RequestConfig<Unit> {
+    fun getV1AutoPiecesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -329,7 +329,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/pieces",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -348,8 +348,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutoRuns(flow: kotlin.String? = null) : kotlin.Any {
-        val localVarResponse = cloudGetV1AutoRunsWithHttpInfo(flow = flow)
+    fun getV1AutoRuns(flow: kotlin.String? = null) : kotlin.Any {
+        val localVarResponse = getV1AutoRunsWithHttpInfo(flow = flow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -377,8 +377,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutoRunsWithHttpInfo(flow: kotlin.String?) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1AutoRunsRequestConfig(flow = flow)
+    fun getV1AutoRunsWithHttpInfo(flow: kotlin.String?) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1AutoRunsRequestConfig(flow = flow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -386,12 +386,12 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutoRuns
+     * To obtain the request config of the operation getV1AutoRuns
      *
      * @param flow Flow narrows the list to one flow&#39;s runs when present. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1AutoRunsRequestConfig(flow: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1AutoRunsRequestConfig(flow: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -407,7 +407,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -426,8 +426,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutoRunsRun(run: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudGetV1AutoRunsRunWithHttpInfo(run = run)
+    fun getV1AutoRunsByRun(run: kotlin.String) : kotlin.Any {
+        val localVarResponse = getV1AutoRunsByRunWithHttpInfo(run = run)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -455,8 +455,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutoRunsRunWithHttpInfo(run: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudGetV1AutoRunsRunRequestConfig(run = run)
+    fun getV1AutoRunsByRunWithHttpInfo(run: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = getV1AutoRunsByRunRequestConfig(run = run)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -464,12 +464,12 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutoRunsRun
+     * To obtain the request config of the operation getV1AutoRunsByRun
      *
      * @param run Run is the run&#39;s id, taken from the path.
      * @return RequestConfig
      */
-    fun cloudGetV1AutoRunsRunRequestConfig(run: kotlin.String) : RequestConfig<Unit> {
+    fun getV1AutoRunsByRunRequestConfig(run: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -480,7 +480,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/runs/{run}".replace("{"+"run"+"}", encodeURIComponent(run.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -489,7 +489,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/auto/status
      * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
      * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
-     * @return CloudAutoStatus
+     * @return AutoStatus
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -498,11 +498,11 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1AutoStatus() : CloudAutoStatus {
-        val localVarResponse = cloudGetV1AutoStatusWithHttpInfo()
+    fun getV1AutoStatus() : AutoStatus {
+        val localVarResponse = getV1AutoStatusWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudAutoStatus
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AutoStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -520,26 +520,26 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * GET /v1/auto/status
      * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
      * Status reports whether the auto service is reachable — its own health endpoint as an honest lens for \&quot;is the automation plane up\&quot;.
-     * @return ApiResponse<CloudAutoStatus?>
+     * @return ApiResponse<AutoStatus?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1AutoStatusWithHttpInfo() : ApiResponse<CloudAutoStatus?> {
-        val localVariableConfig = cloudGetV1AutoStatusRequestConfig()
+    fun getV1AutoStatusWithHttpInfo() : ApiResponse<AutoStatus?> {
+        val localVariableConfig = getV1AutoStatusRequestConfig()
 
-        return request<Unit, CloudAutoStatus>(
+        return request<Unit, AutoStatus>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1AutoStatus
+     * To obtain the request config of the operation getV1AutoStatus
      *
      * @return RequestConfig
      */
-    fun cloudGetV1AutoStatusRequestConfig() : RequestConfig<Unit> {
+    fun getV1AutoStatusRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -550,17 +550,17 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/status",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * PATCH /v1/auto/flows/{flow}
-     * FlowUpdate patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
-     * FlowUpdate patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
+     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
+     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
      * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @param cloudAutoUpdate 
+     * @param autoUpdate 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -570,8 +570,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPatchV1AutoFlowsFlow(flow: kotlin.String, cloudAutoUpdate: CloudAutoUpdate) : kotlin.Any {
-        val localVarResponse = cloudPatchV1AutoFlowsFlowWithHttpInfo(flow = flow, cloudAutoUpdate = cloudAutoUpdate)
+    fun patchV1AutoFlowsByFlow(flow: kotlin.String, autoUpdate: AutoUpdate) : kotlin.Any {
+        val localVarResponse = patchV1AutoFlowsByFlowWithHttpInfo(flow = flow, autoUpdate = autoUpdate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -590,33 +590,33 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * PATCH /v1/auto/flows/{flow}
-     * FlowUpdate patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
-     * FlowUpdate patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
+     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
+     * Patches one of the caller&#39;s flows: the name, the graph, or both — only the stated fields move.
      * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @param cloudAutoUpdate 
+     * @param autoUpdate 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPatchV1AutoFlowsFlowWithHttpInfo(flow: kotlin.String, cloudAutoUpdate: CloudAutoUpdate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPatchV1AutoFlowsFlowRequestConfig(flow = flow, cloudAutoUpdate = cloudAutoUpdate)
+    fun patchV1AutoFlowsByFlowWithHttpInfo(flow: kotlin.String, autoUpdate: AutoUpdate) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = patchV1AutoFlowsByFlowRequestConfig(flow = flow, autoUpdate = autoUpdate)
 
-        return request<CloudAutoUpdate, kotlin.Any>(
+        return request<AutoUpdate, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPatchV1AutoFlowsFlow
+     * To obtain the request config of the operation patchV1AutoFlowsByFlow
      *
      * @param flow Flow is the flow&#39;s id, taken from the path.
-     * @param cloudAutoUpdate 
+     * @param autoUpdate 
      * @return RequestConfig
      */
-    fun cloudPatchV1AutoFlowsFlowRequestConfig(flow: kotlin.String, cloudAutoUpdate: CloudAutoUpdate) : RequestConfig<CloudAutoUpdate> {
-        val localVariableBody = cloudAutoUpdate
+    fun patchV1AutoFlowsByFlowRequestConfig(flow: kotlin.String, autoUpdate: AutoUpdate) : RequestConfig<AutoUpdate> {
+        val localVariableBody = autoUpdate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -627,16 +627,16 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/auto/flows
-     * FlowCreate creates a flow in the caller&#39;s org.
-     * FlowCreate creates a flow in the caller&#39;s org. The org is stamped server-side from the validated principal — there is no field by which a caller could place a flow in another org.
-     * @param cloudAutoCreate 
+     * Creates a flow in the caller&#39;s org.
+     * Creates a flow in the caller&#39;s org. The org is stamped server-side from the validated principal — there is no field by which a caller could place a flow in another org.
+     * @param autoCreate 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -646,8 +646,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutoFlows(cloudAutoCreate: CloudAutoCreate) : kotlin.Any {
-        val localVarResponse = cloudPostV1AutoFlowsWithHttpInfo(cloudAutoCreate = cloudAutoCreate)
+    fun postV1AutoFlows(autoCreate: AutoCreate) : kotlin.Any {
+        val localVarResponse = postV1AutoFlowsWithHttpInfo(autoCreate = autoCreate)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -666,31 +666,31 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
 
     /**
      * POST /v1/auto/flows
-     * FlowCreate creates a flow in the caller&#39;s org.
-     * FlowCreate creates a flow in the caller&#39;s org. The org is stamped server-side from the validated principal — there is no field by which a caller could place a flow in another org.
-     * @param cloudAutoCreate 
+     * Creates a flow in the caller&#39;s org.
+     * Creates a flow in the caller&#39;s org. The org is stamped server-side from the validated principal — there is no field by which a caller could place a flow in another org.
+     * @param autoCreate 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutoFlowsWithHttpInfo(cloudAutoCreate: CloudAutoCreate) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPostV1AutoFlowsRequestConfig(cloudAutoCreate = cloudAutoCreate)
+    fun postV1AutoFlowsWithHttpInfo(autoCreate: AutoCreate) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1AutoFlowsRequestConfig(autoCreate = autoCreate)
 
-        return request<CloudAutoCreate, kotlin.Any>(
+        return request<AutoCreate, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutoFlows
+     * To obtain the request config of the operation postV1AutoFlows
      *
-     * @param cloudAutoCreate 
+     * @param autoCreate 
      * @return RequestConfig
      */
-    fun cloudPostV1AutoFlowsRequestConfig(cloudAutoCreate: CloudAutoCreate) : RequestConfig<CloudAutoCreate> {
-        val localVariableBody = cloudAutoCreate
+    fun postV1AutoFlowsRequestConfig(autoCreate: AutoCreate) : RequestConfig<AutoCreate> {
+        val localVariableBody = autoCreate
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -701,7 +701,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -720,8 +720,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutoFlowsFlowPublish(flow: kotlin.String) : kotlin.Any {
-        val localVarResponse = cloudPostV1AutoFlowsFlowPublishWithHttpInfo(flow = flow)
+    fun postV1AutoFlowsByFlowPublish(flow: kotlin.String) : kotlin.Any {
+        val localVarResponse = postV1AutoFlowsByFlowPublishWithHttpInfo(flow = flow)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -749,8 +749,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutoFlowsFlowPublishWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPostV1AutoFlowsFlowPublishRequestConfig(flow = flow)
+    fun postV1AutoFlowsByFlowPublishWithHttpInfo(flow: kotlin.String) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1AutoFlowsByFlowPublishRequestConfig(flow = flow)
 
         return request<Unit, kotlin.Any>(
             localVariableConfig
@@ -758,12 +758,12 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutoFlowsFlowPublish
+     * To obtain the request config of the operation postV1AutoFlowsByFlowPublish
      *
      * @param flow Flow is the flow&#39;s id, taken from the path.
      * @return RequestConfig
      */
-    fun cloudPostV1AutoFlowsFlowPublishRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
+    fun postV1AutoFlowsByFlowPublishRequestConfig(flow: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -774,7 +774,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/flows/{flow}/publish".replace("{"+"flow"+"}", encodeURIComponent(flow.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -783,7 +783,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/auto/runs
      * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running.
      * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running. Poll the run until it reaches completed — its output then holds each node&#39;s result keyed by node id — or failed, with the error. A flow whose engine is unreachable answers the product&#39;s 503: dispatch is real or it is refused, never queued into the void.
-     * @param cloudAutoStart 
+     * @param autoStart 
      * @return kotlin.Any
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -793,8 +793,8 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1AutoRuns(cloudAutoStart: CloudAutoStart) : kotlin.Any {
-        val localVarResponse = cloudPostV1AutoRunsWithHttpInfo(cloudAutoStart = cloudAutoStart)
+    fun postV1AutoRuns(autoStart: AutoStart) : kotlin.Any {
+        val localVarResponse = postV1AutoRunsWithHttpInfo(autoStart = autoStart)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.Any
@@ -815,29 +815,29 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
      * POST /v1/auto/runs
      * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running.
      * Start begins one asynchronous run of a flow: the product dispatches the graph to its durable execution engine (the hanzo tasks plane) and answers immediately with the run record in status running. Poll the run until it reaches completed — its output then holds each node&#39;s result keyed by node id — or failed, with the error. A flow whose engine is unreachable answers the product&#39;s 503: dispatch is real or it is refused, never queued into the void.
-     * @param cloudAutoStart 
+     * @param autoStart 
      * @return ApiResponse<kotlin.Any?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1AutoRunsWithHttpInfo(cloudAutoStart: CloudAutoStart) : ApiResponse<kotlin.Any?> {
-        val localVariableConfig = cloudPostV1AutoRunsRequestConfig(cloudAutoStart = cloudAutoStart)
+    fun postV1AutoRunsWithHttpInfo(autoStart: AutoStart) : ApiResponse<kotlin.Any?> {
+        val localVariableConfig = postV1AutoRunsRequestConfig(autoStart = autoStart)
 
-        return request<CloudAutoStart, kotlin.Any>(
+        return request<AutoStart, kotlin.Any>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1AutoRuns
+     * To obtain the request config of the operation postV1AutoRuns
      *
-     * @param cloudAutoStart 
+     * @param autoStart 
      * @return RequestConfig
      */
-    fun cloudPostV1AutoRunsRequestConfig(cloudAutoStart: CloudAutoStart) : RequestConfig<CloudAutoStart> {
-        val localVariableBody = cloudAutoStart
+    fun postV1AutoRunsRequestConfig(autoStart: AutoStart) : RequestConfig<AutoStart> {
+        val localVariableBody = autoStart
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -848,7 +848,7 @@ class AutoApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = 
             path = "/v1/auto/runs",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

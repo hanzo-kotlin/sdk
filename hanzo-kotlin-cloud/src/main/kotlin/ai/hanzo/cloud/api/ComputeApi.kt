@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudBotList
-import ai.hanzo.cloud.model.CloudBotView
+import ai.hanzo.cloud.model.BotList
+import ai.hanzo.cloud.model.BotView
 
 import com.google.gson.annotations.SerializedName
 
@@ -59,8 +59,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudDeleteBot(id: kotlin.String) : Unit {
-        val localVarResponse = cloudDeleteBotWithHttpInfo(id = id)
+    fun deleteBot(id: kotlin.String) : Unit {
+        val localVarResponse = deleteBotWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -87,8 +87,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudDeleteBotWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudDeleteBotRequestConfig(id = id)
+    fun deleteBotWithHttpInfo(id: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = deleteBotRequestConfig(id = id)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -96,12 +96,12 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudDeleteBot
+     * To obtain the request config of the operation deleteBot
      *
      * @param id ID is the bot machine&#39;s id — the same id the machines surface addresses it by. Scoped to the caller&#39;s org upstream, so another tenant&#39;s id is 404.
      * @return RequestConfig
      */
-    fun cloudDeleteBotRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun deleteBotRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -111,7 +111,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -121,7 +121,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Returns one of the caller org&#39;s bot machines with its agent binding.
      * Returns one of the caller org&#39;s bot machines with its agent binding.  A machine counts as a Bot if it carries the hanzo-kind:bot tag OR has an agent binding — either signal is authoritative, so a bot resolves even before its cloud-init has stamped every tag. A machine that is neither is 404: this route answers for bots, not for machines.
      * @param id ID is the bot machine&#39;s id — the same id the machines surface addresses it by. Scoped to the caller&#39;s org upstream, so another tenant&#39;s id is 404.
-     * @return CloudBotView
+     * @return BotView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -130,11 +130,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetBot(id: kotlin.String) : CloudBotView {
-        val localVarResponse = cloudGetBotWithHttpInfo(id = id)
+    fun getBot(id: kotlin.String) : BotView {
+        val localVarResponse = getBotWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBotView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BotView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -153,27 +153,27 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * Returns one of the caller org&#39;s bot machines with its agent binding.
      * Returns one of the caller org&#39;s bot machines with its agent binding.  A machine counts as a Bot if it carries the hanzo-kind:bot tag OR has an agent binding — either signal is authoritative, so a bot resolves even before its cloud-init has stamped every tag. A machine that is neither is 404: this route answers for bots, not for machines.
      * @param id ID is the bot machine&#39;s id — the same id the machines surface addresses it by. Scoped to the caller&#39;s org upstream, so another tenant&#39;s id is 404.
-     * @return ApiResponse<CloudBotView?>
+     * @return ApiResponse<BotView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetBotWithHttpInfo(id: kotlin.String) : ApiResponse<CloudBotView?> {
-        val localVariableConfig = cloudGetBotRequestConfig(id = id)
+    fun getBotWithHttpInfo(id: kotlin.String) : ApiResponse<BotView?> {
+        val localVariableConfig = getBotRequestConfig(id = id)
 
-        return request<Unit, CloudBotView>(
+        return request<Unit, BotView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetBot
+     * To obtain the request config of the operation getBot
      *
      * @param id ID is the bot machine&#39;s id — the same id the machines surface addresses it by. Scoped to the caller&#39;s org upstream, so another tenant&#39;s id is 404.
      * @return RequestConfig
      */
-    fun cloudGetBotRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
+    fun getBotRequestConfig(id: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -184,15 +184,15 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/{id}".replace("{"+"id"+"}", encodeURIComponent(id.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/compute/regions
-     * 
-     * 
+     * The regions a machine or GPU can be launched into
+     * Lists the launch regions the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one — because the catalog is what backs the launch drawer, not public marketing copy.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -201,8 +201,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComputeRegions() : Unit {
-        val localVarResponse = cloudGetV1ComputeRegionsWithHttpInfo()
+    fun getV1ComputeRegions() : Unit {
+        val localVarResponse = getV1ComputeRegionsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -221,15 +221,15 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/compute/regions
-     * 
-     * 
+     * The regions a machine or GPU can be launched into
+     * Lists the launch regions the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one — because the catalog is what backs the launch drawer, not public marketing copy.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComputeRegionsWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ComputeRegionsRequestConfig()
+    fun getV1ComputeRegionsWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1ComputeRegionsRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -237,11 +237,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComputeRegions
+     * To obtain the request config of the operation getV1ComputeRegions
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ComputeRegionsRequestConfig() : RequestConfig<Unit> {
+    fun getV1ComputeRegionsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -251,15 +251,15 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/regions",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * GET /v1/compute/sizes
-     * 
-     * 
+     * The machine and GPU sizes that can be launched
+     * Lists the instance sizes the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. These are the values &#x60;size&#x60; accepts on a launch. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -268,8 +268,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1ComputeSizes() : Unit {
-        val localVarResponse = cloudGetV1ComputeSizesWithHttpInfo()
+    fun getV1ComputeSizes() : Unit {
+        val localVarResponse = getV1ComputeSizesWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -288,15 +288,15 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * GET /v1/compute/sizes
-     * 
-     * 
+     * The machine and GPU sizes that can be launched
+     * Lists the instance sizes the compute catalog offers, passed through verbatim from the provider so the shape stays the provider&#39;s single source of truth. These are the values &#x60;size&#x60; accepts on a launch. The catalog is GLOBAL, not per-tenant: no owner is forwarded and every org sees the same list. It is still gated — a validated principal is required, 403 without one.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1ComputeSizesWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1ComputeSizesRequestConfig()
+    fun getV1ComputeSizesWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1ComputeSizesRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -304,11 +304,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1ComputeSizes
+     * To obtain the request config of the operation getV1ComputeSizes
      *
      * @return RequestConfig
      */
-    fun cloudGetV1ComputeSizesRequestConfig() : RequestConfig<Unit> {
+    fun getV1ComputeSizesRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -318,7 +318,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/sizes",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -327,7 +327,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/compute/bots
      * Returns the caller org&#39;s bot machines — the kind&#x3D;bot machines — each joined with the agent binding that says which cloud Agent it runs.
      * Returns the caller org&#39;s bot machines — the kind&#x3D;bot machines — each joined with the agent binding that says which cloud Agent it runs.  The bindings are read ONCE and joined by machine id, so the list is O(1) upstream calls, not N+1. A bindings read that fails only costs the reconciled status: a bot still lists without it.
-     * @return CloudBotList
+     * @return BotList
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -336,11 +336,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudListBots() : CloudBotList {
-        val localVarResponse = cloudListBotsWithHttpInfo()
+    fun listBots() : BotList {
+        val localVarResponse = listBotsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudBotList
+            ResponseType.Success -> (localVarResponse as Success<*>).data as BotList
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -358,26 +358,26 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * GET /v1/compute/bots
      * Returns the caller org&#39;s bot machines — the kind&#x3D;bot machines — each joined with the agent binding that says which cloud Agent it runs.
      * Returns the caller org&#39;s bot machines — the kind&#x3D;bot machines — each joined with the agent binding that says which cloud Agent it runs.  The bindings are read ONCE and joined by machine id, so the list is O(1) upstream calls, not N+1. A bindings read that fails only costs the reconciled status: a bot still lists without it.
-     * @return ApiResponse<CloudBotList?>
+     * @return ApiResponse<BotList?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudListBotsWithHttpInfo() : ApiResponse<CloudBotList?> {
-        val localVariableConfig = cloudListBotsRequestConfig()
+    fun listBotsWithHttpInfo() : ApiResponse<BotList?> {
+        val localVariableConfig = listBotsRequestConfig()
 
-        return request<Unit, CloudBotList>(
+        return request<Unit, BotList>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudListBots
+     * To obtain the request config of the operation listBots
      *
      * @return RequestConfig
      */
-    fun cloudListBotsRequestConfig() : RequestConfig<Unit> {
+    fun listBotsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -388,15 +388,15 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compute/bots/{id}/{action}
-     * 
-     * 
+     * Message a bot, or stop it, by naming the action in the path
+     * Dispatches one verb against a bot the caller&#39;s org owns. &#x60;message&#x60; runs the bot&#39;s bound agent with the request body as the message and streams the agent&#39;s answer back VERBATIM — the upstream body, its content type and its status — so a message is a real agent run, recorded, billed and traced exactly like any other, under the caller&#39;s own identity rather than a fabricated one. &#x60;stop&#x60; and &#x60;pause&#x60; are the same single honest capability: they halt the runtime by unbinding the agent while LEAVING THE MACHINE UP, so the bot stops answering but keeps costing — rebind to resume, or delete the bot to tear it down. Stopping is idempotent; a bot with no binding still reports stopped.  Org-scoped and fails closed: a validated principal is required (403 without one) and the bot is addressed under the caller&#39;s OWN org, so another tenant&#39;s id is not reachable. An unknown action is a clean 400 naming the three it accepts, never a silent no-op, and messaging a bot with no bound agent is a 400.
      * @param id 
      * @param action 
      * @return void
@@ -407,8 +407,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComputeBotsByIdByAction(id: kotlin.String, action: kotlin.String) : Unit {
-        val localVarResponse = cloudPostV1ComputeBotsByIdByActionWithHttpInfo(id = id, action = action)
+    fun postV1ComputeBotsByIdByAction(id: kotlin.String, action: kotlin.String) : Unit {
+        val localVarResponse = postV1ComputeBotsByIdByActionWithHttpInfo(id = id, action = action)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -427,8 +427,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/compute/bots/{id}/{action}
-     * 
-     * 
+     * Message a bot, or stop it, by naming the action in the path
+     * Dispatches one verb against a bot the caller&#39;s org owns. &#x60;message&#x60; runs the bot&#39;s bound agent with the request body as the message and streams the agent&#39;s answer back VERBATIM — the upstream body, its content type and its status — so a message is a real agent run, recorded, billed and traced exactly like any other, under the caller&#39;s own identity rather than a fabricated one. &#x60;stop&#x60; and &#x60;pause&#x60; are the same single honest capability: they halt the runtime by unbinding the agent while LEAVING THE MACHINE UP, so the bot stops answering but keeps costing — rebind to resume, or delete the bot to tear it down. Stopping is idempotent; a bot with no binding still reports stopped.  Org-scoped and fails closed: a validated principal is required (403 without one) and the bot is addressed under the caller&#39;s OWN org, so another tenant&#39;s id is not reachable. An unknown action is a clean 400 naming the three it accepts, never a silent no-op, and messaging a bot with no bound agent is a 400.
      * @param id 
      * @param action 
      * @return ApiResponse<Unit?>
@@ -436,8 +436,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComputeBotsByIdByActionWithHttpInfo(id: kotlin.String, action: kotlin.String) : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ComputeBotsByIdByActionRequestConfig(id = id, action = action)
+    fun postV1ComputeBotsByIdByActionWithHttpInfo(id: kotlin.String, action: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ComputeBotsByIdByActionRequestConfig(id = id, action = action)
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -445,13 +445,13 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComputeBotsByIdByAction
+     * To obtain the request config of the operation postV1ComputeBotsByIdByAction
      *
      * @param id 
      * @param action 
      * @return RequestConfig
      */
-    fun cloudPostV1ComputeBotsByIdByActionRequestConfig(id: kotlin.String, action: kotlin.String) : RequestConfig<Unit> {
+    fun postV1ComputeBotsByIdByActionRequestConfig(id: kotlin.String, action: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -461,15 +461,15 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/{id}/{action}".replace("{"+"id"+"}", encodeURIComponent(id.toString())).replace("{"+"action"+"}", encodeURIComponent(action.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
 
     /**
      * POST /v1/compute/bots/launch
-     * 
-     * 
+     * Launch a bot machine — an agent plus the machine that runs it — or price one
+     * Creates BOTH halves of a bot in one call and answers 201 with the bot: the cloud agent it runs, then a bot-kind machine bootstrapped with the bot runtime, then the binding between them, so a launched bot is immediately messageable. Send &#x60;dryRun: true&#x60; for a price quote instead — 200 with the upstream quote verbatim, no agent created, no machine launched, nothing spent.  The agent is created FIRST and on purpose: it is create-if-absent (an agent that already exists is reused, so a relaunch is fine and several bots may share one explicit &#x60;agent&#x60;), and doing it before the machine means a bad request — a model that is not in the catalog, say — fails with the real reason BEFORE any metered machine is provisioned. &#x60;agent&#x60; defaults to the bot&#39;s name and an empty &#x60;model&#x60; takes the deployment default.  Org-scoped and fails closed: a validated principal is required (403 without one), the owning org is that principal&#39;s and never a body field, &#x60;size&#x60; is required (400), and &#x60;name&#x60; is required for a real launch though not for a quote.
      * @return void
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -478,8 +478,8 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPostV1ComputeBotsLaunch() : Unit {
-        val localVarResponse = cloudPostV1ComputeBotsLaunchWithHttpInfo()
+    fun postV1ComputeBotsLaunch() : Unit {
+        val localVarResponse = postV1ComputeBotsLaunchWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -498,15 +498,15 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
 
     /**
      * POST /v1/compute/bots/launch
-     * 
-     * 
+     * Launch a bot machine — an agent plus the machine that runs it — or price one
+     * Creates BOTH halves of a bot in one call and answers 201 with the bot: the cloud agent it runs, then a bot-kind machine bootstrapped with the bot runtime, then the binding between them, so a launched bot is immediately messageable. Send &#x60;dryRun: true&#x60; for a price quote instead — 200 with the upstream quote verbatim, no agent created, no machine launched, nothing spent.  The agent is created FIRST and on purpose: it is create-if-absent (an agent that already exists is reused, so a relaunch is fine and several bots may share one explicit &#x60;agent&#x60;), and doing it before the machine means a bad request — a model that is not in the catalog, say — fails with the real reason BEFORE any metered machine is provisioned. &#x60;agent&#x60; defaults to the bot&#39;s name and an empty &#x60;model&#x60; takes the deployment default.  Org-scoped and fails closed: a validated principal is required (403 without one), the owning org is that principal&#39;s and never a body field, &#x60;size&#x60; is required (400), and &#x60;name&#x60; is required for a real launch though not for a quote.
      * @return ApiResponse<Unit?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPostV1ComputeBotsLaunchWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudPostV1ComputeBotsLaunchRequestConfig()
+    fun postV1ComputeBotsLaunchWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = postV1ComputeBotsLaunchRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -514,11 +514,11 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
     }
 
     /**
-     * To obtain the request config of the operation cloudPostV1ComputeBotsLaunch
+     * To obtain the request config of the operation postV1ComputeBotsLaunch
      *
      * @return RequestConfig
      */
-    fun cloudPostV1ComputeBotsLaunchRequestConfig() : RequestConfig<Unit> {
+    fun postV1ComputeBotsLaunchRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -528,7 +528,7 @@ class ComputeApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
             path = "/v1/compute/bots/launch",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }

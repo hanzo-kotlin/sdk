@@ -19,10 +19,11 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import ai.hanzo.cloud.model.CloudLimitsView
-import ai.hanzo.cloud.model.CloudNewsResponse
-import ai.hanzo.cloud.model.CloudPipelineReq
-import ai.hanzo.cloud.model.CloudPipelineView
+import ai.hanzo.cloud.model.LimitsView
+import ai.hanzo.cloud.model.NewsResponse
+import ai.hanzo.cloud.model.PipelineReq
+import ai.hanzo.cloud.model.PipelineView
+import ai.hanzo.cloud.model.WorldIndex
 
 import com.google.gson.annotations.SerializedName
 
@@ -49,11 +50,10 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * GET /v1/world/limits
-     * Echoes a World plan&#39;s rate limits, alert quota and model-API grant, read straight from the live @hanzo/plans catalog, so agents and dashboards configure themselves against the catalog instead of hardcoding tier numbers.
-     * Echoes a World plan&#39;s rate limits, alert quota and model-API grant, read straight from the live @hanzo/plans catalog, so agents and dashboards configure themselves against the catalog instead of hardcoding tier numbers.  An empty or unknown plan resolves world-free, and a catalog failure serves that same free floor rather than erroring — so this always answers 200, and it can only ever under-grant. It reports the contract; it does not enforce it.
-     * @param plan Plan is a World plan id from the live @hanzo/plans catalog, e.g. world-pro. Empty means world-free, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
-     * @return CloudLimitsView
+     * GET /v1/world
+     * Answers GET /v1/world — the product&#39;s front door, naming every wire this surface answers on.
+     * Answers GET /v1/world — the product&#39;s front door, naming every wire this surface answers on.  It exists because two of those wires are INVISIBLE to the generated document. /v1/world/mcp and /v1/world/zap are carved off the cloud catch-all by the ingress and answered by world-gw, so the cloud router never serves them — and openapi.Describe renders prose only for a route the router actually serves, which is the very property that keeps the document from being able to claim an operation nothing answers. Both addresses are real and public, so without this op the only way to learn they exist is to read the ingress config. This is where that fact lives, in the product&#39;s own surface.  Public on purpose: discovery precedes credentials. It reports addresses and protocols only — never feed data, and never the caller&#39;s plan, which GET /v1/world/limits owns — so there is nothing here to leak.
+     * @return WorldIndex
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -62,11 +62,82 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WorldLimits(plan: kotlin.String? = null) : CloudLimitsView {
-        val localVarResponse = cloudGetV1WorldLimitsWithHttpInfo(plan = plan)
+    fun getV1World() : WorldIndex {
+        val localVarResponse = getV1WorldWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudLimitsView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as WorldIndex
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /v1/world
+     * Answers GET /v1/world — the product&#39;s front door, naming every wire this surface answers on.
+     * Answers GET /v1/world — the product&#39;s front door, naming every wire this surface answers on.  It exists because two of those wires are INVISIBLE to the generated document. /v1/world/mcp and /v1/world/zap are carved off the cloud catch-all by the ingress and answered by world-gw, so the cloud router never serves them — and openapi.Describe renders prose only for a route the router actually serves, which is the very property that keeps the document from being able to claim an operation nothing answers. Both addresses are real and public, so without this op the only way to learn they exist is to read the ingress config. This is where that fact lives, in the product&#39;s own surface.  Public on purpose: discovery precedes credentials. It reports addresses and protocols only — never feed data, and never the caller&#39;s plan, which GET /v1/world/limits owns — so there is nothing here to leak.
+     * @return ApiResponse<WorldIndex?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getV1WorldWithHttpInfo() : ApiResponse<WorldIndex?> {
+        val localVariableConfig = getV1WorldRequestConfig()
+
+        return request<Unit, WorldIndex>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getV1World
+     *
+     * @return RequestConfig
+     */
+    fun getV1WorldRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/v1/world",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /v1/world/limits
+     * Echoes a World plan&#39;s rate limits, alert quota and model-API grant, read straight from the live @hanzo/plans catalog, so agents and dashboards configure themselves against the catalog instead of hardcoding tier numbers.
+     * Echoes a World plan&#39;s rate limits, alert quota and model-API grant, read straight from the live @hanzo/plans catalog, so agents and dashboards configure themselves against the catalog instead of hardcoding tier numbers.  An empty or unknown plan resolves world-free, and a catalog failure serves that same free floor rather than erroring — so this always answers 200, and it can only ever under-grant. It reports the contract; it does not enforce it.
+     * @param plan Plan is a World plan id from the live @hanzo/plans catalog, e.g. world-pro. Empty means world-free, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
+     * @return LimitsView
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getV1WorldLimits(plan: kotlin.String? = null) : LimitsView {
+        val localVarResponse = getV1WorldLimitsWithHttpInfo(plan = plan)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as LimitsView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -85,27 +156,27 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * Echoes a World plan&#39;s rate limits, alert quota and model-API grant, read straight from the live @hanzo/plans catalog, so agents and dashboards configure themselves against the catalog instead of hardcoding tier numbers.
      * Echoes a World plan&#39;s rate limits, alert quota and model-API grant, read straight from the live @hanzo/plans catalog, so agents and dashboards configure themselves against the catalog instead of hardcoding tier numbers.  An empty or unknown plan resolves world-free, and a catalog failure serves that same free floor rather than erroring — so this always answers 200, and it can only ever under-grant. It reports the contract; it does not enforce it.
      * @param plan Plan is a World plan id from the live @hanzo/plans catalog, e.g. world-pro. Empty means world-free, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
-     * @return ApiResponse<CloudLimitsView?>
+     * @return ApiResponse<LimitsView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WorldLimitsWithHttpInfo(plan: kotlin.String?) : ApiResponse<CloudLimitsView?> {
-        val localVariableConfig = cloudGetV1WorldLimitsRequestConfig(plan = plan)
+    fun getV1WorldLimitsWithHttpInfo(plan: kotlin.String?) : ApiResponse<LimitsView?> {
+        val localVariableConfig = getV1WorldLimitsRequestConfig(plan = plan)
 
-        return request<Unit, CloudLimitsView>(
+        return request<Unit, LimitsView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WorldLimits
+     * To obtain the request config of the operation getV1WorldLimits
      *
      * @param plan Plan is a World plan id from the live @hanzo/plans catalog, e.g. world-pro. Empty means world-free, and so does an id the catalog does not know — this never fails on an unknown plan. (optional)
      * @return RequestConfig
      */
-    fun cloudGetV1WorldLimitsRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
+    fun getV1WorldLimitsRequestConfig(plan: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -121,7 +192,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/limits",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -130,7 +201,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/world/news
      * Returns the caller&#39;s merged world-news feed: every source their project&#39;s pipeline names — GDELT once per keyword, plus each allowlisted RSS or Atom feed — fetched concurrently, narrowed by the pipeline&#39;s keyword/region/source filters, deduplicated by link and sorted freshest first, capped at 50 items.
      * Returns the caller&#39;s merged world-news feed: every source their project&#39;s pipeline names — GDELT once per keyword, plus each allowlisted RSS or Atom feed — fetched concurrently, narrowed by the pipeline&#39;s keyword/region/source filters, deduplicated by link and sorted freshest first, capped at 50 items.  A project with no stored pipeline gets a sensible default set of world feeds rather than an empty answer. A source that fails or times out is SKIPPED: the feed degrades to honest partial results and never 5xxs because one outlet was down. Reading also publishes the result to the /v1/world/stream subscribers of the same (org, project), so a dashboard&#39;s own refresh updates every open tab.
-     * @return CloudNewsResponse
+     * @return NewsResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -139,11 +210,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WorldNews() : CloudNewsResponse {
-        val localVarResponse = cloudGetV1WorldNewsWithHttpInfo()
+    fun getV1WorldNews() : NewsResponse {
+        val localVarResponse = getV1WorldNewsWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudNewsResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as NewsResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -161,26 +232,26 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/world/news
      * Returns the caller&#39;s merged world-news feed: every source their project&#39;s pipeline names — GDELT once per keyword, plus each allowlisted RSS or Atom feed — fetched concurrently, narrowed by the pipeline&#39;s keyword/region/source filters, deduplicated by link and sorted freshest first, capped at 50 items.
      * Returns the caller&#39;s merged world-news feed: every source their project&#39;s pipeline names — GDELT once per keyword, plus each allowlisted RSS or Atom feed — fetched concurrently, narrowed by the pipeline&#39;s keyword/region/source filters, deduplicated by link and sorted freshest first, capped at 50 items.  A project with no stored pipeline gets a sensible default set of world feeds rather than an empty answer. A source that fails or times out is SKIPPED: the feed degrades to honest partial results and never 5xxs because one outlet was down. Reading also publishes the result to the /v1/world/stream subscribers of the same (org, project), so a dashboard&#39;s own refresh updates every open tab.
-     * @return ApiResponse<CloudNewsResponse?>
+     * @return ApiResponse<NewsResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WorldNewsWithHttpInfo() : ApiResponse<CloudNewsResponse?> {
-        val localVariableConfig = cloudGetV1WorldNewsRequestConfig()
+    fun getV1WorldNewsWithHttpInfo() : ApiResponse<NewsResponse?> {
+        val localVariableConfig = getV1WorldNewsRequestConfig()
 
-        return request<Unit, CloudNewsResponse>(
+        return request<Unit, NewsResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WorldNews
+     * To obtain the request config of the operation getV1WorldNews
      *
      * @return RequestConfig
      */
-    fun cloudGetV1WorldNewsRequestConfig() : RequestConfig<Unit> {
+    fun getV1WorldNewsRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -191,7 +262,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/news",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -200,7 +271,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/world/pipeline
      * Returns the caller project&#39;s news pipeline: which feeds it reads and how the merged result is filtered.
      * Returns the caller project&#39;s news pipeline: which feeds it reads and how the merged result is filtered. A project that has never written one is answered with the built-in world feeds and &#x60;default: true&#x60;, so a fresh project sees the same feed /v1/world/news would actually serve rather than an empty configuration.
-     * @return CloudPipelineView
+     * @return PipelineView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -209,11 +280,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WorldPipeline() : CloudPipelineView {
-        val localVarResponse = cloudGetV1WorldPipelineWithHttpInfo()
+    fun getV1WorldPipeline() : PipelineView {
+        val localVarResponse = getV1WorldPipelineWithHttpInfo()
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPipelineView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PipelineView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -231,26 +302,26 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * GET /v1/world/pipeline
      * Returns the caller project&#39;s news pipeline: which feeds it reads and how the merged result is filtered.
      * Returns the caller project&#39;s news pipeline: which feeds it reads and how the merged result is filtered. A project that has never written one is answered with the built-in world feeds and &#x60;default: true&#x60;, so a fresh project sees the same feed /v1/world/news would actually serve rather than an empty configuration.
-     * @return ApiResponse<CloudPipelineView?>
+     * @return ApiResponse<PipelineView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WorldPipelineWithHttpInfo() : ApiResponse<CloudPipelineView?> {
-        val localVariableConfig = cloudGetV1WorldPipelineRequestConfig()
+    fun getV1WorldPipelineWithHttpInfo() : ApiResponse<PipelineView?> {
+        val localVariableConfig = getV1WorldPipelineRequestConfig()
 
-        return request<Unit, CloudPipelineView>(
+        return request<Unit, PipelineView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WorldPipeline
+     * To obtain the request config of the operation getV1WorldPipeline
      *
      * @return RequestConfig
      */
-    fun cloudGetV1WorldPipelineRequestConfig() : RequestConfig<Unit> {
+    fun getV1WorldPipelineRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -261,7 +332,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/pipeline",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -278,8 +349,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws ServerException If the API returns a server error response
      */
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudGetV1WorldStream() : Unit {
-        val localVarResponse = cloudGetV1WorldStreamWithHttpInfo()
+    fun getV1WorldStream() : Unit {
+        val localVarResponse = getV1WorldStreamWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -305,8 +376,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudGetV1WorldStreamWithHttpInfo() : ApiResponse<Unit?> {
-        val localVariableConfig = cloudGetV1WorldStreamRequestConfig()
+    fun getV1WorldStreamWithHttpInfo() : ApiResponse<Unit?> {
+        val localVariableConfig = getV1WorldStreamRequestConfig()
 
         return request<Unit, Unit>(
             localVariableConfig
@@ -314,11 +385,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     }
 
     /**
-     * To obtain the request config of the operation cloudGetV1WorldStream
+     * To obtain the request config of the operation getV1WorldStream
      *
      * @return RequestConfig
      */
-    fun cloudGetV1WorldStreamRequestConfig() : RequestConfig<Unit> {
+    fun getV1WorldStreamRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
@@ -328,7 +399,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/stream",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
@@ -337,8 +408,8 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * PUT /v1/world/pipeline
      * Replaces the caller project&#39;s news pipeline and returns what was stored.
      * Replaces the caller project&#39;s news pipeline and returns what was stored. It is a WHOLE replacement, not a patch: a field the request leaves out is stored empty, so sending only feeds clears the filters.  Every feed URL is validated HERE, at the write boundary — http(s) only, and the host must be on the server&#39;s allowlist — so a stored pipeline can never name a host the fetcher would later refuse, and the allowlist is one decision in one place rather than a check at each fetch.
-     * @param cloudPipelineReq 
-     * @return CloudPipelineView
+     * @param pipelineReq 
+     * @return PipelineView
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -347,11 +418,11 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun cloudPutV1WorldPipeline(cloudPipelineReq: CloudPipelineReq) : CloudPipelineView {
-        val localVarResponse = cloudPutV1WorldPipelineWithHttpInfo(cloudPipelineReq = cloudPipelineReq)
+    fun putV1WorldPipeline(pipelineReq: PipelineReq) : PipelineView {
+        val localVarResponse = putV1WorldPipelineWithHttpInfo(pipelineReq = pipelineReq)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CloudPipelineView
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PipelineView
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -369,29 +440,29 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * PUT /v1/world/pipeline
      * Replaces the caller project&#39;s news pipeline and returns what was stored.
      * Replaces the caller project&#39;s news pipeline and returns what was stored. It is a WHOLE replacement, not a patch: a field the request leaves out is stored empty, so sending only feeds clears the filters.  Every feed URL is validated HERE, at the write boundary — http(s) only, and the host must be on the server&#39;s allowlist — so a stored pipeline can never name a host the fetcher would later refuse, and the allowlist is one decision in one place rather than a check at each fetch.
-     * @param cloudPipelineReq 
-     * @return ApiResponse<CloudPipelineView?>
+     * @param pipelineReq 
+     * @return ApiResponse<PipelineView?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun cloudPutV1WorldPipelineWithHttpInfo(cloudPipelineReq: CloudPipelineReq) : ApiResponse<CloudPipelineView?> {
-        val localVariableConfig = cloudPutV1WorldPipelineRequestConfig(cloudPipelineReq = cloudPipelineReq)
+    fun putV1WorldPipelineWithHttpInfo(pipelineReq: PipelineReq) : ApiResponse<PipelineView?> {
+        val localVariableConfig = putV1WorldPipelineRequestConfig(pipelineReq = pipelineReq)
 
-        return request<CloudPipelineReq, CloudPipelineView>(
+        return request<PipelineReq, PipelineView>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation cloudPutV1WorldPipeline
+     * To obtain the request config of the operation putV1WorldPipeline
      *
-     * @param cloudPipelineReq 
+     * @param pipelineReq 
      * @return RequestConfig
      */
-    fun cloudPutV1WorldPipelineRequestConfig(cloudPipelineReq: CloudPipelineReq) : RequestConfig<CloudPipelineReq> {
-        val localVariableBody = cloudPipelineReq
+    fun putV1WorldPipelineRequestConfig(pipelineReq: PipelineReq) : RequestConfig<PipelineReq> {
+        val localVariableBody = pipelineReq
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
@@ -402,7 +473,7 @@ class WorldApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
             path = "/v1/world/pipeline",
             query = localVariableQuery,
             headers = localVariableHeaders,
-            requiresAuthentication = true,
+            requiresAuthentication = false,
             body = localVariableBody
         )
     }
