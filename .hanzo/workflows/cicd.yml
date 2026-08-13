@@ -28,5 +28,5 @@ concurrency:
 
 jobs:
   cicd:
-    uses: hanzoai/ci/.hanzo/workflows/build.yml@v1.0.52
+    uses: hanzoai/ci/.hanzo/workflows/build.yml@v1.0.54
     secrets: inherit
