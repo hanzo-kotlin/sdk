@@ -8,9 +8,9 @@
 //
 // Operation: get_tools (GET /v1/tools)
 //
-// POST /v1/mcp is the JSON-RPC door onto the same catalogue and answers 200
-// with the tool list, but the document does not declare it, so there is no
-// generated method for it. GET /v1/tools is the REST view that there is.
+// POST /v1/mcp is the JSON-RPC door onto the same catalogue, but the document
+// declares only /v1/mcp/servers, so there is no generated method for it. GET
+// /v1/tools is the REST view that there is.
 //
 //   HANZO_API_KEY=sk-... ./gradlew :examples:tools:run
 import ai.hanzo.Hanzo

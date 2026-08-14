@@ -1,11 +1,13 @@
 // store — provision a KV store, read it back, delete it.
 //
-// This is the provisioning plane, and it is the one that answers: the value
-// plane (/v1/kv/keys/{key}) is authored in the document but does not route at
-// api.hanzo.ai.
+// This is the provisioning plane, and it is the one the document declares:
+// /v1/kv and /v1/kv/{name}, nothing else. The value plane (/v1/kv/keys/{key})
+// was authored in a spec that is now deleted, and 404s at api.hanzo.ai.
 //
-// Org-scoped: /v1/kv replies 403 {"error":"X-Org-Id required"} without one,
-// which `Hanzo` sends from HANZO_ORG_ID.
+// Org-scoped: /v1/kv answers 403 without a tenant, and says which half is
+// missing — "a validated principal is required" for no credential at all, "an
+// org scope is required" for a key that resolves no org. `Hanzo` sends the
+// scope as X-Org-Id from HANZO_ORG_ID.
 //
 // Operations: post_kv           (POST   /v1/kv),
 //             get_kv_by_name    (GET    /v1/kv/{name}),

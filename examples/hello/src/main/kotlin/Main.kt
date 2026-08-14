@@ -16,9 +16,9 @@ import ai.hanzo.cloud.api.KeysApi
 import ai.hanzo.cloud.infrastructure.ClientException
 
 fun main() {
-    // `propertyKeys`, not `keys`: the wire name is `keys`, which the Kotlin
-    // generator renames because a data class cannot carry it, and @SerializedName
-    // still sends the original.
+    // `propertyKeys`, not `keys`: the wire name is `keys`, which is on the
+    // Kotlin generator's reserved list (`size`, `keys`, `values`, `entries`,
+    // `class`), and @SerializedName still sends the original.
     val keys =
         try {
             Hanzo().api(::KeysApi).getKeys().propertyKeys.orEmpty()

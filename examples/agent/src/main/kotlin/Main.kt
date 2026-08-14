@@ -7,8 +7,10 @@
 // A run is asynchronous: the last step polls the run list until the run this
 // example started reaches a terminal status.
 //
-// Org-scoped: /v1/agents replies 403 {"error":"X-Org-Id required"} without one,
-// which `Hanzo` sends from HANZO_ORG_ID.
+// Org-scoped: /v1/agents answers 403 without a tenant, and says which half is
+// missing — "a validated principal is required" for no credential at all, "an
+// org scope is required" for a key that resolves no org. `Hanzo` sends the
+// scope as X-Org-Id from HANZO_ORG_ID.
 //
 // Operations: post_agents            (POST /v1/agents),
 //             post_agents_by_ref_run (POST /v1/agents/{ref}/run),
