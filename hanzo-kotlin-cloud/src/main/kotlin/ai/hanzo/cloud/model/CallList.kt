@@ -15,7 +15,7 @@
 
 package ai.hanzo.cloud.model
 
-import ai.hanzo.cloud.model.Call
+import ai.hanzo.cloud.model.ModelCall
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class CallList (
 
     @SerializedName("data")
-    val `data`: kotlin.collections.List<Call>? = null
+    val `data`: kotlin.collections.List<ModelCall>? = null
 
 ) {
 

@@ -20,11 +20,11 @@ import okhttp3.Call
 import okhttp3.HttpUrl
 
 import ai.hanzo.cloud.model.BuyInput
-import ai.hanzo.cloud.model.Call
 import ai.hanzo.cloud.model.CallInput
 import ai.hanzo.cloud.model.CallList
 import ai.hanzo.cloud.model.MessageInput
 import ai.hanzo.cloud.model.MessageList
+import ai.hanzo.cloud.model.ModelCall
 import ai.hanzo.cloud.model.Number
 import ai.hanzo.cloud.model.NumberList
 import ai.hanzo.cloud.model.SMS
@@ -581,7 +581,7 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Dials.
      * Dials. An &#x60;agent&#x60; names a Hanzo assistant to answer it; the call is refused up front when no assistant plane is configured, because a call that connects to silence has already cost the person who answered it.
      * @param callInput 
-     * @return Call
+     * @return ModelCall
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -590,11 +590,11 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postTelCalls(callInput: CallInput) : Call {
+    fun postTelCalls(callInput: CallInput) : ModelCall {
         val localVarResponse = postTelCallsWithHttpInfo(callInput = callInput)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as Call
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ModelCall
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -613,16 +613,16 @@ class TelApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = A
      * Dials.
      * Dials. An &#x60;agent&#x60; names a Hanzo assistant to answer it; the call is refused up front when no assistant plane is configured, because a call that connects to silence has already cost the person who answered it.
      * @param callInput 
-     * @return ApiResponse<Call?>
+     * @return ApiResponse<ModelCall?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postTelCallsWithHttpInfo(callInput: CallInput) : ApiResponse<Call?> {
+    fun postTelCallsWithHttpInfo(callInput: CallInput) : ApiResponse<ModelCall?> {
         val localVariableConfig = postTelCallsRequestConfig(callInput = callInput)
 
-        return request<CallInput, Call>(
+        return request<CallInput, ModelCall>(
             localVariableConfig
         )
     }
