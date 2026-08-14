@@ -66,17 +66,17 @@ check. [`examples/hello`](examples/hello) catches that — see [Errors](#errors)
 of the 192 generated API classes against them. The classes follow the document's
 tags under `ai.hanzo.cloud.api`, with their request and response types under
 `ai.hanzo.cloud.model`. `propertyKeys` rather than `keys` is the generator
-renaming a wire field a Kotlin data class cannot carry — `@SerializedName` still
-sends the original. Read method and field names off the client; do not guess
-them.
+prefixing a name on its reserved list — `size`, `keys`, `values`, `entries`,
+`class` — and `@SerializedName` still sends the original. Read method and field
+names off the client; do not guess them.
 
 ## Authenticate
 
 `HANZO_API_KEY` goes out as `Authorization: Bearer …` on every request. A Cloud
-API key is one of the two classes `GET /v1/keys` mints: `sk-` (secret, belongs on
-a server) or `pk-` (publishable, org-identifying, safe in a browser bundle). A
-few OIDC-gated routes want an IAM-issued JWT instead and answer 401 to an API
-key.
+API key is one of two classes: `sk-` (secret, belongs on a server) or `pk-`
+(publishable, org-identifying, safe in a browser bundle). `POST /v1/keys` mints
+one; the `GET` above lists what the caller already holds. A few OIDC-gated routes
+want an IAM-issued JWT instead and answer 401 to an API key.
 
 | variable | meaning |
 | --- | --- |
@@ -88,8 +88,8 @@ Pass them explicitly when one program serves more than one tenant —
 `Hanzo(apiKey = "sk-…", orgId = "acme")` — rather than mutating a global.
 
 [`Hanzo`](hanzo-kotlin-cloud/src/main/kotlin/ai/hanzo/Hanzo.kt) is the one
-hand-written file in the module, and it is what makes the client authenticated at
-all: the document declares no `securitySchemes`, so the generator registers no
+hand-written file under `src/main`, and it is what makes the client authenticated
+at all: the document declares no `securitySchemes`, so the generator registers no
 credential and a call built any other way goes out bare.
 
 ## Errors

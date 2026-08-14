@@ -79,12 +79,12 @@ they cannot rot. Configured in one place, the `examples` block in
 HANZO_API_KEY=sk-… ./gradlew :examples:hello:run
 ```
 
-A key is `sk-` (secret) or `pk-` (publishable) — the two classes `GET /v1/keys`
-mints. The operationIds each example names in its header are read off the
-document, never derived: the default version left the id, so `get_v1_keys` is
-now `get_keys`, and a path parameter shows as `by_` (`get_kv_by_name`). Method
-names on the client are those ids camel-cased, and the only way to know one is
-to read it.
+A key is `sk-` (secret) or `pk-` (publishable) — the two classes `POST /v1/keys`
+mints and `GET /v1/keys` lists. The operationIds each example names in its header
+are read off the document, never derived: the default version left the id, so
+`get_v1_keys` is now `get_keys`, and a path parameter shows as `by_`
+(`get_kv_by_name`). Method names on the client are those ids camel-cased, and
+the only way to know one is to read it.
 
 ## Gates
 
