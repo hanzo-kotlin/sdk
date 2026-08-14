@@ -5,27 +5,16 @@
 
 test:
   - name: sdk-build
-    # Compiles the generated cloud client (190 API classes, 2439 models) and all
-    # six example flows.
-    #
-    # NOT `./scripts/build`, which builds every module and cannot pass:
-    # hanzo-kotlin-core does not compile, at upstream HEAD, with none of this
-    # change applied. Its Stainless-generated TeamAddMemberParams.kt declares
-    # `member(member: Member)` twice in both builders — "Conflicting overloads"
-    # at lines 142, 156 and 435. That is a Stainless codegen bug in the legacy
-    # client and it is fixed by regenerating that client, not from here; gating
-    # on it would mean this repo's CI is red for a reason nobody in it can fix.
-    # Widen this back to ./scripts/build the day hanzo-kotlin-core compiles.
-    run: |
-      set -e
-      ./gradlew :hanzo-kotlin-cloud:assemble
-      ./gradlew :examples:hello:assemble :examples:chat:assemble :examples:money:assemble \
-                :examples:store:assemble :examples:agent:assemble :examples:tools:assemble
+    # Every module: the generated client (192 API classes, 2461 models) and the
+    # six example flows. It can be the whole build again because every module is
+    # now part of the one client — the second, hand-shaped client that could not
+    # compile is deleted, and the hand-listed subset it forced went with it.
+    run: ./scripts/build
 
   - name: sdk-lint
-    # ktfmt over the hand-written modules. It is switched off for
-    # hanzo-kotlin-cloud, whose sources must stay byte-identical to the
-    # generator's output or `spec-drift-check` above fails.
+    # ktfmt over what is written by hand: `Hanzo.kt` and the examples. It is
+    # switched off for the generated sources, which must stay byte-identical to
+    # the generator's output or the client lane's `--check` fails.
     run: ./scripts/lint
 
   - name: flows-test

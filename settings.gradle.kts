@@ -1,17 +1,9 @@
-rootProject.name = "hanzo-kotlin-root"
+rootProject.name = "kotlin-sdk"
 
-val projectNames = rootDir.listFiles()
-    ?.asSequence()
-    .orEmpty()
-    .filter { file ->
-        file.isDirectory &&
-        file.name.startsWith("hanzo-kotlin") &&
-        file.listFiles()?.asSequence().orEmpty().any { it.name == "build.gradle.kts" }
-    }
-    .map { it.name }
-    .toList()
-println("projects: $projectNames")
-projectNames.forEach { include(it) }
+// hanzo-kotlin-cloud is the client. It is named here rather than discovered by
+// scanning the root for directories, because a scan answers "what happens to be
+// on disk" when the question is "what does this repo publish".
+include("hanzo-kotlin-cloud")
 
 // The six canonical example flows (hanzoai/openapi `flows.yaml`), built by the
 // same `./scripts/build` that builds the client. An example that does not
