@@ -8,17 +8,28 @@
 // disqualified for answering 200 to a caller with no credential at all;
 // flows.yaml records the probe.
 //
-// Operation: get_v1_keys (GET /v1/keys)
+// Operation: get_keys (GET /v1/keys)
 //
-//   HANZO_API_KEY=hk-... ./gradlew :examples:hello:run
+//   HANZO_API_KEY=sk-... ./gradlew :examples:hello:run
 import ai.hanzo.Hanzo
 import ai.hanzo.cloud.api.KeysApi
+import ai.hanzo.cloud.infrastructure.ClientException
 
 fun main() {
     // `propertyKeys`, not `keys`: the wire name is `keys`, which the Kotlin
     // generator renames because a data class cannot carry it, and @SerializedName
     // still sends the original.
-    val keys = Hanzo().api(::KeysApi).getKeys().propertyKeys.orEmpty()
+    val keys =
+        try {
+            Hanzo().api(::KeysApi).getKeys().propertyKeys.orEmpty()
+        } catch (refused: ClientException) {
+            // The refusal is the other half of the flow, so it is caught rather
+            // than thrown at the terminal as a stack trace. Every generated call
+            // raises ClientException on a 4xx and ServerException on a 5xx, both
+            // carrying `statusCode` and the raw `response`.
+            println("${refused.statusCode}  set HANZO_API_KEY to a key this gateway knows")
+            return
+        }
     if (keys.isEmpty()) {
         println("the key is good, and it owns no keys of its own")
         return

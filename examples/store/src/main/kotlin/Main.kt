@@ -7,11 +7,11 @@
 // Org-scoped: /v1/kv replies 403 {"error":"X-Org-Id required"} without one,
 // which `Hanzo` sends from HANZO_ORG_ID.
 //
-// Operations: post_v1_kv           (POST   /v1/kv),
-//             get_v1_kv_by_name    (GET    /v1/kv/{name}),
-//             delete_v1_kv_by_name (DELETE /v1/kv/{name})
+// Operations: post_kv           (POST   /v1/kv),
+//             get_kv_by_name    (GET    /v1/kv/{name}),
+//             delete_kv_by_name (DELETE /v1/kv/{name})
 //
-//   HANZO_API_KEY=hk-... HANZO_ORG_ID=my-org ./gradlew :examples:store:run
+//   HANZO_API_KEY=sk-... HANZO_ORG_ID=my-org ./gradlew :examples:store:run
 import ai.hanzo.Hanzo
 import ai.hanzo.cloud.api.KvApi
 import ai.hanzo.cloud.model.ProvisionRequest
