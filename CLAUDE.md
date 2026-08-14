@@ -15,8 +15,8 @@ records the Stainless spec it was cut from. Do not hand-edit; it is regenerated
 upstream.
 
 **`hanzo-kotlin-cloud`** — the **full** cloud client, published as
-`ai.hanzo:hanzo-kotlin-cloud`. Every `/v1` route of the Hanzo API: 2468
-operations over 190 API classes and 2439 models, generated from the
+`ai.hanzo:hanzo-kotlin-cloud`. Every `/v1` route of the Hanzo API: 2479
+operations over 192 API classes and 2461 models, generated from the
 `openapi.yaml` hanzoai/cloud emits from its own routers. `.spec-lock` names the
 release this tree is a projection of, and its digest. `sdks.yaml` in
 [hanzoai/openapi](https://github.com/hanzoai/openapi) is the registry that names
