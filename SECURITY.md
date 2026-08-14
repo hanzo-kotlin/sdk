@@ -9,11 +9,11 @@ publicly.
 
 ## Where a flaw actually lives
 
-`hanzo-kotlin-cloud/` is generated from `hanzo.yaml` in `hanzoai/openapi`, which
-is derived from hanzoai/cloud's emitted API document. A flaw in the API surface
-itself belongs upstream in hanzoai/cloud rather than in this client — say so in
-the report and we will route it.
+`hanzo-kotlin-cloud/` is generated from the `openapi.yaml` hanzoai/cloud emits
+from its own routers. A flaw in the API surface itself belongs upstream in
+hanzoai/cloud rather than in this client — say so in the report and we will route
+it. A flaw in the client's shape is a fix to the generator in hanzoai/openapi,
+which every language's client then picks up.
 
-`ai.hanzo.api:hanzo-kotlin`, the curated client, is no longer regenerated: the
-generator that produced it was retired on 2026-07-04. A fix there is a hand
-change to committed code.
+`ai/hanzo/Hanzo.kt` is the exception: it is the one hand-written file, it holds
+the credential, and a fix there is a change to this repo.

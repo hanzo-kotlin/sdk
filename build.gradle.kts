@@ -7,7 +7,9 @@ repositories {
 }
 
 allprojects {
-    group = "ai.hanzo.api"
+    // One artifact line, so one coordinate. `ai.hanzo`, matching the group
+    // `sdks.yaml` pins for the generated cloud clients in every language.
+    group = "ai.hanzo"
     version = "0.1.0-alpha.4" // x-release-please-version
 }
 
@@ -24,10 +26,6 @@ subprojects {
     apply(plugin = "org.jetbrains.dokka")
 }
 
-subprojects {
-    apply(plugin = "org.jetbrains.dokka")
-}
-
 // The six canonical example flows. They differ only in which routes they call,
 // so they are configured once, here, rather than in six identical build files.
 configure(subprojects.filter { it.parent?.name == "examples" }) {
@@ -38,11 +36,4 @@ configure(subprojects.filter { it.parent?.name == "examples" }) {
 
     // Each flow is one `Main.kt` in the default package: `examples/<flow>/`.
     extensions.configure<JavaApplication> { mainClass.set("MainKt") }
-}
-
-// Avoid race conditions between `dokkaHtmlCollector` and `dokkaJavadocJar` tasks
-tasks.named("dokkaHtmlCollector").configure {
-    subprojects.flatMap { it.tasks }
-        .filter { it.project.name != "hanzo-kotlin" && it.name == "dokkaJavadocJar" }
-        .forEach { mustRunAfter(it) }
 }

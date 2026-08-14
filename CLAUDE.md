@@ -1,31 +1,29 @@
 # kotlin-sdk
 
-**Org:** hanzo-kotlin  ·  **Ecosystem:** hanzo
-**Origin:** https://github.com/hanzo-kotlin/sdk.git
+**Org:** hanzoai  ·  **Ecosystem:** hanzo
+**Origin:** https://git.hanzo.ai/hanzoai/kotlin-sdk.git
 
 ## Discovery
 
 This file (`CLAUDE.md`) is the canonical agent-facing readme; `LLM.md` is a symlink to it. Update either name and both stay in sync.
 
-## Two clients live here
+## One client
 
-**`hanzo-kotlin*`** — the curated client. 188 endpoints, hand-shaped ergonomics,
-generated with Stainless, published as `ai.hanzo.api:hanzo-kotlin`. `.stats.yml`
-records the Stainless spec it was cut from. Do not hand-edit; it is regenerated
-upstream.
+`hanzo-kotlin-cloud`, published as `ai.hanzo:hanzo-kotlin-cloud`. Every `/v1`
+route of the Hanzo API: 2502 operations over 192 API classes and 2461 models,
+generated from the `openapi.yaml` hanzoai/cloud emits from its own routers.
+`.spec-lock` names the release this tree is a projection of, and its digest.
+`sdks.yaml` in [hanzoai/openapi](https://github.com/hanzoai/openapi) is the
+registry that names this repo (`kotlin-sdk`) and every generator knob; this repo
+carries only a call site.
 
-**`hanzo-kotlin-cloud`** — the **full** cloud client, published as
-`ai.hanzo:hanzo-kotlin-cloud`. Every `/v1` route of the Hanzo API: 2479
-operations over 192 API classes and 2461 models, generated from the
-`openapi.yaml` hanzoai/cloud emits from its own routers. `.spec-lock` names the
-release this tree is a projection of, and its digest. `sdks.yaml` in
-[hanzoai/openapi](https://github.com/hanzoai/openapi) is the registry that names
-this repo (`kotlin-sdk`) and every generator knob; this repo carries only a call
-site.
+There was a second, hand-shaped client here — `hanzo-kotlin-core` plus its
+okhttp transport, umbrella, example and proguard modules. It is gone. Two
+clients for one API is two answers to one question, and the generated one is the
+one that tracks the document. Anything that used to import `ai.hanzo.api.*`
+belongs on `ai.hanzo.cloud.*`.
 
-The two are independent artifact lines and do not share code.
-
-## Regenerating the cloud client
+## Regenerating
 
 ```sh
 SPEC=…/openapi.yaml OPENAPI=…/hanzoai/openapi ./scripts/generate.sh
@@ -71,5 +69,6 @@ the call into `hanzoai/ci`.
 
 ## Sibling repos
 
-Other languages, same spec: `hanzoai/python-sdk`, `hanzo-js/sdk`,
-`hanzo-go/sdk`, `hanzo-rs/sdk`, `hanzo-cpp/sdk`, `hanzo-swift/sdk`.
+Other languages, same document: `hanzoai/python-sdk`, `hanzoai/java-sdk`,
+`hanzo-js/sdk`, `hanzo-go/sdk`, `hanzo-rs/sdk`, `hanzo-cpp/sdk`,
+`hanzo-swift/sdk`.

@@ -1,5 +1,5 @@
-// The generated Hanzo Cloud client: the whole `/v1` surface of hanzoai/openapi
-// `hanzo.yaml`, as one API class per tag over okhttp.
+// The Hanzo Cloud client: the whole `/v1` surface of the `openapi.yaml`
+// hanzoai/cloud emits, as one API class per tag over okhttp.
 //
 // `src/main/kotlin/ai/hanzo/cloud` belongs to the generator — sdks.yaml maps it
 // there, `scripts/generate.sh` replaces it wholesale, and `--check` fails if it
@@ -8,11 +8,6 @@ plugins {
     id("hanzo.kotlin")
     id("hanzo.publish")
 }
-
-// `ai.hanzo`, not the root's `ai.hanzo.api`: sdks.yaml pins the coordinate for
-// the generated cloud clients, and they are a different artifact line from the
-// hand-written `ai.hanzo.api:hanzo-kotlin-*` modules beside them.
-group = "ai.hanzo"
 
 dependencies {
     // `api`, not `implementation`: okhttp and gson are in the generated client's
@@ -29,7 +24,7 @@ dependencies {
 
 // ktfmt does not run here. The generated sources have to stay byte-identical to
 // the generator's output — that identity is exactly what `--check` diffs — so
-// formatting them would rewrite 2307 files and make the drift gate fail on
+// formatting them would rewrite all 2666 files and make the drift gate fail on
 // every run.
 tasks.named("formatKotlin") { enabled = false }
 
