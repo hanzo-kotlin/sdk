@@ -10,11 +10,11 @@
 // Org-scoped: /v1/agents replies 403 {"error":"X-Org-Id required"} without one,
 // which `Hanzo` sends from HANZO_ORG_ID.
 //
-// Operations: post_v1_agents            (POST /v1/agents),
-//             post_v1_agents_by_ref_run (POST /v1/agents/{ref}/run),
-//             get_v1_agents_by_ref_runs (GET  /v1/agents/{ref}/runs)
+// Operations: post_agents            (POST /v1/agents),
+//             post_agents_by_ref_run (POST /v1/agents/{ref}/run),
+//             get_agents_by_ref_runs (GET  /v1/agents/{ref}/runs)
 //
-//   HANZO_API_KEY=hk-... HANZO_ORG_ID=my-org ./gradlew :examples:agent:run
+//   HANZO_API_KEY=sk-... HANZO_ORG_ID=my-org ./gradlew :examples:agent:run
 import ai.hanzo.Hanzo
 import ai.hanzo.cloud.api.AgentsApi
 import ai.hanzo.cloud.model.CreateAgentIn
@@ -27,7 +27,10 @@ fun main() {
         "HANZO_ORG_ID is required: /v1/agents answers 403 without X-Org-Id"
     }
     val agents = hanzo.api(::AgentsApi)
-    val model = System.getenv("HANZO_MODEL")?.takeIf { it.isNotBlank() } ?: "zen-1"
+    // `zen5` is a model catalog.hanzo.ai serves, so the flow runs on a key alone;
+    // HANZO_MODEL picks another. A default the gateway does not serve makes the
+    // example fail on the model id, which teaches nothing about agents.
+    val model = System.getenv("HANZO_MODEL")?.takeIf { it.isNotBlank() } ?: "zen5"
 
     val name = "sdk-example-${System.nanoTime().toString(36)}"
     val agent =

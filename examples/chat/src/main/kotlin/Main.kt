@@ -4,7 +4,7 @@
 // generated client hands back as an opaque body, so showing it here would teach
 // the wrong shape.
 //
-// Operation: post_v1_chat_completions (POST /v1/chat/completions)
+// Operation: post_chat_completions (POST /v1/chat/completions)
 //
 // THE ROUTE IS UNTYPED AT THE SOURCE, so the generated method takes no argument
 // and returns Unit: there is no request schema to carry a prompt and no
@@ -17,7 +17,7 @@
 // operation the document declares and prints what the route answered; when the
 // shapes land, a regeneration prints the completion.
 //
-//   HANZO_API_KEY=hk-... ./gradlew :examples:chat:run
+//   HANZO_API_KEY=sk-... ./gradlew :examples:chat:run
 import ai.hanzo.Hanzo
 import ai.hanzo.cloud.api.ChatApi
 

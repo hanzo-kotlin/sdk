@@ -1,7 +1,8 @@
 # Hanzo CI — the ONE way this repo is gated, read by hanzoai/ci.
 #
 # No `images:` and no `deploy:`: this is a client library. What CI owes is a
-# gate plus the jar; a consumer resolves it from Maven Central at a tag.
+# gate plus the jar. Nothing is on Maven Central yet, so until a tag publishes
+# one, a consumer builds the jar and resolves it from `mavenLocal()`.
 
 test:
   - name: sdk-build
@@ -49,11 +50,11 @@ binaries:
 # `.spec-lock` beside the code, and — only after the `test:` block below has
 # passed over exactly those bytes — commits and cuts a patch.
 #
-# The document moved from hanzoai/openapi `hanzo.yaml` (hand-merged, 1742 paths,
-# fed by nothing, and NOTHING HAS EVER SENT the spec-update this repo listens
-# for) to hanzoai/cloud `openapi.yaml` — smaller (1058 paths), emitted from the
-# code by each app's own router, and gated on every cloud release. A smaller true
-# document beats a larger unverified one.
+# The document moved from hanzoai/openapi `hanzo.yaml` (a curated projection,
+# 1794 paths / 2456 operations, and NOTHING HAS EVER SENT the spec-update this
+# repo listens for) to hanzoai/cloud `openapi.yaml` — 1814 paths / 2479
+# operations, emitted from the code by each app's own router and gated on every
+# cloud release. The source, rather than a copy of it.
 client:
   generate: ./scripts/generate.sh
   # NO version: — this client's version is a gradle -alpha.N build, not
